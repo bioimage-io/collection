@@ -157,14 +157,16 @@ class Client:
     def _rm_objs(
         self, objects: Sequence[Object], *, bypass_governance_mode: bool
     ) -> None:
-        _ = self._client.remove_objects(
-            self.bucket,
-            (
-                DeleteObject(obj.object_name)
-                for obj in objects
-                if obj.object_name is not None
-            ),
-            bypass_governance_mode=bypass_governance_mode,
+        _ = list(
+            self._client.remove_objects(
+                self.bucket,
+                (
+                    DeleteObject(obj.object_name)
+                    for obj in objects
+                    if obj.object_name is not None
+                ),
+                bypass_governance_mode=bypass_governance_mode,
+            )
         )
 
     def load_file(self, path: str) -> bytes | None:
