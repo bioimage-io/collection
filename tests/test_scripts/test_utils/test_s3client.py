@@ -15,7 +15,7 @@ def test_client():
     assert set(client.ls("test/")) == {"test1.json", "dir"}
     client.mv_dir("test/", "test_b/", bypass_governance_mode=BGM)
     sleep(3)
-    assert set(client.ls("test/")) == {}
+    assert not set(client.ls("test/"))
     assert set(client.ls("test_b/")) == {"test1.json", "dir"}
     assert set(client.ls("test_b/dir")) == {"test2.json", "test3.json"}
     client.rm_dir("test_b/dir/", bypass_governance_mode=BGM)
