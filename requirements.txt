@@ -1,0 +1,7 @@
+bioimageio.spec @ git+https://github.com/bioimage-io/spec-bioimage-io@adb33e04c84a40d981d51fdb9d22e718ec27ac35  # TODO: chenage to released version
+loguru==0.7.2
+minio==7.2.3
+packaging==23.2
+ruyaml==0.91.0
+spdx-license-list==3.22
+typer==0.9.0

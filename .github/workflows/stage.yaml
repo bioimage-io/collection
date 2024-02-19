@@ -1,0 +1,25 @@
+name: Stage new contribution
+
+on:
+  workflow_dispatch:
+    inputs:
+      resource_id:
+        description: "Bioimage.io resource identifier"
+        required: true
+        type: string
+      package_url:
+        description: "Download URL of the resource package zip-file"
+        required: true
+        type: string
+
+concurrency: ${{inputs.resource_id}}
+
+jobs:
+  call:
+    uses: ./.github/workflows/stage_call.yml
+    with:
+      resource_id: ${{inputs.resource_id}}
+      S3_HOST: ${{vars.S3_HOST}}
+      S3_BUCKET: ${{vars.S3_BUCKET}}
+      S3_FOLDER: ${{vars.S3_FOLDER}}
+    secrets: inherit
