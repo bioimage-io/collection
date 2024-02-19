@@ -6,7 +6,7 @@ import urllib.request
 import zipfile
 from dataclasses import dataclass
 from datetime import datetime
-from typing import Any, ClassVar, TypedDict
+from typing import Any, ClassVar, Optional, TypedDict
 
 from loguru import logger
 from ruyaml import YAML
@@ -21,17 +21,27 @@ class RemoteResource:
     client: Client
     id: str
 
-    def _get_latest_staged_version_id(self) -> int:
-        return max(map(int, self.client.ls(f"{self.id}/staged/", only_folders=True)))
+    def _get_latest_staged_version_id(self) -> Optional[int]:
+        staged = list(map(int, self.client.ls(f"{self.id}/staged/", only_folders=True)))
+        if not staged:
+            return None
+        else:
+            return max(staged)
 
-    def get_latest_staged_version(self) -> StagedVersion:
+    def get_latest_staged_version(self) -> Optional[StagedVersion]:
         v = self._get_latest_staged_version_id()
-        return StagedVersion(client=self.client, id=self.id, version=v)
+        if v is None:
+            return None
+        else:
+            return StagedVersion(client=self.client, id=self.id, version=v)
 
     def stage_new_version(self, package_url: str) -> StagedVersion:
-        v = self._get_latest_staged_version_id() + 1
+        v = self._get_latest_staged_version_id()
+        if v is None:
+            v = 1
+
         ret = StagedVersion(client=self.client, id=self.id, version=v)
-        logger.debug("Staging {}", ret.path)
+        logger.debug("Staging {}", ret.folder)
 
         # Download the model zip file
         remotezip = urllib.request.urlopen(package_url)
@@ -52,7 +62,7 @@ class RemoteResource:
 
         for filename in zipobj.namelist():
             file_data = zipobj.open(filename).read()
-            path = f"{ret.path}/files/{filename}"
+            path = f"{ret.folder}files/{filename}"
             self.client.put(path, io.BytesIO(file_data), length=len(file_data))
 
         return ret
@@ -85,14 +95,14 @@ class _RemoteResourceVersion(RemoteResource):
     version_prefix: ClassVar[str]
 
     @property
-    def path(self) -> str:
-        return f"{self.id}/{self.version_prefix}{self.version}"
+    def folder(self) -> str:
+        return f"{self.id}/{self.version_prefix}{self.version}/"
 
     def get_rdf_url(self) -> str:
-        return self.client.get_file_url(f"{self.path}/files/rdf.yaml")
+        return self.client.get_file_url(f"{self.folder}files/rdf.yaml")
 
     def get_log(self) -> Log:
-        path = f"{self.path}/log.json"
+        path = f"{self.folder}log.json"
         log_data = self.client.load_file(path)
         if log_data is None:
             log: Log = {}
@@ -103,7 +113,7 @@ class _RemoteResourceVersion(RemoteResource):
         return log
 
     def _get_details(self) -> Details:
-        details_data = self.client.load_file(f"{self.path}/details.json")
+        details_data = self.client.load_file(f"{self.folder}details.json")
         if details_data is None:
             details: Details = {"messages": []}
         else:
@@ -112,7 +122,7 @@ class _RemoteResourceVersion(RemoteResource):
         return details
 
     def _set_details(self, details: Details):
-        self.client.put_json(f"{self.path}/details.json", details)
+        self.client.put_json(f"{self.folder}details.json", details)
 
     def get_messages(self):
         details = self._get_details()
@@ -132,7 +142,7 @@ class _RemoteResourceVersion(RemoteResource):
         self._set_log(log)
 
     def _set_log(self, log: Log) -> None:
-        self.client.put_json(f"{self.path}/log.json", log)
+        self.client.put_json(f"{self.folder}log.json", log)
 
 
 @dataclass
@@ -140,7 +150,7 @@ class StagedVersion(_RemoteResourceVersion):
     version_prefix: ClassVar[str] = "staged/"
 
     def publish(self) -> PublishedVersion:
-        logger.debug("Publishing {}", self.path)
+        logger.debug("Publishing {}", self.folder)
         # get next version and update versions.json
         versions_path = f"{self.id}/versions.json"
         versions_data = self.client.load_file(versions_path)
@@ -163,7 +173,7 @@ class StagedVersion(_RemoteResourceVersion):
         ret = PublishedVersion(client=self.client, id=self.id, version=next_version)
 
         # move rdf.yaml and set version in it
-        staged_rdf_path = f"{self.path}/files/rdf.yaml"
+        staged_rdf_path = f"{self.folder}files/rdf.yaml"
         rdf_data = self.client.load_file(staged_rdf_path)
         rdf = yaml.load(rdf_data)
         rdf["version"] = ret.version
@@ -171,12 +181,12 @@ class StagedVersion(_RemoteResourceVersion):
         yaml.dump(rdf, stream)
         rdf_data = stream.read().encode()
         self.client.put(
-            f"{ret.path}/files/rdf.yaml", io.BytesIO(rdf_data), length=len(rdf_data)
+            f"{ret.folder}files/rdf.yaml", io.BytesIO(rdf_data), length=len(rdf_data)
         )
         self.client.rm_obj(staged_rdf_path)
 
         # move all other files
-        self.client.mv_dir(self.path, ret.path)
+        self.client.mv_dir(self.folder, ret.folder)
 
         # remove all preceding staged versions
         self.client.rm_dir(f"{self.id}/{self.version_prefix}")

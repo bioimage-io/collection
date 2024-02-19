@@ -127,7 +127,7 @@ class Client:
         self._rm_objs(objects, bypass_governance_mode=bypass_governance_mode)
 
     def rm_dir(self, prefix: str, *, bypass_governance_mode: bool = False):
-        assert prefix.endswith("/")
+        assert prefix == "" or prefix.endswith("/")
         objects = list(
             self._client.list_objects(
                 self.bucket, f"{self.prefix}/{prefix}", recursive=True
