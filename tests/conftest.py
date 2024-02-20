@@ -14,7 +14,7 @@ def client():
     cl = Client(
         host=os.environ["S3_HOST"],
         bucket=os.environ["S3_TEST_BUCKET"],
-        prefix=os.environ["S3_TEST_FOLDER"],
+        prefix=os.environ["S3_TEST_FOLDER"] + "/pytest",
     )
     yield cl
     cl.rm_dir("")  # wipe s3 test folder

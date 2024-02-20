@@ -1,4 +1,4 @@
-bioimageio.spec @ git+https://github.com/bioimage-io/spec-bioimage-io@adb33e04c84a40d981d51fdb9d22e718ec27ac35  # TODO: chenage to released version
+bioimageio.spec @ git+https://github.com/bioimage-io/spec-bioimage-io@cfacdc292784e0ecc7f5dbcdce0e4fc2b0ca3cad  # TODO: chenage to released version
 loguru==0.7.2
 minio==7.2.3
 packaging==23.2

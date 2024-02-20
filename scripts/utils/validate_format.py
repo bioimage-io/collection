@@ -2,32 +2,37 @@ import json
 import os
 import uuid
 import warnings
-from functools import partialmethod
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Optional, TypedDict, assert_never
 
-import requests
-from bioimageio.spec import load_raw_resource_description, validate  # type: ignore
-from bioimageio.spec.model.raw_nodes import Model, WeightsFormat  # type: ignore
-from bioimageio.spec.rdf.raw_nodes import RDF_Base  # type: ignore
-from bioimageio.spec.shared import yaml  # type: ignore
-from bioimageio.spec.shared.raw_nodes import URI, Dependencies  # type: ignore
-from marshmallow import missing
-from marshmallow.utils import _Missing
+import pooch
+from bioimageio.spec import InvalidDescr, ResourceDescr, load_description
+from bioimageio.spec.model import AnyModelDescr, v0_4, v0_5
 from packaging.version import Version
-from tqdm import tqdm
+from ruyaml import YAML
 
 from .remote_resource import StagedVersion
 
-tqdm.__init__ = partialmethod(tqdm.__init__, disable=True)  # silence tqdm
+yaml = YAML(typ="safe")
+
+SupportedWeightsEntry = (
+    v0_4.OnnxWeightsDescr
+    | v0_4.PytorchStateDictWeightsDescr
+    | v0_4.TensorflowSavedModelBundleWeightsDescr
+    | v0_4.TorchscriptWeightsDescr
+    | v0_5.OnnxWeightsDescr
+    | v0_5.PytorchStateDictWeightsDescr
+    | v0_5.TensorflowSavedModelBundleWeightsDescr
+    | v0_5.TorchscriptWeightsDescr
+)
 
 
-def set_multiple_gh_actions_outputs(outputs: Dict[str, Union[str, Any]]):
+def set_multiple_gh_actions_outputs(outputs: dict[str, str | Any]):
     for name, out in outputs.items():
         set_gh_actions_output(name, out)
 
 
-def set_gh_actions_output(name: str, output: Union[str, Any]):
+def set_gh_actions_output(name: str, output: str | Any):
     """set output of a github actions workflow step calling this script"""
     if isinstance(output, bool):
         output = "yes" if output else "no"
@@ -50,55 +55,41 @@ def set_gh_actions_output(name: str, output: Union[str, Any]):
             print(f"{name}={output}", file=fh)
 
 
+class PipDeps(TypedDict):
+    pip: list[str]
+
+
+class CondaEnv(TypedDict):
+    name: str
+    channels: list[str]
+    dependencies: list[str | PipDeps]
+
+
 def get_base_env():
-    return {"channels": ["conda-forge"], "dependencies": ["bioimageio.core"]}
+    return CondaEnv(
+        name="env", channels=["conda-forge"], dependencies=["bioimageio.core"]
+    )
 
 
-def get_env_from_deps(deps: Dependencies):
-    conda_env = get_base_env()
-    try:
-        if deps.manager in ["conda", "pip"]:
-            if isinstance(deps.file, Path):
-                raise TypeError(
-                    f"File path for remote source? {deps.file} should be a url"
-                )
-            elif not isinstance(deps.file, URI):
-                raise TypeError(deps.file)
+def get_env_from_deps(deps: v0_4.Dependencies | v0_5.EnvironmentFileDescr):
+    if isinstance(deps, v0_4.Dependencies):
+        if deps.manager not in ("conda", "mamba"):
+            return get_base_env()
 
-            r = requests.get(str(deps.file))
-            r.raise_for_status()
-            dep_file_content = r.text
-            if deps.manager == "conda":
-                conda_env = yaml.load(dep_file_content)
+        url = deps.file
+        sha = None
+    elif isinstance(deps, v0_5.EnvironmentFileDescr):
+        url = deps.source
+        sha = deps.sha256
+    else:
+        assert_never(deps)
 
-                # add bioimageio.core to dependencies
-                deps = conda_env.get("dependencies", [])
-                if not isinstance(deps, list):
-                    raise TypeError(
-                        f"expected dependencies in conda environment.yaml to be a list, but got: {deps}"
-                    )
-                if not any(
-                    isinstance(d, str) and d.startswith("bioimageio.core") for d in deps
-                ):
-                    conda_env["dependencies"] = deps + ["conda-forge::bioimageio.core"]
-            elif deps.manager == "pip":
-                pip_req = [
-                    d
-                    for d in dep_file_content.split("\n")
-                    if not d.strip().startswith("#")
-                ]
-                if not any(r.startswith("bioimageio.core") for r in pip_req):
-                    pip_req.append("bioimageio.core")
+    local = Path(pooch.retrieve(url, known_hash=sha))  # type: ignore
+    conda_env = yaml.load(local)
 
-                conda_env = dict(
-                    channels=["conda-forge"],
-                    dependencies=["python=3.9", "pip", {"pip": pip_req}],
-                )
-            else:
-                raise NotImplementedError(deps.manager)
-
-    except Exception as e:
-        warnings.warn(f"Failed to resolve dependencies: {e}")
+    # add bioimageio.core to dependencies
+    if not any(isinstance(d, str) and d.startswith("bioimageio.core") for d in deps):
+        conda_env["dependencies"].append("conda-forge::bioimageio.core")
 
     return conda_env
 
@@ -107,100 +98,116 @@ def get_version_range(v: Version) -> str:
     return f"=={v.major}.{v.minor}.*"
 
 
-def get_default_env(
+def get_onnx_env(*, opset_version: Optional[int]):
+    if opset_version is None:
+        opset_version = 15
+
+    conda_env = get_base_env()
+    # note: we should not need to worry about the opset version,
+    # see https://github.com/microsoft/onnxruntime/blob/master/docs/Versioning.md
+    conda_env["dependencies"].append("onnxruntime")
+    return conda_env
+
+
+def get_pytorch_env(
     *,
-    opset_version: Optional[int] = None,
     pytorch_version: Optional[Version] = None,
-    tensorflow_version: Optional[Version] = None,
 ):
-    conda_env: Dict[str, Union[Any, List[Any]]] = get_base_env()
-    if opset_version is not None:
-        conda_env["dependencies"].append("onnxruntime")
-        # note: we should not need to worry about the opset version,
-        # see https://github.com/microsoft/onnxruntime/blob/master/docs/Versioning.md
+    if pytorch_version is None:
+        pytorch_version = Version("1.10")
 
-    if pytorch_version is not None:
-        conda_env["channels"].insert(0, "pytorch")
-        conda_env["dependencies"].extend(
-            [f"pytorch {get_version_range(pytorch_version)}", "cpuonly"]
-        )
+    conda_env = get_base_env()
+    conda_env["channels"].insert(0, "pytorch")
+    conda_env["dependencies"].extend(
+        [f"pytorch {get_version_range(pytorch_version)}", "cpuonly"]
+    )
+    return conda_env
 
-    if tensorflow_version is not None:
-        # tensorflow 1 is not available on conda, so we need to inject this as a pip dependency
-        if tensorflow_version.major == 1:
-            tensorflow_version = max(
-                tensorflow_version, Version("1.13")
-            )  # tf <1.13 not available anymore
-            assert opset_version is None
-            assert pytorch_version is None
-            conda_env["dependencies"] = [
-                "pip",
-                "python=3.7.*",
-            ]  # tf 1.15 not available for py>=3.8
-            # get bioimageio.core (and its dependencies) via pip as well to avoid conda/pip mix
-            # protobuf pin: tf 1 does not pin an upper limit for protobuf,
-            #               but fails to load models saved with protobuf 3 when installing protobuf 4.
-            conda_env["dependencies"].append(
-                {
-                    "pip": [
-                        "bioimageio.core",
-                        f"tensorflow {get_version_range(tensorflow_version)}",
-                        "protobuf <4.0",
-                    ]
-                }
-            )
-        elif tensorflow_version.major == 2 and tensorflow_version.minor < 11:
-            # get older tf versions from defaults channel
-            conda_env = {
-                "channels": ["defaults"],
-                "dependencies": [
-                    "conda-forge::bioimageio.core",
+
+def get_tf_env(tensorflow_version: Optional[Version]):
+    conda_env = get_base_env()
+    if tensorflow_version is None:
+        tensorflow_version = Version("1.15")
+
+    # tensorflow 1 is not available on conda, so we need to inject this as a pip dependency
+    if tensorflow_version.major == 1:
+        tensorflow_version = max(
+            tensorflow_version, Version("1.13")
+        )  # tf <1.13 not available anymore
+        conda_env["dependencies"] = [
+            "pip",
+            "python=3.7.*",
+        ]  # tf 1.15 not available for py>=3.8
+        # get bioimageio.core (and its dependencies) via pip as well to avoid conda/pip mix
+        # protobuf pin: tf 1 does not pin an upper limit for protobuf,
+        #               but fails to load models saved with protobuf 3 when installing protobuf 4.
+        conda_env["dependencies"].append(
+            PipDeps(
+                pip=[
+                    "bioimageio.core",
                     f"tensorflow {get_version_range(tensorflow_version)}",
-                ],
-            }
-        else:  # use conda-forge otherwise
-            conda_env["dependencies"].append(
-                f"tensorflow {get_version_range(tensorflow_version)}"
+                    "protobuf <4.0",
+                ]
             )
+        )
+    elif tensorflow_version.major == 2 and tensorflow_version.minor < 11:
+        # get older tf versions from defaults channel
+        conda_env = CondaEnv(
+            name="env",
+            channels=["defaults"],
+            dependencies=[
+                "conda-forge::bioimageio.core",
+                f"tensorflow {get_version_range(tensorflow_version)}",
+            ],
+        )
+    else:  # use conda-forge otherwise
+        conda_env["dependencies"].append(
+            f"tensorflow {get_version_range(tensorflow_version)}"
+        )
 
     return conda_env
 
 
 def write_conda_env_file(
-    *, rd: Model, weight_format: WeightsFormat, path: Path, env_name: str
+    *,
+    entry: SupportedWeightsEntry,
+    path: Path,
+    env_name: str,
 ):
-    assert isinstance(rd, Model)
-    given_versions: Dict[str, Union[_Missing, Version]] = {}
-    default_versions = dict(
-        pytorch_version=Version("1.10"),
-        tensorflow_version=Version("1.15"),
-        opset_version=15,
-    )
-    if weight_format in ["pytorch_state_dict", "torchscript"]:
-        given_versions["pytorch_version"] = rd.weights[weight_format].pytorch_version
-    elif weight_format in ["tensorflow_saved_model_bundle", "keras_hdf5"]:
-        given_versions["tensorflow_version"] = rd.weights[
-            weight_format
-        ].tensorflow_version
-    elif weight_format in ["onnx"]:
-        given_versions["opset_version"] = rd.weights[weight_format].opset_version
+    if isinstance(entry, (v0_4.OnnxWeightsDescr, v0_5.OnnxWeightsDescr)):
+        conda_env = get_onnx_env(opset_version=entry.opset_version)
+    elif isinstance(
+        entry,
+        (
+            v0_4.PytorchStateDictWeightsDescr,
+            v0_5.PytorchStateDictWeightsDescr,
+            v0_4.TorchscriptWeightsDescr,
+            v0_5.TorchscriptWeightsDescr,
+        ),
+    ):
+        if (
+            isinstance(entry, v0_5.TorchscriptWeightsDescr)
+            or entry.dependencies is None
+        ):
+            conda_env = get_pytorch_env(pytorch_version=entry.pytorch_version)
+        else:
+            conda_env = get_env_from_deps(entry.dependencies)
+
+    elif isinstance(
+        entry,
+        (
+            v0_4.TensorflowSavedModelBundleWeightsDescr,
+            v0_5.TensorflowSavedModelBundleWeightsDescr,
+        ),
+    ):
+        if entry.dependencies is None:
+            conda_env = get_tf_env(tensorflow_version=entry.tensorflow_version)
+        else:
+            conda_env = get_env_from_deps(entry.dependencies)
     else:
-        raise NotImplementedError(weight_format)
+        assert_never(entry)
 
-    deps = rd.weights[weight_format].dependencies
-    if deps is missing:
-        conda_env = get_default_env(
-            **{vn: v or default_versions[vn] for vn, v in given_versions.items()}
-        )
-    else:
-        if any(given_versions.values()):
-            warnings.warn(
-                f"Using specified dependencies; ignoring given versions: {given_versions}"
-            )
-
-        conda_env = get_env_from_deps(deps)
-
-    conda_env["name"] = env_name
+    conda_env["name"] = ensure_valid_conda_env_name(env_name)
 
     path.parent.mkdir(parents=True, exist_ok=True)
     yaml.dump(conda_env, path)
@@ -213,51 +220,44 @@ def ensure_valid_conda_env_name(name: str) -> str:
     return name or "empty"
 
 
-def prepare_dynamic_test_cases(rd: RDF_Base) -> List[Dict[str, str]]:
-    validation_cases: List[Dict[str, str]] = []
+def prepare_dynamic_test_cases(rd: ResourceDescr) -> list[dict[str, str]]:
+    validation_cases: list[dict[str, str]] = []
     # construct test cases based on resource type
-    if isinstance(rd, Model):
+    if isinstance(rd, AnyModelDescr):
         # generate validation cases per weight format
-        for wf in rd.weights:
+        for wf, entry in rd.weights:
             # we skip the keras validation for now, see
             # https://github.com/bioimage-io/collection-bioimage-io/issues/16
-            if wf in ("keras_hdf5", "tensorflow_js"):
+            if not isinstance(entry, SupportedWeightsEntry):
                 warnings.warn(f"{wf} weights are currently not validated")
                 continue
 
             write_conda_env_file(
-                rd=rd,
-                weight_format=wf,
+                entry=entry,
                 path=Path(f"conda_env_{wf}.yaml"),
                 env_name=wf,
             )
             validation_cases.append({"weight_format": wf})
-    elif isinstance(rd, RDF_Base):
-        pass
-    else:
-        raise TypeError(rd)
 
     return validation_cases
 
 
 def validate_format(staged: StagedVersion):
     rdf_source = staged.get_rdf_url()
-    summaries = [validate(rdf_source)]
-
-    dynamic_test_cases: List[Dict[str, str]] = []
-    if summaries[0]["status"] == "passed":
-        # validate rdf using the latest format version
-        latest_static_summary = validate(rdf_source, update_format=True)
-        if latest_static_summary["status"] == "passed":
-            rd = load_raw_resource_description(rdf_source, update_to_format="latest")
-            assert isinstance(rd, RDF_Base)
+    rd = load_description(rdf_source, format_version="discover")
+    dynamic_test_cases: list[dict[str, str]] = []
+    if not isinstance(rd, InvalidDescr):
+        rd_latest = load_description(rdf_source, format_version="latest")
+        if isinstance(rd_latest, InvalidDescr):
             dynamic_test_cases += prepare_dynamic_test_cases(rd)
+        else:
+            dynamic_test_cases += prepare_dynamic_test_cases(rd_latest)
 
-        if "name" not in latest_static_summary:
-            latest_static_summary["name"] = (
-                "bioimageio.spec static validation with auto-conversion to latest format"
-            )
-        summaries.append(latest_static_summary)
+        rd = rd_latest
+        rd.validation_summary.status = "passed"  # passed in 'discover' mode
+
+    summary = rd.validation_summary.model_dump(mode="json")
+    staged.add_log_entry("bioimageio.spec", summary)
 
     set_multiple_gh_actions_outputs(
         dict(

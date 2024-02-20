@@ -1,5 +1,11 @@
 {
+    "window.title": "collection",
     "python.analysis.typeCheckingMode": "strict",
+    "python.analysis.extraPaths": [
+        "../spec-bioimage-io",
+        "../core-bioimage-io",
+        "../core-bioimage-io-python"
+    ],
     "notebook.codeActionsOnSave": {
         "source.organizeImports": true
     },

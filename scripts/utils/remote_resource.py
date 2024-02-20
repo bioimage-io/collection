@@ -6,12 +6,18 @@ import urllib.request
 import zipfile
 from dataclasses import dataclass
 from datetime import datetime
-from typing import Any, ClassVar, Optional, TypedDict
+from typing import (
+    Any,
+    ClassVar,
+    Optional,
+    assert_never,
+)
 
 from loguru import logger
 from ruyaml import YAML
 
 from .s3_client import Client
+from .s3_structure import Details, Log, LogCategory, Status, StatusName
 
 yaml = YAML(typ="safe")
 
@@ -41,12 +47,18 @@ class RemoteResource:
             v = 1
 
         ret = StagedVersion(client=self.client, id=self.id, version=v)
-        logger.debug("Staging {}", ret.folder)
+        ret.set_status("staging", f"unzipping {package_url} to {ret.folder}")
 
         # Download the model zip file
-        remotezip = urllib.request.urlopen(package_url)
-        # Unzip the zip file
+        try:
+            remotezip = urllib.request.urlopen(package_url)
+        except Exception:
+            logger.error("failed to open %s", package_url)
+            raise
+
         zipinmemory = io.BytesIO(remotezip.read())
+
+        # Unzip the zip file
         zipobj = zipfile.ZipFile(zipinmemory)
 
         rdf = yaml.load(zipobj.open("rdf.yaml").read().decode())
@@ -66,27 +78,6 @@ class RemoteResource:
             self.client.put(path, io.BytesIO(file_data), length=len(file_data))
 
         return ret
-
-
-LogCategory = str
-
-
-class LogEntry(TypedDict):
-    timestamp: str
-    log: Any
-
-
-Log = dict[LogCategory, list[LogEntry]]
-
-
-class Message(TypedDict):
-    author: str
-    text: str
-    time: str
-
-
-class Details(TypedDict):
-    messages: list[Message]
 
 
 @dataclass
@@ -115,7 +106,10 @@ class _RemoteResourceVersion(RemoteResource):
     def _get_details(self) -> Details:
         details_data = self.client.load_file(f"{self.folder}details.json")
         if details_data is None:
-            details: Details = {"messages": []}
+            details: Details = {
+                "messages": [],
+                "status": self._create_status("unknown", "no status information found"),
+            }
         else:
             details = json.load(io.BytesIO(details_data))
 
@@ -129,10 +123,35 @@ class _RemoteResourceVersion(RemoteResource):
         return details["messages"]
 
     def add_message(self, author: str, text: str):
+        logger.info("msg from {}: text", author)
         details = self._get_details()
         now = datetime.now().isoformat()
         details["messages"].append({"author": author, "text": text, "time": now})
         self._set_details(details)
+
+    def set_status(self, name: StatusName, description: str) -> None:
+        details = self._get_details()
+        details["status"] = self._create_status(name, description)
+        self._set_details(details)
+
+    @staticmethod
+    def _create_status(name: StatusName, description: str) -> Status:
+        num_steps = 3
+        if name == "unknown":
+            step = 1
+            num_steps = 1
+        elif name == "staging":
+            step = 1
+        else:
+            assert_never(name)
+
+        return Status(
+            name=name, description=description, step=step, num_steps=num_steps
+        )
+
+    def get_status(self) -> Status:
+        details = self._get_details()
+        return details["status"]
 
     def add_log_entry(self, category: LogCategory, content: Any):
         log = self.get_log()

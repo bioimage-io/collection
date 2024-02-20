@@ -4,17 +4,19 @@ from pathlib import Path
 from typing import Optional
 
 import typer
-from bioimageio.spec import load_raw_resource_description
-from bioimageio.spec.shared import yaml
+from bioimageio.spec import load_description
+from ruyaml import YAML
 from utils.remote_resource import StagedVersion
 from utils.s3_client import Client
 
+yaml = YAML(typ="ssafe")
 try:
     from tqdm import tqdm
 except ImportError:
     pass
 else:
-    tqdm.__init__ = partialmethod(tqdm.__init__, disable=True)  # silence tqdm
+    # silence tqdm
+    tqdm.__init__ = partialmethod(tqdm.__init__, disable=True)  # type: ignore
 
 
 def test_summary_from_exception(name: str, exception: Exception):
@@ -42,7 +44,7 @@ def test_dynamically(
 
     if create_env_outcome == "success":
         try:
-            from bioimageio.core.resource_tests import test_resource
+            from bioimageio.core import test_resource
         except Exception as e:
             summaries = [
                 test_summary_from_exception(
@@ -62,7 +64,7 @@ def test_dynamically(
                 summaries = [test_summary_from_exception("check for test kwargs", e)]
             else:
                 try:
-                    rd = load_raw_resource_description(rdf_source)
+                    rd = load_description(rdf_source)
                     summaries = test_resource(
                         rd, weight_format=weight_format, **test_kwargs
                     )
