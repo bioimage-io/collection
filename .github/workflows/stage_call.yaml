@@ -31,9 +31,10 @@ env:
   S3_SECRET_ACCESS_KEY: ${{secrets.S3_SECRET_ACCESS_KEY}}
 
 jobs:
-  validate:
+  stage:
     runs-on: ubuntu-latest
     outputs:
+      version: ${{ steps.stage.outputs.version }}
       dynamic_test_cases: ${{ steps.stage.outputs.dynamic_test_cases }}
       has_dynamic_test_cases: ${{ steps.stage.outputs.has_dynamic_test_cases }}
     steps:
@@ -47,21 +48,9 @@ jobs:
         run: |
           python scripts/stage.py "${{ inputs.resource_id }}" "${{ inputs.package_url }}"
 
-      - name: Validate format
-        id: validate
-        run: |
-          python scripts/update_status.py "${{ inputs.resource_path }}" "Starting validation" "2"
-          python scripts/validate_format.py "${{ inputs.resource_path }}"
-      - run: |
-          python scripts/update_status.py "${{ inputs.resource_path }}" "Starting additional tests" "3"
-        if: steps.validate.outputs.has_dynamic_test_cases == 'yes'
-      - run: |
-          python scripts/update_status.py "${{ inputs.resource_path }}" "Validation done" "3"
-        if: steps.validate.outputs.has_dynamic_test_cases == 'no'
-
   test:
-    needs: validate
-    if: needs.validate.outputs.has_dynamic_test_cases == 'yes'
+    needs: stage
+    if: needs.stage.outputs.has_dynamic_test_cases == 'yes'
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -88,11 +77,11 @@ jobs:
         run: pip install typer bioimageio.spec minio loguru
       - name: dynamic validation
         shell: bash -l {0}
-        run: python scripts/test_dynamically.py "https://${{env.S3_HOST}}/${{env.S3_BUCKET}}/${{env.S3_FOLDER}}/${{inputs.resource_path}}/files/rdf.yaml" ${{ matrix.weight_format }} --create-env-outcome ${{ steps.create_env.outcome }} --${{ contains(inputs.deploy_to, 'gh-pages') && 'no-ignore' || 'ignore' }}-rdf-source-field-in-validation
+        run: python scripts/test_dynamically.py "${{inputs.resource_id}}" "${{needs.stage.outputs.version}}" "${{ matrix.weight_format }}" "${{ steps.create_env.outcome }}"
         timeout-minutes: 60
 
   conclude:
-    needs: test
+    needs: [stage, test]
     if: always() # run even if test job fails
     runs-on: ubuntu-latest
     steps:
@@ -103,4 +92,6 @@ jobs:
           cache: "pip" # caching pip dependencies
       - run: pip install -r scripts/requirements.txt
       - run: |
-          python scripts/update_status.py "${{ inputs.resource_path }}" "Awaiting review" "4"
+          python scripts/conclude.py "${{ inputs.resource_id }}" "${{needs.stage.outputs.version}}"
+
+  # TODO: call emailer

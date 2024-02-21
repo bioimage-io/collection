@@ -10,12 +10,12 @@ from urllib.parse import quote_plus, urljoin, urlparse
 
 import requests  # type: ignore
 import spdx_license_list  # type: ignore
-
 from loguru import logger  # type: ignore
 from packaging.version import parse as parse_version
 from ruyaml import YAML  # type: ignore
 from s3_client import create_client, version_from_resource_path_or_s3
-from update_status import update_status
+
+from scripts.conclude import update_status
 
 yaml = YAML(typ="safe")
 
@@ -75,7 +75,9 @@ def main():
     params = {"access_token": ACCESS_TOKEN}
 
     client = create_client()
-    resource_path, version = version_from_resource_path_or_s3(args.resource_path, client)
+    resource_path, version = version_from_resource_path_or_s3(
+        args.resource_path, client
+    )
 
     s3_path = f"{resource_path}/{version}/files"
 

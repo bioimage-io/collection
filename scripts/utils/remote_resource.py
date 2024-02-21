@@ -66,11 +66,15 @@ class RemoteResource:
             rdf["id"] = ret.id
         elif rdf_id != ret.id:
             raise ValueError(
-                f"Expected package for {ret.id}, but got packaged {rdf_id}"
+                f"Expected package for {ret.id}, but got packaged {rdf_id} ({package_url})"
             )
 
         # overwrite version information
         rdf["version"] = ret.version
+
+        if rdf.get("id_emoji") is None:
+            # TODO: set `id_emoji` according to id
+            raise ValueError(f"RDF in {package_url} is missing `id_emoji`")
 
         for filename in zipobj.namelist():
             file_data = zipobj.open(filename).read()
@@ -136,12 +140,20 @@ class _RemoteResourceVersion(RemoteResource):
 
     @staticmethod
     def _create_status(name: StatusName, description: str) -> Status:
-        num_steps = 3
+        num_steps = 5
         if name == "unknown":
             step = 1
             num_steps = 1
         elif name == "staging":
             step = 1
+        elif name == "testing":
+            step = 2
+        elif name == "awaiting review":
+            step = 3
+        elif name == "publishing":
+            step = 4
+        elif name == "published":
+            step = 5
         else:
             assert_never(name)
 
@@ -153,7 +165,11 @@ class _RemoteResourceVersion(RemoteResource):
         details = self._get_details()
         return details["status"]
 
-    def add_log_entry(self, category: LogCategory, content: Any):
+    def add_log_entry(
+        self,
+        category: LogCategory,
+        content: list[Any] | dict[Any, Any] | int | float | str | None | bool,
+    ):
         log = self.get_log()
         entries = log.setdefault(category, [])
         now = datetime.now().isoformat()

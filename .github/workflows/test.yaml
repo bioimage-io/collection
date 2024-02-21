@@ -15,7 +15,7 @@ jobs:
       S3_FOLDER: ${{vars.S3_TEST_FOLDER}}/ci # using test folder
     secrets: inherit
 
-  test-scripts:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -24,7 +24,32 @@ jobs:
           python-version: "3.12"
           cache: "pip" # caching pip dependencies
       - run: pip install -r .github/scripts/requirements.txt
-      - run: pip install black pyright pytest
       - run: black .
       - run: pyright -p pyproject.toml
       - run: pytest
+      - name: export documentation
+        if: ${{ github.ref == 'ref/head/main' }}
+        run: pdoc . -o ./docs
+      - uses: actions/upload-pages-artifact@v3
+        if: ${{ github.ref == 'ref/head/main' }}
+        with:
+          path: docs/
+
+  deploy:
+    needs: build
+    if: ${{ github.ref == 'ref/head/main' }}
+    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
+    permissions:
+      pages: write # to deploy to Pages
+      id-token: write # to verify the deployment originates from an appropriate source
+
+    # Deploy to the github-pages environment
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

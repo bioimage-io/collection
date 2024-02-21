@@ -1,7 +1,12 @@
-bioimageio.spec @ git+https://github.com/bioimage-io/spec-bioimage-io@cfacdc292784e0ecc7f5dbcdce0e4fc2b0ca3cad  # TODO: chenage to released version
+bioimageio.spec @ git+https://github.com/bioimage-io/spec-bioimage-io@0b707b83b061da7584e554cedbf0c6d725980619  # TODO: chenage to released version
+bioimageio.core @ git+https://github.com/bioimage-io/core-bioimage-io-python@fcb6bcd674e211c61161105eaf3552cf3cb804ec  # TODO: chenage to released version
+black==24.2.0
 loguru==0.7.2
 minio==7.2.3
 packaging==23.2
+pdoc==14.4.0
+pyright==1.1.351
+pytest==8.0.0
 ruyaml==0.91.0
 spdx-license-list==3.22
 typer==0.9.0

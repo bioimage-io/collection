@@ -19,7 +19,7 @@ class Message(TypedDict):
     time: str
 
 
-StatusName = Literal["unknown", "staging"]
+StatusName = Literal["unknown", "staging", "testing", "awaiting review"]
 
 
 class Status(TypedDict):
