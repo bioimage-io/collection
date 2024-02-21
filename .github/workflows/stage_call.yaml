@@ -44,7 +44,7 @@ jobs:
           python-version: "3.12"
           cache: "pip" # caching pip dependencies
       - run: pip install -r requirements.txt
-      - name: stage
+      - id: stage
         run: |
           python scripts/stage.py "${{ inputs.resource_id }}" "${{ inputs.package_url }}"
 
