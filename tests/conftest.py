@@ -16,8 +16,8 @@ def client():
         bucket=os.environ["S3_TEST_BUCKET"],
         prefix=os.environ["S3_TEST_FOLDER"] + "/pytest",
     )
-    yield cl
     cl.rm_dir("")  # wipe s3 test folder
+    yield cl
 
 
 @pytest.fixture(scope="session")

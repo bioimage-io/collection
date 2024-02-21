@@ -185,16 +185,17 @@ class StagedVersion(_RemoteResourceVersion):
     version_prefix: ClassVar[str] = "staged/"
 
     def publish(self) -> PublishedVersion:
-        logger.debug("Publishing {}", self.folder)
         # get next version and update versions.json
         versions_path = f"{self.id}/versions.json"
         versions_data = self.client.load_file(versions_path)
         if versions_data is None:
-            versions: dict[str, Any] = {"1": {}}
+            versions: dict[str, Any] = {}
+            next_version = 1
         else:
             versions = json.loads(versions_data)
+            next_version = max(map(int, versions)) + 1
 
-        next_version = max(map(int, versions)) + 1
+        logger.debug("Publishing {} as version {}", self.folder, next_version)
 
         assert next_version not in versions, (next_version, versions)
 
