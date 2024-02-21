@@ -1,7 +1,6 @@
 from typer import run
+from utils.remote_resource import StagedVersion
 from utils.s3_client import Client
-
-from scripts.utils.remote_resource import StagedVersion
 
 
 def conclude(
