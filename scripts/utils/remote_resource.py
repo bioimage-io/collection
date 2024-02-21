@@ -53,7 +53,7 @@ class RemoteResource:
         try:
             remotezip = urllib.request.urlopen(package_url)
         except Exception:
-            logger.error("failed to open %s", package_url)
+            logger.error("failed to open {}", package_url)
             raise
 
         zipinmemory = io.BytesIO(remotezip.read())

@@ -62,6 +62,7 @@ class Client:
             length=length,
             part_size=part_size,
         )
+        logger.info("Uploaded {}", self.get_file_url(path))
 
     def put_json(self, path: str, json_value: Any):
         data = json.dumps(json_value).encode()
