@@ -1,0 +1,97 @@
+name: stage
+
+on:
+  workflow_call:
+    inputs:
+      resource_id:
+        description: "Bioimage.io resource identifier"
+        required: true
+        type: string
+      package_url:
+        description: "Download URL of the resource package zip-file"
+        required: true
+        type: string
+      S3_HOST:
+        required: true
+        type: string
+      S3_BUCKET:
+        required: true
+        type: string
+      S3_FOLDER:
+        required: true
+        type: string
+
+concurrency: ${{inputs.resource_id}}
+
+env:
+  S3_HOST: ${{ inputs.S3_HOST }}
+  S3_BUCKET: ${{ inputs.S3_BUCKET }}
+  S3_FOLDER: ${{ inputs.S3_FOLDER }}
+  S3_ACCESS_KEY_ID: ${{secrets.S3_ACCESS_KEY_ID}}
+  S3_SECRET_ACCESS_KEY: ${{secrets.S3_SECRET_ACCESS_KEY}}
+
+jobs:
+  stage:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.stage.outputs.version }}
+      dynamic_test_cases: ${{ steps.stage.outputs.dynamic_test_cases }}
+      has_dynamic_test_cases: ${{ steps.stage.outputs.has_dynamic_test_cases }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip" # caching pip dependencies
+      - run: pip install -r requirements.txt
+      - name: stage
+        run: |
+          python scripts/stage.py "${{ inputs.resource_id }}" "${{ inputs.package_url }}"
+
+  test:
+    needs: stage
+    if: needs.stage.outputs.has_dynamic_test_cases == 'yes'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJson(needs.static-validation.outputs.dynamic_test_cases) }} # [{env_name: ..., weight_format: ...}, ...]
+      max-parallel: 1 # avoid prallel updates to log.json
+    steps:
+      - uses: actions/checkout@v4
+      - name: install validation dependencies
+        id: create_env
+        uses: mamba-org/setup-micromamba@v1
+        with:
+          cache-downloads: true
+          environment-name: ${{ matrix.env_name }}
+          environment-file: conda_env_${{ matrix.weight_format }}.yaml
+          create-args: >- # script dependencies
+            typer
+            conda-forge::bioimageio.spec
+            minio
+            loguru
+        continue-on-error: true # we inspect this step's outcome in test_dynamically.py
+        timeout-minutes: 60
+      - name: install minimal script dependencies if val env failed
+        if: ${{ steps.create_env.outcome != 'success' }}
+        run: pip install typer bioimageio.spec minio loguru
+      - name: dynamic validation
+        shell: bash -l {0}
+        run: python scripts/test_dynamically.py "${{inputs.resource_id}}" "${{needs.stage.outputs.version}}" "${{ matrix.weight_format }}" "${{ steps.create_env.outcome }}"
+        timeout-minutes: 60
+
+  conclude:
+    needs: [stage, test]
+    if: always() # run even if test job fails
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip" # caching pip dependencies
+      - run: pip install -r scripts/requirements.txt
+      - run: |
+          python scripts/conclude.py "${{ inputs.resource_id }}" "${{needs.stage.outputs.version}}"
+
+  # TODO: call emailer

@@ -1,0 +1,20 @@
+{
+    "window.title": "collection",
+    "python.analysis.typeCheckingMode": "strict",
+    "python.analysis.extraPaths": [
+        "../spec-bioimage-io",
+        "../core-bioimage-io",
+        "../core-bioimage-io-python"
+    ],
+    "notebook.codeActionsOnSave": {
+        "source.organizeImports": true
+    },
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": "explicit"
+    },
+    "python.testing.pytestArgs": [
+        "tests"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true,
+}

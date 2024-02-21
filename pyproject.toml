@@ -1,0 +1,23 @@
+[tool.black]
+target-version = ["py312"]
+
+[tool.pyright]
+include = ["scripts"]
+pythonPlatform = "All"
+pythonVersion = "3.12"
+reportIncompatibleMethodOverride = true
+reportMissingSuperCall = "error"
+reportMissingTypeArgument = true
+reportMissingTypeStubs = "warning"
+reportUninitializedInstanceVariable = "error"
+reportUnknownMemberType = false
+reportUnnecessaryIsInstance = false
+reportUnnecessaryTypeIgnoreComment = "error"
+reportUnusedCallResult = "error"
+reportUnusedVariable = "error"
+typeCheckingMode = "strict"
+useLibraryCodeForTypes = true
+
+[tool.pytest.ini_options]
+addopts = "--capture=no --doctest-modules --failed-first"
+testpaths = ["scripts"]
