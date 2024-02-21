@@ -16,7 +16,7 @@ concurrency: ${{inputs.resource_id}}
 
 jobs:
   call:
-    uses: ./.github/workflows/stage_call.yml
+    uses: ./.github/workflows/stage_call.yaml
     with:
       resource_id: ${{inputs.resource_id}}
       S3_HOST: ${{vars.S3_HOST}}
