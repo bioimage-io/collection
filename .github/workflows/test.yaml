@@ -4,6 +4,11 @@ on: push
 
 concurrency: test
 
+env:
+  S3_HOST: ${{vars.S3_HOST}}
+  S3_BUCKET: ${{vars.S3_TEST_BUCKET}}
+  S3_FOLDER: ${{vars.S3_TEST_FOLDER}}
+
 jobs:
   test-stage-wf:
     uses: ./.github/workflows/stage_call.yaml

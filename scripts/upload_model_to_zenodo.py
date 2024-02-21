@@ -15,7 +15,7 @@ from conclude import update_status
 from loguru import logger
 from packaging.version import parse as parse_version
 from ruyaml import YAML
-from s3_client import create_client, version_from_resource_path_or_s3
+from utils.s3_client import create_client, version_from_resource_path_or_s3
 
 yaml = YAML(typ="safe")
 
