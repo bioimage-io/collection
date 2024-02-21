@@ -2,7 +2,7 @@ name: test stage call
 
 on: push
 
-concurrency: ${{inputs.resource_id}}
+concurrency: test
 
 jobs:
   test-stage-wf:
