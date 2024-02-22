@@ -18,6 +18,9 @@ env:
   ZENODO_API_ACCESS_TOKEN: ${{secrets.ZENODO_TEST_API_ACCESS_TOKEN}} # testing!
   ZENODO_TEST_API_ACCESS_TOKEN: ${{secrets.ZENODO_TEST_API_ACCESS_TOKEN}}
 
+  TEST_PACKAGE_ID: ${{vars.TEST_PACKAGE_ID}}
+  TEST_PACKAGE_URL: ${{vars.TEST_PACKAGE_URL}}
+
 jobs:
   initial-cleanup:
     runs-on: ubuntu-latest

@@ -37,12 +37,9 @@ def s3_test_folder_url(client: "Client"):
 
 @pytest.fixture(scope="session")
 def package_url():
-    return os.getenv(
-        "TEST_PACKAGE_URL",
-        "https://uk1s3.embassy.ebi.ac.uk/public-datasets/sandbox.bioimage.io/uploads/frank-water-buffalov1.zip",
-    )
+    return os.environ["TEST_PACKAGE_URL"]
 
 
 @pytest.fixture(scope="session")
 def package_id():
-    return os.getenv("TEST_PACKAGE_ID", "frank-water-buffalo")
+    return os.environ["TEST_PACKAGE_ID"]
