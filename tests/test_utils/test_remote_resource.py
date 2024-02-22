@@ -27,5 +27,5 @@ def test_lifecycle(
         published_rdf_url == f"{s3_test_folder_url}frank-water-buffalo/1/files/rdf.yaml"
     )
 
-    backed_up = backup(client, os.environ["ZENODO_TEST"])
+    backed_up = backup(client, os.environ["ZENODO_TEST_URL"])
     assert backed_up == ["frank-water-buffalo"]
