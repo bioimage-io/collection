@@ -184,6 +184,12 @@ class _RemoteResourceVersion(RemoteResource):
 class StagedVersion(_RemoteResourceVersion):
     version_prefix: ClassVar[str] = "staged/"
 
+    def await_review(self):
+        self.set_status(
+            "awaiting review",
+            description="Thank you for your contribution! Our bioimage.io maintainers will take a look soon.",
+        )
+
     def publish(self) -> PublishedVersion:
         # get next version and update versions.json
         versions_path = f"{self.id}/versions.json"

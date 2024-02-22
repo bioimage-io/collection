@@ -11,7 +11,7 @@ from bioimageio.spec.model import v0_4, v0_5
 from packaging.version import Version
 from ruyaml import YAML
 
-from .remote_resource import StagedVersion
+from backoffice.utils.remote_resource import StagedVersion
 
 yaml = YAML(typ="safe")
 

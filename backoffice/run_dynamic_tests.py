@@ -5,7 +5,6 @@ from typing import Optional
 
 import bioimageio.core
 import bioimageio.spec
-import typer
 from bioimageio.spec.model.v0_5 import WeightsFormat
 from bioimageio.spec.summary import (
     ErrorEntry,
@@ -14,8 +13,8 @@ from bioimageio.spec.summary import (
     ValidationSummary,
 )
 from ruyaml import YAML
-from utils.remote_resource import StagedVersion
-from utils.s3_client import Client
+
+from backoffice.utils.remote_resource import StagedVersion
 
 try:
     from tqdm import tqdm
@@ -44,14 +43,10 @@ def get_summary_detail_from_exception(name: str, exception: Exception):
 
 
 def run_dynamic_tests(
-    resource_id: str,
-    version: int,
-    weight_format: Optional[WeightsFormat] = typer.Argument(
-        ..., help="weight format to test model with."
-    ),
-    create_env_outcome: str = "success",
+    staged: StagedVersion,
+    weight_format: Optional[WeightsFormat],  # "weight format to test model with."
+    create_env_outcome: str,
 ):
-    staged = StagedVersion(client=Client(), id=resource_id, version=version)
     staged.set_status(
         "testing",
         "Testing" + ("" if weight_format is None else f" {weight_format} weights"),
@@ -124,7 +119,3 @@ def run_dynamic_tests(
         )
 
     staged.add_log_entry("bioimageio.core", summary.model_dump(mode="json"))
-
-
-if __name__ == "__main__":
-    typer.run(run_dynamic_tests)

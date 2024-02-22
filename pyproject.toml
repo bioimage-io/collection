@@ -2,7 +2,7 @@
 target-version = ["py312"]
 
 [tool.pyright]
-include = ["scripts"]
+include = ["backoffice", "tests"]
 pythonPlatform = "All"
 pythonVersion = "3.12"
 reportIncompatibleMethodOverride = true
@@ -20,4 +20,4 @@ useLibraryCodeForTypes = true
 
 [tool.pytest.ini_options]
 addopts = "--capture=no --doctest-modules --failed-first"
-testpaths = ["scripts", "tests"]
+testpaths = ["backoffice", "tests"]

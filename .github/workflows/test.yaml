@@ -1,4 +1,4 @@
-name: test stage call
+name: test and build docs
 
 on: push
 
