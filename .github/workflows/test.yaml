@@ -8,6 +8,8 @@ env:
   S3_HOST: ${{vars.S3_HOST}}
   S3_BUCKET: ${{vars.S3_TEST_BUCKET}} # testing!
   S3_FOLDER: ${{vars.S3_TEST_FOLDER}} # testing!
+  S3_TEST_BUCKET: ${{vars.S3_TEST_BUCKET}}
+  S3_TEST_FOLDER: ${{vars.S3_TEST_FOLDER}}
   ZENODO_URL: ${{vars.ZENODO_TEST_URL}} # testing!
   ZENODO_TEST_URL: ${{vars.ZENODO_TEST_URL}}
 
