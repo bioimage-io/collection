@@ -1,23 +1,33 @@
 import os
-from typing import TYPE_CHECKING
 
 import pytest
 
-if TYPE_CHECKING:
-    from scripts.utils.s3_client import Client
+from backoffice import BackOffice
+from backoffice.utils.s3_client import Client
+
+
+@pytest.fixture(scope="session")
+def backoffice():
+    bo = BackOffice(
+        host=os.environ["S3_HOST"],
+        bucket=os.environ["S3_TEST_BUCKET"],
+        prefix=os.environ["S3_TEST_FOLDER"] + "/pytest/backoffice",
+    )
+    bo.client.rm_dir("")  # wipe s3 test folder
+    yield bo
+    bo.client.rm_dir("")  # wipe s3 test folder
 
 
 @pytest.fixture(scope="session")
 def client():
-    from scripts.utils.s3_client import Client
-
     cl = Client(
         host=os.environ["S3_HOST"],
         bucket=os.environ["S3_TEST_BUCKET"],
-        prefix=os.environ["S3_TEST_FOLDER"] + "/pytest",
+        prefix=os.environ["S3_TEST_FOLDER"] + "/pytest/client",
     )
     cl.rm_dir("")  # wipe s3 test folder
     yield cl
+    cl.rm_dir("")  # wipe s3 test folder
 
 
 @pytest.fixture(scope="session")
