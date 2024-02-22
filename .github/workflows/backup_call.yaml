@@ -16,7 +16,7 @@ on:
         required: true
         type: string
 
-concurrency: ${{ZENODO_URL}}
+concurrency: ${{ZENODO_URL}}-call
 
 env:
   S3_HOST: ${{inputs.S3_HOST}}

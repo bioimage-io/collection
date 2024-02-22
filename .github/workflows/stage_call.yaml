@@ -21,7 +21,7 @@ on:
         required: true
         type: string
 
-concurrency: ${{inputs.resource_id}}
+concurrency: ${{inputs.resource_id}}-call
 
 env:
   S3_HOST: ${{ inputs.S3_HOST }}
