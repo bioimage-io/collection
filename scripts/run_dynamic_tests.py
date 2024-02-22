@@ -43,7 +43,7 @@ def get_summary_detail_from_exception(name: str, exception: Exception):
     )
 
 
-def test_dynamically(
+def run_dynamic_tests(
     resource_id: str,
     version: int,
     weight_format: Optional[WeightsFormat] = typer.Argument(
@@ -127,4 +127,4 @@ def test_dynamically(
 
 
 if __name__ == "__main__":
-    typer.run(test_dynamically)
+    typer.run(run_dynamic_tests)

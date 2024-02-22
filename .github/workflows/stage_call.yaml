@@ -21,7 +21,7 @@ on:
         required: true
         type: string
 
-concurrency: ${{inputs.resource_id}}
+concurrency: ${{inputs.resource_id}}-call
 
 env:
   S3_HOST: ${{ inputs.S3_HOST }}
@@ -70,14 +70,14 @@ jobs:
             conda-forge::bioimageio.spec
             minio
             loguru
-        continue-on-error: true # we inspect this step's outcome in test_dynamically.py
+        continue-on-error: true # we inspect this step's outcome in run_dynamic_tests.py
         timeout-minutes: 60
       - name: install minimal script dependencies if val env failed
         if: ${{ steps.create_env.outcome != 'success' }}
         run: pip install typer bioimageio.spec minio loguru
       - name: dynamic validation
         shell: bash -l {0}
-        run: python scripts/test_dynamically.py "${{inputs.resource_id}}" "${{needs.stage.outputs.version}}" "${{ matrix.weight_format }}" "${{ steps.create_env.outcome }}"
+        run: python scripts/run_dynamic_tests.py "${{inputs.resource_id}}" "${{needs.stage.outputs.version}}" "${{ matrix.weight_format }}" "${{ steps.create_env.outcome }}"
         timeout-minutes: 60
 
   conclude:

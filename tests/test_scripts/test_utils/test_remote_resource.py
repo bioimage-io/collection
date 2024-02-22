@@ -7,6 +7,7 @@ if TYPE_CHECKING:
 def test_lifecycle(
     client: "Client", package_url: str, package_id: str, s3_test_folder_url: str
 ):
+    from scripts.backup import backup
     from scripts.utils.remote_resource import (
         PublishedVersion,
         RemoteResource,
@@ -27,3 +28,6 @@ def test_lifecycle(
     assert (
         published_rdf_url == f"{s3_test_folder_url}frank-water-buffalo/1/files/rdf.yaml"
     )
+
+    backed_up = backup()
+    assert backed_up == ["frank-water-buffalo"]

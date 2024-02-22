@@ -1,0 +1,26 @@
+name: backup
+
+on:
+  schedule:
+    - cron: "0 0 * * 0" # every sunday at midnight
+
+concurrency: ${{vars.ZENODO_URL}}
+
+env:
+  S3_HOST: ${{vars.S3_HOST}}
+  S3_BUCKET: ${{vars.S3_BUCKET}}
+  S3_FOLDER: ${{vars.S3_FOLDER}}
+  ZENODO_URL: ${{vars.ZENODO_URL}}
+  S3_ACCESS_KEY_ID: ${{secrets.S3_ACCESS_KEY_ID}}
+  S3_SECRET_ACCESS_KEY: ${{secrets.S3_SECRET_ACCESS_KEY}}
+  ZENODO_API_ACCESS_TOKEN: ${{secrets.ZENODO_API_ACCESS_TOKEN}}
+
+jobs:
+  call:
+    uses: ./.github/workflows/backup_call.yaml
+    with:
+      S3_HOST: ${{vars.S3_HOST}}
+      S3_BUCKET: ${{vars.S3_BUCKET}}
+      S3_FOLDER: ${{vars.S3_FOLDER}}
+      ZENODO_URL: ${{vars.ZENODO_URL}}
+    secrets: inherit
