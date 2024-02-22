@@ -26,7 +26,7 @@ jobs:
           python-version: "3.12"
           cache: "pip" # caching pip dependencies
       - run: pip install .
-      - run: backoffice wipe
+      - run: backoffice wipe --bucket "${{vars.S3_TEST_BUCKET}}" --prefix "${{vars.S3_TEST_FOLDER}}"
 
   test-stage-wf:
     needs: initial-cleanup
