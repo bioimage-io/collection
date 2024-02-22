@@ -45,7 +45,7 @@ jobs:
           cache: "pip" # caching pip dependencies
       - run: pip install .
       - id: stage
-        run: bakcoffice stage "${{ inputs.resource_id }}" "${{ inputs.package_url }}"
+        run: backoffice stage "${{ inputs.resource_id }}" "${{ inputs.package_url }}"
 
   test:
     needs: stage
@@ -90,6 +90,6 @@ jobs:
           python-version: "3.12"
           cache: "pip" # caching pip dependencies
       - run: pip install .
-      - run: bakcoffice await-review "${{ inputs.resource_id }}" "${{needs.stage.outputs.version}}"
+      - run: backoffice await-review "${{ inputs.resource_id }}" "${{needs.stage.outputs.version}}"
 
   # TODO: call emailer
