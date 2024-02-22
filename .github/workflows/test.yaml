@@ -70,9 +70,8 @@ jobs:
           python-version: "3.12"
           cache: "pip" # caching pip dependencies
       - run: pip install .[dev]
-      - run: black .
+      - run: black . --check
       - run: pyright -p pyproject.toml
-      - run: pip uninstall -y backoffice # leave only dependencies, so pytest doctest-modules imports local files and not from site-packages
       - run: pytest
       - name: export documentation
         if: ${{ github.ref == 'ref/head/main' }}
