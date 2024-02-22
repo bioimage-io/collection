@@ -15,14 +15,14 @@ def test_lifecycle(
     resource = RemoteResource(client=client, id=package_id)
     staged = resource.stage_new_version(package_url)
     assert isinstance(staged, StagedVersion)
-    staged_rdf_url = staged.get_rdf_url()
+    staged_rdf_url = staged.rdf_url
     assert (
         staged_rdf_url
         == f"{s3_test_folder_url}frank-water-buffalo/staged/1/files/rdf.yaml"
     )
     published = staged.publish()
     assert isinstance(published, PublishedVersion)
-    published_rdf_url = published.get_rdf_url()
+    published_rdf_url = published.rdf_url
     assert (
         published_rdf_url == f"{s3_test_folder_url}frank-water-buffalo/1/files/rdf.yaml"
     )
