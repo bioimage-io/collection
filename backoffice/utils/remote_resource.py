@@ -4,14 +4,10 @@ import io
 import json
 import urllib.request
 import zipfile
+from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from datetime import datetime
-from typing import (
-    Any,
-    ClassVar,
-    Optional,
-    assert_never,
-)
+from typing import Any, assert_never
 
 from loguru import logger
 from ruyaml import YAML
@@ -24,25 +20,33 @@ yaml = YAML(typ="safe")
 
 @dataclass
 class RemoteResource:
-    client: Client
-    id: str
+    """A representation of a bioimage.io resource
+    (**not** a specific staged or published version of it)"""
 
-    def _get_latest_staged_version_id(self) -> Optional[int]:
+    client: Client
+    """Client to connect to remote storage"""
+    id: str
+    """resource identifier"""
+
+    def _get_latest_stage_nr(self) -> int | None:
         staged = list(map(int, self.client.ls(f"{self.id}/staged/", only_folders=True)))
         if not staged:
             return None
         else:
             return max(staged)
 
-    def get_latest_staged_version(self) -> Optional[StagedVersion]:
-        v = self._get_latest_staged_version_id()
+    def get_latest_staged_version(self) -> StagedVersion | None:
+        """Get a representation of the latest staged version
+        (the one with the highest stage nr)"""
+        v = self._get_latest_stage_nr()
         if v is None:
             return None
         else:
             return StagedVersion(client=self.client, id=self.id, version=v)
 
     def stage_new_version(self, package_url: str) -> StagedVersion:
-        v = self._get_latest_staged_version_id()
+        """Stage the content at `package_url` as a new resource version candidate."""
+        v = self._get_latest_stage_nr()
         if v is None:
             v = 1
 
@@ -66,7 +70,8 @@ class RemoteResource:
             rdf["id"] = ret.id
         elif rdf_id != ret.id:
             raise ValueError(
-                f"Expected package for {ret.id}, but got packaged {rdf_id} ({package_url})"
+                f"Expected package for {ret.id}, "
+                f"but got packaged {rdf_id} ({package_url})"
             )
 
         # overwrite version information
@@ -85,15 +90,27 @@ class RemoteResource:
 
 
 @dataclass
-class _RemoteResourceVersion(RemoteResource):
+class RemoteResourceVersion(RemoteResource, ABC):
+    """Base class for a resource version (`StagedVersion` or `PublishedVersion`)"""
+
     version: int
-    version_prefix: ClassVar[str]
+    """version number"""
+
+    @property
+    @abstractmethod
+    def version_prefix(self) -> str:
+        """a prefix to distinguish independent staged and published `version` numbers"""
+        pass
 
     @property
     def folder(self) -> str:
+        """The S3 (sub)prefix of this version
+        (**sub**)prefix, because the client may prefix this prefix"""
         return f"{self.id}/{self.version_prefix}{self.version}/"
 
-    def get_rdf_url(self) -> str:
+    @property
+    def rdf_url(self) -> str:
+        """rdf.yaml download URL"""
         return self.client.get_file_url(f"{self.folder}files/rdf.yaml")
 
     def get_log(self) -> Log:
@@ -162,6 +179,7 @@ class _RemoteResourceVersion(RemoteResource):
         )
 
     def get_status(self) -> Status:
+        """get the current status"""
         details = self._get_details()
         return details["status"]
 
@@ -170,6 +188,7 @@ class _RemoteResourceVersion(RemoteResource):
         category: LogCategory,
         content: list[Any] | dict[Any, Any] | int | float | str | None | bool,
     ):
+        """add log entry"""
         log = self.get_log()
         entries = log.setdefault(category, [])
         now = datetime.now().isoformat()
@@ -181,20 +200,30 @@ class _RemoteResourceVersion(RemoteResource):
 
 
 @dataclass
-class StagedVersion(_RemoteResourceVersion):
+class StagedVersion(RemoteResourceVersion):
     """A staged resource version"""
 
-    version_prefix: ClassVar[str] = "staged/"
-    """The prefix identifying the version 'directory' to contain a staged version
-    (opposed to a published one)."""
+    version: int
+    """stage number (**not** future resource version)"""
+
+    @property
+    def version_prefix(self):
+        """The 'staged/' prefix identifies the `version` as a stage number
+        (opposed to a published resource version)."""
+        return "staged/"
 
     def await_review(self):
+        """set status to 'awaiting review'"""
         self.set_status(
             "awaiting review",
-            description="Thank you for your contribution! Our bioimage.io maintainers will take a look soon.",
+            description=(
+                "Thank you for your contribution! "
+                "Our bioimage.io maintainers will take a look soon."
+            ),
         )
 
     def publish(self) -> PublishedVersion:
+        """publish this staged version candidate as the next resource version"""
         # get next version and update versions.json
         versions_path = f"{self.id}/versions.json"
         versions_data = self.client.load_file(versions_path)
@@ -240,5 +269,10 @@ class StagedVersion(_RemoteResourceVersion):
 
 
 @dataclass
-class PublishedVersion(_RemoteResourceVersion):
-    version_prefix: ClassVar[str] = ""
+class PublishedVersion(RemoteResourceVersion):
+    """A representation of a published resource version"""
+
+    @property
+    def version_prefix(self):
+        """published versions do not have a prefix"""
+        return ""

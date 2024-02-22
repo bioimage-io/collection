@@ -244,7 +244,7 @@ def prepare_dynamic_test_cases(rd: ResourceDescr) -> list[dict[str, str]]:
 
 def validate_format(staged: StagedVersion):
     staged.set_status("testing", "Testing RDF format")
-    rdf_source = staged.get_rdf_url()
+    rdf_source = staged.rdf_url
     rd = load_description(rdf_source, format_version="discover")
     dynamic_test_cases: list[dict[str, str]] = []
     if not isinstance(rd, InvalidDescr):

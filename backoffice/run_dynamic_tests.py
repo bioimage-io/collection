@@ -51,7 +51,7 @@ def run_dynamic_tests(
         "testing",
         "Testing" + ("" if weight_format is None else f" {weight_format} weights"),
     )
-    rdf_source = staged.get_rdf_url()
+    rdf_source = staged.rdf_url
     if weight_format is None:
         # no dynamic tests for non-model resources yet...
         return
