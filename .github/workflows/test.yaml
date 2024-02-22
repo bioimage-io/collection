@@ -72,7 +72,7 @@ jobs:
       - run: pip install .[dev]
       - run: black .
       - run: pyright -p pyproject.toml
-      - run: pip uninstall . # leave only dependencies, so pytest doctest-modules imports local files and not from site-packages
+      - run: pip uninstall -y backoffice # leave only dependencies, so pytest doctest-modules imports local files and not from site-packages
       - run: pytest
       - name: export documentation
         if: ${{ github.ref == 'ref/head/main' }}
