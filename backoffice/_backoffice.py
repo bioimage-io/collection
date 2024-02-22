@@ -27,6 +27,15 @@ class BackOffice:
         super().__init__()
         self.client = Client(host=host, bucket=bucket, prefix=prefix)
 
+    def wipe(self, subfolder: str = ""):
+        """DANGER ZONE: wipes `subfolder` completely, only use for test folders!"""
+        url = self.client.get_file_url(subfolder)
+        key_parts = ("sandbox", "testing")
+        if not all(p in url for p in key_parts):
+            raise RuntimeError(f"Refusing to wipe {url} (missing {key_parts})")
+
+        self.client.rm_dir(subfolder)
+
     def stage(self, resource_id: str, package_url: str):
         resource = RemoteResource(client=Client(), id=resource_id)
         staged = resource.stage_new_version(package_url)
@@ -55,5 +64,5 @@ class BackOffice:
         published = staged.publish()
         assert isinstance(published, PublishedVersion)
 
-    def backup(self, destination: str = os.environ["ZENODO_URL"]):
-        _ = backup(self.client, destination)
+    def backup(self, destination: Optional[str] = None):
+        _ = backup(self.client, destination or os.environ["ZENODO_URL"])
