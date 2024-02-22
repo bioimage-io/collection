@@ -43,10 +43,9 @@ jobs:
         with:
           python-version: "3.12"
           cache: "pip" # caching pip dependencies
-      - run: pip install -r requirements.txt
+      - run: pip install -r .
       - id: stage
-        run: |
-          python scripts/stage.py "${{ inputs.resource_id }}" "${{ inputs.package_url }}"
+        run: bakcoffice stage "${{ inputs.resource_id }}" "${{ inputs.package_url }}"
 
   test:
     needs: stage
@@ -90,8 +89,7 @@ jobs:
         with:
           python-version: "3.12"
           cache: "pip" # caching pip dependencies
-      - run: pip install -r requirements.txt
-      - run: |
-          python scripts/conclude.py "${{ inputs.resource_id }}" "${{needs.stage.outputs.version}}"
+      - run: pip install .
+      - run: bakcoffice await-review "${{ inputs.resource_id }}" "${{needs.stage.outputs.version}}"
 
   # TODO: call emailer
