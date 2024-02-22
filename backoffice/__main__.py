@@ -51,5 +51,9 @@ class BackOffice:
         _ = backup(self.client, os.environ["ZENODO_URL"])
 
 
-if __name__ == "__main__":
+def main():
     fire.Fire(BackOffice)
+
+
+if __name__ == "__main__":
+    main()

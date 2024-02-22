@@ -42,7 +42,7 @@ setup(
             "pytest",
         ]
     },
-    entry_points={"console_scripts": ["backoffice = backoffice.__main__"]},
+    entry_points={"console_scripts": ["backoffice = backoffice.__main__:main"]},
     project_urls={
         "Bug Reports": "https://github.com/bioimage-io/collection/issues",
         "Source": "https://github.com/bioimage-io/collection",
