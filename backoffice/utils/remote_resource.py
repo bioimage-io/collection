@@ -182,7 +182,11 @@ class _RemoteResourceVersion(RemoteResource):
 
 @dataclass
 class StagedVersion(_RemoteResourceVersion):
+    """A staged resource version"""
+
     version_prefix: ClassVar[str] = "staged/"
+    """The prefix identifying the version 'directory' to contain a staged version
+    (opposed to a published one)."""
 
     def await_review(self):
         self.set_status(
