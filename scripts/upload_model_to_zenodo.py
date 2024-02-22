@@ -1,3 +1,4 @@
+# type: ignore
 import argparse
 import logging
 import os
@@ -8,14 +9,13 @@ from pathlib import Path
 from typing import Optional
 from urllib.parse import quote_plus, urljoin, urlparse
 
-import requests  # type: ignore
-import spdx_license_list  # type: ignore
-from loguru import logger  # type: ignore
+import requests
+import spdx_license_list
+from loguru import logger
 from packaging.version import parse as parse_version
-from ruyaml import YAML  # type: ignore
-from s3_client import create_client, version_from_resource_path_or_s3
+from ruyaml import YAML
 
-from scripts.conclude import update_status
+# from utils.s3_client import create_client, version_from_resource_path_or_s3
 
 yaml = YAML(typ="safe")
 

@@ -54,14 +54,15 @@ class Client:
         if length == -1:
             part_size = 10 * 1024 * 1024
 
-        path = f"{self.prefix}/{path}"
+        prefixed_path = f"{self.prefix}/{path}"
         _ = self._client.put_object(
             self.bucket,
-            path,
+            prefixed_path,
             file_object,
             length=length,
             part_size=part_size,
         )
+        logger.info("Uploaded {}", self.get_file_url(path))
 
     def put_json(self, path: str, json_value: Any):
         data = json.dumps(json_value).encode()

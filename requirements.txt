@@ -1,5 +1,5 @@
-bioimageio.spec @ git+https://github.com/bioimage-io/spec-bioimage-io@0b707b83b061da7584e554cedbf0c6d725980619  # TODO: chenage to released version
-bioimageio.core @ git+https://github.com/bioimage-io/core-bioimage-io-python@154a7d6f3c585045bb23a5a0fcfc6f418355bc1a  # TODO: chenage to released version
+bioimageio.spec @ git+https://github.com/bioimage-io/spec-bioimage-io@19105665ad779014e03c7b311c0b4003ab08f752  # TODO: chenage to released version
+bioimageio.core @ git+https://github.com/bioimage-io/core-bioimage-io-python@3a7875b5debc2d52b2fc87f6579afe217e1c7280  # TODO: chenage to released version
 black==24.2.0
 loguru==0.7.2
 minio==7.2.3

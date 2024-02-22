@@ -7,7 +7,7 @@ from typing import Any, Optional, TypedDict, assert_never
 
 import pooch
 from bioimageio.spec import InvalidDescr, ResourceDescr, load_description
-from bioimageio.spec.model import AnyModelDescr, v0_4, v0_5
+from bioimageio.spec.model import v0_4, v0_5
 from packaging.version import Version
 from ruyaml import YAML
 
@@ -223,7 +223,7 @@ def ensure_valid_conda_env_name(name: str) -> str:
 def prepare_dynamic_test_cases(rd: ResourceDescr) -> list[dict[str, str]]:
     validation_cases: list[dict[str, str]] = []
     # construct test cases based on resource type
-    if isinstance(rd, AnyModelDescr):
+    if isinstance(rd, (v0_4.ModelDescr, v0_5.ModelDescr)):
         # generate validation cases per weight format
         for wf, entry in rd.weights:
             # we skip the keras validation for now, see
