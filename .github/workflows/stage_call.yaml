@@ -43,7 +43,7 @@ jobs:
         with:
           python-version: "3.12"
           cache: "pip" # caching pip dependencies
-      - run: pip install -r .
+      - run: pip install .
       - id: stage
         run: bakcoffice stage "${{ inputs.resource_id }}" "${{ inputs.package_url }}"
 
