@@ -1,1 +1,1 @@
-from ._backoffice import BackOffice
+from ._backoffice import BackOffice as BackOffice
