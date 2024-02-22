@@ -44,11 +44,11 @@ class BackOffice:
     def test(
         self,
         resource_id: str,
-        version: int,
+        stage_nr: int,
         weight_format: WeightsFormat | Literal[""] | None = None,
         create_env_outcome: Literal["success", ""] = "success",
     ):
-        staged = StagedVersion(self.client, resource_id, version)
+        staged = StagedVersion(self.client, resource_id, stage_nr)
         run_dynamic_tests(
             staged=staged,
             weight_format=weight_format or None,

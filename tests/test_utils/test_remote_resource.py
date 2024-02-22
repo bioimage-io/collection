@@ -20,6 +20,7 @@ def test_lifecycle(
         staged_rdf_url
         == f"{s3_test_folder_url}frank-water-buffalo/staged/1/files/rdf.yaml"
     )
+    # skipping test step here (tested in test_backoffice)
     published = staged.publish()
     assert isinstance(published, PublishedVersion)
     published_rdf_url = published.rdf_url

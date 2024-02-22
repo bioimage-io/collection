@@ -40,6 +40,7 @@ setup(
             "pre-commit",
             "pyright",
             "pytest",
+            "torchscript",
         ]
     },
     entry_points={"console_scripts": ["backoffice = backoffice.__main__:main"]},
