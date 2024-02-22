@@ -2,6 +2,7 @@
 target-version = ["py312"]
 
 [tool.pyright]
+exclude = ["**/__pycache__"]
 include = ["backoffice", "tests"]
 pythonPlatform = "All"
 pythonVersion = "3.12"
