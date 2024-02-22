@@ -37,7 +37,7 @@ class BackOffice:
         self.client.rm_dir(subfolder)
 
     def stage(self, resource_id: str, package_url: str):
-        resource = RemoteResource(client=Client(), id=resource_id)
+        resource = RemoteResource(self.client, resource_id)
         staged = resource.stage_new_version(package_url)
         validate_format(staged)
 
