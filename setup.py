@@ -21,6 +21,9 @@ setup(
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Intended Audience :: Developers",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
         "Programming Language :: Python :: 3.12",
     ],
     packages=find_packages(exclude=["tests"]),
@@ -30,6 +33,7 @@ setup(
         "fire",
         "loguru",
         "minio==7.2.3",
+        "python>=3.9",
         "ruyaml",
         "tqdm",
     ],

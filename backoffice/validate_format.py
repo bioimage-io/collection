@@ -3,7 +3,7 @@ import os
 import uuid
 import warnings
 from pathlib import Path
-from typing import Any, Literal, Optional, TypedDict, assert_never, cast
+from typing import Any, Literal, Optional, TypedDict, cast
 
 import pooch
 from bioimageio.spec import InvalidDescr, ResourceDescr, load_description
@@ -11,6 +11,7 @@ from bioimageio.spec.model import v0_4, v0_5
 from bioimageio.spec.model.v0_5 import WeightsFormat
 from packaging.version import Version
 from ruyaml import YAML
+from typing_extensions import assert_never
 
 from backoffice.utils.remote_resource import StagedVersion
 

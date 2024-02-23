@@ -7,10 +7,11 @@ import zipfile
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from datetime import datetime
-from typing import Any, assert_never
+from typing import Any
 
 from loguru import logger
 from ruyaml import YAML
+from typing_extensions import assert_never
 
 from .s3_client import Client
 from .s3_structure import Details, Log, LogCategory, Status, StatusName
