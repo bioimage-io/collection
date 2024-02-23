@@ -3,7 +3,7 @@ import os
 import uuid
 import warnings
 from pathlib import Path
-from typing import Any, Literal, Optional, TypedDict, cast
+from typing import Any, Literal, Optional, TypedDict, Union, cast
 
 import pooch
 from bioimageio.spec import InvalidDescr, ResourceDescr, load_description
@@ -17,24 +17,24 @@ from backoffice.utils.remote_resource import StagedVersion
 
 yaml = YAML(typ="safe")
 
-SupportedWeightsEntry = (
-    v0_4.OnnxWeightsDescr
-    | v0_4.PytorchStateDictWeightsDescr
-    | v0_4.TensorflowSavedModelBundleWeightsDescr
-    | v0_4.TorchscriptWeightsDescr
-    | v0_5.OnnxWeightsDescr
-    | v0_5.PytorchStateDictWeightsDescr
-    | v0_5.TensorflowSavedModelBundleWeightsDescr
-    | v0_5.TorchscriptWeightsDescr
-)
+SupportedWeightsEntry = Union[
+    v0_4.OnnxWeightsDescr,
+    v0_4.PytorchStateDictWeightsDescr,
+    v0_4.TensorflowSavedModelBundleWeightsDescr,
+    v0_4.TorchscriptWeightsDescr,
+    v0_5.OnnxWeightsDescr,
+    v0_5.PytorchStateDictWeightsDescr,
+    v0_5.TensorflowSavedModelBundleWeightsDescr,
+    v0_5.TorchscriptWeightsDescr,
+]
 
 
-def set_multiple_gh_actions_outputs(outputs: dict[str, str | Any]):
+def set_multiple_gh_actions_outputs(outputs: dict[str, Union[str, Any]]):
     for name, out in outputs.items():
         set_gh_actions_output(name, out)
 
 
-def set_gh_actions_output(name: str, output: str | Any):
+def set_gh_actions_output(name: str, output: Union[str, Any]):
     """set output of a github actions workflow step calling this script"""
     if isinstance(output, bool):
         output = "yes" if output else "no"
@@ -64,7 +64,7 @@ class PipDeps(TypedDict):
 class CondaEnv(TypedDict):
     name: str
     channels: list[str]
-    dependencies: list[str | PipDeps]
+    dependencies: list[Union[str, PipDeps]]
 
 
 def get_base_env():
@@ -73,7 +73,7 @@ def get_base_env():
     )
 
 
-def get_env_from_deps(deps: v0_4.Dependencies | v0_5.EnvironmentFileDescr):
+def get_env_from_deps(deps: Union[v0_4.Dependencies, v0_5.EnvironmentFileDescr]):
     if isinstance(deps, v0_4.Dependencies):
         if deps.manager not in ("conda", "mamba"):
             return get_base_env()

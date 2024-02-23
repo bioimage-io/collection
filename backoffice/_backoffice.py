@@ -1,5 +1,5 @@
 import os
-from typing import Literal, Optional
+from typing import Literal, Optional, Union
 
 from bioimageio.spec.model.v0_5 import WeightsFormat
 from dotenv import load_dotenv
@@ -45,7 +45,7 @@ class BackOffice:
         self,
         resource_id: str,
         stage_nr: int,
-        weight_format: WeightsFormat | Literal[""] | None = None,
+        weight_format: Optional[Union[WeightsFormat, Literal[""]]] = None,
         create_env_outcome: Literal["success", ""] = "success",
     ):
         staged = StagedVersion(self.client, resource_id, stage_nr)

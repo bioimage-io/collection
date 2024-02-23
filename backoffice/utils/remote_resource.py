@@ -7,7 +7,7 @@ import zipfile
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from datetime import datetime
-from typing import Any
+from typing import Any, Optional, Union
 
 from loguru import logger
 from ruyaml import YAML
@@ -29,14 +29,14 @@ class RemoteResource:
     id: str
     """resource identifier"""
 
-    def _get_latest_stage_nr(self) -> int | None:
+    def _get_latest_stage_nr(self) -> Optional[int]:
         staged = list(map(int, self.client.ls(f"{self.id}/staged/", only_folders=True)))
         if not staged:
             return None
         else:
             return max(staged)
 
-    def get_latest_staged_version(self) -> StagedVersion | None:
+    def get_latest_staged_version(self) -> Optional[StagedVersion]:
         """Get a representation of the latest staged version
         (the one with the highest stage nr)"""
         v = self._get_latest_stage_nr()
@@ -187,7 +187,7 @@ class RemoteResourceVersion(RemoteResource, ABC):
     def add_log_entry(
         self,
         category: LogCategory,
-        content: list[Any] | dict[Any, Any] | int | float | str | None | bool,
+        content: Union[list[Any], dict[Any, Any], int, float, str, None, bool],
     ):
         """add log entry"""
         log = self.get_log()

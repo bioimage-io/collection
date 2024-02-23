@@ -32,7 +32,7 @@ setup(
     packages=find_packages(exclude=["tests"]),
     install_requires=[
         "bioimageio.core @ git+https://github.com/bioimage-io/core-bioimage-io-python@3a7875b5debc2d52b2fc87f6579afe217e1c7280",  # TODO: change to released version
-        "bioimageio.spec @ git+https://github.com/bioimage-io/spec-bioimage-io@19105665ad779014e03c7b311c0b4003ab08f752",  # TODO: change to released version
+        "bioimageio.spec @ git+https://github.com/bioimage-io/spec-bioimage-io@539a09d0a35144a5928f8a58433c76ff1f2c3bcb",  # TODO: change to released version
         "fire",
         "loguru",
         "minio==7.2.3",

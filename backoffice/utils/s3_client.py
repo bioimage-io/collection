@@ -7,7 +7,7 @@ from collections.abc import Sequence
 from dataclasses import dataclass, field
 from datetime import timedelta
 from pathlib import Path
-from typing import Any, BinaryIO, Iterator, Optional
+from typing import Any, BinaryIO, Iterator, Optional, Union
 
 from dotenv import load_dotenv
 from loguru import logger
@@ -51,7 +51,7 @@ class Client:
         return self._client.bucket_exists(bucket)
 
     def put(
-        self, path: str, file_object: io.BytesIO | BinaryIO, length: Optional[int]
+        self, path: str, file_object: Union[io.BytesIO, BinaryIO], length: Optional[int]
     ) -> None:
         """upload a file(like object)"""
         # For unknown length (ie without reading file into mem) give `part_size`
@@ -180,7 +180,7 @@ class Client:
             )
         )
 
-    def load_file(self, path: str) -> bytes | None:
+    def load_file(self, path: str) -> Optional[bytes]:
         """Load file
 
         Returns:

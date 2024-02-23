@@ -175,7 +175,7 @@ def put_file_from_url(file_url: str, destination_url: str, params: dict) -> dict
     # return put_file(response.raw, filename, destination_url, params)
 
 
-def put_file_path(path: str | Path, url: str, params: dict) -> dict:
+def put_file_path(path: Union[str, Path], url: str, params: dict) -> dict:
     """PUT file to url with params, given a file-path"""
     path = Path(path)
     filename = path.name
