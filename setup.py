@@ -1,4 +1,5 @@
 import json
+import sys
 from pathlib import Path
 
 from setuptools import find_packages, setup
@@ -9,6 +10,8 @@ long_description = (ROOT_DIR / "README.md").read_text(encoding="utf-8")
 VERSION_FILE = ROOT_DIR / "backoffice" / "VERSION"
 VERSION = json.loads(VERSION_FILE.read_text(encoding="utf-8"))["version"]
 
+if sys.version_info < (3, 9):
+    sys.exit("backoffice requires Python >= 3.9")
 
 setup(
     name="backoffice",
@@ -33,7 +36,6 @@ setup(
         "fire",
         "loguru",
         "minio==7.2.3",
-        "python>=3.9",
         "ruyaml",
         "tqdm",
     ],
