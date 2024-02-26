@@ -16,7 +16,7 @@ on:
         required: true
         type: string
 
-concurrency: ${{ZENODO_URL}}-call
+concurrency: ${{inputs.ZENODO_URL}}-call
 
 env:
   S3_HOST: ${{inputs.S3_HOST}}
@@ -36,6 +36,5 @@ jobs:
         with:
           python-version: "3.12"
           cache: "pip" # caching pip dependencies
-      - run: pip install -r requirements.txt
-      - run: |
-          python scripts/backup.py
+      - run: pip install .
+      - run: backoffice backup

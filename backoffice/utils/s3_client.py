@@ -7,7 +7,7 @@ from collections.abc import Sequence
 from dataclasses import dataclass, field
 from datetime import timedelta
 from pathlib import Path
-from typing import Any, BinaryIO, Iterator, Optional
+from typing import Any, BinaryIO, Iterator, Optional, Union
 
 from dotenv import load_dotenv
 from loguru import logger
@@ -21,11 +21,18 @@ _ = load_dotenv()
 
 @dataclass
 class Client:
+    """Convenience wrapper around a `Minio` S3 client"""
+
     host: str = os.environ["S3_HOST"]
+    """S3 host"""
     bucket: str = os.environ["S3_BUCKET"]
+    """S3 bucket"""
     prefix: str = os.environ["S3_FOLDER"]
+    """S3 prefix ('root folder')"""
     access_key: str = field(default=os.environ["S3_ACCESS_KEY_ID"], repr=False)
+    """S3 access key"""
     secret_key: str = field(default=os.environ["S3_SECRET_ACCESS_KEY"], repr=False)
+    """S3 secret key"""
     _client: Minio = field(init=False, repr=False)
 
     def __post_init__(self):
@@ -35,17 +42,18 @@ class Client:
             access_key=self.access_key,
             secret_key=self.secret_key,
         )
-        found = self.bucket_exists(self.bucket)
+        found = self._bucket_exists(self.bucket)
         if not found:
             raise Exception("target bucket does not exist: {self.bucket}")
         logger.debug("Created S3-Client: {}", self)
 
-    def bucket_exists(self, bucket: str) -> bool:
+    def _bucket_exists(self, bucket: str) -> bool:
         return self._client.bucket_exists(bucket)
 
     def put(
-        self, path: str, file_object: io.BytesIO | BinaryIO, length: Optional[int]
+        self, path: str, file_object: Union[io.BytesIO, BinaryIO], length: Optional[int]
     ) -> None:
+        """upload a file(like object)"""
         # For unknown length (ie without reading file into mem) give `part_size`
         part_size = 0
         if length is None:
@@ -65,6 +73,7 @@ class Client:
         logger.info("Uploaded {}", self.get_file_url(path))
 
     def put_json(self, path: str, json_value: Any):
+        """convenience method to upload a json file from a json serializable value"""
         data = json.dumps(json_value).encode()
         self.put(path, io.BytesIO(data), length=len(data))
 
@@ -99,10 +108,8 @@ class Client:
         self, path: str, only_folders: bool = False, only_files: bool = False
     ) -> Iterator[str]:
         """
-        List folder contents, non-recursive, ala `ls`
-        but no "." or ".."
+        List folder contents, non-recursive, ala `ls` but no "." or ".."
         """
-        # path = str(Path(self.prefix, path))
         path = f"{self.prefix}/{path}"
         logger.debug("Running ls at path: {}", path)
         objects = self._client.list_objects(self.bucket, prefix=path, recursive=False)
@@ -117,6 +124,7 @@ class Client:
             yield Path(obj.object_name).name
 
     def mv_dir(self, src: str, tgt: str, *, bypass_governance_mode: bool = False):
+        """copy and delete all objects under `src` to `tgt`"""
         assert src.endswith("/")
         assert tgt.endswith("/")
         objects = list(
@@ -128,6 +136,7 @@ class Client:
         self._rm_objs(objects, bypass_governance_mode=bypass_governance_mode)
 
     def rm_dir(self, prefix: str, *, bypass_governance_mode: bool = False):
+        """remove all objects under `prefix`"""
         assert prefix == "" or prefix.endswith("/")
         objects = list(
             self._client.list_objects(
@@ -153,6 +162,7 @@ class Client:
             )
 
     def rm_obj(self, name: str) -> None:
+        """remove single object"""
         self._client.remove_object(self.bucket, name)
 
     def _rm_objs(
@@ -170,8 +180,12 @@ class Client:
             )
         )
 
-    def load_file(self, path: str) -> bytes | None:
-        """Load file from S3"""
+    def load_file(self, path: str) -> Optional[bytes]:
+        """Load file
+
+        Returns:
+            file content or `None` if no object at `path` was found.
+        """
         try:
             response = self._client.get_object(self.bucket, f"{self.prefix}/{path}")
             content = response.read()
@@ -195,4 +209,5 @@ class Client:
         return content
 
     def get_file_url(self, path: str) -> str:
+        """Get the full URL to `path`"""
         return f"https://{self.host}/{self.bucket}/{self.prefix}/{path}"

@@ -1,0 +1,68 @@
+# Emails resource uploader about the status of test results alerting them
+# about whether they need to take any actions to fix issues with their upload
+
+name: email
+
+on:
+  workflow_call:
+    inputs:
+      user_email:
+        description: "Email address of user"
+        required: true
+        type: string
+      message:
+        description: "email body"
+        required: false
+        type: string
+
+jobs:
+  send-email:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send mail
+        uses: dawidd6/action-send-mail@v3
+        with:
+          # Specify connection via URL (replaces server_address, server_port, secure,
+          # username and password)
+          #
+          # Format:
+          #
+          #    * smtp://user:password@server:port
+          #    * smtp+starttls://user:password@server:port
+          connection_url: ${{secrets.MAIL_CONNECTION}}
+          # Required mail server address if not connection_url:
+          server_address: smtp.gmail.com
+          # Server port, default 25:
+          server_port: 465
+          # Optional whether this connection use TLS (default is true if server_port is 465)
+          secure: true
+          # Optional (recommended) mail server username:
+          username: ${{secrets.MAIL_USERNAME}}
+          # Optional (recommended) mail server password:
+          password: ${{secrets.MAIL_PASSWORD}}
+          # Required mail subject:
+          subject: Github Actions job result
+          # Required recipients' addresses:
+          to: ${{ inputs.user_email }}
+          # Required sender full name (address can be skipped):
+          from: ${{ env.MAIL_FROM }}
+          # Optional plain body:
+          body: ${{ inputs.message }}
+          # Optional HTML body read from file:
+          # html_body: file://README.html
+          # Optional carbon copy recipients:
+          # cc: kyloren@example.com,leia@example.com
+          # Optional blind carbon copy recipients:
+          # bcc: r2d2@example.com,hansolo@example.com
+          # Optional recipient of the email response:
+          # reply_to: luke@example.com
+          # Optional Message ID this message is replying to:
+          # in_reply_to: <random-luke@example.com>
+          # Optional unsigned/invalid certificates allowance:
+          ignore_cert: true
+          # Optional converting Markdown to HTML (set content_type to text/html too):
+          convert_markdown: true
+          # Optional attachments:
+          # attachments: # TODO Can we attach a test log?
+          # Optional priority: 'high', 'normal' (default) or 'low'
+          # priority: low

@@ -1,10 +1,7 @@
-from typing import TYPE_CHECKING
-
-if TYPE_CHECKING:
-    from scripts.utils.s3_client import Client
+from backoffice.utils.s3_client import Client
 
 
-def test_client(client: "Client"):
+def test_client(client: Client):
     assert client.prefix.startswith("sandbox")
     client.put_json("test/test1.json", "test")
     client.put_json("test/dir/test2.json", "test")

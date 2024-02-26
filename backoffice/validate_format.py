@@ -3,36 +3,38 @@ import os
 import uuid
 import warnings
 from pathlib import Path
-from typing import Any, Optional, TypedDict, assert_never
+from typing import Any, Literal, Optional, TypedDict, Union, cast
 
 import pooch
 from bioimageio.spec import InvalidDescr, ResourceDescr, load_description
 from bioimageio.spec.model import v0_4, v0_5
+from bioimageio.spec.model.v0_5 import WeightsFormat
 from packaging.version import Version
 from ruyaml import YAML
+from typing_extensions import assert_never
 
-from .remote_resource import StagedVersion
+from backoffice.utils.remote_resource import StagedVersion
 
 yaml = YAML(typ="safe")
 
-SupportedWeightsEntry = (
-    v0_4.OnnxWeightsDescr
-    | v0_4.PytorchStateDictWeightsDescr
-    | v0_4.TensorflowSavedModelBundleWeightsDescr
-    | v0_4.TorchscriptWeightsDescr
-    | v0_5.OnnxWeightsDescr
-    | v0_5.PytorchStateDictWeightsDescr
-    | v0_5.TensorflowSavedModelBundleWeightsDescr
-    | v0_5.TorchscriptWeightsDescr
-)
+SupportedWeightsEntry = Union[
+    v0_4.OnnxWeightsDescr,
+    v0_4.PytorchStateDictWeightsDescr,
+    v0_4.TensorflowSavedModelBundleWeightsDescr,
+    v0_4.TorchscriptWeightsDescr,
+    v0_5.OnnxWeightsDescr,
+    v0_5.PytorchStateDictWeightsDescr,
+    v0_5.TensorflowSavedModelBundleWeightsDescr,
+    v0_5.TorchscriptWeightsDescr,
+]
 
 
-def set_multiple_gh_actions_outputs(outputs: dict[str, str | Any]):
+def set_multiple_gh_actions_outputs(outputs: dict[str, Union[str, Any]]):
     for name, out in outputs.items():
         set_gh_actions_output(name, out)
 
 
-def set_gh_actions_output(name: str, output: str | Any):
+def set_gh_actions_output(name: str, output: Union[str, Any]):
     """set output of a github actions workflow step calling this script"""
     if isinstance(output, bool):
         output = "yes" if output else "no"
@@ -62,7 +64,7 @@ class PipDeps(TypedDict):
 class CondaEnv(TypedDict):
     name: str
     channels: list[str]
-    dependencies: list[str | PipDeps]
+    dependencies: list[Union[str, PipDeps]]
 
 
 def get_base_env():
@@ -71,7 +73,7 @@ def get_base_env():
     )
 
 
-def get_env_from_deps(deps: v0_4.Dependencies | v0_5.EnvironmentFileDescr):
+def get_env_from_deps(deps: Union[v0_4.Dependencies, v0_5.EnvironmentFileDescr]):
     if isinstance(deps, v0_4.Dependencies):
         if deps.manager not in ("conda", "mamba"):
             return get_base_env()
@@ -168,12 +170,11 @@ def get_tf_env(tensorflow_version: Optional[Version]):
     return conda_env
 
 
-def write_conda_env_file(
+def get_conda_env(
     *,
     entry: SupportedWeightsEntry,
-    path: Path,
     env_name: str,
-):
+) -> CondaEnv:
     if isinstance(entry, (v0_4.OnnxWeightsDescr, v0_5.OnnxWeightsDescr)):
         conda_env = get_onnx_env(opset_version=entry.opset_version)
     elif isinstance(
@@ -209,8 +210,7 @@ def write_conda_env_file(
 
     conda_env["name"] = ensure_valid_conda_env_name(env_name)
 
-    path.parent.mkdir(parents=True, exist_ok=True)
-    yaml.dump(conda_env, path)
+    return conda_env
 
 
 def ensure_valid_conda_env_name(name: str) -> str:
@@ -220,9 +220,14 @@ def ensure_valid_conda_env_name(name: str) -> str:
     return name or "empty"
 
 
-def prepare_dynamic_test_cases(rd: ResourceDescr) -> list[dict[str, str]]:
-    validation_cases: list[dict[str, str]] = []
+def prepare_dynamic_test_cases(
+    rd: ResourceDescr,
+) -> tuple[
+    list[dict[Literal["weight_format"], WeightsFormat]], dict[WeightsFormat, CondaEnv]
+]:
+    validation_cases: list[dict[Literal["weight_format"], WeightsFormat]] = []
     # construct test cases based on resource type
+    conda_envs: dict[WeightsFormat, CondaEnv] = {}
     if isinstance(rd, (v0_4.ModelDescr, v0_5.ModelDescr)):
         # generate validation cases per weight format
         for wf, entry in rd.weights:
@@ -232,27 +237,28 @@ def prepare_dynamic_test_cases(rd: ResourceDescr) -> list[dict[str, str]]:
                 warnings.warn(f"{wf} weights are currently not validated")
                 continue
 
-            write_conda_env_file(
+            wf = cast(WeightsFormat, wf)
+            conda_envs[wf] = get_conda_env(
                 entry=entry,
-                path=Path(f"conda_env_{wf}.yaml"),
                 env_name=wf,
             )
             validation_cases.append({"weight_format": wf})
 
-    return validation_cases
+    return validation_cases, conda_envs
 
 
 def validate_format(staged: StagedVersion):
     staged.set_status("testing", "Testing RDF format")
-    rdf_source = staged.get_rdf_url()
+    rdf_source = staged.rdf_url
     rd = load_description(rdf_source, format_version="discover")
-    dynamic_test_cases: list[dict[str, str]] = []
+    dynamic_test_cases: list[dict[Literal["weight_format"], WeightsFormat]] = []
+    conda_envs: dict[WeightsFormat, CondaEnv] = {}
     if not isinstance(rd, InvalidDescr):
         rd_latest = load_description(rdf_source, format_version="latest")
         if isinstance(rd_latest, InvalidDescr):
-            dynamic_test_cases += prepare_dynamic_test_cases(rd)
+            dynamic_test_cases, conda_envs = prepare_dynamic_test_cases(rd)
         else:
-            dynamic_test_cases += prepare_dynamic_test_cases(rd_latest)
+            dynamic_test_cases, conda_envs = prepare_dynamic_test_cases(rd_latest)
 
         rd = rd_latest
         rd.validation_summary.status = "passed"  # passed in 'discover' mode
@@ -265,5 +271,6 @@ def validate_format(staged: StagedVersion):
             has_dynamic_test_cases=bool(dynamic_test_cases),
             dynamic_test_cases={"include": dynamic_test_cases},
             version=staged.version,
+            conda_envs=conda_envs,
         )
     )

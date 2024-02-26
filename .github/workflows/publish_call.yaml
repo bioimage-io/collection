@@ -44,9 +44,8 @@ jobs:
         with:
           python-version: "3.12"
           cache: "pip" # caching pip dependencies
-      - run: pip install -r requirements.txt
-      - run: |
-          python scripts/publish.py "${{ inputs.resource_id }}" "${{ inputs.stage_nr }}"
+      - run: pip install .
+      - run: backoffice publish "${{ inputs.resource_id }}" "${{ inputs.stage_nr }}"
       # - name: Publish to Zenodo
       #   run: |
       #     python .github/scripts/update_status.py "${{ inputs.resource_path }}" "Publishing to Zenodo" "5"

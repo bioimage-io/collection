@@ -37,16 +37,16 @@ jobs:
       version: ${{ steps.stage.outputs.version }}
       dynamic_test_cases: ${{ steps.stage.outputs.dynamic_test_cases }}
       has_dynamic_test_cases: ${{ steps.stage.outputs.has_dynamic_test_cases }}
+      conda_envs: ${{ steps.stage.outputs.conda_envs }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
           cache: "pip" # caching pip dependencies
-      - run: pip install -r requirements.txt
+      - run: pip install .
       - id: stage
-        run: |
-          python scripts/stage.py "${{ inputs.resource_id }}" "${{ inputs.package_url }}"
+        run: backoffice stage "${{ inputs.resource_id }}" "${{ inputs.package_url }}"
 
   test:
     needs: stage
@@ -54,30 +54,38 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
-      matrix: ${{ fromJson(needs.static-validation.outputs.dynamic_test_cases) }} # [{env_name: ..., weight_format: ...}, ...]
+      matrix: ${{ fromJson(needs.stage.outputs.dynamic_test_cases) }} # include: [{weight_format: ...}, ...]
       max-parallel: 1 # avoid prallel updates to log.json
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip" # caching pip dependencies
+      - run: pip install ruyaml
+      - name: save conda_env_${{ matrix.weight_format }}.yaml
+        run: |
+          import json
+          from pathlib import Path
+          from ruyaml import YAML
+          yaml = YAML(typ="safe")
+          conda_env = json.loads('${{ needs.stage.outputs.conda_envs }}')["${{ matrix.weight_format }}"]
+          yaml.dump(conda_env, Path("conda_env_${{ matrix.weight_format }}.yaml"))
+        shell: python
       - name: install validation dependencies
         id: create_env
         uses: mamba-org/setup-micromamba@v1
         with:
           cache-downloads: true
-          environment-name: ${{ matrix.env_name }}
+          environment-name: ${{ matrix.weight_format }}
           environment-file: conda_env_${{ matrix.weight_format }}.yaml
-          create-args: >- # script dependencies
-            typer
-            conda-forge::bioimageio.spec
-            minio
-            loguru
         continue-on-error: true # we inspect this step's outcome in run_dynamic_tests.py
         timeout-minutes: 60
-      - name: install minimal script dependencies if val env failed
-        if: ${{ steps.create_env.outcome != 'success' }}
-        run: pip install typer bioimageio.spec minio loguru
+      - run: pip install .
+        shell: bash -l {0}
       - name: dynamic validation
         shell: bash -l {0}
-        run: python scripts/run_dynamic_tests.py "${{inputs.resource_id}}" "${{needs.stage.outputs.version}}" "${{ matrix.weight_format }}" "${{ steps.create_env.outcome }}"
+        run: backoffice test "${{inputs.resource_id}}" "${{needs.stage.outputs.version}}" "${{ matrix.weight_format }}" "${{ steps.create_env.outcome }}"
         timeout-minutes: 60
 
   conclude:
@@ -90,8 +98,7 @@ jobs:
         with:
           python-version: "3.12"
           cache: "pip" # caching pip dependencies
-      - run: pip install -r requirements.txt
-      - run: |
-          python scripts/conclude.py "${{ inputs.resource_id }}" "${{needs.stage.outputs.version}}"
+      - run: pip install .
+      - run: backoffice await-review "${{ inputs.resource_id }}" "${{needs.stage.outputs.version}}"
 
   # TODO: call emailer
