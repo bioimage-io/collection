@@ -1,7 +1,7 @@
 # Emails resource uploader about the status of test results alerting them
 # about whether they need to take any actions to fix issues with their upload
 
-name: email
+name: email call
 
 on:
   workflow_call:
