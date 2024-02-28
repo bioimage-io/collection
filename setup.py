@@ -35,7 +35,7 @@ setup(
         "bioimageio.spec @ git+https://github.com/bioimage-io/spec-bioimage-io@b9714ba8d8214c67e9377a8cd24f6ba65ed1b981",  # TODO: change to released version
         "fire",
         "loguru",
-        "minio==7.2.3",
+        "minio==7.2.4",
         "ruyaml",
         "tqdm",
     ],
