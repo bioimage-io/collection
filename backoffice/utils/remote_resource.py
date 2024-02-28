@@ -14,7 +14,15 @@ from ruyaml import YAML
 from typing_extensions import assert_never
 
 from .s3_client import Client
-from .s3_structure import Details, Log, LogCategory, Status, StatusName
+from .s3_structure import (
+    Details,
+    Log,
+    LogCategory,
+    Status,
+    StatusName,
+    VersionDetails,
+    Versions,
+)
 
 yaml = YAML(typ="safe")
 
@@ -28,6 +36,19 @@ class RemoteResource:
     """Client to connect to remote storage"""
     id: str
     """resource identifier"""
+
+    @property
+    def versions_path(self) -> str:
+        return f"{self.id}/versions.json"
+
+    def get_published_versions(self) -> Versions:
+        versions_data = self.client.load_file(self.versions_path)
+        if versions_data is None:
+            versions: Versions = {}
+        else:
+            versions = json.loads(versions_data)
+            assert isinstance(versions, dict)
+        return versions
 
     def _get_latest_stage_nr(self) -> Optional[int]:
         staged = list(map(int, self.client.ls(f"{self.id}/staged/", only_folders=True)))
@@ -226,32 +247,36 @@ class StagedVersion(RemoteResourceVersion):
     def publish(self) -> PublishedVersion:
         """publish this staged version candidate as the next resource version"""
         # get next version and update versions.json
-        versions_path = f"{self.id}/versions.json"
-        versions_data = self.client.load_file(versions_path)
-        if versions_data is None:
-            versions: dict[str, Any] = {}
+        versions = self.get_published_versions()
+        if not versions:
             next_version = 1
         else:
-            versions = json.loads(versions_data)
             next_version = max(map(int, versions)) + 1
 
         logger.debug("Publishing {} as version {}", self.folder, next_version)
 
         assert next_version not in versions, (next_version, versions)
 
-        versions[str(next_version)] = {}
+        # load rdf
+        staged_rdf_path = f"{self.folder}files/rdf.yaml"
+        rdf_data = self.client.load_file(staged_rdf_path)
+        rdf = yaml.load(rdf_data)
+
+        sem_ver = rdf.get("sem_ver")
+        if sem_ver is not None and sem_ver in {v["sem_ver"] for v in versions.values()}:
+            raise RuntimeError(f"Trying to publish {sem_ver} again!")
+
+        versions[next_version] = VersionDetails(sem_ver=sem_ver)
+
         updated_versions_data = json.dumps(versions).encode()
         self.client.put(
-            versions_path,
+            self.versions_path,
             io.BytesIO(updated_versions_data),
             length=len(updated_versions_data),
         )
         ret = PublishedVersion(client=self.client, id=self.id, version=next_version)
 
         # move rdf.yaml and set version in it
-        staged_rdf_path = f"{self.folder}files/rdf.yaml"
-        rdf_data = self.client.load_file(staged_rdf_path)
-        rdf = yaml.load(rdf_data)
         rdf["version"] = ret.version
         stream = io.StringIO()
         yaml.dump(rdf, stream)

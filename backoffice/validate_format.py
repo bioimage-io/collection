@@ -6,6 +6,7 @@ import pooch
 from bioimageio.spec import InvalidDescr, ResourceDescr, load_description
 from bioimageio.spec.model import v0_4, v0_5
 from bioimageio.spec.model.v0_5 import WeightsFormat
+from bioimageio.spec.summary import ErrorEntry, ValidationDetail
 from packaging.version import Version
 from ruyaml import YAML
 from typing_extensions import assert_never
@@ -232,6 +233,24 @@ def validate_format(staged: StagedVersion):
 
         rd = rd_latest
         rd.validation_summary.status = "passed"  # passed in 'discover' mode
+        if not isinstance(rd, InvalidDescr) and rd.sem_ver is not None:
+            published = staged.get_published_versions()
+            if rd.sem_ver in {v["sem_ver"] for v in published.values()}:
+                error = ErrorEntry(
+                    loc=("sem_ver",),
+                    msg=f"Trying to publish semantic version {rd.sem_ver} again!",
+                    type="error",
+                )
+            else:
+                error = None
+
+            rd.validation_summary.add_detail(
+                ValidationDetail(
+                    name="Enforce that RDF has unpublished semantic version (field `sem_ver`)",
+                    status="passed" if error is None else "failed",
+                    errors=[error],
+                )
+            )
 
     summary = rd.validation_summary.model_dump(mode="json")
     staged.add_log_entry("bioimageio.spec", summary)
