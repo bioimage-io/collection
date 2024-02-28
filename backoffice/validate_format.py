@@ -1,9 +1,6 @@
-import json
-import os
-import uuid
 import warnings
 from pathlib import Path
-from typing import Any, Literal, Optional, TypedDict, Union, cast
+from typing import Literal, Optional, TypedDict, Union, cast
 
 import pooch
 from bioimageio.spec import InvalidDescr, ResourceDescr, load_description
@@ -13,6 +10,7 @@ from packaging.version import Version
 from ruyaml import YAML
 from typing_extensions import assert_never
 
+from backoffice.utils._gh import set_multiple_gh_actions_outputs
 from backoffice.utils.remote_resource import StagedVersion
 
 yaml = YAML(typ="safe")
@@ -27,34 +25,6 @@ SupportedWeightsEntry = Union[
     v0_5.TensorflowSavedModelBundleWeightsDescr,
     v0_5.TorchscriptWeightsDescr,
 ]
-
-
-def set_multiple_gh_actions_outputs(outputs: dict[str, Union[str, Any]]):
-    for name, out in outputs.items():
-        set_gh_actions_output(name, out)
-
-
-def set_gh_actions_output(name: str, output: Union[str, Any]):
-    """set output of a github actions workflow step calling this script"""
-    if isinstance(output, bool):
-        output = "yes" if output else "no"
-
-    if not isinstance(output, str):
-        output = json.dumps(output, sort_keys=True)
-
-    if "GITHUB_OUTPUT" not in os.environ:
-        print(output)
-        return
-
-    if "\n" in output:
-        with open(os.environ["GITHUB_OUTPUT"], "a") as fh:
-            delimiter = uuid.uuid1()
-            print(f"{name}<<{delimiter}", file=fh)
-            print(output, file=fh)
-            print(delimiter, file=fh)
-    else:
-        with open(os.environ["GITHUB_OUTPUT"], "a") as fh:
-            print(f"{name}={output}", file=fh)
 
 
 class PipDeps(TypedDict):
