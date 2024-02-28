@@ -248,7 +248,7 @@ def validate_format(staged: StagedVersion):
                 ValidationDetail(
                     name="Enforce that RDF has unpublished semantic version (field `sem_ver`)",
                     status="passed" if error is None else "failed",
-                    errors=[error],
+                    errors=[] if error is None else [error],
                 )
             )
 
