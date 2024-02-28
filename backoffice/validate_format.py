@@ -235,7 +235,7 @@ def validate_format(staged: StagedVersion):
         rd.validation_summary.status = "passed"  # passed in 'discover' mode
         if not isinstance(rd, InvalidDescr) and rd.sem_ver is not None:
             published = staged.get_published_versions()
-            if rd.sem_ver in {v["sem_ver"] for v in published.values()}:
+            if str(rd.sem_ver) in {v["sem_ver"] for v in published.values()}:
                 error = ErrorEntry(
                     loc=("sem_ver",),
                     msg=f"Trying to publish semantic version {rd.sem_ver} again!",
