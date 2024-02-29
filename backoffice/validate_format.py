@@ -233,12 +233,12 @@ def validate_format(staged: StagedVersion):
 
         rd = rd_latest
         rd.validation_summary.status = "passed"  # passed in 'discover' mode
-        if not isinstance(rd, InvalidDescr) and rd.sem_ver is not None:
+        if not isinstance(rd, InvalidDescr) and rd.version is not None:
             published = staged.get_published_versions()
-            if str(rd.sem_ver) in {v["sem_ver"] for v in published.values()}:
+            if str(rd.version) in {v["sem_ver"] for v in published.values()}:
                 error = ErrorEntry(
-                    loc=("sem_ver",),
-                    msg=f"Trying to publish semantic version {rd.sem_ver} again!",
+                    loc=("version",),
+                    msg=f"Trying to publish version {rd.version} again!",
                     type="error",
                 )
             else:
@@ -246,7 +246,7 @@ def validate_format(staged: StagedVersion):
 
             rd.validation_summary.add_detail(
                 ValidationDetail(
-                    name="Enforce that RDF has unpublished semantic version (field `sem_ver`)",
+                    name="Enforce that RDF has unpublished semantic `version`",
                     status="passed" if error is None else "failed",
                     errors=[] if error is None else [error],
                 )

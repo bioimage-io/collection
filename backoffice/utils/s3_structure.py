@@ -12,7 +12,10 @@ class VersionDetails(TypedDict):
     sem_ver: Optional[str]
 
 
-Versions = dict[int, VersionDetails]
+VersionNr = int
+"""the n-th published version"""
+
+Versions = dict[VersionNr, VersionDetails]
 """info about published resource versions at `<id>/versions.json`"""
 
 LogCategory = Literal[

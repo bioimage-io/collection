@@ -253,7 +253,7 @@ class StagedVersion(RemoteResourceVersion):
         else:
             next_version = max(map(int, versions)) + 1
 
-        logger.debug("Publishing {} as version {}", self.folder, next_version)
+        logger.debug("Publishing {} as version nr {}", self.folder, next_version)
 
         assert next_version not in versions, (next_version, versions)
 
@@ -262,7 +262,7 @@ class StagedVersion(RemoteResourceVersion):
         rdf_data = self.client.load_file(staged_rdf_path)
         rdf = yaml.load(rdf_data)
 
-        sem_ver = rdf.get("sem_ver")
+        sem_ver = rdf.get("version")
         if sem_ver is not None and sem_ver in {v["sem_ver"] for v in versions.values()}:
             raise RuntimeError(f"Trying to publish {sem_ver} again!")
 
