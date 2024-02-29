@@ -1,10 +1,22 @@
 """
 Descriptions of
+- `<id>/versions.json` `Versions`
 - `<id>/<version>/log.json` → `Log`
 - `<id>/<version>/details.json` → `Details`
 """
 
-from typing import Any, Literal, TypedDict
+from typing import Any, Literal, Optional, TypedDict
+
+
+class VersionDetails(TypedDict):
+    sem_ver: Optional[str]
+
+
+VersionNr = int
+"""the n-th published version"""
+
+Versions = dict[VersionNr, VersionDetails]
+"""info about published resource versions at `<id>/versions.json`"""
 
 LogCategory = Literal[
     "bioimageio.spec", "bioimageio.core", "ilastik", "deepimagej", "icy", "biapy"

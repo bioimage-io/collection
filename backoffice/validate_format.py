@@ -1,18 +1,17 @@
-import json
-import os
-import uuid
 import warnings
 from pathlib import Path
-from typing import Any, Literal, Optional, TypedDict, Union, cast
+from typing import Literal, Optional, TypedDict, Union, cast
 
 import pooch
 from bioimageio.spec import InvalidDescr, ResourceDescr, load_description
 from bioimageio.spec.model import v0_4, v0_5
 from bioimageio.spec.model.v0_5 import WeightsFormat
+from bioimageio.spec.summary import ErrorEntry, ValidationDetail
 from packaging.version import Version
 from ruyaml import YAML
 from typing_extensions import assert_never
 
+from backoffice.utils._gh import set_multiple_gh_actions_outputs
 from backoffice.utils.remote_resource import StagedVersion
 
 yaml = YAML(typ="safe")
@@ -27,34 +26,6 @@ SupportedWeightsEntry = Union[
     v0_5.TensorflowSavedModelBundleWeightsDescr,
     v0_5.TorchscriptWeightsDescr,
 ]
-
-
-def set_multiple_gh_actions_outputs(outputs: dict[str, Union[str, Any]]):
-    for name, out in outputs.items():
-        set_gh_actions_output(name, out)
-
-
-def set_gh_actions_output(name: str, output: Union[str, Any]):
-    """set output of a github actions workflow step calling this script"""
-    if isinstance(output, bool):
-        output = "yes" if output else "no"
-
-    if not isinstance(output, str):
-        output = json.dumps(output, sort_keys=True)
-
-    if "GITHUB_OUTPUT" not in os.environ:
-        print(output)
-        return
-
-    if "\n" in output:
-        with open(os.environ["GITHUB_OUTPUT"], "a") as fh:
-            delimiter = uuid.uuid1()
-            print(f"{name}<<{delimiter}", file=fh)
-            print(output, file=fh)
-            print(delimiter, file=fh)
-    else:
-        with open(os.environ["GITHUB_OUTPUT"], "a") as fh:
-            print(f"{name}={output}", file=fh)
 
 
 class PipDeps(TypedDict):
@@ -262,6 +233,24 @@ def validate_format(staged: StagedVersion):
 
         rd = rd_latest
         rd.validation_summary.status = "passed"  # passed in 'discover' mode
+        if not isinstance(rd, InvalidDescr) and rd.version is not None:
+            published = staged.get_published_versions()
+            if str(rd.version) in {v["sem_ver"] for v in published.values()}:
+                error = ErrorEntry(
+                    loc=("version",),
+                    msg=f"Trying to publish version {rd.version} again!",
+                    type="error",
+                )
+            else:
+                error = None
+
+            rd.validation_summary.add_detail(
+                ValidationDetail(
+                    name="Enforce that RDF has unpublished semantic `version`",
+                    status="passed" if error is None else "failed",
+                    errors=[] if error is None else [error],
+                )
+            )
 
     summary = rd.validation_summary.model_dump(mode="json")
     staged.add_log_entry("bioimageio.spec", summary)

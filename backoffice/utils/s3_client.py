@@ -74,8 +74,13 @@ class Client:
 
     def put_json(self, path: str, json_value: Any):
         """convenience method to upload a json file from a json serializable value"""
-        data = json.dumps(json_value).encode()
+        data_str = json.dumps(json_value)
+        data = data_str.encode()
         self.put(path, io.BytesIO(data), length=len(data))
+        data_log = data_str[:1000]
+        if len(data_log) < len(data_str):
+            data_log += "..."
+        logger.debug("Uploaded {}", data_log)
 
     def get_file_urls(
         self,
