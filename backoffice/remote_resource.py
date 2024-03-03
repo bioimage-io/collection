@@ -246,10 +246,10 @@ class StagedVersion(RemoteResourceVersion[StageNr]):
         rdf = yaml.load(rdf_data)
 
         sem_ver = rdf.get("version")
-        if sem_ver is not None and sem_ver in {
-            v.sem_ver for v in versions.published.values()
-        }:
-            raise RuntimeError(f"Trying to publish {sem_ver} again!")
+        if sem_ver is not None:
+            sem_ver = str(sem_ver)
+            if sem_ver in {v.sem_ver for v in versions.published.values()}:
+                raise RuntimeError(f"Trying to publish {sem_ver} again!")
 
         ret = PublishedVersion(client=self.client, id=self.id, nr=next_publish_nr)
 
