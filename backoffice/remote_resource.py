@@ -55,10 +55,6 @@ class RemoteResource:
         """The S3 (sub)prefix of this resource"""
         return self.id
 
-    @property
-    def versions_path(self) -> str:
-        return f"{self.id}/versions.json"
-
     def get_versions(self) -> Versions:
         return self._get_json(Versions)
 
@@ -89,7 +85,7 @@ class RemoteResource:
         return ret
 
     def _get_json(self, typ: Type[J]) -> J:
-        path = f"{self.folder}{type.__name__.lower()}.json"
+        path = f"{self.folder}{typ.__name__.lower()}.json"
         data = self.client.load_file(path)
         if data is None:
             return typ()
