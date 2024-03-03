@@ -14,7 +14,8 @@ from bioimageio.spec.summary import (
 )
 from ruyaml import YAML
 
-from backoffice.utils.remote_resource import StagedVersion
+from backoffice.remote_resource import StagedVersion
+from backoffice.s3_structure.log import BioimageioLog, Logs
 
 try:
     from tqdm import tqdm
@@ -47,8 +48,7 @@ def run_dynamic_tests(
     weight_format: Optional[WeightsFormat],  # "weight format to test model with."
     create_env_outcome: str,
 ):
-    staged.set_status(
-        "testing",
+    staged.set_testing_status(
         "Testing" + ("" if weight_format is None else f" {weight_format} weights"),
     )
     rdf_source = staged.rdf_url
@@ -118,4 +118,4 @@ def run_dynamic_tests(
             )
         )
 
-    staged.add_log_entry("bioimageio.core", summary.model_dump(mode="json"))
+    staged.extend_log(Logs(bioimageio_core=[BioimageioLog(log=summary)]))

@@ -37,6 +37,7 @@ setup(
         "loguru",
         "minio==7.2.4",
         "ruyaml",
+        "pydantic==2.6.3",
         "tqdm",
     ],
     extras_require={

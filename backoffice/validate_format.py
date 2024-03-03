@@ -11,8 +11,9 @@ from packaging.version import Version
 from ruyaml import YAML
 from typing_extensions import assert_never
 
-from backoffice.utils._gh import set_multiple_gh_actions_outputs
-from backoffice.utils.remote_resource import StagedVersion
+from backoffice.gh_utils import set_multiple_gh_actions_outputs
+from backoffice.remote_resource import StagedVersion
+from backoffice.s3_structure.log import BioimageioLog, Logs
 
 yaml = YAML(typ="safe")
 
@@ -219,7 +220,7 @@ def prepare_dynamic_test_cases(
 
 
 def validate_format(staged: StagedVersion):
-    staged.set_status("testing", "Testing RDF format")
+    staged.set_testing_status("Validating RDF format")
     rdf_source = staged.rdf_url
     rd = load_description(rdf_source, format_version="discover")
     dynamic_test_cases: list[dict[Literal["weight_format"], WeightsFormat]] = []
@@ -234,8 +235,8 @@ def validate_format(staged: StagedVersion):
         rd = rd_latest
         rd.validation_summary.status = "passed"  # passed in 'discover' mode
         if not isinstance(rd, InvalidDescr) and rd.version is not None:
-            published = staged.get_published_versions()
-            if str(rd.version) in {v["sem_ver"] for v in published.values()}:
+            published = staged.get_versions().published
+            if str(rd.version) in {v.sem_ver for v in published.values()}:
                 error = ErrorEntry(
                     loc=("version",),
                     msg=f"Trying to publish version {rd.version} again!",
@@ -252,14 +253,14 @@ def validate_format(staged: StagedVersion):
                 )
             )
 
-    summary = rd.validation_summary.model_dump(mode="json")
-    staged.add_log_entry("bioimageio.spec", summary)
+    summary = rd.validation_summary
+    staged.extend_log(Logs(bioimageio_spec=[BioimageioLog(log=summary)]))
 
     set_multiple_gh_actions_outputs(
         dict(
             has_dynamic_test_cases=bool(dynamic_test_cases),
             dynamic_test_cases={"include": dynamic_test_cases},
-            version=staged.version,
+            version=staged.nr,
             conda_envs=conda_envs,
         )
     )

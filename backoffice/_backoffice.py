@@ -5,13 +5,14 @@ from bioimageio.spec.model.v0_5 import WeightsFormat
 from dotenv import load_dotenv
 
 from backoffice.backup import backup
-from backoffice.run_dynamic_tests import run_dynamic_tests
-from backoffice.utils.remote_resource import (
+from backoffice.remote_resource import (
     PublishedVersion,
     RemoteResource,
     StagedVersion,
 )
-from backoffice.utils.s3_client import Client
+from backoffice.run_dynamic_tests import run_dynamic_tests
+from backoffice.s3_client import Client
+from backoffice.s3_structure.versions import StageNr
 from backoffice.validate_format import validate_format
 
 _ = load_dotenv()
@@ -44,7 +45,7 @@ class BackOffice:
     def test(
         self,
         resource_id: str,
-        stage_nr: int,
+        stage_nr: StageNr,
         weight_format: Optional[Union[WeightsFormat, Literal[""]]] = None,
         create_env_outcome: Literal["success", ""] = "success",
     ):
@@ -55,11 +56,15 @@ class BackOffice:
             create_env_outcome=create_env_outcome,
         )
 
-    def await_review(self, resource_id: str, stage_nr: int):
+    def await_review(self, resource_id: str, stage_nr: StageNr):
         staged = StagedVersion(self.client, resource_id, stage_nr)
         staged.await_review()
 
-    def publish(self, resource_id: str, stage_nr: int):
+    def request_changes(self, resource_id: str, stage_nr: StageNr, reason: str):
+        staged = StagedVersion(self.client, resource_id, stage_nr)
+        staged.request_changes(reason=reason)
+
+    def publish(self, resource_id: str, stage_nr: StageNr):
         staged = StagedVersion(self.client, resource_id, stage_nr)
         published = staged.publish()
         assert isinstance(published, PublishedVersion)

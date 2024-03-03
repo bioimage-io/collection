@@ -1,7 +1,7 @@
 from dotenv import load_dotenv
 from loguru import logger
 
-from backoffice.utils.s3_client import Client
+from backoffice.s3_client import Client
 
 _ = load_dotenv()
 

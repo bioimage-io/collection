@@ -3,7 +3,7 @@ import os
 import pytest
 
 from backoffice import BackOffice
-from backoffice.utils.s3_client import Client
+from backoffice.s3_client import Client
 
 
 @pytest.fixture(scope="session")
