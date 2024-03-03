@@ -1,0 +1,52 @@
+name: request changes call
+
+on:
+  workflow_call:
+    inputs:
+      resource_id:
+        description: "Bioimageio ID of the resource - to be used to access the resource on S3"
+        required: true
+        type: string
+      stage_nr:
+        description: stage nr
+        required: true
+        type: number
+      reason:
+        description: Why are changes required? What needs changing?
+        required: true
+        type: string
+      S3_HOST:
+        required: true
+        type: string
+      S3_BUCKET:
+        required: true
+        type: string
+      S3_FOLDER:
+        required: true
+        type: string
+      ZENODO_URL:
+        required: true
+        type: string
+
+concurrency: ${{inputs.resource_id}}-call
+
+env:
+  S3_HOST: ${{inputs.S3_HOST}}
+  S3_BUCKET: ${{inputs.S3_BUCKET}}
+  S3_FOLDER: ${{inputs.S3_FOLDER}}
+  ZENODO_URL: ${{inputs.ZENODO_URL}}
+  S3_ACCESS_KEY_ID: ${{secrets.S3_ACCESS_KEY_ID}}
+  S3_SECRET_ACCESS_KEY: ${{secrets.S3_SECRET_ACCESS_KEY}}
+  ZENODO_API_ACCESS_TOKEN: ${{secrets.ZENODO_API_ACCESS_TOKEN}}
+
+jobs:
+  request-changes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip" # caching pip dependencies
+      - run: pip install .
+      - run: backoffice request-changes "${{ inputs.resource_id }}" "${{ inputs.stage_nr }}" "${{ inputs.reason }}"
