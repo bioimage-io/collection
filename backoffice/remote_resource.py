@@ -284,8 +284,10 @@ class StagedVersion(RemoteResourceVersion[StageNr]):
         return ret
 
     def _set_status(self, value: StagedVersionStatus):
-        version = self.get_versions()
-        details = version.staged.setdefault(self.nr, StagedVersionDetails(status=value))
+        versions = self.get_versions()
+        details = versions.staged.setdefault(
+            self.nr, StagedVersionDetails(status=value)
+        )
         if value.step < details.status.step:
             logger.error("Cannot proceed from {} to {}", details.status, value)
             return
@@ -296,7 +298,7 @@ class StagedVersion(RemoteResourceVersion[StageNr]):
             logger.warning("Proceeding from {} to {}", details.status, value)
 
         details.status = value
-        self._extend_json(version)
+        self._extend_json(versions)
 
 
 @dataclass
