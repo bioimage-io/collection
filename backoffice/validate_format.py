@@ -260,7 +260,7 @@ def validate_format(staged: StagedVersion):
         dict(
             has_dynamic_test_cases=bool(dynamic_test_cases),
             dynamic_test_cases={"include": dynamic_test_cases},
-            version=staged.nr,
+            version=staged.number,
             conda_envs=conda_envs,
         )
     )

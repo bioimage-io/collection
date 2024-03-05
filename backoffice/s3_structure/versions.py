@@ -7,10 +7,10 @@ import pydantic
 
 from backoffice.s3_structure.common import Node
 
-PublishNr = NewType("PublishNr", int)
+PublishNumber = NewType("PublishNumber", int)
 """n-th published version"""
 
-StageNr = NewType("StageNr", int)
+StageNumber = NewType("StageNumber", int)
 """n-th staged version"""
 
 
@@ -72,7 +72,7 @@ class SupersededStatus(_StagedStatusBase):
 
     name: Literal["superseded"] = "superseded"
     step: Literal[6] = 6
-    by: StageNr
+    by: StageNumber
 
 
 class PublishedStagedStatus(_StagedStatusBase):
@@ -81,7 +81,7 @@ class PublishedStagedStatus(_StagedStatusBase):
     name: Literal["published"] = "published"
     description: str = "published! 🎉"
     step: Literal[6] = 6
-    publish_nr: PublishNr
+    publish_number: PublishNumber
 
 
 StagedVersionStatus = Annotated[
@@ -101,7 +101,7 @@ StagedVersionStatus = Annotated[
 
 class PublishedStatus(_StatusBase):
     name: Literal["published"] = "published"
-    stage_nr: StageNr
+    stage_number: StageNumber
 
 
 PulishedVersionStatus = PublishedStatus
@@ -122,10 +122,12 @@ class StagedVersionDetails(VersionDetails):
 class Versions(Node):
     """`<id>/versions.json` containing an overview of all published and staged resource versions"""
 
-    published: dict[PublishNr, PublishedVersionDetails] = pydantic.Field(
+    published: dict[PublishNumber, PublishedVersionDetails] = pydantic.Field(
         default_factory=dict
     )
-    staged: dict[StageNr, StagedVersionDetails] = pydantic.Field(default_factory=dict)
+    staged: dict[StageNumber, StagedVersionDetails] = pydantic.Field(
+        default_factory=dict
+    )
 
     def extend(self, other: Versions) -> None:
         assert set(self.model_fields) == {"published", "staged"}, set(self.model_fields)

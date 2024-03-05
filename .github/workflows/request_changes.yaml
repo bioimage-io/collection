@@ -7,8 +7,8 @@ on:
         description: "Bioimageio ID of the resource - to be used to access the resource on S3"
         required: true
         type: string
-      stage_nr:
-        description: stage nr
+      stage_number:
+        description: stage number
         required: true
         type: number
       reason:
@@ -32,7 +32,7 @@ jobs:
     uses: ./.github/workflows/request_changes_call.yaml
     with:
       resource_id: ${{inputs.resource_id}}
-      stage_nr: ${{inputs.stage_nr}}
+      stage_number: ${{inputs.stage_number}}
       reason: ${{inputs.reason}}
       S3_HOST: ${{vars.S3_HOST}}
       S3_BUCKET: ${{vars.S3_BUCKET}}

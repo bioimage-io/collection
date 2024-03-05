@@ -7,8 +7,8 @@ on:
         description: "Bioimageio ID of the resource - to be used to access the resource on S3"
         required: true
         type: string
-      stage_nr:
-        description: stage nr to publish
+      stage_number:
+        description: stage number to publish
         required: true
         type: number
 
@@ -28,7 +28,7 @@ jobs:
     uses: ./.github/workflows/publish_call.yaml
     with:
       resource_id: ${{inputs.resource_id}}
-      stage_nr: ${{inputs.stage_nr}}
+      stage_number: ${{inputs.stage_number}}
       S3_HOST: ${{vars.S3_HOST}}
       S3_BUCKET: ${{vars.S3_BUCKET}}
       S3_FOLDER: ${{vars.S3_FOLDER}}

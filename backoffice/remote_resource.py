@@ -22,10 +22,10 @@ from .s3_structure.versions import (
     PublishedStagedStatus,
     PublishedStatus,
     PublishedVersionDetails,
-    PublishNr,
+    PublishNumber,
     StagedVersionDetails,
     StagedVersionStatus,
-    StageNr,
+    StageNumber,
     SupersededStatus,
     TestingStatus,
     UnpackedStatus,
@@ -35,9 +35,9 @@ from .s3_structure.versions import (
 
 yaml = YAML(typ="safe")
 
-J = TypeVar("J", Versions, Logs, Chat)
+JsonFileT = TypeVar("JsonFileT", Versions, Logs, Chat)
 
-Nr = TypeVar("Nr", StageNr, PublishNr)
+NumberT = TypeVar("NumberT", StageNumber, PublishNumber)
 
 
 @dataclass
@@ -58,7 +58,7 @@ class RemoteResource:
     def get_versions(self) -> Versions:
         return self._get_json(Versions)
 
-    def get_latest_stage_nr(self) -> Optional[StageNr]:
+    def get_latest_stage_number(self) -> Optional[StageNumber]:
         versions = self.get_versions()
         if not versions.staged:
             return None
@@ -67,24 +67,24 @@ class RemoteResource:
 
     def get_latest_staged_version(self) -> Optional[StagedVersion]:
         """Get a representation of the latest staged version
-        (the one with the highest stage nr)"""
-        v = self.get_latest_stage_nr()
-        if v is None:
+        (the one with the highest stage number)"""
+        nr = self.get_latest_stage_number()
+        if nr is None:
             return None
         else:
-            return StagedVersion(client=self.client, id=self.id, nr=v)
+            return StagedVersion(client=self.client, id=self.id, number=nr)
 
     def stage_new_version(self, package_url: str) -> StagedVersion:
         """Stage the content at `package_url` as a new resource version candidate."""
-        nr = self.get_latest_stage_nr()
+        nr = self.get_latest_stage_number()
         if nr is None:
-            nr = StageNr(1)
+            nr = StageNumber(1)
 
-        ret = StagedVersion(client=self.client, id=self.id, nr=nr)
+        ret = StagedVersion(client=self.client, id=self.id, number=nr)
         ret.unpack(package_url=package_url)
         return ret
 
-    def _get_json(self, typ: Type[J]) -> J:
+    def _get_json(self, typ: Type[JsonFileT]) -> JsonFileT:
         path = f"{self.folder}{typ.__name__.lower()}.json"
         data = self.client.load_file(path)
         if data is None:
@@ -94,7 +94,7 @@ class RemoteResource:
 
     def _extend_json(
         self,
-        extension: J,
+        extension: JsonFileT,
     ):
         path = f"{self.folder}{extension.__class__.__name__.lower()}.json"
         logger.info("Extending {} with {}", path, extension)
@@ -104,10 +104,10 @@ class RemoteResource:
 
 
 @dataclass
-class RemoteResourceVersion(RemoteResource, Generic[Nr], ABC):
+class RemoteResourceVersion(RemoteResource, Generic[NumberT], ABC):
     """Base class for a resource version (`StagedVersion` or `PublishedVersion`)"""
 
-    nr: Nr
+    number: NumberT
     """version number"""
 
     @property
@@ -120,7 +120,7 @@ class RemoteResourceVersion(RemoteResource, Generic[Nr], ABC):
     def folder(self) -> str:
         """The S3 (sub)prefix of this version
         (**sub**)prefix, because the client may prefix this prefix"""
-        return f"{self.id}/{self.version_prefix}{self.nr}/"
+        return f"{self.id}/{self.version_prefix}{self.number}/"
 
     @property
     def rdf_url(self) -> str:
@@ -142,10 +142,10 @@ class RemoteResourceVersion(RemoteResource, Generic[Nr], ABC):
 
 
 @dataclass
-class StagedVersion(RemoteResourceVersion[StageNr]):
+class StagedVersion(RemoteResourceVersion[StageNumber]):
     """A staged resource version"""
 
-    nr: StageNr
+    number: StageNumber
     """stage number (**not** future resource version)"""
 
     @property
@@ -181,7 +181,7 @@ class StagedVersion(RemoteResourceVersion[StageNr]):
             )
 
         # overwrite version information
-        rdf["version_nr"] = self.nr
+        rdf["version_number"] = self.number
 
         if rdf.get("id_emoji") is None:
             # TODO: set `id_emoji` according to id
@@ -204,7 +204,7 @@ class StagedVersion(RemoteResourceVersion[StageNr]):
     def request_changes(self, reason: str):
         self._set_status(ChangesRequestedStatus(description=reason))
 
-    def mark_as_superseded(self, description: str, by: StageNr):
+    def mark_as_superseded(self, description: str, by: StageNumber):
         self._set_status(SupersededStatus(description=description, by=by))
 
     def publish(self) -> PublishedVersion:
@@ -213,7 +213,7 @@ class StagedVersion(RemoteResourceVersion[StageNr]):
         versions = self.get_versions()
         # check status of older staged versions
         for nr, details in versions.staged.items():
-            if nr >= self.nr:  # ignore newer staged versions
+            if nr >= self.number:  # ignore newer staged versions
                 continue
             if isinstance(details.status, (SupersededStatus, PublishedStagedStatus)):
                 pass
@@ -228,15 +228,17 @@ class StagedVersion(RemoteResourceVersion[StageNr]):
                     AcceptedStatus,
                 ),
             ):
-                superseded = StagedVersion(client=self.client, id=self.id, nr=nr)
-                superseded.mark_as_superseded(f"Superseded by {self.nr}", self.nr)
+                superseded = StagedVersion(client=self.client, id=self.id, number=nr)
+                superseded.mark_as_superseded(
+                    f"Superseded by {self.number}", self.number
+                )
             else:
                 assert_never(details.status)
 
         if not versions.published:
-            next_publish_nr = PublishNr(1)
+            next_publish_nr = PublishNumber(1)
         else:
-            next_publish_nr = PublishNr(max(versions.published) + 1)
+            next_publish_nr = PublishNumber(max(versions.published) + 1)
 
         logger.debug("Publishing {} as version nr {}", self.folder, next_publish_nr)
 
@@ -251,10 +253,10 @@ class StagedVersion(RemoteResourceVersion[StageNr]):
             if sem_ver in {v.sem_ver for v in versions.published.values()}:
                 raise RuntimeError(f"Trying to publish {sem_ver} again!")
 
-        ret = PublishedVersion(client=self.client, id=self.id, nr=next_publish_nr)
+        ret = PublishedVersion(client=self.client, id=self.id, number=next_publish_nr)
 
         # copy rdf.yaml and set version in it
-        rdf["version_nr"] = ret.nr
+        rdf["version_number"] = ret.number
         stream = io.StringIO()
         yaml.dump(rdf, stream)
         rdf_data = stream.read().encode()
@@ -266,11 +268,11 @@ class StagedVersion(RemoteResourceVersion[StageNr]):
         # move all other files
         self.client.cp_dir(self.folder, ret.folder)
 
-        versions.staged[self.nr].status = PublishedStagedStatus(
-            publish_nr=next_publish_nr
+        versions.staged[self.number].status = PublishedStagedStatus(
+            publish_number=next_publish_nr
         )
         versions.published[next_publish_nr] = PublishedVersionDetails(
-            sem_ver=sem_ver, status=PublishedStatus(stage_nr=self.nr)
+            sem_ver=sem_ver, status=PublishedStatus(stage_number=self.number)
         )
         self._extend_json(versions)
 
@@ -282,7 +284,7 @@ class StagedVersion(RemoteResourceVersion[StageNr]):
     def _set_status(self, value: StagedVersionStatus):
         versions = self.get_versions()
         details = versions.staged.setdefault(
-            self.nr, StagedVersionDetails(status=value)
+            self.number, StagedVersionDetails(status=value)
         )
         if value.step < details.status.step:
             logger.error("Cannot proceed from {} to {}", details.status, value)
@@ -298,7 +300,7 @@ class StagedVersion(RemoteResourceVersion[StageNr]):
 
 
 @dataclass
-class PublishedVersion(RemoteResourceVersion[PublishNr]):
+class PublishedVersion(RemoteResourceVersion[PublishNumber]):
     """A representation of a published resource version"""
 
     @property

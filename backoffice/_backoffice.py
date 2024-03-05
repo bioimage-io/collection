@@ -12,7 +12,7 @@ from backoffice.remote_resource import (
 )
 from backoffice.run_dynamic_tests import run_dynamic_tests
 from backoffice.s3_client import Client
-from backoffice.s3_structure.versions import StageNr
+from backoffice.s3_structure.versions import StageNumber
 from backoffice.validate_format import validate_format
 
 _ = load_dotenv()
@@ -45,27 +45,29 @@ class BackOffice:
     def test(
         self,
         resource_id: str,
-        stage_nr: StageNr,
+        stage_number: StageNumber,
         weight_format: Optional[Union[WeightsFormat, Literal[""]]] = None,
         create_env_outcome: Literal["success", ""] = "success",
     ):
-        staged = StagedVersion(self.client, resource_id, stage_nr)
+        staged = StagedVersion(self.client, resource_id, stage_number)
         run_dynamic_tests(
             staged=staged,
             weight_format=weight_format or None,
             create_env_outcome=create_env_outcome,
         )
 
-    def await_review(self, resource_id: str, stage_nr: StageNr):
-        staged = StagedVersion(self.client, resource_id, stage_nr)
+    def await_review(self, resource_id: str, stage_number: StageNumber):
+        staged = StagedVersion(self.client, resource_id, stage_number)
         staged.await_review()
 
-    def request_changes(self, resource_id: str, stage_nr: StageNr, reason: str):
-        staged = StagedVersion(self.client, resource_id, stage_nr)
+    def request_changes(
+        self, resource_id: str, stage_numbermber: StageNumber, reason: str
+    ):
+        staged = StagedVersion(self.client, resource_id, stage_number)
         staged.request_changes(reason=reason)
 
-    def publish(self, resource_id: str, stage_nr: StageNr):
-        staged = StagedVersion(self.client, resource_id, stage_nr)
+    def publish(self, resource_id: str, stage_number: StageNumber):
+        staged = StagedVersion(self.client, resource_id, stage_number)
         published = staged.publish()
         assert isinstance(published, PublishedVersion)
 

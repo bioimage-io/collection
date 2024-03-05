@@ -7,8 +7,8 @@ on:
         description: "Bioimageio ID of the resource - to be used to access the resource on S3"
         required: true
         type: string
-      stage_nr:
-        description: stage nr
+      stage_number:
+        description: stage number
         required: true
         type: number
       reason:
@@ -49,4 +49,4 @@ jobs:
           python-version: "3.12"
           cache: "pip" # caching pip dependencies
       - run: pip install .
-      - run: backoffice request-changes "${{ inputs.resource_id }}" "${{ inputs.stage_nr }}" "${{ inputs.reason }}"
+      - run: backoffice request-changes "${{ inputs.resource_id }}" "${{ inputs.stage_number }}" "${{ inputs.reason }}"
