@@ -16,8 +16,11 @@ from bioimageio.spec import (
     load_description,
     save_bioimageio_package,
 )
-from bioimageio.spec._internal.utils import get_parent_url
-from bioimageio.spec.common import BioimageioYamlContent, BioimageioYamlSource, HttpUrl
+from bioimageio.spec.common import (
+    BioimageioYamlContent,
+    BioimageioYamlSource,
+    RootHttpUrl,
+)
 from dotenv import load_dotenv
 from minio import Minio
 from ruyaml import YAML
@@ -82,7 +85,7 @@ def upload_resource(
 
 
 def upload_resources(
-    sources: Sequence[Tuple[BioimageioYamlSource, Union[HttpUrl, Path]]],
+    sources: Sequence[Tuple[BioimageioYamlSource, Union[RootHttpUrl, Path]]],
 ):
     client = Client()
     # with TemporaryDirectory() as tmp_dir:
@@ -134,7 +137,7 @@ def get_model_urls_from_collection_json():
 
 def get_model_urls_from_collection_folder(start: int = 0, end: int = 9999):
     assert COLLECTION_FOLDER.exists()
-    ret: List[Tuple[BioimageioYamlContent, HttpUrl]] = []
+    ret: List[Tuple[BioimageioYamlContent, RootHttpUrl]] = []
     count = 0
     for i, resource_path in enumerate(
         sorted(COLLECTION_FOLDER.glob("**/resource.yaml"))[start:end], start=start
@@ -192,7 +195,7 @@ def get_model_urls_from_collection_folder(start: int = 0, end: int = 9999):
 
         v += 1
         rdf["version"] = v
-        ret.append((rdf, get_parent_url(rdf_source)))
+        ret.append((rdf, RootHttpUrl(rdf_source).parent))
         count += 1
 
     return ret
