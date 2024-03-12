@@ -4,10 +4,10 @@ from typing import Literal, Optional, TypedDict, Union, cast
 
 import pooch
 from bioimageio.spec import InvalidDescr, ResourceDescr, load_description
+from bioimageio.spec.common import Sha256
 from bioimageio.spec.model import v0_4, v0_5
-from bioimageio.spec.model.v0_5 import WeightsFormat
+from bioimageio.spec.model.v0_5 import Version, WeightsFormat
 from bioimageio.spec.summary import ErrorEntry, ValidationDetail
-from packaging.version import Version
 from ruyaml import YAML
 from typing_extensions import assert_never
 
@@ -51,7 +51,7 @@ def get_env_from_deps(deps: Union[v0_4.Dependencies, v0_5.EnvironmentFileDescr])
             return get_base_env()
 
         url = deps.file
-        sha = None
+        sha: Optional[Sha256] = None
     elif isinstance(deps, v0_5.EnvironmentFileDescr):
         url = deps.source
         sha = deps.sha256
