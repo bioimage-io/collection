@@ -60,9 +60,7 @@ class BackOffice:
         staged = StagedVersion(self.client, resource_id, stage_number)
         staged.await_review()
 
-    def request_changes(
-        self, resource_id: str, stage_numbermber: StageNumber, reason: str
-    ):
+    def request_changes(self, resource_id: str, stage_number: StageNumber, reason: str):
         staged = StagedVersion(self.client, resource_id, stage_number)
         staged.request_changes(reason=reason)
 

@@ -35,6 +35,7 @@ from .s3_structure.versions import (
 
 yaml = YAML(typ="safe")
 
+VersionSpecificJsonFileT = TypeVar("VersionSpecificJsonFileT", Logs, Chat)
 JsonFileT = TypeVar("JsonFileT", Versions, Logs, Chat)
 
 NumberT = TypeVar("NumberT", StageNumber, PublishNumber)
@@ -51,12 +52,17 @@ class RemoteResource:
     """resource identifier"""
 
     @property
-    def folder(self) -> str:
+    def resource_folder(self) -> str:
         """The S3 (sub)prefix of this resource"""
-        return self.id
+        return f"{self.id}/"
+
+    @property
+    def folder(self) -> str:
+        """The S3 (sub)prefix of this resource (or resource version)"""
+        return self.resource_folder
 
     def get_versions(self) -> Versions:
-        return self._get_json(Versions)
+        return self._get_version_agnostic_json(Versions)
 
     def get_latest_stage_number(self) -> Optional[StageNumber]:
         versions = self.get_versions()
@@ -84,21 +90,41 @@ class RemoteResource:
         ret.unpack(package_url=package_url)
         return ret
 
-    def _get_json(self, typ: Type[JsonFileT]) -> JsonFileT:
-        path = f"{self.folder}{typ.__name__.lower()}.json"
+    def _get_version_agnostic_json(self, typ: Type[Versions]) -> Versions:
+        return self._get_json(typ, f"{self.resource_folder}{typ.__name__.lower()}.json")
+
+    def _get_version_specific_json(
+        self, typ: Type[VersionSpecificJsonFileT]
+    ) -> VersionSpecificJsonFileT:
+        return self._get_json(typ, f"{self.folder}{typ.__name__.lower()}.json")
+
+    def _get_json(self, typ: Type[JsonFileT], path: str) -> JsonFileT:
         data = self.client.load_file(path)
         if data is None:
             return typ()
         else:
             return typ.model_validate_json(data)
 
-    def _extend_json(
+    def _extend_version_agnostic_json(
         self,
-        extension: JsonFileT,
+        extension: Versions,
     ):
-        path = f"{self.folder}{extension.__class__.__name__.lower()}.json"
+        self._extend_json(
+            extension,
+            f"{self.resource_folder}{extension.__class__.__name__.lower()}.json",
+        )
+
+    def _extend_version_specific_json(
+        self,
+        extension: VersionSpecificJsonFileT,
+    ):
+        self._extend_json(
+            extension, f"{self.folder}{extension.__class__.__name__.lower()}.json"
+        )
+
+    def _extend_json(self, extension: JsonFileT, path: str):
         logger.info("Extending {} with {}", path, extension)
-        current = self._get_json(extension.__class__)
+        current = self._get_json(extension.__class__, path)
         _ = current.extend(extension)
         self.client.put_pydantic(path, current)
 
@@ -128,17 +154,17 @@ class RemoteResourceVersion(RemoteResource, Generic[NumberT], ABC):
         return self.client.get_file_url(f"{self.folder}files/rdf.yaml")
 
     def get_log(self) -> Logs:
-        return self._get_json(Logs)
+        return self._get_version_specific_json(Logs)
 
     def get_chat(self) -> Chat:
-        return self._get_json(Chat)
+        return self._get_version_specific_json(Chat)
 
     def extend_log(
         self,
         extension: Logs,
     ):
         """extend log file"""
-        self._extend_json(extension)
+        self._extend_version_specific_json(extension)
 
 
 @dataclass
@@ -274,7 +300,7 @@ class StagedVersion(RemoteResourceVersion[StageNumber]):
         versions.published[next_publish_nr] = PublishedVersionDetails(
             sem_ver=sem_ver, status=PublishedStatus(stage_number=self.number)
         )
-        self._extend_json(versions)
+        self._extend_version_agnostic_json(versions)
 
         # TODO: clean up staged files?
         # remove all uploaded files from this staged version
@@ -296,7 +322,7 @@ class StagedVersion(RemoteResourceVersion[StageNumber]):
             logger.warning("Proceeding from {} to {}", details.status, value)
 
         details.status = value
-        self._extend_json(versions)
+        self._extend_version_agnostic_json(versions)
 
 
 @dataclass
