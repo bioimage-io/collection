@@ -181,6 +181,13 @@ class StagedVersion(RemoteResourceVersion[StageNumber]):
         return "staged/"
 
     def unpack(self, package_url: str):
+        # ensure we have a chat.json
+        self._extend_version_specific_json(self._get_version_specific_json(Chat))
+
+        # ensure we have a logs.json
+        self._extend_version_specific_json(self._get_version_specific_json(Logs))
+
+        # set first status (this also write versions.json)
         self._set_status(
             UnpackingStatus(description=f"unzipping {package_url} to {self.folder}")
         )
