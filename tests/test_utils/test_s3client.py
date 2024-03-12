@@ -1,4 +1,4 @@
-from backoffice.utils.s3_client import Client
+from backoffice.s3_client import Client
 
 
 def test_client(client: Client):

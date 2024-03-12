@@ -1,12 +1,12 @@
 import os
 
 from backoffice.backup import backup
-from backoffice.utils.remote_resource import (
+from backoffice.remote_resource import (
     PublishedVersion,
     RemoteResource,
     StagedVersion,
 )
-from backoffice.utils.s3_client import Client
+from backoffice.s3_client import Client
 
 
 def test_lifecycle(

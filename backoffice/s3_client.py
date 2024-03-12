@@ -7,7 +7,7 @@ from collections.abc import Sequence
 from dataclasses import dataclass, field
 from datetime import timedelta
 from pathlib import Path
-from typing import Any, BinaryIO, Iterator, Optional, Union
+from typing import Any, BinaryIO, Iterator, Optional, TypeVar, Union
 
 from dotenv import load_dotenv
 from loguru import logger
@@ -15,8 +15,12 @@ from minio import Minio, S3Error
 from minio.commonconfig import CopySource
 from minio.datatypes import Object
 from minio.deleteobjects import DeleteObject
+from pydantic import BaseModel
 
 _ = load_dotenv()
+
+
+M = TypeVar("M", bound=BaseModel)
 
 
 @dataclass
@@ -72,15 +76,19 @@ class Client:
         )
         logger.info("Uploaded {}", self.get_file_url(path))
 
+    def put_pydantic(self, path: str, obj: BaseModel):
+        """convenience method to upload a json file from a pydantic model"""
+        self.put_json_string(path, obj.model_dump_json())
+        logger.debug("Uploaded {} containing {}", self.get_file_url(path), obj)
+
     def put_json(self, path: str, json_value: Any):
         """convenience method to upload a json file from a json serializable value"""
-        data_str = json.dumps(json_value)
-        data = data_str.encode()
+        self.put_json_string(path, json.dumps(json_value))
+        logger.debug("Uploaded {} containing {}", self.get_file_url(path), json_value)
+
+    def put_json_string(self, path: str, json_str: str):
+        data = json_str.encode()
         self.put(path, io.BytesIO(data), length=len(data))
-        data_log = data_str[:1000]
-        if len(data_log) < len(data_str):
-            data_log += "..."
-        logger.debug("Uploaded {}", data_log)
 
     def get_file_urls(
         self,
@@ -128,16 +136,12 @@ class Client:
 
             yield Path(obj.object_name).name
 
+    def cp_dir(self, src: str, tgt: str):
+        _ = self._cp_dir(src, tgt)
+
     def mv_dir(self, src: str, tgt: str, *, bypass_governance_mode: bool = False):
         """copy and delete all objects under `src` to `tgt`"""
-        assert src.endswith("/")
-        assert tgt.endswith("/")
-        objects = list(
-            self._client.list_objects(
-                self.bucket, f"{self.prefix}/{src}", recursive=True
-            )
-        )
-        self._cp_objs(objects, src, tgt)
+        objects = self._cp_dir(src, tgt)
         self._rm_objs(objects, bypass_governance_mode=bypass_governance_mode)
 
     def rm_dir(self, prefix: str, *, bypass_governance_mode: bool = False):
@@ -150,11 +154,12 @@ class Client:
         )
         self._rm_objs(objects, bypass_governance_mode=bypass_governance_mode)
 
-    def _cp_objs(self, objects: Sequence[Object], src: str, tgt: str) -> None:
+    def _cp_dir(self, src: str, tgt: str):
         assert src.endswith("/")
         assert tgt.endswith("/")
         src = f"{self.prefix}/{src}"
         tgt = f"{self.prefix}/{tgt}"
+        objects = list(self._client.list_objects(self.bucket, src, recursive=True))
         # copy
         for obj in objects:
             assert obj.object_name is not None and obj.object_name.startswith(src)
@@ -165,6 +170,8 @@ class Client:
                 tgt_obj_name,
                 CopySource(self.bucket, obj.object_name),
             )
+
+        return objects
 
     def rm_obj(self, name: str) -> None:
         """remove single object"""

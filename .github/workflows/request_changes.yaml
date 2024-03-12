@@ -1,4 +1,4 @@
-name: publish
+name: request changes
 
 on:
   workflow_dispatch:
@@ -8,9 +8,13 @@ on:
         required: true
         type: string
       stage_number:
-        description: stage number to publish
+        description: stage number
         required: true
         type: number
+      reason:
+        description: Why are changes required? What needs changing?
+        required: true
+        type: string
 
 concurrency: ${{inputs.resource_id}}
 
@@ -25,10 +29,11 @@ env:
 
 jobs:
   call:
-    uses: ./.github/workflows/publish_call.yaml
+    uses: ./.github/workflows/request_changes_call.yaml
     with:
       resource_id: ${{inputs.resource_id}}
       stage_number: ${{inputs.stage_number}}
+      reason: ${{inputs.reason}}
       S3_HOST: ${{vars.S3_HOST}}
       S3_BUCKET: ${{vars.S3_BUCKET}}
       S3_FOLDER: ${{vars.S3_FOLDER}}
