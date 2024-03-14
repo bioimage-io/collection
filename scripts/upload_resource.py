@@ -45,7 +45,7 @@ COLLECTION_FOLDER = (
 class Client:
     host: str = os.environ["S3_HOST"]
     bucket: str = os.environ["S3_BUCKET"]
-    root_folder: str = os.environ["S3_FOLDER"]
+    root_folder: str = "collection_reupload.bioimage.io"
     _client: Minio = field(init=False)
 
     def __post_init__(self):
@@ -74,7 +74,7 @@ class Client:
 
     def upload_file(self, file: Path, upload_name: str):
         with file.open("rb") as f:
-            self.put(f"uploads/{upload_name}", f)
+            self.put(upload_name, f)
 
 
 def upload_resource(

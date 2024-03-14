@@ -2,7 +2,7 @@ from backoffice.s3_client import Client
 
 
 def test_client(client: Client):
-    assert client.prefix.startswith("sandbox")
+    assert client.prefix.startswith("testing")
     client.put_json("test/test1.json", "test")
     client.put_json("test/dir/test2.json", "test")
     client.put_json("test/dir/test3.json", "test")
