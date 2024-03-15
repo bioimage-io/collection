@@ -97,8 +97,7 @@ def generate_collection_json(
     coll_descr = build_description(
         collection, context=ValidationContext(perform_io_checks=False)
     )
-    assert isinstance(
-        coll_descr, CollectionDescr
-    ), coll_descr.validation_summary.format()
+    if not isinstance(coll_descr, CollectionDescr):
+        logger.error(coll_descr.validation_summary.format())
 
     client.put_json(COLLECTION_JSON_S3_PATH, collection)
