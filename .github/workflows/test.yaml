@@ -56,8 +56,17 @@ jobs:
       ZENODO_URL: ${{vars.ZENODO_TEST_URL}} # testing!
     secrets: inherit
 
-  test-backup-wf:
+  test-generate-collection-json-wf:
     needs: test-publish-wf
+    uses: ./.github/workflows/generate_collection_json_call.yaml
+    with:
+      S3_HOST: ${{vars.S3_HOST}}
+      S3_BUCKET: ${{vars.S3_TEST_BUCKET}} # testing!
+      S3_FOLDER: ${{vars.S3_TEST_FOLDER}}/ci # testing!
+    secrets: inherit
+
+  test-backup-wf:
+    needs: test-generate-collection-json-wf
     uses: ./.github/workflows/backup_call.yaml
     with:
       S3_HOST: ${{vars.S3_HOST}}

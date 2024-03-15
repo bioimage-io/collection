@@ -78,7 +78,7 @@ class Client:
 
     def put_pydantic(self, path: str, obj: BaseModel):
         """convenience method to upload a json file from a pydantic model"""
-        self.put_json_string(path, obj.model_dump_json())
+        self.put_json_string(path, obj.model_dump_json(exclude_defaults=False))
         logger.debug("Uploaded {} containing {}", self.get_file_url(path), obj)
 
     def put_json(self, path: str, json_value: Any):

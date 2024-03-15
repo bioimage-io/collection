@@ -11,4 +11,5 @@ def test_backoffice(
     backoffice.test(resource_id=package_id, stage_number=StageNumber(1))
     backoffice.await_review(resource_id=package_id, stage_number=StageNumber(1))
     backoffice.publish(resource_id=package_id, stage_number=StageNumber(1))
+    backoffice.generate_collection_json()
     backoffice.backup(os.environ["ZENODO_TEST_URL"])

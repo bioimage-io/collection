@@ -1,0 +1,130 @@
+{
+    "name": "bioimage.io",
+    "type": "collection",
+    "description": "bioimage.io collection RDF",
+    "tags": [],
+    "version": "0.3.0",
+    "authors": [
+        {
+            "name": "BioImgae.IO Team"
+        }
+    ],
+    "documentation": "README.md",
+    "git_repo": "https://github.com/bioimage-io/collection",
+    "icon": "https://raw.githubusercontent.com/bioimage-io/bioimage.io/main/public/static/icons/android-chrome-384x384.png",
+    "cite": [
+        {
+            "text": "todo cite BioImageIO",
+            "url": "https://bioimage.io"
+        }
+    ],
+    "format_version": "0.3.0",
+    "config": {
+        "splash_title": "BioImage Model Zoo",
+        "splash_subtitle": "Advanced AI models in one-click",
+        "splash_feature_list": [
+            "Integrate with Fiji, Ilastik, ImJoy",
+            "Try model instantly with BioEngine",
+            "Contribute your models via Zenodo",
+            "Link models to datasets and applications"
+        ],
+        "explore_button_text": "Start Exploring",
+        "background_image": "static/img/zoo-background.svg",
+        "resource_types": [
+            "model",
+            "application",
+            "dataset"
+        ],
+        "default_type": "model",
+        "url_root": "https://raw.githubusercontent.com/bioimage-io/collection-bioimage-io/gh-pages",
+        "partners": [
+            {
+                "id": "bioimageio",
+                "repository": "bioimage-io/bioimage-io-resources",
+                "branch": "main",
+                "collection_file_name": "collection.bioimage.io.yaml"
+            },
+            {
+                "id": "zero",
+                "repository": "HenriquesLab/ZeroCostDL4Mic",
+                "branch": "master",
+                "collection_file_name": "manifest.bioimage.io.yaml"
+            },
+            {
+                "id": "deepimagej",
+                "repository": "deepimagej/models",
+                "branch": "master",
+                "collection_file_name": "manifest.bioimage.io.yaml",
+                "test_summaries": {
+                    "repository": "deepimagej/CI-deepimagej-bioimage-io",
+                    "deploy_branch": "gh-pages",
+                    "deploy_folder": ".",
+                    "workflow": "test_bioimageio_resources.yaml",
+                    "workflow_ref": "refs/heads/master"
+                }
+            },
+            {
+                "id": "fiji",
+                "repository": "bioimage-io/fiji-bioimage-io",
+                "branch": "master",
+                "collection_file_name": "manifest.bioimage.io.yaml"
+            },
+            {
+                "id": "imjoy",
+                "repository": "imjoy-team/bioimage-io-resources",
+                "branch": "master",
+                "collection_file_name": "collection.bioimage.io.yaml"
+            },
+            {
+                "id": "ilastik",
+                "repository": "ilastik/bioimage-io-resources",
+                "branch": "main",
+                "collection_file_name": "collection.yaml",
+                "test_summaries": {
+                    "repository": "ilastik/bioimage-io-resources",
+                    "deploy_branch": "gh-pages",
+                    "deploy_folder": "test_summaries",
+                    "workflow": "test_bioimageio_resources.yaml",
+                    "workflow_ref": "refs/heads/main"
+                }
+            },
+            {
+                "id": "hpa",
+                "repository": "CellProfiling/HPA-model-zoo",
+                "branch": "master",
+                "collection_file_name": "manifest.bioimage.io.yaml"
+            },
+            {
+                "id": "icy",
+                "repository": "Icy-imaging/icy-bioimage-io",
+                "branch": "main",
+                "collection_file_name": "collection.yaml"
+            },
+            {
+                "id": "qupath",
+                "repository": "qupath/qupath-bioimage-io",
+                "branch": "main",
+                "collection_file_name": "collection.yaml"
+            },
+            {
+                "id": "stardist",
+                "repository": "stardist/stardist-bioimage-io",
+                "branch": "main",
+                "collection_file_name": "collection.yaml"
+            },
+            {
+                "id": "biapy",
+                "repository": "BiaPyX/BiaPy-bioimage-io",
+                "branch": "main",
+                "collection_file_name": "collection.yaml"
+            },
+            {
+                "id": "dl4miceverywhere",
+                "repository": "HenriquesLab/DL4MicEverywhere-bioimage-io",
+                "branch": "main",
+                "collection_file_name": "collection.yaml"
+            }
+        ]
+    },
+    "collection": []
+}

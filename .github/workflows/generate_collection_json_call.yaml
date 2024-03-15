@@ -1,0 +1,35 @@
+name: generate collection.json call
+
+on:
+  workflow_call:
+    inputs:
+      S3_HOST:
+        required: true
+        type: string
+      S3_BUCKET:
+        required: true
+        type: string
+      S3_FOLDER:
+        required: true
+        type: string
+
+concurrency: generate-collection-json-call
+
+env:
+  S3_HOST: ${{inputs.S3_HOST}}
+  S3_BUCKET: ${{inputs.S3_BUCKET}}
+  S3_FOLDER: ${{inputs.S3_FOLDER}}
+  S3_ACCESS_KEY_ID: ${{secrets.S3_ACCESS_KEY_ID}}
+  S3_SECRET_ACCESS_KEY: ${{secrets.S3_SECRET_ACCESS_KEY}}
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip" # caching pip dependencies
+      - run: pip install .
+      - run: backoffice genreate-collection-json

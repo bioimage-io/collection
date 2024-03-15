@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 
 import pytest
 
@@ -43,3 +44,8 @@ def package_url():
 @pytest.fixture(scope="session")
 def package_id():
     return os.environ["TEST_PACKAGE_ID"]
+
+
+@pytest.fixture(scope="session")
+def collection_template_path():
+    return Path(__file__).parent.parent / "collection_template.json"
