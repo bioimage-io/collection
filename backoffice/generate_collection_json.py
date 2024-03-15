@@ -95,4 +95,6 @@ def generate_collection_json(
     coll_descr = build_description(
         collection, context=ValidationContext(perform_io_checks=False)
     )
-    assert isinstance(coll_descr, CollectionDescr)
+    assert isinstance(
+        coll_descr, CollectionDescr
+    ), coll_descr.validation_summary.format()

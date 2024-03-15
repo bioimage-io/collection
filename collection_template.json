@@ -2,6 +2,7 @@
     "name": "bioimage.io",
     "type": "collection",
     "description": "bioimage.io collection RDF",
+    "license": "CC0-1.0",
     "tags": [],
     "version": "0.3.0",
     "authors": [
