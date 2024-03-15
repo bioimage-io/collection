@@ -7,6 +7,7 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from typing import Generic, Optional, Type, TypeVar
 
+from bioimageio.spec.utils import identify_bioimageio_yaml_file_name
 from loguru import logger
 from ruyaml import YAML
 from typing_extensions import assert_never
@@ -21,9 +22,9 @@ from .s3_structure.versions import (
     ChangesRequestedStatus,
     PublishedStagedStatus,
     PublishedStatus,
-    PublishedVersionDetails,
+    PublishedVersionInfo,
     PublishNumber,
-    StagedVersionDetails,
+    StagedVersionInfo,
     StagedVersionStatus,
     StageNumber,
     SupersededStatus,
@@ -204,7 +205,10 @@ class StagedVersion(RemoteResourceVersion[StageNumber]):
         # Unzip the zip file
         zipobj = zipfile.ZipFile(zipinmemory)
 
-        rdf = yaml.load(zipobj.open("rdf.yaml").read().decode())
+        bioimageio_yaml_file_name = identify_bioimageio_yaml_file_name(
+            zipobj.namelist()
+        )
+        rdf = yaml.load(zipobj.open(bioimageio_yaml_file_name).read().decode())
         if (rdf_id := rdf.get("id")) is None:
             rdf["id"] = self.id
         elif rdf_id != self.id:
@@ -221,6 +225,11 @@ class StagedVersion(RemoteResourceVersion[StageNumber]):
             raise ValueError(f"RDF in {package_url} is missing `id_emoji`")
 
         for filename in zipobj.namelist():
+            if filename == bioimageio_yaml_file_name:
+                filename = "rdf.yaml"  # always upload as 'rdf.yaml'
+            elif filename == "rdf.yaml":
+                raise RuntimeError("Another rdf.yaml???")
+
             file_data = zipobj.open(filename).read()
             path = f"{self.folder}files/{filename}"
             self.client.put(path, io.BytesIO(file_data), length=len(file_data))
@@ -304,7 +313,7 @@ class StagedVersion(RemoteResourceVersion[StageNumber]):
         versions.staged[self.number].status = PublishedStagedStatus(
             publish_number=next_publish_nr
         )
-        versions.published[next_publish_nr] = PublishedVersionDetails(
+        versions.published[next_publish_nr] = PublishedVersionInfo(
             sem_ver=sem_ver, status=PublishedStatus(stage_number=self.number)
         )
         self._extend_version_agnostic_json(versions)
@@ -317,7 +326,7 @@ class StagedVersion(RemoteResourceVersion[StageNumber]):
     def _set_status(self, value: StagedVersionStatus):
         versions = self.get_versions()
         details = versions.staged.setdefault(
-            self.number, StagedVersionDetails(status=value)
+            self.number, StagedVersionInfo(status=value)
         )
         if value.step < details.status.step:
             logger.error("Cannot proceed from {} to {}", details.status, value)

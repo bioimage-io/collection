@@ -1,6 +1,8 @@
 import os
+from pathlib import Path
 
 from backoffice.backup import backup
+from backoffice.generate_collection_json import generate_collection_json
 from backoffice.remote_resource import (
     PublishedVersion,
     RemoteResource,
@@ -10,7 +12,11 @@ from backoffice.s3_client import Client
 
 
 def test_lifecycle(
-    client: Client, package_url: str, package_id: str, s3_test_folder_url: str
+    client: Client,
+    package_url: str,
+    package_id: str,
+    s3_test_folder_url: str,
+    collection_template_path: Path,
 ):
     resource = RemoteResource(client=client, id=package_id)
     staged = resource.stage_new_version(package_url)
@@ -27,6 +33,8 @@ def test_lifecycle(
     assert (
         published_rdf_url == f"{s3_test_folder_url}frank-water-buffalo/1/files/rdf.yaml"
     )
+
+    generate_collection_json(client, collection_template_path)
 
     backed_up = backup(client, os.environ["ZENODO_TEST_URL"])
     assert backed_up == ["frank-water-buffalo"]

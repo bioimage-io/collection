@@ -1,10 +1,12 @@
 import os
+from pathlib import Path
 from typing import Literal, Optional, Union
 
 from bioimageio.spec.model.v0_5 import WeightsFormat
 from dotenv import load_dotenv
 
 from backoffice.backup import backup
+from backoffice.generate_collection_json import generate_collection_json
 from backoffice.remote_resource import (
     PublishedVersion,
     RemoteResource,
@@ -71,3 +73,8 @@ class BackOffice:
 
     def backup(self, destination: Optional[str] = None):
         _ = backup(self.client, destination or os.environ["ZENODO_URL"])
+
+    def generate_collection_json(
+        self, collection_template: Path = Path("collection_template.json")
+    ):
+        generate_collection_json(self.client, collection_template=collection_template)

@@ -107,27 +107,26 @@ class PublishedStatus(_StatusBase):
 PulishedVersionStatus = PublishedStatus
 
 
-class VersionDetails(Node):
+class VersionInfo(Node):
     sem_ver: Optional[str] = None
+    timestamp: datetime = datetime.now()
 
 
-class PublishedVersionDetails(VersionDetails):
+class PublishedVersionInfo(VersionInfo):
     status: PublishedStatus
 
 
-class StagedVersionDetails(VersionDetails):
+class StagedVersionInfo(VersionInfo):
     status: StagedVersionStatus
 
 
 class Versions(Node):
     """`<id>/versions.json` containing an overview of all published and staged resource versions"""
 
-    published: dict[PublishNumber, PublishedVersionDetails] = pydantic.Field(
+    published: dict[PublishNumber, PublishedVersionInfo] = pydantic.Field(
         default_factory=dict
     )
-    staged: dict[StageNumber, StagedVersionDetails] = pydantic.Field(
-        default_factory=dict
-    )
+    staged: dict[StageNumber, StagedVersionInfo] = pydantic.Field(default_factory=dict)
 
     def extend(self, other: Versions) -> None:
         assert set(self.model_fields) == {"published", "staged"}, set(self.model_fields)

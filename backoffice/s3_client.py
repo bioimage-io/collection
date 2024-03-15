@@ -78,13 +78,18 @@ class Client:
 
     def put_pydantic(self, path: str, obj: BaseModel):
         """convenience method to upload a json file from a pydantic model"""
-        self.put_json_string(path, obj.model_dump_json())
+        self.put_json_string(path, obj.model_dump_json(exclude_defaults=False))
         logger.debug("Uploaded {} containing {}", self.get_file_url(path), obj)
 
     def put_json(self, path: str, json_value: Any):
         """convenience method to upload a json file from a json serializable value"""
-        self.put_json_string(path, json.dumps(json_value))
-        logger.debug("Uploaded {} containing {}", self.get_file_url(path), json_value)
+        json_str = json.dumps(json_value)
+        self.put_json_string(path, json_str)
+        logger.debug(
+            "Uploaded {} containing {}",
+            self.get_file_url(path),
+            f"{json_str[:100]}{'...' if len(json_str)>100 else ''}",
+        )
 
     def put_json_string(self, path: str, json_str: str):
         data = json_str.encode()
