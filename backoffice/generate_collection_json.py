@@ -20,17 +20,19 @@ from backoffice.s3_structure.versions import (
 yaml = YAML(typ="safe")
 _ = load_dotenv()
 
+COLLECTION_JSON_S3_PATH = "collection.json"
+
 
 def generate_collection_json(
     client: Client,
     collection_template: Path = Path("collection_template.json"),
-    output_path: Path = Path("collection.json"),
 ) -> None:
     """generate a json file with an overview of all published resources"""
+    logger.info("generating {}", COLLECTION_JSON_S3_PATH)
+
     with collection_template.open() as f:
         collection = json.load(f)
 
-    logger.info("generating {}", output_path)
     resource_dirs = [p for p in client.ls("", only_folders=True)]
     versions_data = {
         rid: client.load_file(f"{rid}/versions.json") for rid in resource_dirs
@@ -98,3 +100,5 @@ def generate_collection_json(
     assert isinstance(
         coll_descr, CollectionDescr
     ), coll_descr.validation_summary.format()
+
+    client.put_json(COLLECTION_JSON_S3_PATH, collection)
