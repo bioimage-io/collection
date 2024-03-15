@@ -12,7 +12,7 @@ def backoffice():
     bo = BackOffice(
         host=os.environ["S3_HOST"],
         bucket=os.environ["S3_TEST_BUCKET"],
-        prefix=os.environ["S3_TEST_FOLDER"] + "/pytest/backoffice",
+        prefix=os.environ["S3_PYTEST_FOLDER"] + "/backoffice",
     )
     bo.client.rm_dir("")  # wipe s3 test folder
     yield bo

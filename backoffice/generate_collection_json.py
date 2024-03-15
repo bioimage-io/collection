@@ -62,10 +62,9 @@ def generate_collection_json(
                 "authors",
                 "covers",
                 "description",
-                "id",
                 "id_emoji",
+                "id",
                 "license",
-                "links",
                 "name",
                 "type",
             )
@@ -73,6 +72,7 @@ def generate_collection_json(
 
         info["badges"] = rdf.get("badges", [])
         info["tags"] = rdf.get("tags", [])
+        info["links"] = rdf.get("links", [])
         if "training_data" in rdf:
             info["training_data"] = rdf["training_data"]
 
