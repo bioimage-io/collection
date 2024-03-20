@@ -9,7 +9,7 @@ from loguru import logger
 from backoffice.backup import backup
 from backoffice.generate_collection_json import generate_collection_json
 from backoffice.gh_utils import set_gh_actions_outputs
-from backoffice.mailroom import forward_emails_to_chat
+from backoffice.mailroom import forward_emails_to_chat, notify_uploader
 from backoffice.remote_resource import (
     PublishedVersion,
     RemoteResource,
@@ -91,6 +91,12 @@ class BackOffice:
                 f"Cannot await review for already published {resource_id} {version}"
             )
         rv.await_review()
+        notify_uploader(
+            rv,
+            "is awaiting review ⌛",
+            f"Thank you for proposing {rv.id} {rv.version}!\n"
+            + "Our maintainers will take a look shortly!",
+        )
 
     def request_changes(self, resource_id: str, version: str, reason: str):
         """mark a (staged) resource version as needing changes"""
@@ -101,6 +107,13 @@ class BackOffice:
             )
 
         rv.request_changes(reason=reason)
+        notify_uploader(
+            rv,
+            "needs changes 📑",
+            f"Thank you for proposing {rv.id} {rv.version}!\n"
+            + "We kindly ask you to upload an updated version, because: \n"
+            + f"{reason}\n",
+        )
 
     def publish(self, resource_id: str, version: str):
         """publish a (staged) resource version"""
@@ -112,6 +125,13 @@ class BackOffice:
 
         published: PublishedVersion = rv.publish()
         assert isinstance(published, PublishedVersion)
+        self.generate_collection_json()
+        notify_uploader(
+            rv,
+            "was published! 🎉",
+            f"Thank you for contributing {published.id} {published.version} to bioimage.io!\n"
+            + "Check it out at https://bioimage.io/#/?id={published.id}\n",  # TODO: link to version
+        )
 
     def backup(self, destination: Optional[str] = None):
         """backup the whole collection (to zenodo.org)"""

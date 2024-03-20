@@ -46,8 +46,3 @@ jobs:
           cache: "pip" # caching pip dependencies
       - run: pip install .
       - run: backoffice publish "${{ inputs.resource_id }}" "staged/${{ inputs.stage_number }}"
-      # - name: Publish to Zenodo
-      #   run: |
-      #     python .github/scripts/update_status.py "${{ inputs.resource_path }}" "Publishing to Zenodo" "5"
-      #     python .github/scripts/upload_model_to_zenodo.py --resource_path "${{inputs.resource_path}}"
-      #     python .github/scripts/update_status.py "${{ inputs.resource_path }}" "Publishing complete" "6"

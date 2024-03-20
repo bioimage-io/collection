@@ -1,32 +1,47 @@
 import os
 import smtplib
-from datetime import datetime
 from email.mime.text import MIMEText
-from email.utils import format_datetime
 
 from dotenv import load_dotenv
 from loguru import logger
 
 from backoffice.mailroom.constants import (
     BOT_EMAIL,
+    REPLY_HINT,
     SMTP_PORT,
     SMTP_SERVER,
     STATUS_UPDATE_SUBJECT,
+)
+from backoffice.remote_resource import (
+    PublishedVersion,
+    RemoteResourceVersion,
+    StagedVersion,
 )
 
 _ = load_dotenv()
 
 
+def notify_uploader(rv: StagedVersion | PublishedVersion, subject_end: str, msg: str):
+    email, name = rv.get_uploader()
+    if email is None:
+        logger.error("missing uploader email for {} {}", rv.id, rv.version)
+    else:
+        send_email(
+            subject=f"{STATUS_UPDATE_SUBJECT}{rv.id} {rv.version} {subject_end.strip()}",
+            body=(
+                f"Dear {name},\n"
+                + f"{msg.strip()}\n"
+                + "Kind regards,\n"
+                + "The bioimage.io bot 🦒\n"
+                + REPLY_HINT
+            ),
+            recipients=[email],
+        )
+
+
 def send_email(subject: str, body: str, recipients: list[str]):
     from_addr = BOT_EMAIL
     to_addr = ", ".join(recipients)
-    # message_text = (
-    #     f"From: {from_addr}\n"
-    #     + f"To: {to_addr}\n"
-    #     + f"Subject: {subject}\n"
-    #     + f"Date: {format_datetime(datetime.now().astimezone())}\n\n"
-    #     + body
-    # )
     msg = MIMEText(body)
     msg["From"] = from_addr
     msg["To"] = to_addr

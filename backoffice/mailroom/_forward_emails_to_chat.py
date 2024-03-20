@@ -13,6 +13,7 @@ from loguru import logger
 from backoffice.mailroom.constants import (
     BOT_EMAIL,
     IMAP_PORT,
+    REPLY_HINT,
     SMTP_SERVER,
     STATUS_UPDATE_SUBJECT,
 )
@@ -93,7 +94,9 @@ def _update_chats(
             continue
 
         sender = msg["from"]
-        text = "[forwarded from email]\n" + body
+        text = "[forwarded from email]\n" + body.replace("> " + REPLY_HINT, "").replace(
+            REPLY_HINT, ""
+        )
         rr = get_remote_resource_version(s3_client, rid, rv)
         if not rr.exists():
             logger.error("Cannot comment on non-existing resource {} {}", rid, rv)

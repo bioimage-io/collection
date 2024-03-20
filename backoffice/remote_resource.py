@@ -5,10 +5,11 @@ import urllib.request
 import zipfile
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
-from typing import Generic, Optional, Type, TypeVar
+from typing import Generic, NamedTuple, Optional, Type, TypeVar
 
 from bioimageio.spec.utils import identify_bioimageio_yaml_file_name
 from loguru import logger
+from pyparsing import srange
 from ruyaml import YAML
 from typing_extensions import assert_never
 
@@ -130,6 +131,11 @@ class RemoteResource:
         self.client.put_pydantic(path, current)
 
 
+class Uploader(NamedTuple):
+    email: Optional[str]
+    name: str
+
+
 @dataclass
 class RemoteResourceVersion(RemoteResource, Generic[NumberT], ABC):
     """Base class for a resource version (`StagedVersion` or `PublishedVersion`)"""
@@ -177,6 +183,21 @@ class RemoteResourceVersion(RemoteResource, Generic[NumberT], ABC):
     ):
         """extend chat file"""
         self._extend_version_specific_json(extension)
+
+    def get_uploader(self):
+        rdf = yaml.load(self.client.load_file(f"{self.folder}files/rdf.yaml"))
+        try:
+            uploader = rdf["uploader"]
+            email = uploader["email"]
+            name = uploader.get(
+                "name", f"{rdf.get('type', 'bioimage.io resource')} contributor"
+            )
+        except Exception as e:
+            logger.error("failed to extract uploader from rdf: {}", e)
+            email = None
+            name = "bioimage.io resource contributor"
+
+        return Uploader(email=email, name=name)
 
 
 @dataclass
