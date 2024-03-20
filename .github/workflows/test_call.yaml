@@ -1,0 +1,103 @@
+name: test call
+
+on:
+  workflow_call:
+    inputs:
+      resource_id:
+        description: "Bioimage.io resource identifier"
+        required: true
+        type: string
+      version:
+        description: "Version number prefixed with 'staged/', e.g. 'staged/1' (testing published versions again is not (yet) implemented)"
+        required: true
+        type: string
+      S3_HOST:
+        required: true
+        type: string
+      S3_BUCKET:
+        required: true
+        type: string
+      S3_FOLDER:
+        required: true
+        type: string
+
+
+concurrency: ${{inputs.resource_id}}-call
+
+env:
+  S3_HOST: ${{ inputs.S3_HOST }}
+  S3_BUCKET: ${{ inputs.S3_BUCKET }}
+  S3_FOLDER: ${{ inputs.S3_FOLDER }}
+  S3_ACCESS_KEY_ID: ${{secrets.S3_ACCESS_KEY_ID}}
+  S3_SECRET_ACCESS_KEY: ${{secrets.S3_SECRET_ACCESS_KEY}}
+
+jobs:
+  validate_format:
+    runs-on: ubuntu-latest
+    outputs:
+      dynamic_test_cases: ${{ steps.validate_format.outputs.dynamic_test_cases }}
+      has_dynamic_test_cases: ${{ steps.validate_format.outputs.has_dynamic_test_cases }}
+      conda_envs: ${{ steps.validate_format.outputs.conda_envs }}
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip" # caching pip dependencies
+      - run: pip install .
+      - id: validate_format
+        run: backoffice validate-format "${{ inputs.resource_id }}" "${{ inputs.version }}"
+
+  test:
+    needs: validate_format
+    if: needs.validate_format.outputs.has_dynamic_test_cases == 'yes'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJson(needs.validate_format.outputs.dynamic_test_cases) }} # include: [{weight_format: ...}, ...]
+      max-parallel: 1 # avoid prallel updates to log.json
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip" # caching pip dependencies
+      - run: pip install ruyaml
+      - name: save conda_env_${{ matrix.weight_format }}.yaml
+        run: |
+          import json
+          from pathlib import Path
+          from ruyaml import YAML
+          yaml = YAML(typ="safe")
+          conda_env = json.loads('${{ needs.validate_format.outputs.conda_envs }}')["${{ matrix.weight_format }}"]
+          yaml.dump(conda_env, Path("conda_env_${{ matrix.weight_format }}.yaml"))
+        shell: python
+      - name: install validation dependencies
+        id: create_env
+        uses: mamba-org/setup-micromamba@v1
+        with:
+          cache-downloads: true
+          environment-name: ${{ matrix.weight_format }}
+          environment-file: conda_env_${{ matrix.weight_format }}.yaml
+        continue-on-error: true # we inspect this step's outcome in run_dynamic_tests.py
+        timeout-minutes: 60
+      - run: pip install .
+        shell: bash -l {0}
+      - name: dynamic validation
+        shell: bash -l {0}
+        run: backoffice test "${{inputs.resource_id}}" "${{ inputs.version }}" "${{ matrix.weight_format }}" "${{ steps.create_env.outcome }}"
+        timeout-minutes: 60
+
+  conclude:
+    needs: [validate_format, test]
+    if: always() # run even if test job fails
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip" # caching pip dependencies
+      - run: pip install .
+      - run: backoffice await-review "${{ inputs.resource_id }}" "${{ inputs.version }}"
