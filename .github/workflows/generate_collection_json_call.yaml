@@ -32,4 +32,4 @@ jobs:
           python-version: "3.12"
           cache: "pip" # caching pip dependencies
       - run: pip install .
-      - run: backoffice genreate-collection-json
+      - run: backoffice generate-collection-json

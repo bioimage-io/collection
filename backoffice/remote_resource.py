@@ -144,6 +144,10 @@ class RemoteResourceVersion(RemoteResource, Generic[NumberT], ABC):
         pass
 
     @property
+    def version(self) -> str:
+        return self.version_prefix + str(self.number)
+
+    @property
     def folder(self) -> str:
         """The S3 (sub)prefix of this version
         (**sub**)prefix, because the client may prefix this prefix"""
@@ -235,6 +239,9 @@ class StagedVersion(RemoteResourceVersion[StageNumber]):
             self.client.put(path, io.BytesIO(file_data), length=len(file_data))
 
         self._set_status(UnpackedStatus())
+
+    def exists(self):
+        return self.number in self.get_versions().staged
 
     def set_testing_status(self, description: str):
         self._set_status(TestingStatus(description=description))
@@ -349,3 +356,15 @@ class PublishedVersion(RemoteResourceVersion[PublishNumber]):
     def version_prefix(self):
         """published versions do not have a prefix"""
         return ""
+
+    def exists(self):
+        return self.number in self.get_versions().published
+
+
+def get_remote_resource_version(client: Client, id: str, version: str):
+    if version.startswith("staged/"):
+        number = int(version[len("staged/") :])
+        return StagedVersion(client=client, id=id, number=StageNumber(number))
+    else:
+        number = int(version)
+        return PublishedVersion(client=client, id=id, number=PublishNumber(number))

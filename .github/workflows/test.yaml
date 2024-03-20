@@ -1,115 +1,28 @@
-name: test and build docs
+name: test bioimageio resource
 
-on: push
+on:
+  workflow_dispatch:
+    inputs:
+      resource_id:
+        description: "Bioimage.io resource identifier"
+        required: true
+        type: string
+      stage_number:
+        description: stage number to test
+        required: true
+        type: number
 
-concurrency: test
-
-env:
-  S3_HOST: ${{vars.S3_HOST}}
-  S3_BUCKET: ${{vars.S3_TEST_BUCKET}} # testing!
-  S3_FOLDER: ${{vars.S3_TEST_FOLDER}} # testing!
-  S3_TEST_BUCKET: ${{vars.S3_TEST_BUCKET}}
-  S3_TEST_FOLDER: ${{vars.S3_TEST_FOLDER}}
-  S3_PYTEST_FOLDER: ${{vars.S3_PYTEST_FOLDER}}
-  ZENODO_URL: ${{vars.ZENODO_TEST_URL}} # testing!
-  ZENODO_TEST_URL: ${{vars.ZENODO_TEST_URL}}
-
-  S3_ACCESS_KEY_ID: ${{secrets.S3_ACCESS_KEY_ID}}
-  S3_SECRET_ACCESS_KEY: ${{secrets.S3_SECRET_ACCESS_KEY}}
-  ZENODO_API_ACCESS_TOKEN: ${{secrets.ZENODO_TEST_API_ACCESS_TOKEN}} # testing!
-  ZENODO_TEST_API_ACCESS_TOKEN: ${{secrets.ZENODO_TEST_API_ACCESS_TOKEN}}
-
-  TEST_PACKAGE_ID: ${{vars.TEST_PACKAGE_ID}}
-  TEST_PACKAGE_URL: ${{vars.TEST_PACKAGE_URL}}
+concurrency: ${{inputs.resource_id}}
 
 jobs:
-  initial-cleanup:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-          cache: "pip" # caching pip dependencies
-      - run: pip install .
-      - run: backoffice wipe --bucket "${{vars.S3_TEST_BUCKET}}" --prefix "${{vars.S3_TEST_FOLDER}}"
-
-  test-stage-wf:
-    needs: initial-cleanup
-    uses: ./.github/workflows/stage_call.yaml
+  call:
+    uses: ./.github/workflows/test_call.yaml
     with:
-      resource_id: ${{vars.TEST_PACKAGE_ID}} # testing!
-      package_url: ${{vars.TEST_PACKAGE_URL}} # testing!
+      resource_id: ${{inputs.resource_id}}
+      version: staged/${{inputs.stage_number}}
       S3_HOST: ${{vars.S3_HOST}}
-      S3_BUCKET: ${{vars.S3_TEST_BUCKET}} # testing!
-      S3_FOLDER: ${{vars.S3_TEST_FOLDER}}/ci # testing!
+      S3_BUCKET: ${{vars.S3_BUCKET}}
+      S3_FOLDER: ${{vars.S3_FOLDER}}
     secrets: inherit
 
-  test-publish-wf:
-    needs: test-stage-wf
-    uses: ./.github/workflows/publish_call.yaml
-    with:
-      resource_id: ${{vars.TEST_PACKAGE_ID}} # testing!
-      stage_number: 1
-      S3_HOST: ${{vars.S3_HOST}}
-      S3_BUCKET: ${{vars.S3_TEST_BUCKET}} # testing!
-      S3_FOLDER: ${{vars.S3_TEST_FOLDER}}/ci # testing!
-      ZENODO_URL: ${{vars.ZENODO_TEST_URL}} # testing!
-    secrets: inherit
-
-  test-generate-collection-json-wf:
-    needs: test-publish-wf
-    uses: ./.github/workflows/generate_collection_json_call.yaml
-    with:
-      S3_HOST: ${{vars.S3_HOST}}
-      S3_BUCKET: ${{vars.S3_TEST_BUCKET}} # testing!
-      S3_FOLDER: ${{vars.S3_TEST_FOLDER}}/ci # testing!
-    secrets: inherit
-
-  test-backup-wf:
-    needs: test-generate-collection-json-wf
-    uses: ./.github/workflows/backup_call.yaml
-    with:
-      S3_HOST: ${{vars.S3_HOST}}
-      S3_BUCKET: ${{vars.S3_TEST_BUCKET}} # testing!
-      S3_FOLDER: ${{vars.S3_TEST_FOLDER}}/ci # testing!
-      ZENODO_URL: ${{vars.ZENODO_TEST_URL}} # testing!
-    secrets: inherit
-
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-          cache: "pip" # caching pip dependencies
-      - run: pip install .[dev]
-      - run: black . --check
-      - run: pyright -p pyproject.toml
-      - run: pytest
-      - name: export documentation
-        run: pdoc backoffice -o ./docs
-      - uses: actions/upload-pages-artifact@v3
-        if: ${{ github.ref == 'refs/heads/main' }}
-        with:
-          path: docs/
-
-  deploy_docs:
-    needs: build
-    if: ${{ github.ref == 'refs/heads/main' }}
-    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
-    permissions:
-      pages: write # to deploy to Pages
-      id-token: write # to verify the deployment originates from an appropriate source
-
-    # Deploy to the github-pages environment
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+# TODO: call emailer

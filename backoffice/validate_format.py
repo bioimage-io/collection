@@ -11,7 +11,6 @@ from bioimageio.spec.summary import ErrorEntry, ValidationDetail
 from ruyaml import YAML
 from typing_extensions import assert_never
 
-from backoffice.gh_utils import set_multiple_gh_actions_outputs
 from backoffice.remote_resource import StagedVersion
 from backoffice.s3_structure.log import BioimageioLog, Logs
 
@@ -220,6 +219,9 @@ def prepare_dynamic_test_cases(
 
 
 def validate_format(staged: StagedVersion):
+    if not staged.exists():
+        raise ValueError(f"{staged} not found")
+
     staged.set_testing_status("Validating RDF format")
     rdf_source = staged.rdf_url
     rd = load_description(rdf_source, format_version="discover")
@@ -255,12 +257,4 @@ def validate_format(staged: StagedVersion):
 
     summary = rd.validation_summary
     staged.extend_log(Logs(bioimageio_spec=[BioimageioLog(log=summary)]))
-
-    set_multiple_gh_actions_outputs(
-        dict(
-            has_dynamic_test_cases=bool(dynamic_test_cases),
-            dynamic_test_cases={"include": dynamic_test_cases},
-            version=staged.number,
-            conda_envs=conda_envs,
-        )
-    )
+    return dynamic_test_cases, conda_envs

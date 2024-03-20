@@ -1,9 +1,19 @@
-# Emails resource uploader about the status of test results alerting them
-# about whether they need to take any actions to fix issues with their upload
+# Sends an email from the bioimageiobot
 
-name: email call
+name: email
 
 on:
+  workflow_dispatch:  # dipatch only for testing
+    inputs:
+      user_email:
+        description: "Email address of user"
+        required: true
+        type: string
+      message:
+        description: "email body"
+        required: false
+        type: string
+
   workflow_call:
     inputs:
       user_email:
@@ -37,7 +47,7 @@ jobs:
           # Optional whether this connection use TLS (default is true if server_port is 465)
           secure: true
           # Optional (recommended) mail server username:
-          username: ${{secrets.MAIL_USERNAME}}
+          username: bioimageiobot@gmail.com
           # Optional (recommended) mail server password:
           password: ${{secrets.MAIL_PASSWORD}}
           # Required mail subject:
@@ -45,7 +55,7 @@ jobs:
           # Required recipients' addresses:
           to: ${{ inputs.user_email }}
           # Required sender full name (address can be skipped):
-          from: ${{ env.MAIL_FROM }}
+          from: bioimageiobot@gmail.com
           # Optional plain body:
           body: ${{ inputs.message }}
           # Optional HTML body read from file:
