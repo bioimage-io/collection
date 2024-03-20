@@ -9,7 +9,6 @@ from typing import Generic, NamedTuple, Optional, Type, TypeVar
 
 from bioimageio.spec.utils import identify_bioimageio_yaml_file_name
 from loguru import logger
-from pyparsing import srange
 from ruyaml import YAML
 from typing_extensions import assert_never
 

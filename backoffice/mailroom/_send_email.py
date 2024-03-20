@@ -12,11 +12,7 @@ from backoffice.mailroom.constants import (
     SMTP_SERVER,
     STATUS_UPDATE_SUBJECT,
 )
-from backoffice.remote_resource import (
-    PublishedVersion,
-    RemoteResourceVersion,
-    StagedVersion,
-)
+from backoffice.remote_resource import PublishedVersion, StagedVersion
 
 _ = load_dotenv()
 
