@@ -171,6 +171,13 @@ class RemoteResourceVersion(RemoteResource, Generic[NumberT], ABC):
         """extend log file"""
         self._extend_version_specific_json(extension)
 
+    def extend_chat(
+        self,
+        extension: Chat,
+    ):
+        """extend chat file"""
+        self._extend_version_specific_json(extension)
+
 
 @dataclass
 class StagedVersion(RemoteResourceVersion[StageNumber]):
@@ -187,10 +194,10 @@ class StagedVersion(RemoteResourceVersion[StageNumber]):
 
     def unpack(self, package_url: str):
         # ensure we have a chat.json
-        self._extend_version_specific_json(self._get_version_specific_json(Chat))
+        self.extend_chat(Chat())
 
         # ensure we have a logs.json
-        self._extend_version_specific_json(self._get_version_specific_json(Logs))
+        self.extend_log(Logs())
 
         # set first status (this also write versions.json)
         self._set_status(

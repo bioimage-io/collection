@@ -9,6 +9,7 @@ from loguru import logger
 from backoffice.backup import backup
 from backoffice.generate_collection_json import generate_collection_json
 from backoffice.gh_utils import set_gh_actions_outputs
+from backoffice.mailroom import forward_emails_to_chat
 from backoffice.remote_resource import (
     PublishedVersion,
     RemoteResource,
@@ -121,3 +122,6 @@ class BackOffice:
     ):
         """generate the collection.json file --- a summary of the whole collection"""
         generate_collection_json(self.client, collection_template=collection_template)
+
+    def forward_emails_to_chat(self):
+        forward_emails_to_chat(self.client, last_n_days=7)
