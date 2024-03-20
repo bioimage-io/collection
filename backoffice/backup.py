@@ -12,6 +12,6 @@ def backup(client: Client, destination: str):
     Returns:
         list of folders and file names backed up
     """
-    content_to_backup = list(client.ls(""))
+    content_to_backup = set(client.ls(""))
     logger.error("Not implemented: Backup to '{}': {}", destination, content_to_backup)
     return content_to_backup

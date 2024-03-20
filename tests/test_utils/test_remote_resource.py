@@ -37,4 +37,4 @@ def test_lifecycle(
     generate_collection_json(client, collection_template_path)
 
     backed_up = backup(client, os.environ["ZENODO_TEST_URL"])
-    assert backed_up == ["frank-water-buffalo", "collection.json"]
+    assert backed_up == {"frank-water-buffalo", "collection.json"}
