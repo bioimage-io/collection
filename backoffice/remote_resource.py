@@ -5,7 +5,7 @@ import urllib.request
 import zipfile
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
-from typing import Generic, Optional, Type, TypeVar
+from typing import Generic, NamedTuple, Optional, Type, TypeVar
 
 from bioimageio.spec.utils import identify_bioimageio_yaml_file_name
 from loguru import logger
@@ -130,6 +130,11 @@ class RemoteResource:
         self.client.put_pydantic(path, current)
 
 
+class Uploader(NamedTuple):
+    email: Optional[str]
+    name: str
+
+
 @dataclass
 class RemoteResourceVersion(RemoteResource, Generic[NumberT], ABC):
     """Base class for a resource version (`StagedVersion` or `PublishedVersion`)"""
@@ -171,6 +176,28 @@ class RemoteResourceVersion(RemoteResource, Generic[NumberT], ABC):
         """extend log file"""
         self._extend_version_specific_json(extension)
 
+    def extend_chat(
+        self,
+        extension: Chat,
+    ):
+        """extend chat file"""
+        self._extend_version_specific_json(extension)
+
+    def get_uploader(self):
+        rdf = yaml.load(self.client.load_file(f"{self.folder}files/rdf.yaml"))
+        try:
+            uploader = rdf["uploader"]
+            email = uploader["email"]
+            name = uploader.get(
+                "name", f"{rdf.get('type', 'bioimage.io resource')} contributor"
+            )
+        except Exception as e:
+            logger.error("failed to extract uploader from rdf: {}", e)
+            email = None
+            name = "bioimage.io resource contributor"
+
+        return Uploader(email=email, name=name)
+
 
 @dataclass
 class StagedVersion(RemoteResourceVersion[StageNumber]):
@@ -187,10 +214,10 @@ class StagedVersion(RemoteResourceVersion[StageNumber]):
 
     def unpack(self, package_url: str):
         # ensure we have a chat.json
-        self._extend_version_specific_json(self._get_version_specific_json(Chat))
+        self.extend_chat(Chat())
 
         # ensure we have a logs.json
-        self._extend_version_specific_json(self._get_version_specific_json(Logs))
+        self.extend_log(Logs())
 
         # set first status (this also write versions.json)
         self._set_status(

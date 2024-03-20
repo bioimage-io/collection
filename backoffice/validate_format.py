@@ -225,6 +225,20 @@ def validate_format(staged: StagedVersion):
     staged.set_testing_status("Validating RDF format")
     rdf_source = staged.rdf_url
     rd = load_description(rdf_source, format_version="discover")
+    if not isinstance(rd, InvalidDescr):
+        rd.validation_summary.add_detail(
+            ValidationDetail(
+                name="Check that uploader is specified",
+                status="failed" if rd.uploader is None else "passed",
+                errors=[
+                    ErrorEntry(
+                        loc=("uploader", "email"),
+                        msg="missing uploader email",
+                        type="error",
+                    )
+                ],
+            )
+        )
     dynamic_test_cases: list[dict[Literal["weight_format"], WeightsFormat]] = []
     conda_envs: dict[WeightsFormat, CondaEnv] = {}
     if not isinstance(rd, InvalidDescr):
