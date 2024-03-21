@@ -1,8 +1,10 @@
+# for now we do not want any emails forwarded to the chat system
 name: forward emails to chat
 
 on:
-  schedule:
-    - cron: "0 * * * *" # every hour at minute 0
+  workflow_call:
+  # schedule:
+  #   - cron: "0 * * * *" # every hour at minute 0
 
 concurrency: forward-emails-to-chat
 

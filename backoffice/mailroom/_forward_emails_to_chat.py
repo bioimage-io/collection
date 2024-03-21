@@ -126,6 +126,9 @@ def _iterate_relevant_emails(imap_client: imaplib.IMAP4_SSL, cutoff_datetime: da
 def _iterate_emails(imap_client: imaplib.IMAP4_SSL, cutoff_datetime: datetime):
     data = imap_client.search(None, "ALL")
     mail_ids = data[1]
+    if not mail_ids:
+        return
+
     id_list = mail_ids[0].split()
     first_email_id = int(id_list[0])
     latest_email_id = int(id_list[-1])
