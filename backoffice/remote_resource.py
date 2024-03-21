@@ -5,9 +5,12 @@ import urllib.request
 import zipfile
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
-from typing import Generic, NamedTuple, Optional, Type, TypeVar
+from typing import Any, Generic, NamedTuple, Optional, Type, TypeVar
 
-from bioimageio.spec.utils import identify_bioimageio_yaml_file_name
+from bioimageio.spec.utils import (
+    identify_bioimageio_yaml_file_name,
+    is_valid_bioimageio_yaml_name,
+)
 from loguru import logger
 from ruyaml import YAML
 from typing_extensions import assert_never
@@ -15,6 +18,7 @@ from typing_extensions import assert_never
 from backoffice.s3_structure.chat import Chat
 from backoffice.s3_structure.log import Logs
 
+from ._thumbnails import create_thumbnails
 from .s3_client import Client
 from .s3_structure.versions import (
     AcceptedStatus,
@@ -236,10 +240,17 @@ class StagedVersion(RemoteResourceVersion[StageNumber]):
         # Unzip the zip file
         zipobj = zipfile.ZipFile(zipinmemory)
 
-        bioimageio_yaml_file_name = identify_bioimageio_yaml_file_name(
-            zipobj.namelist()
+        file_names = set(zipobj.namelist())
+        bioimageio_yaml_file_name = identify_bioimageio_yaml_file_name(file_names)
+
+        rdf: Any | dict[Any, Any] = yaml.load(
+            zipobj.open(bioimageio_yaml_file_name).read().decode()
         )
-        rdf = yaml.load(zipobj.open(bioimageio_yaml_file_name).read().decode())
+        if not isinstance(rdf, dict):
+            raise ValueError(
+                f"Expected {bioimageio_yaml_file_name} to hold a dictionary"
+            )
+
         if (rdf_id := rdf.get("id")) is None:
             rdf["id"] = self.id
         elif rdf_id != self.id:
@@ -255,15 +266,35 @@ class StagedVersion(RemoteResourceVersion[StageNumber]):
             # TODO: set `id_emoji` according to id
             raise ValueError(f"RDF in {package_url} is missing `id_emoji`")
 
-        for filename in zipobj.namelist():
-            if filename == bioimageio_yaml_file_name:
-                filename = "rdf.yaml"  # always upload as 'rdf.yaml'
-            elif filename == "rdf.yaml":
-                raise RuntimeError("Another rdf.yaml???")
-
-            file_data = zipobj.open(filename).read()
-            path = f"{self.folder}files/{filename}"
+        def upload(file_name: str, file_data: bytes):
+            path = f"{self.folder}files/{file_name}"
             self.client.put(path, io.BytesIO(file_data), length=len(file_data))
+
+        thumbnails = create_thumbnails(rdf, zipobj)
+        config = rdf.setdefault("config", {})
+        if isinstance(config, dict):
+            bioimageio_config: Any = config.setdefault("bioimageio", {})
+            if isinstance(bioimageio_config, dict):
+                thumbnail_config: Any = bioimageio_config.setdefault("thumbnails", {})
+                if isinstance(thumbnail_config, dict):
+                    for oname, (tname, tdata) in thumbnails.items():
+                        upload(tname, tdata)
+                        thumbnail_config[oname] = tname
+
+        rdf_io = io.BytesIO()
+        yaml.dump(rdf, rdf_io)
+        rdf_data = rdf_io.getvalue()
+        upload("bioimageio.yaml", rdf_data)
+        upload("rdf.yaml", rdf_data)
+
+        file_names.remove(bioimageio_yaml_file_name)
+        for other in {fn for fn in file_names if is_valid_bioimageio_yaml_name(fn)}:
+            logger.warning("ignoring alternative bioimageio.yaml source '{other}'")
+            file_names.remove(other)
+
+        for file_name in file_names:
+            file_data = zipobj.open(file_name).read()
+            upload(file_name, file_data)
 
         self._set_status(UnpackedStatus())
 
