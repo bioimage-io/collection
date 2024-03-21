@@ -62,7 +62,6 @@ def generate_collection_json(
             k: rdf[k]
             for k in (
                 "authors",
-                "covers",
                 "description",
                 "id_emoji",
                 "id",
@@ -71,15 +70,36 @@ def generate_collection_json(
                 "type",
             )
         }
+        try:
+            thumbnails = rdf["config"]["bioimageio"]["thumbnails"]
+        except KeyError:
+            thumbnails: dict[Any, Any] = {}
+        else:
+            if not isinstance(thumbnails, dict):
+                thumbnails = {}
 
-        info["badges"] = rdf.get("badges", [])
+        def maybe_swap_with_thumbnail(src: Any | dict[Any, Any] | list[Any]) -> Any:
+            if isinstance(src, dict):
+                return {k: maybe_swap_with_thumbnail(v) for k, v in src.items()}
+
+            if isinstance(src, list):
+                return [maybe_swap_with_thumbnail(s) for s in src]
+
+            if isinstance(src, str):
+                clean_name = Path(src).name  # remove any leading './'
+                return thumbnails.get(clean_name, src)
+
+            return src
+
+        info["covers"] = maybe_swap_with_thumbnail(rdf["covers"])
+        info["badges"] = maybe_swap_with_thumbnail(rdf.get("badges", []))
         info["tags"] = rdf.get("tags", [])
         info["links"] = rdf.get("links", [])
         if "training_data" in rdf:
             info["training_data"] = rdf["training_data"]
 
         if "icon" in rdf:
-            info["icon"] = rdf["icon"]
+            info["icon"] = maybe_swap_with_thumbnail(rdf["icon"])
 
         info["created"] = v_info.timestamp.isoformat()
         info["download_count"] = "?"
