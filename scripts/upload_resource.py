@@ -1,6 +1,5 @@
 """This script was used internally to upload previously contributed resources to bioimage.io that were managed through the old bioimage-io/collection-bioimage-io repo"""
 
-import json
 import logging
 import os
 from dataclasses import dataclass, field
@@ -109,9 +108,12 @@ def upload_resources(
             try:
                 package = save_bioimageio_package(rd, output_path=out / fname)
             except Exception as e:
-                raise ValueError(f"failed to package {root}") from e
+                raise ValueError(
+                    f"failed to package {rd.id} {rd.version} from {root}"
+                ) from e
 
         client.upload_file(package, fname)
+        UPLOADED.add(fname)
         upload_count += 1
 
     print(f"uploaded {upload_count}")
@@ -243,3 +245,4 @@ UPLOADED = {}
 if __name__ == "__main__":
     model_urls = get_model_urls_from_collection_folder(start=0)
     upload_resources(model_urls)
+    print(UPLOADED)
