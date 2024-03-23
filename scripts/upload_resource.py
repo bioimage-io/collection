@@ -1,6 +1,5 @@
 """This script was used internally to upload previously contributed resources to bioimage.io that were managed through the old bioimage-io/collection-bioimage-io repo"""
 
-import json
 import logging
 import os
 from dataclasses import dataclass, field
@@ -30,11 +29,6 @@ _ = load_dotenv()
 
 yaml = YAML(typ="safe")
 logger = logging.getLogger(__name__)
-
-# COLLECTION_URL = "https://raw.githubusercontent.com/bioimage-io/collection-bioimage-io/gh-pages/collection.json"
-COLLECTION_URL = "https://raw.githubusercontent.com/bioimage-io/collection-bioimage-io/bd814413906ad105e8732a50b51a954aae25771b/collection.json"
-COLLECTION_SHA256 = "44d3bdc9120139f864a76da8669c7ad8d77fd4c09b66fb4319db826326691614"
-UPLOAD_URL = "https://oc.embl.de/index.php/s/mdE3in0099rQFwW"
 
 COLLECTION_FOLDER = (
     Path(__file__).parent.parent.parent / "collection-bioimage-io/collection"
@@ -114,25 +108,15 @@ def upload_resources(
             try:
                 package = save_bioimageio_package(rd, output_path=out / fname)
             except Exception as e:
-                raise ValueError(f"failed to package {root}") from e
+                raise ValueError(
+                    f"failed to package {rd.id} {rd.version} from {root}"
+                ) from e
 
         client.upload_file(package, fname)
+        UPLOADED.add(fname)
         upload_count += 1
 
     print(f"uploaded {upload_count}")
-
-
-def get_model_urls_from_collection_json():
-    collection_path = Path(pooch.retrieve(COLLECTION_URL, known_hash=COLLECTION_SHA256))  # type: ignore
-
-    with collection_path.open() as f:
-        collection = json.load(f)
-
-    return [
-        entry["rdf_source"]
-        for entry in collection["collection"]
-        if entry["type"] == "model"
-    ]
 
 
 def get_model_urls_from_collection_folder(start: int = 0, end: int = 9999):
@@ -201,7 +185,7 @@ def get_model_urls_from_collection_folder(start: int = 0, end: int = 9999):
     return ret
 
 
-UPLOADED = {
+UPLOADED_SANDBOX = {
     "funny-butterfly_v1.zip",
     "committed-turkey_v1.zip",
     "pioneering-goat_v1.zip",
@@ -256,7 +240,9 @@ UPLOADED = {
     "determined-hedgehog_v1.zip",
 }
 
+UPLOADED = {}
+
 if __name__ == "__main__":
-    # model_urls = get_model_urls_from_collection_json()
     model_urls = get_model_urls_from_collection_folder(start=0)
     upload_resources(model_urls)
+    print(UPLOADED)
