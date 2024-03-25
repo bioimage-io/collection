@@ -28,7 +28,7 @@ jobs:
     uses: ./.github/workflows/publish_call.yaml
     with:
       resource_id: ${{inputs.resource_id}}
-      stage_number: ${{inputs.stage_number}}
+      stage_number: '${{inputs.stage_number}}'
       S3_HOST: ${{vars.S3_HOST}}
       S3_BUCKET: ${{vars.S3_BUCKET}}
       S3_FOLDER: ${{vars.S3_FOLDER}}

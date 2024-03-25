@@ -32,7 +32,7 @@ jobs:
     uses: ./.github/workflows/request_changes_call.yaml
     with:
       resource_id: ${{inputs.resource_id}}
-      stage_number: ${{inputs.stage_number}}
+      stage_number: '${{inputs.stage_number}}'
       reason: ${{inputs.reason}}
       S3_HOST: ${{vars.S3_HOST}}
       S3_BUCKET: ${{vars.S3_BUCKET}}
