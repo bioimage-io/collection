@@ -1,4 +1,5 @@
 name: test bioimageio resource
+run-name: test ${{inputs.resource_id}} staged/${{inputs.stage_number}}
 
 on:
   workflow_dispatch:

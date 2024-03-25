@@ -1,4 +1,5 @@
 name: backup
+run-name: backup ${{vars.S3_BUCKET}}/${{vars.S3_FOLDER}} to ${{ inputs.ZENODO_URL }}
 
 on:
   schedule:

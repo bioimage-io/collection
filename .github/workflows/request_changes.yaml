@@ -1,4 +1,5 @@
 name: request changes
+run-name: request changes for ${{inputs.resource_id}} staged/${{inputs.stage_number}}
 
 on:
   workflow_dispatch:
