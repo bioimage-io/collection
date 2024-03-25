@@ -30,7 +30,7 @@ jobs:
     uses: ./.github/workflows/test_call.yaml
     with:
       resource_id: ${{inputs.resource_id}}
-      version: ${{inputs.package_url}}
+      version: ${{needs.stage.outputs.version}}
       S3_HOST: ${{vars.S3_HOST}}
       S3_BUCKET: ${{vars.S3_BUCKET}}
       S3_FOLDER: ${{vars.S3_FOLDER}}

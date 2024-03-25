@@ -21,9 +21,9 @@ on:
         required: true
         type: string
     outputs:
-      firstword:
-        description: "The first output string"
-        value: ${{ jobs.example_job.outputs.output1 }}
+      version:
+        description: "staged version incl 'stage/' prefix"
+        value: ${{ jobs.run.outputs.version }}
 
 concurrency: ${{inputs.resource_id}}-call
 
