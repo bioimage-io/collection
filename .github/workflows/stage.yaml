@@ -26,6 +26,7 @@ jobs:
     secrets: inherit
 
   test:
+    needs: stage
     uses: ./.github/workflows/test_call.yaml
     with:
       resource_id: ${{inputs.resource_id}}
