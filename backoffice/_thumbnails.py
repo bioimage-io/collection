@@ -93,7 +93,9 @@ def _downsize_image(image_data: bytes, size: tuple[int, int]) -> bytes | None:
     try:
         with Image.open(BytesIO(image_data)) as img:
             img.thumbnail(size)
-            return img.tobytes("PNG")
+            img_bytes_io = BytesIO()
+            img.save(img_bytes_io, format="PNG")
+            return img_bytes_io.getvalue()
     except Exception as e:
         logger.warning(str(e))
         return None
