@@ -47,7 +47,7 @@ def generate_collection_json(
         if vd is not None
     }
 
-    def get_info(
+    def create_entry(
         rid: str,
         v: PublishNumber,
         v_info: PublishedVersionInfo,
@@ -58,7 +58,7 @@ def generate_collection_json(
             rdf_url = HttpUrl(client.get_file_url(rdf_s3_path))
 
         rdf = yaml.load(download(rdf_url).path)
-        info = {
+        entry = {
             k: rdf[k]
             for k in (
                 "authors",
@@ -91,27 +91,27 @@ def generate_collection_json(
 
             return src
 
-        info["covers"] = maybe_swap_with_thumbnail(rdf["covers"])
-        info["badges"] = maybe_swap_with_thumbnail(rdf.get("badges", []))
-        info["tags"] = rdf.get("tags", [])
-        info["links"] = rdf.get("links", [])
+        entry["covers"] = maybe_swap_with_thumbnail(rdf["covers"])
+        entry["badges"] = maybe_swap_with_thumbnail(rdf.get("badges", []))
+        entry["tags"] = rdf.get("tags", [])
+        entry["links"] = rdf.get("links", [])
         if "training_data" in rdf:
-            info["training_data"] = rdf["training_data"]
+            entry["training_data"] = rdf["training_data"]
 
         if "icon" in rdf:
-            info["icon"] = maybe_swap_with_thumbnail(rdf["icon"])
+            entry["icon"] = maybe_swap_with_thumbnail(rdf["icon"])
 
-        info["created"] = v_info.timestamp.isoformat()
-        info["download_count"] = "?"
-        info["nickname"] = info["id"]
-        info["nickname_icon"] = info["id_emoji"]
-        info["entry_source"] = client.get_file_url(rdf_s3_path)
-        info["rdf_source"] = info["entry_source"]
-        info["versions"] = versions
-        return info
+        entry["created"] = v_info.timestamp.isoformat()
+        entry["download_count"] = "?"
+        entry["nickname"] = entry["id"]
+        entry["nickname_icon"] = entry["id_emoji"]
+        entry["entry_source"] = client.get_file_url(rdf_s3_path)
+        entry["rdf_source"] = entry["entry_source"]
+        entry["versions"] = versions
+        return entry
 
     collection["collection"] = [
-        get_info(rid, v, v_info, list(vs.published))
+        create_entry(rid, v, v_info, list(vs.published))
         for rid, vs in all_versions.items()
         for v, v_info in vs.published.items()
     ]
