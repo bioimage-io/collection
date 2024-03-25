@@ -31,11 +31,11 @@ jobs:
   call:
     uses: ./.github/workflows/request_changes_call.yaml
     with:
-      resource_id: ${{inputs.resource_id}}
+      resource_id: '${{inputs.resource_id}}'
       stage_number: '${{inputs.stage_number}}'
-      reason: ${{inputs.reason}}
-      S3_HOST: ${{vars.S3_HOST}}
-      S3_BUCKET: ${{vars.S3_BUCKET}}
-      S3_FOLDER: ${{vars.S3_FOLDER}}
-      ZENODO_URL: ${{vars.ZENODO_URL}}
+      reason: '${{inputs.reason}}'
+      S3_HOST: '${{vars.S3_HOST}}'
+      S3_BUCKET: '${{vars.S3_BUCKET}}'
+      S3_FOLDER: '${{vars.S3_FOLDER}}'
+      ZENODO_URL: '${{vars.ZENODO_URL}}'
     secrets: inherit
