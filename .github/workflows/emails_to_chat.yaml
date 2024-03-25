@@ -26,4 +26,4 @@ jobs:
           python-version: "3.12"
           cache: "pip" # caching pip dependencies
       - run: pip install .
-      - run: backoffice forward-emails-to-chat
+      - run: backoffice forward_emails_to_chat

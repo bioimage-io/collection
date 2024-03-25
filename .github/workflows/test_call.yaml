@@ -47,7 +47,7 @@ jobs:
           cache: "pip" # caching pip dependencies
       - run: pip install .
       - id: validate_format
-        run: backoffice validate-format "${{ inputs.resource_id }}" "${{ inputs.version }}"
+        run: backoffice validate_format "${{ inputs.resource_id }}" "${{ inputs.version }}"
 
   test:
     needs: validate_format
@@ -100,4 +100,4 @@ jobs:
           python-version: "3.12"
           cache: "pip" # caching pip dependencies
       - run: pip install .
-      - run: backoffice await-review "${{ inputs.resource_id }}" "${{ inputs.version }}"
+      - run: backoffice await_review "${{ inputs.resource_id }}" "${{ inputs.version }}"
