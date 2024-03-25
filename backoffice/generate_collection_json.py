@@ -105,7 +105,8 @@ def generate_collection_json(
         info["download_count"] = "?"
         info["nickname"] = info["id"]
         info["nickname_icon"] = info["id_emoji"]
-        info["rdf_source"] = client.get_file_url(rdf_s3_path)
+        info["entry_source"] = client.get_file_url(rdf_s3_path)
+        info["rdf_source"] = info["entry_source"]
         info["versions"] = versions
         return info
 
