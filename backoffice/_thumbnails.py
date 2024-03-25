@@ -1,3 +1,4 @@
+from io import BytesIO
 from pathlib import PurePosixPath
 from typing import Any
 from zipfile import ZipFile
@@ -90,7 +91,7 @@ def _downsize_image(image_data: bytes, size: tuple[int, int]) -> bytes | None:
     """downsize an image"""
 
     try:
-        with Image.open(image_data) as img:
+        with Image.open(BytesIO(image_data)) as img:
             img.thumbnail(size)
             return img.tobytes("PNG")
     except Exception as e:
