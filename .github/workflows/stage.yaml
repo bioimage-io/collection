@@ -16,7 +16,7 @@ concurrency: ${{inputs.resource_id}}
 
 jobs:
   stage:
-    uses: ./.github/workflows/stage_call.yaml
+    uses: bioimage-io/collection/.github/workflows/stage_call.yaml@main
     with:
       resource_id: ${{inputs.resource_id}}
       package_url: ${{inputs.package_url}}
@@ -27,7 +27,7 @@ jobs:
 
   test:
     needs: stage
-    uses: ./.github/workflows/test_call.yaml
+    uses: bioimage-io/collection/.github/workflows/test_call.yaml@main
     with:
       resource_id: ${{inputs.resource_id}}
       version: ${{needs.stage.outputs.version}}

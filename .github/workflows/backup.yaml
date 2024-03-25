@@ -17,7 +17,7 @@ env:
 
 jobs:
   call:
-    uses: ./.github/workflows/backup_call.yaml
+    uses: bioimage-io/collection/.github/workflows/backup_call.yaml@main
     with:
       S3_HOST: ${{vars.S3_HOST}}
       S3_BUCKET: ${{vars.S3_BUCKET}}

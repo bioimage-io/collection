@@ -28,7 +28,7 @@ env:
   ZENODO_API_ACCESS_TOKEN: ${{secrets.ZENODO_API_ACCESS_TOKEN}}
 
 jobs:
-  publish:
+  run:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

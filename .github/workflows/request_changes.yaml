@@ -29,7 +29,7 @@ env:
 
 jobs:
   call:
-    uses: ./.github/workflows/request_changes_call.yaml
+    uses: bioimage-io/collection/.github/workflows/request_changes_call.yaml@main
     with:
       resource_id: '${{inputs.resource_id}}'
       stage_number: '${{inputs.stage_number}}'
