@@ -240,9 +240,11 @@ UPLOADED_SANDBOX = {
     "determined-hedgehog_v1.zip",
 }
 
-UPLOADED = {}
+UPLOADED = {
+    "funny-butterfly_v1.zip",
+}
 
 if __name__ == "__main__":
-    model_urls = get_model_urls_from_collection_folder(start=0)
+    model_urls = get_model_urls_from_collection_folder(start=1, end=4)
     upload_resources(model_urls)
     print(UPLOADED)
