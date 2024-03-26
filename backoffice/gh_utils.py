@@ -2,7 +2,7 @@ import json
 import os
 import uuid
 from io import TextIOWrapper
-from typing import Any, Union
+from typing import Any, Dict, Union, no_type_check
 
 from loguru import logger
 
@@ -35,3 +35,17 @@ def set_gh_actions_outputs(**outputs: Union[str, Any]):
                 _set_gh_actions_output_impl(delimiter, fh)
             else:
                 _set_gh_actions_output_impl(f"{name}={output}", fh)
+
+
+@no_type_check
+def workflow_dispatch(workflow_name: str, inputs: Dict[str, Any]):
+    import github  # pyright: ignore[reportMissingImports]  # pygithub
+
+    g = github.Github(login_or_token=os.environ["GITHUB_PAT"])
+
+    repo = g.get_repo("bioimage-io/collection")
+
+    workflow = repo.get_workflow(workflow_name)
+
+    ref = repo.get_branch("main")
+    workflow.create_dispatch(ref=ref, inputs=inputs)
