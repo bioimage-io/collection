@@ -10,6 +10,9 @@ long_description = (ROOT_DIR / "README.md").read_text(encoding="utf-8")
 VERSION_FILE = ROOT_DIR / "backoffice" / "VERSION"
 VERSION = json.loads(VERSION_FILE.read_text(encoding="utf-8"))["version"]
 
+if sys.version_info < (3, 8):
+    sys.exit("backoffice requires Python >= 3.8")
+
 setup(
     name="backoffice",
     version=VERSION,
@@ -36,7 +39,6 @@ setup(
         "minio==7.2.4",
         "pillow",
         "pydantic==2.6.3",
-        "python>=3.8",
         "ruyaml",
         "tqdm",
     ],
