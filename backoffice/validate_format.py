@@ -1,6 +1,6 @@
 import warnings
 from pathlib import Path
-from typing import Literal, Optional, TypedDict, Union, cast
+from typing import Dict, List, Literal, Optional, Tuple, TypedDict, Union, cast
 
 import pooch
 from bioimageio.spec import InvalidDescr, ResourceDescr, load_description
@@ -29,13 +29,13 @@ SupportedWeightsEntry = Union[
 
 
 class PipDeps(TypedDict):
-    pip: list[str]
+    pip: List[str]
 
 
 class CondaEnv(TypedDict):
     name: str
-    channels: list[str]
-    dependencies: list[Union[str, PipDeps]]
+    channels: List[str]
+    dependencies: List[Union[str, PipDeps]]
 
 
 def get_base_env():
@@ -193,12 +193,12 @@ def ensure_valid_conda_env_name(name: str) -> str:
 
 def prepare_dynamic_test_cases(
     rd: ResourceDescr,
-) -> tuple[
-    list[dict[Literal["weight_format"], WeightsFormat]], dict[WeightsFormat, CondaEnv]
+) -> Tuple[
+    List[Dict[Literal["weight_format"], WeightsFormat]], Dict[WeightsFormat, CondaEnv]
 ]:
-    validation_cases: list[dict[Literal["weight_format"], WeightsFormat]] = []
+    validation_cases: List[Dict[Literal["weight_format"], WeightsFormat]] = []
     # construct test cases based on resource type
-    conda_envs: dict[WeightsFormat, CondaEnv] = {}
+    conda_envs: Dict[WeightsFormat, CondaEnv] = {}
     if isinstance(rd, (v0_4.ModelDescr, v0_5.ModelDescr)):
         # generate validation cases per weight format
         for wf, entry in rd.weights:
@@ -239,8 +239,8 @@ def validate_format(staged: StagedVersion):
                 ],
             )
         )
-    dynamic_test_cases: list[dict[Literal["weight_format"], WeightsFormat]] = []
-    conda_envs: dict[WeightsFormat, CondaEnv] = {}
+    dynamic_test_cases: List[Dict[Literal["weight_format"], WeightsFormat]] = []
+    conda_envs: Dict[WeightsFormat, CondaEnv] = {}
     if not isinstance(rd, InvalidDescr):
         rd_latest = load_description(rdf_source, format_version="latest")
         if isinstance(rd_latest, InvalidDescr):

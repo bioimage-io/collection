@@ -5,7 +5,7 @@ import urllib.request
 import zipfile
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
-from typing import Any, Generic, NamedTuple, Optional, Type, TypeVar
+from typing import Any, Dict, Generic, NamedTuple, Optional, Type, TypeVar, Union
 
 from bioimageio.spec.utils import (
     identify_bioimageio_yaml_file_name,
@@ -245,7 +245,7 @@ class StagedVersion(RemoteResourceVersion[StageNumber]):
         file_names = set(zipobj.namelist())
         bioimageio_yaml_file_name = identify_bioimageio_yaml_file_name(file_names)
 
-        rdf: Any | dict[Any, Any] = yaml.load(
+        rdf: Union[Any, Dict[Any, Any]] = yaml.load(
             zipobj.open(bioimageio_yaml_file_name).read().decode()
         )
         if not isinstance(rdf, dict):

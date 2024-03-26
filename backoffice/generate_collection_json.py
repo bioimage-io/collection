@@ -1,6 +1,6 @@
 import json
 from pathlib import Path
-from typing import Any, List
+from typing import Any, Dict, List, Union
 
 from bioimageio.spec import ValidationContext, build_description
 from bioimageio.spec.collection import CollectionDescr
@@ -52,7 +52,7 @@ def generate_collection_json(
         v: PublishNumber,
         v_info: PublishedVersionInfo,
         versions: List[PublishNumber],
-    ) -> dict[str, Any]:
+    ) -> Dict[str, Any]:
         rdf_s3_path = f"{rid}/{v}/files/rdf.yaml"
         with ValidationContext(perform_io_checks=False):
             rdf_url = HttpUrl(client.get_file_url(rdf_s3_path))
@@ -73,12 +73,14 @@ def generate_collection_json(
         try:
             thumbnails = rdf["config"]["bioimageio"]["thumbnails"]
         except KeyError:
-            thumbnails: dict[Any, Any] = {}
+            thumbnails: Dict[Any, Any] = {}
         else:
             if not isinstance(thumbnails, dict):
                 thumbnails = {}
 
-        def maybe_swap_with_thumbnail(src: Any | dict[Any, Any] | list[Any]) -> Any:
+        def maybe_swap_with_thumbnail(
+            src: Union[Any, Dict[Any, Any], List[Any]],
+        ) -> Any:
             if isinstance(src, dict):
                 return {k: maybe_swap_with_thumbnail(v) for k, v in src.items()}
 

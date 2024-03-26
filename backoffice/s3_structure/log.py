@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import Any
+from typing import Any, List
 
 from bioimageio.spec import ValidationSummary
 from pydantic import Field
@@ -23,8 +23,8 @@ class BioimageioLog(_LogEntryBase):
 class Logs(Node):
     """`<id>/<version>/log.json` contains a version specific log"""
 
-    bioimageio_spec: list[BioimageioLog] = Field(default_factory=list)
-    bioimageio_core: list[BioimageioLog] = Field(default_factory=list)
+    bioimageio_spec: List[BioimageioLog] = Field(default_factory=list)
+    bioimageio_core: List[BioimageioLog] = Field(default_factory=list)
 
     def extend(self, other: Logs):
         for k, v in other:

@@ -39,7 +39,7 @@ def set_gh_actions_outputs(**outputs: Union[str, Any]):
 
 @no_type_check
 def workflow_dispatch(workflow_name: str, inputs: Dict[str, Any]):
-    import github  # pyright: ignore[reportMissingImports]  # pygithub
+    import github
 
     g = github.Github(login_or_token=os.environ["GITHUB_PAT"])
 

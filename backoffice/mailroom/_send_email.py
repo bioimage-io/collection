@@ -1,6 +1,7 @@
 import os
 import smtplib
 from email.mime.text import MIMEText
+from typing import List, Union
 
 from dotenv import load_dotenv
 from loguru import logger
@@ -17,7 +18,9 @@ from backoffice.remote_resource import PublishedVersion, StagedVersion
 _ = load_dotenv()
 
 
-def notify_uploader(rv: StagedVersion | PublishedVersion, subject_end: str, msg: str):
+def notify_uploader(
+    rv: Union[StagedVersion, PublishedVersion], subject_end: str, msg: str
+):
     email, name = rv.get_uploader()
     if email is None:
         logger.error("missing uploader email for {} {}", rv.id, rv.version)
@@ -35,7 +38,7 @@ def notify_uploader(rv: StagedVersion | PublishedVersion, subject_end: str, msg:
         )
 
 
-def send_email(subject: str, body: str, recipients: list[str]):
+def send_email(subject: str, body: str, recipients: List[str]):
     from_addr = BOT_EMAIL
     to_addr = ", ".join(recipients)
     msg = MIMEText(body)

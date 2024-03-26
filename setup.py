@@ -10,9 +10,6 @@ long_description = (ROOT_DIR / "README.md").read_text(encoding="utf-8")
 VERSION_FILE = ROOT_DIR / "backoffice" / "VERSION"
 VERSION = json.loads(VERSION_FILE.read_text(encoding="utf-8"))["version"]
 
-if sys.version_info < (3, 9):
-    sys.exit("backoffice requires Python >= 3.9")
-
 setup(
     name="backoffice",
     version=VERSION,
@@ -24,6 +21,7 @@ setup(
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Intended Audience :: Developers",
+        "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
@@ -38,6 +36,7 @@ setup(
         "minio==7.2.4",
         "pillow",
         "pydantic==2.6.3",
+        "python>=3.8",
         "ruyaml",
         "tqdm",
     ],
@@ -46,6 +45,7 @@ setup(
             "black",
             "pdoc",
             "pre-commit",
+            "pygithub",
             "pyright",
             "pytest",
             "torch",

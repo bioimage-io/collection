@@ -1,9 +1,10 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import Annotated, Literal, NewType, Optional, Union
+from typing import Dict, Literal, NewType, Optional, Union
 
 import pydantic
+from typing_extensions import Annotated
 
 from backoffice.s3_structure.common import Node
 
@@ -123,10 +124,10 @@ class StagedVersionInfo(VersionInfo):
 class Versions(Node):
     """`<id>/versions.json` containing an overview of all published and staged resource versions"""
 
-    published: dict[PublishNumber, PublishedVersionInfo] = pydantic.Field(
+    published: Dict[PublishNumber, PublishedVersionInfo] = pydantic.Field(
         default_factory=dict
     )
-    staged: dict[StageNumber, StagedVersionInfo] = pydantic.Field(default_factory=dict)
+    staged: Dict[StageNumber, StagedVersionInfo] = pydantic.Field(default_factory=dict)
 
     def extend(self, other: Versions) -> None:
         assert set(self.model_fields) == {"published", "staged"}, set(self.model_fields)

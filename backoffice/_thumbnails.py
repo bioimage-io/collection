@@ -1,6 +1,6 @@
 from io import BytesIO
 from pathlib import PurePosixPath
-from typing import Any
+from typing import Any, Dict, List, Optional, Tuple, Union
 from zipfile import ZipFile
 
 from bioimageio.spec.common import FileName
@@ -11,14 +11,14 @@ THUMBNAIL_SUFFIX = ".thumbnail.png"
 
 
 def create_thumbnails(
-    rdf: dict[str, Any], zip: ZipFile
-) -> dict[FileName, tuple[FileName, bytes]]:
-    covers: Any | list[Any] = rdf.get("covers")
-    plan: list[tuple[Any, tuple[int, int]]] = []
+    rdf: Dict[str, Any], zip: ZipFile
+) -> Dict[FileName, Tuple[FileName, bytes]]:
+    covers: Union[Any, List[Any]] = rdf.get("covers")
+    plan: List[Tuple[Any, Tuple[int, int]]] = []
     if isinstance(covers, list):
         plan.extend((src, (600, 340)) for src in covers)
 
-    badges: Any | list[Any] = rdf.get("badges")
+    badges: Union[Any, List[Any]] = rdf.get("badges")
     if isinstance(badges, list):
         for badge in badges:
             if not isinstance(badge, dict):
@@ -29,7 +29,7 @@ def create_thumbnails(
 
     plan.append((rdf.get("icon"), (320, 320)))
 
-    thumbnails: dict[FileName, tuple[FileName, bytes]] = {}
+    thumbnails: Dict[FileName, Tuple[FileName, bytes]] = {}
     for src, size in plan:
         thumbnail = _get_thumbnail(src, zip, size)
         if thumbnail is None:
@@ -48,8 +48,8 @@ def create_thumbnails(
 
 
 def _get_thumbnail(
-    src: Any, zip: ZipFile, size: tuple[int, int]
-) -> tuple[FileName, FileName, bytes] | None:
+    src: Any, zip: ZipFile, size: Tuple[int, int]
+) -> Optional[Tuple[FileName, FileName, bytes]]:
     if not isinstance(src, str) or src.endswith(THUMBNAIL_SUFFIX):
         return  # invalid or already a thumbnail
 
@@ -87,7 +87,7 @@ def _get_thumbnail(
         )
 
 
-def _downsize_image(image_data: bytes, size: tuple[int, int]) -> bytes | None:
+def _downsize_image(image_data: bytes, size: Tuple[int, int]) -> Optional[bytes]:
     """downsize an image"""
 
     try:

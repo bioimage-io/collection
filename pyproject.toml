@@ -1,12 +1,12 @@
 [tool.black]
-target-version = ["py39", "py310", "py311", "py312"]
+target-version = ["py38", "py39", "py310", "py311", "py312"]
 preview = true
 
 [tool.pyright]
 exclude = ["**/__pycache__"]
 include = ["backoffice", "tests"]
 pythonPlatform = "All"
-pythonVersion = "3.12"
+pythonVersion = "3.8"
 reportIncompatibleMethodOverride = true
 reportMissingSuperCall = "error"
 reportMissingTypeArgument = true

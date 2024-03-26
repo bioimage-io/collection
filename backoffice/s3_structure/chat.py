@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from datetime import datetime
+from typing import List
 
 from pydantic import Field
 
@@ -16,7 +17,7 @@ class Message(Node):
 class Chat(Node):
     """`<id>/<version>/chat.json` keeps a record of version specific comments"""
 
-    messages: list[Message] = Field(default_factory=list)
+    messages: List[Message] = Field(default_factory=list)
     """messages"""
 
     def extend(self, other: Chat):

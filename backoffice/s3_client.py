@@ -7,7 +7,7 @@ from collections.abc import Sequence
 from dataclasses import dataclass, field
 from datetime import timedelta
 from pathlib import Path
-from typing import Any, BinaryIO, Iterator, Optional, TypeVar, Union
+from typing import Any, BinaryIO, Iterator, List, Optional, TypeVar, Union
 
 from dotenv import load_dotenv
 from loguru import logger
@@ -100,12 +100,12 @@ class Client:
         path: str = "",
         exclude_files: Sequence[str] = ("details.json",),
         lifetime: timedelta = timedelta(hours=1),
-    ) -> list[str]:
+    ) -> List[str]:
         """Checks an S3 'folder' for its list of files"""
         logger.debug("Getting file list using {}, at {}", self, path)
         path = f"{self.prefix}/{path}"
         objects = self._client.list_objects(self.bucket, prefix=path, recursive=True)
-        file_urls: list[str] = []
+        file_urls: List[str] = []
         for obj in objects:
             if obj.is_dir or obj.object_name is None:
                 continue
