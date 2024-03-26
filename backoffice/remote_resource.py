@@ -90,6 +90,8 @@ class RemoteResource:
         nr = self.get_latest_stage_number()
         if nr is None:
             nr = StageNumber(1)
+        else:
+            nr = StageNumber(nr + 1)
 
         ret = StagedVersion(client=self.client, id=self.id, number=nr)
         ret.unpack(package_url=package_url)
