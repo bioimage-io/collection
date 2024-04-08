@@ -263,6 +263,14 @@ class StagedVersion(RemoteResourceVersion[StageNumber]):
         # overwrite version information
         rdf["version_number"] = self.number
 
+        # TODO: extract from gh api for programmatic uploads, e.g. https://api.github.com/users/bioimageiobot
+        if (
+            "uploader" not in rdf
+            or not isinstance(rdf["uploader"], dict)
+            or "email" not in rdf["uploader"]
+        ):
+            raise ValueError("RDF is missing `uploader.email` field.")
+
         if rdf.get("id_emoji") is None:
             # TODO: set `id_emoji` according to id
             raise ValueError(f"RDF in {package_url} is missing `id_emoji`")
