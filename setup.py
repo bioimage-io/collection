@@ -7,7 +7,7 @@ from setuptools import find_packages, setup
 # Get the long description from the README file
 ROOT_DIR = Path(__file__).parent.resolve()
 long_description = (ROOT_DIR / "README.md").read_text(encoding="utf-8")
-VERSION_FILE = ROOT_DIR / "backoffice" / "VERSION"
+VERSION_FILE = ROOT_DIR / "bioimageio_collection_backoffice" / "VERSION"
 VERSION = json.loads(VERSION_FILE.read_text(encoding="utf-8"))["version"]
 
 if sys.version_info < (3, 8):
