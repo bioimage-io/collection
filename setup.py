@@ -53,7 +53,11 @@ _ = setup(
             "torch",
         ]
     },
-    entry_points={"console_scripts": ["backoffice = backoffice.__main__:main"]},
+    entry_points={
+        "console_scripts": [
+            "backoffice = bioimageio_collection_backoffice.__main__:main"
+        ]
+    },
     project_urls={
         "Bug Reports": "https://github.com/bioimage-io/collection/issues",
         "Source": "https://github.com/bioimage-io/collection",
