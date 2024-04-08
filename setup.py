@@ -13,8 +13,8 @@ VERSION = json.loads(VERSION_FILE.read_text(encoding="utf-8"))["version"]
 if sys.version_info < (3, 8):
     sys.exit("backoffice requires Python >= 3.8")
 
-setup(
-    name="backoffice",
+_ = setup(
+    name="bioimageio-collection-backoffice",
     version=VERSION,
     description="backoffice to control bioimage.io collection",
     long_description=long_description,
