@@ -1,4 +1,4 @@
-from backoffice.s3_client import Client
+from bioimageio_collection_backoffice.s3_client import Client
 
 
 def test_client(client: Client):

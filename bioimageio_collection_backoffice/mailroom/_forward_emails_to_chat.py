@@ -10,16 +10,16 @@ from typing import Any
 from dotenv import load_dotenv
 from loguru import logger
 
-from backoffice.mailroom.constants import (
+from ..remote_resource import get_remote_resource_version
+from ..s3_client import Client
+from ..s3_structure.chat import Chat, Message
+from .constants import (
     BOT_EMAIL,
     IMAP_PORT,
     REPLY_HINT,
     SMTP_SERVER,
     STATUS_UPDATE_SUBJECT,
 )
-from backoffice.remote_resource import get_remote_resource_version
-from backoffice.s3_client import Client
-from backoffice.s3_structure.chat import Chat, Message
 
 _ = load_dotenv()
 

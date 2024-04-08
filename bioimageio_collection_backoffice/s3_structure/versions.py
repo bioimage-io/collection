@@ -6,7 +6,7 @@ from typing import Dict, Literal, NewType, Optional, Union
 import pydantic
 from typing_extensions import Annotated
 
-from backoffice.s3_structure.common import Node
+from .common import Node
 
 PublishNumber = NewType("PublishNumber", int)
 """n-th published version"""

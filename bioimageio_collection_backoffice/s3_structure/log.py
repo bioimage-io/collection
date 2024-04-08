@@ -6,7 +6,7 @@ from typing import Any, List
 from bioimageio.spec import ValidationSummary
 from pydantic import Field
 
-from backoffice.s3_structure.common import Node
+from .common import Node
 
 
 class _LogEntryBase(Node):

@@ -1,14 +1,16 @@
 import os
 from pathlib import Path
 
-from backoffice.backup import backup
-from backoffice.generate_collection_json import generate_collection_json
-from backoffice.remote_resource import (
+from bioimageio_collection_backoffice.backup import backup
+from bioimageio_collection_backoffice.generate_collection_json import (
+    generate_collection_json,
+)
+from bioimageio_collection_backoffice.remote_resource import (
     PublishedVersion,
     RemoteResource,
     StagedVersion,
 )
-from backoffice.s3_client import Client
+from bioimageio_collection_backoffice.s3_client import Client
 
 
 def test_lifecycle(

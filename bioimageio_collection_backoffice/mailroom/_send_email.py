@@ -6,14 +6,17 @@ from typing import List, Union
 from dotenv import load_dotenv
 from loguru import logger
 
-from backoffice.mailroom.constants import (
+from ..remote_resource import (
+    PublishedVersion,
+    StagedVersion,
+)
+from .constants import (
     BOT_EMAIL,
     REPLY_HINT,
     SMTP_PORT,
     SMTP_SERVER,
     STATUS_UPDATE_SUBJECT,
 )
-from backoffice.remote_resource import PublishedVersion, StagedVersion
 
 _ = load_dotenv()
 

@@ -15,11 +15,10 @@ from loguru import logger
 from ruyaml import YAML
 from typing_extensions import assert_never
 
-from backoffice.s3_structure.chat import Chat
-from backoffice.s3_structure.log import Logs
-
 from ._thumbnails import create_thumbnails
 from .s3_client import Client
+from .s3_structure.chat import Chat
+from .s3_structure.log import Logs
 from .s3_structure.versions import (
     AcceptedStatus,
     AwaitingReviewStatus,

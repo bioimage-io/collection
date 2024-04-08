@@ -10,8 +10,8 @@ from dotenv import load_dotenv
 from loguru import logger
 from ruyaml import YAML
 
-from backoffice.s3_client import Client
-from backoffice.s3_structure.versions import (
+from .s3_client import Client
+from .s3_structure.versions import (
     PublishedVersionInfo,
     PublishNumber,
     Versions,

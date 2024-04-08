@@ -5,7 +5,7 @@ from typing import List
 
 from pydantic import Field
 
-from backoffice.s3_structure.common import Node
+from .common import Node
 
 
 class Message(Node):

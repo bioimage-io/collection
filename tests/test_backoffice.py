@@ -1,6 +1,6 @@
 import os
 
-from backoffice import BackOffice
+from bioimageio_collection_backoffice import BackOffice
 
 
 def test_backoffice(

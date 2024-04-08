@@ -6,18 +6,18 @@ from bioimageio.spec.model.v0_5 import WeightsFormat
 from dotenv import load_dotenv
 from loguru import logger
 
-from backoffice.backup import backup
-from backoffice.generate_collection_json import generate_collection_json
-from backoffice.gh_utils import set_gh_actions_outputs
-from backoffice.mailroom import notify_uploader
-from backoffice.remote_resource import (
+from .backup import backup
+from .generate_collection_json import generate_collection_json
+from .gh_utils import set_gh_actions_outputs
+from .mailroom import notify_uploader
+from .remote_resource import (
     PublishedVersion,
     RemoteResource,
     get_remote_resource_version,
 )
-from backoffice.run_dynamic_tests import run_dynamic_tests
-from backoffice.s3_client import Client
-from backoffice.validate_format import validate_format
+from .run_dynamic_tests import run_dynamic_tests
+from .s3_client import Client
+from .validate_format import validate_format
 
 _ = load_dotenv()
 

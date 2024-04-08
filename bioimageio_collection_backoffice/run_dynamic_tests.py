@@ -14,8 +14,8 @@ from bioimageio.spec.summary import (
 )
 from ruyaml import YAML
 
-from backoffice.remote_resource import StagedVersion
-from backoffice.s3_structure.log import BioimageioLog, Logs
+from .remote_resource import StagedVersion
+from .s3_structure.log import BioimageioLog, Logs
 
 try:
     from tqdm import tqdm
