@@ -17,6 +17,7 @@ from .remote_resource import (
 )
 from .run_dynamic_tests import run_dynamic_tests
 from .s3_client import Client
+from .s3_structure.chat import Chat, Message
 from .validate_format import validate_format
 
 _ = load_dotenv()
@@ -146,3 +147,10 @@ class BackOffice:
     def forward_emails_to_chat(self):
         logger.error("disabled")
         # forward_emails_to_chat(self.client, last_n_days=7)
+
+    def add_chat_message(
+        self, resource_id: str, version: str, chat_message: str, author: str
+    ):
+        chat = Chat(messages=[Message(author=author, text=chat_message)])
+        rv = get_remote_resource_version(self.client, resource_id, version)
+        rv.extend_chat(chat)
