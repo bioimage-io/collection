@@ -53,10 +53,6 @@ class BackOffice:
     def validate_format(self, resource_id: str, version: str):
         """validate a (staged) resource version's bioimageio.yaml"""
         rv = get_remote_resource_version(self.client, resource_id, version)
-        if isinstance(rv, PublishedVersion):
-            logger.error("Revalidation of published resources is not implemented")
-            return
-
         dynamic_test_cases, conda_envs = validate_format(rv)
         set_gh_actions_outputs(
             has_dynamic_test_cases=bool(dynamic_test_cases),

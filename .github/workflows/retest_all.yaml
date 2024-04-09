@@ -1,0 +1,41 @@
+name: retest all bioimageio resources adding to their logs
+
+on: workflow_dispatch
+concurrency: retest
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{steps.get_matrix.outputs.matrix}}
+
+    steps:
+      - run: wget ${{vars.S3_HOST}}/${{vars.S3_BUCKET}}/${{vars.S3_FOLDER}}/collection.json
+      - shell: python
+        id: get_matrix
+        run: |
+          import json, os
+
+          with open("collection.json") as f:
+            collection = json.load(f)
+
+          published = [{"id": entry["id"], "v": entry["version"]} for entry in collection["collection"]]
+          matrix = {"include": published}
+          with open(os.environ["GITHUB_OUTPUT"], "a") as f:
+            print(f"matrix={matrix}", file=f)
+
+  test:
+    needs: setup
+    strategy:
+      matrix: ${{fromJson(needs.setup.outputs.matrix)}}
+    uses: bioimage-io/collection/.github/workflows/test_call.yaml@main
+    with:
+      resource_id: ${{matrix.id}}
+      version: ${{matrix.v}}
+      conclude: 'no'
+      S3_HOST: ${{vars.S3_HOST}}
+      S3_BUCKET: ${{vars.S3_BUCKET}}
+      S3_FOLDER: ${{vars.S3_FOLDER}}
+    secrets: inherit
+
+# TODO: call emailer

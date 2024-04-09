@@ -11,6 +11,11 @@ on:
         description: "Version number prefixed with 'staged/', e.g. 'staged/1' (testing published versions again is not (yet) implemented)"
         required: true
         type: string
+      conclude:
+        description: "Wether or not to trigger a status update based on test results"
+        required: false
+        default: 'yes'
+        type: string
       S3_HOST:
         required: true
         type: string
@@ -91,7 +96,7 @@ jobs:
 
   conclude:
     needs: [validate_format, test]
-    if: always() # run even if test job fails
+    if: (inputs.conclude == 'yes') && always()  # run even if test job fails
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

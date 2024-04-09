@@ -11,7 +11,7 @@ from bioimageio.spec.summary import ErrorEntry, ValidationDetail
 from ruyaml import YAML
 from typing_extensions import assert_never
 
-from .remote_resource import StagedVersion
+from .remote_resource import PublishedVersion, StagedVersion
 from .s3_structure.log import BioimageioLog, Logs
 
 yaml = YAML(typ="safe")
@@ -218,12 +218,14 @@ def prepare_dynamic_test_cases(
     return validation_cases, conda_envs
 
 
-def validate_format(staged: StagedVersion):
-    if not staged.exists():
-        raise ValueError(f"{staged} not found")
+def validate_format(rv: Union[StagedVersion, PublishedVersion]):
+    if not rv.exists():
+        raise ValueError(f"{rv} not found")
 
-    staged.set_testing_status("Validating RDF format")
-    rdf_source = staged.rdf_url
+    if isinstance(rv, StagedVersion):
+        rv.set_testing_status("Validating RDF format")
+
+    rdf_source = rv.rdf_url
     rd = load_description(rdf_source, format_version="discover")
     if not isinstance(rd, InvalidDescr):
         rd.validation_summary.add_detail(
@@ -251,15 +253,15 @@ def validate_format(staged: StagedVersion):
         rd = rd_latest
         rd.validation_summary.status = "passed"  # passed in 'discover' mode
         if not isinstance(rd, InvalidDescr) and rd.version is not None:
-            published = staged.get_versions().published
-            if str(rd.version) in {v.sem_ver for v in published.values()}:
-                error = ErrorEntry(
-                    loc=("version",),
-                    msg=f"Trying to publish version {rd.version} again!",
-                    type="error",
-                )
-            else:
-                error = None
+            error = None
+            if isinstance(rv, StagedVersion):
+                published = rv.get_versions().published
+                if str(rd.version) in {v.sem_ver for v in published.values()}:
+                    error = ErrorEntry(
+                        loc=("version",),
+                        msg=f"Trying to publish version {rd.version} again!",
+                        type="error",
+                    )
 
             rd.validation_summary.add_detail(
                 ValidationDetail(
@@ -270,5 +272,5 @@ def validate_format(staged: StagedVersion):
             )
 
     summary = rd.validation_summary
-    staged.extend_log(Logs(bioimageio_spec=[BioimageioLog(log=summary)]))
+    rv.extend_log(Logs(bioimageio_spec=[BioimageioLog(log=summary)]))
     return dynamic_test_cases, conda_envs
