@@ -57,7 +57,7 @@ def get_env_from_deps(deps: Union[v0_4.Dependencies, v0_5.EnvironmentFileDescr])
     else:
         assert_never(deps)
 
-    local = Path(pooch.retrieve(url, known_hash=sha))  # type: ignore
+    local = Path(pooch.retrieve(str(url), known_hash=sha))  # type: ignore
     conda_env = yaml.load(local)
 
     # add bioimageio.core to dependencies
