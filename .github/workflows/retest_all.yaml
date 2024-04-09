@@ -19,7 +19,7 @@ jobs:
           with open("collection.json") as f:
             collection = json.load(f)
 
-          published = [{"id": entry["id"], "v": entry["version"]} for entry in collection["collection"]]
+          published = [{"id": entry["id"], "v": entry["version_number"]} for entry in collection["collection"]]
           matrix = {"include": published}
           with open(os.environ["GITHUB_OUTPUT"], "a") as f:
             print(f"matrix={matrix}", file=f)

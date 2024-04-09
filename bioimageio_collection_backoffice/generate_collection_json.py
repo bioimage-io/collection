@@ -109,7 +109,7 @@ def generate_collection_json(
         entry["nickname_icon"] = entry["id_emoji"]
         entry["entry_source"] = client.get_file_url(rdf_s3_path)
         entry["rdf_source"] = entry["entry_source"]
-        entry["version"] = v
+        entry["version_number"] = v
         entry["versions"] = versions
         return entry
 
