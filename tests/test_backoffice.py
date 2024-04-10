@@ -9,6 +9,6 @@ def test_backoffice(
     backoffice.stage(resource_id=package_id, package_url=package_url)
     backoffice.test(resource_id=package_id, version="staged/1")
     backoffice.await_review(resource_id=package_id, version="staged/1")
-    backoffice.publish(resource_id=package_id, version="staged/1", reviewer="test")
+    backoffice.publish(resource_id=package_id, version="staged/1", reviewer="fynnbe")
     backoffice.generate_collection_json()
     backoffice.backup(os.environ["ZENODO_TEST_URL"])

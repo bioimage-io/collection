@@ -13,8 +13,9 @@ on:
         required: true
         type: number
       reviewer:
-        description: Name of bioimage.io maintainer requesting changes
-        required: true
+        description: GitHub account name of bioimage.io maintainer requesting changes
+        required: false
+        default: 'auto detect'
         type: string
       reason:
         description: Why are changes required? What needs changing?
@@ -27,12 +28,12 @@ jobs:
   call:
     uses: bioimage-io/collection/.github/workflows/request_changes_call.yaml@main
     with:
-      resource_id: '${{inputs.resource_id}}'
-      stage_number: '${{fromJson(inputs.stage_number)}}'  # wo 'fromJson' the number is given as string, see https://github.com/orgs/community/discussions/67182
-      reviewer: '${{inputs.reviewer}}'
-      reason: '${{inputs.reason}}'
-      S3_HOST: '${{vars.S3_HOST}}'
-      S3_BUCKET: '${{vars.S3_BUCKET}}'
-      S3_FOLDER: '${{vars.S3_FOLDER}}'
-      ZENODO_URL: '${{vars.ZENODO_URL}}'
+      resource_id: ${{inputs.resource_id}}
+      stage_number: ${{fromJson(inputs.stage_number)}}  # wo 'fromJson' the number is given as string, see https://github.com/orgs/community/discussions/67182
+      reviewer: ${{inputs.reviewer == 'auto detect' && github.actor || inputs.reviewer}}
+      reason: ${{inputs.reason}}
+      S3_HOST: ${{vars.S3_HOST}}
+      S3_BUCKET: ${{vars.S3_BUCKET}}
+      S3_FOLDER: ${{vars.S3_FOLDER}}
+      ZENODO_URL: ${{vars.ZENODO_URL}}
     secrets: inherit
