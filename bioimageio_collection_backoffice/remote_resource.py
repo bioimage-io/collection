@@ -17,7 +17,7 @@ from typing_extensions import assert_never
 
 from ._thumbnails import create_thumbnails
 from .s3_client import Client
-from .s3_structure.chat import Chat
+from .s3_structure.chat import Chat, Message
 from .s3_structure.log import Logs
 from .s3_structure.versions import (
     AcceptedStatus,
@@ -155,6 +155,7 @@ class RemoteResourceVersion(RemoteResource, Generic[NumberT], ABC):
 
     @property
     def version(self) -> str:
+        """version prefix + version number"""
         return self.version_prefix + str(self.number)
 
     @property
@@ -317,15 +318,35 @@ class StagedVersion(RemoteResourceVersion[StageNumber]):
         """set status to 'awaiting review'"""
         self._set_status(AwaitingReviewStatus())
 
-    def request_changes(self, reason: str):
+    def request_changes(self, reviewer: str, reason: str):
         self._set_status(ChangesRequestedStatus(description=reason))
+        self.extend_chat(
+            Chat(
+                messages=[
+                    Message(
+                        author="system", text=f"{reviewer} requested changes: {reason}"
+                    )
+                ]
+            )
+        )
 
     def mark_as_superseded(self, description: str, by: StageNumber):
         self._set_status(SupersededStatus(description=description, by=by))
 
-    def publish(self) -> PublishedVersion:
+    def publish(self, reviewer: str) -> PublishedVersion:
         """mark this staged version candidate as accepted and try to publish it"""
         self._set_status(AcceptedStatus())
+        self.extend_chat(
+            Chat(
+                messages=[
+                    Message(
+                        author="system",
+                        text=f"{reviewer} accepted {self.id} {self.version}",
+                    )
+                ]
+            )
+        )
+
         versions = self.get_versions()
         # check status of older staged versions
         for nr, details in versions.staged.items():

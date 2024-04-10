@@ -11,6 +11,10 @@ on:
         description: stage number
         required: true
         type: number
+      reviewer:
+        description: Name of bioimage.io maintainer requesting changes
+        required: true
+        type: string
       reason:
         description: Why are changes required? What needs changing?
         required: true
@@ -49,4 +53,4 @@ jobs:
           python-version: "3.12"
           cache: "pip" # caching pip dependencies
       - run: pip install .
-      - run: backoffice request_changes "${{ inputs.resource_id }}" "staged/${{ inputs.stage_number }}" "${{ inputs.reason }}"
+      - run: backoffice request_changes "${{ inputs.resource_id }}" "staged/${{ inputs.stage_number }}" "${{ inputs.reviewer }}" "${{ inputs.reason }}"

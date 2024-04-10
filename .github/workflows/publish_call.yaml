@@ -11,6 +11,10 @@ on:
         description: stage number to publish
         required: true
         type: number
+      reviewer:
+        description: Name of bioimage.io maintainer accepting this resource version
+        required: true
+        type: string
       S3_HOST:
         required: true
         type: string
@@ -41,4 +45,4 @@ jobs:
           python-version: "3.12"
           cache: "pip" # caching pip dependencies
       - run: pip install .
-      - run: backoffice publish "${{ inputs.resource_id }}" "staged/${{ inputs.stage_number }}"
+      - run: backoffice publish "${{inputs.resource_id}}" "staged/${{inputs.stage_number}}" "${{inputs.reviewer}}"

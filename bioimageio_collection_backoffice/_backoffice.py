@@ -95,7 +95,9 @@ class BackOffice:
             + "Our maintainers will take a look shortly!",
         )
 
-    def request_changes(self, resource_id: str, version: str, reason: str):
+    def request_changes(
+        self, resource_id: str, version: str, reviewer: str, reason: str
+    ):
         """mark a (staged) resource version as needing changes"""
         rv = get_remote_resource_version(self.client, resource_id, version)
         if isinstance(rv, PublishedVersion):
@@ -103,7 +105,7 @@ class BackOffice:
                 f"Requesting changes of already published  {resource_id} {version} is not implemented"
             )
 
-        rv.request_changes(reason=reason)
+        rv.request_changes(reviewer=reviewer, reason=reason)
         notify_uploader(
             rv,
             "needs changes 📑",
@@ -112,7 +114,7 @@ class BackOffice:
             + f"{reason}\n",
         )
 
-    def publish(self, resource_id: str, version: str):
+    def publish(self, resource_id: str, version: str, reviewer: str):
         """publish a (staged) resource version"""
         rv = get_remote_resource_version(self.client, resource_id, version)
         if isinstance(rv, PublishedVersion):
@@ -120,7 +122,7 @@ class BackOffice:
                 f"Cannot publish already published {resource_id} {version}"
             )
 
-        published: PublishedVersion = rv.publish()
+        published: PublishedVersion = rv.publish(reviewer=reviewer)
         assert isinstance(published, PublishedVersion)
         self.generate_collection_json()
         notify_uploader(
