@@ -181,10 +181,6 @@ class Client:
 
         return objects
 
-    def rm_obj(self, name: str) -> None:
-        """remove single object"""
-        self._client.remove_object(self.bucket, name)
-
     def _rm_objs(
         self, objects: Sequence[Object], *, bypass_governance_mode: bool
     ) -> None:
