@@ -12,6 +12,11 @@ on:
         description: "Download URL of the resource package zip-file"
         required: true
         type: string
+      sandbox:
+        description: Flag to stage to sandbox instead
+        required: false
+        default: false
+        type: boolean
 
 concurrency: ${{inputs.resource_id}}
 
@@ -23,7 +28,7 @@ jobs:
       package_url: ${{inputs.package_url}}
       S3_HOST: ${{vars.S3_HOST}}
       S3_BUCKET: ${{vars.S3_BUCKET}}
-      S3_FOLDER: ${{vars.S3_FOLDER}}
+      S3_FOLDER: ${{inputs.sandbox && vars.S3_SANDBOX_FOLDER || vars.S3_FOLDER}}
     secrets: inherit
 
   test:
@@ -34,5 +39,5 @@ jobs:
       version: ${{needs.stage.outputs.version}}
       S3_HOST: ${{vars.S3_HOST}}
       S3_BUCKET: ${{vars.S3_BUCKET}}
-      S3_FOLDER: ${{vars.S3_FOLDER}}
+      S3_FOLDER: ${{inputs.sandbox && vars.S3_SANDBOX_FOLDER || vars.S3_FOLDER}}
     secrets: inherit
