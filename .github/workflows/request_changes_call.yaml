@@ -48,6 +48,9 @@ jobs:
   request-changes:
     runs-on: ubuntu-latest
     steps:
+      - name: reject reviewer id
+        run: exit 1
+        if: github.actor != 'bioimageiobot' && github.actor != inputs.reviewer
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
