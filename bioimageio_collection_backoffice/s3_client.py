@@ -41,6 +41,9 @@ class Client:
 
     def __post_init__(self):
         self.prefix = self.prefix.strip("/")
+        if not self.prefix:
+            raise ValueError("empty prefix not allowed")
+
         self._client = Minio(
             self.host,
             access_key=self.access_key,
