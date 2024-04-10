@@ -16,7 +16,6 @@ from ruyaml import YAML
 from typing_extensions import assert_never
 
 from ._thumbnails import create_thumbnails
-from .reviewer import REVIEWERS
 from .s3_client import Client
 from .s3_structure.chat import Chat, Message
 from .s3_structure.log import Logs
@@ -320,6 +319,8 @@ class StagedVersion(RemoteResourceVersion[StageNumber]):
         self._set_status(AwaitingReviewStatus())
 
     def request_changes(self, reviewer: str, reason: str):
+        from .reviewer import REVIEWERS
+
         reviewer = REVIEWERS[reviewer.lower()]  # map to reviewer name
         self._set_status(ChangesRequestedStatus(description=reason))
         self.extend_chat(
@@ -337,6 +338,8 @@ class StagedVersion(RemoteResourceVersion[StageNumber]):
 
     def publish(self, reviewer: str) -> PublishedVersion:
         """mark this staged version candidate as accepted and try to publish it"""
+        from .reviewer import REVIEWERS
+
         reviewer = REVIEWERS[reviewer.lower()]  # map to reviewer name
         self._set_status(AcceptedStatus())
         self.extend_chat(
