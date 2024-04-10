@@ -90,7 +90,7 @@ jobs:
       - run: pytest
       - name: export documentation
         run: pdoc bioimageio_collection_backoffice -o ./docs
-      - run: cp README.md ./docs/
+      - run: cp README.md ./docs/  # TODO: do not use upload-pages-artifact, because the README.md somehow doesn't make it, compare to https://github.com/bioimage-io/spec-bioimage-io/blob/275cb4266e5661f7315165e7c069d6f30dd5651d/.github/workflows/build.yml#L74 which works
       - uses: actions/upload-pages-artifact@v3
         if: ${{ github.ref == 'refs/heads/main' }}
         with:
