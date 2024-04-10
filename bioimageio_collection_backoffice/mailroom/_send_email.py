@@ -30,7 +30,7 @@ def notify_uploader(
         return
 
     subject = f"{STATUS_UPDATE_SUBJECT}{rv.id} {rv.version} {subject_end.strip()}"
-    if email is BOT_EMAIL:
+    if email == BOT_EMAIL:
         logger.info("skipping email '{}' to {}", subject, BOT_EMAIL)
         return
 
