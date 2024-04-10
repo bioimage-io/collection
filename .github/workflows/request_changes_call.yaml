@@ -12,8 +12,9 @@ on:
         required: true
         type: number
       reviewer:
-        description: Name of bioimage.io maintainer requesting changes
-        required: true
+        description: GitHub account name of bioimage.io maintainer requesting changes
+        required: false
+        default: ${{github.actor}}
         type: string
       reason:
         description: Why are changes required? What needs changing?
