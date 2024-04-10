@@ -27,18 +27,24 @@ def notify_uploader(
     email, name = rv.get_uploader()
     if email is None:
         logger.error("missing uploader email for {} {}", rv.id, rv.version)
-    else:
-        send_email(
-            subject=f"{STATUS_UPDATE_SUBJECT}{rv.id} {rv.version} {subject_end.strip()}",
-            body=(
-                f"Dear {name},\n"
-                + f"{msg.strip()}\n"
-                + "Kind regards,\n"
-                + "The bioimage.io bot 🦒\n"
-                + REPLY_HINT
-            ),
-            recipients=[email],
-        )
+        return
+
+    subject = f"{STATUS_UPDATE_SUBJECT}{rv.id} {rv.version} {subject_end.strip()}"
+    if email is BOT_EMAIL:
+        logger.info("skipping email '{}' to {}", subject, BOT_EMAIL)
+        return
+
+    send_email(
+        subject=subject,
+        body=(
+            f"Dear {name},\n"
+            + f"{msg.strip()}\n"
+            + "Kind regards,\n"
+            + "The bioimage.io bot 🦒\n"
+            + REPLY_HINT
+        ),
+        recipients=[email],
+    )
 
 
 def send_email(subject: str, body: str, recipients: List[str]):
