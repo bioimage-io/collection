@@ -114,7 +114,7 @@ class BackOffice:
             + f"{reason}\n",
         )
 
-    def publish(self, resource_id: str, version: str):
+    def publish(self, resource_id: str, version: str, reviewer: str):
         """publish a (staged) resource version"""
         rv = get_remote_resource_version(self.client, resource_id, version)
         if isinstance(rv, PublishedVersion):
@@ -122,7 +122,7 @@ class BackOffice:
                 f"Cannot publish already published {resource_id} {version}"
             )
 
-        published: PublishedVersion = rv.publish()
+        published: PublishedVersion = rv.publish(reviewer=reviewer)
         assert isinstance(published, PublishedVersion)
         self.generate_collection_json()
         notify_uploader(
