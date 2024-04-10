@@ -1,6 +1,14 @@
 name: retest all bioimageio resources adding to their logs
 
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      sandbox:
+        description: Flag to use sandbox instead
+        required: false
+        default: true
+        type: boolean
+
 concurrency: retest
 
 jobs:
@@ -10,7 +18,7 @@ jobs:
       matrix: ${{steps.get_matrix.outputs.matrix}}
 
     steps:
-      - run: wget ${{vars.S3_HOST}}/${{vars.S3_BUCKET}}/${{vars.S3_FOLDER}}/collection.json
+      - run: wget ${{vars.S3_HOST}}/${{vars.S3_BUCKET}}/${{inputs.sandbox && vars.S3_SANDBOX_FOLDER || vars.S3_FOLDER}}/collection.json
       - shell: python
         id: get_matrix
         run: |
@@ -35,7 +43,7 @@ jobs:
       conclude: 'no'
       S3_HOST: ${{vars.S3_HOST}}
       S3_BUCKET: ${{vars.S3_BUCKET}}
-      S3_FOLDER: ${{vars.S3_FOLDER}}
+      S3_FOLDER: ${{inputs.sandbox && vars.S3_SANDBOX_FOLDER || vars.S3_FOLDER}}
     secrets: inherit
 
 # TODO: call emailer

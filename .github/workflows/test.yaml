@@ -12,6 +12,11 @@ on:
         description: stage number to test
         required: true
         type: number
+      sandbox:
+        description: Flag to test resource in sandbox instead
+        required: false
+        default: false
+        type: boolean
 
 concurrency: ${{inputs.resource_id}}
 
@@ -23,7 +28,7 @@ jobs:
       version: staged/${{inputs.stage_number}}
       S3_HOST: ${{vars.S3_HOST}}
       S3_BUCKET: ${{vars.S3_BUCKET}}
-      S3_FOLDER: ${{vars.S3_FOLDER}}
+      S3_FOLDER: ${{inputs.sandbox && vars.S3_SANDBOX_FOLDER || vars.S3_FOLDER}}
     secrets: inherit
 
 # TODO: call emailer
