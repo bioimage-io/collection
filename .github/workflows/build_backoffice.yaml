@@ -55,6 +55,7 @@ jobs:
       S3_HOST: ${{vars.S3_HOST}}
       S3_BUCKET: ${{vars.S3_TEST_BUCKET}} # testing!
       S3_FOLDER: ${{vars.S3_TEST_FOLDER}}/ci # testing!
+      REVIEWERS: ${{vars.REVIEWERS}}
     secrets: inherit
 
   test-generate-collection-json-wf:
