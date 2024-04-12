@@ -115,6 +115,8 @@ class VersionInfo(Node):
 
 class PublishedVersionInfo(VersionInfo):
     status: PublishedStatus
+    doi: Optional[str] = None
+    """version specific zenodo DOI"""
 
 
 class StagedVersionInfo(VersionInfo):
