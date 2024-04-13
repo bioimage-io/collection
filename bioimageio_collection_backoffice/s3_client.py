@@ -5,7 +5,6 @@ import json
 import os
 from collections.abc import Sequence
 from dataclasses import dataclass, field
-from datetime import timedelta
 from pathlib import Path
 from typing import Any, BinaryIO, Iterator, List, Optional, TypeVar, Union
 
@@ -37,7 +36,7 @@ class Client:
     """S3 access key"""
     secret_key: str = field(default=os.environ["S3_SECRET_ACCESS_KEY"], repr=False)
     """S3 secret key"""
-    _client: Minio = field(init=False, repr=False)
+    _client: Minio = field(init=False, compare=False, repr=False)
 
     def __post_init__(self):
         self.prefix = self.prefix.strip("/")
@@ -101,8 +100,6 @@ class Client:
     def get_file_urls(
         self,
         path: str = "",
-        exclude_files: Sequence[str] = (),
-        lifetime: timedelta = timedelta(hours=1),
     ) -> List[str]:
         """Checks an S3 'folder' for its list of files"""
         logger.debug("Getting file list using {}, at {}", self, path)
@@ -112,18 +109,38 @@ class Client:
         for obj in objects:
             if obj.is_dir or obj.object_name is None:
                 continue
-            if Path(obj.object_name).name in exclude_files:
-                continue
-            # Option 1:
-            url = self._client.get_presigned_url(
-                "GET",
-                obj.bucket_name,
-                obj.object_name,
-                expires=lifetime,
-            )
+            assert obj.bucket_name == self.bucket
+            url = self.get_file_url(obj.object_name)
             file_urls.append(url)
-            # Option 2: Work with minio.datatypes.Object directly
+
         return file_urls
+
+    # def get_presigned_file_urls(
+    #     self,
+    #     path: str = "",
+    #     exclude_files: Sequence[str] = (),
+    #     lifetime: timedelta = timedelta(hours=1),
+    # ) -> List[str]:
+    #     """Checks an S3 'folder' for its list of files"""
+    #     logger.debug("Getting file list using {}, at {}", self, path)
+    #     path = f"{self.prefix}/{path}"
+    #     objects = self._client.list_objects(self.bucket, prefix=path, recursive=True)
+    #     file_urls: List[str] = []
+    #     for obj in objects:
+    #         if obj.is_dir or obj.object_name is None:
+    #             continue
+    #         if Path(obj.object_name).name in exclude_files:
+    #             continue
+    #         # Option 1:
+    #         url = self._client.get_presigned_url(
+    #             "GET",
+    #             obj.bucket_name,
+    #             obj.object_name,
+    #             expires=lifetime,
+    #         )
+    #         file_urls.append(url)
+    #         # Option 2: Work with minio.datatypes.Object directly
+    #     return file_urls
 
     def ls(
         self, path: str, only_folders: bool = False, only_files: bool = False
