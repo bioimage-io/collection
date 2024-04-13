@@ -111,6 +111,12 @@ class RemoteResource:
         else:
             return typ.model_validate_json(data)
 
+    def update_versions(
+        self,
+        update: Versions,
+    ):
+        self._extend_version_agnostic_json(update)
+
     def _extend_version_agnostic_json(
         self,
         extension: Versions,
@@ -203,6 +209,9 @@ class RemoteResourceVersion(RemoteResource, Generic[NumberT], ABC):
             name = "bioimage.io resource contributor"
 
         return Uploader(email=email, name=name)
+
+    def get_file_urls(self):
+        return self.client.get_file_urls(f"{self.folder}/files/")
 
 
 @dataclass
@@ -453,6 +462,14 @@ class PublishedVersion(RemoteResourceVersion[PublishNumber]):
 
     def exists(self):
         return self.number in self.get_versions().published
+
+    def get_doi(self):
+        """get version specific DOI of Zenodo record"""
+        return self.get_versions().published[self.number].doi
+
+    def get_concept_doi(self):
+        """(version **un**specific) Zenodo concept DOI of this resource"""
+        return self.get_versions().concept_doi
 
 
 def get_remote_resource_version(client: Client, id: str, version: str):

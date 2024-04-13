@@ -39,6 +39,7 @@ _ = setup(
         "minio==7.2.4",
         "pillow",
         "pydantic==2.6.3",
+        "requests",
         "ruyaml",
         "tqdm",
     ],

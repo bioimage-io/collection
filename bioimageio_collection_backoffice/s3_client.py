@@ -101,7 +101,7 @@ class Client:
     def get_file_urls(
         self,
         path: str = "",
-        exclude_files: Sequence[str] = ("details.json",),
+        exclude_files: Sequence[str] = (),
         lifetime: timedelta = timedelta(hours=1),
     ) -> List[str]:
         """Checks an S3 'folder' for its list of files"""

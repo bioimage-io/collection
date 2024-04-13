@@ -23,6 +23,22 @@ _ = load_dotenv()
 COLLECTION_JSON_S3_PATH = "collection.json"
 
 
+def get_all_versions(client: Client):
+    resource_dirs = [p for p in client.ls("", only_folders=True)]
+    versions_data = {
+        rid: client.load_file(f"{rid}/versions.json") for rid in resource_dirs
+    }
+    missing = {rid for rid, vdata in versions_data.items() if vdata is None}
+    if missing:
+        logger.warning("{} missing versions.json files for {}", len(missing), missing)
+
+    return {
+        rid: Versions.model_validate_json(vd)
+        for rid, vd in versions_data.items()
+        if vd is not None
+    }
+
+
 def generate_collection_json(
     client: Client,
     collection_template: Path = Path("collection_template.json"),
@@ -32,20 +48,6 @@ def generate_collection_json(
 
     with collection_template.open() as f:
         collection = json.load(f)
-
-    resource_dirs = [p for p in client.ls("", only_folders=True)]
-    versions_data = {
-        rid: client.load_file(f"{rid}/versions.json") for rid in resource_dirs
-    }
-    missing = {rid for rid, vdata in versions_data.items() if vdata is None}
-    if missing:
-        logger.warning("{} missing versions.json files for {}", len(missing), missing)
-
-    all_versions = {
-        rid: Versions.model_validate_json(vd)
-        for rid, vd in versions_data.items()
-        if vd is not None
-    }
 
     def create_entry(
         rid: str,
@@ -113,6 +115,7 @@ def generate_collection_json(
         entry["versions"] = versions
         return entry
 
+    all_versions = get_all_versions()
     collection["collection"] = [
         create_entry(rid, v, v_info, list(vs.published))
         for rid, vs in all_versions.items()

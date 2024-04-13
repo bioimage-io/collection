@@ -130,8 +130,18 @@ class Versions(Node):
         default_factory=dict
     )
     staged: Dict[StageNumber, StagedVersionInfo] = pydantic.Field(default_factory=dict)
+    concept_doi: Optional[str] = None
 
     def extend(self, other: Versions) -> None:
-        assert set(self.model_fields) == {"published", "staged"}, set(self.model_fields)
+        assert set(self.model_fields) == {"published", "staged", "concept_doi"}, set(
+            self.model_fields
+        )
+        if self.concept_doi is None:
+            self.concept_doi = other.concept_doi
+        elif other.concept_doi is None:
+            pass
+        elif self.concept_doi != other.concept_doi:
+            raise ValueError("May not overwrite concept_doi")
+
         self.published.update(other.published)
         self.staged.update(other.staged)

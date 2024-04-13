@@ -132,9 +132,9 @@ class BackOffice:
             + "Check it out at https://bioimage.io/#/?id={published.id}\n",  # TODO: link to version
         )
 
-    def backup(self, destination: Optional[str] = None):
+    def backup(self, destination: str):
         """backup the whole collection (to zenodo.org)"""
-        _ = backup(self.client, destination or os.environ["ZENODO_URL"])
+        _ = backup(self.client, destination)
 
     def generate_collection_json(
         self, collection_template: Path = Path("collection_template.json")
