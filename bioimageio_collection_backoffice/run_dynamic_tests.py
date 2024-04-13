@@ -15,7 +15,7 @@ from bioimageio.spec.summary import (
 from ruyaml import YAML
 
 from .remote_resource import StagedVersion
-from .s3_structure.log import BioimageioLog, Logs
+from .s3_structure.log import BioimageioLog, Log
 
 try:
     from tqdm import tqdm
@@ -118,4 +118,4 @@ def run_dynamic_tests(
             )
         )
 
-    staged.extend_log(Logs(bioimageio_core=[BioimageioLog(log=summary)]))
+    staged.extend_log(Log(bioimageio_core=[BioimageioLog(log=summary)]))
