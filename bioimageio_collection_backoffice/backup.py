@@ -1,3 +1,4 @@
+import json
 from datetime import datetime
 from io import BytesIO
 from pathlib import PurePosixPath
@@ -120,9 +121,9 @@ def backup_published_version(
     )
 
     r = requests.put(
-        f"{destination}/api/deposit/depositions/%s" % concept_id,
+        f"{destination}/api/deposit/depositions/{concept_id}",
         params=params,
-        json={"metadata": metadata},
+        json=json.dumps({"metadata": metadata}),
         headers=headers,
     )
     r.raise_for_status()
@@ -174,12 +175,10 @@ def put_file(file_object: BytesIO, url: str, params: Dict[str, Any]):
 def rdf_authors_to_metadata_creators(rdf: ResourceDescr):
     creators: List[Dict[str, str]] = []
     for author in rdf.authors:
-        creator = {
-            "name": str(author.name),
-            "affiliation": (
-                "" if author.affiliation is None else str(author.affiliation)
-            ),
-        }
+        creator = {"name": str(author.name)}
+        if author.affiliation:
+            creator["affiliation"] = author.affiliation
+
         if author.orcid:
             creator["orcid"] = str(author.orcid)
 
@@ -196,26 +195,28 @@ def rdf_to_metadata(
 ) -> Dict[str, Any]:
 
     creators = rdf_authors_to_metadata_creators(rdf)
-    docstring_html = ""
+    docstring = ""
     if rdf.documentation is not None:
-        docstring = download(rdf.documentation)
-        docstring_html = f"<p>{docstring}</p>"
+        docstring = download(rdf.documentation).path.read_text()
 
-    description = f"""<a href="https://bioimage.io/#/?id={rdf.id}"><span class="label label-success">View on bioimage.io</span></a><br><p>{docstring_html}</p>"""
+    description = f"""<a href="https://bioimage.io/#/?id={rdf.id}"><span class="label label-success">View on bioimage.io</span></a><br>{rdf.name}<br><p>{docstring}</p>"""
     keywords = ["bioimage.io", "bioimage.io:" + rdf.type]
     related_identifiers = generate_related_identifiers_from_rdf(rdf, rdf_file_name)
+    assert rdf.id is not None
+    zenodo_license_ids = requests.get("https://zenodo.org/api/licenses/").json()
+    assert rdf.license is not None
     return {
-        "title": rdf.name,
+        "title": f"bioimage.io upload: {rdf.id}",
         "description": description,
         "access_right": "open",
         "license": rdf.license,
-        "upload_type": "other",
+        "upload_type": "dataset" if rdf.type == "dataset" else "software",
         "creators": creators,
         "publication_date": publication_date.date().isoformat(),
         "keywords": keywords + rdf.tags,
         "notes": rdf.description + additional_note,
-        "related_identifiers": related_identifiers,
-        "communities": [],
+        # "related_identifiers": related_identifiers,
+        # "communities": [],
     }
 
 
