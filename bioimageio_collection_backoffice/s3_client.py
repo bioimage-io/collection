@@ -3,10 +3,18 @@ from __future__ import annotations
 import io
 import json
 import os
-from collections.abc import Sequence
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any, BinaryIO, Iterator, List, Optional, TypeVar, Union
+from typing import (
+    Any,
+    BinaryIO,
+    Iterator,
+    List,
+    Optional,
+    Sequence,
+    TypeVar,
+    Union,
+)
 
 from dotenv import load_dotenv
 from loguru import logger
@@ -15,6 +23,8 @@ from minio.commonconfig import CopySource
 from minio.datatypes import Object
 from minio.deleteobjects import DeleteObject
 from pydantic import BaseModel
+
+from .cache import SizedValueLRU
 
 _ = load_dotenv()
 
@@ -36,7 +46,11 @@ class Client:
     """S3 access key"""
     secret_key: str = field(default=os.environ["S3_SECRET_ACCESS_KEY"], repr=False)
     """S3 secret key"""
+    max_bytes_cached: int = int(1e9)
     _client: Minio = field(init=False, compare=False, repr=False)
+    _cache: Optional[SizedValueLRU[str, Optional[bytes]]] = field(
+        init=False, compare=False, repr=False
+    )
 
     def __post_init__(self):
         self.prefix = self.prefix.strip("/")
@@ -51,16 +65,27 @@ class Client:
         found = self._bucket_exists(self.bucket)
         if not found:
             raise Exception("target bucket does not exist: {self.bucket}")
+
+        self._cache = SizedValueLRU(maxsize=int(5e9))
+        self.load_file = self._cache(self.load_file)
         logger.debug("Created S3-Client: {}", self)
 
     def _bucket_exists(self, bucket: str) -> bool:
         return self._client.bucket_exists(bucket)
+
+    def put_and_cache(self, path: str, file: bytes):
+        self.put(path, io.BytesIO(file), length=len(file))
+        if self._cache is not None:
+            self._cache.update((path,), file, only_if_cached=False)
 
     def put(
         self, path: str, file_object: Union[io.BytesIO, BinaryIO], length: Optional[int]
     ) -> None:
         """upload a file(like object)"""
         # For unknown length (ie without reading file into mem) give `part_size`
+        if self._cache is not None:
+            self._cache.pop((path,))
+
         part_size = 0
         if length is None:
             length = -1
@@ -95,7 +120,7 @@ class Client:
 
     def put_json_string(self, path: str, json_str: str):
         data = json_str.encode()
-        self.put(path, io.BytesIO(data), length=len(data))
+        self.put_and_cache(path, data)
 
     def get_file_urls(
         self,
@@ -213,7 +238,7 @@ class Client:
             )
         )
 
-    def load_file(self, path: str) -> Optional[bytes]:
+    def load_file(self, path: str, /) -> Optional[bytes]:
         """Load file
 
         Returns:
