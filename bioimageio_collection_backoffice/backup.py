@@ -2,7 +2,7 @@ import os
 from datetime import datetime
 from io import BytesIO
 from pathlib import PurePosixPath
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 from urllib.parse import quote_plus, urlparse
 
 import requests
@@ -19,10 +19,11 @@ from loguru import logger
 from ruyaml import YAML
 from typing_extensions import Literal
 
-from .generate_collection_json import get_all_versions
+from bioimageio_collection_backoffice.remote_collection import RemoteCollection
+
 from .remote_resource import PublishedVersion
 from .s3_client import Client
-from .s3_structure.versions import PublishedVersionInfo, Versions
+from .s3_structure.versions import PublishedVersionInfo, VersionsWithDefaults
 
 _ = load_dotenv()
 yaml = YAML(typ="safe")
@@ -31,32 +32,22 @@ ZenodoHost = Literal["https://sandbox.zenodo.org", "https://zenodo.org"]
 
 
 def backup(client: Client, destination: ZenodoHost):
-    """backup all published resources to their own record"""
+    """backup all published resources to their own zenodo records"""
     if "sandbox" not in destination:
         raise NotImplementedError("impl not production ready")
 
-    all_versions = get_all_versions(client)
-    for rid, versions in all_versions.items():
-        for p_nr in sorted(versions.published):
-            v_info = versions.published[p_nr]
-            if v_info.doi is not None:
-                continue
+    remote_collection = RemoteCollection(client=client)
 
-            backup_published_version(
-                PublishedVersion(client, rid, p_nr),
-                v_info,
-                destination,
-                versions.concept_doi,
-            )
+    for v in remote_collection.get_all_published_versions():
+        if v.info.doi is not None:
+            continue
 
-        break
+        backup_published_version(v, destination)
 
 
 def backup_published_version(
     v: PublishedVersion,
-    v_info: PublishedVersionInfo,
     destination: ZenodoHost,
-    concept_doi: Optional[str],
 ):
     with ValidationContext(perform_io_checks=False) as val_ctxt:
         rdf = load_description(v.rdf_url)
@@ -83,11 +74,7 @@ def backup_published_version(
     file_urls = v.get_file_urls()
     logger.info("Using file URLs:\n{}", "\n".join((str(obj) for obj in file_urls)))
 
-    if concept_doi is None:
-        # get concept_doi again; we may have just overriden it
-        concept_doi = v.get_concept_doi()
-
-    if concept_doi is None:
+    if v.concept.doi is None:
         # Create empty deposition
         r = requests.post(
             f"{destination}/api/deposit/depositions",
@@ -96,7 +83,7 @@ def backup_published_version(
             headers=headers,
         )
     else:
-        concept_id = concept_doi.split("/zenodo.")[1]
+        concept_id = v.concept.doi.split("/zenodo.")[1]
         # create a new deposition version with different deposition_id from the existing deposition
         r = requests.post(
             destination
@@ -132,7 +119,7 @@ def backup_published_version(
     metadata = rdf_to_metadata(
         rdf,
         rdf_file_name=rdf_file_name,
-        publication_date=v.get_versions().published[v.number].timestamp,
+        publication_date=v.info.timestamp,
     )
 
     r = requests.put(
@@ -152,14 +139,14 @@ def backup_published_version(
     r.raise_for_status()
 
     if "sandbox" not in destination:
-        v.update_versions(
-            Versions(
+        v.concept.extend_versions(
+            VersionsWithDefaults(
                 concept_doi=concept_doi,
                 published={
                     v.number: PublishedVersionInfo(
-                        sem_ver=v_info.sem_ver,
-                        timestamp=v_info.timestamp,
-                        status=v_info.status,
+                        sem_ver=v.info.sem_ver,
+                        timestamp=v.info.timestamp,
+                        status=v.info.status,
                         doi=doi,
                     )
                 },

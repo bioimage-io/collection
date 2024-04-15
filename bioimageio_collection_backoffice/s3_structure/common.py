@@ -4,7 +4,7 @@ import pydantic
 class Node(
     pydantic.BaseModel,
     extra="ignore",
-    frozen=False,
+    frozen=True,
     populate_by_name=True,
     revalidate_instances="never",
     validate_assignment=True,

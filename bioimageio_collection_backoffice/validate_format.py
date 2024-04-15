@@ -219,7 +219,7 @@ def prepare_dynamic_test_cases(
 
 
 def validate_format(rv: Union[StagedVersion, PublishedVersion]):
-    if not rv.exists():
+    if not rv.exists:
         raise ValueError(f"{rv} not found")
 
     if isinstance(rv, StagedVersion):
@@ -255,7 +255,7 @@ def validate_format(rv: Union[StagedVersion, PublishedVersion]):
         if not isinstance(rd, InvalidDescr) and rd.version is not None:
             error = None
             if isinstance(rv, StagedVersion):
-                published = rv.get_versions().published
+                published = rv.concept.versions.published
                 if str(rd.version) in {v.sem_ver for v in published.values()}:
                     error = ErrorEntry(
                         loc=("version",),

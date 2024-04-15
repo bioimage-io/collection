@@ -128,14 +128,16 @@ class Client:
     ) -> List[str]:
         """Checks an S3 'folder' for its list of files"""
         logger.debug("Getting file list using {}, at {}", self, path)
-        path = f"{self.prefix}/{path}"
+        prefix_folder = f"{self.prefix}/"
+        path = f"{prefix_folder}{path}"
         objects = self._client.list_objects(self.bucket, prefix=path, recursive=True)
         file_urls: List[str] = []
         for obj in objects:
             if obj.is_dir or obj.object_name is None:
                 continue
             assert obj.bucket_name == self.bucket
-            url = self.get_file_url(obj.object_name)
+            assert obj.object_name.startswith(prefix_folder), obj.object_name
+            url = self.get_file_url(obj.object_name[len(prefix_folder) :])
             file_urls.append(url)
 
         return file_urls

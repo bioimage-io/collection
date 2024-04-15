@@ -1,7 +1,8 @@
 from __future__ import annotations
 
+import collections.abc
 from datetime import datetime
-from typing import Any, List
+from typing import Any, Dict, Sequence, Union
 
 from bioimageio.spec import ValidationSummary
 from pydantic import Field
@@ -9,27 +10,54 @@ from pydantic import Field
 from .common import Node
 
 
-class _LogEntryBase(Node):
-    timestamp: datetime = datetime.now()
+class _LogEntryBase(Node, frozen=True):
+    timestamp: datetime
     """creation of log entry"""
     log: Any
     """log content"""
 
 
-class BioimageioLog(_LogEntryBase):
+class _LogEntryBaseWithDefaults(_LogEntryBase, frozen=True):
+    timestamp: datetime = datetime.now()
+    """creation of log entry"""
+
+
+class BioimageioLog(_LogEntryBase, frozen=True):
     log: ValidationSummary
 
 
-class Log(Node, extra="allow"):
+class BioimageioLogWithDefaults(_LogEntryBaseWithDefaults, BioimageioLog, frozen=True):
+    pass
+
+
+class Log(Node, frozen=True, extra="allow"):
     """`<id>/<version>/log.json` contains a version specific log"""
 
-    bioimageio_spec: List[BioimageioLog] = Field(default_factory=list)
-    bioimageio_core: List[BioimageioLog] = Field(default_factory=list)
+    bioimageio_spec: Sequence[BioimageioLog]
+    bioimageio_core: Sequence[BioimageioLog]
 
-    def extend(self, other: Log):
-        v: List[Any]
-        for k, v in other:
-            assert isinstance(v, list)
-            logs = getattr(self, k, [])
-            assert isinstance(logs, list)
-            logs.extend(v)
+    @classmethod
+    def get_file_name(cls):
+        return "log.json"
+
+    def get_updated(self, update: Log):
+        v: Union[Any, Sequence[Any]]
+        data: Dict[str, Sequence[Any]] = {}
+        for k, v in update:
+            assert isinstance(v, collections.abc.Sequence)
+            old = getattr(self, k, ())
+            assert isinstance(old, collections.abc.Sequence)
+            data[k] = list(old) + list(v)
+
+        return Log.model_validate(data)
+
+    @staticmethod
+    def get_class_with_defaults():
+        return LogWithDefaults
+
+
+class LogWithDefaults(Log, frozen=True, extra="allow"):
+    """`<id>/<version>/log.json` contains a version specific log"""
+
+    bioimageio_spec: Sequence[BioimageioLogWithDefaults] = Field(default_factory=list)
+    bioimageio_core: Sequence[BioimageioLogWithDefaults] = Field(default_factory=list)

@@ -6,37 +6,16 @@ from bioimageio.spec import ValidationContext, build_description
 from bioimageio.spec.collection import CollectionDescr
 from bioimageio.spec.common import HttpUrl
 from bioimageio.spec.utils import download
-from dotenv import load_dotenv
 from loguru import logger
 from ruyaml import YAML
 
+from .remote_collection import RemoteCollection
+from .remote_resource import PublishedVersion
 from .s3_client import Client
-from .s3_structure.versions import (
-    PublishedVersionInfo,
-    PublishNumber,
-    Versions,
-)
 
 yaml = YAML(typ="safe")
-_ = load_dotenv()
 
 COLLECTION_JSON_S3_PATH = "collection.json"
-
-
-def get_all_versions(client: Client):
-    resource_dirs = [p for p in client.ls("", only_folders=True)]
-    versions_data = {
-        rid: client.load_file(f"{rid}/versions.json") for rid in resource_dirs
-    }
-    missing = {rid for rid, vdata in versions_data.items() if vdata is None}
-    if missing:
-        logger.warning("{} missing versions.json files for {}", len(missing), missing)
-
-    return {
-        rid: Versions.model_validate_json(vd)
-        for rid, vd in versions_data.items()
-        if vd is not None
-    }
 
 
 def generate_collection_json(
@@ -46,81 +25,13 @@ def generate_collection_json(
     """generate a json file with an overview of all published resources"""
     logger.info("generating {}", COLLECTION_JSON_S3_PATH)
 
+    remote_collection = RemoteCollection(client=client)
     with collection_template.open() as f:
         collection = json.load(f)
 
-    def create_entry(
-        rid: str,
-        v: PublishNumber,
-        v_info: PublishedVersionInfo,
-        versions: List[PublishNumber],
-    ) -> Dict[str, Any]:
-        rdf_s3_path = f"{rid}/{v}/files/rdf.yaml"
-        with ValidationContext(perform_io_checks=False):
-            rdf_url = HttpUrl(client.get_file_url(rdf_s3_path))
+    for p in remote_collection.get_all_published_versions():
+        collection["collection"].append(create_entry(p))
 
-        rdf = yaml.load(download(rdf_url).path)
-        entry = {
-            k: rdf[k]
-            for k in (
-                "authors",
-                "description",
-                "id_emoji",
-                "id",
-                "license",
-                "name",
-                "type",
-            )
-        }
-        try:
-            thumbnails = rdf["config"]["bioimageio"]["thumbnails"]
-        except KeyError:
-            thumbnails: Dict[Any, Any] = {}
-        else:
-            if not isinstance(thumbnails, dict):
-                thumbnails = {}
-
-        def maybe_swap_with_thumbnail(
-            src: Union[Any, Dict[Any, Any], List[Any]],
-        ) -> Any:
-            if isinstance(src, dict):
-                return {k: maybe_swap_with_thumbnail(v) for k, v in src.items()}
-
-            if isinstance(src, list):
-                return [maybe_swap_with_thumbnail(s) for s in src]
-
-            if isinstance(src, str):
-                clean_name = Path(src).name  # remove any leading './'
-                return thumbnails.get(clean_name, src)
-
-            return src
-
-        entry["covers"] = maybe_swap_with_thumbnail(rdf["covers"])
-        entry["badges"] = maybe_swap_with_thumbnail(rdf.get("badges", []))
-        entry["tags"] = rdf.get("tags", [])
-        entry["links"] = rdf.get("links", [])
-        if "training_data" in rdf:
-            entry["training_data"] = rdf["training_data"]
-
-        if "icon" in rdf:
-            entry["icon"] = maybe_swap_with_thumbnail(rdf["icon"])
-
-        entry["created"] = v_info.timestamp.isoformat()
-        entry["download_count"] = "?"
-        entry["nickname"] = entry["id"]
-        entry["nickname_icon"] = entry["id_emoji"]
-        entry["entry_source"] = client.get_file_url(rdf_s3_path)
-        entry["rdf_source"] = entry["entry_source"]
-        entry["version_number"] = v
-        entry["versions"] = versions
-        return entry
-
-    all_versions = get_all_versions()
-    collection["collection"] = [
-        create_entry(rid, v, v_info, list(vs.published))
-        for rid, vs in all_versions.items()
-        for v, v_info in vs.published.items()
-    ]
     coll_descr = build_description(
         collection, context=ValidationContext(perform_io_checks=False)
     )
@@ -128,3 +39,66 @@ def generate_collection_json(
         logger.error(coll_descr.validation_summary.format())
 
     client.put_json(COLLECTION_JSON_S3_PATH, collection)
+
+
+def create_entry(
+    p: PublishedVersion,
+) -> Dict[str, Any]:
+    with ValidationContext(perform_io_checks=False):
+        rdf_url = HttpUrl(p.rdf_url)
+
+    rdf = yaml.load(download(rdf_url).path)
+    entry = {
+        k: rdf[k]
+        for k in (
+            "authors",
+            "description",
+            "id_emoji",
+            "id",
+            "license",
+            "name",
+            "type",
+        )
+    }
+    try:
+        thumbnails = rdf["config"]["bioimageio"]["thumbnails"]
+    except KeyError:
+        thumbnails: Dict[Any, Any] = {}
+    else:
+        if not isinstance(thumbnails, dict):
+            thumbnails = {}
+
+    def maybe_swap_with_thumbnail(
+        src: Union[Any, Dict[Any, Any], List[Any]],
+    ) -> Any:
+        if isinstance(src, dict):
+            return {k: maybe_swap_with_thumbnail(v) for k, v in src.items()}
+
+        if isinstance(src, list):
+            return [maybe_swap_with_thumbnail(s) for s in src]
+
+        if isinstance(src, str):
+            clean_name = Path(src).name  # remove any leading './'
+            return thumbnails.get(clean_name, src)
+
+        return src
+
+    entry["covers"] = maybe_swap_with_thumbnail(rdf["covers"])
+    entry["badges"] = maybe_swap_with_thumbnail(rdf.get("badges", []))
+    entry["tags"] = rdf.get("tags", [])
+    entry["links"] = rdf.get("links", [])
+    if "training_data" in rdf:
+        entry["training_data"] = rdf["training_data"]
+
+    if "icon" in rdf:
+        entry["icon"] = maybe_swap_with_thumbnail(rdf["icon"])
+
+    entry["created"] = p.info.timestamp.isoformat()
+    entry["download_count"] = "?"
+    entry["nickname"] = entry["id"]
+    entry["nickname_icon"] = entry["id_emoji"]
+    entry["entry_source"] = p.rdf_url
+    entry["rdf_source"] = entry["entry_source"]
+    entry["version_number"] = p.number
+    entry["versions"] = list(p.concept.versions.published)
+    return entry

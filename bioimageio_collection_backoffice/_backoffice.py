@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 from pathlib import Path
 from typing import Literal, Optional, Union
 
@@ -6,13 +7,13 @@ from bioimageio.spec.model.v0_5 import WeightsFormat
 from dotenv import load_dotenv
 from loguru import logger
 
-from .backup import backup
+from .backup import ZenodoHost, backup
 from .generate_collection_json import generate_collection_json
 from .gh_utils import set_gh_actions_outputs
 from .mailroom import notify_uploader
 from .remote_resource import (
     PublishedVersion,
-    RemoteResource,
+    ResourceConcept,
     get_remote_resource_version,
 )
 from .run_dynamic_tests import run_dynamic_tests
@@ -46,7 +47,7 @@ class BackOffice:
 
     def stage(self, resource_id: str, package_url: str):
         """stage a new resourse (version) from `package_url`"""
-        resource = RemoteResource(self.client, resource_id)
+        resource = ResourceConcept(self.client, resource_id)
         staged = resource.stage_new_version(package_url)
         set_gh_actions_outputs(version=staged.version)
 
@@ -132,7 +133,7 @@ class BackOffice:
             + "Check it out at https://bioimage.io/#/?id={published.id}\n",  # TODO: link to version
         )
 
-    def backup(self, destination: str):
+    def backup(self, destination: ZenodoHost):
         """backup the whole collection (to zenodo.org)"""
         _ = backup(self.client, destination)
 
@@ -149,6 +150,10 @@ class BackOffice:
     def add_chat_message(
         self, resource_id: str, version: str, chat_message: str, author: str
     ):
-        chat = Chat(messages=[Message(author=author, text=chat_message)])
+        chat = Chat(
+            messages=[
+                Message(author=author, text=chat_message, timestamp=datetime.now())
+            ]
+        )
         rv = get_remote_resource_version(self.client, resource_id, version)
         rv.extend_chat(chat)
