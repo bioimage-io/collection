@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import Sequence
+from typing import ClassVar, Sequence
 
 from pydantic import Field
 
@@ -20,6 +20,8 @@ class MessageWithDefaults(Message, frozen=True):
 
 class Chat(Node, frozen=True):
     """`<id>/<version>/chat.json` keeps a record of version specific comments"""
+
+    file_name: ClassVar[str] = "chat.json"
 
     messages: Sequence[Message]
     """messages"""

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import Literal, Mapping, NewType, Optional, Union
+from typing import ClassVar, Literal, Mapping, NewType, Optional, Union
 
 import pydantic
 from typing_extensions import Annotated
@@ -221,13 +221,11 @@ class StagedVersionInfoWithDefaults(
 class Versions(Node, frozen=True):
     """`<id>/versions.json` containing an overview of all published and staged resource versions"""
 
+    file_name: ClassVar[str] = "versions.json"
+
     published: Mapping[PublishNumber, PublishedVersionInfo]
     staged: Mapping[StageNumber, StagedVersionInfo]
     concept_doi: Optional[str]
-
-    @classmethod
-    def get_file_name(cls):
-        return "versions.json"
 
     def get_updated(self, update: Versions) -> Versions:
         assert set(self.model_fields) == {"published", "staged", "concept_doi"}, set(

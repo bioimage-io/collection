@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import collections.abc
 from datetime import datetime
-from typing import Any, Dict, Sequence, Union
+from typing import Any, ClassVar, Dict, Sequence, Union
 
 from bioimageio.spec import ValidationSummary
 from pydantic import Field
@@ -33,12 +33,10 @@ class BioimageioLogWithDefaults(_LogEntryBaseWithDefaults, BioimageioLog, frozen
 class Log(Node, frozen=True, extra="allow"):
     """`<id>/<version>/log.json` contains a version specific log"""
 
+    file_name: ClassVar[str] = "log.json"
+
     bioimageio_spec: Sequence[BioimageioLog]
     bioimageio_core: Sequence[BioimageioLog]
-
-    @classmethod
-    def get_file_name(cls):
-        return "log.json"
 
     def get_updated(self, update: Log):
         v: Union[Any, Sequence[Any]]

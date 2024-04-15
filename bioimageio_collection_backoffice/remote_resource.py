@@ -79,7 +79,7 @@ class RemoteResourceBase:
     def folder(self) -> str: ...
 
     def _get_json(self, typ: Type[JsonFileT]) -> JsonFileT:
-        path = f"{self.folder}{typ.__name__.lower()}.json"
+        path = self.folder + typ.file_name
         data = self.client.load_file(path)
         if data is None:
             return typ.get_class_with_defaults()()
@@ -87,7 +87,7 @@ class RemoteResourceBase:
             return typ.get_class_with_defaults().model_validate_json(data)
 
     def _extend_json(self, extension: JsonFileT):
-        path = f"{self.folder}{extension.__class__.__name__.lower()}.json"
+        path = self.folder + extension.file_name
         logger.info("Extending {} with {}", path, extension)
         current = self._get_json(extension.__class__)
         updated = current.get_updated(extension)
@@ -262,6 +262,7 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
 
     @property
     def info(self):
+        assert self.exists
         return self.concept.versions.staged[self.number]
 
     def unpack(self, package_url: str):
