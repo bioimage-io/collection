@@ -1,20 +1,20 @@
-from typing import Literal
+from typing import Literal, Optional
 
-from dotenv import load_dotenv
+from loguru import logger
 from pydantic import SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
-
-_ = load_dotenv()
 
 
 class Settings(BaseSettings, extra="ignore"):
     """environment variables for bioimageio.spec"""
 
     model_config = SettingsConfigDict(
+        case_sensitive=False,
         env_file=".env",
         env_file_encoding="utf-8",
     )
 
+    github_output: Optional[str] = None
     reviewers: str = (
         "https://raw.githubusercontent.com/bioimage-io/collection/main/reviewers.json"
     )
@@ -42,6 +42,8 @@ class Settings(BaseSettings, extra="ignore"):
     s3_secret_access_key: SecretStr = SecretStr("")
     zenodo_api_access_token: SecretStr = SecretStr("")
     zenodo_test_api_access_token: SecretStr = SecretStr("")
+    github_pat: SecretStr = SecretStr("")
 
 
 settings = Settings()
+logger.info("settings: {}", settings)

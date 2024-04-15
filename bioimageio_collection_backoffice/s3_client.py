@@ -55,8 +55,8 @@ class Client:
 
         self._client = Minio(
             self.host,
-            access_key=str(self.access_key),
-            secret_key=str(self.secret_key),
+            access_key=self.access_key.get_secret_value(),
+            secret_key=self.secret_key.get_secret_value(),
         )
         found = self._bucket_exists(self.bucket)
         if not found:

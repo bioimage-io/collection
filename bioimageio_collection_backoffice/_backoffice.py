@@ -32,8 +32,7 @@ class BackOffice:
     ) -> None:
         super().__init__()
         self.client = Client(host=host, bucket=bucket, prefix=prefix)
-        logger.info("created backoffice in environment: {}", settings)
-        logger.info("with client {}", self.client)
+        logger.info("created backoffice with client {}", self.client)
 
     def wipe(self, subfolder: str = ""):
         """DANGER ZONE: wipes `subfolder` completely, only use for test folders!"""

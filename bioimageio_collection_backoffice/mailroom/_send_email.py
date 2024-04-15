@@ -52,7 +52,7 @@ def send_email(subject: str, body: str, recipients: List[str]):
     msg["To"] = to_addr
     msg["Subject"] = subject
     with smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT) as smtp_server:
-        _ = smtp_server.login(BOT_EMAIL, str(settings.mail_password))
+        _ = smtp_server.login(BOT_EMAIL, settings.mail_password.get_secret_value())
         _ = smtp_server.sendmail(BOT_EMAIL, recipients, msg.as_string())
 
     logger.info("Email '{}' sent to {}", subject, recipients)
