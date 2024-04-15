@@ -1,6 +1,5 @@
-import os
-
 from bioimageio_collection_backoffice import BackOffice
+from bioimageio_collection_backoffice._settings import settings
 
 
 def test_backoffice(
@@ -11,4 +10,4 @@ def test_backoffice(
     backoffice.await_review(resource_id=package_id, version="staged/1")
     backoffice.publish(resource_id=package_id, version="staged/1", reviewer="fynnbe")
     backoffice.generate_collection_json()
-    backoffice.backup(os.environ["ZENODO_TEST_URL"])
+    backoffice.backup(settings.zenodo_test_url)
