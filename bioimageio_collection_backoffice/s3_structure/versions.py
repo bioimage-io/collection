@@ -258,4 +258,4 @@ class VersionsWithDefaults(Versions, frozen=True):
     staged: Mapping[
         StageNumber, Union[StagedVersionInfo, StagedVersionInfoWithDefaults]
     ] = pydantic.Field(default_factory=dict)
-    concept_doi: Optional[str] = None
+    doi: Optional[str] = None
