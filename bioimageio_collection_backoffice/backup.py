@@ -105,8 +105,8 @@ def backup_published_version(
         put_file_from_url(file_url, bucket_url, params)
 
     # Report deposition URL
-    deposition_id = deposition_info["id"]
-    concept_id = deposition_info["conceptrecid"]
+    deposition_id = str(deposition_info["id"])
+    concept_id = str(deposition_info["conceptrecid"])
     doi = deposition_info["metadata"]["prereserve_doi"]["doi"]
     assert isinstance(doi, str)
     concept_doi = doi.replace(deposition_id, concept_id)
