@@ -47,16 +47,14 @@ def backup_published_version(
     v: PublishedVersion,
     destination: ZenodoHost,
 ):
-    with ValidationContext(perform_io_checks=False) as val_ctxt:
+    with ValidationContext(perform_io_checks=False):
         rdf = load_description(v.rdf_url)
-        rdf_file_name = val_ctxt.file_name
+        rdf_file_name = download(v.rdf_url).original_file_name
 
     if isinstance(rdf, InvalidDescr):
         raise Exception(
             "Failed to load RDF from S3:\n" + rdf.validation_summary.format()
         )
-
-    assert rdf_file_name is not None
 
     if rdf.id is None:
         raise ValueError("Missing bioimage.io `id`")
