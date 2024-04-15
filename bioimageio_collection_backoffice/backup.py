@@ -1,4 +1,3 @@
-import os
 from datetime import datetime
 from io import BytesIO
 from pathlib import PurePosixPath
@@ -20,6 +19,7 @@ from typing_extensions import Literal
 
 from bioimageio_collection_backoffice.remote_collection import RemoteCollection
 
+from ._settings import settings
 from .remote_resource import PublishedVersion
 from .s3_client import Client
 from .s3_structure.versions import PublishedVersionInfo, VersionsWithDefaults
@@ -66,7 +66,7 @@ def backup_published_version(
 
     # client = v.client
     headers = {"Content-Type": "application/json"}
-    params = {"access_token": os.environ["ZENODO_API_ACCESS_TOKEN"]}
+    params = {"access_token": settings.zenodo_api_access_token.get_secret_value()}
 
     # List the files at the model URL
     file_urls = v.get_file_urls()
