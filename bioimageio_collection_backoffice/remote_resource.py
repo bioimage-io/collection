@@ -157,7 +157,7 @@ class ResourceConcept(RemoteResourceBase):
     @property
     def doi(self):
         """(version **un**specific) Zenodo concept DOI of this resource"""
-        return self.versions.concept_doi
+        return self.versions.doi
 
 
 class Uploader(NamedTuple):

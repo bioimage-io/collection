@@ -225,25 +225,25 @@ class Versions(Node, frozen=True):
 
     published: Mapping[PublishNumber, PublishedVersionInfo]
     staged: Mapping[StageNumber, StagedVersionInfo]
-    concept_doi: Optional[str]
+    doi: Optional[str]
 
     def get_updated(self, update: Versions) -> Versions:
         assert set(self.model_fields) == {"published", "staged", "concept_doi"}, set(
             self.model_fields
         )
-        if update.concept_doi is None:
-            concept_doi = self.concept_doi
-        elif self.concept_doi is None:
-            concept_doi = update.concept_doi
-        elif self.concept_doi != update.concept_doi:
-            raise ValueError("May not overwrite concept_doi")
+        if update.doi is None:
+            concept_doi = self.doi
+        elif self.doi is None:
+            concept_doi = update.doi
+        elif self.doi != update.doi:
+            raise ValueError("May not overwrite doi")
         else:
-            concept_doi = self.concept_doi
+            concept_doi = self.doi
 
         return Versions(
             published={**self.published, **update.published},
             staged={**self.staged, **update.staged},
-            concept_doi=concept_doi,
+            doi=concept_doi,
         )
 
     @staticmethod

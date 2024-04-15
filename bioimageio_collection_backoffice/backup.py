@@ -108,6 +108,7 @@ def backup_published_version(
     deposition_id = deposition_info["id"]
     concept_id = deposition_info["conceptrecid"]
     doi = deposition_info["metadata"]["prereserve_doi"]["doi"]
+    assert isinstance(doi, str)
     concept_doi = doi.replace(deposition_id, concept_id)
 
     # base_url = f"{destination}/record/{concept_id}/files/"
@@ -135,7 +136,7 @@ def backup_published_version(
     if "sandbox" not in destination or "sandbox" in v.client.prefix:
         v.concept.extend_versions(
             VersionsWithDefaults(
-                concept_doi=concept_doi,
+                doi=concept_doi,
                 published={
                     v.number: PublishedVersionInfo(
                         sem_ver=v.info.sem_ver,
