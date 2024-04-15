@@ -11,6 +11,7 @@ from bioimageio_collection_backoffice.remote_resource import (
     StagedVersion,
 )
 from bioimageio_collection_backoffice.s3_client import Client
+from bioimageio_collection_backoffice.s3_structure.versions import PublishNumber
 
 
 def test_lifecycle(
@@ -38,5 +39,9 @@ def test_lifecycle(
 
     generate_collection_json(client, collection_template_path)
 
-    backed_up = backup(client, settings.zenodo_url)
-    assert backed_up == {"frank-water-buffalo", "collection.json"}
+    backup(client, settings.zenodo_test_url)
+
+    concept_doi = resource.versions.doi
+    assert concept_doi is not None
+    doi = resource.versions.published[PublishNumber(1)].doi
+    assert doi is not None
