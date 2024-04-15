@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import io
 import json
-import os
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import (
@@ -21,7 +20,7 @@ from minio import Minio, S3Error
 from minio.commonconfig import CopySource
 from minio.datatypes import Object
 from minio.deleteobjects import DeleteObject
-from pydantic import BaseModel
+from pydantic import BaseModel, SecretStr
 
 from ._settings import settings
 from .cache import SizedValueLRU
@@ -39,9 +38,9 @@ class Client:
     """S3 bucket"""
     prefix: str = settings.s3_folder
     """S3 prefix ('root folder')"""
-    access_key: str = field(default=settings.s3_access_key_id, repr=False)
+    access_key: SecretStr = field(default=settings.s3_access_key_id, repr=False)
     """S3 access key"""
-    secret_key: str = field(default=settings.s3_secret_access_key, repr=False)
+    secret_key: SecretStr = field(default=settings.s3_secret_access_key, repr=False)
     """S3 secret key"""
     max_bytes_cached: int = int(1e9)
     _client: Minio = field(init=False, compare=False, repr=False)
@@ -56,8 +55,8 @@ class Client:
 
         self._client = Minio(
             self.host,
-            access_key=self.access_key,
-            secret_key=self.secret_key,
+            access_key=str(self.access_key),
+            secret_key=str(self.secret_key),
         )
         found = self._bucket_exists(self.bucket)
         if not found:

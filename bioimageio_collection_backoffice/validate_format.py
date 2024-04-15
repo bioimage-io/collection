@@ -12,7 +12,7 @@ from ruyaml import YAML
 from typing_extensions import assert_never
 
 from .remote_resource import PublishedVersion, StagedVersion
-from .s3_structure.log import BioimageioLog, Log
+from .s3_structure.log import BioimageioLogWithDefaults, Log
 
 yaml = YAML(typ="safe")
 
@@ -272,5 +272,5 @@ def validate_format(rv: Union[StagedVersion, PublishedVersion]):
             )
 
     summary = rd.validation_summary
-    rv.extend_log(Log(bioimageio_spec=[BioimageioLog(log=summary)]))
+    rv.extend_log(Log(bioimageio_spec=[BioimageioLogWithDefaults(log=summary)]))
     return dynamic_test_cases, conda_envs

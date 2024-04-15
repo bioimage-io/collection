@@ -32,7 +32,7 @@ def forward_emails_to_chat(s3_client: Client, last_n_days: int):
 @contextmanager
 def _get_imap_client():
     imap_client = imaplib.IMAP4_SSL(SMTP_SERVER, IMAP_PORT)
-    _ = imap_client.login(BOT_EMAIL, settings.mail_password)
+    _ = imap_client.login(BOT_EMAIL, str(settings.mail_password))
     yield imap_client
     _ = imap_client.logout()
 
