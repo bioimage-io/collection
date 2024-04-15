@@ -125,8 +125,6 @@ def backup_published_version(
         headers=headers,
     )
     r.raise_for_status()
-    logger.error("Would be publishing now...(but leaving as draft)")
-    # return
 
     r = requests.post(
         f"{destination}/api/deposit/depositions/{concept_doi}/actions/publish",
@@ -134,7 +132,7 @@ def backup_published_version(
     )
     r.raise_for_status()
 
-    if "sandbox" not in destination:
+    if "sandbox" not in destination or "sandbox" in v.client.prefix:
         v.concept.extend_versions(
             VersionsWithDefaults(
                 concept_doi=concept_doi,
