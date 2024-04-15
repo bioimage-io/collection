@@ -21,12 +21,14 @@ class Settings(BaseSettings, extra="ignore"):
     s3_bucket: str = "public-datasets"
     s3_folder: str = "sandbox.bioimage.io"
     s3_host: str = "uk1s3.embassy.ebi.ac.uk"
-    s3_pytest_folder = "testing.bioimage.io/user_pytest"
+    s3_pytest_folder: str = "testing.bioimage.io/user_pytest"
     s3_sandbox_folder: str = "sandbox.bioimage.io"
-    s3_test_bucket = "public-datasets"
-    s3_test_folder = "testing.bioimage.io/user_sandbox"
-    test_package_id = "frank-water-buffalo"
-    test_package_url = "https://uk1s3.embassy.ebi.ac.uk/public-datasets/examples.bioimage.io/frank-water-buffalo_v1.zip"
+    s3_test_bucket: str = "public-datasets"
+    s3_test_folder: str = "testing.bioimage.io/user_sandbox"
+    test_package_id: str = "frank-water-buffalo"
+    test_package_url: str = (
+        "https://uk1s3.embassy.ebi.ac.uk/public-datasets/examples.bioimage.io/frank-water-buffalo_v1.zip"
+    )
     zenodo_test_url: Literal["https://sandbox.zenodo.org"] = (
         "https://sandbox.zenodo.org"
     )
