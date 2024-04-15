@@ -228,9 +228,6 @@ class Versions(Node, frozen=True):
     doi: Optional[str]
 
     def get_updated(self, update: Versions) -> Versions:
-        assert set(self.model_fields) == {"published", "staged", "concept_doi"}, set(
-            self.model_fields
-        )
         if update.doi is None:
             concept_doi = self.doi
         elif self.doi is None:
