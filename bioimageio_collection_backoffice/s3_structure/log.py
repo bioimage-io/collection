@@ -20,10 +20,6 @@ class BioimageioLog(_LogEntryBase):
     log: ValidationSummary
 
 
-<<<<<<< ours
-=======
-class Logs(Node):
->>>>>>> theirs
 class Log(Node, extra="allow"):
     """`<id>/<version>/log.json` contains a version specific log"""
 
