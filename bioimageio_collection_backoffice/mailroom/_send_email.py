@@ -1,11 +1,10 @@
-import os
 import smtplib
 from email.mime.text import MIMEText
 from typing import List, Union
 
-from dotenv import load_dotenv
 from loguru import logger
 
+from .._settings import settings
 from ..remote_resource import (
     PublishedVersion,
     StagedVersion,
@@ -17,8 +16,6 @@ from .constants import (
     SMTP_SERVER,
     STATUS_UPDATE_SUBJECT,
 )
-
-_ = load_dotenv()
 
 
 def notify_uploader(
@@ -55,7 +52,7 @@ def send_email(subject: str, body: str, recipients: List[str]):
     msg["To"] = to_addr
     msg["Subject"] = subject
     with smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT) as smtp_server:
-        _ = smtp_server.login(BOT_EMAIL, os.environ["MAIL_PASSWORD"])
+        _ = smtp_server.login(BOT_EMAIL, settings.mail_password)
         _ = smtp_server.sendmail(BOT_EMAIL, recipients, msg.as_string())
 
     logger.info("Email '{}' sent to {}", subject, recipients)

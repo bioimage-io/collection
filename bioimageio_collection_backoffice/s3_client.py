@@ -16,7 +16,6 @@ from typing import (
     Union,
 )
 
-from dotenv import load_dotenv
 from loguru import logger
 from minio import Minio, S3Error
 from minio.commonconfig import CopySource
@@ -24,10 +23,8 @@ from minio.datatypes import Object
 from minio.deleteobjects import DeleteObject
 from pydantic import BaseModel
 
+from ._settings import settings
 from .cache import SizedValueLRU
-
-_ = load_dotenv()
-
 
 M = TypeVar("M", bound=BaseModel)
 
@@ -36,15 +33,15 @@ M = TypeVar("M", bound=BaseModel)
 class Client:
     """Convenience wrapper around a `Minio` S3 client"""
 
-    host: str = os.environ["S3_HOST"]
+    host: str = settings.s3_host
     """S3 host"""
-    bucket: str = os.environ["S3_BUCKET"]
+    bucket: str = settings.s3_bucket
     """S3 bucket"""
-    prefix: str = os.environ["S3_FOLDER"]
+    prefix: str = settings.s3_folder
     """S3 prefix ('root folder')"""
-    access_key: str = field(default=os.environ["S3_ACCESS_KEY_ID"], repr=False)
+    access_key: str = field(default=settings.s3_access_key_id, repr=False)
     """S3 access key"""
-    secret_key: str = field(default=os.environ["S3_SECRET_ACCESS_KEY"], repr=False)
+    secret_key: str = field(default=settings.s3_secret_access_key, repr=False)
     """S3 secret key"""
     max_bytes_cached: int = int(1e9)
     _client: Minio = field(init=False, compare=False, repr=False)

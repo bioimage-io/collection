@@ -14,7 +14,6 @@ from bioimageio.spec import (
 )
 from bioimageio.spec.common import HttpUrl, RelativeFilePath
 from bioimageio.spec.utils import download
-from dotenv import load_dotenv
 from loguru import logger
 from ruyaml import YAML
 from typing_extensions import Literal
@@ -25,7 +24,6 @@ from .remote_resource import PublishedVersion
 from .s3_client import Client
 from .s3_structure.versions import PublishedVersionInfo, VersionsWithDefaults
 
-_ = load_dotenv()
 yaml = YAML(typ="safe")
 
 ZenodoHost = Literal["https://sandbox.zenodo.org", "https://zenodo.org"]

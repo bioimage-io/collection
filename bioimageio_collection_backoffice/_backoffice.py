@@ -1,12 +1,11 @@
-import os
 from datetime import datetime
 from pathlib import Path
 from typing import Literal, Optional, Union
 
 from bioimageio.spec.model.v0_5 import WeightsFormat
-from dotenv import load_dotenv
 from loguru import logger
 
+from ._settings import settings
 from .backup import ZenodoHost, backup
 from .generate_collection_json import generate_collection_json
 from .gh_utils import set_gh_actions_outputs
@@ -21,20 +20,20 @@ from .s3_client import Client
 from .s3_structure.chat import Chat, Message
 from .validate_format import validate_format
 
-_ = load_dotenv()
-
 
 class BackOffice:
     """This backoffice aids to maintain the bioimage.io collection"""
 
     def __init__(
         self,
-        host: str = os.environ["S3_HOST"],
-        bucket: str = os.environ["S3_BUCKET"],
-        prefix: str = os.environ["S3_FOLDER"],
+        host: str = settings.s3_host,
+        bucket: str = settings.s3_bucket,
+        prefix: str = settings.s3_folder,
     ) -> None:
         super().__init__()
         self.client = Client(host=host, bucket=bucket, prefix=prefix)
+        logger.info("created backoffice in environment: {}", settings)
+        logger.info("with client {}", self.client)
 
     def wipe(self, subfolder: str = ""):
         """DANGER ZONE: wipes `subfolder` completely, only use for test folders!"""

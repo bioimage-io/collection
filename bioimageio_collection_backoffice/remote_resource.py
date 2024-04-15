@@ -28,7 +28,7 @@ from typing_extensions import LiteralString, assert_never
 
 from ._thumbnails import create_thumbnails
 from .s3_client import Client
-from .s3_structure.chat import Chat, ChatWithDefaults, Message, MessageWithDefaults
+from .s3_structure.chat import Chat, ChatWithDefaults, MessageWithDefaults
 from .s3_structure.log import Log, LogWithDefaults
 from .s3_structure.versions import (
     AcceptedStatus,
@@ -39,7 +39,6 @@ from .s3_structure.versions import (
     ChangesRequestedStatusWithDefaults,
     PublishedStagedStatus,
     PublishedStagedStatusWithDefaults,
-    PublishedStatus,
     PublishedStatusWithDefaults,
     PublishedVersionInfo,
     PublishedVersionInfoWithDefaults,
@@ -486,7 +485,7 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
 
     def _set_status(self, value: StagedVersionStatus):
         info = self.concept.versions.staged.get(
-            self.number, StagedVersionInfo(status=value)
+            self.number, StagedVersionInfoWithDefaults(status=value)
         )
         if value.step < info.status.step:
             logger.error("Cannot proceed from {} to {}", info.status, value)
@@ -498,7 +497,7 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
             logger.warning("Proceeding from {} to {}", info.status, value)
 
         updated_info = info.model_copy(update=dict(status=value))
-        versions_update = Versions(staged={self.number: updated_info})
+        versions_update = VersionsWithDefaults(staged={self.number: updated_info})
         self.concept.extend_versions(versions_update)
 
 

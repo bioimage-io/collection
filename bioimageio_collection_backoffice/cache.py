@@ -2,6 +2,7 @@ import collections.abc
 from functools import wraps
 from typing import (
     Callable,
+    Generic,
     NamedTuple,
     Optional,
     OrderedDict,
@@ -23,7 +24,7 @@ class CacheInfo(NamedTuple):
     currsize: int
 
 
-class UpdatetableLRU(collections.abc.Mapping[Tuple[Unpack[Ks]], V]):
+class UpdatetableLRU(Generic[Unpack[Ks], V]):
     "LRU Cache that allows to pop and update cache entries."
 
     def __init__(self, maxsize: int = 128):
