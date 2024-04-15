@@ -371,7 +371,7 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
     def request_changes(self, reviewer: str, reason: str):
         from .reviewer import REVIEWERS
 
-        reviewer = REVIEWERS[reviewer.lower()]  # map to reviewer name
+        reviewer = REVIEWERS[reviewer.lower()].name  # map to reviewer name
         self._set_status(ChangesRequestedStatusWithDefaults(description=reason))
         self.extend_chat(
             Chat(
@@ -390,7 +390,7 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
         """mark this staged version candidate as accepted and try to publish it"""
         from .reviewer import REVIEWERS
 
-        reviewer = REVIEWERS[reviewer.lower()]  # map to reviewer name
+        reviewer = REVIEWERS[reviewer.lower()].name  # map to reviewer name
         self._set_status(AcceptedStatusWithDefaults())
         self.extend_chat(
             Chat(
