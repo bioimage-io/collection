@@ -1,3 +1,6 @@
+from io import BytesIO
+from pathlib import PurePosixPath
+from typing import Any, Dict
 from urllib.parse import urlparse
 
 import requests
@@ -39,3 +42,25 @@ def raise_for_status_discretely(response: requests.Response):
 
     if http_error_msg:
         raise requests.HTTPError(http_error_msg)
+
+
+def put_file_from_url(
+    file_url: str, destination_url: str, params: Dict[str, Any]
+) -> None:
+    """Gets a remote file and pushes it up to a destination"""
+    filename = PurePosixPath(urlparse(file_url).path).name
+    response = requests.get(file_url)
+    file_like = BytesIO(response.content)
+    put_file(file_like, f"{destination_url}/{filename}", params)
+    # TODO: Can we use stream=True and pass response.raw into requests.put?
+    #   response = requests.get(file_url, stream=True)
+    #   put_file(response.raw, filename, destination_url, params)
+
+
+def put_file(file_object: BytesIO, url: str, params: Dict[str, Any]):
+    r = requests.put(
+        url,
+        data=file_object,
+        params=params,
+    )
+    raise_for_status_discretely(r)

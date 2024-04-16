@@ -1,8 +1,6 @@
 from datetime import datetime
-from io import BytesIO
-from pathlib import PurePosixPath
 from typing import Any, Dict, List
-from urllib.parse import quote_plus, urlparse
+from urllib.parse import quote_plus
 
 import requests
 from bioimageio.spec import (
@@ -20,7 +18,7 @@ from typing_extensions import Literal
 from ._settings import settings
 from .remote_collection import RemoteCollection
 from .remote_resource import PublishedVersion
-from .requests_utils import raise_for_status_discretely
+from .requests_utils import put_file_from_url, raise_for_status_discretely
 from .s3_client import Client
 from .s3_structure.versions import PublishedVersionInfo, VersionsWithDefaults
 
@@ -148,28 +146,6 @@ def backup_published_version(
                 },
             )
         )
-
-
-def put_file_from_url(
-    file_url: str, destination_url: str, params: Dict[str, Any]
-) -> None:
-    """Gets a remote file and pushes it up to a destination"""
-    filename = PurePosixPath(urlparse(file_url).path).name
-    response = requests.get(file_url)
-    file_like = BytesIO(response.content)
-    put_file(file_like, f"{destination_url}/{filename}", params)
-    # TODO: Can we use stream=True and pass response.raw into requests.put?
-    #   response = requests.get(file_url, stream=True)
-    #   put_file(response.raw, filename, destination_url, params)
-
-
-def put_file(file_object: BytesIO, url: str, params: Dict[str, Any]):
-    r = requests.put(
-        url,
-        data=file_object,
-        params=params,
-    )
-    raise_for_status_discretely(r)
 
 
 def rdf_authors_to_metadata_creators(rdf: ResourceDescr):
