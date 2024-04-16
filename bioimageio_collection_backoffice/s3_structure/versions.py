@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import ClassVar, Literal, Mapping, NewType, Optional, Union
+from typing import ClassVar, List, Literal, Mapping, NewType, Optional, Union
 
 import pydantic
 from typing_extensions import Annotated
@@ -185,6 +185,14 @@ PulishedVersionStatus = PublishedStatus
 PulishedVersionStatusWithDefaults = PublishedStatusWithDefaults
 
 
+class ErrorStatus(_StatusBase, frozen=True):
+    name: Literal["error"] = "error"
+    step: Literal[0] = 0
+    message: str
+    traceback: List[str]
+    during: Optional[Union[StagedVersionStatus, PulishedVersionStatus]]
+
+
 class VersionInfo(Node, frozen=True):
     sem_ver: Optional[str]
     timestamp: datetime
@@ -196,7 +204,9 @@ class VersionInfoWithDefaults(VersionInfo, frozen=True):
 
 
 class PublishedVersionInfo(VersionInfo, frozen=True):
-    status: PublishedStatus
+    status: Annotated[
+        Union[PulishedVersionStatus, ErrorStatus], pydantic.Discriminator("name")
+    ]
     doi: Optional[str]
     """version specific zenodo DOI"""
 
@@ -209,7 +219,9 @@ class PublishedVersionInfoWithDefaults(
 
 
 class StagedVersionInfo(VersionInfo, frozen=True):
-    status: StagedVersionStatus
+    status: Annotated[
+        Union[StagedVersionStatus, ErrorStatus], pydantic.Discriminator("name")
+    ]
 
 
 class StagedVersionInfoWithDefaults(

@@ -1,10 +1,13 @@
 from __future__ import annotations
 
 import io
+import sys
+import traceback
 import urllib.request
 import zipfile
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
+from datetime import datetime
 from typing import (
     Any,
     ClassVar,
@@ -37,6 +40,7 @@ from .s3_structure.versions import (
     AwaitingReviewStatusWithDefaults,
     ChangesRequestedStatus,
     ChangesRequestedStatusWithDefaults,
+    ErrorStatus,
     PublishedStagedStatus,
     PublishedStagedStatusWithDefaults,
     PublishedStatusWithDefaults,
@@ -145,7 +149,10 @@ class ResourceConcept(RemoteResourceBase):
             nr = StageNumber(nr + 1)
 
         ret = StagedVersion(client=self.client, id=self.id, number=nr)
-        ret.unpack(package_url=package_url)
+        try:
+            ret.unpack(package_url=package_url)
+        except Exception as e:
+            ret.report_error(e)
         return ret
 
     def extend_versions(
@@ -264,6 +271,31 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
     def info(self):
         assert self.exists
         return self.concept.versions.staged[self.number]
+
+    def report_error(self, error: Exception):
+        info = self.concept.versions.staged.get(self.number)
+        current_status = None if info is None else info.status
+        if isinstance(current_status, ErrorStatus):
+            logger.error("error: {}", current_status)
+            sys.exit(1)
+
+        error_status = ErrorStatus(
+            timestamp=datetime.now(),
+            message=str(error),
+            traceback=traceback.format_tb(error.__traceback__),
+            during=current_status,
+        )
+        if info is None:
+            info = StagedVersionInfoWithDefaults(status=error_status)
+
+        version_update = VersionsWithDefaults(
+            staged={
+                self.number: StagedVersionInfo(
+                    sem_ver=info.sem_ver, timestamp=info.timestamp, status=error_status
+                )
+            }
+        )
+        self.concept.extend_versions(version_update)
 
     def unpack(self, package_url: str):
         # ensure we have a chat.json
