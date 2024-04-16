@@ -132,7 +132,11 @@ def backup_published_version(
     )
     raise_for_status_discretely(r_publish)
 
-    if "sandbox" not in destination or "sandbox" in v.client.prefix:
+    if (
+        "sandbox" not in destination
+        or "sandbox" in v.client.prefix
+        or "testing" in v.client.prefix
+    ):
         v.concept.extend_versions(
             VersionsWithDefaults(
                 doi=concept_doi,
