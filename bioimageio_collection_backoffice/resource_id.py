@@ -1,4 +1,5 @@
 import random
+from datetime import datetime
 
 from .db_structure.id_parts import IdParts
 from .s3_client import Client
@@ -22,10 +23,14 @@ def validate_resource_id(resource_id: str, *, type_: str):
     _select_parts(type_).validate_resource_id(resource_id)
 
 
+def get_taken_resoure_ids(client: Client):
+    return set(client.ls("", only_folders=True))
+
+
 def generate_resource_id(client: Client, type_: str):
-    taken = set(client.ls("", only_folders=True))
     id_parts = _select_parts(type_)
     nouns = list(id_parts.nouns)
+    taken = get_taken_resoure_ids(client)
     n = 9999
     for _ in range(n):
         adj = random.choice(id_parts.adjectives)
@@ -36,4 +41,13 @@ def generate_resource_id(client: Client, type_: str):
 
     raise RuntimeError(
         f"I tried {n} times to generate an available {type_} resource id, but failed."
+    )
+
+
+def reserve_resource_id(client: Client, resource_id: str):
+    if resource_id in get_taken_resoure_ids(client):
+        raise ValueError(f"'{resource_id}' already taken")
+
+    client.put_json(
+        f"{resource_id}/reserved.json", {"timestamp": datetime.now().isoformat()}
     )
