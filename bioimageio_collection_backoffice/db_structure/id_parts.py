@@ -2,9 +2,9 @@ from typing import Mapping, Sequence
 
 import requests
 
-from bioimageio_collection_backoffice._settings import settings
-from bioimageio_collection_backoffice.db_structure.common import Node
-from bioimageio_collection_backoffice.requests_utils import raise_for_status_discretely
+from .._settings import settings
+from ..requests_utils import raise_for_status_discretely
+from .common import Node
 
 
 class IdPartsEntry(Node, frozen=True):
