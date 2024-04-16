@@ -16,11 +16,11 @@ from ruyaml import YAML
 from typing_extensions import Literal
 
 from ._settings import settings
+from .db_structure.versions import PublishedVersionInfo, VersionsWithDefaults
 from .remote_collection import RemoteCollection
 from .remote_resource import PublishedVersion
 from .requests_utils import put_file_from_url, raise_for_status_discretely
 from .s3_client import Client
-from .s3_structure.versions import PublishedVersionInfo, VersionsWithDefaults
 
 yaml = YAML(typ="safe")
 

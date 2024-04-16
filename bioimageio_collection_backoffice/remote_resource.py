@@ -30,10 +30,9 @@ from ruyaml import YAML
 from typing_extensions import LiteralString, assert_never
 
 from ._thumbnails import create_thumbnails
-from .s3_client import Client
-from .s3_structure.chat import Chat, ChatWithDefaults, MessageWithDefaults
-from .s3_structure.log import Log, LogWithDefaults
-from .s3_structure.versions import (
+from .db_structure.chat import Chat, ChatWithDefaults, MessageWithDefaults
+from .db_structure.log import Log, LogWithDefaults
+from .db_structure.versions import (
     AcceptedStatus,
     AcceptedStatusWithDefaults,
     AwaitingReviewStatus,
@@ -62,6 +61,7 @@ from .s3_structure.versions import (
     Versions,
     VersionsWithDefaults,
 )
+from .s3_client import Client
 
 yaml = YAML(typ="safe")
 
