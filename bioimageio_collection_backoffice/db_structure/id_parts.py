@@ -1,4 +1,4 @@
-from typing import Mapping, Sequence
+"""describes a file holding all parts to create resource ids"""
 
 import requests
 
@@ -8,6 +8,7 @@ from .common import Node
 
 
 class IdPartsEntry(Node, frozen=True):
+    """parts to create resource ids for a specific resource type"""
     nouns: Mapping[str, str]
     adjectives: Sequence[str]
 

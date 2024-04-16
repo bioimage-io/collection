@@ -18,9 +18,11 @@ class Settings(BaseSettings, extra="ignore"):
     id_parts: str = (
         "https://raw.githubusercontent.com/bioimage-io/collection/main/id_parts.json"
     )
+    """describes a file holding all parts to create bioimage.io resource ids"""
     reviewers: str = (
         "https://raw.githubusercontent.com/bioimage-io/collection/main/reviewers.json"
     )
+    """determines who is a bioimage.io reviewer"""
     s3_bucket: str = "public-datasets"
     s3_folder: str = "sandbox.bioimage.io"
     s3_host: str = "uk1s3.embassy.ebi.ac.uk"

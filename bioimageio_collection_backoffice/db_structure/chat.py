@@ -1,3 +1,5 @@
+"""`<id>/<version>/chat.json` keeps a record of version specific comments"""
+
 from __future__ import annotations
 
 from datetime import datetime
