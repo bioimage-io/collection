@@ -15,6 +15,9 @@ class Settings(BaseSettings, extra="ignore"):
     )
 
     github_output: Optional[str] = None
+    id_parts: str = (
+        "https://raw.githubusercontent.com/bioimage-io/collection/main/id_parts.json"
+    )
     reviewers: str = (
         "https://raw.githubusercontent.com/bioimage-io/collection/main/reviewers.json"
     )
