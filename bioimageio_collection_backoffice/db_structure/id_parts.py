@@ -1,7 +1,7 @@
 """describes a file holding all parts to create resource ids"""
 
 from functools import lru_cache
-from typing import Mapping, Optional, Sequence
+from typing import Mapping, Sequence
 
 import requests
 from pydantic import field_validator
@@ -55,25 +55,9 @@ class IdParts(Node, frozen=True):
     dataset: IdPartsEntry
     notebook: IdPartsEntry
 
-    @lru_cache
     @classmethod
+    @lru_cache
     def load(cls):
         r = requests.get(settings.id_parts)
         raise_for_status_discretely(r)
         return cls.model_validate(r.json())
-
-
-def validate_resource_id(resource_id: str, *, type_: str):
-    id_parts = IdParts.load()
-    if type_ == "model":
-        parts = id_parts.model
-    elif type_ == "dataset":
-        parts = id_parts.dataset
-    elif type_ == "notebook":
-        parts = id_parts.notebook
-    else:
-        raise NotImplementedError(
-            f"resource id validation for {type_} is not yet implemented"
-        )
-
-    parts.validate_resource_id(resource_id)

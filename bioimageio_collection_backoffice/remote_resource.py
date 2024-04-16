@@ -31,7 +31,6 @@ from typing_extensions import LiteralString, assert_never
 
 from ._thumbnails import create_thumbnails
 from .db_structure.chat import Chat, ChatWithDefaults, MessageWithDefaults
-from .db_structure.id_parts import validate_resource_id
 from .db_structure.log import Log, LogWithDefaults
 from .db_structure.versions import (
     AcceptedStatus,
@@ -62,6 +61,7 @@ from .db_structure.versions import (
     Versions,
     VersionsWithDefaults,
 )
+from .resource_id import validate_resource_id
 from .s3_client import Client
 
 yaml = YAML(typ="safe")
