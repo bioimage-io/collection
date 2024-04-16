@@ -1,16 +1,17 @@
-import os
 from pathlib import Path
 
+from bioimageio_collection_backoffice._settings import settings
 from bioimageio_collection_backoffice.backup import backup
 from bioimageio_collection_backoffice.generate_collection_json import (
     generate_collection_json,
 )
 from bioimageio_collection_backoffice.remote_resource import (
     PublishedVersion,
-    RemoteResource,
+    ResourceConcept,
     StagedVersion,
 )
 from bioimageio_collection_backoffice.s3_client import Client
+from bioimageio_collection_backoffice.s3_structure.versions import PublishNumber
 
 
 def test_lifecycle(
@@ -20,7 +21,7 @@ def test_lifecycle(
     s3_test_folder_url: str,
     collection_template_path: Path,
 ):
-    resource = RemoteResource(client=client, id=package_id)
+    resource = ResourceConcept(client=client, id=package_id)
     staged = resource.stage_new_version(package_url)
     assert isinstance(staged, StagedVersion)
     staged_rdf_url = staged.rdf_url
@@ -38,5 +39,9 @@ def test_lifecycle(
 
     generate_collection_json(client, collection_template_path)
 
-    backed_up = backup(client, os.environ["ZENODO_TEST_URL"])
-    assert backed_up == {"frank-water-buffalo", "collection.json"}
+    backup(client, settings.zenodo_test_url)
+
+    concept_doi = resource.versions.doi
+    assert concept_doi is not None
+    doi = resource.versions.published[PublishNumber(1)].doi
+    assert doi is not None

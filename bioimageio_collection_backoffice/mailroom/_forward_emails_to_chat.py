@@ -1,15 +1,14 @@
 import email.message
 import email.parser
 import imaplib
-import os
 from contextlib import contextmanager
 from datetime import datetime, timedelta
 from email.utils import parsedate_to_datetime
 from typing import Any
 
-from dotenv import load_dotenv
 from loguru import logger
 
+from .._settings import settings
 from ..remote_resource import get_remote_resource_version
 from ..s3_client import Client
 from ..s3_structure.chat import Chat, Message
@@ -20,9 +19,6 @@ from .constants import (
     SMTP_SERVER,
     STATUS_UPDATE_SUBJECT,
 )
-
-_ = load_dotenv()
-
 
 FORWARDED_TO_CHAT_FLAT = "forwarded-to-bioimageio-chat"
 
@@ -36,7 +32,7 @@ def forward_emails_to_chat(s3_client: Client, last_n_days: int):
 @contextmanager
 def _get_imap_client():
     imap_client = imaplib.IMAP4_SSL(SMTP_SERVER, IMAP_PORT)
-    _ = imap_client.login(BOT_EMAIL, os.environ["MAIL_PASSWORD"])
+    _ = imap_client.login(BOT_EMAIL, settings.mail_password.get_secret_value())
     yield imap_client
     _ = imap_client.logout()
 
@@ -98,7 +94,7 @@ def _update_chats(
             REPLY_HINT, ""
         )
         rr = get_remote_resource_version(s3_client, rid, rv)
-        if not rr.exists():
+        if not rr.exists:
             logger.error("Cannot comment on non-existing resource {} {}", rid, rv)
             continue
 

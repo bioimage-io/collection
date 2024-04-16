@@ -2,13 +2,13 @@
 programmatic staging of a new resource version (for advanced/internal use only)
 """
 
-import os
-
 import github
+
+from bioimageio_collection_backoffice._settings import settings
 
 
 def bioimageio_upload(resource_id: str, package_url: str):
-    g = github.Github(login_or_token=os.environ["GITHUB_PAT"])
+    g = github.Github(login_or_token=settings.github_pat.get_secret_value())
 
     repo = g.get_repo("bioimage-io/collection")
 

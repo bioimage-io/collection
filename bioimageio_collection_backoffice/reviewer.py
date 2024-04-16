@@ -1,10 +1,23 @@
-import os
 from typing import Dict
 
 import requests
+from pydantic import BaseModel
 
-# load mapping of GitHub account names to plain names for bioimage.io maintainers
-REVIEWERS: Dict[str, str] = requests.get(os.environ["REVIEWERS"]).json()
+from ._settings import settings
+
+
+class Reviewer(BaseModel):
+    name: str
+    affiliation: str
+    orcid: str
+
+
+# load mapping of GitHub account names to Reviewer (info)
+# for bioimage.io maintainers
+REVIEWERS: Dict[str, Reviewer] = {
+    k: Reviewer.model_validate(v)
+    for k, v in requests.get(settings.reviewers).json().items()
+}
 assert all(
     r.lower() == r for r in REVIEWERS
 ), "Maintainer GitHub account name has to be lower case"

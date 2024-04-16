@@ -4,8 +4,19 @@ import io
 import urllib.request
 import zipfile
 from abc import ABC, abstractmethod
-from dataclasses import dataclass
-from typing import Any, Dict, Generic, NamedTuple, Optional, Type, TypeVar, Union
+from dataclasses import dataclass, field
+from typing import (
+    Any,
+    ClassVar,
+    Dict,
+    Generic,
+    List,
+    NamedTuple,
+    Optional,
+    Type,
+    TypeVar,
+    Union,
+)
 
 from bioimageio.spec.utils import (
     identify_bioimageio_yaml_file_name,
@@ -13,72 +24,113 @@ from bioimageio.spec.utils import (
 )
 from loguru import logger
 from ruyaml import YAML
-from typing_extensions import assert_never
+from typing_extensions import LiteralString, assert_never
 
 from ._thumbnails import create_thumbnails
 from .s3_client import Client
-from .s3_structure.chat import Chat, Message
-from .s3_structure.log import Logs
+from .s3_structure.chat import Chat, ChatWithDefaults, MessageWithDefaults
+from .s3_structure.log import Log, LogWithDefaults
 from .s3_structure.versions import (
     AcceptedStatus,
+    AcceptedStatusWithDefaults,
     AwaitingReviewStatus,
+    AwaitingReviewStatusWithDefaults,
     ChangesRequestedStatus,
+    ChangesRequestedStatusWithDefaults,
     PublishedStagedStatus,
-    PublishedStatus,
+    PublishedStagedStatusWithDefaults,
+    PublishedStatusWithDefaults,
     PublishedVersionInfo,
+    PublishedVersionInfoWithDefaults,
     PublishNumber,
     StagedVersionInfo,
+    StagedVersionInfoWithDefaults,
     StagedVersionStatus,
     StageNumber,
     SupersededStatus,
+    SupersededStatusWithDefaults,
     TestingStatus,
+    TestingStatusWithDefaults,
     UnpackedStatus,
+    UnpackedStatusWithDefaults,
     UnpackingStatus,
+    UnpackingStatusWithDefaults,
     Versions,
+    VersionsWithDefaults,
 )
 
 yaml = YAML(typ="safe")
 
-VersionSpecificJsonFileT = TypeVar("VersionSpecificJsonFileT", Logs, Chat)
-JsonFileT = TypeVar("JsonFileT", Versions, Logs, Chat)
 
+JsonFileT = TypeVar("JsonFileT", Versions, Log, Chat)
 NumberT = TypeVar("NumberT", StageNumber, PublishNumber)
+InfoT = TypeVar("InfoT", StagedVersionInfo, PublishedVersionInfo)
 
 
 @dataclass
-class RemoteResource:
-    """A representation of a bioimage.io resource
-    (**not** a specific staged or published version of it)"""
-
+class RemoteResourceBase:
     client: Client
     """Client to connect to remote storage"""
     id: str
     """resource identifier"""
 
     @property
-    def resource_folder(self) -> str:
+    @abstractmethod
+    def folder(self) -> str: ...
+
+    def _get_json(self, typ: Type[JsonFileT]) -> JsonFileT:
+        path = self.folder + typ.file_name
+        data = self.client.load_file(path)
+        if data is None:
+            return typ.get_class_with_defaults()()
+        else:
+            return typ.get_class_with_defaults().model_validate_json(data)
+
+    def _extend_json(self, extension: JsonFileT):
+        path = self.folder + extension.file_name
+        logger.info("Extending {} with {}", path, extension)
+        current = self._get_json(extension.__class__)
+        updated = current.get_updated(extension)
+        self.client.put_pydantic(path, updated)
+
+
+@dataclass
+class ResourceConcept(RemoteResourceBase):
+    """A representation of a bioimage.io resource
+    (**not** a specific staged or published version of it)"""
+
+    @property
+    def folder(self) -> str:
         """The S3 (sub)prefix of this resource"""
         return f"{self.id}/"
 
     @property
-    def folder(self) -> str:
-        """The S3 (sub)prefix of this resource (or resource version)"""
-        return self.resource_folder
+    def versions(self) -> Versions:
+        return self._get_json(Versions)
 
-    def get_versions(self) -> Versions:
-        return self._get_version_agnostic_json(Versions)
+    def get_all_staged_versions(self) -> List[StagedVersion]:
+        return [
+            StagedVersion(client=self.client, id=self.id, number=v)
+            for v in self.versions.staged
+        ]
 
-    def get_latest_stage_number(self) -> Optional[StageNumber]:
-        versions = self.get_versions()
-        if not versions.staged:
+    def get_all_published_versions(self) -> List[PublishedVersion]:
+        return [
+            PublishedVersion(client=self.client, id=self.id, number=v)
+            for v in self.versions.published
+        ]
+
+    @property
+    def latest_stage_number(self) -> Optional[StageNumber]:
+        if not self.versions.staged:
             return None
         else:
-            return max(versions.staged)
+            return max(self.versions.staged)
 
     def get_latest_staged_version(self) -> Optional[StagedVersion]:
         """Get a representation of the latest staged version
         (the one with the highest stage number)"""
-        nr = self.get_latest_stage_number()
+        nr = self.latest_stage_number
         if nr is None:
             return None
         else:
@@ -86,7 +138,7 @@ class RemoteResource:
 
     def stage_new_version(self, package_url: str) -> StagedVersion:
         """Stage the content at `package_url` as a new resource version candidate."""
-        nr = self.get_latest_stage_number()
+        nr = self.latest_stage_number
         if nr is None:
             nr = StageNumber(1)
         else:
@@ -96,43 +148,16 @@ class RemoteResource:
         ret.unpack(package_url=package_url)
         return ret
 
-    def _get_version_agnostic_json(self, typ: Type[Versions]) -> Versions:
-        return self._get_json(typ, f"{self.resource_folder}{typ.__name__.lower()}.json")
-
-    def _get_version_specific_json(
-        self, typ: Type[VersionSpecificJsonFileT]
-    ) -> VersionSpecificJsonFileT:
-        return self._get_json(typ, f"{self.folder}{typ.__name__.lower()}.json")
-
-    def _get_json(self, typ: Type[JsonFileT], path: str) -> JsonFileT:
-        data = self.client.load_file(path)
-        if data is None:
-            return typ()
-        else:
-            return typ.model_validate_json(data)
-
-    def _extend_version_agnostic_json(
+    def extend_versions(
         self,
-        extension: Versions,
+        update: Versions,
     ):
-        self._extend_json(
-            extension,
-            f"{self.resource_folder}{extension.__class__.__name__.lower()}.json",
-        )
+        self._extend_json(update)
 
-    def _extend_version_specific_json(
-        self,
-        extension: VersionSpecificJsonFileT,
-    ):
-        self._extend_json(
-            extension, f"{self.folder}{extension.__class__.__name__.lower()}.json"
-        )
-
-    def _extend_json(self, extension: JsonFileT, path: str):
-        logger.info("Extending {} with {}", path, extension)
-        current = self._get_json(extension.__class__, path)
-        _ = current.extend(extension)
-        self.client.put_pydantic(path, current)
+    @property
+    def doi(self):
+        """(version **un**specific) Zenodo concept DOI of this resource"""
+        return self.versions.doi
 
 
 class Uploader(NamedTuple):
@@ -141,22 +166,32 @@ class Uploader(NamedTuple):
 
 
 @dataclass
-class RemoteResourceVersion(RemoteResource, Generic[NumberT], ABC):
+class RemoteResourceVersion(RemoteResourceBase, Generic[NumberT, InfoT], ABC):
     """Base class for a resource version (`StagedVersion` or `PublishedVersion`)"""
+
+    version_prefix: ClassVar[LiteralString] = ""
+    """a prefix to distinguish independent staged and published `version` numbers"""
 
     number: NumberT
     """version number"""
 
-    @property
-    @abstractmethod
-    def version_prefix(self) -> str:
-        """a prefix to distinguish independent staged and published `version` numbers"""
-        pass
+    concept: ResourceConcept = field(init=False)
+
+    def __post_init__(self):
+        self.concept = ResourceConcept(client=self.client, id=self.id)
 
     @property
     def version(self) -> str:
         """version prefix + version number"""
         return self.version_prefix + str(self.number)
+
+    @property
+    @abstractmethod
+    def info(self) -> InfoT: ...
+
+    @property
+    @abstractmethod
+    def exists(self) -> bool: ...
 
     @property
     def folder(self) -> str:
@@ -165,32 +200,38 @@ class RemoteResourceVersion(RemoteResource, Generic[NumberT], ABC):
         return f"{self.id}/{self.version_prefix}{self.number}/"
 
     @property
+    def rdf_path(self) -> str:
+        return f"{self.folder}files/rdf.yaml"
+
+    @property
     def rdf_url(self) -> str:
         """rdf.yaml download URL"""
-        return self.client.get_file_url(f"{self.folder}files/rdf.yaml")
+        return self.client.get_file_url(self.rdf_path)
 
-    def get_log(self) -> Logs:
-        return self._get_version_specific_json(Logs)
+    @property
+    def log(self) -> Log:
+        return self._get_json(Log)
 
-    def get_chat(self) -> Chat:
-        return self._get_version_specific_json(Chat)
+    @property
+    def chat(self) -> Chat:
+        return self._get_json(Chat)
 
     def extend_log(
         self,
-        extension: Logs,
+        extension: Log,
     ):
         """extend log file"""
-        self._extend_version_specific_json(extension)
+        self._extend_json(extension)
 
     def extend_chat(
         self,
         extension: Chat,
     ):
         """extend chat file"""
-        self._extend_version_specific_json(extension)
+        self._extend_json(extension)
 
     def get_uploader(self):
-        rdf = yaml.load(self.client.load_file(f"{self.folder}files/rdf.yaml"))
+        rdf = yaml.load(self.client.load_file(self.rdf_path))
         try:
             uploader = rdf["uploader"]
             email = uploader["email"]
@@ -204,30 +245,38 @@ class RemoteResourceVersion(RemoteResource, Generic[NumberT], ABC):
 
         return Uploader(email=email, name=name)
 
+    def get_file_urls(self):
+        return self.client.get_file_urls(f"{self.folder}files/")
+
 
 @dataclass
-class StagedVersion(RemoteResourceVersion[StageNumber]):
+class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
     """A staged resource version"""
+
+    version_prefix: ClassVar[LiteralString] = "staged/"
+    """The 'staged/' prefix identifies the `version` as a stage number
+    (opposed to a published resource version)."""
 
     number: StageNumber
     """stage number (**not** future resource version)"""
 
     @property
-    def version_prefix(self):
-        """The 'staged/' prefix identifies the `version` as a stage number
-        (opposed to a published resource version)."""
-        return "staged/"
+    def info(self):
+        assert self.exists
+        return self.concept.versions.staged[self.number]
 
     def unpack(self, package_url: str):
         # ensure we have a chat.json
-        self.extend_chat(Chat())
+        self.extend_chat(ChatWithDefaults())
 
         # ensure we have a logs.json
-        self.extend_log(Logs())
+        self.extend_log(LogWithDefaults())
 
         # set first status (this also write versions.json)
         self._set_status(
-            UnpackingStatus(description=f"unzipping {package_url} to {self.folder}")
+            UnpackingStatusWithDefaults(
+                description=f"unzipping {package_url} to {self.folder}"
+            )
         )
 
         # Download the model zip file
@@ -306,27 +355,28 @@ class StagedVersion(RemoteResourceVersion[StageNumber]):
             file_data = zipobj.open(file_name).read()
             upload(file_name, file_data)
 
-        self._set_status(UnpackedStatus())
+        self._set_status(UnpackedStatusWithDefaults())
 
+    @property
     def exists(self):
-        return self.number in self.get_versions().staged
+        return self.number in self.concept.versions.staged
 
     def set_testing_status(self, description: str):
-        self._set_status(TestingStatus(description=description))
+        self._set_status(TestingStatusWithDefaults(description=description))
 
     def await_review(self):
         """set status to 'awaiting review'"""
-        self._set_status(AwaitingReviewStatus())
+        self._set_status(AwaitingReviewStatusWithDefaults())
 
     def request_changes(self, reviewer: str, reason: str):
         from .reviewer import REVIEWERS
 
-        reviewer = REVIEWERS[reviewer.lower()]  # map to reviewer name
-        self._set_status(ChangesRequestedStatus(description=reason))
+        reviewer = REVIEWERS[reviewer.lower()].name  # map to reviewer name
+        self._set_status(ChangesRequestedStatusWithDefaults(description=reason))
         self.extend_chat(
             Chat(
                 messages=[
-                    Message(
+                    MessageWithDefaults(
                         author="system", text=f"{reviewer} requested changes: {reason}"
                     )
                 ]
@@ -334,18 +384,18 @@ class StagedVersion(RemoteResourceVersion[StageNumber]):
         )
 
     def mark_as_superseded(self, description: str, by: StageNumber):  # TODO: use this!
-        self._set_status(SupersededStatus(description=description, by=by))
+        self._set_status(SupersededStatusWithDefaults(description=description, by=by))
 
     def publish(self, reviewer: str) -> PublishedVersion:
         """mark this staged version candidate as accepted and try to publish it"""
         from .reviewer import REVIEWERS
 
-        reviewer = REVIEWERS[reviewer.lower()]  # map to reviewer name
-        self._set_status(AcceptedStatus())
+        reviewer = REVIEWERS[reviewer.lower()].name  # map to reviewer name
+        self._set_status(AcceptedStatusWithDefaults())
         self.extend_chat(
             Chat(
                 messages=[
-                    Message(
+                    MessageWithDefaults(
                         author="system",
                         text=f"{reviewer} accepted {self.id} {self.version}",
                     )
@@ -353,9 +403,8 @@ class StagedVersion(RemoteResourceVersion[StageNumber]):
             )
         )
 
-        versions = self.get_versions()
         # check status of older staged versions
-        for nr, details in versions.staged.items():
+        for nr, details in self.concept.versions.staged.items():
             if nr >= self.number:  # ignore newer staged versions
                 continue
             if isinstance(details.status, (SupersededStatus, PublishedStagedStatus)):
@@ -378,10 +427,10 @@ class StagedVersion(RemoteResourceVersion[StageNumber]):
             else:
                 assert_never(details.status)
 
-        if not versions.published:
+        if not self.concept.versions.published:
             next_publish_nr = PublishNumber(1)
         else:
-            next_publish_nr = PublishNumber(max(versions.published) + 1)
+            next_publish_nr = PublishNumber(max(self.concept.versions.published) + 1)
 
         logger.debug("Publishing {} as version nr {}", self.folder, next_publish_nr)
 
@@ -393,7 +442,7 @@ class StagedVersion(RemoteResourceVersion[StageNumber]):
         sem_ver = rdf.get("version")
         if sem_ver is not None:
             sem_ver = str(sem_ver)
-            if sem_ver in {v.sem_ver for v in versions.published.values()}:
+            if sem_ver in {v.sem_ver for v in self.concept.versions.published.values()}:
                 raise RuntimeError(f"Trying to publish {sem_ver} again!")
 
         ret = PublishedVersion(client=self.client, id=self.id, number=next_publish_nr)
@@ -411,13 +460,24 @@ class StagedVersion(RemoteResourceVersion[StageNumber]):
         # move all other files
         self.client.cp_dir(self.folder, ret.folder)
 
-        versions.staged[self.number].status = PublishedStagedStatus(
-            publish_number=next_publish_nr
+        verions_update = VersionsWithDefaults(
+            staged={
+                self.number: StagedVersionInfoWithDefaults(
+                    sem_ver=self.concept.versions.staged[self.number].sem_ver,
+                    timestamp=self.concept.versions.staged[self.number].timestamp,
+                    status=PublishedStagedStatusWithDefaults(
+                        publish_number=next_publish_nr
+                    ),
+                )
+            },
+            published={
+                next_publish_nr: PublishedVersionInfoWithDefaults(
+                    sem_ver=sem_ver,
+                    status=PublishedStatusWithDefaults(stage_number=self.number),
+                )
+            },
         )
-        versions.published[next_publish_nr] = PublishedVersionInfo(
-            sem_ver=sem_ver, status=PublishedStatus(stage_number=self.number)
-        )
-        self._extend_version_agnostic_json(versions)
+        self.concept.extend_versions(verions_update)
 
         # TODO: clean up staged files?
         # remove all uploaded files from this staged version
@@ -425,34 +485,39 @@ class StagedVersion(RemoteResourceVersion[StageNumber]):
         return ret
 
     def _set_status(self, value: StagedVersionStatus):
-        versions = self.get_versions()
-        details = versions.staged.setdefault(
-            self.number, StagedVersionInfo(status=value)
+        info = self.concept.versions.staged.get(
+            self.number, StagedVersionInfoWithDefaults(status=value)
         )
-        if value.step < details.status.step:
-            logger.error("Cannot proceed from {} to {}", details.status, value)
+        if value.step < info.status.step:
+            logger.error("Cannot proceed from {} to {}", info.status, value)
             return
 
-        if value.step not in (details.status.step, details.status.step + 1) and not (
-            details.status.name == "awaiting review" and value.name == "superseded"
+        if value.step not in (info.status.step, info.status.step + 1) and not (
+            info.status.name == "awaiting review" and value.name == "superseded"
         ):
-            logger.warning("Proceeding from {} to {}", details.status, value)
+            logger.warning("Proceeding from {} to {}", info.status, value)
 
-        details.status = value
-        self._extend_version_agnostic_json(versions)
+        updated_info = info.model_copy(update=dict(status=value))
+        versions_update = VersionsWithDefaults(staged={self.number: updated_info})
+        self.concept.extend_versions(versions_update)
 
 
 @dataclass
-class PublishedVersion(RemoteResourceVersion[PublishNumber]):
+class PublishedVersion(RemoteResourceVersion[PublishNumber, PublishedVersionInfo]):
     """A representation of a published resource version"""
 
     @property
-    def version_prefix(self):
-        """published versions do not have a prefix"""
-        return ""
-
     def exists(self):
-        return self.number in self.get_versions().published
+        return self.number in self.concept.versions.published
+
+    @property
+    def info(self):
+        return self.concept.versions.published[self.number]
+
+    @property
+    def doi(self):
+        """get version specific DOI of Zenodo record"""
+        return self.concept.versions.published[self.number].doi
 
 
 def get_remote_resource_version(client: Client, id: str, version: str):

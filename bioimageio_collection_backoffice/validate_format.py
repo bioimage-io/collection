@@ -12,7 +12,7 @@ from ruyaml import YAML
 from typing_extensions import assert_never
 
 from .remote_resource import PublishedVersion, StagedVersion
-from .s3_structure.log import BioimageioLog, Logs
+from .s3_structure.log import BioimageioLogWithDefaults, LogWithDefaults
 
 yaml = YAML(typ="safe")
 
@@ -219,7 +219,7 @@ def prepare_dynamic_test_cases(
 
 
 def validate_format(rv: Union[StagedVersion, PublishedVersion]):
-    if not rv.exists():
+    if not rv.exists:
         raise ValueError(f"{rv} not found")
 
     if isinstance(rv, StagedVersion):
@@ -255,7 +255,7 @@ def validate_format(rv: Union[StagedVersion, PublishedVersion]):
         if not isinstance(rd, InvalidDescr) and rd.version is not None:
             error = None
             if isinstance(rv, StagedVersion):
-                published = rv.get_versions().published
+                published = rv.concept.versions.published
                 if str(rd.version) in {v.sem_ver for v in published.values()}:
                     error = ErrorEntry(
                         loc=("version",),
@@ -272,5 +272,7 @@ def validate_format(rv: Union[StagedVersion, PublishedVersion]):
             )
 
     summary = rd.validation_summary
-    rv.extend_log(Logs(bioimageio_spec=[BioimageioLog(log=summary)]))
+    rv.extend_log(
+        LogWithDefaults(bioimageio_spec=[BioimageioLogWithDefaults(log=summary)])
+    )
     return dynamic_test_cases, conda_envs

@@ -1,4 +1,12 @@
 {
-    "fynnbe": "Fynn Beuttenmüller",
-    "oeway": "Wei Ouyang"
+    "fynnbe": {
+        "name": "Fynn Beuttenmüller",
+        "affiliation": "European Molecular Biology Laboratory",
+        "orcid": "0000-0002-8567-6389"
+    },
+    "oeway": {
+        "name": "Wei Ouyang",
+        "affiliation": "KTH Royal Institute of Technology",
+        "orcid": "0000-0002-0291-926X"
+    }
 }

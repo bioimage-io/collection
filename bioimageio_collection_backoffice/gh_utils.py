@@ -1,10 +1,11 @@
 import json
-import os
 import uuid
 from io import TextIOWrapper
 from typing import Any, Dict, Union, no_type_check
 
 from loguru import logger
+
+from ._settings import settings
 
 
 def _set_gh_actions_output_impl(msg: Union[str, uuid.UUID], fh: TextIOWrapper):
@@ -21,13 +22,11 @@ def set_gh_actions_outputs(**outputs: Union[str, Any]):
         if not isinstance(output, str):
             output = json.dumps(output, sort_keys=True)
 
-        if "GITHUB_OUTPUT" not in os.environ:
-            logger.error(
-                "GITHUB_OUTPUT env var not defined; output would be: {}", output
-            )
+        if settings.github_output is None:
+            logger.error("output would be: {}", output)
             return
 
-        with open(os.environ["GITHUB_OUTPUT"], "a") as fh:
+        with open(settings.github_output, "a") as fh:
             if "\n" in output:
                 delimiter = uuid.uuid1()
                 _set_gh_actions_output_impl(f"{name}<<{delimiter}", fh)
@@ -41,7 +40,7 @@ def set_gh_actions_outputs(**outputs: Union[str, Any]):
 def workflow_dispatch(workflow_name: str, inputs: Dict[str, Any]):
     import github
 
-    g = github.Github(login_or_token=os.environ["GITHUB_PAT"])
+    g = github.Github(login_or_token=settings.github_pat)
 
     repo = g.get_repo("bioimage-io/collection")
 

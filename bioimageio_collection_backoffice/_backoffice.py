@@ -1,18 +1,18 @@
-import os
+from datetime import datetime
 from pathlib import Path
 from typing import Literal, Optional, Union
 
 from bioimageio.spec.model.v0_5 import WeightsFormat
-from dotenv import load_dotenv
 from loguru import logger
 
-from .backup import backup
+from ._settings import settings
+from .backup import ZenodoHost, backup
 from .generate_collection_json import generate_collection_json
 from .gh_utils import set_gh_actions_outputs
 from .mailroom import notify_uploader
 from .remote_resource import (
     PublishedVersion,
-    RemoteResource,
+    ResourceConcept,
     get_remote_resource_version,
 )
 from .run_dynamic_tests import run_dynamic_tests
@@ -20,20 +20,19 @@ from .s3_client import Client
 from .s3_structure.chat import Chat, Message
 from .validate_format import validate_format
 
-_ = load_dotenv()
-
 
 class BackOffice:
     """This backoffice aids to maintain the bioimage.io collection"""
 
     def __init__(
         self,
-        host: str = os.environ["S3_HOST"],
-        bucket: str = os.environ["S3_BUCKET"],
-        prefix: str = os.environ["S3_FOLDER"],
+        host: str = settings.s3_host,
+        bucket: str = settings.s3_bucket,
+        prefix: str = settings.s3_folder,
     ) -> None:
         super().__init__()
         self.client = Client(host=host, bucket=bucket, prefix=prefix)
+        logger.info("created backoffice with client {}", self.client)
 
     def wipe(self, subfolder: str = ""):
         """DANGER ZONE: wipes `subfolder` completely, only use for test folders!"""
@@ -46,7 +45,7 @@ class BackOffice:
 
     def stage(self, resource_id: str, package_url: str):
         """stage a new resourse (version) from `package_url`"""
-        resource = RemoteResource(self.client, resource_id)
+        resource = ResourceConcept(self.client, resource_id)
         staged = resource.stage_new_version(package_url)
         set_gh_actions_outputs(version=staged.version)
 
@@ -132,9 +131,9 @@ class BackOffice:
             + "Check it out at https://bioimage.io/#/?id={published.id}\n",  # TODO: link to version
         )
 
-    def backup(self, destination: Optional[str] = None):
+    def backup(self, destination: ZenodoHost):
         """backup the whole collection (to zenodo.org)"""
-        _ = backup(self.client, destination or os.environ["ZENODO_URL"])
+        _ = backup(self.client, destination)
 
     def generate_collection_json(
         self, collection_template: Path = Path("collection_template.json")
@@ -149,6 +148,10 @@ class BackOffice:
     def add_chat_message(
         self, resource_id: str, version: str, chat_message: str, author: str
     ):
-        chat = Chat(messages=[Message(author=author, text=chat_message)])
+        chat = Chat(
+            messages=[
+                Message(author=author, text=chat_message, timestamp=datetime.now())
+            ]
+        )
         rv = get_remote_resource_version(self.client, resource_id, version)
         rv.extend_chat(chat)

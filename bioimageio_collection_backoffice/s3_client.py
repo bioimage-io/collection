@@ -2,23 +2,28 @@ from __future__ import annotations
 
 import io
 import json
-import os
-from collections.abc import Sequence
 from dataclasses import dataclass, field
-from datetime import timedelta
 from pathlib import Path
-from typing import Any, BinaryIO, Iterator, List, Optional, TypeVar, Union
+from typing import (
+    Any,
+    BinaryIO,
+    Iterator,
+    List,
+    Optional,
+    Sequence,
+    TypeVar,
+    Union,
+)
 
-from dotenv import load_dotenv
 from loguru import logger
 from minio import Minio, S3Error
 from minio.commonconfig import CopySource
 from minio.datatypes import Object
 from minio.deleteobjects import DeleteObject
-from pydantic import BaseModel
+from pydantic import BaseModel, SecretStr
 
-_ = load_dotenv()
-
+from ._settings import settings
+from .cache import SizedValueLRU
 
 M = TypeVar("M", bound=BaseModel)
 
@@ -27,17 +32,21 @@ M = TypeVar("M", bound=BaseModel)
 class Client:
     """Convenience wrapper around a `Minio` S3 client"""
 
-    host: str = os.environ["S3_HOST"]
+    host: str = settings.s3_host
     """S3 host"""
-    bucket: str = os.environ["S3_BUCKET"]
+    bucket: str = settings.s3_bucket
     """S3 bucket"""
-    prefix: str = os.environ["S3_FOLDER"]
+    prefix: str = settings.s3_folder
     """S3 prefix ('root folder')"""
-    access_key: str = field(default=os.environ["S3_ACCESS_KEY_ID"], repr=False)
+    access_key: SecretStr = field(default=settings.s3_access_key_id, repr=False)
     """S3 access key"""
-    secret_key: str = field(default=os.environ["S3_SECRET_ACCESS_KEY"], repr=False)
+    secret_key: SecretStr = field(default=settings.s3_secret_access_key, repr=False)
     """S3 secret key"""
-    _client: Minio = field(init=False, repr=False)
+    max_bytes_cached: int = int(1e9)
+    _client: Minio = field(init=False, compare=False, repr=False)
+    _cache: Optional[SizedValueLRU[str, Optional[bytes]]] = field(
+        init=False, compare=False, repr=False
+    )
 
     def __post_init__(self):
         self.prefix = self.prefix.strip("/")
@@ -46,22 +55,33 @@ class Client:
 
         self._client = Minio(
             self.host,
-            access_key=self.access_key,
-            secret_key=self.secret_key,
+            access_key=self.access_key.get_secret_value(),
+            secret_key=self.secret_key.get_secret_value(),
         )
         found = self._bucket_exists(self.bucket)
         if not found:
             raise Exception("target bucket does not exist: {self.bucket}")
+
+        self._cache = SizedValueLRU(maxsize=int(5e9))
+        self.load_file = self._cache(self.load_file)
         logger.debug("Created S3-Client: {}", self)
 
     def _bucket_exists(self, bucket: str) -> bool:
         return self._client.bucket_exists(bucket)
+
+    def put_and_cache(self, path: str, file: bytes):
+        self.put(path, io.BytesIO(file), length=len(file))
+        if self._cache is not None:
+            self._cache.update((path,), file, only_if_cached=False)
 
     def put(
         self, path: str, file_object: Union[io.BytesIO, BinaryIO], length: Optional[int]
     ) -> None:
         """upload a file(like object)"""
         # For unknown length (ie without reading file into mem) give `part_size`
+        if self._cache is not None:
+            self._cache.pop((path,))
+
         part_size = 0
         if length is None:
             length = -1
@@ -96,34 +116,54 @@ class Client:
 
     def put_json_string(self, path: str, json_str: str):
         data = json_str.encode()
-        self.put(path, io.BytesIO(data), length=len(data))
+        self.put_and_cache(path, data)
 
     def get_file_urls(
         self,
         path: str = "",
-        exclude_files: Sequence[str] = ("details.json",),
-        lifetime: timedelta = timedelta(hours=1),
     ) -> List[str]:
         """Checks an S3 'folder' for its list of files"""
         logger.debug("Getting file list using {}, at {}", self, path)
-        path = f"{self.prefix}/{path}"
+        prefix_folder = f"{self.prefix}/"
+        path = f"{prefix_folder}{path}"
         objects = self._client.list_objects(self.bucket, prefix=path, recursive=True)
         file_urls: List[str] = []
         for obj in objects:
             if obj.is_dir or obj.object_name is None:
                 continue
-            if Path(obj.object_name).name in exclude_files:
-                continue
-            # Option 1:
-            url = self._client.get_presigned_url(
-                "GET",
-                obj.bucket_name,
-                obj.object_name,
-                expires=lifetime,
-            )
+            assert obj.bucket_name == self.bucket
+            assert obj.object_name.startswith(prefix_folder), obj.object_name
+            url = self.get_file_url(obj.object_name[len(prefix_folder) :])
             file_urls.append(url)
-            # Option 2: Work with minio.datatypes.Object directly
+
         return file_urls
+
+    # def get_presigned_file_urls(
+    #     self,
+    #     path: str = "",
+    #     exclude_files: Sequence[str] = (),
+    #     lifetime: timedelta = timedelta(hours=1),
+    # ) -> List[str]:
+    #     """Checks an S3 'folder' for its list of files"""
+    #     logger.debug("Getting file list using {}, at {}", self, path)
+    #     path = f"{self.prefix}/{path}"
+    #     objects = self._client.list_objects(self.bucket, prefix=path, recursive=True)
+    #     file_urls: List[str] = []
+    #     for obj in objects:
+    #         if obj.is_dir or obj.object_name is None:
+    #             continue
+    #         if Path(obj.object_name).name in exclude_files:
+    #             continue
+    #         # Option 1:
+    #         url = self._client.get_presigned_url(
+    #             "GET",
+    #             obj.bucket_name,
+    #             obj.object_name,
+    #             expires=lifetime,
+    #         )
+    #         file_urls.append(url)
+    #         # Option 2: Work with minio.datatypes.Object directly
+    #     return file_urls
 
     def ls(
         self, path: str, only_folders: bool = False, only_files: bool = False
@@ -196,7 +236,7 @@ class Client:
             )
         )
 
-    def load_file(self, path: str) -> Optional[bytes]:
+    def load_file(self, path: str, /) -> Optional[bytes]:
         """Load file
 
         Returns:
