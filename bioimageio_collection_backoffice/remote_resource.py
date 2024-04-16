@@ -31,6 +31,7 @@ from typing_extensions import LiteralString, assert_never
 
 from ._thumbnails import create_thumbnails
 from .db_structure.chat import Chat, ChatWithDefaults, MessageWithDefaults
+from .db_structure.id_parts import validate_resource_id
 from .db_structure.log import Log, LogWithDefaults
 from .db_structure.versions import (
     AcceptedStatus,
@@ -345,6 +346,8 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
         # overwrite version information
         rdf["version_number"] = self.number
 
+        validate_resource_id(rdf["id"], type_=rdf["type"])
+
         # TODO: extract from gh api for programmatic uploads, e.g. https://api.github.com/users/bioimageiobot
         if (
             "uploader" not in rdf
@@ -444,6 +447,7 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
             elif isinstance(
                 details.status,
                 (
+                    ErrorStatus,
                     UnpackingStatus,
                     UnpackedStatus,
                     TestingStatus,
