@@ -1,4 +1,3 @@
-import json
 from datetime import datetime
 from io import BytesIO
 from pathlib import PurePosixPath
@@ -18,10 +17,10 @@ from loguru import logger
 from ruyaml import YAML
 from typing_extensions import Literal
 
-from bioimageio_collection_backoffice.remote_collection import RemoteCollection
-
 from ._settings import settings
+from .remote_collection import RemoteCollection
 from .remote_resource import PublishedVersion
+from .requests_utils import raise_for_status_discretely
 from .s3_client import Client
 from .s3_structure.versions import PublishedVersionInfo, VersionsWithDefaults
 
@@ -69,11 +68,12 @@ def backup_published_version(
 
     # List the files at the model URL
     file_urls = v.get_file_urls()
+    assert file_urls
     logger.info("Using file URLs:\n{}", "\n".join((str(obj) for obj in file_urls)))
 
     if v.concept.doi is None:
         # Create empty deposition
-        r = requests.post(
+        r_create = requests.post(
             f"{destination}/api/deposit/depositions",
             params=params,
             json={},
@@ -82,7 +82,7 @@ def backup_published_version(
     else:
         concept_id = v.concept.doi.split("/zenodo.")[1]
         # create a new deposition version with different deposition_id from the existing deposition
-        r = requests.post(
+        r_create = requests.post(
             destination
             + "/api/deposit/depositions/"
             + concept_id
@@ -90,8 +90,8 @@ def backup_published_version(
             params=params,
         )
 
-    r.raise_for_status()
-    deposition_info = r.json()
+    raise_for_status_discretely(r_create)
+    deposition_info = r_create.json()
 
     bucket_url = deposition_info["links"]["bucket"]
 
@@ -120,19 +120,19 @@ def backup_published_version(
         publication_date=v.info.timestamp,
     )
 
-    r = requests.put(
-        f"{destination}/api/deposit/depositions/{concept_id}",
+    r_metadata = requests.put(
+        f"{destination}/api/deposit/depositions/{deposition_id}",
         params=params,
-        json=json.dumps({"metadata": metadata}),
+        json={"metadata": metadata},
         headers=headers,
     )
-    r.raise_for_status()
+    raise_for_status_discretely(r_metadata)
 
-    r = requests.post(
-        f"{destination}/api/deposit/depositions/{concept_doi}/actions/publish",
+    r_publish = requests.post(
+        f"{destination}/api/deposit/depositions/{deposition_id}/actions/publish",
         params=params,
     )
-    r.raise_for_status()
+    raise_for_status_discretely(r_publish)
 
     if "sandbox" not in destination or "sandbox" in v.client.prefix:
         v.concept.extend_versions(
@@ -169,7 +169,7 @@ def put_file(file_object: BytesIO, url: str, params: Dict[str, Any]):
         data=file_object,
         params=params,
     )
-    r.raise_for_status()
+    raise_for_status_discretely(r)
 
 
 def rdf_authors_to_metadata_creators(rdf: ResourceDescr):
@@ -201,10 +201,14 @@ def rdf_to_metadata(
 
     description = f"""<a href="https://bioimage.io/#/?id={rdf.id}"><span class="label label-success">View on bioimage.io</span></a><br>{rdf.name}<br><p>{docstring}</p>"""
     keywords = ["bioimage.io", "bioimage.io:" + rdf.type]
-    related_identifiers = generate_related_identifiers_from_rdf(rdf, rdf_file_name)
-    assert rdf.id is not None
-    zenodo_license_ids = requests.get("https://zenodo.org/api/licenses/").json()
-    assert rdf.license is not None
+    # related_identifiers = generate_related_identifiers_from_rdf(rdf, rdf_file_name)  # TODO: add related identifiers
+
+    # for debugging: check if license id is valid:
+    # license_response = requests.get(
+    #     f"https://zenodo.org/api/vocabularies/licenses/{rdf.license.lower()}"
+    # )
+    # raise_for_status_discretely(license_response)
+
     return {
         "title": f"bioimage.io upload: {rdf.id}",
         "description": description,
