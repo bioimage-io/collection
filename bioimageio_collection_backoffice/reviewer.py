@@ -10,17 +10,15 @@ class Reviewer(BaseModel):
     name: str
     affiliation: str
     orcid: str
+    github_user: str 
 
 
-# load mapping of GitHub account names to Reviewer (info)
+# load mapping of user-ids to Reviewer (info)
 # for bioimage.io maintainers
 REVIEWERS: Dict[str, Reviewer] = {
     k: Reviewer.model_validate(v)
     for k, v in requests.get(settings.reviewers).json().items()
 }
-assert all(
-    r.lower() == r for r in REVIEWERS
-), "Maintainer GitHub account name has to be lower case"
 assert all(
     isinstance(name, str) for name in REVIEWERS
 ), "Maintainer name has to be string"
