@@ -46,7 +46,7 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - name: reject reviewer id
+      - name: reject reviewer '${{inputs.reviewer}}'
         run: exit 1
         if: github.actor != 'bioimageiobot' && 'github|${{github.actor_id}}' != inputs.reviewer
       - uses: actions/checkout@v4
