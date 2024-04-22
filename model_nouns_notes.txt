@@ -1,0 +1,39 @@
+# additional animal name-icon pairs that are not included (yet)
+# close duplicates
+# ram: 🐏  # already have sheep
+# ewe: 🐑  # already have sheep
+# whale:🐋  # we use spouting whale as whale
+# hatching chick: 🐣  # already have chick
+# front-facing baby chick: 🐥  # already have chick
+
+# reserved for bioimageio
+# giraffe: 🦒
+
+# too new. not available on all common systems
+# black cat: 🐈‍⬛
+# bison: 🦬
+# mammoth: 🦣
+# beaver: 🦫
+# polar bear: 🐻‍❄
+# dodo: 🦤
+# seal: 🦭
+# beetle: 🪲
+# fly: 🪰
+# worm: 🪱
+
+# maybe not
+# cockroach: 🪳
+# unicorn: 🦄
+# dragon: 🐉
+
+# faces (for which non-face versions are listed)
+# monkey face: 🐵
+# dog face: 🐶
+# cat face: 🐱
+# tiger face: 🐯
+# horse face: 🐴
+# cow face: 🐮
+# pig face: 🐷
+# mouse face: 🐭
+# rabbit face: 🐰
+# dragon face: 🐲

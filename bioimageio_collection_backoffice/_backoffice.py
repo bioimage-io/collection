@@ -7,6 +7,7 @@ from loguru import logger
 
 from ._settings import settings
 from .backup import ZenodoHost, backup
+from .db_structure.chat import Chat, Message
 from .generate_collection_json import generate_collection_json
 from .gh_utils import set_gh_actions_outputs
 from .mailroom import notify_uploader
@@ -17,7 +18,6 @@ from .remote_resource import (
 )
 from .run_dynamic_tests import run_dynamic_tests
 from .s3_client import Client
-from .s3_structure.chat import Chat, Message
 from .validate_format import validate_format
 
 

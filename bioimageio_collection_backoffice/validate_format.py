@@ -11,8 +11,8 @@ from bioimageio.spec.summary import ErrorEntry, ValidationDetail
 from ruyaml import YAML
 from typing_extensions import assert_never
 
+from .db_structure.log import BioimageioLogWithDefaults, LogWithDefaults
 from .remote_resource import PublishedVersion, StagedVersion
-from .s3_structure.log import BioimageioLogWithDefaults, LogWithDefaults
 
 yaml = YAML(typ="safe")
 

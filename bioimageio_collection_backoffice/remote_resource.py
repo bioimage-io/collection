@@ -1,10 +1,13 @@
 from __future__ import annotations
 
 import io
+import sys
+import traceback
 import urllib.request
 import zipfile
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
+from datetime import datetime
 from typing import (
     Any,
     ClassVar,
@@ -27,16 +30,16 @@ from ruyaml import YAML
 from typing_extensions import LiteralString, assert_never
 
 from ._thumbnails import create_thumbnails
-from .s3_client import Client
-from .s3_structure.chat import Chat, ChatWithDefaults, MessageWithDefaults
-from .s3_structure.log import Log, LogWithDefaults
-from .s3_structure.versions import (
+from .db_structure.chat import Chat, ChatWithDefaults, MessageWithDefaults
+from .db_structure.log import Log, LogWithDefaults
+from .db_structure.versions import (
     AcceptedStatus,
     AcceptedStatusWithDefaults,
     AwaitingReviewStatus,
     AwaitingReviewStatusWithDefaults,
     ChangesRequestedStatus,
     ChangesRequestedStatusWithDefaults,
+    ErrorStatus,
     PublishedStagedStatus,
     PublishedStagedStatusWithDefaults,
     PublishedStatusWithDefaults,
@@ -58,6 +61,8 @@ from .s3_structure.versions import (
     Versions,
     VersionsWithDefaults,
 )
+from .resource_id import validate_resource_id
+from .s3_client import Client
 
 yaml = YAML(typ="safe")
 
@@ -145,7 +150,10 @@ class ResourceConcept(RemoteResourceBase):
             nr = StageNumber(nr + 1)
 
         ret = StagedVersion(client=self.client, id=self.id, number=nr)
-        ret.unpack(package_url=package_url)
+        try:
+            ret.unpack(package_url=package_url)
+        except Exception as e:
+            ret.report_error(e)
         return ret
 
     def extend_versions(
@@ -231,7 +239,9 @@ class RemoteResourceVersion(RemoteResourceBase, Generic[NumberT, InfoT], ABC):
         self._extend_json(extension)
 
     def get_uploader(self):
-        rdf = yaml.load(self.client.load_file(self.rdf_path))
+        rdf_data = self.client.load_file(self.rdf_path)
+        assert rdf_data is not None
+        rdf = yaml.load(io.BytesIO(rdf_data))
         try:
             uploader = rdf["uploader"]
             email = uploader["email"]
@@ -264,6 +274,31 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
     def info(self):
         assert self.exists
         return self.concept.versions.staged[self.number]
+
+    def report_error(self, error: Exception):
+        info = self.concept.versions.staged.get(self.number)
+        current_status = None if info is None else info.status
+        if isinstance(current_status, ErrorStatus):
+            logger.error("error: {}", current_status)
+            sys.exit(1)
+
+        error_status = ErrorStatus(
+            timestamp=datetime.now(),
+            message=str(error),
+            traceback=traceback.format_tb(error.__traceback__),
+            during=current_status,
+        )
+        if info is None:
+            info = StagedVersionInfoWithDefaults(status=error_status)
+
+        version_update = VersionsWithDefaults(
+            staged={
+                self.number: StagedVersionInfo(
+                    sem_ver=info.sem_ver, timestamp=info.timestamp, status=error_status
+                )
+            }
+        )
+        self.concept.extend_versions(version_update)
 
     def unpack(self, package_url: str):
         # ensure we have a chat.json
@@ -312,6 +347,8 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
 
         # overwrite version information
         rdf["version_number"] = self.number
+
+        validate_resource_id(rdf["id"], type_=rdf["type"])
 
         # TODO: extract from gh api for programmatic uploads, e.g. https://api.github.com/users/bioimageiobot
         if (
@@ -412,6 +449,7 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
             elif isinstance(
                 details.status,
                 (
+                    ErrorStatus,
                     UnpackingStatus,
                     UnpackedStatus,
                     TestingStatus,

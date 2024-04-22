@@ -2,6 +2,7 @@ from pathlib import Path
 
 from bioimageio_collection_backoffice._settings import settings
 from bioimageio_collection_backoffice.backup import backup
+from bioimageio_collection_backoffice.db_structure.versions import PublishNumber
 from bioimageio_collection_backoffice.generate_collection_json import (
     generate_collection_json,
 )
@@ -11,7 +12,6 @@ from bioimageio_collection_backoffice.remote_resource import (
     StagedVersion,
 )
 from bioimageio_collection_backoffice.s3_client import Client
-from bioimageio_collection_backoffice.s3_structure.versions import PublishNumber
 
 
 def test_lifecycle(
@@ -30,7 +30,7 @@ def test_lifecycle(
         == f"{s3_test_folder_url}frank-water-buffalo/staged/1/files/rdf.yaml"
     )
     # skipping test step here (tested in test_backoffice)
-    published = staged.publish(reviewer="fynnbe")
+    published = staged.publish(reviewer="github|15139589")
     assert isinstance(published, PublishedVersion)
     published_rdf_url = published.rdf_url
     assert (
