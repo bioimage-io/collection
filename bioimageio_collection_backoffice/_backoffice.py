@@ -134,8 +134,7 @@ class BackOffice:
             )
         finally:
             rv.unlock_publish()
-            
-    
+
     def backup(self, destination: ZenodoHost):
         """backup the whole collection (to zenodo.org)"""
         _ = backup(self.client, destination)
