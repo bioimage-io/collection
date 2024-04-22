@@ -32,12 +32,16 @@ jobs:
     secrets: inherit
 
   test:
+    runs-on: ubuntu-latest
     needs: stage
-    uses: bioimage-io/collection/.github/workflows/test_call.yaml@main
-    with:
-      resource_id: ${{inputs.resource_id}}
-      version: ${{needs.stage.outputs.version}}
-      S3_HOST: ${{vars.S3_HOST}}
-      S3_BUCKET: ${{vars.S3_BUCKET}}
-      S3_FOLDER: ${{inputs.sandbox && vars.S3_SANDBOX_FOLDER || vars.S3_FOLDER}}
-    secrets: inherit
+    steps:
+    - uses: actions/checkout@v4
+    - run: |
+        gh workflow run test.yaml \
+          -f resource_id=${{inputs.resource_id}} \
+          -f version=${{needs.stage.outputs.version}} \
+          -f S3_HOST=${{vars.S3_HOST}} \
+          -f S3_BUCKET=${{vars.S3_BUCKET}} \
+          -f S3_FOLDER=${{inputs.sandbox && vars.S3_SANDBOX_FOLDER || vars.S3_FOLDER}}
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

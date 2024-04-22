@@ -13,7 +13,7 @@ from bioimageio.spec.common import HttpUrl, RelativeFilePath
 from bioimageio.spec.utils import download
 from loguru import logger
 from ruyaml import YAML
-from typing_extensions import Literal
+from typing_extensions import Literal, assert_never
 
 from ._settings import settings
 from .db_structure.versions import PublishedVersionInfo, VersionsWithDefaults
@@ -60,9 +60,15 @@ def backup_published_version(
     if rdf.license is None:
         raise ValueError("Missing license")
 
-    # client = v.client
     headers = {"Content-Type": "application/json"}
-    params = {"access_token": settings.zenodo_api_access_token.get_secret_value()}
+    if destination == "https://zenodo.org":
+        params = {"access_token": settings.zenodo_api_access_token.get_secret_value()}
+    elif destination == "https://sandbox.zenodo.org":
+        params = {
+            "access_token": settings.zenodo_test_api_access_token.get_secret_value()
+        }
+    else:
+        assert_never(destination)
 
     # List the files at the model URL
     file_urls = v.get_file_urls()
