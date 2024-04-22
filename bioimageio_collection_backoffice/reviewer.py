@@ -10,7 +10,7 @@ class Reviewer(BaseModel):
     name: str
     affiliation: str
     orcid: str
-    github_user: str 
+    github_user: str
 
 
 # load mapping of user-ids to Reviewer (info)
