@@ -14,7 +14,7 @@ on:
       reviewer:
         description: GitHub account name of bioimage.io maintainer requesting changes
         required: false
-        default: ${{github.actor}}
+        default: 'github|${{github.actor_id}}'
         type: string
       reason:
         description: Why are changes required? What needs changing?
@@ -56,7 +56,7 @@ jobs:
     steps:
       - name: reject reviewer id
         run: exit 1
-        if: github.actor != 'bioimageiobot' && github.actor != inputs.reviewer
+        if: github.actor != 'bioimageiobot' && 'github|${{github.actor_id}}' != inputs.reviewer
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:

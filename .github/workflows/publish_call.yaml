@@ -12,9 +12,9 @@ on:
         required: true
         type: number
       reviewer:
-        description: GitHub account name of bioimage.io maintainer accepting this resource version
+        description: GitHub user id (prefixed with 'github|') of the bioimage.io maintainer accepting this resource version
         required: false
-        default: ${{github.actor}}
+        default: 'github|${{github.actor_id}}'
         type: string
       S3_HOST:
         required: true
@@ -48,7 +48,7 @@ jobs:
     steps:
       - name: reject reviewer id
         run: exit 1
-        if: github.actor != 'bioimageiobot' && github.actor != inputs.reviewer
+        if: github.actor != 'bioimageiobot' && 'github|${{github.actor_id}}' != inputs.reviewer
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
