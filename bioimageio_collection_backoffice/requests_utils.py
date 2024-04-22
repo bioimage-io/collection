@@ -1,7 +1,7 @@
 from io import BytesIO
 from pathlib import PurePosixPath
 from typing import Any, Dict
-from urllib.parse import urlparse
+from urllib.parse import urlparse, urlunparse
 
 import requests
 
@@ -26,9 +26,12 @@ def raise_for_status_discretely(response: requests.Response):
     else:
         reason = response.reason
 
-    discrete_url = urlparse(response.url)
-    if discrete_url.query:
-        discrete_url = discrete_url._replace(query="***query*hidden***")
+    parsed_url = urlparse(response.url)
+    if parsed_url.query:
+        parsed_url = parsed_url._replace(query="***query*hidden***")
+        discrete_url = urlunparse(parsed_url)
+    else:
+        discrete_url = response.url
 
     if 400 <= response.status_code < 500:
         http_error_msg = (
