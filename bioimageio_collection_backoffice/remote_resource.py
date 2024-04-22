@@ -538,6 +538,18 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
         updated_info = info.model_copy(update=dict(status=value))
         versions_update = VersionsWithDefaults(staged={self.number: updated_info})
         self.concept.extend_versions(versions_update)
+    
+    def lock_publish(self):
+        """Creates publish lock in DB"""
+        self.client.put_and_cache(self.publish_lockfile_path, b" ")
+
+    def unlock_publish(self):
+        """Releases publish lock in DB"""         
+        self.client.rm(self.publish_lockfile_path)
+
+    @property
+    def publish_lockfile_path(self):
+        return f"{self.folder}lock-publish"    
 
 
 @dataclass
