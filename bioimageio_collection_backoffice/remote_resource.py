@@ -239,7 +239,9 @@ class RemoteResourceVersion(RemoteResourceBase, Generic[NumberT, InfoT], ABC):
         self._extend_json(extension)
 
     def get_uploader(self):
-        rdf = yaml.load(self.client.load_file(self.rdf_path))
+        rdf_data = self.client.load_file(self.rdf_path)
+        assert rdf_data is not None
+        rdf = yaml.load(io.BytesIO(rdf_data))
         try:
             uploader = rdf["uploader"]
             email = uploader["email"]
