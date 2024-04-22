@@ -549,7 +549,7 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
 
     @property
     def publish_lockfile_path(self):
-        return f"{self.folder}lock-publish"
+        return f"{self.concept.folder}lock-publish"
 
 
 @dataclass
