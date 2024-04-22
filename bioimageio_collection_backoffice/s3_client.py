@@ -223,6 +223,9 @@ class Client:
 
         return objects
 
+    def rm(self, object: str):
+        self._client.remove_object(self.bucket, f"{self.prefix}/{object}")
+
     def _rm_objs(
         self, objects: Sequence[Object], *, bypass_governance_mode: bool
     ) -> None:

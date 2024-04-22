@@ -121,15 +121,19 @@ class BackOffice:
                 f"Cannot publish already published {resource_id} {version}"
             )
 
-        published: PublishedVersion = rv.publish(reviewer=reviewer)
-        assert isinstance(published, PublishedVersion)
-        self.generate_collection_json()
-        notify_uploader(
-            rv,
-            "was published! 🎉",
-            f"Thank you for contributing {published.id} {published.version} to bioimage.io!\n"
-            + "Check it out at https://bioimage.io/#/?id={published.id}\n",  # TODO: link to version
-        )
+        try:
+            rv.lock_publish()
+            published: PublishedVersion = rv.publish(reviewer=reviewer)
+            assert isinstance(published, PublishedVersion)
+            self.generate_collection_json()
+            notify_uploader(
+                rv,
+                "was published! 🎉",
+                f"Thank you for contributing {published.id} {published.version} to bioimage.io!\n"
+                + "Check it out at https://bioimage.io/#/?id={published.id}\n",  # TODO: link to version
+            )
+        finally:
+            rv.unlock_publish()
 
     def backup(self, destination: ZenodoHost):
         """backup the whole collection (to zenodo.org)"""
