@@ -1,12 +1,20 @@
 {
-    "fynnbe": {
-        "name": "Fynn Beuttenmüller",
-        "affiliation": "European Molecular Biology Laboratory",
-        "orcid": "0000-0002-8567-6389"
-    },
-    "oeway": {
-        "name": "Wei Ouyang",
-        "affiliation": "KTH Royal Institute of Technology",
-        "orcid": "0000-0002-0291-926X"
-    }
+  "github|15139589": {
+    "name": "Fynn Beuttenmüller",
+    "affiliation": "European Molecular Biology Laboratory",
+    "orcid": "0000-0002-8567-6389",
+    "github_user": "fynnbe"
+  },
+  "github|478667": {
+    "name": "Wei Ouyang",
+    "affiliation": "KTH Royal Institute of Technology",
+    "orcid": "0000-0002-0291-926X",
+    "github_user": "oeway"
+  },
+  "github|1950756": {
+    "name": "Jeremy Metz",
+    "affiliation": "Presently unaffiliated; formerly KTH Royal Institute of Technology",
+    "orcid": "0000-0002-8099-8776",
+    "github_user": "jmetz"
+  }
 }
