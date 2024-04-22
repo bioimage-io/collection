@@ -48,7 +48,7 @@ jobs:
     steps:
       - name: reject reviewer '${{inputs.reviewer}}'
         run: exit 1
-        if: github.actor != 'bioimageiobot' && 'github|${{github.actor_id}}' != inputs.reviewer
+        if: github.actor != 'bioimageiobot' && format('github|{0}', github.actor_id) != inputs.reviewer
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
