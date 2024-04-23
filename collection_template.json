@@ -37,7 +37,6 @@
             "dataset"
         ],
         "default_type": "model",
-        "url_root": "https://raw.githubusercontent.com/bioimage-io/collection-bioimage-io/gh-pages",
         "partners": [
             {
                 "id": "bioimageio",

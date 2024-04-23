@@ -29,6 +29,7 @@ def generate_collection_json(
     with collection_template.open() as f:
         collection = json.load(f)
 
+    collection["config"]["url_root"] = client.get_file_url("").strip("/")
     for p in remote_collection.get_all_published_versions():
         collection["collection"].append(create_entry(p))
 
