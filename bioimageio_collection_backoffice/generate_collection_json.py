@@ -80,7 +80,10 @@ def create_entry(
 
         if isinstance(src, str):
             clean_name = Path(src).name  # remove any leading './'
-            return thumbnails.get(clean_name, src)
+            if clean_name in thumbnails:
+                return p.get_file_url(thumbnails[clean_name])
+            else:
+                return src
 
         return src
 
