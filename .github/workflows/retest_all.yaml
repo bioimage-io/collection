@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       sandbox:
-        description: Flag to use sandbox instead
+        description: use sandbox
         required: false
         default: true
         type: boolean

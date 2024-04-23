@@ -18,7 +18,7 @@ on:
         default: 'auto detect'
         type: string
       sandbox:
-        description: Flag to publish within sandbox instead
+        description: Publish within sandbox
         required: false
         default: false
         type: boolean

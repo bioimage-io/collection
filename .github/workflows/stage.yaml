@@ -13,7 +13,7 @@ on:
         required: true
         type: string
       sandbox:
-        description: Flag to stage to sandbox instead
+        description: Stage to sandbox
         required: false
         default: false
         type: boolean

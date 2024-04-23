@@ -1,5 +1,5 @@
 name: test bioimageio resource
-run-name: test ${{inputs.resource_id}} staged/${{inputs.stage_number}}
+run-name: test ${{inputs.resource_id}} ${{inputs.version}}
 
 on:
   workflow_dispatch:
@@ -8,12 +8,12 @@ on:
         description: "Bioimage.io resource identifier"
         required: true
         type: string
-      stage_number:
-        description: stage number to test
+      version:
+        description: "(Published) version number or staged version number prefixed with 'staged/', e.g. 'staged/1'"
         required: true
         type: number
       sandbox:
-        description: Flag to test resource in sandbox instead
+        description: staged resource is on sandbox
         required: false
         default: false
         type: boolean
@@ -25,10 +25,8 @@ jobs:
     uses: bioimage-io/collection/.github/workflows/test_call.yaml@main
     with:
       resource_id: ${{inputs.resource_id}}
-      version: staged/${{inputs.stage_number}}
+      version: ${{inputs.version}}
       S3_HOST: ${{vars.S3_HOST}}
       S3_BUCKET: ${{vars.S3_BUCKET}}
       S3_FOLDER: ${{inputs.sandbox && vars.S3_SANDBOX_FOLDER || vars.S3_FOLDER}}
     secrets: inherit
-
-# TODO: call emailer
