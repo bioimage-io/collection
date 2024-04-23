@@ -1,9 +1,10 @@
 name: backup
-run-name: backup ${{vars.S3_BUCKET}}/${{vars.S3_FOLDER}} to ${{ inputs.ZENODO_URL }}
+run-name: backup ${{vars.S3_BUCKET}}/${{vars.S3_FOLDER}} to ${{ vars.ZENODO_URL }}
 
 on:
   schedule:
     - cron: "0 8 * * *" # every day at 8am
+  workflow_dispatch:
 
 concurrency: ${{vars.ZENODO_URL}}
 
