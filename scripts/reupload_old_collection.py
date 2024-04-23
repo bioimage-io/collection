@@ -21,6 +21,7 @@ from bioimageio.spec.common import (
     BioimageioYamlSource,
     RootHttpUrl,
 )
+from bioimageio.spec.utils import download
 from dotenv import load_dotenv
 from minio import Minio
 from ruyaml import YAML
@@ -36,7 +37,10 @@ _ = load_dotenv()
 yaml = YAML(typ="safe")
 logger = logging.getLogger(__name__)
 
-COLLECTION_FOLDER = Path(__file__).parent.parent / "collection-bioimage-io/collection"
+COLLECTION_FOLDER = (
+    Path(__file__).parent.parent.parent / "collection-bioimage-io/collection"
+)
+assert COLLECTION_FOLDER.exists(), COLLECTION_FOLDER.absolute()
 
 id_client = BigClient()
 id_parts = IdParts.load()
@@ -275,7 +279,7 @@ def get_resource_urls_from_collection_folder(
             logger.warning("converting %s to %s", rdf_source, new_rdf_source)
             rdf_source = new_rdf_source
 
-        remote_update_path = Path(pooch.retrieve(rdf_source, known_hash=None))  # type: ignore
+        remote_update_path = download(rdf_source).path
         remote_update = yaml.load(remote_update_path)
         rdf.update(remote_update)
         rdf.update(version)
@@ -361,13 +365,15 @@ UPLOADED: Set[str] = {
     "stupendous-sheep_v1.zip",
 }
 
-nicknames: Dict[Literal["dataset"], Set[str]] = {}
+nicknames: Dict[Literal["dataset"], Set[str]] = {"dataset": {"decadent-candy"}}
 
+done = ["https://zenodo.org/api/records/6559930/files/content"]
 if __name__ == "__main__":
     type_ = "dataset"
     resource_urls = get_resource_urls_from_collection_folder(
-        start=0, end=10, type_=type_
+        start=10, end=50, type_=type_
     )
+    resource_urls = [url for url in resource_urls if url[1] not in done]
     print("plan:", [t[1] for t in resource_urls])
     print()
     print()
