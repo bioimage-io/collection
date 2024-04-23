@@ -25,7 +25,7 @@ class IdPartsEntry(Node, frozen=True):
         )  # such that longest adjective matches first during validation, e.g. 'easy-' vs 'easy-going-'
         return value
 
-    def validate_resource_id(self, resource_id: str):
+    def get_noun(self, resource_id: str):
         if not isinstance(resource_id, str):
             raise TypeError(f"invalid resource_id type: {type(resource_id)}")
         if not resource_id:
@@ -35,12 +35,18 @@ class IdPartsEntry(Node, frozen=True):
             if resource_id.startswith(adj + "-"):
                 break
         else:
+            return None
+
+        return resource_id[len(adj) + 1 :]
+
+    def validate_resource_id(self, resource_id: str):
+        noun = self.get_noun(resource_id)
+        if noun is None:
             raise ValueError(
                 f"{resource_id} does not start with a listed adjective"
                 + " (or does not follow the pattern 'adjective-noun')"
             )
 
-        noun = resource_id[len(adj) + 1 :]
         if noun not in self.nouns:
             raise ValueError(
                 f"{resource_id} does not end with a listed noun"
@@ -61,3 +67,11 @@ class IdParts(Node, frozen=True):
         r = requests.get(settings.id_parts)
         raise_for_status_discretely(r)
         return cls.model_validate(r.json())
+
+    def get_icon(self, resource_id: str):
+        for parts in (self.model, self.dataset, self.notebook):
+            noun = parts.get_noun(resource_id)
+            if noun is not None:
+                return parts.nouns[noun]
+
+        return None
