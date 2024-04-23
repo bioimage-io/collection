@@ -5,8 +5,9 @@ import os
 from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
-from typing import BinaryIO, List, Sequence, Tuple, Union
+from typing import Any, BinaryIO, Dict, List, Sequence, Set, Tuple, Union, assert_never
 
+import github
 import pooch
 from bioimageio.spec import (
     InvalidDescr,
@@ -24,15 +25,21 @@ from dotenv import load_dotenv
 from minio import Minio
 from ruyaml import YAML
 from tqdm import tqdm
+from typing_extensions import Literal
+
+from bioimageio_collection_backoffice.db_structure.id_parts import IdParts
+from bioimageio_collection_backoffice.resource_id import generate_resource_id
+from bioimageio_collection_backoffice.s3_client import Client as BigClient
 
 _ = load_dotenv()
 
 yaml = YAML(typ="safe")
 logger = logging.getLogger(__name__)
 
-COLLECTION_FOLDER = (
-    Path(__file__).parent.parent.parent / "collection-bioimage-io/collection"
-)
+COLLECTION_FOLDER = Path(__file__).parent.parent / "collection-bioimage-io/collection"
+
+id_client = BigClient()
+id_parts = IdParts.load()
 
 
 @dataclass
@@ -95,7 +102,7 @@ def upload_resources(
     for i, (src, root) in enumerate(tqdm(sources)):
         out = Path(tmp_dir) / str(i)
         out.mkdir()
-        with ValidationContext(root=root):
+        with ValidationContext(root=root, warning_level=50):
             if isinstance(src, dict):
                 rd = build_description(src)
             else:
@@ -114,9 +121,34 @@ def upload_resources(
 
         client.upload_file(package, fname)
         UPLOADED.add(fname)
+        print()
+        print()
+        print(UPLOADED)
+        print()
+        print()
+        workflow_dispatch(
+            "stage.yaml",
+            {
+                "resource_id": rd.id,
+                "package_url": f"https://{client.host}/{client.bucket}/{client.root_folder}/{fname}",
+            },
+        )
+
         upload_count += 1
 
     print(f"uploaded {upload_count}")
+
+
+def workflow_dispatch(workflow_name: str, inputs: Dict[str, Any]):
+    g = github.Github(login_or_token=os.environ["GITHUB_PAT"])
+
+    repo = g.get_repo("bioimage-io/collection")
+
+    workflow = repo.get_workflow(workflow_name)
+
+    ref = repo.get_branch("main")
+    ok = workflow.create_dispatch(ref=ref, inputs=inputs)
+    assert ok
 
 
 def get_model_urls_from_collection_folder(start: int = 0, end: int = 9999):
@@ -174,7 +206,82 @@ def get_model_urls_from_collection_folder(start: int = 0, end: int = 9999):
         rdf.update(version)
         rdf["id"] = nickname
         rdf["id_emoji"] = nickname_icon
+        rdf["uploader"] = {"email": "bioimageiobot@gmail.com"}
+        _ = rdf.pop("download_url", None)
 
+        v += 1
+        rdf["version"] = v
+        ret.append((rdf, RootHttpUrl(rdf_source).parent))
+        count += 1
+
+    return ret
+
+
+def get_resource_urls_from_collection_folder(
+    start: int = 0, end: int = 9999, type_: Literal["dataset"] = "dataset"
+):
+    assert COLLECTION_FOLDER.exists()
+    ret: List[Tuple[BioimageioYamlContent, RootHttpUrl]] = []
+    count = 0
+    for i, resource_path in enumerate(
+        sorted(COLLECTION_FOLDER.glob("**/resource.yaml"))[start:end], start=start
+    ):
+        logger.info("processing %d %s", i, resource_path.relative_to(COLLECTION_FOLDER))
+        resource = yaml.load(resource_path)
+        if resource["status"] != "accepted":
+            continue
+
+        if resource["type"] != type_:
+            continue
+
+        rdf_base = dict(resource)
+        _ = rdf_base.pop("doi", None)
+        _ = rdf_base.pop("owners", None)
+        _ = rdf_base.pop("status", None)
+        _ = rdf_base.pop("versions", None)
+
+        nickname = generate_resource_id(id_client, type_)
+        while nickname in nicknames[type_]:
+            nickname = generate_resource_id(id_client, type_)
+
+        nicknames[type_].add(nickname)
+        nickname_icon = id_parts.get_icon(nickname)
+        assert nickname_icon is not None
+        nickname_icon = rdf_base.pop("nickname", None)
+        nickname_icon = rdf_base.pop("nickname_icon", None)
+
+        v = 0
+        # for version in resource["versions"][::-1]:
+        version = resource["versions"][0]  # only upload latest version
+        if version.pop("status", None) != "accepted":
+            continue
+
+        rdf = dict(rdf_base)
+        rdf_source = version.pop("rdf_source")
+        _ = version.pop("doi", None)
+        _ = version.pop("version_name", None)
+        version_id = version.pop("version_id", None)
+        created = version.pop("created", None)
+        if created is not None:
+            version["timestamp"] = created
+
+        if rdf_source.startswith("https://zenodo.org/api/files/"):
+            # convert source from old zenodo api
+            assert version_id is not None
+            rdf_name = rdf_source.split("/")[-1]
+            new_rdf_source = (
+                f"https://zenodo.org/api/records/{version_id}/files/{rdf_name}/content"
+            )
+            logger.warning("converting %s to %s", rdf_source, new_rdf_source)
+            rdf_source = new_rdf_source
+
+        remote_update_path = Path(pooch.retrieve(rdf_source, known_hash=None))  # type: ignore
+        remote_update = yaml.load(remote_update_path)
+        rdf.update(remote_update)
+        rdf.update(version)
+        rdf["id"] = nickname
+        rdf["id_emoji"] = nickname_icon
+        rdf["uploader"] = {"email": "bioimageiobot@gmail.com"}
         _ = rdf.pop("download_url", None)
 
         v += 1
@@ -240,11 +347,31 @@ UPLOADED_SANDBOX = {
     "determined-hedgehog_v1.zip",
 }
 
-UPLOADED = {
+UPLOADED: Set[str] = {
+    "affable-shark_v1.zip",
+    "committed-turkey_v1.zip",
+    "decisive-panda_v1.zip",
+    "determined-hedgehog_v1.zip",
+    "frank-water-buffalo_v1.zip",
     "funny-butterfly_v1.zip",
+    "greedy-shark_v1.zip",
+    "humorous-owl_v1.zip",
+    "lucky-fox_v1.zip",
+    "pioneering-goat_v1.zip",
+    "stupendous-sheep_v1.zip",
 }
 
+nicknames: Dict[Literal["dataset"], Set[str]] = {}
+
 if __name__ == "__main__":
-    model_urls = get_model_urls_from_collection_folder(start=1, end=4)
-    upload_resources(model_urls)
-    print(UPLOADED)
+    type_ = "dataset"
+    resource_urls = get_resource_urls_from_collection_folder(
+        start=0, end=10, type_=type_
+    )
+    print("plan:", [t[1] for t in resource_urls])
+    print()
+    print()
+    print(nicknames)
+    print()
+    print()
+    upload_resources(resource_urls)
