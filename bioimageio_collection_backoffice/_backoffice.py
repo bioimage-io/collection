@@ -4,6 +4,7 @@ from typing import Literal, Optional, Union
 
 from bioimageio.spec.model.v0_5 import WeightsFormat
 from loguru import logger
+from typing_extensions import assert_never
 
 from ._settings import settings
 from .backup import ZenodoHost, backup
@@ -14,9 +15,10 @@ from .mailroom import notify_uploader
 from .remote_resource import (
     PublishedVersion,
     ResourceConcept,
+    StagedVersion,
     get_remote_resource_version,
 )
-from .run_dynamic_tests import run_dynamic_tests
+from .run_dynamic_tests import rerun_dynamic_tests, run_dynamic_tests
 from .s3_client import Client
 from .validate_format import validate_format
 
@@ -50,7 +52,7 @@ class BackOffice:
         set_gh_actions_outputs(version=staged.version)
 
     def validate_format(self, resource_id: str, version: str):
-        """validate a (staged) resource version's bioimageio.yaml"""
+        """validate a resource version's bioimageio.yaml"""
         rv = get_remote_resource_version(self.client, resource_id, version)
         dynamic_test_cases, conda_envs = validate_format(rv)
         set_gh_actions_outputs(
@@ -68,16 +70,20 @@ class BackOffice:
     ):
         """run dynamic tests for a (staged) resource version"""
         rv = get_remote_resource_version(self.client, resource_id, version)
-        if isinstance(rv, PublishedVersion):
-            raise ValueError(
-                f"Testing of already published {resource_id} {version} is not implemented"
+        if isinstance(rv, StagedVersion):
+            run_dynamic_tests(
+                staged=rv,
+                weight_format=weight_format or None,
+                create_env_outcome=create_env_outcome,
             )
-
-        run_dynamic_tests(
-            staged=rv,
-            weight_format=weight_format or None,
-            create_env_outcome=create_env_outcome,
-        )
+        elif isinstance(rv, PublishedVersion):
+            rerun_dynamic_tests(
+                published=rv,
+                weight_format=weight_format or None,
+                create_env_outcome=create_env_outcome,
+            )
+        else:
+            assert_never(rv)
 
     def await_review(self, resource_id: str, version: str):
         """mark a (staged) resource version is awaiting review"""

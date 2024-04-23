@@ -12,10 +12,11 @@ from bioimageio.spec.summary import (
     ValidationDetail,
     ValidationSummary,
 )
+from bioimageio.spec.utils import download
 from ruyaml import YAML
 
 from .db_structure.log import BioimageioLogWithDefaults, LogWithDefaults
-from .remote_resource import StagedVersion
+from .remote_resource import PublishedVersion, StagedVersion
 
 try:
     from tqdm import tqdm
@@ -51,7 +52,30 @@ def run_dynamic_tests(
     staged.set_testing_status(
         "Testing" + ("" if weight_format is None else f" {weight_format} weights"),
     )
-    rdf_source = staged.rdf_url
+    summary = _run_dynamic_tests_impl(staged.rdf_url, weight_format, create_env_outcome)
+    if summary is not None:
+        staged.extend_log(
+            LogWithDefaults(bioimageio_core=[BioimageioLogWithDefaults(log=summary)])
+        )
+
+
+def rerun_dynamic_tests(
+    published: PublishedVersion,
+    weight_format: Optional[WeightsFormat],  # "weight format to test model with."
+    create_env_outcome: str,
+):
+    summary = _run_dynamic_tests_impl(
+        published.rdf_url, weight_format, create_env_outcome
+    )
+    if summary is not None:
+        published.extend_log(
+            LogWithDefaults(bioimageio_core=[BioimageioLogWithDefaults(log=summary)])
+        )
+
+
+def _run_dynamic_tests_impl(
+    rdf_url: str, weight_format: Optional[WeightsFormat], create_env_outcome: str
+):
     if weight_format is None:
         # no dynamic tests for non-model resources yet...
         return
@@ -68,7 +92,7 @@ def run_dynamic_tests(
                 name="bioimageio.core", version=bioimageio.core.__version__
             ),
         ],
-        source_name=rdf_source,
+        source_name=rdf_url,
     )
 
     if create_env_outcome == "success":
@@ -82,7 +106,7 @@ def run_dynamic_tests(
             )
         else:
             try:
-                rdf = yaml.load(rdf_source)
+                rdf = yaml.load(download(rdf_url).path)
                 test_kwargs = (
                     rdf.get("config", {})
                     .get("bioimageio", {})
@@ -96,7 +120,7 @@ def run_dynamic_tests(
             else:
                 try:
                     summary = test_description(
-                        rdf_source, weight_format=weight_format, **test_kwargs
+                        rdf_url, weight_format=weight_format, **test_kwargs
                     )
                 except Exception as e:
                     summary.add_detail(
@@ -118,6 +142,4 @@ def run_dynamic_tests(
             )
         )
 
-    staged.extend_log(
-        LogWithDefaults(bioimageio_core=[BioimageioLogWithDefaults(log=summary)])
-    )
+    return summary
