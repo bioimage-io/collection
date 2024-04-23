@@ -40,8 +40,6 @@ jobs:
         gh workflow run test.yaml \
           -f resource_id=${{inputs.resource_id}} \
           -f version=${{needs.stage.outputs.version}} \
-          -f S3_HOST=${{vars.S3_HOST}} \
-          -f S3_BUCKET=${{vars.S3_BUCKET}} \
-          -f S3_FOLDER=${{inputs.sandbox && vars.S3_SANDBOX_FOLDER || vars.S3_FOLDER}}
+          -f sandbox=${{inputs.sandbox}}
       env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
