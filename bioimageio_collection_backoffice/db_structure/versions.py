@@ -6,6 +6,7 @@ from typing import ClassVar, List, Literal, Mapping, NewType, Optional, Union
 import pydantic
 from typing_extensions import Annotated
 
+from .._settings import settings
 from .common import Node
 
 PublishNumber = NewType("PublishNumber", int)
@@ -17,10 +18,12 @@ StageNumber = NewType("StageNumber", int)
 
 class _StatusBase(Node, frozen=True):
     timestamp: datetime
+    run_url: Optional[str]
 
 
 class _StatusBaseWithDefaults(Node, frozen=True):
     timestamp: datetime = datetime.now()
+    run_url: Optional[str] = settings.run_url
 
 
 class _StagedStatusBase(_StatusBase, frozen=True):

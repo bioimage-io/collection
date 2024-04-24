@@ -29,6 +29,7 @@ from loguru import logger
 from ruyaml import YAML
 from typing_extensions import LiteralString, assert_never
 
+from ._settings import settings
 from ._thumbnails import create_thumbnails
 from .db_structure.chat import Chat, ChatWithDefaults, MessageWithDefaults
 from .db_structure.log import Log, LogWithDefaults
@@ -287,6 +288,7 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
 
         error_status = ErrorStatus(
             timestamp=datetime.now(),
+            run_url=settings.run_url,
             message=str(error),
             traceback=traceback.format_tb(error.__traceback__),
             during=current_status,
