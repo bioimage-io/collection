@@ -35,6 +35,7 @@ env:
   S3_FOLDER: ${{ inputs.S3_FOLDER }}
   S3_ACCESS_KEY_ID: ${{secrets.S3_ACCESS_KEY_ID}}
   S3_SECRET_ACCESS_KEY: ${{secrets.S3_SECRET_ACCESS_KEY}}
+  RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
 
 jobs:
   validate_format:
