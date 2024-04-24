@@ -255,6 +255,9 @@ class RemoteResourceVersion(RemoteResourceBase, Generic[NumberT, InfoT], ABC):
 
         return Uploader(email=email, name=name)
 
+    def get_file_url(self, path: str):
+        return self.client.get_file_url(f"{self.folder}files/{path}")
+
     def get_file_urls(self):
         return self.client.get_file_urls(f"{self.folder}files/")
 

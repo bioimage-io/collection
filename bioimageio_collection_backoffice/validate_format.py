@@ -9,7 +9,7 @@ from bioimageio.spec.model import v0_4, v0_5
 from bioimageio.spec.model.v0_5 import Version, WeightsFormat
 from bioimageio.spec.summary import ErrorEntry, ValidationDetail
 from ruyaml import YAML
-from typing_extensions import assert_never
+from typing_extensions import assert_never, get_args
 
 from .db_structure.log import BioimageioLogWithDefaults, LogWithDefaults
 from .remote_resource import PublishedVersion, StagedVersion
@@ -204,7 +204,7 @@ def prepare_dynamic_test_cases(
         for wf, entry in rd.weights:
             # we skip the keras validation for now, see
             # https://github.com/bioimage-io/collection-bioimage-io/issues/16
-            if not isinstance(entry, SupportedWeightsEntry):
+            if not isinstance(entry, get_args(SupportedWeightsEntry)):
                 warnings.warn(f"{wf} weights are currently not validated")
                 continue
 

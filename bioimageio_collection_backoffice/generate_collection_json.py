@@ -29,6 +29,7 @@ def generate_collection_json(
     with collection_template.open() as f:
         collection = json.load(f)
 
+    collection["config"]["url_root"] = client.get_file_url("").strip("/")
     for p in remote_collection.get_all_published_versions():
         collection["collection"].append(create_entry(p))
 
@@ -79,7 +80,10 @@ def create_entry(
 
         if isinstance(src, str):
             clean_name = Path(src).name  # remove any leading './'
-            return thumbnails.get(clean_name, src)
+            if clean_name in thumbnails:
+                return p.get_file_url(thumbnails[clean_name])
+            else:
+                return src
 
         return src
 
