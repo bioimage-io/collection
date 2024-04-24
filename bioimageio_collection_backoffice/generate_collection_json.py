@@ -105,4 +105,5 @@ def create_entry(
     entry["rdf_source"] = entry["entry_source"]
     entry["version_number"] = p.number
     entry["versions"] = list(p.concept.versions.published)
+    entry["staged_versions"] = [f"staged/{s}" for s in p.concept.versions.staged]
     return entry
