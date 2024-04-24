@@ -5,7 +5,7 @@ import os
 from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
-from typing import Any, BinaryIO, Dict, List, Sequence, Set, Tuple, Union, assert_never
+from typing import Any, BinaryIO, Dict, List, Sequence, Set, Tuple, Union
 
 import github
 import pooch
@@ -139,6 +139,7 @@ def upload_resources(
         )
 
         upload_count += 1
+        break
 
     print(f"uploaded {upload_count}")
 
@@ -265,9 +266,9 @@ def get_resource_urls_from_collection_folder(
         _ = version.pop("doi", None)
         _ = version.pop("version_name", None)
         version_id = version.pop("version_id", None)
-        created = version.pop("created", None)
-        if created is not None:
-            version["timestamp"] = created
+        _ = version.pop("created", None)
+        # if created is not None:
+        #     version["timestamp"] = created
 
         if rdf_source.startswith("https://zenodo.org/api/files/"):
             # convert source from old zenodo api
@@ -352,26 +353,68 @@ UPLOADED_SANDBOX = {
 }
 
 UPLOADED: Set[str] = {
-    "affable-shark_v1.zip",
-    "committed-turkey_v1.zip",
-    "decisive-panda_v1.zip",
-    "determined-hedgehog_v1.zip",
-    "frank-water-buffalo_v1.zip",
     "funny-butterfly_v1.zip",
+    "loyal-squid_v1.zip",
+    "naked-microbe_v1.zip",
+    "noisy-fish_v1.zip",
+    "hiding-tiger_v1.zip",
+    "wild-whale_v1.zip",
+    "polite-pig_v1.zip",
+    "conscientious-seashell_v1.zip",
+    "willing-hedgehog_v1.zip",
+    "loyal-parrot_v1.zip",
+    "determined-chipmunk_v1.zip",
+    "committed-turkey_v1.zip",
+    "amiable-crocodile_v1.zip",
+    "ambitious-ant_v1.zip",
+    "non-judgemental-eagle_v1.zip",
+    "passionate-t-rex_v1.zip",
+    "chatty-frog_v1.zip",
+    "ambitious-sloth_v1.zip",
+    "thoughtful-turtle_v1.zip",
     "greedy-shark_v1.zip",
-    "humorous-owl_v1.zip",
-    "lucky-fox_v1.zip",
-    "pioneering-goat_v1.zip",
     "stupendous-sheep_v1.zip",
+    "creative-panda_v1.zip",
+    "noisy-hedgehog_v1.zip",
+    "laid-back-lobster_v1.zip",
+    "powerful-chipmunk_v1.zip",
+    "pioneering-goat_v1.zip",
+    "nice-peacock_v1.zip",
+    "fearless-crab_v1.zip",
+    "emotional-cricket_v1.zip",
+    "affable-shark_v1.zip",
+    "joyful-deer_v1.zip",
+    "hiding-blowfish_v1.zip",
+    "lucky-fox_v1.zip",
+    "determined-hedgehog_v1.zip",
+    "organized-cricket_v1.zip",
+    "easy-going-sauropod_v1.zip",
+    "independent-shrimp_v1.zip",
+    "humorous-owl_v1.zip",
+    "kind-seashell_v1.zip",
+    "shivering-raccoon_v1.zip",
+    "impartial-shrimp_v1.zip",
+    "placid-llama_v1.zip",
+    "pioneering-rhino_v1.zip",
+    "frank-water-buffalo_v1.zip",
+    "courteous-otter_v1.zip",
+    "impartial-shark_v1.zip",
+    "organized-badger_v1.zip",
+    "straightforward-crocodile_v1.zip",
+    "decisive-panda_v1.zip",
+    "discreet-rooster_v1.zip",
+    "efficient-chipmunk_v1.zip",
+    "powerful-fish_v1.zip",
+    "uplifting-ice-cream",
 }
 
-nicknames: Dict[Literal["dataset"], Set[str]] = {"dataset": {"decadent-candy"}}
+nicknames: Dict[Literal["dataset"], Set[str]] = {"dataset": {"uplifting-ice-cream"}}
 
 done = ["https://zenodo.org/api/records/6559930/files/content"]
 if __name__ == "__main__":
     type_ = "dataset"
     resource_urls = get_resource_urls_from_collection_folder(
-        start=10, end=50, type_=type_
+        start=10, end=500, type_=type_
     )
     resource_urls = [url for url in resource_urls if url[1] not in done]
     print("plan:", [t[1] for t in resource_urls])

@@ -71,7 +71,7 @@ class IdParts(Node, frozen=True):
     def get_icon(self, resource_id: str):
         for parts in (self.model, self.dataset, self.notebook):
             noun = parts.get_noun(resource_id)
-            if noun is not None:
+            if noun is not None and noun in parts.nouns:
                 return parts.nouns[noun]
 
         return None
