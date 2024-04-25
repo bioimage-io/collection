@@ -18,6 +18,9 @@ We currently do not have a workflow for direct upload, but publicly available re
     a) superseded: This staged resource version has not been published and also will not be published in the future.
     b) A copy of this staged version has been published as a new resource version. (note: the resource/publish version is not neccessarily identical with the stage number)
 
+Additionally an 'error' status may be shown if an exception occured.
+This also may be the case for invalid inputs.
+
 ```mermaid
 graph TD;
     unpacking[1: unpacking]-->unpacked[unpacked]
@@ -27,5 +30,7 @@ graph TD;
     cr-->superseded
     ar--->accepted[4b: accepted]
     accepted-->published
+    unpacking-->error
+    testing-->error
 
 ```
