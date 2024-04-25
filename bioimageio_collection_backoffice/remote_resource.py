@@ -486,6 +486,7 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
             upload(file_name, file_data)
 
         self._set_status(UnpackedStatusWithDefaults())
+        self.supersede_previously_staged_versions()
 
     @property
     def exists(self):
@@ -516,23 +517,7 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
     def mark_as_superseded(self, description: str, by: StageNumber):  # TODO: use this!
         self._set_status(SupersededStatusWithDefaults(description=description, by=by))
 
-    @reviewer_role
-    def publish(self, reviewer: str) -> PublishedVersion:
-        """mark this staged version candidate as accepted and try to publish it"""
-        reviewer = get_reviewers()[reviewer.lower()].name  # map to reviewer name
-        self._set_status(AcceptedStatusWithDefaults())
-        self.extend_chat(
-            Chat(
-                messages=[
-                    MessageWithDefaults(
-                        author="system",
-                        text=f"{reviewer} accepted {self.id} {self.version}",
-                    )
-                ]
-            )
-        )
-
-        # check status of older staged versions
+    def supersede_previously_staged_versions(self):
         for nr, details in self.concept.versions.staged.items():
             if nr >= self.number:  # ignore newer staged versions
                 continue
@@ -557,6 +542,21 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
             else:
                 assert_never(details.status)
 
+    @reviewer_role
+    def publish(self, reviewer: str) -> PublishedVersion:
+        """mark this staged version candidate as accepted and try to publish it"""
+        reviewer = get_reviewers()[reviewer.lower()].name  # map to reviewer name
+        self._set_status(AcceptedStatusWithDefaults())
+        self.extend_chat(
+            Chat(
+                messages=[
+                    MessageWithDefaults(
+                        author="system",
+                        text=f"{reviewer} accepted {self.id} {self.version}",
+                    )
+                ]
+            )
+        )
         if not self.concept.versions.published:
             next_publish_nr = PublishNumber(1)
         else:
