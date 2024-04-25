@@ -129,7 +129,7 @@ class BackOffice:
 
         try:
             rv.lock_publish()
-            published: PublishedVersion = rv.publish(reviewer=reviewer)
+            published: PublishedVersion = rv.publish(reviewer)
             assert isinstance(published, PublishedVersion)
             self.generate_collection_json()
             notify_uploader(

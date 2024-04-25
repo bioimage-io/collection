@@ -354,6 +354,20 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
         return
 
     def unpack(self, package_url: str):
+        previous_version = self.concept.get_latest_published_version()
+        if previous_version is None:
+            previous_rdf = None
+        else:
+            previous_rdf_data = self.client.load_file(previous_version.rdf_path)
+            if previous_rdf_data is None:
+                self.set_error_status("Failed to load previous published version's RDF")
+                sys.exit(1)
+
+            previous_rdf: Optional[Dict[Any, Any]] = yaml.load(
+                io.BytesIO(previous_rdf_data)
+            )
+            assert isinstance(previous_rdf, dict)
+
         # ensure we have a chat.json
         self.extend_chat(ChatWithDefaults())
 
@@ -419,8 +433,27 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
         ):
             self.set_error_status("RDF is missing `uploader.email` field.")
             sys.exit(1)
+        elif not isinstance(rdf["uploader"]["email"], str):
+            self.set_error_status("RDF has invalid `uploader.email` field.")
+            sys.exit(1)
 
-        rdf["uploader"]["email"]
+        uploader = rdf["uploader"]["email"]
+        if previous_rdf is not None:
+            prev_authors: List[Dict[str, str]] = previous_rdf["authors"]
+            assert isinstance(prev_authors, list)
+            prev_maintainers: List[Dict[str, str]] = (
+                previous_rdf.get("maintainers", []) + prev_authors
+            )
+            maintainer_emails = [a["email"] for a in prev_maintainers if "email" in a]
+            if (
+                uploader != previous_rdf["uploader"]["email"]
+                and uploader not in maintainer_emails
+                and uploader not in [r.email for r in get_reviewers().values()]
+            ):
+                self.set_error_status(
+                    f"uploader '{uploader}' is not a maintainer of {self.id} nor a registered bioimageio reviewer."
+                )
+                sys.exit()
 
         def upload(file_name: str, file_data: bytes):
             path = f"{self.folder}files/{file_name}"
