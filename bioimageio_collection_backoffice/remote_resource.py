@@ -478,9 +478,12 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
         logger.debug("Publishing {} as version nr {}", self.folder, next_publish_nr)
 
         # load rdf
-        staged_rdf_path = f"{self.folder}files/rdf.yaml"
+        staged_rdf_path = f"{self.folder}files/bioimageio.yaml"
         rdf_data = self.client.load_file(staged_rdf_path)
-        rdf = yaml.load(rdf_data)
+        if rdf_data is None:
+            raise ValueError(f"Failed to load staged RDF from {staged_rdf_path}")
+
+        rdf = yaml.load(io.BytesIO(rdf_data))
 
         sem_ver = rdf.get("version")
         if sem_ver is not None:
