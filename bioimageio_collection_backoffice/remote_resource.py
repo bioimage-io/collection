@@ -29,6 +29,7 @@ from loguru import logger
 from ruyaml import YAML
 from typing_extensions import LiteralString, assert_never
 
+from ._settings import settings
 from ._thumbnails import create_thumbnails
 from .db_structure.chat import Chat, ChatWithDefaults, MessageWithDefaults
 from .db_structure.log import Log, LogWithDefaults
@@ -287,6 +288,7 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
 
         error_status = ErrorStatus(
             timestamp=datetime.now(),
+            run_url=settings.run_url,
             message=str(error),
             traceback=traceback.format_tb(error.__traceback__),
             during=current_status,
@@ -476,9 +478,12 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
         logger.debug("Publishing {} as version nr {}", self.folder, next_publish_nr)
 
         # load rdf
-        staged_rdf_path = f"{self.folder}files/rdf.yaml"
+        staged_rdf_path = f"{self.folder}files/bioimageio.yaml"
         rdf_data = self.client.load_file(staged_rdf_path)
-        rdf = yaml.load(rdf_data)
+        if rdf_data is None:
+            raise ValueError(f"Failed to load staged RDF from {staged_rdf_path}")
+
+        rdf = yaml.load(io.BytesIO(rdf_data))
 
         sem_ver = rdf.get("version")
         if sem_ver is not None:
