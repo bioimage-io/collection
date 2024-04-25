@@ -8,8 +8,10 @@ import zipfile
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from datetime import datetime
+from functools import wraps
 from typing import (
     Any,
+    Callable,
     ClassVar,
     Dict,
     Generic,
@@ -27,11 +29,12 @@ from bioimageio.spec.utils import (
 )
 from loguru import logger
 from ruyaml import YAML
-from typing_extensions import LiteralString, assert_never
+from typing_extensions import Concatenate, LiteralString, ParamSpec, assert_never
 
 from ._settings import settings
 from ._thumbnails import create_thumbnails
 from .db_structure.chat import Chat, ChatWithDefaults, MessageWithDefaults
+from .db_structure.id_parts import IdParts
 from .db_structure.log import (
     CollectionLogWithDefaults,
     Log,
@@ -67,6 +70,7 @@ from .db_structure.versions import (
     VersionsWithDefaults,
 )
 from .resource_id import validate_resource_id
+from .reviewer import get_reviewers
 from .s3_client import Client
 
 yaml = YAML(typ="safe")
@@ -137,6 +141,13 @@ class ResourceConcept(RemoteResourceBase):
         else:
             return max(self.versions.staged)
 
+    @property
+    def latest_publish_number(self) -> Optional[PublishNumber]:
+        if not self.versions.published:
+            return None
+        else:
+            return max(self.versions.published)
+
     def get_latest_staged_version(self) -> Optional[StagedVersion]:
         """Get a representation of the latest staged version
         (the one with the highest stage number)"""
@@ -145,6 +156,15 @@ class ResourceConcept(RemoteResourceBase):
             return None
         else:
             return StagedVersion(client=self.client, id=self.id, number=nr)
+
+    def get_latest_published_version(self) -> Optional[PublishedVersion]:
+        """Get a representation of the latest published version
+        (the one with the highest stage number)"""
+        nr = self.latest_publish_number
+        if nr is None:
+            return None
+        else:
+            return PublishedVersion(client=self.client, id=self.id, number=nr)
 
     def stage_new_version(self, package_url: str) -> StagedVersion:
         """Stage the content at `package_url` as a new resource version candidate."""
@@ -173,6 +193,27 @@ class ResourceConcept(RemoteResourceBase):
 class Uploader(NamedTuple):
     email: Optional[str]
     name: str
+
+
+T = TypeVar("T")
+RV = TypeVar("RV", "StagedVersion", "PublishedVersion")
+P = ParamSpec("P")
+
+
+def reviewer_role(
+    func: Callable[Concatenate[RV, str, P], T],
+) -> Callable[Concatenate[RV, str, P], T]:
+    """method decorator to indicate that a method may only be called by a bioimage.io reviewer"""
+
+    @wraps(func)
+    def wrapper(self: RV, actor: str, *args: P.args, **kwargs: P.kwargs):
+        if actor not in get_reviewers():
+            self.report_error(f"{actor} is not allowed to trigger '{func.__name__}'")
+            sys.exit(1)
+
+        return func(self, actor, *args, **kwargs)
+
+    return wrapper
 
 
 @dataclass
@@ -263,6 +304,11 @@ class RemoteResourceVersion(RemoteResourceBase, Generic[NumberT, InfoT], ABC):
     def get_file_urls(self):
         return self.client.get_file_urls(f"{self.folder}files/")
 
+    def report_error(self, msg: str):
+        self.extend_log(
+            LogWithDefaults(collection=[CollectionLogWithDefaults(log=msg)])
+        )
+
 
 @dataclass
 class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
@@ -280,7 +326,7 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
         assert self.exists
         return self.concept.versions.staged[self.number]
 
-    def report_error(self, msg: str):
+    def set_error_status(self, msg: str):
         info = self.concept.versions.staged.get(self.number)
         current_status = None if info is None else info.status
         if isinstance(current_status, ErrorStatus):
@@ -325,7 +371,7 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
         try:
             remotezip = urllib.request.urlopen(package_url)
         except Exception as e:
-            self.report_error(f"failed to open {package_url}: {e}")
+            self.set_error_status(f"failed to open {package_url}: {e}")
             sys.exit(1)
 
         zipinmemory = io.BytesIO(remotezip.read())
@@ -340,7 +386,7 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
             zipobj.open(bioimageio_yaml_file_name).read().decode()
         )
         if not isinstance(rdf, dict):
-            self.report_error(
+            self.set_error_status(
                 f"Expected {bioimageio_yaml_file_name} to hold a dictionary"
             )
             sys.exit(1)
@@ -348,10 +394,17 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
         if (rdf_id := rdf.get("id")) is None:
             rdf["id"] = self.id
         elif rdf_id != self.id:
-            self.report_error(
+            self.set_error_status(
                 f"Expected package for {self.id}, "
                 + f"but got packaged {rdf_id} ({package_url})"
             )
+            sys.exit(1)
+
+        # set matching id_emoji
+        id_parts = IdParts.load()
+        rdf["id_emoji"] = id_parts.get_icon(self.id)
+        if rdf["id_emoji"] is None:
+            self.set_error_status(f"Failed to get icon for {self.id}")
             sys.exit(1)
 
         # overwrite version information
@@ -359,18 +412,15 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
 
         validate_resource_id(rdf["id"], type_=rdf["type"])
 
-        # TODO: extract from gh api for programmatic uploads, e.g. https://api.github.com/users/bioimageiobot
         if (
             "uploader" not in rdf
             or not isinstance(rdf["uploader"], dict)
             or "email" not in rdf["uploader"]
         ):
-            self.report_error("RDF is missing `uploader.email` field.")
+            self.set_error_status("RDF is missing `uploader.email` field.")
             sys.exit(1)
-        if rdf.get("id_emoji") is None:
-            # TODO: set `id_emoji` according to id
-            self.report_error(f"RDF in {package_url} is missing `id_emoji`")
-            sys.exit(1)
+
+        rdf["uploader"]["email"]
 
         def upload(file_name: str, file_data: bytes):
             path = f"{self.folder}files/{file_name}"
@@ -415,10 +465,10 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
         """set status to 'awaiting review'"""
         self._set_status(AwaitingReviewStatusWithDefaults())
 
+    @reviewer_role
     def request_changes(self, reviewer: str, reason: str):
-        from .reviewer import REVIEWERS
 
-        reviewer = REVIEWERS[reviewer.lower()].name  # map to reviewer name
+        reviewer = get_reviewers()[reviewer.lower()].name  # map to reviewer name
         self._set_status(ChangesRequestedStatusWithDefaults(description=reason))
         self.extend_chat(
             Chat(
@@ -433,11 +483,10 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
     def mark_as_superseded(self, description: str, by: StageNumber):  # TODO: use this!
         self._set_status(SupersededStatusWithDefaults(description=description, by=by))
 
+    @reviewer_role
     def publish(self, reviewer: str) -> PublishedVersion:
         """mark this staged version candidate as accepted and try to publish it"""
-        from .reviewer import REVIEWERS
-
-        reviewer = REVIEWERS[reviewer.lower()].name  # map to reviewer name
+        reviewer = get_reviewers()[reviewer.lower()].name  # map to reviewer name
         self._set_status(AcceptedStatusWithDefaults())
         self.extend_chat(
             Chat(
@@ -486,7 +535,7 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
         staged_rdf_path = f"{self.folder}files/bioimageio.yaml"
         rdf_data = self.client.load_file(staged_rdf_path)
         if rdf_data is None:
-            self.report_error(f"Failed to load staged RDF from {staged_rdf_path}")
+            self.set_error_status(f"Failed to load staged RDF from {staged_rdf_path}")
             sys.exit(1)
 
         rdf = yaml.load(io.BytesIO(rdf_data))
@@ -495,7 +544,7 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
         if sem_ver is not None:
             sem_ver = str(sem_ver)
             if sem_ver in {v.sem_ver for v in self.concept.versions.published.values()}:
-                self.report_error(f"Trying to publish {sem_ver} again!")
+                self.set_error_status(f"Trying to publish {sem_ver} again!")
                 sys.exit(1)
 
         ret = PublishedVersion(client=self.client, id=self.id, number=next_publish_nr)
@@ -542,7 +591,7 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
             self.number, StagedVersionInfoWithDefaults(status=value)
         )
         if value.step < info.status.step:
-            self.report_error(f"Cannot proceed from {info.status} to {value}")
+            self.set_error_status(f"Cannot proceed from {info.status} to {value}")
             return
 
         if value.step not in (info.status.step, info.status.step + 1) and not (
@@ -583,11 +632,6 @@ class PublishedVersion(RemoteResourceVersion[PublishNumber, PublishedVersionInfo
     def doi(self):
         """get version specific DOI of Zenodo record"""
         return self.concept.versions.published[self.number].doi
-
-    def report_error(self, msg: str):
-        self.extend_log(
-            LogWithDefaults(collection=[CollectionLogWithDefaults(log=msg)])
-        )
 
 
 def get_remote_resource_version(client: Client, id: str, version: str):

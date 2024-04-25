@@ -110,7 +110,7 @@ class BackOffice:
                 f"Requesting changes of already published  {resource_id} {version} is not implemented"
             )
 
-        rv.request_changes(reviewer=reviewer, reason=reason)
+        rv.request_changes(reviewer, reason=reason)
         notify_uploader(
             rv,
             "needs changes 📑",
