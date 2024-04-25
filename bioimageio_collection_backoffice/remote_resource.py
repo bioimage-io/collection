@@ -32,7 +32,11 @@ from typing_extensions import LiteralString, assert_never
 from ._settings import settings
 from ._thumbnails import create_thumbnails
 from .db_structure.chat import Chat, ChatWithDefaults, MessageWithDefaults
-from .db_structure.log import Log, LogWithDefaults
+from .db_structure.log import (
+    CollectionLogWithDefaults,
+    Log,
+    LogWithDefaults,
+)
 from .db_structure.versions import (
     AcceptedStatus,
     AcceptedStatusWithDefaults,
@@ -151,10 +155,7 @@ class ResourceConcept(RemoteResourceBase):
             nr = StageNumber(nr + 1)
 
         ret = StagedVersion(client=self.client, id=self.id, number=nr)
-        try:
-            ret.unpack(package_url=package_url)
-        except Exception as e:
-            ret.report_error(e)
+        ret.unpack(package_url=package_url)
         return ret
 
     def extend_versions(
@@ -279,18 +280,18 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
         assert self.exists
         return self.concept.versions.staged[self.number]
 
-    def report_error(self, error: Exception):
+    def report_error(self, msg: str):
         info = self.concept.versions.staged.get(self.number)
         current_status = None if info is None else info.status
         if isinstance(current_status, ErrorStatus):
             logger.error("error: {}", current_status)
-            sys.exit(1)
+            return
 
         error_status = ErrorStatus(
             timestamp=datetime.now(),
             run_url=settings.run_url,
-            message=str(error),
-            traceback=traceback.format_tb(error.__traceback__),
+            message=msg,
+            traceback=traceback.format_stack(),
             during=current_status,
         )
         if info is None:
@@ -304,6 +305,7 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
             }
         )
         self.concept.extend_versions(version_update)
+        return
 
     def unpack(self, package_url: str):
         # ensure we have a chat.json
@@ -322,9 +324,9 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
         # Download the model zip file
         try:
             remotezip = urllib.request.urlopen(package_url)
-        except Exception:
-            logger.error("failed to open {}", package_url)
-            raise
+        except Exception as e:
+            self.report_error(f"failed to open {package_url}: {e}")
+            sys.exit(1)
 
         zipinmemory = io.BytesIO(remotezip.read())
 
@@ -338,17 +340,19 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
             zipobj.open(bioimageio_yaml_file_name).read().decode()
         )
         if not isinstance(rdf, dict):
-            raise ValueError(
+            self.report_error(
                 f"Expected {bioimageio_yaml_file_name} to hold a dictionary"
             )
+            sys.exit(1)
 
         if (rdf_id := rdf.get("id")) is None:
             rdf["id"] = self.id
         elif rdf_id != self.id:
-            raise ValueError(
+            self.report_error(
                 f"Expected package for {self.id}, "
-                f"but got packaged {rdf_id} ({package_url})"
+                + f"but got packaged {rdf_id} ({package_url})"
             )
+            sys.exit(1)
 
         # overwrite version information
         rdf["version_number"] = self.number
@@ -361,11 +365,12 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
             or not isinstance(rdf["uploader"], dict)
             or "email" not in rdf["uploader"]
         ):
-            raise ValueError("RDF is missing `uploader.email` field.")
-
+            self.report_error("RDF is missing `uploader.email` field.")
+            sys.exit(1)
         if rdf.get("id_emoji") is None:
             # TODO: set `id_emoji` according to id
-            raise ValueError(f"RDF in {package_url} is missing `id_emoji`")
+            self.report_error(f"RDF in {package_url} is missing `id_emoji`")
+            sys.exit(1)
 
         def upload(file_name: str, file_data: bytes):
             path = f"{self.folder}files/{file_name}"
@@ -481,7 +486,8 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
         staged_rdf_path = f"{self.folder}files/bioimageio.yaml"
         rdf_data = self.client.load_file(staged_rdf_path)
         if rdf_data is None:
-            raise ValueError(f"Failed to load staged RDF from {staged_rdf_path}")
+            self.report_error(f"Failed to load staged RDF from {staged_rdf_path}")
+            sys.exit(1)
 
         rdf = yaml.load(io.BytesIO(rdf_data))
 
@@ -489,7 +495,8 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
         if sem_ver is not None:
             sem_ver = str(sem_ver)
             if sem_ver in {v.sem_ver for v in self.concept.versions.published.values()}:
-                raise RuntimeError(f"Trying to publish {sem_ver} again!")
+                self.report_error(f"Trying to publish {sem_ver} again!")
+                sys.exit(1)
 
         ret = PublishedVersion(client=self.client, id=self.id, number=next_publish_nr)
 
@@ -535,7 +542,7 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
             self.number, StagedVersionInfoWithDefaults(status=value)
         )
         if value.step < info.status.step:
-            logger.error("Cannot proceed from {} to {}", info.status, value)
+            self.report_error(f"Cannot proceed from {info.status} to {value}")
             return
 
         if value.step not in (info.status.step, info.status.step + 1) and not (
@@ -576,6 +583,11 @@ class PublishedVersion(RemoteResourceVersion[PublishNumber, PublishedVersionInfo
     def doi(self):
         """get version specific DOI of Zenodo record"""
         return self.concept.versions.published[self.number].doi
+
+    def report_error(self, msg: str):
+        self.extend_log(
+            LogWithDefaults(collection=[CollectionLogWithDefaults(log=msg)])
+        )
 
 
 def get_remote_resource_version(client: Client, id: str, version: str):
