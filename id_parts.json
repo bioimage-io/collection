@@ -479,6 +479,7 @@
         "adjectives": [
             "adaptable",
             "adorable",
+            "aerodynamic",
             "airy",
             "all-purpose",
             "alluring",
@@ -510,7 +511,6 @@
             "customized",
             "cute",
             "dapper",
-            "darling",
             "delightful",
             "distinctive",
             "dramatic",
@@ -542,7 +542,6 @@
             "flowing",
             "fluffy",
             "fluid",
-            "forceful",
             "fresh",
             "fun",
             "functional",
@@ -556,8 +555,6 @@
             "graceful",
             "handy",
             "happy",
-            "huggable",
-            "impactful",
             "incredible",
             "individual",
             "innovative",
@@ -653,7 +650,6 @@
             "well-fitted",
             "whimsical",
             "winsome",
-            "zesty"
         ]
     }
 }
