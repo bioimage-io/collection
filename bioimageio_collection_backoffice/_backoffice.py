@@ -110,7 +110,7 @@ class BackOffice:
                 f"Requesting changes of already published  {resource_id} {version} is not implemented"
             )
 
-        rv.request_changes(reviewer=reviewer, reason=reason)
+        rv.request_changes(reviewer, reason=reason)
         notify_uploader(
             rv,
             "needs changes 📑",
@@ -129,7 +129,7 @@ class BackOffice:
 
         try:
             rv.lock_publish()
-            published: PublishedVersion = rv.publish(reviewer=reviewer)
+            published: PublishedVersion = rv.publish(reviewer)
             assert isinstance(published, PublishedVersion)
             self.generate_collection_json()
             notify_uploader(

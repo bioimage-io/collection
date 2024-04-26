@@ -22,6 +22,14 @@ class _LogEntryBaseWithDefaults(_LogEntryBase, frozen=True):
     """creation of log entry"""
 
 
+class CollectionLog(_LogEntryBase, frozen=True):
+    log: str
+
+
+class CollectionLogWithDefaults(_LogEntryBaseWithDefaults, CollectionLog, frozen=True):
+    pass
+
+
 class BioimageioLog(_LogEntryBase, frozen=True):
     log: ValidationSummary
 
@@ -37,6 +45,7 @@ class Log(Node, frozen=True, extra="allow"):
 
     bioimageio_spec: Sequence[BioimageioLog]
     bioimageio_core: Sequence[BioimageioLog]
+    collection: Sequence[CollectionLog]
 
     def get_updated(self, update: Log):
         v: Union[Any, Sequence[Any]]
@@ -59,3 +68,4 @@ class LogWithDefaults(Log, frozen=True, extra="allow"):
 
     bioimageio_spec: Sequence[BioimageioLogWithDefaults] = Field(default_factory=list)
     bioimageio_core: Sequence[BioimageioLogWithDefaults] = Field(default_factory=list)
+    collection: Sequence[CollectionLogWithDefaults] = Field(default_factory=list)

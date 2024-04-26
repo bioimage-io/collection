@@ -1,4 +1,5 @@
 import smtplib
+import sys
 from email.mime.text import MIMEText
 from typing import List, Union
 
@@ -23,8 +24,8 @@ def notify_uploader(
 ):
     email, name = rv.get_uploader()
     if email is None:
-        logger.error("missing uploader email for {} {}", rv.id, rv.version)
-        return
+        rv.report_error(f"missing uploader email for {rv.id} {rv.version}")
+        sys.exit(1)
 
     subject = f"{STATUS_UPDATE_SUBJECT}{rv.id} {rv.version} {subject_end.strip()}"
     if email == BOT_EMAIL:
