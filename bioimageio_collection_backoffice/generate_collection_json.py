@@ -3,6 +3,9 @@ from pathlib import Path
 from typing import Any, Dict, List, Union
 
 from bioimageio.spec import ValidationContext, build_description
+from bioimageio.spec._internal.io import (
+    get_sha256,  # TODO: use bioimageio.spec.utils.get_sha256
+)
 from bioimageio.spec.collection import CollectionDescr
 from bioimageio.spec.common import HttpUrl
 from bioimageio.spec.utils import download
@@ -48,7 +51,8 @@ def create_entry(
     with ValidationContext(perform_io_checks=False):
         rdf_url = HttpUrl(p.rdf_url)
 
-    rdf = yaml.load(download(rdf_url).path)
+    rdf_path = download(rdf_url).path
+    rdf = yaml.load(rdf_path)
     entry = {
         k: rdf[k]
         for k in (
@@ -102,6 +106,7 @@ def create_entry(
     entry["nickname"] = entry["id"]
     entry["nickname_icon"] = entry["id_emoji"]
     entry["entry_source"] = p.rdf_url
+    entry["entry_sha256"] = get_sha256(rdf_path)
     entry["rdf_source"] = entry["entry_source"]
     entry["version_number"] = p.number
     entry["versions"] = list(p.concept.versions.published)
