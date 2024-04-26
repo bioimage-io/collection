@@ -11,7 +11,7 @@ from bioimageio.spec.summary import ErrorEntry, ValidationDetail
 from ruyaml import YAML
 from typing_extensions import assert_never, get_args
 
-from .db_structure.log import BioimageioLogWithDefaults, LogWithDefaults
+from .db_structure.log import BioimageioLog, Log
 from .remote_resource import PublishedVersion, StagedVersion
 
 yaml = YAML(typ="safe")
@@ -272,7 +272,5 @@ def validate_format(rv: Union[StagedVersion, PublishedVersion]):
             )
 
     summary = rd.validation_summary
-    rv.extend_log(
-        LogWithDefaults(bioimageio_spec=[BioimageioLogWithDefaults(log=summary)])
-    )
+    rv.extend_log(Log(bioimageio_spec=[BioimageioLog(log=summary)]))
     return dynamic_test_cases, conda_envs

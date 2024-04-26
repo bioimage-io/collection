@@ -33,41 +33,29 @@ from typing_extensions import Concatenate, LiteralString, ParamSpec, assert_neve
 
 from ._settings import settings
 from ._thumbnails import create_thumbnails
-from .db_structure.chat import Chat, ChatWithDefaults, MessageWithDefaults
+from .db_structure.chat import Chat, Message
 from .db_structure.id_parts import IdParts
 from .db_structure.log import (
-    CollectionLogWithDefaults,
+    CollectionLog,
     Log,
-    LogWithDefaults,
 )
 from .db_structure.versions import (
     AcceptedStatus,
-    AcceptedStatusWithDefaults,
     AwaitingReviewStatus,
-    AwaitingReviewStatusWithDefaults,
     ChangesRequestedStatus,
-    ChangesRequestedStatusWithDefaults,
     ErrorStatus,
     PublishedStagedStatus,
-    PublishedStagedStatusWithDefaults,
-    PublishedStatusWithDefaults,
+    PublishedStatus,
     PublishedVersionInfo,
-    PublishedVersionInfoWithDefaults,
     PublishNumber,
     StagedVersionInfo,
-    StagedVersionInfoWithDefaults,
     StagedVersionStatus,
     StageNumber,
     SupersededStatus,
-    SupersededStatusWithDefaults,
     TestingStatus,
-    TestingStatusWithDefaults,
     UnpackedStatus,
-    UnpackedStatusWithDefaults,
     UnpackingStatus,
-    UnpackingStatusWithDefaults,
     Versions,
-    VersionsWithDefaults,
 )
 from .resource_id import validate_resource_id
 from .reviewer import get_reviewers
@@ -96,9 +84,9 @@ class RemoteResourceBase:
         path = self.folder + typ.file_name
         data = self.client.load_file(path)
         if data is None:
-            return typ.get_class_with_defaults()()
+            return typ()
         else:
-            return typ.get_class_with_defaults().model_validate_json(data)
+            return typ.model_validate_json(data)
 
     def _extend_json(self, extension: JsonFileT):
         path = self.folder + extension.file_name
@@ -305,9 +293,7 @@ class RemoteResourceVersion(RemoteResourceBase, Generic[NumberT, InfoT], ABC):
         return self.client.get_file_urls(f"{self.folder}files/")
 
     def report_error(self, msg: str):
-        self.extend_log(
-            LogWithDefaults(collection=[CollectionLogWithDefaults(log=msg)])
-        )
+        self.extend_log(Log(collection=[CollectionLog(log=msg)]))
 
 
 @dataclass
@@ -341,9 +327,9 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
             during=current_status,
         )
         if info is None:
-            info = StagedVersionInfoWithDefaults(status=error_status)
+            info = StagedVersionInfo(status=error_status)
 
-        version_update = VersionsWithDefaults(
+        version_update = Versions(
             staged={
                 self.number: StagedVersionInfo(
                     sem_ver=info.sem_ver, timestamp=info.timestamp, status=error_status
@@ -369,16 +355,14 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
             assert isinstance(previous_rdf, dict)
 
         # ensure we have a chat.json
-        self.extend_chat(ChatWithDefaults())
+        self.extend_chat(Chat())
 
         # ensure we have a logs.json
-        self.extend_log(LogWithDefaults())
+        self.extend_log(Log())
 
         # set first status (this also write versions.json)
         self._set_status(
-            UnpackingStatusWithDefaults(
-                description=f"unzipping {package_url} to {self.folder}"
-            )
+            UnpackingStatus(description=f"unzipping {package_url} to {self.folder}")
         )
 
         # Download the model zip file
@@ -485,7 +469,7 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
             file_data = zipobj.open(file_name).read()
             upload(file_name, file_data)
 
-        self._set_status(UnpackedStatusWithDefaults())
+        self._set_status(UnpackedStatus())
         self.supersede_previously_staged_versions()
 
     @property
@@ -493,21 +477,21 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
         return self.number in self.concept.versions.staged
 
     def set_testing_status(self, description: str):
-        self._set_status(TestingStatusWithDefaults(description=description))
+        self._set_status(TestingStatus(description=description))
 
     def await_review(self):
         """set status to 'awaiting review'"""
-        self._set_status(AwaitingReviewStatusWithDefaults())
+        self._set_status(AwaitingReviewStatus())
 
     @reviewer_role
     def request_changes(self, reviewer: str, reason: str):
 
         reviewer = get_reviewers()[reviewer.lower()].name  # map to reviewer name
-        self._set_status(ChangesRequestedStatusWithDefaults(description=reason))
+        self._set_status(ChangesRequestedStatus(description=reason))
         self.extend_chat(
             Chat(
                 messages=[
-                    MessageWithDefaults(
+                    Message(
                         author="system", text=f"{reviewer} requested changes: {reason}"
                     )
                 ]
@@ -515,7 +499,7 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
         )
 
     def mark_as_superseded(self, description: str, by: StageNumber):  # TODO: use this!
-        self._set_status(SupersededStatusWithDefaults(description=description, by=by))
+        self._set_status(SupersededStatus(description=description, by=by))
 
     def supersede_previously_staged_versions(self):
         for nr, details in self.concept.versions.staged.items():
@@ -546,11 +530,11 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
     def publish(self, reviewer: str) -> PublishedVersion:
         """mark this staged version candidate as accepted and try to publish it"""
         reviewer = get_reviewers()[reviewer.lower()].name  # map to reviewer name
-        self._set_status(AcceptedStatusWithDefaults())
+        self._set_status(AcceptedStatus())
         self.extend_chat(
             Chat(
                 messages=[
-                    MessageWithDefaults(
+                    Message(
                         author="system",
                         text=f"{reviewer} accepted {self.id} {self.version}",
                     )
@@ -595,20 +579,18 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
         # move all other files
         self.client.cp_dir(self.folder, ret.folder)
 
-        verions_update = VersionsWithDefaults(
+        verions_update = Versions(
             staged={
-                self.number: StagedVersionInfoWithDefaults(
+                self.number: StagedVersionInfo(
                     sem_ver=self.concept.versions.staged[self.number].sem_ver,
                     timestamp=self.concept.versions.staged[self.number].timestamp,
-                    status=PublishedStagedStatusWithDefaults(
-                        publish_number=next_publish_nr
-                    ),
+                    status=PublishedStagedStatus(publish_number=next_publish_nr),
                 )
             },
             published={
-                next_publish_nr: PublishedVersionInfoWithDefaults(
+                next_publish_nr: PublishedVersionInfo(
                     sem_ver=sem_ver,
-                    status=PublishedStatusWithDefaults(stage_number=self.number),
+                    status=PublishedStatus(stage_number=self.number),
                 )
             },
         )
@@ -621,7 +603,7 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
 
     def _set_status(self, value: StagedVersionStatus):
         info = self.concept.versions.staged.get(
-            self.number, StagedVersionInfoWithDefaults(status=value)
+            self.number, StagedVersionInfo(status=value)
         )
         if value.step < info.status.step:
             self.set_error_status(f"Cannot proceed from {info.status} to {value}")
@@ -633,7 +615,7 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
             logger.warning("Proceeding from {} to {}", info.status, value)
 
         updated_info = info.model_copy(update=dict(status=value))
-        versions_update = VersionsWithDefaults(staged={self.number: updated_info})
+        versions_update = Versions(staged={self.number: updated_info})
         self.concept.extend_versions(versions_update)
 
     def lock_publish(self):

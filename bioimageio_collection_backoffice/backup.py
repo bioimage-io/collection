@@ -16,7 +16,7 @@ from ruyaml import YAML
 from typing_extensions import Literal, assert_never
 
 from ._settings import settings
-from .db_structure.versions import PublishedVersionInfo, VersionsWithDefaults
+from .db_structure.versions import PublishedVersionInfo, Versions
 from .remote_collection import RemoteCollection
 from .remote_resource import PublishedVersion
 from .requests_utils import put_file_from_url, raise_for_status_discretely
@@ -144,7 +144,7 @@ def backup_published_version(
         or "testing" in v.client.prefix
     ):
         v.concept.extend_versions(
-            VersionsWithDefaults(
+            Versions(
                 doi=concept_doi,
                 published={
                     v.number: PublishedVersionInfo(
