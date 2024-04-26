@@ -24,7 +24,7 @@ def notify_uploader(
 ):
     email, name = rv.get_uploader()
     if email is None:
-        rv.set_error_status(f"missing uploader email for {rv.id} {rv.version}")
+        rv.report_error(f"missing uploader email for {rv.id} {rv.version}")
         sys.exit(1)
 
     subject = f"{STATUS_UPDATE_SUBJECT}{rv.id} {rv.version} {subject_end.strip()}"
