@@ -93,27 +93,11 @@ jobs:
       - run: pytest
       - name: export documentation
         run: pdoc bioimageio_collection_backoffice -o ./docs
-      - run: cp README.md ./docs/  # TODO: do not use upload-pages-artifact, because the README.md somehow doesn't make it, compare to https://github.com/bioimage-io/spec-bioimage-io/blob/275cb4266e5661f7315165e7c069d6f30dd5651d/.github/workflows/build.yml#L74 which works
-      - uses: actions/upload-pages-artifact@v3
+      - run: cp README.md ./docs/
+      - run: cp id_parts.json ./docs/
+      - run: cp reviewers.json ./docs/
+      - name: Deploy to gh-pages 🚀
         if: ${{ github.ref == 'refs/heads/main' }}
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          path: docs/
-
-  deploy_docs:
-    needs: build
-    if: ${{ github.ref == 'refs/heads/main' }}
-    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
-    permissions:
-      pages: write # to deploy to Pages
-      id-token: write # to verify the deployment originates from an appropriate source
-
-    # Deploy to the github-pages environment
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          folder: docs
