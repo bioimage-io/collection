@@ -1,7 +1,10 @@
 name: generate collection.json
 run-name: generate ${{vars.S3_BUCKET}}/${{vars.S3_FOLDER}}/collection.json
 
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
 
 concurrency: generate-collection-json
 
