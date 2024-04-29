@@ -2,6 +2,7 @@ from datetime import datetime
 from typing import Any, Dict, List
 from urllib.parse import quote_plus
 
+import markdown
 import requests
 from bioimageio.spec import (
     InvalidDescr,
@@ -182,7 +183,8 @@ def rdf_to_metadata(
     if rdf.documentation is not None:
         docstring = download(rdf.documentation).path.read_text()
 
-    description = f"""<a href="https://bioimage.io/#/?id={rdf.id}"><span class="label label-success">View on bioimage.io</span></a><br>{rdf.name}<br><p>{docstring}</p>"""
+    description_md = f'[View on bioimage.io]("https://bioimage.io/#/?id={rdf.id}") # {rdf.name} \n\n{docstring}'
+    description = markdown.markdown(description_md)
     keywords = ["bioimage.io", "bioimage.io:" + rdf.type]
     # related_identifiers = generate_related_identifiers_from_rdf(rdf, rdf_file_name)  # TODO: add related identifiers
 
