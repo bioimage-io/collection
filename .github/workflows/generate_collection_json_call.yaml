@@ -38,4 +38,4 @@ jobs:
           python-version: "3.12"
           cache: "pip" # caching pip dependencies
       - run: pip install .
-      - run: backoffice generate_collection_json --mode ${{inputs.mode}}
+      - run: backoffice generate_collection_json --mode=${{inputs.mode}}
