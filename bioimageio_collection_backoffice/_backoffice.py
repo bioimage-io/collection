@@ -9,6 +9,7 @@ from typing_extensions import assert_never
 from ._settings import settings
 from .backup import ZenodoHost, backup
 from .db_structure.chat import Chat, Message
+from .db_structure.log import CollectionCiLog, CollectionCiLogEntry, Log
 from .generate_collection_json import generate_collection_json
 from .gh_utils import set_gh_actions_outputs
 from .mailroom import notify_uploader
@@ -35,6 +36,21 @@ class BackOffice:
         super().__init__()
         self.client = Client(host=host, bucket=bucket, prefix=prefix)
         logger.info("created backoffice with client {}", self.client)
+
+    def log_run_url(self, resource_id: str, version: str, name: str):
+        if not settings.run_url:
+            raise ValueError("'RUN_URL' not set")
+
+        rv = get_remote_resource_version(self.client, resource_id, version)
+        rv.extend_log(
+            Log(
+                collection_ci=[
+                    CollectionCiLog(
+                        log=CollectionCiLogEntry(name=name, run_url=settings.run_url)
+                    )
+                ]
+            )
+        )
 
     def wipe(self, subfolder: str = ""):
         """DANGER ZONE: wipes `subfolder` completely, only use for test folders!"""

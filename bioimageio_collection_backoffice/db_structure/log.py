@@ -7,6 +7,7 @@ from typing import Any, ClassVar, Dict, Sequence, Union
 from bioimageio.spec import ValidationSummary
 from pydantic import Field
 
+from .._settings import settings
 from .common import Node
 
 
@@ -21,6 +22,15 @@ class CollectionLog(_LogEntryBase, frozen=True):
     log: str
 
 
+class CollectionCiLogEntry(Node, frozen=True):
+    name: str
+    run_url: str
+
+
+class CollectionCiLog(_LogEntryBase, frozen=True):
+    log: CollectionCiLogEntry
+
+
 class BioimageioLog(_LogEntryBase, frozen=True):
     log: ValidationSummary
 
@@ -33,6 +43,7 @@ class Log(Node, frozen=True, extra="allow"):
     bioimageio_spec: Sequence[BioimageioLog] = Field(default_factory=list)
     bioimageio_core: Sequence[BioimageioLog] = Field(default_factory=list)
     collection: Sequence[CollectionLog] = Field(default_factory=list)
+    collection_ci: Sequence[CollectionCiLog] = Field(default_factory=list)
 
     def get_updated(self, update: Log):
         v: Union[Any, Sequence[Any]]
