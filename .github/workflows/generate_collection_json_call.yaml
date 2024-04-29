@@ -3,6 +3,11 @@ name: generate collection.json call
 on:
   workflow_call:
     inputs:
+      mode:
+        description: "determines which collection file to generate: 'published' (default) or 'staged'"
+        required: false
+        default: published
+        type: string
       S3_HOST:
         required: true
         type: string
@@ -33,4 +38,4 @@ jobs:
           python-version: "3.12"
           cache: "pip" # caching pip dependencies
       - run: pip install .
-      - run: backoffice generate_collection_json
+      - run: backoffice generate_collection_json --mode ${{inputs.mode}}

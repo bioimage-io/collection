@@ -50,6 +50,7 @@ class BackOffice:
         resource = ResourceConcept(self.client, resource_id)
         staged = resource.stage_new_version(package_url)
         set_gh_actions_outputs(version=staged.version)
+        self.generate_collection_json(mode="staged")
 
     def validate_format(self, resource_id: str, version: str):
         """validate a resource version's bioimageio.yaml"""
@@ -131,7 +132,7 @@ class BackOffice:
             rv.lock_publish()
             published: PublishedVersion = rv.publish(reviewer)
             assert isinstance(published, PublishedVersion)
-            self.generate_collection_json()
+            self.generate_collection_json(mode="published")
             notify_uploader(
                 rv,
                 "was published! 🎉",
@@ -144,12 +145,18 @@ class BackOffice:
     def backup(self, destination: ZenodoHost):
         """backup the whole collection (to zenodo.org)"""
         _ = backup(self.client, destination)
+        self.generate_collection_json(mode="published")
+        self.generate_collection_json(mode="staged")
 
     def generate_collection_json(
-        self, collection_template: Path = Path("collection_template.json")
+        self,
+        collection_template: Path = Path("collection_template.json"),
+        mode: Literal["published", "staged"] = "published",
     ):
         """generate the collection.json file --- a summary of the whole collection"""
-        generate_collection_json(self.client, collection_template=collection_template)
+        generate_collection_json(
+            self.client, collection_template=collection_template, mode=mode
+        )
 
     def forward_emails_to_chat(self):
         logger.error("disabled")

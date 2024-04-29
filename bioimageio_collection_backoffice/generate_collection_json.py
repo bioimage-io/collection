@@ -11,52 +11,59 @@ from bioimageio.spec.common import HttpUrl
 from bioimageio.spec.utils import download
 from loguru import logger
 from ruyaml import YAML
+from typing_extensions import Literal, assert_never
 
 from .remote_collection import RemoteCollection
-from .remote_resource import PublishedVersion
+from .remote_resource import PublishedVersion, StagedVersion
 from .s3_client import Client
 
 yaml = YAML(typ="safe")
-
-COLLECTION_JSON_S3_PATH = "collection.json"
 
 
 def generate_collection_json(
     client: Client,
     collection_template: Path = Path("collection_template.json"),
+    mode: Literal["published", "staged"] = "published",
 ) -> None:
     """generate a json file with an overview of all published resources"""
-    logger.info("generating {}", COLLECTION_JSON_S3_PATH)
+    output_file_name: str = (
+        "collection.json" if mode == "published" else f"collection_{mode}.json"
+    )
+    logger.info("generating {}", output_file_name)
 
     remote_collection = RemoteCollection(client=client)
     with collection_template.open() as f:
         collection = json.load(f)
 
     collection["config"]["url_root"] = client.get_file_url("").strip("/")
-    for p in remote_collection.get_all_published_versions():
-        collection["collection"].append(create_entry(p))
-
+    if mode == "published":
+        for rv in remote_collection.get_all_published_versions():
+            collection["collection"].append(create_entry(rv))
+    elif mode == "staged":
+        for rv in remote_collection.get_all_staged_versions():
+            collection["collection"].append(create_entry(rv))
+    else:
+        assert_never(mode)
     coll_descr = build_description(
         collection, context=ValidationContext(perform_io_checks=False)
     )
     if not isinstance(coll_descr, CollectionDescr):
         logger.error(coll_descr.validation_summary.format())
 
-    client.put_json(COLLECTION_JSON_S3_PATH, collection)
+    client.put_json(output_file_name, collection)
 
 
 def create_entry(
-    p: PublishedVersion,
+    rv: Union[PublishedVersion, StagedVersion],
 ) -> Dict[str, Any]:
     with ValidationContext(perform_io_checks=False):
-        rdf_url = HttpUrl(p.rdf_url)
+        rdf_url = HttpUrl(rv.rdf_url)
 
     rdf_path = download(rdf_url).path
     rdf = yaml.load(rdf_path)
     entry = {
-        k: rdf[k]
+        k: rdf.get(k, f"unknown {k}")
         for k in (
-            "authors",
             "description",
             "id_emoji",
             "id",
@@ -65,6 +72,8 @@ def create_entry(
             "type",
         )
     }
+    entry["authors"] = rdf.get("authors", [])
+
     try:
         thumbnails = rdf["config"]["bioimageio"]["thumbnails"]
     except KeyError:
@@ -85,7 +94,7 @@ def create_entry(
         if isinstance(src, str):
             clean_name = Path(src).name  # remove any leading './'
             if clean_name in thumbnails:
-                return p.get_file_url(thumbnails[clean_name])
+                return rv.get_file_url(thumbnails[clean_name])
             else:
                 return src
 
@@ -101,14 +110,16 @@ def create_entry(
     if "icon" in rdf:
         entry["icon"] = maybe_swap_with_thumbnail(rdf["icon"])
 
-    entry["created"] = p.info.timestamp.isoformat()
+    entry["created"] = rv.info.timestamp.isoformat()
     entry["download_count"] = "?"
     entry["nickname"] = entry["id"]
     entry["nickname_icon"] = entry["id_emoji"]
-    entry["entry_source"] = p.rdf_url
+    entry["entry_source"] = rv.rdf_url
     entry["entry_sha256"] = get_sha256(rdf_path)
     entry["rdf_source"] = entry["entry_source"]
-    entry["version_number"] = p.number
-    entry["versions"] = list(p.concept.versions.published)
-    entry["staged_versions"] = [f"staged/{s}" for s in p.concept.versions.staged]
+    entry["version_number"] = rv.number
+    entry["versions"] = list(rv.concept.versions.published)
+    entry["staged_versions"] = [f"staged/{s}" for s in rv.concept.versions.staged]
+    entry["doi"] = rv.doi if isinstance(rv, PublishedVersion) else None
+    entry["concept_doi"] = rv.concept.doi
     return entry

@@ -3,6 +3,12 @@ run-name: generate ${{vars.S3_BUCKET}}/${{vars.S3_FOLDER}}/collection.json
 
 on:
   workflow_dispatch:
+    inputs:
+      mode:
+        description: "determines which collection file to generate: 'published' (default) or 'staged'"
+        required: false
+        default: published
+        type: string
   push:
     branches: [main]
 
@@ -19,6 +25,7 @@ jobs:
   call:
     uses: bioimage-io/collection/.github/workflows/generate_collection_json_call.yaml@main
     with:
+      mode: ${{inputs == null && 'published' || inputs.mode}}
       S3_HOST: ${{vars.S3_HOST}}
       S3_BUCKET: ${{vars.S3_BUCKET}}
       S3_FOLDER: ${{vars.S3_FOLDER}}
