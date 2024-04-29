@@ -37,8 +37,12 @@ _ = load_dotenv()
 yaml = YAML(typ="safe")
 logger = logging.getLogger(__name__)
 
+# COLLECTION_FOLDER = (
+#     Path(__file__).parent.parent.parent / "collection-bioimage-io/collection"
+# )
+
 COLLECTION_FOLDER = (
-    Path(__file__).parent.parent.parent / "collection-bioimage-io/collection"
+    Path(__file__).parent.parent.parent / "collection-gh-pages/partner_collection"
 )
 assert COLLECTION_FOLDER.exists(), COLLECTION_FOLDER.absolute()
 
@@ -139,7 +143,6 @@ def upload_resources(
         )
 
         upload_count += 1
-        break
 
     print(f"uploaded {upload_count}")
 
@@ -178,6 +181,9 @@ def get_model_urls_from_collection_folder(start: int = 0, end: int = 9999):
         _ = rdf_base.pop("versions", None)
 
         nickname = rdf_base.pop("nickname")
+        if nickname in nicknames["model"]:
+            continue
+
         nickname_icon = rdf_base.pop("nickname_icon")
 
         v = 0
@@ -223,10 +229,10 @@ def get_model_urls_from_collection_folder(start: int = 0, end: int = 9999):
 
 
 def get_resource_urls_from_collection_folder(
-    start: int = 0, end: int = 9999, type_: Literal["dataset"] = "dataset"
+    start: int = 0, end: int = 9999, type_: Literal["dataset", "notebook"] = "dataset"
 ):
     assert COLLECTION_FOLDER.exists()
-    ret: List[Tuple[BioimageioYamlContent, RootHttpUrl]] = []
+    ret: List[Tuple[BioimageioYamlContent, Union[Path, RootHttpUrl]]] = []
     count = 0
     for i, resource_path in enumerate(
         sorted(COLLECTION_FOLDER.glob("**/resource.yaml"))[start:end], start=start
@@ -270,18 +276,23 @@ def get_resource_urls_from_collection_folder(
         # if created is not None:
         #     version["timestamp"] = created
 
-        if rdf_source.startswith("https://zenodo.org/api/files/"):
-            # convert source from old zenodo api
-            assert version_id is not None
-            rdf_name = rdf_source.split("/")[-1]
-            new_rdf_source = (
-                f"https://zenodo.org/api/records/{version_id}/files/{rdf_name}/content"
-            )
-            logger.warning("converting %s to %s", rdf_source, new_rdf_source)
-            rdf_source = new_rdf_source
+        if isinstance(rdf_source, str):
+            if rdf_source.startswith("https://zenodo.org/api/files/"):
+                # convert source from old zenodo api
+                assert version_id is not None
+                rdf_name = rdf_source.split("/")[-1]
+                new_rdf_source = f"https://zenodo.org/api/records/{version_id}/files/{rdf_name}/content"
+                logger.warning("converting %s to %s", rdf_source, new_rdf_source)
+                rdf_source = new_rdf_source
 
-        remote_update_path = download(rdf_source).path
-        remote_update = yaml.load(remote_update_path)
+            remote_update_path = download(rdf_source).path
+            remote_update = yaml.load(remote_update_path)
+
+            root = RootHttpUrl(rdf_source).parent
+        else:
+            remote_update = rdf_source
+            root = Path()
+
         rdf.update(remote_update)
         rdf.update(version)
         rdf["id"] = nickname
@@ -291,7 +302,7 @@ def get_resource_urls_from_collection_folder(
 
         v += 1
         rdf["version"] = v
-        ret.append((rdf, RootHttpUrl(rdf_source).parent))
+        ret.append((rdf, root))
         count += 1
 
     return ret
@@ -353,69 +364,81 @@ UPLOADED_SANDBOX = {
 }
 
 UPLOADED: Set[str] = {
-    "funny-butterfly_v1.zip",
-    "loyal-squid_v1.zip",
-    "naked-microbe_v1.zip",
-    "noisy-fish_v1.zip",
-    "hiding-tiger_v1.zip",
-    "wild-whale_v1.zip",
-    "polite-pig_v1.zip",
-    "conscientious-seashell_v1.zip",
-    "willing-hedgehog_v1.zip",
-    "loyal-parrot_v1.zip",
-    "determined-chipmunk_v1.zip",
-    "committed-turkey_v1.zip",
-    "amiable-crocodile_v1.zip",
-    "ambitious-ant_v1.zip",
-    "non-judgemental-eagle_v1.zip",
-    "passionate-t-rex_v1.zip",
-    "chatty-frog_v1.zip",
-    "ambitious-sloth_v1.zip",
-    "thoughtful-turtle_v1.zip",
-    "greedy-shark_v1.zip",
-    "stupendous-sheep_v1.zip",
-    "creative-panda_v1.zip",
-    "noisy-hedgehog_v1.zip",
-    "laid-back-lobster_v1.zip",
-    "powerful-chipmunk_v1.zip",
-    "pioneering-goat_v1.zip",
-    "nice-peacock_v1.zip",
     "fearless-crab_v1.zip",
-    "emotional-cricket_v1.zip",
-    "affable-shark_v1.zip",
-    "joyful-deer_v1.zip",
-    "hiding-blowfish_v1.zip",
-    "lucky-fox_v1.zip",
-    "determined-hedgehog_v1.zip",
-    "organized-cricket_v1.zip",
-    "easy-going-sauropod_v1.zip",
-    "independent-shrimp_v1.zip",
-    "humorous-owl_v1.zip",
-    "kind-seashell_v1.zip",
-    "shivering-raccoon_v1.zip",
-    "impartial-shrimp_v1.zip",
-    "placid-llama_v1.zip",
+    "efficient-chipmunk_v1.zip",
     "pioneering-rhino_v1.zip",
+    "passionate-t-rex_v1.zip",
+    "straightforward-crocodile_v1.zip",
+    "loyal-squid_v1.zip",
+    "determined-hedgehog_v1.zip",
+    "loyal-parrot_v1.zip",
+    "decisive-panda_v1.zip",
+    "uplifting-ice-cream",
+    "humorous-owl_v1.zip",
+    "independent-shrimp_v1.zip",
+    "hiding-tiger_v1.zip",
+    "shivering-raccoon_v1.zip",
+    "discreet-rooster_v1.zip",
+    "affable-shark_v1.zip",
+    "non-judgemental-eagle_v1.zip",
+    "greedy-shark_v1.zip",
+    "determined-chipmunk_v1.zip",
+    "noisy-fish_v1.zip",
+    "wild-whale_v1.zip",
+    "funny-butterfly_v1.zip",
+    "easy-going-sauropod_v1.zip",
+    "polite-pig_v1.zip",
+    "thoughtful-turtle_v1.zip",
+    "powerful-chipmunk_v1.zip",
+    "impartial-shrimp_v1.zip",
+    "invigorating-lab-coat_v1.zip",
+    "lucky-fox_v1.zip",
     "frank-water-buffalo_v1.zip",
+    "chatty-frog_v1.zip",
+    "naked-microbe_v1.zip",
+    "conscientious-seashell_v1.zip",
+    "amiable-crocodile_v1.zip",
+    "willing-hedgehog_v1.zip",
+    "noisy-hedgehog_v1.zip",
+    "organized-badger_v1.zip",
+    "pioneering-goat_v1.zip",
+    "hiding-blowfish_v1.zip",
+    "organized-cricket_v1.zip",
+    "emotional-cricket_v1.zip",
+    "committed-turkey_v1.zip",
     "courteous-otter_v1.zip",
     "impartial-shark_v1.zip",
-    "organized-badger_v1.zip",
-    "straightforward-crocodile_v1.zip",
-    "decisive-panda_v1.zip",
-    "discreet-rooster_v1.zip",
-    "efficient-chipmunk_v1.zip",
     "powerful-fish_v1.zip",
-    "uplifting-ice-cream",
+    "laid-back-lobster_v1.zip",
+    "breezy-handbag_v1.zip",
+    "ambitious-sloth_v1.zip",
+    "joyful-deer_v1.zip",
+    "ambitious-ant_v1.zip",
+    "placid-llama_v1.zip",
+    "creative-panda_v1.zip",
+    "kind-seashell_v1.zip",
+    "stupendous-sheep_v1.zip",
+    "nice-peacock_v1.zip",
 }
 
-nicknames: Dict[Literal["dataset"], Set[str]] = {"dataset": {"uplifting-ice-cream"}}
 
-done = ["https://zenodo.org/api/records/6559930/files/content"]
+nicknames: Dict[Literal["model", "dataset", "notebook"], Set[str]] = {
+    "dataset": {"uplifting-ice-cream"},
+    "notebook": set(),
+    "model": {fn.split("_")[0] for fn in UPLOADED},
+}
+
+done = {
+    "https://zenodo.org/api/records/6559930/files/content",
+    "https://zenodo.org/api/records/7612152/files/content",
+}
 if __name__ == "__main__":
-    type_ = "dataset"
+    # resource_urls = get_model_urls_from_collection_folder(start=0, end=9999)
+    type_ = "notebook"
     resource_urls = get_resource_urls_from_collection_folder(
-        start=10, end=500, type_=type_
+        start=0, end=9999, type_=type_
     )
+
     resource_urls = [url for url in resource_urls if url[1] not in done]
     print("plan:", [t[1] for t in resource_urls])
     print()
