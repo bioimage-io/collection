@@ -12,7 +12,7 @@ on:
   push:
     branches: [main]
 
-concurrency: generate-collection-json
+concurrency: generate-collection-json-${{inputs.mode}}
 
 env:
   S3_HOST: ${{vars.S3_HOST}}
@@ -25,7 +25,7 @@ jobs:
   call:
     uses: bioimage-io/collection/.github/workflows/generate_collection_json_call.yaml@main
     with:
-      mode: ${{inputs == null && 'published' || inputs.mode}}
+      mode: ${{inputs.mode || 'published'}}
       S3_HOST: ${{vars.S3_HOST}}
       S3_BUCKET: ${{vars.S3_BUCKET}}
       S3_FOLDER: ${{vars.S3_FOLDER}}
