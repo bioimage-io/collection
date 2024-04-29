@@ -103,7 +103,14 @@ jobs:
       - run: pyright -p pyproject.toml
       - run: pytest
       - name: export documentation
-        run: pdoc bioimageio_collection_backoffice -o ./docs
+        run: |
+          pdoc \
+          --mermaid \
+          --logo https://bioimage.io/static/img/bioimage-io-logo.svg \
+          --logo-link https://bioimage.io/ \
+          --favicon https://bioimage.io/static/img/bioimage-io-icon-small.svg \
+          --footer-text 'bioimageio_collection_backoffice' \
+          -o ./docs bioimageio_collection_backoffice
       - run: cp README.md ./docs/
       - run: cp id_parts.json ./docs/
       - run: cp reviewers.json ./docs/
