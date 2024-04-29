@@ -1,5 +1,5 @@
 name: generate collection.json
-run-name: generate ${{vars.S3_BUCKET}}/${{vars.S3_FOLDER}}/collection.json
+run-name: generate ${{inputs.mode}} collection for ${{vars.S3_BUCKET}}/${{vars.S3_FOLDER}}
 
 on:
   workflow_dispatch:
