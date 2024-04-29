@@ -29,9 +29,6 @@ ZenodoHost = Literal["https://sandbox.zenodo.org", "https://zenodo.org"]
 
 def backup(client: Client, destination: ZenodoHost):
     """backup all published resources to their own zenodo records"""
-    if "sandbox" not in destination:
-        raise NotImplementedError("impl not production ready")
-
     remote_collection = RemoteCollection(client=client)
 
     for v in remote_collection.get_all_published_versions():
