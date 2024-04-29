@@ -59,8 +59,18 @@ def create_entry(
     with ValidationContext(perform_io_checks=False):
         rdf_url = HttpUrl(rv.rdf_url)
 
-    rdf_path = download(rdf_url).path
-    rdf = yaml.load(rdf_path)
+    try:
+        rdf_path = download(rdf_url).path
+    except Exception as e:
+        logger.error("failed to download rdf_url: {}", e)
+        if isinstance(rv, PublishedVersion):
+            raise e
+
+        rdf_path = None
+        rdf: Dict[Any, Any] = {}
+    else:
+        rdf = yaml.load(rdf_path)
+
     entry = {
         k: rdf.get(k, f"unknown {k}")
         for k in (
@@ -115,7 +125,7 @@ def create_entry(
     entry["nickname"] = entry["id"]
     entry["nickname_icon"] = entry["id_emoji"]
     entry["entry_source"] = rv.rdf_url
-    entry["entry_sha256"] = get_sha256(rdf_path)
+    entry["entry_sha256"] = None if rdf_path is None else get_sha256(rdf_path)
     entry["rdf_source"] = entry["entry_source"]
     entry["version_number"] = rv.number
     entry["versions"] = list(rv.concept.versions.published)
