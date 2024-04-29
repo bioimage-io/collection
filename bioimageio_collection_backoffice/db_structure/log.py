@@ -7,7 +7,6 @@ from typing import Any, ClassVar, Dict, Sequence, Union
 from bioimageio.spec import ValidationSummary
 from pydantic import Field
 
-from .._settings import settings
 from .common import Node
 
 
