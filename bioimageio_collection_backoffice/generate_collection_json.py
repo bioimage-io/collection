@@ -1,4 +1,5 @@
 import json
+import sys
 from pathlib import Path
 from typing import Any, Dict, List, Union
 
@@ -36,12 +37,26 @@ def generate_collection_json(
         collection = json.load(f)
 
     collection["config"]["url_root"] = client.get_file_url("").strip("/")
+    error_in_published_entry = None
     if mode == "published":
         for rv in remote_collection.get_all_published_versions():
-            collection["collection"].append(create_entry(rv))
+            try:
+                entry = create_entry(rv)
+            except Exception as e:
+                error_in_published_entry = (
+                    f"failed to create {rv.id} {rv.version} entry: {e}"
+                )
+                logger.error(error_in_published_entry)
+            else:
+                collection["collection"].append(entry)
     elif mode == "staged":
         for rv in remote_collection.get_all_staged_versions():
-            collection["collection"].append(create_entry(rv))
+            try:
+                entry = create_entry(rv)
+            except Exception as e:
+                logger.info("failed to create {} {} entry: {}", rv.id, rv.version, e)
+            else:
+                collection["collection"].append(entry)
     else:
         assert_never(mode)
     coll_descr = build_description(
@@ -51,6 +66,8 @@ def generate_collection_json(
         logger.error(coll_descr.validation_summary.format())
 
     client.put_json(output_file_name, collection)
+    if error_in_published_entry is not None:
+        raise ValueError(error_in_published_entry)
 
 
 def create_entry(
@@ -110,7 +127,7 @@ def create_entry(
 
         return src
 
-    entry["covers"] = maybe_swap_with_thumbnail(rdf["covers"])
+    entry["covers"] = maybe_swap_with_thumbnail(rdf.get("covers", []))
     entry["badges"] = maybe_swap_with_thumbnail(rdf.get("badges", []))
     entry["tags"] = rdf.get("tags", [])
     entry["links"] = rdf.get("links", [])
