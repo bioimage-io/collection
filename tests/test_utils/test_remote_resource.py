@@ -27,14 +27,15 @@ def test_lifecycle(
     staged_rdf_url = staged.rdf_url
     assert (
         staged_rdf_url
-        == f"{s3_test_folder_url}frank-water-buffalo/staged/1/files/rdf.yaml"
+        == f"{s3_test_folder_url}frank-water-buffalo/staged/1/files/bioimageio.yaml"
     )
     # skipping test step here (tested in test_backoffice)
     published = staged.publish("github|15139589")
     assert isinstance(published, PublishedVersion)
     published_rdf_url = published.rdf_url
     assert (
-        published_rdf_url == f"{s3_test_folder_url}frank-water-buffalo/1/files/rdf.yaml"
+        published_rdf_url
+        == f"{s3_test_folder_url}frank-water-buffalo/1/files/bioimageio.yaml"
     )
 
     generate_collection_json(client, collection_template_path)
