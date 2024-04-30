@@ -573,7 +573,7 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
         rdf["version_number"] = ret.number
         stream = io.StringIO()
         yaml.dump(rdf, stream)
-        rdf_data = stream.read().encode()
+        rdf_data = stream.getvalue().encode()
         for fn in ("rdf.yaml", "bioimageio.yaml"):
             self.client.put(
                 f"{ret.folder}files/{fn}", io.BytesIO(rdf_data), length=len(rdf_data)
