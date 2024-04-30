@@ -32,11 +32,15 @@ def backup(client: Client, destination: ZenodoHost):
     """backup all published resources to their own zenodo records"""
     remote_collection = RemoteCollection(client=client)
 
+    backed_up: List[str] = []
     for v in remote_collection.get_all_published_versions():
         if v.info.doi is not None:
             continue
 
         backup_published_version(v, destination)
+        backed_up.append(f"{v.id}/{v.version}")
+
+    logger.info("backed up {}", backed_up)
 
 
 def backup_published_version(
