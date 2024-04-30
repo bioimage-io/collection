@@ -185,7 +185,7 @@ def rdf_to_metadata(
 
     description_md = f'[View on bioimage.io]("https://bioimage.io/#/?id={rdf.id}") # {rdf.name} \n\n{docstring}'
     description = markdown.markdown(description_md)
-    keywords = ["bioimage.io", "bioimage.io:" + rdf.type]
+    keywords = ["backup.bioimage.io", "bioimage.io", "bioimage.io:" + rdf.type]
     # related_identifiers = generate_related_identifiers_from_rdf(rdf, rdf_file_name)  # TODO: add related identifiers
 
     # for debugging: check if license id is valid:
