@@ -566,18 +566,20 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
 
         ret = PublishedVersion(client=self.client, id=self.id, number=next_publish_nr)
 
-        # copy rdf.yaml and set version in it
+        # move all files
+        self.client.cp_dir(self.folder, ret.folder)
+
+        # overwrite bioimageio.yaml and rdf.yaml with updated version_number
         rdf["version_number"] = ret.number
         stream = io.StringIO()
         yaml.dump(rdf, stream)
         rdf_data = stream.read().encode()
-        self.client.put(
-            f"{ret.folder}files/rdf.yaml", io.BytesIO(rdf_data), length=len(rdf_data)
-        )
+        for fn in ('rdf.yaml', 'bioimageio.yaml'):
+            self.client.put(
+                f"{ret.folder}files/{fn}", io.BytesIO(rdf_data), length=len(rdf_data)
+            )
         # self.client.rm_obj(staged_rdf_path)
 
-        # move all other files
-        self.client.cp_dir(self.folder, ret.folder)
 
         verions_update = Versions(
             staged={
