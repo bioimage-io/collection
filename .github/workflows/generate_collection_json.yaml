@@ -1,18 +1,12 @@
 name: generate collection.json
-run-name: generate ${{inputs.mode}} collection for ${{vars.S3_BUCKET}}/${{vars.S3_FOLDER}}
+run-name: generate collection for ${{vars.S3_BUCKET}}/${{vars.S3_FOLDER}}
 
 on:
   workflow_dispatch:
-    inputs:
-      mode:
-        description: "determines which collection file to generate: 'published' (default) or 'staged'"
-        required: false
-        default: published
-        type: string
   push:
     branches: [main]
 
-concurrency: generate-collection-json-${{inputs.mode}}
+concurrency: generate-collection-json
 
 env:
   S3_HOST: ${{vars.S3_HOST}}
@@ -23,9 +17,12 @@ env:
 
 jobs:
   call:
+    strategy:
+      matrix:
+        mode: [staged, published]
     uses: bioimage-io/collection/.github/workflows/generate_collection_json_call.yaml@main
     with:
-      mode: ${{inputs.mode || 'published'}}
+      mode: ${{matrix.mode}}
       S3_HOST: ${{vars.S3_HOST}}
       S3_BUCKET: ${{vars.S3_BUCKET}}
       S3_FOLDER: ${{vars.S3_FOLDER}}
