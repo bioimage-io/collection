@@ -89,7 +89,7 @@ def create_entry(
         rdf = yaml.load(rdf_path)
 
     entry = {
-        k: rdf.get(k, f"unknown {k}")
+        k: rdf[k]
         for k in (
             "description",
             "id_emoji",
@@ -99,6 +99,7 @@ def create_entry(
             "type",
         )
     }
+
     entry["authors"] = rdf.get("authors", [])
 
     try:
