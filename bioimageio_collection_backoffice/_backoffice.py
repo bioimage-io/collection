@@ -1,3 +1,5 @@
+"""implements the Backoffice CLI"""
+
 from datetime import datetime
 from pathlib import Path
 from typing import Literal, Optional, Union
