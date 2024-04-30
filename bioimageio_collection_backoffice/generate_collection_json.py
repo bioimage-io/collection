@@ -127,7 +127,7 @@ def create_entry(
     entry["entry_source"] = rv.rdf_url
     entry["entry_sha256"] = None if rdf_path is None else get_sha256(rdf_path)
     entry["rdf_source"] = entry["entry_source"]
-    entry["version_number"] = rv.number
+    entry["version_number"] = rv.version
     entry["versions"] = list(rv.concept.versions.published)
     entry["staged_versions"] = [f"staged/{s}" for s in rv.concept.versions.staged]
     entry["doi"] = rv.doi if isinstance(rv, PublishedVersion) else None
