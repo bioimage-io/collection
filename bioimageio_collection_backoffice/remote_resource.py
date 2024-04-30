@@ -240,7 +240,7 @@ class RemoteResourceVersion(RemoteResourceBase, Generic[NumberT, InfoT], ABC):
 
     @property
     def rdf_path(self) -> str:
-        return f"{self.folder}files/rdf.yaml"
+        return f"{self.folder}files/bioimageio.yaml"
 
     @property
     def rdf_url(self) -> str:
