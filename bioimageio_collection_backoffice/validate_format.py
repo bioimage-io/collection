@@ -1,13 +1,12 @@
 import warnings
-from pathlib import Path
 from typing import Dict, List, Literal, Optional, Tuple, TypedDict, Union, cast
 
-import pooch
 from bioimageio.spec import InvalidDescr, ResourceDescr, load_description
 from bioimageio.spec.common import Sha256
 from bioimageio.spec.model import v0_4, v0_5
 from bioimageio.spec.model.v0_5 import Version, WeightsFormat
 from bioimageio.spec.summary import ErrorEntry, ValidationDetail
+from bioimageio.spec.utils import download
 from ruyaml import YAML
 from typing_extensions import assert_never, get_args
 
@@ -49,15 +48,15 @@ def get_env_from_deps(deps: Union[v0_4.Dependencies, v0_5.EnvironmentFileDescr])
         if deps.manager not in ("conda", "mamba"):
             return get_base_env()
 
-        url = deps.file
+        deps_source = deps.file
         sha: Optional[Sha256] = None
     elif isinstance(deps, v0_5.EnvironmentFileDescr):
-        url = deps.source
+        deps_source = deps.source
         sha = deps.sha256
     else:
         assert_never(deps)
 
-    local = Path(pooch.retrieve(str(url), known_hash=sha))  # type: ignore
+    local = download(deps_source, sha256=sha)
     conda_env = yaml.load(local)
 
     # add bioimageio.core to dependencies
