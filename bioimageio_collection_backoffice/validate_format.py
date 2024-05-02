@@ -56,7 +56,7 @@ def get_env_from_deps(deps: Union[v0_4.Dependencies, v0_5.EnvironmentFileDescr])
     else:
         assert_never(deps)
 
-    local = download(deps_source, sha256=sha)
+    local = download(deps_source, sha256=sha).path
     conda_env = yaml.load(local)
 
     # add bioimageio.core to dependencies
