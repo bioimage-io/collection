@@ -357,7 +357,7 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
         # ensure we have a chat.json
         self.extend_chat(Chat())
 
-        # ensure we have a logs.json
+        # ensure we have a log.json
         self.extend_log(Log())
 
         # set first status (this also write versions.json)
