@@ -41,7 +41,7 @@ env:
   ZENODO_API_ACCESS_TOKEN: ${{secrets.ZENODO_API_ACCESS_TOKEN}}
   REVIEWERS: ${{inputs.REVIEWERS}}
   RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
-
+  MAIL_PASSWORD: ${{secrets.MAIL_PASSWORD}}
 
 jobs:
   run:
