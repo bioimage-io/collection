@@ -133,7 +133,7 @@ def create_entry(
     entry["nickname"] = entry["id"]
     entry["nickname_icon"] = entry["id_emoji"]
     entry["entry_source"] = rv.rdf_url
-    entry["entry_sha256"] = None if rdf_path is None else get_sha256(rdf_path)
+    entry["entry_sha256"] = get_sha256(rdf_path)
     entry["rdf_source"] = entry["entry_source"]
     entry["version_number"] = rv.version
     entry["versions"] = list(rv.concept.versions.published)
