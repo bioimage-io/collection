@@ -75,17 +75,8 @@ def create_entry(
     with ValidationContext(perform_io_checks=False):
         rdf_url = HttpUrl(rv.rdf_url)
 
-    try:
-        rdf_path = download(rdf_url).path
-    except Exception as e:
-        logger.error("failed to download rdf_url: {}", e)
-        if isinstance(rv, PublishedVersion):
-            raise e
-
-        rdf_path = None
-        rdf: Dict[Any, Any] = {}
-    else:
-        rdf = yaml.load(rdf_path)
+    rdf_path = download(rdf_url).path
+    rdf = yaml.load(rdf_path)
 
     entry = {
         k: rdf[k]
