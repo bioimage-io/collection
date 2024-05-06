@@ -35,12 +35,11 @@ def generate_collection_json(
     with collection_template.open() as f:
         collection = json.load(f)
 
-    collection["config"]["url_root"] = client.get_file_url("").strip("/")
     error_in_published_entry = None
     if mode == "published":
         for rv in remote_collection.get_all_published_versions():
             try:
-                entry = create_entry(rv)
+                entry = create_entry(client, rv)
             except Exception as e:
                 error_in_published_entry = (
                     f"failed to create {rv.id} {rv.version} entry: {e}"
@@ -51,7 +50,7 @@ def generate_collection_json(
     elif mode == "staged":
         for rv in remote_collection.get_all_staged_versions():
             try:
-                entry = create_entry(rv)
+                entry = create_entry(client, rv)
             except Exception as e:
                 logger.info("failed to create {} {} entry: {}", rv.id, rv.version, e)
             else:
@@ -70,6 +69,7 @@ def generate_collection_json(
 
 
 def create_entry(
+    client: Client,
     rv: Union[PublishedVersion, StagedVersion],
 ) -> Dict[str, Any]:
     with ValidationContext(perform_io_checks=False):
@@ -140,4 +140,5 @@ def create_entry(
     entry["staged_versions"] = [f"staged/{s}" for s in rv.concept.versions.staged]
     entry["doi"] = rv.doi if isinstance(rv, PublishedVersion) else None
     entry["concept_doi"] = rv.concept.doi
+    entry["root_url"] = client.get_file_url("").strip("/") + "/" + rv.folder.strip("/")
     return entry
