@@ -140,5 +140,7 @@ def create_entry(
     entry["staged_versions"] = [f"staged/{s}" for s in rv.concept.versions.staged]
     entry["doi"] = rv.doi if isinstance(rv, PublishedVersion) else None
     entry["concept_doi"] = rv.concept.doi
-    entry["root_url"] = client.get_file_url("").strip("/") + "/" + rv.folder.strip("/")
+    entry["root_url"] = (
+        client.get_file_url("").strip("/") + "/" + rv.folder.strip("/") + "/files"
+    )
     return entry
