@@ -12,9 +12,9 @@ from ._settings import settings
 from .backup import ZenodoHost, backup
 from .db_structure.chat import Chat, Message
 from .db_structure.log import CollectionCiLog, CollectionCiLogEntry, Log
-from .generate_collection_json import generate_collection_json
 from .gh_utils import set_gh_actions_outputs
 from .mailroom import notify_uploader
+from .remote_collection import RemoteCollection
 from .remote_resource import (
     PublishedVersion,
     ResourceConcept,
@@ -172,8 +172,8 @@ class BackOffice:
         mode: Literal["published", "staged"] = "published",
     ):
         """generate the collection.json file --- a summary of the whole collection"""
-        generate_collection_json(
-            self.client, collection_template=collection_template, mode=mode
+        RemoteCollection(self.client).generate_collection_json(
+            collection_template=collection_template, mode=mode
         )
 
     def forward_emails_to_chat(self):

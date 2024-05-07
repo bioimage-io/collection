@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import io
+import json
 import sys
 import traceback
 import urllib.request
@@ -398,6 +399,22 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
             )
             sys.exit(1)
 
+        if "name" not in rdf:
+            self.set_error_status(f"Missing 'name' in {package_url}")
+            sys.exit(1)
+
+        collection_data = self.client.load_file("collection.json")
+        assert collection_data is not None
+        collection = json.loads(collection_data)
+        for e in collection["collection"]:
+            if e["name"] == rdf["name"]:
+                if e["id"] != rdf["id"]:
+                    self.set_error_status(
+                        f"Another resource with name='{rdf['name']}' already exists ({e['id']})"
+                    )
+                    sys.exit(1)
+                break
+
         # set matching id_emoji
         id_parts = IdParts.load()
         rdf["id_emoji"] = id_parts.get_icon(self.id)
@@ -605,6 +622,9 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
     def _set_status(self, value: StagedVersionStatus):
         info = self.concept.versions.staged.get(
             self.number, StagedVersionInfo(status=value)
+        )
+        self.extend_log(
+            Log(collection=[CollectionLog(log=f"updating status to {value}")])
         )
         if value.step < info.status.step:
             self.set_error_status(f"Cannot proceed from {info.status} to {value}")
