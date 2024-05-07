@@ -101,6 +101,28 @@ def create_entry(
     return entry
 
 
+def generate_doi_mapping(
+    client: Client,
+    collection: Dict[
+        str, Union[Any, Dict[str, Union[Any, List[Union[Any, Dict[str, Any]]]]]]
+    ],
+):
+    mapping: Dict[str, str] = {}
+    for e in collection["collection"]:
+        assert isinstance(e, dict)
+        doi: Any = e.get("doi")
+        if doi is not None:
+            assert isinstance(doi, str)
+            mapping[doi] = e["id"]
+
+        concept_doi: Any = e.get("concept_doi")
+        if concept_doi is not None:
+            assert isinstance(concept_doi, str)
+            mapping[concept_doi] = e["id"]
+
+    client.put_json("mapping_dois.json", mapping)
+
+
 def generate_old_doi_mapping(
     client: Client,
     collection: Dict[

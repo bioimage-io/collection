@@ -8,7 +8,11 @@ from bioimageio.spec.collection import CollectionDescr
 from loguru import logger
 from typing_extensions import assert_never
 
-from .generate_collection_json import create_entry, generate_old_doi_mapping
+from .generate_collection_json import (
+    create_entry,
+    generate_doi_mapping,
+    generate_old_doi_mapping,
+)
 from .s3_client import Client
 
 
@@ -83,6 +87,7 @@ class RemoteCollection:
 
         if mode == "published":
             generate_old_doi_mapping(self.client, collection)
+            generate_doi_mapping(self.client, collection)
 
         self.client.put_json(output_file_name, collection)
         if error_in_published_entry is not None:
