@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import io
+import json
 import sys
 import traceback
 import urllib.request
@@ -57,7 +58,6 @@ from .db_structure.versions import (
     UnpackingStatus,
     Versions,
 )
-from .remote_collection import RemoteCollection
 from .resource_id import validate_resource_id
 from .reviewer import get_reviewers
 from .s3_client import Client
@@ -403,7 +403,9 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
             self.set_error_status(f"Missing 'name' in {package_url}")
             sys.exit(1)
 
-        collection = RemoteCollection(self.client).get_collection_json()
+        collection_data = self.client.load_file("collection.json")
+        assert collection_data is not None
+        collection = json.loads(collection_data)
         for e in collection["collection"]:
             if e["name"] == rdf["name"]:
                 if e["id"] != rdf["id"]:
