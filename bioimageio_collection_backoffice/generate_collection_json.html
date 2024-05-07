@@ -224,7 +224,14 @@
 </span><span id="L-143"><a href="#L-143"><span class="linenos">143</span></a>    <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;root_url&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
 </span><span id="L-144"><a href="#L-144"><span class="linenos">144</span></a>        <span class="n">client</span><span class="o">.</span><span class="n">get_file_url</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">rv</span><span class="o">.</span><span class="n">folder</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;/files&quot;</span>
 </span><span id="L-145"><a href="#L-145"><span class="linenos">145</span></a>    <span class="p">)</span>
-</span><span id="L-146"><a href="#L-146"><span class="linenos">146</span></a>    <span class="k">return</span> <span class="n">entry</span>
+</span><span id="L-146"><a href="#L-146"><span class="linenos">146</span></a>    <span class="k">try</span><span class="p">:</span>
+</span><span id="L-147"><a href="#L-147"><span class="linenos">147</span></a>        <span class="n">old_doi</span> <span class="o">=</span> <span class="n">rdf</span><span class="p">[</span><span class="s2">&quot;config&quot;</span><span class="p">][</span><span class="s2">&quot;_conceptdoi&quot;</span><span class="p">]</span>
+</span><span id="L-148"><a href="#L-148"><span class="linenos">148</span></a>    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+</span><span id="L-149"><a href="#L-149"><span class="linenos">149</span></a>        <span class="k">pass</span>
+</span><span id="L-150"><a href="#L-150"><span class="linenos">150</span></a>    <span class="k">else</span><span class="p">:</span>
+</span><span id="L-151"><a href="#L-151"><span class="linenos">151</span></a>        <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;direct_zenodo_upload_doi&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">old_doi</span>
+</span><span id="L-152"><a href="#L-152"><span class="linenos">152</span></a>
+</span><span id="L-153"><a href="#L-153"><span class="linenos">153</span></a>    <span class="k">return</span> <span class="n">entry</span>
 </span></pre></div>
 
 
@@ -392,7 +399,14 @@
 </span><span id="create_entry-144"><a href="#create_entry-144"><span class="linenos">144</span></a>    <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;root_url&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
 </span><span id="create_entry-145"><a href="#create_entry-145"><span class="linenos">145</span></a>        <span class="n">client</span><span class="o">.</span><span class="n">get_file_url</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">rv</span><span class="o">.</span><span class="n">folder</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;/files&quot;</span>
 </span><span id="create_entry-146"><a href="#create_entry-146"><span class="linenos">146</span></a>    <span class="p">)</span>
-</span><span id="create_entry-147"><a href="#create_entry-147"><span class="linenos">147</span></a>    <span class="k">return</span> <span class="n">entry</span>
+</span><span id="create_entry-147"><a href="#create_entry-147"><span class="linenos">147</span></a>    <span class="k">try</span><span class="p">:</span>
+</span><span id="create_entry-148"><a href="#create_entry-148"><span class="linenos">148</span></a>        <span class="n">old_doi</span> <span class="o">=</span> <span class="n">rdf</span><span class="p">[</span><span class="s2">&quot;config&quot;</span><span class="p">][</span><span class="s2">&quot;_conceptdoi&quot;</span><span class="p">]</span>
+</span><span id="create_entry-149"><a href="#create_entry-149"><span class="linenos">149</span></a>    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+</span><span id="create_entry-150"><a href="#create_entry-150"><span class="linenos">150</span></a>        <span class="k">pass</span>
+</span><span id="create_entry-151"><a href="#create_entry-151"><span class="linenos">151</span></a>    <span class="k">else</span><span class="p">:</span>
+</span><span id="create_entry-152"><a href="#create_entry-152"><span class="linenos">152</span></a>        <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;direct_zenodo_upload_doi&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">old_doi</span>
+</span><span id="create_entry-153"><a href="#create_entry-153"><span class="linenos">153</span></a>
+</span><span id="create_entry-154"><a href="#create_entry-154"><span class="linenos">154</span></a>    <span class="k">return</span> <span class="n">entry</span>
 </span></pre></div>
 
 
