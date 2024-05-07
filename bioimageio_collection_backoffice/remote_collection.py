@@ -1,7 +1,11 @@
 import json
 from dataclasses import dataclass
-from typing import Any, Dict, List, Union
+from pathlib import Path
+from typing import Any, Dict, List, Literal, Union
 
+from .generate_collection_json import (
+    generate_collection_json as generate_collection_json_impl,
+)
 from .s3_client import Client
 
 
@@ -29,6 +33,13 @@ class RemoteCollection:
         for rc in self.get_resource_concepts():
             for v in rc.get_all_published_versions():
                 yield v
+
+    def generate_collection_json(
+        self,
+        collection_template: Path = Path("collection_template.json"),
+        mode: Literal["published", "staged"] = "published",
+    ):
+        generate_collection_json_impl(self.client, collection_template, mode)
 
     def get_collection_json(self):
         data = self.client.load_file("collection.json")

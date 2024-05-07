@@ -6,6 +6,7 @@ from bioimageio_collection_backoffice.db_structure.versions import PublishNumber
 from bioimageio_collection_backoffice.generate_collection_json import (
     generate_collection_json,
 )
+from bioimageio_collection_backoffice.remote_collection import RemoteCollection
 from bioimageio_collection_backoffice.remote_resource import (
     PublishedVersion,
     ResourceConcept,
@@ -21,6 +22,8 @@ def test_lifecycle(
     s3_test_folder_url: str,
     collection_template_path: Path,
 ):
+    remote_collection = RemoteCollection(client)
+    remote_collection.generate_collection_json(collection_template_path)
     resource = ResourceConcept(client=client, id=package_id)
     staged = resource.stage_new_version(package_url)
     assert isinstance(staged, StagedVersion)
@@ -38,7 +41,7 @@ def test_lifecycle(
         == f"{s3_test_folder_url}frank-water-buffalo/1/files/bioimageio.yaml"
     )
 
-    generate_collection_json(client, collection_template_path)
+    remote_collection.generate_collection_json(collection_template_path)
 
     backup(client, settings.zenodo_test_url)
 
