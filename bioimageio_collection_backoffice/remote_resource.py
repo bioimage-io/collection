@@ -31,8 +31,6 @@ from loguru import logger
 from ruyaml import YAML
 from typing_extensions import Concatenate, LiteralString, ParamSpec, assert_never
 
-from bioimageio_collection_backoffice.remote_collection import RemoteCollection
-
 from ._settings import settings
 from ._thumbnails import create_thumbnails
 from .db_structure.chat import Chat, Message
@@ -59,6 +57,7 @@ from .db_structure.versions import (
     UnpackingStatus,
     Versions,
 )
+from .remote_collection import RemoteCollection
 from .resource_id import validate_resource_id
 from .reviewer import get_reviewers
 from .s3_client import Client

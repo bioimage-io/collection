@@ -2,7 +2,6 @@ import json
 from dataclasses import dataclass
 from typing import Any, Dict, List, Union
 
-from .remote_resource import ResourceConcept
 from .s3_client import Client
 
 
@@ -14,6 +13,8 @@ class RemoteCollection:
     """Client to connect to remote storage"""
 
     def get_resource_concepts(self):
+        from .remote_resource import ResourceConcept
+
         return (
             ResourceConcept(client=self.client, id=d)
             for d in self.client.ls("", only_folders=True)
