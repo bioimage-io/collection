@@ -90,6 +90,7 @@ def create_entry(
     entry["root_url"] = (
         client.get_file_url("").strip("/") + "/" + rv.folder.strip("/") + "/files"
     )
+    entry["status"] = str(rv.info)
     try:
         old_doi = rdf["config"]["_conceptdoi"]
     except KeyError:
