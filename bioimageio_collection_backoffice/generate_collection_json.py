@@ -1,71 +1,18 @@
-import json
 from pathlib import Path
 from typing import Any, Dict, List, Union
 
-from bioimageio.spec import ValidationContext, build_description
+from bioimageio.spec import ValidationContext
 from bioimageio.spec._internal.io import (
     get_sha256,  # TODO: use bioimageio.spec.utils.get_sha256
 )
-from bioimageio.spec.collection import CollectionDescr
 from bioimageio.spec.common import HttpUrl
 from bioimageio.spec.utils import download
-from loguru import logger
 from ruyaml import YAML
-from typing_extensions import Literal, assert_never
 
-from .remote_collection import RemoteCollection
 from .remote_resource import PublishedVersion, StagedVersion
 from .s3_client import Client
 
 yaml = YAML(typ="safe")
-
-
-def generate_collection_json(
-    client: Client,
-    collection_template: Path = Path("collection_template.json"),
-    mode: Literal["published", "staged"] = "published",
-) -> None:
-    """generate a json file with an overview of all published resources"""
-    output_file_name: str = (
-        "collection.json" if mode == "published" else f"collection_{mode}.json"
-    )
-    logger.info("generating {}", output_file_name)
-
-    remote_collection = RemoteCollection(client=client)
-    with collection_template.open() as f:
-        collection = json.load(f)
-
-    error_in_published_entry = None
-    if mode == "published":
-        for rv in remote_collection.get_all_published_versions():
-            try:
-                entry = create_entry(client, rv)
-            except Exception as e:
-                error_in_published_entry = (
-                    f"failed to create {rv.id} {rv.version} entry: {e}"
-                )
-                logger.error(error_in_published_entry)
-            else:
-                collection["collection"].append(entry)
-    elif mode == "staged":
-        for rv in remote_collection.get_all_staged_versions():
-            try:
-                entry = create_entry(client, rv)
-            except Exception as e:
-                logger.info("failed to create {} {} entry: {}", rv.id, rv.version, e)
-            else:
-                collection["collection"].append(entry)
-    else:
-        assert_never(mode)
-    coll_descr = build_description(
-        collection, context=ValidationContext(perform_io_checks=False)
-    )
-    if not isinstance(coll_descr, CollectionDescr):
-        logger.error(coll_descr.validation_summary.format())
-
-    client.put_json(output_file_name, collection)
-    if error_in_published_entry is not None:
-        raise ValueError(error_in_published_entry)
 
 
 def create_entry(
@@ -143,4 +90,28 @@ def create_entry(
     entry["root_url"] = (
         client.get_file_url("").strip("/") + "/" + rv.folder.strip("/") + "/files"
     )
+    try:
+        old_doi = rdf["config"]["_conceptdoi"]
+    except KeyError:
+        pass
+    else:
+        entry["direct_zenodo_upload_doi"] = old_doi
+
     return entry
+
+
+def generate_old_doi_mapping(
+    client: Client,
+    collection: Dict[
+        str, Union[Any, Dict[str, Union[Any, List[Union[Any, Dict[str, Any]]]]]]
+    ],
+):
+    mapping: Dict[str, str] = {}
+    for e in collection["collection"]:
+        assert isinstance(e, dict)
+        direct_zenodo_upload_doi: Any = e.pop("direct_zenodo_upload_doi", None)
+        if direct_zenodo_upload_doi is not None:
+            assert isinstance(direct_zenodo_upload_doi, str)
+            mapping[direct_zenodo_upload_doi] = e["id"]
+
+    client.put_json("mapping_direct_zenodo_upload_dois.json", mapping)
