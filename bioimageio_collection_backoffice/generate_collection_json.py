@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import Any, Dict, List, Union
+from typing import Any, Dict, List, Optional, Union
 
 from bioimageio.spec import ValidationContext
 from bioimageio.spec._internal.io import (
@@ -7,6 +7,7 @@ from bioimageio.spec._internal.io import (
 )
 from bioimageio.spec.common import HttpUrl
 from bioimageio.spec.utils import download
+from loguru import logger
 from ruyaml import YAML
 
 from .remote_resource import PublishedVersion, StagedVersion
@@ -18,7 +19,7 @@ yaml = YAML(typ="safe")
 def create_entry(
     client: Client,
     rv: Union[PublishedVersion, StagedVersion],
-) -> Dict[str, Any]:
+) -> Optional[Dict[str, Any]]:
     with ValidationContext(perform_io_checks=False):
         rdf_url = HttpUrl(rv.rdf_url)
 
@@ -91,6 +92,14 @@ def create_entry(
         client.get_file_url("").strip("/") + "/" + rv.folder.strip("/") + "/files"
     )
     entry["info"] = rv.info.model_dump(mode="json")
+    if isinstance(rv, StagedVersion) and (
+        status := entry["info"]["status"]["name"]
+    ) in (
+        "superseded",
+        "published",
+    ):
+        logger.debug("skipping {} staged version {} {}", status, rv.id, rv.version)
+        return None
     try:
         old_doi = rdf["config"]["_conceptdoi"]
     except KeyError:

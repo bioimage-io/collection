@@ -66,7 +66,8 @@ class RemoteCollection:
                     )
                     logger.error(error_in_published_entry)
                 else:
-                    collection["collection"].append(entry)
+                    if entry is not None:
+                        collection["collection"].append(entry)
         elif mode == "staged":
             for rv in self.get_all_staged_versions():
                 try:
@@ -76,7 +77,8 @@ class RemoteCollection:
                         "failed to create {} {} entry: {}", rv.id, rv.version, e
                     )
                 else:
-                    collection["collection"].append(entry)
+                    if entry is not None:
+                        collection["collection"].append(entry)
         else:
             assert_never(mode)
         coll_descr = build_description(
