@@ -182,7 +182,7 @@
 </span><span id="L-2"><a href="#L-2"><span class="linenos"> 2</span></a>
 </span><span id="L-3"><a href="#L-3"><span class="linenos"> 3</span></a><span class="kn">import</span> <span class="nn">collections.abc</span>
 </span><span id="L-4"><a href="#L-4"><span class="linenos"> 4</span></a><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
-</span><span id="L-5"><a href="#L-5"><span class="linenos"> 5</span></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">ClassVar</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">,</span> <span class="n">Union</span>
+</span><span id="L-5"><a href="#L-5"><span class="linenos"> 5</span></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">ClassVar</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">,</span> <span class="n">Union</span>
 </span><span id="L-6"><a href="#L-6"><span class="linenos"> 6</span></a>
 </span><span id="L-7"><a href="#L-7"><span class="linenos"> 7</span></a><span class="kn">from</span> <span class="nn">bioimageio.spec</span> <span class="kn">import</span> <span class="n">ValidationSummary</span>
 </span><span id="L-8"><a href="#L-8"><span class="linenos"> 8</span></a><span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">Field</span>
@@ -198,7 +198,7 @@
 </span><span id="L-18"><a href="#L-18"><span class="linenos">18</span></a>
 </span><span id="L-19"><a href="#L-19"><span class="linenos">19</span></a>
 </span><span id="L-20"><a href="#L-20"><span class="linenos">20</span></a><span class="k">class</span> <span class="nc">CollectionLog</span><span class="p">(</span><span class="n">_LogEntryBase</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-</span><span id="L-21"><a href="#L-21"><span class="linenos">21</span></a>    <span class="n">log</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="L-21"><a href="#L-21"><span class="linenos">21</span></a>    <span class="n">log</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span>
 </span><span id="L-22"><a href="#L-22"><span class="linenos">22</span></a>
 </span><span id="L-23"><a href="#L-23"><span class="linenos">23</span></a>
 </span><span id="L-24"><a href="#L-24"><span class="linenos">24</span></a><span class="k">class</span> <span class="nc">CollectionCiLogEntry</span><span class="p">(</span><span class="n">Node</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
@@ -250,7 +250,7 @@
     </div>
     <a class="headerlink" href="#CollectionLog"></a>
             <div class="pdoc-code codehilite"><pre><span></span><span id="CollectionLog-21"><a href="#CollectionLog-21"><span class="linenos">21</span></a><span class="k">class</span> <span class="nc">CollectionLog</span><span class="p">(</span><span class="n">_LogEntryBase</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-</span><span id="CollectionLog-22"><a href="#CollectionLog-22"><span class="linenos">22</span></a>    <span class="n">log</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="CollectionLog-22"><a href="#CollectionLog-22"><span class="linenos">22</span></a>    <span class="n">log</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span>
 </span></pre></div>
 
 
@@ -286,7 +286,7 @@ __pydantic_private__: Instance attribute with the values of private attributes s
 
                             <div id="CollectionLog.log" class="classattr">
                                 <div class="attr variable">
-            <span class="name">log</span><span class="annotation">: str</span>
+            <span class="name">log</span><span class="annotation">: Union[str, Mapping[str, Any]]</span>
 
         
     </div>
@@ -314,7 +314,7 @@ __pydantic_private__: Instance attribute with the values of private attributes s
                                 <div class="attr variable">
             <span class="name">model_fields</span>        =
 <input id="CollectionLog.model_fields-view-value" class="view-value-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
-            <label class="view-value-button pdoc-button" for="CollectionLog.model_fields-view-value"></label><span class="default_value">{&#39;timestamp&#39;: FieldInfo(annotation=datetime, required=False, default=datetime.datetime(2024, 5, 8, 15, 44, 22, 600672)), &#39;log&#39;: FieldInfo(annotation=str, required=True)}</span>
+            <label class="view-value-button pdoc-button" for="CollectionLog.model_fields-view-value"></label><span class="default_value">{&#39;timestamp&#39;: FieldInfo(annotation=datetime, required=False, default=datetime.datetime(2024, 5, 8, 16, 14, 3, 684281)), &#39;log&#39;: FieldInfo(annotation=Union[str, Mapping[str, Any]], required=True)}</span>
 
         
     </div>
@@ -592,7 +592,7 @@ __pydantic_private__: Instance attribute with the values of private attributes s
                                 <div class="attr variable">
             <span class="name">model_fields</span>        =
 <input id="CollectionCiLog.model_fields-view-value" class="view-value-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
-            <label class="view-value-button pdoc-button" for="CollectionCiLog.model_fields-view-value"></label><span class="default_value">{&#39;timestamp&#39;: FieldInfo(annotation=datetime, required=False, default=datetime.datetime(2024, 5, 8, 15, 44, 22, 600672)), &#39;log&#39;: FieldInfo(annotation=CollectionCiLogEntry, required=True)}</span>
+            <label class="view-value-button pdoc-button" for="CollectionCiLog.model_fields-view-value"></label><span class="default_value">{&#39;timestamp&#39;: FieldInfo(annotation=datetime, required=False, default=datetime.datetime(2024, 5, 8, 16, 14, 3, 684281)), &#39;log&#39;: FieldInfo(annotation=CollectionCiLogEntry, required=True)}</span>
 
         
     </div>
@@ -728,7 +728,7 @@ __pydantic_private__: Instance attribute with the values of private attributes s
                                 <div class="attr variable">
             <span class="name">model_fields</span>        =
 <input id="BioimageioLog.model_fields-view-value" class="view-value-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
-            <label class="view-value-button pdoc-button" for="BioimageioLog.model_fields-view-value"></label><span class="default_value">{&#39;timestamp&#39;: FieldInfo(annotation=datetime, required=False, default=datetime.datetime(2024, 5, 8, 15, 44, 22, 600672)), &#39;log&#39;: FieldInfo(annotation=ValidationSummary, required=True)}</span>
+            <label class="view-value-button pdoc-button" for="BioimageioLog.model_fields-view-value"></label><span class="default_value">{&#39;timestamp&#39;: FieldInfo(annotation=datetime, required=False, default=datetime.datetime(2024, 5, 8, 16, 14, 3, 684281)), &#39;log&#39;: FieldInfo(annotation=ValidationSummary, required=True)}</span>
 
         
     </div>
