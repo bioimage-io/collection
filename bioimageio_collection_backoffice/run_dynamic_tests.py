@@ -15,7 +15,7 @@ from bioimageio.spec.summary import (
 from bioimageio.spec.utils import download
 from ruyaml import YAML
 
-from .db_structure.log import BioimageioLog, Log
+from .db_structure.log import BioimageioLog, BioimageioLogEntry, Log
 from .remote_resource import PublishedVersion, StagedVersion
 
 try:
@@ -54,7 +54,15 @@ def run_dynamic_tests(
     )
     summary = _run_dynamic_tests_impl(staged.rdf_url, weight_format, create_env_outcome)
     if summary is not None:
-        staged.extend_log(Log(bioimageio_core=[BioimageioLog(log=summary)]))
+        staged.extend_log(
+            Log(
+                bioimageio_core=[
+                    BioimageioLog(
+                        log=BioimageioLogEntry(message=summary.name, details=summary)
+                    )
+                ]
+            )
+        )
 
 
 def rerun_dynamic_tests(
@@ -66,7 +74,15 @@ def rerun_dynamic_tests(
         published.rdf_url, weight_format, create_env_outcome
     )
     if summary is not None:
-        published.extend_log(Log(bioimageio_core=[BioimageioLog(log=summary)]))
+        published.extend_log(
+            Log(
+                bioimageio_core=[
+                    BioimageioLog(
+                        log=BioimageioLogEntry(message=summary.name, details=summary)
+                    )
+                ]
+            )
+        )
 
 
 def _run_dynamic_tests_impl(

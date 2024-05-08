@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import collections.abc
 from datetime import datetime
-from typing import Any, ClassVar, Dict, Mapping, Sequence, Union
+from typing import Any, ClassVar, Dict, Optional, Sequence, Union
 
 from bioimageio.spec import ValidationSummary
 from pydantic import Field
@@ -10,19 +10,24 @@ from pydantic import Field
 from .common import Node
 
 
-class _LogEntryBase(Node, frozen=True):
+class _LogEntryBase(Node, frozen=True, extra="ignore"):
     timestamp: datetime = datetime.now()
     """creation of log entry"""
     log: Any
     """log content"""
 
 
+class CollectionLogEntry(Node, frozen=True, extra="ignore"):
+    message: str = ""
+    details: Any = None
+
+
 class CollectionLog(_LogEntryBase, frozen=True):
-    log: Union[str, Mapping[str, Any]]
+    log: Union[str, CollectionLogEntry]
 
 
-class CollectionCiLogEntry(Node, frozen=True):
-    name: str
+class CollectionCiLogEntry(Node, frozen=True, extra="ignore"):
+    message: str = ""
     run_url: str
 
 
@@ -30,8 +35,13 @@ class CollectionCiLog(_LogEntryBase, frozen=True):
     log: CollectionCiLogEntry
 
 
-class BioimageioLog(_LogEntryBase, frozen=True):
-    log: ValidationSummary
+class BioimageioLogEntry(Node, frozen=True, extra="ignore"):
+    message: str = ""
+    details: Optional[ValidationSummary] = None
+
+
+class BioimageioLog(_LogEntryBase, frozen=True, extra="ignore"):
+    log: BioimageioLogEntry
 
 
 class Log(Node, frozen=True, extra="allow"):

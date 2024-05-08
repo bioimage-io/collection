@@ -48,7 +48,7 @@ class BackOffice:
             Log(
                 collection_ci=[
                     CollectionCiLog(
-                        log=CollectionCiLogEntry(name=name, run_url=settings.run_url)
+                        log=CollectionCiLogEntry(message=name, run_url=settings.run_url)
                     )
                 ]
             )

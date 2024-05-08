@@ -17,7 +17,6 @@ from typing import (
     Dict,
     Generic,
     List,
-    Mapping,
     NamedTuple,
     Optional,
     Type,
@@ -39,6 +38,7 @@ from .db_structure.chat import Chat, Message
 from .db_structure.id_parts import IdParts
 from .db_structure.log import (
     CollectionLog,
+    CollectionLogEntry,
     Log,
 )
 from .db_structure.versions import (
@@ -295,8 +295,14 @@ class RemoteResourceVersion(RemoteResourceBase, Generic[NumberT, InfoT], ABC):
     def get_file_urls(self):
         return self.client.get_file_urls(f"{self.folder}files/")
 
-    def report_error(self, msg: Union[str, Mapping[str, Any]]):
-        self.extend_log(Log(collection=[CollectionLog(log=msg)]))
+    def report_error(self, msg: str, details: Any = None):
+        self.extend_log(
+            Log(
+                collection=[
+                    CollectionLog(log=CollectionLogEntry(message=msg, details=details))
+                ]
+            )
+        )
 
 
 @dataclass
@@ -628,7 +634,9 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
         self.extend_log(
             Log(
                 collection=[
-                    CollectionLog(log={"message": "new status", "status": value})
+                    CollectionLog(
+                        log=CollectionLogEntry(message="new status", details=value)
+                    )
                 ]
             )
         )
