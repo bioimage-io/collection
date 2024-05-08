@@ -1,3 +1,4 @@
+import traceback
 from datetime import datetime
 from typing import Any, Dict, List
 from urllib.parse import quote_plus
@@ -37,7 +38,16 @@ def backup(client: Client, destination: ZenodoHost):
         if v.info.doi is not None:
             continue
 
-        backup_published_version(v, destination)
+        error = None
+        try:
+            backup_published_version(v, destination)
+        except Exception as e:
+            error = e
+            logger.error("{}\n{}", e, traceback.format_exc())
+
+        if error is not None:
+            raise error
+
         backed_up.append(f"{v.id}/{v.version}")
 
     logger.info("backed up {}", backed_up)
@@ -188,7 +198,9 @@ def rdf_to_metadata(
         docstring = download(rdf.documentation).path.read_text()
 
     description_md = f'[View on bioimage.io]("https://bioimage.io/#/?id={rdf.id}") # {rdf.name} \n\n{docstring}'
+    logger.debug("markdown descriptoin:\n{}", description_md)
     description = markdown.markdown(description_md)
+    logger.debug("html descriptoin:\n{}", description_md)
     keywords = ["backup.bioimage.io", "bioimage.io", "bioimage.io:" + rdf.type]
     # related_identifiers = generate_related_identifiers_from_rdf(rdf, rdf_file_name)  # TODO: add related identifiers
 
