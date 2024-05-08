@@ -142,7 +142,7 @@
 </span><span id="L-10"><a href="#L-10"><span class="linenos"> 10</span></a><span class="kn">from</span> <span class="nn">ruyaml</span> <span class="kn">import</span> <span class="n">YAML</span>
 </span><span id="L-11"><a href="#L-11"><span class="linenos"> 11</span></a><span class="kn">from</span> <span class="nn">typing_extensions</span> <span class="kn">import</span> <span class="n">assert_never</span><span class="p">,</span> <span class="n">get_args</span>
 </span><span id="L-12"><a href="#L-12"><span class="linenos"> 12</span></a>
-</span><span id="L-13"><a href="#L-13"><span class="linenos"> 13</span></a><span class="kn">from</span> <span class="nn">.db_structure.log</span> <span class="kn">import</span> <span class="n">BioimageioLog</span><span class="p">,</span> <span class="n">Log</span>
+</span><span id="L-13"><a href="#L-13"><span class="linenos"> 13</span></a><span class="kn">from</span> <span class="nn">.db_structure.log</span> <span class="kn">import</span> <span class="n">BioimageioLog</span><span class="p">,</span> <span class="n">BioimageioLogEntry</span><span class="p">,</span> <span class="n">Log</span>
 </span><span id="L-14"><a href="#L-14"><span class="linenos"> 14</span></a><span class="kn">from</span> <span class="nn">.remote_resource</span> <span class="kn">import</span> <span class="n">PublishedVersion</span><span class="p">,</span> <span class="n">StagedVersion</span>
 </span><span id="L-15"><a href="#L-15"><span class="linenos"> 15</span></a>
 </span><span id="L-16"><a href="#L-16"><span class="linenos"> 16</span></a><span class="n">yaml</span> <span class="o">=</span> <span class="n">YAML</span><span class="p">(</span><span class="n">typ</span><span class="o">=</span><span class="s2">&quot;safe&quot;</span><span class="p">)</span>
@@ -416,8 +416,16 @@
 </span><span id="L-284"><a href="#L-284"><span class="linenos">284</span></a>            <span class="p">)</span>
 </span><span id="L-285"><a href="#L-285"><span class="linenos">285</span></a>
 </span><span id="L-286"><a href="#L-286"><span class="linenos">286</span></a>    <span class="n">summary</span> <span class="o">=</span> <span class="n">rd</span><span class="o">.</span><span class="n">validation_summary</span>
-</span><span id="L-287"><a href="#L-287"><span class="linenos">287</span></a>    <span class="n">rv</span><span class="o">.</span><span class="n">extend_log</span><span class="p">(</span><span class="n">Log</span><span class="p">(</span><span class="n">bioimageio_spec</span><span class="o">=</span><span class="p">[</span><span class="n">BioimageioLog</span><span class="p">(</span><span class="n">log</span><span class="o">=</span><span class="n">summary</span><span class="p">)]))</span>
-</span><span id="L-288"><a href="#L-288"><span class="linenos">288</span></a>    <span class="k">return</span> <span class="n">dynamic_test_cases</span><span class="p">,</span> <span class="n">conda_envs</span>
+</span><span id="L-287"><a href="#L-287"><span class="linenos">287</span></a>    <span class="n">rv</span><span class="o">.</span><span class="n">extend_log</span><span class="p">(</span>
+</span><span id="L-288"><a href="#L-288"><span class="linenos">288</span></a>        <span class="n">Log</span><span class="p">(</span>
+</span><span id="L-289"><a href="#L-289"><span class="linenos">289</span></a>            <span class="n">bioimageio_spec</span><span class="o">=</span><span class="p">[</span>
+</span><span id="L-290"><a href="#L-290"><span class="linenos">290</span></a>                <span class="n">BioimageioLog</span><span class="p">(</span>
+</span><span id="L-291"><a href="#L-291"><span class="linenos">291</span></a>                    <span class="n">log</span><span class="o">=</span><span class="n">BioimageioLogEntry</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">summary</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">details</span><span class="o">=</span><span class="n">summary</span><span class="p">)</span>
+</span><span id="L-292"><a href="#L-292"><span class="linenos">292</span></a>                <span class="p">)</span>
+</span><span id="L-293"><a href="#L-293"><span class="linenos">293</span></a>            <span class="p">]</span>
+</span><span id="L-294"><a href="#L-294"><span class="linenos">294</span></a>        <span class="p">)</span>
+</span><span id="L-295"><a href="#L-295"><span class="linenos">295</span></a>    <span class="p">)</span>
+</span><span id="L-296"><a href="#L-296"><span class="linenos">296</span></a>    <span class="k">return</span> <span class="n">dynamic_test_cases</span><span class="p">,</span> <span class="n">conda_envs</span>
 </span></pre></div>
 
 
@@ -962,8 +970,16 @@
 </span><span id="validate_format-285"><a href="#validate_format-285"><span class="linenos">285</span></a>            <span class="p">)</span>
 </span><span id="validate_format-286"><a href="#validate_format-286"><span class="linenos">286</span></a>
 </span><span id="validate_format-287"><a href="#validate_format-287"><span class="linenos">287</span></a>    <span class="n">summary</span> <span class="o">=</span> <span class="n">rd</span><span class="o">.</span><span class="n">validation_summary</span>
-</span><span id="validate_format-288"><a href="#validate_format-288"><span class="linenos">288</span></a>    <span class="n">rv</span><span class="o">.</span><span class="n">extend_log</span><span class="p">(</span><span class="n">Log</span><span class="p">(</span><span class="n">bioimageio_spec</span><span class="o">=</span><span class="p">[</span><span class="n">BioimageioLog</span><span class="p">(</span><span class="n">log</span><span class="o">=</span><span class="n">summary</span><span class="p">)]))</span>
-</span><span id="validate_format-289"><a href="#validate_format-289"><span class="linenos">289</span></a>    <span class="k">return</span> <span class="n">dynamic_test_cases</span><span class="p">,</span> <span class="n">conda_envs</span>
+</span><span id="validate_format-288"><a href="#validate_format-288"><span class="linenos">288</span></a>    <span class="n">rv</span><span class="o">.</span><span class="n">extend_log</span><span class="p">(</span>
+</span><span id="validate_format-289"><a href="#validate_format-289"><span class="linenos">289</span></a>        <span class="n">Log</span><span class="p">(</span>
+</span><span id="validate_format-290"><a href="#validate_format-290"><span class="linenos">290</span></a>            <span class="n">bioimageio_spec</span><span class="o">=</span><span class="p">[</span>
+</span><span id="validate_format-291"><a href="#validate_format-291"><span class="linenos">291</span></a>                <span class="n">BioimageioLog</span><span class="p">(</span>
+</span><span id="validate_format-292"><a href="#validate_format-292"><span class="linenos">292</span></a>                    <span class="n">log</span><span class="o">=</span><span class="n">BioimageioLogEntry</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">summary</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">details</span><span class="o">=</span><span class="n">summary</span><span class="p">)</span>
+</span><span id="validate_format-293"><a href="#validate_format-293"><span class="linenos">293</span></a>                <span class="p">)</span>
+</span><span id="validate_format-294"><a href="#validate_format-294"><span class="linenos">294</span></a>            <span class="p">]</span>
+</span><span id="validate_format-295"><a href="#validate_format-295"><span class="linenos">295</span></a>        <span class="p">)</span>
+</span><span id="validate_format-296"><a href="#validate_format-296"><span class="linenos">296</span></a>    <span class="p">)</span>
+</span><span id="validate_format-297"><a href="#validate_format-297"><span class="linenos">297</span></a>    <span class="k">return</span> <span class="n">dynamic_test_cases</span><span class="p">,</span> <span class="n">conda_envs</span>
 </span></pre></div>
 
 
