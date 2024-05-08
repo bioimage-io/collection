@@ -17,6 +17,7 @@ from typing import (
     Dict,
     Generic,
     List,
+    Mapping,
     NamedTuple,
     Optional,
     Type,
@@ -294,7 +295,7 @@ class RemoteResourceVersion(RemoteResourceBase, Generic[NumberT, InfoT], ABC):
     def get_file_urls(self):
         return self.client.get_file_urls(f"{self.folder}files/")
 
-    def report_error(self, msg: str):
+    def report_error(self, msg: Union[str, Mapping[str, Any]]):
         self.extend_log(Log(collection=[CollectionLog(log=msg)]))
 
 
@@ -625,9 +626,19 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
             self.number, StagedVersionInfo(status=value)
         )
         self.extend_log(
-            Log(collection=[CollectionLog(log=f"updating status to {value}")])
+            Log(
+                collection=[
+                    CollectionLog(log={"message": "new status", "status": value})
+                ]
+            )
         )
-        if value.step < info.status.step:
+        if value.name == "testing" and info.status.name not in (
+            "accepted",
+            "published",
+            "superseded",
+        ):
+            pass
+        elif value.step < info.status.step:
             self.set_error_status(f"Cannot proceed from {info.status} to {value}")
             return
 

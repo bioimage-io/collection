@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import collections.abc
 from datetime import datetime
-from typing import Any, ClassVar, Dict, Sequence, Union
+from typing import Any, ClassVar, Dict, Mapping, Sequence, Union
 
 from bioimageio.spec import ValidationSummary
 from pydantic import Field
@@ -18,7 +18,7 @@ class _LogEntryBase(Node, frozen=True):
 
 
 class CollectionLog(_LogEntryBase, frozen=True):
-    log: str
+    log: Union[str, Mapping[str, Any]]
 
 
 class CollectionCiLogEntry(Node, frozen=True):
