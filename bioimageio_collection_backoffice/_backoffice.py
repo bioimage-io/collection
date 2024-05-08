@@ -40,6 +40,8 @@ class BackOffice:
         logger.info("created backoffice with client {}", self.client)
 
     def log_run_url(self, resource_id: str, version: str, name: str):
+        # TODO: rename name -> message
+
         if not settings.run_url:
             raise ValueError("'RUN_URL' not set")
 
