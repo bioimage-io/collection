@@ -182,7 +182,11 @@ class BackOffice:
 
     def add_chat_message(
         self, resource_id: str, version: str, chat_message: str, author: str
-    ):
+    ) -> Chat:
+        """add message to chat
+
+        Returns: updated chat
+        """
         chat = Chat(
             messages=[
                 Message(author=author, text=chat_message, timestamp=datetime.now())
@@ -190,3 +194,8 @@ class BackOffice:
         )
         rv = get_remote_resource_version(self.client, resource_id, version)
         rv.extend_chat(chat)
+        return rv.chat
+
+    def get_chat(self, resource_id: str, version: str) -> Chat:
+        rv = get_remote_resource_version(self.client, resource_id, version)
+        return rv.chat
