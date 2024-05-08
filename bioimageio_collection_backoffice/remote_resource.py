@@ -58,6 +58,7 @@ from .db_structure.versions import (
     UnpackingStatus,
     Versions,
 )
+from .mailroom.constants import BOT_EMAIL
 from .resource_id import validate_resource_id
 from .reviewer import get_reviewers
 from .s3_client import Client
@@ -447,7 +448,7 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
             )
             maintainer_emails = [a["email"] for a in prev_maintainers if "email" in a]
             if (
-                uploader != previous_rdf["uploader"]["email"]
+                uploader != previous_rdf.get("uploader", {}).get("email", BOT_EMAIL)
                 and uploader not in maintainer_emails
                 and uploader not in [r.email for r in get_reviewers().values()]
             ):
