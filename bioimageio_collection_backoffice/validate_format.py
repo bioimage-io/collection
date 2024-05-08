@@ -2,7 +2,7 @@ import warnings
 from typing import Dict, List, Literal, Optional, Tuple, TypedDict, Union, cast
 
 from bioimageio.spec import InvalidDescr, ResourceDescr, load_description
-from bioimageio.spec.common import Sha256
+from bioimageio.spec.common import RelativeFilePath, Sha256
 from bioimageio.spec.model import v0_4, v0_5
 from bioimageio.spec.model.v0_5 import Version, WeightsFormat
 from bioimageio.spec.summary import ErrorEntry, ValidationDetail
@@ -43,12 +43,25 @@ def get_base_env():
     )
 
 
-def get_env_from_deps(deps: Union[v0_4.Dependencies, v0_5.EnvironmentFileDescr]):
+def get_env_from_deps(
+    deps: Union[v0_4.Dependencies, v0_5.EnvironmentFileDescr],
+) -> CondaEnv:
     if isinstance(deps, v0_4.Dependencies):
-        if deps.manager not in ("conda", "mamba"):
-            return get_base_env()
+        if deps.manager == "pip":
+            conda_env = get_base_env()
+            conda_env["dependencies"].append("pip")
+            pip_deps = [
+                d.strip() for d in download(deps.file).path.read_text().split("\n")
+            ]
+            conda_env["dependencies"].append({"pip": pip_deps})
+            return conda_env
 
-        deps_source = deps.file
+        if deps.manager not in ("conda", "mamba"):
+            raise ValueError(f"Dependency manager {deps.manager} not supported")
+
+        deps_source = (
+            deps.file.absolute if isinstance(deps.file, RelativeFilePath) else deps.file
+        )
         sha: Optional[Sha256] = None
     elif isinstance(deps, v0_5.EnvironmentFileDescr):
         deps_source = deps.source
@@ -57,7 +70,7 @@ def get_env_from_deps(deps: Union[v0_4.Dependencies, v0_5.EnvironmentFileDescr])
         assert_never(deps)
 
     local = download(deps_source, sha256=sha).path
-    conda_env = yaml.load(local)
+    conda_env = CondaEnv(**yaml.load(local))
 
     # add bioimageio.core to dependencies
     if not any(isinstance(d, str) and d.startswith("bioimageio.core") for d in deps):
