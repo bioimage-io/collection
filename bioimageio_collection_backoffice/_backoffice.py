@@ -13,7 +13,7 @@ from .backup import ZenodoHost, backup
 from .db_structure.chat import Chat, Message
 from .db_structure.log import CollectionCiLog, CollectionCiLogEntry, Log
 from .gh_utils import set_gh_actions_outputs
-from .mailroom import notify_uploader
+from .mailroom.send_email import notify_uploader
 from .remote_collection import RemoteCollection
 from .remote_resource import (
     PublishedVersion,
