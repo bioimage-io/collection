@@ -8,7 +8,7 @@ from bioimageio.spec.model.v0_5 import Version, WeightsFormat
 from bioimageio.spec.summary import ErrorEntry, ValidationDetail
 from bioimageio.spec.utils import download
 from ruyaml import YAML
-from typing_extensions import assert_never, get_args
+from typing_extensions import assert_never
 
 from .db_structure.log import BioimageioLog, BioimageioLogEntry, Log
 from .remote_resource import PublishedVersion, StagedVersion
