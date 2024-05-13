@@ -39,7 +39,13 @@ class CondaEnv(TypedDict):
 
 def get_base_env():
     return CondaEnv(
-        name="env", channels=["conda-forge"], dependencies=["bioimageio.core"]
+        name="env",
+        channels=["conda-forge"],
+        dependencies=[
+            "bioimageio.core",
+            "pip",
+            PipDeps(pip=["git+https://github.com/bioimage-io/collection.git@main"]),
+        ],
     )
 
 

@@ -65,7 +65,6 @@ jobs:
       matrix: ${{ fromJson(needs.validate_format.outputs.dynamic_test_cases) }} # include: [{weight_format: ...}, ...]
       max-parallel: 1 # avoid prallel updates to log.json
     steps:
-      - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -89,8 +88,6 @@ jobs:
           environment-file: conda_env_${{ matrix.weight_format }}.yaml
         continue-on-error: true # we inspect this step's outcome in run_dynamic_tests.py
         timeout-minutes: 60
-      - run: pip install .
-        shell: bash -l {0}
       - name: dynamic validation
         shell: bash -l {0}
         run: backoffice test "${{inputs.resource_id}}" "${{ inputs.version }}" "${{ matrix.weight_format }}" "${{ steps.create_env.outcome }}"
