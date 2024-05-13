@@ -216,7 +216,7 @@ def prepare_dynamic_test_cases(
         for wf, entry in rd.weights:
             # we skip the keras validation for now, see
             # https://github.com/bioimage-io/collection-bioimage-io/issues/16
-            if not isinstance(entry, get_args(SupportedWeightsEntry)):
+            if wf == "keras_hdf5":
                 warnings.warn(f"{wf} weights are currently not validated")
                 continue
 
