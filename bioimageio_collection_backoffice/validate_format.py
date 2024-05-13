@@ -214,6 +214,9 @@ def prepare_dynamic_test_cases(
     if isinstance(rd, (v0_4.ModelDescr, v0_5.ModelDescr)):
         # generate validation cases per weight format
         for wf, entry in rd.weights:
+            if entry is None:
+                continue
+
             # we skip the keras validation for now, see
             # https://github.com/bioimage-io/collection-bioimage-io/issues/16
             if wf == "keras_hdf5":
