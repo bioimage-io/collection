@@ -65,6 +65,7 @@ jobs:
       matrix: ${{ fromJson(needs.validate_format.outputs.dynamic_test_cases) }} # include: [{weight_format: ...}, ...]
       max-parallel: 1 # avoid prallel updates to log.json
     steps:
+      - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
