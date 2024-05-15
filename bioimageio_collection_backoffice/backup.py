@@ -37,6 +37,8 @@ def backup(client: Client, destination: ZenodoHost):
     for v in remote_collection.get_all_published_versions():
         if v.info.doi is not None:
             continue
+        if v.number == 0:
+            continue  # skip legacy publications
 
         error = None
         try:
