@@ -106,6 +106,14 @@ jobs:
           environment-file: conda_env_${{ matrix.weight_format }}.yaml
         continue-on-error: true # we inspect this step's outcome in run_dynamic_tests.py
         timeout-minutes: 60
+      - name: check torch import # TODO: improve error messages in bioimageio.core
+        if: matrix.weight_format == 'pytroch_state_dict' || matrix.weight_format == 'torchscript'
+        shell: bash -el {0}
+        run: python -c "import torch"
+      - name: check onnx import  # TODO: improve error messages in bioimageio.core
+        if: matrix.weight_format == 'onnx'
+        shell: bash -el {0}
+        run: python -c "import onnxruntime"
       - name: dynamic validation
         shell: bash -el {0}
         run: backoffice test "${{inputs.resource_id}}" "${{ inputs.version }}" "${{ matrix.weight_format }}" "${{ steps.create_env.outcome }}"
