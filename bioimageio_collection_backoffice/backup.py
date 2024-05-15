@@ -138,16 +138,22 @@ def backup_published_version(
         publication_date=v.info.timestamp,
     )
 
+    put_url = f"{destination}/api/deposit/depositions/{deposition_id}"
+    logger.debug("PUT {} with metadata: {}", put_url, metadata)
     r_metadata = requests.put(
-        f"{destination}/api/deposit/depositions/{deposition_id}",
+        put_url,
         params=params,
         json={"metadata": metadata},
         headers=headers,
     )
     raise_for_status_discretely(r_metadata)
 
+    publish_url = (
+        f"{destination}/api/deposit/depositions/{deposition_id}/actions/publish"
+    )
+    logger.debug("POST {}", publish_url)
     r_publish = requests.post(
-        f"{destination}/api/deposit/depositions/{deposition_id}/actions/publish",
+        publish_url,
         params=params,
     )
     raise_for_status_discretely(r_publish)
