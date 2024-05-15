@@ -56,14 +56,13 @@ jobs:
       - id: validate_format
         run: backoffice validate_format "${{ inputs.resource_id }}" "${{ inputs.version }}"
 
-  test:
+  setup-test:
     needs: validate_format
     if: needs.validate_format.outputs.has_dynamic_test_cases == 'yes'
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix: ${{ fromJson(needs.validate_format.outputs.dynamic_test_cases) }} # include: [{weight_format: ...}, ...]
-      max-parallel: 1 # avoid prallel updates to log.json
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -80,6 +79,24 @@ jobs:
           conda_env = json.loads('${{ needs.validate_format.outputs.conda_envs }}')["${{ matrix.weight_format }}"]
           yaml.dump(conda_env, Path("conda_env_${{ matrix.weight_format }}.yaml"))
         shell: python
+      - uses: actions/upload-artifact@v4
+        with:
+          name: conda_env_${{ matrix.weight_format }}.yaml
+          path: conda_env_${{ matrix.weight_format }}.yaml
+
+  test:
+    needs: [validate_format, setup-test]
+    if: needs.validate_format.outputs.has_dynamic_test_cases == 'yes'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJson(needs.validate_format.outputs.dynamic_test_cases) }} # include: [{weight_format: ...}, ...]
+      max-parallel: 1 # avoid prallel updates to log.json
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: conda_env_${{ matrix.weight_format }}.yaml
       - name: install validation dependencies
         id: create_env
         uses: mamba-org/setup-micromamba@v1
@@ -90,7 +107,7 @@ jobs:
         continue-on-error: true # we inspect this step's outcome in run_dynamic_tests.py
         timeout-minutes: 60
       - name: dynamic validation
-        shell: bash -l {0}
+        shell: bash -el {0}
         run: backoffice test "${{inputs.resource_id}}" "${{ inputs.version }}" "${{ matrix.weight_format }}" "${{ steps.create_env.outcome }}"
         timeout-minutes: 60
 
