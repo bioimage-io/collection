@@ -92,25 +92,21 @@ def _run_dynamic_tests_impl(
         # no dynamic tests for non-model resources yet...
         return
 
-    summary = ValidationSummary(
-        name="bioimageio.core.test_description",
-        status="passed",
-        details=[],
-        env=[
-            InstalledPackage(
-                name="bioimageio.spec", version=bioimageio.spec.__version__
-            ),
+    def get_basic_summary():
+        summary = bioimageio.spec.load_description(rdf_url).validation_summary
+        summary.name = "bioimageio.core.test_description"
+        summary.env.append(
             InstalledPackage(
                 name="bioimageio.core", version=bioimageio.core.__version__
-            ),
-        ],
-        source_name=rdf_url,
-    )
+            )
+        )
+        return summary
 
     if create_env_outcome == "success":
         try:
             from bioimageio.core import test_description
         except Exception as e:
+            summary = get_basic_summary()
             summary.add_detail(
                 get_summary_detail_from_exception(
                     "import test_description from test environment", e
@@ -126,6 +122,7 @@ def _run_dynamic_tests_impl(
                     .get(weight_format, {})
                 )
             except Exception as e:
+                summary = get_basic_summary()
                 summary.add_detail(
                     get_summary_detail_from_exception("check for test kwargs", e)
                 )
@@ -135,6 +132,7 @@ def _run_dynamic_tests_impl(
                         rdf_url, weight_format=weight_format, **test_kwargs
                     )
                 except Exception as e:
+                    summary = get_basic_summary()
                     summary.add_detail(
                         get_summary_detail_from_exception("call 'test_resource'", e)
                     )
@@ -146,6 +144,7 @@ def _run_dynamic_tests_impl(
         else:
             error = f"Conda environment yaml file not found: {env_path}"
 
+        summary = get_basic_summary()
         summary.add_detail(
             ValidationDetail(
                 name="install test environment",
