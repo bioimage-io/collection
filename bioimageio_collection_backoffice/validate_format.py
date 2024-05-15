@@ -246,7 +246,42 @@ def validate_format(rv: Union[StagedVersion, PublishedVersion]):
     if isinstance(rv, StagedVersion):
         rv.set_testing_status("Validating RDF format")
 
-    rdf_source = rv.rdf_url
+    rd, dynamic_test_cases, conda_envs = validate_format_impl(rv.rdf_url)
+    if not isinstance(rd, InvalidDescr) and rd.version is not None:
+        error = None
+        if isinstance(rv, StagedVersion):
+            published = rv.concept.versions.published
+            if str(rd.version) in {v.sem_ver for v in published.values()}:
+                error = ErrorEntry(
+                    loc=("version",),
+                    msg=f"Trying to publish version {rd.version} again!",
+                    type="error",
+                )
+
+        rd.validation_summary.add_detail(
+            ValidationDetail(
+                name="Enforce that RDF has unpublished semantic `version`",
+                status="passed" if error is None else "failed",
+                errors=[] if error is None else [error],
+            )
+        )
+
+    rv.extend_log(
+        Log(
+            bioimageio_spec=[
+                BioimageioLog(
+                    log=BioimageioLogEntry(
+                        message=rd.validation_summary.name,
+                        details=rd.validation_summary,
+                    )
+                )
+            ]
+        )
+    )
+    return dynamic_test_cases, conda_envs
+
+
+def validate_format_impl(rdf_source: str):
     rd = load_description(rdf_source, format_version="discover")
     if not isinstance(rd, InvalidDescr):
         rd.validation_summary.add_detail(
@@ -273,33 +308,5 @@ def validate_format(rv: Union[StagedVersion, PublishedVersion]):
 
         rd = rd_latest
         rd.validation_summary.status = "passed"  # passed in 'discover' mode
-        if not isinstance(rd, InvalidDescr) and rd.version is not None:
-            error = None
-            if isinstance(rv, StagedVersion):
-                published = rv.concept.versions.published
-                if str(rd.version) in {v.sem_ver for v in published.values()}:
-                    error = ErrorEntry(
-                        loc=("version",),
-                        msg=f"Trying to publish version {rd.version} again!",
-                        type="error",
-                    )
 
-            rd.validation_summary.add_detail(
-                ValidationDetail(
-                    name="Enforce that RDF has unpublished semantic `version`",
-                    status="passed" if error is None else "failed",
-                    errors=[] if error is None else [error],
-                )
-            )
-
-    summary = rd.validation_summary
-    rv.extend_log(
-        Log(
-            bioimageio_spec=[
-                BioimageioLog(
-                    log=BioimageioLogEntry(message=summary.name, details=summary)
-                )
-            ]
-        )
-    )
-    return dynamic_test_cases, conda_envs
+    return rd, dynamic_test_cases, conda_envs
