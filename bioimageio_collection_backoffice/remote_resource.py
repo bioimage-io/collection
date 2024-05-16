@@ -300,7 +300,7 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
 
     @property
     def bioimageio_url(self):
-        return f"https://bioimage.io/#/?repo={self.client.get_file_url('collection_staged.json')}&id={rv.id}/{rv.version}"
+        return f"https://bioimage.io/#/?repo={self.client.get_file_url('collection_staged.json')}&id={self.id}/{self.version}"
 
     def set_error_status(self, msg: str):
         info = self.concept.versions.staged.get(self.number)
@@ -689,7 +689,7 @@ class PublishedVersion(RemoteResourceVersion[PublishNumber, PublishedVersionInfo
 
     @property
     def bioimageio_url(self):
-        return f"https://bioimage.io/#/?id={rv.id}/{rv.version}"
+        return f"https://bioimage.io/#/?id={self.id}/{self.version}"
 
 
 def get_remote_resource_version(client: Client, id: str, version: str):
