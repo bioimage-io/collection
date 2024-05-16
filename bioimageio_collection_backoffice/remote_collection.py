@@ -34,6 +34,9 @@ class RemoteCollection:
     def get_all_staged_versions(self):
         for rc in self.get_resource_concepts():
             for v in rc.get_all_staged_versions():
+                if v.info.status.name in ("superseded", "published"):
+                    continue
+
                 yield v
 
     def get_all_published_versions(self):
