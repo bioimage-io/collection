@@ -99,7 +99,7 @@ class RemoteCollection(RemoteBase):
                         collection["collection"].append(entry)
                         if entry["version_number"] == max(entry["versions"]):
                             latest_entry = dict(entry)
-                            version_suffix = f"/{entry['version']}"
+                            version_suffix = f"/{entry['version_number']}"
                             assert isinstance(entry["id"], str)
                             assert entry["id"].endswith(version_suffix)
                             latest_entry["id"] = entry["id"][: -len(version_suffix)]
@@ -120,7 +120,7 @@ class RemoteCollection(RemoteBase):
                             int(v[len("staged/") :]) for v in entry["staged_versions"]
                         ):
                             latest_entry = dict(entry)
-                            version_suffix = f"/{entry['version']}"
+                            version_suffix = f"/{entry['version_number']}"
                             assert isinstance(entry["id"], str)
                             assert entry["id"].endswith(version_suffix)
                             latest_entry["id"] = (

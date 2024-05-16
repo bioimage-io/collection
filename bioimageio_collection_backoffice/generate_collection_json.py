@@ -31,13 +31,13 @@ def create_entry(
         for k in (
             "description",
             "id_emoji",
-            "id",
             "license",
             "name",
             "type",
         )
     }
-
+    assert rdf["id"] == rv.id, (rdf["id"], rv.id)
+    entry["id"] = f"{rv.id}/{rv.version}"
     entry["authors"] = rdf.get("authors", [])
 
     try:
