@@ -78,7 +78,9 @@ def backup_published_version(
         raise ValueError("Missing bioimage.io `id`")
 
     if rdf.type == "application" and "notebook" not in rdf.tags:
-        raise SkipForNow("backup for (non-notebook) applications skipped for now.")
+        raise SkipForNow(
+            "backup for (non-notebook) applications skipped for now."
+        )  # TODO: start backing up applications
 
     if rdf.license is None:
         raise ValueError("Missing license")

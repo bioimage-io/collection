@@ -298,6 +298,10 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
         assert self.exists
         return self.concept.versions.staged[self.number]
 
+    @property
+    def bioimageio_url(self):
+        return f"https://bioimage.io/#/?repo={self.client.get_file_url('collection_staged.json')}&id={rv.id}/{rv.version}"
+
     def set_error_status(self, msg: str):
         info = self.concept.versions.staged.get(self.number)
         current_status = None if info is None else info.status
@@ -618,10 +622,7 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
             },
         )
         self.concept.extend_versions(verions_update)
-
-        # TODO: clean up staged files?
-        # remove all uploaded files from this staged version
-        # self.client.rm_dir(f"{self.folder}/files/")
+        self.supersede_previously_staged_versions()
         return ret
 
     def _set_status(self, value: StagedVersionStatus):
@@ -685,6 +686,10 @@ class PublishedVersion(RemoteResourceVersion[PublishNumber, PublishedVersionInfo
     def doi(self):
         """get version specific DOI of Zenodo record"""
         return self.concept.versions.published[self.number].doi
+
+    @property
+    def bioimageio_url(self):
+        return f"https://bioimage.io/#/?id={rv.id}/{rv.version}"
 
 
 def get_remote_resource_version(client: Client, id: str, version: str):

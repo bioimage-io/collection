@@ -58,6 +58,7 @@ class RemoteCollection(RemoteBase):
         for rc in self.get_resource_concepts():
             for v in rc.get_all_staged_versions():
                 if v.info.status.name in ("superseded", "published"):
+                    # TODO: clean up superseded (and published) staged versions after x months
                     continue
 
                 yield v
@@ -96,6 +97,14 @@ class RemoteCollection(RemoteBase):
                 else:
                     if entry is not None:
                         collection["collection"].append(entry)
+                        if entry["version"] == max(entry["versions"]):
+                            latest_entry = dict(entry)
+                            version_suffix = f"/{entry['version']}"
+                            assert isinstance(entry["id"], str)
+                            assert entry["id"].endswith(version_suffix)
+                            latest_entry["id"] = entry["id"][: -len(version_suffix)]
+                            collection["collection"].append(latest_entry)
+
         elif mode == "staged":
             for rv in self.get_all_staged_versions():
                 try:
@@ -107,6 +116,17 @@ class RemoteCollection(RemoteBase):
                 else:
                     if entry is not None:
                         collection["collection"].append(entry)
+                        if int(entry["version"][len("staged/")]) == max(
+                            int(v[len("staged/") :]) for v in entry["versions"]
+                        ):
+                            latest_entry = dict(entry)
+                            version_suffix = f"/{entry['version']}"
+                            assert isinstance(entry["id"], str)
+                            assert entry["id"].endswith(version_suffix)
+                            latest_entry["id"] = (
+                                entry["id"][: -len(version_suffix)] + "/staged"
+                            )
+                            collection["collection"].append(latest_entry)
         else:
             assert_never(mode)
         coll_descr = build_description(

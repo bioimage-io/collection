@@ -118,7 +118,8 @@ class BackOffice:
             rv,
             "is awaiting review ⌛",
             f"Thank you for proposing {rv.id} {rv.version}!\n"
-            + "Our maintainers will take a look shortly!",
+            + "Our maintainers will take a look shortly.\n"
+            + f"A preview is available [here]({rv.bioimageio_url})",
         )
 
     def request_changes(
@@ -137,7 +138,7 @@ class BackOffice:
             "needs changes 📑",
             f"Thank you for proposing {rv.id} {rv.version}!\n"
             + "We kindly ask you to upload an updated version, because: \n"
-            + f"{reason}\n",
+            + f"{reason}\n",  # TODO: add link to chat
         )
 
     def publish(self, resource_id: str, version: str, reviewer: str):
@@ -157,7 +158,7 @@ class BackOffice:
                 rv,
                 "was published! 🎉",
                 f"Thank you for contributing {published.id} {published.version} to bioimage.io!\n"
-                + "Check it out at https://bioimage.io/#/?id={published.id}\n",  # TODO: link to version
+                + f"Check it out at {published.bioimageio_url}\n",
             )
         finally:
             rv.unlock_publish()

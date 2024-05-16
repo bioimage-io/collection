@@ -3,19 +3,20 @@ import sys
 from email.mime.text import MIMEText
 from typing import List, Union
 
+import markdown
 from loguru import logger
 
-from .._settings import settings
-from ..remote_resource import (
-    PublishedVersion,
-    StagedVersion,
-)
-from .constants import (
+from bioimageio_collection_backoffice._settings import settings
+from bioimageio_collection_backoffice.mailroom.constants import (
     BOT_EMAIL,
     REPLY_HINT,
     SMTP_PORT,
     SMTP_SERVER,
     STATUS_UPDATE_SUBJECT,
+)
+from bioimageio_collection_backoffice.remote_resource import (
+    PublishedVersion,
+    StagedVersion,
 )
 
 
@@ -40,6 +41,8 @@ def notify_uploader(
             + "Kind regards,\n"
             + "The bioimage.io bot 🦒\n"
             + REPLY_HINT
+        ).replace(
+            "\n", "\\\n"  # respect newlines in markdown
         ),
         recipients=[email],
     )
@@ -48,7 +51,8 @@ def notify_uploader(
 def send_email(subject: str, body: str, recipients: List[str]):
     from_addr = BOT_EMAIL
     to_addr = ", ".join(recipients)
-    msg = MIMEText(body)
+    body_html = markdown.markdown(body)
+    msg = MIMEText(body_html, "html")
     msg["From"] = from_addr
     msg["To"] = to_addr
     msg["Subject"] = subject
@@ -60,8 +64,20 @@ def send_email(subject: str, body: str, recipients: List[str]):
 
 
 if __name__ == "__main__":
+    # send_email(
+    #     subject=STATUS_UPDATE_SUBJECT + " lazy-bug staged/2",
+    #     body="Staged version 2 of your model 'lazy-bug' is now under review.",
+    #     recipients=["bioimageiobot@gmail.com"],
+    # )
+
     send_email(
-        subject=STATUS_UPDATE_SUBJECT + " lazy-bug staged/2",
-        body="Staged version 2 of your model 'lazy-bug' is now under review.",
+        subject="something is awaiting review ⌛",
+        body=(
+            "Dear,\n"
+            + "Thank you for proposing [this](https://bioimage.io/#/?repo=https%3A%2F%2Fuk1s3.embassy.ebi.ac.uk%2Fpublic-datasets%2Fbioimage.io%2Fcollection_staged.json&id=faithful-chicken)!\n"
+            + "Our maintainers will take a look shortly!"
+            + "Kind regards,\n"
+            + "The bioimage.io bot 🦒\n"
+        ),
         recipients=["bioimageiobot@gmail.com"],
     )
