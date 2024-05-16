@@ -19,7 +19,6 @@ from typing import (
     List,
     NamedTuple,
     Optional,
-    Type,
     TypeVar,
     Union,
 )
@@ -60,43 +59,21 @@ from .db_structure.versions import (
     Versions,
 )
 from .mailroom.constants import BOT_EMAIL
-from .resource_id import validate_resource_id
+from .remote_base import RemoteBase
 from .reviewer import get_reviewers
 from .s3_client import Client
 
 yaml = YAML(typ="safe")
 
 
-JsonFileT = TypeVar("JsonFileT", Versions, Log, Chat)
 NumberT = TypeVar("NumberT", StageNumber, PublishNumber)
 InfoT = TypeVar("InfoT", StagedVersionInfo, PublishedVersionInfo)
 
 
 @dataclass
-class RemoteResourceBase:
-    client: Client
-    """Client to connect to remote storage"""
+class RemoteResourceBase(RemoteBase):
     id: str
     """resource identifier"""
-
-    @property
-    @abstractmethod
-    def folder(self) -> str: ...
-
-    def _get_json(self, typ: Type[JsonFileT]) -> JsonFileT:
-        path = self.folder + typ.file_name
-        data = self.client.load_file(path)
-        if data is None:
-            return typ()
-        else:
-            return typ.model_validate_json(data)
-
-    def _extend_json(self, extension: JsonFileT):
-        path = self.folder + extension.file_name
-        logger.info("Extending {} with {}", path, extension)
-        current = self._get_json(extension.__class__)
-        updated = current.get_updated(extension)
-        self.client.put_pydantic(path, updated)
 
 
 @dataclass

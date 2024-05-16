@@ -8,28 +8,46 @@ from bioimageio.spec.collection import CollectionDescr
 from loguru import logger
 from typing_extensions import assert_never
 
+from .db_structure.partners import Partners
 from .generate_collection_json import (
     create_entry,
     generate_doi_mapping,
     generate_old_doi_mapping,
 )
+from .remote_base import RemoteBase
 from .s3_client import Client
 
 
 @dataclass
-class RemoteCollection:
+class RemoteCollection(RemoteBase):
     """A representation of a (the) bioimage.io collection"""
 
     client: Client
     """Client to connect to remote storage"""
 
+    partners_json = "partners.json"
+
+    @property
+    def partners(self) -> Partners:
+        return self._get_json(Partners)
+
+    @property
+    def get_partner_ids(self):
+        return tuple(p.id for p in self.partners.active)
+
     def get_resource_concepts(self):
         from .remote_resource import ResourceConcept
 
-        return (
+        partner_ids = self.get_partner_ids
+        return [  # general resources outside partner folders
             ResourceConcept(client=self.client, id=d)
             for d in self.client.ls("", only_folders=True)
-        )
+            if d.strip("/") not in partner_ids
+        ] + [  # resources in partner folders
+            ResourceConcept(client=self.client, id=d)
+            for pid in partner_ids
+            for d in self.client.ls(pid, only_folders=True)
+        ]
 
     def get_all_staged_versions(self):
         for rc in self.get_resource_concepts():
@@ -46,7 +64,9 @@ class RemoteCollection:
 
     def generate_collection_json(
         self,
-        collection_template: Path = Path("collection_template.json"),
+        collection_template: Path = Path(
+            "collection_template.json"
+        ),  # TODO: fill template with 'partners.json' and use remote template
         mode: Literal["published", "staged"] = "published",
     ) -> None:
         """generate a json file with an overview of all published resources"""
