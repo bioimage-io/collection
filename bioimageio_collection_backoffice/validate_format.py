@@ -275,7 +275,9 @@ def prepare_dynamic_test_cases(
 
 def validate_format(rv: Union[StagedVersion, PublishedVersion]):
     if not rv.exists:
-        raise ValueError(f"{rv} not found")
+        # check for "manual staging" (direct creation of new staged/x 'folder')
+        if rv.client.load_file(rv.rdf_path) is None:
+            raise ValueError(f"{rv} not found")
 
     if isinstance(rv, StagedVersion):
         rv.set_testing_status("Validating RDF format")
