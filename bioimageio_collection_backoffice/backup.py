@@ -29,6 +29,10 @@ yaml = YAML(typ="safe")
 ZenodoHost = Literal["https://sandbox.zenodo.org", "https://zenodo.org"]
 
 
+class SkipForNow(NotImplementedError):
+    pass
+
+
 def backup(client: Client, destination: ZenodoHost):
     """backup all published resources to their own zenodo records"""
     remote_collection = RemoteCollection(client=client)
@@ -43,6 +47,8 @@ def backup(client: Client, destination: ZenodoHost):
         error = None
         try:
             backup_published_version(v, destination)
+        except SkipForNow as e:
+            logger.warning("{}\n{}", e, traceback.format_exc())
         except Exception as e:
             error = e
             logger.error("{}\n{}", e, traceback.format_exc())
@@ -70,6 +76,9 @@ def backup_published_version(
 
     if rdf.id is None:
         raise ValueError("Missing bioimage.io `id`")
+
+    if rdf.type == "application" and "notebook" not in rdf.tags:
+        raise SkipForNow("backup for (non-notebook) applications skipped for now.")
 
     if rdf.license is None:
         raise ValueError("Missing license")
