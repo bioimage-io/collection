@@ -115,13 +115,13 @@
 </span><span id="L-31"><a href="#L-31"><span class="linenos"> 31</span></a>        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">(</span>
 </span><span id="L-32"><a href="#L-32"><span class="linenos"> 32</span></a>            <span class="s2">&quot;description&quot;</span><span class="p">,</span>
 </span><span id="L-33"><a href="#L-33"><span class="linenos"> 33</span></a>            <span class="s2">&quot;id_emoji&quot;</span><span class="p">,</span>
-</span><span id="L-34"><a href="#L-34"><span class="linenos"> 34</span></a>            <span class="s2">&quot;id&quot;</span><span class="p">,</span>
-</span><span id="L-35"><a href="#L-35"><span class="linenos"> 35</span></a>            <span class="s2">&quot;license&quot;</span><span class="p">,</span>
-</span><span id="L-36"><a href="#L-36"><span class="linenos"> 36</span></a>            <span class="s2">&quot;name&quot;</span><span class="p">,</span>
-</span><span id="L-37"><a href="#L-37"><span class="linenos"> 37</span></a>            <span class="s2">&quot;type&quot;</span><span class="p">,</span>
-</span><span id="L-38"><a href="#L-38"><span class="linenos"> 38</span></a>        <span class="p">)</span>
-</span><span id="L-39"><a href="#L-39"><span class="linenos"> 39</span></a>    <span class="p">}</span>
-</span><span id="L-40"><a href="#L-40"><span class="linenos"> 40</span></a>
+</span><span id="L-34"><a href="#L-34"><span class="linenos"> 34</span></a>            <span class="s2">&quot;license&quot;</span><span class="p">,</span>
+</span><span id="L-35"><a href="#L-35"><span class="linenos"> 35</span></a>            <span class="s2">&quot;name&quot;</span><span class="p">,</span>
+</span><span id="L-36"><a href="#L-36"><span class="linenos"> 36</span></a>            <span class="s2">&quot;type&quot;</span><span class="p">,</span>
+</span><span id="L-37"><a href="#L-37"><span class="linenos"> 37</span></a>        <span class="p">)</span>
+</span><span id="L-38"><a href="#L-38"><span class="linenos"> 38</span></a>    <span class="p">}</span>
+</span><span id="L-39"><a href="#L-39"><span class="linenos"> 39</span></a>    <span class="k">assert</span> <span class="n">rdf</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">rv</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="p">(</span><span class="n">rdf</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">],</span> <span class="n">rv</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+</span><span id="L-40"><a href="#L-40"><span class="linenos"> 40</span></a>    <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">rv</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">rv</span><span class="o">.</span><span class="n">version</span><span class="si">}</span><span class="s2">&quot;</span>
 </span><span id="L-41"><a href="#L-41"><span class="linenos"> 41</span></a>    <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;authors&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rdf</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;authors&quot;</span><span class="p">,</span> <span class="p">[])</span>
 </span><span id="L-42"><a href="#L-42"><span class="linenos"> 42</span></a>
 </span><span id="L-43"><a href="#L-43"><span class="linenos"> 43</span></a>    <span class="k">try</span><span class="p">:</span>
@@ -273,13 +273,13 @@
 </span><span id="create_entry-32"><a href="#create_entry-32"><span class="linenos"> 32</span></a>        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">(</span>
 </span><span id="create_entry-33"><a href="#create_entry-33"><span class="linenos"> 33</span></a>            <span class="s2">&quot;description&quot;</span><span class="p">,</span>
 </span><span id="create_entry-34"><a href="#create_entry-34"><span class="linenos"> 34</span></a>            <span class="s2">&quot;id_emoji&quot;</span><span class="p">,</span>
-</span><span id="create_entry-35"><a href="#create_entry-35"><span class="linenos"> 35</span></a>            <span class="s2">&quot;id&quot;</span><span class="p">,</span>
-</span><span id="create_entry-36"><a href="#create_entry-36"><span class="linenos"> 36</span></a>            <span class="s2">&quot;license&quot;</span><span class="p">,</span>
-</span><span id="create_entry-37"><a href="#create_entry-37"><span class="linenos"> 37</span></a>            <span class="s2">&quot;name&quot;</span><span class="p">,</span>
-</span><span id="create_entry-38"><a href="#create_entry-38"><span class="linenos"> 38</span></a>            <span class="s2">&quot;type&quot;</span><span class="p">,</span>
-</span><span id="create_entry-39"><a href="#create_entry-39"><span class="linenos"> 39</span></a>        <span class="p">)</span>
-</span><span id="create_entry-40"><a href="#create_entry-40"><span class="linenos"> 40</span></a>    <span class="p">}</span>
-</span><span id="create_entry-41"><a href="#create_entry-41"><span class="linenos"> 41</span></a>
+</span><span id="create_entry-35"><a href="#create_entry-35"><span class="linenos"> 35</span></a>            <span class="s2">&quot;license&quot;</span><span class="p">,</span>
+</span><span id="create_entry-36"><a href="#create_entry-36"><span class="linenos"> 36</span></a>            <span class="s2">&quot;name&quot;</span><span class="p">,</span>
+</span><span id="create_entry-37"><a href="#create_entry-37"><span class="linenos"> 37</span></a>            <span class="s2">&quot;type&quot;</span><span class="p">,</span>
+</span><span id="create_entry-38"><a href="#create_entry-38"><span class="linenos"> 38</span></a>        <span class="p">)</span>
+</span><span id="create_entry-39"><a href="#create_entry-39"><span class="linenos"> 39</span></a>    <span class="p">}</span>
+</span><span id="create_entry-40"><a href="#create_entry-40"><span class="linenos"> 40</span></a>    <span class="k">assert</span> <span class="n">rdf</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">rv</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="p">(</span><span class="n">rdf</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">],</span> <span class="n">rv</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+</span><span id="create_entry-41"><a href="#create_entry-41"><span class="linenos"> 41</span></a>    <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">rv</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">rv</span><span class="o">.</span><span class="n">version</span><span class="si">}</span><span class="s2">&quot;</span>
 </span><span id="create_entry-42"><a href="#create_entry-42"><span class="linenos"> 42</span></a>    <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;authors&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rdf</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;authors&quot;</span><span class="p">,</span> <span class="p">[])</span>
 </span><span id="create_entry-43"><a href="#create_entry-43"><span class="linenos"> 43</span></a>
 </span><span id="create_entry-44"><a href="#create_entry-44"><span class="linenos"> 44</span></a>    <span class="k">try</span><span class="p">:</span>
