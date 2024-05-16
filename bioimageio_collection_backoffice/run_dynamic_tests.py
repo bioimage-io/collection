@@ -6,12 +6,7 @@ from typing import Optional
 import bioimageio.core
 import bioimageio.spec
 from bioimageio.spec.model.v0_5 import WeightsFormat
-from bioimageio.spec.summary import (
-    ErrorEntry,
-    InstalledPackage,
-    ValidationDetail,
-    ValidationSummary,
-)
+from bioimageio.spec.summary import ErrorEntry, InstalledPackage, ValidationDetail
 from bioimageio.spec.utils import download
 from ruyaml import YAML
 
