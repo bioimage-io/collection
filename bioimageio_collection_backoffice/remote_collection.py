@@ -49,9 +49,9 @@ class RemoteCollection(RemoteBase):
             for d in self.client.ls("", only_folders=True)
             if d.strip("/") not in partner_ids
         ] + [  # resources in partner folders
-            ResourceConcept(client=self.client, id=d)
+            ResourceConcept(client=self.client, id=pid + "/" + d)
             for pid in partner_ids
-            for d in self.client.ls(pid, only_folders=True)
+            for d in self.client.ls(pid + "/", only_folders=True)
         ]
 
     def get_all_staged_versions(self):

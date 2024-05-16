@@ -9,7 +9,7 @@ We currently do not have a workflow for direct upload, but publicly available re
 ## Lifecycle of staged resources
 
 1. unpacking: Uploaded resource packages are unpacked and their individuell files uploaded to our public S3 storage.
-2. testing: Staged resources are automatically tested: Is their metadata valid? Can test outputs be reproduced from test inputs? Are linked URLs available?
+2. testing: Staged resource drafts are automatically tested: Is their metadata valid? Can test outputs be reproduced from test inputs? Are linked URLs available?
 3. awaiting reviewe: After the tests have concluded the bioimageio reviewers are notified.
 4. The reviewer will result in
     a) changes requested: Please upload an updated draft.
