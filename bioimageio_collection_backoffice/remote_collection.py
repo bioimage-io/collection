@@ -117,7 +117,7 @@ class RemoteCollection(RemoteBase):
                     if entry is not None:
                         collection["collection"].append(entry)
                         if int(entry["version_number"][len("staged/")]) == max(
-                            int(v[len("staged/") :]) for v in entry["versions"]
+                            int(v[len("staged/") :]) for v in entry["staged_versions"]
                         ):
                             latest_entry = dict(entry)
                             version_suffix = f"/{entry['version']}"
