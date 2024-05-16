@@ -18,8 +18,6 @@ JsonFileT = TypeVar("JsonFileT", Versions, Log, Chat, Partners)
 class RemoteBase:
     client: Client
     """Client to connect to remote storage"""
-    id: str
-    """resource identifier"""
 
     @property
     @abstractmethod

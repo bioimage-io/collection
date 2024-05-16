@@ -25,6 +25,11 @@ class RemoteCollection(RemoteBase):
     client: Client
     """Client to connect to remote storage"""
 
+    @property
+    def folder(self) -> str:
+        """collection folder is given by the `client` prefix"""
+        return ""
+
     partners_json = "partners.json"
 
     @property
