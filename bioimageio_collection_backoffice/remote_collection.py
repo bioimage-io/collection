@@ -97,7 +97,7 @@ class RemoteCollection(RemoteBase):
                 else:
                     if entry is not None:
                         collection["collection"].append(entry)
-                        if entry["version"] == max(entry["versions"]):
+                        if entry["version_number"] == max(entry["versions"]):
                             latest_entry = dict(entry)
                             version_suffix = f"/{entry['version']}"
                             assert isinstance(entry["id"], str)
@@ -116,7 +116,7 @@ class RemoteCollection(RemoteBase):
                 else:
                     if entry is not None:
                         collection["collection"].append(entry)
-                        if int(entry["version"][len("staged/")]) == max(
+                        if int(entry["version_number"][len("staged/")]) == max(
                             int(v[len("staged/") :]) for v in entry["versions"]
                         ):
                             latest_entry = dict(entry)
