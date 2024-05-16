@@ -281,22 +281,35 @@ def validate_format(rv: Union[StagedVersion, PublishedVersion]):
         rv.set_testing_status("Validating RDF format")
 
     rd, dynamic_test_cases, conda_envs = validate_format_impl(rv.rdf_url)
-    if not isinstance(rd, InvalidDescr) and rd.version is not None:
-        error = None
-        if isinstance(rv, StagedVersion):
-            published = rv.concept.versions.published
-            if str(rd.version) in {v.sem_ver for v in published.values()}:
-                error = ErrorEntry(
-                    loc=("version",),
-                    msg=f"Trying to publish version {rd.version} again!",
-                    type="error",
+    if not isinstance(rd, InvalidDescr):
+        if rd.version is not None:
+            error = None
+            if isinstance(rv, StagedVersion):
+                published = rv.concept.versions.published
+                if str(rd.version) in {v.sem_ver for v in published.values()}:
+                    error = ErrorEntry(
+                        loc=("version",),
+                        msg=f"Trying to publish version {rd.version} again!",
+                        type="error",
+                    )
+
+            rd.validation_summary.add_detail(
+                ValidationDetail(
+                    name="Enforce that RDF has unpublished semantic `version`",
+                    status="passed" if error is None else "failed",
+                    errors=[] if error is None else [error],
                 )
+            )
 
         rd.validation_summary.add_detail(
             ValidationDetail(
-                name="Enforce that RDF has unpublished semantic `version`",
-                status="passed" if error is None else "failed",
-                errors=[] if error is None else [error],
+                name="Check `id_emoji`",
+                status="failed" if rd.id_emoji is None else "passed",
+                errors=(
+                    [ErrorEntry(loc=("id_emoji",), msg="missing", type="error")]
+                    if rd.id_emoji is None
+                    else []
+                ),
             )
         )
 

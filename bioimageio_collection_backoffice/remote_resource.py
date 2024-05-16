@@ -417,23 +417,43 @@ class StagedVersion(RemoteResourceVersion[StageNumber, StagedVersionInfo]):
         for e in collection["collection"]:
             if e["name"] == rdf["name"]:
                 if e["id"] != rdf["id"]:
-                    self.set_error_status(
-                        f"Another resource with name='{rdf['name']}' already exists ({e['id']})"
+                    self.extend_log(
+                        Log(
+                            collection=[
+                                CollectionLog(
+                                    log=CollectionLogEntry(
+                                        message=f"Another resource with name='{rdf['name']}' already exists ({e['id']})"
+                                    )
+                                )
+                            ]
+                        )
                     )
-                    sys.exit(1)
                 break
 
         # set matching id_emoji
         id_parts = IdParts.load()
         rdf["id_emoji"] = id_parts.get_icon(self.id)
         if rdf["id_emoji"] is None:
-            self.set_error_status(f"Failed to get icon for {self.id}")
-            sys.exit(1)
+            self.extend_log(
+                Log(
+                    collection=[
+                        CollectionLog(
+                            log=CollectionLogEntry(
+                                message="Failed to get icon for {self.id}"
+                            )
+                        )
+                    ]
+                )
+            )
 
         # overwrite version information
         rdf["version_number"] = self.number
 
-        validate_resource_id(rdf["id"], type_=rdf["type"])
+        if "id" not in rdf:
+            raise ValueError("Missing `id` field")
+
+        if not str(rdf["id"]):
+            raise ValueError(f"Invalid `id`: {rdf['id']}")
 
         if (
             "uploader" not in rdf
