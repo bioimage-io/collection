@@ -12,11 +12,11 @@ We currently do not have a workflow for direct upload, but publicly available re
 2. testing: Staged resources are automatically tested: Is their metadata valid? Can test outputs be reproduced from test inputs? Are linked URLs available?
 3. awaiting reviewe: After the tests have concluded the bioimageio reviewers are notified.
 4. The reviewer will result in
-    a) changes requested: Please upload an updated version.
+    a) changes requested: Please upload an updated draft.
     b) accepted: The resource will be published!
-5. The final status of a staged resource is one of
-    a) superseded: This staged resource version has not been published and also will not be published in the future.
-    b) A copy of this staged version has been published as a new resource version. (note: the resource/publish version is not neccessarily identical with the stage number)
+5. The final status of a draft is one of
+    a) superseded: This draft has not been published and also will not be published in the future.
+    b) published: A copy of this draft has been published as a new resource version.
 
 Additionally an 'error' status may be shown if an exception occured.
 This also may be the case for invalid inputs.
