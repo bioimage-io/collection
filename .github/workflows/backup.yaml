@@ -1,30 +1,31 @@
-name: backup
-run-name: backup ${{vars.S3_BUCKET}}/${{vars.S3_FOLDER}} to ${{ vars.ZENODO_URL }}
+# pause until all versions.json have been converted to info.json files
+# name: backup
+# run-name: backup ${{vars.S3_BUCKET}}/${{vars.S3_FOLDER}} to ${{ vars.ZENODO_URL }}
 
-on:
-  workflow_run:
-    workflows: [publish]
-    types: [completed]
-    branches: [main]
-  workflow_dispatch:
+# on:
+#   workflow_run:
+#     workflows: [publish]
+#     types: [completed]
+#     branches: [main]
+#   workflow_dispatch:
 
-concurrency: ${{vars.ZENODO_URL}}
+# concurrency: ${{vars.ZENODO_URL}}
 
-env:
-  S3_HOST: ${{vars.S3_HOST}}
-  S3_BUCKET: ${{vars.S3_BUCKET}}
-  S3_FOLDER: ${{vars.S3_FOLDER}}
-  ZENODO_URL: ${{vars.ZENODO_URL}}
-  S3_ACCESS_KEY_ID: ${{secrets.S3_ACCESS_KEY_ID}}
-  S3_SECRET_ACCESS_KEY: ${{secrets.S3_SECRET_ACCESS_KEY}}
-  ZENODO_API_ACCESS_TOKEN: ${{secrets.ZENODO_API_ACCESS_TOKEN}}
+# env:
+#   S3_HOST: ${{vars.S3_HOST}}
+#   S3_BUCKET: ${{vars.S3_BUCKET}}
+#   S3_FOLDER: ${{vars.S3_FOLDER}}
+#   ZENODO_URL: ${{vars.ZENODO_URL}}
+#   S3_ACCESS_KEY_ID: ${{secrets.S3_ACCESS_KEY_ID}}
+#   S3_SECRET_ACCESS_KEY: ${{secrets.S3_SECRET_ACCESS_KEY}}
+#   ZENODO_API_ACCESS_TOKEN: ${{secrets.ZENODO_API_ACCESS_TOKEN}}
 
-jobs:
-  call:
-    uses: bioimage-io/collection/.github/workflows/backup_call.yaml@main
-    with:
-      S3_HOST: ${{vars.S3_HOST}}
-      S3_BUCKET: ${{vars.S3_BUCKET}}
-      S3_FOLDER: ${{vars.S3_FOLDER}}
-      ZENODO_URL: ${{vars.ZENODO_URL}}
-    secrets: inherit
+# jobs:
+#   call:
+#     uses: bioimage-io/collection/.github/workflows/backup_call.yaml@main
+#     with:
+#       S3_HOST: ${{vars.S3_HOST}}
+#       S3_BUCKET: ${{vars.S3_BUCKET}}
+#       S3_FOLDER: ${{vars.S3_FOLDER}}
+#       ZENODO_URL: ${{vars.ZENODO_URL}}
+#     secrets: inherit

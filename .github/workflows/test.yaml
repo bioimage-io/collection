@@ -1,32 +1,33 @@
-name: test bioimageio resource
-run-name: test ${{inputs.resource_id}} ${{inputs.version}}
+# pause
+# name: test bioimageio resource
+# run-name: test ${{inputs.resource_id}} ${{inputs.version}}
 
-on:
-  workflow_dispatch:
-    inputs:
-      resource_id:
-        description: "Bioimage.io resource identifier"
-        required: true
-        type: string
-      version:
-        description: "(Published) version number or staged version number prefixed with 'staged/', e.g. 'staged/1'"
-        required: true
-        type: number
-      sandbox:
-        description: staged resource is on sandbox
-        required: false
-        default: false
-        type: boolean
+# on:
+#   workflow_dispatch:
+#     inputs:
+#       resource_id:
+#         description: "Bioimage.io resource identifier"
+#         required: true
+#         type: string
+#       version:
+#         description: "(Published) version number or staged version number prefixed with 'staged/', e.g. 'staged/1'"
+#         required: true
+#         type: number
+#       sandbox:
+#         description: staged resource is on sandbox
+#         required: false
+#         default: false
+#         type: boolean
 
-concurrency: ${{inputs.resource_id}}
+# concurrency: ${{inputs.resource_id}}
 
-jobs:
-  call:
-    uses: bioimage-io/collection/.github/workflows/test_call.yaml@main
-    with:
-      resource_id: ${{inputs.resource_id}}
-      version: ${{inputs.version}}
-      S3_HOST: ${{vars.S3_HOST}}
-      S3_BUCKET: ${{vars.S3_BUCKET}}
-      S3_FOLDER: ${{inputs.sandbox && vars.S3_SANDBOX_FOLDER || vars.S3_FOLDER}}
-    secrets: inherit
+# jobs:
+#   call:
+#     uses: bioimage-io/collection/.github/workflows/test_call.yaml@main
+#     with:
+#       resource_id: ${{inputs.resource_id}}
+#       version: ${{inputs.version}}
+#       S3_HOST: ${{vars.S3_HOST}}
+#       S3_BUCKET: ${{vars.S3_BUCKET}}
+#       S3_FOLDER: ${{inputs.sandbox && vars.S3_SANDBOX_FOLDER || vars.S3_FOLDER}}
+#     secrets: inherit

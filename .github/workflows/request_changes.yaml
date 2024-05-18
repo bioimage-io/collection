@@ -1,40 +1,41 @@
-name: request changes
-run-name: request changes for ${{inputs.resource_id}} staged/${{inputs.stage_number}}
+# pause
+# name: request changes
+# run-name: request changes for ${{inputs.resource_id}} staged/${{inputs.stage_number}}
 
-on:
-  workflow_dispatch:
-    inputs:
-      resource_id:
-        description: "Bioimageio ID of the resource - to be used to access the resource on S3"
-        required: true
-        type: string
-      stage_number:
-        description: stage number
-        required: true
-        type: number
-      reviewer:
-        description: GitHub account name of bioimage.io maintainer requesting changes
-        required: false
-        default: 'auto detect'
-        type: string
-      reason:
-        description: Why are changes required? What needs changing?
-        required: true
-        type: string
+# on:
+#   workflow_dispatch:
+#     inputs:
+#       resource_id:
+#         description: "Bioimageio ID of the resource - to be used to access the resource on S3"
+#         required: true
+#         type: string
+#       stage_number:
+#         description: stage number
+#         required: true
+#         type: number
+#       reviewer:
+#         description: GitHub account name of bioimage.io maintainer requesting changes
+#         required: false
+#         default: 'auto detect'
+#         type: string
+#       reason:
+#         description: Why are changes required? What needs changing?
+#         required: true
+#         type: string
 
-concurrency: ${{inputs.resource_id}}
+# concurrency: ${{inputs.resource_id}}
 
-jobs:
-  call:
-    uses: bioimage-io/collection/.github/workflows/request_changes_call.yaml@main
-    with:
-      resource_id: ${{inputs.resource_id}}
-      stage_number: ${{fromJson(inputs.stage_number)}}  # wo 'fromJson' the number is given as string, see https://github.com/orgs/community/discussions/67182
-      reviewer: ${{inputs.reviewer == 'auto detect' && format('github|{0}', github.actor_id) || inputs.reviewer}}
-      reason: ${{inputs.reason}}
-      S3_HOST: ${{vars.S3_HOST}}
-      S3_BUCKET: ${{vars.S3_BUCKET}}
-      S3_FOLDER: ${{vars.S3_FOLDER}}
-      ZENODO_URL: ${{vars.ZENODO_URL}}
-      REVIEWERS: ${{vars.REVIEWERS}}
-    secrets: inherit
+# jobs:
+#   call:
+#     uses: bioimage-io/collection/.github/workflows/request_changes_call.yaml@main
+#     with:
+#       resource_id: ${{inputs.resource_id}}
+#       stage_number: ${{fromJson(inputs.stage_number)}}  # wo 'fromJson' the number is given as string, see https://github.com/orgs/community/discussions/67182
+#       reviewer: ${{inputs.reviewer == 'auto detect' && format('github|{0}', github.actor_id) || inputs.reviewer}}
+#       reason: ${{inputs.reason}}
+#       S3_HOST: ${{vars.S3_HOST}}
+#       S3_BUCKET: ${{vars.S3_BUCKET}}
+#       S3_FOLDER: ${{vars.S3_FOLDER}}
+#       ZENODO_URL: ${{vars.ZENODO_URL}}
+#       REVIEWERS: ${{vars.REVIEWERS}}
+#     secrets: inherit

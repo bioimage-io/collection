@@ -1,40 +1,41 @@
-name: publish
-run-name: publish ${{inputs.resource_id}} staged/${{inputs.stage_number}}
+# pause
+# name: publish
+# run-name: publish ${{inputs.resource_id}} staged/${{inputs.stage_number}}
 
-on:
-  workflow_dispatch:
-    inputs:
-      resource_id:
-        description: "Bioimageio ID of the resource - to be used to access the resource on S3"
-        required: true
-        type: string
-      stage_number:
-        description: stage number to publish
-        required: true
-        type: number
-      reviewer:
-        description: GitHub account name of bioimage.io maintainer accepting this resource version
-        required: false
-        default: 'auto detect'
-        type: string
-      sandbox:
-        description: Publish within sandbox
-        required: false
-        default: false
-        type: boolean
+# on:
+#   workflow_dispatch:
+#     inputs:
+#       resource_id:
+#         description: "Bioimageio ID of the resource - to be used to access the resource on S3"
+#         required: true
+#         type: string
+#       stage_number:
+#         description: stage number to publish
+#         required: true
+#         type: number
+#       reviewer:
+#         description: GitHub account name of bioimage.io maintainer accepting this resource version
+#         required: false
+#         default: 'auto detect'
+#         type: string
+#       sandbox:
+#         description: Publish within sandbox
+#         required: false
+#         default: false
+#         type: boolean
 
-concurrency: ${{inputs.resource_id}}
+# concurrency: ${{inputs.resource_id}}
 
-jobs:
-  call:
-    uses: bioimage-io/collection/.github/workflows/publish_call.yaml@main
-    with:
-      resource_id: ${{inputs.resource_id}}
-      stage_number: ${{fromJson(inputs.stage_number)}}  # wo 'fromJson' the number is given as string, see https://github.com/orgs/community/discussions/67182
-      reviewer: ${{inputs.reviewer == 'auto detect' && format('github|{0}', github.actor_id) || inputs.reviewer}}
-      S3_HOST: ${{vars.S3_HOST}}
-      S3_BUCKET: ${{vars.S3_BUCKET}}
-      S3_FOLDER: ${{inputs.sandbox && vars.S3_SANDBOX_FOLDER || vars.S3_FOLDER}}
-      REVIEWERS: ${{vars.REVIEWERS}}
+# jobs:
+#   call:
+#     uses: bioimage-io/collection/.github/workflows/publish_call.yaml@main
+#     with:
+#       resource_id: ${{inputs.resource_id}}
+#       stage_number: ${{fromJson(inputs.stage_number)}}  # wo 'fromJson' the number is given as string, see https://github.com/orgs/community/discussions/67182
+#       reviewer: ${{inputs.reviewer == 'auto detect' && format('github|{0}', github.actor_id) || inputs.reviewer}}
+#       S3_HOST: ${{vars.S3_HOST}}
+#       S3_BUCKET: ${{vars.S3_BUCKET}}
+#       S3_FOLDER: ${{inputs.sandbox && vars.S3_SANDBOX_FOLDER || vars.S3_FOLDER}}
+#       REVIEWERS: ${{vars.REVIEWERS}}
 
-    secrets: inherit
+#     secrets: inherit

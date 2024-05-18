@@ -1,34 +1,35 @@
-name: generate collection.json
-run-name: generate collection for ${{vars.S3_BUCKET}}/${{vars.S3_FOLDER}}
+# pause
+# name: generate collection.json
+# run-name: generate collection for ${{vars.S3_BUCKET}}/${{vars.S3_FOLDER}}
 
-on:
-  workflow_dispatch:
-  push:
-    branches: [main]
-  workflow_run:
-    workflows: [stage, test bioimageio resource, request changes, publish]
-    types: [completed]
-    branches: [main]
+# on:
+#   workflow_dispatch:
+#   push:
+#     branches: [main]
+#   workflow_run:
+#     workflows: [stage, test bioimageio resource, request changes, publish]
+#     types: [completed]
+#     branches: [main]
 
 
-concurrency: generate-collection-json
+# concurrency: generate-collection-json
 
-env:
-  S3_HOST: ${{vars.S3_HOST}}
-  S3_BUCKET: ${{vars.S3_BUCKET}}
-  S3_FOLDER: ${{vars.S3_FOLDER}}
-  S3_ACCESS_KEY_ID: ${{secrets.S3_ACCESS_KEY_ID}}
-  S3_SECRET_ACCESS_KEY: ${{secrets.S3_SECRET_ACCESS_KEY}}
+# env:
+#   S3_HOST: ${{vars.S3_HOST}}
+#   S3_BUCKET: ${{vars.S3_BUCKET}}
+#   S3_FOLDER: ${{vars.S3_FOLDER}}
+#   S3_ACCESS_KEY_ID: ${{secrets.S3_ACCESS_KEY_ID}}
+#   S3_SECRET_ACCESS_KEY: ${{secrets.S3_SECRET_ACCESS_KEY}}
 
-jobs:
-  call:
-    strategy:
-      matrix:
-        mode: [staged, published]
-    uses: bioimage-io/collection/.github/workflows/generate_collection_json_call.yaml@main
-    with:
-      mode: ${{matrix.mode}}
-      S3_HOST: ${{vars.S3_HOST}}
-      S3_BUCKET: ${{vars.S3_BUCKET}}
-      S3_FOLDER: ${{vars.S3_FOLDER}}
-    secrets: inherit
+# jobs:
+#   call:
+#     strategy:
+#       matrix:
+#         mode: [staged, published]
+#     uses: bioimage-io/collection/.github/workflows/generate_collection_json_call.yaml@main
+#     with:
+#       mode: ${{matrix.mode}}
+#       S3_HOST: ${{vars.S3_HOST}}
+#       S3_BUCKET: ${{vars.S3_BUCKET}}
+#       S3_FOLDER: ${{vars.S3_FOLDER}}
+#     secrets: inherit
