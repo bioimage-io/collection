@@ -11,7 +11,7 @@ from ruyaml import YAML
 from typing_extensions import assert_never
 
 from .db_structure.log import BioimageioLog, BioimageioLogEntry, Log
-from .remote_resource import PublishedVersion, StagedVersion
+from .remote_collection import Record, RecordDraft
 
 yaml = YAML(typ="safe")
 
@@ -273,20 +273,20 @@ def prepare_dynamic_test_cases(
     return validation_cases, conda_envs
 
 
-def validate_format(rv: Union[StagedVersion, PublishedVersion]):
+def validate_format(rv: Union[RecordDraft, Record]):
     if not rv.exists:
         # check for "manual staging" (direct creation of new staged/x 'folder')
         if rv.client.load_file(rv.rdf_path) is None:
             raise ValueError(f"{rv} not found")
 
-    if isinstance(rv, StagedVersion):
+    if isinstance(rv, RecordDraft):
         rv.set_testing_status("Validating RDF format")
 
     rd, dynamic_test_cases, conda_envs = validate_format_impl(rv.rdf_url)
     if not isinstance(rd, InvalidDescr):
         if rd.version is not None:
             error = None
-            if isinstance(rv, StagedVersion):
+            if isinstance(rv, RecordDraft):
                 published = rv.concept.versions.published
                 if str(rd.version) in {v.sem_ver for v in published.values()}:
                     error = ErrorEntry(

@@ -1,14 +1,10 @@
 """describes a file holding all parts to create resource ids"""
 
-from functools import lru_cache
 from typing import Mapping, Sequence
 
-import requests
 from pydantic import field_validator
 
-from .._settings import settings
-from ..requests_utils import raise_for_status_discretely
-from .common import Node
+from ..common import Node
 
 
 class IdPartsEntry(Node, frozen=True):
@@ -39,7 +35,7 @@ class IdPartsEntry(Node, frozen=True):
 
         return resource_id[len(adj) + 1 :]
 
-    def validate_resource_id(self, resource_id: str):
+    def validate_concept_id(self, resource_id: str):
         noun = self.get_noun(resource_id)
         if noun is None:
             raise ValueError(
@@ -61,13 +57,6 @@ class IdParts(Node, frozen=True):
     dataset: IdPartsEntry
     notebook: IdPartsEntry
 
-    @classmethod
-    @lru_cache
-    def load(cls):
-        r = requests.get(settings.id_parts)
-        raise_for_status_discretely(r)
-        return cls.model_validate(r.json())
-
     def get_icon(self, resource_id: str):
         for parts in (self.model, self.dataset, self.notebook):
             noun = parts.get_noun(resource_id)
@@ -75,3 +64,15 @@ class IdParts(Node, frozen=True):
                 return parts.nouns[noun]
 
         return None
+
+    def select_type(self, type_: str) -> IdPartsEntry:
+        if type_ == "model":
+            return self.model
+        elif type_ == "dataset":
+            return self.dataset
+        elif type_ == "notebook":
+            return self.notebook
+        else:
+            raise NotImplementedError(
+                f"handling resource id for type '{type_}' is not yet implemented"
+            )

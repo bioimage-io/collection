@@ -107,8 +107,7 @@
                     "splash_title": "ZeroCostDL4Mic",
                     "tags": [
                         "ZeroCostDL4Mic"
-                    ],
-                    "version": "1.7.1"
+                    ]
                 },
                 {
                     "background_image": "static/img/zoo-background.svg",
@@ -136,6 +135,7 @@
                             "name": "Daniel Sage"
                         }
                     ],
+                    "default_type": "model",
                     "docs": "https://github.com/deepimagej/deepimagej-plugin/wiki",
                     "explore_button_text": "Start Exploring",
                     "icon": "https://raw.githubusercontent.com/deepimagej/models/master/logos/icon.png",
@@ -147,7 +147,7 @@
                         "notebook",
                         "application"
                     ],
-                    "splash_feature_list": null,
+                    "splash_feature_list": [],
                     "splash_subtitle": "A user-friendly plugin to run deep learning models in ImageJ",
                     "splash_title": "deepImageJ",
                     "tags": [
@@ -169,6 +169,7 @@
                             "name": "Florian Jug"
                         }
                     ],
+                    "default_type": "model",
                     "docs": "https://imagej.net/software/fiji/",
                     "explore_button_text": "Start Exploring",
                     "icon": "https://fiji.sc/site/logo.png",
@@ -234,7 +235,7 @@
                     "resource_types": [
                         "application"
                     ],
-                    "splash_feature_list": null,
+                    "splash_feature_list": [],
                     "splash_subtitle": "the interactive learning and segmentation toolkit",
                     "splash_title": "ilastik",
                     "tags": [
@@ -291,7 +292,7 @@
                         "application",
                         "model"
                     ],
-                    "splash_feature_list": null,
+                    "splash_feature_list": [],
                     "splash_subtitle": "Icy is an open community platform for bioimage informatics",
                     "splash_title": "Icy",
                     "tags": [
@@ -310,7 +311,7 @@
                         "application",
                         "model"
                     ],
-                    "splash_feature_list": null,
+                    "splash_feature_list": [],
                     "splash_subtitle": "QuPath is open-source software for bioimage analysis and digital pathology",
                     "splash_title": "QuPath",
                     "tags": [
@@ -348,7 +349,7 @@
                         "application",
                         "model"
                     ],
-                    "splash_feature_list": null,
+                    "splash_feature_list": [],
                     "splash_subtitle": "StarDist - object detection with star-convex shapes",
                     "splash_title": "StarDist",
                     "tags": [
@@ -386,8 +387,7 @@
                     "splash_title": "BiaPy",
                     "tags": [
                         "BiaPy"
-                    ],
-                    "version": "3.1.0"
+                    ]
                 },
                 {
                     "background_image": "static/img/zoo-background.svg",
@@ -401,7 +401,7 @@
                         "application",
                         "model"
                     ],
-                    "splash_feature_list": null,
+                    "splash_feature_list": [],
                     "splash_subtitle": "DL4MicEverywhere is an open-source and user-friendly platform of deep learning techniques for bioimage analysis that ensures the portability and reproducibility of the methods.",
                     "splash_title": "DL4MicEverywhere",
                     "tags": [

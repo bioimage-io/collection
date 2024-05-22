@@ -46,8 +46,8 @@ COLLECTION_FOLDER = (
 )
 assert COLLECTION_FOLDER.exists(), COLLECTION_FOLDER.absolute()
 
-id_client = BigClient()
-id_parts = IdParts.load()
+# id_client = BigClient()
+# id_parts = IdParts.load()
 
 
 @dataclass
@@ -120,6 +120,7 @@ def upload_resources(
             fname = f"{rd.id}_v{rd.version}.zip"
             if fname in UPLOADED:
                 continue
+            (out / fname).parent.mkdir(exist_ok=True, parents=True)
             try:
                 package = save_bioimageio_package(rd, output_path=out / fname)
             except Exception as e:
@@ -147,7 +148,7 @@ def upload_resources(
     print(f"uploaded {upload_count}")
 
 
-def workflow_dispatch(workflow_name: str, inputs: Dict[str, Any]):
+def workflow_dispatch(workflow_name: str, inputs: Dict[str, str]):
     g = github.Github(login_or_token=os.environ["GITHUB_PAT"])
 
     repo = g.get_repo("bioimage-io/collection")
@@ -229,7 +230,9 @@ def get_model_urls_from_collection_folder(start: int = 0, end: int = 9999):
 
 
 def get_resource_urls_from_collection_folder(
-    start: int = 0, end: int = 9999, type_: Literal["dataset", "notebook"] = "dataset"
+    start: int = 0,
+    end: int = 9999,
+    type_: Literal["dataset", "notebook"] = "dataset",
 ):
     assert COLLECTION_FOLDER.exists()
     ret: List[Tuple[BioimageioYamlContent, Union[Path, RootHttpUrl]]] = []
@@ -297,6 +300,81 @@ def get_resource_urls_from_collection_folder(
         rdf.update(version)
         rdf["id"] = nickname
         rdf["id_emoji"] = nickname_icon
+        rdf["uploader"] = {"email": "bioimageiobot@gmail.com"}
+        _ = rdf.pop("download_url", None)
+
+        v += 1
+        rdf["version"] = v
+        ret.append((rdf, root))
+        count += 1
+
+    return ret
+
+
+def get_application_urls_from_collection_folder(
+    start: int = 0,
+    end: int = 9999,
+):
+    type_ = "application"
+    assert COLLECTION_FOLDER.exists()
+    ret: List[Tuple[BioimageioYamlContent, Union[Path, RootHttpUrl]]] = []
+    count = 0
+    for i, resource_path in enumerate(
+        sorted(COLLECTION_FOLDER.glob("**/resource.yaml"))[start:end], start=start
+    ):
+        logger.info("processing %d %s", i, resource_path.relative_to(COLLECTION_FOLDER))
+        resource = yaml.load(resource_path)
+        if resource["status"] != "accepted":
+            continue
+
+        if resource["type"] != type_:
+            continue
+
+        rdf_base = dict(resource)
+        _ = rdf_base.pop("doi", None)
+        _ = rdf_base.pop("owners", None)
+        _ = rdf_base.pop("status", None)
+        _ = rdf_base.pop("versions", None)
+
+        v = 0
+        # for version in resource["versions"][::-1]:
+        version = resource["versions"][0]  # only upload latest version
+        if version.pop("status", None) != "accepted":
+            continue
+
+        rdf = dict(rdf_base)
+
+        rdf_source = version.pop("rdf_source")
+        _ = version.pop("doi", None)
+        _ = version.pop("version_name", None)
+        version_id = version.pop("version_id", None)
+        _ = version.pop("created", None)
+        # if created is not None:
+        #     version["timestamp"] = created
+
+        if isinstance(rdf_source, str):
+            if rdf_source.startswith("https://zenodo.org/api/files/"):
+                # convert source from old zenodo api
+                assert version_id is not None
+                rdf_name = rdf_source.split("/")[-1]
+                new_rdf_source = f"https://zenodo.org/api/records/{version_id}/files/{rdf_name}/content"
+                logger.warning("converting %s to %s", rdf_source, new_rdf_source)
+                rdf_source = new_rdf_source
+
+            remote_update_path = download(rdf_source).path
+            remote_update = yaml.load(remote_update_path)
+
+            root = RootHttpUrl(rdf_source).parent
+        else:
+            remote_update = rdf_source
+            root = Path()
+
+        rdf.update(remote_update)
+        rdf.update(version)
+        if "notebook" in rdf["tags"]:
+            continue
+
+        rdf["id_emoji"] = " "
         rdf["uploader"] = {"email": "bioimageiobot@gmail.com"}
         _ = rdf.pop("download_url", None)
 
@@ -422,28 +500,95 @@ UPLOADED: Set[str] = {
 }
 
 
-nicknames: Dict[Literal["model", "dataset", "notebook"], Set[str]] = {
+nicknames: Dict[Literal["model", "dataset", "notebook", "application"], Set[str]] = {
     "dataset": {"uplifting-ice-cream"},
     "notebook": set(),
     "model": {fn.split("_")[0] for fn in UPLOADED},
+    "application": set(),
 }
 
 done = {
     "https://zenodo.org/api/records/6559930/files/content",
     "https://zenodo.org/api/records/7612152/files/content",
+    "biapy/biapy",
+    "bioimageio/qupath",
+    "bioimageio/stardist",
+    "deepimagej/deepimagej",
+    "deepimagej/smlm-deepimagej",
+    "dl4miceverywhere/DL4MicEverywhere",
+    "fiji/Fiji",
+    "hpa/HPA-Classification",
+    "icy/icy",
+    "ilastik/ilastik",
+    "ilastik/mws-segmentation",
+    "imjoy/BioImageIO-Packager",
+    "imjoy/GenericBioEngineApp",
+    "imjoy/HPA-Single-Cell",
+    "imjoy/ImageJ.JS",
+    "imjoy/ImJoy",
+    "imjoy/vizarr",
+    "qupath/QuPath",
+    "stardist/stardist",
 }
 if __name__ == "__main__":
-    # resource_urls = get_model_urls_from_collection_folder(start=0, end=9999)
-    type_ = "notebook"
-    resource_urls = get_resource_urls_from_collection_folder(
-        start=0, end=9999, type_=type_
-    )
+    for rid in [
+        # "ilastik/ilastik",
+        # "biapy/biapy",
+        # "bioimageio/qupath",
+        # "bioimageio/stardist",
+        # "deepimagej/deepimagej",
+        # "deepimagej/smlm-deepimagej",
+        # "dl4miceverywhere/DL4MicEverywhere",
+        # "fiji/Fiji",
+        # "hpa/HPA-Classification",
+        # "icy/icy",
+        # "ilastik/mws-segmentation",
+        # "imjoy/BioImageIO-Packager",
+        # "imjoy/GenericBioEngineApp",
+        # "imjoy/HPA-Single-Cell",
+        # "imjoy/ImageJ.JS",
+        # "imjoy/ImJoy",
+        # "imjoy/vizarr",
+    ]:
+        fname = f"{rid}_v1.zip"
 
-    resource_urls = [url for url in resource_urls if url[1] not in done]
-    print("plan:", [t[1] for t in resource_urls])
-    print()
-    print()
-    print(nicknames)
-    print()
-    print()
-    upload_resources(resource_urls)
+        # workflow_dispatch(
+        #     "stage.yaml",
+        #     {
+        #         "resource_id": rid,
+        #         "package_url": f"https://{os.environ['S3_HOST']}/{os.environ['S3_BUCKET']}/collection_reupload.bioimage.io/{fname}",
+        #     },
+        # )
+
+        # workflow_dispatch(
+        #     "test.yaml",
+        #     {
+        #         "resource_id": rid,
+        #         "version": "staged/2",
+        #     },
+        # )
+
+        workflow_dispatch(
+            "publish.yaml",
+            {
+                "resource_id": rid,
+                "stage_number": "2",
+            },
+        )
+    # # resource_urls = get_model_urls_from_collection_folder(start=0, end=9999)
+    # type_ = "application"
+    # # resource_urls = get_resource_urls_from_collection_folder(
+    # #     start=0, end=9999, type_=type_
+    # # )
+    # resource_urls = get_application_urls_from_collection_folder(start=0, end=9999)
+
+    # resource_urls = [
+    #     url for url in resource_urls if url[1] not in done and url[0]["id"] not in done
+    # ]
+    # print("plan:", [t[0]["id"] for t in resource_urls])
+    # print()
+    # print()
+    # # print(nicknames)
+    # # print()
+    # # print()
+    # upload_resources(resource_urls)

@@ -18,9 +18,7 @@ from ruyaml import YAML
 from typing_extensions import Literal, assert_never
 
 from ._settings import settings
-from .db_structure.versions import PublishedVersionInfo, Versions
-from .remote_collection import RemoteCollection
-from .remote_resource import PublishedVersion
+from .remote_collection import Record, RemoteCollection
 from .requests_utils import put_file_from_url, raise_for_status_discretely
 from .s3_client import Client
 
@@ -38,11 +36,9 @@ def backup(client: Client, destination: ZenodoHost):
     remote_collection = RemoteCollection(client=client)
 
     backed_up: List[str] = []
-    for v in remote_collection.get_all_published_versions():
-        if v.info.doi is not None:
+    for v in remote_collection.get_published_versions():
+        if v.doi is not None:
             continue
-        if v.number == 0:
-            continue  # skip legacy publications
 
         error = None
         try:
@@ -62,7 +58,7 @@ def backup(client: Client, destination: ZenodoHost):
 
 
 def backup_published_version(
-    v: PublishedVersion,
+    v: Record,
     destination: ZenodoHost,
 ):
     with ValidationContext(perform_io_checks=False):
@@ -146,7 +142,7 @@ def backup_published_version(
     metadata = rdf_to_metadata(
         rdf,
         rdf_file_name=rdf_file_name,
-        publication_date=v.info.timestamp,
+        publication_date=v.info.created,
     )
 
     put_url = f"{destination}/api/deposit/depositions/{deposition_id}"
@@ -168,25 +164,7 @@ def backup_published_version(
         params=params,
     )
     raise_for_status_discretely(r_publish)
-
-    if (
-        "sandbox" not in destination
-        or "sandbox" in v.client.prefix
-        or "testing" in v.client.prefix
-    ):
-        v.concept.extend_versions(
-            Versions(
-                doi=concept_doi,
-                published={
-                    v.number: PublishedVersionInfo(
-                        sem_ver=v.info.sem_ver,
-                        timestamp=v.info.timestamp,
-                        status=v.info.status,
-                        doi=doi,
-                    )
-                },
-            )
-        )
+    v.set_dois(doi=doi, concept_doi=concept_doi)
 
 
 def rdf_authors_to_metadata_creators(rdf: ResourceDescr):

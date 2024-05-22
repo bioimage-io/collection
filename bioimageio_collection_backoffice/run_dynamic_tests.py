@@ -11,7 +11,7 @@ from bioimageio.spec.utils import download
 from ruyaml import YAML
 
 from .db_structure.log import BioimageioLog, BioimageioLogEntry, Log
-from .remote_resource import PublishedVersion, StagedVersion
+from .remote_collection import Record, RecordDraft
 
 try:
     from tqdm import tqdm
@@ -40,7 +40,7 @@ def get_summary_detail_from_exception(name: str, exception: Exception):
 
 
 def run_dynamic_tests(
-    staged: StagedVersion,
+    staged: RecordDraft,
     weight_format: Optional[WeightsFormat],  # "weight format to test model with."
     create_env_outcome: str,
 ):
@@ -61,7 +61,7 @@ def run_dynamic_tests(
 
 
 def rerun_dynamic_tests(
-    published: PublishedVersion,
+    published: Record,
     weight_format: Optional[WeightsFormat],  # "weight format to test model with."
     create_env_outcome: str,
 ):

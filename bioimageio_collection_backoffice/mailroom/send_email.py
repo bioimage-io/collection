@@ -14,15 +14,13 @@ from bioimageio_collection_backoffice.mailroom.constants import (
     SMTP_SERVER,
     STATUS_UPDATE_SUBJECT,
 )
-from bioimageio_collection_backoffice.remote_resource import (
-    PublishedVersion,
-    StagedVersion,
+from bioimageio_collection_backoffice.remote_collection import (
+    Record,
+    RecordDraft,
 )
 
 
-def notify_uploader(
-    rv: Union[StagedVersion, PublishedVersion], subject_end: str, msg: str
-):
+def notify_uploader(rv: Union[RecordDraft, Record], subject_end: str, msg: str):
     email, name = rv.get_uploader()
     if email is None:
         rv.report_error(f"missing uploader email for {rv.id} {rv.version}")

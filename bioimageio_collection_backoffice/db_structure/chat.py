@@ -1,4 +1,4 @@
-"""`<id>/<version>/chat.json` keeps a record of version specific comments"""
+"""`<concept_id>/<version>/chat.json` keeps a record of version specific comments"""
 
 from __future__ import annotations
 
@@ -7,7 +7,7 @@ from typing import ClassVar, Sequence
 
 from pydantic import Field
 
-from .common import Node
+from ..common import Node
 
 
 class Message(Node, frozen=True):
@@ -17,7 +17,7 @@ class Message(Node, frozen=True):
 
 
 class Chat(Node, frozen=True):
-    """`<id>/<version>/chat.json` keeps a record of version specific comments"""
+    """`<concept_id>/<version>/chat.json` keeps a record of version specific comments"""
 
     file_name: ClassVar[str] = "chat.json"
 

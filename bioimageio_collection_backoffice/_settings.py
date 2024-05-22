@@ -6,7 +6,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings, extra="ignore"):
-    """environment variables for bioimageio.spec"""
+    """environment variables for bioimageio_collection_backoffice"""
 
     model_config = SettingsConfigDict(
         case_sensitive=False,
@@ -15,15 +15,10 @@ class Settings(BaseSettings, extra="ignore"):
     )
 
     github_output: Optional[str] = None
-    id_parts: str = (
-        "https://raw.githubusercontent.com/bioimage-io/collection/main/id_parts.json"
+    collection_config: str = (
+        "https://raw.githubusercontent.com/bioimage-io/collection/main/bioimageio_collection_config.json"
     )
-    """describes a file holding all parts to create bioimage.io resource ids"""
-
-    reviewers: str = (
-        "https://raw.githubusercontent.com/bioimage-io/collection/main/reviewers.json"
-    )
-    """determines who is a bioimage.io reviewer"""
+    """collection config"""
 
     run_url: Optional[str] = None
     """url to logs of the current CI run"""

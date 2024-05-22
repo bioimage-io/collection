@@ -10,7 +10,7 @@ from loguru import logger
 
 from .._settings import settings
 from ..db_structure.chat import Chat, Message
-from ..remote_resource import get_remote_resource_version
+from ..remote_collection import get_remote_collection_version
 from ..s3_client import Client
 from .constants import (
     BOT_EMAIL,
@@ -93,7 +93,7 @@ def _update_chats(
         text = "[forwarded from email]\n" + body.replace("> " + REPLY_HINT, "").replace(
             REPLY_HINT, ""
         )
-        rr = get_remote_resource_version(s3_client, rid, rv)
+        rr = get_remote_collection_version(s3_client, rid, rv)
         if not rr.exists:
             logger.error("Cannot comment on non-existing resource {} {}", rid, rv)
             continue
