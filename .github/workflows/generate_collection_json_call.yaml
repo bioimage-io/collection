@@ -4,33 +4,21 @@ on:
   workflow_call:
     inputs:
       mode:
-        description: "determines which collection file to generate: 'published' (default) or 'staged'"
+        description: "determines which collection file to generate: 'published' (default) or 'draft'"
         required: false
         default: published
         type: string
-      S3_HOST:
-        required: true
-        type: string
-      S3_BUCKET:
-        required: true
-        type: string
-      S3_FOLDER:
+      environment_name:
         required: true
         type: string
 
-concurrency: generate-collection-json-call-${{inputs.S3_HOST}}-${{inputs.S3_BUCKET}}-${{inputs.S3_FOLDER}}-${{inputs.mode}}
+concurrency: generate-collection-json-call-${{inputs.environment_name}}-${{inputs.mode}}
 
-env:
-  S3_HOST: ${{inputs.S3_HOST}}
-  S3_BUCKET: ${{inputs.S3_BUCKET}}
-  S3_FOLDER: ${{inputs.S3_FOLDER}}
-  S3_ACCESS_KEY_ID: ${{secrets.S3_ACCESS_KEY_ID}}
-  S3_SECRET_ACCESS_KEY: ${{secrets.S3_SECRET_ACCESS_KEY}}
-  RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
 
 jobs:
   run:
     runs-on: ubuntu-latest
+    environment: ${{inputs.environment_name}}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -39,3 +27,10 @@ jobs:
           cache: "pip" # caching pip dependencies
       - run: pip install .
       - run: backoffice generate_collection_json --mode=${{inputs.mode}}
+        env:
+          S3_HOST: ${{vars.S3_HOST}}
+          S3_BUCKET: ${{vars.S3_BUCKET}}
+          S3_FOLDER: ${{vars.S3_FOLDER}}
+          S3_ACCESS_KEY_ID: ${{secrets.S3_ACCESS_KEY_ID}}
+          S3_SECRET_ACCESS_KEY: ${{secrets.S3_SECRET_ACCESS_KEY}}
+          RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}

@@ -44,7 +44,7 @@ class CollectionEntry(Node, frozen=True):
     license: str
     links: Sequence[str]
     name: str
-    nickname_icon: str
+    nickname_icon: Optional[str]
     nickname: str
     rdf_sha256: str
     rdf_source: HttpUrl

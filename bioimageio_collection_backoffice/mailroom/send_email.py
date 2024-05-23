@@ -23,8 +23,7 @@ from bioimageio_collection_backoffice.remote_collection import (
 def notify_uploader(rv: Union[RecordDraft, Record], subject_end: str, msg: str):
     email, name = rv.get_uploader()
     if email is None:
-        rv.report_error(f"missing uploader email for {rv.id} {rv.version}")
-        sys.exit(1)
+        raise ValueError("missing uploader email")
 
     subject = f"{STATUS_UPDATE_SUBJECT}{rv.id} {rv.version} {subject_end.strip()}"
     if email == BOT_EMAIL:

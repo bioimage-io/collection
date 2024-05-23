@@ -25,11 +25,9 @@
 #   stage:
 #     uses: bioimage-io/collection/.github/workflows/stage_call.yaml@main
 #     with:
-#       resource_id: ${{inputs.resource_id}}
+#       concept_id: ${{inputs.resource_id}}
 #       package_url: ${{inputs.package_url}}
-#       S3_HOST: ${{vars.S3_HOST}}
-#       S3_BUCKET: ${{vars.S3_BUCKET}}
-#       S3_FOLDER: ${{inputs.sandbox && vars.S3_SANDBOX_FOLDER || vars.S3_FOLDER}}
+#       environment_name ${{inputs.sandbox && 'sandbox' || 'production'}}
 #     secrets: inherit
 
 #   test:

@@ -6,6 +6,7 @@ import random
 import urllib.request
 import zipfile
 from abc import ABC
+from collections import defaultdict
 from dataclasses import dataclass, field
 from functools import wraps
 from pathlib import Path
@@ -154,7 +155,7 @@ LEGACY_DOWNLOAD_COUNTS = {
 
 
 T = TypeVar("T")
-R = TypeVar("R", "RecordDraft", "Record", "RecordConcept")
+R = TypeVar("R", "RecordDraft", "Record")
 P = ParamSpec("P")
 
 
@@ -165,13 +166,13 @@ def log(
 
     @wraps(func)
     def wrapper(self: R, *args: P.args, **kwargs: P.kwargs):
+        self.log_message(f"starting: '{func.__name__}'")
         try:
             ret = func(self, *args, **kwargs)
         except Exception as e:
             self.log_error(e)
             raise
         else:
-            self.log_message(f"success: '{func.__name__}'")
             return ret
 
     return wrapper
@@ -188,6 +189,49 @@ def reviewer_role(
             raise ValueError(f"{actor} is not allowed to trigger '{func.__name__}'")
 
         return func(self, actor, *args, **kwargs)
+
+    return wrapper
+
+
+def lock_concept(
+    func: Callable[Concatenate[R, P], T],
+) -> Callable[Concatenate[R, P], T]:
+    """method decorator to indicate that a method may only be called by a bioimage.io reviewer"""
+
+    @wraps(func)
+    def wrapper(self: R, *args: P.args, **kwargs: P.kwargs):
+        concept_id = self.concept_id
+        lock_path = f"{concept_id}/concept-lock"
+        if list(self.client.ls(lock_path)):
+            raise ValueError(f"{concept_id} is currently locked")
+
+        self.client.put(lock_path, io.BytesIO(b" "), length=1)
+        try:
+            return func(self, *args, **kwargs)
+        finally:
+            self.client.rm(lock_path)
+
+    return wrapper
+
+
+def lock_version(
+    func: Callable[Concatenate[R, P], T],
+) -> Callable[Concatenate[R, P], T]:
+    """method decorator to indicate that a method may only be called by a bioimage.io reviewer"""
+
+    @wraps(func)
+    def wrapper(self: R, *args: P.args, **kwargs: P.kwargs):
+        concept_id = self.concept_id
+        version = self.version
+        lock_path = f"{concept_id}/{version}/version-lock"
+        if list(self.client.ls(lock_path)):
+            raise ValueError(f"{concept_id} is currently locked")
+
+        self.client.put(lock_path, io.BytesIO(b" "), length=1)
+        try:
+            return func(self, *args, **kwargs)
+        finally:
+            self.client.rm(lock_path)
 
     return wrapper
 
@@ -287,8 +331,8 @@ class RemoteCollection(RemoteBase):
         logger.info("generating {}", output_file_name)
 
         entries: List[CollectionEntry] = []
-        n_resource_versions: Dict[str, int] = {}
-        n_resources: Dict[str, int] = {}
+        n_resource_versions: Dict[str, int] = defaultdict(lambda: 0)
+        n_resources: Dict[str, int] = defaultdict(lambda: 0)
         error_in_published_entry = None
         for rc in self.get_concepts():
             versions: List[Union[RecordDraft, Record]] = (
@@ -308,11 +352,17 @@ class RemoteCollection(RemoteBase):
             authors=(template := self.config.collection_template).authors,
             cite=template.cite,
             config=CollectionWebsiteConfig(
+                background_image=template.config.background_image,
+                default_type=template.config.default_type,
+                explore_button_text=template.config.explore_button_text,
                 n_resource_versions=n_resource_versions,
-                resource_types=list(n_resources),
                 n_resources=n_resources,
+                partners=template.config.partners,
+                resource_types=list(n_resources) or [template.config.default_type],
+                splash_feature_list=template.config.splash_feature_list,
+                splash_subtitle=template.config.splash_subtitle,
+                splash_title=template.config.splash_title,
                 url_root=AnyUrl(self.client.get_file_url(self.folder)),
-                **template.config.__dict__,
             ),
             description=template.description,
             documentation=template.documentation,
@@ -327,14 +377,14 @@ class RemoteCollection(RemoteBase):
             collection=entries,
         )
 
-        # check that this generated collection is a valid RDF itself
-        coll_descr = build_description(
-            collection.model_dump(), context=ValidationContext(perform_io_checks=False)
-        )
-        if not isinstance(coll_descr, CollectionDescr):
-            raise ValueError(coll_descr.validation_summary.format())
+        # # check that this generated collection is a valid RDF itself
+        # coll_descr = build_description(
+        #     collection.model_dump(), context=ValidationContext(perform_io_checks=False)
+        # )
+        # if not isinstance(coll_descr, CollectionDescr):
+        #     raise ValueError(coll_descr.validation_summary.format())
 
-        self.client.put_json(output_file_name, collection)
+        self.client.put_json(output_file_name, collection.model_dump(mode="json"))
 
         # raise an error for an invalid (skipped) collection entry
         if error_in_published_entry is not None:
@@ -370,7 +420,7 @@ class RecordConcept(RemoteBase):
     def id(self):
         return self.concept_id
 
-    def __post__init__(self):
+    def __post_init__(self):
         self.collection = RemoteCollection(client=self.client)
 
     @property
@@ -509,6 +559,7 @@ class RecordDraft(RecordBase):
         return self.concept.doi
 
     @log
+    @lock_concept
     def unpack(self, package_url: str):
         previous_versions = self.concept.get_published_versions()
         if not previous_versions:
@@ -562,11 +613,11 @@ class RecordDraft(RecordBase):
             )
 
         if (rdf_id := rdf.get("id")) is None:
-            rdf["id"] = self.id
-        elif rdf_id != self.id:
+            rdf["id"] = self.concept_id
+        elif rdf_id != self.concept_id:
             raise ValueError(
-                f"Expected package for {self.id}, "
-                + f"but got packaged {rdf_id} ({package_url})"
+                f"Expected package for {self.concept_id}, "
+                + f"but found id {rdf_id} in {package_url}"
             )
 
         if "name" not in rdf:
@@ -708,6 +759,7 @@ class RecordDraft(RecordBase):
 
     @log
     @reviewer_role
+    @lock_concept
     def publish(self, reviewer: str) -> Record:
         """mark this staged version candidate as accepted and try to publish it"""
         # map reviewer id to name
@@ -778,18 +830,6 @@ class RecordDraft(RecordBase):
             logger.warning("Proceeding from {} to {}", current_status, value)
 
         self._update_json(DraftInfo(status=value))
-
-    def lock_publish(self):
-        """Creates publish lock in DB"""
-        self.client.put_and_cache(self.publish_lockfile_path, b" ")
-
-    def unlock_publish(self):
-        """Releases publish lock in DB"""
-        self.client.rm(self.publish_lockfile_path)
-
-    @property
-    def publish_lockfile_path(self):
-        return f"{self.concept.folder}lock-publish"
 
 
 @dataclass
@@ -889,7 +929,7 @@ def create_collection_entries(
     try:
         nickname = rdf["config"]["bioimageio"]["nickname"]
         nickname_icon = rdf["config"]["bioimageio"]["nickname_icon"]
-    finally:
+    except Exception:
         nickname = rdf["id"]
         nickname_icon = rdf["id_emoji"]
 

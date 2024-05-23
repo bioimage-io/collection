@@ -1,3 +1,4 @@
+import getpass
 from typing import Literal, Optional
 
 from loguru import logger
@@ -23,13 +24,12 @@ class Settings(BaseSettings, extra="ignore"):
     run_url: Optional[str] = None
     """url to logs of the current CI run"""
 
-    s3_bucket: str = "public-datasets"
-    s3_folder: str = "sandbox.bioimage.io"
-    s3_host: str = "uk1s3.embassy.ebi.ac.uk"
-    s3_pytest_folder: str = "testing.bioimage.io/user_pytest"
+    s3_host: str
+    s3_bucket: str
+    s3_folder: str = f"testing.bioimage.io/{getpass.getuser()}/instance"
+    s3_pytest_folder: str = f"testing.bioimage.io/{getpass.getuser()}/pytest"
     s3_sandbox_folder: str = "sandbox.bioimage.io"
-    s3_test_bucket: str = "public-datasets"
-    s3_test_folder: str = "testing.bioimage.io/user_sandbox"
+    s3_test_folder: str = f"testing.bioimage.io/{getpass.getuser()}/sandbox"
     test_package_id: str = "frank-water-buffalo"
     test_package_url: str = (
         "https://uk1s3.embassy.ebi.ac.uk/public-datasets/examples.bioimage.io/frank-water-buffalo_v1.zip"
@@ -50,5 +50,5 @@ class Settings(BaseSettings, extra="ignore"):
     github_pat: SecretStr = SecretStr("")
 
 
-settings = Settings()
+settings = Settings()  # pyright: ignore[reportCallIssue]
 logger.info("settings: {}", settings)

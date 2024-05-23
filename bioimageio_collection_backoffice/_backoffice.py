@@ -2,7 +2,6 @@
 
 import warnings
 from datetime import datetime
-from pathlib import Path
 from typing import Literal, Optional, Union
 
 from bioimageio.spec.model.v0_5 import WeightsFormat
@@ -10,7 +9,7 @@ from loguru import logger
 from typing_extensions import assert_never
 
 from ._settings import settings
-from .backup import ZenodoHost, backup
+from .backup import backup
 from .db_structure.chat import Chat, Message
 from .db_structure.log import CollectionLog, CollectionLogEntry, Log
 from .gh_utils import set_gh_actions_outputs
@@ -171,23 +170,22 @@ class BackOffice:
         if isinstance(rv, Record):
             raise ValueError(f"Cannot publish already published {concept_id} {version}")
 
-        try:
-            rv.lock_publish()
-            published: Record = rv.publish(reviewer)
-            assert isinstance(published, Record)
-            self.generate_collection_json(mode="published")
-            notify_uploader(
-                rv,
-                "was published! 🎉",
-                f"Thank you for contributing {published.id} {published.version} to bioimage.io!\n"
-                + f"Check it out at {published.bioimageio_url}\n",
-            )
-        finally:
-            rv.unlock_publish()
+        published: Record = rv.publish(reviewer)
+        assert isinstance(published, Record)
+        self.generate_collection_json(mode="published")
+        notify_uploader(
+            published,
+            "was published! 🎉",
+            f"Thank you for contributing {published.id} {published.version} to bioimage.io!\n"
+            + f"Check it out at {published.bioimageio_url}\n",
+        )
 
-    def backup(self, destination: ZenodoHost):
+    def backup(self, destination: str = "deprecated"):
         """backup the whole collection (to zenodo.org)"""
-        _ = backup(self.client, destination)
+        if destination != "deprecated":
+            logger.warning("argument `destination` is deprecated")
+
+        _ = backup(self.client)
         self.generate_collection_json(mode="published")
         self.generate_collection_json(mode="draft")
 

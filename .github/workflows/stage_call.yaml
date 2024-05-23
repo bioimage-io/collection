@@ -3,47 +3,24 @@ name: stage call
 on:
   workflow_call:
     inputs:
-      resource_id:
-        description: "Bioimage.io resource identifier"
+      concept_id:
+        description: "Bioimage.io resource concept"
         required: true
         type: string
       package_url:
         description: "Download URL of the resource package zip-file"
         required: true
         type: string
-      S3_HOST:
+      environment_name:
         required: true
         type: string
-      S3_BUCKET:
-        required: true
-        type: string
-      S3_FOLDER:
-        required: true
-        type: string
-    outputs:
-      version:
-        description: "staged version incl 'stage/' prefix"
-        value: ${{ jobs.run.outputs.version }}
 
-concurrency: ${{inputs.resource_id}}-call
-
-env:
-  S3_HOST: ${{ inputs.S3_HOST }}
-  S3_BUCKET: ${{ inputs.S3_BUCKET }}
-  S3_FOLDER: ${{ inputs.S3_FOLDER }}
-  S3_ACCESS_KEY_ID: ${{secrets.S3_ACCESS_KEY_ID}}
-  S3_SECRET_ACCESS_KEY: ${{secrets.S3_SECRET_ACCESS_KEY}}
-  MAIL_PASSWORD: ${{secrets.MAIL_PASSWORD}}
-  RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
+concurrency: ${{inputs.concept_id}}-call
 
 jobs:
   run:
     runs-on: ubuntu-latest
-    outputs:
-      version: ${{ steps.stage.outputs.version }}
-      dynamic_test_cases: ${{ steps.stage.outputs.dynamic_test_cases }}
-      has_dynamic_test_cases: ${{ steps.stage.outputs.has_dynamic_test_cases }}
-      conda_envs: ${{ steps.stage.outputs.conda_envs }}
+    environment: ${{inputs.environment_name}}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -52,5 +29,13 @@ jobs:
           cache: "pip" # caching pip dependencies
       - run: pip install .
       - id: stage
-        run: backoffice stage "${{ inputs.resource_id }}" "${{ inputs.package_url }}"
+        run: backoffice stage "${{ inputs.concept_id }}" "${{inputs.package_url }}"
+        env:
+          S3_HOST: ${{ vars.S3_HOST }}
+          S3_BUCKET: ${{ vars.S3_BUCKET }}
+          S3_FOLDER: ${{ vars.S3_FOLDER }}
+          S3_ACCESS_KEY_ID: ${{secrets.S3_ACCESS_KEY_ID}}
+          S3_SECRET_ACCESS_KEY: ${{secrets.S3_SECRET_ACCESS_KEY}}
+          MAIL_PASSWORD: ${{secrets.MAIL_PASSWORD}}
+          RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
 

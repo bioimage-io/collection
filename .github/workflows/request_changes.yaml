@@ -29,7 +29,7 @@
 #   call:
 #     uses: bioimage-io/collection/.github/workflows/request_changes_call.yaml@main
 #     with:
-#       resource_id: ${{inputs.resource_id}}
+#       concept_id: ${{inputs.resource_id}}
 #       stage_number: ${{fromJson(inputs.stage_number)}}  # wo 'fromJson' the number is given as string, see https://github.com/orgs/community/discussions/67182
 #       reviewer: ${{inputs.reviewer == 'auto detect' && format('github|{0}', github.actor_id) || inputs.reviewer}}
 #       reason: ${{inputs.reason}}

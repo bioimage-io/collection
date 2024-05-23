@@ -3,7 +3,7 @@ name: request changes call
 on:
   workflow_call:
     inputs:
-      resource_id:
+      concept_id:
         description: "Bioimageio ID of the resource - to be used to access the resource on S3"
         required: true
         type: string
@@ -20,40 +20,17 @@ on:
         description: Why are changes required? What needs changing?
         required: true
         type: string
-      S3_HOST:
-        required: true
-        type: string
-      S3_BUCKET:
-        required: true
-        type: string
-      S3_FOLDER:
-        required: true
-        type: string
-      ZENODO_URL:
-        required: true
-        type: string
-      REVIEWERS:
+      environment_name:
         required: true
         type: string
 
-
-concurrency: ${{inputs.resource_id}}-call
-
-env:
-  S3_HOST: ${{inputs.S3_HOST}}
-  S3_BUCKET: ${{inputs.S3_BUCKET}}
-  S3_FOLDER: ${{inputs.S3_FOLDER}}
-  ZENODO_URL: ${{inputs.ZENODO_URL}}
-  S3_ACCESS_KEY_ID: ${{secrets.S3_ACCESS_KEY_ID}}
-  S3_SECRET_ACCESS_KEY: ${{secrets.S3_SECRET_ACCESS_KEY}}
-  ZENODO_API_ACCESS_TOKEN: ${{secrets.ZENODO_API_ACCESS_TOKEN}}
-  REVIEWERS: ${{vars.REVIEWERS}}
-  RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
+concurrency: ${{inputs.concept_id}}-call
 
 
 jobs:
   request-changes:
     runs-on: ubuntu-latest
+    environment: ${{inputs.environment_name}}
     steps:
       - name: reject reviewer id
         run: exit 1
@@ -64,4 +41,13 @@ jobs:
           python-version: "3.12"
           cache: "pip" # caching pip dependencies
       - run: pip install .
-      - run: backoffice request_changes "${{ inputs.resource_id }}" "staged/${{ inputs.stage_number }}" "${{ inputs.reviewer }}" "${{ inputs.reason }}"
+      - run: backoffice request_changes "${{ inputs.concept_id }}" --reviewer "${{ inputs.reviewer }}" --reason "${{ inputs.reason }}"
+        env:
+          S3_HOST: ${{vars.S3_HOST}}
+          S3_BUCKET: ${{vars.S3_BUCKET}}
+          S3_FOLDER: ${{vars.S3_FOLDER}}
+          ZENODO_URL: ${{vars.ZENODO_URL}}
+          S3_ACCESS_KEY_ID: ${{secrets.S3_ACCESS_KEY_ID}}
+          S3_SECRET_ACCESS_KEY: ${{secrets.S3_SECRET_ACCESS_KEY}}
+          ZENODO_API_ACCESS_TOKEN: ${{secrets.ZENODO_API_ACCESS_TOKEN}}
+          RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}

@@ -10,8 +10,9 @@
 #         required: true
 #         type: string
 #       stage_number:
-#         description: stage number to publish
-#         required: true
+#         description: DEPRECATED; will be removed soon
+#         required: false
+#         default: -1
 #         type: number
 #       reviewer:
 #         description: GitHub account name of bioimage.io maintainer accepting this resource version

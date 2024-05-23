@@ -233,6 +233,7 @@
                     "logo": "https://raw.githubusercontent.com/ilastik/bioimage-io-resources/main/image/ilastik-fist-icon.png",
                     "name": "ilastik",
                     "resource_types": [
+                        "model",
                         "application"
                     ],
                     "splash_feature_list": [],

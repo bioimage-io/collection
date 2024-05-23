@@ -6,15 +6,16 @@
 #   workflow_dispatch:
 #     inputs:
 #       resource_id:
-#         description: "Bioimage.io resource identifier"
+#         description: "Bioimage.io resource concept"
 #         required: true
 #         type: string
 #       version:
-#         description: "(Published) version number or staged version number prefixed with 'staged/', e.g. 'staged/1'"
-#         required: true
-#         type: number
+#         description: "Published version or 'draft'"
+#         required: false
+#         type: string
+#         default: draft
 #       sandbox:
-#         description: staged resource is on sandbox
+#         description: Publish within sandbox
 #         required: false
 #         default: false
 #         type: boolean
@@ -25,9 +26,7 @@
 #   call:
 #     uses: bioimage-io/collection/.github/workflows/test_call.yaml@main
 #     with:
-#       resource_id: ${{inputs.resource_id}}
+#       concept_id: ${{inputs.resource_id}}
 #       version: ${{inputs.version}}
-#       S3_HOST: ${{vars.S3_HOST}}
-#       S3_BUCKET: ${{vars.S3_BUCKET}}
-#       S3_FOLDER: ${{inputs.sandbox && vars.S3_SANDBOX_FOLDER || vars.S3_FOLDER}}
+#       environment_name: ${{inputs.sandbox && 'sandbox' || 'production'}}
 #     secrets: inherit

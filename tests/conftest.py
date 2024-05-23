@@ -11,7 +11,7 @@ from bioimageio_collection_backoffice.s3_client import Client
 def backoffice():
     bo = BackOffice(
         host=settings.s3_host,
-        bucket=settings.s3_test_bucket,
+        bucket=settings.s3_bucket,
         prefix=settings.s3_pytest_folder + "/backoffice",
     )
     bo.client.rm_dir("")  # wipe s3 test folder
@@ -23,7 +23,7 @@ def backoffice():
 def client():
     cl = Client(
         host=settings.s3_host,
-        bucket=settings.s3_test_bucket,
+        bucket=settings.s3_bucket,
         prefix=settings.s3_pytest_folder + "/client",
     )
     cl.rm_dir("")  # wipe s3 test folder

@@ -24,14 +24,12 @@ from .s3_client import Client
 
 yaml = YAML(typ="safe")
 
-ZenodoHost = Literal["https://sandbox.zenodo.org", "https://zenodo.org"]
-
 
 class SkipForNow(NotImplementedError):
     pass
 
 
-def backup(client: Client, destination: ZenodoHost):
+def backup(client: Client):
     """backup all published resources to their own zenodo records"""
     remote_collection = RemoteCollection(client=client)
 
@@ -42,7 +40,7 @@ def backup(client: Client, destination: ZenodoHost):
 
         error = None
         try:
-            backup_published_version(v, destination)
+            backup_published_version(v)
         except SkipForNow as e:
             logger.warning("{}\n{}", e, traceback.format_exc())
         except Exception as e:
@@ -59,7 +57,6 @@ def backup(client: Client, destination: ZenodoHost):
 
 def backup_published_version(
     v: Record,
-    destination: ZenodoHost,
 ):
     with ValidationContext(perform_io_checks=False):
         rdf = load_description(v.rdf_url)
@@ -82,14 +79,7 @@ def backup_published_version(
         raise ValueError("Missing license")
 
     headers = {"Content-Type": "application/json"}
-    if destination == "https://zenodo.org":
-        params = {"access_token": settings.zenodo_api_access_token.get_secret_value()}
-    elif destination == "https://sandbox.zenodo.org":
-        params = {
-            "access_token": settings.zenodo_test_api_access_token.get_secret_value()
-        }
-    else:
-        assert_never(destination)
+    params = {"access_token": settings.zenodo_api_access_token.get_secret_value()}
 
     # List the files at the model URL
     file_urls = v.get_file_urls()
@@ -99,7 +89,7 @@ def backup_published_version(
     if v.concept.doi is None:
         # Create empty deposition
         r_create = requests.post(
-            f"{destination}/api/deposit/depositions",
+            f"{settings.zenodo_url}/api/deposit/depositions",
             params=params,
             json={},
             headers=headers,
@@ -108,7 +98,7 @@ def backup_published_version(
         concept_id = v.concept.doi.split("/zenodo.")[1]
         # create a new deposition version with different deposition_id from the existing deposition
         r_create = requests.post(
-            destination
+            settings.zenodo_url
             + "/api/deposit/depositions/"
             + concept_id
             + "/actions/newversion",
@@ -137,7 +127,7 @@ def backup_published_version(
     assert isinstance(doi, str)
     concept_doi = doi.replace(deposition_id, concept_id)
 
-    # base_url = f"{destination}/record/{concept_id}/files/"
+    # base_url = f"{settings.zenodo_url}/record/{concept_id}/files/"
 
     metadata = rdf_to_metadata(
         rdf,
@@ -145,7 +135,7 @@ def backup_published_version(
         publication_date=v.info.created,
     )
 
-    put_url = f"{destination}/api/deposit/depositions/{deposition_id}"
+    put_url = f"{settings.zenodo_url}/api/deposit/depositions/{deposition_id}"
     logger.debug("PUT {} with metadata: {}", put_url, metadata)
     r_metadata = requests.put(
         put_url,
@@ -156,7 +146,7 @@ def backup_published_version(
     raise_for_status_discretely(r_metadata)
 
     publish_url = (
-        f"{destination}/api/deposit/depositions/{deposition_id}/actions/publish"
+        f"{settings.zenodo_url}/api/deposit/depositions/{deposition_id}/actions/publish"
     )
     logger.debug("POST {}", publish_url)
     r_publish = requests.post(

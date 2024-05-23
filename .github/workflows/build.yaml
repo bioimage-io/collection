@@ -4,12 +4,10 @@ on: push
 
 concurrency: test
 
-# env:
-#   S3_HOST: ${{vars.S3_HOST}}
-#   S3_BUCKET: ${{vars.S3_TEST_BUCKET}} # testing!
+env:
+  S3_HOST: ${{vars.S3_HOST}}
+  S3_BUCKET: ${{vars.S3_BUCKET}}
 #   S3_FOLDER: ${{vars.S3_TEST_FOLDER}} # testing!
-#   S3_TEST_BUCKET: ${{vars.S3_TEST_BUCKET}}
-#   S3_TEST_FOLDER: ${{vars.S3_TEST_FOLDER}}
 #   S3_PYTEST_FOLDER: ${{vars.S3_PYTEST_FOLDER}}
 #   ZENODO_URL: ${{vars.ZENODO_TEST_URL}} # testing!
 #   ZENODO_TEST_URL: ${{vars.ZENODO_TEST_URL}}
@@ -27,8 +25,8 @@ concurrency: test
 
 jobs:
   initial-cleanup:
-    runs-on: ubuntu-latest
     environment: testing
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -36,26 +34,26 @@ jobs:
           python-version: "3.12"
           cache: "pip" # caching pip dependencies
       - run: pip install .
-      - run: backoffice wipe --bucket "${{vars.S3_TEST_BUCKET}}" --prefix "${{vars.S3_TEST_FOLDER}}"
+      - run: backoffice wipe --bucket "${{vars.S3_BUCKET}}" --prefix "${{vars.S3_FOLDER}}"
+        env:
+          S3_HOST: ${{vars.S3_HOST}}
+          S3_BUCKET: ${{vars.S3_BUCKET}}
+          S3_FOLDER: ${{vars.S3_FOLDER}}
 
   generate-initial-collection-json:
     needs: initial-cleanup
     uses: bioimage-io/collection/.github/workflows/generate_collection_json_call.yaml@main
     with:
-      S3_HOST: ${{vars.S3_HOST}}
-      S3_BUCKET: ${{vars.S3_TEST_BUCKET}} # testing!
-      S3_FOLDER: ${{vars.S3_TEST_FOLDER}}/ci # testing!
+      environment_name: testing
     secrets: inherit
 
   test-stage:
     needs: generate-initial-collection-json
     uses: bioimage-io/collection/.github/workflows/stage_call.yaml@main
     with:
-      resource_id: ${{vars.TEST_PACKAGE_ID}} # testing!
-      package_url: ${{vars.TEST_PACKAGE_URL}} # testing!
-      S3_HOST: ${{vars.S3_HOST}}
-      S3_BUCKET: ${{vars.S3_TEST_BUCKET}} # testing!
-      S3_FOLDER: ${{vars.S3_TEST_FOLDER}}/ci # testing!
+      resource_id: 'frank-water-buffalo'
+      package_url: 'https://uk1s3.embassy.ebi.ac.uk/public-datasets/examples.bioimage.io/frank-water-buffalo_v1.zip'
+      environment_name: testing
     secrets: inherit
 
   test-publish:

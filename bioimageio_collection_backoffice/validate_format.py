@@ -274,11 +274,6 @@ def prepare_dynamic_test_cases(
 
 
 def validate_format(rv: Union[RecordDraft, Record]):
-    if not rv.exists:
-        # check for "manual staging" (direct creation of new staged/x 'folder')
-        if rv.client.load_file(rv.rdf_path) is None:
-            raise ValueError(f"{rv} not found")
-
     if isinstance(rv, RecordDraft):
         rv.set_testing_status("Validating RDF format")
 
@@ -287,11 +282,11 @@ def validate_format(rv: Union[RecordDraft, Record]):
         if rd.version is not None:
             error = None
             if isinstance(rv, RecordDraft):
-                published = rv.concept.versions.published
-                if str(rd.version) in {v.sem_ver for v in published.values()}:
+                published = rv.concept.get_published_versions()
+                if str(rd.version) in {v.version for v in published}:
                     error = ErrorEntry(
                         loc=("version",),
-                        msg=f"Trying to publish version {rd.version} again!",
+                        msg=f"Version '{rd.version}' is already published!",
                         type="error",
                     )
 
