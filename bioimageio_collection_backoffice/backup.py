@@ -33,7 +33,7 @@ def backup(client: Client):
     remote_collection = RemoteCollection(client=client)
 
     backed_up: List[str] = []
-    for v in remote_collection.get_published_versions():
+    for v in remote_collection.get_published_versions()[::-1]:
         if v.doi is not None:
             continue
 
