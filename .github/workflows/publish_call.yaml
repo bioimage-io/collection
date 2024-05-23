@@ -3,45 +3,29 @@ name: publish call
 on:
   workflow_call:
     inputs:
-      resource_id:
-        description: "Bioimageio ID of the resource - to be used to access the resource on S3"
+      concept_id:
+        description: "Bioimageio resource concept"
         required: true
         type: string
-      stage_number:
-        description: stage number to publish
-        required: true
-        type: number
       reviewer:
         description: GitHub user id (prefixed with 'github|') of the bioimage.io maintainer accepting this resource version
         required: false
         default: 'github|${{github.actor_id}}'
         type: string
-      S3_HOST:
-        required: true
-        type: string
-      S3_BUCKET:
-        required: true
-        type: string
-      S3_FOLDER:
-        required: true
-        type: string
-      REVIEWERS:
+      environment_name:
         required: true
         type: string
 
-
-concurrency: ${{inputs.resource_id}}-call
+concurrency: ${{inputs.environment_name}}-${{inputs.concept_id}}-call
 
 env:
-  S3_HOST: ${{inputs.S3_HOST}}
-  S3_BUCKET: ${{inputs.S3_BUCKET}}
-  S3_FOLDER: ${{inputs.S3_FOLDER}}
-  S3_ACCESS_KEY_ID: ${{secrets.S3_ACCESS_KEY_ID}}
+  S3_HOST: ${{vars.S3_HOST}}
+  S3_BUCKET: ${{vars.S3_BUCKET}}
   S3_SECRET_ACCESS_KEY: ${{secrets.S3_SECRET_ACCESS_KEY}}
-  ZENODO_API_ACCESS_TOKEN: ${{secrets.ZENODO_API_ACCESS_TOKEN}}
-  REVIEWERS: ${{inputs.REVIEWERS}}
+  S3_ACCESS_KEY_ID: ${{secrets.S3_ACCESS_KEY_ID}}
   RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
   MAIL_PASSWORD: ${{secrets.MAIL_PASSWORD}}
+
 
 jobs:
   run:
@@ -57,3 +41,7 @@ jobs:
           cache: "pip" # caching pip dependencies
       - run: pip install .
       - run: backoffice publish "${{inputs.resource_id}}" "staged/${{inputs.stage_number}}" "${{inputs.reviewer}}"
+        env:
+          S3_FOLDER: ${{vars.S3_FOLDER}}
+          ZENODO_URL: ${{vars.ZENODO_URL}}
+          ZENODO_API_ACCESS_TOKEN: ${{secrets.ZENODO_API_ACCESS_TOKEN}}
