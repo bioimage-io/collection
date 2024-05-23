@@ -7,21 +7,6 @@ concurrency: test
 env:
   S3_HOST: ${{vars.S3_HOST}}
   S3_BUCKET: ${{vars.S3_BUCKET}}
-#   S3_FOLDER: ${{vars.S3_TEST_FOLDER}} # testing!
-#   S3_PYTEST_FOLDER: ${{vars.S3_PYTEST_FOLDER}}
-#   ZENODO_URL: ${{vars.ZENODO_TEST_URL}} # testing!
-#   ZENODO_TEST_URL: ${{vars.ZENODO_TEST_URL}}
-#   REVIEWERS: ${{vars.REVIEWERS}}
-#   RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
-
-#   S3_ACCESS_KEY_ID: ${{secrets.S3_ACCESS_KEY_ID}}
-#   S3_SECRET_ACCESS_KEY: ${{secrets.S3_SECRET_ACCESS_KEY}}
-#   ZENODO_API_ACCESS_TOKEN: ${{secrets.ZENODO_TEST_API_ACCESS_TOKEN}} # testing!
-#   ZENODO_TEST_API_ACCESS_TOKEN: ${{secrets.ZENODO_TEST_API_ACCESS_TOKEN}}
-
-#   TEST_PACKAGE_ID: ${{vars.TEST_PACKAGE_ID}}
-#   TEST_PACKAGE_URL: ${{vars.TEST_PACKAGE_URL}}
-
 
 jobs:
   initial-cleanup:
@@ -34,10 +19,8 @@ jobs:
           python-version: "3.12"
           cache: "pip" # caching pip dependencies
       - run: pip install .
-      - run: backoffice wipe --bucket "${{vars.S3_BUCKET}}" --prefix "${{vars.S3_FOLDER}}"
+      - run: backoffice wipe
         env:
-          S3_HOST: ${{vars.S3_HOST}}
-          S3_BUCKET: ${{vars.S3_BUCKET}}
           S3_FOLDER: ${{vars.S3_FOLDER}}
 
   generate-initial-collection-json:
@@ -54,7 +37,7 @@ jobs:
       concept_id: 'frank-water-buffalo'
       package_url: 'https://uk1s3.embassy.ebi.ac.uk/public-datasets/examples.bioimage.io/frank-water-buffalo_v1.zip'
       environment_name: testing
-      secrets: inherit
+    secrets: inherit
 
   test-publish:
     needs: test-stage
@@ -69,30 +52,22 @@ jobs:
     needs: test-publish
     uses: bioimage-io/collection/.github/workflows/generate_collection_json_call.yaml@main
     with:
-      S3_HOST: ${{vars.S3_HOST}}
-      S3_BUCKET: ${{vars.S3_TEST_BUCKET}} # testing!
-      S3_FOLDER: ${{vars.S3_TEST_FOLDER}}/ci # testing!
+      environment_name: testing
     secrets: inherit
-
 
   test-generate-collection-staged-json:
     needs: test-publish
     uses: bioimage-io/collection/.github/workflows/generate_collection_json_call.yaml@main
     with:
       mode: 'staged'
-      S3_HOST: ${{vars.S3_HOST}}
-      S3_BUCKET: ${{vars.S3_TEST_BUCKET}} # testing!
-      S3_FOLDER: ${{vars.S3_TEST_FOLDER}}/ci # testing!
+      environment_name: testing
     secrets: inherit
 
   test-backup:
     needs: test-generate-collection-json
     uses: bioimage-io/collection/.github/workflows/backup_call.yaml@main
     with:
-      S3_HOST: ${{vars.S3_HOST}}
-      S3_BUCKET: ${{vars.S3_TEST_BUCKET}} # testing!
-      S3_FOLDER: ${{vars.S3_TEST_FOLDER}}/ci # testing!
-      ZENODO_URL: ${{vars.ZENODO_TEST_URL}} # testing!
+      environment_name: testing
     secrets: inherit
 
   build:

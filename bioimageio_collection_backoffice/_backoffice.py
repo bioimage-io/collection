@@ -63,8 +63,8 @@ class BackOffice:
         """DANGER ZONE: wipes `subfolder` completely, only use for test folders!"""
         url = self.client.get_file_url(subfolder)
         key_parts = ("sandbox", "testing")
-        if not all(p in url for p in key_parts):
-            raise RuntimeError(f"Refusing to wipe {url} (missing {key_parts})")
+        if not any(p in url for p in key_parts):
+            raise RuntimeError(f"Refusing to wipe {url} (missing any of {key_parts})")
 
         self.client.rm_dir(subfolder)
 
