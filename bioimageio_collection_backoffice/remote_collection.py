@@ -24,8 +24,7 @@ from typing import (
     Union,
 )
 
-from bioimageio.spec import ValidationContext, build_description
-from bioimageio.spec.collection import CollectionDescr
+from bioimageio.spec import ValidationContext
 from bioimageio.spec.common import HttpUrl
 from bioimageio.spec.utils import (
     download,
@@ -975,5 +974,6 @@ def create_collection_entries(
             training_data=rdf["training_data"] if "training_data" in rdf else None,
             type=rdf["type"],
             versions=[v.version for v in versions],
+            dois=[v.doi for v in versions],
         )
     ]

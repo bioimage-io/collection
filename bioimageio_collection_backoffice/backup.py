@@ -15,7 +15,6 @@ from bioimageio.spec.common import HttpUrl, RelativeFilePath
 from bioimageio.spec.utils import download
 from loguru import logger
 from ruyaml import YAML
-from typing_extensions import Literal, assert_never
 
 from ._settings import settings
 from .remote_collection import Record, RemoteCollection

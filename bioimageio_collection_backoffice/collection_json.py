@@ -54,6 +54,8 @@ class CollectionEntry(Node, frozen=True):
     type: Literal["application", "model", "notebook", "dataset"]
     versions: Sequence[str]
     """available versions of this resource. newest first"""
+    dois: Sequence[Optional[str]]
+    """version specific dois of the available versions. newest first"""
 
 
 class CollectionWebsiteConfig(CollectionWebsiteConfigTemplate, frozen=True):
