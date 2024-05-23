@@ -16,12 +16,10 @@ env:
   S3_SECRET_ACCESS_KEY: ${{secrets.S3_SECRET_ACCESS_KEY}}
   RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
 
-  ZENODO_API_ACCESS_TOKEN: ${{secrets.ZENODO_API_ACCESS_TOKEN}}
-  S3_FOLDER: ${{inputs.S3_FOLDER}}
-
 jobs:
   run:
     runs-on: ubuntu-latest
+    environment: ${{inputs.environment_name}}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -29,4 +27,8 @@ jobs:
           python-version: "3.12"
           cache: "pip" # caching pip dependencies
       - run: pip install .
-      - run: backoffice backup  ${{inputs.ZENODO_URL}}
+      - run: backoffice backup
+        env:
+          S3_FOLDER: ${{inputs.S3_FOLDER}}
+          ZENODO_API_ACCESS_TOKEN: ${{secrets.ZENODO_API_ACCESS_TOKEN}}
+
