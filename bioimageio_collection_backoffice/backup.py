@@ -69,6 +69,15 @@ def backup_published_version(
     if rdf.id is None:
         raise ValueError("Missing bioimage.io `id`")
 
+    if rdf.id.startswith("10.5281/zenodo"):
+        # use legacy doi and concept doi
+        parts = rdf.id.split("/")
+        assert len(parts) == 3
+        concept_doi = "/".join(parts[:2])
+        doi = f"10.5281/zenodo{parts[2]}"
+        v.set_dois(doi=doi, concept_doi=concept_doi)
+        return
+
     if rdf.type == "application" and "notebook" not in rdf.tags:
         raise SkipForNow(
             "backup for (non-notebook) applications skipped for now."
