@@ -18,14 +18,6 @@ on:
 
 concurrency: ${{inputs.environment_name}}-${{inputs.concept_id}}-call
 
-env:
-  S3_HOST: ${{vars.S3_HOST}}
-  S3_BUCKET: ${{vars.S3_BUCKET}}
-  S3_SECRET_ACCESS_KEY: ${{secrets.S3_SECRET_ACCESS_KEY}}
-  S3_ACCESS_KEY_ID: ${{secrets.S3_ACCESS_KEY_ID}}
-  RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
-  MAIL_PASSWORD: ${{secrets.MAIL_PASSWORD}}
-
 
 jobs:
   run:
@@ -43,6 +35,12 @@ jobs:
       - run: pip install .
       - run: backoffice publish "${{inputs.resource_id}}" "staged/${{inputs.stage_number}}" "${{inputs.reviewer}}"
         env:
-          S3_FOLDER: ${{vars.S3_FOLDER}}
+          S3_HOST: ${{vars.S3_HOST}}
+          S3_BUCKET: ${{vars.S3_BUCKET}}
+          S3_FOLDER: ${{inputs.S3_FOLDER}}
+          S3_ACCESS_KEY_ID: ${{secrets.S3_ACCESS_KEY_ID}}
+          S3_SECRET_ACCESS_KEY: ${{secrets.S3_SECRET_ACCESS_KEY}}
           ZENODO_URL: ${{vars.ZENODO_URL}}
           ZENODO_API_ACCESS_TOKEN: ${{secrets.ZENODO_API_ACCESS_TOKEN}}
+          MAIL_PASSWORD: ${{secrets.MAIL_PASSWORD}}
+          RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}

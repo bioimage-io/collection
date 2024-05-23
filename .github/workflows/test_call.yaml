@@ -25,6 +25,7 @@ concurrency: ${{inputs.concept_id}}-call
 env:
   S3_HOST: ${{ vars.S3_HOST }}
   S3_BUCKET: ${{ vars.S3_BUCKET }}
+  S3_FOLDER: ${{vars.S3_FOLDER}}
   S3_ACCESS_KEY_ID: ${{secrets.S3_ACCESS_KEY_ID}}
   S3_SECRET_ACCESS_KEY: ${{secrets.S3_SECRET_ACCESS_KEY}}
   RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
@@ -48,8 +49,6 @@ jobs:
       - run: pip install .
       - id: validate_format
         run: backoffice validate_format "${{ inputs.concept_id }}" "${{ inputs.version }}"
-        env:
-          S3_FOLDER: ${{ vars.S3_FOLDER }}
 
   setup-test:
     needs: validate_format
@@ -106,8 +105,6 @@ jobs:
         shell: bash -el {0}
         run: backoffice test "${{inputs.concept_id}}" "${{ inputs.version }}" "${{ matrix.weight_format }}" "${{ steps.create_env.outcome }}"
         timeout-minutes: 60
-        env:
-          S3_FOLDER: ${{ vars.S3_FOLDER }}
       - name: check torch import # TODO: improve error messages in bioimageio.core
         if: matrix.weight_format == 'pytorch_state_dict' || matrix.weight_format == 'torchscript'
         shell: bash -el {0}
@@ -130,5 +127,3 @@ jobs:
           cache: "pip" # caching pip dependencies
       - run: pip install .
       - run: backoffice await_review "${{ inputs.concept_id }}" "${{ inputs.version }}"
-        env:
-          S3_FOLDER: ${{ vars.S3_FOLDER }}

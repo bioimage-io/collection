@@ -14,17 +14,11 @@ on:
 
 concurrency: forward-emails-to-chat
 
-env:
-  S3_HOST: ${{vars.S3_HOST}}
-  S3_BUCKET: ${{vars.S3_BUCKET}}
-  S3_FOLDER: ${{inputs.sandbox && vars.S3_SANDBOX_FOLDER || vars.S3_FOLDER}}
-  S3_ACCESS_KEY_ID: ${{secrets.S3_ACCESS_KEY_ID}}
-  S3_SECRET_ACCESS_KEY: ${{secrets.S3_SECRET_ACCESS_KEY}}
-  MAIL_PASSWORD: ${{secrets.MAIL_PASSWORD}}
 
 jobs:
   run:
     runs-on: ubuntu-latest
+    # environment: ${{inputs.sandbox && 'sandbox' || 'production'}}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -33,3 +27,10 @@ jobs:
           cache: "pip" # caching pip dependencies
       - run: pip install .
       - run: backoffice forward_emails_to_chat
+        env:
+          S3_HOST: ${{vars.S3_HOST}}
+          S3_BUCKET: ${{vars.S3_BUCKET}}
+          S3_FOLDER: ${{vars.S3_FOLDER}}
+          S3_ACCESS_KEY_ID: ${{secrets.S3_ACCESS_KEY_ID}}
+          S3_SECRET_ACCESS_KEY: ${{secrets.S3_SECRET_ACCESS_KEY}}
+          MAIL_PASSWORD: ${{secrets.MAIL_PASSWORD}}
