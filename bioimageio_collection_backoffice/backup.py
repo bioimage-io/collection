@@ -199,17 +199,10 @@ def rdf_to_metadata(
     keywords = ["backup.bioimage.io", "bioimage.io", "bioimage.io:" + rdf.type]
     # related_identifiers = generate_related_identifiers_from_rdf(rdf, rdf_file_name)  # TODO: add related identifiers
 
-    # for debugging: check if license id is valid:
-    # license_response = requests.get(
-    #     f"https://zenodo.org/api/vocabularies/licenses/{rdf.license.lower()}"
-    # )
-    # raise_for_status_discretely(license_response)
-
-    return {
+    ret: Dict[str, Any] = {
         "title": f"bioimage.io upload: {rdf.id}",
         "description": description,
         "access_right": "open",
-        "license": rdf.license,
         "upload_type": "dataset" if rdf.type == "dataset" else "software",
         "creators": creators,
         "publication_date": publication_date.date().isoformat(),
@@ -218,6 +211,26 @@ def rdf_to_metadata(
         # "related_identifiers": related_identifiers,
         # "communities": [],
     }
+
+    # check if license id is valid:
+    license_response = requests.get(
+        f"https://zenodo.org/api/vocabularies/licenses/{rdf.license.lower()}"
+    )
+    try:
+        raise_for_status_discretely(license_response)
+    except Exception as e:
+        logger.error(str(e))
+        logger.error(
+            (
+                f"License '{rdf.license}' not known to Zenodo."
+                + " Please add manually as custom license"
+                + " (as this is currently not supported to do via REST API)"
+            )
+        )
+    else:
+        ret["license"] = rdf.license
+
+    return ret
 
 
 def generate_related_identifiers_from_rdf(rdf: ResourceDescr, rdf_file_name: str):
