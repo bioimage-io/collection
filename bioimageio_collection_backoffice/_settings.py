@@ -24,8 +24,8 @@ class Settings(BaseSettings, extra="ignore"):
     run_url: Optional[str] = None
     """url to logs of the current CI run"""
 
-    s3_host: str
-    s3_bucket: str
+    s3_host: str = "uk1s3.embassy.ebi.ac.uk"
+    s3_bucket: str = "public-datasets"
     s3_folder: str = f"testing.bioimage.io/{getpass.getuser()}/instance"
     s3_pytest_folder: str = f"testing.bioimage.io/{getpass.getuser()}/pytest"
     s3_sandbox_folder: str = "sandbox.bioimage.io"
@@ -50,5 +50,5 @@ class Settings(BaseSettings, extra="ignore"):
     github_pat: SecretStr = SecretStr("")
 
 
-settings = Settings()  # pyright: ignore[reportCallIssue]
+settings = Settings()
 logger.info("settings: {}", settings)
