@@ -1,5 +1,4 @@
 import smtplib
-import sys
 from email.mime.text import MIMEText
 from typing import List, Union
 

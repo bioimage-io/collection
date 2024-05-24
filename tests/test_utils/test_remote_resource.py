@@ -1,6 +1,3 @@
-from pathlib import Path
-
-from bioimageio_collection_backoffice._settings import settings
 from bioimageio_collection_backoffice.backup import backup
 from bioimageio_collection_backoffice.remote_collection import (
     Record,
@@ -35,7 +32,7 @@ def test_lifecycle(
 
     remote_collection.generate_collection_json()
 
-    backup(client, settings.zenodo_test_url)
+    backup(client)
 
     assert concept.doi is not None
     assert published.doi is not None

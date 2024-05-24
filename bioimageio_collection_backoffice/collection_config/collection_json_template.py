@@ -4,7 +4,12 @@ from __future__ import annotations
 
 from typing import Any, Literal, Optional, Sequence
 
-from bioimageio.spec.generic.v0_3 import Author, CiteEntry, LicenseId, Version
+from bioimageio.spec.generic.v0_3 import (
+    Author,
+    CiteEntry,
+    LicenseId,  # type: ignore
+    Version,
+)
 from pydantic import HttpUrl
 
 from ..common import Node

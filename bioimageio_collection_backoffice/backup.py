@@ -212,23 +212,24 @@ def rdf_to_metadata(
         # "communities": [],
     }
 
-    # check if license id is valid:
-    license_response = requests.get(
-        f"https://zenodo.org/api/vocabularies/licenses/{rdf.license.lower()}"
-    )
-    try:
-        raise_for_status_discretely(license_response)
-    except Exception as e:
-        logger.error(str(e))
-        logger.error(
-            (
-                f"License '{rdf.license}' not known to Zenodo."
-                + " Please add manually as custom license"
-                + " (as this is currently not supported to do via REST API)"
-            )
+    if rdf.license is not None:
+        # check if license id is valid:
+        license_response = requests.get(
+            f"https://zenodo.org/api/vocabularies/licenses/{rdf.license.lower()}"
         )
-    else:
-        ret["license"] = rdf.license
+        try:
+            raise_for_status_discretely(license_response)
+        except Exception as e:
+            logger.error(str(e))
+            logger.error(
+                (
+                    f"License '{rdf.license}' not known to Zenodo."
+                    + " Please add manually as custom license"
+                    + " (as this is currently not supported to do via REST API)"
+                )
+            )
+        else:
+            ret["license"] = rdf.license
 
     return ret
 
