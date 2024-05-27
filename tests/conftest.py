@@ -21,10 +21,24 @@ def backoffice():
 
 @pytest.fixture(scope="session")
 def client():
+    """a client of a test instance of a bioimageio collection"""
     cl = Client(
         host=settings.s3_host,
         bucket=settings.s3_bucket,
         prefix=settings.s3_pytest_folder + "/client",
+    )
+    cl.rm_dir("")  # wipe s3 test folder
+    yield cl
+    cl.rm_dir("")  # wipe s3 test folder
+
+
+@pytest.fixture(scope="session")
+def non_collection_client():
+    """a client fixture without implying it maintains a bioimageio collection"""
+    cl = Client(
+        host=settings.s3_host,
+        bucket=settings.s3_bucket,
+        prefix=settings.s3_pytest_folder + "/other",
     )
     cl.rm_dir("")  # wipe s3 test folder
     yield cl
