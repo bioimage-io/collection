@@ -262,11 +262,11 @@ class RemoteCollection(RemoteBase):
 
     def get_concepts(self):
         return [  # general resources outside partner folders
-            RecordConcept(client=self.client, concept_id=d)
+            RecordConcept(client=self.client, concept_id=concept_id)
             for d in self.client.ls("", only_folders=True)
-            if d.strip("/") not in self.partner_ids
+            if (concept_id := d.strip("/")) not in self.partner_ids
         ] + [  # resources in partner folders
-            RecordConcept(client=self.client, concept_id=pid + "/" + d)
+            RecordConcept(client=self.client, concept_id=pid + "/" + d.strip("/"))
             for pid in self.partner_ids
             for d in self.client.ls(pid + "/", only_folders=True)
         ]
@@ -430,9 +430,9 @@ class RecordConcept(RemoteBase):
     def get_published_versions(self) -> List[Record]:
         """Get representations of the published version"""
         versions = [
-            Record(client=self.client, concept_id=self.id, version=v)
+            Record(client=self.client, concept_id=self.id, version=version)
             for v in self.client.ls(self.folder, only_folders=True)
-            if v.strip("/") != "draft"
+            if (version := v.strip("/")) != "draft"
         ]
         versions.sort(key=lambda r: r.info.created, reverse=True)
         return versions
@@ -468,6 +468,7 @@ class RecordBase(RemoteBase, ABC):
     concept: RecordConcept = field(init=False)
 
     def __post_init__(self):
+        self.concept_id = self.concept_id.strip("/")
         self.concept = RecordConcept(client=self.client, concept_id=self.concept_id)
 
     @property
@@ -841,7 +842,7 @@ class Record(RecordBase):
 
     @property
     def id(self) -> str:
-        return f"{self.concept.id}/{self.version}"
+        return f"{self.concept_id}/{self.version}"
 
     @property
     def doi(self):
