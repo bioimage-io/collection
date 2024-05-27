@@ -200,6 +200,7 @@ def lock_concept(
     @wraps(func)
     def wrapper(self: R, *args: P.args, **kwargs: P.kwargs):
         concept_id = self.concept_id
+        assert not concept_id.endswith("/"), concept_id
         lock_path = f"{concept_id}/concept-lock"
         if list(self.client.ls(lock_path)):
             raise ValueError(f"{concept_id} is currently locked")
@@ -469,6 +470,7 @@ class RecordBase(RemoteBase, ABC):
 
     def __post_init__(self):
         self.concept_id = self.concept_id.strip("/")
+        assert self.concept_id, "missing concept_id"
         self.concept = RecordConcept(client=self.client, concept_id=self.concept_id)
 
     @property
@@ -544,7 +546,7 @@ class RecordDraft(RecordBase):
 
     @property
     def id(self) -> str:
-        return f"{self.concept.id}/draft"
+        return f"{self.concept_id}/draft"
 
     @property
     def info(self) -> DraftInfo:
