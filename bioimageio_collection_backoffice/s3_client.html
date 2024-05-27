@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="pdoc 14.4.0"/>
+    <meta name="generator" content="pdoc 14.5.0"/>
     <title>bioimageio_collection_backoffice.s3_client API documentation</title>
             <link rel="icon" href="https://bioimage.io/static/img/bioimage-io-icon-small.svg"/>
 
@@ -666,7 +666,7 @@
                             <div id="Client.__init__" class="classattr">
                                 <div class="attr function">
             
-        <span class="name">Client</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">host</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;uk1s3.embassy.ebi.ac.uk&#39;</span>,</span><span class="param">	<span class="n">bucket</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;public-datasets&#39;</span>,</span><span class="param">	<span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;testing.bioimage.io/sandbox&#39;</span>,</span><span class="param">	<span class="n">access_key</span><span class="p">:</span> <span class="n">pydantic</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">SecretStr</span> <span class="o">=</span> <span class="n">SecretStr</span><span class="p">(</span><span class="s1">&#39;**********&#39;</span><span class="p">)</span>,</span><span class="param">	<span class="n">secret_key</span><span class="p">:</span> <span class="n">pydantic</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">SecretStr</span> <span class="o">=</span> <span class="n">SecretStr</span><span class="p">(</span><span class="s1">&#39;**********&#39;</span><span class="p">)</span>,</span><span class="param">	<span class="n">max_bytes_cached</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1000000000</span></span>)</span>
+        <span class="name">Client</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">host</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;uk1s3.embassy.ebi.ac.uk&#39;</span>,</span><span class="param">	<span class="n">bucket</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;public-datasets&#39;</span>,</span><span class="param">	<span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;testing.bioimage.io/runner/instance&#39;</span>,</span><span class="param">	<span class="n">access_key</span><span class="p">:</span> <span class="n">pydantic</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">SecretStr</span> <span class="o">=</span> <span class="n">SecretStr</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>,</span><span class="param">	<span class="n">secret_key</span><span class="p">:</span> <span class="n">pydantic</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">SecretStr</span> <span class="o">=</span> <span class="n">SecretStr</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>,</span><span class="param">	<span class="n">max_bytes_cached</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1000000000</span></span>)</span>
 
         
     </div>
@@ -678,7 +678,7 @@
                             <div id="Client.host" class="classattr">
                                 <div class="attr variable">
             <span class="name">host</span><span class="annotation">: str</span>        =
-<span class="default_value">$S3_HOST</span>
+<span class="default_value">&#39;uk1s3.embassy.ebi.ac.uk&#39;</span>
 
         
     </div>
@@ -692,7 +692,7 @@
                             <div id="Client.bucket" class="classattr">
                                 <div class="attr variable">
             <span class="name">bucket</span><span class="annotation">: str</span>        =
-<span class="default_value">$S3_BUCKET</span>
+<span class="default_value">&#39;public-datasets&#39;</span>
 
         
     </div>
@@ -706,7 +706,7 @@
                             <div id="Client.prefix" class="classattr">
                                 <div class="attr variable">
             <span class="name">prefix</span><span class="annotation">: str</span>        =
-<span class="default_value">$S3_TEST_FOLDER</span>
+<span class="default_value">&#39;testing.bioimage.io/runner/instance&#39;</span>
 
         
     </div>
@@ -720,7 +720,7 @@
                             <div id="Client.access_key" class="classattr">
                                 <div class="attr variable">
             <span class="name">access_key</span><span class="annotation">: pydantic.types.SecretStr</span>        =
-<span class="default_value">SecretStr(&#39;**********&#39;)</span>
+<span class="default_value">SecretStr(&#39;&#39;)</span>
 
         
     </div>
@@ -734,7 +734,7 @@
                             <div id="Client.secret_key" class="classattr">
                                 <div class="attr variable">
             <span class="name">secret_key</span><span class="annotation">: pydantic.types.SecretStr</span>        =
-<span class="default_value">SecretStr(&#39;**********&#39;)</span>
+<span class="default_value">SecretStr(&#39;&#39;)</span>
 
         
     </div>
