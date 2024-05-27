@@ -87,7 +87,9 @@ def backup_published_version(
         raise ValueError("Missing license")
 
     headers = {"Content-Type": "application/json"}
-    params = {"access_token": settings.zenodo_api_access_token.get_secret_value()}
+    access_token = settings.zenodo_api_access_token.get_secret_value()
+    assert len(access_token) > 1, "missing zenodo api access token"
+    params = {"access_token": access_token}
 
     # List the files at the model URL
     file_urls = v.get_file_urls()
