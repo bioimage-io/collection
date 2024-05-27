@@ -29,7 +29,7 @@ class CollectionConfig(Node, frozen=True):
             raise_for_status_discretely(r)
             data = r.json()
         else:
-            with Path(settings.collection_config).open() as f:
+            with Path(settings.collection_config).open(encoding="utf-8") as f:
                 data = json.load(f)
 
         return cls.model_validate(data)
