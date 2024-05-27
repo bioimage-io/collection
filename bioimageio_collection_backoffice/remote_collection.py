@@ -343,9 +343,10 @@ class RemoteCollection(RemoteBase):
                 error_in_published_entry = f"failed to create {rc.id} entry: {e}"
                 logger.error(error_in_published_entry)
             else:
-                n_resources[versions_in_collection[0].type] += 1
-                n_resource_versions[versions_in_collection[0].type] += len(versions)
-                entries.extend(versions_in_collection)
+                if versions_in_collection:
+                    n_resources[versions_in_collection[0].type] += 1
+                    n_resource_versions[versions_in_collection[0].type] += len(versions)
+                    entries.extend(versions_in_collection)
 
         collection = CollectionJson(
             authors=(template := self.config.collection_template).authors,
