@@ -23,6 +23,7 @@ from typing import (
     TypeVar,
     Union,
 )
+from urllib.parse import urlsplit, urlunsplit
 
 from bioimageio.spec import ValidationContext
 from bioimageio.spec.common import HttpUrl
@@ -901,6 +902,17 @@ def create_collection_entries(
     with ValidationContext(perform_io_checks=False):
         rdf_url = HttpUrl(rv.rdf_url)
 
+    root_url = str(rdf_url.parent)
+    assert root_url == (
+        (
+            root := (
+                rv.client.get_file_url("").strip("/")
+                + "/"
+                + rv.folder.strip("/")
+                + "/files"
+            )
+        )
+    ), (root_url, root)
     rdf_path = download(rdf_url).path
     rdf: Union[Any, Dict[Any, Any]] = yaml.load(rdf_path)
     assert isinstance(rdf, dict)
@@ -912,6 +924,32 @@ def create_collection_entries(
     else:
         if not isinstance(thumbnails, dict):
             thumbnails = {}
+
+    def resolve_relative_path(src: Union[Any, Dict[Any, Any], List[Any]]) -> Any:
+        if isinstance(src, dict):
+            return {k: resolve_relative_path(v) for k, v in src.items()}
+
+        if isinstance(src, list):
+            return [resolve_relative_path(s) for s in src]
+
+        if isinstance(src, str):
+            if src.startswith("http") or src.startswith("/"):
+                return src
+            else:
+                parsed = urlsplit(src)
+                return HttpUrl(
+                    urlunsplit(
+                        (
+                            parsed.scheme,
+                            parsed.netloc,
+                            parsed.path + "/" + src,
+                            parsed.query,
+                            parsed.fragment,
+                        )
+                    )
+                )
+
+        return src
 
     def maybe_swap_with_thumbnail(
         src: Union[Any, Dict[Any, Any], List[Any]],
@@ -951,15 +989,19 @@ def create_collection_entries(
     return [
         CollectionEntry(
             authors=rdf.get("authors", []),
-            badges=maybe_swap_with_thumbnail(rdf.get("badges", [])),
+            badges=resolve_relative_path(
+                maybe_swap_with_thumbnail(rdf.get("badges", []))
+            ),
             concept_doi=concept_doi,
             concept_id=rv.concept_id,
-            covers=maybe_swap_with_thumbnail(rdf.get("covers", [])),
+            covers=resolve_relative_path(
+                maybe_swap_with_thumbnail(rdf.get("covers", []))
+            ),
             created=rv.info.created,
             description=rdf["description"],
             download_count=download_count,
             download_url=rdf["download_url"] if "download_url" in rdf else None,
-            icon=(
+            icon=resolve_relative_path(
                 maybe_swap_with_thumbnail(rdf["icon"])
                 if "icon" in rdf
                 else rdf.get("id_emoji")
@@ -972,10 +1014,7 @@ def create_collection_entries(
             nickname=nickname,
             rdf_sha256=get_sha256(rdf_path),
             rdf_source=AnyUrl(rv.rdf_url),
-            root_url=rv.client.get_file_url("").strip("/")
-            + "/"
-            + rv.folder.strip("/")
-            + "/files",
+            root_url=root_url,
             tags=rdf.get("tags", []),
             training_data=rdf["training_data"] if "training_data" in rdf else None,
             type=rdf["type"],
