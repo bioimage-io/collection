@@ -105,8 +105,6 @@ jobs:
           --footer-text 'bioimageio_collection_backoffice' \
           -o ./docs bioimageio_collection_backoffice
       - run: cp README.md ./docs/
-      - run: cp id_parts.json ./docs/
-      - run: cp reviewers.json ./docs/
       - name: Deploy to gh-pages 🚀
         if: ${{ github.ref == 'refs/heads/main' }}
         uses: JamesIves/github-pages-deploy-action@v4
