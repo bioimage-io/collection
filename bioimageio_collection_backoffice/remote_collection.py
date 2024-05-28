@@ -434,9 +434,12 @@ class RecordConcept(RemoteBase):
     def get_published_versions(self) -> List[Record]:
         """Get representations of the published version"""
         versions = [
-            Record(client=self.client, concept_id=self.id, version=version)
+            rec
             for v in self.client.ls(self.folder, only_folders=True)
             if (version := v.strip("/")) != "draft"
+            and (
+                rec := Record(client=self.client, concept_id=self.id, version=version)
+            ).exists()
         ]
         versions.sort(key=lambda r: r.info.created, reverse=True)
         return versions
