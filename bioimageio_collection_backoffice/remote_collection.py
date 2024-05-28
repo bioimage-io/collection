@@ -913,6 +913,7 @@ def create_collection_entries(
             )
         )
     ), (root_url, root)
+    parsed_root = urlsplit(root_url)
     rdf_path = download(rdf_url).path
     rdf: Union[Any, Dict[Any, Any]] = yaml.load(rdf_path)
     assert isinstance(rdf, dict)
@@ -936,15 +937,14 @@ def create_collection_entries(
             if src.startswith("http") or src.startswith("/"):
                 return src
             else:
-                parsed = urlsplit(src)
                 return HttpUrl(
                     urlunsplit(
                         (
-                            parsed.scheme,
-                            parsed.netloc,
-                            parsed.path + "/" + src,
-                            parsed.query,
-                            parsed.fragment,
+                            parsed_root.scheme,
+                            parsed_root.netloc,
+                            parsed_root.path + "/" + src,
+                            parsed_root.query,
+                            parsed_root.fragment,
                         )
                     )
                 )
