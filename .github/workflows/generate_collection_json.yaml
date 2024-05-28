@@ -12,6 +12,7 @@ concurrency: generate-collection-json
 jobs:
   call:
     strategy:
+      fail-fast: false
       matrix:
         mode: [draft, published]
         environment_name: [production, sandbox]
