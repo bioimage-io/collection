@@ -14,8 +14,9 @@ jobs:
     strategy:
       matrix:
         mode: [draft, published]
+        environment_name: [production, sandbox]
     uses: bioimage-io/collection/.github/workflows/generate_collection_json_call.yaml@main
     with:
       mode: ${{matrix.mode}}
-      environment_name: production
+      environment_name: ${{matrix.environment_name}}
     secrets: inherit

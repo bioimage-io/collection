@@ -9,7 +9,7 @@ on:
         default: true
         type: boolean
 
-concurrency: retest
+concurrency: retest-${{inputs.sandbox}}
 
 jobs:
   setup:
