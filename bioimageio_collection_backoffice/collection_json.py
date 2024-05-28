@@ -34,7 +34,6 @@ class CollectionEntry(Node, frozen=True):
     authors: Sequence[Author]
     badges: Sequence[Badge]
     concept_doi: Optional[str]
-    concept_id: Optional[str]
     covers: Sequence[HttpUrl]
     created: datetime
     description: str

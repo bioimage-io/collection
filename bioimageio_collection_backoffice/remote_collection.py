@@ -993,7 +993,6 @@ def create_collection_entries(
                 maybe_swap_with_thumbnail(rdf.get("badges", []))
             ),
             concept_doi=concept_doi,
-            concept_id=rv.concept_id,
             covers=resolve_relative_path(
                 maybe_swap_with_thumbnail(rdf.get("covers", []))
             ),
