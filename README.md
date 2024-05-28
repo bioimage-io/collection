@@ -1,3 +1,5 @@
+![internal tests](https://github.com/bioimage-io/collection/actions/workflows/build.yaml/badge.svg) ![generate collection overview](https://github.com/bioimage-io/collection/actions/workflows/generate_collection_json.yaml/badge.svg)
+
 # collection
 
 This repository is used to manage the resources displayed on [bioimage.io](http://bioimage.io).
