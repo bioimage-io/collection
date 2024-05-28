@@ -28,7 +28,7 @@ on:
         default: false
         type: boolean
 
-concurrency: ${{inputs.resource_id}}
+concurrency: ${{inputs.sandbox}}-${{inputs.resource_id}}
 
 jobs:
   call:

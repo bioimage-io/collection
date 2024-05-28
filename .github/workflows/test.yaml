@@ -19,7 +19,7 @@ on:
         default: false
         type: boolean
 
-concurrency: ${{inputs.resource_id}}-${{inputs.version}}
+concurrency: ${{inputs.sandbox}}-${{inputs.resource_id}}
 
 jobs:
   call:

@@ -15,7 +15,7 @@ on:
         required: true
         type: string
 
-concurrency: ${{inputs.concept_id}}-call
+concurrency: ${{inputs.environment_name}}-${{inputs.concept_id}}-call
 
 jobs:
   run:
