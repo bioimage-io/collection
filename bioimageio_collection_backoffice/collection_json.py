@@ -3,6 +3,7 @@ from __future__ import annotations
 from datetime import datetime
 from typing import Literal, Mapping, Optional, Sequence, Union
 
+from loguru import logger
 from pydantic import HttpUrl, model_validator
 
 from .collection_config.collection_json_template import (
@@ -67,8 +68,8 @@ class CollectionWebsiteConfig(CollectionWebsiteConfigTemplate, frozen=True):
     @model_validator(mode="after")
     def _validate_default_type(self):
         if self.default_type not in self.resource_types:
-            raise ValueError(
-                f"Missing `default_type={self.default_type}` in `resource_types={self.resource_types}`"
+            logger.warning(
+                "Missing `default_type={self.default_type}` in `resource_types={self.resource_types}`"
             )
         return self
 
