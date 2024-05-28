@@ -41,7 +41,7 @@ jobs:
           python-version: "3.12"
           cache: "pip" # caching pip dependencies
       - run: pip install .
-      - run: backoffice request_changes "${{inputs.concept_id}}" --reviewer=${{inputs.reviewer}} --reason=${{inputs.reason}}
+      - run: backoffice request_changes "${{inputs.concept_id}}" --reviewer="${{inputs.reviewer}}" --reason="${{inputs.reason}}"
         env:
           S3_HOST: ${{vars.S3_HOST}}
           S3_BUCKET: ${{vars.S3_BUCKET}}
