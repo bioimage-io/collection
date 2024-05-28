@@ -82,7 +82,7 @@ jobs:
         with:
           python-version: "3.12"
           cache: "pip" # caching pip dependencies
-      - run: pip install .[dev]
+      - run: pip install -e .[dev]
       - run: black . --check
       - run: pyright -p pyproject.toml
       - run: pytest
@@ -104,7 +104,6 @@ jobs:
           --favicon https://bioimage.io/static/img/bioimage-io-icon-small.svg \
           --footer-text 'bioimageio_collection_backoffice' \
           -o ./docs bioimageio_collection_backoffice
-      - run: cp README.md ./docs/
       - name: Deploy to gh-pages 🚀
         if: ${{ github.ref == 'refs/heads/main' }}
         uses: JamesIves/github-pages-deploy-action@v4
