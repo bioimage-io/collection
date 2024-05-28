@@ -1,20 +1,19 @@
-# pause until all versions.json have been converted to info.json files
-# name: backup
-# run-name: backup ${{vars.S3_BUCKET}}/${{vars.S3_FOLDER}} to ${{ vars.ZENODO_URL }}
+name: backup
+run-name: backup
 
-# on:
-#   workflow_run:
-#     workflows: [publish]
-#     types: [completed]
-#     branches: [main]
-#   workflow_dispatch:
+on:
+  workflow_run:
+    workflows: [publish]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
 
-# concurrency: ${{vars.ZENODO_URL}}
+concurrency: backup
 
-# jobs:
-#   call:
-#     uses: bioimage-io/collection/.github/workflows/backup_call.yaml@main
-#     with:
-#       environment_name: production
+jobs:
+  call:
+    uses: bioimage-io/collection/.github/workflows/backup_call.yaml@main
+    with:
+      environment_name: production
 
-#     secrets: inherit
+    secrets: inherit
