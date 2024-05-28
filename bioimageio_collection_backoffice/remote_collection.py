@@ -934,7 +934,7 @@ def create_collection_entries(
             return [resolve_relative_path(s) for s in src]
 
         if isinstance(src, str):
-            if src.startswith("http") or src.startswith("/"):
+            if src.startswith("http") or src.startswith("/") or "." not in src:
                 return src
             else:
                 return HttpUrl(
