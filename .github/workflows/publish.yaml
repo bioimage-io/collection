@@ -1,37 +1,36 @@
-# pause
-# name: publish
-# run-name: publish ${{inputs.resource_id}} staged/${{inputs.stage_number}}
+name: publish
+run-name: publish ${{inputs.resource_id}}
 
-# on:
-#   workflow_dispatch:
-#     inputs:
-#       resource_id:
-#         description: "Bioimageio ID of the resource - to be used to access the resource on S3"
-#         required: true
-#         type: string
-#       stage_number:
-#         description: DEPRECATED; will be removed soon
-#         required: false
-#         default: -1
-#         type: number
-#       reviewer:
-#         description: GitHub account name of bioimage.io maintainer accepting this resource version
-#         required: false
-#         default: 'auto detect'
-#         type: string
-#       sandbox:
-#         description: Publish within sandbox
-#         required: false
-#         default: false
-#         type: boolean
+on:
+  workflow_dispatch:
+    inputs:
+      resource_id:
+        description: "Bioimageio ID of the resource - to be used to access the resource on S3"
+        required: true
+        type: string
+      stage_number:
+        description: DEPRECATED; will be removed soon
+        required: false
+        default: -1
+        type: number
+      reviewer:
+        description: GitHub account name of bioimage.io maintainer accepting this resource version
+        required: false
+        default: 'auto detect'
+        type: string
+      sandbox:
+        description: Publish within sandbox
+        required: false
+        default: false
+        type: boolean
 
-# concurrency: ${{inputs.resource_id}}
+concurrency: ${{inputs.resource_id}}
 
-# jobs:
-#   call:
-#     uses: bioimage-io/collection/.github/workflows/publish_call.yaml@main
-#     with:
-#       concept_id: ${{inputs.resource_id}}
-#       reviewer: ${{inputs.reviewer == 'auto detect' && format('github|{0}', github.actor_id) || inputs.reviewer}}
-#       environment_name: ${{inputs.sandbox && vars.S3_SANDBOX_FOLDER || vars.S3_FOLDER}}
-#     secrets: inherit
+jobs:
+  call:
+    uses: bioimage-io/collection/.github/workflows/publish_call.yaml@main
+    with:
+      concept_id: ${{inputs.resource_id}}
+      reviewer: ${{inputs.reviewer == 'auto detect' && format('github|{0}', github.actor_id) || inputs.reviewer}}
+      environment_name: ${{inputs.sandbox && 'sandbox' || 'production'}}
+    secrets: inherit

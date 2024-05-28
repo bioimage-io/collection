@@ -1,49 +1,46 @@
-# pause
-# name: retest all bioimageio resources adding to their logs
+name: retest all bioimageio resources
 
-# on:
-#   workflow_dispatch:
-#     inputs:
-#       sandbox:
-#         description: use sandbox
-#         required: false
-#         default: true
-#         type: boolean
+on:
+  workflow_dispatch:
+    inputs:
+      sandbox:
+        description: use sandbox
+        required: false
+        default: true
+        type: boolean
 
-# concurrency: retest
+concurrency: retest
 
-# jobs:
-#   setup:
-#     runs-on: ubuntu-latest
-#      environment: ${{inputs.sandbox && 'sandbox' || 'production'}}
-#     outputs:
-#       matrix: ${{steps.get_matrix.outputs.matrix}}
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    environment: ${{inputs.sandbox && 'sandbox' || 'production'}}
+    outputs:
+      matrix: ${{steps.get_matrix.outputs.matrix}}
 
-#     steps:
-#       - run: wget ${{vars.S3_HOST}}/${{vars.S3_BUCKET}}/${{vars.S3_FOLDER}}/collection.json
-#       - shell: python
-#         id: get_matrix
-#         run: |
-#           import json, os
+    steps:
+      - run: wget ${{vars.S3_HOST}}/${{vars.S3_BUCKET}}/${{vars.S3_FOLDER}}/collection_draft.json
+      - shell: python
+        id: get_matrix
+        run: |
+          import json, os
 
-#           with open("collection.json") as f:
-#             collection = json.load(f)
+          with open("collection_draft.json") as f:
+            collection = json.load(f)
 
-#           published = [{"id": entry["id"], "v": entry["version"]} for entry in collection["collection"]]
-#           matrix = {"include": published}
-#           with open(os.environ["GITHUB_OUTPUT"], "a") as f:
-#             print(f"matrix={matrix}", file=f)
+          versions = [{"id": entry["id"], "v": v} for entry in collection["collection"] for v in entry["versions"]]
+          matrix = {"include": versions}
+          with open(os.environ["GITHUB_OUTPUT"], "a") as f:
+            print(f"matrix={matrix}", file=f)
 
-#   test:
-#     needs: setup
-#     strategy:
-#       matrix: ${{fromJson(needs.setup.outputs.matrix)}}
-#     uses: bioimage-io/collection/.github/workflows/test_call.yaml@main
-#     with:
-#       concept_id: ${{matrix.id}}
-#       version: ${{matrix.v}}
-#       conclude: 'no'
-#        environment_name: ${{inputs.sandbox && 'sandbox' || 'production'}}
-#     secrets: inherit
-
-# # TODO: call emailer
+  test:
+    needs: setup
+    strategy:
+      matrix: ${{fromJson(needs.setup.outputs.matrix)}}
+    uses: bioimage-io/collection/.github/workflows/test_call.yaml@main
+    with:
+      concept_id: ${{matrix.id}}
+      version: ${{matrix.v}}
+      conclude: ${{matrix.v == 'draft' && 'yes' || 'no'}}
+      environment_name: ${{inputs.sandbox && 'sandbox' || 'production'}}
+    secrets: inherit

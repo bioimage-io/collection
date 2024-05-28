@@ -1,32 +1,31 @@
-# pause
-# name: test bioimageio resource
-# run-name: test ${{inputs.resource_id}} ${{inputs.version}}
+name: test bioimageio resource
+run-name: test ${{inputs.resource_id}} ${{inputs.version}}
 
-# on:
-#   workflow_dispatch:
-#     inputs:
-#       resource_id:
-#         description: "Bioimage.io resource concept"
-#         required: true
-#         type: string
-#       version:
-#         description: "Published version or 'draft'"
-#         required: false
-#         type: string
-#         default: draft
-#       sandbox:
-#         description: Publish within sandbox
-#         required: false
-#         default: false
-#         type: boolean
+on:
+  workflow_dispatch:
+    inputs:
+      resource_id:
+        description: "Bioimage.io resource concept"
+        required: true
+        type: string
+      version:
+        description: "Published version or 'draft'"
+        required: false
+        type: string
+        default: draft
+      sandbox:
+        description: Publish within sandbox
+        required: false
+        default: false
+        type: boolean
 
-# concurrency: ${{inputs.resource_id}}
+concurrency: ${{inputs.resource_id}}-${{inputs.version}}
 
-# jobs:
-#   call:
-#     uses: bioimage-io/collection/.github/workflows/test_call.yaml@main
-#     with:
-#       concept_id: ${{inputs.resource_id}}
-#       version: ${{inputs.version}}
-#       environment_name: ${{inputs.sandbox && 'sandbox' || 'production'}}
-#     secrets: inherit
+jobs:
+  call:
+    uses: bioimage-io/collection/.github/workflows/test_call.yaml@main
+    with:
+      concept_id: ${{inputs.resource_id}}
+      version: ${{inputs.version}}
+      environment_name: ${{inputs.sandbox && 'sandbox' || 'production'}}
+    secrets: inherit
