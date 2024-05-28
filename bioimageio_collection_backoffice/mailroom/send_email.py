@@ -61,8 +61,8 @@ def send_email(subject: str, body: str, recipients: List[str]):
 
 if __name__ == "__main__":
     # send_email(
-    #     subject=STATUS_UPDATE_SUBJECT + " lazy-bug staged/2",
-    #     body="Staged version 2 of your model 'lazy-bug' is now under review.",
+    #     subject=STATUS_UPDATE_SUBJECT + " lazy-bug draft",
+    #     body="Staged draft version of your model 'lazy-bug' is now under review.",
     #     recipients=["bioimageiobot@gmail.com"],
     # )
 

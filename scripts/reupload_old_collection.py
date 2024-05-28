@@ -564,7 +564,7 @@ if __name__ == "__main__":
         #     "test.yaml",
         #     {
         #         "resource_id": rid,
-        #         "version": "staged/2",
+        #         "version": "draft",
         #     },
         # )
 
