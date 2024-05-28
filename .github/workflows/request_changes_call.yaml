@@ -7,10 +7,6 @@ on:
         description: "Bioimageio ID of the resource - to be used to access the resource on S3"
         required: true
         type: string
-      stage_number:
-        description: stage number
-        required: true
-        type: number
       reviewer:
         description: GitHub account name of bioimage.io maintainer requesting changes
         required: false
