@@ -146,7 +146,11 @@ def get_pytorch_env(
     conda_env = get_base_env()
     conda_env["channels"].insert(0, "pytorch")
     conda_env["dependencies"].extend(
-        [f"pytorch {get_version_range(pytorch_version)}", "cpuonly"]
+        [
+            f"pytorch {get_version_range(pytorch_version)}",
+            "cpuonly",
+            "mkl !=2024.1.0",  #  avoid https://github.com/pytorch/pytorch/issues/123097
+        ]
     )
     return conda_env
 
