@@ -152,6 +152,11 @@ def get_pytorch_env(
             "mkl !=2024.1.0",  #  avoid https://github.com/pytorch/pytorch/issues/123097
         ]
     )
+    if pytorch_version.major == 1 and pytorch_version.minor == 10:
+        # avoid "ImportError: cannot import name 'packaging' from 'pkg_resources'"
+        #   on 'import torch'
+        conda_env["dependencies"].append("setuptools <=70.0.0")
+
     return conda_env
 
 
