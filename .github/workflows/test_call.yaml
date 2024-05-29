@@ -126,4 +126,4 @@ jobs:
           python-version: "3.12"
           cache: "pip" # caching pip dependencies
       - run: pip install .
-      - run: backoffice await_review "${{ inputs.concept_id }}" "${{ inputs.version }}"
+      - run: backoffice await_review "${{inputs.concept_id}}"
