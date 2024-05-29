@@ -213,57 +213,52 @@
 </span><span id="L-4"><a href="#L-4"><span class="linenos"> 4</span></a>
 </span><span id="L-5"><a href="#L-5"><span class="linenos"> 5</span></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Literal</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Sequence</span>
 </span><span id="L-6"><a href="#L-6"><span class="linenos"> 6</span></a>
-</span><span id="L-7"><a href="#L-7"><span class="linenos"> 7</span></a><span class="kn">from</span> <span class="nn">bioimageio.spec.generic.v0_3</span> <span class="kn">import</span> <span class="p">(</span>
-</span><span id="L-8"><a href="#L-8"><span class="linenos"> 8</span></a>    <span class="n">Author</span><span class="p">,</span>
-</span><span id="L-9"><a href="#L-9"><span class="linenos"> 9</span></a>    <span class="n">CiteEntry</span><span class="p">,</span>
-</span><span id="L-10"><a href="#L-10"><span class="linenos">10</span></a>    <span class="n">LicenseId</span><span class="p">,</span>  <span class="c1"># type: ignore</span>
-</span><span id="L-11"><a href="#L-11"><span class="linenos">11</span></a>    <span class="n">Version</span><span class="p">,</span>
-</span><span id="L-12"><a href="#L-12"><span class="linenos">12</span></a><span class="p">)</span>
-</span><span id="L-13"><a href="#L-13"><span class="linenos">13</span></a><span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">HttpUrl</span>
-</span><span id="L-14"><a href="#L-14"><span class="linenos">14</span></a>
-</span><span id="L-15"><a href="#L-15"><span class="linenos">15</span></a><span class="kn">from</span> <span class="nn">..common</span> <span class="kn">import</span> <span class="n">Node</span>
-</span><span id="L-16"><a href="#L-16"><span class="linenos">16</span></a>
-</span><span id="L-17"><a href="#L-17"><span class="linenos">17</span></a>
-</span><span id="L-18"><a href="#L-18"><span class="linenos">18</span></a><span class="k">class</span> <span class="nc">Partner</span><span class="p">(</span><span class="n">Node</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-</span><span id="L-19"><a href="#L-19"><span class="linenos">19</span></a>    <span class="n">background_image</span><span class="p">:</span> <span class="nb">str</span>
-</span><span id="L-20"><a href="#L-20"><span class="linenos">20</span></a>    <span class="n">default_type</span><span class="p">:</span> <span class="nb">str</span>
-</span><span id="L-21"><a href="#L-21"><span class="linenos">21</span></a>    <span class="n">explore_button_text</span><span class="p">:</span> <span class="nb">str</span>
-</span><span id="L-22"><a href="#L-22"><span class="linenos">22</span></a>    <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span>
-</span><span id="L-23"><a href="#L-23"><span class="linenos">23</span></a>    <span class="n">logo</span><span class="p">:</span> <span class="nb">str</span>
-</span><span id="L-24"><a href="#L-24"><span class="linenos">24</span></a>    <span class="n">resource_types</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
-</span><span id="L-25"><a href="#L-25"><span class="linenos">25</span></a>    <span class="n">splash_feature_list</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
-</span><span id="L-26"><a href="#L-26"><span class="linenos">26</span></a>    <span class="n">splash_subtitle</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
-</span><span id="L-27"><a href="#L-27"><span class="linenos">27</span></a>    <span class="n">splash_title</span><span class="p">:</span> <span class="nb">str</span>
-</span><span id="L-28"><a href="#L-28"><span class="linenos">28</span></a>
-</span><span id="L-29"><a href="#L-29"><span class="linenos">29</span></a>
-</span><span id="L-30"><a href="#L-30"><span class="linenos">30</span></a><span class="k">class</span> <span class="nc">CollectionWebsiteConfigTemplate</span><span class="p">(</span><span class="n">Node</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-</span><span id="L-31"><a href="#L-31"><span class="linenos">31</span></a>    <span class="n">background_image</span><span class="p">:</span> <span class="nb">str</span>
-</span><span id="L-32"><a href="#L-32"><span class="linenos">32</span></a>    <span class="n">default_type</span><span class="p">:</span> <span class="nb">str</span>
-</span><span id="L-33"><a href="#L-33"><span class="linenos">33</span></a>    <span class="n">explore_button_text</span><span class="p">:</span> <span class="nb">str</span>
-</span><span id="L-34"><a href="#L-34"><span class="linenos">34</span></a>    <span class="n">partners</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Partner</span><span class="p">]</span>
-</span><span id="L-35"><a href="#L-35"><span class="linenos">35</span></a>    <span class="n">splash_feature_list</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
-</span><span id="L-36"><a href="#L-36"><span class="linenos">36</span></a>    <span class="n">splash_subtitle</span><span class="p">:</span> <span class="nb">str</span>
-</span><span id="L-37"><a href="#L-37"><span class="linenos">37</span></a>    <span class="n">splash_title</span><span class="p">:</span> <span class="nb">str</span>
-</span><span id="L-38"><a href="#L-38"><span class="linenos">38</span></a>
-</span><span id="L-39"><a href="#L-39"><span class="linenos">39</span></a>
-</span><span id="L-40"><a href="#L-40"><span class="linenos">40</span></a><span class="k">class</span> <span class="nc">CollectionJsonTemplate</span><span class="p">(</span><span class="n">Node</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-</span><span id="L-41"><a href="#L-41"><span class="linenos">41</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;a summary of all collection records&quot;&quot;&quot;</span>
-</span><span id="L-42"><a href="#L-42"><span class="linenos">42</span></a>
-</span><span id="L-43"><a href="#L-43"><span class="linenos">43</span></a>    <span class="n">authors</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Author</span><span class="p">]</span>
-</span><span id="L-44"><a href="#L-44"><span class="linenos">44</span></a>    <span class="n">cite</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">CiteEntry</span><span class="p">]</span>
-</span><span id="L-45"><a href="#L-45"><span class="linenos">45</span></a>    <span class="n">config</span><span class="p">:</span> <span class="n">CollectionWebsiteConfigTemplate</span>
-</span><span id="L-46"><a href="#L-46"><span class="linenos">46</span></a>    <span class="n">description</span><span class="p">:</span> <span class="nb">str</span>
-</span><span id="L-47"><a href="#L-47"><span class="linenos">47</span></a>    <span class="n">documentation</span><span class="p">:</span> <span class="n">HttpUrl</span>
-</span><span id="L-48"><a href="#L-48"><span class="linenos">48</span></a>    <span class="n">format_version</span><span class="p">:</span> <span class="n">Version</span>
-</span><span id="L-49"><a href="#L-49"><span class="linenos">49</span></a>    <span class="n">git_repo</span><span class="p">:</span> <span class="n">HttpUrl</span>
-</span><span id="L-50"><a href="#L-50"><span class="linenos">50</span></a>    <span class="n">icon</span><span class="p">:</span> <span class="n">HttpUrl</span>
-</span><span id="L-51"><a href="#L-51"><span class="linenos">51</span></a>    <span class="n">license</span><span class="p">:</span> <span class="n">LicenseId</span>
-</span><span id="L-52"><a href="#L-52"><span class="linenos">52</span></a>    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
-</span><span id="L-53"><a href="#L-53"><span class="linenos">53</span></a>    <span class="n">tags</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
-</span><span id="L-54"><a href="#L-54"><span class="linenos">54</span></a>    <span class="nb">type</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;collection&quot;</span><span class="p">]</span>
-</span><span id="L-55"><a href="#L-55"><span class="linenos">55</span></a>    <span class="n">version</span><span class="p">:</span> <span class="n">Version</span>
-</span><span id="L-56"><a href="#L-56"><span class="linenos">56</span></a>
-</span><span id="L-57"><a href="#L-57"><span class="linenos">57</span></a>    <span class="n">collection</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span>
+</span><span id="L-7"><a href="#L-7"><span class="linenos"> 7</span></a><span class="kn">from</span> <span class="nn">bioimageio.spec.generic.v0_3</span> <span class="kn">import</span> <span class="n">Author</span><span class="p">,</span> <span class="n">CiteEntry</span><span class="p">,</span> <span class="n">LicenseId</span><span class="p">,</span> <span class="n">Version</span>
+</span><span id="L-8"><a href="#L-8"><span class="linenos"> 8</span></a><span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">HttpUrl</span>
+</span><span id="L-9"><a href="#L-9"><span class="linenos"> 9</span></a>
+</span><span id="L-10"><a href="#L-10"><span class="linenos">10</span></a><span class="kn">from</span> <span class="nn">..common</span> <span class="kn">import</span> <span class="n">Node</span>
+</span><span id="L-11"><a href="#L-11"><span class="linenos">11</span></a>
+</span><span id="L-12"><a href="#L-12"><span class="linenos">12</span></a>
+</span><span id="L-13"><a href="#L-13"><span class="linenos">13</span></a><span class="k">class</span> <span class="nc">Partner</span><span class="p">(</span><span class="n">Node</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+</span><span id="L-14"><a href="#L-14"><span class="linenos">14</span></a>    <span class="n">background_image</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="L-15"><a href="#L-15"><span class="linenos">15</span></a>    <span class="n">default_type</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="L-16"><a href="#L-16"><span class="linenos">16</span></a>    <span class="n">explore_button_text</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="L-17"><a href="#L-17"><span class="linenos">17</span></a>    <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="L-18"><a href="#L-18"><span class="linenos">18</span></a>    <span class="n">logo</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="L-19"><a href="#L-19"><span class="linenos">19</span></a>    <span class="n">resource_types</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+</span><span id="L-20"><a href="#L-20"><span class="linenos">20</span></a>    <span class="n">splash_feature_list</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+</span><span id="L-21"><a href="#L-21"><span class="linenos">21</span></a>    <span class="n">splash_subtitle</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+</span><span id="L-22"><a href="#L-22"><span class="linenos">22</span></a>    <span class="n">splash_title</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="L-23"><a href="#L-23"><span class="linenos">23</span></a>
+</span><span id="L-24"><a href="#L-24"><span class="linenos">24</span></a>
+</span><span id="L-25"><a href="#L-25"><span class="linenos">25</span></a><span class="k">class</span> <span class="nc">CollectionWebsiteConfigTemplate</span><span class="p">(</span><span class="n">Node</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+</span><span id="L-26"><a href="#L-26"><span class="linenos">26</span></a>    <span class="n">background_image</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="L-27"><a href="#L-27"><span class="linenos">27</span></a>    <span class="n">default_type</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="L-28"><a href="#L-28"><span class="linenos">28</span></a>    <span class="n">explore_button_text</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="L-29"><a href="#L-29"><span class="linenos">29</span></a>    <span class="n">partners</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Partner</span><span class="p">]</span>
+</span><span id="L-30"><a href="#L-30"><span class="linenos">30</span></a>    <span class="n">splash_feature_list</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+</span><span id="L-31"><a href="#L-31"><span class="linenos">31</span></a>    <span class="n">splash_subtitle</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="L-32"><a href="#L-32"><span class="linenos">32</span></a>    <span class="n">splash_title</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="L-33"><a href="#L-33"><span class="linenos">33</span></a>
+</span><span id="L-34"><a href="#L-34"><span class="linenos">34</span></a>
+</span><span id="L-35"><a href="#L-35"><span class="linenos">35</span></a><span class="k">class</span> <span class="nc">CollectionJsonTemplate</span><span class="p">(</span><span class="n">Node</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+</span><span id="L-36"><a href="#L-36"><span class="linenos">36</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;a summary of all collection records&quot;&quot;&quot;</span>
+</span><span id="L-37"><a href="#L-37"><span class="linenos">37</span></a>
+</span><span id="L-38"><a href="#L-38"><span class="linenos">38</span></a>    <span class="n">authors</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Author</span><span class="p">]</span>
+</span><span id="L-39"><a href="#L-39"><span class="linenos">39</span></a>    <span class="n">cite</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">CiteEntry</span><span class="p">]</span>
+</span><span id="L-40"><a href="#L-40"><span class="linenos">40</span></a>    <span class="n">config</span><span class="p">:</span> <span class="n">CollectionWebsiteConfigTemplate</span>
+</span><span id="L-41"><a href="#L-41"><span class="linenos">41</span></a>    <span class="n">description</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="L-42"><a href="#L-42"><span class="linenos">42</span></a>    <span class="n">documentation</span><span class="p">:</span> <span class="n">HttpUrl</span>
+</span><span id="L-43"><a href="#L-43"><span class="linenos">43</span></a>    <span class="n">format_version</span><span class="p">:</span> <span class="n">Version</span>
+</span><span id="L-44"><a href="#L-44"><span class="linenos">44</span></a>    <span class="n">git_repo</span><span class="p">:</span> <span class="n">HttpUrl</span>
+</span><span id="L-45"><a href="#L-45"><span class="linenos">45</span></a>    <span class="n">icon</span><span class="p">:</span> <span class="n">HttpUrl</span>
+</span><span id="L-46"><a href="#L-46"><span class="linenos">46</span></a>    <span class="n">license</span><span class="p">:</span> <span class="n">LicenseId</span>
+</span><span id="L-47"><a href="#L-47"><span class="linenos">47</span></a>    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="L-48"><a href="#L-48"><span class="linenos">48</span></a>    <span class="n">tags</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+</span><span id="L-49"><a href="#L-49"><span class="linenos">49</span></a>    <span class="nb">type</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;collection&quot;</span><span class="p">]</span>
+</span><span id="L-50"><a href="#L-50"><span class="linenos">50</span></a>    <span class="n">version</span><span class="p">:</span> <span class="n">Version</span>
+</span><span id="L-51"><a href="#L-51"><span class="linenos">51</span></a>
+</span><span id="L-52"><a href="#L-52"><span class="linenos">52</span></a>    <span class="n">collection</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span>
 </span></pre></div>
 
 
@@ -279,16 +274,16 @@
 
     </div>
     <a class="headerlink" href="#Partner"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Partner-19"><a href="#Partner-19"><span class="linenos">19</span></a><span class="k">class</span> <span class="nc">Partner</span><span class="p">(</span><span class="n">Node</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-</span><span id="Partner-20"><a href="#Partner-20"><span class="linenos">20</span></a>    <span class="n">background_image</span><span class="p">:</span> <span class="nb">str</span>
-</span><span id="Partner-21"><a href="#Partner-21"><span class="linenos">21</span></a>    <span class="n">default_type</span><span class="p">:</span> <span class="nb">str</span>
-</span><span id="Partner-22"><a href="#Partner-22"><span class="linenos">22</span></a>    <span class="n">explore_button_text</span><span class="p">:</span> <span class="nb">str</span>
-</span><span id="Partner-23"><a href="#Partner-23"><span class="linenos">23</span></a>    <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span>
-</span><span id="Partner-24"><a href="#Partner-24"><span class="linenos">24</span></a>    <span class="n">logo</span><span class="p">:</span> <span class="nb">str</span>
-</span><span id="Partner-25"><a href="#Partner-25"><span class="linenos">25</span></a>    <span class="n">resource_types</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
-</span><span id="Partner-26"><a href="#Partner-26"><span class="linenos">26</span></a>    <span class="n">splash_feature_list</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
-</span><span id="Partner-27"><a href="#Partner-27"><span class="linenos">27</span></a>    <span class="n">splash_subtitle</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
-</span><span id="Partner-28"><a href="#Partner-28"><span class="linenos">28</span></a>    <span class="n">splash_title</span><span class="p">:</span> <span class="nb">str</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Partner-14"><a href="#Partner-14"><span class="linenos">14</span></a><span class="k">class</span> <span class="nc">Partner</span><span class="p">(</span><span class="n">Node</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+</span><span id="Partner-15"><a href="#Partner-15"><span class="linenos">15</span></a>    <span class="n">background_image</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="Partner-16"><a href="#Partner-16"><span class="linenos">16</span></a>    <span class="n">default_type</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="Partner-17"><a href="#Partner-17"><span class="linenos">17</span></a>    <span class="n">explore_button_text</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="Partner-18"><a href="#Partner-18"><span class="linenos">18</span></a>    <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="Partner-19"><a href="#Partner-19"><span class="linenos">19</span></a>    <span class="n">logo</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="Partner-20"><a href="#Partner-20"><span class="linenos">20</span></a>    <span class="n">resource_types</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+</span><span id="Partner-21"><a href="#Partner-21"><span class="linenos">21</span></a>    <span class="n">splash_feature_list</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+</span><span id="Partner-22"><a href="#Partner-22"><span class="linenos">22</span></a>    <span class="n">splash_subtitle</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+</span><span id="Partner-23"><a href="#Partner-23"><span class="linenos">23</span></a>    <span class="n">splash_title</span><span class="p">:</span> <span class="nb">str</span>
 </span></pre></div>
 
 
@@ -505,14 +500,14 @@ __pydantic_private__: Instance attribute with the values of private attributes s
 
     </div>
     <a class="headerlink" href="#CollectionWebsiteConfigTemplate"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="CollectionWebsiteConfigTemplate-31"><a href="#CollectionWebsiteConfigTemplate-31"><span class="linenos">31</span></a><span class="k">class</span> <span class="nc">CollectionWebsiteConfigTemplate</span><span class="p">(</span><span class="n">Node</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-</span><span id="CollectionWebsiteConfigTemplate-32"><a href="#CollectionWebsiteConfigTemplate-32"><span class="linenos">32</span></a>    <span class="n">background_image</span><span class="p">:</span> <span class="nb">str</span>
-</span><span id="CollectionWebsiteConfigTemplate-33"><a href="#CollectionWebsiteConfigTemplate-33"><span class="linenos">33</span></a>    <span class="n">default_type</span><span class="p">:</span> <span class="nb">str</span>
-</span><span id="CollectionWebsiteConfigTemplate-34"><a href="#CollectionWebsiteConfigTemplate-34"><span class="linenos">34</span></a>    <span class="n">explore_button_text</span><span class="p">:</span> <span class="nb">str</span>
-</span><span id="CollectionWebsiteConfigTemplate-35"><a href="#CollectionWebsiteConfigTemplate-35"><span class="linenos">35</span></a>    <span class="n">partners</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Partner</span><span class="p">]</span>
-</span><span id="CollectionWebsiteConfigTemplate-36"><a href="#CollectionWebsiteConfigTemplate-36"><span class="linenos">36</span></a>    <span class="n">splash_feature_list</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
-</span><span id="CollectionWebsiteConfigTemplate-37"><a href="#CollectionWebsiteConfigTemplate-37"><span class="linenos">37</span></a>    <span class="n">splash_subtitle</span><span class="p">:</span> <span class="nb">str</span>
-</span><span id="CollectionWebsiteConfigTemplate-38"><a href="#CollectionWebsiteConfigTemplate-38"><span class="linenos">38</span></a>    <span class="n">splash_title</span><span class="p">:</span> <span class="nb">str</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="CollectionWebsiteConfigTemplate-26"><a href="#CollectionWebsiteConfigTemplate-26"><span class="linenos">26</span></a><span class="k">class</span> <span class="nc">CollectionWebsiteConfigTemplate</span><span class="p">(</span><span class="n">Node</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+</span><span id="CollectionWebsiteConfigTemplate-27"><a href="#CollectionWebsiteConfigTemplate-27"><span class="linenos">27</span></a>    <span class="n">background_image</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="CollectionWebsiteConfigTemplate-28"><a href="#CollectionWebsiteConfigTemplate-28"><span class="linenos">28</span></a>    <span class="n">default_type</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="CollectionWebsiteConfigTemplate-29"><a href="#CollectionWebsiteConfigTemplate-29"><span class="linenos">29</span></a>    <span class="n">explore_button_text</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="CollectionWebsiteConfigTemplate-30"><a href="#CollectionWebsiteConfigTemplate-30"><span class="linenos">30</span></a>    <span class="n">partners</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Partner</span><span class="p">]</span>
+</span><span id="CollectionWebsiteConfigTemplate-31"><a href="#CollectionWebsiteConfigTemplate-31"><span class="linenos">31</span></a>    <span class="n">splash_feature_list</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+</span><span id="CollectionWebsiteConfigTemplate-32"><a href="#CollectionWebsiteConfigTemplate-32"><span class="linenos">32</span></a>    <span class="n">splash_subtitle</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="CollectionWebsiteConfigTemplate-33"><a href="#CollectionWebsiteConfigTemplate-33"><span class="linenos">33</span></a>    <span class="n">splash_title</span><span class="p">:</span> <span class="nb">str</span>
 </span></pre></div>
 
 
@@ -707,24 +702,24 @@ __pydantic_private__: Instance attribute with the values of private attributes s
 
     </div>
     <a class="headerlink" href="#CollectionJsonTemplate"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="CollectionJsonTemplate-41"><a href="#CollectionJsonTemplate-41"><span class="linenos">41</span></a><span class="k">class</span> <span class="nc">CollectionJsonTemplate</span><span class="p">(</span><span class="n">Node</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-</span><span id="CollectionJsonTemplate-42"><a href="#CollectionJsonTemplate-42"><span class="linenos">42</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;a summary of all collection records&quot;&quot;&quot;</span>
-</span><span id="CollectionJsonTemplate-43"><a href="#CollectionJsonTemplate-43"><span class="linenos">43</span></a>
-</span><span id="CollectionJsonTemplate-44"><a href="#CollectionJsonTemplate-44"><span class="linenos">44</span></a>    <span class="n">authors</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Author</span><span class="p">]</span>
-</span><span id="CollectionJsonTemplate-45"><a href="#CollectionJsonTemplate-45"><span class="linenos">45</span></a>    <span class="n">cite</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">CiteEntry</span><span class="p">]</span>
-</span><span id="CollectionJsonTemplate-46"><a href="#CollectionJsonTemplate-46"><span class="linenos">46</span></a>    <span class="n">config</span><span class="p">:</span> <span class="n">CollectionWebsiteConfigTemplate</span>
-</span><span id="CollectionJsonTemplate-47"><a href="#CollectionJsonTemplate-47"><span class="linenos">47</span></a>    <span class="n">description</span><span class="p">:</span> <span class="nb">str</span>
-</span><span id="CollectionJsonTemplate-48"><a href="#CollectionJsonTemplate-48"><span class="linenos">48</span></a>    <span class="n">documentation</span><span class="p">:</span> <span class="n">HttpUrl</span>
-</span><span id="CollectionJsonTemplate-49"><a href="#CollectionJsonTemplate-49"><span class="linenos">49</span></a>    <span class="n">format_version</span><span class="p">:</span> <span class="n">Version</span>
-</span><span id="CollectionJsonTemplate-50"><a href="#CollectionJsonTemplate-50"><span class="linenos">50</span></a>    <span class="n">git_repo</span><span class="p">:</span> <span class="n">HttpUrl</span>
-</span><span id="CollectionJsonTemplate-51"><a href="#CollectionJsonTemplate-51"><span class="linenos">51</span></a>    <span class="n">icon</span><span class="p">:</span> <span class="n">HttpUrl</span>
-</span><span id="CollectionJsonTemplate-52"><a href="#CollectionJsonTemplate-52"><span class="linenos">52</span></a>    <span class="n">license</span><span class="p">:</span> <span class="n">LicenseId</span>
-</span><span id="CollectionJsonTemplate-53"><a href="#CollectionJsonTemplate-53"><span class="linenos">53</span></a>    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
-</span><span id="CollectionJsonTemplate-54"><a href="#CollectionJsonTemplate-54"><span class="linenos">54</span></a>    <span class="n">tags</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
-</span><span id="CollectionJsonTemplate-55"><a href="#CollectionJsonTemplate-55"><span class="linenos">55</span></a>    <span class="nb">type</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;collection&quot;</span><span class="p">]</span>
-</span><span id="CollectionJsonTemplate-56"><a href="#CollectionJsonTemplate-56"><span class="linenos">56</span></a>    <span class="n">version</span><span class="p">:</span> <span class="n">Version</span>
-</span><span id="CollectionJsonTemplate-57"><a href="#CollectionJsonTemplate-57"><span class="linenos">57</span></a>
-</span><span id="CollectionJsonTemplate-58"><a href="#CollectionJsonTemplate-58"><span class="linenos">58</span></a>    <span class="n">collection</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="CollectionJsonTemplate-36"><a href="#CollectionJsonTemplate-36"><span class="linenos">36</span></a><span class="k">class</span> <span class="nc">CollectionJsonTemplate</span><span class="p">(</span><span class="n">Node</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+</span><span id="CollectionJsonTemplate-37"><a href="#CollectionJsonTemplate-37"><span class="linenos">37</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;a summary of all collection records&quot;&quot;&quot;</span>
+</span><span id="CollectionJsonTemplate-38"><a href="#CollectionJsonTemplate-38"><span class="linenos">38</span></a>
+</span><span id="CollectionJsonTemplate-39"><a href="#CollectionJsonTemplate-39"><span class="linenos">39</span></a>    <span class="n">authors</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Author</span><span class="p">]</span>
+</span><span id="CollectionJsonTemplate-40"><a href="#CollectionJsonTemplate-40"><span class="linenos">40</span></a>    <span class="n">cite</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">CiteEntry</span><span class="p">]</span>
+</span><span id="CollectionJsonTemplate-41"><a href="#CollectionJsonTemplate-41"><span class="linenos">41</span></a>    <span class="n">config</span><span class="p">:</span> <span class="n">CollectionWebsiteConfigTemplate</span>
+</span><span id="CollectionJsonTemplate-42"><a href="#CollectionJsonTemplate-42"><span class="linenos">42</span></a>    <span class="n">description</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="CollectionJsonTemplate-43"><a href="#CollectionJsonTemplate-43"><span class="linenos">43</span></a>    <span class="n">documentation</span><span class="p">:</span> <span class="n">HttpUrl</span>
+</span><span id="CollectionJsonTemplate-44"><a href="#CollectionJsonTemplate-44"><span class="linenos">44</span></a>    <span class="n">format_version</span><span class="p">:</span> <span class="n">Version</span>
+</span><span id="CollectionJsonTemplate-45"><a href="#CollectionJsonTemplate-45"><span class="linenos">45</span></a>    <span class="n">git_repo</span><span class="p">:</span> <span class="n">HttpUrl</span>
+</span><span id="CollectionJsonTemplate-46"><a href="#CollectionJsonTemplate-46"><span class="linenos">46</span></a>    <span class="n">icon</span><span class="p">:</span> <span class="n">HttpUrl</span>
+</span><span id="CollectionJsonTemplate-47"><a href="#CollectionJsonTemplate-47"><span class="linenos">47</span></a>    <span class="n">license</span><span class="p">:</span> <span class="n">LicenseId</span>
+</span><span id="CollectionJsonTemplate-48"><a href="#CollectionJsonTemplate-48"><span class="linenos">48</span></a>    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="CollectionJsonTemplate-49"><a href="#CollectionJsonTemplate-49"><span class="linenos">49</span></a>    <span class="n">tags</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+</span><span id="CollectionJsonTemplate-50"><a href="#CollectionJsonTemplate-50"><span class="linenos">50</span></a>    <span class="nb">type</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;collection&quot;</span><span class="p">]</span>
+</span><span id="CollectionJsonTemplate-51"><a href="#CollectionJsonTemplate-51"><span class="linenos">51</span></a>    <span class="n">version</span><span class="p">:</span> <span class="n">Version</span>
+</span><span id="CollectionJsonTemplate-52"><a href="#CollectionJsonTemplate-52"><span class="linenos">52</span></a>
+</span><span id="CollectionJsonTemplate-53"><a href="#CollectionJsonTemplate-53"><span class="linenos">53</span></a>    <span class="n">collection</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span>
 </span></pre></div>
 
 
