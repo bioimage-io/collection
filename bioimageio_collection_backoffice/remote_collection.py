@@ -676,9 +676,6 @@ class RecordDraft(RecordBase):
         if not str(rdf["id"]):
             raise ValueError(f"Invalid `id`: {rdf['id']}")
 
-        if "version" not in rdf:
-            raise ValueError("Missing `version` field")
-
         if (
             "uploader" not in rdf
             or not isinstance(rdf["uploader"], dict)
@@ -797,9 +794,9 @@ class RecordDraft(RecordBase):
 
         rdf: Union[Any, Dict[Any, Any]] = yaml.load(io.BytesIO(rdf_data))
         assert isinstance(rdf, dict)
-        version = rdf.get("version")
-        if version is None:
-            raise ValueError("Missing `version`")
+        version = rdf.get("version", "1")
+        if not isinstance(version, (int, float, str)):
+            raise ValueError(f"Invalid `version`: '{version}'")
         else:
             version = str(version)
             if version in {v.version for v in self.concept.get_published_versions()}:
@@ -818,6 +815,8 @@ class RecordDraft(RecordBase):
         rdf_data = stream.getvalue().encode()
         self.client.put(self.rdf_path, io.BytesIO(rdf_data), length=len(rdf_data))
         self.client.rm_dir(self.folder)
+
+        published.update_info(RecordInfo())
         return published
 
     def _set_status(self, value: DraftStatus):
@@ -869,6 +868,9 @@ class Record(RecordBase):
     @property
     def info(self) -> RecordInfo:
         return self._get_json(RecordInfo)
+
+    def update_info(self, update: RecordInfo):
+        self._update_json(update)
 
     def set_dois(self, *, doi: str, concept_doi: str):
         if self.doi is not None:
