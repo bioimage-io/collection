@@ -94,9 +94,9 @@ class ErrorStatus(_StatusBase, frozen=True):
 
 
 class DraftInfo(Node, frozen=True):
-    """`<concept_id>/draft/info.json` contains the collection entry metadata"""
+    """`<concept_id>/draft/draft.json` contains the collection entry metadata"""
 
-    file_name: ClassVar[str] = "info.json"
+    file_name: ClassVar[str] = "draft.json"
 
     status: Optional[
         Annotated[Union[DraftStatus, ErrorStatus], pydantic.Discriminator("name")]
