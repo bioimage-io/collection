@@ -418,9 +418,9 @@
 </span><span id="L-94"><a href="#L-94"><span class="linenos"> 94</span></a>
 </span><span id="L-95"><a href="#L-95"><span class="linenos"> 95</span></a>
 </span><span id="L-96"><a href="#L-96"><span class="linenos"> 96</span></a><span class="k">class</span> <span class="nc">DraftInfo</span><span class="p">(</span><span class="n">Node</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-</span><span id="L-97"><a href="#L-97"><span class="linenos"> 97</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;`&lt;concept_id&gt;/draft/info.json` contains the collection entry metadata&quot;&quot;&quot;</span>
+</span><span id="L-97"><a href="#L-97"><span class="linenos"> 97</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;`&lt;concept_id&gt;/draft/draft.json` contains the collection entry metadata&quot;&quot;&quot;</span>
 </span><span id="L-98"><a href="#L-98"><span class="linenos"> 98</span></a>
-</span><span id="L-99"><a href="#L-99"><span class="linenos"> 99</span></a>    <span class="n">file_name</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;info.json&quot;</span>
+</span><span id="L-99"><a href="#L-99"><span class="linenos"> 99</span></a>    <span class="n">file_name</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;draft.json&quot;</span>
 </span><span id="L-100"><a href="#L-100"><span class="linenos">100</span></a>
 </span><span id="L-101"><a href="#L-101"><span class="linenos">101</span></a>    <span class="n">status</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span>
 </span><span id="L-102"><a href="#L-102"><span class="linenos">102</span></a>        <span class="n">Annotated</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">DraftStatus</span><span class="p">,</span> <span class="n">ErrorStatus</span><span class="p">],</span> <span class="n">pydantic</span><span class="o">.</span><span class="n">Discriminator</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)]</span>
@@ -1757,9 +1757,9 @@ __pydantic_private__: Instance attribute with the values of private attributes s
     </div>
     <a class="headerlink" href="#DraftInfo"></a>
             <div class="pdoc-code codehilite"><pre><span></span><span id="DraftInfo-97"><a href="#DraftInfo-97"><span class="linenos"> 97</span></a><span class="k">class</span> <span class="nc">DraftInfo</span><span class="p">(</span><span class="n">Node</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-</span><span id="DraftInfo-98"><a href="#DraftInfo-98"><span class="linenos"> 98</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;`&lt;concept_id&gt;/draft/info.json` contains the collection entry metadata&quot;&quot;&quot;</span>
+</span><span id="DraftInfo-98"><a href="#DraftInfo-98"><span class="linenos"> 98</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;`&lt;concept_id&gt;/draft/draft.json` contains the collection entry metadata&quot;&quot;&quot;</span>
 </span><span id="DraftInfo-99"><a href="#DraftInfo-99"><span class="linenos"> 99</span></a>
-</span><span id="DraftInfo-100"><a href="#DraftInfo-100"><span class="linenos">100</span></a>    <span class="n">file_name</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;info.json&quot;</span>
+</span><span id="DraftInfo-100"><a href="#DraftInfo-100"><span class="linenos">100</span></a>    <span class="n">file_name</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;draft.json&quot;</span>
 </span><span id="DraftInfo-101"><a href="#DraftInfo-101"><span class="linenos">101</span></a>
 </span><span id="DraftInfo-102"><a href="#DraftInfo-102"><span class="linenos">102</span></a>    <span class="n">status</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span>
 </span><span id="DraftInfo-103"><a href="#DraftInfo-103"><span class="linenos">103</span></a>        <span class="n">Annotated</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">DraftStatus</span><span class="p">,</span> <span class="n">ErrorStatus</span><span class="p">],</span> <span class="n">pydantic</span><span class="o">.</span><span class="n">Discriminator</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)]</span>
@@ -1771,14 +1771,14 @@ __pydantic_private__: Instance attribute with the values of private attributes s
 </span></pre></div>
 
 
-            <div class="docstring"><p><code>&lt;concept_id&gt;/draft/info.json</code> contains the collection entry metadata</p>
+            <div class="docstring"><p><code>&lt;concept_id&gt;/draft/draft.json</code> contains the collection entry metadata</p>
 </div>
 
 
                             <div id="DraftInfo.file_name" class="classattr">
                                 <div class="attr variable">
             <span class="name">file_name</span><span class="annotation">: ClassVar[str]</span>        =
-<span class="default_value">&#39;info.json&#39;</span>
+<span class="default_value">&#39;draft.json&#39;</span>
 
         
     </div>
