@@ -883,8 +883,10 @@ class Record(RecordBase):
         self._update_json(RecordInfo(doi=doi, concept_doi=concept_doi))
 
 
-def get_remote_resource_version(client: Client, concept_id: str, version: str):
-    version = version.strip("/")
+def get_remote_resource_version(
+    client: Client, concept_id: str, version: Union[int, float, str]
+):
+    version = str(version).strip("/")
     if version == "draft":
         rv = RecordDraft(client=client, concept_id=concept_id)
     else:
