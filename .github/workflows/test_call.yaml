@@ -30,6 +30,7 @@ env:
   S3_SECRET_ACCESS_KEY: ${{secrets.S3_SECRET_ACCESS_KEY}}
   RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
   MAIL_PASSWORD: ${{secrets.MAIL_PASSWORD}}
+  BIOIMAGEIO_USER_ID: github|${{github.actor_id}}
 
 jobs:
   validate_format:

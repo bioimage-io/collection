@@ -38,6 +38,7 @@ from pydantic import AnyUrl
 from ruyaml import YAML
 from typing_extensions import Concatenate, ParamSpec
 
+from ._settings import settings
 from ._thumbnails import create_thumbnails
 from .collection_config import CollectionConfig
 from .collection_json import CollectionEntry, CollectionJson, CollectionWebsiteConfig
@@ -676,16 +677,20 @@ class RecordDraft(RecordBase):
         if not str(rdf["id"]):
             raise ValueError(f"Invalid `id`: {rdf['id']}")
 
-        if (
-            "uploader" not in rdf
-            or not isinstance(rdf["uploader"], dict)
-            or "email" not in rdf["uploader"]
-        ):
+        if "uploader" not in rdf:
+            for r in self.collection.config.reviewers:
+                if settings.bioimageio_user_id == r.id:
+                    rdf["uploader"] = dict(name=r.name, email=r.email)
+                    break
+            else:
+                raise ValueError("RDF is missing `uploader.email` field.")
+
+        elif not isinstance(rdf["uploader"], dict) or "email" not in rdf["uploader"]:
             raise ValueError("RDF is missing `uploader.email` field.")
         elif not isinstance(rdf["uploader"]["email"], str):
             raise ValueError("RDF has invalid `uploader.email` field.")
 
-        uploader = rdf["uploader"]["email"]
+        uploader: Any = rdf["uploader"]["email"]
         if previous_rdf is not None:
             prev_authors: List[Dict[str, str]] = previous_rdf["authors"]
             assert isinstance(prev_authors, list)

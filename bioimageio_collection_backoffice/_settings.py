@@ -41,6 +41,8 @@ class Settings(BaseSettings, extra="ignore"):
         "https://sandbox.zenodo.org"
     )
 
+    bioimageio_user_id: Optional[str] = None
+
     # secrets
     mail_password: SecretStr = SecretStr("")
     s3_access_key_id: SecretStr = SecretStr("")

@@ -24,6 +24,7 @@ jobs:
           S3_ACCESS_KEY_ID: ${{secrets.S3_ACCESS_KEY_ID}}
           S3_SECRET_ACCESS_KEY: ${{secrets.S3_SECRET_ACCESS_KEY}}
           RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
+          BIOIMAGEIO_USER_ID: github|${{github.actor_id}}
 
 
   generate-initial-collection-json:
@@ -95,6 +96,7 @@ jobs:
           RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
           ZENODO_URL: ${{vars.ZENODO_URL}}
           ZENODO_API_ACCESS_TOKEN: ${{secrets.ZENODO_API_ACCESS_TOKEN}}
+          BIOIMAGEIO_USER_ID: github|${{github.actor_id}}
       - name: export documentation
         run: |
           pdoc \
