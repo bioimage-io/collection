@@ -14,7 +14,7 @@ on:
         type: string
         default: draft
       sandbox:
-        description: Publish within sandbox
+        description: Resource is in sandbox
         required: false
         default: false
         type: boolean
