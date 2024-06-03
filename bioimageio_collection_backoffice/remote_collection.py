@@ -154,6 +154,62 @@ LEGACY_DOWNLOAD_COUNTS = {
     "10.5281/zenodo.8421755": 8531,
 }
 
+LEGACY_VERSIONS = {
+    "10.5281/zenodo.5764892": ["6647674", "6322939"],
+    "10.5281/zenodo.6338614": ["6338615"],
+    "10.5281/zenodo.5869899": ["6647688", "6321179", "5869900"],
+    "10.5281/zenodo.5874741": ["5874742"],
+    "10.5281/zenodo.5914248": ["8186255", "6514622", "6514446", "5914249"],
+    "10.5281/zenodo.6406756": ["6811922", "6811498", "6406757"],
+    "10.5281/zenodo.5874841": ["6630266", "5874842"],
+    "10.5281/zenodo.5749843": ["5888237"],
+    "10.5281/zenodo.6028097": ["6028098"],
+    "10.5281/zenodo.6348084": ["6348085"],
+    "10.5281/zenodo.7261974": ["7782776", "7778377", "7688940", "7546703", "7261975"],
+    "10.5281/zenodo.6028280": ["6647695", "6028281"],
+    "10.5281/zenodo.6200635": ["7702687", "6538890", "6200636"],
+    "10.5281/zenodo.6346511": ["7768142", "7701413", "6346512"],
+    "10.5281/zenodo.6348728": ["6348729"],
+    "10.5281/zenodo.5817052": ["5906839", "5850574"],
+    "10.5281/zenodo.5847355": ["6647683", "6322908"],
+    "10.5281/zenodo.6406803": ["6406804"],
+    "10.5281/zenodo.6200999": ["7690494", "7678300", "6538911", "6224243"],
+    "10.5281/zenodo.6384845": ["7774490", "7701638", "6384846"],
+    "10.5281/zenodo.6383429": ["7774505", "7701632", "6383430"],
+    "10.5281/zenodo.6079314": ["7695872", "7689587", "7688686", "6385590", "6079315"],
+    "10.5281/zenodo.6334383": ["7805067", "7701262", "7697068", "6346500", "6334384"],
+    "10.5281/zenodo.6334881": ["7805026", "7701241", "7696907", "6346477", "6334882"],
+    "10.5281/zenodo.6334777": ["7765026", "7701561", "7696952", "6346524", "6334778"],
+    "10.5281/zenodo.5910854": ["6539073", "5911832"],
+    "10.5281/zenodo.6334583": [
+        "7805434",
+        "7768223",
+        "7701492",
+        "7696919",
+        "6346519",
+        "6334584",
+    ],
+    "10.5281/zenodo.6811491": ["6811492"],
+    "10.5281/zenodo.6559474": ["6559475"],
+    "10.5281/zenodo.5910163": ["5942853"],
+    "10.5281/zenodo.6865412": ["6919253"],
+    "10.5281/zenodo.7274275": ["8123818", "7274276"],
+    "10.5281/zenodo.6808325": ["6808413"],
+    "10.5281/zenodo.7315440": ["7315441"],
+    "10.5281/zenodo.7380171": ["7405349"],
+    "10.5281/zenodo.7614645": ["7642674"],
+    "10.5281/zenodo.7772662": ["7781091"],
+    "10.5281/zenodo.7786492": ["7786493"],
+    "10.5281/zenodo.8421755": ["8432366"],
+    "10.5281/zenodo.8064806": ["8073617"],
+    "10.5281/zenodo.6559929": ["6559930"],
+    "10.5281/zenodo.8419845": ["8420081"],
+    "10.5281/zenodo.8420099": ["8420100"],
+    "10.5281/zenodo.8401064": ["8429203", "8401065"],
+    "10.5281/zenodo.8142283": ["8171247"],
+    "10.5281/zenodo.7612115": ["7612152"],
+}
+
 
 T = TypeVar("T")
 R = TypeVar("R", "RecordDraft", "Record")
@@ -981,22 +1037,32 @@ def create_collection_entries(
 
         return src
 
-    try:
+    if rdf["id"].startswith("10.5281/zenodo."):
+        # legacy models
         nickname = rdf["config"]["bioimageio"]["nickname"]
         nickname_icon = rdf["config"]["bioimageio"]["nickname_icon"]
-    except Exception:
-        nickname = rdf["id"]
-        nickname_icon = rdf["id_emoji"]
 
-    try:
-        # preserve old zenodo doi for legacy records
-        concept_doi = rdf["config"]["_conceptdoi"]
-        download_count: Union[Literal["?"], int] = LEGACY_DOWNLOAD_COUNTS.get(
-            concept_doi, "?"
-        )
-    except KeyError:
+        concept_end = rdf["id"].rfind("/")
+        concept_doi = rdf["id"][:concept_end]
+        version_record_id: str = rdf["id"][concept_end + 1 :]
+        entry_id = concept_doi
+        legacy_download_count: int = LEGACY_DOWNLOAD_COUNTS.get(concept_doi, 0)
+        entry_versions = LEGACY_VERSIONS.get(concept_doi, [])
+        if version_record_id not in entry_versions:
+            entry_versions.append(version_record_id)
+
+        entry_dois = [f"10.5281/zenodo.{v}" for v in entry_versions]
+    else:
         concept_doi = rv.concept_doi
-        download_count = "?"
+        nickname_icon = rdf["id_emoji"]
+        nickname = rdf["id"]
+        entry_id = nickname
+        legacy_download_count = 0
+        entry_versions = [v.id for v in versions]
+        entry_dois = [v.doi for v in versions]
+
+    # TODO: read new download count
+    download_count = "?" if legacy_download_count == 0 else legacy_download_count
 
     return [
         CollectionEntry(
@@ -1017,7 +1083,7 @@ def create_collection_entries(
                 if "icon" in rdf
                 else rdf.get("id_emoji")
             ),
-            id=rdf["id"],
+            id=entry_id,
             license=rdf["license"],
             links=rdf.get("links", []),
             name=rdf["name"],
@@ -1029,7 +1095,7 @@ def create_collection_entries(
             tags=rdf.get("tags", []),
             training_data=rdf["training_data"] if "training_data" in rdf else None,
             type=rdf["type"],
-            versions=[v.version for v in versions],
-            dois=[v.doi for v in versions],
+            versions=entry_versions,
+            dois=entry_dois,
         )
     ]
