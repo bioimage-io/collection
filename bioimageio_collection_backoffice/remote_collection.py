@@ -1052,8 +1052,8 @@ def create_collection_entries(
             entry_versions.append(version_record_id)
 
         entry_dois = [f"10.5281/zenodo.{v}" for v in entry_versions]
-        concept_doi = rv.concept_doi
     else:
+        concept_doi = rv.concept_doi
         entry_id = rdf["id"]
         legacy_download_count = 0
         entry_versions = [v.version for v in versions]
