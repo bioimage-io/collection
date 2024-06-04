@@ -1052,23 +1052,26 @@ def create_collection_entries(
             entry_versions.append(version_record_id)
 
         entry_dois = [f"10.5281/zenodo.{v}" for v in entry_versions]
-    elif "/" in rdf["id"]:
-        # legacy datasets and notebooks
         concept_doi = rv.concept_doi
-        nickname = rdf["config"]["bioimageio"]["nickname"]
-        nickname_icon = rdf["config"]["bioimageio"]["nickname_icon"]
-        entry_id = rdf["id"]
-        legacy_download_count = 0
-        entry_versions = [v.version for v in versions]
-        entry_dois = [v.doi for v in versions]
     else:
-        concept_doi = rv.concept_doi
-        nickname_icon = rdf["id_emoji"]
-        nickname = rdf["id"]
         entry_id = rdf["id"]
         legacy_download_count = 0
         entry_versions = [v.version for v in versions]
         entry_dois = [v.doi for v in versions]
+
+        if "/" in rdf["id"]:
+            try:
+                # legacy datasets and notebooks
+                nickname = rdf["config"]["bioimageio"]["nickname"]
+                nickname_icon = rdf["config"]["bioimageio"]["nickname_icon"]
+            except KeyError:
+                # legacy applications
+                assert rdf["type"] == "application"
+                nickname = rdf["id"]
+                nickname_icon = None
+        else:
+            nickname = rdf["id"]
+            nickname_icon = rdf["id_emoji"]
 
     # TODO: read new download count
     download_count = "?" if legacy_download_count == 0 else legacy_download_count
