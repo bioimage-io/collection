@@ -41,7 +41,7 @@ class CollectionEntry(Node, frozen=True):
     download_url: Optional[HttpUrl] = None
     icon: Union[HttpUrl, str, None] = None
     id: str
-    license: str
+    license: Optional[str]
     links: Sequence[str]
     name: str
     nickname_icon: Optional[str]

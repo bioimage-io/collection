@@ -1096,7 +1096,7 @@ def create_collection_entries(
                 else rdf.get("id_emoji")
             ),
             id=entry_id,
-            license=rdf.get("license", "unknown"),
+            license=rdf.get("license"),
             links=rdf.get("links", []),
             name=rdf["name"],
             nickname_icon=nickname_icon,
