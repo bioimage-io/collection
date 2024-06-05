@@ -57,6 +57,14 @@ class CollectionEntry(Node, frozen=True):
     dois: Sequence[Optional[str]]
     """version specific dois of the available versions. newest first"""
 
+    def __lt__(self, other: CollectionEntry):
+        sdc = 0 if self.download_count == "?" else self.download_count
+        odc = 0 if other.download_count == "?" else other.download_count
+        if sdc == odc:
+            return self.created < other.created  # newer entry first
+        else:
+            return sdc > odc  # higher download count first
+
 
 class CollectionWebsiteConfig(CollectionWebsiteConfigTemplate, frozen=True):
     n_resource_versions: Mapping[str, int]

@@ -410,6 +410,7 @@ class RemoteCollection(RemoteBase):
                     n_resource_versions[versions_in_collection[0].type] += len(versions)
                     entries.extend(versions_in_collection)
 
+        entries.sort()
         collection = CollectionJson(
             authors=(template := self.config.collection_template).authors,
             cite=template.cite,
