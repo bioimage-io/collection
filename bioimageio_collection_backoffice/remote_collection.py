@@ -547,6 +547,13 @@ class RecordBase(RemoteBase, ABC):
     def rdf_path(self) -> str:
         return f"{self.folder}files/rdf.yaml"  # TODO: transition to bioimageio.yaml eventually
 
+    def get_rdf(self) -> Dict[str, Any]:
+        rdf_data = self.client.load_file(self.rdf_path)
+        if rdf_data is None:
+            return {}
+        else:
+            return yaml.load(io.BytesIO(rdf_data))
+
     @property
     def rdf_url(self) -> str:
         """rdf.yaml download URL"""
