@@ -43,6 +43,7 @@ class CollectionJsonTemplate(Node, frozen=True):
     format_version: Version
     git_repo: HttpUrl
     icon: HttpUrl
+    logo: HttpUrl
     license: LicenseId
     name: str
     tags: Sequence[str]
