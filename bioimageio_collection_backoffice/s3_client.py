@@ -66,6 +66,10 @@ class Client:
         self.load_file = self._cache(self.load_file)
         logger.debug("Created S3-Client: {}", self)
 
+    def __del__(self):
+        if self._cache is not None:
+            logger.info("cache info: {}", self._cache.cache_info)
+
     def _bucket_exists(self, bucket: str) -> bool:
         return self._client.bucket_exists(bucket)
 
