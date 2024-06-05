@@ -29,6 +29,20 @@ def remove_colab_badges():
             r.client.rm(path)
 
 
+def add_info_json():
+    rc = RemoteCollection(Client())
+    for r in rc.get_published_versions():
+        if not list(r.client.ls(r.folder + "info.json")):
+            info = r.info
+            r.update_info(info)
+
+    for r in rc.get_drafts():
+        if not list(r.client.ls(r.folder + "info.json")):
+            info = r.info
+            r.update_info(info)
+
+
 if __name__ == "__main__":
     # remove_colab_badges()  # June 5, 2024
+    # add_info_json()  # June 5, 2024
     pass

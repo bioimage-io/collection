@@ -624,6 +624,9 @@ class RecordDraft(RecordBase):
     def info(self) -> DraftInfo:
         return self._get_json(DraftInfo)
 
+    def update_info(self, update: DraftInfo):
+        self._update_json(update)
+
     @property
     def bioimageio_url(self):
         return f"https://bioimage.io/#/?repo={self.collection.client.get_file_url('collection_draft.json')}&id={self.id}"
