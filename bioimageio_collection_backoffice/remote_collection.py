@@ -431,7 +431,6 @@ class RemoteCollection(RemoteBase):
             format_version=template.format_version,
             git_repo=template.git_repo,
             icon=template.icon,
-            logo=template.logo,
             license=template.license,
             name=template.name,
             tags=template.tags,

@@ -15,7 +15,8 @@ class Partner(Node, frozen=True):
     default_type: str
     explore_button_text: str
     id: str
-    logo: str
+    icon: HttpUrl
+    logo: HttpUrl
     resource_types: Sequence[str]
     splash_feature_list: Sequence[str]
     splash_subtitle: Optional[str]
@@ -43,7 +44,6 @@ class CollectionJsonTemplate(Node, frozen=True):
     format_version: Version
     git_repo: HttpUrl
     icon: HttpUrl
-    logo: HttpUrl
     license: LicenseId
     name: str
     tags: Sequence[str]
