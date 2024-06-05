@@ -445,7 +445,9 @@ class RemoteCollection(RemoteBase):
         # if not isinstance(coll_descr, CollectionDescr):
         #     raise ValueError(coll_descr.validation_summary.format())
 
-        self.client.put_json(output_file_name, collection.model_dump(mode="json"))
+        self.client.put_json(
+            output_file_name, collection.model_dump(mode="json", exclude_none=True)
+        )
 
         # raise an error for an invalid (skipped) collection entry
         if error_in_published_entry is not None:
@@ -1103,11 +1105,7 @@ def create_collection_entries(
             description=rdf["description"],
             download_count=download_count,
             download_url=rdf["download_url"] if "download_url" in rdf else None,
-            icon=resolve_relative_path(
-                maybe_swap_with_thumbnail(rdf["icon"])
-                if "icon" in rdf
-                else rdf.get("id_emoji")
-            ),
+            icon=resolve_relative_path(maybe_swap_with_thumbnail(rdf.get("icon"))),
             id=entry_id,
             license=rdf.get("license"),
             links=rdf.get("links", []),

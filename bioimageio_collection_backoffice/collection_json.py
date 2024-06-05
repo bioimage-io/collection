@@ -39,7 +39,7 @@ class CollectionEntry(Node, frozen=True):
     description: str
     download_count: Union[Literal["?"], int]
     download_url: Optional[HttpUrl] = None
-    icon: Union[HttpUrl, str, None] = None
+    icon: Optional[HttpUrl] = None
     id: str
     license: Optional[str]
     links: Sequence[str]
