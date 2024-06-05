@@ -29,8 +29,6 @@ from urllib.parse import urlsplit, urlunsplit
 from bioimageio.spec import ValidationContext
 from bioimageio.spec.common import HttpUrl
 from bioimageio.spec.utils import (
-    download,
-    get_sha256,
     identify_bioimageio_yaml_file_name,
     is_valid_bioimageio_yaml_name,
 )
