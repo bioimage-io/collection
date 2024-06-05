@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import io
 import json
 import random
@@ -967,7 +968,10 @@ def create_collection_entries(
     if not versions:
         return []
 
+    # create an explicit entry only for the latest version
+    #   (all versions are referenced under `versions`)
     rv = versions[0]
+
     with ValidationContext(perform_io_checks=False):
         rdf_url = HttpUrl(rv.rdf_url)
 
@@ -983,8 +987,11 @@ def create_collection_entries(
         )
     ), (root_url, root)
     parsed_root = urlsplit(root_url)
-    rdf_path = download(rdf_url).path
-    rdf: Union[Any, Dict[Any, Any]] = yaml.load(rdf_path)
+    rdf_data = rv.client.load_file(rv.rdf_path)
+    if rdf_data is None:
+        raise RuntimeError(f"failed to load {rv.rdf_path}")
+
+    rdf: Union[Any, Dict[Any, Any]] = yaml.load(io.BytesIO(rdf_data))
     assert isinstance(rdf, dict)
 
     try:
@@ -1102,7 +1109,7 @@ def create_collection_entries(
             name=rdf["name"],
             nickname_icon=nickname_icon,
             nickname=nickname,
-            rdf_sha256=get_sha256(rdf_path),
+            rdf_sha256=hashlib.sha256(rdf_data).hexdigest(),
             rdf_source=AnyUrl(rv.rdf_url),
             root_url=root_url,
             tags=rdf.get("tags", []),
