@@ -1065,16 +1065,20 @@ def create_collection_entries(
         version_record_id: str = rdf["id"][concept_end + 1 :]
         entry_id = concept_doi
         legacy_download_count: int = LEGACY_DOWNLOAD_COUNTS.get(concept_doi, 0)
-        entry_versions = LEGACY_VERSIONS.get(concept_doi, [])
-        if version_record_id not in entry_versions:
-            entry_versions.append(version_record_id)
+        entry_versions = [
+            f"{concept_doi}/{v}" for v in LEGACY_VERSIONS.get(concept_doi, [])
+        ]
+        if (
+            this_version_id := f"{concept_doi}/{version_record_id}"
+        ) not in entry_versions:
+            entry_versions.append(this_version_id)
 
         entry_dois = [f"10.5281/zenodo.{v}" for v in entry_versions]
     else:
         concept_doi = rv.concept_doi
         entry_id = rdf["id"]
         legacy_download_count = 0
-        entry_versions = [v.version for v in versions]
+        entry_versions = [v.id for v in versions]
         entry_dois = [v.doi for v in versions]
 
         if "/" in rdf["id"]:
