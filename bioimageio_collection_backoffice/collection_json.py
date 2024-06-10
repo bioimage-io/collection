@@ -54,7 +54,7 @@ class CollectionEntry(Node, frozen=True):
     type: Literal["application", "model", "notebook", "dataset"]
     versions: Sequence[str]
     """available versions of this resource. newest first"""
-    versions_sha256: Sequence[str]
+    versions_sha256: Sequence[Optional[str]]
     """SHA-256 of each versioned RDF"""
     dois: Sequence[Optional[str]]
     """version specific dois of the available versions. newest first"""

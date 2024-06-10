@@ -1071,7 +1071,9 @@ def create_collection_entries(
         if (
             this_version_id := f"{concept_doi}/{version_record_id}"
         ) not in entry_versions:
-            entry_versions.append(this_version_id)
+            entry_versions.insert(0, this_version_id)
+
+        versions_sha256: List[Optional[str]] = [None] * (len(entry_versions) - 1)
 
         entry_dois = [f"10.5281/zenodo.{v}" for v in entry_versions]
     else:
@@ -1079,6 +1081,10 @@ def create_collection_entries(
         entry_id = rdf["id"]
         legacy_download_count = 0
         entry_versions = [v.id for v in versions]
+        versions_sha256 = [
+            None if d is None else hashlib.sha256(d).hexdigest()
+            for d in [v.client.load_file(v.rdf_path) for v in versions]
+        ]
         entry_dois = [v.doi for v in versions]
 
         if "/" in rdf["id"]:
@@ -1126,6 +1132,7 @@ def create_collection_entries(
             training_data=rdf["training_data"] if "training_data" in rdf else None,
             type=rdf["type"],
             versions=entry_versions,
+            versions_sha256=versions_sha256,
             dois=entry_dois,
         )
     ]
