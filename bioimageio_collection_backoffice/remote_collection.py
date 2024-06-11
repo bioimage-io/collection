@@ -462,7 +462,9 @@ class RemoteCollection(RemoteBase):
                 output_file_name, collection.model_dump(mode="json", exclude_none=True)
             )
         else:
-            logger.error("Skipping overriding existing collection with an empty collection!")
+            logger.error(
+                "Skipping overriding existing collection with an empty collection!"
+            )
 
         # raise an error for an invalid (skipped) collection entry
         if error_in_published_entry is not None:
