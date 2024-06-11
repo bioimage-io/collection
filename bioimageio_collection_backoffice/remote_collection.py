@@ -70,7 +70,10 @@ from .s3_client import Client
 
 yaml = YAML(typ="safe")
 
+# TODO: add nicknames of legacy models
 LEGACY_DOWNLOAD_COUNTS = {
+    "affable-shark": 70601,
+    "emotional-cricket": 36653,
     "10.5281/zenodo.10366411": 632,
     "10.5281/zenodo.10391887": 754,
     "10.5281/zenodo.10405148": 566,
@@ -1102,13 +1105,13 @@ def create_collection_entries(
         for d in [v.client.load_file(v.rdf_path) for v in versions]
     ]
     entry_dois = [v.doi for v in versions]
+    legacy_download_count = LEGACY_DOWNLOAD_COUNTS.get(rdf["id"], 0)  # TODO: add download count from versions
 
     if rdf["id"].startswith("10.5281/zenodo."):
         # legacy models
         concept_end = rdf["id"].rfind("/")
         concept_doi = rdf["id"][:concept_end]
         entry_id = concept_doi
-        legacy_download_count: int = LEGACY_DOWNLOAD_COUNTS.get(concept_doi, 0)
         for v in LEGACY_VERSIONS.get(concept_doi, []):
             entry_versions.append(f"{concept_doi}/{v}")
             versions_sha256.append(None)
@@ -1116,7 +1119,6 @@ def create_collection_entries(
     else:
         concept_doi = rv.concept_doi
         entry_id = rdf["id"]
-        legacy_download_count = 0
 
     # TODO: read new download count
     download_count = "?" if legacy_download_count == 0 else legacy_download_count
