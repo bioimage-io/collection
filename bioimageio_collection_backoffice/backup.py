@@ -241,7 +241,7 @@ def generate_related_identifiers_from_rdf(rdf: ResourceDescr, rdf_file_name: str
     covers = []
     for cover in rdf.covers:
         if isinstance(cover, RelativeFilePath):
-            cover = cover.absolute
+            cover = cover.absolute()
 
         assert isinstance(cover, HttpUrl)
         covers.append(str(cover))
