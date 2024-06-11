@@ -958,10 +958,19 @@ class Record(RecordBase):
 
     def get_all_compatibility_reports(self, tool: Optional[str]):
         """get all compatibility reports"""
-        tools = [d[:-4] for d in self.client.ls(f"{self.folder}compat/", only_files=True) if d.endswith(".json") and (tool is None or d[:-4] == tool)]
-        reports_data = {t: self.client.load_file(f"{self.folder}compat/{tools}") for t in tools}
-        return [CompatiblityReport.model_validate({**reports_data, "tool": t}) for t, d in reports_data.items() if isinstance(d, dict)]
-
+        tools = [
+            d[:-4]
+            for d in self.client.ls(f"{self.folder}compat/", only_files=True)
+            if d.endswith(".json") and (tool is None or d[:-4] == tool)
+        ]
+        reports_data = {
+            t: self.client.load_file(f"{self.folder}compat/{tools}") for t in tools
+        }
+        return [
+            CompatiblityReport.model_validate({**reports_data, "tool": t})
+            for t, d in reports_data.items()
+            if isinstance(d, dict)
+        ]
 
     def set_dois(self, *, doi: str, concept_doi: str):
         if self.doi is not None:
