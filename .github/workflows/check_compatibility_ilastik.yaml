@@ -3,10 +3,13 @@ name: check compatibility ilastik
 concurrency: ilastik
 
 on:
-  push:  # run on updating this file
-    branches: [main]
-    paths: []
-  workflow_dispatch:  # run whenever you want
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/check_compatibility_ilastik.yaml
+      - scripts/check_compatibility_ilastik.py
+  workflow_dispatch:
   schedule:
     - cron: 0 1 * * *  # update compatibility once a day
 
