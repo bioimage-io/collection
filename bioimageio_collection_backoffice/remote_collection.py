@@ -1087,61 +1087,36 @@ def create_collection_entries(
 
         return src
 
-    if rdf["id"].startswith("10.5281/zenodo."):
-        # legacy models
+    try:
+        # legacy nickname
         nickname = rdf["config"]["bioimageio"]["nickname"]
         nickname_icon = rdf["config"]["bioimageio"]["nickname_icon"]
+    except KeyError:
+        # id is nickname
+        nickname = rdf["id"]
+        nickname_icon = None
 
+    entry_versions = [v.id for v in versions]
+    versions_sha256 = [
+        None if d is None else hashlib.sha256(d).hexdigest()
+        for d in [v.client.load_file(v.rdf_path) for v in versions]
+    ]
+    entry_dois = [v.doi for v in versions]
+
+    if rdf["id"].startswith("10.5281/zenodo."):
+        # legacy models
         concept_end = rdf["id"].rfind("/")
         concept_doi = rdf["id"][:concept_end]
-        version_record_id: str = rdf["id"][concept_end + 1 :]
         entry_id = concept_doi
         legacy_download_count: int = LEGACY_DOWNLOAD_COUNTS.get(concept_doi, 0)
-        entry_versions = [
-            f"{concept_doi}/{v}" for v in LEGACY_VERSIONS.get(concept_doi, [])
-        ]
-        if (
-            this_version_id := f"{concept_doi}/{version_record_id}"
-        ) not in entry_versions:
-            entry_versions.insert(0, this_version_id)
-
-        drafts = [v for v in versions if isinstance(v, RecordDraft)]
-        entry_versions = [v.id for v in drafts] + entry_versions
-        drafts_sha256 = [
-            None if d is None else hashlib.sha256(d).hexdigest()
-            for d in [v.client.load_file(v.rdf_path) for v in drafts]
-        ]
-        versions_sha256: List[Optional[str]] = drafts_sha256 + (
-            [None] * len(entry_versions)
-        )
-
-        entry_dois = ([None] * len(drafts)) + [
-            f"10.5281/zenodo.{v}" for v in entry_versions
-        ]
+        for v in LEGACY_VERSIONS.get(concept_doi, []):
+            entry_versions.append(f"{concept_doi}/{v}")
+            versions_sha256.append(None)
+            entry_dois.append(f"10.5281/zenodo.{v}")
     else:
         concept_doi = rv.concept_doi
         entry_id = rdf["id"]
         legacy_download_count = 0
-        entry_versions = [v.id for v in versions]
-        versions_sha256 = [
-            None if d is None else hashlib.sha256(d).hexdigest()
-            for d in [v.client.load_file(v.rdf_path) for v in versions]
-        ]
-        entry_dois = [v.doi for v in versions]
-
-        if "/" in rdf["id"]:
-            try:
-                # legacy datasets and notebooks
-                nickname = rdf["config"]["bioimageio"]["nickname"]
-                nickname_icon = rdf["config"]["bioimageio"]["nickname_icon"]
-            except KeyError:
-                # legacy applications
-                assert rdf["type"] == "application"
-                nickname = rdf["id"]
-                nickname_icon = None
-        else:
-            nickname = rdf["id"]
-            nickname_icon = rdf["id_emoji"]
 
     # TODO: read new download count
     download_count = "?" if legacy_download_count == 0 else legacy_download_count
