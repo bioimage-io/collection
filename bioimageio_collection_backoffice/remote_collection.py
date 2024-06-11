@@ -1186,7 +1186,6 @@ def create_collection_entries(
             name=rdf["name"],
             nickname_icon=nickname_icon,
             nickname=nickname,
-            rdf_sha256=hashlib.sha256(rdf_data).hexdigest(),
             rdf_source=AnyUrl(rv.rdf_url),
             root_url=root_url,
             tags=rdf.get("tags", []),

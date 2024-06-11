@@ -46,7 +46,6 @@ class CollectionEntry(Node, frozen=True):
     name: str
     nickname_icon: Optional[str]
     nickname: str
-    rdf_sha256: str
     rdf_source: HttpUrl
     root_url: str
     tags: Sequence[str]
