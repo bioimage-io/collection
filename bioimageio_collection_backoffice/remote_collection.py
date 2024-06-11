@@ -1154,6 +1154,9 @@ def create_collection_entries(
         compat_reports = rv.get_all_compatibility_reports()
 
         for r in compat_reports:
+            if r.status == "not-applicable":
+                continue
+
             compatible = r.status == "passed"
             compat[r.tool] = compatible
             if compatible:
