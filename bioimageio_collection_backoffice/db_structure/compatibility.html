@@ -61,6 +61,12 @@
                                 <a class="variable" href="#CompatiblityReport.details">details</a>
                         </li>
                         <li>
+                                <a class="variable" href="#CompatiblityReport.badge">badge</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#CompatiblityReport.links">links</a>
+                        </li>
+                        <li>
                                 <a class="variable" href="#CompatiblityReport.model_config">model_config</a>
                         </li>
                         <li>
@@ -94,23 +100,31 @@
 
                         <label class="view-source-button" for="mod-compatibility-view-source"><span>View Source</span></label>
 
-                        <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos"> 1</span></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Literal</span>
+                        <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos"> 1</span></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Literal</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Sequence</span>
 </span><span id="L-2"><a href="#L-2"><span class="linenos"> 2</span></a>
 </span><span id="L-3"><a href="#L-3"><span class="linenos"> 3</span></a><span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">Field</span>
 </span><span id="L-4"><a href="#L-4"><span class="linenos"> 4</span></a><span class="kn">from</span> <span class="nn">typing_extensions</span> <span class="kn">import</span> <span class="n">Annotated</span>
 </span><span id="L-5"><a href="#L-5"><span class="linenos"> 5</span></a>
-</span><span id="L-6"><a href="#L-6"><span class="linenos"> 6</span></a><span class="kn">from</span> <span class="nn">..common</span> <span class="kn">import</span> <span class="n">Node</span>
+</span><span id="L-6"><a href="#L-6"><span class="linenos"> 6</span></a><span class="kn">from</span> <span class="nn">bioimageio_collection_backoffice.collection_json</span> <span class="kn">import</span> <span class="n">Badge</span>
 </span><span id="L-7"><a href="#L-7"><span class="linenos"> 7</span></a>
-</span><span id="L-8"><a href="#L-8"><span class="linenos"> 8</span></a>
-</span><span id="L-9"><a href="#L-9"><span class="linenos"> 9</span></a><span class="k">class</span> <span class="nc">CompatiblityReport</span><span class="p">(</span><span class="n">Node</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">extra</span><span class="o">=</span><span class="s2">&quot;allow&quot;</span><span class="p">):</span>
-</span><span id="L-10"><a href="#L-10"><span class="linenos">10</span></a>    <span class="n">tool</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">exclude</span><span class="o">=</span><span class="kc">True</span><span class="p">)]</span>
-</span><span id="L-11"><a href="#L-11"><span class="linenos">11</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;toolname (including version)&quot;&quot;&quot;</span>
-</span><span id="L-12"><a href="#L-12"><span class="linenos">12</span></a>
-</span><span id="L-13"><a href="#L-13"><span class="linenos">13</span></a>    <span class="n">status</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;passed&quot;</span><span class="p">,</span> <span class="s2">&quot;failed&quot;</span><span class="p">,</span> <span class="s2">&quot;not-applicable&quot;</span><span class="p">]</span>
-</span><span id="L-14"><a href="#L-14"><span class="linenos">14</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;status of this tool for this resource&quot;&quot;&quot;</span>
-</span><span id="L-15"><a href="#L-15"><span class="linenos">15</span></a>
-</span><span id="L-16"><a href="#L-16"><span class="linenos">16</span></a>    <span class="n">details</span><span class="p">:</span> <span class="n">Any</span>
-</span><span id="L-17"><a href="#L-17"><span class="linenos">17</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;details to explain the `status`&quot;&quot;&quot;</span>
+</span><span id="L-8"><a href="#L-8"><span class="linenos"> 8</span></a><span class="kn">from</span> <span class="nn">..common</span> <span class="kn">import</span> <span class="n">Node</span>
+</span><span id="L-9"><a href="#L-9"><span class="linenos"> 9</span></a>
+</span><span id="L-10"><a href="#L-10"><span class="linenos">10</span></a>
+</span><span id="L-11"><a href="#L-11"><span class="linenos">11</span></a><span class="k">class</span> <span class="nc">CompatiblityReport</span><span class="p">(</span><span class="n">Node</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">extra</span><span class="o">=</span><span class="s2">&quot;allow&quot;</span><span class="p">):</span>
+</span><span id="L-12"><a href="#L-12"><span class="linenos">12</span></a>    <span class="n">tool</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">exclude</span><span class="o">=</span><span class="kc">True</span><span class="p">)]</span>
+</span><span id="L-13"><a href="#L-13"><span class="linenos">13</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;toolname (including version)&quot;&quot;&quot;</span>
+</span><span id="L-14"><a href="#L-14"><span class="linenos">14</span></a>
+</span><span id="L-15"><a href="#L-15"><span class="linenos">15</span></a>    <span class="n">status</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;passed&quot;</span><span class="p">,</span> <span class="s2">&quot;failed&quot;</span><span class="p">,</span> <span class="s2">&quot;not-applicable&quot;</span><span class="p">]</span>
+</span><span id="L-16"><a href="#L-16"><span class="linenos">16</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;status of this tool for this resource&quot;&quot;&quot;</span>
+</span><span id="L-17"><a href="#L-17"><span class="linenos">17</span></a>
+</span><span id="L-18"><a href="#L-18"><span class="linenos">18</span></a>    <span class="n">details</span><span class="p">:</span> <span class="n">Any</span>
+</span><span id="L-19"><a href="#L-19"><span class="linenos">19</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;details to explain the `status`&quot;&quot;&quot;</span>
+</span><span id="L-20"><a href="#L-20"><span class="linenos">20</span></a>
+</span><span id="L-21"><a href="#L-21"><span class="linenos">21</span></a>    <span class="n">badge</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Badge</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span id="L-22"><a href="#L-22"><span class="linenos">22</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;status badge with a resource specific link to the tool&quot;&quot;&quot;</span>
+</span><span id="L-23"><a href="#L-23"><span class="linenos">23</span></a>
+</span><span id="L-24"><a href="#L-24"><span class="linenos">24</span></a>    <span class="n">links</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">()</span>
+</span><span id="L-25"><a href="#L-25"><span class="linenos">25</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;the checked resource should link these other bioimage.io resources&quot;&quot;&quot;</span>
 </span></pre></div>
 
 
@@ -126,15 +140,21 @@
 
     </div>
     <a class="headerlink" href="#CompatiblityReport"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="CompatiblityReport-10"><a href="#CompatiblityReport-10"><span class="linenos">10</span></a><span class="k">class</span> <span class="nc">CompatiblityReport</span><span class="p">(</span><span class="n">Node</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">extra</span><span class="o">=</span><span class="s2">&quot;allow&quot;</span><span class="p">):</span>
-</span><span id="CompatiblityReport-11"><a href="#CompatiblityReport-11"><span class="linenos">11</span></a>    <span class="n">tool</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">exclude</span><span class="o">=</span><span class="kc">True</span><span class="p">)]</span>
-</span><span id="CompatiblityReport-12"><a href="#CompatiblityReport-12"><span class="linenos">12</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;toolname (including version)&quot;&quot;&quot;</span>
-</span><span id="CompatiblityReport-13"><a href="#CompatiblityReport-13"><span class="linenos">13</span></a>
-</span><span id="CompatiblityReport-14"><a href="#CompatiblityReport-14"><span class="linenos">14</span></a>    <span class="n">status</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;passed&quot;</span><span class="p">,</span> <span class="s2">&quot;failed&quot;</span><span class="p">,</span> <span class="s2">&quot;not-applicable&quot;</span><span class="p">]</span>
-</span><span id="CompatiblityReport-15"><a href="#CompatiblityReport-15"><span class="linenos">15</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;status of this tool for this resource&quot;&quot;&quot;</span>
-</span><span id="CompatiblityReport-16"><a href="#CompatiblityReport-16"><span class="linenos">16</span></a>
-</span><span id="CompatiblityReport-17"><a href="#CompatiblityReport-17"><span class="linenos">17</span></a>    <span class="n">details</span><span class="p">:</span> <span class="n">Any</span>
-</span><span id="CompatiblityReport-18"><a href="#CompatiblityReport-18"><span class="linenos">18</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;details to explain the `status`&quot;&quot;&quot;</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="CompatiblityReport-12"><a href="#CompatiblityReport-12"><span class="linenos">12</span></a><span class="k">class</span> <span class="nc">CompatiblityReport</span><span class="p">(</span><span class="n">Node</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">extra</span><span class="o">=</span><span class="s2">&quot;allow&quot;</span><span class="p">):</span>
+</span><span id="CompatiblityReport-13"><a href="#CompatiblityReport-13"><span class="linenos">13</span></a>    <span class="n">tool</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">exclude</span><span class="o">=</span><span class="kc">True</span><span class="p">)]</span>
+</span><span id="CompatiblityReport-14"><a href="#CompatiblityReport-14"><span class="linenos">14</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;toolname (including version)&quot;&quot;&quot;</span>
+</span><span id="CompatiblityReport-15"><a href="#CompatiblityReport-15"><span class="linenos">15</span></a>
+</span><span id="CompatiblityReport-16"><a href="#CompatiblityReport-16"><span class="linenos">16</span></a>    <span class="n">status</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;passed&quot;</span><span class="p">,</span> <span class="s2">&quot;failed&quot;</span><span class="p">,</span> <span class="s2">&quot;not-applicable&quot;</span><span class="p">]</span>
+</span><span id="CompatiblityReport-17"><a href="#CompatiblityReport-17"><span class="linenos">17</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;status of this tool for this resource&quot;&quot;&quot;</span>
+</span><span id="CompatiblityReport-18"><a href="#CompatiblityReport-18"><span class="linenos">18</span></a>
+</span><span id="CompatiblityReport-19"><a href="#CompatiblityReport-19"><span class="linenos">19</span></a>    <span class="n">details</span><span class="p">:</span> <span class="n">Any</span>
+</span><span id="CompatiblityReport-20"><a href="#CompatiblityReport-20"><span class="linenos">20</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;details to explain the `status`&quot;&quot;&quot;</span>
+</span><span id="CompatiblityReport-21"><a href="#CompatiblityReport-21"><span class="linenos">21</span></a>
+</span><span id="CompatiblityReport-22"><a href="#CompatiblityReport-22"><span class="linenos">22</span></a>    <span class="n">badge</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Badge</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span id="CompatiblityReport-23"><a href="#CompatiblityReport-23"><span class="linenos">23</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;status badge with a resource specific link to the tool&quot;&quot;&quot;</span>
+</span><span id="CompatiblityReport-24"><a href="#CompatiblityReport-24"><span class="linenos">24</span></a>
+</span><span id="CompatiblityReport-25"><a href="#CompatiblityReport-25"><span class="linenos">25</span></a>    <span class="n">links</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">()</span>
+</span><span id="CompatiblityReport-26"><a href="#CompatiblityReport-26"><span class="linenos">26</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;the checked resource should link these other bioimage.io resources&quot;&quot;&quot;</span>
 </span></pre></div>
 
 
@@ -207,6 +227,32 @@ __pydantic_private__: Instance attribute with the values of private attributes s
 
 
                             </div>
+                            <div id="CompatiblityReport.badge" class="classattr">
+                                <div class="attr variable">
+            <span class="name">badge</span><span class="annotation">: Optional[<a href="../collection_json.html#Badge">bioimageio_collection_backoffice.collection_json.Badge</a>]</span>
+
+        
+    </div>
+    <a class="headerlink" href="#CompatiblityReport.badge"></a>
+    
+            <div class="docstring"><p>status badge with a resource specific link to the tool</p>
+</div>
+
+
+                            </div>
+                            <div id="CompatiblityReport.links" class="classattr">
+                                <div class="attr variable">
+            <span class="name">links</span><span class="annotation">: Sequence[str]</span>
+
+        
+    </div>
+    <a class="headerlink" href="#CompatiblityReport.links"></a>
+    
+            <div class="docstring"><p>the checked resource should link these other bioimage.io resources</p>
+</div>
+
+
+                            </div>
                             <div id="CompatiblityReport.model_config" class="classattr">
                                 <div class="attr variable">
             <span class="name">model_config</span>        =
@@ -224,7 +270,7 @@ __pydantic_private__: Instance attribute with the values of private attributes s
                                 <div class="attr variable">
             <span class="name">model_fields</span>        =
 <input id="CompatiblityReport.model_fields-view-value" class="view-value-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
-            <label class="view-value-button pdoc-button" for="CompatiblityReport.model_fields-view-value"></label><span class="default_value">{&#39;tool&#39;: FieldInfo(annotation=str, required=True, exclude=True), &#39;status&#39;: FieldInfo(annotation=Literal[&#39;passed&#39;, &#39;failed&#39;, &#39;not-applicable&#39;], required=True), &#39;details&#39;: FieldInfo(annotation=Any, required=True)}</span>
+            <label class="view-value-button pdoc-button" for="CompatiblityReport.model_fields-view-value"></label><span class="default_value">{&#39;tool&#39;: FieldInfo(annotation=str, required=True, exclude=True), &#39;status&#39;: FieldInfo(annotation=Literal[&#39;passed&#39;, &#39;failed&#39;, &#39;not-applicable&#39;], required=True), &#39;details&#39;: FieldInfo(annotation=Any, required=True), &#39;badge&#39;: FieldInfo(annotation=Union[Badge, NoneType], required=False), &#39;links&#39;: FieldInfo(annotation=Sequence[str], required=False, default=())}</span>
 
         
     </div>
