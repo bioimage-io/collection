@@ -38,7 +38,7 @@ def notify_uploader(rv: Union[RecordDraft, Record], subject_end: str, msg: str):
             + "The bioimage.io bot 🦒\n"
             + REPLY_HINT
         ).replace(
-            "\n", "\\\n"  # respect newlines in markdown
+            "\n", "\n\n"  # respect newlines in markdown
         ),
         recipients=[email],
     )
