@@ -1094,7 +1094,7 @@ def create_collection_entries(
     except KeyError:
         # id is nickname
         nickname = rdf["id"]
-        nickname_icon = None
+        nickname_icon = rdf.get("id_emoji")
 
     entry_versions = [v.id for v in versions]
     versions_sha256 = [
