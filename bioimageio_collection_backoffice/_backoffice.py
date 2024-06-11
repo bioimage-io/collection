@@ -117,7 +117,7 @@ class BackOffice:
         notify_uploader(
             rv,
             "is awaiting review ⌛",
-            f"Thank you for submitting {rv.id}!\n"
+            f"Thank you for submitting {rv.concept_id}!\n"
             + "Our maintainers will take a look shortly.\n"
             + f"A preview is available [here]({rv.bioimageio_url})",
         )
@@ -147,7 +147,7 @@ class BackOffice:
         notify_uploader(
             rv,
             "needs changes 📑",
-            f"Thank you for submitting {rv.id}!\n"
+            f"Thank you for submitting {rv.concept_id}!\n"
             + "We kindly ask you to upload an updated version, because: \n"
             + f"{reason}\n",  # TODO: add link to chat
         )
@@ -176,7 +176,7 @@ class BackOffice:
         notify_uploader(
             published,
             "was published! 🎉",
-            f"Thank you for contributing {published.id} {published.version} to bioimage.io!\n"
+            f"Thank you for contributing {published.id} to bioimage.io!\n"
             + f"Check it out at {published.bioimageio_url}\n",
         )
 
