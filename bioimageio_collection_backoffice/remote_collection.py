@@ -1073,9 +1073,19 @@ def create_collection_entries(
         ) not in entry_versions:
             entry_versions.insert(0, this_version_id)
 
-        versions_sha256: List[Optional[str]] = [None] * (len(entry_versions) - 1)
+        drafts = [v for v in versions if isinstance(v, RecordDraft)]
+        entry_versions = [v.id for v in drafts] + entry_versions
+        drafts_sha256 = [
+            None if d is None else hashlib.sha256(d).hexdigest()
+            for d in [v.client.load_file(v.rdf_path) for v in drafts]
+        ]
+        versions_sha256: List[Optional[str]] = drafts_sha256 + (
+            [None] * len(entry_versions)
+        )
 
-        entry_dois = [f"10.5281/zenodo.{v}" for v in entry_versions]
+        entry_dois = ([None] * len(drafts)) + [
+            f"10.5281/zenodo.{v}" for v in entry_versions
+        ]
     else:
         concept_doi = rv.concept_doi
         entry_id = rdf["id"]
