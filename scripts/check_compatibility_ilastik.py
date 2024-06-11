@@ -1,4 +1,5 @@
-import fire
+import argparse
+
 from bioimageio.core import test_model
 from loguru import logger
 from ruyaml import YAML
@@ -60,4 +61,7 @@ def check_compatibility_ilastik(
 
 
 if __name__ == "__main__":
-    fire.Fire(check_compatibility_ilastik)
+    parser = argparse.ArgumentParser()
+    _ = parser.add_argument("ilastik_version")
+
+    check_compatibility_ilastik(parser.parse_args().ilastik_version)
