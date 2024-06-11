@@ -457,12 +457,12 @@ class RemoteCollection(RemoteBase):
         # if not isinstance(coll_descr, CollectionDescr):
         #     raise ValueError(coll_descr.validation_summary.format())
 
-        if entries:
+        if entries or not list(self.client.ls(output_file_name)):
             self.client.put_json(
                 output_file_name, collection.model_dump(mode="json", exclude_none=True)
             )
         else:
-            logger.error("Skipping uploading empty collection!")
+            logger.error("Skipping overriding existing collection with an empty collection!")
 
         # raise an error for an invalid (skipped) collection entry
         if error_in_published_entry is not None:
