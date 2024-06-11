@@ -37,6 +37,10 @@ from pydantic import AnyUrl
 from ruyaml import YAML
 from typing_extensions import Concatenate, ParamSpec
 
+from bioimageio_collection_backoffice.db_structure.compatibility import (
+    CompatiblityReport,
+)
+
 from ._settings import settings
 from ._thumbnails import create_thumbnails
 from .collection_config import CollectionConfig
@@ -453,7 +457,7 @@ class RemoteCollection(RemoteBase):
         if error_in_published_entry is not None:
             raise ValueError(error_in_published_entry)
 
-    def get_collection_json(self):
+    def get_collection_json(self) -> CollectionJson:
         data = self.client.load_file("collection.json")
         assert data is not None
         collection: Union[Any, Dict[str, Union[Any, List[Dict[str, Any]]]]] = (
@@ -468,7 +472,7 @@ class RemoteCollection(RemoteBase):
         assert all(isinstance(e, dict) for e in collection["collection"])
         assert all(isinstance(k, str) for e in collection["collection"] for k in e)
         assert all("name" in e for e in collection["collection"])
-        return collection
+        return CollectionJson(**collection)  # type: ignore
 
 
 @dataclass
@@ -944,6 +948,29 @@ class Record(RecordBase):
 
     def update_info(self, update: RecordInfo):
         self._update_json(update)
+
+    def get_compatibility_report_path(self, tool: str):
+        return f"{self.folder}compat/{tool}.json"
+
+    def set_compatibility_report(self, report: CompatiblityReport) -> None:
+        path = self.get_compatibility_report_path(report.tool)
+        self.client.put_and_cache(path, report.model_dump_json().encode())
+
+    def get_all_compatibility_reports(self, tool: Optional[str]):
+        """get all compatibility reports"""
+        tools = [
+            d[:-4]
+            for d in self.client.ls(f"{self.folder}compat/", only_files=True)
+            if d.endswith(".json") and (tool is None or d[:-4] == tool)
+        ]
+        reports_data = {
+            t: self.client.load_file(f"{self.folder}compat/{tools}") for t in tools
+        }
+        return [
+            CompatiblityReport.model_validate({**reports_data, "tool": t})
+            for t, d in reports_data.items()
+            if isinstance(d, dict)
+        ]
 
     def set_dois(self, *, doi: str, concept_doi: str):
         if self.doi is not None:

@@ -106,7 +106,7 @@ def get_env_from_deps(
             raise ValueError(f"Dependency manager {deps.manager} not supported")
         else:
             deps_source = (
-                deps.file.absolute
+                deps.file.absolute()
                 if isinstance(deps.file, RelativeFilePath)
                 else deps.file
             )
