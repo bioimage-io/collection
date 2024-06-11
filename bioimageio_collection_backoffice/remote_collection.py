@@ -457,9 +457,12 @@ class RemoteCollection(RemoteBase):
         # if not isinstance(coll_descr, CollectionDescr):
         #     raise ValueError(coll_descr.validation_summary.format())
 
-        self.client.put_json(
-            output_file_name, collection.model_dump(mode="json", exclude_none=True)
-        )
+        if entries:
+            self.client.put_json(
+                output_file_name, collection.model_dump(mode="json", exclude_none=True)
+            )
+        else:
+            logger.error("Skipping uploading empty collection!")
 
         # raise an error for an invalid (skipped) collection entry
         if error_in_published_entry is not None:
@@ -1105,7 +1108,9 @@ def create_collection_entries(
         for d in [v.client.load_file(v.rdf_path) for v in versions]
     ]
     entry_dois = [v.doi for v in versions]
-    legacy_download_count = LEGACY_DOWNLOAD_COUNTS.get(rdf["id"], 0)  # TODO: add download count from versions
+    legacy_download_count = LEGACY_DOWNLOAD_COUNTS.get(
+        rdf["id"], 0
+    )  # TODO: add download count from versions
 
     if rdf["id"].startswith("10.5281/zenodo."):
         # legacy models
