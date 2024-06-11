@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import Literal, Mapping, Optional, Sequence, Union
+from typing import Dict, Literal, Mapping, Optional, Sequence, Union
 
 from loguru import logger
 from pydantic import HttpUrl, model_validator
@@ -58,6 +58,7 @@ class CollectionEntry(Node, frozen=True):
     """SHA-256 of each versioned RDF"""
     dois: Sequence[Optional[str]]
     """version specific dois of the available versions. newest first"""
+    compatibility: Dict[str, bool]
 
     def __lt__(self, other: CollectionEntry):
         sdc = 0 if self.download_count == "?" else self.download_count

@@ -44,7 +44,12 @@ from bioimageio_collection_backoffice.db_structure.compatibility import (
 from ._settings import settings
 from ._thumbnails import create_thumbnails
 from .collection_config import CollectionConfig
-from .collection_json import CollectionEntry, CollectionJson, CollectionWebsiteConfig
+from .collection_json import (
+    Badge,
+    CollectionEntry,
+    CollectionJson,
+    CollectionWebsiteConfig,
+)
 from .db_structure.chat import Chat, Message
 from .db_structure.log import CollectionLog, CollectionLogEntry, Log
 from .db_structure.reserved import Reserved
@@ -956,7 +961,7 @@ class Record(RecordBase):
         path = self.get_compatibility_report_path(report.tool)
         self.client.put_and_cache(path, report.model_dump_json().encode())
 
-    def get_all_compatibility_reports(self, tool: Optional[str]):
+    def get_all_compatibility_reports(self, tool: Optional[str] = None):
         """get all compatibility reports"""
         tools = [
             d[:-4]
@@ -1141,13 +1146,29 @@ def create_collection_entries(
     # TODO: read new download count
     download_count = "?" if legacy_download_count == 0 else legacy_download_count
 
+    # ingest compatibility reports
+    badges = set(Badge.model_validate(b) for b in rdf.get("badges", []))
+    links = set(rdf.get("links", []))
+    compat: Dict[str, bool] = {}
+    if isinstance(rv, Record):
+        compat_reports = rv.get_all_compatibility_reports()
+
+        for r in compat_reports:
+            compatible = r.status == "passed"
+            compat[r.tool] = compatible
+            if compatible:
+                # update badges and links to reference compatible tools
+                if r.badge is not None:
+                    badges.add(r.badge)
+
+                links.update(r.links)
+
     return [
         CollectionEntry(
             authors=rdf.get("authors", []),
-            badges=resolve_relative_path(
-                maybe_swap_with_thumbnail(rdf.get("badges", []))
-            ),
+            badges=resolve_relative_path(maybe_swap_with_thumbnail(list(badges))),
             concept_doi=concept_doi,
+            compatibility=compat,
             covers=resolve_relative_path(
                 maybe_swap_with_thumbnail(rdf.get("covers", []))
             ),
@@ -1158,7 +1179,7 @@ def create_collection_entries(
             icon=resolve_relative_path(maybe_swap_with_thumbnail(rdf.get("icon"))),
             id=entry_id,
             license=rdf.get("license"),
-            links=rdf.get("links", []),
+            links=list(links),
             name=rdf["name"],
             nickname_icon=nickname_icon,
             nickname=nickname,
