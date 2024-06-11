@@ -33,7 +33,9 @@ def check_compatibility_ilastik_impl(
 
     # produce test summaries for each weight format
     summary = test_model(record.client.get_file_url(record.rdf_path))
-    return CompatiblityReport(tool=tool, status=summary.status, details=summary)
+    return CompatiblityReport(
+        tool=tool, status=summary.status, details=summary, links=["ilastik/ilastik"]
+    )
 
 
 def check_compatibility_ilastik(
