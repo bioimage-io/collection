@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import Dict, Literal, Mapping, Optional, Sequence, Union
+from typing import Literal, Mapping, Optional, Sequence, Union
 
 from loguru import logger
 from pydantic import HttpUrl, model_validator
@@ -44,20 +44,13 @@ class CollectionEntry(Node, frozen=True):
     license: Optional[str]
     links: Sequence[str]
     name: str
-    nickname_icon: Optional[str]
-    nickname: str
+    nickname_icon: Optional[str] = None
+    nickname: Optional[str] = None
     rdf_source: HttpUrl
     root_url: str
-    tags: Sequence[str]
+    tags: Sequence[str] = ()
     training_data: Optional[TrainingData] = None
     type: Literal["application", "model", "notebook", "dataset"]
-    versions: Sequence[str]
-    """available versions of this resource. newest first"""
-    versions_sha256: Sequence[Optional[str]]
-    """SHA-256 of each versioned RDF"""
-    dois: Sequence[Optional[str]]
-    """version specific dois of the available versions. newest first"""
-    compatibility: Dict[str, bool]
 
     def __lt__(self, other: CollectionEntry):
         sdc = 0 if self.download_count == "?" else self.download_count

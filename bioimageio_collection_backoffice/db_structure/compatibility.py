@@ -3,8 +3,7 @@ from typing import Any, Literal, Optional, Sequence
 from pydantic import Field
 from typing_extensions import Annotated
 
-from bioimageio_collection_backoffice.collection_json import Badge
-
+from ..collection_json import Badge
 from ..common import Node
 
 

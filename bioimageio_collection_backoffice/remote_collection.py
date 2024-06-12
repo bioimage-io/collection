@@ -18,13 +18,15 @@ from typing import (
     Dict,
     List,
     Literal,
+    Mapping,
     NamedTuple,
     Optional,
     Sequence,
+    Tuple,
     TypeVar,
     Union,
 )
-from urllib.parse import urlsplit, urlunsplit
+from urllib.parse import SplitResult, urlsplit, urlunsplit
 
 from bioimageio.spec import ValidationContext
 from bioimageio.spec.common import HttpUrl
@@ -37,20 +39,16 @@ from pydantic import AnyUrl
 from ruyaml import YAML
 from typing_extensions import Concatenate, ParamSpec
 
-from bioimageio_collection_backoffice.db_structure.compatibility import (
-    CompatiblityReport,
-)
-
 from ._settings import settings
 from ._thumbnails import create_thumbnails
 from .collection_config import CollectionConfig
 from .collection_json import (
-    Badge,
     CollectionEntry,
     CollectionJson,
     CollectionWebsiteConfig,
 )
 from .db_structure.chat import Chat, Message
+from .db_structure.compatibility import CompatiblityReport
 from .db_structure.log import CollectionLog, CollectionLogEntry, Log
 from .db_structure.reserved import Reserved
 from .db_structure.version_info import (
@@ -64,105 +62,58 @@ from .db_structure.version_info import (
     UnpackedStatus,
     UnpackingStatus,
 )
+from .id_map import IdInfo, IdMap
 from .mailroom.constants import BOT_EMAIL
 from .remote_base import RemoteBase
 from .s3_client import Client
 
 yaml = YAML(typ="safe")
 
-# TODO: add nicknames of legacy models
 LEGACY_DOWNLOAD_COUNTS = {
     "affable-shark": 70601,
+    "ambitious-ant": 5830,
+    "ambitious-sloth": 12735,
+    "amiable-crocodile": 2516,
+    "chatty-frog": 54555,
+    "conscientious-seashell": 33362,
+    "courteous-otter": 4519,
+    "creative-panda": 35927,
+    "determined-chipmunk": 18747,
+    "discreet-rooster": 42990,
+    "easy-going-sauropod": 12717,
+    "efficient-chipmunk": 3556,
     "emotional-cricket": 36653,
-    "10.5281/zenodo.10366411": 632,
-    "10.5281/zenodo.10391887": 754,
-    "10.5281/zenodo.10405148": 566,
-    "10.5281/zenodo.10406306": 638,
-    "10.5281/zenodo.10406343": 644,
-    "10.5281/zenodo.10575472": 399,
-    "10.5281/zenodo.10577217": 462,
-    "10.5281/zenodo.10579555": 319,
-    "10.5281/zenodo.10579777": 430,
-    "10.5281/zenodo.10579821": 588,
-    "10.5281/zenodo.10595427": 480,
-    "10.5281/zenodo.10595459": 406,
-    "10.5281/zenodo.10659334": 208,
-    "10.5281/zenodo.10668824": 2,
-    "10.5281/zenodo.11004445": 2,
-    "10.5281/zenodo.5744489": 6128,
-    "10.5281/zenodo.5749843": 40313,
-    "10.5281/zenodo.5764892": 70601,
-    "10.5281/zenodo.5817052": 35927,
-    "10.5281/zenodo.5847355": 35455,
-    "10.5281/zenodo.5869899": 45822,
-    "10.5281/zenodo.5874741": 44942,
-    "10.5281/zenodo.5874841": 40486,
-    "10.5281/zenodo.5910163": 21235,
-    "10.5281/zenodo.5910854": 25477,
-    "10.5281/zenodo.5914248": 42990,
-    "10.5281/zenodo.5940478": 3575,
-    "10.5281/zenodo.6028097": 39777,
-    "10.5281/zenodo.6028280": 37772,
-    "10.5281/zenodo.6079314": 29530,
-    "10.5281/zenodo.6200635": 37100,
-    "10.5281/zenodo.6200999": 33362,
-    "10.5281/zenodo.6326366": 8893,
-    "10.5281/zenodo.6334383": 28176,
-    "10.5281/zenodo.6334583": 24267,
-    "10.5281/zenodo.6334777": 25874,
-    "10.5281/zenodo.6334793": 9323,
-    "10.5281/zenodo.6334881": 25850,
-    "10.5281/zenodo.6338614": 54555,
-    "10.5281/zenodo.6346511": 36653,
-    "10.5281/zenodo.6348084": 39638,
-    "10.5281/zenodo.6348728": 36554,
-    "10.5281/zenodo.6383429": 30836,
-    "10.5281/zenodo.6384845": 31743,
-    "10.5281/zenodo.6406756": 41816,
-    "10.5281/zenodo.6406803": 34761,
-    "10.5281/zenodo.6518218": 2532,
-    "10.5281/zenodo.6518500": 2514,
-    "10.5281/zenodo.6518571": 2527,
-    "10.5281/zenodo.6518890": 4217,
-    "10.5281/zenodo.6554667": 2406,
-    "10.5281/zenodo.6559474": 23086,
-    "10.5281/zenodo.6559929": 6666,
-    "10.5281/zenodo.6808325": 18747,
-    "10.5281/zenodo.6811491": 23638,
-    "10.5281/zenodo.6817638": 2104,
-    "10.5281/zenodo.6821147": 2102,
-    "10.5281/zenodo.6827058": 2161,
-    "10.5281/zenodo.6865412": 20822,
-    "10.5281/zenodo.7052800": 5771,
-    "10.5281/zenodo.7053390": 1957,
-    "10.5281/zenodo.7139022": 5364,
-    "10.5281/zenodo.7254196": 3308,
-    "10.5281/zenodo.7261974": 39063,
-    "10.5281/zenodo.7274275": 19265,
-    "10.5281/zenodo.7315440": 13995,
-    "10.5281/zenodo.7372476": 21,
-    "10.5281/zenodo.7380171": 12717,
-    "10.5281/zenodo.7380213": 1705,
-    "10.5281/zenodo.7385954": 3291,
-    "10.5281/zenodo.7612115": 2356,
-    "10.5281/zenodo.7614645": 12735,
-    "10.5281/zenodo.7634388": 1477,
-    "10.5281/zenodo.7653695": 1450,
-    "10.5281/zenodo.7689187": 1343,
-    "10.5281/zenodo.7772662": 12501,
-    "10.5281/zenodo.7781877": 2271,
-    "10.5281/zenodo.7786492": 10156,
-    "10.5281/zenodo.7872357": 2474,
-    "10.5281/zenodo.8064806": 6793,
-    "10.5281/zenodo.8142283": 2516,
-    "10.5281/zenodo.8260660": 693,
-    "10.5281/zenodo.8324706": 16,
-    "10.5281/zenodo.8346993": 991,
-    "10.5281/zenodo.8356515": 1051,
-    "10.5281/zenodo.8401064": 3556,
-    "10.5281/zenodo.8419845": 5830,
-    "10.5281/zenodo.8420099": 4519,
-    "10.5281/zenodo.8421755": 8531,
+    "fearless-crab": 39638,
+    "hiding-blowfish": 41816,
+    "hiding-tiger": 45822,
+    "humorous-owl": 40313,
+    "impartial-shark": 20822,
+    "impartial-shrimp": 44942,
+    "independent-shrimp": 23638,
+    "joyful-deer": 19265,
+    "kind-seashell": 40486,
+    "laid-back-lobster": 25850,
+    "loyal-parrot": 37100,
+    "loyal-squid": 30836,
+    "modest-octopus": 8531,
+    "naked-microbe": 23086,
+    "nice-peacock": 13995,
+    "noisy-fish": 12501,
+    "noisy-hedgehog": 6793,
+    "non-judgemental-eagle": 36554,
+    "organized-badger": 39777,
+    "organized-cricket": 10156,
+    "passionate-t-rex": 24267,
+    "pioneering-rhino": 28176,
+    "placid-llama": 39063,
+    "polite-pig": 21235,
+    "powerful-chipmunk": 35455,
+    "powerful-fish": 31743,
+    "shivering-raccoon": 34761,
+    "straightforward-crocodile": 25477,
+    "thoughtful-turtle": 25874,
+    "wild-whale": 29530,
+    "willing-hedgehog": 37772,
 }
 
 LEGACY_VERSIONS = {
@@ -403,6 +354,7 @@ class RemoteCollection(RemoteBase):
         n_resource_versions: Dict[str, int] = defaultdict(lambda: 0)
         n_resources: Dict[str, int] = defaultdict(lambda: 0)
         error_in_published_entry = None
+        id_map: Dict[str, IdInfo] = {}
         for rc in self.get_concepts():
             versions: List[Union[RecordDraft, Record]] = (
                 [rc.draft]
@@ -410,11 +362,14 @@ class RemoteCollection(RemoteBase):
                 else [] + rc.get_published_versions()
             )
             try:
-                versions_in_collection = create_collection_entries(versions)
+                versions_in_collection, id_map_update = create_collection_entries(
+                    versions
+                )
             except Exception as e:
                 error_in_published_entry = f"failed to create {rc.id} entry: {e}"
                 logger.error(error_in_published_entry)
             else:
+                id_map.update(id_map_update)
                 if versions_in_collection:
                     n_resources[versions_in_collection[0].type] += 1
                     n_resource_versions[versions_in_collection[0].type] += len(versions)
@@ -459,12 +414,24 @@ class RemoteCollection(RemoteBase):
 
         if entries or not list(self.client.ls(output_file_name)):
             self.client.put_json(
-                output_file_name, collection.model_dump(mode="json", exclude_none=True)
+                output_file_name,
+                collection.model_dump(mode="json", exclude_defaults=True),
             )
         else:
             logger.error(
                 "Skipping overriding existing collection with an empty collection!"
             )
+
+        id_map_file_name = (
+            "id_map.json" if mode == "published" else f"id_map_{mode}.json"
+        )
+        self.client.put_json(
+            id_map_file_name,
+            {
+                k: ii.model_dump(mode="json", exclude_defaults=True)
+                for k, ii in id_map.items()
+            },
+        )
 
         # raise an error for an invalid (skipped) collection entry
         if error_in_published_entry is not None:
@@ -597,9 +564,7 @@ class RecordBase(RemoteBase, ABC):
         self._update_json(extension)
 
     def get_uploader(self):
-        rdf_data = self.client.load_file(self.rdf_path)
-        assert rdf_data is not None
-        rdf = yaml.load(io.BytesIO(rdf_data))
+        rdf = self.get_rdf()
         try:
             uploader = rdf["uploader"]
             email = uploader["email"]
@@ -646,7 +611,7 @@ class RecordDraft(RecordBase):
 
     @property
     def bioimageio_url(self):
-        return f"https://bioimage.io/#/?repo={self.collection.client.get_file_url('collection_draft.json')}&id={self.id}"
+        return f"https://bioimage.io/#/?repo={self.collection.client.get_file_url('collection_draft.json')}&id={self.concept_id}"
 
     @property
     def concept_doi(self):
@@ -660,14 +625,7 @@ class RecordDraft(RecordBase):
         if not previous_versions:
             previous_rdf = None
         else:
-            previous_rdf_data = self.client.load_file(previous_versions[0].rdf_path)
-            if previous_rdf_data is None:
-                raise ValueError("Failed to load previous published version's RDF")
-
-            previous_rdf: Optional[Dict[Any, Any]] = yaml.load(
-                io.BytesIO(previous_rdf_data)
-            )
-            assert isinstance(previous_rdf, dict)
+            previous_rdf = previous_versions[0].get_rdf()
 
         # ensure we have a chat.json
         self.extend_chat(Chat())
@@ -953,7 +911,7 @@ class Record(RecordBase):
 
     @property
     def bioimageio_url(self):
-        return f"https://bioimage.io/#/?id={self.concept_id}/{self.version}"
+        return f"https://bioimage.io/#/?id={self.concept_id}"
 
     @property
     def info(self) -> RecordInfo:
@@ -963,7 +921,7 @@ class Record(RecordBase):
         self._update_json(update)
 
     def get_compatibility_report_path(self, tool: str):
-        return f"{self.folder}compat/{tool}.json"
+        return f"{self.folder}compatibility/{tool}.json"
 
     def set_compatibility_report(self, report: CompatiblityReport) -> None:
         path = self.get_compatibility_report_path(report.tool)
@@ -973,11 +931,12 @@ class Record(RecordBase):
         """get all compatibility reports"""
         tools = [
             d[:-4]
-            for d in self.client.ls(f"{self.folder}compat/", only_files=True)
+            for d in self.client.ls(f"{self.folder}compatibility/", only_files=True)
             if d.endswith(".json") and (tool is None or d[:-4] == tool)
         ]
         reports_data = {
-            t: self.client.load_file(f"{self.folder}compat/{tools}") for t in tools
+            t: self.client.load_file(f"{self.folder}compatibility/{tools}")
+            for t in tools
         }
         return [
             CompatiblityReport.model_validate({**reports_data, "tool": t})
@@ -1011,38 +970,137 @@ def get_remote_resource_version(
     return rv
 
 
+def maybe_swap_with_thumbnail(
+    src: Union[Any, Dict[Any, Any], List[Any]], thumbnails: Mapping[str, str]
+) -> Any:
+    if isinstance(src, dict):
+        return {k: maybe_swap_with_thumbnail(v, thumbnails) for k, v in src.items()}
+
+    if isinstance(src, list):
+        return [maybe_swap_with_thumbnail(s, thumbnails) for s in src]
+
+    if isinstance(src, str) and not src.startswith("https://"):
+        clean_name = Path(src).name  # remove any leading './'
+        if clean_name in thumbnails:
+            return thumbnails[clean_name]
+        else:
+            return src
+
+    return src
+
+
+def resolve_relative_path(
+    src: Union[Any, Dict[Any, Any], List[Any]], parsed_root: SplitResult
+) -> Any:
+    if isinstance(src, dict):
+        return {k: resolve_relative_path(v, parsed_root) for k, v in src.items()}
+
+    if isinstance(src, list):
+        return [resolve_relative_path(s, parsed_root) for s in src]
+
+    if isinstance(src, str):
+        if src.startswith("http") or src.startswith("/") or "." not in src:
+            return src
+        else:
+            return HttpUrl(
+                urlunsplit(
+                    (
+                        parsed_root.scheme,
+                        parsed_root.netloc,
+                        parsed_root.path + "/" + src,
+                        parsed_root.query,
+                        parsed_root.fragment,
+                    )
+                )
+            )
+
+    return src
+
+
 def create_collection_entries(
     versions: Sequence[Union[Record, RecordDraft]],
-) -> List[CollectionEntry]:
+) -> Tuple[List[CollectionEntry], IdMap]:
     """create collection entries from a single (draft) record"""
     if not versions:
-        return []
+        return [], {}
 
     # create an explicit entry only for the latest version
     #   (all versions are referenced under `versions`)
-    rv = versions[0]
+    latest_record_version = versions[0]
 
     with ValidationContext(perform_io_checks=False):
-        rdf_url = HttpUrl(rv.rdf_url)
+        rdf_url = HttpUrl(latest_record_version.rdf_url)
 
     root_url = str(rdf_url.parent)
-    assert root_url == (
-        (
-            root := (
-                rv.client.get_file_url("").strip("/")
-                + "/"
-                + rv.folder.strip("/")
-                + "/files"
-            )
-        )
-    ), (root_url, root)
+    assert root_url == ((root := latest_record_version.get_file_url("").strip("/"))), (
+        root_url,
+        root,
+    )
     parsed_root = urlsplit(root_url)
-    rdf_data = rv.client.load_file(rv.rdf_path)
-    if rdf_data is None:
-        raise RuntimeError(f"failed to load {rv.rdf_path}")
+    rdf = latest_record_version.get_rdf()
 
-    rdf: Union[Any, Dict[Any, Any]] = yaml.load(io.BytesIO(rdf_data))
-    assert isinstance(rdf, dict)
+    id_map: Dict[str, IdInfo] = {}
+    for record_version in versions:
+        rdf_version_data = latest_record_version.client.load_file(
+            latest_record_version.rdf_path
+        )
+        if rdf_version_data is None:
+            logger.error("failed to load {}", latest_record_version.rdf_path)
+            continue
+
+        id_info = IdInfo(
+            source=record_version.rdf_url,
+            sha256=hashlib.sha256(rdf_version_data).hexdigest(),
+        )
+        id_map[record_version.id] = id_info
+
+        if record_version.concept_doi is not None:
+            id_map[record_version.concept_doi] = id_info
+
+        if record_version.doi is not None:
+            id_map[record_version.doi] = id_info
+
+        rdf_version = record_version.get_rdf()
+        if (version_id := rdf_version["id"]) is not None and version_id not in id_map:
+            id_map[version_id] = id_info
+
+        if rdf_version["id"].startswith("10.5281/zenodo."):
+            # legacy models
+            concept_end = rdf_version["id"].rfind("/")
+            concept = rdf_version["id"][:concept_end]
+        else:
+            concept = rdf_version["id"]
+
+        if concept not in id_map:
+            id_map[concept] = id_info
+
+    concept = latest_record_version.concept_id
+    try:
+        # legacy nickname
+        nickname = rdf["config"]["bioimageio"]["nickname"]
+        nickname_icon = rdf["config"]["bioimageio"]["nickname_icon"]
+    except KeyError:
+        # id is nickname
+        nickname = None
+        nickname_icon = rdf.get("id_emoji")
+
+    if nickname == concept:
+        nickname = None
+
+    legacy_download_count = LEGACY_DOWNLOAD_COUNTS.get(concept, 0)
+
+    # TODO: read new download count
+    download_count = "?" if legacy_download_count == 0 else legacy_download_count
+
+    # ingest compatibility reports
+    links = set(rdf.get("links", []))
+    if isinstance(latest_record_version, Record):
+        compat_reports = latest_record_version.get_all_compatibility_reports()
+
+        for r in compat_reports:
+            if r.status == "passed":
+                # update links to reference compatible tools
+                links.update(r.links)
 
     try:
         thumbnails = rdf["config"]["bioimageio"]["thumbnails"]
@@ -1052,131 +1110,35 @@ def create_collection_entries(
         if not isinstance(thumbnails, dict):
             thumbnails = {}
 
-    def resolve_relative_path(src: Union[Any, Dict[Any, Any], List[Any]]) -> Any:
-        if isinstance(src, dict):
-            return {k: resolve_relative_path(v) for k, v in src.items()}
-
-        if isinstance(src, list):
-            return [resolve_relative_path(s) for s in src]
-
-        if isinstance(src, str):
-            if src.startswith("http") or src.startswith("/") or "." not in src:
-                return src
-            else:
-                return HttpUrl(
-                    urlunsplit(
-                        (
-                            parsed_root.scheme,
-                            parsed_root.netloc,
-                            parsed_root.path + "/" + src,
-                            parsed_root.query,
-                            parsed_root.fragment,
-                        )
-                    )
-                )
-
-        return src
-
-    def maybe_swap_with_thumbnail(
-        src: Union[Any, Dict[Any, Any], List[Any]],
-    ) -> Any:
-        if isinstance(src, dict):
-            return {k: maybe_swap_with_thumbnail(v) for k, v in src.items()}
-
-        if isinstance(src, list):
-            return [maybe_swap_with_thumbnail(s) for s in src]
-
-        if isinstance(src, str):
-            clean_name = Path(src).name  # remove any leading './'
-            if clean_name in thumbnails:
-                return rv.get_file_url(thumbnails[clean_name])
-            else:
-                return src
-
-        return src
-
-    try:
-        # legacy nickname
-        nickname = rdf["config"]["bioimageio"]["nickname"]
-        nickname_icon = rdf["config"]["bioimageio"]["nickname_icon"]
-    except KeyError:
-        # id is nickname
-        nickname = rdf["id"]
-        nickname_icon = rdf.get("id_emoji")
-
-    entry_versions = [v.id for v in versions]
-    versions_sha256 = [
-        None if d is None else hashlib.sha256(d).hexdigest()
-        for d in [v.client.load_file(v.rdf_path) for v in versions]
-    ]
-    entry_dois = [v.doi for v in versions]
-    legacy_download_count = LEGACY_DOWNLOAD_COUNTS.get(
-        rdf["id"], 0
-    )  # TODO: add download count from versions
-
-    if rdf["id"].startswith("10.5281/zenodo."):
-        # legacy models
-        concept_end = rdf["id"].rfind("/")
-        concept_doi = rdf["id"][:concept_end]
-        entry_id = concept_doi
-        for v in LEGACY_VERSIONS.get(concept_doi, []):
-            entry_versions.append(f"{concept_doi}/{v}")
-            versions_sha256.append(None)
-            entry_dois.append(f"10.5281/zenodo.{v}")
-    else:
-        concept_doi = rv.concept_doi
-        entry_id = rdf["id"]
-
-    # TODO: read new download count
-    download_count = "?" if legacy_download_count == 0 else legacy_download_count
-
-    # ingest compatibility reports
-    badges = set(Badge.model_validate(b) for b in rdf.get("badges", []))
-    links = set(rdf.get("links", []))
-    compat: Dict[str, bool] = {}
-    if isinstance(rv, Record):
-        compat_reports = rv.get_all_compatibility_reports()
-
-        for r in compat_reports:
-            if r.status == "not-applicable":
-                continue
-
-            compatible = r.status == "passed"
-            compat[r.tool] = compatible
-            if compatible:
-                # update badges and links to reference compatible tools
-                if r.badge is not None:
-                    badges.add(r.badge)
-
-                links.update(r.links)
-
     return [
         CollectionEntry(
             authors=rdf.get("authors", []),
-            badges=resolve_relative_path(maybe_swap_with_thumbnail(list(badges))),
-            concept_doi=concept_doi,
-            compatibility=compat,
-            covers=resolve_relative_path(
-                maybe_swap_with_thumbnail(rdf.get("covers", []))
+            badges=resolve_relative_path(
+                maybe_swap_with_thumbnail(rdf.get("badges", []), thumbnails),
+                parsed_root,
             ),
-            created=rv.info.created,
+            concept_doi=latest_record_version.concept_doi,
+            covers=resolve_relative_path(
+                maybe_swap_with_thumbnail(rdf.get("covers", []), thumbnails),
+                parsed_root,
+            ),
+            created=latest_record_version.info.created,
             description=rdf["description"],
             download_count=download_count,
             download_url=rdf["download_url"] if "download_url" in rdf else None,
-            icon=resolve_relative_path(maybe_swap_with_thumbnail(rdf.get("icon"))),
-            id=entry_id,
+            icon=resolve_relative_path(
+                maybe_swap_with_thumbnail(rdf.get("icon"), thumbnails), parsed_root
+            ),
+            id=concept,
             license=rdf.get("license"),
             links=list(links),
             name=rdf["name"],
             nickname_icon=nickname_icon,
             nickname=nickname,
-            rdf_source=AnyUrl(rv.rdf_url),
+            rdf_source=AnyUrl(latest_record_version.rdf_url),
             root_url=root_url,
             tags=rdf.get("tags", []),
             training_data=rdf["training_data"] if "training_data" in rdf else None,
             type=rdf["type"],
-            versions=entry_versions,
-            versions_sha256=versions_sha256,
-            dois=entry_dois,
         )
-    ]
+    ], id_map
