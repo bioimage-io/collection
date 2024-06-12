@@ -300,6 +300,48 @@
                 </ul>
 
             </li>
+            <li>
+                    <a class="class" href="#VersionInfo">VersionInfo</a>
+                            <ul class="memberlist">
+                        <li>
+                                <a class="variable" href="#VersionInfo.created">created</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#VersionInfo.doi">doi</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#VersionInfo.model_config">model_config</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#VersionInfo.model_fields">model_fields</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#VersionInfo.model_computed_fields">model_computed_fields</a>
+                        </li>
+                </ul>
+
+            </li>
+            <li>
+                    <a class="class" href="#VersionsInfo">VersionsInfo</a>
+                            <ul class="memberlist">
+                        <li>
+                                <a class="variable" href="#VersionsInfo.concept_doi">concept_doi</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#VersionsInfo.versions">versions</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#VersionsInfo.model_config">model_config</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#VersionsInfo.model_fields">model_fields</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#VersionsInfo.model_computed_fields">model_computed_fields</a>
+                        </li>
+                </ul>
+
+            </li>
     </ul>
 
 
@@ -325,7 +367,7 @@
                         <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos">  1</span></a><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 </span><span id="L-2"><a href="#L-2"><span class="linenos">  2</span></a>
 </span><span id="L-3"><a href="#L-3"><span class="linenos">  3</span></a><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
-</span><span id="L-4"><a href="#L-4"><span class="linenos">  4</span></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">ClassVar</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Literal</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+</span><span id="L-4"><a href="#L-4"><span class="linenos">  4</span></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">ClassVar</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Literal</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">,</span> <span class="n">Union</span>
 </span><span id="L-5"><a href="#L-5"><span class="linenos">  5</span></a>
 </span><span id="L-6"><a href="#L-6"><span class="linenos">  6</span></a><span class="kn">import</span> <span class="nn">pydantic</span>
 </span><span id="L-7"><a href="#L-7"><span class="linenos">  7</span></a><span class="kn">from</span> <span class="nn">typing_extensions</span> <span class="kn">import</span> <span class="n">Annotated</span>
@@ -456,6 +498,19 @@
 </span><span id="L-132"><a href="#L-132"><span class="linenos">132</span></a>                <span class="k">else</span> <span class="n">update</span><span class="o">.</span><span class="n">download_count</span>
 </span><span id="L-133"><a href="#L-133"><span class="linenos">133</span></a>            <span class="p">),</span>
 </span><span id="L-134"><a href="#L-134"><span class="linenos">134</span></a>        <span class="p">)</span>
+</span><span id="L-135"><a href="#L-135"><span class="linenos">135</span></a>
+</span><span id="L-136"><a href="#L-136"><span class="linenos">136</span></a>
+</span><span id="L-137"><a href="#L-137"><span class="linenos">137</span></a><span class="k">class</span> <span class="nc">VersionInfo</span><span class="p">(</span><span class="n">Node</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+</span><span id="L-138"><a href="#L-138"><span class="linenos">138</span></a>
+</span><span id="L-139"><a href="#L-139"><span class="linenos">139</span></a>    <span class="n">created</span><span class="p">:</span> <span class="n">datetime</span> <span class="o">=</span> <span class="n">pydantic</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">)</span>
+</span><span id="L-140"><a href="#L-140"><span class="linenos">140</span></a>
+</span><span id="L-141"><a href="#L-141"><span class="linenos">141</span></a>    <span class="n">doi</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span id="L-142"><a href="#L-142"><span class="linenos">142</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;version specific DOI&quot;&quot;&quot;</span>
+</span><span id="L-143"><a href="#L-143"><span class="linenos">143</span></a>
+</span><span id="L-144"><a href="#L-144"><span class="linenos">144</span></a>
+</span><span id="L-145"><a href="#L-145"><span class="linenos">145</span></a><span class="k">class</span> <span class="nc">VersionsInfo</span><span class="p">(</span><span class="n">Node</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+</span><span id="L-146"><a href="#L-146"><span class="linenos">146</span></a>    <span class="n">concept_doi</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span id="L-147"><a href="#L-147"><span class="linenos">147</span></a>    <span class="n">versions</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">VersionInfo</span><span class="p">]</span> <span class="o">=</span> <span class="p">()</span>
 </span></pre></div>
 
 
@@ -2098,6 +2153,295 @@ __pydantic_private__: Instance attribute with the values of private attributes s
                 <dd id="RecordInfo.schema_json" class="function">schema_json</dd>
                 <dd id="RecordInfo.validate" class="function">validate</dd>
                 <dd id="RecordInfo.update_forward_refs" class="function">update_forward_refs</dd>
+
+            </div>
+                                </dl>
+                            </div>
+                </section>
+                <section id="VersionInfo">
+                            <input id="VersionInfo-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr class">
+            
+    <span class="def">class</span>
+    <span class="name">VersionInfo</span><wbr>(<span class="base"><a href="../common.html#Node">bioimageio_collection_backoffice.common.Node</a></span>):
+
+                <label class="view-source-button" for="VersionInfo-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#VersionInfo"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="VersionInfo-138"><a href="#VersionInfo-138"><span class="linenos">138</span></a><span class="k">class</span> <span class="nc">VersionInfo</span><span class="p">(</span><span class="n">Node</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+</span><span id="VersionInfo-139"><a href="#VersionInfo-139"><span class="linenos">139</span></a>
+</span><span id="VersionInfo-140"><a href="#VersionInfo-140"><span class="linenos">140</span></a>    <span class="n">created</span><span class="p">:</span> <span class="n">datetime</span> <span class="o">=</span> <span class="n">pydantic</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">)</span>
+</span><span id="VersionInfo-141"><a href="#VersionInfo-141"><span class="linenos">141</span></a>
+</span><span id="VersionInfo-142"><a href="#VersionInfo-142"><span class="linenos">142</span></a>    <span class="n">doi</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span id="VersionInfo-143"><a href="#VersionInfo-143"><span class="linenos">143</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;version specific DOI&quot;&quot;&quot;</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>Usage docs: <a href="https://docs.pydantic.dev/2.6/concepts/models/">https://docs.pydantic.dev/2.6/concepts/models/</a></p>
+
+<p>A base class for creating Pydantic models.</p>
+
+<p>Attributes:
+    __class_vars__: The names of classvars defined on the model.
+    __private_attributes__: Metadata about the private attributes of the model.
+    __signature__: The signature for instantiating the model.</p>
+
+<pre><code>__pydantic_complete__: Whether model building is completed, or if there are still undefined fields.
+__pydantic_core_schema__: The pydantic-core schema used to build the SchemaValidator and SchemaSerializer.
+__pydantic_custom_init__: Whether the model has a custom `__init__` function.
+__pydantic_decorators__: Metadata containing the decorators defined on the model.
+    This replaces `Model.__validators__` and `Model.__root_validators__` from Pydantic V1.
+__pydantic_generic_metadata__: Metadata for generic models; contains data used for a similar purpose to
+    __args__, __origin__, __parameters__ in typing-module generics. May eventually be replaced by these.
+__pydantic_parent_namespace__: Parent namespace of the model, used for automatic rebuilding of models.
+__pydantic_post_init__: The name of the post-init method for the model, if defined.
+__pydantic_root_model__: Whether the model is a `RootModel`.
+__pydantic_serializer__: The pydantic-core SchemaSerializer used to dump instances of the model.
+__pydantic_validator__: The pydantic-core SchemaValidator used to validate instances of the model.
+
+__pydantic_extra__: An instance attribute with the values of extra fields from validation when
+    `model_config['extra'] == 'allow'`.
+__pydantic_fields_set__: An instance attribute with the names of fields explicitly set.
+__pydantic_private__: Instance attribute with the values of private attributes set on the model instance.
+</code></pre>
+</div>
+
+
+                            <div id="VersionInfo.created" class="classattr">
+                                <div class="attr variable">
+            <span class="name">created</span><span class="annotation">: datetime.datetime</span>
+
+        
+    </div>
+    <a class="headerlink" href="#VersionInfo.created"></a>
+    
+    
+
+                            </div>
+                            <div id="VersionInfo.doi" class="classattr">
+                                <div class="attr variable">
+            <span class="name">doi</span><span class="annotation">: Optional[str]</span>
+
+        
+    </div>
+    <a class="headerlink" href="#VersionInfo.doi"></a>
+    
+            <div class="docstring"><p>version specific DOI</p>
+</div>
+
+
+                            </div>
+                            <div id="VersionInfo.model_config" class="classattr">
+                                <div class="attr variable">
+            <span class="name">model_config</span>        =
+<input id="VersionInfo.model_config-view-value" class="view-value-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+            <label class="view-value-button pdoc-button" for="VersionInfo.model_config-view-value"></label><span class="default_value">{&#39;extra&#39;: &#39;ignore&#39;, &#39;frozen&#39;: True, &#39;populate_by_name&#39;: True, &#39;revalidate_instances&#39;: &#39;never&#39;, &#39;validate_assignment&#39;: True, &#39;validate_default&#39;: False}</span>
+
+        
+    </div>
+    <a class="headerlink" href="#VersionInfo.model_config"></a>
+    
+    
+
+                            </div>
+                            <div id="VersionInfo.model_fields" class="classattr">
+                                <div class="attr variable">
+            <span class="name">model_fields</span>        =
+<input id="VersionInfo.model_fields-view-value" class="view-value-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+            <label class="view-value-button pdoc-button" for="VersionInfo.model_fields-view-value"></label><span class="default_value">{&#39;created&#39;: FieldInfo(annotation=datetime, required=False, default_factory=builtin_function_or_method), &#39;doi&#39;: FieldInfo(annotation=Union[str, NoneType], required=False)}</span>
+
+        
+    </div>
+    <a class="headerlink" href="#VersionInfo.model_fields"></a>
+    
+    
+
+                            </div>
+                            <div id="VersionInfo.model_computed_fields" class="classattr">
+                                <div class="attr variable">
+            <span class="name">model_computed_fields</span>        =
+<span class="default_value">{}</span>
+
+        
+    </div>
+    <a class="headerlink" href="#VersionInfo.model_computed_fields"></a>
+    
+    
+
+                            </div>
+                            <div class="inherited">
+                                <h5>Inherited Members</h5>
+                                <dl>
+                                    <div><dt>pydantic.main.BaseModel</dt>
+                                <dd id="VersionInfo.__init__" class="function">BaseModel</dd>
+                <dd id="VersionInfo.model_extra" class="variable">model_extra</dd>
+                <dd id="VersionInfo.model_fields_set" class="variable">model_fields_set</dd>
+                <dd id="VersionInfo.model_construct" class="function">model_construct</dd>
+                <dd id="VersionInfo.model_copy" class="function">model_copy</dd>
+                <dd id="VersionInfo.model_dump" class="function">model_dump</dd>
+                <dd id="VersionInfo.model_dump_json" class="function">model_dump_json</dd>
+                <dd id="VersionInfo.model_json_schema" class="function">model_json_schema</dd>
+                <dd id="VersionInfo.model_parametrized_name" class="function">model_parametrized_name</dd>
+                <dd id="VersionInfo.model_post_init" class="function">model_post_init</dd>
+                <dd id="VersionInfo.model_rebuild" class="function">model_rebuild</dd>
+                <dd id="VersionInfo.model_validate" class="function">model_validate</dd>
+                <dd id="VersionInfo.model_validate_json" class="function">model_validate_json</dd>
+                <dd id="VersionInfo.model_validate_strings" class="function">model_validate_strings</dd>
+                <dd id="VersionInfo.dict" class="function">dict</dd>
+                <dd id="VersionInfo.json" class="function">json</dd>
+                <dd id="VersionInfo.parse_obj" class="function">parse_obj</dd>
+                <dd id="VersionInfo.parse_raw" class="function">parse_raw</dd>
+                <dd id="VersionInfo.parse_file" class="function">parse_file</dd>
+                <dd id="VersionInfo.from_orm" class="function">from_orm</dd>
+                <dd id="VersionInfo.construct" class="function">construct</dd>
+                <dd id="VersionInfo.copy" class="function">copy</dd>
+                <dd id="VersionInfo.schema" class="function">schema</dd>
+                <dd id="VersionInfo.schema_json" class="function">schema_json</dd>
+                <dd id="VersionInfo.validate" class="function">validate</dd>
+                <dd id="VersionInfo.update_forward_refs" class="function">update_forward_refs</dd>
+
+            </div>
+                                </dl>
+                            </div>
+                </section>
+                <section id="VersionsInfo">
+                            <input id="VersionsInfo-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr class">
+            
+    <span class="def">class</span>
+    <span class="name">VersionsInfo</span><wbr>(<span class="base"><a href="../common.html#Node">bioimageio_collection_backoffice.common.Node</a></span>):
+
+                <label class="view-source-button" for="VersionsInfo-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#VersionsInfo"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="VersionsInfo-146"><a href="#VersionsInfo-146"><span class="linenos">146</span></a><span class="k">class</span> <span class="nc">VersionsInfo</span><span class="p">(</span><span class="n">Node</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+</span><span id="VersionsInfo-147"><a href="#VersionsInfo-147"><span class="linenos">147</span></a>    <span class="n">concept_doi</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span id="VersionsInfo-148"><a href="#VersionsInfo-148"><span class="linenos">148</span></a>    <span class="n">versions</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">VersionInfo</span><span class="p">]</span> <span class="o">=</span> <span class="p">()</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>Usage docs: <a href="https://docs.pydantic.dev/2.6/concepts/models/">https://docs.pydantic.dev/2.6/concepts/models/</a></p>
+
+<p>A base class for creating Pydantic models.</p>
+
+<p>Attributes:
+    __class_vars__: The names of classvars defined on the model.
+    __private_attributes__: Metadata about the private attributes of the model.
+    __signature__: The signature for instantiating the model.</p>
+
+<pre><code>__pydantic_complete__: Whether model building is completed, or if there are still undefined fields.
+__pydantic_core_schema__: The pydantic-core schema used to build the SchemaValidator and SchemaSerializer.
+__pydantic_custom_init__: Whether the model has a custom `__init__` function.
+__pydantic_decorators__: Metadata containing the decorators defined on the model.
+    This replaces `Model.__validators__` and `Model.__root_validators__` from Pydantic V1.
+__pydantic_generic_metadata__: Metadata for generic models; contains data used for a similar purpose to
+    __args__, __origin__, __parameters__ in typing-module generics. May eventually be replaced by these.
+__pydantic_parent_namespace__: Parent namespace of the model, used for automatic rebuilding of models.
+__pydantic_post_init__: The name of the post-init method for the model, if defined.
+__pydantic_root_model__: Whether the model is a `RootModel`.
+__pydantic_serializer__: The pydantic-core SchemaSerializer used to dump instances of the model.
+__pydantic_validator__: The pydantic-core SchemaValidator used to validate instances of the model.
+
+__pydantic_extra__: An instance attribute with the values of extra fields from validation when
+    `model_config['extra'] == 'allow'`.
+__pydantic_fields_set__: An instance attribute with the names of fields explicitly set.
+__pydantic_private__: Instance attribute with the values of private attributes set on the model instance.
+</code></pre>
+</div>
+
+
+                            <div id="VersionsInfo.concept_doi" class="classattr">
+                                <div class="attr variable">
+            <span class="name">concept_doi</span><span class="annotation">: Optional[str]</span>
+
+        
+    </div>
+    <a class="headerlink" href="#VersionsInfo.concept_doi"></a>
+    
+    
+
+                            </div>
+                            <div id="VersionsInfo.versions" class="classattr">
+                                <div class="attr variable">
+            <span class="name">versions</span><span class="annotation">: Sequence[<a href="#VersionInfo">VersionInfo</a>]</span>
+
+        
+    </div>
+    <a class="headerlink" href="#VersionsInfo.versions"></a>
+    
+    
+
+                            </div>
+                            <div id="VersionsInfo.model_config" class="classattr">
+                                <div class="attr variable">
+            <span class="name">model_config</span>        =
+<input id="VersionsInfo.model_config-view-value" class="view-value-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+            <label class="view-value-button pdoc-button" for="VersionsInfo.model_config-view-value"></label><span class="default_value">{&#39;extra&#39;: &#39;ignore&#39;, &#39;frozen&#39;: True, &#39;populate_by_name&#39;: True, &#39;revalidate_instances&#39;: &#39;never&#39;, &#39;validate_assignment&#39;: True, &#39;validate_default&#39;: False}</span>
+
+        
+    </div>
+    <a class="headerlink" href="#VersionsInfo.model_config"></a>
+    
+    
+
+                            </div>
+                            <div id="VersionsInfo.model_fields" class="classattr">
+                                <div class="attr variable">
+            <span class="name">model_fields</span>        =
+<input id="VersionsInfo.model_fields-view-value" class="view-value-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+            <label class="view-value-button pdoc-button" for="VersionsInfo.model_fields-view-value"></label><span class="default_value">{&#39;concept_doi&#39;: FieldInfo(annotation=Union[str, NoneType], required=False), &#39;versions&#39;: FieldInfo(annotation=Sequence[VersionInfo], required=False, default=())}</span>
+
+        
+    </div>
+    <a class="headerlink" href="#VersionsInfo.model_fields"></a>
+    
+    
+
+                            </div>
+                            <div id="VersionsInfo.model_computed_fields" class="classattr">
+                                <div class="attr variable">
+            <span class="name">model_computed_fields</span>        =
+<span class="default_value">{}</span>
+
+        
+    </div>
+    <a class="headerlink" href="#VersionsInfo.model_computed_fields"></a>
+    
+    
+
+                            </div>
+                            <div class="inherited">
+                                <h5>Inherited Members</h5>
+                                <dl>
+                                    <div><dt>pydantic.main.BaseModel</dt>
+                                <dd id="VersionsInfo.__init__" class="function">BaseModel</dd>
+                <dd id="VersionsInfo.model_extra" class="variable">model_extra</dd>
+                <dd id="VersionsInfo.model_fields_set" class="variable">model_fields_set</dd>
+                <dd id="VersionsInfo.model_construct" class="function">model_construct</dd>
+                <dd id="VersionsInfo.model_copy" class="function">model_copy</dd>
+                <dd id="VersionsInfo.model_dump" class="function">model_dump</dd>
+                <dd id="VersionsInfo.model_dump_json" class="function">model_dump_json</dd>
+                <dd id="VersionsInfo.model_json_schema" class="function">model_json_schema</dd>
+                <dd id="VersionsInfo.model_parametrized_name" class="function">model_parametrized_name</dd>
+                <dd id="VersionsInfo.model_post_init" class="function">model_post_init</dd>
+                <dd id="VersionsInfo.model_rebuild" class="function">model_rebuild</dd>
+                <dd id="VersionsInfo.model_validate" class="function">model_validate</dd>
+                <dd id="VersionsInfo.model_validate_json" class="function">model_validate_json</dd>
+                <dd id="VersionsInfo.model_validate_strings" class="function">model_validate_strings</dd>
+                <dd id="VersionsInfo.dict" class="function">dict</dd>
+                <dd id="VersionsInfo.json" class="function">json</dd>
+                <dd id="VersionsInfo.parse_obj" class="function">parse_obj</dd>
+                <dd id="VersionsInfo.parse_raw" class="function">parse_raw</dd>
+                <dd id="VersionsInfo.parse_file" class="function">parse_file</dd>
+                <dd id="VersionsInfo.from_orm" class="function">from_orm</dd>
+                <dd id="VersionsInfo.construct" class="function">construct</dd>
+                <dd id="VersionsInfo.copy" class="function">copy</dd>
+                <dd id="VersionsInfo.schema" class="function">schema</dd>
+                <dd id="VersionsInfo.schema_json" class="function">schema_json</dd>
+                <dd id="VersionsInfo.validate" class="function">validate</dd>
+                <dd id="VersionsInfo.update_forward_refs" class="function">update_forward_refs</dd>
 
             </div>
                                 </dl>
