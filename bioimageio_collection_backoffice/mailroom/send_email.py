@@ -5,18 +5,15 @@ from typing import List, Union
 import markdown
 from loguru import logger
 
-from bioimageio_collection_backoffice._settings import settings
-from bioimageio_collection_backoffice.mailroom.constants import (
+from .._settings import settings
+from ..mailroom.constants import (
     BOT_EMAIL,
     REPLY_HINT,
     SMTP_PORT,
     SMTP_SERVER,
     STATUS_UPDATE_SUBJECT,
 )
-from bioimageio_collection_backoffice.remote_collection import (
-    Record,
-    RecordDraft,
-)
+from ..remote_collection import Record, RecordDraft
 
 
 def notify_uploader(rv: Union[RecordDraft, Record], subject_end: str, msg: str):

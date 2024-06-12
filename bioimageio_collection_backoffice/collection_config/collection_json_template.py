@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Any, Literal, Optional, Sequence
+from typing import Literal, Optional, Sequence
 
 from bioimageio.spec.generic.v0_3 import Author, CiteEntry, LicenseId, Version
 from pydantic import HttpUrl
@@ -49,5 +49,3 @@ class CollectionJsonTemplate(Node, frozen=True):
     tags: Sequence[str]
     type: Literal["collection"]
     version: Version
-
-    collection: Sequence[Any]
