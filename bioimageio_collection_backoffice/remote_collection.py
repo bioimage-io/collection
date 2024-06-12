@@ -1074,7 +1074,13 @@ def create_collection_entries(
         if concept not in id_map:
             id_map[concept] = id_info
 
-    concept = latest_record_version.concept_id
+    if rdf["id"].startswith("10.5281/zenodo."):
+        # legacy models
+        concept_end = rdf["id"].rfind("/")
+        concept = rdf["id"][:concept_end]
+    else:
+        concept = rdf["id"]
+
     try:
         # legacy nickname
         nickname = rdf["config"]["bioimageio"]["nickname"]
