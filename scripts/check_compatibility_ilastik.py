@@ -29,13 +29,18 @@ def check_compatibility_ilastik_impl(
         return CompatiblityReport(
             tool=tool,
             status="not-applicable",
+            error=None,
             details="only 'model' resources can be used in ilastik.",
         )
 
     # produce test summaries for each weight format
     summary = test_model(record.client.get_file_url(record.rdf_path))
     return CompatiblityReport(
-        tool=tool, status=summary.status, details=summary, links=["ilastik/ilastik"]
+        tool=tool,
+        status=summary.status,
+        error=None if summary.status == "passed" else summary.format(),
+        details=summary,
+        links=["ilastik/ilastik"],
     )
 
 

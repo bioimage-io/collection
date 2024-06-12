@@ -10,6 +10,10 @@ from bioimageio.spec.summary import ErrorEntry, InstalledPackage, ValidationDeta
 from bioimageio.spec.utils import download
 from ruyaml import YAML
 
+from bioimageio_collection_backoffice.db_structure.compatibility import (
+    CompatiblityReport,
+)
+
 from .db_structure.log import BioimageioLog, BioimageioLogEntry, Log
 from .remote_collection import Record, RecordDraft
 
@@ -78,6 +82,13 @@ def rerun_dynamic_tests(
                 ]
             )
         )
+        report = CompatiblityReport(
+            tool="bioimageio.core",
+            status=summary.status,
+            error=None if summary.status == "passed" else f"'{summary.name}' failed",
+            details=summary,
+        )
+        published.set_compatibility_report(report)
 
 
 def _run_dynamic_tests_impl(
