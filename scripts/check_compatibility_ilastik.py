@@ -1,6 +1,6 @@
 import argparse
 
-from bioimageio.core import test_model
+import bioimageio.core
 from loguru import logger
 from ruyaml import YAML
 
@@ -9,6 +9,11 @@ from bioimageio_collection_backoffice.db_structure.compatibility import (
 )
 from bioimageio_collection_backoffice.remote_collection import Record, RemoteCollection
 from bioimageio_collection_backoffice.s3_client import Client
+
+if bioimageio.core.__version__.startswith("0.5."):
+    from bioimageio.core import test_resource as test_model
+else:
+    from bioimageio.core import test_model
 
 yaml = YAML(typ="safe")
 
@@ -35,6 +40,9 @@ def check_compatibility_ilastik_impl(
 
     # produce test summaries for each weight format
     summary = test_model(record.client.get_file_url(record.rdf_path))
+    if bioimageio.core.__version__.startswith("0.5."):
+        summary = summary[-1]  # type: ignore
+
     return CompatiblityReport(
         tool=tool,
         status=summary.status,
