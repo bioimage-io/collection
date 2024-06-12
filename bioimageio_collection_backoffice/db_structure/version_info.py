@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import ClassVar, List, Literal, Optional, Union
+from typing import ClassVar, List, Literal, Optional, Sequence, Union
 
 import pydantic
 from typing_extensions import Annotated
@@ -132,3 +132,16 @@ class RecordInfo(Node, frozen=True):
                 else update.download_count
             ),
         )
+
+
+class VersionInfo(Node, frozen=True):
+
+    created: datetime = pydantic.Field(default_factory=datetime.now)
+
+    doi: Optional[str] = None
+    """version specific DOI"""
+
+
+class VersionsInfo(Node, frozen=True):
+    concept_doi: Optional[str] = None
+    versions: Sequence[VersionInfo] = ()

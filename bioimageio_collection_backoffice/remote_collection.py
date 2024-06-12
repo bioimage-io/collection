@@ -61,6 +61,8 @@ from .db_structure.version_info import (
     TestingStatus,
     UnpackedStatus,
     UnpackingStatus,
+    VersionInfo,
+    VersionsInfo,
 )
 from .id_map import IdInfo, IdMap
 from .mailroom.constants import BOT_EMAIL
@@ -344,7 +346,9 @@ class RemoteCollection(RemoteBase):
         self,
         mode: Literal["published", "draft"] = "published",
     ) -> None:
-        """generate a json file with an overview of all published resources"""
+        """generate a json file with an overview of all published resources
+        (also generates `versions.json` files for each research concept)
+        """
         output_file_name: str = (
             "collection.json" if mode == "published" else f"collection_{mode}.json"
         )
@@ -1040,6 +1044,7 @@ def create_collection_entries(
     rdf = latest_record_version.get_rdf()
 
     id_map: Dict[str, IdInfo] = {}
+    version_infos: List[VersionInfo] = []
     for record_version in versions:
         rdf_version_data = latest_record_version.client.load_file(
             latest_record_version.rdf_path
@@ -1073,6 +1078,26 @@ def create_collection_entries(
 
         if concept not in id_map:
             id_map[concept] = id_info
+
+        version_infos.append(
+            VersionInfo(
+                created=record_version.info.created,
+                doi=(
+                    None
+                    if isinstance(record_version, RecordDraft)
+                    else record_version.info.doi
+                ),
+            )
+        )
+
+    # upload 'versions.json' summary
+    versions_info = VersionsInfo(
+        concept_doi=latest_record_version.concept_doi, versions=version_infos
+    )
+    latest_record_version.concept.client.put_json(
+        f"{latest_record_version.concept.folder}versions.json",
+        versions_info.model_dump(mode="json"),
+    )
 
     if rdf["id"].startswith("10.5281/zenodo."):
         # legacy models
