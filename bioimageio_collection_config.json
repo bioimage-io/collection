@@ -23,6 +23,14 @@
             "orcid": "0000-0001-6562-7187",
             "github_user": "constantinpape",
             "email": "constantin.pape@informatik.uni-goettingen.de"
+        },
+        {
+            "id": "github|32868330",
+            "name": "Daniel Franco-Barranco",
+            "affiliation": "University of the Basque Country",
+            "orcid": "0000-0002-1109-110X",
+            "github_user": "danifranco",
+            "email": "daniel.franco@dipc.org"
         }
     ],
     "collection_template": {
