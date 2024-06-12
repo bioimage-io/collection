@@ -48,7 +48,11 @@ from .collection_json import (
     CollectionWebsiteConfig,
 )
 from .db_structure.chat import Chat, Message
-from .db_structure.compatibility import CompatiblityReport
+from .db_structure.compatibility import (
+    CompatiblityReport,
+    TestSummary,
+    TestSummaryEntry,
+)
 from .db_structure.log import CollectionLog, CollectionLogEntry, Log
 from .db_structure.reserved import Reserved
 from .db_structure.version_info import (
@@ -1085,6 +1089,37 @@ def create_collection_entries(
                     created=record_version.info.created,
                     doi=record_version.info.doi,
                 )
+            )
+            compat_reports = record_version.get_all_compatibility_reports()
+            compat_tests: Dict[str, List[TestSummaryEntry]] = {}
+            bioimageio_status = "failed"
+            for r in compat_reports:
+                if r.status == "not-applicable":
+                    continue
+
+                if r.tool == "bioimageio.core":
+                    bioimageio_status = r.status
+
+                compat_tests.setdefault(r.tool, []).append(
+                    TestSummaryEntry(
+                        error=r.error,
+                        name="compatibility check",
+                        status=r.status,
+                        traceback=None,
+                        warnings=None,
+                    )
+                )
+
+            test_summary = TestSummary(
+                status=bioimageio_status, tests=compat_tests
+            ).model_dump(mode="json")
+            stream = io.StringIO()
+            yaml.dump(test_summary, stream)
+            test_summary_data = stream.getvalue().encode()
+            record_version.client.put(
+                f"{record_version.folder}test_summary.yaml",
+                io.BytesIO(test_summary_data),
+                length=len(test_summary_data),
             )
 
     # upload 'versions.json' summary
