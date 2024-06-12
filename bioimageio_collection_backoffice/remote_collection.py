@@ -356,10 +356,10 @@ class RemoteCollection(RemoteBase):
         error_in_published_entry = None
         id_map: Dict[str, IdInfo] = {}
         for rc in self.get_concepts():
-            versions: List[Union[RecordDraft, Record]] = (
+            versions: Union[List[RecordDraft], List[Record]] = (
                 [rc.draft]
                 if mode == "draft" and rc.draft.exists()
-                else [] + rc.get_published_versions()
+                else rc.get_published_versions()
             )
             try:
                 versions_in_collection, id_map_update = create_collection_entries(
