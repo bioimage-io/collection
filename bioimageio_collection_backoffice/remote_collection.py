@@ -365,10 +365,13 @@ class RemoteCollection(RemoteBase):
         id_map: Dict[str, IdInfo] = {}
         for rc in self.get_concepts():
             versions: Union[List[RecordDraft], List[Record]] = (
-                [rc.draft]
-                if mode == "draft" and rc.draft.exists()
+                ([rc.draft] if rc.draft.exists() else [])
+                if mode == "draft"
                 else rc.get_published_versions()
             )
+            if not versions:
+                continue
+
             try:
                 versions_in_collection, id_map_update = create_collection_entries(
                     versions
