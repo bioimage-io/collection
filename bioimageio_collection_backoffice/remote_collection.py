@@ -1204,5 +1204,6 @@ def create_collection_entries(
             tags=rdf.get("tags", []),
             training_data=rdf["training_data"] if "training_data" in rdf else None,
             type=rdf["type"],
+            source=rdf.get("source"),
         )
     ], id_map

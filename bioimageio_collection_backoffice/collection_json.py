@@ -51,6 +51,7 @@ class CollectionEntry(Node, frozen=True):
     tags: Sequence[str] = ()
     training_data: Optional[TrainingData] = None
     type: Literal["application", "model", "notebook", "dataset"]
+    source: Optional[str] = None
 
     def __lt__(self, other: CollectionEntry):
         sdc = 0 if self.download_count == "?" else self.download_count
