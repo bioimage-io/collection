@@ -21,14 +21,14 @@ package io.bioimage.modelrunner.ci;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
-import io.bioimage.modelrunner.bioimageio.download.DownloadTracker.TwoParameterConsumer;
 import io.bioimage.modelrunner.engine.installation.EngineInstall;
+import io.bioimage.modelrunner.versionmanagement.InstalledEngines;
 
 /**
+ * Class to install the engines that a DIJ or Icy distribution would install
  * 
+ * @author Carlos Javier GArcia Lopez de Haro
  */
 public class DownloadEngines {
 	
@@ -49,6 +49,8 @@ public class DownloadEngines {
 		if (args[0].equals(DEEPIMAGEJ_TAG)) {
 			EngineInstall engineManager = EngineInstall.createInstaller(ENGINES_DIR);
 			engineManager.basicEngineInstallation();
+			//InstalledEngines.buildEnginesFinder(ENGINES_DIR).getDownloadedForOS().stream().map(i -> i.toString())
+			System.out.println(InstalledEngines.buildEnginesFinder(ENGINES_DIR).getDownloadedForOS());
 		}
     }
 }
