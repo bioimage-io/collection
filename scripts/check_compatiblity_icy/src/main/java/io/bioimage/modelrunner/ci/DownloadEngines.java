@@ -21,46 +21,11 @@ package io.bioimage.modelrunner.ci;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.PathMatcher;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.jar.Manifest;
-import java.util.stream.Collectors;
 
-import io.bioimage.modelrunner.bioimageio.BioimageioRepo;
-import io.bioimage.modelrunner.bioimageio.description.ModelDescriptor;
-import io.bioimage.modelrunner.bioimageio.description.TransformSpec;
-import io.bioimage.modelrunner.bioimageio.description.exceptions.ModelSpecsException;
-import io.bioimage.modelrunner.bioimageio.description.weights.ModelWeight;
-import io.bioimage.modelrunner.bioimageio.description.weights.WeightFormat;
-import io.bioimage.modelrunner.bioimageio.download.DownloadTracker;
 import io.bioimage.modelrunner.bioimageio.download.DownloadTracker.TwoParameterConsumer;
-import io.bioimage.modelrunner.engine.EngineInfo;
 import io.bioimage.modelrunner.engine.installation.EngineInstall;
-import io.bioimage.modelrunner.model.Model;
-import io.bioimage.modelrunner.numpy.DecodeNumpy;
-import io.bioimage.modelrunner.tensor.Tensor;
-import io.bioimage.modelrunner.utils.Constants;
-import io.bioimage.modelrunner.utils.YAMLUtils;
-import io.bioimage.modelrunner.versionmanagement.InstalledEngines;
-import net.imglib2.Cursor;
-import net.imglib2.RandomAccessibleInterval;
-import net.imglib2.loops.LoopBuilder;
-import net.imglib2.type.NativeType;
-import net.imglib2.type.numeric.RealType;
-import net.imglib2.type.numeric.real.FloatType;
-import net.imglib2.view.Views;
 
 /**
  * 
@@ -83,24 +48,7 @@ public class DownloadEngines {
 	public static void main(String[] args) throws IOException, InterruptedException {
 		if (args[0].equals(DEEPIMAGEJ_TAG)) {
 			EngineInstall engineManager = EngineInstall.createInstaller(ENGINES_DIR);
-			Map<String, TwoParameterConsumer<String, Double>> consumers = 
-					new LinkedHashMap<String, TwoParameterConsumer<String, Double>>();
-			Thread checkAndInstallMissingEngines = new Thread(() -> {
-				consumers.putAll(engineManager.getBasicEnginesProgress());
-				engineManager.basicEngineInstallation();
-	        });
-			System.out.println("[DEBUG] Checking and installing missing engines");
-			checkAndInstallMissingEngines.start();
-			
-			String backup = "";
-			EngineInstallationProgress installerInfo = new EngineInstallationProgress();
-			while (!engineManager.isInstallationFinished()) {
-				Thread.sleep(300);
-				if (consumers.keySet().size() != 0) {
-					String progress = installerInfo.basicEnginesInstallationProgress(consumers);
-					System.out.println(progress);
-				}
-			}
+			engineManager.basicEngineInstallation();
 		}
     }
 }
