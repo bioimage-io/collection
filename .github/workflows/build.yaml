@@ -1,6 +1,6 @@
 name: test backoffice and build docs
 
-on: #push
+on: pull
 
 concurrency: test
 
