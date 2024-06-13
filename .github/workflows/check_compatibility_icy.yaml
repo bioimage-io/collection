@@ -31,22 +31,3 @@ jobs:
       run: |
         java -cp target/dl-modelrunner-ci-0.0.1-SNAPSHOT.jar io.bioimage.modelrunner.ci.DownloadEngines deepimagej
 
-
-  run:
-    runs-on: ubuntu-latest
-    needs: setup
-    strategy:
-      fail-fast: false
-
-    steps:
-    - uses: actions/checkout@v3
-    - uses: actions/checkout@v3
-      with:
-        repository: bioimage-io/collection-bioimage-io
-        ref: gh-pages
-        path: bioimageio-gh-pages
-    - name: Download JDLL engines
-      run: 
-    - name: test with ilastik ${{ matrix.v }}
-      shell: bash -l {0}
-      run: python scripts/check_compatibility_ilastik.py ${{ matrix.v }}
