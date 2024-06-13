@@ -6,7 +6,7 @@ from typing import Any, Optional, Type, TypeVar, Union
 from loguru import logger
 
 from .db_structure.chat import Chat
-from .db_structure.log import CollectionLog, CollectionLogEntry, Log
+from .db_structure.log import CollectionLog, Log, LogContent
 from .db_structure.reserved import Reserved
 from .db_structure.version_info import DraftInfo, RecordInfo
 from .s3_client import Client
@@ -51,9 +51,7 @@ class RemoteBase:
         self._update_json(
             Log(
                 collection=[
-                    CollectionLog(
-                        log=CollectionLogEntry(message=message, details=details)
-                    )
+                    CollectionLog(log=LogContent(message=message, details=details))
                 ]
             )
         )
@@ -71,9 +69,7 @@ class RemoteBase:
         self._update_json(
             Log(
                 collection=[
-                    CollectionLog(
-                        log=CollectionLogEntry(message=error, details=details)
-                    )
+                    CollectionLog(log=LogContent(message=error, details=details))
                 ]
             )
         )

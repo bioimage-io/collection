@@ -11,7 +11,7 @@ from typing_extensions import assert_never
 from ._settings import settings
 from .backup import backup
 from .db_structure.chat import Chat, Message
-from .db_structure.log import CollectionLog, CollectionLogEntry, Log
+from .db_structure.log import Log, LogContent, LogEntry
 from .gh_utils import set_gh_actions_outputs
 from .mailroom.send_email import notify_uploader
 from .remote_collection import (
@@ -50,11 +50,7 @@ class BackOffice:
         rv.extend_log(
             Log(
                 collection=[
-                    CollectionLog(
-                        log=CollectionLogEntry(
-                            message=message, run_url=settings.run_url
-                        )
-                    )
+                    LogEntry(log=LogContent(message=message, run_url=settings.run_url))
                 ]
             )
         )

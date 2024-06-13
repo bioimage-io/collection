@@ -14,7 +14,7 @@ from bioimageio_collection_backoffice.db_structure.compatibility import (
     CompatiblityReport,
 )
 
-from .db_structure.log import BioimageioLog, BioimageioLogEntry, Log
+from .db_structure.log import Log, LogContent, LogEntry
 from .remote_collection import Record, RecordDraft
 
 try:
@@ -56,9 +56,7 @@ def run_dynamic_tests(
         staged.extend_log(
             Log(
                 bioimageio_core=[
-                    BioimageioLog(
-                        log=BioimageioLogEntry(message=summary.name, details=summary)
-                    )
+                    LogEntry(log=LogContent(message=summary.name, details=summary))
                 ]
             )
         )
@@ -76,9 +74,7 @@ def rerun_dynamic_tests(
         published.extend_log(
             Log(
                 bioimageio_core=[
-                    BioimageioLog(
-                        log=BioimageioLogEntry(message=summary.name, details=summary)
-                    )
+                    LogEntry(log=LogContent(message=summary.name, details=summary))
                 ]
             )
         )

@@ -4,37 +4,24 @@ import collections.abc
 from datetime import datetime
 from typing import Any, ClassVar, Dict, Optional, Sequence, Union
 
-from bioimageio.spec import ValidationSummary
 from pydantic import Field
 
 from .._settings import settings
 from ..common import Node
 
 
-class _LogEntryBase(Node, frozen=True, extra="ignore"):
-    timestamp: datetime = Field(default_factory=datetime.now)
-    """creation of log entry"""
-    log: Any
-    """log content"""
-
-
-class CollectionLogEntry(Node, frozen=True, extra="ignore"):
+class LogContent(Node, frozen=True, extra="ignore"):
     message: str = ""
     details: Any = None
     run_url: Optional[str] = settings.run_url
 
 
-class CollectionLog(_LogEntryBase, frozen=True):
-    log: Union[str, CollectionLogEntry]
+class LogEntry(Node, frozen=True, extra="ignore"):
+    timestamp: datetime = Field(default_factory=datetime.now)
+    """creation of log entry"""
 
-
-class BioimageioLogEntry(Node, frozen=True, extra="ignore"):
-    message: str = ""
-    details: Optional[ValidationSummary] = None
-
-
-class BioimageioLog(_LogEntryBase, frozen=True, extra="ignore"):
-    log: BioimageioLogEntry
+    log: LogContent
+    """log content"""
 
 
 class Log(Node, frozen=True, extra="allow"):
@@ -42,9 +29,9 @@ class Log(Node, frozen=True, extra="allow"):
 
     file_name: ClassVar[str] = "log.json"
 
-    bioimageio_spec: Sequence[BioimageioLog] = Field(default_factory=list)
-    bioimageio_core: Sequence[BioimageioLog] = Field(default_factory=list)
-    collection: Sequence[CollectionLog] = Field(default_factory=list)
+    bioimageio_spec: Sequence[LogEntry] = Field(default_factory=list)
+    bioimageio_core: Sequence[LogEntry] = Field(default_factory=list)
+    collection: Sequence[LogEntry] = Field(default_factory=list)
 
     def get_updated(self, update: Log) -> Log:
         v: Union[Any, Sequence[Any]]

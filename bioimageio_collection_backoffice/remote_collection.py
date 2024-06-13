@@ -53,7 +53,7 @@ from .db_structure.compatibility import (
     TestSummary,
     TestSummaryEntry,
 )
-from .db_structure.log import CollectionLog, CollectionLogEntry, Log
+from .db_structure.log import Log, LogContent, LogEntry
 from .db_structure.reserved import Reserved
 from .db_structure.version_info import (
     AcceptedStatus,
@@ -644,8 +644,8 @@ class RecordDraft(RecordBase):
         self.extend_log(
             Log(
                 collection=[
-                    CollectionLog(
-                        log=CollectionLogEntry(
+                    LogEntry(
+                        log=LogContent(
                             message="new status: unpacking",
                             details={"package_url": package_url},
                         )
@@ -700,8 +700,8 @@ class RecordDraft(RecordBase):
                     self.extend_log(
                         Log(
                             collection=[
-                                CollectionLog(
-                                    log=CollectionLogEntry(
+                                LogEntry(
+                                    log=LogContent(
                                         message=f"error: Another resource with name='{rdf['name']}' already exists ({e['id']})"
                                     )
                                 )
@@ -716,8 +716,8 @@ class RecordDraft(RecordBase):
             self.extend_log(
                 Log(
                     collection=[
-                        CollectionLog(
-                            log=CollectionLogEntry(
+                        LogEntry(
+                            log=LogContent(
                                 message=f"error: Failed to get icon for {self.id}"
                             )
                         )
@@ -883,8 +883,8 @@ class RecordDraft(RecordBase):
         self.extend_log(
             Log(
                 collection=[
-                    CollectionLog(
-                        log=CollectionLogEntry(
+                    LogEntry(
+                        log=LogContent(
                             message=f"set new status: {value.name}", details=value
                         )
                     )
