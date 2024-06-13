@@ -72,7 +72,7 @@ public class ContinuousIntegration {
 		//String pendingMatrix = args[1];
         
         Path currentDir = Paths.get(ContinuousIntegration.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getParent();
-        Path rdfDir = currentDir.resolve("../bioimageio-gh-pages/rdfs").normalize();
+        Path rdfDir = currentDir.resolve("../../../bioimageio-gh-pages/rdfs").normalize();
 
         // Create a matcher for the pattern 'rdf.yaml'
         runTests(rdfDir, "**", "**", Paths.get("test_summaries"), null);
