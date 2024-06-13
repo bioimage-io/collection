@@ -949,9 +949,16 @@ def get_remote_resource_version(
     if version == "draft":
         rv = RecordDraft(client=client, concept_id=concept_id)
     elif version == "latest":
-        rv = RecordConcept(
+        versions = RecordConcept(
             client=client, concept_id=concept_id
-        ).get_published_versions()[0]
+        ).get_published_versions()
+        if versions:
+            rv = versions[0]
+        else:
+            raise ValueError(
+                f"no published version of '{concept_id}' found."
+                + f" Try '{concept_id}/draft' for the unpublished draft."
+            )
     else:
         rv = Record(client=client, concept_id=concept_id, version=version)
 

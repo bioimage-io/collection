@@ -60,6 +60,7 @@ jobs:
     needs: setup
     strategy:
       matrix: ${{fromJson(needs.setup.outputs.matrix)}}
+      fail-fast: false
     uses: bioimage-io/collection/.github/workflows/test_call.yaml@main
     with:
       concept_id: ${{matrix.id}}
