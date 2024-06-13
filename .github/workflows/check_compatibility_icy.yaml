@@ -26,7 +26,6 @@ jobs:
     - name: Build with Maven
       run: |
         cd scripts/check_compatiblity_icy
-        mvn clean install
         mvn clean install org.apache.maven.plugins:maven-shade-plugin:3.2.4:shade -Dshade.mainClass=io.bioimage.modelrunner.ci.ContinuousIntegration
     - name: Download engines
       run: |
