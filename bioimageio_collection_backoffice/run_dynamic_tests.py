@@ -53,7 +53,12 @@ def run_dynamic_tests(
     )
     summary = _run_dynamic_tests_impl(staged.rdf_url, weight_format, create_env_outcome)
     if summary is not None:
-        staged.add_log_entry(LogEntry(message=summary.name, details=summary))
+        staged.add_log_entry(
+            LogEntry(
+                message=f"bioimageio.core {bioimageio.core.__version__} test {summary.status}",
+                details=summary,
+            )
+        )
 
 
 def rerun_dynamic_tests(
