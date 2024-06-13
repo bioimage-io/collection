@@ -8,7 +8,7 @@ on:
       - main
     paths:
       - .github/workflows/check_compatibility_icy.yaml
-      - scripts/check_compatibility_icy.py
+      - scripts/check_compatibility_icy
   workflow_dispatch:
   schedule:
     - cron: 0 1 * * *  # update compatibility once a day
