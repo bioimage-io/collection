@@ -1124,8 +1124,8 @@ def create_collection_entries(
 
     try:
         # legacy nickname
-        nickname = rdf["config"]["bioimageio"]["nickname"]
-        nickname_icon = rdf["config"]["bioimageio"]["nickname_icon"]
+        nickname = str(rdf["config"]["bioimageio"]["nickname"])
+        nickname_icon = str(rdf["config"]["bioimageio"]["nickname_icon"])
     except KeyError:
         # id is nickname
         nickname = None
@@ -1134,7 +1134,7 @@ def create_collection_entries(
     if nickname == concept:
         nickname = None
 
-    legacy_download_count = LEGACY_DOWNLOAD_COUNTS.get(concept, 0)
+    legacy_download_count = LEGACY_DOWNLOAD_COUNTS.get(nickname or concept, 0)
 
     # TODO: read new download count
     download_count = "?" if legacy_download_count == 0 else legacy_download_count
