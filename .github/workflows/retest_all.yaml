@@ -19,16 +19,21 @@ jobs:
       matrix: ${{steps.get_matrix.outputs.matrix}}
 
     steps:
+      - run: wget ${{vars.S3_HOST}}/${{vars.S3_BUCKET}}/${{vars.S3_FOLDER}}/collection.json
       - run: wget ${{vars.S3_HOST}}/${{vars.S3_BUCKET}}/${{vars.S3_FOLDER}}/collection_draft.json
       - shell: python
         id: get_matrix
         run: |
           import json, os
 
-          with open("collection_draft.json") as f:
+          with open("collection.json") as f:
             collection = json.load(f)
 
+          with open("collection_draft.json") as f:
+            collection_draft = json.load(f)
+
           versions = [{"id": entry.get("nickname", entry["id"]), "v": "latest"} for entry in collection["collection"]]
+          versions.extend([{"id": entry["id"], "v": "draft"} for entry in collection_draft["collection"])
           matrix = {"include": versions}
           with open(os.environ["GITHUB_OUTPUT"], "a") as f:
             print(f"matrix={matrix}", file=f)
