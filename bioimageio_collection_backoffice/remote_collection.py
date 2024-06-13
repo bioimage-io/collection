@@ -969,6 +969,10 @@ def get_remote_resource_version(
     version = str(version).strip("/")
     if version == "draft":
         rv = RecordDraft(client=client, concept_id=concept_id)
+    elif version == "latest":
+        rv = RecordConcept(
+            client=client, concept_id=concept_id
+        ).get_published_versions()[0]
     else:
         rv = Record(client=client, concept_id=concept_id, version=version)
 
