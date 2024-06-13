@@ -29,6 +29,5 @@ jobs:
         mvn clean install org.apache.maven.plugins:maven-shade-plugin:3.2.4:shade -Dshade.mainClass=io.bioimage.modelrunner.ci.ContinuousIntegration
     - name: Download engines
       run: |
-        pwd
-        java -cp target/dl-modelrunner-ci-0.0.1-SNAPSHOT.jar io.bioimage.modelrunner.ci.DownloadEngines deepimagej
+        java -cp scripts/check_compatiblity_icy/target/dl-modelrunner-ci-0.0.1-SNAPSHOT.jar io.bioimage.modelrunner.ci.DownloadEngines deepimagej
 
