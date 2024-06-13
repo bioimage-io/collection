@@ -18,9 +18,27 @@ jobs:
     outputs:
       matrix: ${{steps.get_matrix.outputs.matrix}}
 
+    env:
+      S3_HOST: ${{vars.S3_HOST}}
+      S3_BUCKET: ${{vars.S3_BUCKET}}
+      S3_FOLDER: ${{vars.S3_FOLDER}}
+      S3_ACCESS_KEY_ID: ${{secrets.S3_ACCESS_KEY_ID}}
+      S3_SECRET_ACCESS_KEY: ${{secrets.S3_SECRET_ACCESS_KEY}}
+      ZENODO_URL: ${{vars.ZENODO_URL}}
+      ZENODO_API_ACCESS_TOKEN: ${{secrets.ZENODO_API_ACCESS_TOKEN}}
+      MAIL_PASSWORD: ${{secrets.MAIL_PASSWORD}}
+      RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
+      BIOIMAGEIO_USER_ID: github|${{github.actor_id}}
+
     steps:
-      - run: wget ${{vars.S3_HOST}}/${{vars.S3_BUCKET}}/${{vars.S3_FOLDER}}/collection.json
-      - run: wget ${{vars.S3_HOST}}/${{vars.S3_BUCKET}}/${{vars.S3_FOLDER}}/collection_draft.json
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip" # caching pip dependencies
+      - run: pip install .
+      - run: backoffice download collection.json
+      - run: backoffice download collection_draft.json
       - shell: python
         id: get_matrix
         run: |

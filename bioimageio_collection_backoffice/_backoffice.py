@@ -2,6 +2,7 @@
 
 import warnings
 from datetime import datetime
+from pathlib import Path
 from typing import Literal, Optional, Union
 
 from bioimageio.spec.model.v0_5 import WeightsFormat
@@ -38,6 +39,19 @@ class BackOffice:
         super().__init__()
         self.client = Client(host=host, bucket=bucket, prefix=prefix)
         logger.info("created backoffice with client {}", self.client)
+
+    def download(self, in_collection_path: str, output_path: Optional[Path] = None):
+        """downlaod a file from the collection (using the MinIO client)"""
+        data = self.client.load_file(in_collection_path)
+        if data is None:
+            raise FileNotFoundError(
+                f"failed to download {self.client.get_file_url(in_collection_path)}"
+            )
+
+        if output_path is None:
+            output_path = Path(in_collection_path)
+
+        _ = output_path.write_bytes(data)
 
     def log(self, message: str, concept_id: str, version: str):
         """log a message"""
