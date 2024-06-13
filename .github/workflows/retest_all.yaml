@@ -51,7 +51,7 @@ jobs:
             collection_draft = json.load(f)
 
           versions = [{"id": entry.get("nickname", entry["id"]), "v": "latest"} for entry in collection["collection"]]
-          versions.extend([{"id": entry["id"], "v": "draft"} for entry in collection_draft["collection"])
+          versions.extend([{"id": entry["id"], "v": "draft"} for entry in collection_draft["collection"]])
           matrix = {"include": versions}
           with open(os.environ["GITHUB_OUTPUT"], "a") as f:
             print(f"matrix={matrix}", file=f)
