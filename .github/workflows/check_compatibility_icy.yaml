@@ -18,6 +18,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+    - uses: actions/checkout@v3
+      with:
+        repository: bioimage-io/collection-bioimage-io
+        ref: gh-pages
+        path: bioimageio-gh-pages
     - name: Setup Maven Action
       uses: stCarolas/setup-maven@v4.5
       with:
@@ -30,4 +35,10 @@ jobs:
     - name: Download engines
       run: |
         java -cp scripts/check_compatibility_icy/target/dl-modelrunner-ci-0.0.1-SNAPSHOT.jar io.bioimage.modelrunner.ci.DownloadEngines deepimagej
+  run:
+    runs-on: ubuntu-lastest
+    steps:
+    - name: Run models
+      run: |
+        java -cp scripts/check_compatibility_icy/target/dl-modelrunner-ci-0.0.1-SNAPSHOT.jar io.bioimage.modelrunner.ci.ContinuousIntegration
 
