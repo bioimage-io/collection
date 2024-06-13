@@ -1,0 +1,30 @@
+name: check compatibility icy
+
+concurrency: icy
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/check_compatibility_icy.yaml
+      - scripts/check_compatibility_icy.py
+  workflow_dispatch:
+  schedule:
+    - cron: 0 1 * * *  # update compatibility once a day
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup Maven Action
+      uses: stCarolas/setup-maven@v4.5
+      with:
+        java-version: 11
+        maven-version: 3.9.5
+    - name: Build with Maven
+      run: |
+        cd scripts/check_compatiblity_icy
+        mvn clean install
+
