@@ -14,8 +14,10 @@ on:
     - cron: 0 1 * * *  # update compatibility once a day
 
 jobs:
-  setup:
+  run:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
     steps:
     - uses: actions/checkout@v3
     - uses: actions/checkout@v3
@@ -35,12 +37,6 @@ jobs:
     - name: Download engines
       run: |
         java -cp scripts/check_compatibility_icy/target/dl-modelrunner-ci-0.0.1-SNAPSHOT.jar io.bioimage.modelrunner.ci.DownloadEngines deepimagej
-  run:
-    runs-on: ubuntu-lastest
-    needs: setup
-    strategy:
-      fail-fast: false
-    steps:
     - name: Run models
       run: |
         java -cp scripts/check_compatibility_icy/target/dl-modelrunner-ci-0.0.1-SNAPSHOT.jar io.bioimage.modelrunner.ci.ContinuousIntegration
