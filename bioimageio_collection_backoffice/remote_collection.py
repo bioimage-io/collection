@@ -53,7 +53,7 @@ from .db_structure.compatibility import (
     TestSummary,
     TestSummaryEntry,
 )
-from .db_structure.log import Log, LogContent, LogEntry
+from .db_structure.log import Log, LogEntry
 from .db_structure.reserved import Reserved
 from .db_structure.version_info import (
     AcceptedStatus,
@@ -560,6 +560,10 @@ class RecordBase(RemoteBase, ABC):
     def chat(self) -> Chat:
         return self._get_json(Chat)
 
+    def add_log_entry(self, log_entry: LogEntry):
+        """add a log entry"""
+        self.extend_log(Log(entries=[log_entry]))
+
     def extend_log(
         self,
         extension: Log,
@@ -641,16 +645,10 @@ class RecordDraft(RecordBase):
         # ensure we have a chat.json
         self.extend_chat(Chat())
 
-        self.extend_log(
-            Log(
-                collection=[
-                    LogEntry(
-                        log=LogContent(
-                            message="new status: unpacking",
-                            details={"package_url": package_url},
-                        )
-                    )
-                ]
+        self.add_log_entry(
+            LogEntry(
+                message="new status: unpacking",
+                details={"package_url": package_url},
             )
         )
 
@@ -697,15 +695,9 @@ class RecordDraft(RecordBase):
         for e in collection["collection"]:
             if e["name"] == rdf["name"]:
                 if e["id"] != rdf["id"]:
-                    self.extend_log(
-                        Log(
-                            collection=[
-                                LogEntry(
-                                    log=LogContent(
-                                        message=f"error: Another resource with name='{rdf['name']}' already exists ({e['id']})"
-                                    )
-                                )
-                            ]
+                    self.add_log_entry(
+                        LogEntry(
+                            message=f"error: Another resource with name='{rdf['name']}' already exists ({e['id']})"
                         )
                     )
                 break
@@ -713,16 +705,8 @@ class RecordDraft(RecordBase):
         # set matching id_emoji
         rdf["id_emoji"] = self.collection.config.id_parts.get_icon(self.id)
         if rdf["id_emoji"] is None:
-            self.extend_log(
-                Log(
-                    collection=[
-                        LogEntry(
-                            log=LogContent(
-                                message=f"error: Failed to get icon for {self.id}"
-                            )
-                        )
-                    ]
-                )
+            self.add_log_entry(
+                LogEntry(message=f"error: Failed to get icon for {self.id}")
             )
 
         if "id" not in rdf:
@@ -880,16 +864,8 @@ class RecordDraft(RecordBase):
 
     def _set_status(self, value: DraftStatus):
         current_status = self.info.status
-        self.extend_log(
-            Log(
-                collection=[
-                    LogEntry(
-                        log=LogContent(
-                            message=f"set new status: {value.name}", details=value
-                        )
-                    )
-                ]
-            )
+        self.add_log_entry(
+            LogEntry(message=f"new status: {value.description}", details=value)
         )
         if value.name == "testing" or current_status is None:
             pass

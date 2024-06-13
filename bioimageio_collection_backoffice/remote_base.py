@@ -6,7 +6,7 @@ from typing import Any, Optional, Type, TypeVar, Union
 from loguru import logger
 
 from .db_structure.chat import Chat
-from .db_structure.log import CollectionLog, Log, LogContent
+from .db_structure.log import Log, LogEntry
 from .db_structure.reserved import Reserved
 from .db_structure.version_info import DraftInfo, RecordInfo
 from .s3_client import Client
@@ -48,13 +48,7 @@ class RemoteBase:
         return self._get_json(Log)
 
     def log_message(self, message: str, details: Optional[Any] = None):
-        self._update_json(
-            Log(
-                collection=[
-                    CollectionLog(log=LogContent(message=message, details=details))
-                ]
-            )
-        )
+        self._update_json(Log(entries=[LogEntry(message=message, details=details)]))
 
     def log_error(self, error: Union[Exception, str], details: Optional[Any] = None):
         if isinstance(error, Exception):
@@ -66,10 +60,4 @@ class RemoteBase:
         if isinstance(details, dict) and "traceback" not in details:
             details["traceback"] = traceback.format_stack()
 
-        self._update_json(
-            Log(
-                collection=[
-                    CollectionLog(log=LogContent(message=error, details=details))
-                ]
-            )
-        )
+        self._update_json(Log(entries=[LogEntry(message=error, details=details)]))

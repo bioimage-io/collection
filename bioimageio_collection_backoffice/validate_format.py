@@ -10,7 +10,7 @@ from bioimageio.spec.utils import download
 from ruyaml import YAML
 from typing_extensions import assert_never
 
-from .db_structure.log import Log, LogContent, LogEntry
+from .db_structure.log import LogEntry
 from .remote_collection import Record, RecordDraft
 
 yaml = YAML(typ="safe")
@@ -319,16 +319,10 @@ def validate_format(rv: Union[RecordDraft, Record]):
             )
         )
 
-    rv.extend_log(
-        Log(
-            bioimageio_spec=[
-                LogEntry(
-                    log=LogContent(
-                        message=rd.validation_summary.name,
-                        details=rd.validation_summary,
-                    )
-                )
-            ]
+    rv.add_log_entry(
+        LogEntry(
+            message=rd.validation_summary.name,
+            details=rd.validation_summary,
         )
     )
     return dynamic_test_cases, conda_envs

@@ -11,7 +11,7 @@ from typing_extensions import assert_never
 from ._settings import settings
 from .backup import backup
 from .db_structure.chat import Chat, Message
-from .db_structure.log import Log, LogContent, LogEntry
+from .db_structure.log import Log, LogEntry
 from .gh_utils import set_gh_actions_outputs
 from .mailroom.send_email import notify_uploader
 from .remote_collection import (
@@ -46,14 +46,7 @@ class BackOffice:
             raise ValueError("'RUN_URL' not set")
 
         rv = get_remote_resource_version(self.client, concept_id, version)
-
-        rv.extend_log(
-            Log(
-                collection=[
-                    LogEntry(log=LogContent(message=message, run_url=settings.run_url))
-                ]
-            )
-        )
+        rv.extend_log(Log(entries=[LogEntry(message=message)]))
 
     def wipe(self, subfolder: str = ""):
         """DANGER ZONE: wipes `subfolder` completely, only use for test folders!"""
