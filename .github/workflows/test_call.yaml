@@ -65,19 +65,19 @@ jobs:
           python-version: "3.12"
           cache: "pip" # caching pip dependencies
       - run: pip install ruyaml
-      - name: save conda_env_${{ matrix.weight_format }}.yaml
+      - name: save ${{inputs.environment_name}}_${{inputs.concept_id}}_${{inputs.version}}_conda_env_${{matrix.weight_format}}.yaml
         run: |
           import json
           from pathlib import Path
           from ruyaml import YAML
           yaml = YAML(typ="safe")
           conda_env = json.loads('${{ needs.validate_format.outputs.conda_envs }}')["${{ matrix.weight_format }}"]
-          yaml.dump(conda_env, Path("conda_env_${{ matrix.weight_format }}.yaml"))
+          yaml.dump(conda_env, Path("${{inputs.environment_name}}_${{inputs.concept_id}}_${{inputs.version}}_conda_env_${{matrix.weight_format}}.yaml"))
         shell: python
       - uses: actions/upload-artifact@v4
         with:
-          name: conda_env_${{ matrix.weight_format }}.yaml
-          path: conda_env_${{ matrix.weight_format }}.yaml
+          name: ${{inputs.environment_name}}_${{inputs.concept_id}}_${{inputs.version}}_conda_env_${{matrix.weight_format}}.yaml
+          path: ${{inputs.environment_name}}_${{inputs.concept_id}}_${{inputs.version}}_conda_env_${{matrix.weight_format}}.yaml
 
   test:
     needs: [validate_format, setup-test]
@@ -92,14 +92,14 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
         with:
-          name: conda_env_${{ matrix.weight_format }}.yaml
+          name: ${{inputs.environment_name}}_${{inputs.concept_id}}_${{inputs.version}}_conda_env_${{matrix.weight_format}}.yaml
       - name: install validation dependencies
         id: create_env
         uses: mamba-org/setup-micromamba@v1
         with:
           cache-downloads: true
           environment-name: ${{ matrix.weight_format }}
-          environment-file: conda_env_${{ matrix.weight_format }}.yaml
+          environment-file: ${{inputs.environment_name}}_${{inputs.concept_id}}_${{inputs.version}}_conda_env_${{matrix.weight_format}}.yaml
         continue-on-error: true # we inspect this step's outcome in run_dynamic_tests.py
         timeout-minutes: 60
       - name: dynamic validation
