@@ -1,15 +1,10 @@
 import argparse
 import warnings
-from typing import Any, Dict, Union
+from typing import Any, Dict, Optional, Sequence, Union
 
 import bioimageio.core
 from ruyaml import YAML
-
-from bioimageio_collection_backoffice.db_structure.compatibility import (
-    CompatiblityReport,
-)
-from bioimageio_collection_backoffice.remote_collection import Record, RemoteCollection
-from bioimageio_collection_backoffice.s3_client import Client
+from typing_extensions import Literal, TypedDict
 
 if bioimageio.core.__version__.startswith("0.5."):
     from bioimageio.core import test_resource as test_model
@@ -17,6 +12,20 @@ else:
     from bioimageio.core import test_model
 
 yaml = YAML(typ="safe")
+
+
+class CompatiblityReport(TypedDict):
+    status: Literal["passed", "failed", "not-applicable"]
+    """status of this tool for this resource"""
+
+    error: Optional[str]
+    """error message if `status`=='failed'"""
+
+    details: Any
+    """details to explain the `status`"""
+
+    links: Sequence[str]
+    """the checked resource should link these other bioimage.io resources"""
 
 
 def check_compatibility_ilastik_impl(
