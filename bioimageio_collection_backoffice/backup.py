@@ -1,5 +1,7 @@
 import traceback
 from datetime import datetime
+from io import BytesIO
+from pathlib import PurePosixPath
 from typing import Any, Dict, List
 from urllib.parse import quote_plus
 
@@ -18,7 +20,7 @@ from ruyaml import YAML
 
 from ._settings import settings
 from .remote_collection import Record, RemoteCollection
-from .requests_utils import put_file_from_url, raise_for_status_discretely
+from .requests_utils import put_file, raise_for_status_discretely
 from .s3_client import Client
 
 yaml = YAML(typ="safe")
@@ -91,11 +93,6 @@ def backup_published_version(
     assert len(access_token) > 1, "missing zenodo api access token"
     params = {"access_token": access_token}
 
-    # List the files at the model URL
-    file_urls = v.get_file_urls()
-    assert file_urls
-    logger.info("Using file URLs:\n{}", "\n".join((str(obj) for obj in file_urls)))
-
     if v.concept.doi is None:
         # Create empty deposition
         r_create = requests.post(
@@ -127,8 +124,11 @@ def backup_published_version(
     # deposition_id = newversion_draft_url.split('/')[-1]
 
     # PUT files to the deposition
-    for file_url in file_urls:
-        put_file_from_url(file_url, bucket_url, params)
+    for file_path in v.get_file_paths():
+        file_data = v.client.load_file(file_path)
+        assert file_data is not None
+        filename = PurePosixPath(file_path).name
+        put_file(BytesIO(file_data), f"{bucket_url}/{filename}", params)
 
     # Report deposition URL
     deposition_id = str(deposition_info["id"])

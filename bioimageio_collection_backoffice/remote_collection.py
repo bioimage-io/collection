@@ -651,6 +651,8 @@ class RecordBase(RemoteBase, ABC):
     def get_file_urls(self):
         return self.client.get_file_urls(f"{self.folder}files/")
 
+    def get_file_paths(self):
+        return [f"{self.folder}files/{p}" for p in self.client.ls(f"{self.folder}files/")]
 
 @dataclass
 class RecordDraft(RecordBase):
