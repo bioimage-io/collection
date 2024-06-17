@@ -60,6 +60,7 @@ jobs:
         cache-downloads: true
         cache-environment: true
     - name: install backoffice
+      shell: bash -l {0}
       run: pip install .
     - name: test with ilastik ${{ matrix.v }}
       shell: bash -l {0}
