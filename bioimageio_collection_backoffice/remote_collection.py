@@ -43,9 +43,12 @@ from ._settings import settings
 from ._thumbnails import create_thumbnails
 from .collection_config import CollectionConfig
 from .collection_json import (
+    AllVersions,
     CollectionEntry,
     CollectionJson,
     CollectionWebsiteConfig,
+    ConceptSummary,
+    ConceptVersion,
 )
 from .db_structure.chat import Chat, Message
 from .db_structure.compatibility import (
@@ -353,12 +356,25 @@ class RemoteCollection(RemoteBase):
         """generate a json file with an overview of all published resources
         (also generates `versions.json` files for each research concept)
         """
-        output_file_name: str = (
+        collection_output_file_name: str = (
             "collection.json" if mode == "published" else f"collection_{mode}.json"
         )
-        logger.info("generating {}", output_file_name)
+        all_versions_file_name: str = (
+            "all_versions.json" if mode == "published" else f"all_versions_{mode}.json"
+        )
+        id_map_file_name = (
+            "id_map.json" if mode == "published" else f"id_map_{mode}.json"
+        )
 
-        entries: List[CollectionEntry] = []
+        logger.info(
+            "generating {}, {}, {}",
+            collection_output_file_name,
+            all_versions_file_name,
+            id_map_file_name,
+        )
+
+        collection_entries: List[CollectionEntry] = []
+        concepts_summaries: List[ConceptSummary] = []
         n_resource_versions: Dict[str, int] = defaultdict(lambda: 0)
         n_resources: Dict[str, int] = defaultdict(lambda: 0)
         error_in_published_entry = None
@@ -382,11 +398,30 @@ class RemoteCollection(RemoteBase):
             else:
                 id_map.update(id_map_update)
                 if versions_in_collection:
-                    n_resources[versions_in_collection[0].type] += 1
-                    n_resource_versions[versions_in_collection[0].type] += len(versions)
-                    entries.extend(versions_in_collection)
+                    latest_version = versions_in_collection[0]
+                    n_resources[latest_version.type] += 1
+                    n_resource_versions[latest_version.type] += len(versions)
+                    collection_entries.extend(versions_in_collection)
+                    concepts_summaries.append(
+                        ConceptSummary(
+                            concept=latest_version.id,
+                            type=latest_version.type,
+                            concept_doi=latest_version.concept_doi,
+                            versions=sorted(
+                                ConceptVersion(
+                                    v=v.version,
+                                    created=v.info.created,
+                                    doi=v.doi,
+                                    source=id_map[v.id].source,
+                                    sha256=id_map[v.id].sha256,
+                                )
+                                for v in versions
+                            ),
+                        )
+                    )
 
-        entries.sort()
+        collection_entries.sort()
+        concepts_summaries.sort()
         collection = CollectionJson(
             authors=(template := self.config.collection_template).authors,
             cite=template.cite,
@@ -413,8 +448,10 @@ class RemoteCollection(RemoteBase):
             tags=template.tags,
             type=template.type,
             version=template.version,
-            collection=entries,
+            collection=collection_entries,
         )
+
+        all_versions = AllVersions(entries=concepts_summaries)
 
         # # check that this generated collection is a valid RDF itself
         # coll_descr = build_description(
@@ -423,26 +460,41 @@ class RemoteCollection(RemoteBase):
         # if not isinstance(coll_descr, CollectionDescr):
         #     raise ValueError(coll_descr.validation_summary.format())
 
-        if entries or not list(self.client.ls(output_file_name)):
+        if collection_entries or not list(self.client.ls(collection_output_file_name)):
             self.client.put_json(
-                output_file_name,
+                collection_output_file_name,
                 collection.model_dump(mode="json", exclude_defaults=True),
             )
         else:
             logger.error(
-                "Skipping overriding existing collection with an empty collection!"
+                "Skipping overriding existing {} with an empty list!",
+                collection_output_file_name,
             )
 
-        id_map_file_name = (
-            "id_map.json" if mode == "published" else f"id_map_{mode}.json"
-        )
-        self.client.put_json(
-            id_map_file_name,
-            {
-                k: ii.model_dump(mode="json", exclude_defaults=True)
-                for k, ii in id_map.items()
-            },
-        )
+        if all_versions or not list(self.client.ls(all_versions_file_name)):
+            self.client.put_json(
+                all_versions_file_name,
+                all_versions.model_dump(mode="json", exclude_defaults=True),
+            )
+        else:
+            logger.error(
+                "Skipping overriding existing {} with an empty list!",
+                all_versions_file_name,
+            )
+
+        if id_map_file_name or not list(self.client.ls(id_map_file_name)):
+            self.client.put_json(
+                id_map_file_name,
+                {
+                    k: ii.model_dump(mode="json", exclude_defaults=True)
+                    for k, ii in id_map.items()
+                },
+            )
+        else:
+            logger.error(
+                "Skipping overriding existing {} with an empty mapping!",
+                id_map_file_name,
+            )
 
         # raise an error for an invalid (skipped) collection entry
         if error_in_published_entry is not None:
