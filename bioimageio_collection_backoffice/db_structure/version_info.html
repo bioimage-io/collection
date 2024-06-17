@@ -310,6 +310,9 @@
                                 <a class="variable" href="#VersionInfo.doi">doi</a>
                         </li>
                         <li>
+                                <a class="variable" href="#VersionInfo.v">v</a>
+                        </li>
+                        <li>
                                 <a class="variable" href="#VersionInfo.model_config">model_config</a>
                         </li>
                         <li>
@@ -507,10 +510,13 @@
 </span><span id="L-141"><a href="#L-141"><span class="linenos">141</span></a>    <span class="n">doi</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 </span><span id="L-142"><a href="#L-142"><span class="linenos">142</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;version specific DOI&quot;&quot;&quot;</span>
 </span><span id="L-143"><a href="#L-143"><span class="linenos">143</span></a>
-</span><span id="L-144"><a href="#L-144"><span class="linenos">144</span></a>
-</span><span id="L-145"><a href="#L-145"><span class="linenos">145</span></a><span class="k">class</span> <span class="nc">VersionsInfo</span><span class="p">(</span><span class="n">Node</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-</span><span id="L-146"><a href="#L-146"><span class="linenos">146</span></a>    <span class="n">concept_doi</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span id="L-147"><a href="#L-147"><span class="linenos">147</span></a>    <span class="n">versions</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">VersionInfo</span><span class="p">]</span> <span class="o">=</span> <span class="p">()</span>
+</span><span id="L-144"><a href="#L-144"><span class="linenos">144</span></a>    <span class="n">v</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="L-145"><a href="#L-145"><span class="linenos">145</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;version&quot;&quot;&quot;</span>
+</span><span id="L-146"><a href="#L-146"><span class="linenos">146</span></a>
+</span><span id="L-147"><a href="#L-147"><span class="linenos">147</span></a>
+</span><span id="L-148"><a href="#L-148"><span class="linenos">148</span></a><span class="k">class</span> <span class="nc">VersionsInfo</span><span class="p">(</span><span class="n">Node</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+</span><span id="L-149"><a href="#L-149"><span class="linenos">149</span></a>    <span class="n">concept_doi</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span id="L-150"><a href="#L-150"><span class="linenos">150</span></a>    <span class="n">versions</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">VersionInfo</span><span class="p">]</span> <span class="o">=</span> <span class="p">()</span>
 </span></pre></div>
 
 
@@ -2175,6 +2181,9 @@ __pydantic_private__: Instance attribute with the values of private attributes s
 </span><span id="VersionInfo-141"><a href="#VersionInfo-141"><span class="linenos">141</span></a>
 </span><span id="VersionInfo-142"><a href="#VersionInfo-142"><span class="linenos">142</span></a>    <span class="n">doi</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 </span><span id="VersionInfo-143"><a href="#VersionInfo-143"><span class="linenos">143</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;version specific DOI&quot;&quot;&quot;</span>
+</span><span id="VersionInfo-144"><a href="#VersionInfo-144"><span class="linenos">144</span></a>
+</span><span id="VersionInfo-145"><a href="#VersionInfo-145"><span class="linenos">145</span></a>    <span class="n">v</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="VersionInfo-146"><a href="#VersionInfo-146"><span class="linenos">146</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;version&quot;&quot;&quot;</span>
 </span></pre></div>
 
 
@@ -2232,6 +2241,19 @@ __pydantic_private__: Instance attribute with the values of private attributes s
 
 
                             </div>
+                            <div id="VersionInfo.v" class="classattr">
+                                <div class="attr variable">
+            <span class="name">v</span><span class="annotation">: str</span>
+
+        
+    </div>
+    <a class="headerlink" href="#VersionInfo.v"></a>
+    
+            <div class="docstring"><p>version</p>
+</div>
+
+
+                            </div>
                             <div id="VersionInfo.model_config" class="classattr">
                                 <div class="attr variable">
             <span class="name">model_config</span>        =
@@ -2249,7 +2271,7 @@ __pydantic_private__: Instance attribute with the values of private attributes s
                                 <div class="attr variable">
             <span class="name">model_fields</span>        =
 <input id="VersionInfo.model_fields-view-value" class="view-value-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
-            <label class="view-value-button pdoc-button" for="VersionInfo.model_fields-view-value"></label><span class="default_value">{&#39;created&#39;: FieldInfo(annotation=datetime, required=False, default_factory=builtin_function_or_method), &#39;doi&#39;: FieldInfo(annotation=Union[str, NoneType], required=False, default=None)}</span>
+            <label class="view-value-button pdoc-button" for="VersionInfo.model_fields-view-value"></label><span class="default_value">{&#39;created&#39;: FieldInfo(annotation=datetime, required=False, default_factory=builtin_function_or_method), &#39;doi&#39;: FieldInfo(annotation=Union[str, NoneType], required=False, default=None), &#39;v&#39;: FieldInfo(annotation=str, required=True)}</span>
 
         
     </div>
@@ -2316,9 +2338,9 @@ __pydantic_private__: Instance attribute with the values of private attributes s
 
     </div>
     <a class="headerlink" href="#VersionsInfo"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="VersionsInfo-146"><a href="#VersionsInfo-146"><span class="linenos">146</span></a><span class="k">class</span> <span class="nc">VersionsInfo</span><span class="p">(</span><span class="n">Node</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-</span><span id="VersionsInfo-147"><a href="#VersionsInfo-147"><span class="linenos">147</span></a>    <span class="n">concept_doi</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span id="VersionsInfo-148"><a href="#VersionsInfo-148"><span class="linenos">148</span></a>    <span class="n">versions</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">VersionInfo</span><span class="p">]</span> <span class="o">=</span> <span class="p">()</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="VersionsInfo-149"><a href="#VersionsInfo-149"><span class="linenos">149</span></a><span class="k">class</span> <span class="nc">VersionsInfo</span><span class="p">(</span><span class="n">Node</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+</span><span id="VersionsInfo-150"><a href="#VersionsInfo-150"><span class="linenos">150</span></a>    <span class="n">concept_doi</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span id="VersionsInfo-151"><a href="#VersionsInfo-151"><span class="linenos">151</span></a>    <span class="n">versions</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">VersionInfo</span><span class="p">]</span> <span class="o">=</span> <span class="p">()</span>
 </span></pre></div>
 
 
