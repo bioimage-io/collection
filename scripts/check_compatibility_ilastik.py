@@ -1,5 +1,6 @@
 import argparse
 import warnings
+from typing import Any, Dict, Union
 
 import bioimageio.core
 from ruyaml import YAML
@@ -28,7 +29,7 @@ def check_compatibility_ilastik_impl(
 
     rdf_data = record.client.load_file(record.rdf_path)
     assert rdf_data is not None
-    rdf = yaml.load(rdf_data)
+    rdf: Union[Any, Dict[str, Any]] = yaml.load(rdf_data)
     assert isinstance(rdf, dict)
     if rdf.get("type") != "model":
         return CompatiblityReport(
@@ -36,6 +37,14 @@ def check_compatibility_ilastik_impl(
             status="not-applicable",
             error=None,
             details="only 'model' resources can be used in ilastik.",
+        )
+
+    if len(rdf["inputs"]) > 1 or len(rdf["outputs"]) > 1:
+        return CompatiblityReport(
+            tool=tool,
+            status="failed",
+            error=f"ilastik only supports single tensor input/output (found {len(rdf['inputs'])}/{len(rdf['outputs'])})",
+            details=None,
         )
 
     # produce test summaries for each weight format
