@@ -12,7 +12,19 @@ on:
 concurrency: retest-${{inputs.sandbox}}
 
 jobs:
+  generate_collection:  # make sure collection.json is up to date
+    strategy:
+      fail-fast: false
+      matrix:
+        mode: [draft, published]
+    uses: bioimage-io/collection/.github/workflows/generate_collection_json_call.yaml@main
+    with:
+      mode: ${{matrix.mode}}
+      environment_name: ${{inputs.sandbox && 'sandbox' || 'production'}}
+    secrets: inherit
+
   setup:
+    needs: generate_collection
     runs-on: ubuntu-latest
     environment: ${{inputs.sandbox && 'sandbox' || 'production'}}
     outputs:
