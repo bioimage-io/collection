@@ -1,7 +1,7 @@
 import argparse
+import warnings
 
 import bioimageio.core
-from loguru import logger
 from ruyaml import YAML
 
 from bioimageio_collection_backoffice.db_structure.compatibility import (
@@ -67,7 +67,7 @@ def check_compatibility_ilastik(
                 record, f"ilastik_{ilastik_version}"
             )
         except Exception as e:
-            logger.error(f"failed to check '{record.id}': {e}")
+            warnings.warn(f"failed to check '{record.id}': {e}")
         else:
             if report is not None:
                 record.set_compatibility_report(report)
