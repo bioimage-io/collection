@@ -141,6 +141,9 @@ class VersionInfo(Node, frozen=True):
     doi: Optional[str] = None
     """version specific DOI"""
 
+    v: str
+    """version"""
+
 
 class VersionsInfo(Node, frozen=True):
     concept_doi: Optional[str] = None

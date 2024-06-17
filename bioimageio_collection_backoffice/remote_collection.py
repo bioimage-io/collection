@@ -1128,6 +1128,7 @@ def create_collection_entries(
         if isinstance(record_version, Record):
             version_infos.append(
                 VersionInfo(
+                    v=record_version.version,
                     created=record_version.info.created,
                     doi=record_version.info.doi,
                 )
