@@ -150,6 +150,7 @@ def get_pytorch_env(
             f"pytorch {get_version_range(pytorch_version)}",
             "cpuonly",
             "mkl !=2024.1.0",  #  avoid https://github.com/pytorch/pytorch/issues/123097
+            "setuptools",
         ]
     )
     if pytorch_version.major == 1 and pytorch_version.minor == 10:
