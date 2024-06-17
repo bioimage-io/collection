@@ -59,6 +59,8 @@ jobs:
         environment-file: env.yaml
         cache-downloads: true
         cache-environment: true
+    - name: install backoffice
+      run: pip install .
     - name: test with ilastik ${{ matrix.v }}
       shell: bash -l {0}
       run: python scripts/check_compatibility_ilastik.py ${{ matrix.v }}
