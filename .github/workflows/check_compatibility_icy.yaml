@@ -40,4 +40,12 @@ jobs:
     - name: Run models
       run: |
         java -cp scripts/check_compatibility_icy/target/dl-modelrunner-ci-0.0.1-SNAPSHOT.jar io.bioimage.modelrunner.ci.ContinuousIntegration
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        path: test_summaries
+    - name: Setup Maven Action
+      run: |
+        ls
+        ls test_summaries 
 
