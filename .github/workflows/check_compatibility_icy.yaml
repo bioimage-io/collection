@@ -44,8 +44,20 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         path: test_summaries
-    - name: Setup Maven Action
-      run: |
-        ls
-        ls test_summaries 
+
+  
+  sendreport:
+    runs-on: ubuntu-latest
+    needs: run
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Get test results
+      uses: actions/upload-artifact@v3
+      with:
+        path: test_summaries
+
+    - name: test with ilastik ${{ matrix.v }}
+      shell: bash -l {0}
+      run: python scripts/upload_reports_java.py deepimagej
 
