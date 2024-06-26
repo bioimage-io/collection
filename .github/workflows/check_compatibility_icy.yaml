@@ -53,11 +53,14 @@ jobs:
     - uses: actions/checkout@v3
 
     - name: Get test results
-      uses: actions/upload-artifact@v3
+      uses: actions/download-artifact@v3
       with:
         path: test_summaries
 
-    - name: test with ilastik ${{ matrix.v }}
+    - name: check path
+      run: ls test_summaries
+
+    - name: test with Java software ${{ matrix.v }}
       shell: bash -l {0}
-      run: python scripts/upload_reports_java.py deepimagej
+      run: python scripts/check_compatibility_java_software.py deepimagej 3.0.1 test_summaries
 

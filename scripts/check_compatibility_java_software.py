@@ -51,7 +51,9 @@ def check_compatibility_icy_impl(
 
 
 def check_compatibility_icy(
-    icy_version: str,
+    software_name: str,
+    version: str,
+    summaries_dir: str = "test_summaries",
 ):
     """preliminary icy check
 
@@ -62,7 +64,7 @@ def check_compatibility_icy(
     for record in collection.get_published_versions():
         try:
             report = check_compatibility_icy_impl(
-                record, f"icy{icy_version}"
+                record, f"{software_name}{version}"
             )
         except Exception as e:
             logger.error(f"failed to check '{record.id}': {e}")
@@ -73,6 +75,8 @@ def check_compatibility_icy(
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    _ = parser.add_argument("icy_version")
+    _ = parser.add_argument("software_name")
+    _ = parser.add_argument("version")
+    _ = parser.add_argument("--summaries_dir", default="test_summaries", help="Directory path where summaries are stored.")
 
-    check_compatibility_icy(parser.parse_args().icy_version)
+    check_compatibility_icy(parser.parse_args().software_name, parser.parse_args().version, parser.parse_args().summaries_dir)
