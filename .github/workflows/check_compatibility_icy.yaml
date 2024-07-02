@@ -57,10 +57,7 @@ jobs:
       with:
         path: test_summaries
 
-    - name: check path
-      run: ls test_summaries
-
     - name: test with Java software ${{ matrix.v }}
       shell: bash -l {0}
-      run: python scripts/check_compatibility_java_software.py deepimagej 3.0.1 test_summaries
+      run: python scripts/check_compatibility_java_software.py deepimagej 3.0.1 test_summaries/artifact
 
