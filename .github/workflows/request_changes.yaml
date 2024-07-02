@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
     inputs:
       resource_id:
-        description: "Bioimageio ID of the resource - to be used to access the resource on S3"
+        description: "bioimage.io resource concept ID, e.g. 'affable-shark'"
         required: true
         type: string
       stage_number:  # TODO: remove
