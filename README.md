@@ -48,8 +48,9 @@ graph TD;
 
 #### Staging
 
-Given a download URL to a _resource package_ the `stage` workflow needs to be [dispatched manually, or via github api][staging-wf] ("run workflow")[^1].
-If the _resource package_ was uploaded via the bioimage.io website, this is initiated automatically by the uploader service.
+If the _resource package_ was uploaded via the bioimage.io website, the staging of the new resource draft is initiated automatically by the uploader service.
+Otherwise, given a download URL to a _resource package_, the `stage` workflow needs to be [dispatched manually, or via github api][staging-wf] ("run workflow")[^1].
+
 
 Staging unpacks the files from the zipped resource package to our public S3.
 Once unpacked, the staged _resource draft_ is automatically tested (the [test workflow][test-wf] is dispatched automatically at the end of the stage workflow).
