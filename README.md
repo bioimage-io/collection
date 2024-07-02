@@ -74,7 +74,7 @@ A _draft_ is identified by its concept id (`id` from the `rdf.yaml`).
 
 Reviewers should check the models for technical correctness (aided by CI, see [Testing section](#testing)) and contents/metadata of the resource.
 
-To this end it can be helpful to check the logs displayed at https://bioimageio-uploader.netlify.app/#/status/<concept id>.
+To this end it can be helpful to check the logs displayed at `https://bioimageio-uploader.netlify.app/#/status/<concept_id>`.
 There information about automated workflow steps and validation outcome is logged.
 Additionally an 'error' status may be shown if an exception occured in the GitHub workflow run producing the log.
 
