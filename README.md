@@ -66,11 +66,17 @@ Reviewers can:
    A contributor is expected to upload an updated (fixed) draft (which overwrites the current draft).
    This can be done either by the website, or the stage workflow.
    Important is to keep the `id` the same.
+* _apply minor changes_:
+  For minor changes it is often not necessary to involve the contributor directly.
+  Such changes could be e.g. obvious typos in some of the fields.
+  Reviewers can apply changes locally to the _resource package_ and re-upload (using the same `id`), or, given S3 credentials, files could also be changed in place.
+  Latter way of changing requires manually triggering the tests (see [Testing section](#testing)).
 * _accept_:
   Accepting the _resource draft_ via the web interface triggers the [publish workflow][publish-wf], which creates a new unique _resource version_.
   As a result, the resource is published, the draft deleted and, thus, the _resource_ is available via the [bioimage.io][bioimageio] website.
   The [backup workflow][backup-wf] will upload/publish the _resource version_ to zenodo using the bioimage.io bot account (tagged with [`backup.bioimage.io`][zenodo-overview]). 
-  
+
+
 
 Additionally an 'error' status may be shown if an exception occured.
 This also may be the case for invalid inputs.
