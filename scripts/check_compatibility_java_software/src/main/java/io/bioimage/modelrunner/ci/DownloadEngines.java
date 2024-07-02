@@ -21,8 +21,11 @@ package io.bioimage.modelrunner.ci;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import io.bioimage.modelrunner.engine.installation.EngineInstall;
+import io.bioimage.modelrunner.versionmanagement.AvailableEngines;
+import io.bioimage.modelrunner.versionmanagement.DeepLearningVersion;
 import io.bioimage.modelrunner.versionmanagement.InstalledEngines;
 
 /**
@@ -50,6 +53,12 @@ public class DownloadEngines {
 			EngineInstall engineManager = EngineInstall.createInstaller(ENGINES_DIR);
 			engineManager.basicEngineInstallation();
 			//InstalledEngines.buildEnginesFinder(ENGINES_DIR).getDownloadedForOS().stream().map(i -> i.toString())
+			System.out.println(InstalledEngines.buildEnginesFinder(ENGINES_DIR).getDownloadedForOS());
+		} else if (args[0].equals(ICY_TAG)) {
+			List<DeepLearningVersion> allEngines = AvailableEngines.getForCurrentOS();
+			for (DeepLearningVersion engine : allEngines) {
+				EngineInstall.installEngineInDir(engine, ENGINES_DIR);
+			}
 			System.out.println(InstalledEngines.buildEnginesFinder(ENGINES_DIR).getDownloadedForOS());
 		}
     }
