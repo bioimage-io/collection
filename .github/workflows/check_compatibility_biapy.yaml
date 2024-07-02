@@ -1,0 +1,26 @@
+name: check compatibility biapy
+
+concurrency: biapy
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/check_compatibility_biapy.yaml
+      - scripts/check_compatibility_biapy.py
+  workflow_dispatch:
+  schedule:
+    - cron: 0 1 * * *  # update compatibility once a day
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-python@v5
+      with:
+        python-version: "3.10"
+        cache: "pip" # caching pip dependencies
+    - run: pip install biapy torch==2.2.0 torchvision==0.17.0 torchaudio==2.2.0 --index-url https://download.pytorch.org/whl/cpu timm torchmetrics
+    - run: python scripts/check_compatibility_biapy.py
