@@ -35,9 +35,9 @@ The latter option is reserved for members of this repository (or the bioimageio 
 
 Now the stage workflow needs to be dispatched.
 If the resource package was uploaded via the bioimage.io website, this is initiated automatically.
-In case of a url to a resource package, the `stage` workflow needs to be [dispatched manually, or via github api][staging-action] ("run workflow")[^1].
+In case of a url to a resource package, the `stage` workflow needs to be [dispatched manually, or via github api][staging-w] ("run workflow")[^1].
 Staging unpacks the files from the zipped resource package to our public S3.
-Once unpacked, the staged _resource draft_ is automatically tested ([test workflow][test-action] is triggerd automatically at the end of the stage action).
+Once unpacked, the staged _resource draft_ is automatically tested ([test workflow][test-wf] is triggerd automatically at the end of the stage action).
 
 #### Testing
 
@@ -48,7 +48,7 @@ Staged resource drafts are automatically tested:
 * Are linked URLs available?
 * ...
 
-Tests can also be triggered (via github api or manually) by dispatching the [test workflow][test-action][^2].
+Tests can also be triggered (via github api or manually) by dispatching the [test workflow][test-wf][^2].
 
 Once the tests are completed, a reviewer needs to take a look.
 The uploader gets a notification via email.
@@ -60,10 +60,17 @@ A _draft_ is identified by its concept id (`id` from the `rdf.yaml`).
 Reviewers should check the models for technical correctness (aided by CI, see [Testing section](#testing)) and contents/metadata of the resource.
 For models, reviewers can use [the model documentation][model-docs] as a guide.
 
-3. awaiting reviewe: After the tests have concluded the bioimageio reviewers are notified.
-4. The reviewer will result in
-    a) changes requested: Please upload an updated draft (which overwrites the current draft).
-    b) accepted: The resource will be published (and the draft deleted).
+Reviewers can:
+
+ * _request changes_:
+   A contributor is expected to upload an updated (fixed) draft (which overwrites the current draft).
+   This can be done either by the website, or the stage workflow.
+   Important is to keep the `id` the same.
+* _accept_:
+  Accepting the _resource draft_ via the web interface triggers the [publish workflow][publish-wf], which creates a new unique _resource version_.
+  As a result, the resource is published, the draft deleted and, thus, the _resource_ is available via the [bioimage.io][bioimageio] website.
+  The [backup workflow][backup-wf] will upload/publish the _resource version_ to zenodo using the bioimage.io bot account (tagged with [`backup.bioimage.io`][zenodo-overview]). 
+  
 
 Additionally an 'error' status may be shown if an exception occured.
 This also may be the case for invalid inputs.
@@ -76,15 +83,18 @@ graph TD;
     ar--->cr[4a: changes requestd]
     cr-->unpacking
     ar--->accepted[4b: accepted]
-    accepted-->published[published: (draft is deleted)]
+    accepted-->published[published: draft is deleted]
 ```
 
 [^1]: Parameters to this workflow are `Bioimage.io resource identifier` (`id` from the `rdf.yaml`), and `Download URL of the resource package zip-file`, which should contain a publicly reachable url to a _resource package_ `.zip`-file.
 [^2]: Parameters to this workflow are `Bioimage.io resource concept` (`id` from the `rdf.yaml`), and `Published version or 'draft'` (optional, usually `draft`).
 
+[backup-wf]: https://github.com/bioimage-io/collection/actions/workflows/backup.yaml
 [bioimageio]: https://bioimage.io
 [model-docs]: https://bioimage.io/docs/#/guides/developers-guide?id=model-documentation
 [review-config]: https://github.com/bioimage-io/collection/blob/main/bioimageio_collection_config.json
-[staging-action]: https://github.com/bioimage-io/collection/actions/workflows/stage.yaml
-[test-action]: https://github.com/bioimage-io/collection/actions/workflows/test.yaml
+[publish-wf]: https://github.com/bioimage-io/collection/actions/workflows/publish.yaml
+[staging-wf]: https://github.com/bioimage-io/collection/actions/workflows/stage.yaml
+[test-wf]: https://github.com/bioimage-io/collection/actions/workflows/test.yaml
 [upload]: https://bioimage.io/#/upload
+[zenodo-overview]: https://zenodo.org/search?q=metadata.subjects.subject%3A%22backup.bioimage.io%22&l=list&p=1&s=10&sort=bestmatch
