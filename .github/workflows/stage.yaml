@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
     inputs:
       resource_id:
-        description: "bioimage.io resource concept ID, e.g. 'affable-shark'"
+        description: "bioimage.io resource concept ID (e.g. 'affable-shark')"
         required: true
         type: string
       package_url:
