@@ -35,19 +35,30 @@ The latter option is reserved for members of this repository (or the bioimageio 
 
 Now the stage workflow needs to be dispatched.
 If the resource package was uploaded via the bioimage.io website, this is initiated automatically.
-In case of a url to a resource package, the `stage` workflow needs to be [dispatched manually, or via github api][staging-action] ("run workflow").
+In case of a url to a resource package, the `stage` workflow needs to be [dispatched manually, or via github api][staging-action] ("run workflow")[^1].
 Staging unpacks the files from the zipped resource package to our public S3.
-Once unpacked, the staged _resource draft_ is automatically tested ([test action][test-action] is triggerd automatically at the end of the stage action).
+Once unpacked, the staged _resource draft_ is automatically tested ([test workflow][test-action] is triggerd automatically at the end of the stage action).
 
 #### Testing
 
 Staged resource drafts are automatically tested:
+
 * Is their metadata valid?
 * Can test outputs be reproduced from test inputs?
 * Are linked URLs available?
 * ...
 
-Once the
+Tests can also be triggered (via github api or manually) by dispatching the [test workflow][test-action][^2].
+
+Once the tests are completed, a reviewer needs to take a look.
+The uploader gets a notification via email.
+An overview of all pending _resource drafts_ can be found at https://bioimageio-uploader.netlify.app/#/status.
+A _draft_ is identified by its concept id (`id` from the `rdf.yaml`).
+
+#### Review
+
+Reviewers should check the models for technical correctness (aided by CI, see [Testing section](#testing)) and contents/metadata of the resource.
+For models, reviewers can use [the model documentation][model-docs] as a guide.
 
 3. awaiting reviewe: After the tests have concluded the bioimageio reviewers are notified.
 4. The reviewer will result in
@@ -68,7 +79,11 @@ graph TD;
     accepted-->published[published: (draft is deleted)]
 ```
 
+[^1]: Parameters to this workflow are `Bioimage.io resource identifier` (`id` from the `rdf.yaml`), and `Download URL of the resource package zip-file`, which should contain a publicly reachable url to a _resource package_ `.zip`-file.
+[^2]: Parameters to this workflow are `Bioimage.io resource concept` (`id` from the `rdf.yaml`), and `Published version or 'draft'` (optional, usually `draft`).
+
 [bioimageio]: https://bioimage.io
+[model-docs]: https://bioimage.io/docs/#/guides/developers-guide?id=model-documentation
 [review-config]: https://github.com/bioimage-io/collection/blob/main/bioimageio_collection_config.json
 [staging-action]: https://github.com/bioimage-io/collection/actions/workflows/stage.yaml
 [test-action]: https://github.com/bioimage-io/collection/actions/workflows/test.yaml
