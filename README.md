@@ -97,8 +97,8 @@ Reviewers can:
   The [backup workflow][backup-wf] will upload/publish the _resource version_ to zenodo using the bioimage.io bot account (tagged with [`backup.bioimage.io`][zenodo-overview]). 
 
 
-[^1]: Parameters to this workflow are `Bioimage.io resource identifier` (`id` from the `rdf.yaml`), and `Download URL of the resource package zip-file`, which should contain a publicly reachable url to a _resource package_ `.zip`-file.
-[^2]: Parameters to this workflow are `Bioimage.io resource concept` (`id` from the `rdf.yaml`), and `Published version or 'draft'` (optional, usually `draft`).
+[^1]: Parameters to this workflow are `bioimage.io resource concept ID` (`id` from the `rdf.yaml`), and `Download URL of the resource package zip-file`, which should contain a publicly reachable URL to a _resource package_ `.zip`-file.
+[^2]: Parameters to this workflow are `Bioimage.io resource concept ID` (`id` from the `rdf.yaml`), and `Published version or 'draft'` (optional, usually `draft`).
 
 [backup-wf]: https://github.com/bioimage-io/collection/actions/workflows/backup.yaml
 [bioimageio]: https://bioimage.io
