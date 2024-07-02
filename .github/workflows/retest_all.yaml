@@ -43,14 +43,8 @@ jobs:
       BIOIMAGEIO_USER_ID: github|${{github.actor_id}}
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-          cache: "pip" # caching pip dependencies
-      - run: pip install .
-      - run: backoffice download collection.json
-      - run: backoffice download collection_draft.json
+      - run: wget https://${{vars.S3_HOST}}/${{vars.S3_BUCKET}}/${{vars.S3_FOLDER}}/collection.json
+      - run: wget https://${{vars.S3_HOST}}/${{vars.S3_BUCKET}}/${{vars.S3_FOLDER}}/collection_draft.json
       - shell: python
         id: get_matrix
         run: |
