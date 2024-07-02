@@ -23,21 +23,36 @@ Current reviewers are listed in [`bioimageio_collection_config.json`][review-con
    * request changes on resource drafts
    * upload a new version for any resource
 
-### Review Process
+### Adding a bioimage.io resource
 
-The review process technically starts after a user uploaded a _resource package_.
-Such a _resource package_ could e.g. be a newly uploaded _model package_, or _notebook package_, or an updated version of any existing resource.
+A bioimage.io resource is created by a user uploading a _resource package_.
+Such a _resource package_ could e.g. be a newly uploaded _model package_, or _notebook package_.
 Typically, uploaders would go via [bioimage.io/upload][upload].
 Alternatively, any direct link to a downloadable resource package (`.zip`-file) would work.
 The latter option is reserved for members of this repository (or the bioimageio org).
+Once available online the _resource package_ is staged (see [Staging section](#staging)), tested (see [Testing section](#testing)), and reviewed (see [Review section](#review)).
+
+
+graph TD;
+    stage[stage]
+    test[test]
+    cr[request changes]
+    publish[accept/publish]
+    backup[backup to Zenodo]
+
+    stage-->test
+    test-->cr
+    cr-->stage
+    test-->publish
+    publish-->backup
 
 #### Staging
 
-Now the stage workflow needs to be dispatched.
-If the resource package was uploaded via the bioimage.io website, this is initiated automatically.
-In case of a url to a resource package, the `stage` workflow needs to be [dispatched manually, or via github api][staging-w] ("run workflow")[^1].
+Given a download URL to a _resource package_ the `stage` workflow needs to be [dispatched manually, or via github api][staging-wf] ("run workflow")[^1].
+If the _resource package_ was uploaded via the bioimage.io website, this is initiated automatically by the uploader service.
+
 Staging unpacks the files from the zipped resource package to our public S3.
-Once unpacked, the staged _resource draft_ is automatically tested ([test workflow][test-wf] is triggerd automatically at the end of the stage action).
+Once unpacked, the staged _resource draft_ is automatically tested (the [test workflow][test-wf] is dispatched automatically at the end of the stage workflow).
 
 #### Testing
 
@@ -50,14 +65,19 @@ Staged resource drafts are automatically tested:
 
 Tests can also be triggered (via github api or manually) by dispatching the [test workflow][test-wf][^2].
 
-Once the tests are completed, a reviewer needs to take a look.
-The uploader gets a notification via email.
+Once the tests are completed, the uploader gets a notification via email that their draft is awaiting review; now a reviewer needs to take a look.
+
 An overview of all pending _resource drafts_ can be found at https://bioimageio-uploader.netlify.app/#/status.
 A _draft_ is identified by its concept id (`id` from the `rdf.yaml`).
 
 #### Review
 
 Reviewers should check the models for technical correctness (aided by CI, see [Testing section](#testing)) and contents/metadata of the resource.
+
+To this end it can be helpful to check the logs displayed at https://bioimageio-uploader.netlify.app/#/status/<concept id>.
+There information about automated workflow steps and validation outcome is logged.
+Additionally an 'error' status may be shown if an exception occured in the GitHub workflow run producing the log.
+
 For models, reviewers can use [the model documentation][model-docs] as a guide.
 
 Reviewers can:
@@ -76,21 +96,6 @@ Reviewers can:
   As a result, the resource is published, the draft deleted and, thus, the _resource_ is available via the [bioimage.io][bioimageio] website.
   The [backup workflow][backup-wf] will upload/publish the _resource version_ to zenodo using the bioimage.io bot account (tagged with [`backup.bioimage.io`][zenodo-overview]). 
 
-
-
-Additionally an 'error' status may be shown if an exception occured.
-This also may be the case for invalid inputs.
-
-```mermaid
-graph TD;
-    unpacking[1: unpacking]-->unpacked[unpacked]
-    unpacked-->testing[2: testing]
-    testing-->ar[3: awaiting review]
-    ar--->cr[4a: changes requestd]
-    cr-->unpacking
-    ar--->accepted[4b: accepted]
-    accepted-->published[published: draft is deleted]
-```
 
 [^1]: Parameters to this workflow are `Bioimage.io resource identifier` (`id` from the `rdf.yaml`), and `Download URL of the resource package zip-file`, which should contain a publicly reachable url to a _resource package_ `.zip`-file.
 [^2]: Parameters to this workflow are `Bioimage.io resource concept` (`id` from the `rdf.yaml`), and `Published version or 'draft'` (optional, usually `draft`).
