@@ -35,7 +35,7 @@ jobs:
         with open(os.environ["GITHUB_OUTPUT"], "a") as fh:
           print(f"version_matrix={version_matrix}", file=fh)
 
-  run:
+  generate-reports:
     runs-on: ubuntu-latest
     needs: setup
     strategy:
@@ -43,12 +43,8 @@ jobs:
       matrix: ${{ fromJson(needs.setup.outputs.version_matrix) }}
 
     steps:
-    - uses: actions/checkout@v3
-    - uses: actions/checkout@v3
-      with:
-        repository: bioimage-io/collection-bioimage-io
-        ref: gh-pages
-        path: bioimageio-gh-pages
+    - run: wget https://${{vars.S3_HOST}}/${{vars.S3_BUCKET}}/${{vars.S3_FOLDER}}/all_versions_draft.json
+    - run: wget https://${{vars.S3_HOST}}/${{vars.S3_BUCKET}}/${{vars.S3_FOLDER}}/all_versions.json
     - name: Download ilastik env
       run: wget --output-document env.yaml ${{ matrix.env_url }}
     - name: ignore unrelated packages
@@ -59,9 +55,30 @@ jobs:
         environment-file: env.yaml
         cache-downloads: true
         cache-environment: true
-    - name: install backoffice
+    - name: test drafts with ilastik ${{ matrix.v }}
       shell: bash -l {0}
-      run: pip install .
-    - name: test with ilastik ${{ matrix.v }}
+      run: python scripts/check_compatibility_ilastik.py ${{ matrix.v }} all_versions_draft.json generated-reports
+    - name: test published versions with ilastik ${{ matrix.v }}
       shell: bash -l {0}
-      run: python scripts/check_compatibility_ilastik.py ${{ matrix.v }}
+      run: python scripts/check_compatibility_ilastik.py ${{ matrix.v }} all_versions.json generated-reports
+    - uses: actions/upload-artifact@v4
+      with:
+        name: generated-reports
+        path: generated-reports
+
+  upload-reports:
+    needs: generate-reports
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-python@v5
+      with:
+        python-version: "3.12"
+        cache: "pip" # caching pip dependencies
+    - run: pip install .
+    - uses: actions/download-artifact@v4
+      with:
+        name: generated-reports
+        path: generated-reports
+    - run: python scripts/upload_reports.py generated-reports
+

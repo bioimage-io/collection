@@ -7,7 +7,6 @@ from typing import TYPE_CHECKING
 
 import bioimageio.core
 import requests
-from ruyaml import YAML
 from tqdm import tqdm
 
 if bioimageio.core.__version__.startswith("0.5."):
@@ -16,8 +15,6 @@ else:
     from bioimageio.core import test_model
 
 from script_utils import CompatiblityReport, download_rdf
-
-yaml = YAML(typ="safe")
 
 
 def check_compatibility_ilastik_impl(
@@ -57,7 +54,7 @@ def check_compatibility_ilastik_impl(
         )
 
     with report_path.open("wt", encoding="utf-8") as f:
-        yaml.dump(report, f)
+        json.dump(report, f)
 
 
 def check_compatibility_ilastik(
@@ -79,17 +76,19 @@ def check_compatibility_ilastik(
             rdf_url = version["source"]
             sha256 = version["sha256"]
 
-            report_path = (
-                "/".join(rdf_url.split("/")[-4:-2])
+            report_url = (
+                "/".join(rdf_url.split("/")[:-2])
                 + f"/compatibility/ilastik_{ilastik_version}.yaml"
             )
-            report_url = "/".join(rdf_url.split("/")[:-4]) + f"/{report_path}"
-
             r = requests.head(report_url)
             if r.status_code != 404:
                 r.raise_for_status()  # raises if failed to check if report exists
                 continue  # report already exists
 
+            report_path = (
+                "/".join(rdf_url.split("/")[-4:-2])
+                + f"/compatibility/ilastik_{ilastik_version}.json"
+            )
             try:
                 check_compatibility_ilastik_impl(
                     rdf_url, sha256, output_folder / report_path
