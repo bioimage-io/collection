@@ -7,7 +7,6 @@ from typing import TYPE_CHECKING
 
 import bioimageio.core
 import requests
-from tqdm import tqdm
 
 if bioimageio.core.__version__.startswith("0.5."):
     from bioimageio.core import test_resource as test_model
@@ -15,6 +14,11 @@ else:
     from bioimageio.core import test_model
 
 from script_utils import CompatiblityReport, download_rdf
+
+try:
+    from tqdm import tqdm
+except ImportError:
+    tqdm = list
 
 
 def check_compatibility_ilastik_impl(

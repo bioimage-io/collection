@@ -2,8 +2,12 @@ import hashlib
 from typing import Any, Dict, Optional, Sequence, Union
 
 import requests
-from ruyaml import YAML
 from typing_extensions import Literal, NotRequired, TypedDict
+
+try:
+    from ruyaml import YAML
+except ImportError:
+    from ruamel.yaml import YAML
 
 yaml = YAML(typ="safe")
 
