@@ -1,6 +1,6 @@
 /*-
  * #%L
- * This project performs Continuous Integration tasks on the JDLL library
+ * This project performs Continuous Integration tasks on java software based on JDLL
  * %%
  * Copyright (C) 2023 Institut Pasteur.
  * %%
@@ -67,22 +67,26 @@ public class ContinuousIntegration {
 	private static Map<String, String> downloadedModelsCorrectly = new HashMap<String, String>();
 	private static Map<String, String> downloadedModelsIncorrectly = new HashMap<String, String>();
 	
+	private static String version;
+	
+	private static String software;
+	
 	public static void main(String[] args) throws IOException {
-		
-		//String pendingMatrix = args[1];
+
+		software = args[0];
+		version = args[1];
         
         Path currentDir = Paths.get(ContinuousIntegration.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getParent();
         Path rdfDir = currentDir.resolve("../../../bioimageio-gh-pages/rdfs").normalize();
 
         // Create a matcher for the pattern 'rdf.yaml'
-        runTests(rdfDir, "**", "**", Paths.get("test_summaries"), null);
+        runTests(rdfDir, "**", "**", Paths.get("test_summaries"));
     }
 
 	
-	public static void runTests(Path rdfDir, String resourceID, String versionID, Path summariesDir, String postfix) throws IOException {
+	public static void runTests(Path rdfDir, String resourceID, String versionID, Path summariesDir) throws IOException {
 		LinkedHashMap<String, String> summaryDefaults = new LinkedHashMap<String, String>();
-		postfix = getJDLLVersion();
-		summaryDefaults.put("JDLL_VERSION", postfix);
+		summaryDefaults.put(software, version);
 		
 		PathMatcher matcher = FileSystems.getDefault().getPathMatcher("glob:" + resourceID + File.separator + versionID + File.separator + Constants.RDF_FNAME);
 
@@ -91,7 +95,7 @@ public class ContinuousIntegration {
 		installer.basicEngineInstallation();
 		
 		for (Path rdfPath : rdfFiles) {
-			String testName = "Reproduce ouptuts with JDLL " + postfix;
+			String testName = "Reproduce ouptuts with " + software + " " + version;
 			String error = null;
 			String status = null;
 			String traceback = null;
@@ -144,7 +148,7 @@ public class ContinuousIntegration {
 				summaryMap.putAll(summaryDefaults);
 				summary.add(summaryMap);
 				
-				writeSummaries(summariesDir.toAbsolutePath() + File.separator + rdID + File.separator + "test_summary_" + postfix + ".yaml", summary);
+				writeSummaries(summariesDir.toAbsolutePath() + File.separator + rdID + File.separator + "test_summary_" + version + ".yaml", summary);
 				continue;
 			}
 			
@@ -197,7 +201,7 @@ public class ContinuousIntegration {
 			chosenSummaries.addAll(failedReproducedSummaries);
 			chosenSummaries.addAll(otherSummaries);
 			
-			writeSummaries(summariesDir.toAbsolutePath() + File.separator + rdID + File.separator + "test_summary_" + postfix + ".yaml", chosenSummaries);
+			writeSummaries(summariesDir.toAbsolutePath() + File.separator + rdID + File.separator + "test_summary_" + version + ".yaml", chosenSummaries);
 		}
 	}
 	
@@ -207,23 +211,6 @@ public class ContinuousIntegration {
             Files.createDirectories(path);
 		YAMLUtils.writeYamlFile(summariesPath, summaries);
 	}
-	
-	/**
-	 * Code to automatically get the version of JDLL being used
-	 * @return the JDLL version being used
-	 */
-	public static String getJDLLVersion() {
-		String version = "UNKNOWN";
-        try (InputStream manifestStream = Tensor.class.getClassLoader().getResourceAsStream("META-INF/MANIFEST.MF")) {
-            if (manifestStream != null) {
-                Manifest manifest = new Manifest(manifestStream);
-                java.util.jar.Attributes attrs = manifest.getMainAttributes();
-                version = attrs.getValue("Implementation-Version");
-            }
-        } catch (Exception e) {
-        }
-        return version;
-    }
 	
 	private static List<Object> testResource(String rdf, WeightFormat weightFormat, int decimal, String expectedType) {
 		String error = null;
@@ -243,7 +230,7 @@ public class ContinuousIntegration {
 		loadTest.put("error", error);
 		loadTest.put("source_name", rdf);
 		loadTest.put("traceback", traceback);
-		loadTest.put("JDLL_VERSION", getJDLLVersion());
+		loadTest.put(software, version);
 		
 		tests.add(loadTest);
 		
@@ -264,7 +251,7 @@ public class ContinuousIntegration {
 		typeTest.put("error", yes ? null : "expected type was " + type + " but found " + rd.getType());
 		typeTest.put("source_name", rd.getName());
 		typeTest.put("traceback", null);
-		typeTest.put("JDLL_VERSION", getJDLLVersion());
+		typeTest.put(software, version);
 		return typeTest;
 	}
 	
@@ -278,12 +265,12 @@ public class ContinuousIntegration {
 			error = downloadModel(rd);
 		}
 		Map<String, String> downloadTest = new LinkedHashMap<String, String>();
-		downloadTest.put("name", "JDLL is able to download model");
+		downloadTest.put("name", software + " is able to download model");
 		downloadTest.put("status", error == null ? "passed" : "failed");
 		downloadTest.put("error", error == null ? null : "unable to download model");
 		downloadTest.put("traceback", error);
 		downloadTest.put("source_name", rd.getName());
-		downloadTest.put("JDLL_VERSION", getJDLLVersion());
+		downloadTest.put(software, version);
 		return downloadTest;
 	}
 	
@@ -308,7 +295,7 @@ public class ContinuousIntegration {
 		Map<String, String> inferTest = new LinkedHashMap<String, String>();
 		inferTest.put("name", "reproduce test inputs from test outptus for " + ww.getFramework());
 		inferTest.put("source_name", rd.getName());
-		inferTest.put("JDLL_VERSION", getJDLLVersion());
+		inferTest.put(software, version);
 		if (rd.getModelPath() == null) {
 			inferTest.put("status", "failed");
 			inferTest.put("error", "model was not correctly downloaded");
@@ -343,7 +330,7 @@ public class ContinuousIntegration {
 					preproc = JavaProcessing.definePreprocessing(transform.getName(), transform.getKwargs());
 				} catch (Exception e) {
 					e.printStackTrace();
-					return failInferenceTest(rd.getName(), "pre-processing transformation not supported by JDLL: " + transform.getName(), stackTrace(e));
+					return failInferenceTest(rd.getName(), "pre-processing transformation not supported by " + software + ": " + transform.getName(), stackTrace(e));
 				}
 				inputTensor = preproc.execute(rd.getInputTensors().get(i), inputTensor);
 			}
@@ -358,7 +345,7 @@ public class ContinuousIntegration {
 			engineInfo = EngineInfo.defineCompatibleDLEngineWithRdfYamlWeights(ww);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return failInferenceTest(rd.getName(), "selected weights not supported by JDLL: " + ww.getFramework(), stackTrace(e));
+			return failInferenceTest(rd.getName(), "selected weights not supported by " + software + ": " + ww.getFramework(), stackTrace(e));
 		}
 		Model model;
 		try {
@@ -386,7 +373,7 @@ public class ContinuousIntegration {
 					preproc = JavaProcessing.definePreprocessing(transform.getName(), transform.getKwargs());
 				} catch (Exception e) {
 					e.printStackTrace();
-					return failInferenceTest(rd.getName(), "post-processing transformation not supported by JDLL: " + transform.getName(), stackTrace(e));
+					return failInferenceTest(rd.getName(), "post-processing transformation not supported by " + software + ": " + transform.getName(), stackTrace(e));
 				}
 				tt = preproc.execute(rd.getInputTensors().get(i), tt);
 			}
@@ -413,7 +400,7 @@ public class ContinuousIntegration {
 		typeTest.put("error", null);
 		typeTest.put("source_name", rd.getName());
 		typeTest.put("traceback", null);
-		typeTest.put("JDLL_VERSION", getJDLLVersion());
+		typeTest.put(software, version);
 		return typeTest;
 	}
 	
@@ -424,7 +411,7 @@ public class ContinuousIntegration {
 		typeTest.put("error", error);
 		typeTest.put("source_name", sourceName);
 		typeTest.put("traceback", tb);
-		typeTest.put("JDLL_VERSION", getJDLLVersion());
+		typeTest.put(software, version);
 		return typeTest;
 	}
 	
