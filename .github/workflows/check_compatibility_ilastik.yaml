@@ -65,7 +65,7 @@ jobs:
       run: python scripts/check_compatibility_ilastik.py ${{ matrix.v }} all_versions.json generated-reports
     - uses: actions/upload-artifact@v4
       with:
-        name: generated-reports
+        name: generated-reports-${{ matrix.v }}
         path: generated-reports
 
   upload-reports:
@@ -81,7 +81,7 @@ jobs:
     - run: pip install .
     - uses: actions/download-artifact@v4
       with:
-        name: generated-reports
+        merge-multiple: true
         path: generated-reports
     - run: python scripts/upload_reports.py generated-reports
 
