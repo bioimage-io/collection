@@ -9,6 +9,7 @@ on:
     paths:
       - .github/workflows/check_compatibility_ilastik.yaml
       - scripts/check_compatibility_ilastik.py
+      - scripts/upload_reports.py
   workflow_dispatch:
   schedule:
     - cron: 0 1 * * *  # update compatibility once a day
