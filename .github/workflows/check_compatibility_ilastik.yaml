@@ -44,6 +44,7 @@ jobs:
       matrix: ${{ fromJson(needs.setup.outputs.version_matrix) }}
 
     steps:
+    - uses: actions/checkout@v4
     - run: wget https://${{vars.S3_HOST}}/${{vars.S3_BUCKET}}/${{vars.S3_FOLDER}}/all_versions_draft.json
     - run: wget https://${{vars.S3_HOST}}/${{vars.S3_BUCKET}}/${{vars.S3_FOLDER}}/all_versions.json
     - name: Download ilastik env
@@ -72,7 +73,7 @@ jobs:
     environment: 'production'
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - uses: actions/setup-python@v5
       with:
         python-version: "3.12"
