@@ -48,7 +48,7 @@ public class DownloadEngines {
 	 */
 	private static final String ENGINES_DIR = new File(CWD, "engines").getAbsolutePath();
 	
-	public static void main(String[] args) throws IOException, InterruptedException {
+	public static void main(String[] args) throws IOException  {
 		if (args[0].equals(DEEPIMAGEJ_TAG)) {
 			EngineInstall engineManager = EngineInstall.createInstaller(ENGINES_DIR);
 			engineManager.basicEngineInstallation();
@@ -57,7 +57,13 @@ public class DownloadEngines {
 		} else if (args[0].equals(ICY_TAG)) {
 			List<DeepLearningVersion> allEngines = AvailableEngines.getForCurrentOS();
 			for (DeepLearningVersion engine : allEngines) {
-				EngineInstall.installEngineInDir(engine, ENGINES_DIR);
+				try {
+					EngineInstall.installEngineInDir(engine, ENGINES_DIR);
+				} catch (IOException e) {
+					e.printStackTrace();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
 			System.out.println(InstalledEngines.buildEnginesFinder(ENGINES_DIR).getDownloadedForOS());
 		}
