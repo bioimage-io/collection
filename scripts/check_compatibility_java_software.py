@@ -4,7 +4,6 @@ import os
 
 import requests
 
-import bioimageio.core
 from loguru import logger
 from ruyaml import YAML, YAMLError
 
@@ -13,11 +12,6 @@ from bioimageio_collection_backoffice.db_structure.compatibility import (
 )
 from bioimageio_collection_backoffice.remote_collection import Record, RemoteCollection
 from bioimageio_collection_backoffice.s3_client import Client
-
-if bioimageio.core.__version__.startswith("0.5."):
-    from bioimageio.core import test_resource as test_model
-else:
-    from bioimageio.core import test_model
 
 MAIN_TEST_NAME = "reproduce test outputs from test inputs"
 
@@ -174,6 +168,7 @@ def check_compatibility_java_software(
         except Exception as e:
             logger.error(f"failed to check '{record.id}': {e}")
         else:
+            print(report)
             if report is not None:
                 record.set_compatibility_report(report)
 
