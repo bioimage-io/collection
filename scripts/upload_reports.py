@@ -17,9 +17,10 @@ from bioimageio_collection_backoffice.s3_client import Client
 yaml = YAML(typ="safe")
 
 
-def upload_reports(reports: Path):
+def upload_reports(reports_folder: Union[Path, str]):
+    reports_folder = Path(reports_folder)
     client = Client()
-    for p in reports.glob("*/*/compatibility/*"):
+    for p in reports_folder.glob("*/*/compatibility/*"):
         concept, version, _, tool_file_name = p.as_posix().split("/")
         tool = tool_file_name[: -len(".yaml")]
 
