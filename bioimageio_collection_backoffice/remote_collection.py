@@ -575,7 +575,7 @@ class Uploader(NamedTuple):
 
 @dataclass
 class RecordBase(RemoteBase, ABC):
-    """Base class for a `RemoteDraft` and `RemoteVersion`"""
+    """Base class for a `RecordDraft` and `Record`"""
 
     concept_id: str
     concept: RecordConcept = field(init=False)
@@ -655,6 +655,13 @@ class RecordBase(RemoteBase, ABC):
         return [
             f"{self.folder}files/{p}" for p in self.client.ls(f"{self.folder}files/")
         ]
+
+    def get_compatibility_report_path(self, tool: str):
+        return f"{self.folder}compatibility/{tool}.json"
+
+    def set_compatibility_report(self, report: CompatiblityReport) -> None:
+        path = self.get_compatibility_report_path(report.tool)
+        self.client.put_and_cache(path, report.model_dump_json().encode())
 
 
 @dataclass
@@ -963,13 +970,6 @@ class Record(RecordBase):
 
     def update_info(self, update: RecordInfo):
         self._update_json(update)
-
-    def get_compatibility_report_path(self, tool: str):
-        return f"{self.folder}compatibility/{tool}.json"
-
-    def set_compatibility_report(self, report: CompatiblityReport) -> None:
-        path = self.get_compatibility_report_path(report.tool)
-        self.client.put_and_cache(path, report.model_dump_json().encode())
 
     def get_all_compatibility_reports(self, tool: Optional[str] = None):
         """get all compatibility reports"""
