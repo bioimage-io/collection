@@ -32,7 +32,7 @@ Alternatively, any direct link to a downloadable resource package (`.zip`-file) 
 The latter option is reserved for members of this repository (or the bioimageio org).
 Once available online the _resource package_ is staged (see [Staging section](#staging)), tested (see [Testing section](#testing)), and reviewed (see [Review section](#review)).
 
-
+```mermaid
 graph TD;
     stage[stage]
     test[test]
@@ -45,6 +45,7 @@ graph TD;
     cr-->stage
     test-->publish
     publish-->backup
+```
 
 #### Staging
 
