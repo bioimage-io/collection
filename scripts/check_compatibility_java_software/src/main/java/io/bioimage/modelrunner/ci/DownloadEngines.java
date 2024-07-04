@@ -34,10 +34,6 @@ import io.bioimage.modelrunner.versionmanagement.InstalledEngines;
  * @author Carlos Javier GArcia Lopez de Haro
  */
 public class DownloadEngines {
-	
-	public static final String DEEPIMAGEJ_TAG = "deepimagej";
-	
-	public static final String ICY_TAG = "icy";
 	/**
 	 * Current directory
 	 */
@@ -49,12 +45,12 @@ public class DownloadEngines {
 	private static final String ENGINES_DIR = new File(CWD, "engines").getAbsolutePath();
 	
 	public static void main(String[] args) throws IOException  {
-		if (args[0].equals(DEEPIMAGEJ_TAG)) {
+		if (args[0].equals(Tags.DEEPIMAGEJ)) {
 			EngineInstall engineManager = EngineInstall.createInstaller(ENGINES_DIR);
 			engineManager.basicEngineInstallation();
 			//InstalledEngines.buildEnginesFinder(ENGINES_DIR).getDownloadedForOS().stream().map(i -> i.toString())
 			System.out.println(InstalledEngines.buildEnginesFinder(ENGINES_DIR).getDownloadedForOS());
-		} else if (args[0].equals(ICY_TAG)) {
+		} else if (args[0].equals(Tags.ICY)) {
 			List<DeepLearningVersion> allEngines = AvailableEngines.getForCurrentOS();
 			for (DeepLearningVersion engine : allEngines) {
 				try {

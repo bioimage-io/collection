@@ -21,7 +21,6 @@ package io.bioimage.modelrunner.ci;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.nio.file.FileSystems;
@@ -34,8 +33,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.jar.Manifest;
 import java.util.stream.Collectors;
 
 import io.bioimage.modelrunner.bioimageio.BioimageioRepo;
@@ -51,7 +48,6 @@ import io.bioimage.modelrunner.numpy.DecodeNumpy;
 import io.bioimage.modelrunner.tensor.Tensor;
 import io.bioimage.modelrunner.utils.Constants;
 import io.bioimage.modelrunner.utils.YAMLUtils;
-import io.bioimage.modelrunner.versionmanagement.AvailableEngines;
 import net.imglib2.Cursor;
 import net.imglib2.RandomAccessibleInterval;
 import net.imglib2.loops.LoopBuilder;
@@ -116,11 +112,11 @@ public class ContinuousIntegration {
 				new Exception(rdfPath.toAbsolutePath().toString() + " is missing ID field").printStackTrace();
 				continue;
 			} else if (type == null || !(type instanceof String) || !((String) type).equals("model")) {
-				Map<String, String> summary = create(rdfPath, TEST_NAME, "not-applicable", null,  null, "not a model");
+				Map<String, String> summary = create(rdfPath, "not-applicable", null,  null, "not a model");
 				writeSummary(summariesPath, summary);
 				continue;
 			} else if (weightFormats == null || !(weightFormats instanceof Map)) {
-				Map<String, String> summary = create(rdfPath, TEST_NAME, 
+				Map<String, String> summary = create(rdfPath, 
 						"failed", "Missing weights dictionary for " + rdID,  null, weightFormats.toString());
 				writeSummary(summariesPath, summary);
 				continue;
@@ -129,21 +125,20 @@ public class ContinuousIntegration {
 			try {
 				weights = ModelWeight.build((Map<String, Object>) weightFormats);
 			} catch (Exception ex) {
-				Map<String, String> summary = create(rdfPath, TEST_NAME, 
+				Map<String, String> summary = create(rdfPath,
 						"failed", "Missing/Invalid weight formats for " + rdID,  stackTrace(ex), "Unable to read weight formats");
 				writeSummary(summariesPath, summary);
 				continue;
 			}
 			
 			if (weights != null && weights.gettAllSupportedWeightObjects().size() == 0) {
-				Map<String, String> summary = create(rdfPath, TEST_NAME, 
+				Map<String, String> summary = create(rdfPath,
 						"failed", "Unsupported model weights",  null, "The model weights belong to a Deep Learning "
 								+ "framework not supported by " + software + "_" + version + ".");
 				writeSummary(summariesPath, summary);
 				continue;
 			}
 			
-			Map<String, Object> summariesPerWeightFormat = new LinkedHashMap<String, Object>();
 						
 			for (WeightFormat ww : weights.gettAllSupportedWeightObjects()) {
 				List<Object> summariesWeightFormat = new ArrayList<Object>();
@@ -152,21 +147,21 @@ public class ContinuousIntegration {
 					summaryWeightFormat = testResource(rdfPath.toAbsolutePath().toString(), ww, 4, "model");
 				} catch (Exception ex) {
 					ex.printStackTrace();
-					summaryWeightFormat = create(rdfPath, TEST_NAME + " " + ww.getFramework(), "failed", "exception thrown during testing",
+					summaryWeightFormat = create(rdfPath, "failed", "exception thrown during testing",
 					stackTrace(ex), "test was interrupted by an exception while testing" + ww.getFramework() + " weigths");
-					
 				}
-				summariesPerWeightFormat.put(ww.getFramework(), summariesWeightFormat);
+				summariesPath = summariesDir.toAbsolutePath() + File.separator
+						+ rdID + File.separator + "test_summary_" + software + "_" + version + ".yaml";
+				writeSummary(summariesPath, summaryWeightFormat);
 			}
 			
-			writeSummary(summariesDir.toAbsolutePath() + File.separator + rdID + File.separator + "test_summary_" + version + ".yaml", chosenSummaries);
 		}
 	}
 	
-	private static Map<String, String> create(Path rdfPath, String testName, String status, String error, 
+	private static Map<String, String> create(Path rdfPath, String status, String error, 
 												String tb, String details) {
 		Map<String, String> summaryMap = new LinkedHashMap<String, String>();
-		summaryMap.put("name", testName);
+		summaryMap.put("name", TEST_NAME);
 		summaryMap.put("status", status);
 		summaryMap.put("error", error);
 		summaryMap.put("source_name", rdfPath.toAbsolutePath().toString());
@@ -197,7 +192,7 @@ public class ContinuousIntegration {
 		try {
 			rd = ModelDescriptor.readFromLocalFile(rdf, false);
 		} catch (ModelSpecsException e) {
-			Map<String, String> summary = create(Paths.get(rdf), TEST_NAME, 
+			Map<String, String> summary = create(Paths.get(rdf),
 					"failed", "Unable to parse specs from rdf.yaml file",  stackTrace(e), 
 					software + "_" + version + " is unable to read the specs from the rdf.yaml file. Spec version"
 							+ " might not be compatible with the software version.");
@@ -216,7 +211,7 @@ public class ContinuousIntegration {
 	private static Map<String, String> testExpectedResourceType(ModelDescriptor rd,  String type) {
 		boolean yes = rd.getType().equals(type);
 		Path path = Paths.get(rd.getModelPath() + File.separator + Constants.RDF_FNAME);
-		return create(path, TEST_NAME, yes ? "passed" : "failed", 
+		return create(path, yes ? "passed" : "failed", 
 				yes ? null : "expected type was " + type + " but found " + rd.getType(), null, null);
 	}
 	
@@ -231,7 +226,7 @@ public class ContinuousIntegration {
 			error = downloadModel(rd);
 		}
 		
-		return create(path, TEST_NAME, error == null ? "passed" : "failed", 
+		return create(path, error == null ? "passed" : "failed", 
 				error == null ? null : software + " unable to download model",
 				error, error);
 	}
@@ -259,20 +254,23 @@ public class ContinuousIntegration {
 		inferTest.put("source_name", rd.getName());
 		inferTest.put(software, version);
 		if (rd.getModelPath() == null) {
-			inferTest.put("status", "failed");
-			inferTest.put("error", "model was not correctly downloaded");
-			return inferTest;
+			return create(null, "failed", 
+					"model was not correctly downloaded", null, null);
 		}
-		if (rd.getInputTensors().size() != rd.getTestInputs().size()) {
-			inferTest.put("status", "failed");
-			inferTest.put("error", "the number of test inputs should be the same as the number of inputs,"
-					+ rd.getInputTensors().size() + " vs " + rd.getTestInputs().size());
-			return inferTest;
+		if (software.equals(Tags.DEEPIMAGEJ) && rd.getInputTensors().size() != 1) {
+			return create(null, "failed", 
+					software + " only supports models with 1 (one) input", null, software + " only supports models "
+							+ "with 1 input and this model has " + rd.getInputTensors().size());
+		} else if (rd.getInputTensors().size() != rd.getTestInputs().size()) {
+			return create(null, "failed", 
+					"the number of test inputs should be the same as the number of model inputs", null, 
+					"the number of test inputs should be the same as the number of model inputs,"
+							+ rd.getInputTensors().size() + " vs " + rd.getTestInputs().size());
 		} else if (rd.getOutputTensors().size() != rd.getTestOutputs().size()) {
-			inferTest.put("status", "failed");
-			inferTest.put("error", "the number of test outputs should be the same as the number of outputs"
-					+ rd.getOutputTensors().size() + " vs " + rd.getTestOutputs().size());
-			return inferTest;
+			return create(null, "failed", 
+					"the number of test outputs should be the same as the number of model outputs", null, 
+					"the number of test outputs should be the same as the number of model outputs,"
+							+ rd.getInputTensors().size() + " vs " + rd.getTestInputs().size());
 		} 
 
 		List<Tensor<?>> inps = new ArrayList<Tensor<?>>();
@@ -351,30 +349,15 @@ public class ContinuousIntegration {
 			double diff = computeMaxDiff(rai);
 			if (diff > Math.pow(10, -decimal))
 				return failInferenceTest(rd.getName(), "output number " + i + " produces a very different result, "
-						+ "the max difference is bigger than " + Math.pow(10, -decimal), null);
+						+ "the max difference is " + diff +", bigger than max alllowed " + Math.pow(10, -decimal), null);
 			maxDif.add(computeMaxDiff(rai));
 		}
 		
-		
-		Map<String, String> typeTest = new LinkedHashMap<String, String>();
-		typeTest.put("name", "reproduce test outputs from test inputs");
-		typeTest.put("status", "passed");
-		typeTest.put("error", null);
-		typeTest.put("source_name", rd.getName());
-		typeTest.put("traceback", null);
-		typeTest.put(software, version);
-		return typeTest;
+		return create(null, "passed", null, null, null);
 	}
 	
 	private static Map<String, String> failInferenceTest(String sourceName, String error, String tb) {
-		Map<String, String> typeTest = new LinkedHashMap<String, String>();
-		typeTest.put("name", "reproduce test outputs from test inputs");
-		typeTest.put("status", "failed");
-		typeTest.put("error", error);
-		typeTest.put("source_name", sourceName);
-		typeTest.put("traceback", tb);
-		typeTest.put(software, version);
-		return typeTest;
+		return create(Paths.get(sourceName), "failed", error, tb, tb);
 	}
 	
 	
