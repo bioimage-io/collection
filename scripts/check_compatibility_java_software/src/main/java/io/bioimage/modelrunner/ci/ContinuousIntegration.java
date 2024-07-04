@@ -51,6 +51,7 @@ import io.bioimage.modelrunner.numpy.DecodeNumpy;
 import io.bioimage.modelrunner.tensor.Tensor;
 import io.bioimage.modelrunner.utils.Constants;
 import io.bioimage.modelrunner.utils.YAMLUtils;
+import io.bioimage.modelrunner.versionmanagement.AvailableEngines;
 import net.imglib2.Cursor;
 import net.imglib2.RandomAccessibleInterval;
 import net.imglib2.loops.LoopBuilder;
@@ -70,6 +71,7 @@ public class ContinuousIntegration {
 	private static String version;
 	
 	private static String software;
+	private static final String TEST_NAME = "reproduce test outputs from test inputs";
 	
 	public static void main(String[] args) throws IOException {
 
@@ -85,8 +87,6 @@ public class ContinuousIntegration {
 
 	
 	public static void runTests(Path rdfDir, String resourceID, String versionID, Path summariesDir) throws IOException {
-		LinkedHashMap<String, String> summaryDefaults = new LinkedHashMap<String, String>();
-		summaryDefaults.put(software, version);
 		
 		PathMatcher matcher = FileSystems.getDefault().getPathMatcher("glob:" + resourceID + File.separator + versionID + File.separator + Constants.RDF_FNAME);
 
@@ -95,60 +95,51 @@ public class ContinuousIntegration {
 		installer.basicEngineInstallation();
 		
 		for (Path rdfPath : rdfFiles) {
-			String testName = "Reproduce ouptuts with " + software + " " + version;
-			String error = null;
-			String status = null;
-			String traceback = null;
+			System.out.println("");
+			System.out.println("");
+			System.out.println(rdfPath);
 			
 			Map<String, Object> rdf = new LinkedHashMap<String, Object>();
 			try {
 				rdf = YAMLUtils.load(rdfPath.toAbsolutePath().toString());
 			} catch (Exception ex) {
-				error = "Unable to load " + Constants.RDF_FNAME + ": " + ex.toString();
-				status = "failed";
-				traceback = stackTrace(ex);
 				ex.printStackTrace();
+				continue;
 			}
 
 			Object rdID = rdf.get("id");
+			String summariesPath = summariesDir.toAbsolutePath() + File.separator
+					+ (rdID != null ? rdID : "") + File.separator + "test_summary_" + software + "_" + version + ".yaml";
 			Object type = rdf.get("type");
 			Object weightFormats = rdf.get("weights");
 			if (rdID == null || !(rdID instanceof String)) {
-				System.out.println("Invalid RDF. Missing/Invalid 'id' in rdf: " + rdfPath.toString());
+				new Exception(rdfPath.toAbsolutePath().toString() + " is missing ID field").printStackTrace();
+				continue;
 			} else if (type == null || !(type instanceof String) || !((String) type).equals("model")) {
-				status = "skipped";
-				error = "not a model RDF";
+				Map<String, String> summary = create(rdfPath, TEST_NAME, "not-applicable", null,  null, "not a model");
+				writeSummary(summariesPath, summary);
+				continue;
 			} else if (weightFormats == null || !(weightFormats instanceof Map)) {
-				status = "failed";
-				error = "Missing weights dictionary for " + rdID;
-				traceback = weightFormats.toString();
+				Map<String, String> summary = create(rdfPath, TEST_NAME, 
+						"failed", "Missing weights dictionary for " + rdID,  null, weightFormats.toString());
+				writeSummary(summariesPath, summary);
+				continue;
 			}
 			ModelWeight weights = null;
 			try {
 				weights = ModelWeight.build((Map<String, Object>) weightFormats);
 			} catch (Exception ex) {
-				status = "failed";
-				error = "Missing/Invalid weight formats for " + rdID;
-				traceback = stackTrace(ex);
+				Map<String, String> summary = create(rdfPath, TEST_NAME, 
+						"failed", "Missing/Invalid weight formats for " + rdID,  stackTrace(ex), "Unable to read weight formats");
+				writeSummary(summariesPath, summary);
+				continue;
 			}
 			
 			if (weights != null && weights.gettAllSupportedWeightObjects().size() == 0) {
-				status = "failed";
-				error = "Missing/Invalid weight formats. No supported weigths found for " + rdID;
-			}
-			
-			if (status != null) {
-				List<Object> summary = new ArrayList<Object>();
-				Map<String, String> summaryMap = new LinkedHashMap<String, String>();
-				summaryMap.put("name", testName);
-				summaryMap.put("status", status);
-				summaryMap.put("error", error);
-				summaryMap.put("source_name", rdfPath.toAbsolutePath().toString());
-				summaryMap.put("traceback", traceback);
-				summaryMap.putAll(summaryDefaults);
-				summary.add(summaryMap);
-				
-				writeSummaries(summariesDir.toAbsolutePath() + File.separator + rdID + File.separator + "test_summary_" + version + ".yaml", summary);
+				Map<String, String> summary = create(rdfPath, TEST_NAME, 
+						"failed", "Unsupported model weights",  null, "The model weights belong to a Deep Learning "
+								+ "framework not supported by " + software + "_" + version + ".");
+				writeSummary(summariesPath, summary);
 				continue;
 			}
 			
@@ -205,7 +196,29 @@ public class ContinuousIntegration {
 		}
 	}
 	
+	private static Map<String, String> create(Path rdfPath, String testName, String status, String error, 
+												String tb, String details) {
+		Map<String, String> summaryMap = new LinkedHashMap<String, String>();
+		summaryMap.put("name", testName);
+		summaryMap.put("status", status);
+		summaryMap.put("error", error);
+		summaryMap.put("source_name", rdfPath.toAbsolutePath().toString());
+		summaryMap.put("traceback", tb);
+		summaryMap.put("details", details);
+		summaryMap.put(software, version);;
+		return summaryMap;
+	}
+	
 	private static void writeSummaries(String summariesPath, List<Object> summaries) throws IOException {
+		Path path = Paths.get(summariesPath).getParent();
+		if (path != null && !Files.exists(path))
+            Files.createDirectories(path);
+		YAMLUtils.writeYamlFile(summariesPath, summaries);
+	}
+	
+	private static void writeSummary(String summariesPath, Map<String, String> summary) throws IOException {
+		List<Object> summaries = new ArrayList<Object>();
+		summaries.add(summary);
 		Path path = Paths.get(summariesPath).getParent();
 		if (path != null && !Files.exists(path))
             Files.createDirectories(path);
