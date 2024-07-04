@@ -21,7 +21,9 @@ def upload_reports(reports_folder: Union[Path, str]):
     reports_folder = Path(reports_folder)
     client = Client()
     for p in reports_folder.glob("*/*/compatibility/*"):
-        concept, version, _, tool_file_name = p.as_posix().split("/")
+        concept, version, _, tool_file_name = (
+            p.relative_to(reports_folder).as_posix().split("/")
+        )
         tool = tool_file_name[: -len(".yaml")]
 
         if p.suffix in (".yml", ".yaml"):
