@@ -149,50 +149,17 @@ public class ContinuousIntegration {
 				List<Object> summariesWeightFormat = new ArrayList<Object>();
 				Map<String, String> summaryWeightFormat = new LinkedHashMap<String, String>();
 				try {
-					summariesWeightFormat = testResource(rdfPath.toAbsolutePath().toString(), ww, 4, "model");
+					summaryWeightFormat = testResource(rdfPath.toAbsolutePath().toString(), ww, 4, "model");
 				} catch (Exception ex) {
 					ex.printStackTrace();
-					summaryWeightFormat.put("name", testName);
-					summaryWeightFormat.put("status", "failed");
-					summaryWeightFormat.put("error", "unable to perform tests");
-					summaryWeightFormat.put("traceback", stackTrace(ex));
-					summaryWeightFormat.put("source_name", rdfPath.toAbsolutePath().toString());
-					summaryWeightFormat.putAll(summaryDefaults);
-					summariesWeightFormat.add(summaryWeightFormat);
+					summaryWeightFormat = create(rdfPath, TEST_NAME + " " + ww.getFramework(), "failed", "exception thrown during testing",
+					stackTrace(ex), "test was interrupted by an exception while testing" + ww.getFramework() + " weigths");
+					
 				}
 				summariesPerWeightFormat.put(ww.getFramework(), summariesWeightFormat);
 			}
-
-			List<Object> passedReproducedSummaries = new ArrayList<Object>();
-			List<Object> failedReproducedSummaries = new ArrayList<Object>();
-			List<Object> otherSummaries = new ArrayList<Object>();
-			List<String> seenTests = new ArrayList<String>();
 			
-			for (Entry<String, Object> entry : summariesPerWeightFormat.entrySet()) {
-				String wf = entry.getKey();
-				List<Map<String, String>> s = (List<Map<String, String>>) entry.getValue();
-				for (Map<String, String> ss : s) {
-					boolean isOther = !ss.get("name").equals("reproduce test outputs from test inputs");
-					if (isOther && seenTests.contains(ss.toString())) {
-						continue;
-					}
-					ss.put("name", ss.get("name") + " (" + wf + ")");
-					if (isOther) {
-						seenTests.add(ss.toString());
-	                    otherSummaries.add(ss);
-	                    continue;
-					}
-					if (status != null && status.equals("passed")) passedReproducedSummaries.add(ss);
-					else failedReproducedSummaries.add(ss);
-				}
-			}
-			
-			List<Object> chosenSummaries = new ArrayList<Object>();
-			chosenSummaries.addAll(passedReproducedSummaries);
-			chosenSummaries.addAll(failedReproducedSummaries);
-			chosenSummaries.addAll(otherSummaries);
-			
-			writeSummaries(summariesDir.toAbsolutePath() + File.separator + rdID + File.separator + "test_summary_" + version + ".yaml", chosenSummaries);
+			writeSummary(summariesDir.toAbsolutePath() + File.separator + rdID + File.separator + "test_summary_" + version + ".yaml", chosenSummaries);
 		}
 	}
 	
@@ -225,50 +192,36 @@ public class ContinuousIntegration {
 		YAMLUtils.writeYamlFile(summariesPath, summaries);
 	}
 	
-	private static List<Object> testResource(String rdf, WeightFormat weightFormat, int decimal, String expectedType) {
-		String error = null;
-		String traceback = null;
+	private static Map<String, String>  testResource(String rdf, WeightFormat weightFormat, int decimal, String expectedType) {
 		ModelDescriptor rd = null;
 		try {
 			rd = ModelDescriptor.readFromLocalFile(rdf, false);
 		} catch (ModelSpecsException e) {
-			error = "unable to read rdf.yaml file";
-			traceback = stackTrace(e);
+			Map<String, String> summary = create(Paths.get(rdf), TEST_NAME, 
+					"failed", "Unable to parse specs from rdf.yaml file",  stackTrace(e), 
+					software + "_" + version + " is unable to read the specs from the rdf.yaml file. Spec version"
+							+ " might not be compatible with the software version.");
+			return summary;
 		}
-
-		List<Object> tests = new ArrayList<Object>();
-		Map<String, String> loadTest = new LinkedHashMap<String, String>();
-		loadTest.put("name", "load resource description");
-		loadTest.put("status", error == null ? "passed" : "failed");
-		loadTest.put("error", error);
-		loadTest.put("source_name", rdf);
-		loadTest.put("traceback", traceback);
-		loadTest.put(software, version);
 		
-		tests.add(loadTest);
+		Map<String, String> test1 = testExpectedResourceType(rd, expectedType);
+		if (test1.get("status").equals("failed")) return test1;
 		
-		if (rd != null) 
-			tests.add(testExpectedResourceType(rd, expectedType));
-		if (rd != null && rd.getType().equals("model")) {
-			tests.add(testModelDownload(rd));
-			tests.add(testModelInference(rd, weightFormat, decimal));
-		}
-		return tests;
+		Map<String, String> test2 = testModelDownload(rd);
+		if (test2.get("status").equals("failed")) return test2;
+		
+		return testModelInference(rd, weightFormat, decimal);
 	}
 	
 	private static Map<String, String> testExpectedResourceType(ModelDescriptor rd,  String type) {
 		boolean yes = rd.getType().equals(type);
-		Map<String, String> typeTest = new LinkedHashMap<String, String>();
-		typeTest.put("name", "has expected resource type");
-		typeTest.put("status", yes ? "passed" : "failed");
-		typeTest.put("error", yes ? null : "expected type was " + type + " but found " + rd.getType());
-		typeTest.put("source_name", rd.getName());
-		typeTest.put("traceback", null);
-		typeTest.put(software, version);
-		return typeTest;
+		Path path = Paths.get(rd.getModelPath() + File.separator + Constants.RDF_FNAME);
+		return create(path, TEST_NAME, yes ? "passed" : "failed", 
+				yes ? null : "expected type was " + type + " but found " + rd.getType(), null, null);
 	}
 	
 	private static Map<String, String> testModelDownload(ModelDescriptor rd) {
+		Path path = Paths.get(rd.getModelPath() + File.separator + Constants.RDF_FNAME);
 		String error = null;
 		if (downloadedModelsCorrectly.keySet().contains(rd.getName())) {
 			rd.addModelPath(Paths.get(downloadedModelsCorrectly.get(rd.getName())));
@@ -277,14 +230,10 @@ public class ContinuousIntegration {
 		} else {
 			error = downloadModel(rd);
 		}
-		Map<String, String> downloadTest = new LinkedHashMap<String, String>();
-		downloadTest.put("name", software + " is able to download model");
-		downloadTest.put("status", error == null ? "passed" : "failed");
-		downloadTest.put("error", error == null ? null : "unable to download model");
-		downloadTest.put("traceback", error);
-		downloadTest.put("source_name", rd.getName());
-		downloadTest.put(software, version);
-		return downloadTest;
+		
+		return create(path, TEST_NAME, error == null ? "passed" : "failed", 
+				error == null ? null : software + " unable to download model",
+				error, error);
 	}
 	
 	private static String downloadModel(ModelDescriptor rd) {
