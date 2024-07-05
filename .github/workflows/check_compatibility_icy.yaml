@@ -33,6 +33,7 @@ jobs:
         python scripts/get_java_software_versions.py icy >> $GITHUB_OUTPUT
     - name: Debug matrix
       run: echo '${{ steps.set-dict.outputs.matrix }}'
+      
   run:
     needs: generate-version-dict
     runs-on: ubuntu-latest
