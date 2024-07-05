@@ -8,6 +8,7 @@ on:
       - main
     paths:
       - .github/workflows/check_compatibility_icy.yaml
+      - scripts/get_java_software_versions.py
       - scripts/check_compatibility_java_software/**/*
   workflow_dispatch:
   schedule:
