@@ -14,9 +14,25 @@ on:
     - cron: 0 1 * * *  # update compatibility once a day
 
 jobs:
+  generate-version-dict:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-dict.outputs.matrix }}
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+    - name: Generate dict
+      id: set-dict
+      run: |
+        python scripts/get_java_software_versions.py icy >> $GITHUB_OUTPUT
   run:
+    needs: generate-version-dict
     runs-on: ubuntu-latest
     strategy:
+      matrix: ${{fromJson(needs.generate-version-dict.outputs.matrix)}}
       fail-fast: false
     steps:
     - uses: actions/checkout@v3
@@ -39,7 +55,7 @@ jobs:
         java -cp scripts/check_compatibility_java_software/target/dl-modelrunner-ci-0.0.1-SNAPSHOT.jar io.bioimage.modelrunner.ci.DownloadEngines icy
     - name: Run models
       run: |
-        java -cp scripts/check_compatibility_java_software/target/dl-modelrunner-ci-0.0.1-SNAPSHOT.jar io.bioimage.modelrunner.ci.ContinuousIntegration
+        java -cp scripts/check_compatibility_java_software/target/dl-modelrunner-ci-0.0.1-SNAPSHOT.jar io.bioimage.modelrunner.ci.ContinuousIntegration icy "${{ matrix.key }}"
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
       with:
