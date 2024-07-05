@@ -58,10 +58,12 @@ jobs:
         mvn clean install org.apache.maven.plugins:maven-shade-plugin:3.2.4:shade -Dshade.mainClass=io.bioimage.modelrunner.ci.ContinuousIntegration
     - name: Download engines
       run: |
+        cd scripts/check_compatibility_java_software
         jarfile=$(mvn -q exec:exec -Dexec.executable=echo -Dexec.args='${project.build.finalName}.jar')
         java -cp scripts/check_compatibility_java_software/target/$jarfile io.bioimage.modelrunner.ci.DownloadEngines icy
     - name: Run models
       run: |
+        cd scripts/check_compatibility_java_software
         java -cp scripts/check_compatibility_java_software/target/$jarfile io.bioimage.modelrunner.ci.ContinuousIntegration icy ${{ matrix.key }}
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
