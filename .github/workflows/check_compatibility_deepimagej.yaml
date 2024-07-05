@@ -60,13 +60,13 @@ jobs:
       run: |
         cd scripts/check_compatibility_java_software
         jarfile=$(mvn -q exec:exec -Dexec.executable=echo -Dexec.args='${project.build.finalName}.jar')
+        echo "jarfile=$jarfile" >> $GITHUB_OUTPUT
     - name: Download engines
       run: |
-        echo $jarfile
-        java -cp scripts/check_compatibility_java_software/target/$jarfile io.bioimage.modelrunner.ci.DownloadEngines deepimagej
+        java -cp "scripts/check_compatibility_java_software/target/${{ steps.get-jar.outputs.jarfile }}" io.bioimage.modelrunner.ci.DownloadEngines deepimagej
     - name: Run models
       run: |
-        java -cp scripts/check_compatibility_java_software/target/$jarfile io.bioimage.modelrunner.ci.ContinuousIntegration deepimagej ${{ matrix.key }}
+        java -cp "scripts/check_compatibility_java_software/target/${{ steps.get-jar.outputs.jarfile }}" io.bioimage.modelrunner.ci.ContinuousIntegration deepimagej ${{ matrix.key }}
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
       with:
