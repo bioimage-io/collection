@@ -31,12 +31,13 @@ jobs:
       id: set-dict
       run: |
         python scripts/get_java_software_versions.py icy >> $GITHUB_OUTPUT
+    - name: Debug matrix
+      run: echo '${{ steps.set-dict.outputs.matrix }}'
   run:
     needs: generate-version-dict
     runs-on: ubuntu-latest
-    strategy:
-      matrix: ${{fromJson(needs.generate-version-dict.outputs.matrix)}}
-      fail-fast: false
+    - name: Debug matrix
+      run: echo '${{ toJson(needs.generate-version-dict.outputs.matrix) }}'
     steps:
     - uses: actions/checkout@v3
     - uses: actions/checkout@v3
