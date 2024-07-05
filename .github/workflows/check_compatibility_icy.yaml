@@ -36,12 +36,13 @@ jobs:
         echo "matrix=${matrix}" >> $GITHUB_OUTPUT
     - name: Debug matrix
       run: echo '${{ steps.set-dict.outputs.matrix }}'
-      
+
   run:
     needs: generate-version-dict
     runs-on: ubuntu-latest
     strategy:
-      matrix: ${{ fromJson(needs.generate-version-dict.outputs.matrix) }}
+      matrix: 
+        include: ${{ fromJson(needs.generate-version-dict.outputs.matrix) }}
     steps:
     - name: Debug matrix
       run: echo '${{ toJson(matrix) }}'
@@ -71,19 +72,15 @@ jobs:
       with:
         path: test_summaries
 
-  
   sendreport:
     runs-on: ubuntu-latest
     needs: run
     steps:
     - uses: actions/checkout@v3
-
     - name: Get test results
       uses: actions/download-artifact@v3
       with:
         path: test_summaries
-
     - name: test with Java software ${{ matrix.v }}
       shell: bash -l {0}
       run: python scripts/check_compatibility_java_software.py icy 3.0.1 test_summaries/artifact
-
