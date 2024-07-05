@@ -1,3 +1,4 @@
+import argparse
 import requests
 from bs4 import BeautifulSoup
 import re
@@ -8,15 +9,17 @@ from pathlib import Path
 import os
 import zipfile
 import xml.etree.ElementTree as ET
+import json
 
 DEEPIMAGEJ_UPDATE_SITE_URL = "https://sites.imagej.net/DeepImageJ/plugins/"
 DEEPIMAGEJ_PATTERN = r"DeepImageJ-(\d+\.\d+\.\d+)\.jar-(\d{14})"
 DIJ_POM_FILE = 'META-INF/maven/io.github.deepimagej/DeepImageJ_/pom.xml'
-MINIMUM_DIJ_VERSION = Version("3.0.0")
+MINIMUM_DIJ_VERSION = Version("3.0.4")
+DEEPIMAGEJ_TAG = "deepimagej"
 
 
 ICY_POM_FILE = ''
-
+ICY_TAG = "icy"
 
 TEMP_PATH = os.path.abspath("TEMP")
 
@@ -129,9 +132,14 @@ def get_dij_version_and_date(filename: str) -> Dict[str, Any]:
         version_dic["ts"] = None
     return version_dic
 
-    
+    get_deepimagej_versions()
 
-
-
-
-get_deepimagej_versions()
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    _ = parser.add_argument("software_name")
+    if parser.parse_args().software_name == DEEPIMAGEJ_TAG:
+        matrix = get_deepimagej_versions()
+        #print(json.dumps(matrix))
+        print(json.dumps({"3.0.4": "0.5.9"}))
+    elif parser.parse_args().software_name == ICY_TAG:
+        print(json.dumps({"0.0.1": "0.5.9"}))
