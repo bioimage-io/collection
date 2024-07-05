@@ -24,6 +24,8 @@ jobs:
       uses: actions/setup-python@v4
       with:
         python-version: '3.x'
+    - name: Install deps
+      run: pip install requests==2.28.2 beautifulsoup4==4.12.3 packaging==23.0
     - name: Generate dict
       id: set-dict
       run: |

@@ -132,7 +132,6 @@ def get_dij_version_and_date(filename: str) -> Dict[str, Any]:
         version_dic["ts"] = None
     return version_dic
 
-    get_deepimagej_versions()
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
