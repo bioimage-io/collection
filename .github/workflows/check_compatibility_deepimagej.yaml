@@ -75,7 +75,7 @@ jobs:
 
   sendreport:
     runs-on: ubuntu-latest
-    needs: run
+    needs: [generate-version-dict, run]
     strategy:
       matrix: ${{ fromJson(needs.generate-version-dict.outputs.matrix) }}
     steps:
