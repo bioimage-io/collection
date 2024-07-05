@@ -31,9 +31,8 @@ jobs:
       id: set-dict
       run: |
         matrix_output=$(python scripts/get_java_software_versions.py icy)
-        echo "${matrix_output}" >> $GITHUB_ENV
-        matrix=$(echo "${matrix_output}" | sed 's/matrix=//')
-        echo "matrix=${matrix}" >> $GITHUB_OUTPUT
+        echo "matrix=${matrix_output}" >> $GITHUB_ENV
+        echo "${matrix_output}" >> $GITHUB_OUTPUT
     - name: Debug matrix
       run: echo '${{ steps.set-dict.outputs.matrix }}'
 
@@ -41,8 +40,7 @@ jobs:
     needs: generate-version-dict
     runs-on: ubuntu-latest
     strategy:
-      matrix: 
-        include: ${{ fromJson(needs.generate-version-dict.outputs.matrix) }}
+      matrix: ${{ fromJson(needs.generate-version-dict.outputs.matrix) }}
     steps:
     - name: Debug matrix
       run: echo '${{ toJson(matrix) }}'
