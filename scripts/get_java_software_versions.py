@@ -140,9 +140,9 @@ if __name__ == "__main__":
         matrix = get_deepimagej_versions()
         #print(json.dumps(matrix))
         #print(f"matrix={json.dumps({"0.0.1": "0.5.9"})}")
-        matrix = {"0.0.1": "0.5.9"}
+        matrix = [{"0.0.1": "0.5.9"}]
         print(f"matrix={json.dumps(matrix)}")
     elif parser.parse_args().software_name == ICY_TAG:
         #print(f"matrix={json.dumps({"0.0.1": "0.5.9"})}")
-        matrix = {"0.0.1": "0.5.9"}
+        matrix = [{"0.0.1": "0.5.9"}]
         print(f"matrix={json.dumps(matrix)}")
