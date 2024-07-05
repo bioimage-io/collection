@@ -62,6 +62,7 @@ jobs:
         jarfile=$(mvn -q exec:exec -Dexec.executable=echo -Dexec.args='${project.build.finalName}.jar')
     - name: Download engines
       run: |
+        echo $jarfile
         java -cp scripts/check_compatibility_java_software/target/$jarfile io.bioimage.modelrunner.ci.DownloadEngines deepimagej
     - name: Run models
       run: |
