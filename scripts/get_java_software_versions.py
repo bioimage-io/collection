@@ -139,6 +139,6 @@ if __name__ == "__main__":
     if parser.parse_args().software_name == DEEPIMAGEJ_TAG:
         matrix = get_deepimagej_versions()
         #print(json.dumps(matrix))
-        print(json.dumps({"3.0.4": "0.5.9"}))
+        print(f"matrix={json.dumps({"0.0.1": "0.5.9"})}")
     elif parser.parse_args().software_name == ICY_TAG:
-        print(json.dumps({"0.0.1": "0.5.9"}))
+        print(f"matrix={json.dumps({"0.0.1": "0.5.9"})}")
