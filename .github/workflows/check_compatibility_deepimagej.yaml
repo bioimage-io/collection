@@ -71,7 +71,7 @@ jobs:
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
       with:
-        path: test_summaries${{ matrix.key }}
+        path: test_summaries_deepimagej_${{ matrix.key }}
 
   sendreport:
     runs-on: ubuntu-latest
@@ -83,9 +83,9 @@ jobs:
     - name: Get test results
       uses: actions/download-artifact@v3
       with:
-        path: test_summaries${{ matrix.key }}
+        path: test_summaries_deepimagej_${{ matrix.key }}
     - name: Install deps
       run: pip install requests==2.28.2 loguru==0.7.2 ruyaml==0.91.0 
     - name: Send deepimagej ${{ matrix.key }} tests
       shell: bash -l {0}
-      run: python scripts/check_compatibility_java_software.py deepimagej ${{ matrix.key }} test_summaries/artifact
+      run: python scripts/check_compatibility_java_software.py deepimagej ${{ matrix.key }} test_summaries_deepimagej_{{ matrix.key }}/artifact

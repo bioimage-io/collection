@@ -13,9 +13,6 @@ from bioimageio_collection_backoffice.db_structure.compatibility import (
 from bioimageio_collection_backoffice.remote_collection import Record, RemoteCollection
 from bioimageio_collection_backoffice.s3_client import Client
 
-MAIN_TEST_NAME = "reproduce test outputs from test inputs"
-
-yaml = YAML(typ="safe")
 
 
 def find_java_summaries(directory: str) -> List[str]:
@@ -75,20 +72,26 @@ def get_tests_from_summaries(rdf: str, path_to_summaries: str) -> Dict[str, str]
         summary["error"] = "No tests executed"
         summary["details"] = "The model tests were not executed or the test files could not be located"
         return summary
-    elif len(test_files) > 1:
-        raise Exception("Unexpected number of tests (" + str(len(test_files)) + ") found in the folder of interest")
     
     summaries_yaml = None
+    error: str = ""
+    for test_file in test_files:
+        try:
+            summaries_yaml=YAML(typ='safe')  # default, if not specfied, is 'rt' (round-trip)
+            summaries_yaml.load(test_file)
+            summary = find_passed_test(summaries_yaml)
+            if summary["status"] == "passed":
+                return summary
+        except YAMLError as e:
+            error += str(e) + os.linesep
+            continue
+    
+    if summary["status"] is not None:
+        return summary
 
-    try:
-        summaries_yaml=YAML(typ='safe')  # default, if not specfied, is 'rt' (round-trip)
-        summaries_yaml.load(test_files[0])
-    except YAMLError as e:
-        summary["status"] = "failed"
-        summary["error"] = "Unable to read the test results yaml file"
-        summary["details"] = str(e)
-
-    summary = find_passed_test(summaries_yaml)
+    summary["status"] = "failed"
+    summary["error"] = "Unable to read the test results yaml file"
+    summary["details"] = str(error)
 
     return summary
 
@@ -101,13 +104,12 @@ def find_passed_test(summaries_yaml: List[Dict[Any, Any]]) -> Dict[Any, Any]:
             summary["error"] = "Invalid test output format"
             summary["details"] = "Expected a list of dictionaries, but received an improperly formatted element."
             return summary
-        
-        if elem.get("status") == "passed" and elem.get("name") != None and elem.get("name").contains(MAIN_TEST_NAME):
+        elif elem.get("status") is not None:
             return elem
-        elif elem.get("status") != "passed" and elem.get("name") != None and elem.get("name").contains(MAIN_TEST_NAME):
-            summary["status"] = elem.get("status")
-            summary["error"] = elem.get("error")
-            summary["details"] = elem.get("traceback")
+    
+    summary["status"] = "failed"
+    summary["error"] = "No test contents found"
+    summary["details"] = "test file was empty."
     return summary
 
 
