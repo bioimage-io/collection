@@ -57,6 +57,7 @@ jobs:
         cd scripts/check_compatibility_java_software
         mvn clean install org.apache.maven.plugins:maven-shade-plugin:3.2.4:shade -Dshade.mainClass=io.bioimage.modelrunner.ci.ContinuousIntegration
     - name: Get jar file name
+      id: get-jar
       run: |
         cd scripts/check_compatibility_java_software
         jarfile=$(mvn -q exec:exec -Dexec.executable=echo -Dexec.args='${project.build.finalName}.jar')
