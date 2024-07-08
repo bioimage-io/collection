@@ -3,11 +3,11 @@ import json
 import traceback
 import warnings
 from pathlib import Path
-from typing import TYPE_CHECKING, Any, Literal
+from typing import TYPE_CHECKING
 
 import bioimageio.core
 import requests
-from ruyaml import Optional
+from typing_extensions import Literal
 
 if bioimageio.core.__version__.startswith("0.5."):
     from bioimageio.core import test_resource as test_model
