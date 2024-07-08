@@ -656,6 +656,23 @@ class RecordBase(RemoteBase, ABC):
             f"{self.folder}files/{p}" for p in self.client.ls(f"{self.folder}files/")
         ]
 
+    def get_all_compatibility_reports(self, tool: Optional[str] = None):
+        """get all compatibility reports"""
+        tools = [
+            d[:-4]
+            for d in self.client.ls(f"{self.folder}compatibility/", only_files=True)
+            if d.endswith(".json") and (tool is None or d[:-4] == tool)
+        ]
+        reports_data = {
+            t: self.client.load_file(f"{self.folder}compatibility/{tools}")
+            for t in tools
+        }
+        return [
+            CompatiblityReport.model_validate({**json.loads(d), "tool": t})
+            for t, d in reports_data.items()
+            if d is not None
+        ]
+
     def get_compatibility_report_path(self, tool: str):
         return f"{self.folder}compatibility/{tool}.json"
 
@@ -970,23 +987,6 @@ class Record(RecordBase):
 
     def update_info(self, update: RecordInfo):
         self._update_json(update)
-
-    def get_all_compatibility_reports(self, tool: Optional[str] = None):
-        """get all compatibility reports"""
-        tools = [
-            d[:-4]
-            for d in self.client.ls(f"{self.folder}compatibility/", only_files=True)
-            if d.endswith(".json") and (tool is None or d[:-4] == tool)
-        ]
-        reports_data = {
-            t: self.client.load_file(f"{self.folder}compatibility/{tools}")
-            for t in tools
-        }
-        return [
-            CompatiblityReport.model_validate({**reports_data, "tool": t})
-            for t, d in reports_data.items()
-            if isinstance(d, dict)
-        ]
 
     def set_dois(self, *, doi: str, concept_doi: str):
         if self.doi is not None:
