@@ -99,7 +99,7 @@ def check_compatibility_ilastik(
                 )
             except Exception as e:
                 traceback.print_exc()
-                warnings.warn(f"failed to check '{report_path}': {e}")
+                warnings.warn(f"failed to check '{rdf_url}': {e}")
 
 
 if __name__ == "__main__":
