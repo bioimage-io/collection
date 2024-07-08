@@ -1161,13 +1161,8 @@ def create_collection_entries(
             test_summary = TestSummary(
                 status=bioimageio_status, tests=compat_tests
             ).model_dump(mode="json")
-            stream = io.StringIO()
-            yaml.dump(test_summary, stream)
-            test_summary_data = stream.getvalue().encode()
-            record_version.client.put(
-                f"{record_version.folder}test_summary.yaml",
-                io.BytesIO(test_summary_data),
-                length=len(test_summary_data),
+            record_version.client.put_yaml(
+                test_summary, f"{record_version.folder}test_summary.yaml"
             )
 
     # upload 'versions.json' summary
