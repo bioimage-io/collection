@@ -295,10 +295,12 @@ class RemoteCollection(RemoteBase):
             RecordConcept(client=self.client, concept_id=concept_id)
             for d in self.client.ls("", only_folders=True)
             if (concept_id := d.strip("/")) not in self.partner_ids
+            and not d.startswith(".")
         ] + [  # resources in partner folders
             RecordConcept(client=self.client, concept_id=pid + "/" + d.strip("/"))
             for pid in self.partner_ids
             for d in self.client.ls(pid + "/", only_folders=True)
+            if not d.startswith(".")
         ]
 
     def _select_parts(self, type_: str):
@@ -1134,7 +1136,11 @@ def create_collection_entries(
             VersionInfo(
                 v=record_version.version,
                 created=record_version.info.created,
-                doi=None if isinstance(record_version, RecordDraft) else record_version.info.doi,
+                doi=(
+                    None
+                    if isinstance(record_version, RecordDraft)
+                    else record_version.info.doi
+                ),
             )
         )
         compat_reports = record_version.get_all_compatibility_reports()
