@@ -1130,40 +1130,39 @@ def create_collection_entries(
         if concept not in id_map:
             id_map[concept] = id_info
 
-        if isinstance(record_version, Record):
-            version_infos.append(
-                VersionInfo(
-                    v=record_version.version,
-                    created=record_version.info.created,
-                    doi=record_version.info.doi,
+        version_infos.append(
+            VersionInfo(
+                v=record_version.version,
+                created=record_version.info.created,
+                doi=None if isinstance(record_version, RecordDraft) else record_version.info.doi,
+            )
+        )
+        compat_reports = record_version.get_all_compatibility_reports()
+        compat_tests: Dict[str, List[TestSummaryEntry]] = {}
+        bioimageio_status = "failed"
+        for r in compat_reports:
+            if r.status == "not-applicable":
+                continue
+
+            if r.tool == "bioimageio.core":
+                bioimageio_status = r.status
+
+            compat_tests.setdefault(r.tool, []).append(
+                TestSummaryEntry(
+                    error=r.error,
+                    name="compatibility check",
+                    status=r.status,
+                    traceback=None,
+                    warnings=None,
                 )
             )
-            compat_reports = record_version.get_all_compatibility_reports()
-            compat_tests: Dict[str, List[TestSummaryEntry]] = {}
-            bioimageio_status = "failed"
-            for r in compat_reports:
-                if r.status == "not-applicable":
-                    continue
 
-                if r.tool == "bioimageio.core":
-                    bioimageio_status = r.status
-
-                compat_tests.setdefault(r.tool, []).append(
-                    TestSummaryEntry(
-                        error=r.error,
-                        name="compatibility check",
-                        status=r.status,
-                        traceback=None,
-                        warnings=None,
-                    )
-                )
-
-            test_summary = TestSummary(
-                status=bioimageio_status, tests=compat_tests
-            ).model_dump(mode="json")
-            record_version.client.put_yaml(
-                test_summary, f"{record_version.folder}test_summary.yaml"
-            )
+        test_summary = TestSummary(
+            status=bioimageio_status, tests=compat_tests
+        ).model_dump(mode="json")
+        record_version.client.put_yaml(
+            test_summary, f"{record_version.folder}test_summary.yaml"
+        )
 
     # upload 'versions.json' summary
     if isinstance(latest_record_version, Record):
@@ -1201,13 +1200,12 @@ def create_collection_entries(
 
     # ingest compatibility reports
     links = set(rdf.get("links", []))
-    if isinstance(latest_record_version, Record):
-        compat_reports = latest_record_version.get_all_compatibility_reports()
+    compat_reports = latest_record_version.get_all_compatibility_reports()
 
-        for r in compat_reports:
-            if r.status == "passed":
-                # update links to reference compatible tools
-                links.update(r.links)
+    for r in compat_reports:
+        if r.status == "passed":
+            # update links to reference compatible tools
+            links.update(r.links)
 
     try:
         thumbnails = rdf["config"]["bioimageio"]["thumbnails"]
