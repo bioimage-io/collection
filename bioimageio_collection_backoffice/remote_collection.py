@@ -601,7 +601,7 @@ class RecordBase(RemoteBase, ABC):
         if rdf_data is None:
             return {}
         else:
-            return yaml.load(io.BytesIO(rdf_data))
+            return yaml.load(rdf_data.decode())
 
     @property
     def rdf_url(self) -> str:
@@ -899,7 +899,7 @@ class RecordDraft(RecordBase):
         if rdf_data is None:
             raise RuntimeError(f"Failed to load staged RDF from {self.rdf_path}")
 
-        rdf: Union[Any, Dict[Any, Any]] = yaml.load(io.BytesIO(rdf_data))
+        rdf: Union[Any, Dict[Any, Any]] = yaml.load(rdf_data.decode())
         assert isinstance(rdf, dict)
         version = rdf.get("version", "1")
         if not isinstance(version, (int, float, str)):

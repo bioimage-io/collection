@@ -43,7 +43,7 @@ def download_and_check_hash(url: str, sha256: str) -> bytes:
 
 def download_rdf(rdf_url: str, sha256: str) -> Dict[str, Any]:
     rdf_data = download_and_check_hash(rdf_url, sha256)
-    rdf: Union[Any, Dict[Any, Any]] = yaml.load(BytesIO(rdf_data))
+    rdf: Union[Any, Dict[Any, Any]] = yaml.load(rdf_data.decode())
     assert isinstance(rdf, dict)
     assert all(isinstance(k, str) for k in rdf)
     return rdf
