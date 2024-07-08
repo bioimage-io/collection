@@ -661,9 +661,9 @@ class RecordBase(RemoteBase, ABC):
     def get_all_compatibility_reports(self, tool: Optional[str] = None):
         """get all compatibility reports"""
         tools = [
-            d[:-4]
+            d[:-5]
             for d in self.client.ls(f"{self.folder}compatibility/", only_files=True)
-            if d.endswith(".json") and (tool is None or d[:-4] == tool)
+            if d.endswith(".json") and (tool is None or d[:-5] == tool)
         ]
         reports_data = {
             t: self.client.load_file(self.get_compatibility_report_path(t))
