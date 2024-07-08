@@ -3,10 +3,11 @@ import json
 import traceback
 import warnings
 from pathlib import Path
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any, Literal
 
 import bioimageio.core
 import requests
+from ruyaml import Optional
 
 if bioimageio.core.__version__.startswith("0.5."):
     from bioimageio.core import test_resource as test_model
@@ -50,10 +51,30 @@ def check_compatibility_ilastik_impl(
             if bioimageio.core.__version__.startswith("0.5."):
                 summary = summary[-1]
 
+        status: Literal["passed", "failed"]
+        status = summary["status"] if isinstance(summary, dict) else summary.status  # type: ignore
+        assert status == "passed" or status == "failed", status
+
+        details = (
+            summary if isinstance(summary, dict) else summary.model_dump(mode="json")
+        )
+        error = (
+            None
+            if status == "passed"
+            else (
+                (
+                    str(summary["error"])  # pyright: ignore[reportUnknownArgumentType]
+                    if "error" in summary
+                    else str(summary)
+                )
+                if isinstance(summary, dict)
+                else summary.format()
+            )
+        )
         report = CompatiblityReport(
-            status=summary.status,
-            error=None if summary.status == "passed" else summary.format(),
-            details=summary.model_dump(mode="json"),
+            status=status,
+            error=error,
+            details=details,
             links=["ilastik/ilastik"],
         )
 
