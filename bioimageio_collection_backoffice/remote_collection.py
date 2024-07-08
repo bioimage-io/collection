@@ -666,7 +666,7 @@ class RecordBase(RemoteBase, ABC):
             if d.endswith(".json") and (tool is None or d[:-4] == tool)
         ]
         reports_data = {
-            t: self.client.load_file(f"{self.folder}compatibility/{tools}")
+            t: self.client.load_file(f"{self.folder}compatibility/{t}")
             for t in tools
         }
         return [
