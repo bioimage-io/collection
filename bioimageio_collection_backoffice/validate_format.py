@@ -60,6 +60,18 @@ def validate_format(rv: Union[RecordDraft, Record]):
 
 def _validate_format_impl(rdf_source: str):
     rd = load_description(rdf_source, format_version="discover")
+    dynamic_test_cases: List[Dict[Literal["weight_format"], WeightsFormat]] = []
+    conda_envs: Dict[WeightsFormat, CondaEnv] = {}
+    if not isinstance(rd, InvalidDescr):
+        rd_latest = load_description(rdf_source, format_version="latest")
+        if isinstance(rd_latest, InvalidDescr):
+            dynamic_test_cases, conda_envs = _prepare_dynamic_test_cases(rd)
+        else:
+            dynamic_test_cases, conda_envs = _prepare_dynamic_test_cases(rd_latest)
+
+        rd = rd_latest
+        rd.validation_summary.status = "passed"  # passed in 'discover' mode
+
     if not isinstance(rd, InvalidDescr):
         rd.validation_summary.add_detail(
             ValidationDetail(
@@ -74,17 +86,21 @@ def _validate_format_impl(rdf_source: str):
                 ],
             )
         )
-    dynamic_test_cases: List[Dict[Literal["weight_format"], WeightsFormat]] = []
-    conda_envs: Dict[WeightsFormat, CondaEnv] = {}
-    if not isinstance(rd, InvalidDescr):
-        rd_latest = load_description(rdf_source, format_version="latest")
-        if isinstance(rd_latest, InvalidDescr):
-            dynamic_test_cases, conda_envs = _prepare_dynamic_test_cases(rd)
-        else:
-            dynamic_test_cases, conda_envs = _prepare_dynamic_test_cases(rd_latest)
-
-        rd = rd_latest
-        rd.validation_summary.status = "passed"  # passed in 'discover' mode
+        if rd.license is None:
+            # some older RDF specs have 'license' as an optional field
+            rd.validation_summary.add_detail(
+                ValidationDetail(
+                    name="Check that RDF has a license field",
+                    status="failed" if rd.license is None else "passed",
+                    errors=[
+                        ErrorEntry(
+                            loc=("license",),
+                            msg="missing license field",
+                            type="error",
+                        )
+                    ],
+                )
+            )
 
     return rd, dynamic_test_cases, conda_envs
 
