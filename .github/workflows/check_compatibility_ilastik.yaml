@@ -12,7 +12,7 @@ on:
       - scripts/upload_reports.py
   workflow_dispatch:
   schedule:
-    - cron: 0 1 * * *  # update compatibility once a day
+    - cron: 0 1 * * *
 
 jobs:
   setup:
