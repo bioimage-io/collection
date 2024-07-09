@@ -7,7 +7,6 @@ from typing import Literal, Optional, Union
 
 from bioimageio.spec.model.v0_5 import WeightsFormat
 from loguru import logger
-from typing_extensions import assert_never
 
 from ._settings import settings
 from .backup import backup
