@@ -84,4 +84,4 @@ jobs:
         path: test_summaries
     - name: Send Icy ${{ matrix.key }} tests
       shell: bash -l {0}
-      run: python scripts/check_compatibility_java_software.py icy ${{ matrix.key }} test_summaries/artifact
+      run: python -m scripts.check_compatibility_java_software.py icy ${{ matrix.key }} test_summaries/artifact
