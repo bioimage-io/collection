@@ -35,11 +35,11 @@ def backup(client: Client):
     remote_collection = RemoteCollection(client=client)
 
     backed_up: List[str] = []
+    error = None
     for v in remote_collection.get_published_versions()[::-1]:
         if v.doi is not None:
             continue
 
-        error = None
         try:
             backup_published_version(v)
         except SkipForNow as e:
@@ -47,13 +47,12 @@ def backup(client: Client):
         except Exception as e:
             error = e
             logger.error("{}\n{}", e, traceback.format_exc())
-
-        if error is not None:
-            raise error
-
-        backed_up.append(f"{v.id}/{v.version}")
+        else:
+            backed_up.append(f"{v.id}/{v.version}")
 
     logger.info("backed up {}", backed_up)
+    if error is not None:
+        raise error
 
 
 def backup_published_version(
