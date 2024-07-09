@@ -61,6 +61,15 @@ jobs:
       run: |
         cd scripts/check_compatibility_java_software
         jarfile=$(mvn -q exec:exec -Dexec.executable=echo -Dexec.args='${project.build.finalName}.jar')
+        if [ -z "$jarfile" ]; then
+          echo "Failed to get jar file name"
+          exit 1
+        fi
+        if [ ! -f "target/$jarfile" ]; then
+          echo "Jar file not found: target/$jarfile"
+          exit 1
+        fi
+        echo "Jar file found: target/$jarfile"
         echo "jarfile=$jarfile" >> $GITHUB_OUTPUT
     - name: Download engines
       run: |
@@ -88,4 +97,4 @@ jobs:
       run: pip install requests==2.28.2 loguru==0.7.2 ruyaml==0.91.0 
     - name: Send deepimagej ${{ matrix.key }} tests
       shell: bash -l {0}
-      run: python scripts/check_compatibility_java_software.py deepimagej ${{ matrix.key }} test_summaries_deepimagej_{{ matrix.key }}/artifact
+      run: python -m scripts.check_compatibility_java_software.py deepimagej ${{ matrix.key }} test_summaries_deepimagej_{{ matrix.key }}/artifact

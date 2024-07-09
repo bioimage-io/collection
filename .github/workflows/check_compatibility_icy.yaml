@@ -57,15 +57,26 @@ jobs:
         cd scripts/check_compatibility_java_software
         mvn clean install org.apache.maven.plugins:maven-shade-plugin:3.2.4:shade -Dshade.mainClass=io.bioimage.modelrunner.ci.ContinuousIntegration
     - name: Get jar file name
+      id: get-jar
       run: |
         cd scripts/check_compatibility_java_software
         jarfile=$(mvn -q exec:exec -Dexec.executable=echo -Dexec.args='${project.build.finalName}.jar')
+        if [ -z "$jarfile" ]; then
+          echo "Failed to get jar file name"
+          exit 1
+        fi
+        if [ ! -f "target/$jarfile" ]; then
+          echo "Jar file not found: target/$jarfile"
+          exit 1
+        fi
+        echo "Jar file found: target/$jarfile"
+        echo "jarfile=$jarfile" >> $GITHUB_OUTPUT
     - name: Download engines
       run: |
-        java -cp scripts/check_compatibility_java_software/target/$jarfile io.bioimage.modelrunner.ci.DownloadEngines icy
+        java -cp "scripts/check_compatibility_java_software/target/${{ steps.get-jar.outputs.jarfile }}" io.bioimage.modelrunner.ci.DownloadEngines icy
     - name: Run models
       run: |
-        java -cp scripts/check_compatibility_java_software/target/$jarfile io.bioimage.modelrunner.ci.ContinuousIntegration icy ${{ matrix.key }}
+        java -cp "scripts/check_compatibility_java_software/target/${{ steps.get-jar.outputs.jarfile }}" io.bioimage.modelrunner.ci.ContinuousIntegration icy ${{ matrix.key }}
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
       with:
@@ -84,4 +95,4 @@ jobs:
         path: test_summaries
     - name: Send Icy ${{ matrix.key }} tests
       shell: bash -l {0}
-      run: python scripts/check_compatibility_java_software.py icy ${{ matrix.key }} test_summaries/artifact
+      run: python -m scripts.check_compatibility_java_software.py icy ${{ matrix.key }} test_summaries/artifact
