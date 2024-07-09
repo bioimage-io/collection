@@ -85,7 +85,7 @@ def backup_published_version(
         )  # TODO: start backing up applications
 
     if rdf.license is None:
-        raise ValueError("Missing license")
+        raise ValueError(f"Missing license for {v.id}")
 
     headers = {"Content-Type": "application/json"}
     access_token = settings.zenodo_api_access_token.get_secret_value()
