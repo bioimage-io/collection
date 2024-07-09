@@ -146,7 +146,7 @@ def _get_default_pytorch_env(
     ):
         # avoid ImportError: cannot import name 'packaging' from 'pkg_resources'
         # see https://github.com/pypa/setuptools/issues/4376#issuecomment-2126162839
-        deps.append("setuptools <=70.0.0")
+        deps.append("setuptools <70.0.0")
 
     return CondaEnv(
         name="env",
