@@ -22,7 +22,7 @@ from .remote_collection import (
     RemoteCollection,
     get_remote_resource_version,
 )
-from .run_dynamic_tests import rerun_dynamic_tests, run_dynamic_tests
+from .run_dynamic_tests import run_dynamic_tests
 from .s3_client import Client
 from .validate_format import validate_format
 
@@ -100,7 +100,7 @@ class BackOffice:
         rv = get_remote_resource_version(self.client, concept_id, version)
         if isinstance(rv, RecordDraft):
             run_dynamic_tests(
-                staged=rv,
+                record=rv,
                 weight_format=weight_format or None,
                 create_env_outcome=create_env_outcome,
             )
