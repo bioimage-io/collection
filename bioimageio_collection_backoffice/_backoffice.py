@@ -98,20 +98,11 @@ class BackOffice:
     ):
         """run dynamic tests for a (staged) resource version"""
         rv = get_remote_resource_version(self.client, concept_id, version)
-        if isinstance(rv, RecordDraft):
-            run_dynamic_tests(
-                record=rv,
-                weight_format=weight_format or None,
-                create_env_outcome=create_env_outcome,
-            )
-        elif isinstance(rv, Record):
-            rerun_dynamic_tests(
-                published=rv,
-                weight_format=weight_format or None,
-                create_env_outcome=create_env_outcome,
-            )
-        else:
-            assert_never(rv)
+        run_dynamic_tests(
+            record=rv,
+            weight_format=weight_format or None,
+            create_env_outcome=create_env_outcome,
+        )
 
     def await_review(self, resource_id: str):
         """mark a (staged) resource version is awaiting review"""
