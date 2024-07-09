@@ -1,4 +1,4 @@
-![internal tests](https://github.com/bioimage-io/collection/actions/workflows/build.yaml/badge.svg) ![generate collection overview](https://github.com/bioimage-io/collection/actions/workflows/generate_collection_json.yaml/badge.svg)
+![internal tests](https://github.com/bioimage-io/collection/actions/workflows/build.yaml/badge.svg) ![generate collection overview](https://github.com/bioimage-io/collection/actions/workflows/generate_collection_json.yaml/badge.svg) ![backup status](https://github.com/bioimage-io/collection/actions/workflows/backup.yaml/badge.svg)
 
 # collection
 
@@ -15,7 +15,7 @@ Current reviewers are listed in [`bioimageio_collection_config.json`][review-con
 
 ### Reviewer Onboarding
 
-1. Open a pull request, adding a person to the [list of reviewers][review-config], see https://github.com/bioimage-io/collection/pull/75 for an example.
+1. Open a pull request, adding a person to the [list of reviewers][review-config], see <https://github.com/bioimage-io/collection/pull/75> for an example.
    * one public email address is required
    * github id can be found using `https://api.github.com/users/<github_username>`
 1. Once the pull request has been merged, the new reviewer can
@@ -52,7 +52,6 @@ graph TD;
 If the _resource package_ was uploaded via the bioimage.io website, the staging of the new resource draft is initiated automatically by the uploader service.
 Otherwise, given a download URL to a _resource package_, the `stage` workflow needs to be [dispatched manually, or via github api][staging-wf] ("run workflow")[^1].
 
-
 Staging unpacks the files from the zipped resource package to our public S3.
 Once unpacked, the staged _resource draft_ is automatically tested (the [test workflow][test-wf] is dispatched automatically at the end of the stage workflow).
 
@@ -69,7 +68,7 @@ Tests can also be triggered (via github api or manually) by dispatching the [tes
 
 Once the tests are completed, the uploader gets a notification via email that their draft is awaiting review; now a reviewer needs to take a look.
 
-An overview of all pending _resource drafts_ can be found at https://bioimageio-uploader.netlify.app/#/status.
+An overview of all pending _resource drafts_ can be found at <https://bioimageio-uploader.netlify.app/#/status>.
 A _draft_ is identified by its concept id (`id` from the `rdf.yaml`).
 
 #### Review
@@ -84,7 +83,7 @@ For models, reviewers can use [the model documentation][model-docs] as a guide.
 
 Reviewers can:
 
- * _request changes_:
+* _request changes_:
    A contributor is expected to upload an updated (fixed) draft (which overwrites the current draft).
    This can be done either by the website, or the stage workflow.
    Important is to keep the `id` the same.
@@ -96,8 +95,7 @@ Reviewers can:
 * _accept_:
   Accepting the _resource draft_ via the web interface triggers the [publish workflow][publish-wf], which creates a new unique _resource version_.
   As a result, the resource is published, the draft deleted and, thus, the _resource_ is available via the [bioimage.io][bioimageio] website.
-  The [backup workflow][backup-wf] will upload/publish the _resource version_ to zenodo using the bioimage.io bot account (tagged with [`backup.bioimage.io`][zenodo-overview]). 
-
+  The [backup workflow][backup-wf] will upload/publish the _resource version_ to zenodo using the bioimage.io bot account (tagged with [`backup.bioimage.io`][zenodo-overview]).
 
 [^1]: Parameters to this workflow are `bioimage.io resource concept ID` (`id` from the `rdf.yaml`), and `Download URL of the resource package zip-file`, which should contain a publicly reachable URL to a _resource package_ `.zip`-file.
 [^2]: Parameters to this workflow are `Bioimage.io resource concept ID` (`id` from the `rdf.yaml`), and `Published version or 'draft'` (optional, usually `draft`).
