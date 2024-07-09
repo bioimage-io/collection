@@ -98,23 +98,35 @@ class BackOffice:
     ):
         """run dynamic tests for a (staged) resource version"""
         rv = get_remote_resource_version(self.client, concept_id, version)
+        if (
+            isinstance(rv, RecordDraft)
+            and (rv_status := rv.info.status) is not None
+            and rv_status.name == "unpacked"
+        ):
+            rv.set_testing_status(
+                "Testing"
+                + ("" if weight_format is None else f" {weight_format} weights"),
+            )
+
         run_dynamic_tests(
             record=rv,
             weight_format=weight_format or None,
             create_env_outcome=create_env_outcome,
         )
 
-    def await_review(self, resource_id: str):
-        """mark a (staged) resource version is awaiting review"""
-        rv = RecordDraft(client=self.client, concept_id=resource_id)
-        rv.await_review()
-        notify_uploader(
-            rv,
-            "is awaiting review ⌛",
-            f"Thank you for submitting {rv.concept_id}!\n"
-            + "Our maintainers will take a look shortly.\n"
-            + f"A preview is available [here]({rv.bioimageio_url})",
-        )
+        if (
+            isinstance(rv, RecordDraft)
+            and (rv_status := rv.info.status) is not None
+            and rv_status.name == "testing"
+        ):
+            rv.await_review()
+            notify_uploader(
+                rv,
+                "is awaiting review ⌛",
+                f"Thank you for submitting {rv.concept_id}!\n"
+                + "Our maintainers will take a look shortly.\n"
+                + f"A preview is available [here]({rv.bioimageio_url})",
+            )
 
     def request_changes(
         self,

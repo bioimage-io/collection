@@ -71,6 +71,5 @@ jobs:
     with:
       concept_id: ${{matrix.id}}
       version: ${{matrix.v}}
-      conclude: ${{matrix.v == 'draft' && 'yes' || 'no'}}
       environment_name: ${{inputs.sandbox && 'sandbox' || 'production'}}
     secrets: inherit

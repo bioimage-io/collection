@@ -48,10 +48,6 @@ def run_dynamic_tests(
     weight_format: Optional[WeightsFormat],  # "weight format to test model with."
     create_env_outcome: str,
 ):
-    if isinstance(record, RecordDraft):
-        record.set_testing_status(
-            "Testing" + ("" if weight_format is None else f" {weight_format} weights"),
-        )
     summary = _run_dynamic_tests_impl(record.rdf_url, weight_format, create_env_outcome)
     if summary is not None:
         record.add_log_entry(

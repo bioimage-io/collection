@@ -10,11 +10,6 @@ on:
       version:
         required: true
         type: string
-      conclude:
-        description: "Wether or not to trigger a status update based on test results"
-        required: false
-        default: 'yes'
-        type: string
       environment_name:
         required: true
         type: string
@@ -114,17 +109,3 @@ jobs:
         if: matrix.weight_format == 'onnx'
         shell: bash -el {0}
         run: python -c "import onnxruntime"
-
-  conclude:
-    needs: [validate_format, test]
-    if: (inputs.conclude == 'yes') && always()  # run even if test job fails
-    runs-on: ubuntu-latest
-    environment: ${{inputs.environment_name}}
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-          cache: "pip" # caching pip dependencies
-      - run: pip install .
-      - run: backoffice await_review "${{inputs.concept_id}}"
