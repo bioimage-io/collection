@@ -99,7 +99,6 @@ jobs:
         path: test_summaries
     - name: Install deps
       run: |
-        ls
         pip install .
     - name: Send Icy ${{ matrix.key }} tests
       shell: bash -l {0}
