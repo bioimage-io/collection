@@ -1,5 +1,7 @@
 import traceback
 from datetime import datetime
+from io import BytesIO
+from pathlib import PurePosixPath
 from typing import Any, Dict, List
 from urllib.parse import quote_plus
 
@@ -18,7 +20,7 @@ from ruyaml import YAML
 
 from ._settings import settings
 from .remote_collection import Record, RemoteCollection
-from .requests_utils import put_file_from_url, raise_for_status_discretely
+from .requests_utils import put_file, raise_for_status_discretely
 from .s3_client import Client
 
 yaml = YAML(typ="safe")
@@ -33,11 +35,11 @@ def backup(client: Client):
     remote_collection = RemoteCollection(client=client)
 
     backed_up: List[str] = []
+    error = None
     for v in remote_collection.get_published_versions()[::-1]:
         if v.doi is not None:
             continue
 
-        error = None
         try:
             backup_published_version(v)
         except SkipForNow as e:
@@ -45,13 +47,12 @@ def backup(client: Client):
         except Exception as e:
             error = e
             logger.error("{}\n{}", e, traceback.format_exc())
-
-        if error is not None:
-            raise error
-
-        backed_up.append(f"{v.id}/{v.version}")
+        else:
+            backed_up.append(f"{v.id}/{v.version}")
 
     logger.info("backed up {}", backed_up)
+    if error is not None:
+        raise error
 
 
 def backup_published_version(
@@ -84,17 +85,12 @@ def backup_published_version(
         )  # TODO: start backing up applications
 
     if rdf.license is None:
-        raise ValueError("Missing license")
+        raise ValueError(f"Missing license for {v.id}")
 
     headers = {"Content-Type": "application/json"}
     access_token = settings.zenodo_api_access_token.get_secret_value()
     assert len(access_token) > 1, "missing zenodo api access token"
     params = {"access_token": access_token}
-
-    # List the files at the model URL
-    file_urls = v.get_file_urls()
-    assert file_urls
-    logger.info("Using file URLs:\n{}", "\n".join((str(obj) for obj in file_urls)))
 
     if v.concept.doi is None:
         # Create empty deposition
@@ -127,8 +123,11 @@ def backup_published_version(
     # deposition_id = newversion_draft_url.split('/')[-1]
 
     # PUT files to the deposition
-    for file_url in file_urls:
-        put_file_from_url(file_url, bucket_url, params)
+    for file_path in v.get_file_paths():
+        file_data = v.client.load_file(file_path)
+        assert file_data is not None
+        filename = PurePosixPath(file_path).name
+        put_file(BytesIO(file_data), f"{bucket_url}/{filename}", params)
 
     # Report deposition URL
     deposition_id = str(deposition_info["id"])

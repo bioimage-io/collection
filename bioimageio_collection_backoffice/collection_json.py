@@ -57,7 +57,7 @@ class CollectionEntry(Node, frozen=True):
         sdc = 0 if self.download_count == "?" else self.download_count
         odc = 0 if other.download_count == "?" else other.download_count
         if sdc == odc:
-            return self.created < other.created  # newer entry first
+            return self.created > other.created  # newer entry first
         else:
             return sdc > odc  # higher download count first
 
@@ -80,3 +80,28 @@ class CollectionWebsiteConfig(CollectionWebsiteConfigTemplate, frozen=True):
 class CollectionJson(CollectionJsonTemplate, frozen=True):
     collection: Sequence[CollectionEntry]
     config: CollectionWebsiteConfig
+
+
+class ConceptVersion(Node, frozen=True):
+    v: str
+    created: datetime
+    doi: Optional[str]
+    source: str
+    sha256: str
+
+    def __lt__(self, other: ConceptVersion):
+        return self.created > other.created
+
+
+class ConceptSummary(Node, frozen=True):
+    concept: str
+    type: str
+    concept_doi: Optional[str]
+    versions: Sequence[ConceptVersion]
+
+    def __lt__(self, other: ConceptSummary):
+        return self.versions[0].created > other.versions[0].created
+
+
+class AllVersions(Node, frozen=True):
+    entries: Sequence[ConceptSummary]

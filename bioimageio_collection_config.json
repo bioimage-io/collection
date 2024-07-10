@@ -23,6 +23,22 @@
             "orcid": "0000-0001-6562-7187",
             "github_user": "constantinpape",
             "email": "constantin.pape@informatik.uni-goettingen.de"
+        },
+        {
+            "id": "github|24434157",
+            "name": "Dominik Kutra",
+            "affiliation": "European Molecular Biology Laboratory",
+            "orcid": "0000-0003-4202-3908",
+            "github_user": "k-dominik",
+            "email": "dominik.kutra@embl.de"
+        },
+        {
+            "id": "github|43643518",
+            "name": "Estibaliz Gómez-de-Mariscal",
+            "affiliation": "Instituto Gulbenkian de Ciência",
+            "orcid": "0000-0003-2082-3277",
+            "github_user": "esgomezm",
+            "email": "egomez@igc.gulbenkian.pt"
         }
     ],
     "collection_template": {

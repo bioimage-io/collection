@@ -9,9 +9,10 @@ on:
     paths:
       - .github/workflows/check_compatibility_ilastik.yaml
       - scripts/check_compatibility_ilastik.py
+      - scripts/upload_reports.py
   workflow_dispatch:
   schedule:
-    - cron: 0 1 * * *  # update compatibility once a day
+    - cron: 0 1 * * *
 
 jobs:
   setup:
@@ -35,20 +36,18 @@ jobs:
         with open(os.environ["GITHUB_OUTPUT"], "a") as fh:
           print(f"version_matrix={version_matrix}", file=fh)
 
-  run:
+  generate-reports:
     runs-on: ubuntu-latest
     needs: setup
+    environment: 'production'
     strategy:
       fail-fast: false
       matrix: ${{ fromJson(needs.setup.outputs.version_matrix) }}
 
     steps:
-    - uses: actions/checkout@v3
-    - uses: actions/checkout@v3
-      with:
-        repository: bioimage-io/collection-bioimage-io
-        ref: gh-pages
-        path: bioimageio-gh-pages
+    - uses: actions/checkout@v4
+    - run: wget https://${{vars.S3_HOST}}/${{vars.S3_BUCKET}}/${{vars.S3_FOLDER}}/all_versions_draft.json
+    - run: wget https://${{vars.S3_HOST}}/${{vars.S3_BUCKET}}/${{vars.S3_FOLDER}}/all_versions.json
     - name: Download ilastik env
       run: wget --output-document env.yaml ${{ matrix.env_url }}
     - name: ignore unrelated packages
@@ -59,6 +58,38 @@ jobs:
         environment-file: env.yaml
         cache-downloads: true
         cache-environment: true
-    - name: test with ilastik ${{ matrix.v }}
+    - name: test drafts with ilastik ${{ matrix.v }}
       shell: bash -l {0}
-      run: python scripts/check_compatibility_ilastik.py ${{ matrix.v }}
+      run: python scripts/check_compatibility_ilastik.py ${{ matrix.v }} all_versions_draft.json generated-reports
+    - name: test published versions with ilastik ${{ matrix.v }}
+      shell: bash -l {0}
+      run: python scripts/check_compatibility_ilastik.py ${{ matrix.v }} all_versions.json generated-reports
+    - uses: actions/upload-artifact@v4
+      with:
+        name: generated-reports-${{ matrix.v }}
+        path: generated-reports
+
+  upload-reports:
+    needs: generate-reports
+    environment: 'production'
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v5
+      with:
+        python-version: "3.12"
+        cache: "pip" # caching pip dependencies
+    - run: pip install .
+    - uses: actions/download-artifact@v4
+      with:
+        merge-multiple: true
+        path: generated-reports
+    - run: python scripts/upload_reports.py generated-reports
+      env:
+        S3_HOST: ${{vars.S3_HOST}}
+        S3_BUCKET: ${{vars.S3_BUCKET}}
+        S3_FOLDER: ${{vars.S3_FOLDER}}
+        S3_ACCESS_KEY_ID: ${{secrets.S3_ACCESS_KEY_ID}}
+        S3_SECRET_ACCESS_KEY: ${{secrets.S3_SECRET_ACCESS_KEY}}
+        RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
+

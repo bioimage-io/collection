@@ -2,16 +2,16 @@
 
 import warnings
 from datetime import datetime
+from pathlib import Path
 from typing import Literal, Optional, Union
 
 from bioimageio.spec.model.v0_5 import WeightsFormat
 from loguru import logger
-from typing_extensions import assert_never
 
 from ._settings import settings
 from .backup import backup
 from .db_structure.chat import Chat, Message
-from .db_structure.log import CollectionLog, CollectionLogEntry, Log
+from .db_structure.log import Log, LogEntry
 from .gh_utils import set_gh_actions_outputs
 from .mailroom.send_email import notify_uploader
 from .remote_collection import (
@@ -21,7 +21,7 @@ from .remote_collection import (
     RemoteCollection,
     get_remote_resource_version,
 )
-from .run_dynamic_tests import rerun_dynamic_tests, run_dynamic_tests
+from .run_dynamic_tests import run_dynamic_tests
 from .s3_client import Client
 from .validate_format import validate_format
 
@@ -39,6 +39,19 @@ class BackOffice:
         self.client = Client(host=host, bucket=bucket, prefix=prefix)
         logger.info("created backoffice with client {}", self.client)
 
+    def download(self, in_collection_path: str, output_path: Optional[Path] = None):
+        """downlaod a file from the collection (using the MinIO client)"""
+        data = self.client.load_file(in_collection_path)
+        if data is None:
+            raise FileNotFoundError(
+                f"failed to download {self.client.get_file_url(in_collection_path)}"
+            )
+
+        if output_path is None:
+            output_path = Path(in_collection_path)
+
+        _ = output_path.write_bytes(data)
+
     def log(self, message: str, concept_id: str, version: str):
         """log a message"""
 
@@ -46,18 +59,7 @@ class BackOffice:
             raise ValueError("'RUN_URL' not set")
 
         rv = get_remote_resource_version(self.client, concept_id, version)
-
-        rv.extend_log(
-            Log(
-                collection=[
-                    CollectionLog(
-                        log=CollectionLogEntry(
-                            message=message, run_url=settings.run_url
-                        )
-                    )
-                ]
-            )
-        )
+        rv.extend_log(Log(entries=[LogEntry(message=message)]))
 
     def wipe(self, subfolder: str = ""):
         """DANGER ZONE: wipes `subfolder` completely, only use for test folders!"""
@@ -95,32 +97,35 @@ class BackOffice:
     ):
         """run dynamic tests for a (staged) resource version"""
         rv = get_remote_resource_version(self.client, concept_id, version)
-        if isinstance(rv, RecordDraft):
-            run_dynamic_tests(
-                staged=rv,
-                weight_format=weight_format or None,
-                create_env_outcome=create_env_outcome,
+        if (
+            isinstance(rv, RecordDraft)
+            and (rv_status := rv.info.status) is not None
+            and rv_status.name == "unpacked"
+        ):
+            rv.set_testing_status(
+                "Testing"
+                + ("" if weight_format is None else f" {weight_format} weights"),
             )
-        elif isinstance(rv, Record):
-            rerun_dynamic_tests(
-                published=rv,
-                weight_format=weight_format or None,
-                create_env_outcome=create_env_outcome,
-            )
-        else:
-            assert_never(rv)
 
-    def await_review(self, resource_id: str):
-        """mark a (staged) resource version is awaiting review"""
-        rv = RecordDraft(client=self.client, concept_id=resource_id)
-        rv.await_review()
-        notify_uploader(
-            rv,
-            "is awaiting review ⌛",
-            f"Thank you for submitting {rv.concept_id}!\n"
-            + "Our maintainers will take a look shortly.\n"
-            + f"A preview is available [here]({rv.bioimageio_url})",
+        run_dynamic_tests(
+            record=rv,
+            weight_format=weight_format or None,
+            create_env_outcome=create_env_outcome,
         )
+
+        if (
+            isinstance(rv, RecordDraft)
+            and (rv_status := rv.info.status) is not None
+            and rv_status.name == "testing"
+        ):
+            rv.await_review()
+            notify_uploader(
+                rv,
+                "is awaiting review ⌛",
+                f"Thank you for submitting {rv.concept_id}!\n"
+                + "Our maintainers will take a look shortly.\n"
+                + f"A preview is available [here]({rv.bioimageio_url})",
+            )
 
     def request_changes(
         self,

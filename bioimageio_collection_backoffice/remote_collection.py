@@ -28,6 +28,7 @@ from typing import (
 )
 from urllib.parse import SplitResult, urlsplit, urlunsplit
 
+import bioimageio.core
 from bioimageio.spec import ValidationContext
 from bioimageio.spec.common import HttpUrl
 from bioimageio.spec.utils import (
@@ -43,9 +44,12 @@ from ._settings import settings
 from ._thumbnails import create_thumbnails
 from .collection_config import CollectionConfig
 from .collection_json import (
+    AllVersions,
     CollectionEntry,
     CollectionJson,
     CollectionWebsiteConfig,
+    ConceptSummary,
+    ConceptVersion,
 )
 from .db_structure.chat import Chat, Message
 from .db_structure.compatibility import (
@@ -53,7 +57,7 @@ from .db_structure.compatibility import (
     TestSummary,
     TestSummaryEntry,
 )
-from .db_structure.log import CollectionLog, CollectionLogEntry, Log
+from .db_structure.log import Log, LogEntry
 from .db_structure.reserved import Reserved
 from .db_structure.version_info import (
     AcceptedStatus,
@@ -292,10 +296,12 @@ class RemoteCollection(RemoteBase):
             RecordConcept(client=self.client, concept_id=concept_id)
             for d in self.client.ls("", only_folders=True)
             if (concept_id := d.strip("/")) not in self.partner_ids
+            and not d.startswith(".")
         ] + [  # resources in partner folders
             RecordConcept(client=self.client, concept_id=pid + "/" + d.strip("/"))
             for pid in self.partner_ids
             for d in self.client.ls(pid + "/", only_folders=True)
+            if not d.startswith(".")
         ]
 
     def _select_parts(self, type_: str):
@@ -353,22 +359,38 @@ class RemoteCollection(RemoteBase):
         """generate a json file with an overview of all published resources
         (also generates `versions.json` files for each research concept)
         """
-        output_file_name: str = (
+        collection_output_file_name: str = (
             "collection.json" if mode == "published" else f"collection_{mode}.json"
         )
-        logger.info("generating {}", output_file_name)
+        all_versions_file_name: str = (
+            "all_versions.json" if mode == "published" else f"all_versions_{mode}.json"
+        )
+        id_map_file_name = (
+            "id_map.json" if mode == "published" else f"id_map_{mode}.json"
+        )
 
-        entries: List[CollectionEntry] = []
+        logger.info(
+            "generating {}, {}, {}",
+            collection_output_file_name,
+            all_versions_file_name,
+            id_map_file_name,
+        )
+
+        collection_entries: List[CollectionEntry] = []
+        concepts_summaries: List[ConceptSummary] = []
         n_resource_versions: Dict[str, int] = defaultdict(lambda: 0)
         n_resources: Dict[str, int] = defaultdict(lambda: 0)
         error_in_published_entry = None
         id_map: Dict[str, IdInfo] = {}
         for rc in self.get_concepts():
             versions: Union[List[RecordDraft], List[Record]] = (
-                [rc.draft]
-                if mode == "draft" and rc.draft.exists()
+                ([rc.draft] if rc.draft.exists() else [])
+                if mode == "draft"
                 else rc.get_published_versions()
             )
+            if not versions:
+                continue
+
             try:
                 versions_in_collection, id_map_update = create_collection_entries(
                     versions
@@ -379,11 +401,30 @@ class RemoteCollection(RemoteBase):
             else:
                 id_map.update(id_map_update)
                 if versions_in_collection:
-                    n_resources[versions_in_collection[0].type] += 1
-                    n_resource_versions[versions_in_collection[0].type] += len(versions)
-                    entries.extend(versions_in_collection)
+                    latest_version = versions_in_collection[0]
+                    n_resources[latest_version.type] += 1
+                    n_resource_versions[latest_version.type] += len(versions)
+                    collection_entries.extend(versions_in_collection)
+                    concepts_summaries.append(
+                        ConceptSummary(
+                            concept=latest_version.id,
+                            type=latest_version.type,
+                            concept_doi=latest_version.concept_doi,
+                            versions=sorted(
+                                ConceptVersion(
+                                    v=v.version,
+                                    created=v.info.created,
+                                    doi=v.doi,
+                                    source=id_map[v.id].source,
+                                    sha256=id_map[v.id].sha256,
+                                )
+                                for v in versions
+                            ),
+                        )
+                    )
 
-        entries.sort()
+        collection_entries.sort()
+        concepts_summaries.sort()
         collection = CollectionJson(
             authors=(template := self.config.collection_template).authors,
             cite=template.cite,
@@ -410,8 +451,10 @@ class RemoteCollection(RemoteBase):
             tags=template.tags,
             type=template.type,
             version=template.version,
-            collection=entries,
+            collection=collection_entries,
         )
+
+        all_versions = AllVersions(entries=concepts_summaries)
 
         # # check that this generated collection is a valid RDF itself
         # coll_descr = build_description(
@@ -420,26 +463,41 @@ class RemoteCollection(RemoteBase):
         # if not isinstance(coll_descr, CollectionDescr):
         #     raise ValueError(coll_descr.validation_summary.format())
 
-        if entries or not list(self.client.ls(output_file_name)):
+        if collection_entries or not list(self.client.ls(collection_output_file_name)):
             self.client.put_json(
-                output_file_name,
+                collection_output_file_name,
                 collection.model_dump(mode="json", exclude_defaults=True),
             )
         else:
             logger.error(
-                "Skipping overriding existing collection with an empty collection!"
+                "Skipping overriding existing {} with an empty list!",
+                collection_output_file_name,
             )
 
-        id_map_file_name = (
-            "id_map.json" if mode == "published" else f"id_map_{mode}.json"
-        )
-        self.client.put_json(
-            id_map_file_name,
-            {
-                k: ii.model_dump(mode="json", exclude_defaults=True)
-                for k, ii in id_map.items()
-            },
-        )
+        if all_versions or not list(self.client.ls(all_versions_file_name)):
+            self.client.put_json(
+                all_versions_file_name,
+                all_versions.model_dump(mode="json", exclude_defaults=True),
+            )
+        else:
+            logger.error(
+                "Skipping overriding existing {} with an empty list!",
+                all_versions_file_name,
+            )
+
+        if id_map_file_name or not list(self.client.ls(id_map_file_name)):
+            self.client.put_json(
+                id_map_file_name,
+                {
+                    k: ii.model_dump(mode="json", exclude_defaults=True)
+                    for k, ii in id_map.items()
+                },
+            )
+        else:
+            logger.error(
+                "Skipping overriding existing {} with an empty mapping!",
+                id_map_file_name,
+            )
 
         # raise an error for an invalid (skipped) collection entry
         if error_in_published_entry is not None:
@@ -520,7 +578,7 @@ class Uploader(NamedTuple):
 
 @dataclass
 class RecordBase(RemoteBase, ABC):
-    """Base class for a `RemoteDraft` and `RemoteVersion`"""
+    """Base class for a `RecordDraft` and `Record`"""
 
     concept_id: str
     concept: RecordConcept = field(init=False)
@@ -546,7 +604,7 @@ class RecordBase(RemoteBase, ABC):
         if rdf_data is None:
             return {}
         else:
-            return yaml.load(io.BytesIO(rdf_data))
+            return yaml.load(rdf_data.decode())
 
     @property
     def rdf_url(self) -> str:
@@ -556,6 +614,10 @@ class RecordBase(RemoteBase, ABC):
     @property
     def chat(self) -> Chat:
         return self._get_json(Chat)
+
+    def add_log_entry(self, log_entry: LogEntry):
+        """add a log entry"""
+        self.extend_log(Log(entries=[log_entry]))
 
     def extend_log(
         self,
@@ -591,6 +653,35 @@ class RecordBase(RemoteBase, ABC):
 
     def get_file_urls(self):
         return self.client.get_file_urls(f"{self.folder}files/")
+
+    def get_file_paths(self):
+        return [
+            f"{self.folder}files/{p}" for p in self.client.ls(f"{self.folder}files/")
+        ]
+
+    def get_all_compatibility_reports(self, tool: Optional[str] = None):
+        """get all compatibility reports"""
+        tools = [
+            d[:-5]
+            for d in self.client.ls(f"{self.folder}compatibility/", only_files=True)
+            if d.endswith(".json") and (tool is None or d[:-5] == tool)
+        ]
+        reports_data = {
+            t: self.client.load_file(self.get_compatibility_report_path(t))
+            for t in tools
+        }
+        return [
+            CompatiblityReport.model_validate({**json.loads(d), "tool": t})
+            for t, d in reports_data.items()
+            if d is not None
+        ]
+
+    def get_compatibility_report_path(self, tool: str):
+        return f"{self.folder}compatibility/{tool}.json"
+
+    def set_compatibility_report(self, report: CompatiblityReport) -> None:
+        path = self.get_compatibility_report_path(report.tool)
+        self.client.put_and_cache(path, report.model_dump_json().encode())
 
 
 @dataclass
@@ -638,16 +729,10 @@ class RecordDraft(RecordBase):
         # ensure we have a chat.json
         self.extend_chat(Chat())
 
-        self.extend_log(
-            Log(
-                collection=[
-                    CollectionLog(
-                        log=CollectionLogEntry(
-                            message="new status: unpacking",
-                            details={"package_url": package_url},
-                        )
-                    )
-                ]
+        self.add_log_entry(
+            LogEntry(
+                message="new status: unpacking",
+                details={"package_url": package_url},
             )
         )
 
@@ -694,15 +779,9 @@ class RecordDraft(RecordBase):
         for e in collection["collection"]:
             if e["name"] == rdf["name"]:
                 if e["id"] != rdf["id"]:
-                    self.extend_log(
-                        Log(
-                            collection=[
-                                CollectionLog(
-                                    log=CollectionLogEntry(
-                                        message=f"error: Another resource with name='{rdf['name']}' already exists ({e['id']})"
-                                    )
-                                )
-                            ]
+                    self.add_log_entry(
+                        LogEntry(
+                            message=f"error: Another resource with name='{rdf['name']}' already exists ({e['id']})"
                         )
                     )
                 break
@@ -710,16 +789,8 @@ class RecordDraft(RecordBase):
         # set matching id_emoji
         rdf["id_emoji"] = self.collection.config.id_parts.get_icon(self.id)
         if rdf["id_emoji"] is None:
-            self.extend_log(
-                Log(
-                    collection=[
-                        CollectionLog(
-                            log=CollectionLogEntry(
-                                message=f"error: Failed to get icon for {self.id}"
-                            )
-                        )
-                    ]
-                )
+            self.add_log_entry(
+                LogEntry(message=f"error: Failed to get icon for {self.id}")
             )
 
         if "id" not in rdf:
@@ -848,7 +919,7 @@ class RecordDraft(RecordBase):
         if rdf_data is None:
             raise RuntimeError(f"Failed to load staged RDF from {self.rdf_path}")
 
-        rdf: Union[Any, Dict[Any, Any]] = yaml.load(io.BytesIO(rdf_data))
+        rdf: Union[Any, Dict[Any, Any]] = yaml.load(rdf_data.decode())
         assert isinstance(rdf, dict)
         version = rdf.get("version", "1")
         if not isinstance(version, (int, float, str)):
@@ -877,16 +948,8 @@ class RecordDraft(RecordBase):
 
     def _set_status(self, value: DraftStatus):
         current_status = self.info.status
-        self.extend_log(
-            Log(
-                collection=[
-                    CollectionLog(
-                        log=CollectionLogEntry(
-                            message=f"set new status: {value.name}", details=value
-                        )
-                    )
-                ]
-            )
+        self.add_log_entry(
+            LogEntry(message=f"new status: {value.description}", details=value)
         )
         if value.name == "testing" or current_status is None:
             pass
@@ -928,30 +991,6 @@ class Record(RecordBase):
     def update_info(self, update: RecordInfo):
         self._update_json(update)
 
-    def get_compatibility_report_path(self, tool: str):
-        return f"{self.folder}compatibility/{tool}.json"
-
-    def set_compatibility_report(self, report: CompatiblityReport) -> None:
-        path = self.get_compatibility_report_path(report.tool)
-        self.client.put_and_cache(path, report.model_dump_json().encode())
-
-    def get_all_compatibility_reports(self, tool: Optional[str] = None):
-        """get all compatibility reports"""
-        tools = [
-            d[:-4]
-            for d in self.client.ls(f"{self.folder}compatibility/", only_files=True)
-            if d.endswith(".json") and (tool is None or d[:-4] == tool)
-        ]
-        reports_data = {
-            t: self.client.load_file(f"{self.folder}compatibility/{tools}")
-            for t in tools
-        }
-        return [
-            CompatiblityReport.model_validate({**reports_data, "tool": t})
-            for t, d in reports_data.items()
-            if isinstance(d, dict)
-        ]
-
     def set_dois(self, *, doi: str, concept_doi: str):
         if self.doi is not None:
             raise ValueError(f"May not overwrite existing doi={self.doi} with {doi}")
@@ -969,6 +1008,17 @@ def get_remote_resource_version(
     version = str(version).strip("/")
     if version == "draft":
         rv = RecordDraft(client=client, concept_id=concept_id)
+    elif version == "latest":
+        versions = RecordConcept(
+            client=client, concept_id=concept_id
+        ).get_published_versions()
+        if versions:
+            rv = versions[0]
+        else:
+            raise ValueError(
+                f"no published version of '{concept_id}' found."
+                + f" Try '{concept_id}/draft' for the unpublished draft."
+            )
     else:
         rv = Record(client=client, concept_id=concept_id, version=version)
 
@@ -1083,44 +1133,43 @@ def create_collection_entries(
         if concept not in id_map:
             id_map[concept] = id_info
 
-        if isinstance(record_version, Record):
-            version_infos.append(
-                VersionInfo(
-                    created=record_version.info.created,
-                    doi=record_version.info.doi,
+        version_infos.append(
+            VersionInfo(
+                v=record_version.version,
+                created=record_version.info.created,
+                doi=(
+                    None
+                    if isinstance(record_version, RecordDraft)
+                    else record_version.info.doi
+                ),
+            )
+        )
+        compat_reports = record_version.get_all_compatibility_reports()
+        compat_tests: Dict[str, List[TestSummaryEntry]] = {}
+        bioimageio_status = "failed"
+        for r in compat_reports:
+            if r.status == "not-applicable":
+                continue
+
+            if r.tool == f"bioimageio.core_{bioimageio.core.__version__}":
+                bioimageio_status = r.status
+
+            compat_tests.setdefault(r.tool, []).append(
+                TestSummaryEntry(
+                    error=r.error,
+                    name="compatibility check",
+                    status=r.status,
+                    traceback=None,
+                    warnings=None,
                 )
             )
-            compat_reports = record_version.get_all_compatibility_reports()
-            compat_tests: Dict[str, List[TestSummaryEntry]] = {}
-            bioimageio_status = "failed"
-            for r in compat_reports:
-                if r.status == "not-applicable":
-                    continue
 
-                if r.tool == "bioimageio.core":
-                    bioimageio_status = r.status
-
-                compat_tests.setdefault(r.tool, []).append(
-                    TestSummaryEntry(
-                        error=r.error,
-                        name="compatibility check",
-                        status=r.status,
-                        traceback=None,
-                        warnings=None,
-                    )
-                )
-
-            test_summary = TestSummary(
-                status=bioimageio_status, tests=compat_tests
-            ).model_dump(mode="json")
-            stream = io.StringIO()
-            yaml.dump(test_summary, stream)
-            test_summary_data = stream.getvalue().encode()
-            record_version.client.put(
-                f"{record_version.folder}test_summary.yaml",
-                io.BytesIO(test_summary_data),
-                length=len(test_summary_data),
-            )
+        test_summary = TestSummary(
+            status=bioimageio_status, tests=compat_tests
+        ).model_dump(mode="json")
+        record_version.client.put_yaml(
+            test_summary, f"{record_version.folder}test_summary.yaml"
+        )
 
     # upload 'versions.json' summary
     if isinstance(latest_record_version, Record):
@@ -1141,8 +1190,8 @@ def create_collection_entries(
 
     try:
         # legacy nickname
-        nickname = rdf["config"]["bioimageio"]["nickname"]
-        nickname_icon = rdf["config"]["bioimageio"]["nickname_icon"]
+        nickname = str(rdf["config"]["bioimageio"]["nickname"])
+        nickname_icon = str(rdf["config"]["bioimageio"]["nickname_icon"])
     except KeyError:
         # id is nickname
         nickname = None
@@ -1151,20 +1200,19 @@ def create_collection_entries(
     if nickname == concept:
         nickname = None
 
-    legacy_download_count = LEGACY_DOWNLOAD_COUNTS.get(concept, 0)
+    legacy_download_count = LEGACY_DOWNLOAD_COUNTS.get(nickname or concept, 0)
 
     # TODO: read new download count
     download_count = "?" if legacy_download_count == 0 else legacy_download_count
 
     # ingest compatibility reports
     links = set(rdf.get("links", []))
-    if isinstance(latest_record_version, Record):
-        compat_reports = latest_record_version.get_all_compatibility_reports()
+    compat_reports = latest_record_version.get_all_compatibility_reports()
 
-        for r in compat_reports:
-            if r.status == "passed":
-                # update links to reference compatible tools
-                links.update(r.links)
+    for r in compat_reports:
+        if r.status == "passed":
+            # update links to reference compatible tools
+            links.update(r.links)
 
     try:
         thumbnails = rdf["config"]["bioimageio"]["thumbnails"]

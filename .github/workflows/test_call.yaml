@@ -10,11 +10,6 @@ on:
       version:
         required: true
         type: string
-      conclude:
-        description: "Wether or not to trigger a status update based on test results"
-        required: false
-        default: 'yes'
-        type: string
       environment_name:
         required: true
         type: string
@@ -65,19 +60,19 @@ jobs:
           python-version: "3.12"
           cache: "pip" # caching pip dependencies
       - run: pip install ruyaml
-      - name: save conda_env_${{ matrix.weight_format }}.yaml
+      - name: save ${{inputs.environment_name}}_${{inputs.concept_id}}_${{inputs.version}}_conda_env_${{matrix.weight_format}}.yaml
         run: |
           import json
           from pathlib import Path
           from ruyaml import YAML
           yaml = YAML(typ="safe")
           conda_env = json.loads('${{ needs.validate_format.outputs.conda_envs }}')["${{ matrix.weight_format }}"]
-          yaml.dump(conda_env, Path("conda_env_${{ matrix.weight_format }}.yaml"))
+          yaml.dump(conda_env, Path("${{inputs.environment_name}}_${{inputs.concept_id}}_${{inputs.version}}_conda_env_${{matrix.weight_format}}.yaml"))
         shell: python
       - uses: actions/upload-artifact@v4
         with:
-          name: conda_env_${{ matrix.weight_format }}.yaml
-          path: conda_env_${{ matrix.weight_format }}.yaml
+          name: ${{inputs.environment_name}}_${{inputs.concept_id}}_${{inputs.version}}_conda_env_${{matrix.weight_format}}.yaml
+          path: ${{inputs.environment_name}}_${{inputs.concept_id}}_${{inputs.version}}_conda_env_${{matrix.weight_format}}.yaml
 
   test:
     needs: [validate_format, setup-test]
@@ -92,16 +87,25 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
         with:
-          name: conda_env_${{ matrix.weight_format }}.yaml
+          name: ${{inputs.environment_name}}_${{inputs.concept_id}}_${{inputs.version}}_conda_env_${{matrix.weight_format}}.yaml
       - name: install validation dependencies
         id: create_env
         uses: mamba-org/setup-micromamba@v1
         with:
           cache-downloads: true
           environment-name: ${{ matrix.weight_format }}
-          environment-file: conda_env_${{ matrix.weight_format }}.yaml
+          environment-file: ${{inputs.environment_name}}_${{inputs.concept_id}}_${{inputs.version}}_conda_env_${{matrix.weight_format}}.yaml
         continue-on-error: true # we inspect this step's outcome in run_dynamic_tests.py
         timeout-minutes: 60
+      - name: setup pip to install backoffice (if conda env failed to install)
+        if: steps.create_env.outcome == 'failure'
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip" # caching pip dependencies
+      - name: install backoffice (if conda env failed to install)
+        if: steps.create_env.outcome == 'failure'
+        run: pip install .
       - name: dynamic validation
         shell: bash -el {0}
         run: backoffice test "${{inputs.concept_id}}" "${{ inputs.version }}" "${{ matrix.weight_format }}" "${{ steps.create_env.outcome }}"
@@ -114,17 +118,3 @@ jobs:
         if: matrix.weight_format == 'onnx'
         shell: bash -el {0}
         run: python -c "import onnxruntime"
-
-  conclude:
-    needs: [validate_format, test]
-    if: (inputs.conclude == 'yes') && always()  # run even if test job fails
-    runs-on: ubuntu-latest
-    environment: ${{inputs.environment_name}}
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-          cache: "pip" # caching pip dependencies
-      - run: pip install .
-      - run: backoffice await_review "${{inputs.concept_id}}"

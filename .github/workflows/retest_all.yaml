@@ -12,23 +12,52 @@ on:
 concurrency: retest-${{inputs.sandbox}}
 
 jobs:
+  generate_collection:  # make sure collection.json is up to date
+    strategy:
+      fail-fast: false
+      matrix:
+        mode: [draft, published]
+    uses: bioimage-io/collection/.github/workflows/generate_collection_json_call.yaml@main
+    with:
+      mode: ${{matrix.mode}}
+      environment_name: ${{inputs.sandbox && 'sandbox' || 'production'}}
+    secrets: inherit
+
   setup:
+    needs: generate_collection
     runs-on: ubuntu-latest
     environment: ${{inputs.sandbox && 'sandbox' || 'production'}}
     outputs:
       matrix: ${{steps.get_matrix.outputs.matrix}}
 
+    env:
+      S3_HOST: ${{vars.S3_HOST}}
+      S3_BUCKET: ${{vars.S3_BUCKET}}
+      S3_FOLDER: ${{vars.S3_FOLDER}}
+      S3_ACCESS_KEY_ID: ${{secrets.S3_ACCESS_KEY_ID}}
+      S3_SECRET_ACCESS_KEY: ${{secrets.S3_SECRET_ACCESS_KEY}}
+      ZENODO_URL: ${{vars.ZENODO_URL}}
+      ZENODO_API_ACCESS_TOKEN: ${{secrets.ZENODO_API_ACCESS_TOKEN}}
+      MAIL_PASSWORD: ${{secrets.MAIL_PASSWORD}}
+      RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
+      BIOIMAGEIO_USER_ID: github|${{github.actor_id}}
+
     steps:
-      - run: wget ${{vars.S3_HOST}}/${{vars.S3_BUCKET}}/${{vars.S3_FOLDER}}/collection_draft.json
+      - run: wget https://${{vars.S3_HOST}}/${{vars.S3_BUCKET}}/${{vars.S3_FOLDER}}/collection.json
+      - run: wget https://${{vars.S3_HOST}}/${{vars.S3_BUCKET}}/${{vars.S3_FOLDER}}/collection_draft.json
       - shell: python
         id: get_matrix
         run: |
           import json, os
 
-          with open("collection_draft.json") as f:
+          with open("collection.json") as f:
             collection = json.load(f)
 
-          versions = [{"id": entry["id"], "v": v} for entry in collection["collection"] for v in entry["versions"]]
+          with open("collection_draft.json") as f:
+            collection_draft = json.load(f)
+
+          versions = [{"id": entry.get("nickname", entry["id"]), "v": "latest"} for entry in collection["collection"]]
+          versions.extend([{"id": entry.get("nickname", entry["id"]), "v": "draft"} for entry in collection_draft["collection"]])
           matrix = {"include": versions}
           with open(os.environ["GITHUB_OUTPUT"], "a") as f:
             print(f"matrix={matrix}", file=f)
@@ -37,10 +66,10 @@ jobs:
     needs: setup
     strategy:
       matrix: ${{fromJson(needs.setup.outputs.matrix)}}
+      fail-fast: false
     uses: bioimage-io/collection/.github/workflows/test_call.yaml@main
     with:
       concept_id: ${{matrix.id}}
       version: ${{matrix.v}}
-      conclude: ${{matrix.v == 'draft' && 'yes' || 'no'}}
       environment_name: ${{inputs.sandbox && 'sandbox' || 'production'}}
     secrets: inherit

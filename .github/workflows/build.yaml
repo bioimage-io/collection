@@ -4,7 +4,9 @@ on:
     branches:
       - doesnt-exist
 
-concurrency: test
+concurrency:
+  group: test
+  cancel-in-progress: true
 
 
 jobs:
