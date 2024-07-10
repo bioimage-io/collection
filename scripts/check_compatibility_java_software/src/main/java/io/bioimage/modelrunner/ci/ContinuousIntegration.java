@@ -97,6 +97,8 @@ public class ContinuousIntegration {
 		for (Path rdfPath : rdfFiles) {
 			System.out.println("");
 			System.out.println("");
+			rdfPath = Paths.get("/home/carlos/git/collection/bioimageio-gh-pages"
+					+ "/rdfs/10.5281/zenodo.5874741/5874742/rdf.yaml");
 			System.out.println(rdfPath);
 			
 			Map<String, Object> rdf = new LinkedHashMap<String, Object>();
@@ -151,7 +153,7 @@ public class ContinuousIntegration {
 				} catch (Exception ex) {
 					ex.printStackTrace();
 					summaryWeightFormat = create(rdfPath, "failed", "exception thrown during testing",
-					stackTrace(ex), "test was interrupted by an exception while testing" + ww.getFramework() + " weigths");
+					stackTrace(ex), "test was interrupted by an exception while testing " + ww.getFramework() + " weigths");
 				}
 				summariesPath = summariesDir.toAbsolutePath() + File.separator
 						+ rdID + File.separator + "test_summary_" + ww.getFramework() + ".yaml";
@@ -330,7 +332,6 @@ public class ContinuousIntegration {
 			return failInferenceTest(rd.getName(), "unable to run model", stackTrace(e));
 		}
 
-		List<Double> maxDif = new ArrayList<Double>();
 		for (int i = 0; i < rd.getOutputTensors().size(); i ++) {
 			Tensor<T> tt = (Tensor<T>) outs.get(i);
 			if (rd.getOutputTensors().get(i).getPostprocessing().size() > 0) {
@@ -356,12 +357,12 @@ public class ContinuousIntegration {
 			.multiThreaded().forEachPixel( ( j, o ) -> o.set( (T) new FloatType(o.getRealFloat() - j.getRealFloat())) );
 			double diff = computeMaxDiff(rai);
 			if (diff > Math.pow(10, -decimal))
-				return failInferenceTest(rd.getName(), "output number " + i + " produces a very different result, "
-						+ "the max difference is " + diff +", bigger than max alllowed " + Math.pow(10, -decimal), null);
-			maxDif.add(computeMaxDiff(rai));
+				return failInferenceTest(rd.getModelPath(), "output number " + i + " is not correct", 
+						"output number " + i + " produces a very different result, "
+						+ "the max difference is " + diff +", bigger than max alllowed " + Math.pow(10, -decimal));
 		}
 		
-		return create(null, "passed", null, null, null);
+		return create(Paths.get(rd.getModelPath()), "passed", null, null, null);
 	}
 	
 	private static Map<String, String> failInferenceTest(String sourceName, String error, String tb) {
