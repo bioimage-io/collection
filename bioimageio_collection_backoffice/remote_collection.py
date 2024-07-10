@@ -28,6 +28,7 @@ from typing import (
 )
 from urllib.parse import SplitResult, urlsplit, urlunsplit
 
+import bioimageio.core
 from bioimageio.spec import ValidationContext
 from bioimageio.spec.common import HttpUrl
 from bioimageio.spec.utils import (
@@ -1150,7 +1151,7 @@ def create_collection_entries(
             if r.status == "not-applicable":
                 continue
 
-            if r.tool == "bioimageio.core":
+            if r.tool == f"bioimageio.core_{bioimageio.core.__version__}":
                 bioimageio_status = r.status
 
             compat_tests.setdefault(r.tool, []).append(
