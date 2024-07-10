@@ -78,7 +78,7 @@ public class ContinuousIntegration {
         Path rdfDir = currentDir.resolve("../../../bioimageio-gh-pages/rdfs").normalize();
 
         // Create a matcher for the pattern 'rdf.yaml'
-        runTests(rdfDir, "**", "**", Paths.get("test_summaries"));
+        runTests(rdfDir, "**", "**", Paths.get("test_summaries_" + software + "_" + version));
     }
 
 	
@@ -105,7 +105,7 @@ public class ContinuousIntegration {
 
 			Object rdID = rdf.get("id");
 			String summariesPath = summariesDir.toAbsolutePath() + File.separator
-					+ (rdID != null ? rdID : "") + File.separator + "test_summary_" + software + "_" + version + ".yaml";
+					+ (rdID != null ? rdID : "") + File.separator + "test_summary" + ".yaml";
 			Object type = rdf.get("type");
 			Object weightFormats = rdf.get("weights");
 			if (rdID == null || !(rdID instanceof String)) {
@@ -141,7 +141,6 @@ public class ContinuousIntegration {
 			
 						
 			for (WeightFormat ww : weights.gettAllSupportedWeightObjects()) {
-				List<Object> summariesWeightFormat = new ArrayList<Object>();
 				Map<String, String> summaryWeightFormat = new LinkedHashMap<String, String>();
 				try {
 					summaryWeightFormat = testResource(rdfPath.toAbsolutePath().toString(), ww, 4, "model");
@@ -151,7 +150,7 @@ public class ContinuousIntegration {
 					stackTrace(ex), "test was interrupted by an exception while testing" + ww.getFramework() + " weigths");
 				}
 				summariesPath = summariesDir.toAbsolutePath() + File.separator
-						+ rdID + File.separator + "test_summary_" + software + "_" + version + ".yaml";
+						+ rdID + File.separator + "test_summary_" + ww.getFramework() + ".yaml";
 				writeSummary(summariesPath, summaryWeightFormat);
 			}
 			
