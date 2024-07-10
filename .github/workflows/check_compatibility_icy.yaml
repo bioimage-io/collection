@@ -20,9 +20,6 @@ jobs:
     outputs:
       matrix: ${{ steps.set-dict.outputs.matrix }}
     steps:
-    - name: Fail this workflow
-      run: exit 1
-    - run: wget https://${{vars.S3_HOST}}/${{vars.S3_BUCKET}}/${{vars.S3_FOLDER}}/all_versions.json
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
       with:
