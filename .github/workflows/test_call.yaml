@@ -97,6 +97,15 @@ jobs:
           environment-file: ${{inputs.environment_name}}_${{inputs.concept_id}}_${{inputs.version}}_conda_env_${{matrix.weight_format}}.yaml
         continue-on-error: true # we inspect this step's outcome in run_dynamic_tests.py
         timeout-minutes: 60
+      - name: setup pip to install backoffice (if conda env failed to install)
+        if: steps.create_env.outcome == 'failure'
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip" # caching pip dependencies
+      - name: install backoffice (if conda env failed to install)
+        if: steps.create_env.outcome == 'failure'
+        run: pip install .
       - name: dynamic validation
         shell: bash -el {0}
         run: backoffice test "${{inputs.concept_id}}" "${{ inputs.version }}" "${{ matrix.weight_format }}" "${{ steps.create_env.outcome }}"
