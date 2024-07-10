@@ -1,8 +1,6 @@
 name: test backoffice and build docs
 
-on: 
-    branches:
-      - doesnt-exist
+on: push
 
 concurrency:
   group: test
