@@ -89,6 +89,10 @@ jobs:
       matrix: ${{ fromJson(needs.generate-version-dict.outputs.matrix) }}
     steps:
     - uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.10'
     - name: Get test results
       uses: actions/download-artifact@v3
       with:
@@ -96,7 +100,7 @@ jobs:
     - name: Install deps
       run: |
         ls
-        pip install -e .
+        pip install .
     - name: Send Icy ${{ matrix.key }} tests
       shell: bash -l {0}
       run: python scripts/check_compatibility_java_software.py icy ${{ matrix.key }} test_summaries/artifact

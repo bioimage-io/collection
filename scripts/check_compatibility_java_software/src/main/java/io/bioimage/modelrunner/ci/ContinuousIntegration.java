@@ -70,9 +70,13 @@ public class ContinuousIntegration {
 	private static final String TEST_NAME = "reproduce test outputs from test inputs";
 	
 	public static void main(String[] args) throws IOException {
-
-		software = args[0];
-		version = args[1];
+		if (args.length != 0) {
+			software = args[0];
+			version = args[1];
+		} else {
+			software = "default";
+			version = "default";
+		}
         
         Path currentDir = Paths.get(ContinuousIntegration.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getParent();
         Path rdfDir = currentDir.resolve("../../../bioimageio-gh-pages/rdfs").normalize();
@@ -224,10 +228,15 @@ public class ContinuousIntegration {
 		} else {
 			error = downloadModel(rd);
 		}
+		String details = null;
+		if (error != null && error.contains("The provided name does not correspond to"))
+			details = "Model does not exist on the Bioimage.io repo";
+		else if (error != null)
+			details = error;
 		
 		return create(path, error == null ? "passed" : "failed", 
 				error == null ? null : software + " unable to download model",
-				error, error);
+				error, details);
 	}
 	
 	private static String downloadModel(ModelDescriptor rd) {
