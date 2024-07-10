@@ -97,8 +97,6 @@ public class ContinuousIntegration {
 		for (Path rdfPath : rdfFiles) {
 			System.out.println("");
 			System.out.println("");
-			rdfPath = Paths.get("/home/carlos/git/collection/bioimageio-gh-pages"
-					+ "/rdfs/10.5281/zenodo.5874741/5874742/rdf.yaml");
 			System.out.println(rdfPath);
 			
 			Map<String, Object> rdf = new LinkedHashMap<String, Object>();
