@@ -3,8 +3,8 @@ run-name: generate collection
 
 on:
   workflow_dispatch:
-  #push:
-    #branches: [main]
+  push:
+    branches: [main]
 
 concurrency: generate-collection-json
 
