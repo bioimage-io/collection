@@ -101,7 +101,7 @@ public class ContinuousIntegration {
 			Map<String, Object> rdf = new LinkedHashMap<String, Object>();
 			try {
 				rdf = YAMLUtils.load(rdfPath.toAbsolutePath().toString());
-			} catch (Exception ex) {
+			} catch (Exception | Error ex) {
 				ex.printStackTrace();
 				continue;
 			}
@@ -127,7 +127,7 @@ public class ContinuousIntegration {
 			ModelWeight weights = null;
 			try {
 				weights = ModelWeight.build((Map<String, Object>) weightFormats);
-			} catch (Exception ex) {
+			} catch (Exception | Error ex) {
 				Map<String, String> summary = create(rdfPath,
 						"failed", "Missing/Invalid weight formats for " + rdID,  stackTrace(ex), "Unable to read weight formats");
 				writeSummary(summariesPath, summary);
@@ -147,7 +147,7 @@ public class ContinuousIntegration {
 				Map<String, String> summaryWeightFormat = new LinkedHashMap<String, String>();
 				try {
 					summaryWeightFormat = testResource(rdfPath.toAbsolutePath().toString(), ww, 4, "model");
-				} catch (Exception ex) {
+				} catch (Exception | Error ex) {
 					ex.printStackTrace();
 					summaryWeightFormat = create(rdfPath, "failed", "exception thrown during testing",
 					stackTrace(ex), "test was interrupted by an exception while testing " + ww.getFramework() + " weigths");
@@ -245,7 +245,7 @@ public class ContinuousIntegration {
 			String folder = br.downloadByName(rd.getName(), "models");
 			rd.addModelPath(Paths.get(folder).toAbsolutePath());
 			downloadedModelsCorrectly.put(rd.getName(), folder);
-		} catch (Exception ex) {
+		} catch (Exception | Error ex) {
 			error = stackTrace(ex);
 			downloadedModelsIncorrectly.put(rd.getName(), error);
 		}
@@ -286,7 +286,7 @@ public class ContinuousIntegration {
 			RandomAccessibleInterval<T> rai;
 			try {
 				rai = DecodeNumpy.retrieveImgLib2FromNpy(rd.getTestInputs().get(i).getLocalPath().toAbsolutePath().toString());
-			} catch (Exception e) {
+			} catch (Exception | Error e) {
 				return failInferenceTest(rd.getName(), "unable to open test input: " + rd.getTestInputs().get(i).getString(), stackTrace(e));
 			}
 			Tensor<T> inputTensor = Tensor.build(rd.getInputTensors().get(i).getName(), rd.getInputTensors().get(i).getAxesOrder(), rai);
@@ -295,7 +295,7 @@ public class ContinuousIntegration {
 				JavaProcessing preproc;
 				try {
 					preproc = JavaProcessing.definePreprocessing(transform.getName(), transform.getKwargs());
-				} catch (Exception e) {
+				} catch (Exception | Error e) {
 					e.printStackTrace();
 					return failInferenceTest(rd.getName(), "pre-processing transformation not supported by " + software + ": " + transform.getName(), stackTrace(e));
 				}
@@ -310,7 +310,7 @@ public class ContinuousIntegration {
 		EngineInfo engineInfo;
 		try {
 			engineInfo = EngineInfo.defineCompatibleDLEngineWithRdfYamlWeights(ww);
-		} catch (Exception e) {
+		} catch (Exception | Error e) {
 			e.printStackTrace();
 			return failInferenceTest(rd.getName(), "selected weights not supported by " + software + ": " + ww.getFramework(), stackTrace(e));
 		}
@@ -320,13 +320,13 @@ public class ContinuousIntegration {
 		try {
 			model = Model.createDeepLearningModel(rd.getModelPath(), rd.getModelPath() + File.separator + ww.getSourceFileName(), engineInfo);
 			model.loadModel();
-		} catch (Exception e) {
+		} catch (Exception | Error e) {
 			e.printStackTrace();
 			return failInferenceTest(rd.getName(), "unable to instantiate/load model", stackTrace(e));
 		}
 		try {
 			model.runModel(inps, outs);
-		} catch (Exception e) {
+		} catch (Exception | Error e) {
 			e.printStackTrace();
 			return failInferenceTest(rd.getName(), "unable to run model", stackTrace(e));
 		}
@@ -339,7 +339,7 @@ public class ContinuousIntegration {
 				JavaProcessing preproc;
 				try {
 					preproc = JavaProcessing.definePreprocessing(transform.getName(), transform.getKwargs());
-				} catch (Exception e) {
+				} catch (Exception | Error e) {
 					e.printStackTrace();
 					return failInferenceTest(rd.getName(), "post-processing transformation not supported by " + software + ": " + transform.getName(), stackTrace(e));
 				}
@@ -348,7 +348,7 @@ public class ContinuousIntegration {
 			RandomAccessibleInterval<T> rai;
 			try {
 				rai = DecodeNumpy.retrieveImgLib2FromNpy(rd.getTestOutputs().get(i).getLocalPath().toAbsolutePath().toString());
-			} catch (Exception e) {
+			} catch (Exception | Error e) {
 				e.printStackTrace();
 				return failInferenceTest(rd.getName(), "unable to open test output: " + rd.getTestOutputs().get(i).getString(), stackTrace(e));
 			}
