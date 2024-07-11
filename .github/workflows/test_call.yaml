@@ -114,7 +114,7 @@ jobs:
       - name: check torch import # TODO: improve error messages in bioimageio.core
         if: matrix.weight_format == 'pytorch_state_dict' || matrix.weight_format == 'torchscript'
         shell: bash -el {0}
-        run: python -c "import torch; import torch;print(*torch.__config__.show().split("\n"), sep="\n")"
+        run: python -c "import torch; import torch;print(*torch.__config__.show().split('\n'), sep='\n')"
       - name: check onnx import  # TODO: improve error messages in bioimageio.core
         if: matrix.weight_format == 'onnx'
         shell: bash -el {0}
