@@ -28,7 +28,7 @@ env:
   BIOIMAGEIO_USER_ID: github|${{github.actor_id}}
 
 jobs:
-  validate_format:
+  validate_format:  # validate metadata in rdf.yaml
     runs-on: ubuntu-latest
     environment: ${{inputs.environment_name}}
     outputs:
@@ -46,7 +46,7 @@ jobs:
       - id: validate_format
         run: backoffice validate_format "${{ inputs.concept_id }}" "${{ inputs.version }}"
 
-  setup-test:
+  setup-test:  # setup test environments to run dynamic tests (upload conda env yaml files as artifacts)
     needs: validate_format
     if: needs.validate_format.outputs.has_dynamic_test_cases == 'yes'
     runs-on: ubuntu-latest
