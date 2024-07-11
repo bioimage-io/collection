@@ -80,11 +80,11 @@ jobs:
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
       with:
-        path: test_summaries
+        path: test_summaries_icy_${{ matrix.key }}
 
   sendreport:
     runs-on: ubuntu-latest
-    needs: run
+    needs: [generate-version-dict, run]
     strategy:
       matrix: ${{ fromJson(needs.generate-version-dict.outputs.matrix) }}
     steps:
@@ -96,10 +96,10 @@ jobs:
     - name: Get test results
       uses: actions/download-artifact@v3
       with:
-        path: test_summaries
+        path: test_summaries_icy_${{ matrix.key }}
     - name: Install deps
       run: |
         pip install .
-    - name: Send Icy ${{ matrix.key }} tests
+    - name: Send icy ${{ matrix.key }} tests
       shell: bash -l {0}
       run: python scripts/check_compatibility_java_software.py icy ${{ matrix.key }} --summaries_dir "test_summaries_icy_${{ matrix.key }}/artifact"
