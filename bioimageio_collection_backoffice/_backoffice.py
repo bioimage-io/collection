@@ -186,7 +186,10 @@ class BackOffice:
         )
 
     def backup(self, destination: str = "deprecated"):
-        """backup the whole collection (to zenodo.org)"""
+        """backup the whole collection (to zenodo.org)
+
+        Each resource is separately backed up to zenodo.org to get a concept DOI and version DOIs for every published version
+        """
         if destination != "deprecated":
             logger.warning("argument `destination` is deprecated")
 
