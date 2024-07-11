@@ -98,7 +98,6 @@ public class ContinuousIntegration {
 			System.out.println("");
 			System.out.println("");
 			System.out.println(rdfPath);
-			
 			Map<String, Object> rdf = new LinkedHashMap<String, Object>();
 			try {
 				rdf = YAMLUtils.load(rdfPath.toAbsolutePath().toString());
@@ -244,7 +243,7 @@ public class ContinuousIntegration {
 		try {
 			BioimageioRepo br = BioimageioRepo.connect();
 			String folder = br.downloadByName(rd.getName(), "models");
-			rd.addModelPath(Paths.get(folder));
+			rd.addModelPath(Paths.get(folder).toAbsolutePath());
 			downloadedModelsCorrectly.put(rd.getName(), folder);
 		} catch (Exception ex) {
 			error = stackTrace(ex);
@@ -315,6 +314,8 @@ public class ContinuousIntegration {
 			e.printStackTrace();
 			return failInferenceTest(rd.getName(), "selected weights not supported by " + software + ": " + ww.getFramework(), stackTrace(e));
 		}
+		if (engineInfo == null) return create(Paths.get(rd.getModelPath()), "failed", "no compatible weights", 
+				null, "no compatible weights for " + ww.getFramework() + "_" + ww.getTrainingVersion());
 		Model model;
 		try {
 			model = Model.createDeepLearningModel(rd.getModelPath(), rd.getModelPath() + File.separator + ww.getSourceFileName(), engineInfo);
