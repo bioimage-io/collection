@@ -47,6 +47,7 @@ jobs:
         run: backoffice validate_format "${{ inputs.concept_id }}" "${{ inputs.version }}"
 
   setup-test:  # setup test environments to run dynamic tests (upload conda env yaml files as artifacts)
+    # TODO: write and upload conda yaml files in `validate_format` job instead
     needs: validate_format
     if: needs.validate_format.outputs.has_dynamic_test_cases == 'yes'
     runs-on: ubuntu-latest
