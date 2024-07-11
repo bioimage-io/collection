@@ -929,6 +929,12 @@ class RecordDraft(RecordBase):
             if version in {v.version for v in self.concept.get_published_versions()}:
                 raise ValueError(f"Trying to publish version '{version}' again!")
 
+        # remember previously published concept doi
+        if previous_versions := self.concept.get_published_versions():
+            concept_doi = previous_versions[0].info.concept_doi
+        else:
+            concept_doi = None
+
         published = Record(
             client=self.client, concept_id=self.concept_id, version=version
         )
@@ -943,7 +949,7 @@ class RecordDraft(RecordBase):
         self.client.put(self.rdf_path, io.BytesIO(rdf_data), length=len(rdf_data))
         self.client.rm_dir(self.folder)
 
-        published.update_info(RecordInfo())
+        published.update_info(RecordInfo(concept_doi=concept_doi))
         return published
 
     def _set_status(self, value: DraftStatus):
