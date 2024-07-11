@@ -45,7 +45,7 @@ public class DownloadEngines {
 	private static final String ENGINES_DIR = new File(CWD, "engines").getAbsolutePath();
 	
 	public static void main(String[] args) throws IOException  {
-		if (args[0].equals(Tags.DEEPIMAGEJ)) {
+		if (args[0].equals(Tags.DEEPIMAGEJ) || args[0].equals(Tags.ICY)) {
 			EngineInstall engineManager = EngineInstall.createInstaller(ENGINES_DIR);
 			engineManager.basicEngineInstallation();
 			//InstalledEngines.buildEnginesFinder(ENGINES_DIR).getDownloadedForOS().stream().map(i -> i.toString())
