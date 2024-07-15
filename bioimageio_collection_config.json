@@ -40,14 +40,6 @@
             "github_user": "esgomezm",
             "email": "egomez@igc.gulbenkian.pt"
         }
-        {
-            "id": "github|75674828",
-            "name": "Caterina Fuster-Barceló",
-            "affiliation": "Universidad Carlos III de Madrid",
-            "orcid": "0000-0002-4784-6957",
-            "github_user": "cfusterbarcelo",
-            "email": "cafuster@pa.uc3m.es"
-        }
     ],
     "collection_template": {
         "name": "bioimage.io",
