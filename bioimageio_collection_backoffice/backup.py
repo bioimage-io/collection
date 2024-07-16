@@ -138,7 +138,7 @@ def backup_published_version(
 
     # base_url = f"{settings.zenodo_url}/record/{concept_id}/files/"
 
-    metadata = rdf_to_metadata(
+    metadata = rdf_to_zenodo_metadata(
         rdf,
         rdf_file_name=rdf_file_name,
         publication_date=v.info.created,
@@ -180,7 +180,7 @@ def rdf_authors_to_metadata_creators(rdf: ResourceDescr):
     return creators
 
 
-def rdf_to_metadata(
+def rdf_to_zenodo_metadata(
     rdf: ResourceDescr,
     *,
     additional_note: str = "\n(Uploaded via https://bioimage.io)",
