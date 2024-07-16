@@ -47,6 +47,14 @@
             "orcid": "0000-0002-4784-6957",
             "github_user": "cfusterbarcelo",
             "email": "cafuster@pa.uc3m.es"
+        },
+        {
+            "id": "github|17722010",
+            "name": "Qin Yu",
+            "affiliation": "European Molecular Biology Laboratory",
+            "orcid": "0000-0002-4652-0795",
+            "github_user": "qin-yu",
+            "email": "qin.yu.95@outlook.com"
         }
     ],
     "collection_template": {
