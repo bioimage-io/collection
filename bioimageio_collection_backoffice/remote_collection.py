@@ -1106,9 +1106,7 @@ def create_collection_entries(
     id_map: Dict[str, IdInfo] = {}
     version_infos: List[VersionInfo] = []
     for record_version in versions:
-        rdf_version_data = latest_record_version.client.load_file(
-            latest_record_version.rdf_path
-        )
+        rdf_version_data = record_version.client.load_file(record_version.rdf_path)
         if rdf_version_data is None:
             logger.error("failed to load {}", latest_record_version.rdf_path)
             continue
