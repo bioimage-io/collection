@@ -8,7 +8,7 @@
 
 [![ilastik compatibility](https://github.com/bioimage-io/collection/actions/workflows/check_compatibility_ilastik.yaml/badge.svg)](https://github.com/bioimage-io/collection/actions/workflows/check_compatibility_ilastik.yaml)
 
-
+![code style](https://img.shields.io/badge/code%20style-black-000000.svg)
 
 
 # collection
