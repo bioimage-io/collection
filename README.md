@@ -1,4 +1,15 @@
-![internal tests](https://github.com/bioimage-io/collection/actions/workflows/build.yaml/badge.svg) ![generate collection overview](https://github.com/bioimage-io/collection/actions/workflows/generate_collection_json.yaml/badge.svg) ![backup status](https://github.com/bioimage-io/collection/actions/workflows/backup.yaml/badge.svg)
+[![internal tests & docs](https://github.com/bioimage-io/collection/actions/workflows/build.yaml/badge.svg)](https://github.com/bioimage-io/collection/actions/workflows/build.yaml)
+[![collection overview](https://github.com/bioimage-io/collection/actions/workflows/generate_collection_json.yaml/badge.svg)](https://github.com/bioimage-io/collection/actions/workflows/generate_collection_json.yaml)
+[![backup status](https://github.com/bioimage-io/collection/actions/workflows/backup.yaml/badge.svg)](https://github.com/bioimage-io/collection/actions/workflows/backup.yaml)
+
+[![last resource staging](https://github.com/bioimage-io/collection/actions/workflows/stage.yaml/badge.svg)](https://github.com/bioimage-io/collection/actions/workflows/stage.yaml)
+[![last resource testing](https://github.com/bioimage-io/collection/actions/workflows/test.yaml/badge.svg)](https://github.com/bioimage-io/collection/actions/workflows/test.yaml)
+[![last resource publishing](https://github.com/bioimage-io/collection/actions/workflows/publish.yaml/badge.svg)](https://github.com/bioimage-io/collection/actions/workflows/publish.yaml)
+
+[![ilastik compatibility](https://github.com/bioimage-io/collection/actions/workflows/check_compatibility_ilastik.yaml/badge.svg)](https://github.com/bioimage-io/collection/actions/workflows/check_compatibility_ilastik.yaml)
+
+
+
 
 # collection
 
