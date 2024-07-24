@@ -423,6 +423,16 @@ class RemoteCollection(RemoteBase):
                         )
                     )
 
+        assert (
+            "10.5281/zenodo.11092561" in id_map
+        ), "concept doi missing (for affable shark)"
+        assert (
+            "10.5281/zenodo.11092562" in id_map
+        ), "version specific doi missing (for affable-shark)"
+        assert "affable-shark" in id_map, "concept id missing (for affable-shark)"
+        assert "affable-shark/1" in id_map, "version 1 missing (for affable-shark)"
+        assert "affable-shark/1.1" in id_map, "version 1.1 missing (for affable-shark)"
+
         collection_entries.sort()
         concepts_summaries.sort()
         collection = CollectionJson(
@@ -1088,27 +1098,17 @@ def create_collection_entries(
     if not versions:
         return [], {}
 
-    # create an explicit entry only for the latest version
-    #   (all versions are referenced under `versions`)
-    latest_record_version = versions[0]
-
-    with ValidationContext(perform_io_checks=False):
-        rdf_url = HttpUrl(latest_record_version.rdf_url)
-
-    root_url = str(rdf_url.parent)
-    assert root_url == ((root := latest_record_version.get_file_url("").strip("/"))), (
-        root_url,
-        root,
-    )
-    parsed_root = urlsplit(root_url)
-    rdf = latest_record_version.get_rdf()
+    rdf: Optional[Dict[str, Any]] = None
+    record_version: Optional[Union[Record, RecordDraft]] = None
+    concept: Optional[str] = None
+    id_info: Optional[IdInfo] = None
 
     id_map: Dict[str, IdInfo] = {}
     version_infos: List[VersionInfo] = []
-    for record_version in versions:
+    for record_version in versions[::-1]:  # process oldest to newest
         rdf_version_data = record_version.client.load_file(record_version.rdf_path)
         if rdf_version_data is None:
-            logger.error("failed to load {}", latest_record_version.rdf_path)
+            logger.error("failed to load {}", record_version.rdf_path)
             continue
 
         id_info = IdInfo(
@@ -1116,26 +1116,27 @@ def create_collection_entries(
             sha256=hashlib.sha256(rdf_version_data).hexdigest(),
         )
         id_map[record_version.id] = id_info
-
-        if record_version.concept_doi is not None:
-            id_map[record_version.concept_doi] = id_info
+        id_map[record_version.concept_id] = id_info
 
         if record_version.doi is not None:
             id_map[record_version.doi] = id_info
 
-        rdf_version = record_version.get_rdf()
-        if (version_id := rdf_version["id"]) is not None and version_id not in id_map:
+        if record_version.concept_doi is not None:
+            id_map[record_version.concept_doi] = id_info
+
+        rdf = record_version.get_rdf()
+        if (version_id := rdf["id"]) is not None and version_id not in id_map:
             id_map[version_id] = id_info
 
-        if rdf_version["id"].startswith("10.5281/zenodo."):
+        if rdf["id"].startswith("10.5281/zenodo."):
             # legacy models
-            concept_end = rdf_version["id"].rfind("/")
-            concept = rdf_version["id"][:concept_end]
+            concept_end = rdf["id"].rfind("/")
+            concept = rdf["id"][:concept_end]
         else:
-            concept = rdf_version["id"]
+            concept = rdf["id"]
 
-        if concept not in id_map:
-            id_map[concept] = id_info
+        assert concept is not None
+        id_map[concept] = id_info
 
         version_infos.append(
             VersionInfo(
@@ -1175,22 +1176,22 @@ def create_collection_entries(
             test_summary, f"{record_version.folder}test_summary.yaml"
         )
 
+    assert rdf is not None
+    assert record_version is not None
+    assert concept is not None
+    assert id_info is not None
+
+    # create an explicit entry only for the latest version
+    #   (all versions are referenced under `versions`)
     # upload 'versions.json' summary
-    if isinstance(latest_record_version, Record):
+    if isinstance(record_version, Record):
         versions_info = VersionsInfo(
-            concept_doi=latest_record_version.concept_doi, versions=version_infos
+            concept_doi=record_version.concept_doi, versions=version_infos[::-1]
         )
-        latest_record_version.concept.client.put_json(
-            f"{latest_record_version.concept.folder}versions.json",
+        record_version.concept.client.put_json(
+            f"{record_version.concept.folder}versions.json",
             versions_info.model_dump(mode="json"),
         )
-
-    if rdf["id"].startswith("10.5281/zenodo."):
-        # legacy models
-        concept_end = rdf["id"].rfind("/")
-        concept = rdf["id"][:concept_end]
-    else:
-        concept = rdf["id"]
 
     try:
         # legacy nickname
@@ -1204,6 +1205,9 @@ def create_collection_entries(
     if nickname == concept:
         nickname = None
 
+    if nickname is not None:
+        id_map[nickname] = id_info
+
     legacy_download_count = LEGACY_DOWNLOAD_COUNTS.get(nickname or concept, 0)
 
     # TODO: read new download count
@@ -1211,7 +1215,7 @@ def create_collection_entries(
 
     # ingest compatibility reports
     links = set(rdf.get("links", []))
-    compat_reports = latest_record_version.get_all_compatibility_reports()
+    compat_reports = record_version.get_all_compatibility_reports()
 
     for r in compat_reports:
         if r.status == "passed":
@@ -1226,6 +1230,17 @@ def create_collection_entries(
         if not isinstance(thumbnails, dict):
             thumbnails = {}
 
+    # get parsed root
+    with ValidationContext(perform_io_checks=False):
+        rdf_url = HttpUrl(record_version.rdf_url)
+
+    root_url = str(rdf_url.parent)
+    assert root_url == ((root := record_version.get_file_url("").strip("/"))), (
+        root_url,
+        root,
+    )
+    parsed_root = urlsplit(root_url)
+
     return [
         CollectionEntry(
             authors=rdf.get("authors", []),
@@ -1233,12 +1248,12 @@ def create_collection_entries(
                 maybe_swap_with_thumbnail(rdf.get("badges", []), thumbnails),
                 parsed_root,
             ),
-            concept_doi=latest_record_version.concept_doi,
+            concept_doi=record_version.concept_doi,
             covers=resolve_relative_path(
                 maybe_swap_with_thumbnail(rdf.get("covers", []), thumbnails),
                 parsed_root,
             ),
-            created=latest_record_version.info.created,
+            created=record_version.info.created,
             description=rdf["description"],
             download_count=download_count,
             download_url=rdf["download_url"] if "download_url" in rdf else None,
@@ -1251,7 +1266,7 @@ def create_collection_entries(
             name=rdf["name"],
             nickname_icon=nickname_icon,
             nickname=nickname,
-            rdf_source=AnyUrl(latest_record_version.rdf_url),
+            rdf_source=AnyUrl(record_version.rdf_url),
             root_url=root_url,
             tags=rdf.get("tags", []),
             training_data=rdf["training_data"] if "training_data" in rdf else None,
