@@ -787,10 +787,10 @@ class RecordDraft(RecordBase):
                 break
 
         # set matching id_emoji
-        rdf["id_emoji"] = self.collection.config.id_parts.get_icon(self.id)
+        rdf["id_emoji"] = self.collection.config.id_parts.get_icon(self.concept_id)
         if rdf["id_emoji"] is None:
             self.add_log_entry(
-                LogEntry(message=f"error: Failed to get icon for {self.id}")
+                LogEntry(message=f"error: Failed to get icon for {self.concept_id}")
             )
 
         if "id" not in rdf:
