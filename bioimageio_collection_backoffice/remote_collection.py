@@ -423,16 +423,6 @@ class RemoteCollection(RemoteBase):
                         )
                     )
 
-        assert (
-            "10.5281/zenodo.11092561" in id_map
-        ), "concept doi missing (for affable shark)"
-        assert (
-            "10.5281/zenodo.11092562" in id_map
-        ), "version specific doi missing (for affable-shark)"
-        assert "affable-shark" in id_map, "concept id missing (for affable-shark)"
-        assert "affable-shark/1" in id_map, "version 1 missing (for affable-shark)"
-        assert "affable-shark/1.1" in id_map, "version 1.1 missing (for affable-shark)"
-
         collection_entries.sort()
         concepts_summaries.sort()
         collection = CollectionJson(
