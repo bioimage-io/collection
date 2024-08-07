@@ -1,5 +1,5 @@
 import biapy
-import argparse
+from biapy.models import check_bmz_model_compatibility
 
 from loguru import logger
 from ruyaml import YAML
@@ -29,10 +29,11 @@ def check_compatibility_biapy_impl(
             details="only 'model' resources can be used in biapy.",
         )
 
-    # produce a compatiblity report
-    ....
+    # Check models compatibility using a function inside BiaPy
+    _, error, error_message  = check_bmz_model_compatibility(rdf)
+    status = "passed" if not error else "failed"
     return CompatiblityReport(
-        tool=tool, status=..., details=..., links=["biapy/biapy"]
+        tool=tool, status=status, details=error_message, links=["biapy/biapy"]
     )
 
 
