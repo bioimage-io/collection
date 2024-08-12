@@ -1,6 +1,5 @@
 import biapy
 from biapy.models import check_bmz_model_compatibility
-
 from loguru import logger
 from ruyaml import YAML
 
@@ -30,7 +29,7 @@ def check_compatibility_biapy_impl(
         )
 
     # Check models compatibility using a function inside BiaPy
-    _, error, error_message  = check_bmz_model_compatibility(rdf)
+    _, error, error_message = check_bmz_model_compatibility(rdf)
     status = "passed" if not error else "failed"
     return CompatiblityReport(
         tool=tool, status=status, details=error_message, links=["biapy/biapy"]
@@ -41,7 +40,9 @@ def check_compatibility_biapy():
     collection = RemoteCollection(Client())
     for record in collection.get_published_versions():
         try:
-            report = check_compatibility_biapy_impl(record, f"biapy_{biapy.__version__}")
+            report = check_compatibility_biapy_impl(
+                record, f"biapy_{biapy.__version__}"
+            )
         except Exception as e:
             logger.error(f"failed to check '{record.id}': {e}")
         else:
