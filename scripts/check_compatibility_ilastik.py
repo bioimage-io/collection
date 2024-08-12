@@ -1,67 +1,135 @@
 import argparse
+import json
+import traceback
+import warnings
+from pathlib import Path
+from typing import TYPE_CHECKING
 
-from bioimageio.core import test_model
-from loguru import logger
-from ruyaml import YAML
+import bioimageio.core
+import requests
+from typing_extensions import Literal
 
-from bioimageio_collection_backoffice.db_structure.compatibility import (
-    CompatiblityReport,
-)
-from bioimageio_collection_backoffice.remote_collection import Record, RemoteCollection
-from bioimageio_collection_backoffice.s3_client import Client
+if bioimageio.core.__version__.startswith("0.5."):
+    from bioimageio.core import test_resource as test_model
+else:
+    from bioimageio.core import test_model
 
-yaml = YAML(typ="safe")
+from script_utils import CompatiblityReport, download_rdf
+
+try:
+    from tqdm import tqdm
+except ImportError:
+    tqdm = list
 
 
 def check_compatibility_ilastik_impl(
-    record: Record,
-    tool: str,
+    rdf_url: str,
+    sha256: str,
+    report_path: Path,
 ):
-    report_path = record.get_compatibility_report_path(tool)
-    if list(record.client.ls(report_path)):
-        return
+    report_path.parent.mkdir(parents=True, exist_ok=True)
 
-    rdf_data = record.client.load_file(record.rdf_path)
-    assert rdf_data is not None
-    rdf = yaml.load(rdf_data)
-    assert isinstance(rdf, dict)
-    if rdf.get("type") != "model":
-        return CompatiblityReport(
-            tool=tool,
+    rdf = download_rdf(rdf_url, sha256)
+
+    if rdf["type"] != "model":
+        report = CompatiblityReport(
             status="not-applicable",
+            error=None,
             details="only 'model' resources can be used in ilastik.",
         )
 
-    # produce test summaries for each weight format
-    summary = test_model(record.client.get_file_url(record.rdf_path))
-    return CompatiblityReport(
-        tool=tool, status=summary.status, details=summary, links=["ilastik/ilastik"]
-    )
+    elif len(rdf["inputs"]) > 1 or len(rdf["outputs"]) > 1:
+        report = CompatiblityReport(
+            status="failed",
+            error=f"ilastik only supports single tensor input/output (found {len(rdf['inputs'])}/{len(rdf['outputs'])})",
+            details=None,
+        )
+    else:
+        # produce test summary with bioimageio.core
+        summary = test_model(rdf_url)
+        if not TYPE_CHECKING:
+            if bioimageio.core.__version__.startswith("0.5."):
+                summary = summary[-1]
+
+        status: Literal["passed", "failed"]
+        status = summary["status"] if isinstance(summary, dict) else summary.status  # type: ignore
+        assert status == "passed" or status == "failed", status
+
+        details = (
+            summary if isinstance(summary, dict) else summary.model_dump(mode="json")
+        )
+        error = (
+            None
+            if status == "passed"
+            else (
+                (
+                    str(summary["error"])  # pyright: ignore[reportUnknownArgumentType]
+                    if "error" in summary
+                    else str(summary)
+                )
+                if isinstance(summary, dict)
+                else summary.format()
+            )
+        )
+        report = CompatiblityReport(
+            status=status,
+            error=error,
+            details=details,
+            links=["ilastik/ilastik"],
+        )
+
+    with report_path.open("wt", encoding="utf-8") as f:
+        json.dump(report, f)
 
 
 def check_compatibility_ilastik(
-    ilastik_version: str,
+    ilastik_version: str, all_version_path: Path, output_folder: Path
 ):
     """preliminary ilastik check
 
     only checks if test outputs are reproduced for onnx, torchscript, or pytorch_state_dict weights.
+    # TODO: test with ilastik itself
 
     """
-    collection = RemoteCollection(Client())
-    for record in collection.get_published_versions():
-        try:
-            report = check_compatibility_ilastik_impl(
-                record, f"ilastik_{ilastik_version}"
+    with all_version_path.open() as f:
+        all_versions = json.load(f)["entries"]
+
+    all_model_versions = [entry for entry in all_versions if entry["type"] == "model"]
+
+    for entry in tqdm(all_model_versions):
+        for version in entry["versions"]:
+            rdf_url = version["source"]
+            sha256 = version["sha256"]
+
+            report_url = (
+                "/".join(rdf_url.split("/")[:-2])
+                + f"/compatibility/ilastik_{ilastik_version}.yaml"
             )
-        except Exception as e:
-            logger.error(f"failed to check '{record.id}': {e}")
-        else:
-            if report is not None:
-                record.set_compatibility_report(report)
+            r = requests.head(report_url)
+            if r.status_code != 404:
+                r.raise_for_status()  # raises if failed to check if report exists
+                continue  # report already exists
+
+            report_path = (
+                "/".join(rdf_url.split("/")[-4:-2])
+                + f"/compatibility/ilastik_{ilastik_version}.json"
+            )
+            try:
+                check_compatibility_ilastik_impl(
+                    rdf_url, sha256, output_folder / report_path
+                )
+            except Exception as e:
+                traceback.print_exc()
+                warnings.warn(f"failed to check '{rdf_url}': {e}")
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     _ = parser.add_argument("ilastik_version")
+    _ = parser.add_argument("all_versions", type=Path)
+    _ = parser.add_argument("output_folder", type=Path)
 
-    check_compatibility_ilastik(parser.parse_args().ilastik_version)
+    args = parser.parse_args()
+    check_compatibility_ilastik(
+        args.ilastik_version, args.all_versions, args.output_folder
+    )

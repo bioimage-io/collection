@@ -32,3 +32,4 @@ jobs:
           MAIL_PASSWORD: ${{secrets.MAIL_PASSWORD}}
           RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
           BIOIMAGEIO_USER_ID: github|${{github.actor_id}}
+          BIOIMAGEIO_PERFORM_IO_CHECKS: false

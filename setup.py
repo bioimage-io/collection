@@ -32,7 +32,7 @@ _ = setup(
     ],
     packages=find_packages(exclude=["tests"]),
     install_requires=[
-        "bioimageio.core>=0.6.4",
+        "bioimageio.core>=0.6.7",
         "bioimageio.spec>=0.5.3",
         "fire",
         "loguru",
@@ -40,7 +40,7 @@ _ = setup(
         "minio==7.2.4",
         "pillow",
         "pydantic-settings",
-        "pydantic==2.6.3",
+        "pydantic>=2.7.0",
         "requests",
         "ruyaml",
         "tqdm",

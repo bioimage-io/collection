@@ -2,7 +2,9 @@ name: test backoffice and build docs
 
 on: push
 
-concurrency: test
+concurrency:
+  group: test
+  cancel-in-progress: true
 
 
 jobs:

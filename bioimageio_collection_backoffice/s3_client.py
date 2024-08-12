@@ -21,9 +21,12 @@ from minio.commonconfig import CopySource
 from minio.datatypes import Object
 from minio.deleteobjects import DeleteObject
 from pydantic import BaseModel, SecretStr
+from ruyaml import YAML
 
 from ._settings import settings
 from .cache import SizedValueLRU
+
+yaml = YAML(typ="safe")
 
 M = TypeVar("M", bound=BaseModel)
 
@@ -104,15 +107,26 @@ class Client:
         logger.info("Uploaded {}", self.get_file_url(path))
 
     def put_pydantic(self, path: str, obj: BaseModel):
-        """convenience method to upload a json file from a pydantic model"""
+        """upload a json file from a pydantic model"""
         self.put_json_string(path, obj.model_dump_json(exclude_defaults=False))
 
     def put_json(
         self, path: str, json_value: Any  # TODO: type json_value as JsonValue
     ):
-        """convenience method to upload a json file from a json serializable value"""
+        """upload a json file from a json serializable value"""
         json_str = json.dumps(json_value)
         self.put_json_string(path, json_str)
+
+    def put_yaml(self, yaml_value: Any, path: str):
+        """upload a yaml file from a yaml serializable value"""
+        stream = io.StringIO()
+        yaml.dump(yaml_value, stream)
+        data = stream.getvalue().encode()
+        self.put(
+            path,
+            io.BytesIO(data),
+            length=len(data),
+        )
 
     def put_json_string(self, path: str, json_str: str):
         data = json_str.encode()

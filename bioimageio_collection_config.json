@@ -31,6 +31,38 @@
             "orcid": "0000-0002-1109-110X",
             "github_user": "danifranco",
             "email": "daniel.franco@dipc.org"
+        },
+        {
+            "id": "github|24434157",
+            "name": "Dominik Kutra",
+            "affiliation": "European Molecular Biology Laboratory",
+            "orcid": "0000-0003-4202-3908",
+            "github_user": "k-dominik",
+            "email": "dominik.kutra@embl.de"
+        },
+        {
+            "id": "github|43643518",
+            "name": "Estibaliz Gómez-de-Mariscal",
+            "affiliation": "Instituto Gulbenkian de Ciência",
+            "orcid": "0000-0003-2082-3277",
+            "github_user": "esgomezm",
+            "email": "egomez@igc.gulbenkian.pt"
+        },
+        {
+            "id": "github|75674828",
+            "name": "Caterina Fuster-Barceló",
+            "affiliation": "Universidad Carlos III de Madrid",
+            "orcid": "0000-0002-4784-6957",
+            "github_user": "cfusterbarcelo",
+            "email": "cafuster@pa.uc3m.es"
+        },
+        {
+            "id": "github|17722010",
+            "name": "Qin Yu",
+            "affiliation": "European Molecular Biology Laboratory",
+            "orcid": "0000-0002-4652-0795",
+            "github_user": "qin-yu",
+            "email": "qin.yu.95@outlook.com"
         }
     ],
     "collection_template": {
