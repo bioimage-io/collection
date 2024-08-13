@@ -16,6 +16,7 @@ on:
 jobs:
   run:
     runs-on: ubuntu-latest
+    environment: 'production'
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-python@v5
@@ -31,3 +32,4 @@ jobs:
     - name: Install backoffice
       run: pip install .
     - run: python scripts/check_compatibility_biapy.py
+
