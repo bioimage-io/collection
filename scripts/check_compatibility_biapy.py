@@ -24,6 +24,7 @@ def check_compatibility_biapy_impl(
     if rdf.get("type") != "model":
         return CompatiblityReport(
             tool=tool,
+            error=None,
             status="not-applicable",
             details="only 'model' resources can be used in biapy.",
         )
@@ -32,7 +33,11 @@ def check_compatibility_biapy_impl(
     _, error, error_message = check_bmz_model_compatibility(rdf)
     status = "passed" if not error else "failed"
     return CompatiblityReport(
-        tool=tool, status=status, details=error_message, links=["biapy/biapy"]
+        tool=tool,
+        status=status,
+        details=error_message,
+        links=["biapy/biapy"],
+        error=error,
     )
 
 
