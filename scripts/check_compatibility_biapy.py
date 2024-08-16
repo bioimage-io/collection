@@ -32,12 +32,14 @@ def check_compatibility_biapy_impl(
     # Check models compatibility using a function inside BiaPy
     _, error, error_message = check_bmz_model_compatibility(rdf)
     status = "passed" if not error else "failed"
+    if error:
+        print(f"Reason why BiaPy is not compatible: {error_message}")
     return CompatiblityReport(
         tool=tool,
         status=status,
         details=error_message,
         links=["biapy/biapy"],
-        error=error,
+        error=error_message,
     )
 
 
