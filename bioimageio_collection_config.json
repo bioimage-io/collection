@@ -63,6 +63,22 @@
             "orcid": "0000-0002-4652-0795",
             "github_user": "qin-yu",
             "email": "qin.yu.95@outlook.com"
+        },
+        {
+            "id": "github|32124316",
+            "name": "Vera Galinova",
+            "affiliation": "Fondazione Human Technopole",
+            "orcid": "0009-0001-0166-0399",
+            "github_user": "veegalinova",
+            "email": "vera.galinova@fht.org"
+        },
+        {
+            "id": "github|1878378",
+            "name": "Mehdi Seifi",
+            "affiliation": "Fondazione Human Technopole",
+            "orcid": "0009-0008-9276-5225",
+            "github_user": "mese79",
+            "email": "mehdi.seifi@fht.org"
         }
     ],
     "collection_template": {
