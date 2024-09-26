@@ -16,11 +16,13 @@ def create_thumbnails(
     covers: Union[Any, List[Any]] = rdf.get("covers")
     plan: List[Tuple[Any, Tuple[int, int]]] = []
     if isinstance(covers, list):
-        plan.extend((src, (600, 340)) for src in covers)
+        covers_list: List[Any] = covers
+        plan.extend((src, (600, 340)) for src in covers_list)
 
     badges: Union[Any, List[Any]] = rdf.get("badges")
     if isinstance(badges, list):
-        for badge in badges:
+        badges_list: List[Any] = badges
+        for badge in badges_list:
             if not isinstance(badge, dict):
                 continue
 

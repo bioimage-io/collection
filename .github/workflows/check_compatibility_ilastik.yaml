@@ -55,6 +55,7 @@ jobs:
     - name: Setup ilastik env
       uses: mamba-org/setup-micromamba@v1
       with:
+        generate-run-shell: false
         environment-file: env.yaml
         cache-downloads: true
         cache-environment: true

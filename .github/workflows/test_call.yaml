@@ -93,6 +93,7 @@ jobs:
         id: create_env
         uses: mamba-org/setup-micromamba@v1
         with:
+          generate-run-shell: false
           cache-downloads: true
           environment-name: ${{ matrix.weight_format }}
           environment-file: ${{inputs.environment_name}}_${{inputs.concept_id}}_${{inputs.version}}_conda_env_${{matrix.weight_format}}.yaml
