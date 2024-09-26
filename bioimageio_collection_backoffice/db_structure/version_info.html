@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="pdoc 14.6.1"/>
+    <meta name="generator" content="pdoc 14.7.0"/>
     <title>bioimageio_collection_backoffice.db_structure.version_info API documentation</title>
             <link rel="icon" href="https://bioimage.io/static/img/bioimage-io-icon-small.svg"/>
 
@@ -538,17 +538,17 @@
 </span></pre></div>
 
 
-            <div class="docstring"><p>Usage docs: <a href="https://docs.pydantic.dev/2.8/concepts/models/">https://docs.pydantic.dev/2.8/concepts/models/</a></p>
+            <div class="docstring"><p>Usage docs: <a href="https://docs.pydantic.dev/2.9/concepts/models/">https://docs.pydantic.dev/2.9/concepts/models/</a></p>
 
 <p>A base class for creating Pydantic models.</p>
 
 <p>Attributes:
-    __class_vars__: The names of classvars defined on the model.
+    __class_vars__: The names of the class variables defined on the model.
     __private_attributes__: Metadata about the private attributes of the model.
-    __signature__: The signature for instantiating the model.</p>
+    __signature__: The synthesized <code><a href="#UnpackingStatus.__init__">__init__</a></code> [<code>Signature</code>][inspect.Signature] of the model.</p>
 
 <pre><code>__pydantic_complete__: Whether model building is completed, or if there are still undefined fields.
-__pydantic_core_schema__: The pydantic-core schema used to build the SchemaValidator and SchemaSerializer.
+__pydantic_core_schema__: The core schema of the model.
 __pydantic_custom_init__: Whether the model has a custom `__init__` function.
 __pydantic_decorators__: Metadata containing the decorators defined on the model.
     This replaces `Model.__validators__` and `Model.__root_validators__` from Pydantic V1.
@@ -556,14 +556,14 @@ __pydantic_generic_metadata__: Metadata for generic models; contains data used f
     __args__, __origin__, __parameters__ in typing-module generics. May eventually be replaced by these.
 __pydantic_parent_namespace__: Parent namespace of the model, used for automatic rebuilding of models.
 __pydantic_post_init__: The name of the post-init method for the model, if defined.
-__pydantic_root_model__: Whether the model is a `RootModel`.
-__pydantic_serializer__: The pydantic-core SchemaSerializer used to dump instances of the model.
-__pydantic_validator__: The pydantic-core SchemaValidator used to validate instances of the model.
+__pydantic_root_model__: Whether the model is a [`RootModel`][pydantic.root_model.RootModel].
+__pydantic_serializer__: The `pydantic-core` `SchemaSerializer` used to dump instances of the model.
+__pydantic_validator__: The `pydantic-core` `SchemaValidator` used to validate instances of the model.
 
-__pydantic_extra__: An instance attribute with the values of extra fields from validation when
-    `model_config['extra'] == 'allow'`.
-__pydantic_fields_set__: An instance attribute with the names of fields explicitly set.
-__pydantic_private__: Instance attribute with the values of private attributes set on the model instance.
+__pydantic_extra__: A dictionary containing extra values, if [`extra`][pydantic.config.ConfigDict.extra]
+    is set to `'allow'`.
+__pydantic_fields_set__: The names of fields explicitly set during instantiation.
+__pydantic_private__: Values of private attributes set on the model instance.
 </code></pre>
 </div>
 
@@ -592,7 +592,7 @@ __pydantic_private__: Instance attribute with the values of private attributes s
                             </div>
                             <div id="UnpackingStatus.model_config" class="classattr">
                                 <div class="attr variable">
-            <span class="name">model_config</span>        =
+            <span class="name">model_config</span><span class="annotation">: ClassVar[pydantic.config.ConfigDict]</span>        =
 <input id="UnpackingStatus.model_config-view-value" class="view-value-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
             <label class="view-value-button pdoc-button" for="UnpackingStatus.model_config-view-value"></label><span class="default_value">{&#39;extra&#39;: &#39;ignore&#39;, &#39;frozen&#39;: True, &#39;populate_by_name&#39;: True, &#39;revalidate_instances&#39;: &#39;never&#39;, &#39;validate_assignment&#39;: True, &#39;validate_default&#39;: False}</span>
 
@@ -600,12 +600,14 @@ __pydantic_private__: Instance attribute with the values of private attributes s
     </div>
     <a class="headerlink" href="#UnpackingStatus.model_config"></a>
     
-    
+            <div class="docstring"><p>Configuration for the model, should be a dictionary conforming to [<code>ConfigDict</code>][pydantic.config.ConfigDict].</p>
+</div>
+
 
                             </div>
                             <div id="UnpackingStatus.model_fields" class="classattr">
                                 <div class="attr variable">
-            <span class="name">model_fields</span>        =
+            <span class="name">model_fields</span><span class="annotation">: ClassVar[Dict[str, pydantic.fields.FieldInfo]]</span>        =
 <input id="UnpackingStatus.model_fields-view-value" class="view-value-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
             <label class="view-value-button pdoc-button" for="UnpackingStatus.model_fields-view-value"></label><span class="default_value">{&#39;timestamp&#39;: FieldInfo(annotation=datetime, required=False, default_factory=builtin_function_or_method), &#39;run_url&#39;: FieldInfo(annotation=Union[str, NoneType], required=False, default=None), &#39;description&#39;: FieldInfo(annotation=str, required=True), &#39;num_steps&#39;: FieldInfo(annotation=int, required=False, default=6), &#39;name&#39;: FieldInfo(annotation=Literal[&#39;unpacking&#39;], required=False, default=&#39;unpacking&#39;), &#39;step&#39;: FieldInfo(annotation=Literal[1], required=False, default=1)}</span>
 
@@ -613,19 +615,26 @@ __pydantic_private__: Instance attribute with the values of private attributes s
     </div>
     <a class="headerlink" href="#UnpackingStatus.model_fields"></a>
     
-    
+            <div class="docstring"><p>Metadata about the fields defined on the model,
+mapping of field names to [<code>FieldInfo</code>][pydantic.fields.FieldInfo] objects.</p>
+
+<p>This replaces <code>Model.__fields__</code> from Pydantic V1.</p>
+</div>
+
 
                             </div>
                             <div id="UnpackingStatus.model_computed_fields" class="classattr">
                                 <div class="attr variable">
-            <span class="name">model_computed_fields</span>        =
+            <span class="name">model_computed_fields</span><span class="annotation">: ClassVar[Dict[str, pydantic.fields.ComputedFieldInfo]]</span>        =
 <span class="default_value">{}</span>
 
         
     </div>
     <a class="headerlink" href="#UnpackingStatus.model_computed_fields"></a>
     
-    
+            <div class="docstring"><p>A dictionary of computed field names and their corresponding <code>ComputedFieldInfo</code> objects.</p>
+</div>
+
 
                             </div>
                             <div class="inherited">
@@ -691,17 +700,17 @@ __pydantic_private__: Instance attribute with the values of private attributes s
 </span></pre></div>
 
 
-            <div class="docstring"><p>Usage docs: <a href="https://docs.pydantic.dev/2.8/concepts/models/">https://docs.pydantic.dev/2.8/concepts/models/</a></p>
+            <div class="docstring"><p>Usage docs: <a href="https://docs.pydantic.dev/2.9/concepts/models/">https://docs.pydantic.dev/2.9/concepts/models/</a></p>
 
 <p>A base class for creating Pydantic models.</p>
 
 <p>Attributes:
-    __class_vars__: The names of classvars defined on the model.
+    __class_vars__: The names of the class variables defined on the model.
     __private_attributes__: Metadata about the private attributes of the model.
-    __signature__: The signature for instantiating the model.</p>
+    __signature__: The synthesized <code><a href="#UnpackedStatus.__init__">__init__</a></code> [<code>Signature</code>][inspect.Signature] of the model.</p>
 
 <pre><code>__pydantic_complete__: Whether model building is completed, or if there are still undefined fields.
-__pydantic_core_schema__: The pydantic-core schema used to build the SchemaValidator and SchemaSerializer.
+__pydantic_core_schema__: The core schema of the model.
 __pydantic_custom_init__: Whether the model has a custom `__init__` function.
 __pydantic_decorators__: Metadata containing the decorators defined on the model.
     This replaces `Model.__validators__` and `Model.__root_validators__` from Pydantic V1.
@@ -709,14 +718,14 @@ __pydantic_generic_metadata__: Metadata for generic models; contains data used f
     __args__, __origin__, __parameters__ in typing-module generics. May eventually be replaced by these.
 __pydantic_parent_namespace__: Parent namespace of the model, used for automatic rebuilding of models.
 __pydantic_post_init__: The name of the post-init method for the model, if defined.
-__pydantic_root_model__: Whether the model is a `RootModel`.
-__pydantic_serializer__: The pydantic-core SchemaSerializer used to dump instances of the model.
-__pydantic_validator__: The pydantic-core SchemaValidator used to validate instances of the model.
+__pydantic_root_model__: Whether the model is a [`RootModel`][pydantic.root_model.RootModel].
+__pydantic_serializer__: The `pydantic-core` `SchemaSerializer` used to dump instances of the model.
+__pydantic_validator__: The `pydantic-core` `SchemaValidator` used to validate instances of the model.
 
-__pydantic_extra__: An instance attribute with the values of extra fields from validation when
-    `model_config['extra'] == 'allow'`.
-__pydantic_fields_set__: An instance attribute with the names of fields explicitly set.
-__pydantic_private__: Instance attribute with the values of private attributes set on the model instance.
+__pydantic_extra__: A dictionary containing extra values, if [`extra`][pydantic.config.ConfigDict.extra]
+    is set to `'allow'`.
+__pydantic_fields_set__: The names of fields explicitly set during instantiation.
+__pydantic_private__: Values of private attributes set on the model instance.
 </code></pre>
 </div>
 
@@ -756,7 +765,7 @@ __pydantic_private__: Instance attribute with the values of private attributes s
                             </div>
                             <div id="UnpackedStatus.model_config" class="classattr">
                                 <div class="attr variable">
-            <span class="name">model_config</span>        =
+            <span class="name">model_config</span><span class="annotation">: ClassVar[pydantic.config.ConfigDict]</span>        =
 <input id="UnpackedStatus.model_config-view-value" class="view-value-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
             <label class="view-value-button pdoc-button" for="UnpackedStatus.model_config-view-value"></label><span class="default_value">{&#39;extra&#39;: &#39;ignore&#39;, &#39;frozen&#39;: True, &#39;populate_by_name&#39;: True, &#39;revalidate_instances&#39;: &#39;never&#39;, &#39;validate_assignment&#39;: True, &#39;validate_default&#39;: False}</span>
 
@@ -764,12 +773,14 @@ __pydantic_private__: Instance attribute with the values of private attributes s
     </div>
     <a class="headerlink" href="#UnpackedStatus.model_config"></a>
     
-    
+            <div class="docstring"><p>Configuration for the model, should be a dictionary conforming to [<code>ConfigDict</code>][pydantic.config.ConfigDict].</p>
+</div>
+
 
                             </div>
                             <div id="UnpackedStatus.model_fields" class="classattr">
                                 <div class="attr variable">
-            <span class="name">model_fields</span>        =
+            <span class="name">model_fields</span><span class="annotation">: ClassVar[Dict[str, pydantic.fields.FieldInfo]]</span>        =
 <input id="UnpackedStatus.model_fields-view-value" class="view-value-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
             <label class="view-value-button pdoc-button" for="UnpackedStatus.model_fields-view-value"></label><span class="default_value">{&#39;timestamp&#39;: FieldInfo(annotation=datetime, required=False, default_factory=builtin_function_or_method), &#39;run_url&#39;: FieldInfo(annotation=Union[str, NoneType], required=False, default=None), &#39;description&#39;: FieldInfo(annotation=str, required=False, default=&#39;staging was successful; awaiting automated tests to start ⏳&#39;), &#39;num_steps&#39;: FieldInfo(annotation=int, required=False, default=6), &#39;name&#39;: FieldInfo(annotation=Literal[&#39;unpacked&#39;], required=False, default=&#39;unpacked&#39;), &#39;step&#39;: FieldInfo(annotation=Literal[2], required=False, default=2)}</span>
 
@@ -777,19 +788,26 @@ __pydantic_private__: Instance attribute with the values of private attributes s
     </div>
     <a class="headerlink" href="#UnpackedStatus.model_fields"></a>
     
-    
+            <div class="docstring"><p>Metadata about the fields defined on the model,
+mapping of field names to [<code>FieldInfo</code>][pydantic.fields.FieldInfo] objects.</p>
+
+<p>This replaces <code>Model.__fields__</code> from Pydantic V1.</p>
+</div>
+
 
                             </div>
                             <div id="UnpackedStatus.model_computed_fields" class="classattr">
                                 <div class="attr variable">
-            <span class="name">model_computed_fields</span>        =
+            <span class="name">model_computed_fields</span><span class="annotation">: ClassVar[Dict[str, pydantic.fields.ComputedFieldInfo]]</span>        =
 <span class="default_value">{}</span>
 
         
     </div>
     <a class="headerlink" href="#UnpackedStatus.model_computed_fields"></a>
     
-    
+            <div class="docstring"><p>A dictionary of computed field names and their corresponding <code>ComputedFieldInfo</code> objects.</p>
+</div>
+
 
                             </div>
                             <div class="inherited">
@@ -853,17 +871,17 @@ __pydantic_private__: Instance attribute with the values of private attributes s
 </span></pre></div>
 
 
-            <div class="docstring"><p>Usage docs: <a href="https://docs.pydantic.dev/2.8/concepts/models/">https://docs.pydantic.dev/2.8/concepts/models/</a></p>
+            <div class="docstring"><p>Usage docs: <a href="https://docs.pydantic.dev/2.9/concepts/models/">https://docs.pydantic.dev/2.9/concepts/models/</a></p>
 
 <p>A base class for creating Pydantic models.</p>
 
 <p>Attributes:
-    __class_vars__: The names of classvars defined on the model.
+    __class_vars__: The names of the class variables defined on the model.
     __private_attributes__: Metadata about the private attributes of the model.
-    __signature__: The signature for instantiating the model.</p>
+    __signature__: The synthesized <code><a href="#TestingStatus.__init__">__init__</a></code> [<code>Signature</code>][inspect.Signature] of the model.</p>
 
 <pre><code>__pydantic_complete__: Whether model building is completed, or if there are still undefined fields.
-__pydantic_core_schema__: The pydantic-core schema used to build the SchemaValidator and SchemaSerializer.
+__pydantic_core_schema__: The core schema of the model.
 __pydantic_custom_init__: Whether the model has a custom `__init__` function.
 __pydantic_decorators__: Metadata containing the decorators defined on the model.
     This replaces `Model.__validators__` and `Model.__root_validators__` from Pydantic V1.
@@ -871,14 +889,14 @@ __pydantic_generic_metadata__: Metadata for generic models; contains data used f
     __args__, __origin__, __parameters__ in typing-module generics. May eventually be replaced by these.
 __pydantic_parent_namespace__: Parent namespace of the model, used for automatic rebuilding of models.
 __pydantic_post_init__: The name of the post-init method for the model, if defined.
-__pydantic_root_model__: Whether the model is a `RootModel`.
-__pydantic_serializer__: The pydantic-core SchemaSerializer used to dump instances of the model.
-__pydantic_validator__: The pydantic-core SchemaValidator used to validate instances of the model.
+__pydantic_root_model__: Whether the model is a [`RootModel`][pydantic.root_model.RootModel].
+__pydantic_serializer__: The `pydantic-core` `SchemaSerializer` used to dump instances of the model.
+__pydantic_validator__: The `pydantic-core` `SchemaValidator` used to validate instances of the model.
 
-__pydantic_extra__: An instance attribute with the values of extra fields from validation when
-    `model_config['extra'] == 'allow'`.
-__pydantic_fields_set__: An instance attribute with the names of fields explicitly set.
-__pydantic_private__: Instance attribute with the values of private attributes set on the model instance.
+__pydantic_extra__: A dictionary containing extra values, if [`extra`][pydantic.config.ConfigDict.extra]
+    is set to `'allow'`.
+__pydantic_fields_set__: The names of fields explicitly set during instantiation.
+__pydantic_private__: Values of private attributes set on the model instance.
 </code></pre>
 </div>
 
@@ -907,7 +925,7 @@ __pydantic_private__: Instance attribute with the values of private attributes s
                             </div>
                             <div id="TestingStatus.model_config" class="classattr">
                                 <div class="attr variable">
-            <span class="name">model_config</span>        =
+            <span class="name">model_config</span><span class="annotation">: ClassVar[pydantic.config.ConfigDict]</span>        =
 <input id="TestingStatus.model_config-view-value" class="view-value-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
             <label class="view-value-button pdoc-button" for="TestingStatus.model_config-view-value"></label><span class="default_value">{&#39;extra&#39;: &#39;ignore&#39;, &#39;frozen&#39;: True, &#39;populate_by_name&#39;: True, &#39;revalidate_instances&#39;: &#39;never&#39;, &#39;validate_assignment&#39;: True, &#39;validate_default&#39;: False}</span>
 
@@ -915,12 +933,14 @@ __pydantic_private__: Instance attribute with the values of private attributes s
     </div>
     <a class="headerlink" href="#TestingStatus.model_config"></a>
     
-    
+            <div class="docstring"><p>Configuration for the model, should be a dictionary conforming to [<code>ConfigDict</code>][pydantic.config.ConfigDict].</p>
+</div>
+
 
                             </div>
                             <div id="TestingStatus.model_fields" class="classattr">
                                 <div class="attr variable">
-            <span class="name">model_fields</span>        =
+            <span class="name">model_fields</span><span class="annotation">: ClassVar[Dict[str, pydantic.fields.FieldInfo]]</span>        =
 <input id="TestingStatus.model_fields-view-value" class="view-value-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
             <label class="view-value-button pdoc-button" for="TestingStatus.model_fields-view-value"></label><span class="default_value">{&#39;timestamp&#39;: FieldInfo(annotation=datetime, required=False, default_factory=builtin_function_or_method), &#39;run_url&#39;: FieldInfo(annotation=Union[str, NoneType], required=False, default=None), &#39;description&#39;: FieldInfo(annotation=str, required=True), &#39;num_steps&#39;: FieldInfo(annotation=int, required=False, default=6), &#39;name&#39;: FieldInfo(annotation=Literal[&#39;testing&#39;], required=False, default=&#39;testing&#39;), &#39;step&#39;: FieldInfo(annotation=Literal[3], required=False, default=3)}</span>
 
@@ -928,19 +948,26 @@ __pydantic_private__: Instance attribute with the values of private attributes s
     </div>
     <a class="headerlink" href="#TestingStatus.model_fields"></a>
     
-    
+            <div class="docstring"><p>Metadata about the fields defined on the model,
+mapping of field names to [<code>FieldInfo</code>][pydantic.fields.FieldInfo] objects.</p>
+
+<p>This replaces <code>Model.__fields__</code> from Pydantic V1.</p>
+</div>
+
 
                             </div>
                             <div id="TestingStatus.model_computed_fields" class="classattr">
                                 <div class="attr variable">
-            <span class="name">model_computed_fields</span>        =
+            <span class="name">model_computed_fields</span><span class="annotation">: ClassVar[Dict[str, pydantic.fields.ComputedFieldInfo]]</span>        =
 <span class="default_value">{}</span>
 
         
     </div>
     <a class="headerlink" href="#TestingStatus.model_computed_fields"></a>
     
-    
+            <div class="docstring"><p>A dictionary of computed field names and their corresponding <code>ComputedFieldInfo</code> objects.</p>
+</div>
+
 
                             </div>
                             <div class="inherited">
@@ -1009,17 +1036,17 @@ __pydantic_private__: Instance attribute with the values of private attributes s
 </span></pre></div>
 
 
-            <div class="docstring"><p>Usage docs: <a href="https://docs.pydantic.dev/2.8/concepts/models/">https://docs.pydantic.dev/2.8/concepts/models/</a></p>
+            <div class="docstring"><p>Usage docs: <a href="https://docs.pydantic.dev/2.9/concepts/models/">https://docs.pydantic.dev/2.9/concepts/models/</a></p>
 
 <p>A base class for creating Pydantic models.</p>
 
 <p>Attributes:
-    __class_vars__: The names of classvars defined on the model.
+    __class_vars__: The names of the class variables defined on the model.
     __private_attributes__: Metadata about the private attributes of the model.
-    __signature__: The signature for instantiating the model.</p>
+    __signature__: The synthesized <code><a href="#AwaitingReviewStatus.__init__">__init__</a></code> [<code>Signature</code>][inspect.Signature] of the model.</p>
 
 <pre><code>__pydantic_complete__: Whether model building is completed, or if there are still undefined fields.
-__pydantic_core_schema__: The pydantic-core schema used to build the SchemaValidator and SchemaSerializer.
+__pydantic_core_schema__: The core schema of the model.
 __pydantic_custom_init__: Whether the model has a custom `__init__` function.
 __pydantic_decorators__: Metadata containing the decorators defined on the model.
     This replaces `Model.__validators__` and `Model.__root_validators__` from Pydantic V1.
@@ -1027,14 +1054,14 @@ __pydantic_generic_metadata__: Metadata for generic models; contains data used f
     __args__, __origin__, __parameters__ in typing-module generics. May eventually be replaced by these.
 __pydantic_parent_namespace__: Parent namespace of the model, used for automatic rebuilding of models.
 __pydantic_post_init__: The name of the post-init method for the model, if defined.
-__pydantic_root_model__: Whether the model is a `RootModel`.
-__pydantic_serializer__: The pydantic-core SchemaSerializer used to dump instances of the model.
-__pydantic_validator__: The pydantic-core SchemaValidator used to validate instances of the model.
+__pydantic_root_model__: Whether the model is a [`RootModel`][pydantic.root_model.RootModel].
+__pydantic_serializer__: The `pydantic-core` `SchemaSerializer` used to dump instances of the model.
+__pydantic_validator__: The `pydantic-core` `SchemaValidator` used to validate instances of the model.
 
-__pydantic_extra__: An instance attribute with the values of extra fields from validation when
-    `model_config['extra'] == 'allow'`.
-__pydantic_fields_set__: An instance attribute with the names of fields explicitly set.
-__pydantic_private__: Instance attribute with the values of private attributes set on the model instance.
+__pydantic_extra__: A dictionary containing extra values, if [`extra`][pydantic.config.ConfigDict.extra]
+    is set to `'allow'`.
+__pydantic_fields_set__: The names of fields explicitly set during instantiation.
+__pydantic_private__: Values of private attributes set on the model instance.
 </code></pre>
 </div>
 
@@ -1074,7 +1101,7 @@ __pydantic_private__: Instance attribute with the values of private attributes s
                             </div>
                             <div id="AwaitingReviewStatus.model_config" class="classattr">
                                 <div class="attr variable">
-            <span class="name">model_config</span>        =
+            <span class="name">model_config</span><span class="annotation">: ClassVar[pydantic.config.ConfigDict]</span>        =
 <input id="AwaitingReviewStatus.model_config-view-value" class="view-value-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
             <label class="view-value-button pdoc-button" for="AwaitingReviewStatus.model_config-view-value"></label><span class="default_value">{&#39;extra&#39;: &#39;ignore&#39;, &#39;frozen&#39;: True, &#39;populate_by_name&#39;: True, &#39;revalidate_instances&#39;: &#39;never&#39;, &#39;validate_assignment&#39;: True, &#39;validate_default&#39;: False}</span>
 
@@ -1082,12 +1109,14 @@ __pydantic_private__: Instance attribute with the values of private attributes s
     </div>
     <a class="headerlink" href="#AwaitingReviewStatus.model_config"></a>
     
-    
+            <div class="docstring"><p>Configuration for the model, should be a dictionary conforming to [<code>ConfigDict</code>][pydantic.config.ConfigDict].</p>
+</div>
+
 
                             </div>
                             <div id="AwaitingReviewStatus.model_fields" class="classattr">
                                 <div class="attr variable">
-            <span class="name">model_fields</span>        =
+            <span class="name">model_fields</span><span class="annotation">: ClassVar[Dict[str, pydantic.fields.FieldInfo]]</span>        =
 <input id="AwaitingReviewStatus.model_fields-view-value" class="view-value-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
             <label class="view-value-button pdoc-button" for="AwaitingReviewStatus.model_fields-view-value"></label><span class="default_value">{&#39;timestamp&#39;: FieldInfo(annotation=datetime, required=False, default_factory=builtin_function_or_method), &#39;run_url&#39;: FieldInfo(annotation=Union[str, NoneType], required=False, default=None), &#39;description&#39;: FieldInfo(annotation=str, required=False, default=&#39;Thank you for your contribution! 🎉Our bioimage.io maintainers will take a look soon. 🦒&#39;), &#39;num_steps&#39;: FieldInfo(annotation=int, required=False, default=6), &#39;name&#39;: FieldInfo(annotation=Literal[&#39;awaiting review&#39;], required=False, default=&#39;awaiting review&#39;), &#39;step&#39;: FieldInfo(annotation=Literal[4], required=False, default=4)}</span>
 
@@ -1095,19 +1124,26 @@ __pydantic_private__: Instance attribute with the values of private attributes s
     </div>
     <a class="headerlink" href="#AwaitingReviewStatus.model_fields"></a>
     
-    
+            <div class="docstring"><p>Metadata about the fields defined on the model,
+mapping of field names to [<code>FieldInfo</code>][pydantic.fields.FieldInfo] objects.</p>
+
+<p>This replaces <code>Model.__fields__</code> from Pydantic V1.</p>
+</div>
+
 
                             </div>
                             <div id="AwaitingReviewStatus.model_computed_fields" class="classattr">
                                 <div class="attr variable">
-            <span class="name">model_computed_fields</span>        =
+            <span class="name">model_computed_fields</span><span class="annotation">: ClassVar[Dict[str, pydantic.fields.ComputedFieldInfo]]</span>        =
 <span class="default_value">{}</span>
 
         
     </div>
     <a class="headerlink" href="#AwaitingReviewStatus.model_computed_fields"></a>
     
-    
+            <div class="docstring"><p>A dictionary of computed field names and their corresponding <code>ComputedFieldInfo</code> objects.</p>
+</div>
+
 
                             </div>
                             <div class="inherited">
@@ -1171,17 +1207,17 @@ __pydantic_private__: Instance attribute with the values of private attributes s
 </span></pre></div>
 
 
-            <div class="docstring"><p>Usage docs: <a href="https://docs.pydantic.dev/2.8/concepts/models/">https://docs.pydantic.dev/2.8/concepts/models/</a></p>
+            <div class="docstring"><p>Usage docs: <a href="https://docs.pydantic.dev/2.9/concepts/models/">https://docs.pydantic.dev/2.9/concepts/models/</a></p>
 
 <p>A base class for creating Pydantic models.</p>
 
 <p>Attributes:
-    __class_vars__: The names of classvars defined on the model.
+    __class_vars__: The names of the class variables defined on the model.
     __private_attributes__: Metadata about the private attributes of the model.
-    __signature__: The signature for instantiating the model.</p>
+    __signature__: The synthesized <code><a href="#ChangesRequestedStatus.__init__">__init__</a></code> [<code>Signature</code>][inspect.Signature] of the model.</p>
 
 <pre><code>__pydantic_complete__: Whether model building is completed, or if there are still undefined fields.
-__pydantic_core_schema__: The pydantic-core schema used to build the SchemaValidator and SchemaSerializer.
+__pydantic_core_schema__: The core schema of the model.
 __pydantic_custom_init__: Whether the model has a custom `__init__` function.
 __pydantic_decorators__: Metadata containing the decorators defined on the model.
     This replaces `Model.__validators__` and `Model.__root_validators__` from Pydantic V1.
@@ -1189,14 +1225,14 @@ __pydantic_generic_metadata__: Metadata for generic models; contains data used f
     __args__, __origin__, __parameters__ in typing-module generics. May eventually be replaced by these.
 __pydantic_parent_namespace__: Parent namespace of the model, used for automatic rebuilding of models.
 __pydantic_post_init__: The name of the post-init method for the model, if defined.
-__pydantic_root_model__: Whether the model is a `RootModel`.
-__pydantic_serializer__: The pydantic-core SchemaSerializer used to dump instances of the model.
-__pydantic_validator__: The pydantic-core SchemaValidator used to validate instances of the model.
+__pydantic_root_model__: Whether the model is a [`RootModel`][pydantic.root_model.RootModel].
+__pydantic_serializer__: The `pydantic-core` `SchemaSerializer` used to dump instances of the model.
+__pydantic_validator__: The `pydantic-core` `SchemaValidator` used to validate instances of the model.
 
-__pydantic_extra__: An instance attribute with the values of extra fields from validation when
-    `model_config['extra'] == 'allow'`.
-__pydantic_fields_set__: An instance attribute with the names of fields explicitly set.
-__pydantic_private__: Instance attribute with the values of private attributes set on the model instance.
+__pydantic_extra__: A dictionary containing extra values, if [`extra`][pydantic.config.ConfigDict.extra]
+    is set to `'allow'`.
+__pydantic_fields_set__: The names of fields explicitly set during instantiation.
+__pydantic_private__: Values of private attributes set on the model instance.
 </code></pre>
 </div>
 
@@ -1225,7 +1261,7 @@ __pydantic_private__: Instance attribute with the values of private attributes s
                             </div>
                             <div id="ChangesRequestedStatus.model_config" class="classattr">
                                 <div class="attr variable">
-            <span class="name">model_config</span>        =
+            <span class="name">model_config</span><span class="annotation">: ClassVar[pydantic.config.ConfigDict]</span>        =
 <input id="ChangesRequestedStatus.model_config-view-value" class="view-value-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
             <label class="view-value-button pdoc-button" for="ChangesRequestedStatus.model_config-view-value"></label><span class="default_value">{&#39;extra&#39;: &#39;ignore&#39;, &#39;frozen&#39;: True, &#39;populate_by_name&#39;: True, &#39;revalidate_instances&#39;: &#39;never&#39;, &#39;validate_assignment&#39;: True, &#39;validate_default&#39;: False}</span>
 
@@ -1233,12 +1269,14 @@ __pydantic_private__: Instance attribute with the values of private attributes s
     </div>
     <a class="headerlink" href="#ChangesRequestedStatus.model_config"></a>
     
-    
+            <div class="docstring"><p>Configuration for the model, should be a dictionary conforming to [<code>ConfigDict</code>][pydantic.config.ConfigDict].</p>
+</div>
+
 
                             </div>
                             <div id="ChangesRequestedStatus.model_fields" class="classattr">
                                 <div class="attr variable">
-            <span class="name">model_fields</span>        =
+            <span class="name">model_fields</span><span class="annotation">: ClassVar[Dict[str, pydantic.fields.FieldInfo]]</span>        =
 <input id="ChangesRequestedStatus.model_fields-view-value" class="view-value-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
             <label class="view-value-button pdoc-button" for="ChangesRequestedStatus.model_fields-view-value"></label><span class="default_value">{&#39;timestamp&#39;: FieldInfo(annotation=datetime, required=False, default_factory=builtin_function_or_method), &#39;run_url&#39;: FieldInfo(annotation=Union[str, NoneType], required=False, default=None), &#39;description&#39;: FieldInfo(annotation=str, required=True), &#39;num_steps&#39;: FieldInfo(annotation=int, required=False, default=6), &#39;name&#39;: FieldInfo(annotation=Literal[&#39;changes requested&#39;], required=False, default=&#39;changes requested&#39;), &#39;step&#39;: FieldInfo(annotation=Literal[5], required=False, default=5)}</span>
 
@@ -1246,19 +1284,26 @@ __pydantic_private__: Instance attribute with the values of private attributes s
     </div>
     <a class="headerlink" href="#ChangesRequestedStatus.model_fields"></a>
     
-    
+            <div class="docstring"><p>Metadata about the fields defined on the model,
+mapping of field names to [<code>FieldInfo</code>][pydantic.fields.FieldInfo] objects.</p>
+
+<p>This replaces <code>Model.__fields__</code> from Pydantic V1.</p>
+</div>
+
 
                             </div>
                             <div id="ChangesRequestedStatus.model_computed_fields" class="classattr">
                                 <div class="attr variable">
-            <span class="name">model_computed_fields</span>        =
+            <span class="name">model_computed_fields</span><span class="annotation">: ClassVar[Dict[str, pydantic.fields.ComputedFieldInfo]]</span>        =
 <span class="default_value">{}</span>
 
         
     </div>
     <a class="headerlink" href="#ChangesRequestedStatus.model_computed_fields"></a>
     
-    
+            <div class="docstring"><p>A dictionary of computed field names and their corresponding <code>ComputedFieldInfo</code> objects.</p>
+</div>
+
 
                             </div>
                             <div class="inherited">
@@ -1326,17 +1371,17 @@ __pydantic_private__: Instance attribute with the values of private attributes s
 </span></pre></div>
 
 
-            <div class="docstring"><p>Usage docs: <a href="https://docs.pydantic.dev/2.8/concepts/models/">https://docs.pydantic.dev/2.8/concepts/models/</a></p>
+            <div class="docstring"><p>Usage docs: <a href="https://docs.pydantic.dev/2.9/concepts/models/">https://docs.pydantic.dev/2.9/concepts/models/</a></p>
 
 <p>A base class for creating Pydantic models.</p>
 
 <p>Attributes:
-    __class_vars__: The names of classvars defined on the model.
+    __class_vars__: The names of the class variables defined on the model.
     __private_attributes__: Metadata about the private attributes of the model.
-    __signature__: The signature for instantiating the model.</p>
+    __signature__: The synthesized <code><a href="#AcceptedStatus.__init__">__init__</a></code> [<code>Signature</code>][inspect.Signature] of the model.</p>
 
 <pre><code>__pydantic_complete__: Whether model building is completed, or if there are still undefined fields.
-__pydantic_core_schema__: The pydantic-core schema used to build the SchemaValidator and SchemaSerializer.
+__pydantic_core_schema__: The core schema of the model.
 __pydantic_custom_init__: Whether the model has a custom `__init__` function.
 __pydantic_decorators__: Metadata containing the decorators defined on the model.
     This replaces `Model.__validators__` and `Model.__root_validators__` from Pydantic V1.
@@ -1344,14 +1389,14 @@ __pydantic_generic_metadata__: Metadata for generic models; contains data used f
     __args__, __origin__, __parameters__ in typing-module generics. May eventually be replaced by these.
 __pydantic_parent_namespace__: Parent namespace of the model, used for automatic rebuilding of models.
 __pydantic_post_init__: The name of the post-init method for the model, if defined.
-__pydantic_root_model__: Whether the model is a `RootModel`.
-__pydantic_serializer__: The pydantic-core SchemaSerializer used to dump instances of the model.
-__pydantic_validator__: The pydantic-core SchemaValidator used to validate instances of the model.
+__pydantic_root_model__: Whether the model is a [`RootModel`][pydantic.root_model.RootModel].
+__pydantic_serializer__: The `pydantic-core` `SchemaSerializer` used to dump instances of the model.
+__pydantic_validator__: The `pydantic-core` `SchemaValidator` used to validate instances of the model.
 
-__pydantic_extra__: An instance attribute with the values of extra fields from validation when
-    `model_config['extra'] == 'allow'`.
-__pydantic_fields_set__: An instance attribute with the names of fields explicitly set.
-__pydantic_private__: Instance attribute with the values of private attributes set on the model instance.
+__pydantic_extra__: A dictionary containing extra values, if [`extra`][pydantic.config.ConfigDict.extra]
+    is set to `'allow'`.
+__pydantic_fields_set__: The names of fields explicitly set during instantiation.
+__pydantic_private__: Values of private attributes set on the model instance.
 </code></pre>
 </div>
 
@@ -1391,7 +1436,7 @@ __pydantic_private__: Instance attribute with the values of private attributes s
                             </div>
                             <div id="AcceptedStatus.model_config" class="classattr">
                                 <div class="attr variable">
-            <span class="name">model_config</span>        =
+            <span class="name">model_config</span><span class="annotation">: ClassVar[pydantic.config.ConfigDict]</span>        =
 <input id="AcceptedStatus.model_config-view-value" class="view-value-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
             <label class="view-value-button pdoc-button" for="AcceptedStatus.model_config-view-value"></label><span class="default_value">{&#39;extra&#39;: &#39;ignore&#39;, &#39;frozen&#39;: True, &#39;populate_by_name&#39;: True, &#39;revalidate_instances&#39;: &#39;never&#39;, &#39;validate_assignment&#39;: True, &#39;validate_default&#39;: False}</span>
 
@@ -1399,12 +1444,14 @@ __pydantic_private__: Instance attribute with the values of private attributes s
     </div>
     <a class="headerlink" href="#AcceptedStatus.model_config"></a>
     
-    
+            <div class="docstring"><p>Configuration for the model, should be a dictionary conforming to [<code>ConfigDict</code>][pydantic.config.ConfigDict].</p>
+</div>
+
 
                             </div>
                             <div id="AcceptedStatus.model_fields" class="classattr">
                                 <div class="attr variable">
-            <span class="name">model_fields</span>        =
+            <span class="name">model_fields</span><span class="annotation">: ClassVar[Dict[str, pydantic.fields.FieldInfo]]</span>        =
 <input id="AcceptedStatus.model_fields-view-value" class="view-value-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
             <label class="view-value-button pdoc-button" for="AcceptedStatus.model_fields-view-value"></label><span class="default_value">{&#39;timestamp&#39;: FieldInfo(annotation=datetime, required=False, default_factory=builtin_function_or_method), &#39;run_url&#39;: FieldInfo(annotation=Union[str, NoneType], required=False, default=None), &#39;description&#39;: FieldInfo(annotation=str, required=False, default=&#39;This staged version has been accepted by a bioimage.io maintainer and is about to be published.&#39;), &#39;num_steps&#39;: FieldInfo(annotation=int, required=False, default=6), &#39;name&#39;: FieldInfo(annotation=Literal[&#39;accepted&#39;], required=False, default=&#39;accepted&#39;), &#39;step&#39;: FieldInfo(annotation=Literal[5], required=False, default=5)}</span>
 
@@ -1412,19 +1459,26 @@ __pydantic_private__: Instance attribute with the values of private attributes s
     </div>
     <a class="headerlink" href="#AcceptedStatus.model_fields"></a>
     
-    
+            <div class="docstring"><p>Metadata about the fields defined on the model,
+mapping of field names to [<code>FieldInfo</code>][pydantic.fields.FieldInfo] objects.</p>
+
+<p>This replaces <code>Model.__fields__</code> from Pydantic V1.</p>
+</div>
+
 
                             </div>
                             <div id="AcceptedStatus.model_computed_fields" class="classattr">
                                 <div class="attr variable">
-            <span class="name">model_computed_fields</span>        =
+            <span class="name">model_computed_fields</span><span class="annotation">: ClassVar[Dict[str, pydantic.fields.ComputedFieldInfo]]</span>        =
 <span class="default_value">{}</span>
 
         
     </div>
     <a class="headerlink" href="#AcceptedStatus.model_computed_fields"></a>
     
-    
+            <div class="docstring"><p>A dictionary of computed field names and their corresponding <code>ComputedFieldInfo</code> objects.</p>
+</div>
+
 
                             </div>
                             <div class="inherited">
@@ -1530,7 +1584,7 @@ __pydantic_private__: Instance attribute with the values of private attributes s
                             </div>
                             <div id="PublishedDraftStatus.model_config" class="classattr">
                                 <div class="attr variable">
-            <span class="name">model_config</span>        =
+            <span class="name">model_config</span><span class="annotation">: ClassVar[pydantic.config.ConfigDict]</span>        =
 <input id="PublishedDraftStatus.model_config-view-value" class="view-value-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
             <label class="view-value-button pdoc-button" for="PublishedDraftStatus.model_config-view-value"></label><span class="default_value">{&#39;extra&#39;: &#39;ignore&#39;, &#39;frozen&#39;: True, &#39;populate_by_name&#39;: True, &#39;revalidate_instances&#39;: &#39;never&#39;, &#39;validate_assignment&#39;: True, &#39;validate_default&#39;: False}</span>
 
@@ -1538,12 +1592,14 @@ __pydantic_private__: Instance attribute with the values of private attributes s
     </div>
     <a class="headerlink" href="#PublishedDraftStatus.model_config"></a>
     
-    
+            <div class="docstring"><p>Configuration for the model, should be a dictionary conforming to [<code>ConfigDict</code>][pydantic.config.ConfigDict].</p>
+</div>
+
 
                             </div>
                             <div id="PublishedDraftStatus.model_fields" class="classattr">
                                 <div class="attr variable">
-            <span class="name">model_fields</span>        =
+            <span class="name">model_fields</span><span class="annotation">: ClassVar[Dict[str, pydantic.fields.FieldInfo]]</span>        =
 <input id="PublishedDraftStatus.model_fields-view-value" class="view-value-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
             <label class="view-value-button pdoc-button" for="PublishedDraftStatus.model_fields-view-value"></label><span class="default_value">{&#39;timestamp&#39;: FieldInfo(annotation=datetime, required=False, default_factory=builtin_function_or_method), &#39;run_url&#39;: FieldInfo(annotation=Union[str, NoneType], required=False, default=None), &#39;description&#39;: FieldInfo(annotation=str, required=False, default=&#39;published! (this draft will be deleted shortly)&#39;), &#39;num_steps&#39;: FieldInfo(annotation=int, required=False, default=6), &#39;name&#39;: FieldInfo(annotation=Literal[&#39;published&#39;], required=False, default=&#39;published&#39;), &#39;step&#39;: FieldInfo(annotation=Literal[6], required=False, default=6)}</span>
 
@@ -1551,19 +1607,26 @@ __pydantic_private__: Instance attribute with the values of private attributes s
     </div>
     <a class="headerlink" href="#PublishedDraftStatus.model_fields"></a>
     
-    
+            <div class="docstring"><p>Metadata about the fields defined on the model,
+mapping of field names to [<code>FieldInfo</code>][pydantic.fields.FieldInfo] objects.</p>
+
+<p>This replaces <code>Model.__fields__</code> from Pydantic V1.</p>
+</div>
+
 
                             </div>
                             <div id="PublishedDraftStatus.model_computed_fields" class="classattr">
                                 <div class="attr variable">
-            <span class="name">model_computed_fields</span>        =
+            <span class="name">model_computed_fields</span><span class="annotation">: ClassVar[Dict[str, pydantic.fields.ComputedFieldInfo]]</span>        =
 <span class="default_value">{}</span>
 
         
     </div>
     <a class="headerlink" href="#PublishedDraftStatus.model_computed_fields"></a>
     
-    
+            <div class="docstring"><p>A dictionary of computed field names and their corresponding <code>ComputedFieldInfo</code> objects.</p>
+</div>
+
 
                             </div>
                             <div class="inherited">
@@ -1643,17 +1706,17 @@ __pydantic_private__: Instance attribute with the values of private attributes s
 </span></pre></div>
 
 
-            <div class="docstring"><p>Usage docs: <a href="https://docs.pydantic.dev/2.8/concepts/models/">https://docs.pydantic.dev/2.8/concepts/models/</a></p>
+            <div class="docstring"><p>Usage docs: <a href="https://docs.pydantic.dev/2.9/concepts/models/">https://docs.pydantic.dev/2.9/concepts/models/</a></p>
 
 <p>A base class for creating Pydantic models.</p>
 
 <p>Attributes:
-    __class_vars__: The names of classvars defined on the model.
+    __class_vars__: The names of the class variables defined on the model.
     __private_attributes__: Metadata about the private attributes of the model.
-    __signature__: The signature for instantiating the model.</p>
+    __signature__: The synthesized <code><a href="#ErrorStatus.__init__">__init__</a></code> [<code>Signature</code>][inspect.Signature] of the model.</p>
 
 <pre><code>__pydantic_complete__: Whether model building is completed, or if there are still undefined fields.
-__pydantic_core_schema__: The pydantic-core schema used to build the SchemaValidator and SchemaSerializer.
+__pydantic_core_schema__: The core schema of the model.
 __pydantic_custom_init__: Whether the model has a custom `__init__` function.
 __pydantic_decorators__: Metadata containing the decorators defined on the model.
     This replaces `Model.__validators__` and `Model.__root_validators__` from Pydantic V1.
@@ -1661,14 +1724,14 @@ __pydantic_generic_metadata__: Metadata for generic models; contains data used f
     __args__, __origin__, __parameters__ in typing-module generics. May eventually be replaced by these.
 __pydantic_parent_namespace__: Parent namespace of the model, used for automatic rebuilding of models.
 __pydantic_post_init__: The name of the post-init method for the model, if defined.
-__pydantic_root_model__: Whether the model is a `RootModel`.
-__pydantic_serializer__: The pydantic-core SchemaSerializer used to dump instances of the model.
-__pydantic_validator__: The pydantic-core SchemaValidator used to validate instances of the model.
+__pydantic_root_model__: Whether the model is a [`RootModel`][pydantic.root_model.RootModel].
+__pydantic_serializer__: The `pydantic-core` `SchemaSerializer` used to dump instances of the model.
+__pydantic_validator__: The `pydantic-core` `SchemaValidator` used to validate instances of the model.
 
-__pydantic_extra__: An instance attribute with the values of extra fields from validation when
-    `model_config['extra'] == 'allow'`.
-__pydantic_fields_set__: An instance attribute with the names of fields explicitly set.
-__pydantic_private__: Instance attribute with the values of private attributes set on the model instance.
+__pydantic_extra__: A dictionary containing extra values, if [`extra`][pydantic.config.ConfigDict.extra]
+    is set to `'allow'`.
+__pydantic_fields_set__: The names of fields explicitly set during instantiation.
+__pydantic_private__: Values of private attributes set on the model instance.
 </code></pre>
 </div>
 
@@ -1730,7 +1793,7 @@ __pydantic_private__: Instance attribute with the values of private attributes s
                             </div>
                             <div id="ErrorStatus.model_config" class="classattr">
                                 <div class="attr variable">
-            <span class="name">model_config</span>        =
+            <span class="name">model_config</span><span class="annotation">: ClassVar[pydantic.config.ConfigDict]</span>        =
 <input id="ErrorStatus.model_config-view-value" class="view-value-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
             <label class="view-value-button pdoc-button" for="ErrorStatus.model_config-view-value"></label><span class="default_value">{&#39;extra&#39;: &#39;ignore&#39;, &#39;frozen&#39;: True, &#39;populate_by_name&#39;: True, &#39;revalidate_instances&#39;: &#39;never&#39;, &#39;validate_assignment&#39;: True, &#39;validate_default&#39;: False}</span>
 
@@ -1738,12 +1801,14 @@ __pydantic_private__: Instance attribute with the values of private attributes s
     </div>
     <a class="headerlink" href="#ErrorStatus.model_config"></a>
     
-    
+            <div class="docstring"><p>Configuration for the model, should be a dictionary conforming to [<code>ConfigDict</code>][pydantic.config.ConfigDict].</p>
+</div>
+
 
                             </div>
                             <div id="ErrorStatus.model_fields" class="classattr">
                                 <div class="attr variable">
-            <span class="name">model_fields</span>        =
+            <span class="name">model_fields</span><span class="annotation">: ClassVar[Dict[str, pydantic.fields.FieldInfo]]</span>        =
 <input id="ErrorStatus.model_fields-view-value" class="view-value-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
             <label class="view-value-button pdoc-button" for="ErrorStatus.model_fields-view-value"></label><span class="default_value">{&#39;timestamp&#39;: FieldInfo(annotation=datetime, required=False, default_factory=builtin_function_or_method), &#39;run_url&#39;: FieldInfo(annotation=Union[str, NoneType], required=False, default=None), &#39;name&#39;: FieldInfo(annotation=Literal[&#39;error&#39;], required=False, default=&#39;error&#39;), &#39;step&#39;: FieldInfo(annotation=Literal[0], required=False, default=0), &#39;message&#39;: FieldInfo(annotation=str, required=True), &#39;traceback&#39;: FieldInfo(annotation=List[str], required=True), &#39;during&#39;: FieldInfo(annotation=Union[Annotated[Union[UnpackingStatus, UnpackedStatus, TestingStatus, AwaitingReviewStatus, ChangesRequestedStatus, AcceptedStatus, PublishedDraftStatus], Discriminator], NoneType], required=True)}</span>
 
@@ -1751,19 +1816,26 @@ __pydantic_private__: Instance attribute with the values of private attributes s
     </div>
     <a class="headerlink" href="#ErrorStatus.model_fields"></a>
     
-    
+            <div class="docstring"><p>Metadata about the fields defined on the model,
+mapping of field names to [<code>FieldInfo</code>][pydantic.fields.FieldInfo] objects.</p>
+
+<p>This replaces <code>Model.__fields__</code> from Pydantic V1.</p>
+</div>
+
 
                             </div>
                             <div id="ErrorStatus.model_computed_fields" class="classattr">
                                 <div class="attr variable">
-            <span class="name">model_computed_fields</span>        =
+            <span class="name">model_computed_fields</span><span class="annotation">: ClassVar[Dict[str, pydantic.fields.ComputedFieldInfo]]</span>        =
 <span class="default_value">{}</span>
 
         
     </div>
     <a class="headerlink" href="#ErrorStatus.model_computed_fields"></a>
     
-    
+            <div class="docstring"><p>A dictionary of computed field names and their corresponding <code>ComputedFieldInfo</code> objects.</p>
+</div>
+
 
                             </div>
                             <div class="inherited">
@@ -1891,7 +1963,7 @@ __pydantic_private__: Instance attribute with the values of private attributes s
                             </div>
                             <div id="DraftInfo.model_config" class="classattr">
                                 <div class="attr variable">
-            <span class="name">model_config</span>        =
+            <span class="name">model_config</span><span class="annotation">: ClassVar[pydantic.config.ConfigDict]</span>        =
 <input id="DraftInfo.model_config-view-value" class="view-value-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
             <label class="view-value-button pdoc-button" for="DraftInfo.model_config-view-value"></label><span class="default_value">{&#39;extra&#39;: &#39;ignore&#39;, &#39;frozen&#39;: True, &#39;populate_by_name&#39;: True, &#39;revalidate_instances&#39;: &#39;never&#39;, &#39;validate_assignment&#39;: True, &#39;validate_default&#39;: False}</span>
 
@@ -1899,12 +1971,14 @@ __pydantic_private__: Instance attribute with the values of private attributes s
     </div>
     <a class="headerlink" href="#DraftInfo.model_config"></a>
     
-    
+            <div class="docstring"><p>Configuration for the model, should be a dictionary conforming to [<code>ConfigDict</code>][pydantic.config.ConfigDict].</p>
+</div>
+
 
                             </div>
                             <div id="DraftInfo.model_fields" class="classattr">
                                 <div class="attr variable">
-            <span class="name">model_fields</span>        =
+            <span class="name">model_fields</span><span class="annotation">: ClassVar[Dict[str, pydantic.fields.FieldInfo]]</span>        =
 <input id="DraftInfo.model_fields-view-value" class="view-value-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
             <label class="view-value-button pdoc-button" for="DraftInfo.model_fields-view-value"></label><span class="default_value">{&#39;status&#39;: FieldInfo(annotation=Union[Annotated[Union[Annotated[Union[UnpackingStatus, UnpackedStatus, TestingStatus, AwaitingReviewStatus, ChangesRequestedStatus, AcceptedStatus, PublishedDraftStatus], Discriminator], ErrorStatus], Discriminator], NoneType], required=False, default=None), &#39;created&#39;: FieldInfo(annotation=datetime, required=False, default_factory=builtin_function_or_method)}</span>
 
@@ -1912,19 +1986,26 @@ __pydantic_private__: Instance attribute with the values of private attributes s
     </div>
     <a class="headerlink" href="#DraftInfo.model_fields"></a>
     
-    
+            <div class="docstring"><p>Metadata about the fields defined on the model,
+mapping of field names to [<code>FieldInfo</code>][pydantic.fields.FieldInfo] objects.</p>
+
+<p>This replaces <code>Model.__fields__</code> from Pydantic V1.</p>
+</div>
+
 
                             </div>
                             <div id="DraftInfo.model_computed_fields" class="classattr">
                                 <div class="attr variable">
-            <span class="name">model_computed_fields</span>        =
+            <span class="name">model_computed_fields</span><span class="annotation">: ClassVar[Dict[str, pydantic.fields.ComputedFieldInfo]]</span>        =
 <span class="default_value">{}</span>
 
         
     </div>
     <a class="headerlink" href="#DraftInfo.model_computed_fields"></a>
     
-    
+            <div class="docstring"><p>A dictionary of computed field names and their corresponding <code>ComputedFieldInfo</code> objects.</p>
+</div>
+
 
                             </div>
                             <div class="inherited">
@@ -2093,7 +2174,7 @@ __pydantic_private__: Instance attribute with the values of private attributes s
                             </div>
                             <div id="RecordInfo.model_config" class="classattr">
                                 <div class="attr variable">
-            <span class="name">model_config</span>        =
+            <span class="name">model_config</span><span class="annotation">: ClassVar[pydantic.config.ConfigDict]</span>        =
 <input id="RecordInfo.model_config-view-value" class="view-value-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
             <label class="view-value-button pdoc-button" for="RecordInfo.model_config-view-value"></label><span class="default_value">{&#39;extra&#39;: &#39;ignore&#39;, &#39;frozen&#39;: True, &#39;populate_by_name&#39;: True, &#39;revalidate_instances&#39;: &#39;never&#39;, &#39;validate_assignment&#39;: True, &#39;validate_default&#39;: False}</span>
 
@@ -2101,12 +2182,14 @@ __pydantic_private__: Instance attribute with the values of private attributes s
     </div>
     <a class="headerlink" href="#RecordInfo.model_config"></a>
     
-    
+            <div class="docstring"><p>Configuration for the model, should be a dictionary conforming to [<code>ConfigDict</code>][pydantic.config.ConfigDict].</p>
+</div>
+
 
                             </div>
                             <div id="RecordInfo.model_fields" class="classattr">
                                 <div class="attr variable">
-            <span class="name">model_fields</span>        =
+            <span class="name">model_fields</span><span class="annotation">: ClassVar[Dict[str, pydantic.fields.FieldInfo]]</span>        =
 <input id="RecordInfo.model_fields-view-value" class="view-value-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
             <label class="view-value-button pdoc-button" for="RecordInfo.model_fields-view-value"></label><span class="default_value">{&#39;created&#39;: FieldInfo(annotation=datetime, required=False, default_factory=builtin_function_or_method), &#39;concept_doi&#39;: FieldInfo(annotation=Union[str, NoneType], required=False, default=None), &#39;doi&#39;: FieldInfo(annotation=Union[str, NoneType], required=False, default=None), &#39;download_count&#39;: FieldInfo(annotation=Union[int, Literal[&#39;?&#39;]], required=False, default=&#39;?&#39;)}</span>
 
@@ -2114,19 +2197,26 @@ __pydantic_private__: Instance attribute with the values of private attributes s
     </div>
     <a class="headerlink" href="#RecordInfo.model_fields"></a>
     
-    
+            <div class="docstring"><p>Metadata about the fields defined on the model,
+mapping of field names to [<code>FieldInfo</code>][pydantic.fields.FieldInfo] objects.</p>
+
+<p>This replaces <code>Model.__fields__</code> from Pydantic V1.</p>
+</div>
+
 
                             </div>
                             <div id="RecordInfo.model_computed_fields" class="classattr">
                                 <div class="attr variable">
-            <span class="name">model_computed_fields</span>        =
+            <span class="name">model_computed_fields</span><span class="annotation">: ClassVar[Dict[str, pydantic.fields.ComputedFieldInfo]]</span>        =
 <span class="default_value">{}</span>
 
         
     </div>
     <a class="headerlink" href="#RecordInfo.model_computed_fields"></a>
     
-    
+            <div class="docstring"><p>A dictionary of computed field names and their corresponding <code>ComputedFieldInfo</code> objects.</p>
+</div>
+
 
                             </div>
                             <div class="inherited">
@@ -2187,17 +2277,17 @@ __pydantic_private__: Instance attribute with the values of private attributes s
 </span></pre></div>
 
 
-            <div class="docstring"><p>Usage docs: <a href="https://docs.pydantic.dev/2.8/concepts/models/">https://docs.pydantic.dev/2.8/concepts/models/</a></p>
+            <div class="docstring"><p>Usage docs: <a href="https://docs.pydantic.dev/2.9/concepts/models/">https://docs.pydantic.dev/2.9/concepts/models/</a></p>
 
 <p>A base class for creating Pydantic models.</p>
 
 <p>Attributes:
-    __class_vars__: The names of classvars defined on the model.
+    __class_vars__: The names of the class variables defined on the model.
     __private_attributes__: Metadata about the private attributes of the model.
-    __signature__: The signature for instantiating the model.</p>
+    __signature__: The synthesized <code><a href="#VersionInfo.__init__">__init__</a></code> [<code>Signature</code>][inspect.Signature] of the model.</p>
 
 <pre><code>__pydantic_complete__: Whether model building is completed, or if there are still undefined fields.
-__pydantic_core_schema__: The pydantic-core schema used to build the SchemaValidator and SchemaSerializer.
+__pydantic_core_schema__: The core schema of the model.
 __pydantic_custom_init__: Whether the model has a custom `__init__` function.
 __pydantic_decorators__: Metadata containing the decorators defined on the model.
     This replaces `Model.__validators__` and `Model.__root_validators__` from Pydantic V1.
@@ -2205,14 +2295,14 @@ __pydantic_generic_metadata__: Metadata for generic models; contains data used f
     __args__, __origin__, __parameters__ in typing-module generics. May eventually be replaced by these.
 __pydantic_parent_namespace__: Parent namespace of the model, used for automatic rebuilding of models.
 __pydantic_post_init__: The name of the post-init method for the model, if defined.
-__pydantic_root_model__: Whether the model is a `RootModel`.
-__pydantic_serializer__: The pydantic-core SchemaSerializer used to dump instances of the model.
-__pydantic_validator__: The pydantic-core SchemaValidator used to validate instances of the model.
+__pydantic_root_model__: Whether the model is a [`RootModel`][pydantic.root_model.RootModel].
+__pydantic_serializer__: The `pydantic-core` `SchemaSerializer` used to dump instances of the model.
+__pydantic_validator__: The `pydantic-core` `SchemaValidator` used to validate instances of the model.
 
-__pydantic_extra__: An instance attribute with the values of extra fields from validation when
-    `model_config['extra'] == 'allow'`.
-__pydantic_fields_set__: An instance attribute with the names of fields explicitly set.
-__pydantic_private__: Instance attribute with the values of private attributes set on the model instance.
+__pydantic_extra__: A dictionary containing extra values, if [`extra`][pydantic.config.ConfigDict.extra]
+    is set to `'allow'`.
+__pydantic_fields_set__: The names of fields explicitly set during instantiation.
+__pydantic_private__: Values of private attributes set on the model instance.
 </code></pre>
 </div>
 
@@ -2256,7 +2346,7 @@ __pydantic_private__: Instance attribute with the values of private attributes s
                             </div>
                             <div id="VersionInfo.model_config" class="classattr">
                                 <div class="attr variable">
-            <span class="name">model_config</span>        =
+            <span class="name">model_config</span><span class="annotation">: ClassVar[pydantic.config.ConfigDict]</span>        =
 <input id="VersionInfo.model_config-view-value" class="view-value-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
             <label class="view-value-button pdoc-button" for="VersionInfo.model_config-view-value"></label><span class="default_value">{&#39;extra&#39;: &#39;ignore&#39;, &#39;frozen&#39;: True, &#39;populate_by_name&#39;: True, &#39;revalidate_instances&#39;: &#39;never&#39;, &#39;validate_assignment&#39;: True, &#39;validate_default&#39;: False}</span>
 
@@ -2264,12 +2354,14 @@ __pydantic_private__: Instance attribute with the values of private attributes s
     </div>
     <a class="headerlink" href="#VersionInfo.model_config"></a>
     
-    
+            <div class="docstring"><p>Configuration for the model, should be a dictionary conforming to [<code>ConfigDict</code>][pydantic.config.ConfigDict].</p>
+</div>
+
 
                             </div>
                             <div id="VersionInfo.model_fields" class="classattr">
                                 <div class="attr variable">
-            <span class="name">model_fields</span>        =
+            <span class="name">model_fields</span><span class="annotation">: ClassVar[Dict[str, pydantic.fields.FieldInfo]]</span>        =
 <input id="VersionInfo.model_fields-view-value" class="view-value-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
             <label class="view-value-button pdoc-button" for="VersionInfo.model_fields-view-value"></label><span class="default_value">{&#39;created&#39;: FieldInfo(annotation=datetime, required=False, default_factory=builtin_function_or_method), &#39;doi&#39;: FieldInfo(annotation=Union[str, NoneType], required=False, default=None), &#39;v&#39;: FieldInfo(annotation=str, required=True)}</span>
 
@@ -2277,19 +2369,26 @@ __pydantic_private__: Instance attribute with the values of private attributes s
     </div>
     <a class="headerlink" href="#VersionInfo.model_fields"></a>
     
-    
+            <div class="docstring"><p>Metadata about the fields defined on the model,
+mapping of field names to [<code>FieldInfo</code>][pydantic.fields.FieldInfo] objects.</p>
+
+<p>This replaces <code>Model.__fields__</code> from Pydantic V1.</p>
+</div>
+
 
                             </div>
                             <div id="VersionInfo.model_computed_fields" class="classattr">
                                 <div class="attr variable">
-            <span class="name">model_computed_fields</span>        =
+            <span class="name">model_computed_fields</span><span class="annotation">: ClassVar[Dict[str, pydantic.fields.ComputedFieldInfo]]</span>        =
 <span class="default_value">{}</span>
 
         
     </div>
     <a class="headerlink" href="#VersionInfo.model_computed_fields"></a>
     
-    
+            <div class="docstring"><p>A dictionary of computed field names and their corresponding <code>ComputedFieldInfo</code> objects.</p>
+</div>
+
 
                             </div>
                             <div class="inherited">
@@ -2344,17 +2443,17 @@ __pydantic_private__: Instance attribute with the values of private attributes s
 </span></pre></div>
 
 
-            <div class="docstring"><p>Usage docs: <a href="https://docs.pydantic.dev/2.8/concepts/models/">https://docs.pydantic.dev/2.8/concepts/models/</a></p>
+            <div class="docstring"><p>Usage docs: <a href="https://docs.pydantic.dev/2.9/concepts/models/">https://docs.pydantic.dev/2.9/concepts/models/</a></p>
 
 <p>A base class for creating Pydantic models.</p>
 
 <p>Attributes:
-    __class_vars__: The names of classvars defined on the model.
+    __class_vars__: The names of the class variables defined on the model.
     __private_attributes__: Metadata about the private attributes of the model.
-    __signature__: The signature for instantiating the model.</p>
+    __signature__: The synthesized <code><a href="#VersionsInfo.__init__">__init__</a></code> [<code>Signature</code>][inspect.Signature] of the model.</p>
 
 <pre><code>__pydantic_complete__: Whether model building is completed, or if there are still undefined fields.
-__pydantic_core_schema__: The pydantic-core schema used to build the SchemaValidator and SchemaSerializer.
+__pydantic_core_schema__: The core schema of the model.
 __pydantic_custom_init__: Whether the model has a custom `__init__` function.
 __pydantic_decorators__: Metadata containing the decorators defined on the model.
     This replaces `Model.__validators__` and `Model.__root_validators__` from Pydantic V1.
@@ -2362,14 +2461,14 @@ __pydantic_generic_metadata__: Metadata for generic models; contains data used f
     __args__, __origin__, __parameters__ in typing-module generics. May eventually be replaced by these.
 __pydantic_parent_namespace__: Parent namespace of the model, used for automatic rebuilding of models.
 __pydantic_post_init__: The name of the post-init method for the model, if defined.
-__pydantic_root_model__: Whether the model is a `RootModel`.
-__pydantic_serializer__: The pydantic-core SchemaSerializer used to dump instances of the model.
-__pydantic_validator__: The pydantic-core SchemaValidator used to validate instances of the model.
+__pydantic_root_model__: Whether the model is a [`RootModel`][pydantic.root_model.RootModel].
+__pydantic_serializer__: The `pydantic-core` `SchemaSerializer` used to dump instances of the model.
+__pydantic_validator__: The `pydantic-core` `SchemaValidator` used to validate instances of the model.
 
-__pydantic_extra__: An instance attribute with the values of extra fields from validation when
-    `model_config['extra'] == 'allow'`.
-__pydantic_fields_set__: An instance attribute with the names of fields explicitly set.
-__pydantic_private__: Instance attribute with the values of private attributes set on the model instance.
+__pydantic_extra__: A dictionary containing extra values, if [`extra`][pydantic.config.ConfigDict.extra]
+    is set to `'allow'`.
+__pydantic_fields_set__: The names of fields explicitly set during instantiation.
+__pydantic_private__: Values of private attributes set on the model instance.
 </code></pre>
 </div>
 
@@ -2398,7 +2497,7 @@ __pydantic_private__: Instance attribute with the values of private attributes s
                             </div>
                             <div id="VersionsInfo.model_config" class="classattr">
                                 <div class="attr variable">
-            <span class="name">model_config</span>        =
+            <span class="name">model_config</span><span class="annotation">: ClassVar[pydantic.config.ConfigDict]</span>        =
 <input id="VersionsInfo.model_config-view-value" class="view-value-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
             <label class="view-value-button pdoc-button" for="VersionsInfo.model_config-view-value"></label><span class="default_value">{&#39;extra&#39;: &#39;ignore&#39;, &#39;frozen&#39;: True, &#39;populate_by_name&#39;: True, &#39;revalidate_instances&#39;: &#39;never&#39;, &#39;validate_assignment&#39;: True, &#39;validate_default&#39;: False}</span>
 
@@ -2406,12 +2505,14 @@ __pydantic_private__: Instance attribute with the values of private attributes s
     </div>
     <a class="headerlink" href="#VersionsInfo.model_config"></a>
     
-    
+            <div class="docstring"><p>Configuration for the model, should be a dictionary conforming to [<code>ConfigDict</code>][pydantic.config.ConfigDict].</p>
+</div>
+
 
                             </div>
                             <div id="VersionsInfo.model_fields" class="classattr">
                                 <div class="attr variable">
-            <span class="name">model_fields</span>        =
+            <span class="name">model_fields</span><span class="annotation">: ClassVar[Dict[str, pydantic.fields.FieldInfo]]</span>        =
 <input id="VersionsInfo.model_fields-view-value" class="view-value-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
             <label class="view-value-button pdoc-button" for="VersionsInfo.model_fields-view-value"></label><span class="default_value">{&#39;concept_doi&#39;: FieldInfo(annotation=Union[str, NoneType], required=False, default=None), &#39;versions&#39;: FieldInfo(annotation=Sequence[VersionInfo], required=False, default=())}</span>
 
@@ -2419,19 +2520,26 @@ __pydantic_private__: Instance attribute with the values of private attributes s
     </div>
     <a class="headerlink" href="#VersionsInfo.model_fields"></a>
     
-    
+            <div class="docstring"><p>Metadata about the fields defined on the model,
+mapping of field names to [<code>FieldInfo</code>][pydantic.fields.FieldInfo] objects.</p>
+
+<p>This replaces <code>Model.__fields__</code> from Pydantic V1.</p>
+</div>
+
 
                             </div>
                             <div id="VersionsInfo.model_computed_fields" class="classattr">
                                 <div class="attr variable">
-            <span class="name">model_computed_fields</span>        =
+            <span class="name">model_computed_fields</span><span class="annotation">: ClassVar[Dict[str, pydantic.fields.ComputedFieldInfo]]</span>        =
 <span class="default_value">{}</span>
 
         
     </div>
     <a class="headerlink" href="#VersionsInfo.model_computed_fields"></a>
     
-    
+            <div class="docstring"><p>A dictionary of computed field names and their corresponding <code>ComputedFieldInfo</code> objects.</p>
+</div>
+
 
                             </div>
                             <div class="inherited">

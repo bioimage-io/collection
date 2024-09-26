@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="pdoc 14.6.1"/>
+    <meta name="generator" content="pdoc 14.7.0"/>
     <title>bioimageio_collection_backoffice._settings API documentation</title>
             <link rel="icon" href="https://bioimage.io/static/img/bioimage-io-icon-small.svg"/>
 
@@ -274,13 +274,15 @@
                                 <div class="attr variable">
             <span class="name">model_config</span>        =
 <input id="Settings.model_config-view-value" class="view-value-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
-            <label class="view-value-button pdoc-button" for="Settings.model_config-view-value"></label><span class="default_value">{&#39;extra&#39;: &#39;ignore&#39;, &#39;arbitrary_types_allowed&#39;: True, &#39;validate_default&#39;: True, &#39;case_sensitive&#39;: False, &#39;env_prefix&#39;: &#39;&#39;, &#39;env_file&#39;: &#39;.env&#39;, &#39;env_file_encoding&#39;: &#39;utf-8&#39;, &#39;env_ignore_empty&#39;: False, &#39;env_nested_delimiter&#39;: None, &#39;env_parse_none_str&#39;: None, &#39;env_parse_enums&#39;: None, &#39;cli_prog_name&#39;: None, &#39;cli_parse_args&#39;: None, &#39;cli_settings_source&#39;: None, &#39;cli_parse_none_str&#39;: None, &#39;cli_hide_none_type&#39;: False, &#39;cli_avoid_json&#39;: False, &#39;cli_enforce_required&#39;: False, &#39;cli_use_class_docs_for_groups&#39;: False, &#39;cli_exit_on_error&#39;: True, &#39;cli_prefix&#39;: &#39;&#39;, &#39;json_file&#39;: None, &#39;json_file_encoding&#39;: None, &#39;yaml_file&#39;: None, &#39;yaml_file_encoding&#39;: None, &#39;toml_file&#39;: None, &#39;secrets_dir&#39;: None, &#39;protected_namespaces&#39;: (&#39;model_&#39;, &#39;settings_&#39;)}</span>
+            <label class="view-value-button pdoc-button" for="Settings.model_config-view-value"></label><span class="default_value">{&#39;extra&#39;: &#39;ignore&#39;, &#39;arbitrary_types_allowed&#39;: True, &#39;validate_default&#39;: True, &#39;case_sensitive&#39;: False, &#39;env_prefix&#39;: &#39;&#39;, &#39;nested_model_default_partial_update&#39;: False, &#39;env_file&#39;: &#39;.env&#39;, &#39;env_file_encoding&#39;: &#39;utf-8&#39;, &#39;env_ignore_empty&#39;: False, &#39;env_nested_delimiter&#39;: None, &#39;env_parse_none_str&#39;: None, &#39;env_parse_enums&#39;: None, &#39;cli_prog_name&#39;: None, &#39;cli_parse_args&#39;: None, &#39;cli_settings_source&#39;: None, &#39;cli_parse_none_str&#39;: None, &#39;cli_hide_none_type&#39;: False, &#39;cli_avoid_json&#39;: False, &#39;cli_enforce_required&#39;: False, &#39;cli_use_class_docs_for_groups&#39;: False, &#39;cli_exit_on_error&#39;: True, &#39;cli_prefix&#39;: &#39;&#39;, &#39;cli_implicit_flags&#39;: False, &#39;json_file&#39;: None, &#39;json_file_encoding&#39;: None, &#39;yaml_file&#39;: None, &#39;yaml_file_encoding&#39;: None, &#39;toml_file&#39;: None, &#39;secrets_dir&#39;: None, &#39;protected_namespaces&#39;: (&#39;model_&#39;, &#39;settings_&#39;)}</span>
 
         
     </div>
     <a class="headerlink" href="#Settings.model_config"></a>
     
-    
+            <div class="docstring"><p>Configuration for the model, should be a dictionary conforming to [<code>ConfigDict</code>][pydantic.config.ConfigDict].</p>
+</div>
+
 
                             </div>
                             <div id="Settings.github_output" class="classattr">
@@ -509,7 +511,7 @@
                             </div>
                             <div id="Settings.model_fields" class="classattr">
                                 <div class="attr variable">
-            <span class="name">model_fields</span>        =
+            <span class="name">model_fields</span><span class="annotation">: ClassVar[Dict[str, pydantic.fields.FieldInfo]]</span>        =
 <input id="Settings.model_fields-view-value" class="view-value-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
             <label class="view-value-button pdoc-button" for="Settings.model_fields-view-value"></label><span class="default_value">{&#39;github_output&#39;: FieldInfo(annotation=Union[str, NoneType], required=False, default=None), &#39;collection_config&#39;: FieldInfo(annotation=str, required=False, default=&#39;https://raw.githubusercontent.com/bioimage-io/collection/main/bioimageio_collection_config.json&#39;), &#39;run_url&#39;: FieldInfo(annotation=Union[str, NoneType], required=False, default=None), &#39;s3_host&#39;: FieldInfo(annotation=str, required=False, default=&#39;uk1s3.embassy.ebi.ac.uk&#39;), &#39;s3_bucket&#39;: FieldInfo(annotation=str, required=False, default=&#39;public-datasets&#39;), &#39;s3_folder&#39;: FieldInfo(annotation=str, required=False, default=&#39;testing.bioimage.io/runner/instance&#39;), &#39;s3_pytest_folder&#39;: FieldInfo(annotation=str, required=False, default=&#39;testing.bioimage.io/runner/pytest&#39;), &#39;s3_sandbox_folder&#39;: FieldInfo(annotation=str, required=False, default=&#39;sandbox.bioimage.io&#39;), &#39;s3_test_folder&#39;: FieldInfo(annotation=str, required=False, default=&#39;testing.bioimage.io/runner/sandbox&#39;), &#39;test_package_id&#39;: FieldInfo(annotation=str, required=False, default=&#39;frank-water-buffalo&#39;), &#39;test_package_url&#39;: FieldInfo(annotation=str, required=False, default=&#39;https://uk1s3.embassy.ebi.ac.uk/public-datasets/examples.bioimage.io/frank-water-buffalo_v1.zip&#39;), &#39;zenodo_test_url&#39;: FieldInfo(annotation=Literal[&#39;https://sandbox.zenodo.org&#39;], required=False, default=&#39;https://sandbox.zenodo.org&#39;), &#39;zenodo_url&#39;: FieldInfo(annotation=Literal[&#39;https://sandbox.zenodo.org&#39;, &#39;https://zenodo.org&#39;], required=False, default=&#39;https://sandbox.zenodo.org&#39;), &#39;bioimageio_user_id&#39;: FieldInfo(annotation=Union[str, NoneType], required=False, default=None), &#39;mail_password&#39;: FieldInfo(annotation=SecretStr, required=False, default=SecretStr(&#39;&#39;)), &#39;s3_access_key_id&#39;: FieldInfo(annotation=SecretStr, required=False, default=SecretStr(&#39;&#39;)), &#39;s3_secret_access_key&#39;: FieldInfo(annotation=SecretStr, required=False, default=SecretStr(&#39;&#39;)), &#39;zenodo_api_access_token&#39;: FieldInfo(annotation=SecretStr, required=False, default=SecretStr(&#39;&#39;)), &#39;zenodo_test_api_access_token&#39;: FieldInfo(annotation=SecretStr, required=False, default=SecretStr(&#39;&#39;)), &#39;github_pat&#39;: FieldInfo(annotation=SecretStr, required=False, default=SecretStr(&#39;&#39;))}</span>
 
@@ -517,19 +519,26 @@
     </div>
     <a class="headerlink" href="#Settings.model_fields"></a>
     
-    
+            <div class="docstring"><p>Metadata about the fields defined on the model,
+mapping of field names to [<code>FieldInfo</code>][pydantic.fields.FieldInfo] objects.</p>
+
+<p>This replaces <code>Model.__fields__</code> from Pydantic V1.</p>
+</div>
+
 
                             </div>
                             <div id="Settings.model_computed_fields" class="classattr">
                                 <div class="attr variable">
-            <span class="name">model_computed_fields</span>        =
+            <span class="name">model_computed_fields</span><span class="annotation">: ClassVar[Dict[str, pydantic.fields.ComputedFieldInfo]]</span>        =
 <span class="default_value">{}</span>
 
         
     </div>
     <a class="headerlink" href="#Settings.model_computed_fields"></a>
     
-    
+            <div class="docstring"><p>A dictionary of computed field names and their corresponding <code>ComputedFieldInfo</code> objects.</p>
+</div>
+
 
                             </div>
                             <div class="inherited">
@@ -575,7 +584,7 @@
                     <div class="attr variable">
             <span class="name">settings</span>        =
 <input id="settings-view-value" class="view-value-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
-            <label class="view-value-button pdoc-button" for="settings-view-value"></label><span class="default_value">Settings(github_output=&#39;/home/runner/work/_temp/_runner_file_commands/set_output_02f2d482-ef78-4cd3-b529-2530348a6b69&#39;, collection_config=&#39;https://raw.githubusercontent.com/bioimage-io/collection/main/bioimageio_collection_config.json&#39;, run_url=None, s3_host=&#39;uk1s3.embassy.ebi.ac.uk&#39;, s3_bucket=&#39;public-datasets&#39;, s3_folder=&#39;testing.bioimage.io/runner/instance&#39;, s3_pytest_folder=&#39;testing.bioimage.io/runner/pytest&#39;, s3_sandbox_folder=&#39;sandbox.bioimage.io&#39;, s3_test_folder=&#39;testing.bioimage.io/runner/sandbox&#39;, test_package_id=&#39;frank-water-buffalo&#39;, test_package_url=&#39;https://uk1s3.embassy.ebi.ac.uk/public-datasets/examples.bioimage.io/frank-water-buffalo_v1.zip&#39;, zenodo_test_url=&#39;https://sandbox.zenodo.org&#39;, zenodo_url=&#39;https://sandbox.zenodo.org&#39;, bioimageio_user_id=None, mail_password=SecretStr(&#39;&#39;), s3_access_key_id=SecretStr(&#39;&#39;), s3_secret_access_key=SecretStr(&#39;&#39;), zenodo_api_access_token=SecretStr(&#39;&#39;), zenodo_test_api_access_token=SecretStr(&#39;&#39;), github_pat=SecretStr(&#39;&#39;))</span>
+            <label class="view-value-button pdoc-button" for="settings-view-value"></label><span class="default_value">Settings(github_output=&#39;/home/runner/work/_temp/_runner_file_commands/set_output_bb7d010a-774c-4c2f-839b-f4caf507822a&#39;, collection_config=&#39;https://raw.githubusercontent.com/bioimage-io/collection/main/bioimageio_collection_config.json&#39;, run_url=None, s3_host=&#39;uk1s3.embassy.ebi.ac.uk&#39;, s3_bucket=&#39;public-datasets&#39;, s3_folder=&#39;testing.bioimage.io/runner/instance&#39;, s3_pytest_folder=&#39;testing.bioimage.io/runner/pytest&#39;, s3_sandbox_folder=&#39;sandbox.bioimage.io&#39;, s3_test_folder=&#39;testing.bioimage.io/runner/sandbox&#39;, test_package_id=&#39;frank-water-buffalo&#39;, test_package_url=&#39;https://uk1s3.embassy.ebi.ac.uk/public-datasets/examples.bioimage.io/frank-water-buffalo_v1.zip&#39;, zenodo_test_url=&#39;https://sandbox.zenodo.org&#39;, zenodo_url=&#39;https://sandbox.zenodo.org&#39;, bioimageio_user_id=None, mail_password=SecretStr(&#39;&#39;), s3_access_key_id=SecretStr(&#39;&#39;), s3_secret_access_key=SecretStr(&#39;&#39;), zenodo_api_access_token=SecretStr(&#39;&#39;), zenodo_test_api_access_token=SecretStr(&#39;&#39;), github_pat=SecretStr(&#39;&#39;))</span>
 
         
     </div>
