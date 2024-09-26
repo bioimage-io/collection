@@ -506,9 +506,7 @@ class RemoteCollection(RemoteBase):
     def get_collection_json(self) -> CollectionJson:
         data = self.client.load_file("collection.json")
         assert data is not None
-        collection: Union[Any, Dict[str, Union[Any, List[Dict[str, Any]]]]] = (
-            json.loads(data)
-        )
+        collection: Dict[str, List[Dict[str, Any]]] = json.loads(data)
         assert isinstance(
             collection, dict
         )  # TODO: create typed dict for collection.json
@@ -750,7 +748,7 @@ class RecordDraft(RecordBase):
         file_names = set(zipobj.namelist())
         bioimageio_yaml_file_name = identify_bioimageio_yaml_file_name(file_names)
 
-        rdf: Union[Any, Dict[Any, Any]] = yaml.load(
+        rdf: Dict[Any, Any] = yaml.load(
             zipobj.open(bioimageio_yaml_file_name).read().decode()
         )
         if not isinstance(rdf, dict):
@@ -919,7 +917,7 @@ class RecordDraft(RecordBase):
         if rdf_data is None:
             raise RuntimeError(f"Failed to load staged RDF from {self.rdf_path}")
 
-        rdf: Union[Any, Dict[Any, Any]] = yaml.load(rdf_data.decode())
+        rdf: Dict[Any, Any] = yaml.load(rdf_data.decode())
         assert isinstance(rdf, dict)
         version = rdf.get("version", "1")
         if not isinstance(version, (int, float, str)):
@@ -1038,10 +1036,14 @@ def maybe_swap_with_thumbnail(
     src: Union[Any, Dict[Any, Any], List[Any]], thumbnails: Mapping[str, str]
 ) -> Any:
     if isinstance(src, dict):
-        return {k: maybe_swap_with_thumbnail(v, thumbnails) for k, v in src.items()}
+        src_dict: Dict[Any, Any] = src
+        return {
+            k: maybe_swap_with_thumbnail(v, thumbnails) for k, v in src_dict.items()
+        }
 
     if isinstance(src, list):
-        return [maybe_swap_with_thumbnail(s, thumbnails) for s in src]
+        src_list: List[Any] = src
+        return [maybe_swap_with_thumbnail(s, thumbnails) for s in src_list]
 
     if isinstance(src, str) and not src.startswith("https://"):
         clean_name = Path(src).name  # remove any leading './'
@@ -1057,10 +1059,12 @@ def resolve_relative_path(
     src: Union[Any, Dict[Any, Any], List[Any]], parsed_root: SplitResult
 ) -> Any:
     if isinstance(src, dict):
-        return {k: resolve_relative_path(v, parsed_root) for k, v in src.items()}
+        src_dict: Dict[Any, Any] = src
+        return {k: resolve_relative_path(v, parsed_root) for k, v in src_dict.items()}
 
     if isinstance(src, list):
-        return [resolve_relative_path(s, parsed_root) for s in src]
+        src_list: List[Any] = src
+        return [resolve_relative_path(s, parsed_root) for s in src_list]
 
     if isinstance(src, str):
         if src.startswith("http") or src.startswith("/") or "." not in src:
