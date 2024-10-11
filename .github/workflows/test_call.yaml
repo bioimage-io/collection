@@ -63,19 +63,19 @@ jobs:
       - name: construct conda environment file name
         run: echo "conda_env_file=${{inputs.environment_name}}_${{inputs.concept_id}}_${{inputs.version}}_conda_env_${{matrix.weight_format}}.yaml" >> "$GITHUB_ENV"
       - run: pip install ruyaml
-      - name: save $conda_env_file
+      - name: save ${{env.conda_env_file}}
         run: |
           import json
           from pathlib import Path
           from ruyaml import YAML
           yaml = YAML(typ="safe")
           conda_env = json.loads('${{ needs.validate_format.outputs.conda_envs }}')["${{ matrix.weight_format }}"]
-          yaml.dump(conda_env, Path("$conda_env_file"))
+          yaml.dump(conda_env, Path$("${{env.conda_env_file}}"))
         shell: python
       - uses: actions/upload-artifact@v4
         with:
-          name: $conda_env_file
-          path: $conda_env_file
+          name: ${{env.conda_env_file}}
+          path: ${{env.conda_env_file}}
 
   test:
     needs: [validate_format, setup-test]
@@ -92,7 +92,7 @@ jobs:
         run: echo "conda_env_file=${{inputs.environment_name}}_${{inputs.concept_id}}_${{inputs.version}}_conda_env_${{matrix.weight_format}}.yaml" >> "$GITHUB_ENV"
       - uses: actions/download-artifact@v4
         with:
-          name: $conda_env_file
+          name: ${{env.conda_env_file}}
       - name: install validation dependencies
         id: create_env
         uses: mamba-org/setup-micromamba@v1
@@ -100,7 +100,7 @@ jobs:
           generate-run-shell: false
           cache-downloads: true
           environment-name: ${{ matrix.weight_format }}
-          environment-file: $conda_env_file
+          environment-file: ${{env.conda_env_file}}
         continue-on-error: true # we inspect this step's outcome in run_dynamic_tests.py
         timeout-minutes: 60
       - name: setup pip to install backoffice (if conda env failed to install)
