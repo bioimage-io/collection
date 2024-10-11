@@ -60,20 +60,22 @@ jobs:
         with:
           python-version: "3.12"
           cache: "pip" # caching pip dependencies
+      - name: construct conda environment file name
+        run: echo "conda_env_file=${{inputs.environment_name}}_${{inputs.concept_id}}_${{inputs.version}}_conda_env_${{matrix.weight_format}}.yaml" >> "$GITHUB_ENV"
       - run: pip install ruyaml
-      - name: save ${{inputs.environment_name}}_${{inputs.concept_id}}_${{inputs.version}}_conda_env_${{matrix.weight_format}}.yaml
+      - name: save $conda_env_file
         run: |
           import json
           from pathlib import Path
           from ruyaml import YAML
           yaml = YAML(typ="safe")
           conda_env = json.loads('${{ needs.validate_format.outputs.conda_envs }}')["${{ matrix.weight_format }}"]
-          yaml.dump(conda_env, Path("${{inputs.environment_name}}_${{inputs.concept_id}}_${{inputs.version}}_conda_env_${{matrix.weight_format}}.yaml"))
+          yaml.dump(conda_env, Path("$conda_env_file"))
         shell: python
       - uses: actions/upload-artifact@v4
         with:
-          name: ${{inputs.environment_name}}_${{inputs.concept_id}}_${{inputs.version}}_conda_env_${{matrix.weight_format}}.yaml
-          path: ${{inputs.environment_name}}_${{inputs.concept_id}}_${{inputs.version}}_conda_env_${{matrix.weight_format}}.yaml
+          name: $conda_env_file
+          path: $conda_env_file
 
   test:
     needs: [validate_format, setup-test]
@@ -87,7 +89,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: construct conda environment file name
-        run: echo "{conda_env_file}={${{inputs.environment_name}}_${{inputs.concept_id}}_${{inputs.version}}_conda_env_${{matrix.weight_format}}.yaml}" >> "$GITHUB_ENV"
+        run: echo "conda_env_file=${{inputs.environment_name}}_${{inputs.concept_id}}_${{inputs.version}}_conda_env_${{matrix.weight_format}}.yaml" >> "$GITHUB_ENV"
       - uses: actions/download-artifact@v4
         with:
           name: $conda_env_file
