@@ -293,6 +293,7 @@ def _ensure_min_env(env: CondaEnv, env_name: Optional[str] = None):
     ):
         env["dependencies"].append("conda-forge::bioimageio.core")
 
+
 def _ensure_valid_conda_env_name(name: str) -> str:
     for illegal in ("/", " ", ":", "#"):
         name = name.replace(illegal, "")
