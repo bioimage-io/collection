@@ -47,8 +47,11 @@ def run_dynamic_tests(
     record: Union[Record, RecordDraft],
     weight_format: Optional[WeightsFormat],  # "weight format to test model with."
     create_env_outcome: str,
+    conda_env_file: Path,
 ):
-    summary = _run_dynamic_tests_impl(record.rdf_url, weight_format, create_env_outcome)
+    summary = _run_dynamic_tests_impl(
+        record.rdf_url, weight_format, create_env_outcome, conda_env_file
+    )
     if summary is not None:
         record.add_log_entry(
             LogEntry(
@@ -70,7 +73,10 @@ def run_dynamic_tests(
 
 
 def _run_dynamic_tests_impl(
-    rdf_url: str, weight_format: Optional[WeightsFormat], create_env_outcome: str
+    rdf_url: str,
+    weight_format: Optional[WeightsFormat],
+    create_env_outcome: str,
+    conda_env_file: Path,
 ):
     if weight_format is None:
         # no dynamic tests for non-model resources yet...
@@ -122,11 +128,12 @@ def _run_dynamic_tests_impl(
                     )
 
     else:
-        env_path = Path(f"conda_env_{weight_format}.yaml")
-        if env_path.exists():
-            error = "Failed to install conda environment:\n" + env_path.read_text()
+        if conda_env_file.exists():
+            error = (
+                "Failed to install conda environment:\n" + conda_env_file.read_text()
+            )
         else:
-            error = f"Conda environment yaml file not found: {env_path}"
+            error = f"Conda environment yaml file not found: {conda_env_file}"
 
         summary = get_basic_summary()
         summary.add_detail(

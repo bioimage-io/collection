@@ -86,9 +86,11 @@ jobs:
       max-parallel: 1 # avoid prallel updates to log.json
     steps:
       - uses: actions/checkout@v4
+      - name: construct conda environment file name
+        run: echo "{conda_env_file}={${{inputs.environment_name}}_${{inputs.concept_id}}_${{inputs.version}}_conda_env_${{matrix.weight_format}}.yaml}" >> "$GITHUB_ENV"
       - uses: actions/download-artifact@v4
         with:
-          name: ${{inputs.environment_name}}_${{inputs.concept_id}}_${{inputs.version}}_conda_env_${{matrix.weight_format}}.yaml
+          name: $conda_env_file
       - name: install validation dependencies
         id: create_env
         uses: mamba-org/setup-micromamba@v1
@@ -96,7 +98,7 @@ jobs:
           generate-run-shell: false
           cache-downloads: true
           environment-name: ${{ matrix.weight_format }}
-          environment-file: ${{inputs.environment_name}}_${{inputs.concept_id}}_${{inputs.version}}_conda_env_${{matrix.weight_format}}.yaml
+          environment-file: $conda_env_file
         continue-on-error: true # we inspect this step's outcome in run_dynamic_tests.py
         timeout-minutes: 60
       - name: setup pip to install backoffice (if conda env failed to install)
@@ -110,7 +112,7 @@ jobs:
         run: pip install .
       - name: dynamic validation
         shell: bash -el {0}
-        run: backoffice test "${{inputs.concept_id}}" "${{ inputs.version }}" "${{ matrix.weight_format }}" "${{ steps.create_env.outcome }}"
+        run: backoffice test "${{inputs.concept_id}}" "${{ inputs.version }}" "${{ matrix.weight_format }}" "${{ steps.create_env.outcome }}" "$conda_env_file"
         timeout-minutes: 60
       - name: check torch import # TODO: improve error messages in bioimageio.core
         if: matrix.weight_format == 'pytorch_state_dict' || matrix.weight_format == 'torchscript'
