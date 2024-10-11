@@ -173,7 +173,9 @@ def _get_default_onnx_env(*, opset_version: Optional[int]) -> CondaEnv:
 
     # note: we should not need to worry about the opset version,
     # see https://github.com/microsoft/onnxruntime/blob/master/docs/Versioning.md
-    return CondaEnv(name="env", channels=["conda-forge"], dependencies=["onnxruntime"])
+    return CondaEnv(
+        name="env", channels=["nodefaults", "conda-forge"], dependencies=["onnxruntime"]
+    )
 
 
 def _get_default_tf_env(tensorflow_version: Optional[Version]) -> CondaEnv:
@@ -198,24 +200,14 @@ def _get_default_tf_env(tensorflow_version: Optional[Version]) -> CondaEnv:
         )
         return CondaEnv(
             name="env",
-            channels=["defaults"],
+            channels=["nodefaults", "conda-forge"],
             dependencies=list(deps),
         )
-    elif tensorflow_version.major == 2 and tensorflow_version.minor < 11:
-        # get older tf versions from defaults channel
+    else:
         return CondaEnv(
             name="env",
-            channels=["defaults"],
-            dependencies=[
-                "conda-forge::bioimageio.core",
-                f"tensorflow =={tensorflow_version}",
-            ],
-        )
-    else:  # use conda-forge otherwise
-        return CondaEnv(
-            name="env",
-            channels=["conda-forge"],
-            dependencies=[f"tensorflow =={tensorflow_version}"],
+            channels=["nodefaults", "conda-forge"],
+            dependencies=["bioimageio.core", f"tensorflow =={tensorflow_version}"],
         )
 
 
@@ -232,7 +224,7 @@ def _get_env_from_deps(
 
             return CondaEnv(
                 name="env",
-                channels=["defaults"],
+                channels=["nodefaults", "conda-forge"],
                 dependencies=["pip", PipDeps(pip=pip_deps)],
             )
         elif deps.manager not in ("conda", "mamba"):
@@ -263,13 +255,20 @@ def _ensure_min_env(env: CondaEnv, env_name: Optional[str] = None):
         env["name"] = "env"
 
     if "channels" not in env:
-        env["channels"] = []
+        env["channels"] = ["nodefaults", "conda-forge"]
 
     if "dependencies" not in env:
         env["dependencies"] = []
 
     if "conda-forge" not in env["channels"]:
         env["channels"].append("conda-forge")
+
+    if "defaults" in env["channels"]:
+        warnings.warn("removing 'defaults' from conda-channels")
+        env["channels"].remove("defaults")
+
+    if "nodefaults" not in env["channels"]:
+        env["channels"].append("nodefaults")
 
     if "pip" not in env["dependencies"]:
         env["dependencies"].append("pip")
@@ -293,7 +292,6 @@ def _ensure_min_env(env: CondaEnv, env_name: Optional[str] = None):
         or "bioimageio.core" not in pip_section["pip"]
     ):
         env["dependencies"].append("conda-forge::bioimageio.core")
-
 
 def _ensure_valid_conda_env_name(name: str) -> str:
     for illegal in ("/", " ", ":", "#"):
