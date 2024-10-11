@@ -94,7 +94,7 @@ class BackOffice:
         version: str,
         weight_format: Optional[Union[WeightsFormat, Literal[""]]] = None,
         create_env_outcome: Literal["success", ""] = "success",
-        conda_env_file: Path = Path("environment.yaml"),
+        conda_env_file: Union[str, Path] = Path("environment.yaml"),
     ):
         """run dynamic tests for a (staged) resource version"""
         rv = get_remote_resource_version(self.client, concept_id, version)
@@ -112,7 +112,7 @@ class BackOffice:
             record=rv,
             weight_format=weight_format or None,
             create_env_outcome=create_env_outcome,
-            conda_env_file=conda_env_file,
+            conda_env_file=Path(conda_env_file),
         )
 
         if (
