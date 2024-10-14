@@ -191,7 +191,7 @@ def rdf_to_zenodo_metadata(
     description_md = f'[View on bioimage.io]("https://bioimage.io/#/?id={rdf.id}") # {rdf.name} \n\n{docstring}'
     logger.debug("markdown descriptoin:\n{}", description_md)
     description = markdown.markdown(description_md)
-    logger.debug("html descriptoin:\n{}", description_md)
+    logger.debug("html description:\n{}", description_md)
     keywords = ["backup.bioimage.io", "bioimage.io", "bioimage.io:" + rdf.type]
     # related_identifiers = generate_related_identifiers_from_rdf(rdf, rdf_file_name)  # TODO: add related identifiers
 
