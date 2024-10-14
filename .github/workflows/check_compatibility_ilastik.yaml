@@ -58,7 +58,7 @@ jobs:
         generate-run-shell: false
         environment-file: env.yaml
         cache-downloads: true
-        cache-environment: true
+        cache-environment: false  # gets stuck for 6h?
     - name: test drafts with ilastik ${{ matrix.v }}
       shell: bash -l {0}
       run: python scripts/check_compatibility_ilastik.py ${{ matrix.v }} all_versions_draft.json generated-reports
