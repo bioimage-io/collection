@@ -4,7 +4,7 @@ from datetime import datetime
 from typing import Literal, Mapping, Optional, Sequence, Union
 
 from loguru import logger
-from pydantic import HttpUrl, model_validator
+from pydantic import Field, HttpUrl, model_validator
 
 from .collection_config.collection_json_template import (
     CollectionJsonTemplate,
@@ -80,6 +80,7 @@ class CollectionWebsiteConfig(CollectionWebsiteConfigTemplate, frozen=True):
 class CollectionJson(CollectionJsonTemplate, frozen=True):
     collection: Sequence[CollectionEntry]
     config: CollectionWebsiteConfig
+    created: datetime = Field(default_factory=datetime.now)
 
 
 class ConceptVersion(Node, frozen=True):
