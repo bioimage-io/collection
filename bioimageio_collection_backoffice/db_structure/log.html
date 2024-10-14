@@ -58,6 +58,9 @@
                                 <a class="variable" href="#LogEntry.details">details</a>
                         </li>
                         <li>
+                                <a class="variable" href="#LogEntry.details_formatted">details_formatted</a>
+                        </li>
+                        <li>
                                 <a class="variable" href="#LogEntry.timestamp">timestamp</a>
                         </li>
                         <li>
@@ -142,29 +145,32 @@
 </span><span id="L-16"><a href="#L-16"><span class="linenos">16</span></a>    <span class="n">details</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span>
 </span><span id="L-17"><a href="#L-17"><span class="linenos">17</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;log details&quot;&quot;&quot;</span>
 </span><span id="L-18"><a href="#L-18"><span class="linenos">18</span></a>
-</span><span id="L-19"><a href="#L-19"><span class="linenos">19</span></a>    <span class="n">timestamp</span><span class="p">:</span> <span class="n">datetime</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">)</span>
-</span><span id="L-20"><a href="#L-20"><span class="linenos">20</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;creation of log entry&quot;&quot;&quot;</span>
+</span><span id="L-19"><a href="#L-19"><span class="linenos">19</span></a>    <span class="n">details_formatted</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span id="L-20"><a href="#L-20"><span class="linenos">20</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;log details formatted as markdown&quot;&quot;&quot;</span>
 </span><span id="L-21"><a href="#L-21"><span class="linenos">21</span></a>
-</span><span id="L-22"><a href="#L-22"><span class="linenos">22</span></a>    <span class="n">run_url</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">run_url</span>
-</span><span id="L-23"><a href="#L-23"><span class="linenos">23</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;gh action run url&quot;&quot;&quot;</span>
+</span><span id="L-22"><a href="#L-22"><span class="linenos">22</span></a>    <span class="n">timestamp</span><span class="p">:</span> <span class="n">datetime</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">)</span>
+</span><span id="L-23"><a href="#L-23"><span class="linenos">23</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;creation of log entry&quot;&quot;&quot;</span>
 </span><span id="L-24"><a href="#L-24"><span class="linenos">24</span></a>
-</span><span id="L-25"><a href="#L-25"><span class="linenos">25</span></a>
-</span><span id="L-26"><a href="#L-26"><span class="linenos">26</span></a><span class="k">class</span> <span class="nc">Log</span><span class="p">(</span><span class="n">Node</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">extra</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">):</span>
-</span><span id="L-27"><a href="#L-27"><span class="linenos">27</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;`&lt;concept_id&gt;/&lt;version&gt;/log.json` contains a version specific log&quot;&quot;&quot;</span>
+</span><span id="L-25"><a href="#L-25"><span class="linenos">25</span></a>    <span class="n">run_url</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">run_url</span>
+</span><span id="L-26"><a href="#L-26"><span class="linenos">26</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;gh action run url&quot;&quot;&quot;</span>
+</span><span id="L-27"><a href="#L-27"><span class="linenos">27</span></a>
 </span><span id="L-28"><a href="#L-28"><span class="linenos">28</span></a>
-</span><span id="L-29"><a href="#L-29"><span class="linenos">29</span></a>    <span class="n">file_name</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;log.json&quot;</span>
-</span><span id="L-30"><a href="#L-30"><span class="linenos">30</span></a>
-</span><span id="L-31"><a href="#L-31"><span class="linenos">31</span></a>    <span class="n">log_version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;0.1.0&quot;</span>
-</span><span id="L-32"><a href="#L-32"><span class="linenos">32</span></a>    <span class="n">entries</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">LogEntry</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
+</span><span id="L-29"><a href="#L-29"><span class="linenos">29</span></a><span class="k">class</span> <span class="nc">Log</span><span class="p">(</span><span class="n">Node</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">extra</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">):</span>
+</span><span id="L-30"><a href="#L-30"><span class="linenos">30</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;`&lt;concept_id&gt;/&lt;version&gt;/log.json` contains a version specific log&quot;&quot;&quot;</span>
+</span><span id="L-31"><a href="#L-31"><span class="linenos">31</span></a>
+</span><span id="L-32"><a href="#L-32"><span class="linenos">32</span></a>    <span class="n">file_name</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;log.json&quot;</span>
 </span><span id="L-33"><a href="#L-33"><span class="linenos">33</span></a>
-</span><span id="L-34"><a href="#L-34"><span class="linenos">34</span></a>    <span class="k">def</span> <span class="nf">get_updated</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">update</span><span class="p">:</span> <span class="n">Log</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Log</span><span class="p">:</span>
-</span><span id="L-35"><a href="#L-35"><span class="linenos">35</span></a>        <span class="k">if</span> <span class="n">update</span><span class="o">.</span><span class="n">log_version</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">log_version</span><span class="p">:</span>
-</span><span id="L-36"><a href="#L-36"><span class="linenos">36</span></a>            <span class="k">return</span> <span class="n">update</span>
-</span><span id="L-37"><a href="#L-37"><span class="linenos">37</span></a>
-</span><span id="L-38"><a href="#L-38"><span class="linenos">38</span></a>        <span class="k">return</span> <span class="n">Log</span><span class="p">(</span>
-</span><span id="L-39"><a href="#L-39"><span class="linenos">39</span></a>            <span class="n">log_version</span><span class="o">=</span><span class="n">update</span><span class="o">.</span><span class="n">log_version</span><span class="p">,</span>
-</span><span id="L-40"><a href="#L-40"><span class="linenos">40</span></a>            <span class="n">entries</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entries</span><span class="p">)</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">update</span><span class="o">.</span><span class="n">entries</span><span class="p">),</span>
-</span><span id="L-41"><a href="#L-41"><span class="linenos">41</span></a>        <span class="p">)</span>
+</span><span id="L-34"><a href="#L-34"><span class="linenos">34</span></a>    <span class="n">log_version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;0.1.0&quot;</span>
+</span><span id="L-35"><a href="#L-35"><span class="linenos">35</span></a>    <span class="n">entries</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">LogEntry</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
+</span><span id="L-36"><a href="#L-36"><span class="linenos">36</span></a>
+</span><span id="L-37"><a href="#L-37"><span class="linenos">37</span></a>    <span class="k">def</span> <span class="nf">get_updated</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">update</span><span class="p">:</span> <span class="n">Log</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Log</span><span class="p">:</span>
+</span><span id="L-38"><a href="#L-38"><span class="linenos">38</span></a>        <span class="k">if</span> <span class="n">update</span><span class="o">.</span><span class="n">log_version</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">log_version</span><span class="p">:</span>
+</span><span id="L-39"><a href="#L-39"><span class="linenos">39</span></a>            <span class="k">return</span> <span class="n">update</span>
+</span><span id="L-40"><a href="#L-40"><span class="linenos">40</span></a>
+</span><span id="L-41"><a href="#L-41"><span class="linenos">41</span></a>        <span class="k">return</span> <span class="n">Log</span><span class="p">(</span>
+</span><span id="L-42"><a href="#L-42"><span class="linenos">42</span></a>            <span class="n">log_version</span><span class="o">=</span><span class="n">update</span><span class="o">.</span><span class="n">log_version</span><span class="p">,</span>
+</span><span id="L-43"><a href="#L-43"><span class="linenos">43</span></a>            <span class="n">entries</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entries</span><span class="p">)</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">update</span><span class="o">.</span><span class="n">entries</span><span class="p">),</span>
+</span><span id="L-44"><a href="#L-44"><span class="linenos">44</span></a>        <span class="p">)</span>
 </span></pre></div>
 
 
@@ -187,11 +193,14 @@
 </span><span id="LogEntry-17"><a href="#LogEntry-17"><span class="linenos">17</span></a>    <span class="n">details</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span>
 </span><span id="LogEntry-18"><a href="#LogEntry-18"><span class="linenos">18</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;log details&quot;&quot;&quot;</span>
 </span><span id="LogEntry-19"><a href="#LogEntry-19"><span class="linenos">19</span></a>
-</span><span id="LogEntry-20"><a href="#LogEntry-20"><span class="linenos">20</span></a>    <span class="n">timestamp</span><span class="p">:</span> <span class="n">datetime</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">)</span>
-</span><span id="LogEntry-21"><a href="#LogEntry-21"><span class="linenos">21</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;creation of log entry&quot;&quot;&quot;</span>
+</span><span id="LogEntry-20"><a href="#LogEntry-20"><span class="linenos">20</span></a>    <span class="n">details_formatted</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span id="LogEntry-21"><a href="#LogEntry-21"><span class="linenos">21</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;log details formatted as markdown&quot;&quot;&quot;</span>
 </span><span id="LogEntry-22"><a href="#LogEntry-22"><span class="linenos">22</span></a>
-</span><span id="LogEntry-23"><a href="#LogEntry-23"><span class="linenos">23</span></a>    <span class="n">run_url</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">run_url</span>
-</span><span id="LogEntry-24"><a href="#LogEntry-24"><span class="linenos">24</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;gh action run url&quot;&quot;&quot;</span>
+</span><span id="LogEntry-23"><a href="#LogEntry-23"><span class="linenos">23</span></a>    <span class="n">timestamp</span><span class="p">:</span> <span class="n">datetime</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">)</span>
+</span><span id="LogEntry-24"><a href="#LogEntry-24"><span class="linenos">24</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;creation of log entry&quot;&quot;&quot;</span>
+</span><span id="LogEntry-25"><a href="#LogEntry-25"><span class="linenos">25</span></a>
+</span><span id="LogEntry-26"><a href="#LogEntry-26"><span class="linenos">26</span></a>    <span class="n">run_url</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">run_url</span>
+</span><span id="LogEntry-27"><a href="#LogEntry-27"><span class="linenos">27</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;gh action run url&quot;&quot;&quot;</span>
 </span></pre></div>
 
 
@@ -251,6 +260,19 @@ __pydantic_private__: Values of private attributes set on the model instance.
 
 
                             </div>
+                            <div id="LogEntry.details_formatted" class="classattr">
+                                <div class="attr variable">
+            <span class="name">details_formatted</span><span class="annotation">: Optional[str]</span>
+
+        
+    </div>
+    <a class="headerlink" href="#LogEntry.details_formatted"></a>
+    
+            <div class="docstring"><p>log details formatted as markdown</p>
+</div>
+
+
+                            </div>
                             <div id="LogEntry.timestamp" class="classattr">
                                 <div class="attr variable">
             <span class="name">timestamp</span><span class="annotation">: datetime.datetime</span>
@@ -296,7 +318,7 @@ __pydantic_private__: Values of private attributes set on the model instance.
                                 <div class="attr variable">
             <span class="name">model_fields</span><span class="annotation">: ClassVar[Dict[str, pydantic.fields.FieldInfo]]</span>        =
 <input id="LogEntry.model_fields-view-value" class="view-value-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
-            <label class="view-value-button pdoc-button" for="LogEntry.model_fields-view-value"></label><span class="default_value">{&#39;message&#39;: FieldInfo(annotation=str, required=False, default=&#39;&#39;), &#39;details&#39;: FieldInfo(annotation=Any, required=False, default=None), &#39;timestamp&#39;: FieldInfo(annotation=datetime, required=False, default_factory=builtin_function_or_method), &#39;run_url&#39;: FieldInfo(annotation=Union[str, NoneType], required=False, default=None)}</span>
+            <label class="view-value-button pdoc-button" for="LogEntry.model_fields-view-value"></label><span class="default_value">{&#39;message&#39;: FieldInfo(annotation=str, required=False, default=&#39;&#39;), &#39;details&#39;: FieldInfo(annotation=Any, required=False, default=None), &#39;details_formatted&#39;: FieldInfo(annotation=Union[str, NoneType], required=False, default=None), &#39;timestamp&#39;: FieldInfo(annotation=datetime, required=False, default_factory=builtin_function_or_method), &#39;run_url&#39;: FieldInfo(annotation=Union[str, NoneType], required=False, default=None)}</span>
 
         
     </div>
@@ -336,22 +358,22 @@ mapping of field names to [<code>FieldInfo</code>][pydantic.fields.FieldInfo] ob
 
     </div>
     <a class="headerlink" href="#Log"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Log-27"><a href="#Log-27"><span class="linenos">27</span></a><span class="k">class</span> <span class="nc">Log</span><span class="p">(</span><span class="n">Node</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">extra</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">):</span>
-</span><span id="Log-28"><a href="#Log-28"><span class="linenos">28</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;`&lt;concept_id&gt;/&lt;version&gt;/log.json` contains a version specific log&quot;&quot;&quot;</span>
-</span><span id="Log-29"><a href="#Log-29"><span class="linenos">29</span></a>
-</span><span id="Log-30"><a href="#Log-30"><span class="linenos">30</span></a>    <span class="n">file_name</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;log.json&quot;</span>
-</span><span id="Log-31"><a href="#Log-31"><span class="linenos">31</span></a>
-</span><span id="Log-32"><a href="#Log-32"><span class="linenos">32</span></a>    <span class="n">log_version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;0.1.0&quot;</span>
-</span><span id="Log-33"><a href="#Log-33"><span class="linenos">33</span></a>    <span class="n">entries</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">LogEntry</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Log-30"><a href="#Log-30"><span class="linenos">30</span></a><span class="k">class</span> <span class="nc">Log</span><span class="p">(</span><span class="n">Node</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">extra</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">):</span>
+</span><span id="Log-31"><a href="#Log-31"><span class="linenos">31</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;`&lt;concept_id&gt;/&lt;version&gt;/log.json` contains a version specific log&quot;&quot;&quot;</span>
+</span><span id="Log-32"><a href="#Log-32"><span class="linenos">32</span></a>
+</span><span id="Log-33"><a href="#Log-33"><span class="linenos">33</span></a>    <span class="n">file_name</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;log.json&quot;</span>
 </span><span id="Log-34"><a href="#Log-34"><span class="linenos">34</span></a>
-</span><span id="Log-35"><a href="#Log-35"><span class="linenos">35</span></a>    <span class="k">def</span> <span class="nf">get_updated</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">update</span><span class="p">:</span> <span class="n">Log</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Log</span><span class="p">:</span>
-</span><span id="Log-36"><a href="#Log-36"><span class="linenos">36</span></a>        <span class="k">if</span> <span class="n">update</span><span class="o">.</span><span class="n">log_version</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">log_version</span><span class="p">:</span>
-</span><span id="Log-37"><a href="#Log-37"><span class="linenos">37</span></a>            <span class="k">return</span> <span class="n">update</span>
-</span><span id="Log-38"><a href="#Log-38"><span class="linenos">38</span></a>
-</span><span id="Log-39"><a href="#Log-39"><span class="linenos">39</span></a>        <span class="k">return</span> <span class="n">Log</span><span class="p">(</span>
-</span><span id="Log-40"><a href="#Log-40"><span class="linenos">40</span></a>            <span class="n">log_version</span><span class="o">=</span><span class="n">update</span><span class="o">.</span><span class="n">log_version</span><span class="p">,</span>
-</span><span id="Log-41"><a href="#Log-41"><span class="linenos">41</span></a>            <span class="n">entries</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entries</span><span class="p">)</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">update</span><span class="o">.</span><span class="n">entries</span><span class="p">),</span>
-</span><span id="Log-42"><a href="#Log-42"><span class="linenos">42</span></a>        <span class="p">)</span>
+</span><span id="Log-35"><a href="#Log-35"><span class="linenos">35</span></a>    <span class="n">log_version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;0.1.0&quot;</span>
+</span><span id="Log-36"><a href="#Log-36"><span class="linenos">36</span></a>    <span class="n">entries</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">LogEntry</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
+</span><span id="Log-37"><a href="#Log-37"><span class="linenos">37</span></a>
+</span><span id="Log-38"><a href="#Log-38"><span class="linenos">38</span></a>    <span class="k">def</span> <span class="nf">get_updated</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">update</span><span class="p">:</span> <span class="n">Log</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Log</span><span class="p">:</span>
+</span><span id="Log-39"><a href="#Log-39"><span class="linenos">39</span></a>        <span class="k">if</span> <span class="n">update</span><span class="o">.</span><span class="n">log_version</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">log_version</span><span class="p">:</span>
+</span><span id="Log-40"><a href="#Log-40"><span class="linenos">40</span></a>            <span class="k">return</span> <span class="n">update</span>
+</span><span id="Log-41"><a href="#Log-41"><span class="linenos">41</span></a>
+</span><span id="Log-42"><a href="#Log-42"><span class="linenos">42</span></a>        <span class="k">return</span> <span class="n">Log</span><span class="p">(</span>
+</span><span id="Log-43"><a href="#Log-43"><span class="linenos">43</span></a>            <span class="n">log_version</span><span class="o">=</span><span class="n">update</span><span class="o">.</span><span class="n">log_version</span><span class="p">,</span>
+</span><span id="Log-44"><a href="#Log-44"><span class="linenos">44</span></a>            <span class="n">entries</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entries</span><span class="p">)</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">update</span><span class="o">.</span><span class="n">entries</span><span class="p">),</span>
+</span><span id="Log-45"><a href="#Log-45"><span class="linenos">45</span></a>        <span class="p">)</span>
 </span></pre></div>
 
 
@@ -404,14 +426,14 @@ mapping of field names to [<code>FieldInfo</code>][pydantic.fields.FieldInfo] ob
 
     </div>
     <a class="headerlink" href="#Log.get_updated"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Log.get_updated-35"><a href="#Log.get_updated-35"><span class="linenos">35</span></a>    <span class="k">def</span> <span class="nf">get_updated</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">update</span><span class="p">:</span> <span class="n">Log</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Log</span><span class="p">:</span>
-</span><span id="Log.get_updated-36"><a href="#Log.get_updated-36"><span class="linenos">36</span></a>        <span class="k">if</span> <span class="n">update</span><span class="o">.</span><span class="n">log_version</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">log_version</span><span class="p">:</span>
-</span><span id="Log.get_updated-37"><a href="#Log.get_updated-37"><span class="linenos">37</span></a>            <span class="k">return</span> <span class="n">update</span>
-</span><span id="Log.get_updated-38"><a href="#Log.get_updated-38"><span class="linenos">38</span></a>
-</span><span id="Log.get_updated-39"><a href="#Log.get_updated-39"><span class="linenos">39</span></a>        <span class="k">return</span> <span class="n">Log</span><span class="p">(</span>
-</span><span id="Log.get_updated-40"><a href="#Log.get_updated-40"><span class="linenos">40</span></a>            <span class="n">log_version</span><span class="o">=</span><span class="n">update</span><span class="o">.</span><span class="n">log_version</span><span class="p">,</span>
-</span><span id="Log.get_updated-41"><a href="#Log.get_updated-41"><span class="linenos">41</span></a>            <span class="n">entries</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entries</span><span class="p">)</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">update</span><span class="o">.</span><span class="n">entries</span><span class="p">),</span>
-</span><span id="Log.get_updated-42"><a href="#Log.get_updated-42"><span class="linenos">42</span></a>        <span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Log.get_updated-38"><a href="#Log.get_updated-38"><span class="linenos">38</span></a>    <span class="k">def</span> <span class="nf">get_updated</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">update</span><span class="p">:</span> <span class="n">Log</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Log</span><span class="p">:</span>
+</span><span id="Log.get_updated-39"><a href="#Log.get_updated-39"><span class="linenos">39</span></a>        <span class="k">if</span> <span class="n">update</span><span class="o">.</span><span class="n">log_version</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">log_version</span><span class="p">:</span>
+</span><span id="Log.get_updated-40"><a href="#Log.get_updated-40"><span class="linenos">40</span></a>            <span class="k">return</span> <span class="n">update</span>
+</span><span id="Log.get_updated-41"><a href="#Log.get_updated-41"><span class="linenos">41</span></a>
+</span><span id="Log.get_updated-42"><a href="#Log.get_updated-42"><span class="linenos">42</span></a>        <span class="k">return</span> <span class="n">Log</span><span class="p">(</span>
+</span><span id="Log.get_updated-43"><a href="#Log.get_updated-43"><span class="linenos">43</span></a>            <span class="n">log_version</span><span class="o">=</span><span class="n">update</span><span class="o">.</span><span class="n">log_version</span><span class="p">,</span>
+</span><span id="Log.get_updated-44"><a href="#Log.get_updated-44"><span class="linenos">44</span></a>            <span class="n">entries</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entries</span><span class="p">)</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">update</span><span class="o">.</span><span class="n">entries</span><span class="p">),</span>
+</span><span id="Log.get_updated-45"><a href="#Log.get_updated-45"><span class="linenos">45</span></a>        <span class="p">)</span>
 </span></pre></div>
 
 
