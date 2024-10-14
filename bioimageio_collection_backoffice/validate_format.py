@@ -53,6 +53,7 @@ def validate_format(rv: Union[RecordDraft, Record]):
         LogEntry(
             message=rd.validation_summary.name,
             details=rd.validation_summary,
+            details_formatted=rd.validation_summary.format(),
         )
     )
     return dynamic_test_cases, conda_envs

@@ -57,6 +57,7 @@ def run_dynamic_tests(
             LogEntry(
                 message=f"bioimageio.core {bioimageio.core.__version__} test {summary.status}",
                 details=summary,
+                details_formatted=summary.format(),
             )
         )
         report = CompatiblityReport(
