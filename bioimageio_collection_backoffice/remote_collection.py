@@ -846,6 +846,13 @@ class RecordDraft(RecordBase):
                         upload(tname, tdata)
                         thumbnail_config[oname] = tname
 
+                if rdf["id_emoji"] is not None:
+                    # we have a valid new collection id
+                    # remove any nickname from config.bioimageio
+                    #   that may have been kept if reusing an older model
+                    bioimageio_config.pop("nickname", None)
+                    bioimageio_config.pop("nickname_icon", None)
+
         rdf_io = io.BytesIO()
         yaml.dump(rdf, rdf_io)
         rdf_data = rdf_io.getvalue()
