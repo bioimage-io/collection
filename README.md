@@ -120,3 +120,7 @@ Reviewers can:
 [test-wf]: https://github.com/bioimage-io/collection/actions/workflows/test.yaml
 [upload]: https://bioimage.io/#/upload
 [zenodo-overview]: https://zenodo.org/search?q=metadata.subjects.subject%3A%22backup.bioimage.io%22&l=list&p=1&s=10&sort=bestmatch
+
+# Add community partner
+To link yourself as a community partner, please create a PR to insert relevant metadata into [bioimageio_collection_config.json](https://github.com/bioimage-io/collection/blob/4087336ad00bff0198f5de83c94aa13be357840d/bioimageio_collection_config.json) under `"partners"`.
+Checkout [ilastik partner entry](https://github.com/bioimage-io/collection/blob/4087336ad00bff0198f5de83c94aa13be357840d/bioimageio_collection_config.json#L283-L301) for an example.
