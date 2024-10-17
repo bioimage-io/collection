@@ -91,19 +91,40 @@ def _validate_format_impl(rdf_source: str):
                 ),
             )
         )
+        rd.validation_summary.add_detail(
+            ValidationDetail(
+                name="Check version field",
+                status="failed" if rd.version is None else "passed",
+                errors=(
+                    [
+                        ErrorEntry(
+                            loc=("version",),
+                            msg="missing version (We encourage using '0.1.0' for the initial version.)",
+                            type="error",
+                        )
+                    ]
+                    if rd.uploader is None
+                    else []
+                ),
+            )
+        )
         if rd.license is None:
             # some older RDF specs have 'license' as an optional field
             rd.validation_summary.add_detail(
                 ValidationDetail(
                     name="Check that RDF has a license field",
                     status="failed" if rd.license is None else "passed",
-                    errors=[
-                        ErrorEntry(
-                            loc=("license",),
-                            msg="missing license field",
-                            type="error",
-                        )
-                    ],
+                    errors=(
+                        [
+                            ErrorEntry(
+                                loc=("license",),
+                                msg="missing license field",
+                                type="error",
+                            )
+                        ]
+                        if rd.license is None
+                        else []
+                    ),
                 )
             )
 
