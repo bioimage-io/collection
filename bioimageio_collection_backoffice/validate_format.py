@@ -78,13 +78,17 @@ def _validate_format_impl(rdf_source: str):
             ValidationDetail(
                 name="Check that uploader is specified",
                 status="failed" if rd.uploader is None else "passed",
-                errors=[
-                    ErrorEntry(
-                        loc=("uploader", "email"),
-                        msg="missing uploader email",
-                        type="error",
-                    )
-                ],
+                errors=(
+                    [
+                        ErrorEntry(
+                            loc=("uploader", "email"),
+                            msg="missing uploader email",
+                            type="error",
+                        )
+                    ]
+                    if rd.uploader is None
+                    else []
+                ),
             )
         )
         if rd.license is None:
