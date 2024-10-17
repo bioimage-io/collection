@@ -44,7 +44,7 @@ class TestingStatus(_DraftStatusBase, frozen=True):
 class AwaitingReviewStatus(_DraftStatusBase, frozen=True):
     name: Literal["awaiting review"] = "awaiting review"
     description: str = (
-        "Thank you for your contribution! 🎉"
+        "Thank you for your contribution! 💪"
         "Our bioimage.io maintainers will take a look soon. 🦒"
     )
     step: Literal[4] = 4

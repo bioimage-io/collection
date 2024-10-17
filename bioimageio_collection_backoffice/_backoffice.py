@@ -183,7 +183,7 @@ class BackOffice:
         notify_uploader(
             published,
             "was published! 🎉",
-            f"Thank you for contributing {published.id} to bioimage.io!\n"
+            f"Thank you for contributing {published.id} to bioimage.io! 🙏.\n"
             + f"Check it out at {published.bioimageio_url}\n",
         )
 
