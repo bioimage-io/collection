@@ -29,7 +29,8 @@ Current reviewers are listed in [`bioimageio_collection_config.json`][review-con
 1. Open a pull request, adding a person to the [list of reviewers][review-config], see <https://github.com/bioimage-io/collection/pull/75> for an example.
    * one public email address is required
    * github id can be found using `https://api.github.com/users/<github_username>`
-1. Once the pull request has been merged, the new reviewer can
+2. So the changes can be applied, the service needs to be restored manually. Reach out to the team or leave an issue.
+3. Once the pull request has been merged, the new reviewer can
    * accept resource drafts
    * request changes on resource drafts
    * upload a new version for any resource
@@ -89,6 +90,7 @@ Reviewers should check the models for technical correctness (aided by CI, see [T
 To this end it can be helpful to check the logs displayed at `https://bioimageio-uploader.netlify.app/#/status/<concept_id>`.
 There information about automated workflow steps and validation outcome is logged.
 Additionally an 'error' status may be shown if an exception occured in the GitHub workflow run producing the log.
+To be able to see all the packaged model with the 'rdf.yaml' as well as covers and other documentation, go to the [draft collection](https://bioimage.io/#/?repo=https%3A%2F%2Fuk1s3.embassy.ebi.ac.uk%2Fpublic-datasets%2Fbioimage.io%2Fcollection_draft.json) and download the model from there.
 
 For models, reviewers can use [the model documentation][model-docs] as a guide.
 
@@ -127,5 +129,5 @@ Checkout [ilastik partner entry](https://github.com/bioimage-io/collection/blob/
 
 ## Add community partner compatibility checks
 Any community partner is invited to add a GitHub Actions workflow in this repo (please make a PR) that generates reports on its software compatibility with new and updated resources in the bioimage.io collection.
-See [ilastik compatibility checks worfklow](https://github.com/bioimage-io/collection/blob/main/.github/workflows/check_compatibility_ilastik.yaml) for an example.
+See [ilastik compatibility checks workflow](https://github.com/bioimage-io/collection/blob/main/.github/workflows/check_compatibility_ilastik.yaml) for an example.
 
