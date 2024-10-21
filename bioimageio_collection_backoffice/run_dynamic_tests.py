@@ -8,6 +8,7 @@ import bioimageio.spec
 from bioimageio.spec.model.v0_5 import WeightsFormat
 from bioimageio.spec.summary import ErrorEntry, InstalledPackage, ValidationDetail
 from bioimageio.spec.utils import download
+from loguru import logger
 from ruyaml import YAML
 
 from bioimageio_collection_backoffice.db_structure.compatibility import (
@@ -118,6 +119,7 @@ def _run_dynamic_tests_impl(
                     get_summary_detail_from_exception("check for test kwargs", e)
                 )
             else:
+                logger.debug("extracted 'test_kwargs': {}", test_kwargs)
                 try:
                     summary = test_description(
                         rdf_url, weight_format=weight_format, **test_kwargs
