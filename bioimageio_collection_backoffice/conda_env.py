@@ -140,7 +140,7 @@ def _get_default_pytorch_env(
     # avoid `undefined symbol: iJIT_NotifyEvent` from `torch/lib/libtorch_cpu.so`
     # see https://github.com/pytorch/pytorch/issues/123097
     if pytorch_version < Version(
-        "2.3.0"  # TODO: check if this is the correct cutoff where the fix is not longer needed
+        "2.2.0"  # TODO: check if this is the correct cutoff where the fix is not longer needed
     ):
         deps.append("mkl ==2024.0.0")
 
