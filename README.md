@@ -90,7 +90,7 @@ Reviewers should check the models for technical correctness (aided by CI, see [T
 To this end it can be helpful to check the logs displayed at `https://bioimageio-uploader.netlify.app/#/status/<concept_id>`.
 There information about automated workflow steps and validation outcome is logged.
 Additionally an 'error' status may be shown if an exception occured in the GitHub workflow run producing the log.
-To be able to see all the packaged model with the 'rdf.yaml' as well as covers and other documentation, go to the [draft collection](https://bioimage.io/#/?repo=https%3A%2F%2Fuk1s3.embassy.ebi.ac.uk%2Fpublic-datasets%2Fbioimage.io%2Fcollection_draft.json) and download the model from there.
+To be able to see all the packaged models along with the 'rdf.yaml' as well as covers and other documentation, go to the [draft collection](https://bioimage.io/#/?repo=https%3A%2F%2Fuk1s3.embassy.ebi.ac.uk%2Fpublic-datasets%2Fbioimage.io%2Fcollection_draft.json) and download the model from there.
 
 For models, reviewers can use [the model documentation][model-docs] as a guide.
 
