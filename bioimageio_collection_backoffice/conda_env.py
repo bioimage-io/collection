@@ -1,3 +1,4 @@
+# TODO: remove and use from bioimageio.spec.conda_env
 import warnings
 from typing import List, Optional, TypedDict, Union
 
@@ -30,13 +31,16 @@ class PipDeps(TypedDict):
 class CondaEnv(TypedDict):
     name: str
     channels: List[str]
-    dependencies: List[Union[str, PipDeps]]
+    dependencies: List[
+        Union[str, PipDeps]
+    ]  # TODO: improve typing: last entry is PipDeps
 
 
 def get_conda_env(
     *,
     entry: SupportedWeightsEntry,
-    env_name: str,
+    env_name: Optional[str] = None,
+    add_collection_backoffice: bool = False,
 ) -> CondaEnv:
     if isinstance(entry, (v0_4.OnnxWeightsDescr, v0_5.OnnxWeightsDescr)):
         conda_env = _get_default_onnx_env(opset_version=entry.opset_version)
@@ -71,7 +75,18 @@ def get_conda_env(
     else:
         assert_never(entry)
 
-    _ensure_min_env(conda_env, env_name)
+    _normalize_bioimageio_conda_env(conda_env, env_name)
+    pip_section = conda_env["dependencies"][-1]
+    assert isinstance(pip_section, dict)
+    if (
+        add_collection_backoffice
+        and (
+            collection_main := "git+https://github.com/bioimage-io/collection.git@main"
+        )
+        not in pip_section["pip"]
+    ):
+        pip_section["pip"].append(collection_main)
+
     return conda_env
 
 
@@ -244,8 +259,12 @@ def _get_env_from_deps(
         assert_never(deps)
 
 
-def _ensure_min_env(env: CondaEnv, env_name: Optional[str] = None):
-    """update a conda env such that we have bioimageio.core and the collection backoffice available"""
+def _normalize_bioimageio_conda_env(env: CondaEnv, env_name: Optional[str] = None):
+    """update a conda env such that we have bioimageio.core and sorted dependencies
+
+    Args:
+
+    """
     if env_name is None:
         env["name"] = _ensure_valid_conda_env_name(env.get("name", ""))
     else:
@@ -255,7 +274,7 @@ def _ensure_min_env(env: CondaEnv, env_name: Optional[str] = None):
         env["name"] = "env"
 
     if "channels" not in env:
-        env["channels"] = ["nodefaults", "conda-forge"]
+        env["channels"] = ["conda-forge", "nodefaults"]
 
     if "dependencies" not in env:
         env["dependencies"] = []
@@ -273,18 +292,15 @@ def _ensure_min_env(env: CondaEnv, env_name: Optional[str] = None):
     if "pip" not in env["dependencies"]:
         env["dependencies"].append("pip")
 
-    pip_section: PipDeps = {"pip": []}
-    for d in env["dependencies"]:
-        if isinstance(d, dict) and "pip" in d:
-            pip_section = d
+    for i in range(len(deps := env["dependencies"])):
+        if isinstance(deps[i], dict) and "pip" in deps[i]:
+            found_pip_section = deps.pop(i)
+            assert isinstance(found_pip_section, dict)
+            pip_section = found_pip_section
+            del found_pip_section
             break
     else:
-        env["dependencies"].append(pip_section)
-
-    if (
-        collection_main := "git+https://github.com/bioimage-io/collection.git@main"
-    ) not in pip_section["pip"]:
-        pip_section["pip"].append(collection_main)
+        pip_section: PipDeps = {"pip": []}
 
     if (
         "bioimageio.core" not in env["dependencies"]
@@ -292,6 +308,13 @@ def _ensure_min_env(env: CondaEnv, env_name: Optional[str] = None):
         or "bioimageio.core" not in pip_section["pip"]
     ):
         env["dependencies"].append("conda-forge::bioimageio.core")
+
+    assert all(
+        isinstance(dep, str) for dep in env["dependencies"]
+    ), "found mapping in dependencies even after removing pip section"
+    env["dependencies"].sort()  # pyright: ignore[reportCallIssue]
+    pip_section["pip"].sort()
+    env["dependencies"].append(pip_section)
 
 
 def _ensure_valid_conda_env_name(name: str) -> str:

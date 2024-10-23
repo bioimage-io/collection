@@ -152,7 +152,9 @@ def _prepare_dynamic_test_cases(
                 continue
 
             wf = cast(WeightsFormat, wf)
-            conda_envs[wf] = get_conda_env(entry=entry, env_name=wf)
+            conda_envs[wf] = get_conda_env(
+                entry=entry, env_name=wf, add_collection_backoffice=True
+            )
             validation_cases.append({"weight_format": wf})
 
     return validation_cases, conda_envs
