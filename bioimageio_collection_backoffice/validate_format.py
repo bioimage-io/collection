@@ -152,9 +152,15 @@ def _prepare_dynamic_test_cases(
                 continue
 
             wf = cast(WeightsFormat, wf)
-            conda_envs[wf] = get_conda_env(
-                entry=entry, env_name=wf, add_collection_backoffice=True
-            )
+            wf_conda_env = get_conda_env(entry=entry, env_name=wf)
+            pip_section = wf_conda_env["dependencies"][-1]
+            assert isinstance(pip_section, dict)
+            if (
+                collection_main := "git+https://github.com/bioimage-io/collection.git@main"
+            ) not in pip_section["pip"]:
+                pip_section["pip"].append(collection_main)
+
+            conda_envs[wf] = wf_conda_env
             validation_cases.append({"weight_format": wf})
 
     return validation_cases, conda_envs

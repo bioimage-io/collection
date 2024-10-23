@@ -40,7 +40,6 @@ def get_conda_env(
     *,
     entry: SupportedWeightsEntry,
     env_name: Optional[str] = None,
-    add_collection_backoffice: bool = False,
 ) -> CondaEnv:
     if isinstance(entry, (v0_4.OnnxWeightsDescr, v0_5.OnnxWeightsDescr)):
         conda_env = _get_default_onnx_env(opset_version=entry.opset_version)
@@ -76,17 +75,6 @@ def get_conda_env(
         assert_never(entry)
 
     _normalize_bioimageio_conda_env(conda_env, env_name)
-    pip_section = conda_env["dependencies"][-1]
-    assert isinstance(pip_section, dict)
-    if (
-        add_collection_backoffice
-        and (
-            collection_main := "git+https://github.com/bioimage-io/collection.git@main"
-        )
-        not in pip_section["pip"]
-    ):
-        pip_section["pip"].append(collection_main)
-
     return conda_env
 
 
