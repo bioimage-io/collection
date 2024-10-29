@@ -11,11 +11,9 @@ from bioimageio.spec.utils import download
 from loguru import logger
 from ruyaml import YAML
 
-from bioimageio_collection_backoffice.db_structure.compatibility import (
-    CompatiblityReport,
-)
-
+from .db_structure.compatibility import CompatiblityReport
 from .db_structure.log import LogEntry
+from .gh_utils import render_summary
 from .remote_collection import Record, RecordDraft
 
 try:
@@ -54,13 +52,16 @@ def run_dynamic_tests(
         record.rdf_url, weight_format, create_env_outcome, conda_env_file
     )
     if summary is not None:
+        summary_formatted = summary.format()
         record.add_log_entry(
             LogEntry(
                 message=f"bioimageio.core {bioimageio.core.__version__} test {summary.status}",
                 details=summary,
-                details_formatted=summary.format(),
+                details_formatted=summary_formatted,
             )
         )
+        render_summary(summary_formatted)
+
         report = CompatiblityReport(
             tool=f"bioimageio.core_{bioimageio.core.__version__}",
             status=summary.status,

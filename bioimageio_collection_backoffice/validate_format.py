@@ -6,9 +6,9 @@ from bioimageio.spec.model import v0_4, v0_5
 from bioimageio.spec.model.v0_5 import WeightsFormat
 from bioimageio.spec.summary import ErrorEntry, ValidationDetail
 
-from bioimageio_collection_backoffice.conda_env import CondaEnv, get_conda_env
-
+from .conda_env import CondaEnv, get_conda_env
 from .db_structure.log import LogEntry
+from .gh_utils import render_summary
 from .remote_collection import Record, RecordDraft
 
 
@@ -49,13 +49,15 @@ def validate_format(rv: Union[RecordDraft, Record]):
             )
         )
 
+    summary_formatted = rd.validation_summary.format()
     rv.add_log_entry(
         LogEntry(
             message=rd.validation_summary.name,
             details=rd.validation_summary,
-            details_formatted=rd.validation_summary.format(),
+            details_formatted=summary_formatted,
         )
     )
+    render_summary(summary_formatted)
     return dynamic_test_cases, conda_envs
 
 
