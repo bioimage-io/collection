@@ -88,7 +88,8 @@ def _run_dynamic_tests_impl(
     def get_basic_summary():
         summary = bioimageio.spec.load_description(rdf_url).validation_summary
         summary.name = "bioimageio.core.test_description"
-        summary.env.append(
+        add = summary.env.add if isinstance(summary.env, set) else summary.env.append
+        add(
             InstalledPackage(
                 name="bioimageio.core", version=bioimageio.core.__version__
             )
