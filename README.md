@@ -131,3 +131,5 @@ Checkout [ilastik partner entry](https://github.com/bioimage-io/collection/blob/
 Any community partner is invited to add a GitHub Actions workflow in this repo (please make a PR) that generates reports on its software compatibility with new and updated resources in the bioimage.io collection.
 See [ilastik compatibility checks workflow](https://github.com/bioimage-io/collection/blob/main/.github/workflows/check_compatibility_ilastik.yaml) for an example.
 
+If you are not familiar with GitHub Actions workflows, we can help you to set this up analog to our existing community partner compatibility checks.
+Ideally you can provide a script to create a compatibility report (a relativley simple json file) for a given resource description. see [this Python script as an example](https://github.com/bioimage-io/collection/blob/main/scripts/check_compatibility_ilastik.py).
