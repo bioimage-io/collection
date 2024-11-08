@@ -2,11 +2,12 @@ import warnings
 from typing import Dict, List, Literal, Tuple, Union, cast
 
 from bioimageio.spec import InvalidDescr, ResourceDescr, load_description
+from bioimageio.spec.conda_env import CondaEnv
+from bioimageio.spec.get_conda_env import get_conda_env
 from bioimageio.spec.model import v0_4, v0_5
 from bioimageio.spec.model.v0_5 import WeightsFormat
 from bioimageio.spec.summary import ErrorEntry, ValidationDetail
 
-from .conda_env import CondaEnv, get_conda_env
 from .db_structure.log import LogEntry
 from .gh_utils import render_summary
 from .remote_collection import Record, RecordDraft
