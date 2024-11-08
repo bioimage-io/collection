@@ -464,6 +464,40 @@
                     "tags": [
                         "dl4miceverywhere"
                     ]
+                },
+                {
+                    "background_image": "static/img/zoo-background.svg",
+                    "contact": [
+                        {
+                            "affiliation": [
+                                {
+                                    "name": "Helmholtz Munich - IFE",
+                                    "url": "https://www.helmholtz-munich.de/en/ife/research-groups/schmoller-lab"
+                                }
+                            ],
+                            "email": "francesco.padovani@helmholtz-munich.de",
+                            "github": "ElpadoCan",
+                            "name": "Francesco Padovani"
+                        }
+                    ],
+                    "default_type": "application",
+                    "docs": "https://spotmax.readthedocs.io/en/latest/",
+                    "explore_button_text": "Start Exploring",
+                    "icon": "https://raw.githubusercontent.com/SchmollerLab/SpotMAX/refs/heads/main/spotmax/resources/spotMAX_logo.svg",
+                    "id": "spotmax",
+                    "logo": "https://raw.githubusercontent.com/SchmollerLab/SpotMAX/refs/heads/main/spotmax/resources/spotMAX_logo.svg",
+                    "name": "SpotMAX",
+                    "resource_types": [
+                        "model",
+                        "application",
+                        "dataset"
+                    ],
+                    "splash_feature_list": [],
+                    "splash_subtitle": "SpotMAX is a Python software for the analysis of multi-dimensional microscopy data",
+                    "splash_title": "SpotMAX",
+                    "tags": [
+                        "SpotMAX"
+                    ]
                 }
             ]
         },
