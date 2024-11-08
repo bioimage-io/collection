@@ -79,6 +79,14 @@
             "orcid": "0009-0008-9276-5225",
             "github_user": "mese79",
             "email": "mehdi.seifi@fht.org"
+        },
+        {
+            "id": "github|47150974",
+            "name": "Iván Hidalgo-Cenalmor",
+            "affiliation": "Instituto Gulbenkian de Ciência",
+            "orcid": "0009-0000-8923-568X",
+            "github_user": "IvanHCenalmor",
+            "email": "ihidalgo@igc.gulbenkian.pt"
         }
     ],
     "collection_template": {
