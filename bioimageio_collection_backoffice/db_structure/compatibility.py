@@ -8,8 +8,13 @@ from ..common import Node
 
 
 class CompatiblityReport(Node, frozen=True, extra="allow"):
-    tool: Annotated[str, Field(exclude=True)]
-    """toolname (including version)"""
+    tool: Annotated[str, Field(exclude=True, pattern=r"^[^_]+_[^_]+$")]
+    """toolname (including version separated by an underscore)"""
+
+    @property
+    def tool_wo_version(self) -> str:
+        """assuming a pattern of <tool>_"""
+        return self.tool.split("_")[0]
 
     status: Literal["passed", "failed", "not-applicable"]
     """status of this tool for this resource"""
