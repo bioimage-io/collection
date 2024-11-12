@@ -26,7 +26,14 @@ def check_compatibility_ilastik_impl(
     rdf_url: str,
     sha256: str,
     report_path: Path,
-):
+) -> None:
+    """Write `CompatibilityReport` for a resource description.
+
+    Args:
+        rdf_url: URL to the rdf.yaml file
+        sha256: SHA-256 value of **rdf_url** content
+        report_path: path to save `CompatibilityReport` as json to
+    """
     report_path.parent.mkdir(parents=True, exist_ok=True)
 
     rdf = download_rdf(rdf_url, sha256)
