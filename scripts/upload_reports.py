@@ -4,8 +4,8 @@ from pathlib import Path
 from typing import Any, Dict, Union
 
 import fire
-from ruyaml import YAML
 
+from bioimageio_collection_backoffice.common import yaml
 from bioimageio_collection_backoffice.db_structure.compatibility import (
     CompatiblityReport,
 )
@@ -13,8 +13,6 @@ from bioimageio_collection_backoffice.remote_collection import (
     get_remote_resource_version,
 )
 from bioimageio_collection_backoffice.s3_client import Client
-
-yaml = YAML(typ="safe")
 
 
 def upload_reports(reports_folder: Union[Path, str]):

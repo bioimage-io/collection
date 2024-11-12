@@ -1,11 +1,8 @@
 from io import BytesIO
 
-from ruyaml import YAML
-
+from bioimageio_collection_backoffice.common import yaml
 from bioimageio_collection_backoffice.remote_collection import RemoteCollection
 from bioimageio_collection_backoffice.s3_client import Client
-
-yaml = YAML(typ="safe")
 
 
 def remove_colab_badges():

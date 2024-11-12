@@ -21,12 +21,10 @@ from minio.commonconfig import CopySource
 from minio.datatypes import Object
 from minio.deleteobjects import DeleteObject
 from pydantic import BaseModel, SecretStr
-from ruyaml import YAML
 
 from ._settings import settings
 from .cache import SizedValueLRU
-
-yaml = YAML(typ="safe")
+from .common import yaml
 
 M = TypeVar("M", bound=BaseModel)
 

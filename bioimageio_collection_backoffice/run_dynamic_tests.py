@@ -9,8 +9,8 @@ from bioimageio.spec.model.v0_5 import WeightsFormat
 from bioimageio.spec.summary import ErrorEntry, InstalledPackage, ValidationDetail
 from bioimageio.spec.utils import download
 from loguru import logger
-from ruyaml import YAML
 
+from .common import yaml
 from .db_structure.compatibility import CompatiblityReport
 from .db_structure.log import LogEntry
 from .gh_utils import render_summary
@@ -23,8 +23,6 @@ except ImportError:
 else:
     # silence tqdm
     tqdm.__init__ = partialmethod(tqdm.__init__, disable=True)  # type: ignore
-
-yaml = YAML(typ="safe")
 
 
 def get_summary_detail_from_exception(name: str, exception: Exception):
