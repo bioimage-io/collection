@@ -4,7 +4,7 @@ from loguru import logger
 from ruyaml import YAML
 
 from bioimageio_collection_backoffice.db_structure.compatibility import (
-    CompatiblityReport,
+    CompatibilityReport,
 )
 from bioimageio_collection_backoffice.remote_collection import Record, RemoteCollection
 from bioimageio_collection_backoffice.s3_client import Client
@@ -22,7 +22,7 @@ def check_compatibility_biapy_impl(
 
     rdf = record.get_rdf()
     if rdf.get("type") != "model":
-        return CompatiblityReport(
+        return CompatibilityReport(
             tool=tool,
             error=None,
             status="not-applicable",
@@ -34,7 +34,7 @@ def check_compatibility_biapy_impl(
     status = "passed" if not error else "failed"
     if error:
         print(f"Reason why BiaPy is not compatible: {error_message}")
-    return CompatiblityReport(
+    return CompatibilityReport(
         tool=tool,
         status=status,
         details=error_message,
