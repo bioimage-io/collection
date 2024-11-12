@@ -12,7 +12,7 @@ from loguru import logger
 from ruyaml import YAML
 
 from bioimageio_collection_backoffice.db_structure.compatibility import (
-    CompatiblityReport,
+    CompatibilityReport,
 )
 
 from .db_structure.log import LogEntry
@@ -61,7 +61,7 @@ def run_dynamic_tests(
                 details_formatted=summary.format(),
             )
         )
-        report = CompatiblityReport(
+        report = CompatibilityReport(
             tool=f"bioimageio.core_{bioimageio.core.__version__}",
             status=summary.status,
             error=(
