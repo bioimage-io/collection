@@ -8,6 +8,10 @@ from ..common import Node
 
 
 class CompatibilityReport(Node, frozen=True, extra="allow"):
+    """Used to report on the compatibility of resource description
+    in the bioimageio collection
+    """
+
     tool: Annotated[str, Field(exclude=True, pattern=r"^[^_]+_[^_]+$")]
     """toolname (including version separated by an underscore)"""
 

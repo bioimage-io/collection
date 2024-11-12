@@ -10,4 +10,6 @@ class Node(
     validate_assignment=True,
     validate_default=False,
 ):
+    """"""  # avoid inheriting docstring from `pydantic.BaseModel`
+
     pass
