@@ -1216,12 +1216,28 @@ def create_collection_entries(
 
     # ingest compatibility reports
     links = set(rdf.get("links", []))
+    tags = set(rdf.get("tags", []))
     compat_reports = record_version.get_all_compatibility_reports()
 
+    def get_compat_tag(tool: str):
+        """make a special, derived tag for the automatic compatibility check result
+
+        of a tool to avoid overwriting plain manual tags like 'ilastik'.
+        """
+        return f"{tool}-compatible"
+
+    # remove all version unspecific tool tags
+    for r in compat_reports:
+        tags.discard(get_compat_tag(r.tool_wo_version))
+
+    # update links and tags with compatible tools
     for r in compat_reports:
         if r.status == "passed":
-            # update links to reference compatible tools
             links.update(r.links)
+            tags.add(get_compat_tag(r.tool))  # add version unspecific tag
+            tags.add(get_compat_tag(r.tool_wo_version))
+        else:
+            tags.discard(get_compat_tag(r.tool))
 
     try:
         thumbnails = rdf["config"]["bioimageio"]["thumbnails"]
@@ -1269,7 +1285,7 @@ def create_collection_entries(
             nickname=nickname,
             rdf_source=AnyUrl(record_version.rdf_url),
             root_url=root_url,
-            tags=rdf.get("tags", []),
+            tags=list(tags),
             training_data=rdf["training_data"] if "training_data" in rdf else None,
             type=rdf["type"],
             source=rdf.get("source"),
