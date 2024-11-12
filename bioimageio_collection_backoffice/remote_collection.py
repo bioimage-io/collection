@@ -53,7 +53,7 @@ from .collection_json import (
 )
 from .db_structure.chat import Chat, Message
 from .db_structure.compatibility import (
-    CompatiblityReport,
+    CompatibilityReport,
     TestSummary,
     TestSummaryEntry,
 )
@@ -669,7 +669,7 @@ class RecordBase(RemoteBase, ABC):
             for t in tools
         }
         return [
-            CompatiblityReport.model_validate({**json.loads(d), "tool": t})
+            CompatibilityReport.model_validate({**json.loads(d), "tool": t})
             for t, d in reports_data.items()
             if d is not None
         ]
@@ -677,7 +677,7 @@ class RecordBase(RemoteBase, ABC):
     def get_compatibility_report_path(self, tool: str):
         return f"{self.folder}compatibility/{tool}.json"
 
-    def set_compatibility_report(self, report: CompatiblityReport) -> None:
+    def set_compatibility_report(self, report: CompatibilityReport) -> None:
         path = self.get_compatibility_report_path(report.tool)
         self.client.put_and_cache(path, report.model_dump_json().encode())
 

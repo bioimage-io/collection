@@ -7,7 +7,7 @@ from ..collection_json import Badge
 from ..common import Node
 
 
-class CompatiblityReport(Node, frozen=True, extra="allow"):
+class CompatibilityReport(Node, frozen=True, extra="allow"):
     tool: Annotated[str, Field(exclude=True, pattern=r"^[^_]+_[^_]+$")]
     """toolname (including version separated by an underscore)"""
 
