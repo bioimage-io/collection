@@ -1250,7 +1250,7 @@ def create_collection_entries(
     return [
         CollectionEntry(
             authors=rdf.get("authors", []),
-            uploader=rdf["uploader"],
+            uploader=rdf.get("uploader", dict(email="bioimageiobot@gmail.com")),
             badges=resolve_relative_path(
                 maybe_swap_with_thumbnail(rdf.get("badges", []), thumbnails),
                 parsed_root,
