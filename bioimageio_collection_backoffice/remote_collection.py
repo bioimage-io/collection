@@ -466,7 +466,9 @@ class RemoteCollection(RemoteBase):
         if collection_entries or not list(self.client.ls(collection_output_file_name)):
             self.client.put_json(
                 collection_output_file_name,
-                collection.model_dump(mode="json", exclude_defaults=True),
+                collection.model_dump(
+                    mode="json", exclude_defaults=mode == "published"
+                ),
             )
         else:
             logger.error(
