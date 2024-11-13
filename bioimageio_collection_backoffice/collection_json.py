@@ -30,8 +30,14 @@ class TrainingData(Node, frozen=True):
     id: str
 
 
+class Uploader(Node, frozen=True):
+    name: Optional[str] = None
+    email: str
+
+
 class CollectionEntry(Node, frozen=True):
     authors: Sequence[Author]
+    uploader: Uploader
     badges: Sequence[Badge]
     concept_doi: Optional[str]
     covers: Sequence[HttpUrl]
