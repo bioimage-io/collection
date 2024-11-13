@@ -1,16 +1,27 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import ClassVar, List, Literal, Optional, Sequence, Union
+from typing import (
+    ClassVar,
+    FrozenSet,
+    List,
+    Literal,
+    Optional,
+    Sequence,
+    Union,
+)
 
 import pydantic
-from typing_extensions import Annotated
+from typing_extensions import Annotated, LiteralString
 
 from .._settings import settings
 from ..common import Node
 
 
 class _StatusBase(Node, frozen=True):
+    fields_to_set_explicitly: ClassVar[FrozenSet[LiteralString]] = frozenset(
+        {"name", "step", "num_steps", "description"}
+    )
     timestamp: datetime = pydantic.Field(default_factory=datetime.now)
     run_url: Optional[str] = settings.run_url
 
