@@ -37,7 +37,7 @@ from bioimageio.spec.utils import (
 from loguru import logger
 from pydantic import AnyUrl
 from ruyaml import YAML
-from typing_extensions import Concatenate, ParamSpec
+from typing_extensions import Concatenate, ParamSpec, assert_never
 
 from ._settings import settings
 from ._thumbnails import create_thumbnails
@@ -1177,6 +1177,11 @@ def create_collection_entries(
             f"{record_version.concept.folder}versions.json",
             versions_info.model_dump(mode="json"),
         )
+        status = None
+    elif isinstance(record_version, RecordDraft):
+        status = record_version.info.status
+    else:
+        assert_never(record_version)
 
     try:
         # legacy nickname
@@ -1274,5 +1279,6 @@ def create_collection_entries(
             training_data=rdf["training_data"] if "training_data" in rdf else None,
             type=rdf["type"],
             source=rdf.get("source"),
+            status=status,
         )
     ], id_map

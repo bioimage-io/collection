@@ -11,6 +11,7 @@ from .collection_config.collection_json_template import (
     CollectionWebsiteConfigTemplate,
 )
 from .common import Node
+from .db_structure.version_info import DraftStatus, ErrorStatus
 
 
 class Author(Node, frozen=True):
@@ -58,6 +59,8 @@ class CollectionEntry(Node, frozen=True):
     training_data: Optional[TrainingData] = None
     type: Literal["application", "model", "notebook", "dataset"]
     source: Optional[str] = None
+    status: Optional[Union[DraftStatus, ErrorStatus]] = None
+    """status of the draft (for collection_draft.json only)"""
 
     def __lt__(self, other: CollectionEntry):
         sdc = 0 if self.download_count == "?" else self.download_count
