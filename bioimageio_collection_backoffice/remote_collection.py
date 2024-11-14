@@ -19,7 +19,6 @@ from typing import (
     List,
     Literal,
     Mapping,
-    NamedTuple,
     Optional,
     Sequence,
     Tuple,
@@ -38,7 +37,7 @@ from bioimageio.spec.utils import (
 from loguru import logger
 from pydantic import AnyUrl
 from ruyaml import YAML
-from typing_extensions import Concatenate, ParamSpec
+from typing_extensions import Concatenate, ParamSpec, assert_never
 
 from ._settings import settings
 from ._thumbnails import create_thumbnails
@@ -50,6 +49,7 @@ from .collection_json import (
     CollectionWebsiteConfig,
     ConceptSummary,
     ConceptVersion,
+    Uploader,
 )
 from .db_structure.chat import Chat, Message
 from .db_structure.compatibility import (
@@ -466,7 +466,9 @@ class RemoteCollection(RemoteBase):
         if collection_entries or not list(self.client.ls(collection_output_file_name)):
             self.client.put_json(
                 collection_output_file_name,
-                collection.model_dump(mode="json", exclude_defaults=True),
+                collection.model_dump(
+                    mode="json", exclude_defaults=mode == "published"
+                ),
             )
         else:
             logger.error(
@@ -569,11 +571,6 @@ class RecordConcept(RemoteBase):
             return None
 
 
-class Uploader(NamedTuple):
-    email: Optional[str]
-    name: str
-
-
 @dataclass
 class RecordBase(RemoteBase, ABC):
     """Base class for a `RecordDraft` and `Record`"""
@@ -633,18 +630,7 @@ class RecordBase(RemoteBase, ABC):
 
     def get_uploader(self):
         rdf = self.get_rdf()
-        try:
-            uploader = rdf["uploader"]
-            email = uploader["email"]
-            name = uploader.get(
-                "name", f"{rdf.get('type', 'bioimage.io resource')} contributor"
-            )
-        except Exception as e:
-            logger.error("failed to extract uploader from rdf: {}", e)
-            email = None
-            name = "bioimage.io resource contributor"
-
-        return Uploader(email=email, name=name)
+        return Uploader.model_validate(rdf["uploader"])
 
     def get_file_url(self, path: str):
         return self.client.get_file_url(f"{self.folder}files/{path}")
@@ -1193,6 +1179,11 @@ def create_collection_entries(
             f"{record_version.concept.folder}versions.json",
             versions_info.model_dump(mode="json"),
         )
+        status = None
+    elif isinstance(record_version, RecordDraft):
+        status = record_version.info.status
+    else:
+        assert_never(record_version)
 
     try:
         # legacy nickname
@@ -1261,6 +1252,7 @@ def create_collection_entries(
     return [
         CollectionEntry(
             authors=rdf.get("authors", []),
+            uploader=rdf.get("uploader", dict(email="bioimageiobot@gmail.com")),
             badges=resolve_relative_path(
                 maybe_swap_with_thumbnail(rdf.get("badges", []), thumbnails),
                 parsed_root,
@@ -1289,5 +1281,6 @@ def create_collection_entries(
             training_data=rdf["training_data"] if "training_data" in rdf else None,
             type=rdf["type"],
             source=rdf.get("source"),
+            status=status,
         )
     ], id_map

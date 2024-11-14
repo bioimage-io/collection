@@ -1,7 +1,14 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import ClassVar, List, Literal, Optional, Sequence, Union
+from typing import (
+    ClassVar,
+    List,
+    Literal,
+    Optional,
+    Sequence,
+    Union,
+)
 
 import pydantic
 from typing_extensions import Annotated
