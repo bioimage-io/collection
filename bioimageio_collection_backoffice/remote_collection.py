@@ -867,18 +867,17 @@ class RecordDraft(RecordBase):
         # map reviewer id to name
         for r in self.collection.config.reviewers:
             if reviewer == r.id:
-                reviewer = r.name
                 break
+        else:
+            raise ValueError(reviewer)
 
-        self._set_status(ChangesRequestedStatus(description=reason))
+        description = (
+            f'<a href= "mailto: {r.email}"> {r.name}</a> requested changes: {reason}'
+        )
+        plain_description = f"{r.name} requested changes: {reason}"
+        self._set_status(ChangesRequestedStatus(description=description))
         self.extend_chat(
-            Chat(
-                messages=[
-                    Message(
-                        author="system", text=f"{reviewer} requested changes: {reason}"
-                    )
-                ]
-            )
+            Chat(messages=[Message(author="system", text=plain_description)])
         )
 
     @log
