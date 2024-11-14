@@ -7,7 +7,8 @@ from careamics import __version__ as CAREAMICS_VERSION
 from careamics import CAREamist
 from careamics.model_io.bmz_io import load_from_bmz
 from bioimageio.spec import load_model_description
-from bioimageio.spec.generic.v0_2 import AttachmentsDescr
+from bioimageio.spec.model import AnyModelDescr
+from bioimageio.spec.model.v0_5 import ModelDescr
 
 from .script_utils import CompatibilityReportDict, check_tool_compatibility
 
@@ -22,27 +23,27 @@ def check_compatibility_careamics_impl(
         rdf_url: URL to the rdf.yaml file
         sha256: SHA-256 value of **rdf_url** content
     """
-    model_desc = load_model_description(rdf_url)
-    if isinstance(model_desc.attachments, AttachmentsDescr):
-        attachment_file_names = [
-            Path(file.path).name
-            for file in model_desc.attachments.files
-            if file.path is not None
-        ]
-    elif isinstance(model_desc.attachments, list):
-        attachment_file_names = [
-            Path(attachment.source.path).name
-            for attachment in model_desc.attachments
-            if attachment.source.path is not None
-        ]
-    else:
-        # TODO: confirm all types of attachments (type checker still complaining)
+    model_desc: AnyModelDescr = load_model_description(rdf_url)
+    if not isinstance(model_desc, ModelDescr):
         report = CompatibilityReportDict(
             status="failed",
             error=None,
-            details="Could not process attachments.",
+            details=(
+                "CAREamics compatibility check does not support `bioimageio.spec.v0.4` "
+                + "model desciptions.",
+            ),
         )
         return report
+
+    assert isinstance(model_desc, ModelDescr)
+    attachment_file_names = [
+        (
+            attachment.source
+            if isinstance(attachment.source, Path)
+            else attachment.source.path
+        )
+        for attachment in model_desc.attachments
+    ]
 
     # check type is tagged as CAREamics
     if ("CAREamics" not in model_desc.tags) and ("careamics" not in model_desc.tags):
