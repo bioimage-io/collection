@@ -14,9 +14,10 @@ class Partner(Node, frozen=True):
     background_image: str
     default_type: str
     explore_button_text: str
-    id: str
     icon: HttpUrl
+    id: str
     logo: HttpUrl
+    name: str
     resource_types: Sequence[str]
     splash_feature_list: Sequence[str]
     splash_subtitle: Optional[str]
