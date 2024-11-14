@@ -18,7 +18,11 @@ if bioimageio.core.__version__.startswith("0.5."):
 else:
     from bioimageio.core import test_model
 
-from .script_utils import CompatibilityReportDict, check_tool_compatibility, download_rdf
+from .script_utils import (
+    CompatibilityReportDict,
+    check_tool_compatibility,
+    download_rdf,
+)
 
 
 def check_compatibility_careamics_impl(
@@ -33,18 +37,25 @@ def check_compatibility_careamics_impl(
     """
     model_desc = load_model_description(rdf_url)
     if isinstance(model_desc.attachments, AttachmentsDescr):
-        attachment_file_names = [file.path.name for file in model_desc.attachments.files]
+        attachment_file_names = [
+            Path(file.path).name
+            for file in model_desc.attachments.files
+            if file.path is not None
+        ]
     elif isinstance(model_desc.attachments, list):
         attachment_file_names = [
-            attachment.source.path.name for attachment in model_desc.attachments
+            Path(attachment.source.path).name
+            for attachment in model_desc.attachments
+            if attachment.source.path is not None
         ]
     else:
-        # TODO: confirm all types of attachments
+        # TODO: confirm all types of attachments (type checker still complaining)
         report = CompatibilityReportDict(
             status="failed",
             error=None,
             details="Could not process attachments.",
         )
+        return report
     # check type is model
     if model_desc.type != "model":
         report = CompatibilityReportDict(
@@ -74,20 +85,22 @@ def check_compatibility_careamics_impl(
         except (ValueError, pydantic.ValidationError) as e:
             report = CompatibilityReportDict(
                 status="failed",
-                error=None,
+                error="Error: {}".format(e),
                 details=(
-                    "Could not load CAREamics configuration or model.\n",
-                    "Error: {}".format(e)
-                )
+                    "Could not load CAREamics configuration or model."
+                ),
             )
             return report
-        
+
         # no failure mode as config is already a Configuration object
-        careamist = CAREamist(config) 
-        # TODO: make a model loading method, why doesn't this exist
+        careamist = CAREamist(config)
+        # TODO (CAREamics): make a model loading method, why doesn't this exist
         careamist.model = model
 
         # get input tensor
+        # TODO: type checker complaining because of difference between v0.4 and v0.5
+        #   test_tensor attribute does not exist for v0.4,
+        #   how can the tensor path be accessed?
         input_path = model_desc.inputs[0].test_tensor.download().path
         input_array = np.load(input_path)
 
@@ -97,18 +110,18 @@ def check_compatibility_careamics_impl(
                 data_type="array",
                 axes="SCZYX" if "Z" in config.data_config.axes else "SCYX",
             )
-        except Exception as e: 
+        except Exception as e:
             report = CompatibilityReportDict(
                 status="failed",
-                error=None,
-                details="Calling prediction failed.\nError {}".format(e),
+                error="Error: {}".format(e),
+                details="Calling prediction failed.",
             )
             return report
 
         report = CompatibilityReportDict(
-                status="passed",
-                error=None,
-                details="CAREamics compatibility checks completed successfully!",
-            )
+            status="passed",
+            error=None,
+            details="CAREamics compatibility checks completed successfully!",
+        )
 
     return report
