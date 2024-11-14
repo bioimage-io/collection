@@ -78,9 +78,6 @@ def check_compatibility_careamics_impl(
         careamist.model = model
 
         # get input tensor
-        # TODO: type checker complaining because of difference between v0.4 and v0.5
-        #   test_tensor attribute does not exist for v0.4,
-        #   how can the tensor path be accessed?
         input_path = model_desc.inputs[0].test_tensor.download().path
         input_array = np.load(input_path)
 
