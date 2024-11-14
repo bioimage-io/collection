@@ -8,8 +8,9 @@ from careamics import __version__ as CAREAMICS_VERSION
 from careamics import CAREamist
 from careamics.model_io.bmz_io import load_from_bmz
 from bioimageio.spec import load_model_description
+from bioimageio.core.digest_spec import get_test_inputs
 from bioimageio.spec.model import AnyModelDescr
-from bioimageio.spec.model.v0_5 import ModelDescr
+from bioimageio.spec.model.v0_5 import ModelDescr, AxisId
 
 from .script_utils import CompatibilityReportDict, check_tool_compatibility
 
@@ -35,7 +36,7 @@ def check_compatibility_careamics_impl(
             ),
         )
         return report
-    
+
     attachment_file_paths = [
         (
             attachment.source
@@ -80,8 +81,14 @@ def check_compatibility_careamics_impl(
         careamist.model = model
 
         # get input tensor
-        input_path = model_desc.inputs[0].test_tensor.download().path
-        input_array = np.load(input_path)
+        input_sample = get_test_inputs(model_desc)
+        input_tensor = list(input_sample.members.values())[0]
+        input_tensor = input_tensor.transpose(
+            [AxisId("batch"), AxisId("channel"), AxisId("z"), AxisId("y"), AxisId("x")]
+            if "Z" in config.data_config.axes
+            else [AxisId("batch"), AxisId("channel"), AxisId("y"), AxisId("x")]
+        )
+        input_array = input_tensor.data.to_numpy()
 
         try:
             _ = careamist.predict(
