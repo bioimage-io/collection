@@ -56,15 +56,9 @@ def check_compatibility_careamics_impl(
             details="Could not process attachments.",
         )
         return report
-    # check type is model
-    if model_desc.type != "model":
-        report = CompatibilityReportDict(
-            status="not-applicable",
-            error=None,
-            details="Only 'model' resources can be used in CAREamics.",
-        )
+
     # check type is tagged as CAREamics
-    elif ("CAREamics" not in model_desc.tags) and ("careamics" not in model_desc.tags):
+    if ("CAREamics" not in model_desc.tags) and ("careamics" not in model_desc.tags):
         report = CompatibilityReportDict(
             status="not-applicable",
             error=None,
