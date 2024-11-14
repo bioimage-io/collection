@@ -1,28 +1,15 @@
 import argparse
 from pathlib import Path
-from typing import TYPE_CHECKING
-
-from typing_extensions import Literal
 
 import numpy as np
 import pydantic
+from careamics import __version__ as CAREAMICS_VERSION
 from careamics import CAREamist
-from careamics.model_io import load_pretrained
 from careamics.model_io.bmz_io import load_from_bmz
-from bioimageio.spec import load_model_description, ModelDescr
+from bioimageio.spec import load_model_description
 from bioimageio.spec.generic.v0_2 import AttachmentsDescr
-import bioimageio.core
 
-if bioimageio.core.__version__.startswith("0.5."):
-    from bioimageio.core import test_resource as test_model
-else:
-    from bioimageio.core import test_model
-
-from .script_utils import (
-    CompatibilityReportDict,
-    check_tool_compatibility,
-    download_rdf,
-)
+from .script_utils import CompatibilityReportDict, check_tool_compatibility
 
 
 def check_compatibility_careamics_impl(
@@ -80,9 +67,7 @@ def check_compatibility_careamics_impl(
             report = CompatibilityReportDict(
                 status="failed",
                 error="Error: {}".format(e),
-                details=(
-                    "Could not load CAREamics configuration or model."
-                ),
+                details=("Could not load CAREamics configuration or model."),
             )
             return report
 
@@ -119,3 +104,24 @@ def check_compatibility_careamics_impl(
         )
 
     return report
+
+
+def check_compatibility_careamics(all_version_path: Path, output_folder: Path) -> None:
+    """CAREamics compatibility check."""
+    check_tool_compatibility(
+        "CAREamics",
+        CAREAMICS_VERSION,
+        all_version_path=all_version_path,
+        output_folder=output_folder,
+        check_tool_compatibility_impl=check_compatibility_careamics_impl,
+        applicable_types={"model"},
+    )
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    _ = parser.add_argument("all_versions", type=Path)
+    _ = parser.add_argument("output_folder", type=Path)
+
+    args = parser.parse_args()
+    check_compatibility_careamics(args.all_versions, args.output_folder)
