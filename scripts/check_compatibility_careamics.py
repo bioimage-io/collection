@@ -1,5 +1,6 @@
 import argparse
 from pathlib import Path
+import traceback
 
 import numpy as np
 import pydantic
@@ -34,9 +35,8 @@ def check_compatibility_careamics_impl(
             ),
         )
         return report
-
-    assert isinstance(model_desc, ModelDescr)
-    attachment_file_names = [
+    
+    attachment_file_paths = [
         (
             attachment.source
             if isinstance(attachment.source, Path)
@@ -44,7 +44,9 @@ def check_compatibility_careamics_impl(
         )
         for attachment in model_desc.attachments
     ]
-
+    attachment_file_names = [
+        Path(path).name for path in attachment_file_paths if path is not None
+    ]
     # check type is tagged as CAREamics
     if ("CAREamics" not in model_desc.tags) and ("careamics" not in model_desc.tags):
         report = CompatibilityReportDict(
@@ -64,10 +66,10 @@ def check_compatibility_careamics_impl(
     else:
         try:
             model, config = load_from_bmz(rdf_url)
-        except (ValueError, pydantic.ValidationError) as e:
+        except (ValueError, pydantic.ValidationError):
             report = CompatibilityReportDict(
                 status="failed",
-                error="Error: {}".format(e),
+                error="Error: {}".format(traceback.format_exc()),
                 details=("Could not load CAREamics configuration or model."),
             )
             return report
@@ -87,10 +89,10 @@ def check_compatibility_careamics_impl(
                 data_type="array",
                 axes="SCZYX" if "Z" in config.data_config.axes else "SCYX",
             )
-        except Exception as e:
+        except Exception:
             report = CompatibilityReportDict(
                 status="failed",
-                error="Error: {}".format(e),
+                error="Error: {}".format(traceback.format_exc()),
                 details="Calling prediction failed.",
             )
             return report
