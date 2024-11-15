@@ -26,10 +26,11 @@ def careamics_load_from_bmz(
     return load_from_bmz(rdf_url)
 
 
-
 class CompatibilityCheck_v0_5(Protocol):
 
-    def __call__(self, model_desc: ModelDescr, rdf_url: str) -> Optional[CompatibilityReportDict]: ...
+    def __call__(
+        self, model_desc: ModelDescr, rdf_url: str
+    ) -> Optional[CompatibilityReportDict]: ...
 
 
 def check_model_desc_v0_5(
@@ -48,7 +49,9 @@ def check_model_desc_v0_5(
         return None
 
 
-def check_tagged_careamics(model_desc: ModelDescr, rdf_url: str) -> Optional[CompatibilityReportDict]:
+def check_tagged_careamics(
+    model_desc: ModelDescr, rdf_url: str
+) -> Optional[CompatibilityReportDict]:
     if ("CAREamics" not in model_desc.tags) and ("careamics" not in model_desc.tags):
         return CompatibilityReportDict(
             status="not-applicable",
