@@ -74,7 +74,7 @@ def check_has_careamics_config(
         Path(path).name for path in attachment_file_paths if path is not None
     ]
     # TODO: update to careamics.yaml once files have been updated
-    if not ("config.yml" in attachment_file_names):
+    if not ("careamics.yaml" in attachment_file_names):
         return CompatibilityReportDict(
             status="failed",
             error=None,
