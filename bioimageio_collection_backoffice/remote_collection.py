@@ -19,7 +19,6 @@ from typing import (
     List,
     Literal,
     Mapping,
-    NamedTuple,
     Optional,
     Sequence,
     Tuple,
@@ -38,7 +37,7 @@ from bioimageio.spec.utils import (
 from loguru import logger
 from pydantic import AnyUrl
 from ruyaml import YAML
-from typing_extensions import Concatenate, ParamSpec
+from typing_extensions import Concatenate, ParamSpec, assert_never
 
 from ._settings import settings
 from ._thumbnails import create_thumbnails
@@ -50,10 +49,11 @@ from .collection_json import (
     CollectionWebsiteConfig,
     ConceptSummary,
     ConceptVersion,
+    Uploader,
 )
 from .db_structure.chat import Chat, Message
 from .db_structure.compatibility import (
-    CompatiblityReport,
+    CompatibilityReport,
     TestSummary,
     TestSummaryEntry,
 )
@@ -466,7 +466,9 @@ class RemoteCollection(RemoteBase):
         if collection_entries or not list(self.client.ls(collection_output_file_name)):
             self.client.put_json(
                 collection_output_file_name,
-                collection.model_dump(mode="json", exclude_defaults=True),
+                collection.model_dump(
+                    mode="json", exclude_defaults=mode == "published"
+                ),
             )
         else:
             logger.error(
@@ -569,11 +571,6 @@ class RecordConcept(RemoteBase):
             return None
 
 
-class Uploader(NamedTuple):
-    email: Optional[str]
-    name: str
-
-
 @dataclass
 class RecordBase(RemoteBase, ABC):
     """Base class for a `RecordDraft` and `Record`"""
@@ -633,18 +630,7 @@ class RecordBase(RemoteBase, ABC):
 
     def get_uploader(self):
         rdf = self.get_rdf()
-        try:
-            uploader = rdf["uploader"]
-            email = uploader["email"]
-            name = uploader.get(
-                "name", f"{rdf.get('type', 'bioimage.io resource')} contributor"
-            )
-        except Exception as e:
-            logger.error("failed to extract uploader from rdf: {}", e)
-            email = None
-            name = "bioimage.io resource contributor"
-
-        return Uploader(email=email, name=name)
+        return Uploader.model_validate(rdf["uploader"])
 
     def get_file_url(self, path: str):
         return self.client.get_file_url(f"{self.folder}files/{path}")
@@ -669,7 +655,7 @@ class RecordBase(RemoteBase, ABC):
             for t in tools
         }
         return [
-            CompatiblityReport.model_validate({**json.loads(d), "tool": t})
+            CompatibilityReport.model_validate({**json.loads(d), "tool": t})
             for t, d in reports_data.items()
             if d is not None
         ]
@@ -677,7 +663,7 @@ class RecordBase(RemoteBase, ABC):
     def get_compatibility_report_path(self, tool: str):
         return f"{self.folder}compatibility/{tool}.json"
 
-    def set_compatibility_report(self, report: CompatiblityReport) -> None:
+    def set_compatibility_report(self, report: CompatibilityReport) -> None:
         path = self.get_compatibility_report_path(report.tool)
         self.client.put_and_cache(path, report.model_dump_json().encode())
 
@@ -881,18 +867,17 @@ class RecordDraft(RecordBase):
         # map reviewer id to name
         for r in self.collection.config.reviewers:
             if reviewer == r.id:
-                reviewer = r.name
                 break
+        else:
+            raise ValueError(reviewer)
 
-        self._set_status(ChangesRequestedStatus(description=reason))
+        description = (
+            f'<a href= "mailto: {r.email}"> {r.name}</a> requested changes: {reason}'
+        )
+        plain_description = f"{r.name} requested changes: {reason}"
+        self._set_status(ChangesRequestedStatus(description=description))
         self.extend_chat(
-            Chat(
-                messages=[
-                    Message(
-                        author="system", text=f"{reviewer} requested changes: {reason}"
-                    )
-                ]
-            )
+            Chat(messages=[Message(author="system", text=plain_description)])
         )
 
     @log
@@ -1193,6 +1178,11 @@ def create_collection_entries(
             f"{record_version.concept.folder}versions.json",
             versions_info.model_dump(mode="json"),
         )
+        status = None
+    elif isinstance(record_version, RecordDraft):
+        status = record_version.info.status
+    else:
+        assert_never(record_version)
 
     try:
         # legacy nickname
@@ -1216,12 +1206,28 @@ def create_collection_entries(
 
     # ingest compatibility reports
     links = set(rdf.get("links", []))
+    tags = set(rdf.get("tags", []))
     compat_reports = record_version.get_all_compatibility_reports()
 
+    def get_compat_tag(tool: str):
+        """make a special, derived tag for the automatic compatibility check result
+
+        of a tool to avoid overwriting plain manual tags like 'ilastik'.
+        """
+        return f"{tool}-compatible"
+
+    # remove all version unspecific tool tags
+    for r in compat_reports:
+        tags.discard(get_compat_tag(r.tool_wo_version))
+
+    # update links and tags with compatible tools
     for r in compat_reports:
         if r.status == "passed":
-            # update links to reference compatible tools
             links.update(r.links)
+            tags.add(get_compat_tag(r.tool))  # add version unspecific tag
+            tags.add(get_compat_tag(r.tool_wo_version))
+        else:
+            tags.discard(get_compat_tag(r.tool))
 
     try:
         thumbnails = rdf["config"]["bioimageio"]["thumbnails"]
@@ -1245,6 +1251,7 @@ def create_collection_entries(
     return [
         CollectionEntry(
             authors=rdf.get("authors", []),
+            uploader=rdf.get("uploader", dict(email="bioimageiobot@gmail.com")),
             badges=resolve_relative_path(
                 maybe_swap_with_thumbnail(rdf.get("badges", []), thumbnails),
                 parsed_root,
@@ -1269,9 +1276,10 @@ def create_collection_entries(
             nickname=nickname,
             rdf_source=AnyUrl(record_version.rdf_url),
             root_url=root_url,
-            tags=rdf.get("tags", []),
+            tags=list(tags),
             training_data=rdf["training_data"] if "training_data" in rdf else None,
             type=rdf["type"],
             source=rdf.get("source"),
+            status=status,
         )
     ], id_map

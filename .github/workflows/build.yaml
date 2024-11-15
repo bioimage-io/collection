@@ -103,6 +103,7 @@ jobs:
         run: |
           pdoc \
           --mermaid \
+          --docformat google \
           --logo https://bioimage.io/static/img/bioimage-io-logo.svg \
           --logo-link https://bioimage.io/ \
           --favicon https://bioimage.io/static/img/bioimage-io-icon-small.svg \
