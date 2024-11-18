@@ -11,7 +11,7 @@ from bioimageio.spec.utils import download
 from loguru import logger
 
 from .common import yaml
-from .db_structure.compatibility import CompatiblityReport
+from .db_structure.compatibility import CompatibilityReport
 from .db_structure.log import LogEntry
 from .gh_utils import render_summary
 from .remote_collection import Record, RecordDraft
@@ -60,7 +60,7 @@ def run_dynamic_tests(
         )
         render_summary(summary_formatted)
 
-        report = CompatiblityReport(
+        report = CompatibilityReport(
             tool=f"bioimageio.core_{bioimageio.core.__version__}",
             status=summary.status,
             error=(
