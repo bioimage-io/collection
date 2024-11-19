@@ -38,7 +38,7 @@ def check_model_desc_v0_5(
 ) -> Optional[CompatibilityReportDict]:
     if not isinstance(model_desc, ModelDescr):
         return CompatibilityReportDict(
-            status="failed",
+            status="not-applicable",
             error=None,
             details=(
                 "CAREamics compatibility check does not support `bioimageio.spec.v0.4` "
