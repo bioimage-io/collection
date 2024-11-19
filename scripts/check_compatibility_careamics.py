@@ -11,7 +11,7 @@ from careamics.lightning import FCNModule, VAEModule
 from careamics.config import Configuration
 from careamics.model_io.bmz_io import load_from_bmz
 from bioimageio.spec import load_model_description
-from bioimageio.spec._internal.url import HttpUrl
+from bioimageio.spec.common import HttpUrl
 from bioimageio.core.digest_spec import get_test_inputs
 from bioimageio.spec.model import AnyModelDescr
 from bioimageio.spec.model.v0_5 import ModelDescr, AxisId
