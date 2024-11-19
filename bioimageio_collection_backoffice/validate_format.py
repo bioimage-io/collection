@@ -156,8 +156,11 @@ def _prepare_dynamic_test_cases(
 
             wf = cast(WeightsFormat, wf)
             wf_conda_env = get_conda_env(entry=entry, env_name=wf)
-            pip_section = wf_conda_env.dependencies[-1]
-            assert isinstance(pip_section, PipDeps)
+            pip_sections = [
+                d for d in wf_conda_env.dependencies if isinstance(d, PipDeps)
+            ]
+            assert len(pip_sections) == 1, wf_conda_env
+            pip_section = pip_sections[0]
             if (
                 collection_main := "git+https://github.com/bioimage-io/collection.git@main"
             ) not in pip_section.pip:

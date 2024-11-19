@@ -41,7 +41,7 @@ class UnpackingStatus(_DraftStatusBase, frozen=True):
 
 class UnpackedStatus(_DraftStatusBase, frozen=True):
     name: Literal["unpacked"] = "unpacked"
-    description: str = "staging was successful; awaiting automated tests to start ⏳"
+    description: str = "staging was successful; awaiting automated tests to start"
     step: Literal[2] = 2
     icon: str = "⏳"
 
