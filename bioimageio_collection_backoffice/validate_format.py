@@ -159,8 +159,16 @@ def _prepare_dynamic_test_cases(
             pip_sections = [
                 d for d in wf_conda_env.dependencies if isinstance(d, PipDeps)
             ]
-            assert len(pip_sections) == 1, wf_conda_env
-            pip_section = pip_sections[0]
+            if len(pip_sections) == 0:
+                if "pip" not in wf_conda_env.dependencies:
+                    wf_conda_env.dependencies.append("pip")
+
+                pip_section = PipDeps(pip=[])
+                wf_conda_env.dependencies.append(pip_section)
+            else:
+                assert len(pip_sections) == 1, wf_conda_env
+                pip_section = pip_sections[0]
+
             if (
                 collection_main := "git+https://github.com/bioimage-io/collection.git@main"
             ) not in pip_section.pip:
