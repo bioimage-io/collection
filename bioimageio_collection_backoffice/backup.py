@@ -18,7 +18,6 @@ from bioimageio.spec.utils import download
 from loguru import logger
 
 from ._settings import settings
-from .common import yaml
 from .remote_collection import Record, RemoteCollection
 from .requests_utils import put_file, raise_for_status_discretely
 from .s3_client import Client
