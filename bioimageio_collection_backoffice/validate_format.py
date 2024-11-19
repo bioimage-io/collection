@@ -2,7 +2,7 @@ import warnings
 from typing import Dict, List, Literal, Tuple, Union, cast
 
 from bioimageio.spec import InvalidDescr, ResourceDescr, load_description
-from bioimageio.spec.conda_env import CondaEnv
+from bioimageio.spec.conda_env import CondaEnv, PipDeps
 from bioimageio.spec.get_conda_env import get_conda_env
 from bioimageio.spec.model import v0_4, v0_5
 from bioimageio.spec.model.v0_5 import WeightsFormat
@@ -156,12 +156,12 @@ def _prepare_dynamic_test_cases(
 
             wf = cast(WeightsFormat, wf)
             wf_conda_env = get_conda_env(entry=entry, env_name=wf)
-            pip_section = wf_conda_env["dependencies"][-1]
-            assert isinstance(pip_section, dict)
+            pip_section = wf_conda_env.dependencies[-1]
+            assert isinstance(pip_section, PipDeps)
             if (
                 collection_main := "git+https://github.com/bioimage-io/collection.git@main"
-            ) not in pip_section["pip"]:
-                pip_section["pip"].append(collection_main)
+            ) not in pip_section.pip:
+                pip_section.pip.append(collection_main)
 
             conda_envs[wf] = wf_conda_env
             validation_cases.append({"weight_format": wf})
