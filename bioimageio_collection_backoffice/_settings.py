@@ -16,6 +16,9 @@ class Settings(BaseSettings, extra="ignore"):
     )
 
     github_output: Optional[str] = None
+    github_step_summary: Optional[str] = None
+    """see https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/workflow-commands-for-github-actions#adding-a-job-summary"""
+
     collection_config: str = (
         "https://raw.githubusercontent.com/bioimage-io/collection/main/bioimageio_collection_config.json"
     )

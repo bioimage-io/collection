@@ -1,16 +1,35 @@
 import json
 import uuid
 from io import TextIOWrapper
-from typing import Any, Dict, Union, no_type_check
+from typing import Any, Dict, Literal, Optional, Union, no_type_check
 
 from loguru import logger
+from rich.console import Console
+from rich.markdown import Markdown
 
 from ._settings import settings
+
+rich_console: Optional[Console] = None
 
 
 def _set_gh_actions_output_impl(msg: Union[str, uuid.UUID], fh: TextIOWrapper):
     logger.info("GH actions output: {}", msg)
     print(msg, file=fh)
+
+
+def render_summary(markdown: str, mode: Literal["w", "a"] = "w"):
+    global rich_console
+    if settings.github_step_summary is None:
+        if rich_console is None:
+            rich_console = Console()
+        elif mode == "w":
+            rich_console.clear()
+
+        md = Markdown(markdown)
+        rich_console.print(md)
+    else:
+        with open(settings.github_step_summary, mode) as fh:
+            print(markdown, file=fh)
 
 
 def set_gh_actions_outputs(**outputs: Union[str, Any]):

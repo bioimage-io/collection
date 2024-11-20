@@ -1,15 +1,12 @@
 import biapy
 from biapy.models import check_bmz_model_compatibility
 from loguru import logger
-from ruyaml import YAML
 
 from bioimageio_collection_backoffice.db_structure.compatibility import (
     CompatibilityReport,
 )
 from bioimageio_collection_backoffice.remote_collection import Record, RemoteCollection
 from bioimageio_collection_backoffice.s3_client import Client
-
-yaml = YAML(typ="safe")
 
 
 def check_compatibility_biapy_impl(

@@ -1,4 +1,7 @@
 import pydantic
+from ruyaml import YAML
+
+yaml = YAML(typ="safe")
 
 
 class Node(

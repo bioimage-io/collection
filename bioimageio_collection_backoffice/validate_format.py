@@ -2,13 +2,14 @@ import warnings
 from typing import Dict, List, Literal, Tuple, Union, cast
 
 from bioimageio.spec import InvalidDescr, ResourceDescr, load_description
+from bioimageio.spec.conda_env import CondaEnv, PipDeps
+from bioimageio.spec.get_conda_env import get_conda_env
 from bioimageio.spec.model import v0_4, v0_5
 from bioimageio.spec.model.v0_5 import WeightsFormat
 from bioimageio.spec.summary import ErrorEntry, ValidationDetail
 
-from bioimageio_collection_backoffice.conda_env import CondaEnv, get_conda_env
-
 from .db_structure.log import LogEntry
+from .gh_utils import render_summary
 from .remote_collection import Record, RecordDraft
 
 
@@ -49,13 +50,15 @@ def validate_format(rv: Union[RecordDraft, Record]):
             )
         )
 
+    summary_formatted = rd.validation_summary.format()
     rv.add_log_entry(
         LogEntry(
             message=rd.validation_summary.name,
             details=rd.validation_summary,
-            details_formatted=rd.validation_summary.format(),
+            details_formatted=summary_formatted,
         )
     )
+    render_summary(summary_formatted)
     return dynamic_test_cases, conda_envs
 
 
@@ -152,7 +155,26 @@ def _prepare_dynamic_test_cases(
                 continue
 
             wf = cast(WeightsFormat, wf)
-            conda_envs[wf] = get_conda_env(entry=entry, env_name=wf)
+            wf_conda_env = get_conda_env(entry=entry, env_name=wf)
+            pip_sections = [
+                d for d in wf_conda_env.dependencies if isinstance(d, PipDeps)
+            ]
+            if len(pip_sections) == 0:
+                if "pip" not in wf_conda_env.dependencies:
+                    wf_conda_env.dependencies.append("pip")
+
+                pip_section = PipDeps(pip=[])
+                wf_conda_env.dependencies.append(pip_section)
+            else:
+                assert len(pip_sections) == 1, wf_conda_env
+                pip_section = pip_sections[0]
+
+            if (
+                collection_main := "git+https://github.com/bioimage-io/collection.git@main"
+            ) not in pip_section.pip:
+                pip_section.pip.append(collection_main)
+
+            conda_envs[wf] = wf_conda_env
             validation_cases.append({"weight_format": wf})
 
     return validation_cases, conda_envs

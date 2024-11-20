@@ -16,14 +16,11 @@ from bioimageio.spec import (
 from bioimageio.spec.common import HttpUrl, RelativeFilePath
 from bioimageio.spec.utils import download
 from loguru import logger
-from ruyaml import YAML
 
 from ._settings import settings
 from .remote_collection import Record, RemoteCollection
 from .requests_utils import put_file, raise_for_status_discretely
 from .s3_client import Client
-
-yaml = YAML(typ="safe")
 
 
 class SkipForNow(NotImplementedError):
