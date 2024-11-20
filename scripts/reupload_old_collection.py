@@ -1,4 +1,6 @@
-"""This script was used internally to upload previously contributed resources to bioimage.io that were managed through the old bioimage-io/collection-bioimage-io repo"""
+"""This script was used internally to upload previously contributed resources to
+bioimage.io that were managed through the old bioimage-io/collection-bioimage-io
+repo. It is kept for reference only and will be removed soon."""
 
 import logging
 import os

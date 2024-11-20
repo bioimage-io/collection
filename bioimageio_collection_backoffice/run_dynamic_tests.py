@@ -9,13 +9,11 @@ from bioimageio.spec.model.v0_5 import WeightsFormat
 from bioimageio.spec.summary import ErrorEntry, InstalledPackage, ValidationDetail
 from bioimageio.spec.utils import download
 from loguru import logger
-from ruyaml import YAML
 
-from bioimageio_collection_backoffice.db_structure.compatibility import (
-    CompatibilityReport,
-)
-
+from .common import yaml
+from .db_structure.compatibility import CompatibilityReport
 from .db_structure.log import LogEntry
+from .gh_utils import render_summary
 from .remote_collection import Record, RecordDraft
 
 try:
@@ -25,8 +23,6 @@ except ImportError:
 else:
     # silence tqdm
     tqdm.__init__ = partialmethod(tqdm.__init__, disable=True)  # type: ignore
-
-yaml = YAML(typ="safe")
 
 
 def get_summary_detail_from_exception(name: str, exception: Exception):
@@ -54,13 +50,16 @@ def run_dynamic_tests(
         record.rdf_url, weight_format, create_env_outcome, conda_env_file
     )
     if summary is not None:
+        summary_formatted = summary.format()
         record.add_log_entry(
             LogEntry(
                 message=f"bioimageio.core {bioimageio.core.__version__} test {summary.status}",
                 details=summary,
-                details_formatted=summary.format(),
+                details_formatted=summary_formatted,
             )
         )
+        render_summary(summary_formatted)
+
         report = CompatibilityReport(
             tool=f"bioimageio.core_{bioimageio.core.__version__}",
             status=summary.status,
@@ -87,7 +86,8 @@ def _run_dynamic_tests_impl(
     def get_basic_summary():
         summary = bioimageio.spec.load_description(rdf_url).validation_summary
         summary.name = "bioimageio.core.test_description"
-        summary.env.append(
+        add = summary.env.add if isinstance(summary.env, set) else summary.env.append
+        add(
             InstalledPackage(
                 name="bioimageio.core", version=bioimageio.core.__version__
             )
