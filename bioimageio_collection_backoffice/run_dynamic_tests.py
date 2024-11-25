@@ -6,7 +6,12 @@ from typing import Optional, Union
 import bioimageio.core
 import bioimageio.spec
 from bioimageio.spec.model.v0_5 import WeightsFormat
-from bioimageio.spec.summary import ErrorEntry, InstalledPackage, ValidationDetail
+from bioimageio.spec.summary import (
+    ErrorEntry,
+    InstalledPackage,
+    ValidationDetail,
+    ValidationSummary,
+)
 from bioimageio.spec.utils import download
 from loguru import logger
 
@@ -78,7 +83,7 @@ def _run_dynamic_tests_impl(
     weight_format: Optional[WeightsFormat],
     create_env_outcome: str,
     conda_env_file: Path,
-):
+) -> Optional[ValidationSummary]:
     if weight_format is None:
         # no dynamic tests for non-model resources yet...
         return
