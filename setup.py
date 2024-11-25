@@ -40,7 +40,7 @@ _ = setup(
         "minio==7.2.4",
         "pillow",
         "pydantic-settings",
-        "pydantic>=2.7.0",
+        "pydantic>=2.7.0,<2.10",  # TODO: update upper pin after pydantic 2.10 fix, see https://github.com/bioimage-io/spec-bioimage-io/pull/664
         "requests",
         "ruyaml",
         "tqdm",
