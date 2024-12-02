@@ -7,6 +7,7 @@ on:
     workflows:
       - 'check compatibility ilastik'
       - 'check compatibility biapy'
+      - 'check compatibility careamics'
     types: [completed]
     branches: [main]
   push:
