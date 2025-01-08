@@ -2,6 +2,6 @@
 .. include:: ../README.md
 """
 
-from ._backoffice import BackOffice
+import bioimageio_collection_backoffice.cli
 
-__all__ = ["BackOffice"]
+BackOffice = bioimageio_collection_backoffice.cli.BackOffice

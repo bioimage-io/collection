@@ -109,6 +109,8 @@ jobs:
           --favicon https://bioimage.io/static/img/bioimage-io-icon-small.svg \
           --footer-text 'bioimageio_collection_backoffice' \
           -o ./docs bioimageio_collection_backoffice
+        env:
+          PDOC_DISPLAY_ENV_VARS: 1
       - name: Deploy to gh-pages 🚀
         if: ${{ github.ref == 'refs/heads/main' }}
         uses: JamesIves/github-pages-deploy-action@v4

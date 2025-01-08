@@ -7,7 +7,7 @@ from loguru import logger
 from rich.console import Console
 from rich.markdown import Markdown
 
-from ._settings import settings
+from .settings import settings
 
 rich_console: Optional[Console] = None
 

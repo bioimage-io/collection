@@ -1,6 +1,6 @@
 import fire
 
-from ._backoffice import BackOffice
+from .cli import BackOffice
 
 
 def main():

@@ -5,7 +5,6 @@ from typing import List, Union
 import markdown
 from loguru import logger
 
-from .._settings import settings
 from ..mailroom.constants import (
     BOT_EMAIL,
     REPLY_HINT,
@@ -14,6 +13,7 @@ from ..mailroom.constants import (
     STATUS_UPDATE_SUBJECT,
 )
 from ..remote_collection import Record, RecordDraft
+from ..settings import settings
 
 
 def notify_uploader(rv: Union[RecordDraft, Record], subject_end: str, msg: str):
