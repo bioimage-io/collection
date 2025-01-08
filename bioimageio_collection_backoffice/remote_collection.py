@@ -36,7 +36,6 @@ from bioimageio.spec.utils import (
 )
 from loguru import logger
 from pydantic import AnyUrl
-from ruyaml import YAML
 from typing_extensions import Concatenate, ParamSpec, assert_never
 
 from .collection_config import CollectionConfig
@@ -49,6 +48,7 @@ from .collection_json import (
     ConceptVersion,
     Uploader,
 )
+from .common import yaml
 from .db_structure.chat import Chat, Message
 from .db_structure.compatibility import (
     CompatibilityReport,
@@ -76,8 +76,6 @@ from .remote_base import RemoteBase
 from .s3_client import Client
 from .settings import settings
 from .thumbnails import create_thumbnails
-
-yaml = YAML(typ="safe")
 
 LEGACY_DOWNLOAD_COUNTS = {
     "affable-shark": 70601,
