@@ -75,6 +75,7 @@ jobs:
 
     report:
         needs: [comment, stage]
+        if: always()
         runs-on: ubuntu-latest
         steps:
           - if: needs.stage.result != 'success'
