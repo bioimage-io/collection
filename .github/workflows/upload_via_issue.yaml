@@ -49,7 +49,7 @@ jobs:
                 - [notebook adjectives](https://github.com/bioimage-io/collection/blob/df2523b2ec4803e690ba1d9231b305cbf8053175/bioimageio_collection_config.json#L1020-L1193)
                 - [notebook nouns](https://github.com/bioimage-io/collection/blob/df2523b2ec4803e690ba1d9231b305cbf8053175/bioimageio_collection_config.json#L976-L1018)
 
-                Please create a new issue if you want to upload a bioimage.io package. Thank you! 🙏
+                Please create a new issue if you want to upload a bioimage.io package. Thank you! :pray:
           - if: ${{!startsWith(github.event.issue.body, 'https://')}}
             run: gh issue comment "$NUMBER" --body "$BODY"
             env:
@@ -60,7 +60,7 @@ jobs:
                   Unfortunately I do not understand '${{github.event.issue.body}}'.
 
                   I was expecting to find a URL ZIP-file containing a packaged bioimage.io description.
-                  Please create a new issue if you do want to upload a bioimage.io package. Thank you! 🙏
+                  Please create a new issue if you do want to upload a bioimage.io package. Thank you! :pray:
 
     stage:
         needs: comment
@@ -77,14 +77,6 @@ jobs:
         needs: [comment, stage]
         runs-on: ubuntu-latest
         steps:
-          - if: ${{needs.stage.result == 'success'}}
-            run: gh issue close "$NUMBER" --reason="$REASON"
-            env:
-              GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              GH_REPO: ${{ github.repository }}
-              NUMBER: ${{ github.event.issue.number }}
-              REASON: Successfully staged new draft for '${{needs.comment.outputs.concept}}'! 🚀
-
           - if: needs.stage.result != 'success'
             run: gh issue comment "$NUMBER" --body "$BODY"
             env:
@@ -95,3 +87,12 @@ jobs:
                   Unfortunately an error occurred, see [logs of the staging workflow](${{github.server_url}}/${{github.repository}}/actions/runs/${{needs.stage.outputs.run_id}}).
 
                   bioimage.io @reviewers were notified.
+
+          - if: needs.stage.result == 'success'
+            run: gh issue close "$NUMBER" --reason="$REASON"
+            env:
+              GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              GH_REPO: ${{ github.repository }}
+              NUMBER: ${{ github.event.issue.number }}
+              REASON: 'Successfully staged new draft for ${{needs.comment.outputs.concept}}! :rocket:'
+
