@@ -29,8 +29,8 @@ jobs:
               GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               GH_REPO: ${{ github.repository }}
               NUMBER: ${{ github.event.issue.number }}
-              BODY: >
-                  :sparkles: Thank you for contributing '${{steps.get-concept.outputs.concept}}'! :sparkles:\n
+              BODY: |
+                  :sparkles: Thank you for contributing '${{steps.get-concept.outputs.concept}}'! :sparkles:
                   I will attempt to upload '${{github.event.issue.body}}' to the bioimage.io collection.
           - if: steps.get-concept.outputs.concept == ''
             run: gh issue comment "$NUMBER" --body "$BODY"
@@ -38,7 +38,7 @@ jobs:
               GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               GH_REPO: ${{ github.repository }}
               NUMBER: ${{ github.event.issue.number }}
-              BODY: >
+              BODY: |
                 Unfortunately I did not find a valid concept-id for your upload in the issue title, e.g. '@bioimageiobot, please upload polite-frog'.
 
                 All concept IDs consist of an adjective and a noun of a given list depending on the resource type:
@@ -56,7 +56,7 @@ jobs:
               GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               GH_REPO: ${{ github.repository }}
               NUMBER: ${{ github.event.issue.number }}
-              BODY: >
+              BODY: |
                   Unfortunately I do not understand '${{github.event.issue.body}}'.
 
                   I was expecting to find a URL ZIP-file containing a packaged bioimage.io description.
@@ -91,7 +91,7 @@ jobs:
               GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               GH_REPO: ${{ github.repository }}
               NUMBER: ${{ github.event.issue.number }}
-              BODY: >
+              BODY: |
                   Unfortunately an error occurred, see [logs of the staging workflow](${{github.server_url}}/${{github.repository}}/actions/runs/${{needs.stage.outputs.run_id}}).
 
                   bioimage.io @reviewers were notified.
