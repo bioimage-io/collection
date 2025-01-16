@@ -19,6 +19,10 @@ on:
         type: string
         default: ''
 
+    outputs:
+      run_id:
+        value: ${{github.run_id}}
+
 concurrency: ${{inputs.environment_name}}-${{inputs.concept_id}}-call
 
 jobs:

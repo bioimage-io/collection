@@ -30,7 +30,7 @@ jobs:
               GH_REPO: ${{ github.repository }}
               NUMBER: ${{ github.event.issue.number }}
               BODY: >
-                  :sparkles: Thank you for contributing '${{steps.get-concept.outputs.concept}}'! :sparkles:
+                  :sparkles: Thank you for contributing '${{steps.get-concept.outputs.concept}}'! :sparkles:\n
                   I will attempt to upload '${{github.event.issue.body}}' to the bioimage.io collection.
           - if: steps.get-concept.outputs.concept == ''
             run: gh issue comment "$NUMBER" --body "$BODY"
@@ -67,8 +67,31 @@ jobs:
         if: startsWith(github.event.issue.body, 'https://') && needs.comment.outputs.concept != ''
         uses: bioimage-io/collection/.github/workflows/stage_call.yaml@main
         with:
-            concept_id: ${{inputs.resource_id}}
+            concept_id: ${{needs.comment.outputs.concept}}
             package_url: ${{github.event.issue.body}}
             environment_name: ${{inputs.sandbox && 'sandbox' || 'production'}}
             bioimageio_user_id: ${{format('github|{0}', github.event.issue.user.login)}}
         secrets: inherit
+
+    report:
+        needs: [comment, stage]
+        runs-on: ubuntu-latest
+        steps:
+          - if: ${{needs.stage.result == 'success'}}
+            run: gh issue close "$NUMBER" --reason="$REASON"
+            env:
+              GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              GH_REPO: ${{ github.repository }}
+              NUMBER: ${{ github.event.issue.number }}
+              REASON: Successfully staged new draft for '${{needs.comment.outputs.concept}}'! 🚀
+
+          - if: needs.stage.result != 'success'
+            run: gh issue comment "$NUMBER" --body "$BODY"
+            env:
+              GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              GH_REPO: ${{ github.repository }}
+              NUMBER: ${{ github.event.issue.number }}
+              BODY: >
+                  Unfortunately an error occurred, see [logs of the staging workflow](${{github.server_url}}/${{github.repository}}/actions/runs/${{needs.stage.outputs.run_id}}).
+
+                  bioimage.io @reviewers were notified.
