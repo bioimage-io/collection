@@ -4,9 +4,9 @@ from pathlib import Path
 
 import requests
 
-from .._settings import settings
 from ..common import Node
 from ..requests_utils import raise_for_status_discretely
+from ..settings import settings
 from .collection_json_template import CollectionJsonTemplate
 from .id_parts import IdParts
 from .reviewers import Reviewers

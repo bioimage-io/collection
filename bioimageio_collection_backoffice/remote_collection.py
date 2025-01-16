@@ -36,11 +36,8 @@ from bioimageio.spec.utils import (
 )
 from loguru import logger
 from pydantic import AnyUrl
-from ruyaml import YAML
 from typing_extensions import Concatenate, ParamSpec, assert_never
 
-from ._settings import settings
-from ._thumbnails import create_thumbnails
 from .collection_config import CollectionConfig
 from .collection_json import (
     AllVersions,
@@ -51,6 +48,7 @@ from .collection_json import (
     ConceptVersion,
     Uploader,
 )
+from .common import yaml
 from .db_structure.chat import Chat, Message
 from .db_structure.compatibility import (
     CompatibilityReport,
@@ -76,8 +74,8 @@ from .id_map import IdInfo, IdMap
 from .mailroom.constants import BOT_EMAIL
 from .remote_base import RemoteBase
 from .s3_client import Client
-
-yaml = YAML(typ="safe")
+from .settings import settings
+from .thumbnails import create_thumbnails
 
 LEGACY_DOWNLOAD_COUNTS = {
     "affable-shark": 70601,
@@ -191,7 +189,7 @@ P = ParamSpec("P")
 def log(
     func: Callable[Concatenate[R, P], T],
 ) -> Callable[Concatenate[R, P], T]:
-    """method decorator to indicate that a method execution should be logged"""
+    """Method decorator to log method execution."""
 
     @wraps(func)
     def wrapper(self: R, *args: P.args, **kwargs: P.kwargs):
@@ -210,7 +208,7 @@ def log(
 def reviewer_role(
     func: Callable[Concatenate[R, str, P], T],
 ) -> Callable[Concatenate[R, str, P], T]:
-    """method decorator to indicate that a method may only be called by a bioimage.io reviewer"""
+    """Method decorator to require the actor to be a bioimage.io reviewer."""
 
     @wraps(func)
     def wrapper(self: R, actor: str, *args: P.args, **kwargs: P.kwargs):
@@ -225,7 +223,7 @@ def reviewer_role(
 def lock_concept(
     func: Callable[Concatenate[R, P], T],
 ) -> Callable[Concatenate[R, P], T]:
-    """method decorator to indicate that a method may only be called by a bioimage.io reviewer"""
+    """Method decorator to indicate that a method requires the 'concept' lock."""
 
     @wraps(func)
     def wrapper(self: R, *args: P.args, **kwargs: P.kwargs):
@@ -247,7 +245,7 @@ def lock_concept(
 def lock_version(
     func: Callable[Concatenate[R, P], T],
 ) -> Callable[Concatenate[R, P], T]:
-    """method decorator to indicate that a method may only be called by a bioimage.io reviewer"""
+    """Method decorator to indicate that a method requires the 'version' lock."""
 
     @wraps(func)
     def wrapper(self: R, *args: P.args, **kwargs: P.kwargs):

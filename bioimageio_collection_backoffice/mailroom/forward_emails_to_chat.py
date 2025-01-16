@@ -8,10 +8,10 @@ from typing import Any
 
 from loguru import logger
 
-from .._settings import settings
 from ..db_structure.chat import Chat, Message
 from ..remote_collection import get_remote_resource_version
 from ..s3_client import Client
+from ..settings import settings
 from .constants import (
     BOT_EMAIL,
     IMAP_PORT,

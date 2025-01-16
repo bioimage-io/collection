@@ -22,9 +22,9 @@ from minio.datatypes import Object
 from minio.deleteobjects import DeleteObject
 from pydantic import BaseModel, SecretStr
 
-from ._settings import settings
 from .cache import SizedValueLRU
 from .common import yaml
+from .settings import settings
 
 M = TypeVar("M", bound=BaseModel)
 
