@@ -1,0 +1,74 @@
+on:
+    issues:
+        types:
+            - opened
+
+permissions:
+    issues: write  # Allow the workflow to update the opened issue
+
+jobs:
+    comment:
+        if: startsWith(github.event.issue.title, '@bioimageiobot, please upload')
+        outputs:
+          concept: ${{steps.get-concept.outputs.concept}}
+        runs-on: ubuntu-latest
+        steps:
+          - id: get-concept
+            run: |
+                title='${{github.event.issue.title}}'
+                concept=${title:29}
+                concept=${concept//_/-}
+                concept=${concept// /}
+                concept=${concept//[^a-zA-Z0-9_-]/}
+                concept=`echo -n $concept | tr A-Z a-z`
+                echo "concept=$concept" >> $GITHUB_OUTPUT
+                echo "Extracted concept id: $concept"
+          - if: startsWith(github.event.issue.body, 'https://') && steps.get-concept.outputs.concept != ''
+            run: gh issue comment "$NUMBER" --body "$BODY"
+            env:
+              GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              GH_REPO: ${{ github.repository }}
+              NUMBER: ${{ github.event.issue.number }}
+              BODY: >
+                  :sparkles: Thank you for contributing '${{steps.get-concept.outputs.concept}}'! :sparkles:
+                  I will attempt to upload '${{github.event.issue.body}}' to the bioimage.io collection.
+          - if: steps.get-concept.outputs.concept == ''
+            run: gh issue comment "$NUMBER" --body "$BODY"
+            env:
+              GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              GH_REPO: ${{ github.repository }}
+              NUMBER: ${{ github.event.issue.number }}
+              BODY: >
+                Unfortunately I did not find a valid concept-id for your upload in the issue title, e.g. '@bioimageiobot, please upload polite-frog'.
+
+                All concept IDs consist of an adjective and a noun of a given list depending on the resource type:
+                - [model adjectives](https://github.com/bioimage-io/collection/blob/df2523b2ec4803e690ba1d9231b305cbf8053175/bioimageio_collection_config.json#L633-L808)
+                - [model nouns](https://github.com/bioimage-io/collection/blob/df2523b2ec4803e690ba1d9231b305cbf8053175/bioimageio_collection_config.json#L544-L632)
+                - [dataset adjectives](https://github.com/bioimage-io/collection/blob/df2523b2ec4803e690ba1d9231b305cbf8053175/bioimageio_collection_config.json#L890-L972)
+                - [dataset nouns](https://github.com/bioimage-io/collection/blob/df2523b2ec4803e690ba1d9231b305cbf8053175/bioimageio_collection_config.json#L811-L887)
+                - [notebook adjectives](https://github.com/bioimage-io/collection/blob/df2523b2ec4803e690ba1d9231b305cbf8053175/bioimageio_collection_config.json#L1020-L1193)
+                - [notebook nouns](https://github.com/bioimage-io/collection/blob/df2523b2ec4803e690ba1d9231b305cbf8053175/bioimageio_collection_config.json#L976-L1018)
+
+                Please create a new issue if you want to upload a bioimage.io package. Thank you! 🙏
+          - if: ${{!startsWith(github.event.issue.body, 'https://')}}
+            run: gh issue comment "$NUMBER" --body "$BODY"
+            env:
+              GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              GH_REPO: ${{ github.repository }}
+              NUMBER: ${{ github.event.issue.number }}
+              BODY: >
+                  Unfortunately I do not understand '${{github.event.issue.body}}'.
+
+                  I was expecting to find a URL ZIP-file containing a packaged bioimage.io description.
+                  Please create a new issue if you do want to upload a bioimage.io package. Thank you! 🙏
+
+    stage:
+        needs: comment
+        if: startsWith(github.event.issue.body, 'https://') && needs.comment.outputs.concept != ''
+        uses: bioimage-io/collection/.github/workflows/stage_call.yaml@main
+        with:
+            concept_id: ${{inputs.resource_id}}
+            package_url: ${{github.event.issue.body}}
+            environment_name: ${{inputs.sandbox && 'sandbox' || 'production'}}
+            bioimageio_user_id: ${{format('github|{0}', github.event.issue.user.login)}}
+        secrets: inherit
