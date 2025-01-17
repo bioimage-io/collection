@@ -39,15 +39,15 @@ jobs:
                 package_url = ""
 
               def set_output(name, value):
-                  """adapted from https://github.com/orgs/community/discussions/28146#discussioncomment-5638014"""
-                  with open(os.environ['GITHUB_OUTPUT'], 'a') as fh:
-                      delimiter = uuid.uuid1()
-                      print(f'{name}<<{delimiter}', file=fh)
-                      print(value, file=fh)
-                      print(delimiter, file=fh)
+                """adapted from https://github.com/orgs/community/discussions/28146#discussioncomment-5638014"""
+                with open(os.environ['GITHUB_OUTPUT'], 'a') as fh:
+                  delimiter = uuid.uuid1()
+                  print(f'{name}<<{delimiter}', file=fh)
+                  print(value, file=fh)
+                  print(delimiter, file=fh)
 
-                set_output("message", msg)
-                set_output("package_url", package_url)
+              set_output("message", msg)
+              set_output("package_url", package_url)
 
             env:
               BODY: ${{github.event.issue.body}}
