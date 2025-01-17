@@ -5,8 +5,9 @@ on:
     inputs:
       concept_id:
         description: "Bioimage.io resource concept"
-        required: true
+        required: false
         type: string
+        default: ''
       package_url:
         description: "Download URL of the resource package zip-file"
         required: true
