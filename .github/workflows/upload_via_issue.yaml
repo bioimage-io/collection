@@ -87,12 +87,12 @@ jobs:
                 bioimage.io @reviewers were notified.
 
           - if: needs.stage.result == 'success'
-            run: gh issue close "$NUMBER" --reason="$REASON"
+            run: gh issue close "$NUMBER" --reason=completed --comment="$MESSAGE"
             env:
               GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               GH_REPO: ${{ github.repository }}
               NUMBER: ${{ github.event.issue.number }}
-              REASON: |
+              MESSAGE: |
                 Successfully staged new draft from ${{needs.comment.outputs.package_url}} ! :rocket:
 
                 Status and test results of your upload can be found in our [draft overview](https://bioimageio-uploader.netlify.app/#/status).
