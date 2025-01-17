@@ -20,7 +20,7 @@ on:
         type: string
         default: ''
 
-concurrency: ${{inputs.environment_name}}-${{inputs.concept_id}}-call
+concurrency: ${{inputs.environment_name}}-${{inputs.concept_id}}-${{inputs.package_url}}-call
 
 jobs:
   run:

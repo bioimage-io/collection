@@ -6,8 +6,9 @@ on:
     inputs:
       resource_id:
         description: "bioimage.io resource concept ID (e.g. 'affable-shark')"
-        required: true
+        required: false
         type: string
+        default: ''
       package_url:
         description: "Download URL of the resource package zip-file"
         required: true
@@ -18,7 +19,7 @@ on:
         default: false
         type: boolean
 
-concurrency: ${{inputs.sandbox}}-${{inputs.resource_id}}
+concurrency: ${{inputs.sandbox}}-${{inputs.resource_id}}-${{inputs.package_url}}
 
 jobs:
   stage:
