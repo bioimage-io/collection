@@ -825,11 +825,8 @@ class RecordDraft(RecordBase):
                 name=reviewers[settings.bioimageio_user_id].name,
                 email=reviewers[settings.bioimageio_user_id].email,
             )
-
-        elif not isinstance(rdf["uploader"], dict) or "email" not in rdf["uploader"]:
+        else:
             raise ValueError("RDF is missing `uploader.email` field.")
-        elif not isinstance(rdf["uploader"]["email"], str):
-            raise ValueError("RDF has invalid `uploader.email` field.")
 
         uploader: Any = rdf["uploader"]["email"]
         if previous_rdf is not None:
