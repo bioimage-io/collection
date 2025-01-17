@@ -28,7 +28,7 @@ jobs:
               """
               if body.startswith(expected_start):
                 package_url = body[len(expected_start):].split("\n")[0].strip()
-                if not package_url or not isinstance(package_url, str) or not package_url.startwith("https://"):
+                if not package_url or not isinstance(package_url, str) or not package_url.startswith("https://"):
                   msg = f"I was expecting to find an https URL to a ZIP-file containing a packaged bioimage.io description, but I found '{package_url}'."
                   package_url = ""
                 else:
