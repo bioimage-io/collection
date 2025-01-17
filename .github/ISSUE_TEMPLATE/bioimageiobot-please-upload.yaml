@@ -1,0 +1,26 @@
+name: "@bioimageiobot, please upload"
+description: Upload a zipped bioimage.io package to bioimage.io
+title: "@bioimageiobot, please upload"
+labels:
+  - upload
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for contributing to bioimage.io!
+  - type: input
+    id: package_url
+    attributes:
+      label: Contact Details
+      description: Please provide a publicly accessible download URL to your zipped model/dataset/notebook description.
+      placeholder: https://example.com/my-package.zip
+    validations:
+      required: true
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this issue, you agree to bioimage.io's [Terms of Service](https://bioimage.io/docs/#/terms_of_service).
+      options:
+        - label: I confirm that I have read and agree to bioimage.io's [Terms of Service](https://bioimage.io/docs/#/terms_of_service)
+          required: true
