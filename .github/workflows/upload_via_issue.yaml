@@ -17,27 +17,26 @@ jobs:
             shell: python
             run: |
               import os
+              import uuid
 
               body = os.environ["BODY"]
 
-              expected_start = """## Terms of Service
-              - [x] I confirm that I have read and agree to bioimage.io's [Terms of Service](https://bioimage.io/docs/#/terms_of_service)
+              expected_start = "### Temporary Public Download URL\n\n"
+              expected_end = """
+              ### Terms of Service
 
-              ## Temporary Public Download URL
-              For the duration of the upload process I provide a publicly accessible download URL of my packaged resource description zip-archive:
-              """
-              if body.startswith(expected_start):
-                package_url = body[len(expected_start):].split("\n")[0].strip()
-                if not package_url or not isinstance(package_url, str) or not package_url.startswith("https://"):
+              - [x] I confirm that I have read and agree to bioimage.io's [Terms of Service](https://bioimage.io/docs/#/terms_of_service)"""
+
+              if body.startswith(expected_start) and body.endsswith(expected_end):
+                package_url = body[len(expected_start):-len(expected_end)].strip()
+                if not package_url or not package_url.startswith("https://"):
                   msg = f"I was expecting to find an https URL to a ZIP-file containing a packaged bioimage.io description, but I found '{package_url}'."
                   package_url = ""
                 else:
                   msg = f"Attempting to upload package source '{package_url}' to the bioimage.io collection..."
               else:
-                msg = f"Expected issue body to start with the '@bioimageiobot, please upload' issue body template with a checked Terms of Service checkbox.\nPlease create a new issue if you do want to upload a bioimage.io package. Thank you! :pray:"
+                msg = f"Expected issue to follow the '@bioimageiobot, please upload' issue template with a checked Terms of Service checkbox.\nPlease create a new issue if you do want to upload a bioimage.io package. Thank you! :pray:"
                 package_url = ""
-
-              import uuid
 
               def set_output(name, value):
                   """adapted from https://github.com/orgs/community/discussions/28146#discussioncomment-5638014"""
