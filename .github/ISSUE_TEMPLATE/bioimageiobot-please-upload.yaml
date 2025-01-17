@@ -11,15 +11,15 @@ body:
   - type: input
     id: package_url
     attributes:
-      label: Contact Details
-      description: Please provide a publicly accessible download URL to your zipped model/dataset/notebook description.
+      label: Temporary Public Download URL
+      description: Please provide a publicly accessible download URL to your zipped model, dataset or notebook description.
       placeholder: https://example.com/my-package.zip
     validations:
       required: true
   - type: checkboxes
     id: terms
     attributes:
-      label: Code of Conduct
+      label: Terms of Service
       description: By submitting this issue, you agree to bioimage.io's [Terms of Service](https://bioimage.io/docs/#/terms_of_service).
       options:
         - label: I confirm that I have read and agree to bioimage.io's [Terms of Service](https://bioimage.io/docs/#/terms_of_service)
