@@ -37,9 +37,18 @@ jobs:
                 msg = f"Expected issue body to start with the '@bioimageiobot, please upload' issue body template with a checked Terms of Service checkbox.\nPlease create a new issue if you do want to upload a bioimage.io package. Thank you! :pray:"
                 package_url = ""
 
-              with open(os.environ['GITHUB_OUTPUT'], 'a') as fh:
-                print(f'message={msg}', file=fh)
-                print(f'package_url={package_url}', file=fh)
+              import uuid
+
+              def set_output(name, value):
+                  """adapted from https://github.com/orgs/community/discussions/28146#discussioncomment-5638014"""
+                  with open(os.environ['GITHUB_OUTPUT'], 'a') as fh:
+                      delimiter = uuid.uuid1()
+                      print(f'{name}<<{delimiter}', file=fh)
+                      print(value, file=fh)
+                      print(delimiter, file=fh)
+
+                set_output("message", msg)
+                set_output("package_url", package_url)
 
             env:
               BODY: ${{github.event.issue.body}}
