@@ -23,5 +23,5 @@ def test_generate_resource_id(client: Client, type_: str):
 
     rc = RemoteCollection(client)
 
-    cid = rc.generate_concpet_id(type_)
+    cid = rc.generate_concept_id(type_)
     assert rc.validate_concept_id(cid, type_=type_) is None
