@@ -33,7 +33,7 @@ jobs:
                   msg = f"I was expecting to find an https URL to a ZIP-file containing a packaged bioimage.io description, but I found '{package_url}'."
                   package_url = ""
                 else:
-                  msg = f"Attempting to upload package source '{package_url}' to the bioimage.io collection..."
+                  msg = f"Started [workflow run](${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}) to upload '{package_url}' to the bioimage.io collection."
               else:
                 msg = f"Expected issue to follow the '@bioimageiobot, please upload' issue template with a checked Terms of Service checkbox.\nPlease create a new issue if you do want to upload a bioimage.io package. Thank you! :pray:"
                 package_url = ""
@@ -64,7 +64,7 @@ jobs:
         if: needs.comment.outputs.package_url != ''
         uses: bioimage-io/collection/.github/workflows/stage_call.yaml@main
         with:
-            package_url: ${{github.event.issue.body}}
+            package_url: ${{needs.comment.outputs.package_url}}
             environment_name: production
             bioimageio_user_id: ${{format('github|{0}', github.event.issue.user.login)}}
         secrets: inherit
@@ -81,7 +81,7 @@ jobs:
               GH_REPO: ${{ github.repository }}
               NUMBER: ${{ github.event.issue.number }}
               MESSAGE: |
-                Unfortunately an error occurred, see [logs of the staging workflow](${{github.server_url}}/${{github.repository}}/actions/runs/${{needs.stage.outputs.run_id}}).
+                Unfortunately an error occurred, see stage job in [workflow run](${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}).
 
                 bioimage.io @reviewers were notified.
 
