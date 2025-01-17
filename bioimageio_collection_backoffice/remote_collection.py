@@ -469,14 +469,14 @@ class RemoteCollection(RemoteBase):
         }
         available_concept_ids = AvailableConceptIds.model_validate(
             {
-                typ: {
+                typ: [
                     ci
                     for a, n in product(
                         self.config.id_parts[typ].adjectives,
                         self.config.id_parts[typ].nouns,
                     )
                     if (ci := f"{a}-{n}") not in taken_ids[typ]
-                }
+                ]
                 for typ in types
             }
         )
