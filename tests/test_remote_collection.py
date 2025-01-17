@@ -14,10 +14,7 @@ def test_validate_concept_id_direct():
     from bioimageio_collection_backoffice.collection_config import CollectionConfig
 
     config = CollectionConfig.load()
-    assert (
-        config.id_parts.select_type("model").validate_concept_id("affable-shark")
-        is None
-    )
+    assert config.id_parts["model"].validate_concept_id("affable-shark") is None
 
 
 @pytest.mark.parametrize("type_", ["model", "dataset", "notebook"])
