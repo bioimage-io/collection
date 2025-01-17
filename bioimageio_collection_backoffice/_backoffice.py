@@ -16,9 +16,9 @@ from .gh_utils import set_gh_actions_outputs
 from .mailroom.send_email import notify_uploader
 from .remote_collection import (
     Record,
-    RecordConcept,
     RecordDraft,
     RemoteCollection,
+    draft_new_version,
     get_remote_resource_version,
 )
 from .run_dynamic_tests import run_dynamic_tests
@@ -71,9 +71,15 @@ class BackOffice:
         self.client.rm_dir(subfolder)
 
     def draft(self, concept_id: str, package_url: str):
-        """stage a new resourse version draft from `package_url`"""
-        resource = RecordConcept(self.client, concept_id)
-        _ = resource.draft_new_version(package_url)
+        """stage a new resourse version draft from `package_url`
+
+        Args:
+            concept_id: overwrite `id` found in **package_url**.
+                        If **concept_id** is an empty string a new concept_id is
+                        assigned.
+            package_url: Public source of zipped package to upload.
+        """
+        _ = draft_new_version(RemoteCollection(self.client), package_url, concept_id)
         self.generate_collection_json(mode="draft")
 
     stage = draft

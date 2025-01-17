@@ -10,66 +10,54 @@ jobs:
     comment:
         if: startsWith(github.event.issue.title, '@bioimageiobot, please upload')
         outputs:
-          concept: ${{steps.get-concept.outputs.concept}}
+          package_url: ${{steps.analyse-body.outputs.package_url}}
         runs-on: ubuntu-latest
         steps:
-          - id: get-concept
+          - id: analyse-body
+            shell: python
             run: |
-                title='${{github.event.issue.title}}'
-                concept=${title:29}
-                concept=${concept//_/-}
-                concept=${concept// /}
-                concept=${concept//[^a-zA-Z0-9_-]/}
-                concept=`echo -n $concept | tr A-Z a-z`
-                echo "concept=$concept" >> $GITHUB_OUTPUT
-                echo "Extracted concept id: $concept"
-          - if: startsWith(github.event.issue.body, 'https://') && steps.get-concept.outputs.concept != ''
-            run: gh issue comment "$NUMBER" --body "$BODY"
+              import os
+
+              body = os.environ["BODY"]
+
+              expected_start = """## Terms of Service
+              - [x] I confirm that I have read and agree to bioimage.io's [Terms of Service](https://bioimage.io/docs/#/terms_of_service)
+
+              ## Temporary Public Download URL
+              For the duration of the upload process I provide a publicly accessible download URL of my packaged resource description zip-archive:
+              """
+              if body.startswith(expected_start):
+                package_url = body[len(expected_start):].split("\n")[0].strip()
+                if not package_url or not isinstance(package_url, str) or not package_url.startwith("https://"):
+                  msg = f"I was expecting to find an https URL to a ZIP-file containing a packaged bioimage.io description, but I found '{package_url}'."
+                  package_url = ""
+                else:
+                  msg = f"Attempting to upload package source '{package_url}' to the bioimage.io collection..."
+              else:
+                msg = f"Expected issue body to start with the '@bioimageiobot, please upload' issue body template with a checked Terms of Service checkbox.\nPlease create a new issue if you do want to upload a bioimage.io package. Thank you! :pray:"
+                package_url = ""
+
+              with open(os.environ['GITHUB_OUTPUT'], 'a') as fh:
+                print(f'message={msg}', file=fh)
+                print(f'package_url={package_url}', file=fh)
+
+            env:
+              BODY: ${{github.event.issue.body}}
+
+          - run: gh issue comment "$NUMBER" --body "$MESSAGE"
             env:
               GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               GH_REPO: ${{ github.repository }}
               NUMBER: ${{ github.event.issue.number }}
-              BODY: |
-                  :sparkles: Thank you for contributing '${{steps.get-concept.outputs.concept}}'! :sparkles:
-                  I will attempt to upload '${{github.event.issue.body}}' to the bioimage.io collection.
-          - if: steps.get-concept.outputs.concept == ''
-            run: gh issue comment "$NUMBER" --body "$BODY"
-            env:
-              GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              GH_REPO: ${{ github.repository }}
-              NUMBER: ${{ github.event.issue.number }}
-              BODY: |
-                Unfortunately I did not find a valid concept-id for your upload in the issue title, e.g. '@bioimageiobot, please upload polite-frog'.
-
-                All concept IDs consist of an adjective and a noun of a given list depending on the resource type:
-                - [model adjectives](https://github.com/bioimage-io/collection/blob/df2523b2ec4803e690ba1d9231b305cbf8053175/bioimageio_collection_config.json#L633-L808)
-                - [model nouns](https://github.com/bioimage-io/collection/blob/df2523b2ec4803e690ba1d9231b305cbf8053175/bioimageio_collection_config.json#L544-L632)
-                - [dataset adjectives](https://github.com/bioimage-io/collection/blob/df2523b2ec4803e690ba1d9231b305cbf8053175/bioimageio_collection_config.json#L890-L972)
-                - [dataset nouns](https://github.com/bioimage-io/collection/blob/df2523b2ec4803e690ba1d9231b305cbf8053175/bioimageio_collection_config.json#L811-L887)
-                - [notebook adjectives](https://github.com/bioimage-io/collection/blob/df2523b2ec4803e690ba1d9231b305cbf8053175/bioimageio_collection_config.json#L1020-L1193)
-                - [notebook nouns](https://github.com/bioimage-io/collection/blob/df2523b2ec4803e690ba1d9231b305cbf8053175/bioimageio_collection_config.json#L976-L1018)
-
-                Please create a new issue if you want to upload a bioimage.io package. Thank you! :pray:
-          - if: ${{!startsWith(github.event.issue.body, 'https://')}}
-            run: gh issue comment "$NUMBER" --body "$BODY"
-            env:
-              GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              GH_REPO: ${{ github.repository }}
-              NUMBER: ${{ github.event.issue.number }}
-              BODY: |
-                  Unfortunately I do not understand '${{github.event.issue.body}}'.
-
-                  I was expecting to find a URL ZIP-file containing a packaged bioimage.io description.
-                  Please create a new issue if you do want to upload a bioimage.io package. Thank you! :pray:
+              MESSAGE: ${{steps.analyse-body.outputs.message}}
 
     stage:
         needs: comment
-        if: startsWith(github.event.issue.body, 'https://') && needs.comment.outputs.concept != ''
+        if: needs.comment.outputs.package_url != ''
         uses: bioimage-io/collection/.github/workflows/stage_call.yaml@main
         with:
-            concept_id: ${{needs.comment.outputs.concept}}
             package_url: ${{github.event.issue.body}}
-            environment_name: ${{inputs.sandbox && 'sandbox' || 'production'}}
+            environment_name: production
             bioimageio_user_id: ${{format('github|{0}', github.event.issue.user.login)}}
         secrets: inherit
 
@@ -79,15 +67,15 @@ jobs:
         runs-on: ubuntu-latest
         steps:
           - if: needs.stage.result != 'success'
-            run: gh issue comment "$NUMBER" --body "$BODY"
+            run: gh issue comment "$NUMBER" --body "$MESSAGE"
             env:
               GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               GH_REPO: ${{ github.repository }}
               NUMBER: ${{ github.event.issue.number }}
-              BODY: |
-                  Unfortunately an error occurred, see [logs of the staging workflow](${{github.server_url}}/${{github.repository}}/actions/runs/${{needs.stage.outputs.run_id}}).
+              MESSAGE: |
+                Unfortunately an error occurred, see [logs of the staging workflow](${{github.server_url}}/${{github.repository}}/actions/runs/${{needs.stage.outputs.run_id}}).
 
-                  bioimage.io @reviewers were notified.
+                bioimage.io @reviewers were notified.
 
           - if: needs.stage.result == 'success'
             run: gh issue close "$NUMBER" --reason="$REASON"
@@ -95,5 +83,8 @@ jobs:
               GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               GH_REPO: ${{ github.repository }}
               NUMBER: ${{ github.event.issue.number }}
-              REASON: 'Successfully staged new draft for ${{needs.comment.outputs.concept}}! :rocket:'
+              REASON: |
+                Successfully staged new draft from ${{needs.comment.outputs.package_url}} ! :rocket:
+
+                Status and test results of your upload can be found in our [draft overview](https://bioimageio-uploader.netlify.app/#/status).
 
