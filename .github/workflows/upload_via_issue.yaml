@@ -27,7 +27,7 @@ jobs:
 
               - [x] I confirm that I have read and agree to bioimage.io's [Terms of Service](https://bioimage.io/docs/#/terms_of_service)"""
 
-              if body.startswith(expected_start) and body.endsswith(expected_end):
+              if body.startswith(expected_start) and body.endswith(expected_end):
                 package_url = body[len(expected_start):-len(expected_end)].strip()
                 if not package_url or not package_url.startswith("https://"):
                   msg = f"I was expecting to find an https URL to a ZIP-file containing a packaged bioimage.io description, but I found '{package_url}'."
