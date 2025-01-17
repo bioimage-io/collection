@@ -10,6 +10,7 @@ from abc import ABC
 from collections import defaultdict
 from dataclasses import dataclass, field
 from functools import wraps
+from itertools import product
 from pathlib import Path
 from typing import (
     Any,
@@ -44,6 +45,7 @@ from ._thumbnails import create_thumbnails
 from .collection_config import CollectionConfig
 from .collection_json import (
     AllVersions,
+    AvailableConceptIds,
     CollectionEntry,
     CollectionJson,
     CollectionWebsiteConfig,
@@ -318,11 +320,11 @@ class RemoteCollection(RemoteBase):
 
     def validate_concept_id(self, concept_id: str, *, type_: str):
         """check if a concept id follows the defined pattern (not if it exists)"""
-        self.config.id_parts.select_type(type_).validate_concept_id(concept_id)
+        self.config.id_parts[type_].validate_concept_id(concept_id)
 
     def generate_concpet_id(self, type_: str):
         """generate a new, unused concept id"""
-        id_parts = self.config.id_parts.select_type(type_)
+        id_parts = self.config.id_parts[type_]
         nouns = list(id_parts.nouns)
         taken = self.get_taken_concept_ids()
         n = 9999
@@ -364,6 +366,11 @@ class RemoteCollection(RemoteBase):
         )
         all_versions_file_name: str = (
             "all_versions.json" if mode == "published" else f"all_versions_{mode}.json"
+        )
+        available_concept_ids_file_name: str = (
+            "available_ids.json"
+            if mode == "published"
+            else f"available_ids_{mode}.json"
         )
         id_map_file_name = (
             "id_map.json" if mode == "published" else f"id_map_{mode}.json"
@@ -455,7 +462,24 @@ class RemoteCollection(RemoteBase):
         )
 
         all_versions = AllVersions(entries=concepts_summaries)
-
+        types = ("model", "dataset", "notebook")
+        taken_ids = {
+            typ: {cs.concept for cs in concepts_summaries if cs.type == typ}
+            for typ in types
+        }
+        available_concept_ids = AvailableConceptIds.model_validate(
+            {
+                typ: [
+                    ci
+                    for a, n in product(
+                        self.config.id_parts[typ].adjectives,
+                        self.config.id_parts[typ].nouns,
+                    )
+                    if (ci := f"{a}-{n}") not in taken_ids[typ]
+                ]
+                for typ in types
+            }
+        )
         # # check that this generated collection is a valid RDF itself
         # coll_descr = build_description(
         #     collection.model_dump(), context=ValidationContext(perform_io_checks=False)
@@ -480,6 +504,10 @@ class RemoteCollection(RemoteBase):
             self.client.put_json(
                 all_versions_file_name,
                 all_versions.model_dump(mode="json", exclude_defaults=True),
+            )
+            self.client.put_json(
+                available_concept_ids_file_name,
+                available_concept_ids.model_dump(mode="json", exclude_defaults=True),
             )
         else:
             logger.error(

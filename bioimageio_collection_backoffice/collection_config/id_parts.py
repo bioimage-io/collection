@@ -65,7 +65,7 @@ class IdParts(Node, frozen=True):
 
         return None
 
-    def select_type(self, type_: str) -> IdPartsEntry:
+    def __getitem__(self, type_: str) -> IdPartsEntry:
         if type_ == "model":
             return self.model
         elif type_ == "dataset":
