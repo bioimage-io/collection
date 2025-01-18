@@ -87,7 +87,9 @@ jobs:
                 bioimage.io @reviewers were notified.
 
           - if: needs.stage.result == 'success'
-            run: gh issue close "$NUMBER" --reason=completed --comment="$MESSAGE"
+            run: |
+              gh issue close "$NUMBER" --reason=completed --comment="$MESSAGE"
+              gh issue edit "$NUMBER" --title="$TITLE"
             env:
               GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               GH_REPO: ${{ github.repository }}
@@ -96,7 +98,7 @@ jobs:
                 Successfully staged new draft '${{needs.stage.outputs.concept_id}}' from ${{needs.comment.outputs.package_url}} ! :rocket:
 
                 Status and test results of your upload can be found [here](https://bioimageio-uploader.netlify.app/#/status/${{needs.stage.outputs.concept_id}}).
-
+              TITLE: "@bioimageiobot, please upload ${{needs.stage.outputs.concept_id}}"
     dispatch-test:
       runs-on: ubuntu-latest
       needs: stage
