@@ -95,5 +95,5 @@ jobs:
               MESSAGE: |
                 Successfully staged new draft from ${{needs.comment.outputs.package_url}} ! :rocket:
 
-                Status and test results of your upload can be found in our [draft overview](https://bioimageio-uploader.netlify.app/#/status).
+                Status and test results of your upload can be found [here](https://bioimageio-uploader.netlify.app/#/status/${{needs.stage.outputs.concept_id}}).
 

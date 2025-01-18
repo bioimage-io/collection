@@ -41,6 +41,8 @@ from pydantic import AnyUrl
 from ruyaml import YAML
 from typing_extensions import Concatenate, ParamSpec, assert_never
 
+from bioimageio_collection_backoffice.gh_utils import set_gh_actions_outputs
+
 from ._settings import settings
 from ._thumbnails import create_thumbnails
 from .collection_config import CollectionConfig
@@ -1081,6 +1083,7 @@ def draft_new_version(
 
             concept_id = collection.generate_concept_id(typ)
 
+    set_gh_actions_outputs(concept_id=concept_id)
     draft = RecordDraft(collection.client, concept_id=concept_id)
     draft.unpack(package_url=package_url)
     return draft
