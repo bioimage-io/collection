@@ -17,6 +17,7 @@ on:
         description: Issue number to comment validation summary in.
         required: false
         type: number
+        default: null
 
 concurrency: ${{inputs.environment_name}}-${{inputs.concept_id}}-call
 
