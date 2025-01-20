@@ -8,7 +8,7 @@ import github
 
 
 def bioimageio_upload(resource_id: str, package_url: str):
-    g = github.Github(login_or_token=os.environ["GITHUB_PAT"])
+    g = github.Github(login_or_token=os.environ["GITHUB_TOKEN"])
 
     repo = g.get_repo("bioimage-io/collection")
 

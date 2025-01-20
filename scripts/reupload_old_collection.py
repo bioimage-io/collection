@@ -151,7 +151,7 @@ def upload_resources(
 
 
 def workflow_dispatch(workflow_name: str, inputs: Dict[str, str]):
-    g = github.Github(login_or_token=os.environ["GITHUB_PAT"])
+    g = github.Github(login_or_token=os.environ["GITHUB_TOKEN"])
 
     repo = g.get_repo("bioimage-io/collection")
 

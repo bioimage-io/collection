@@ -17,7 +17,9 @@ rich_console: Optional[Console] = None
 
 @cache
 def get_gh_api():
-    return github.Github(auth=github.Auth.Token(settings.github_pat.get_secret_value()))
+    return github.Github(
+        auth=github.Auth.Token(settings.github_token.get_secret_value())
+    )
 
 
 @cache

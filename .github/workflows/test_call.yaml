@@ -30,6 +30,7 @@ env:
   MAIL_PASSWORD: ${{secrets.MAIL_PASSWORD}}
   BIOIMAGEIO_USER_ID: github|${{github.actor_id}}
   GITHUB_ISSUE_NUMBER: ${{inputs.issue-nr}}
+  GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
 jobs:
   validate_format:  # validate metadata in rdf.yaml

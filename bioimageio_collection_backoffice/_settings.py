@@ -53,7 +53,7 @@ class Settings(BaseSettings, extra="ignore"):
     s3_secret_access_key: SecretStr = SecretStr("")
     zenodo_api_access_token: SecretStr = SecretStr("")
     zenodo_test_api_access_token: SecretStr = SecretStr("")
-    github_pat: SecretStr = SecretStr("")
+    github_token: SecretStr = SecretStr("")
 
 
 settings = Settings()
