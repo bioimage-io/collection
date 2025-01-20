@@ -12,7 +12,6 @@ from ._settings import settings
 from .backup import backup
 from .db_structure.chat import Chat, Message
 from .db_structure.log import Log, LogEntry
-from .gh_utils import set_gh_actions_outputs
 from .mailroom.send_email import notify_uploader
 from .remote_collection import (
     Record,
