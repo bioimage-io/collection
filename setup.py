@@ -35,12 +35,13 @@ _ = setup(
         "bioimageio.core>=0.7.0",
         "bioimageio.spec>=0.5.3.5",
         "fire",
-        "PyGithub",
+        "imagecodecs",  # not needed for core >=0.7.1
         "loguru",
         "markdown",
         "minio==7.2.4",
         "pillow",
         "pydantic-settings",
+        "PyGithub",
         "pydantic>=2.7.0,<2.10",  # TODO: update upper pin after pydantic 2.10 fix, see https://github.com/bioimage-io/spec-bioimage-io/pull/664
         "requests",
         "ruyaml",
