@@ -50,15 +50,14 @@ def validate_format(rv: Union[RecordDraft, Record]):
             )
         )
 
-    summary_formatted = rd.validation_summary.format()
     rv.add_log_entry(
         LogEntry(
             message=rd.validation_summary.name,
             details=rd.validation_summary,
-            details_formatted=summary_formatted,
+            details_formatted=rd.validation_summary.format(),
         )
     )
-    render_summary(summary_formatted)
+    render_summary(rd.validation_summary)
     set_gh_actions_outputs(
         conda_envs={k: v.model_dump(mode="json") for k, v in conda_envs.items()},
         dynamic_test_cases={"include": dynamic_test_cases},

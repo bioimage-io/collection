@@ -35,6 +35,7 @@ _ = setup(
         "bioimageio.core>=0.7.0",
         "bioimageio.spec>=0.5.3.5",
         "fire",
+        "PyGithub",
         "loguru",
         "markdown",
         "minio==7.2.4",

@@ -15,6 +15,7 @@ class Settings(BaseSettings, extra="ignore"):
         env_file_encoding="utf-8",
     )
 
+    github_issue_nr: Optional[int] = None
     github_output: Optional[str] = None
     github_step_summary: Optional[str] = None
     """see https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/workflow-commands-for-github-actions#adding-a-job-summary"""

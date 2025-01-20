@@ -55,15 +55,14 @@ def run_dynamic_tests(
         record.rdf_url, weight_format, create_env_outcome, conda_env_file
     )
     if summary is not None:
-        summary_formatted = summary.format()
         record.add_log_entry(
             LogEntry(
                 message=f"bioimageio.core {bioimageio.core.__version__} test {summary.status}",
                 details=summary,
-                details_formatted=summary_formatted,
+                details_formatted=summary.format(),
             )
         )
-        render_summary(summary_formatted)
+        render_summary(summary)
 
         report = CompatibilityReport(
             tool=f"bioimageio.core_{bioimageio.core.__version__}",
