@@ -99,12 +99,13 @@ jobs:
 
                 Status and test results of your upload can be found [here](https://bioimageio-uploader.netlify.app/#/status/${{needs.stage.outputs.concept_id}}).
               TITLE: "@bioimageiobot, please upload ${{needs.stage.outputs.concept_id}}"
-    dispatch-test:
-      runs-on: ubuntu-latest
+
+    test:
       needs: stage
-      steps:
-      - uses: actions/checkout@v4
-      - run: |
-          gh workflow run test.yaml -f resource_id=${{needs.stage.outputs.concept_id}}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      uses: bioimage-io/collection/.github/workflows/test_call.yaml@main
+      with:
+        concept_id: ${{needs.stage.outputs.concept_id}}
+        version: 'draft'
+        environment_name: 'production'
+        issue-nr: ${{github.event.issue.number}}
+      secrets: inherit

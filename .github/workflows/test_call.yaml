@@ -13,7 +13,10 @@ on:
       environment_name:
         required: true
         type: string
-
+      issue-nr:
+        description: Issue number to comment validation summary in.
+        required: false
+        type: number
 
 concurrency: ${{inputs.environment_name}}-${{inputs.concept_id}}-call
 
@@ -26,6 +29,7 @@ env:
   RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
   MAIL_PASSWORD: ${{secrets.MAIL_PASSWORD}}
   BIOIMAGEIO_USER_ID: github|${{github.actor_id}}
+  GITHUB_ISSUE_NUMBER: ${{inputs.issue-nr}}
 
 jobs:
   validate_format:  # validate metadata in rdf.yaml

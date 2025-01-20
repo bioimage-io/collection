@@ -45,8 +45,8 @@ def render_summary(summary: ValidationSummary, mode: Literal["w", "a"] = "w"):
         with open(settings.github_step_summary, mode) as fh:
             print(summary_formatted, file=fh)
 
-    if settings.github_issue_nr is not None:
-        issue = get_collection_repo().get_issue(number=settings.github_issue_nr)
+    if settings.github_issue_number is not None:
+        issue = get_collection_repo().get_issue(number=settings.github_issue_number)
         _ = issue.create_comment(
             f"<details><summary>{summary.name}</summary>\n{summary_formatted}\n</details>"
         )
