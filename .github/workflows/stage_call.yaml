@@ -21,7 +21,7 @@ on:
         default: ''
 
     outputs:
-      cocnept_id:
+      concept_id:
         description: "Bioimage.io resource concept (may have been generated if inputs.concept_id was empty)"
         value:  ${{jobs.run.outputs.concept_id}}
 
