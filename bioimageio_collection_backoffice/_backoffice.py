@@ -87,12 +87,7 @@ class BackOffice:
     def validate_format(self, concept_id: str, version: str):
         """validate a resource version's rdf.yaml"""
         rv = get_remote_resource_version(self.client, concept_id, version)
-        dynamic_test_cases, conda_envs = validate_format(rv)
-        set_gh_actions_outputs(
-            has_dynamic_test_cases=bool(dynamic_test_cases),
-            dynamic_test_cases={"include": dynamic_test_cases},
-            conda_envs={k: v.model_dump(mode="json") for k, v in conda_envs.items()},
-        )
+        validate_format(rv)
 
     def test(
         self,
