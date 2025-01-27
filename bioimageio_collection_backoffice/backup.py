@@ -16,14 +16,11 @@ from bioimageio.spec import (
 from bioimageio.spec.common import HttpUrl, RelativeFilePath
 from bioimageio.spec.utils import download
 from loguru import logger
-from ruyaml import YAML
 
 from ._settings import settings
 from .remote_collection import Record, RemoteCollection
 from .requests_utils import put_file, raise_for_status_discretely
 from .s3_client import Client
-
-yaml = YAML(typ="safe")
 
 
 class SkipForNow(NotImplementedError):
@@ -71,12 +68,7 @@ def backup_published_version(
         raise ValueError("Missing bioimage.io `id`")
 
     if rdf.id.startswith("10.5281/zenodo"):
-        # use legacy doi and concept doi
-        parts = rdf.id.split("/")
-        assert len(parts) == 3
-        concept_doi = "/".join(parts[:2])
-        doi = f"10.5281/zenodo{parts[2]}"
-        v.set_dois(doi=doi, concept_doi=concept_doi)
+        # ignore legacy model
         return
 
     if rdf.type == "application" and "notebook" not in rdf.tags:
@@ -138,7 +130,7 @@ def backup_published_version(
 
     # base_url = f"{settings.zenodo_url}/record/{concept_id}/files/"
 
-    metadata = rdf_to_metadata(
+    metadata = rdf_to_zenodo_metadata(
         rdf,
         rdf_file_name=rdf_file_name,
         publication_date=v.info.created,
@@ -180,7 +172,7 @@ def rdf_authors_to_metadata_creators(rdf: ResourceDescr):
     return creators
 
 
-def rdf_to_metadata(
+def rdf_to_zenodo_metadata(
     rdf: ResourceDescr,
     *,
     additional_note: str = "\n(Uploaded via https://bioimage.io)",
@@ -196,7 +188,7 @@ def rdf_to_metadata(
     description_md = f'[View on bioimage.io]("https://bioimage.io/#/?id={rdf.id}") # {rdf.name} \n\n{docstring}'
     logger.debug("markdown descriptoin:\n{}", description_md)
     description = markdown.markdown(description_md)
-    logger.debug("html descriptoin:\n{}", description_md)
+    logger.debug("html description:\n{}", description_md)
     keywords = ["backup.bioimage.io", "bioimage.io", "bioimage.io:" + rdf.type]
     # related_identifiers = generate_related_identifiers_from_rdf(rdf, rdf_file_name)  # TODO: add related identifiers
 

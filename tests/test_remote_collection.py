@@ -14,10 +14,7 @@ def test_validate_concept_id_direct():
     from bioimageio_collection_backoffice.collection_config import CollectionConfig
 
     config = CollectionConfig.load()
-    assert (
-        config.id_parts.select_type("model").validate_concept_id("affable-shark")
-        is None
-    )
+    assert config.id_parts["model"].validate_concept_id("affable-shark") is None
 
 
 @pytest.mark.parametrize("type_", ["model", "dataset", "notebook"])
@@ -26,5 +23,5 @@ def test_generate_resource_id(client: Client, type_: str):
 
     rc = RemoteCollection(client)
 
-    cid = rc.generate_concpet_id(type_)
+    cid = rc.generate_concept_id(type_)
     assert rc.validate_concept_id(cid, type_=type_) is None

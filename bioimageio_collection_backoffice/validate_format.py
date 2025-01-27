@@ -2,13 +2,14 @@ import warnings
 from typing import Dict, List, Literal, Tuple, Union, cast
 
 from bioimageio.spec import InvalidDescr, ResourceDescr, load_description
+from bioimageio.spec.conda_env import CondaEnv, PipDeps
+from bioimageio.spec.get_conda_env import get_conda_env
 from bioimageio.spec.model import v0_4, v0_5
 from bioimageio.spec.model.v0_5 import WeightsFormat
 from bioimageio.spec.summary import ErrorEntry, ValidationDetail
 
-from bioimageio_collection_backoffice.conda_env import CondaEnv, get_conda_env
-
 from .db_structure.log import LogEntry
+from .gh_utils import render_summary, set_gh_actions_outputs
 from .remote_collection import Record, RecordDraft
 
 
@@ -53,9 +54,15 @@ def validate_format(rv: Union[RecordDraft, Record]):
         LogEntry(
             message=rd.validation_summary.name,
             details=rd.validation_summary,
+            details_formatted=rd.validation_summary.format(),
         )
     )
-    return dynamic_test_cases, conda_envs
+    render_summary(rd.validation_summary)
+    set_gh_actions_outputs(
+        conda_envs={k: v.model_dump(mode="json") for k, v in conda_envs.items()},
+        dynamic_test_cases={"include": dynamic_test_cases},
+        has_dynamic_test_cases=bool(dynamic_test_cases),
+    )
 
 
 def _validate_format_impl(rdf_source: str):
@@ -77,13 +84,34 @@ def _validate_format_impl(rdf_source: str):
             ValidationDetail(
                 name="Check that uploader is specified",
                 status="failed" if rd.uploader is None else "passed",
-                errors=[
-                    ErrorEntry(
-                        loc=("uploader", "email"),
-                        msg="missing uploader email",
-                        type="error",
-                    )
-                ],
+                errors=(
+                    [
+                        ErrorEntry(
+                            loc=("uploader", "email"),
+                            msg="missing uploader email",
+                            type="error",
+                        )
+                    ]
+                    if rd.uploader is None
+                    else []
+                ),
+            )
+        )
+        rd.validation_summary.add_detail(
+            ValidationDetail(
+                name="Check version field",
+                status="failed" if rd.version is None else "passed",
+                errors=(
+                    [
+                        ErrorEntry(
+                            loc=("version",),
+                            msg="missing version (We encourage using '0.1.0' for the initial version.)",
+                            type="error",
+                        )
+                    ]
+                    if rd.uploader is None
+                    else []
+                ),
             )
         )
         if rd.license is None:
@@ -92,13 +120,17 @@ def _validate_format_impl(rdf_source: str):
                 ValidationDetail(
                     name="Check that RDF has a license field",
                     status="failed" if rd.license is None else "passed",
-                    errors=[
-                        ErrorEntry(
-                            loc=("license",),
-                            msg="missing license field",
-                            type="error",
-                        )
-                    ],
+                    errors=(
+                        [
+                            ErrorEntry(
+                                loc=("license",),
+                                msg="missing license field",
+                                type="error",
+                            )
+                        ]
+                        if rd.license is None
+                        else []
+                    ),
                 )
             )
 
@@ -126,7 +158,26 @@ def _prepare_dynamic_test_cases(
                 continue
 
             wf = cast(WeightsFormat, wf)
-            conda_envs[wf] = get_conda_env(entry=entry, env_name=wf)
+            wf_conda_env = get_conda_env(entry=entry, env_name=wf)
+            pip_sections = [
+                d for d in wf_conda_env.dependencies if isinstance(d, PipDeps)
+            ]
+            if len(pip_sections) == 0:
+                if "pip" not in wf_conda_env.dependencies:
+                    wf_conda_env.dependencies.append("pip")
+
+                pip_section = PipDeps(pip=[])
+                wf_conda_env.dependencies.append(pip_section)
+            else:
+                assert len(pip_sections) == 1, wf_conda_env
+                pip_section = pip_sections[0]
+
+            if (
+                collection_main := "git+https://github.com/bioimage-io/collection.git@main"
+            ) not in pip_section.pip:
+                pip_section.pip.append(collection_main)
+
+            conda_envs[wf] = wf_conda_env
             validation_cases.append({"weight_format": wf})
 
     return validation_cases, conda_envs

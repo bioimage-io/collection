@@ -1,4 +1,15 @@
-![internal tests](https://github.com/bioimage-io/collection/actions/workflows/build.yaml/badge.svg) ![generate collection overview](https://github.com/bioimage-io/collection/actions/workflows/generate_collection_json.yaml/badge.svg) ![backup status](https://github.com/bioimage-io/collection/actions/workflows/backup.yaml/badge.svg)
+[![internal tests & docs](https://github.com/bioimage-io/collection/actions/workflows/build.yaml/badge.svg)](https://github.com/bioimage-io/collection/actions/workflows/build.yaml)
+[![collection overview](https://github.com/bioimage-io/collection/actions/workflows/generate_collection_json.yaml/badge.svg)](https://github.com/bioimage-io/collection/actions/workflows/generate_collection_json.yaml)
+[![backup status](https://github.com/bioimage-io/collection/actions/workflows/backup.yaml/badge.svg)](https://github.com/bioimage-io/collection/actions/workflows/backup.yaml)
+
+[![last resource staging](https://github.com/bioimage-io/collection/actions/workflows/stage.yaml/badge.svg)](https://github.com/bioimage-io/collection/actions/workflows/stage.yaml)
+[![last resource testing](https://github.com/bioimage-io/collection/actions/workflows/test.yaml/badge.svg)](https://github.com/bioimage-io/collection/actions/workflows/test.yaml)
+[![last resource publishing](https://github.com/bioimage-io/collection/actions/workflows/publish.yaml/badge.svg)](https://github.com/bioimage-io/collection/actions/workflows/publish.yaml)
+
+[![ilastik compatibility](https://github.com/bioimage-io/collection/actions/workflows/check_compatibility_ilastik.yaml/badge.svg)](https://github.com/bioimage-io/collection/actions/workflows/check_compatibility_ilastik.yaml)
+
+![code style](https://img.shields.io/badge/code%20style-black-000000.svg)
+
 
 # collection
 
@@ -18,7 +29,8 @@ Current reviewers are listed in [`bioimageio_collection_config.json`][review-con
 1. Open a pull request, adding a person to the [list of reviewers][review-config], see <https://github.com/bioimage-io/collection/pull/75> for an example.
    * one public email address is required
    * github id can be found using `https://api.github.com/users/<github_username>`
-1. Once the pull request has been merged, the new reviewer can
+2. So the changes can be applied, the service needs to be restored manually. Reach out to the team or leave an issue.
+3. Once the pull request has been merged, the new reviewer can
    * accept resource drafts
    * request changes on resource drafts
    * upload a new version for any resource
@@ -78,6 +90,7 @@ Reviewers should check the models for technical correctness (aided by CI, see [T
 To this end it can be helpful to check the logs displayed at `https://bioimageio-uploader.netlify.app/#/status/<concept_id>`.
 There information about automated workflow steps and validation outcome is logged.
 Additionally an 'error' status may be shown if an exception occured in the GitHub workflow run producing the log.
+To be able to see all the packaged models along with the 'rdf.yaml' as well as covers and other documentation, go to the [draft collection](https://bioimage.io/#/?repo=https%3A%2F%2Fuk1s3.embassy.ebi.ac.uk%2Fpublic-datasets%2Fbioimage.io%2Fcollection_draft.json) and download the model from there.
 
 For models, reviewers can use [the model documentation][model-docs] as a guide.
 
@@ -109,3 +122,14 @@ Reviewers can:
 [test-wf]: https://github.com/bioimage-io/collection/actions/workflows/test.yaml
 [upload]: https://bioimage.io/#/upload
 [zenodo-overview]: https://zenodo.org/search?q=metadata.subjects.subject%3A%22backup.bioimage.io%22&l=list&p=1&s=10&sort=bestmatch
+
+# Add community partner
+To link yourself as a community partner, please create a PR to insert relevant metadata into [bioimageio_collection_config.json](https://github.com/bioimage-io/collection/blob/4087336ad00bff0198f5de83c94aa13be357840d/bioimageio_collection_config.json) under `"partners"`.
+Checkout [ilastik partner entry](https://github.com/bioimage-io/collection/blob/4087336ad00bff0198f5de83c94aa13be357840d/bioimageio_collection_config.json#L283-L301) for an example.
+
+## Add community partner compatibility checks
+Any community partner is invited to add a GitHub Actions workflow in this repo (please make a PR) that generates reports on its software compatibility with new and updated resources in the bioimage.io collection.
+See [ilastik compatibility checks workflow](https://github.com/bioimage-io/collection/blob/main/.github/workflows/check_compatibility_ilastik.yaml) for an example.
+
+If you are not familiar with GitHub Actions workflows, we can help you to set this up analog to our existing community partner compatibility checks.
+Ideally you can provide a script to create a compatibility report (a relativley simple json file) for a given resource description. see [this Python script as an example](https://github.com/bioimage-io/collection/blob/main/scripts/check_compatibility_ilastik.py).

@@ -17,19 +17,17 @@ from ..remote_collection import Record, RecordDraft
 
 
 def notify_uploader(rv: Union[RecordDraft, Record], subject_end: str, msg: str):
-    email, name = rv.get_uploader()
-    if email is None:
-        raise ValueError("missing uploader email")
+    uploader = rv.get_uploader()
 
     subject = f"{STATUS_UPDATE_SUBJECT}{rv.id} {rv.version} {subject_end.strip()}"
-    if email == BOT_EMAIL:
+    if uploader.email == BOT_EMAIL:
         logger.info("skipping email '{}' to {}", subject, BOT_EMAIL)
         return
 
     send_email(
         subject=subject,
         body=(
-            f"Dear {name},\n"
+            f"Dear {uploader.name},\n"
             + f"{msg.strip()}\n"
             + "Kind regards,\n"
             + "The bioimage.io bot 🦒\n"
@@ -37,7 +35,7 @@ def notify_uploader(rv: Union[RecordDraft, Record], subject_end: str, msg: str):
         ).replace(
             "\n", "\n\n"  # respect newlines in markdown
         ),
-        recipients=[email],
+        recipients=[uploader.email],
     )
 
 

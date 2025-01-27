@@ -25,6 +25,14 @@
             "email": "constantin.pape@informatik.uni-goettingen.de"
         },
         {
+            "id": "github|32868330",
+            "name": "Daniel Franco-Barranco",
+            "affiliation": "University of the Basque Country",
+            "orcid": "0000-0002-1109-110X",
+            "github_user": "danifranco",
+            "email": "daniel.franco@dipc.org"
+        },
+        {
             "id": "github|24434157",
             "name": "Dominik Kutra",
             "affiliation": "European Molecular Biology Laboratory",
@@ -39,6 +47,46 @@
             "orcid": "0000-0003-2082-3277",
             "github_user": "esgomezm",
             "email": "egomez@igc.gulbenkian.pt"
+        },
+        {
+            "id": "github|75674828",
+            "name": "Caterina Fuster-Barceló",
+            "affiliation": "Universidad Carlos III de Madrid",
+            "orcid": "0000-0002-4784-6957",
+            "github_user": "cfusterbarcelo",
+            "email": "cafuster@pa.uc3m.es"
+        },
+        {
+            "id": "github|17722010",
+            "name": "Qin Yu",
+            "affiliation": "European Molecular Biology Laboratory",
+            "orcid": "0000-0002-4652-0795",
+            "github_user": "qin-yu",
+            "email": "qin.yu.95@outlook.com"
+        },
+        {
+            "id": "github|32124316",
+            "name": "Vera Galinova",
+            "affiliation": "Fondazione Human Technopole",
+            "orcid": "0009-0001-0166-0399",
+            "github_user": "veegalinova",
+            "email": "vera.galinova@fht.org"
+        },
+        {
+            "id": "github|1878378",
+            "name": "Mehdi Seifi",
+            "affiliation": "Fondazione Human Technopole",
+            "orcid": "0009-0008-9276-5225",
+            "github_user": "mese79",
+            "email": "mehdi.seifi@fht.org"
+        },
+        {
+            "id": "github|47150974",
+            "name": "Iván Hidalgo-Cenalmor",
+            "affiliation": "Instituto Gulbenkian de Ciência",
+            "orcid": "0009-0000-8923-568X",
+            "github_user": "IvanHCenalmor",
+            "email": "ihidalgo@igc.gulbenkian.pt"
         }
     ],
     "collection_template": {
@@ -424,6 +472,68 @@
                     "tags": [
                         "dl4miceverywhere"
                     ]
+                },
+                {
+                    "background_image": "static/img/zoo-background.svg",
+                    "contact": [
+                        {
+                            "affiliation": [
+                                {
+                                    "name": "Helmholtz Munich - IFE",
+                                    "url": "https://www.helmholtz-munich.de/en/ife/research-groups/schmoller-lab"
+                                }
+                            ],
+                            "email": "francesco.padovani@helmholtz-munich.de",
+                            "github": "ElpadoCan",
+                            "name": "Francesco Padovani"
+                        }
+                    ],
+                    "default_type": "application",
+                    "docs": "https://spotmax.readthedocs.io/en/latest/",
+                    "explore_button_text": "Start Exploring",
+                    "icon": "https://raw.githubusercontent.com/SchmollerLab/SpotMAX/refs/heads/main/spotmax/resources/spotMAX_logo.svg",
+                    "id": "spotmax",
+                    "logo": "https://raw.githubusercontent.com/SchmollerLab/SpotMAX/refs/heads/main/spotmax/resources/spotMAX_logo.svg",
+                    "name": "SpotMAX",
+                    "resource_types": [
+                        "model",
+                        "application",
+                        "dataset"
+                    ],
+                    "splash_feature_list": [],
+                    "splash_subtitle": "SpotMAX is a Python software for the analysis of multi-dimensional microscopy data",
+                    "splash_title": "SpotMAX",
+                    "tags": [
+                        "SpotMAX"
+                    ]
+                },
+                {
+                    "background_image": "static/img/zoo-background.svg",
+                    "contact": [
+                        {
+                            "affiliation": [
+                                {
+                                    "name": "Human Technopole",
+                                    "url": "https://humantechnopole.it/en/"
+                                }
+                            ],
+                            "email": "rse@fht.org",
+                            "github": "https://github.com/orgs/CAREamics/teams/maintainers",
+                            "name": "CAREamics Maintainers"
+                        }
+                    ],
+                    "default_type": "model",
+                    "docs": "https://careamics.github.io/",
+                    "explore_button_text": "Start Exploring",
+                    "icon": "https://raw.githubusercontent.com/CAREamics/.github/refs/heads/main/profile/images/logo_careamics_128.png",
+                    "id": "careamics",
+                    "logo": "https://raw.githubusercontent.com/CAREamics/.github/refs/heads/main/profile/images/logo_careamics_128.png",
+                    "name": "CAREamics",
+                    "resource_types": ["model"],
+                    "splash_feature_list": [],
+                    "splash_subtitle": "CAREamics is a PyTorch library aimed at simplifying the use of Noise2Void and its many variants and cousins (CARE, Noise2Noise, N2V2, P(P)N2V, HDN, muSplit etc.).",
+                    "splash_title": "CAREamics",
+                    "tags": ["CAREamics", "careamics"]
                 }
             ]
         },

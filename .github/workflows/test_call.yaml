@@ -13,7 +13,10 @@ on:
       environment_name:
         required: true
         type: string
-
+      issue-nr:
+        description: Issue number to comment validation summary in.
+        required: false
+        type: number
 
 concurrency: ${{inputs.environment_name}}-${{inputs.concept_id}}-call
 
@@ -26,9 +29,11 @@ env:
   RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
   MAIL_PASSWORD: ${{secrets.MAIL_PASSWORD}}
   BIOIMAGEIO_USER_ID: github|${{github.actor_id}}
+  GITHUB_ISSUE_NUMBER: ${{inputs.issue-nr}}
+  GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
 jobs:
-  validate_format:
+  validate_format:  # validate metadata in rdf.yaml
     runs-on: ubuntu-latest
     environment: ${{inputs.environment_name}}
     outputs:
@@ -46,7 +51,8 @@ jobs:
       - id: validate_format
         run: backoffice validate_format "${{ inputs.concept_id }}" "${{ inputs.version }}"
 
-  setup-test:
+  setup-test:  # setup test environments to run dynamic tests (upload conda env yaml files as artifacts)
+    # TODO: write and upload conda yaml files in `validate_format` job instead
     needs: validate_format
     if: needs.validate_format.outputs.has_dynamic_test_cases == 'yes'
     runs-on: ubuntu-latest
@@ -59,20 +65,22 @@ jobs:
         with:
           python-version: "3.12"
           cache: "pip" # caching pip dependencies
+      - name: construct conda environment file name
+        run: echo "conda_env_file=${{inputs.environment_name}}_${{inputs.concept_id}}_${{inputs.version}}_conda_env_${{matrix.weight_format}}.yaml" >> "$GITHUB_ENV"
       - run: pip install ruyaml
-      - name: save ${{inputs.environment_name}}_${{inputs.concept_id}}_${{inputs.version}}_conda_env_${{matrix.weight_format}}.yaml
+      - name: save ${{env.conda_env_file}}
         run: |
           import json
           from pathlib import Path
           from ruyaml import YAML
           yaml = YAML(typ="safe")
           conda_env = json.loads('${{ needs.validate_format.outputs.conda_envs }}')["${{ matrix.weight_format }}"]
-          yaml.dump(conda_env, Path("${{inputs.environment_name}}_${{inputs.concept_id}}_${{inputs.version}}_conda_env_${{matrix.weight_format}}.yaml"))
+          yaml.dump(conda_env, Path("${{env.conda_env_file}}"))
         shell: python
       - uses: actions/upload-artifact@v4
         with:
-          name: ${{inputs.environment_name}}_${{inputs.concept_id}}_${{inputs.version}}_conda_env_${{matrix.weight_format}}.yaml
-          path: ${{inputs.environment_name}}_${{inputs.concept_id}}_${{inputs.version}}_conda_env_${{matrix.weight_format}}.yaml
+          name: ${{env.conda_env_file}}
+          path: ${{env.conda_env_file}}
 
   test:
     needs: [validate_format, setup-test]
@@ -85,17 +93,20 @@ jobs:
       max-parallel: 1 # avoid prallel updates to log.json
     steps:
       - uses: actions/checkout@v4
+      - name: construct conda environment file name
+        run: echo "conda_env_file=${{inputs.environment_name}}_${{inputs.concept_id}}_${{inputs.version}}_conda_env_${{matrix.weight_format}}.yaml" >> "$GITHUB_ENV"
       - uses: actions/download-artifact@v4
         with:
-          name: ${{inputs.environment_name}}_${{inputs.concept_id}}_${{inputs.version}}_conda_env_${{matrix.weight_format}}.yaml
+          name: ${{env.conda_env_file}}
       - name: install validation dependencies
         id: create_env
         uses: mamba-org/setup-micromamba@v1
         with:
+          generate-run-shell: false
           cache-downloads: true
           environment-name: ${{ matrix.weight_format }}
-          environment-file: ${{inputs.environment_name}}_${{inputs.concept_id}}_${{inputs.version}}_conda_env_${{matrix.weight_format}}.yaml
-        continue-on-error: true # we inspect this step's outcome in run_dynamic_tests.py
+          environment-file: ${{env.conda_env_file}}
+        continue-on-error: true # we inspect this step's outcome during testing
         timeout-minutes: 60
       - name: setup pip to install backoffice (if conda env failed to install)
         if: steps.create_env.outcome == 'failure'
@@ -108,12 +119,12 @@ jobs:
         run: pip install .
       - name: dynamic validation
         shell: bash -el {0}
-        run: backoffice test "${{inputs.concept_id}}" "${{ inputs.version }}" "${{ matrix.weight_format }}" "${{ steps.create_env.outcome }}"
+        run: backoffice test "${{inputs.concept_id}}" "${{ inputs.version }}" "${{ matrix.weight_format }}" "${{ steps.create_env.outcome }}" "$conda_env_file"
         timeout-minutes: 60
       - name: check torch import # TODO: improve error messages in bioimageio.core
         if: matrix.weight_format == 'pytorch_state_dict' || matrix.weight_format == 'torchscript'
         shell: bash -el {0}
-        run: python -c "import torch"
+        run: python -c "import torch; import torch;print(*torch.__config__.show().split('\n'), sep='\n')"
       - name: check onnx import  # TODO: improve error messages in bioimageio.core
         if: matrix.weight_format == 'onnx'
         shell: bash -el {0}

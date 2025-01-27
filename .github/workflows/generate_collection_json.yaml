@@ -3,6 +3,12 @@ run-name: generate collection
 
 on:
   workflow_dispatch:
+  workflow_run:
+    workflows:
+      - 'check compatibility ilastik'
+      - 'check compatibility biapy'
+    types: [completed]
+    branches: [main]
   push:
     branches: [main]
 

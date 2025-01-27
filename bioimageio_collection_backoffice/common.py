@@ -1,4 +1,7 @@
 import pydantic
+from ruyaml import YAML
+
+yaml = YAML(typ="safe")
 
 
 class Node(
@@ -10,4 +13,4 @@ class Node(
     validate_assignment=True,
     validate_default=False,
 ):
-    pass
+    """"""  # avoid inheriting docstring from `pydantic.BaseModel`

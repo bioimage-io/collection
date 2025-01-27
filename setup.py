@@ -32,15 +32,17 @@ _ = setup(
     ],
     packages=find_packages(exclude=["tests"]),
     install_requires=[
-        "bioimageio.core>=0.6.7",
-        "bioimageio.spec>=0.5.3",
+        "bioimageio.core>=0.7.0",
+        "bioimageio.spec>=0.5.3.5",
         "fire",
+        "imagecodecs",  # not needed for core >=0.7.1
         "loguru",
         "markdown",
         "minio==7.2.4",
         "pillow",
         "pydantic-settings",
-        "pydantic>=2.7.0",
+        "PyGithub",
+        "pydantic>=2.7.0,<2.10",  # TODO: update upper pin after pydantic 2.10 fix, see https://github.com/bioimage-io/spec-bioimage-io/pull/664
         "requests",
         "ruyaml",
         "tqdm",

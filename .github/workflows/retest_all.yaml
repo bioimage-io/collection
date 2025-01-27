@@ -1,3 +1,5 @@
+# use this workflow to rerun tests for all (published and drafted) resource versions,
+# e.g. when a new bioimageio.core library version is released.
 name: retest all bioimageio resources
 
 on:

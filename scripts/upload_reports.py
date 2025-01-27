@@ -4,17 +4,15 @@ from pathlib import Path
 from typing import Any, Dict, Union
 
 import fire
-from ruyaml import YAML
 
+from bioimageio_collection_backoffice.common import yaml
 from bioimageio_collection_backoffice.db_structure.compatibility import (
-    CompatiblityReport,
+    CompatibilityReport,
 )
 from bioimageio_collection_backoffice.remote_collection import (
     get_remote_resource_version,
 )
 from bioimageio_collection_backoffice.s3_client import Client
-
-yaml = YAML(typ="safe")
 
 
 def upload_reports(reports_folder: Union[Path, str]):
@@ -37,7 +35,7 @@ def upload_reports(reports_folder: Union[Path, str]):
             continue
 
         assert isinstance(report_data, dict)
-        report = CompatiblityReport(tool=tool, **report_data)
+        report = CompatibilityReport(tool=tool, **report_data)
 
         record = get_remote_resource_version(
             client=client, concept_id=concept, version=version

@@ -1,0 +1,42 @@
+name: check compatibility biapy
+
+concurrency: biapy
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/check_compatibility_biapy.yaml
+      - scripts/check_compatibility_biapy.py
+  workflow_dispatch:
+  schedule:
+    - cron: 0 1 * * *  # update compatibility once a day
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    environment: 'production'
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v5
+      with:
+        python-version: "3.10"
+        cache: "pip" # caching pip dependencies
+    - name: Installing BiaPy dependencies
+      run: pip install biapy
+    - name: Installing Pytorch
+      run: pip install torch==2.4.0 torchvision==0.19.0 torchaudio==2.4.0 --index-url https://download.pytorch.org/whl/cpu
+    - name: Installing last packages that rely on the Pytorch installation
+      run: pip install timm torchmetrics[image] pytorch-msssim
+    - name: Install backoffice
+      run: pip install .
+    - run: python scripts/check_compatibility_biapy.py
+      env:
+        S3_HOST: ${{vars.S3_HOST}}
+        S3_BUCKET: ${{vars.S3_BUCKET}}
+        S3_FOLDER: ${{vars.S3_FOLDER}}
+        S3_ACCESS_KEY_ID: ${{secrets.S3_ACCESS_KEY_ID}}
+        S3_SECRET_ACCESS_KEY: ${{secrets.S3_SECRET_ACCESS_KEY}}
+        RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
+

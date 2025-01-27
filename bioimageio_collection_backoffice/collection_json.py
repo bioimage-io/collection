@@ -1,16 +1,17 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import Literal, Mapping, Optional, Sequence, Union
+from typing import List, Literal, Mapping, Optional, Sequence, Union
 
 from loguru import logger
-from pydantic import HttpUrl, model_validator
+from pydantic import Field, HttpUrl, model_validator
 
 from .collection_config.collection_json_template import (
     CollectionJsonTemplate,
     CollectionWebsiteConfigTemplate,
 )
 from .common import Node
+from .db_structure.version_info import DraftStatus, ErrorStatus
 
 
 class Author(Node, frozen=True):
@@ -30,8 +31,14 @@ class TrainingData(Node, frozen=True):
     id: str
 
 
+class Uploader(Node, frozen=True):
+    name: Optional[str] = None
+    email: str
+
+
 class CollectionEntry(Node, frozen=True):
     authors: Sequence[Author]
+    uploader: Uploader
     badges: Sequence[Badge]
     concept_doi: Optional[str]
     covers: Sequence[HttpUrl]
@@ -52,6 +59,8 @@ class CollectionEntry(Node, frozen=True):
     training_data: Optional[TrainingData] = None
     type: Literal["application", "model", "notebook", "dataset"]
     source: Optional[str] = None
+    status: Optional[Union[DraftStatus, ErrorStatus]] = None
+    """status of the draft (for collection_draft.json only)"""
 
     def __lt__(self, other: CollectionEntry):
         sdc = 0 if self.download_count == "?" else self.download_count
@@ -80,6 +89,7 @@ class CollectionWebsiteConfig(CollectionWebsiteConfigTemplate, frozen=True):
 class CollectionJson(CollectionJsonTemplate, frozen=True):
     collection: Sequence[CollectionEntry]
     config: CollectionWebsiteConfig
+    created: datetime = Field(default_factory=datetime.now)
 
 
 class ConceptVersion(Node, frozen=True):
@@ -105,3 +115,9 @@ class ConceptSummary(Node, frozen=True):
 
 class AllVersions(Node, frozen=True):
     entries: Sequence[ConceptSummary]
+
+
+class AvailableConceptIds(Node, frozen=True):
+    model: List[str]
+    dataset: List[str]
+    notebook: List[str]

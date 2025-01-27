@@ -16,6 +16,9 @@ class LogEntry(Node, frozen=True, extra="ignore"):
     details: Any = None
     """log details"""
 
+    details_formatted: Optional[str] = None
+    """log details formatted as markdown"""
+
     timestamp: datetime = Field(default_factory=datetime.now)
     """creation of log entry"""
 

@@ -10,6 +10,7 @@ from abc import ABC
 from collections import defaultdict
 from dataclasses import dataclass, field
 from functools import wraps
+from itertools import product
 from pathlib import Path
 from typing import (
     Any,
@@ -19,7 +20,6 @@ from typing import (
     List,
     Literal,
     Mapping,
-    NamedTuple,
     Optional,
     Sequence,
     Tuple,
@@ -29,6 +29,7 @@ from typing import (
 from urllib.parse import SplitResult, urlsplit, urlunsplit
 
 import bioimageio.core
+import requests
 from bioimageio.spec import ValidationContext
 from bioimageio.spec.common import HttpUrl
 from bioimageio.spec.utils import (
@@ -38,22 +39,26 @@ from bioimageio.spec.utils import (
 from loguru import logger
 from pydantic import AnyUrl
 from ruyaml import YAML
-from typing_extensions import Concatenate, ParamSpec
+from typing_extensions import Concatenate, ParamSpec, assert_never
+
+from bioimageio_collection_backoffice.gh_utils import set_gh_actions_outputs
 
 from ._settings import settings
 from ._thumbnails import create_thumbnails
 from .collection_config import CollectionConfig
 from .collection_json import (
     AllVersions,
+    AvailableConceptIds,
     CollectionEntry,
     CollectionJson,
     CollectionWebsiteConfig,
     ConceptSummary,
     ConceptVersion,
+    Uploader,
 )
 from .db_structure.chat import Chat, Message
 from .db_structure.compatibility import (
-    CompatiblityReport,
+    CompatibilityReport,
     TestSummary,
     TestSummaryEntry,
 )
@@ -318,11 +323,11 @@ class RemoteCollection(RemoteBase):
 
     def validate_concept_id(self, concept_id: str, *, type_: str):
         """check if a concept id follows the defined pattern (not if it exists)"""
-        self.config.id_parts.select_type(type_).validate_concept_id(concept_id)
+        self.config.id_parts[type_].validate_concept_id(concept_id)
 
-    def generate_concpet_id(self, type_: str):
+    def generate_concept_id(self, type_: str):
         """generate a new, unused concept id"""
-        id_parts = self.config.id_parts.select_type(type_)
+        id_parts = self.config.id_parts[type_]
         nouns = list(id_parts.nouns)
         taken = self.get_taken_concept_ids()
         n = 9999
@@ -364,6 +369,11 @@ class RemoteCollection(RemoteBase):
         )
         all_versions_file_name: str = (
             "all_versions.json" if mode == "published" else f"all_versions_{mode}.json"
+        )
+        available_concept_ids_file_name: str = (
+            "available_ids.json"
+            if mode == "published"
+            else f"available_ids_{mode}.json"
         )
         id_map_file_name = (
             "id_map.json" if mode == "published" else f"id_map_{mode}.json"
@@ -455,7 +465,24 @@ class RemoteCollection(RemoteBase):
         )
 
         all_versions = AllVersions(entries=concepts_summaries)
-
+        types = ("model", "dataset", "notebook")
+        taken_ids = {
+            typ: {cs.concept for cs in concepts_summaries if cs.type == typ}
+            for typ in types
+        }
+        available_concept_ids = AvailableConceptIds.model_validate(
+            {
+                typ: [
+                    ci
+                    for a, n in product(
+                        self.config.id_parts[typ].adjectives,
+                        self.config.id_parts[typ].nouns,
+                    )
+                    if (ci := f"{a}-{n}") not in taken_ids[typ]
+                ]
+                for typ in types
+            }
+        )
         # # check that this generated collection is a valid RDF itself
         # coll_descr = build_description(
         #     collection.model_dump(), context=ValidationContext(perform_io_checks=False)
@@ -466,7 +493,9 @@ class RemoteCollection(RemoteBase):
         if collection_entries or not list(self.client.ls(collection_output_file_name)):
             self.client.put_json(
                 collection_output_file_name,
-                collection.model_dump(mode="json", exclude_defaults=True),
+                collection.model_dump(
+                    mode="json", exclude_defaults=mode == "published"
+                ),
             )
         else:
             logger.error(
@@ -478,6 +507,10 @@ class RemoteCollection(RemoteBase):
             self.client.put_json(
                 all_versions_file_name,
                 all_versions.model_dump(mode="json", exclude_defaults=True),
+            )
+            self.client.put_json(
+                available_concept_ids_file_name,
+                available_concept_ids.model_dump(mode="json", exclude_defaults=True),
             )
         else:
             logger.error(
@@ -506,9 +539,7 @@ class RemoteCollection(RemoteBase):
     def get_collection_json(self) -> CollectionJson:
         data = self.client.load_file("collection.json")
         assert data is not None
-        collection: Union[Any, Dict[str, Union[Any, List[Dict[str, Any]]]]] = (
-            json.loads(data)
-        )
+        collection: Dict[str, List[Dict[str, Any]]] = json.loads(data)
         assert isinstance(
             collection, dict
         )  # TODO: create typed dict for collection.json
@@ -553,13 +584,6 @@ class RecordConcept(RemoteBase):
         versions.sort(key=lambda r: r.info.created, reverse=True)
         return versions
 
-    def draft_new_version(self, package_url: str) -> RecordDraft:
-        """Stage the content at `package_url` as a new resource version candidate."""
-
-        draft = self.draft
-        draft.unpack(package_url=package_url)
-        return draft
-
     @property
     def doi(self):
         """(version **un**specific) Zenodo concept DOI of the
@@ -569,11 +593,6 @@ class RecordConcept(RemoteBase):
             return versions[0].concept_doi
         else:
             return None
-
-
-class Uploader(NamedTuple):
-    email: Optional[str]
-    name: str
 
 
 @dataclass
@@ -635,18 +654,7 @@ class RecordBase(RemoteBase, ABC):
 
     def get_uploader(self):
         rdf = self.get_rdf()
-        try:
-            uploader = rdf["uploader"]
-            email = uploader["email"]
-            name = uploader.get(
-                "name", f"{rdf.get('type', 'bioimage.io resource')} contributor"
-            )
-        except Exception as e:
-            logger.error("failed to extract uploader from rdf: {}", e)
-            email = None
-            name = "bioimage.io resource contributor"
-
-        return Uploader(email=email, name=name)
+        return Uploader.model_validate(rdf["uploader"])
 
     def get_file_url(self, path: str):
         return self.client.get_file_url(f"{self.folder}files/{path}")
@@ -671,7 +679,7 @@ class RecordBase(RemoteBase, ABC):
             for t in tools
         }
         return [
-            CompatiblityReport.model_validate({**json.loads(d), "tool": t})
+            CompatibilityReport.model_validate({**json.loads(d), "tool": t})
             for t, d in reports_data.items()
             if d is not None
         ]
@@ -679,7 +687,7 @@ class RecordBase(RemoteBase, ABC):
     def get_compatibility_report_path(self, tool: str):
         return f"{self.folder}compatibility/{tool}.json"
 
-    def set_compatibility_report(self, report: CompatiblityReport) -> None:
+    def set_compatibility_report(self, report: CompatibilityReport) -> None:
         path = self.get_compatibility_report_path(report.tool)
         self.client.put_and_cache(path, report.model_dump_json().encode())
 
@@ -719,7 +727,7 @@ class RecordDraft(RecordBase):
 
     @log
     @lock_concept
-    def unpack(self, package_url: str):
+    def unpack(self, package_url: str, package_zip: Optional[zipfile.ZipFile] = None):
         previous_versions = self.concept.get_published_versions()
         if not previous_versions:
             previous_rdf = None
@@ -736,27 +744,13 @@ class RecordDraft(RecordBase):
             )
         )
 
-        # Download the model zip file
-        try:
-            remotezip = urllib.request.urlopen(package_url)
-        except Exception as e:
-            raise RuntimeError(f"failed to open {package_url}: {e}")
+        if package_zip is None:
+            package_zip = load_from_package_url(package_url)
 
-        zipinmemory = io.BytesIO(remotezip.read())
-
-        # Unzip the zip file
-        zipobj = zipfile.ZipFile(zipinmemory)
-
-        file_names = set(zipobj.namelist())
+        file_names = set(package_zip.namelist())
         bioimageio_yaml_file_name = identify_bioimageio_yaml_file_name(file_names)
 
-        rdf: Union[Any, Dict[Any, Any]] = yaml.load(
-            zipobj.open(bioimageio_yaml_file_name).read().decode()
-        )
-        if not isinstance(rdf, dict):
-            raise ValueError(
-                f"Expected {bioimageio_yaml_file_name} to hold a dictionary"
-            )
+        rdf = load_rdf_from_package_zip(package_zip, bioimageio_yaml_file_name)
 
         if (rdf_id := rdf.get("id")) is None:
             rdf["id"] = self.concept_id
@@ -787,30 +781,54 @@ class RecordDraft(RecordBase):
                 break
 
         # set matching id_emoji
-        rdf["id_emoji"] = self.collection.config.id_parts.get_icon(self.id)
+        rdf["id_emoji"] = self.collection.config.id_parts.get_icon(self.concept_id)
         if rdf["id_emoji"] is None:
             self.add_log_entry(
-                LogEntry(message=f"error: Failed to get icon for {self.id}")
+                LogEntry(message=f"error: Failed to get icon for {self.concept_id}")
             )
-
-        if "id" not in rdf:
-            raise ValueError("Missing `id` field")
 
         if not str(rdf["id"]):
             raise ValueError(f"Invalid `id`: {rdf['id']}")
 
-        if "uploader" not in rdf:
-            for r in self.collection.config.reviewers:
-                if settings.bioimageio_user_id == r.id:
-                    rdf["uploader"] = dict(name=r.name, email=r.email)
-                    break
-            else:
+        reviewers = {r.id: r for r in self.collection.config.reviewers}
+        if "uploader" in rdf:
+            given_uploader_email: Any = (
+                None
+                if not isinstance(rdf["uploader"], dict)
+                else rdf["uploader"].get("email")
+            )
+            if not isinstance(given_uploader_email, str) or not given_uploader_email:
                 raise ValueError("RDF is missing `uploader.email` field.")
 
-        elif not isinstance(rdf["uploader"], dict) or "email" not in rdf["uploader"]:
+            if settings.bioimageio_user_id not in reviewers:
+                # verify that uploader email matches bioimageio id
+                req = requests.get(
+                    f"https://api.github.com/search/users?q={given_uploader_email}+in:email"
+                )
+                req.raise_for_status()
+                response = req.json()
+                if response["total_count"] != 1:
+                    raise ValueError(
+                        "Failed to identify GitHub account of"
+                        + f" '{given_uploader_email}' from `uploader.email` field."
+                    )
+
+                if settings.bioimageio_user_id != (
+                    expected_user := f"github|{response['items'][0]['id']}"
+                ):
+                    raise ValueError(
+                        f"Upload triggered by '{settings.bioimageio_user_id}',"
+                        + f" but found GitHub user '{expected_user}' associated with"
+                        + f" '{given_uploader_email}' specified in `uploader.email`."
+                    )
+
+        elif settings.bioimageio_user_id in reviewers:
+            rdf["uploader"] = dict(
+                name=reviewers[settings.bioimageio_user_id].name,
+                email=reviewers[settings.bioimageio_user_id].email,
+            )
+        else:
             raise ValueError("RDF is missing `uploader.email` field.")
-        elif not isinstance(rdf["uploader"]["email"], str):
-            raise ValueError("RDF has invalid `uploader.email` field.")
 
         uploader: Any = rdf["uploader"]["email"]
         if previous_rdf is not None:
@@ -826,7 +844,8 @@ class RecordDraft(RecordBase):
                 and uploader not in [r.email for r in self.collection.config.reviewers]
             ):
                 raise ValueError(
-                    f"uploader '{uploader}' is not a maintainer of '{self.id}' nor a registered bioimageio reviewer."
+                    f"uploader '{uploader}' is not a maintainer of '{self.id}'"
+                    + " nor a registered bioimageio reviewer."
                 )
 
         # clean up any previous draft files
@@ -837,7 +856,7 @@ class RecordDraft(RecordBase):
             path = f"{self.folder}files/{file_name}"
             self.client.put(path, io.BytesIO(file_data), length=len(file_data))
 
-        thumbnails = create_thumbnails(rdf, zipobj)
+        thumbnails = create_thumbnails(rdf, package_zip)
         config = rdf.setdefault("config", {})
         if isinstance(config, dict):
             bioimageio_config: Any = config.setdefault("bioimageio", {})
@@ -847,6 +866,13 @@ class RecordDraft(RecordBase):
                     for oname, (tname, tdata) in thumbnails.items():
                         upload(tname, tdata)
                         thumbnail_config[oname] = tname
+
+                if rdf["id_emoji"] is not None:
+                    # we have a valid new collection id
+                    # remove any nickname from config.bioimageio
+                    #   that may have been kept if reusing an older model
+                    bioimageio_config.pop("nickname", None)
+                    bioimageio_config.pop("nickname_icon", None)
 
         rdf_io = io.BytesIO()
         yaml.dump(rdf, rdf_io)
@@ -859,7 +885,7 @@ class RecordDraft(RecordBase):
             file_names.remove(other)
 
         for file_name in file_names:
-            file_data = zipobj.open(file_name).read()
+            file_data = package_zip.open(file_name).read()
             upload(file_name, file_data)
 
         self._set_status(UnpackedStatus())
@@ -876,18 +902,17 @@ class RecordDraft(RecordBase):
         # map reviewer id to name
         for r in self.collection.config.reviewers:
             if reviewer == r.id:
-                reviewer = r.name
                 break
+        else:
+            raise ValueError(reviewer)
 
-        self._set_status(ChangesRequestedStatus(description=reason))
+        description = (
+            f'<a href= "mailto: {r.email}"> {r.name}</a> requested changes: {reason}'
+        )
+        plain_description = f"{r.name} requested changes: {reason}"
+        self._set_status(ChangesRequestedStatus(description=description))
         self.extend_chat(
-            Chat(
-                messages=[
-                    Message(
-                        author="system", text=f"{reviewer} requested changes: {reason}"
-                    )
-                ]
-            )
+            Chat(messages=[Message(author="system", text=plain_description)])
         )
 
     @log
@@ -919,7 +944,7 @@ class RecordDraft(RecordBase):
         if rdf_data is None:
             raise RuntimeError(f"Failed to load staged RDF from {self.rdf_path}")
 
-        rdf: Union[Any, Dict[Any, Any]] = yaml.load(rdf_data.decode())
+        rdf: Dict[Any, Any] = yaml.load(rdf_data.decode())
         assert isinstance(rdf, dict)
         version = rdf.get("version", "1")
         if not isinstance(version, (int, float, str)):
@@ -928,6 +953,12 @@ class RecordDraft(RecordBase):
             version = str(version)
             if version in {v.version for v in self.concept.get_published_versions()}:
                 raise ValueError(f"Trying to publish version '{version}' again!")
+
+        # remember previously published concept doi
+        if previous_versions := self.concept.get_published_versions():
+            concept_doi = previous_versions[0].info.concept_doi
+        else:
+            concept_doi = None
 
         published = Record(
             client=self.client, concept_id=self.concept_id, version=version
@@ -943,7 +974,7 @@ class RecordDraft(RecordBase):
         self.client.put(self.rdf_path, io.BytesIO(rdf_data), length=len(rdf_data))
         self.client.rm_dir(self.folder)
 
-        published.update_info(RecordInfo())
+        published.update_info(RecordInfo(concept_doi=concept_doi))
         return published
 
     def _set_status(self, value: DraftStatus):
@@ -1002,6 +1033,62 @@ class Record(RecordBase):
         self._update_json(RecordInfo(doi=doi, concept_doi=concept_doi))
 
 
+def load_rdf_from_package_zip(
+    package_zip: zipfile.ZipFile, bioimageio_yaml_file_name: str
+):
+    rdf: Dict[Any, Any] = yaml.load(
+        package_zip.open(bioimageio_yaml_file_name).read().decode()
+    )
+    if not isinstance(rdf, dict):
+        raise ValueError(f"Expected {bioimageio_yaml_file_name} to hold a dictionary")
+    return rdf
+
+
+def load_from_package_url(package_url: str):
+    # Download the model zip file
+    try:
+        remotezip = urllib.request.urlopen(package_url)
+    except Exception as e:
+        raise RuntimeError(f"failed to open {package_url}: {e}")
+
+    zipinmemory = io.BytesIO(remotezip.read())
+    return zipfile.ZipFile(zipinmemory)
+
+
+def draft_new_version(
+    collection: RemoteCollection, package_url: str, concept_id: str = ""
+) -> RecordDraft:
+    """Stage the content at `package_url` as a new resource version candidate.
+
+    Args:
+        package_url: upload source
+        concept_id: (optional) overwrite any resource id given in **package_url**
+    """
+    if not concept_id:
+        package_zip = load_from_package_url(package_url)
+        bioimageio_yaml_file_name = identify_bioimageio_yaml_file_name(
+            package_zip.namelist()
+        )
+        rdf = load_rdf_from_package_zip(package_zip, bioimageio_yaml_file_name)
+        concept_id = (
+            found if isinstance((found := rdf.get("id")), str) and found else ""
+        )
+        if not concept_id:
+            typ = rdf.get("type")
+            if not isinstance(typ, str) or not typ:
+                raise ValueError(
+                    f"'`type` field of {bioimageio_yaml_file_name}' in '{package_url}'"
+                    + " is missing/invalid ."
+                )
+
+            concept_id = collection.generate_concept_id(typ)
+
+    set_gh_actions_outputs(concept_id=concept_id)
+    draft = RecordDraft(collection.client, concept_id=concept_id)
+    draft.unpack(package_url=package_url)
+    return draft
+
+
 def get_remote_resource_version(
     client: Client, concept_id: str, version: Union[int, float, str]
 ):
@@ -1032,10 +1119,14 @@ def maybe_swap_with_thumbnail(
     src: Union[Any, Dict[Any, Any], List[Any]], thumbnails: Mapping[str, str]
 ) -> Any:
     if isinstance(src, dict):
-        return {k: maybe_swap_with_thumbnail(v, thumbnails) for k, v in src.items()}
+        src_dict: Dict[Any, Any] = src
+        return {
+            k: maybe_swap_with_thumbnail(v, thumbnails) for k, v in src_dict.items()
+        }
 
     if isinstance(src, list):
-        return [maybe_swap_with_thumbnail(s, thumbnails) for s in src]
+        src_list: List[Any] = src
+        return [maybe_swap_with_thumbnail(s, thumbnails) for s in src_list]
 
     if isinstance(src, str) and not src.startswith("https://"):
         clean_name = Path(src).name  # remove any leading './'
@@ -1051,10 +1142,12 @@ def resolve_relative_path(
     src: Union[Any, Dict[Any, Any], List[Any]], parsed_root: SplitResult
 ) -> Any:
     if isinstance(src, dict):
-        return {k: resolve_relative_path(v, parsed_root) for k, v in src.items()}
+        src_dict: Dict[Any, Any] = src
+        return {k: resolve_relative_path(v, parsed_root) for k, v in src_dict.items()}
 
     if isinstance(src, list):
-        return [resolve_relative_path(s, parsed_root) for s in src]
+        src_list: List[Any] = src
+        return [resolve_relative_path(s, parsed_root) for s in src_list]
 
     if isinstance(src, str):
         if src.startswith("http") or src.startswith("/") or "." not in src:
@@ -1082,29 +1175,17 @@ def create_collection_entries(
     if not versions:
         return [], {}
 
-    # create an explicit entry only for the latest version
-    #   (all versions are referenced under `versions`)
-    latest_record_version = versions[0]
-
-    with ValidationContext(perform_io_checks=False):
-        rdf_url = HttpUrl(latest_record_version.rdf_url)
-
-    root_url = str(rdf_url.parent)
-    assert root_url == ((root := latest_record_version.get_file_url("").strip("/"))), (
-        root_url,
-        root,
-    )
-    parsed_root = urlsplit(root_url)
-    rdf = latest_record_version.get_rdf()
+    rdf: Optional[Dict[str, Any]] = None
+    record_version: Optional[Union[Record, RecordDraft]] = None
+    concept: Optional[str] = None
+    id_info: Optional[IdInfo] = None
 
     id_map: Dict[str, IdInfo] = {}
     version_infos: List[VersionInfo] = []
-    for record_version in versions:
-        rdf_version_data = latest_record_version.client.load_file(
-            latest_record_version.rdf_path
-        )
+    for record_version in versions[::-1]:  # process oldest to newest
+        rdf_version_data = record_version.client.load_file(record_version.rdf_path)
         if rdf_version_data is None:
-            logger.error("failed to load {}", latest_record_version.rdf_path)
+            logger.error("failed to load {}", record_version.rdf_path)
             continue
 
         id_info = IdInfo(
@@ -1112,26 +1193,27 @@ def create_collection_entries(
             sha256=hashlib.sha256(rdf_version_data).hexdigest(),
         )
         id_map[record_version.id] = id_info
-
-        if record_version.concept_doi is not None:
-            id_map[record_version.concept_doi] = id_info
+        id_map[record_version.concept_id] = id_info
 
         if record_version.doi is not None:
             id_map[record_version.doi] = id_info
 
-        rdf_version = record_version.get_rdf()
-        if (version_id := rdf_version["id"]) is not None and version_id not in id_map:
+        if record_version.concept_doi is not None:
+            id_map[record_version.concept_doi] = id_info
+
+        rdf = record_version.get_rdf()
+        if (version_id := rdf["id"]) is not None and version_id not in id_map:
             id_map[version_id] = id_info
 
-        if rdf_version["id"].startswith("10.5281/zenodo."):
+        if rdf["id"].startswith("10.5281/zenodo."):
             # legacy models
-            concept_end = rdf_version["id"].rfind("/")
-            concept = rdf_version["id"][:concept_end]
+            concept_end = rdf["id"].rfind("/")
+            concept = rdf["id"][:concept_end]
         else:
-            concept = rdf_version["id"]
+            concept = rdf["id"]
 
-        if concept not in id_map:
-            id_map[concept] = id_info
+        assert concept is not None
+        id_map[concept] = id_info
 
         version_infos.append(
             VersionInfo(
@@ -1171,22 +1253,27 @@ def create_collection_entries(
             test_summary, f"{record_version.folder}test_summary.yaml"
         )
 
+    assert rdf is not None
+    assert record_version is not None
+    assert concept is not None
+    assert id_info is not None
+
+    # create an explicit entry only for the latest version
+    #   (all versions are referenced under `versions`)
     # upload 'versions.json' summary
-    if isinstance(latest_record_version, Record):
+    if isinstance(record_version, Record):
         versions_info = VersionsInfo(
-            concept_doi=latest_record_version.concept_doi, versions=version_infos
+            concept_doi=record_version.concept_doi, versions=version_infos[::-1]
         )
-        latest_record_version.concept.client.put_json(
-            f"{latest_record_version.concept.folder}versions.json",
+        record_version.concept.client.put_json(
+            f"{record_version.concept.folder}versions.json",
             versions_info.model_dump(mode="json"),
         )
-
-    if rdf["id"].startswith("10.5281/zenodo."):
-        # legacy models
-        concept_end = rdf["id"].rfind("/")
-        concept = rdf["id"][:concept_end]
+        status = None
+    elif isinstance(record_version, RecordDraft):
+        status = record_version.info.status
     else:
-        concept = rdf["id"]
+        assert_never(record_version)
 
     try:
         # legacy nickname
@@ -1200,6 +1287,9 @@ def create_collection_entries(
     if nickname == concept:
         nickname = None
 
+    if nickname is not None:
+        id_map[nickname] = id_info
+
     legacy_download_count = LEGACY_DOWNLOAD_COUNTS.get(nickname or concept, 0)
 
     # TODO: read new download count
@@ -1207,12 +1297,28 @@ def create_collection_entries(
 
     # ingest compatibility reports
     links = set(rdf.get("links", []))
-    compat_reports = latest_record_version.get_all_compatibility_reports()
+    tags = set(rdf.get("tags", []))
+    compat_reports = record_version.get_all_compatibility_reports()
 
+    def get_compat_tag(tool: str):
+        """make a special, derived tag for the automatic compatibility check result
+
+        of a tool to avoid overwriting plain manual tags like 'ilastik'.
+        """
+        return f"{tool}-compatible"
+
+    # remove all version unspecific tool tags
+    for r in compat_reports:
+        tags.discard(get_compat_tag(r.tool_wo_version))
+
+    # update links and tags with compatible tools
     for r in compat_reports:
         if r.status == "passed":
-            # update links to reference compatible tools
             links.update(r.links)
+            tags.add(get_compat_tag(r.tool))  # add version unspecific tag
+            tags.add(get_compat_tag(r.tool_wo_version))
+        else:
+            tags.discard(get_compat_tag(r.tool))
 
     try:
         thumbnails = rdf["config"]["bioimageio"]["thumbnails"]
@@ -1222,19 +1328,31 @@ def create_collection_entries(
         if not isinstance(thumbnails, dict):
             thumbnails = {}
 
+    # get parsed root
+    with ValidationContext(perform_io_checks=False):
+        rdf_url = HttpUrl(record_version.rdf_url)
+
+    root_url = str(rdf_url.parent)
+    assert root_url == ((root := record_version.get_file_url("").strip("/"))), (
+        root_url,
+        root,
+    )
+    parsed_root = urlsplit(root_url)
+
     return [
         CollectionEntry(
             authors=rdf.get("authors", []),
+            uploader=rdf.get("uploader", dict(email="bioimageiobot@gmail.com")),
             badges=resolve_relative_path(
                 maybe_swap_with_thumbnail(rdf.get("badges", []), thumbnails),
                 parsed_root,
             ),
-            concept_doi=latest_record_version.concept_doi,
+            concept_doi=record_version.concept_doi,
             covers=resolve_relative_path(
                 maybe_swap_with_thumbnail(rdf.get("covers", []), thumbnails),
                 parsed_root,
             ),
-            created=latest_record_version.info.created,
+            created=record_version.info.created,
             description=rdf["description"],
             download_count=download_count,
             download_url=rdf["download_url"] if "download_url" in rdf else None,
@@ -1247,11 +1365,12 @@ def create_collection_entries(
             name=rdf["name"],
             nickname_icon=nickname_icon,
             nickname=nickname,
-            rdf_source=AnyUrl(latest_record_version.rdf_url),
+            rdf_source=AnyUrl(record_version.rdf_url),
             root_url=root_url,
-            tags=rdf.get("tags", []),
+            tags=list(tags),
             training_data=rdf["training_data"] if "training_data" in rdf else None,
             type=rdf["type"],
             source=rdf.get("source"),
+            status=status,
         )
     ], id_map

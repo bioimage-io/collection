@@ -1,4 +1,6 @@
-"""This script was used internally to upload previously contributed resources to bioimage.io that were managed through the old bioimage-io/collection-bioimage-io repo"""
+"""This script was used internally to upload previously contributed resources to
+bioimage.io that were managed through the old bioimage-io/collection-bioimage-io
+repo. It is kept for reference only and will be removed soon."""
 
 import logging
 import os
@@ -149,7 +151,7 @@ def upload_resources(
 
 
 def workflow_dispatch(workflow_name: str, inputs: Dict[str, str]):
-    g = github.Github(login_or_token=os.environ["GITHUB_PAT"])
+    g = github.Github(login_or_token=os.environ["GITHUB_TOKEN"])
 
     repo = g.get_repo("bioimage-io/collection")
 

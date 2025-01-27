@@ -12,13 +12,12 @@ from ._settings import settings
 from .backup import backup
 from .db_structure.chat import Chat, Message
 from .db_structure.log import Log, LogEntry
-from .gh_utils import set_gh_actions_outputs
 from .mailroom.send_email import notify_uploader
 from .remote_collection import (
     Record,
-    RecordConcept,
     RecordDraft,
     RemoteCollection,
+    draft_new_version,
     get_remote_resource_version,
 )
 from .run_dynamic_tests import run_dynamic_tests
@@ -71,9 +70,15 @@ class BackOffice:
         self.client.rm_dir(subfolder)
 
     def draft(self, concept_id: str, package_url: str):
-        """stage a new resourse version draft from `package_url`"""
-        resource = RecordConcept(self.client, concept_id)
-        _ = resource.draft_new_version(package_url)
+        """stage a new resourse version draft from `package_url`
+
+        Args:
+            concept_id: overwrite `id` found in **package_url**.
+                        If **concept_id** is an empty string a new concept_id is
+                        assigned.
+            package_url: Public source of zipped package to upload.
+        """
+        _ = draft_new_version(RemoteCollection(self.client), package_url, concept_id)
         self.generate_collection_json(mode="draft")
 
     stage = draft
@@ -81,12 +86,7 @@ class BackOffice:
     def validate_format(self, concept_id: str, version: str):
         """validate a resource version's rdf.yaml"""
         rv = get_remote_resource_version(self.client, concept_id, version)
-        dynamic_test_cases, conda_envs = validate_format(rv)
-        set_gh_actions_outputs(
-            has_dynamic_test_cases=bool(dynamic_test_cases),
-            dynamic_test_cases={"include": dynamic_test_cases},
-            conda_envs=conda_envs,
-        )
+        validate_format(rv)
 
     def test(
         self,
@@ -94,6 +94,7 @@ class BackOffice:
         version: str,
         weight_format: Optional[Union[WeightsFormat, Literal[""]]] = None,
         create_env_outcome: Literal["success", ""] = "success",
+        conda_env_file: Union[str, Path] = Path("environment.yaml"),
     ):
         """run dynamic tests for a (staged) resource version"""
         rv = get_remote_resource_version(self.client, concept_id, version)
@@ -111,6 +112,7 @@ class BackOffice:
             record=rv,
             weight_format=weight_format or None,
             create_env_outcome=create_env_outcome,
+            conda_env_file=Path(conda_env_file),
         )
 
         if (
@@ -181,12 +183,15 @@ class BackOffice:
         notify_uploader(
             published,
             "was published! 🎉",
-            f"Thank you for contributing {published.id} to bioimage.io!\n"
+            f"Thank you for contributing {published.id} to bioimage.io! 🙏.\n"
             + f"Check it out at {published.bioimageio_url}\n",
         )
 
     def backup(self, destination: str = "deprecated"):
-        """backup the whole collection (to zenodo.org)"""
+        """backup the whole collection (to zenodo.org)
+
+        Each resource is separately backed up to zenodo.org to get a concept DOI and version DOIs for every published version
+        """
         if destination != "deprecated":
             logger.warning("argument `destination` is deprecated")
 

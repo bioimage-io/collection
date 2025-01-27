@@ -1,7 +1,14 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import ClassVar, List, Literal, Optional, Sequence, Union
+from typing import (
+    ClassVar,
+    List,
+    Literal,
+    Optional,
+    Sequence,
+    Union,
+)
 
 import pydantic
 from typing_extensions import Annotated
@@ -13,6 +20,7 @@ from ..common import Node
 class _StatusBase(Node, frozen=True):
     timestamp: datetime = pydantic.Field(default_factory=datetime.now)
     run_url: Optional[str] = settings.run_url
+    icon: str = "🛈"
 
 
 class _DraftStatusBase(_StatusBase, frozen=True):
@@ -28,31 +36,36 @@ class _DraftStatusBase(_StatusBase, frozen=True):
 class UnpackingStatus(_DraftStatusBase, frozen=True):
     name: Literal["unpacking"] = "unpacking"
     step: Literal[1] = 1
+    icon: str = "📦"
 
 
 class UnpackedStatus(_DraftStatusBase, frozen=True):
     name: Literal["unpacked"] = "unpacked"
-    description: str = "staging was successful; awaiting automated tests to start ⏳"
+    description: str = "staging was successful; awaiting automated tests to start"
     step: Literal[2] = 2
+    icon: str = "⏳"
 
 
 class TestingStatus(_DraftStatusBase, frozen=True):
     name: Literal["testing"] = "testing"
     step: Literal[3] = 3
+    icon: str = "🧪"
 
 
 class AwaitingReviewStatus(_DraftStatusBase, frozen=True):
     name: Literal["awaiting review"] = "awaiting review"
     description: str = (
-        "Thank you for your contribution! 🎉"
-        "Our bioimage.io maintainers will take a look soon. 🦒"
+        "Thank you for your contribution! 💪"
+        "Our bioimage.io maintainers will take a look soon."
     )
     step: Literal[4] = 4
+    icon: str = "🧐"
 
 
 class ChangesRequestedStatus(_DraftStatusBase, frozen=True):
     name: Literal["changes requested"] = "changes requested"
     step: Literal[5] = 5
+    icon: str = "🔧"
 
 
 class AcceptedStatus(_DraftStatusBase, frozen=True):
@@ -61,6 +74,7 @@ class AcceptedStatus(_DraftStatusBase, frozen=True):
         "This staged version has been accepted by a bioimage.io maintainer and is about to be published."
     )
     step: Literal[5] = 5
+    icon: str = "👍"
 
 
 class PublishedDraftStatus(_DraftStatusBase, frozen=True):
@@ -69,6 +83,7 @@ class PublishedDraftStatus(_DraftStatusBase, frozen=True):
     name: Literal["published"] = "published"
     description: str = "published! (this draft will be deleted shortly)"
     step: Literal[6] = 6
+    icon: str = "🎉"
 
 
 DraftStatus = Annotated[
@@ -91,6 +106,7 @@ class ErrorStatus(_StatusBase, frozen=True):
     message: str
     traceback: List[str]
     during: Optional[DraftStatus]
+    icon: str = "🔴"
 
 
 class DraftInfo(Node, frozen=True):
