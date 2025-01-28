@@ -66,7 +66,7 @@ if not os.path.exists(models_dir) or not os.path.isdir(models_dir):
 
     
 br = BioimageioRepo.connect()
-mfp = br.downloadModelByID(descriptor.getID(), models_dir)
+mfp = br.downloadModelByID(descriptor.getModelID(), models_dir)
 
 macro_path = os.path.join(mfp, os.getenv("MACRO_NAME"))
 
@@ -79,7 +79,7 @@ with open(macro_path, "a") as file:
     if sample_name is None:
         test_name = descriptor.getInputTensors().get(0).getTestTensorName()
         if test_name is None:
-            raise Exception("There are no test inputs for model: " + descriptor.getID())
+            raise Exception("There are no test inputs for model: " + descriptor.getModelID())
         convert_npy_to_tif(mfp, test_name, descriptor.getInputTensors().get(0).getAxesOrder())
         sample_name = CREATED_INPUT_SAMPLE_NAME
     if " " in mfp:
@@ -94,7 +94,7 @@ for n in range(descriptor.getOutputTensors().size()):
     if test_name is None:
         sample_name = descriptor.getOutputTensors().get(n).getSampleTensorName()
         if sample_name is None:
-            raise Exception("There are no test ouputs for model: " + descriptor.getID())
+            raise Exception("There are no test ouputs for model: " + descriptor.getModelID())
     else:
         convert_npy_to_tif(mfp, test_name, descriptor.getOutputTensors().get(n).getAxesOrder(), name=CREATED_OUTPUT_SAMPLE_NAME)
         sample_name = CREATED_OUTPUT_SAMPLE_NAME
