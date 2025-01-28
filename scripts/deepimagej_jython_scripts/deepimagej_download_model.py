@@ -77,6 +77,7 @@ with open(macro_path, "a") as file:
     sample_name = descriptor.getInputTensors().get(0).getSampleTensorName()
     if sample_name is None:
         test_name = descriptor.getInputTensors().get(0).getTestTensorName()
+        print(descriptor.getName() + ": " + test_name)
         if test_name is None:
             raise Exception("There are no test inputs for model: " + descriptor.getModelID())
         convert_npy_to_tif(mfp, test_name, descriptor.getInputTensors().get(0).getAxesOrder())
