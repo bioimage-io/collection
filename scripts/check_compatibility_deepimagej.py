@@ -93,7 +93,7 @@ def test_model_deepimagej(rdf_url: str, fiji_executable: str, fiji_path: str):
             report = CompatibilityReportDict(
                     status="failed",
                     error=f"error running the model",
-                    details=out_str),
+                    details=out_str,
                     links=["deepimagej/deepimagej"],
                 ) 
             return report
