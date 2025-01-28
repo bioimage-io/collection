@@ -36,4 +36,5 @@ args = parser.parse_args()
 yaml_fpath = args.yaml_fpath
 
 print(yaml_fpath)
+print("AA")
 #descriptor = ModelDescriptorFactory.readFromLocalFile(yaml_fpath)
