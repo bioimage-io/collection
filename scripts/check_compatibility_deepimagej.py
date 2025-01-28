@@ -23,6 +23,7 @@ def test_model_deepimagej(rdf_url: str, headless_command: str, fiji_path: str):
                 links=["deepimagej/deepimagej"],
             ) 
         return report
+    print(os.listdir())
     try:
         read_yaml = subprocess.run(
         [
@@ -168,6 +169,7 @@ def get_dij_version(fiji_path):
         for file in os.listdir(plugins_path)
         if pattern.match(file.lower())
     ]
+    print(matching_files)
     assert len(matching_files) > 0, "No deepImageJ plugin found, review your installation"
     version = pattern.search(matching_files[0]).group(1)
     print(version)

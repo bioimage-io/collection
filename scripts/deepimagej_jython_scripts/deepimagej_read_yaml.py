@@ -30,6 +30,7 @@ parser = argparse.ArgumentParser()
 # Add the arguments
 parser.add_argument('-yaml_fpath', type=str, required=True, help='Path to the yaml file that contains the rdf.yaml file')
 
+print(yaml_fpath)
 
 # Parse the arguments
 args = parser.parse_args()
