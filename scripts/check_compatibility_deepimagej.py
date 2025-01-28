@@ -24,6 +24,7 @@ def test_model_deepimagej(rdf_url: str, fiji_executable: str, fiji_path: str):
                 links=["deepimagej/deepimagej"],
             ) 
         return report
+    print("HEREEEEEEEEEEEEEEEEEEEEEEEE")
     try:
         read_yaml = subprocess.run(
         [
@@ -42,6 +43,7 @@ def test_model_deepimagej(rdf_url: str, fiji_executable: str, fiji_path: str):
         printed_output = read_yaml.stdout
         print("Subprocess Output:\n", printed_output)
     except BaseException as e:
+        print('hereeeeeeeeeeeeeeeeeeeeee22222222222222222222222222222222222222')
         report = CompatibilityReportDict(
                 status="failed",
                 error=f"unable to read the yaml file",
