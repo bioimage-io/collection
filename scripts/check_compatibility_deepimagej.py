@@ -15,13 +15,13 @@ from script_utils import CompatibilityReportDict, check_tool_compatibility, down
 
 def check_dij_macro_generated_outputs(model_dir: str):
     with open(os.path.join(model_dir, os.getenv("JSON_OUTS_FNAME")), 'r') as f:
-    expected_outputs = json.load(f)
+        expected_outputs = json.load(f)
 
-    for i, output in enumerate(expected_outputs):
-        name = output["name"]
-        dij_output = output["dij"]
-        if not os.path.exists(dij_output):
-            return False
+        for i, output in enumerate(expected_outputs):
+            name = output["name"]
+            dij_output = output["dij"]
+            if not os.path.exists(dij_output):
+                return False
     return True
 
 
