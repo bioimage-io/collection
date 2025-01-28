@@ -8,6 +8,7 @@ on:
     paths:
       - .github/workflows/check_compatibility_deepimagej.yaml
       - scripts/check_compatibility_deepimagej.py
+      - scripts/deepimagej_jython_scripts/**
   workflow_dispatch:
   schedule:
     - cron: 0 1 * * *
