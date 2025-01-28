@@ -35,14 +35,13 @@ jobs:
       - run: wget https://uk1s3.embassy.ebi.ac.uk/public-datasets/bioimage.io/all_versions.json #wget https://${{vars.S3_HOST}}/${{vars.S3_BUCKET}}/${{vars.S3_FOLDER}}/all_versions.json
       - name: Set up Fiji
         shell: bash
-        run: >
+        run: |
           mkdir -p fiji
           curl -L -o fiji.zip https://downloads.imagej.net/fiji/latest/${{ matrix.url_file_name }}
           unzip fiji.zip -d fiji
       - name: Install deepimageJ
-        run: >
-          fiji/Fiji.app/${{ matrix.fiji_executable }} --update add-update-site
-          "deepimagej" "https://sites.imagej.net/DeepImageJ/"
+        run: |
+          fiji/Fiji.app/${{ matrix.fiji_executable }} --update add-update-site "deepimagej" "https://sites.imagej.net/DeepImageJ/"
       - name: Install engines
         shell: bash
         run: fiji/Fiji.app/${{ matrix.fiji_executable }} --headless --console
