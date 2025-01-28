@@ -54,13 +54,11 @@ jobs:
         env:
           JSON_OUTS_FNAME: dij_ouputs_file${{ github.run_id }}.json
           MACRO_NAME: dij_macro_ci${{ github.run_id }}.ijm
-          FINISH_STR: MACRO_COMPLETED_${{ github.run_id }}
       - name: Run deepImageJ tests for pusblished versions
         run: python scripts/check_compatibility_deepimagej.py all_versions.json generated-reports fiji/Fiji.app/${{ matrix.fiji_executable }} fiji/Fiji.app
         env:
           JSON_OUTS_FNAME: dij_ouputs_file${{ github.run_id }}.json
           MACRO_NAME: dij_macro_ci${{ github.run_id }}.ijm
-          FINISH_STR: MACRO_COMPLETED_${{ github.run_id }}
       - name: Save reports for debugging purposes
         uses: actions/upload-artifact@v4
         with:

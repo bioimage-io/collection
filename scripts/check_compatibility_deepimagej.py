@@ -3,6 +3,7 @@ from pathlib import Path
 from typing import List, Dict, Any
 import os
 import re
+import json
 
 import urllib.request
 import subprocess
@@ -10,6 +11,18 @@ from functools import partial
 import traceback
 
 from script_utils import CompatibilityReportDict, check_tool_compatibility, download_rdf
+
+
+def check_dij_macro_generated_outputs(model_dir: str):
+    with open(os.path.join(model_dir, os.getenv("JSON_OUTS_FNAME")), 'r') as f:
+    expected_outputs = json.load(f)
+
+    for i, output in enumerate(expected_outputs):
+        name = output["name"]
+        dij_output = output["dij"]
+        if not os.path.exists(dij_output):
+            return False
+    return True
 
 
 def test_model_deepimagej(rdf_url: str, fiji_executable: str, fiji_path: str):
@@ -89,8 +102,7 @@ def test_model_deepimagej(rdf_url: str, fiji_executable: str, fiji_path: str):
             text=True
         )
         out_str = run.stdout
-        print(out_str)
-        if os.getenv("FINISH_STR") not in out_str:
+        if not check_dij_macro_generated_outputs(model_dir):
             report = CompatibilityReportDict(
                     status="failed",
                     error=f"error running the model",
@@ -217,7 +229,6 @@ if __name__ == "__main__":
     _ = parser.add_argument("fiji_path", type=str)
 
     args = parser.parse_args()
-    print(os.getenv("FINISH_STR"))
     fiji_path = os.path.abspath(args.fiji_path)
     check_compatibility_deepimagej(
         get_dij_version(fiji_path), args.all_versions, args.output_folder, fiji_executable=args.fiji_executable, fiji_path=fiji_path
