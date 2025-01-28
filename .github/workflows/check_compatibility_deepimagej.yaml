@@ -45,7 +45,7 @@ jobs:
       - name: Install engines
         shell: bash
         run: fiji/Fiji.app/${{ matrix.fiji_executable }} --headless --console
-          scripts/deepimagej_jython_scripts/download_engines.py -engines_path
+          scripts/deepimagej_jython_scripts/deepimagej_download_engines.py -engines_path
           fiji/Fiji.app/engines
       - name: Run deepImageJ tests for drafts
         run: python scripts/check_compatibility_deepimagej.py \ all_versions_draft.json
