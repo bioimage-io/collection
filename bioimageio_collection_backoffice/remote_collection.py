@@ -1025,7 +1025,7 @@ class Record(RecordBase):
     def set_dois(self, *, doi: str, concept_doi: str):
         if self.doi is not None:
             raise ValueError(f"May not overwrite existing doi={self.doi} with {doi}")
-        if self.concept_doi is not None:
+        if self.concept_doi is not None and concept_doi != self.concept_doi:
             raise ValueError(
                 f"May not overwrite existing concept_doi={self.concept_doi} with {concept_doi}"
             )
