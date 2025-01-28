@@ -41,7 +41,8 @@ jobs:
           unzip fiji.zip -d fiji
       - name: Install deepimageJ
         run: |
-          fiji/Fiji.app/${{ matrix.fiji_executable }} --update add-update-site "deepimagej" "https://sites.imagej.net/DeepImageJ/"
+          fiji/Fiji.app/${{ matrix.fiji_executable }} --headless --update add-update-site "DeepImageJ" "https://sites.imagej.net/DeepImageJ/"
+          fiji/Fiji.app/${{ matrix.fiji_executable }} --headless --update update
       - name: Install engines
         shell: bash
         run: fiji/Fiji.app/${{ matrix.fiji_executable }} --headless --console
