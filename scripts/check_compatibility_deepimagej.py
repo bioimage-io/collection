@@ -30,7 +30,6 @@ def test_model_deepimagej(rdf_url: str, fiji_executable: str, fiji_path: str):
             fiji_executable,
             "--headless",
             "--console",
-            "--debug",
             "scripts/deepimagej_jython_scripts/deepimagej_read_yaml.py",
             "-yaml_fpath",
             yaml_file
@@ -39,6 +38,8 @@ def test_model_deepimagej(rdf_url: str, fiji_executable: str, fiji_path: str):
         stdout=subprocess.PIPE,
         text=True
         )
+        printed_output = read_yaml.stdout
+        print("Subprocess Output:\n", printed_output)
     except BaseException as e:
         report = CompatibilityReportDict(
                 status="failed",
@@ -54,7 +55,7 @@ def test_model_deepimagej(rdf_url: str, fiji_executable: str, fiji_path: str):
             fiji_executable,
             "--headless",
             "--console",
-            "scripts/deepimagej_jython_scripts/download_model.py",
+            "scripts/deepimagej_jython_scripts/deepimagej_download_model.py",
             "-yaml_fpath",
             yaml_file,
             "-models_dir",
