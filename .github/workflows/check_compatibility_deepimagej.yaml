@@ -49,15 +49,9 @@ jobs:
           scripts/deepimagej_jython_scripts/deepimagej_download_engines.py -engines_path
           fiji/Fiji.app/engines
       - name: Run deepImageJ tests for drafts
-        run: python scripts/check_compatibility_deepimagej.py \
-          all_versions.json \
-          generated-reports \
-          "fiji/Fiji.app/${{ matrix.fiji_executable }} --headless --console" fiji/Fiji.app
+        run: python scripts/check_compatibility_deepimagej.py all_versions.json generated-reports "fiji/Fiji.app/${{ matrix.fiji_executable }} --headless --console" fiji/Fiji.app
       - name: Run deepImageJ tests for pusblished versions
-        run: python scripts/check_compatibility_deepimagej.py \
-          all_versions.json \
-          generated-reports \
-          "fiji/Fiji.app/${{ matrix.fiji_executable }} --headless --console" fiji/Fiji.app
+        run: python scripts/check_compatibility_deepimagej.py all_versions.json generated-reports "fiji/Fiji.app/${{ matrix.fiji_executable }} --headless --console" fiji/Fiji.app
       - name: Upload reports
         run: python scripts/upload_reports.py generated-reports
         env:
