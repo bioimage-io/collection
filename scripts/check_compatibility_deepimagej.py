@@ -208,6 +208,7 @@ if __name__ == "__main__":
     _ = parser.add_argument("fiji_path", type=str)
 
     args = parser.parse_args()
+    fiji_path = os.path.abspath(args.fiji_path)
     check_compatibility_deepimagej(
-        get_dij_version(args.fiji_path), args.all_versions, args.output_folder, fiji_executable=args.fiji_executable, fiji_path=args.fiji_path
+        get_dij_version(fiji_path), args.all_versions, args.output_folder, fiji_executable=args.fiji_executable, fiji_path=fiji_path
     )
