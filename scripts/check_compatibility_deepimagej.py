@@ -12,7 +12,7 @@ import traceback
 from script_utils import CompatibilityReportDict, check_tool_compatibility, download_rdf
 
 
-def test_model_deepimagej(rdf_url: str, headless_command: str, fiji_path: str):
+def test_model_deepimagej(rdf_url: str, fiji_executable: str, fiji_path: str):
     yaml_file = "rdf.yaml"
     try:
         urllib.request.urlretrieve(rdf_url, yaml_file)
@@ -24,15 +24,15 @@ def test_model_deepimagej(rdf_url: str, headless_command: str, fiji_path: str):
                 links=["deepimagej/deepimagej"],
             ) 
         return report
-    print(type(headless_command))
-    print((headless_command))
-    print(type(yaml_file))
-    print((yaml_file))
-    #print(headless_command + f" scripts/deepimagej_jython_scripts/deepimagej_read_yaml.py -yaml_fpath {yaml_file}" )
     try:
         read_yaml = subprocess.run(
         [
-            headless_command + f" scripts/deepimagej_jython_scripts/deepimagej_read_yaml.py -yaml_fpath {yaml_file}" 
+            fiji_executable,
+            "--headless",
+            "--console",
+            "scripts/deepimagej_jython_scripts/deepimagej_read_yaml.py",
+            "-yaml_fpath",
+            yaml_file
         ],
         check=True,
         stdout=subprocess.PIPE,
@@ -50,7 +50,14 @@ def test_model_deepimagej(rdf_url: str, headless_command: str, fiji_path: str):
     try:
         download_result = subprocess.run(
         [
-            headless_command + f" scripts/deepimagej_jython_scripts/download_model.py -yaml_fpath {yaml_file} -models_dir {os.path.join(fiji_path, 'models')}" 
+            fiji_executable,
+            "--headless",
+            "--console",
+            "scripts/deepimagej_jython_scripts/download_model.py",
+            "-yaml_fpath",
+            yaml_file,
+            "-models_dir",
+            os.path.join(fiji_path, 'models')
         ],
         check=True,
         stdout=subprocess.PIPE,
@@ -68,7 +75,13 @@ def test_model_deepimagej(rdf_url: str, headless_command: str, fiji_path: str):
     macro_path = os.path.join(model_dir, str(os.getenv("MACRO_NAME")))
     try:
         run = subprocess.run(
-            [headless_command + " -macro " + macro_path],
+            [
+                fiji_executable,
+                "--headless",
+                "--console",
+                "-macro",
+                macro_path,
+            ],
             check=True,
             stdout=subprocess.PIPE,
             text=True
@@ -84,7 +97,12 @@ def test_model_deepimagej(rdf_url: str, headless_command: str, fiji_path: str):
     try:
         check_outputs = subprocess.run(
         [
-            headless_command + f" scripts/deepimagej_jython_scripts/deepimagej_check_outputs.py -model_dir {model_dir}" 
+            fiji_executable,
+            "--headless",
+            "--console",
+            "scripts/deepimagej_jython_scripts/deepimagej_check_outputs.py",
+            "-model_dir",
+            model_dir,
         ],
         check=True,
         stdout=subprocess.PIPE,
@@ -114,7 +132,7 @@ def test_model_deepimagej(rdf_url: str, headless_command: str, fiji_path: str):
 def check_compatibility_deepimagej_impl(
     rdf_url: str,
     sha256: str,
-    headless_command: str = "",
+    fiji_executable: str = "",
     fiji_path: str = "fiji",
 ) -> CompatibilityReportDict:
     """Create a `CompatibilityReport` for a resource description.
@@ -123,7 +141,7 @@ def check_compatibility_deepimagej_impl(
         rdf_url: URL to the rdf.yaml file
         sha256: SHA-256 value of **rdf_url** content
     """
-    assert headless_command != "", "please provide the fiji headless call"
+    assert fiji_executable != "", "please provide the fiji executable path"
 
     rdf = download_rdf(rdf_url, sha256)
 
@@ -143,17 +161,17 @@ def check_compatibility_deepimagej_impl(
             links=["deepimagej/deepimagej"],
         )
     else:
-        report = test_model_deepimagej(rdf_url, headless_command, fiji_path)
+        report = test_model_deepimagej(rdf_url, fiji_executable, fiji_path)
 
     return report
 
 
 def check_compatibility_deepimagej(
-    deepimagej_version: str, all_version_path: Path, output_folder: Path, headless_command: str, fiji_path: str,
+    deepimagej_version: str, all_version_path: Path, output_folder: Path, fiji_executable: str, fiji_path: str,
 ):
     partial_impl = partial(
         check_compatibility_deepimagej_impl,
-        headless_command=headless_command,
+        fiji_executable=fiji_executable,
         fiji_path=fiji_path
     )
     check_tool_compatibility(
@@ -174,10 +192,8 @@ def get_dij_version(fiji_path):
         for file in os.listdir(plugins_path)
         if pattern.match(file.lower())
     ]
-    print(matching_files)
     assert len(matching_files) > 0, "No deepImageJ plugin found, review your installation"
     version = pattern.search(matching_files[0]).group(1)
-    print(version)
     return version
 
 
@@ -185,10 +201,10 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     _ = parser.add_argument("all_versions", type=Path)
     _ = parser.add_argument("output_folder", type=Path)
-    _ = parser.add_argument("headless_command", type=Path)
-    _ = parser.add_argument("fiji_path", type=Path)
+    _ = parser.add_argument("fiji_executable", type=str)
+    _ = parser.add_argument("fiji_path", type=str)
 
     args = parser.parse_args()
     check_compatibility_deepimagej(
-        get_dij_version(args.fiji_path), args.all_versions, args.output_folder, headless_command=args.headless_command, fiji_path=args.fiji_path
+        get_dij_version(args.fiji_path), args.all_versions, args.output_folder, fiji_executable=args.fiji_executable, fiji_path=args.fiji_path
     )
