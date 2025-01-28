@@ -8,98 +8,65 @@ on:
       - main
     paths:
       - .github/workflows/check_compatibility_deepimagej.yaml
-      - scripts/get_java_software_versions.py
-      - scripts/check_compatibility_java_software/**/*
+      - scripts/check_compatibility_deepimagej.py
   workflow_dispatch:
   schedule:
     - cron: 0 1 * * *  # update compatibility once a day
 
 jobs:
-  generate-version-dict:
-    runs-on: ubuntu-latest
-    outputs:
-      matrix: ${{ steps.set-dict.outputs.matrix }}
-    steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.x'
-    - name: Install deps
-      run: pip install requests==2.28.2 beautifulsoup4==4.12.3 packaging==23.0
-    - name: Generate dict
-      id: set-dict
-      run: |
-        matrix_output=$(python scripts/get_java_software_versions.py deepimagej)
-        echo "matrix=${matrix_output}" >> $GITHUB_OUTPUT
-    - name: Versions matrix
-      run: echo '${{ steps.set-dict.outputs.matrix }}'
-
   run:
-    needs: generate-version-dict
-    runs-on: ubuntu-latest
     strategy:
-      matrix: ${{ fromJson(needs.generate-version-dict.outputs.matrix) }}
+      fail-fast: false
+      matrix:
+        include:
+          - name: ubuntu
+            os: ubuntu-latest
+            url_file_name: fiji-linux64.zip
+            fiji_executable: ImageJ-linux64
+    runs-on: ${{ matrix.os }}
+    environment: 'production'
     steps:
-    - uses: actions/checkout@v3
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v5
+    - uses: actions/setup-python@v5
       with:
-        repository: bioimage-io/collection-bioimage-io
-        ref: gh-pages
-        path: bioimageio-gh-pages
-    - name: Setup Maven Action
-      uses: stCarolas/setup-maven@v4.5
-      with:
-        java-version: 11
-        maven-version: 3.9.5
-    - name: Build with Maven
+        python-version: "3.10"
+        cache: "pip" # caching pip dependencies
+    - name: Installing Numpy for output comparison
+      run: pip install numpy
+    - run: wget https://${{vars.S3_HOST}}/${{vars.S3_BUCKET}}/${{vars.S3_FOLDER}}/all_versions_draft.json
+    - run: wget https://${{vars.S3_HOST}}/${{vars.S3_BUCKET}}/${{vars.S3_FOLDER}}/all_versions.json
+    - name: Set up Fiji
+      shell: bash
       run: |
-        cd scripts/check_compatibility_java_software
-        mvn clean install org.apache.maven.plugins:maven-shade-plugin:3.2.4:shade -Dshade.mainClass=io.bioimage.modelrunner.ci.ContinuousIntegration
-    - name: Get jar file name
-      id: get-jar
+        mkdir -p fiji
+        curl -L -o fiji.zip https://downloads.imagej.net/fiji/latest/${{ matrix.url_file_name }}
+        unzip fiji.zip -d fiji
+    - name: Install deepimageJ
       run: |
-        cd scripts/check_compatibility_java_software
-        jarfile=$(mvn -q exec:exec -Dexec.executable=echo -Dexec.args='${project.build.finalName}.jar')
-        if [ -z "$jarfile" ]; then
-          echo "Failed to get jar file name"
-          exit 1
-        fi
-        if [ ! -f "target/$jarfile" ]; then
-          echo "Jar file not found: target/$jarfile"
-          exit 1
-        fi
-        echo "Jar file found: target/$jarfile"
-        echo "jarfile=$jarfile" >> $GITHUB_OUTPUT
-    - name: Download engines
-      run: |
-        java -cp "scripts/check_compatibility_java_software/target/${{ steps.get-jar.outputs.jarfile }}" io.bioimage.modelrunner.ci.DownloadEngines deepimagej
-    - name: Run models
-      run: |
-        java -cp "scripts/check_compatibility_java_software/target/${{ steps.get-jar.outputs.jarfile }}" io.bioimage.modelrunner.ci.ContinuousIntegration deepimagej ${{ matrix.key }}
-    - name: Upload artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        path: test_summaries_deepimagej_${{ matrix.key }}
-
-  sendreport:
-    runs-on: ubuntu-latest
-    needs: [generate-version-dict, run]
-    strategy:
-      matrix: ${{ fromJson(needs.generate-version-dict.outputs.matrix) }}
-    steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.10'
-    - name: Get test results
-      uses: actions/download-artifact@v3
-      with:
-        path: test_summaries_deepimagej_${{ matrix.key }}
-    - name: Install deps
-      run: |
-        pip install .
-    - name: Send deepimagej ${{ matrix.key }} tests
-      shell: bash -l {0}
-      run: python scripts/check_compatibility_java_software.py deepimagej ${{ matrix.key }} --summaries_dir "test_summaries_deepimagej_${{ matrix.key }}/artifact"
+        fiji/Fiji.app/${{ matrix.fiji_executable }} --update add-update-site "deepimagej" "https://sites.imagej.net/DeepImageJ/"
+    - name: Install engines
+      shell: bash
+        run: fiji/Fiji.app/${{ matrix.fiji_executable }} --headless --console scripts/deepimagej_jython_scripts/download_engines.py -engines_path fiji/Fiji.app/engines
+    - name: Run deepImageJ tests for drafts
+      run: python scripts/check_compatibility_deepimagej.py \
+                    all_versions_draft.json \
+                    generated-reports \
+                    "fiji/Fiji.app/${{ matrix.fiji_executable }} --headless --console" \
+                    fiji
+    - rname: Run deepImageJ tests for pusblished versions
+      run: python scripts/check_compatibility_deepimagej.py \
+                    all_versions_draft.json \
+                    generated-reports \
+                    "fiji/Fiji.app/${{ matrix.fiji_executable }} --headless --console" \
+                    fiji
+    - name: Upload reports
+      run: python scripts/upload_reports.py generated-reports
+      env:
+        S3_HOST: ${{vars.S3_HOST}}
+        S3_BUCKET: ${{vars.S3_BUCKET}}
+        S3_FOLDER: ${{vars.S3_FOLDER}}
+        S3_ACCESS_KEY_ID: ${{secrets.S3_ACCESS_KEY_ID}}
+        S3_SECRET_ACCESS_KEY: ${{secrets.S3_SECRET_ACCESS_KEY}}
+        RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
+        JSON_OUTS_FNAME: "dij_ouputs_file.json"
+        MACRO_NAME: "dij_macro_ci.ijm"

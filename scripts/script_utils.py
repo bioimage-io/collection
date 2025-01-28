@@ -90,7 +90,7 @@ def check_tool_compatibility(
 
             report_url = (
                 "/".join(rdf_url.split("/")[:-2])
-                + f"/compatibility/ilastik_{tool_version}.yaml"
+                + f"/compatibility/{tool_name}_{tool_version}.yaml"
             )
             r = requests.head(report_url)
             if r.status_code != 404:
