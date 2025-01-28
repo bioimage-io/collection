@@ -30,6 +30,7 @@ def test_model_deepimagej(rdf_url: str, fiji_executable: str, fiji_path: str):
             fiji_executable,
             "--headless",
             "--console",
+            "--debug",
             "scripts/deepimagej_jython_scripts/deepimagej_read_yaml.py",
             "-yaml_fpath",
             yaml_file
