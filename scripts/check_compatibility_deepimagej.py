@@ -13,14 +13,22 @@ import traceback
 from script_utils import CompatibilityReportDict, check_tool_compatibility, download_rdf
 
 
-def check_dij_macro_generated_outputs(model_dir: str):
+def find_expected_output(outputs_dir, name):
+    for ff in os.listdir(outputs_dir):
+        if ff.endswith("_" + name + ".tif") or ff.endswith("_" + name + ".tiff"):
+            return True
+    return False
+
+
+def check_dij_macro_generated_outputs(model_dir: str, name: str):
     with open(os.path.join(model_dir, os.getenv("JSON_OUTS_FNAME")), 'r') as f:
         expected_outputs = json.load(f)
 
-        for i, output in enumerate(expected_outputs):
-            name = output["name"]
+        for output in enumerate(expected_outputs):
             dij_output = output["dij"]
             if not os.path.exists(dij_output):
+                return False
+            if not find_expected_output(dij_output, name):
                 return False
     return True
 
