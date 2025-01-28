@@ -13,7 +13,7 @@ from script_utils import CompatibilityReportDict, check_tool_compatibility, down
 
 
 def test_model_deepimagej(rdf_url: str, fiji_executable: str, fiji_path: str):
-    yaml_file = "rdf.yaml"
+    yaml_file = os.path.abspath("rdf.yaml")
     try:
         urllib.request.urlretrieve(rdf_url, yaml_file)
     except Exception as e:
@@ -38,8 +38,6 @@ def test_model_deepimagej(rdf_url: str, fiji_executable: str, fiji_path: str):
         stdout=subprocess.PIPE,
         text=True
         )
-        printed_output = read_yaml.stdout
-        print("Subprocess Output:\n", printed_output)
     except BaseException as e:
         report = CompatibilityReportDict(
                 status="failed",
@@ -74,6 +72,7 @@ def test_model_deepimagej(rdf_url: str, fiji_executable: str, fiji_path: str):
                 links=["deepimagej/deepimagej"],
             ) 
         return report
+    print(model_dir)
     macro_path = os.path.join(model_dir, str(os.getenv("MACRO_NAME")))
     try:
         run = subprocess.run(
