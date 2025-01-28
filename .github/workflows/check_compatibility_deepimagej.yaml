@@ -54,7 +54,7 @@ jobs:
         run: python scripts/check_compatibility_deepimagej.py \ all_versions_draft.json
           \ generated-reports \ "fiji/Fiji.app/${{ matrix.fiji_executable }}
           --headless --console" \ fiji
-      - rname: Run deepImageJ tests for pusblished versions
+      - name: Run deepImageJ tests for pusblished versions
         run: python scripts/check_compatibility_deepimagej.py \ all_versions_draft.json
           \ generated-reports \ "fiji/Fiji.app/${{ matrix.fiji_executable }}
           --headless --console" \ fiji
