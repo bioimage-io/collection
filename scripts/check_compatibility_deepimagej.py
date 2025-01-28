@@ -35,7 +35,6 @@ def check_dij_macro_generated_outputs(model_dir: str):
 
 
 def test_model_deepimagej(rdf_url: str, fiji_executable: str, fiji_path: str):
-    print(rdf_url)
     yaml_file = os.path.abspath("rdf.yaml")
     try:
         urllib.request.urlretrieve(rdf_url, yaml_file)
