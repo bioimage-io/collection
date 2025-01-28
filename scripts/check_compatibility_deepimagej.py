@@ -205,6 +205,9 @@ if __name__ == "__main__":
     _ = parser.add_argument("fiji_executable", type=str)
     _ = parser.add_argument("fiji_path", type=str)
 
+    for key, value in os.environ.items():
+        print(f"{key}={value}")
+
     args = parser.parse_args()
     check_compatibility_deepimagej(
         get_dij_version(args.fiji_path), args.all_versions, args.output_folder, fiji_executable=args.fiji_executable, fiji_path=args.fiji_path
