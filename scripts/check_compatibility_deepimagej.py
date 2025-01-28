@@ -38,6 +38,7 @@ def test_model_deepimagej(rdf_url: str, fiji_executable: str, fiji_path: str):
         stdout=subprocess.PIPE,
         text=True
         )
+        print('hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee')
         printed_output = read_yaml.stdout
         print("Subprocess Output:\n", printed_output)
     except BaseException as e:
