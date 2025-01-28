@@ -52,14 +52,12 @@ jobs:
         run: python scripts/check_compatibility_deepimagej.py \
           all_versions.json \
           generated-reports \
-          "fiji/Fiji.app/${{ matrix.fiji_executable }} --headless --console" \
-          fiji/Fiji.app
+          "fiji/Fiji.app/${{ matrix.fiji_executable }} --headless --console" fiji/Fiji.app
       - name: Run deepImageJ tests for pusblished versions
         run: python scripts/check_compatibility_deepimagej.py \
           all_versions.json \
           generated-reports \
-          "fiji/Fiji.app/${{ matrix.fiji_executable }} --headless --console" \
-          fiji/Fiji.app
+          "fiji/Fiji.app/${{ matrix.fiji_executable }} --headless --console" fiji/Fiji.app
       - name: Upload reports
         run: python scripts/upload_reports.py generated-reports
         env:
