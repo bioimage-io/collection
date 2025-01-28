@@ -51,8 +51,14 @@ jobs:
           fiji/Fiji.app/engines
       - name: Run deepImageJ tests for drafts
         run: python scripts/check_compatibility_deepimagej.py all_versions_draft.json generated-reports fiji/Fiji.app/${{ matrix.fiji_executable }} fiji/Fiji.app
+        env:
+          JSON_OUTS_FNAME: dij_ouputs_file.json
+          MACRO_NAME: dij_macro_ci.ijm
       - name: Run deepImageJ tests for pusblished versions
         run: python scripts/check_compatibility_deepimagej.py all_versions.json generated-reports fiji/Fiji.app/${{ matrix.fiji_executable }} fiji/Fiji.app
+        env:
+          JSON_OUTS_FNAME: dij_ouputs_file.json
+          MACRO_NAME: dij_macro_ci.ijm
       - name: Save reports for debugging purposes
         uses: actions/upload-artifact@v4
         with:
@@ -67,5 +73,3 @@ jobs:
           S3_ACCESS_KEY_ID: ${{secrets.S3_ACCESS_KEY_ID}}
           S3_SECRET_ACCESS_KEY: ${{secrets.S3_SECRET_ACCESS_KEY}}
           RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
-          JSON_OUTS_FNAME: dij_ouputs_file.json
-          MACRO_NAME: dij_macro_ci.ijm
