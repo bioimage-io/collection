@@ -25,8 +25,10 @@ def test_model_deepimagej(rdf_url: str, headless_command: str, fiji_path: str):
             ) 
         return report
     print(type(headless_command))
+    print((headless_command))
     print(type(yaml_file))
-    print(headless_command + f" scripts/deepimagej_jython_scripts/deepimagej_read_yaml.py -yaml_fpath {yaml_file}" )
+    print((yaml_file))
+    #print(headless_command + f" scripts/deepimagej_jython_scripts/deepimagej_read_yaml.py -yaml_fpath {yaml_file}" )
     try:
         read_yaml = subprocess.run(
         [
