@@ -20,11 +20,12 @@ def find_expected_output(outputs_dir, name):
     return False
 
 
-def check_dij_macro_generated_outputs(model_dir: str, name: str):
+def check_dij_macro_generated_outputs(model_dir: str):
     with open(os.path.join(model_dir, os.getenv("JSON_OUTS_FNAME")), 'r') as f:
         expected_outputs = json.load(f)
 
         for output in enumerate(expected_outputs):
+            name = output["name"]
             dij_output = output["dij"]
             if not os.path.exists(dij_output):
                 return False
@@ -42,7 +43,7 @@ def test_model_deepimagej(rdf_url: str, fiji_executable: str, fiji_path: str):
         report = CompatibilityReportDict(
                 status="failed",
                 error=f"unable to download the yaml file",
-                details=traceback.format_exc(),
+                details=e.stderr if isinstance(e, subprocess.CalledProcessError) else str(e),
                 links=["deepimagej/deepimagej"],
             ) 
         return report
@@ -58,13 +59,14 @@ def test_model_deepimagej(rdf_url: str, fiji_executable: str, fiji_path: str):
         ],
         check=True,
         stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
         text=True
         )
     except BaseException as e:
         report = CompatibilityReportDict(
                 status="failed",
                 error=f"unable to read the yaml file",
-                details=traceback.format_exc(),
+                details=e.stderr if isinstance(e, subprocess.CalledProcessError) else str(e),
                 links=["deepimagej/deepimagej"],
             ) 
         return report
@@ -83,6 +85,7 @@ def test_model_deepimagej(rdf_url: str, fiji_executable: str, fiji_path: str):
         ],
         check=True,
         stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
         text=True
         )
         model_dir = download_result.stdout.strip().splitlines()[-1]
@@ -90,7 +93,7 @@ def test_model_deepimagej(rdf_url: str, fiji_executable: str, fiji_path: str):
         report = CompatibilityReportDict(
                 status="failed",
                 error=f"unable to download the model",
-                details=traceback.format_exc(),
+                details=e.stderr if isinstance(e, subprocess.CalledProcessError) else str(e),
                 links=["deepimagej/deepimagej"],
             ) 
         return report
@@ -106,6 +109,7 @@ def test_model_deepimagej(rdf_url: str, fiji_executable: str, fiji_path: str):
             ],
             check=True,
             stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
             text=True
         )
         out_str = run.stdout
@@ -121,7 +125,7 @@ def test_model_deepimagej(rdf_url: str, fiji_executable: str, fiji_path: str):
         report = CompatibilityReportDict(
                 status="failed",
                 error=f"error running the model",
-                details=traceback.format_exc(),
+                details=e.stderr if isinstance(e, subprocess.CalledProcessError) else str(e),
                 links=["deepimagej/deepimagej"],
             ) 
         return report
@@ -137,13 +141,14 @@ def test_model_deepimagej(rdf_url: str, fiji_executable: str, fiji_path: str):
         ],
         check=True,
         stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
         text=True
         )
     except BaseException as e:
         report = CompatibilityReportDict(
                 status="failed",
                 error=f"error comparing expected outputs and actual outputs",
-                details=traceback.format_exc(),
+                details=e.stderr if isinstance(e, subprocess.CalledProcessError) else str(e),
                 links=["deepimagej/deepimagej"],
             ) 
         return report
