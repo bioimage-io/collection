@@ -23,7 +23,8 @@ from io.bioimage.modelrunner.bioimageio.description import ModelDescriptorFactor
 
 import argparse
 
-
+import sys
+print("ARGV:", sys.argv)
 # Create the argument parser
 parser = argparse.ArgumentParser()
 
@@ -35,6 +36,5 @@ parser.add_argument('-yaml_fpath', type=str, required=True, help='Path to the ya
 args = parser.parse_args()
 yaml_fpath = args.yaml_fpath
 
-print(yaml_fpath)
-print("AA")
+print(f"YAML_FILE: '{yaml_fpath}'")
 #descriptor = ModelDescriptorFactory.readFromLocalFile(yaml_fpath)

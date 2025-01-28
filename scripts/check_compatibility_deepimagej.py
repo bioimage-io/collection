@@ -14,7 +14,6 @@ from script_utils import CompatibilityReportDict, check_tool_compatibility, down
 
 def test_model_deepimagej(rdf_url: str, fiji_executable: str, fiji_path: str):
     yaml_file = "rdf.yaml"
-    print("LOOOOOOOOOOOOOOOOOOOOOOL")
     try:
         urllib.request.urlretrieve(rdf_url, yaml_file)
     except Exception as e:
@@ -25,7 +24,6 @@ def test_model_deepimagej(rdf_url: str, fiji_executable: str, fiji_path: str):
                 links=["deepimagej/deepimagej"],
             ) 
         return report
-    print("HEREEEEEEEEEEEEEEEEEEEEEEEE")
     try:
         read_yaml = subprocess.run(
         [
@@ -40,11 +38,7 @@ def test_model_deepimagej(rdf_url: str, fiji_executable: str, fiji_path: str):
         stdout=subprocess.PIPE,
         text=True
         )
-        print('hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee')
-        printed_output = read_yaml.stdout
-        print("Subprocess Output:\n", printed_output)
     except BaseException as e:
-        print('hereeeeeeeeeeeeeeeeeeeeee22222222222222222222222222222222222222')
         report = CompatibilityReportDict(
                 status="failed",
                 error=f"unable to read the yaml file",
