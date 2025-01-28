@@ -8,14 +8,6 @@ import urllib.request
 import subprocess
 from functools import partial
 
-from loguru import logger
-
-from bioimageio_collection_backoffice.db_structure.compatibility import (
-    CompatiblityReport,
-)
-from bioimageio_collection_backoffice.remote_collection import Record, RemoteCollection
-from bioimageio_collection_backoffice.s3_client import Client
-
 from script_utils import CompatibilityReportDict, check_tool_compatibility, download_rdf
 
 
@@ -125,7 +117,7 @@ def check_compatibility_deepimagej_impl(
         rdf_url: URL to the rdf.yaml file
         sha256: SHA-256 value of **rdf_url** content
     """
-    assert headless_command is not "", "please provide the fiji headless call"
+    assert headless_command != "", "please provide the fiji headless call"
 
     rdf = download_rdf(rdf_url, sha256)
 
