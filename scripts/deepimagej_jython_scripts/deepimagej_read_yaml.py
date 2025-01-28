@@ -36,5 +36,5 @@ parser.add_argument('-yaml_fpath', type=str, required=True, help='Path to the ya
 args = parser.parse_args()
 yaml_fpath = args.yaml_fpath
 
-print(f"YAML_FILE: '{yaml_fpath}'")
+print("YAML_FILE: '" + yaml_fpath + "'")
 #descriptor = ModelDescriptorFactory.readFromLocalFile(yaml_fpath)
