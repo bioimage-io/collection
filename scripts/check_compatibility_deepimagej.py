@@ -74,7 +74,6 @@ def test_model_deepimagej(rdf_url: str, fiji_executable: str, fiji_path: str):
                 links=["deepimagej/deepimagej"],
             ) 
         return report
-    print(model_dir)
     macro_path = os.path.join(model_dir, str(os.getenv("MACRO_NAME")))
     try:
         run = subprocess.run(
@@ -89,6 +88,15 @@ def test_model_deepimagej(rdf_url: str, fiji_executable: str, fiji_path: str):
             stdout=subprocess.PIPE,
             text=True
         )
+        out_str = run.stdout
+        if os.getenv("FINISH_STR") not in out_str:
+            report = CompatibilityReportDict(
+                    status="failed",
+                    error=f"error running the model",
+                    details=out_str),
+                    links=["deepimagej/deepimagej"],
+                ) 
+            return report
     except BaseException as e:
         report = CompatibilityReportDict(
                 status="failed",
