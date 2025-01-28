@@ -7,6 +7,7 @@ import re
 import urllib.request
 import subprocess
 from functools import partial
+import traceback
 
 from script_utils import CompatibilityReportDict, check_tool_compatibility, download_rdf
 
@@ -19,11 +20,13 @@ def test_model_deepimagej(rdf_url: str, headless_command: str, fiji_path: str):
         report = CompatibilityReportDict(
                 status="failed",
                 error=f"unable to download the yaml file",
-                details=str(e),
+                details=traceback.format_exc(),
                 links=["deepimagej/deepimagej"],
             ) 
         return report
-    print(os.listdir())
+    print(type(headless_command))
+    print(type(yaml_file))
+    print(headless_command + f" scripts/deepimagej_jython_scripts/deepimagej_read_yaml.py -yaml_fpath {yaml_file}" )
     try:
         read_yaml = subprocess.run(
         [
@@ -37,7 +40,7 @@ def test_model_deepimagej(rdf_url: str, headless_command: str, fiji_path: str):
         report = CompatibilityReportDict(
                 status="failed",
                 error=f"unable to read the yaml file",
-                details=str(e),
+                details=traceback.format_exc(),
                 links=["deepimagej/deepimagej"],
             ) 
         return report
@@ -56,7 +59,7 @@ def test_model_deepimagej(rdf_url: str, headless_command: str, fiji_path: str):
         report = CompatibilityReportDict(
                 status="failed",
                 error=f"unable to download the model",
-                details=str(e),
+                details=traceback.format_exc(),
                 links=["deepimagej/deepimagej"],
             ) 
         return report
@@ -72,7 +75,7 @@ def test_model_deepimagej(rdf_url: str, headless_command: str, fiji_path: str):
         report = CompatibilityReportDict(
                 status="failed",
                 error=f"error running the model",
-                details=str(e),
+                details=traceback.format_exc(),
                 links=["deepimagej/deepimagej"],
             ) 
         return report
@@ -89,7 +92,7 @@ def test_model_deepimagej(rdf_url: str, headless_command: str, fiji_path: str):
         report = CompatibilityReportDict(
                 status="failed",
                 error=f"error comparing expected outputs and actual outputs",
-                details=str(e),
+                details=traceback.format_exc(),
                 links=["deepimagej/deepimagej"],
             ) 
         return report
@@ -162,7 +165,7 @@ def check_compatibility_deepimagej(
 
 def get_dij_version(fiji_path):
     plugins_path = os.path.join(fiji_path, "plugins")
-    pattern = re.compile(r"^deepimagej-\d+\.\d+\.\d+(-snapshot)?\.jar$")
+    pattern = re.compile(r"^deepimagej-(\d+\.\d+\.\d+(?:-snapshot)?)\.jar$")
 
     matching_files = [
         file.lower()
