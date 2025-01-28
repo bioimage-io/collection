@@ -77,7 +77,7 @@ def test_model_deepimagej(rdf_url: str, fiji_executable: str, fiji_path: str):
         stdout=subprocess.PIPE,
         text=True
         )
-        model_dir = out_str.strip().splitlines()[-1]
+        model_dir = download_result.stdout.strip().splitlines()[-1]
     except BaseException as e:
         report = CompatibilityReportDict(
                 status="failed",
