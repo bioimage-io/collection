@@ -38,6 +38,8 @@ def test_model_deepimagej(rdf_url: str, fiji_executable: str, fiji_path: str):
         stdout=subprocess.PIPE,
         text=True
         )
+        printed_output = download_result.stdout
+        print("Subprocess Output:\n", printed_output)
     except BaseException as e:
         report = CompatibilityReportDict(
                 status="failed",
