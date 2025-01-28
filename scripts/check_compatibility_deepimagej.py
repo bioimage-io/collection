@@ -178,8 +178,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     _ = parser.add_argument("all_versions", type=Path)
     _ = parser.add_argument("output_folder", type=Path)
-    _ = parser.add_argument("fiji_path", type=Path)
     _ = parser.add_argument("headless_command", type=Path)
+    _ = parser.add_argument("fiji_path", type=Path)
 
     args = parser.parse_args()
     check_compatibility_deepimagej(
