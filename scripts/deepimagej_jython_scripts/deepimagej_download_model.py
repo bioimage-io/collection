@@ -20,10 +20,9 @@ creates a macro to run the model(s) downloaded on the sample input with deepimag
 
 from io.bioimage.modelrunner.bioimageio import BioimageioRepo
 from io.bioimage.modelrunner.bioimageio.description import ModelDescriptorFactory
-from io.bioimage.modelrunner.utils import Constants
 from io.bioimage.modelrunner.numpy import DecodeNumpy
-from io.bioimage.modelrunner.versionmanagement import AvailableEngines
 
+from deepimagej.tools import ImPlusRaiManager
 
 from ij import IJ
 
