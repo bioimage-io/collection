@@ -4,7 +4,7 @@ from typing import List, Dict, Any
 import os
 import re
 
-import requests
+import urllib.request
 import subprocess
 from functools import partial
 
@@ -20,8 +20,17 @@ from script_utils import CompatibilityReportDict, check_tool_compatibility, down
 
 
 def test_model_deepimagej(rdf_url: str, headless_command: str, fiji_path: str):
-
-    yaml_file = None
+    yaml_file = "rdf.yaml"
+    try:
+        urllib.request.urlretrieve(rdf_url, yaml_file)
+    except Exception as e:
+        report = CompatibilityReportDict(
+                status="failed",
+                error=f"unable to download the yaml file",
+                details=str(e),
+                links=["deepimagej/deepimagej"],
+            ) 
+        return report
     try:
         read_yaml = subprocess.run(
         [

@@ -1,7 +1,6 @@
+---
 name: check compatibility deepimagej
-
 concurrency: deepimagej
-
 on:
   push:
     branches:
@@ -11,8 +10,7 @@ on:
       - scripts/check_compatibility_deepimagej.py
   workflow_dispatch:
   schedule:
-    - cron: 0 1 * * *  # update compatibility once a day
-
+    - cron: 0 1 * * *
 jobs:
   run:
     strategy:
@@ -26,47 +24,48 @@ jobs:
     runs-on: ${{ matrix.os }}
     environment: 'production'
     steps:
-    - uses: actions/checkout@v5
-    - uses: actions/setup-python@v5
-      with:
-        python-version: "3.10"
-        cache: "pip" # caching pip dependencies
-    - name: Installing Numpy for output comparison
-      run: pip install numpy
-    - run: wget https://${{vars.S3_HOST}}/${{vars.S3_BUCKET}}/${{vars.S3_FOLDER}}/all_versions_draft.json
-    - run: wget https://${{vars.S3_HOST}}/${{vars.S3_BUCKET}}/${{vars.S3_FOLDER}}/all_versions.json
-    - name: Set up Fiji
-      shell: bash
-      run: |
-        mkdir -p fiji
-        curl -L -o fiji.zip https://downloads.imagej.net/fiji/latest/${{ matrix.url_file_name }}
-        unzip fiji.zip -d fiji
-    - name: Install deepimageJ
-      run: |
-        fiji/Fiji.app/${{ matrix.fiji_executable }} --update add-update-site "deepimagej" "https://sites.imagej.net/DeepImageJ/"
-    - name: Install engines
-      shell: bash
-        run: fiji/Fiji.app/${{ matrix.fiji_executable }} --headless --console scripts/deepimagej_jython_scripts/download_engines.py -engines_path fiji/Fiji.app/engines
-    - name: Run deepImageJ tests for drafts
-      run: python scripts/check_compatibility_deepimagej.py \
-                    all_versions_draft.json \
-                    generated-reports \
-                    "fiji/Fiji.app/${{ matrix.fiji_executable }} --headless --console" \
-                    fiji
-    - rname: Run deepImageJ tests for pusblished versions
-      run: python scripts/check_compatibility_deepimagej.py \
-                    all_versions_draft.json \
-                    generated-reports \
-                    "fiji/Fiji.app/${{ matrix.fiji_executable }} --headless --console" \
-                    fiji
-    - name: Upload reports
-      run: python scripts/upload_reports.py generated-reports
-      env:
-        S3_HOST: ${{vars.S3_HOST}}
-        S3_BUCKET: ${{vars.S3_BUCKET}}
-        S3_FOLDER: ${{vars.S3_FOLDER}}
-        S3_ACCESS_KEY_ID: ${{secrets.S3_ACCESS_KEY_ID}}
-        S3_SECRET_ACCESS_KEY: ${{secrets.S3_SECRET_ACCESS_KEY}}
-        RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
-        JSON_OUTS_FNAME: "dij_ouputs_file.json"
-        MACRO_NAME: "dij_macro_ci.ijm"
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+          cache: pip
+      - name: Installing Numpy for output comparison
+        run: pip install numpy
+      - run: wget
+          https://${{vars.S3_HOST}}/${{vars.S3_BUCKET}}/${{vars.S3_FOLDER}}/all_versions_draft.json
+      - run: wget
+          https://${{vars.S3_HOST}}/${{vars.S3_BUCKET}}/${{vars.S3_FOLDER}}/all_versions.json
+      - name: Set up Fiji
+        shell: bash
+        run: >
+          mkdir -p fiji
+          curl -L -o fiji.zip https://downloads.imagej.net/fiji/latest/${{ matrix.url_file_name }}
+          unzip fiji.zip -d fiji
+      - name: Install deepimageJ
+        run: >
+          fiji/Fiji.app/${{ matrix.fiji_executable }} --update add-update-site
+          "deepimagej" "https://sites.imagej.net/DeepImageJ/"
+      - name: Install engines
+        shell: bash
+        run: fiji/Fiji.app/${{ matrix.fiji_executable }} --headless --console
+          scripts/deepimagej_jython_scripts/download_engines.py -engines_path
+          fiji/Fiji.app/engines
+      - name: Run deepImageJ tests for drafts
+        run: python scripts/check_compatibility_deepimagej.py \ all_versions_draft.json
+          \ generated-reports \ "fiji/Fiji.app/${{ matrix.fiji_executable }}
+          --headless --console" \ fiji
+      - rname: Run deepImageJ tests for pusblished versions
+        run: python scripts/check_compatibility_deepimagej.py \ all_versions_draft.json
+          \ generated-reports \ "fiji/Fiji.app/${{ matrix.fiji_executable }}
+          --headless --console" \ fiji
+      - name: Upload reports
+        run: python scripts/upload_reports.py generated-reports
+        env:
+          S3_HOST: ${{vars.S3_HOST}}
+          S3_BUCKET: ${{vars.S3_BUCKET}}
+          S3_FOLDER: ${{vars.S3_FOLDER}}
+          S3_ACCESS_KEY_ID: ${{secrets.S3_ACCESS_KEY_ID}}
+          S3_SECRET_ACCESS_KEY: ${{secrets.S3_SECRET_ACCESS_KEY}}
+          RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
+          JSON_OUTS_FNAME: dij_ouputs_file.json
+          MACRO_NAME: dij_macro_ci.ijm
