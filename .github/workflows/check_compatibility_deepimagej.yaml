@@ -29,8 +29,8 @@ jobs:
         with:
           python-version: "3.10"
           cache: pip
-      - name: Installing Numpy for output comparison
-        run: pip install numpy
+      - name: Install backoffice
+        run: pip install .
       - run: wget https://uk1s3.embassy.ebi.ac.uk/public-datasets/bioimage.io/all_versions.json #wget https://${{vars.S3_HOST}}/${{vars.S3_BUCKET}}/${{vars.S3_FOLDER}}/all_versions_draft.json
       - run: wget https://uk1s3.embassy.ebi.ac.uk/public-datasets/bioimage.io/all_versions.json #wget https://${{vars.S3_HOST}}/${{vars.S3_BUCKET}}/${{vars.S3_FOLDER}}/all_versions.json
       - name: Set up Fiji
