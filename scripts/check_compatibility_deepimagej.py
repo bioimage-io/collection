@@ -89,6 +89,7 @@ def test_model_deepimagej(rdf_url: str, fiji_executable: str, fiji_path: str):
             text=True
         )
         out_str = run.stdout
+        print(out_str)
         if os.getenv("FINISH_STR") not in out_str:
             report = CompatibilityReportDict(
                     status="failed",
@@ -216,6 +217,7 @@ if __name__ == "__main__":
     _ = parser.add_argument("fiji_path", type=str)
 
     args = parser.parse_args()
+    print(os.getenv("FINISH_STR"))
     fiji_path = os.path.abspath(args.fiji_path)
     check_compatibility_deepimagej(
         get_dij_version(fiji_path), args.all_versions, args.output_folder, fiji_executable=args.fiji_executable, fiji_path=fiji_path
