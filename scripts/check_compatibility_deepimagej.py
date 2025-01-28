@@ -160,14 +160,15 @@ def check_compatibility_deepimagej(
     )
 
 def get_dij_version(fiji_path):
-    print(os.listdir("fiji/Fiji.app"))
+    print(os.listdir("fiji/Fiji.app/plugins"))
     plugins_path = os.path.join(fiji_path, "plugins")
+    print(os.listdir(plugins_path))
     pattern = re.compile(r"^deepimagej-\d+\.\d+\.\d+(-snapshot)?\.jar$")
 
     matching_files = [
-        lower(file)
+        file.lower()
         for file in os.listdir(plugins_path)
-        if pattern.match(lower(file))
+        if pattern.match(file.lower())
     ]
     assert len(matching_files) > 0, "No deepImageJ plugin found, review your installation"
     version = pattern.search(matching_files[0]).group(1)
