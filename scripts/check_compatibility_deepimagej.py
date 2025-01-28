@@ -14,6 +14,7 @@ from script_utils import CompatibilityReportDict, check_tool_compatibility, down
 
 def test_model_deepimagej(rdf_url: str, fiji_executable: str, fiji_path: str):
     yaml_file = "rdf.yaml"
+    print("LOOOOOOOOOOOOOOOOOOOOOOL")
     try:
         urllib.request.urlretrieve(rdf_url, yaml_file)
     except Exception as e:
