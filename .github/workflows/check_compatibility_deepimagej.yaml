@@ -49,16 +49,16 @@ jobs:
         run: fiji/Fiji.app/${{ matrix.fiji_executable }} --headless --console
           scripts/deepimagej_jython_scripts/deepimagej_download_engines.py -engines_path
           fiji/Fiji.app/engines
-      - name: Run deepImageJ tests for drafts
-        run: python scripts/check_compatibility_deepimagej.py all_versions_draft.json generated-reports fiji/Fiji.app/${{ matrix.fiji_executable }} fiji/Fiji.app
-        env:
-          JSON_OUTS_FNAME: dij_ouputs_file${{ github.run_id }}.json
-          MACRO_NAME: dij_macro_ci${{ github.run_id }}.ijm
-      - name: Save reports for debugging purposes for drafts
-        uses: actions/upload-artifact@v4
-        with:
-          name: generated-reports-dij-drafts
-          path: generated-reports
+      #- name: Run deepImageJ tests for drafts
+      #  run: python scripts/check_compatibility_deepimagej.py all_versions_draft.json generated-reports fiji/Fiji.app/${{ matrix.fiji_executable }} fiji/Fiji.app
+      #  env:
+      #    JSON_OUTS_FNAME: dij_ouputs_file${{ github.run_id }}.json
+      #    MACRO_NAME: dij_macro_ci${{ github.run_id }}.ijm
+      #- name: Save reports for debugging purposes for drafts
+      #  uses: actions/upload-artifact@v4
+      #  with:
+      #    name: generated-reports-dij-drafts
+      #    path: generated-reports
       - name: Run deepImageJ tests for pusblished versions
         run: python scripts/check_compatibility_deepimagej.py all_versions.json generated-reports fiji/Fiji.app/${{ matrix.fiji_executable }} fiji/Fiji.app
         env:

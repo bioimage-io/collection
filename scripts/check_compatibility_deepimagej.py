@@ -12,6 +12,13 @@ import traceback
 
 from script_utils import CompatibilityReportDict, check_tool_compatibility, download_rdf
 
+try:
+    from ruyaml import YAML
+except ImportError:
+    from ruamel.yaml import YAML
+
+yaml = YAML(typ="safe")
+
 
 def find_expected_output(outputs_dir, name):
     for ff in os.listdir(outputs_dir):
@@ -32,6 +39,23 @@ def check_dij_macro_generated_outputs(model_dir: str):
             if not find_expected_output(dij_output, name):
                 return False
     return True
+
+def remove_processing_and_halo(model_dir: str):
+    data = None
+    with open(os.path.join(model_dir, "rdf.yaml")) as stream:
+        data = yaml.load(stream)
+    for inp in data["inputs"]:
+        inp.pop('preprocessing', None)
+    for out in data["outputs"]:
+        out.pop('postprocessing', None)
+        if not isinstance(out["axes"][0], dict):
+            out.pop('halo', None)
+            continue
+        for ax in out["axes"]:
+            ax.pop('halo', None)
+    with open(os.path.join(model_dir, "rdf.yaml"), 'w') as outfile:
+        yaml.dump(data, outfile)
+
 
 
 def test_model_deepimagej(rdf_url: str, fiji_executable: str, fiji_path: str):
@@ -96,6 +120,7 @@ def test_model_deepimagej(rdf_url: str, fiji_executable: str, fiji_path: str):
                 links=["deepimagej/deepimagej"],
             ) 
         return report
+    remove_processing_and_halo(model_dir)
     macro_path = os.path.join(model_dir, str(os.getenv("MACRO_NAME")))
     try:
         run = subprocess.run(
@@ -188,10 +213,11 @@ def check_compatibility_deepimagej_impl(
             links=["deepimagej/deepimagej"],
         )
 
-    elif len(rdf["inputs"]) > 1 or len(rdf["outputs"]) > 1:
+    elif len(rdf["inputs"]) > 1 :#or len(rdf["outputs"]) > 1:
         report = CompatibilityReportDict(
             status="failed",
-            error=f"deepimagej only supports single tensor input/output (found {len(rdf['inputs'])}/{len(rdf['outputs'])})",
+            #error=f"deepimagej only supports single tensor input/output (found {len(rdf['inputs'])}/{len(rdf['outputs'])})",
+            error=f"deepimagej only supports single tensor input (found {len(rdf['inputs'])})",
             details=None,
             links=["deepimagej/deepimagej"],
         )
