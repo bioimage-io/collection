@@ -44,10 +44,7 @@ def remove_processing_and_halo(model_dir: str):
     data = None
     with open(os.path.join(model_dir, "rdf.yaml")) as stream:
         data = yaml.load(stream)
-    for inp in data["inputs"]:
-        inp.pop('preprocessing', None)
     for out in data["outputs"]:
-        out.pop('postprocessing', None)
         if not isinstance(out["axes"][0], dict):
             out.pop('halo', None)
             continue
