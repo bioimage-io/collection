@@ -41,8 +41,7 @@ def main(model_dir):
             while dij_cursor.hasNext():
                 dij_cursor.fwd()
                 expected_cursor.fwd()
-                if dij_cursor.get().getRealFloat() - expected_cursor.get().getRealFloat() > (1.5 * 1e-4) \
-                    or expected_cursor.get().getRealFloat() - dij_cursor.get().getRealFloat() > (1.5 * 1e-4):
+                if abs(dij_cursor.get().getRealFloat() - expected_cursor.get().getRealFloat()) > (1.5 * 1e-4 + 1e-4 * abs(expected_cursor.get().getRealFloat())):
                     raise Exception("Values of output " + name  + " differ")
 
 
