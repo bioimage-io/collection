@@ -10,8 +10,8 @@ long_description = (ROOT_DIR / "README.md").read_text(encoding="utf-8")
 VERSION_FILE = ROOT_DIR / "bioimageio_collection_backoffice" / "VERSION"
 VERSION = json.loads(VERSION_FILE.read_text(encoding="utf-8"))["version"]
 
-if sys.version_info < (3, 8):
-    sys.exit("backoffice requires Python >= 3.8")
+if sys.version_info < (3, 9):
+    sys.exit("backoffice requires Python >= 3.9")
 
 _ = setup(
     name="bioimageio-collection-backoffice",
@@ -24,11 +24,11 @@ _ = setup(
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Intended Audience :: Developers",
-        "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
         "Programming Language :: Python :: 3.12",
+        "Programming Language :: Python :: 3.13",
     ],
     packages=find_packages(exclude=["tests"]),
     install_requires=[
