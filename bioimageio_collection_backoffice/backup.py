@@ -2,8 +2,8 @@ import traceback
 from datetime import datetime
 from io import BytesIO
 from pathlib import PurePosixPath
-from typing import Any, Dict, List
-from urllib.parse import quote_plus
+from typing import Dict, List
+from urllib.parse import quote_plus, urlparse
 
 import markdown
 import requests
@@ -17,11 +17,11 @@ from bioimageio.spec.common import HttpUrl, RelativeFilePath
 from bioimageio.spec.utils import download
 from loguru import logger
 
+
 from ._settings import settings
 from .remote_collection import Record, RemoteCollection
-from .requests_utils import put_file, raise_for_status_discretely
 from .s3_client import Client
-
+import bioimageio_collection_backoffice.zenodo as zd
 
 class SkipForNow(NotImplementedError):
     pass
@@ -30,6 +30,11 @@ class SkipForNow(NotImplementedError):
 def backup(client: Client):
     """backup all published resources to their own zenodo records"""
     remote_collection = RemoteCollection(client=client)
+    zenodo_client = zd.Client(
+        session=requests.Session(),
+        access_token=settings.zenodo_api_access_token.get_secret_value(),
+        api_hostname=urlparse(settings.zenodo_url).netloc,
+    )
 
     backed_up: List[str] = []
     error = None
@@ -38,7 +43,7 @@ def backup(client: Client):
             continue
 
         try:
-            backup_published_version(v)
+            backup_published_version(v, zenodo_client=zenodo_client)
         except SkipForNow as e:
             logger.warning("{}\n{}", e, traceback.format_exc())
         except Exception as e:
@@ -53,7 +58,7 @@ def backup(client: Client):
 
 
 def backup_published_version(
-    v: Record,
+    v: Record, zenodo_client: zd.Client
 ):
     with ValidationContext(perform_io_checks=False):
         rdf = load_description(v.rdf_url)
@@ -79,34 +84,12 @@ def backup_published_version(
     if rdf.license is None:
         raise ValueError(f"Missing license for {v.id}")
 
-    headers = {"Content-Type": "application/json"}
-    access_token = settings.zenodo_api_access_token.get_secret_value()
-    assert len(access_token) > 1, "missing zenodo api access token"
-    params = {"access_token": access_token}
-
     if v.concept.doi is None:
-        # Create empty deposition
-        r_create = requests.post(
-            f"{settings.zenodo_url}/api/deposit/depositions",
-            params=params,
-            json={},
-            headers=headers,
-        )
+        deposition_info = zenodo_client.create_new_concept()
     else:
-        concept_id = v.concept.doi.split("/zenodo.")[1]
+        concept_doi = zd.ZenodoDoi[zd.ConceptId].model_validate(v.concept.doi)
         # create a new deposition version with different deposition_id from the existing deposition
-        r_create = requests.post(
-            settings.zenodo_url
-            + "/api/deposit/depositions/"
-            + concept_id
-            + "/actions/newversion",
-            params=params,
-        )
-
-    raise_for_status_discretely(r_create)
-    deposition_info = r_create.json()
-
-    bucket_url = deposition_info["links"]["bucket"]
+        deposition_info: zd.Record = zenodo_client.create_new_concept_version(concept_id=concept_doi.id)
 
     # # use the new version's deposit link
     # newversion_draft_url = deposition_info["links"]['latest_draft']
@@ -119,16 +102,7 @@ def backup_published_version(
         file_data = v.client.load_file(file_path)
         assert file_data is not None
         filename = PurePosixPath(file_path).name
-        put_file(BytesIO(file_data), f"{bucket_url}/{filename}", params)
-
-    # Report deposition URL
-    deposition_id = str(deposition_info["id"])
-    concept_id = str(deposition_info["conceptrecid"])
-    doi = deposition_info["metadata"]["prereserve_doi"]["doi"]
-    assert isinstance(doi, str)
-    concept_doi = doi.replace(deposition_id, concept_id)
-
-    # base_url = f"{settings.zenodo_url}/record/{concept_id}/files/"
+        zenodo_client.add_file_to_record(record=deposition_info, file_name=filename, data=BytesIO(file_data))
 
     metadata = rdf_to_zenodo_metadata(
         rdf,
@@ -136,40 +110,17 @@ def backup_published_version(
         publication_date=v.info.created,
     )
 
-    put_url = f"{settings.zenodo_url}/api/deposit/depositions/{deposition_id}"
-    logger.debug("PUT {} with metadata: {}", put_url, metadata)
-    r_metadata = requests.put(
-        put_url,
-        params=params,
-        json={"metadata": metadata},
-        headers=headers,
+    zenodo_client.add_metadata_to_record(record_id=deposition_info.id, metadata=metadata)
+
+    published_record = zenodo_client.publish(record_id=deposition_info.id)
+    if published_record.doi is None:
+        raise TypeError("Expected published record to have a DOI, found None")
+    if published_record.conceptdoi is None:
+        raise TypeError("Expected published record to have a concept DOI, found None")
+    v.set_dois(
+        doi=published_record.doi.as_str(),
+        concept_doi=published_record.conceptdoi.as_str(),
     )
-    raise_for_status_discretely(r_metadata)
-
-    publish_url = (
-        f"{settings.zenodo_url}/api/deposit/depositions/{deposition_id}/actions/publish"
-    )
-    logger.debug("POST {}", publish_url)
-    r_publish = requests.post(
-        publish_url,
-        params=params,
-    )
-    raise_for_status_discretely(r_publish)
-    v.set_dois(doi=doi, concept_doi=concept_doi)
-
-
-def rdf_authors_to_metadata_creators(rdf: ResourceDescr):
-    creators: List[Dict[str, str]] = []
-    for author in rdf.authors:
-        creator = {"name": str(author.name)}
-        if author.affiliation:
-            creator["affiliation"] = author.affiliation
-
-        if author.orcid:
-            creator["orcid"] = str(author.orcid)
-
-        creators.append(creator)
-    return creators
 
 
 def rdf_to_zenodo_metadata(
@@ -178,9 +129,30 @@ def rdf_to_zenodo_metadata(
     additional_note: str = "\n(Uploaded via https://bioimage.io)",
     publication_date: datetime,
     rdf_file_name: str,
-) -> Dict[str, Any]:
+) -> "zd.OpenAccessSoftwareMetadataArgs | zd.OpenAccessDatasetMetadataArgs":
+    if rdf.license is None:
+        raise ValueError(f"Missing license for {rdf.id}")
+    license = str(rdf.license).lower()
+    if not zd.is_zenodo_license(license):
+        message = f"License '{rdf.license}' not known to Zenodo."
+        logger.error(
+            (
+                message
+                + " Please add manually as custom license"
+                + " (as this is currently not supported to do via REST API)"
+            )
+        )
+        raise ValueError(message)
 
-    creators = rdf_authors_to_metadata_creators(rdf)
+    creators = [
+        zd.RecordCreator(
+            name=str(author.name),
+            affiliation=None if author.affiliation is None else str(author.affiliation),
+            orcid = None if author.orcid is None else str(author.orcid),
+        )
+        for author in rdf.authors
+    ]
+
     docstring = ""
     if rdf.documentation is not None:
         docstring = download(rdf.documentation).path.read_text()
@@ -190,42 +162,33 @@ def rdf_to_zenodo_metadata(
     description = markdown.markdown(description_md)
     logger.debug("html description:\n{}", description_md)
     keywords = ["backup.bioimage.io", "bioimage.io", "bioimage.io:" + rdf.type]
-    # related_identifiers = generate_related_identifiers_from_rdf(rdf, rdf_file_name)  # TODO: add related identifiers
 
-    ret: Dict[str, Any] = {
-        "title": f"bioimage.io upload: {rdf.id}",
-        "description": description,
-        "access_right": "open",
-        "upload_type": "dataset" if rdf.type == "dataset" else "software",
-        "creators": creators,
-        "publication_date": publication_date.date().isoformat(),
-        "keywords": keywords + rdf.tags,
-        "notes": rdf.description + additional_note,
-        # "related_identifiers": related_identifiers,
-        # "communities": [],
-    }
-
-    if rdf.license is not None:
-        # check if license id is valid:
-        license_response = requests.get(
-            f"https://zenodo.org/api/vocabularies/licenses/{rdf.license.lower()}"
+    if rdf.type == "dataset":
+        return zd.OpenAccessDatasetMetadataArgs(
+            title=f"bioimage.io upload: {rdf.id}",
+            description=description,
+            access_right="open",
+            upload_type="dataset",
+            creators=creators,
+            publication_date=publication_date.date(),
+            keywords=keywords + rdf.tags,
+            notes=rdf.description + additional_note,
+            license=license,
+            prereserve_doi=True,
         )
-        try:
-            raise_for_status_discretely(license_response)
-        except Exception as e:
-            logger.error(str(e))
-            logger.error(
-                (
-                    f"License '{rdf.license}' not known to Zenodo."
-                    + " Please add manually as custom license"
-                    + " (as this is currently not supported to do via REST API)"
-                )
-            )
-        else:
-            ret["license"] = rdf.license
-
-    return ret
-
+    else:
+        return zd.OpenAccessSoftwareMetadataArgs(
+            title=f"bioimage.io upload: {rdf.id}",
+            description=description,
+            access_right="open",
+            upload_type="software",
+            creators=creators,
+            publication_date=publication_date.date(),
+            keywords=keywords + rdf.tags,
+            notes=rdf.description + additional_note,
+            license=license,
+            prereserve_doi=True,
+        )
 
 def generate_related_identifiers_from_rdf(rdf: ResourceDescr, rdf_file_name: str):
     related_identifiers: List[Dict[str, str]] = []
