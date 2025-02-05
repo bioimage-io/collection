@@ -136,7 +136,11 @@ def _run_dynamic_tests_impl(
 
     else:
         if conda_env_file.exists():
-            error = f"Failed to install conda environment:\n```yaml\n{conda_env_file.read_text()}\n```"
+            error = (
+                "Failed to install conda environment:<br><code>"
+                + conda_env_file.read_text().replace("\n", "</code><br><code>")
+                + "</code><br>"
+            )
         else:
             error = f"Conda environment yaml file not found: {conda_env_file}"
 
