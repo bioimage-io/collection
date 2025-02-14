@@ -833,9 +833,10 @@ class RecordDraft(RecordBase):
         uploader: Any = rdf["uploader"]["email"]
         if previous_rdf is not None:
             prev_authors: List[Dict[str, str]] = previous_rdf["authors"]
+            prev_uploader: List[Dict[str, str]] = [previous_rdf["uploader"]]
             assert isinstance(prev_authors, list)
             prev_maintainers: List[Dict[str, str]] = (
-                previous_rdf.get("maintainers", []) + prev_authors
+                previous_rdf.get("maintainers", []) + prev_authors + prev_uploader
             )
             maintainer_emails = [a["email"] for a in prev_maintainers if "email" in a]
             if (
