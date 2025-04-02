@@ -32,6 +32,7 @@ import bioimageio.core
 import pydantic
 import requests
 from bioimageio.spec import ValidationContext
+from bioimageio.spec._internal.type_guards import is_dict
 from bioimageio.spec.common import HttpUrl
 from bioimageio.spec.utils import (
     identify_bioimageio_yaml_file_name,
@@ -42,6 +43,8 @@ from typing_extensions import Concatenate, ParamSpec, assert_never
 
 from bioimageio_collection_backoffice.gh_utils import set_gh_actions_outputs
 
+from .settings import settings
+from .thumbnails import create_thumbnails
 from .collection_config import CollectionConfig
 from .collection_json import (
     AllVersions,
@@ -53,7 +56,6 @@ from .collection_json import (
     ConceptVersion,
     Uploader,
 )
-from .common import yaml
 from .db_structure.chat import Chat, Message
 from .db_structure.compatibility import (
     CompatibilityReport,
@@ -79,8 +81,7 @@ from .id_map import IdInfo, IdMap
 from .mailroom.constants import BOT_EMAIL
 from .remote_base import RemoteBase
 from .s3_client import Client
-from .settings import settings
-from .thumbnails import create_thumbnails
+from .common import yaml
 
 LEGACY_DOWNLOAD_COUNTS = {
     "affable-shark": 70601,
@@ -194,7 +195,7 @@ P = ParamSpec("P")
 def log(
     func: Callable[Concatenate[R, P], T],
 ) -> Callable[Concatenate[R, P], T]:
-    """Method decorator to log method execution."""
+    """method decorator to indicate that a method execution should be logged"""
 
     @wraps(func)
     def wrapper(self: R, *args: P.args, **kwargs: P.kwargs):
@@ -213,7 +214,7 @@ def log(
 def reviewer_role(
     func: Callable[Concatenate[R, str, P], T],
 ) -> Callable[Concatenate[R, str, P], T]:
-    """Method decorator to require the actor to be a bioimage.io reviewer."""
+    """method decorator to indicate that a method may only be called by a bioimage.io reviewer"""
 
     @wraps(func)
     def wrapper(self: R, actor: str, *args: P.args, **kwargs: P.kwargs):
@@ -228,7 +229,7 @@ def reviewer_role(
 def lock_concept(
     func: Callable[Concatenate[R, P], T],
 ) -> Callable[Concatenate[R, P], T]:
-    """Method decorator to indicate that a method requires the 'concept' lock."""
+    """method decorator to indicate that a method may only be called by a bioimage.io reviewer"""
 
     @wraps(func)
     def wrapper(self: R, *args: P.args, **kwargs: P.kwargs):
@@ -250,7 +251,7 @@ def lock_concept(
 def lock_version(
     func: Callable[Concatenate[R, P], T],
 ) -> Callable[Concatenate[R, P], T]:
-    """Method decorator to indicate that a method requires the 'version' lock."""
+    """method decorator to indicate that a method may only be called by a bioimage.io reviewer"""
 
     @wraps(func)
     def wrapper(self: R, *args: P.args, **kwargs: P.kwargs):
@@ -447,7 +448,7 @@ class RemoteCollection(RemoteBase):
                 splash_feature_list=template.config.splash_feature_list,
                 splash_subtitle=template.config.splash_subtitle,
                 splash_title=template.config.splash_title,
-                url_root=AnyUrl(self.client.get_file_url(self.folder)),
+                url_root=pydantic.HttpUrl(self.client.get_file_url(self.folder)),
             ),
             description=template.description,
             documentation=template.documentation,
@@ -791,9 +792,7 @@ class RecordDraft(RecordBase):
         reviewers = {r.id: r for r in self.collection.config.reviewers}
         if "uploader" in rdf:
             given_uploader_email: Any = (
-                None
-                if not isinstance(rdf["uploader"], dict)
-                else rdf["uploader"].get("email")
+                None if not is_dict(rdf["uploader"]) else rdf["uploader"].get("email")
             )
             if not isinstance(given_uploader_email, str) or not given_uploader_email:
                 raise ValueError("RDF is missing `uploader.email` field.")
@@ -857,11 +856,11 @@ class RecordDraft(RecordBase):
 
         thumbnails = create_thumbnails(rdf, package_zip)
         config = rdf.setdefault("config", {})
-        if isinstance(config, dict):
+        if is_dict(config):
             bioimageio_config: Any = config.setdefault("bioimageio", {})
-            if isinstance(bioimageio_config, dict):
+            if is_dict(bioimageio_config):
                 thumbnail_config: Any = bioimageio_config.setdefault("thumbnails", {})
-                if isinstance(thumbnail_config, dict):
+                if is_dict(thumbnail_config):
                     for oname, (tname, tdata) in thumbnails.items():
                         upload(tname, tdata)
                         thumbnail_config[oname] = tname
