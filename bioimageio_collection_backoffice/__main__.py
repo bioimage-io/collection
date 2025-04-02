@@ -1,6 +1,6 @@
-import fire
+import fire  # pyright: ignore[reportMissingTypeStubs]
 
-from ._backoffice import BackOffice
+from .cli import BackOffice
 
 
 def main():

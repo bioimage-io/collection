@@ -32,10 +32,9 @@ _ = setup(
     ],
     packages=find_packages(exclude=["tests"]),
     install_requires=[
-        "bioimageio.core>=0.7.0",
-        "bioimageio.spec>=0.5.3.5",
+        "bioimageio.core>=0.8.0",
+        "bioimageio.spec>=0.5.4.1",
         "fire",
-        "imagecodecs",  # not needed for core >=0.7.1
         "loguru",
         "markdown",
         "minio==7.2.4",

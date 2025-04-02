@@ -1,9 +1,8 @@
 import warnings
 from typing import Dict, List, Literal, Tuple, Union, cast
 
-from bioimageio.spec import InvalidDescr, ResourceDescr, load_description
+from bioimageio.spec import InvalidDescr, ResourceDescr, get_conda_env, load_description
 from bioimageio.spec.conda_env import CondaEnv, PipDeps
-from bioimageio.spec.get_conda_env import get_conda_env
 from bioimageio.spec.model import v0_4, v0_5
 from bioimageio.spec.model.v0_5 import WeightsFormat
 from bioimageio.spec.summary import ErrorEntry, ValidationDetail
@@ -114,7 +113,7 @@ def _validate_format_impl(rdf_source: str):
                 ),
             )
         )
-        if rd.license is None:
+        if rd.license is None:  # pyright: ignore[reportUnnecessaryComparison]
             # some older RDF specs have 'license' as an optional field
             rd.validation_summary.add_detail(
                 ValidationDetail(

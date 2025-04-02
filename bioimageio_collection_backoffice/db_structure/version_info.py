@@ -13,8 +13,8 @@ from typing import (
 import pydantic
 from typing_extensions import Annotated
 
-from .._settings import settings
 from ..common import Node
+from ..settings import settings
 
 
 class _StatusBase(Node, frozen=True):

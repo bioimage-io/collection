@@ -5,8 +5,8 @@ from typing import Any, ClassVar, Optional, Sequence
 
 from pydantic import Field
 
-from .._settings import settings
 from ..common import Node
+from ..settings import settings
 
 
 class LogEntry(Node, frozen=True, extra="ignore"):
