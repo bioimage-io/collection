@@ -1,5 +1,4 @@
 import email.message
-import email.parser
 import imaplib
 from contextlib import contextmanager
 from datetime import datetime, timedelta

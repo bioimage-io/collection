@@ -43,8 +43,6 @@ from typing_extensions import Concatenate, ParamSpec, assert_never
 
 from bioimageio_collection_backoffice.gh_utils import set_gh_actions_outputs
 
-from .settings import settings
-from .thumbnails import create_thumbnails
 from .collection_config import CollectionConfig
 from .collection_json import (
     AllVersions,
@@ -56,6 +54,7 @@ from .collection_json import (
     ConceptVersion,
     Uploader,
 )
+from .common import yaml
 from .db_structure.chat import Chat, Message
 from .db_structure.compatibility import (
     CompatibilityReport,
@@ -81,7 +80,8 @@ from .id_map import IdInfo, IdMap
 from .mailroom.constants import BOT_EMAIL
 from .remote_base import RemoteBase
 from .s3_client import Client
-from .common import yaml
+from .settings import settings
+from .thumbnails import create_thumbnails
 
 LEGACY_DOWNLOAD_COUNTS = {
     "affable-shark": 70601,
@@ -448,7 +448,7 @@ class RemoteCollection(RemoteBase):
                 splash_feature_list=template.config.splash_feature_list,
                 splash_subtitle=template.config.splash_subtitle,
                 splash_title=template.config.splash_title,
-                url_root=pydantic.HttpUrl(self.client.get_file_url(self.folder)),
+                url_root=pydantic.HttpUrl(self.client.get_file_url(self.folder)),  # type: ignore
             ),
             description=template.description,
             documentation=template.documentation,
@@ -1363,7 +1363,7 @@ def create_collection_entries(
             name=rdf["name"],
             nickname_icon=nickname_icon,
             nickname=nickname,
-            rdf_source=pydantic.HttpUrl(record_version.rdf_url),
+            rdf_source=pydantic.HttpUrl(record_version.rdf_url),  # type: ignore
             root_url=root_url,
             tags=list(tags),
             training_data=rdf["training_data"] if "training_data" in rdf else None,

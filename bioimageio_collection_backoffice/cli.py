@@ -4,11 +4,10 @@ import warnings
 from datetime import datetime
 from pathlib import Path
 from typing import Literal, Optional, Union
-
-from bioimageio.spec.model.v0_5 import WeightsFormat
 from loguru import logger
 
 from .backup import backup
+from bioimageio.core.common import SupportedWeightsFormat
 from .db_structure.chat import Chat, Message
 from .db_structure.log import Log, LogEntry
 from .mailroom.send_email import notify_uploader
@@ -92,7 +91,7 @@ class BackOffice:
         self,
         concept_id: str,
         version: str,
-        weight_format: Optional[Union[WeightsFormat, Literal[""]]] = None,
+        weight_format: Optional[Union[SupportedWeightsFormat, Literal[""]]] = None,
         create_env_outcome: Literal["success", ""] = "success",
         conda_env_file: Union[str, Path] = Path("environment.yaml"),
     ):
