@@ -403,7 +403,7 @@ class RemoteCollection(RemoteBase):
 
             try:
                 versions_in_collection, id_map_update = create_collection_entries(
-                    versions
+                    versions, ignore_test_summaries=ignore_test_summaries
                 )
             except Exception as e:
                 error_in_published_entry = f"failed to create {rc.id} entry: {e}"
@@ -1168,7 +1168,7 @@ def resolve_relative_path(
 
 
 def create_collection_entries(
-    versions: Sequence[Union[Record, RecordDraft]], ignore_test_summaries: bool
+    versions: Sequence[Union[Record, RecordDraft]], *, ignore_test_summaries: bool
 ) -> Tuple[List[CollectionEntry], IdMap]:
     """create collection entries from a single (draft) record"""
     if not versions:
