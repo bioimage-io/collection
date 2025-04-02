@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import Literal, Mapping, Optional, Sequence, Union
+from typing import List, Literal, Mapping, Optional, Sequence, Union
 
 from loguru import logger
 from pydantic import Field, HttpUrl, model_validator
@@ -115,3 +115,9 @@ class ConceptSummary(Node, frozen=True):
 
 class AllVersions(Node, frozen=True):
     entries: Sequence[ConceptSummary]
+
+
+class AvailableConceptIds(Node, frozen=True):
+    model: List[str]
+    dataset: List[str]
+    notebook: List[str]

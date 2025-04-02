@@ -13,6 +13,7 @@ from ..common import Node
 class Partner(Node, frozen=True):
     background_image: str
     default_type: str
+    docs: HttpUrl
     explore_button_text: str
     icon: HttpUrl
     id: str

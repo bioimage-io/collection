@@ -4,6 +4,7 @@ from bioimageio_collection_backoffice.remote_collection import (
     RecordConcept,
     RecordDraft,
     RemoteCollection,
+    draft_new_version,
 )
 from bioimageio_collection_backoffice.s3_client import Client
 
@@ -17,7 +18,7 @@ def test_lifecycle(
     remote_collection = RemoteCollection(client)
     remote_collection.generate_collection_json()
     concept = RecordConcept(client=client, concept_id=package_id)
-    draft = concept.draft_new_version(package_url)
+    draft = draft_new_version(remote_collection, package_url)
     assert isinstance(draft, RecordDraft)
     assert (
         draft.rdf_url == f"{s3_test_folder_url}frank-water-buffalo/draft/files/rdf.yaml"

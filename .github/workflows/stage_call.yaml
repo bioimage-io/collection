@@ -5,8 +5,9 @@ on:
     inputs:
       concept_id:
         description: "Bioimage.io resource concept"
-        required: true
+        required: false
         type: string
+        default: ''
       package_url:
         description: "Download URL of the resource package zip-file"
         required: true
@@ -14,13 +15,24 @@ on:
       environment_name:
         required: true
         type: string
+      bioimageio_user_id:
+        required: false
+        type: string
+        default: ''
 
-concurrency: ${{inputs.environment_name}}-${{inputs.concept_id}}-call
+    outputs:
+      concept_id:
+        description: "Bioimage.io resource concept (may have been generated if inputs.concept_id was empty)"
+        value:  ${{jobs.run.outputs.concept_id}}
+
+concurrency: ${{inputs.environment_name}}-${{inputs.concept_id}}-${{inputs.package_url}}-call
 
 jobs:
   run:
     runs-on: ubuntu-latest
     environment: ${{inputs.environment_name}}
+    outputs:
+      concept_id: ${{steps.stage.outputs.concept_id}}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -38,5 +50,5 @@ jobs:
           S3_SECRET_ACCESS_KEY: ${{secrets.S3_SECRET_ACCESS_KEY}}
           MAIL_PASSWORD: ${{secrets.MAIL_PASSWORD}}
           RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
-          BIOIMAGEIO_USER_ID: github|${{github.actor_id}}
+          BIOIMAGEIO_USER_ID: ${{inputs.bioimageio_user_id || format('github|{0}', github.actor_id)}}
 

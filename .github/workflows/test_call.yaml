@@ -13,7 +13,10 @@ on:
       environment_name:
         required: true
         type: string
-
+      issue-nr:
+        description: Issue number to comment validation summary in.
+        required: false
+        type: number
 
 concurrency: ${{inputs.environment_name}}-${{inputs.concept_id}}-call
 
@@ -26,6 +29,8 @@ env:
   RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
   MAIL_PASSWORD: ${{secrets.MAIL_PASSWORD}}
   BIOIMAGEIO_USER_ID: github|${{github.actor_id}}
+  GITHUB_ISSUE_NUMBER: ${{inputs.issue-nr}}
+  GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
 jobs:
   validate_format:  # validate metadata in rdf.yaml
@@ -101,7 +106,7 @@ jobs:
           cache-downloads: true
           environment-name: ${{ matrix.weight_format }}
           environment-file: ${{env.conda_env_file}}
-        continue-on-error: true # we inspect this step's outcome in run_dynamic_tests.py
+        continue-on-error: true # we inspect this step's outcome during testing
         timeout-minutes: 60
       - name: setup pip to install backoffice (if conda env failed to install)
         if: steps.create_env.outcome == 'failure'
