@@ -3,8 +3,8 @@ from pathlib import Path
 import pytest
 
 from bioimageio_collection_backoffice import BackOffice
-from bioimageio_collection_backoffice._settings import settings
 from bioimageio_collection_backoffice.s3_client import Client
+from bioimageio_collection_backoffice.settings import settings
 
 
 @pytest.fixture(scope="session")

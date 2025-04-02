@@ -29,22 +29,20 @@ from typing import (
 from urllib.parse import SplitResult, urlsplit, urlunsplit
 
 import bioimageio.core
+import pydantic
 import requests
 from bioimageio.spec import ValidationContext
+from bioimageio.spec._internal.type_guards import is_dict
 from bioimageio.spec.common import HttpUrl
 from bioimageio.spec.utils import (
     identify_bioimageio_yaml_file_name,
     is_valid_bioimageio_yaml_name,
 )
 from loguru import logger
-from pydantic import AnyUrl
-from ruyaml import YAML
 from typing_extensions import Concatenate, ParamSpec, assert_never
 
 from bioimageio_collection_backoffice.gh_utils import set_gh_actions_outputs
 
-from ._settings import settings
-from ._thumbnails import create_thumbnails
 from .collection_config import CollectionConfig
 from .collection_json import (
     AllVersions,
@@ -56,6 +54,7 @@ from .collection_json import (
     ConceptVersion,
     Uploader,
 )
+from .common import yaml
 from .db_structure.chat import Chat, Message
 from .db_structure.compatibility import (
     CompatibilityReport,
@@ -81,8 +80,8 @@ from .id_map import IdInfo, IdMap
 from .mailroom.constants import BOT_EMAIL
 from .remote_base import RemoteBase
 from .s3_client import Client
-
-yaml = YAML(typ="safe")
+from .settings import settings
+from .thumbnails import create_thumbnails
 
 LEGACY_DOWNLOAD_COUNTS = {
     "affable-shark": 70601,
@@ -449,7 +448,7 @@ class RemoteCollection(RemoteBase):
                 splash_feature_list=template.config.splash_feature_list,
                 splash_subtitle=template.config.splash_subtitle,
                 splash_title=template.config.splash_title,
-                url_root=AnyUrl(self.client.get_file_url(self.folder)),
+                url_root=pydantic.HttpUrl(self.client.get_file_url(self.folder)),  # type: ignore
             ),
             description=template.description,
             documentation=template.documentation,
@@ -793,9 +792,7 @@ class RecordDraft(RecordBase):
         reviewers = {r.id: r for r in self.collection.config.reviewers}
         if "uploader" in rdf:
             given_uploader_email: Any = (
-                None
-                if not isinstance(rdf["uploader"], dict)
-                else rdf["uploader"].get("email")
+                None if not is_dict(rdf["uploader"]) else rdf["uploader"].get("email")
             )
             if not isinstance(given_uploader_email, str) or not given_uploader_email:
                 raise ValueError("RDF is missing `uploader.email` field.")
@@ -859,11 +856,11 @@ class RecordDraft(RecordBase):
 
         thumbnails = create_thumbnails(rdf, package_zip)
         config = rdf.setdefault("config", {})
-        if isinstance(config, dict):
+        if is_dict(config):
             bioimageio_config: Any = config.setdefault("bioimageio", {})
-            if isinstance(bioimageio_config, dict):
+            if is_dict(bioimageio_config):
                 thumbnail_config: Any = bioimageio_config.setdefault("thumbnails", {})
-                if isinstance(thumbnail_config, dict):
+                if is_dict(thumbnail_config):
                     for oname, (tname, tdata) in thumbnails.items():
                         upload(tname, tdata)
                         thumbnail_config[oname] = tname
@@ -1366,7 +1363,7 @@ def create_collection_entries(
             name=rdf["name"],
             nickname_icon=nickname_icon,
             nickname=nickname,
-            rdf_source=AnyUrl(record_version.rdf_url),
+            rdf_source=pydantic.HttpUrl(record_version.rdf_url),  # type: ignore
             root_url=root_url,
             tags=list(tags),
             training_data=rdf["training_data"] if "training_data" in rdf else None,

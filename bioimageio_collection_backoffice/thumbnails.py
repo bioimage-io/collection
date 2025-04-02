@@ -3,6 +3,7 @@ from pathlib import PurePosixPath
 from typing import Any, Dict, List, Optional, Tuple, Union
 from zipfile import ZipFile
 
+from bioimageio.spec._internal.type_guards import is_dict, is_list
 from bioimageio.spec.common import FileName
 from loguru import logger
 from PIL import Image
@@ -20,13 +21,12 @@ def create_thumbnails(
         plan.extend((src, (600, 340)) for src in covers_list)
 
     badges: Union[Any, List[Any]] = rdf.get("badges")
-    if isinstance(badges, list):
-        badges_list: List[Any] = badges
-        for badge in badges_list:
-            if not isinstance(badge, dict):
+    if is_list(badges):
+        for badge in badges:
+            if not is_dict(badge):
                 continue
 
-            icon: Any = badge.get("icon")
+            icon = badge.get("icon")
             plan.append((icon, (320, 320)))
 
     plan.append((rdf.get("icon"), (320, 320)))

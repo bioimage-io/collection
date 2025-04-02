@@ -1,4 +1,4 @@
-import collections.abc
+import collections
 from functools import wraps
 from typing import (
     Callable,

@@ -1,5 +1,5 @@
 from bioimageio_collection_backoffice import BackOffice
-from bioimageio_collection_backoffice._settings import settings
+from bioimageio_collection_backoffice.settings import settings
 
 
 def test_backoffice(backoffice: BackOffice, package_url: str, package_id: str):

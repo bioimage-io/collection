@@ -1,11 +1,9 @@
-import traceback
 from functools import partialmethod
 from pathlib import Path
 from typing import Optional, Union
 
 import bioimageio.core
 import bioimageio.spec
-from bioimageio.spec.model.v0_5 import WeightsFormat
 from bioimageio.spec.summary import (
     ErrorEntry,
     InstalledPackage,
@@ -20,6 +18,7 @@ from .db_structure.compatibility import CompatibilityReport
 from .db_structure.log import LogEntry
 from .gh_utils import render_summary
 from .remote_collection import Record, RecordDraft
+from bioimageio.core.common import SupportedWeightsFormat
 
 try:
     from tqdm import tqdm
@@ -31,23 +30,28 @@ else:
 
 
 def get_summary_detail_from_exception(name: str, exception: Exception):
-    return ValidationDetail(
-        name=name,
-        status="failed",
-        errors=[
-            ErrorEntry(
-                loc=(),
-                msg=str(exception),
-                type="exception",
-                traceback=traceback.format_tb(exception.__traceback__),
-            )
-        ],
-    )
+    try:
+        raise exception
+    except Exception:
+        return ValidationDetail(
+            name=name,
+            status="failed",
+            errors=[
+                ErrorEntry(
+                    loc=(),
+                    msg=str(exception),
+                    type="exception",
+                    with_traceback=True,
+                )
+            ],
+        )
 
 
 def run_dynamic_tests(
     record: Union[Record, RecordDraft],
-    weight_format: Optional[WeightsFormat],  # "weight format to test model with."
+    weight_format: Optional[
+        SupportedWeightsFormat
+    ],  # "weight format to test model with."
     create_env_outcome: str,
     conda_env_file: Path,
 ):
@@ -64,6 +68,9 @@ def run_dynamic_tests(
         )
         render_summary(summary)
 
+        assert (
+            summary.status != "valid-format"
+        ), "unexpected status after running dynamic tests (not just format validation)"
         report = CompatibilityReport(
             tool=f"bioimageio.core_{bioimageio.core.__version__}",
             status=summary.status,
@@ -79,7 +86,7 @@ def run_dynamic_tests(
 
 def _run_dynamic_tests_impl(
     rdf_url: str,
-    weight_format: Optional[WeightsFormat],
+    weight_format: Optional[SupportedWeightsFormat],
     create_env_outcome: str,
     conda_env_file: Path,
 ) -> Optional[ValidationSummary]:
