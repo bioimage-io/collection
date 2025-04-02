@@ -3,7 +3,7 @@ from typing import Dict, List, Literal, Tuple, Union, cast
 
 from bioimageio.spec import InvalidDescr, ResourceDescr, load_description
 from bioimageio.spec.conda_env import CondaEnv, PipDeps
-from bioimageio.spec.get_conda_env import get_conda_env
+from bioimageio.spec import get_conda_env
 from bioimageio.spec.model import v0_4, v0_5
 from bioimageio.spec.model.v0_5 import WeightsFormat
 from bioimageio.spec.summary import ErrorEntry, ValidationDetail

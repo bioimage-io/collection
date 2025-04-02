@@ -29,6 +29,7 @@ from typing import (
 from urllib.parse import SplitResult, urlsplit, urlunsplit
 
 import bioimageio.core
+import pydantic
 import requests
 from bioimageio.spec import ValidationContext
 from bioimageio.spec.common import HttpUrl
@@ -37,7 +38,6 @@ from bioimageio.spec.utils import (
     is_valid_bioimageio_yaml_name,
 )
 from loguru import logger
-from pydantic import AnyUrl
 from ruyaml import YAML
 from typing_extensions import Concatenate, ParamSpec, assert_never
 
@@ -1366,7 +1366,7 @@ def create_collection_entries(
             name=rdf["name"],
             nickname_icon=nickname_icon,
             nickname=nickname,
-            rdf_source=AnyUrl(record_version.rdf_url),
+            rdf_source=pydantic.HttpUrl(record_version.rdf_url),
             root_url=root_url,
             tags=list(tags),
             training_data=rdf["training_data"] if "training_data" in rdf else None,
