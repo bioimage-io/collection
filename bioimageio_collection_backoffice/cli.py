@@ -78,7 +78,7 @@ class BackOffice:
             package_url: Public source of zipped package to upload.
         """
         _ = draft_new_version(RemoteCollection(self.client), package_url, concept_id)
-        self.generate_collection_json(mode="draft")
+        self.generate_collection_json(mode="draft", ignore_test_summaries=True)
 
     stage = draft
 
@@ -178,7 +178,7 @@ class BackOffice:
 
         published: Record = rv.publish(reviewer)
         assert isinstance(published, Record)
-        self.generate_collection_json(mode="published")
+        self.generate_collection_json(mode="published", ignore_test_summaries=True)
         notify_uploader(
             published,
             "was published! 🎉",
@@ -195,15 +195,18 @@ class BackOffice:
             logger.warning("argument `destination` is deprecated")
 
         _ = backup(self.client)
-        self.generate_collection_json(mode="published")
-        self.generate_collection_json(mode="draft")
+        self.generate_collection_json(mode="published", ignore_test_summaries=True)
+        self.generate_collection_json(mode="draft", ignore_test_summaries=True)
 
     def generate_collection_json(
         self,
         mode: Literal["published", "draft"] = "published",
+        ignore_test_summaries: bool = False,
     ):
         """generate the collection.json file --- a summary of the whole collection"""
-        RemoteCollection(self.client).generate_collection_json(mode=mode)
+        RemoteCollection(self.client).generate_collection_json(
+            mode=mode, ignore_test_summaries=ignore_test_summaries
+        )
 
     def forward_emails_to_chat(self):
         logger.error("disabled")

@@ -359,6 +359,7 @@ class RemoteCollection(RemoteBase):
     def generate_collection_json(
         self,
         mode: Literal["published", "draft"] = "published",
+        ignore_test_summaries: bool = False,
     ) -> None:
         """generate a json file with an overview of all published resources
         (also generates `versions.json` files for each research concept)
@@ -402,7 +403,7 @@ class RemoteCollection(RemoteBase):
 
             try:
                 versions_in_collection, id_map_update = create_collection_entries(
-                    versions
+                    versions, ignore_test_summaries=ignore_test_summaries
                 )
             except Exception as e:
                 error_in_published_entry = f"failed to create {rc.id} entry: {e}"
@@ -1167,7 +1168,7 @@ def resolve_relative_path(
 
 
 def create_collection_entries(
-    versions: Sequence[Union[Record, RecordDraft]],
+    versions: Sequence[Union[Record, RecordDraft]], *, ignore_test_summaries: bool
 ) -> Tuple[List[CollectionEntry], IdMap]:
     """create collection entries from a single (draft) record"""
     if not versions:
@@ -1224,6 +1225,8 @@ def create_collection_entries(
                 ),
             )
         )
+        if ignore_test_summaries:
+            continue
         compat_reports = record_version.get_all_compatibility_reports()
         compat_tests: Dict[str, List[TestSummaryEntry]] = {}
         bioimageio_status = "failed"
