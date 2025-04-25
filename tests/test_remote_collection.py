@@ -1,9 +1,9 @@
 import pytest
 
-from bioimageio_collection_backoffice.s3_client import Client
+from bioimageio_collection_backoffice.s3_client import S3Client
 
 
-def test_validate_concept_id(client: Client):
+def test_validate_concept_id(client: S3Client):
     from bioimageio_collection_backoffice.remote_collection import RemoteCollection
 
     rc = RemoteCollection(client)
@@ -18,7 +18,7 @@ def test_validate_concept_id_direct():
 
 
 @pytest.mark.parametrize("type_", ["model", "dataset", "notebook"])
-def test_generate_resource_id(client: Client, type_: str):
+def test_generate_resource_id(client: S3Client, type_: str):
     from bioimageio_collection_backoffice.remote_collection import RemoteCollection
 
     rc = RemoteCollection(client)

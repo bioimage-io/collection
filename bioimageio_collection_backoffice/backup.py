@@ -17,9 +17,9 @@ from bioimageio.spec.common import HttpUrl, RelativeFilePath
 from bioimageio.spec.utils import download
 from loguru import logger
 
+from .client import Client
 from .remote_collection import Record, RemoteCollection
 from .requests_utils import put_file, raise_for_status_discretely
-from .s3_client import Client
 from .settings import settings
 
 

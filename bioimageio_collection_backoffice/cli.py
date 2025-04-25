@@ -4,12 +4,14 @@ import warnings
 from datetime import datetime
 from pathlib import Path
 from typing import Literal, Optional, Union
+
+from bioimageio.core.common import SupportedWeightsFormat
 from loguru import logger
 
 from .backup import backup
-from bioimageio.core.common import SupportedWeightsFormat
 from .db_structure.chat import Chat, Message
 from .db_structure.log import Log, LogEntry
+from .folder_client import FolderClient
 from .mailroom.send_email import notify_uploader
 from .remote_collection import (
     Record,
@@ -19,7 +21,7 @@ from .remote_collection import (
     get_remote_resource_version,
 )
 from .run_dynamic_tests import run_dynamic_tests
-from .s3_client import Client
+from .s3_client import S3Client
 from .settings import settings
 from .validate_format import validate_format
 
@@ -32,9 +34,14 @@ class BackOffice:
         host: str = settings.s3_host,
         bucket: str = settings.s3_bucket,
         prefix: str = settings.s3_folder,
+        local_collection: Optional[Path] = settings.local_collection,
     ) -> None:
         super().__init__()
-        self.client = Client(host=host, bucket=bucket, prefix=prefix)
+        if local_collection is None:
+            self.client = S3Client(host=host, bucket=bucket, prefix=prefix)
+        else:
+            self.client = FolderClient(local_collection)
+
         logger.info("created backoffice with client {}", self.client)
 
     def download(self, in_collection_path: str, output_path: Optional[Path] = None):
@@ -201,11 +208,12 @@ class BackOffice:
     def generate_collection_json(
         self,
         mode: Literal["published", "draft"] = "published",
+        dist: Path = Path("gh-pages"),
         ignore_test_summaries: bool = False,
     ):
         """generate the collection.json file --- a summary of the whole collection"""
         RemoteCollection(self.client).generate_collection_json(
-            mode=mode, ignore_test_summaries=ignore_test_summaries
+            mode=mode, dist=dist, ignore_test_summaries=ignore_test_summaries
         )
 
     def forward_emails_to_chat(self):

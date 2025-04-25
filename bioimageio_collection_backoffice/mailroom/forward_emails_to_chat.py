@@ -3,13 +3,16 @@ import imaplib
 from contextlib import contextmanager
 from datetime import datetime, timedelta
 from email.utils import parsedate_to_datetime
+from pathlib import Path
 from typing import Any
 
 from loguru import logger
 
+from bioimageio_collection_backoffice.folder_client import FolderClient
+
+from ..client import Client
 from ..db_structure.chat import Chat, Message
 from ..remote_collection import get_remote_resource_version
-from ..s3_client import Client
 from ..settings import settings
 from .constants import (
     BOT_EMAIL,
@@ -22,10 +25,10 @@ from .constants import (
 FORWARDED_TO_CHAT_FLAT = "forwarded-to-bioimageio-chat"
 
 
-def forward_emails_to_chat(s3_client: Client, last_n_days: int):
+def forward_emails_to_chat(client: Client, last_n_days: int):
     cutoff_datetime = datetime.now().astimezone() - timedelta(days=last_n_days)
     with _get_imap_client() as imap_client:
-        _update_chats(s3_client, imap_client, cutoff_datetime)
+        _update_chats(client, imap_client, cutoff_datetime)
 
 
 @contextmanager
@@ -64,7 +67,7 @@ def _get_body(msg: email.message.Message):
 
 
 def _update_chats(
-    s3_client: Client, imap_client: imaplib.IMAP4_SSL, cutoff_datetime: datetime
+    client: Client, imap_client: imaplib.IMAP4_SSL, cutoff_datetime: datetime
 ):
     _ = imap_client.select("inbox")
     for msg_id, rid, rv, msg, dt in _iterate_relevant_emails(
@@ -92,7 +95,7 @@ def _update_chats(
         text = "[forwarded from email]\n" + body.replace("> " + REPLY_HINT, "").replace(
             REPLY_HINT, ""
         )
-        rr = get_remote_resource_version(s3_client, rid, rv)
+        rr = get_remote_resource_version(client, rid, rv)
         if not rr.exists():
             logger.error("Cannot comment on non-existing resource {} {}", rid, rv)
             continue
@@ -157,4 +160,4 @@ def _iterate_emails(imap_client: imaplib.IMAP4_SSL, cutoff_datetime: datetime):
 
 
 if __name__ == "__main__":
-    forward_emails_to_chat(Client(), 7)
+    forward_emails_to_chat(FolderClient(Path("local_storage")), 7)

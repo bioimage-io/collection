@@ -5,11 +5,11 @@ from typing import Any, Optional, Type, TypeVar, Union
 
 from loguru import logger
 
+from .client import Client
 from .db_structure.chat import Chat
 from .db_structure.log import Log, LogEntry
 from .db_structure.reserved import Reserved
 from .db_structure.version_info import DraftInfo, RecordInfo
-from .s3_client import Client
 
 JsonFileT = TypeVar("JsonFileT", DraftInfo, RecordInfo, Log, Chat, Reserved)
 
@@ -17,7 +17,7 @@ JsonFileT = TypeVar("JsonFileT", DraftInfo, RecordInfo, Log, Chat, Reserved)
 @dataclass
 class RemoteBase:
     client: Client
-    """Client to connect to remote storage"""
+    """Client to connect to storage"""
 
     @property
     @abstractmethod

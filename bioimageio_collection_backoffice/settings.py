@@ -1,4 +1,5 @@
 import getpass
+from pathlib import Path
 from typing import Literal, Optional
 
 from loguru import logger
@@ -54,6 +55,7 @@ class Settings(BaseSettings, extra="ignore"):
     zenodo_api_access_token: SecretStr = SecretStr("")
     zenodo_test_api_access_token: SecretStr = SecretStr("")
     github_token: SecretStr = SecretStr("")
+    local_collection: Optional[Path] = None
 
 
 settings = Settings()

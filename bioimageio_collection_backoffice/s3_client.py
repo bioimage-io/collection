@@ -1,17 +1,14 @@
 from __future__ import annotations
 
 import io
-import json
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import (
-    Any,
     BinaryIO,
     Iterator,
     List,
     Optional,
     Sequence,
-    TypeVar,
     Union,
 )
 
@@ -20,17 +17,15 @@ from minio import Minio, S3Error
 from minio.commonconfig import CopySource
 from minio.datatypes import Object
 from minio.deleteobjects import DeleteObject
-from pydantic import BaseModel, SecretStr
+from pydantic import SecretStr
 
 from .cache import SizedValueLRU
-from .common import yaml
+from .client_base import ClientBase
 from .settings import settings
-
-M = TypeVar("M", bound=BaseModel)
 
 
 @dataclass
-class Client:
+class S3Client(ClientBase):
     """Convenience wrapper around a `Minio` S3 client"""
 
     host: str = settings.s3_host
@@ -83,10 +78,10 @@ class Client:
         self, path: str, file_object: Union[io.BytesIO, BinaryIO], length: Optional[int]
     ) -> None:
         """upload a file(like object)"""
-        # For unknown length (ie without reading file into mem) give `part_size`
         if self._cache is not None:
             self._cache.pop((path,))
 
+        # For unknown length (ie without reading file into mem) give `part_size`
         part_size = 0
         if length is None:
             length = -1
@@ -103,32 +98,6 @@ class Client:
             part_size=part_size,
         )
         logger.info("Uploaded {}", self.get_file_url(path))
-
-    def put_pydantic(self, path: str, obj: BaseModel):
-        """upload a json file from a pydantic model"""
-        self.put_json_string(path, obj.model_dump_json(exclude_defaults=False))
-
-    def put_json(
-        self, path: str, json_value: Any  # TODO: type json_value as JsonValue
-    ):
-        """upload a json file from a json serializable value"""
-        json_str = json.dumps(json_value)
-        self.put_json_string(path, json_str)
-
-    def put_yaml(self, yaml_value: Any, path: str):
-        """upload a yaml file from a yaml serializable value"""
-        stream = io.StringIO()
-        yaml.dump(yaml_value, stream)
-        data = stream.getvalue().encode()
-        self.put(
-            path,
-            io.BytesIO(data),
-            length=len(data),
-        )
-
-    def put_json_string(self, path: str, json_str: str):
-        data = json_str.encode()
-        self.put_and_cache(path, data)
 
     def get_file_urls(
         self,
@@ -182,6 +151,9 @@ class Client:
         """
         List folder contents, non-recursive, ala `ls` but no "." or ".."
         """
+        if only_folders and only_files:
+            raise ValueError("only one of `only_folders` or `only_files` can be True")
+
         path = f"{self.prefix}/{path}"
         logger.debug("Running ls at path: {}", path)
         objects = self._client.list_objects(self.bucket, prefix=path, recursive=False)
@@ -203,12 +175,12 @@ class Client:
         objects = self._cp_dir(src, tgt)
         self._rm_objs(objects, bypass_governance_mode=bypass_governance_mode)
 
-    def rm_dir(self, prefix: str, *, bypass_governance_mode: bool = False):
+    def rm_dir(self, path: str, *, bypass_governance_mode: bool = False):
         """remove all objects under `prefix`"""
-        assert prefix == "" or prefix.endswith("/")
+        assert path == "" or path.endswith("/")
         objects = list(
             self._client.list_objects(
-                self.bucket, f"{self.prefix}/{prefix}", recursive=True
+                self.bucket, f"{self.prefix}/{path}", recursive=True
             )
         )
         self._rm_objs(objects, bypass_governance_mode=bypass_governance_mode)
@@ -232,8 +204,8 @@ class Client:
 
         return objects
 
-    def rm(self, object: str):
-        self._client.remove_object(self.bucket, f"{self.prefix}/{object}")
+    def rm(self, path: str):
+        self._client.remove_object(self.bucket, f"{self.prefix}/{path}")
 
     def _rm_objs(
         self, objects: Sequence[Object], *, bypass_governance_mode: bool

@@ -6,11 +6,11 @@ from bioimageio_collection_backoffice.remote_collection import (
     RemoteCollection,
     draft_new_version,
 )
-from bioimageio_collection_backoffice.s3_client import Client
+from bioimageio_collection_backoffice.s3_client import S3Client
 
 
 def test_lifecycle(
-    client: Client,
+    client: S3Client,
     package_url: str,
     package_id: str,
     s3_test_folder_url: str,

@@ -3,7 +3,7 @@ from pathlib import Path
 import pytest
 
 from bioimageio_collection_backoffice import BackOffice
-from bioimageio_collection_backoffice.s3_client import Client
+from bioimageio_collection_backoffice.s3_client import S3Client
 from bioimageio_collection_backoffice.settings import settings
 
 
@@ -22,7 +22,7 @@ def backoffice():
 @pytest.fixture(scope="session")
 def client():
     """a client of a test instance of a bioimageio collection"""
-    cl = Client(
+    cl = S3Client(
         host=settings.s3_host,
         bucket=settings.s3_bucket,
         prefix=settings.s3_pytest_folder + "/client",
@@ -35,7 +35,7 @@ def client():
 @pytest.fixture(scope="session")
 def non_collection_client():
     """a client fixture without implying it maintains a bioimageio collection"""
-    cl = Client(
+    cl = S3Client(
         host=settings.s3_host,
         bucket=settings.s3_bucket,
         prefix=settings.s3_pytest_folder + "/other",
@@ -46,7 +46,7 @@ def non_collection_client():
 
 
 @pytest.fixture(scope="session")
-def s3_test_folder_url(client: "Client"):
+def s3_test_folder_url(client: "S3Client"):
     return client.get_file_url("")
 
 

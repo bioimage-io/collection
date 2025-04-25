@@ -9,7 +9,7 @@ import zipfile
 from abc import ABC
 from collections import defaultdict
 from dataclasses import dataclass, field
-from functools import wraps
+from functools import cached_property, wraps
 from itertools import product
 from pathlib import Path
 from typing import (
@@ -29,6 +29,8 @@ from typing import (
 from urllib.parse import SplitResult, urlsplit, urlunsplit
 
 import bioimageio.core
+import github
+import github.ContentFile
 import pydantic
 import requests
 from bioimageio.spec import ValidationContext
@@ -41,8 +43,7 @@ from bioimageio.spec.utils import (
 from loguru import logger
 from typing_extensions import Concatenate, ParamSpec, assert_never
 
-from bioimageio_collection_backoffice.gh_utils import set_gh_actions_outputs
-
+from .client import Client
 from .collection_config import CollectionConfig
 from .collection_json import (
     AllVersions,
@@ -76,10 +77,10 @@ from .db_structure.version_info import (
     VersionInfo,
     VersionsInfo,
 )
+from .gh_utils import get_collection_repo, set_gh_actions_outputs
 from .id_map import IdInfo, IdMap
 from .mailroom.constants import BOT_EMAIL
 from .remote_base import RemoteBase
-from .s3_client import Client
 from .settings import settings
 from .thumbnails import create_thumbnails
 
@@ -295,6 +296,62 @@ class RemoteCollection(RemoteBase):
     def partner_ids(self):
         return tuple(p.id for p in self.config.partners)
 
+    @property
+    def test_summaries(self) -> Mapping[str, str]:
+        return {k: v.content for k, v in self._test_summaries.items()}
+
+    @cached_property
+    def _test_summaries(self) -> Dict[str, github.ContentFile.ContentFile]:
+        repo = get_collection_repo()
+        ret: Dict[str, github.ContentFile.ContentFile] = {}
+        contents = repo.get_contents("test_summaries", "gh-pages")
+        assert isinstance(contents, list)
+        while contents:
+            file_content = contents.pop(0)
+            if file_content.type == "dir":
+                subcontent = repo.get_contents(file_content.path)
+                if isinstance(subcontent, list):
+                    contents.extend(subcontent)
+                else:
+                    contents.append(subcontent)
+            else:
+                ret[file_content.path] = file_content
+
+        return ret
+
+    updated_test_summaries: Dict[str, str] = (# pyright: ignore[reportUnknownVariableType]
+
+        field(
+            default_factory=dict
+        )  )
+
+    def push_updated_test_summaries(self):
+        if not self.updated_test_summaries:
+            return
+
+        repo = get_collection_repo()
+        for path, content in self.updated_test_summaries.items():
+            assert not path.startswith("test_summaries")
+            path = "test_summaries/" + path
+            if path in self.test_summaries:
+                current = repo.get_contents(path)
+                assert not isinstance(current, list)
+                updated = repo.update_file(
+                    path,
+                    "update test summary",
+                    content,
+                    current.sha,
+                    branch="gh-pages",
+                )["content"]
+            else:
+                updated = repo.create_file(path, "create test summary", content, branch="gh-pages")["content"]
+
+            assert isinstance(updated, github.ContentFile.ContentFile)
+            assert updated.path == path, (updated.path, path)
+            self._test_summaries[updated.path] = updated
+
+        self.updated_test_summaries = {}
+
     def get_concepts(self):
         return [  # general resources outside partner folders
             RecordConcept(client=self.client, concept_id=concept_id)
@@ -359,6 +416,7 @@ class RemoteCollection(RemoteBase):
     def generate_collection_json(
         self,
         mode: Literal["published", "draft"] = "published",
+        *, dist: Path = Path("gh-pages"),
         ignore_test_summaries: bool = False,
     ) -> None:
         """generate a json file with an overview of all published resources
@@ -403,7 +461,7 @@ class RemoteCollection(RemoteBase):
 
             try:
                 versions_in_collection, id_map_update = create_collection_entries(
-                    versions, ignore_test_summaries=ignore_test_summaries
+                    versions, dist=dist, ignore_test_summaries=ignore_test_summaries
                 )
             except Exception as e:
                 error_in_published_entry = f"failed to create {rc.id} entry: {e}"
@@ -1168,7 +1226,7 @@ def resolve_relative_path(
 
 
 def create_collection_entries(
-    versions: Sequence[Union[Record, RecordDraft]], *, ignore_test_summaries: bool
+    versions: Sequence[Union[Record, RecordDraft]], *, dist: Path, ignore_test_summaries: bool
 ) -> Tuple[List[CollectionEntry], IdMap]:
     """create collection entries from a single (draft) record"""
     if not versions:

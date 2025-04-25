@@ -1,7 +1,7 @@
-from bioimageio_collection_backoffice.s3_client import Client
+from bioimageio_collection_backoffice.s3_client import S3Client
 
 
-def test_client(non_collection_client: Client):
+def test_client(non_collection_client: S3Client):
     client = non_collection_client
     assert client.prefix.startswith("testing")
     client.put_json("test/test1.json", "test")
