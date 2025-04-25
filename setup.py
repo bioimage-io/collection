@@ -33,15 +33,13 @@ _ = setup(
     packages=find_packages(exclude=["tests"]),
     install_requires=[
         "bioimageio.core>=0.8.0",
-        "bioimageio.spec>=0.5.4.1",
-        "fire",
+        "bioimageio.spec>=0.5.4.2",
         "loguru",
         "markdown",
         "minio==7.2.4",
         "pillow",
         "pydantic-settings",
         "PyGithub",
-        "pydantic>=2.7.0,<2.10",  # TODO: update upper pin after pydantic 2.10 fix, see https://github.com/bioimage-io/spec-bioimage-io/pull/664
         "requests",
         "ruyaml",
         "tqdm",
@@ -57,11 +55,7 @@ _ = setup(
             "torch",
         ]
     },
-    entry_points={
-        "console_scripts": [
-            "backoffice = bioimageio_collection_backoffice.__main__:main"
-        ]
-    },
+    entry_points={"console_scripts": ["backoffice = backoffice.__main__:main"]},
     project_urls={
         "Bug Reports": "https://github.com/bioimage-io/collection/issues",
         "Source": "https://github.com/bioimage-io/collection",
