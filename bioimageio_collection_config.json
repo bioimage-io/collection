@@ -131,31 +131,6 @@
             "partners": [
                 {
                     "background_image": "static/img/zoo-background.svg",
-                    "default_type": "model",
-                    "docs": "https://bioimage.io/docs",
-                    "explore_button_text": "Start Exploring",
-                    "icon": "https://raw.githubusercontent.com/bioimage-io/bioimage.io/main/public/img/bioimage-io-icon.svg",
-                    "id": "bioimageio",
-                    "logo": "https://raw.githubusercontent.com/bioimage-io/bioimage.io/main/public/img/bioimage-io-icon.svg",
-                    "name": "BioImage.IO",
-                    "resource_types": [
-                        "model",
-                        "application",
-                        "notebook",
-                        "dataset"
-                    ],
-                    "splash_feature_list": [
-                        "Integrate with Fiji, Ilastik, ImJoy",
-                        "Try model instantly with BioEngine",
-                        "Contribute your models via Zenodo",
-                        "Link models to datasets and applications"
-                    ],
-                    "splash_subtitle": "Advanced AI models in one-click",
-                    "splash_title": "BioImage Model Zoo",
-                    "tags": []
-                },
-                {
-                    "background_image": "static/img/zoo-background.svg",
                     "default_type": "application",
                     "docs": "https://github.com/HenriquesLab/DeepLearning_Collab/wiki",
                     "explore_button_text": "Start Exploring",
