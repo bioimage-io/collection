@@ -134,9 +134,9 @@
                     "default_type": "model",
                     "docs": "https://bioimage.io/docs",
                     "explore_button_text": "Start Exploring",
-                    "icon": "https://raw.githubusercontent.com/bioimage-io/bioimage.io/main/public/static/img/bioimage-io-icon.svg",
+                    "icon": "https://raw.githubusercontent.com/bioimage-io/bioimage.io/main/public/img/bioimage-io-icon.svg",
                     "id": "bioimageio",
-                    "logo": "https://raw.githubusercontent.com/bioimage-io/bioimage.io/main/public/static/img/bioimage-io-icon.svg",
+                    "logo": "https://raw.githubusercontent.com/bioimage-io/bioimage.io/main/public/img/bioimage-io-icon.svg",
                     "name": "BioImage.IO",
                     "resource_types": [
                         "model",
