@@ -59,12 +59,9 @@ jobs:
         environment-file: env.yaml
         cache-downloads: true
         cache-environment: false  # gets stuck for 6h?
-    - name: test drafts with ilastik ${{ matrix.v }}
-      shell: bash -l {0}
-      run: python scripts/check_compatibility_ilastik.py ${{ matrix.v }} all_versions_draft.json generated-reports
     - name: test published versions with ilastik ${{ matrix.v }}
       shell: bash -l {0}
-      run: python scripts/check_compatibility_ilastik.py ${{ matrix.v }} all_versions.json generated-reports
+      run: python scripts/check_compatibility_ilastik.py ${{ matrix.v }} index.json generated-reports
     - uses: actions/upload-artifact@v4
       with:
         name: generated-reports-${{ matrix.v }}

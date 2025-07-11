@@ -1,0 +1,43 @@
+name: index
+run-name: index bioimage.io resources
+
+on:
+  workflow_call:
+    inputs:
+      dry-run:
+        description: 'Run the workflow without making any changes'
+        required: false
+        default: false
+        type: boolean
+  workflow_dispatch:
+    inputs:
+      dry-run:
+        description: 'Run the workflow without making any changes'
+        required: false
+        default: false
+        type: boolean
+  push:
+    branches: [main]
+  schedule:
+    - cron: '0 6 * * *'
+
+concurrency: index
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          cache: "pip" # caching pip dependencies
+      - run: pip install .
+      - run: backoffice index
+        env:
+          RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
+      - name: Deploy to gh-pages 🚀
+        if: ${{ github.ref == 'refs/heads/main' }}
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          dry-run: ${{ inputs.dry-run || false }}
+          folder: gh-pages

@@ -12,7 +12,6 @@ from bioimageio_collection_backoffice.db_structure.compatibility import (
 from bioimageio_collection_backoffice.remote_collection import (
     get_remote_resource_version,
 )
-from bioimageio_collection_backoffice.s3_client import Client
 
 
 def upload_reports(reports_folder: Union[Path, str]):
