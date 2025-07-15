@@ -13,8 +13,12 @@ from backoffice.compatibility import (
     ToolNameVersioned,
     ToolReportDetails,
 )
-from backoffice.index import Item, ItemVersion, create_index
-from backoffice.utils import get_all_tool_report_paths, get_summary_file_path
+from backoffice.index import IndexItem, IndexItemVersion, create_index
+from backoffice.utils import (
+    get_all_tool_report_paths,
+    get_summary,
+    get_summary_file_path,
+)
 
 
 def summarize_reports():
@@ -31,8 +35,10 @@ def summarize_reports():
             pass
 
 
-def _summarize(item: Item, v: ItemVersion):
+def _summarize(item: IndexItem, v: IndexItemVersion):
     """Conflate all summaries for a given item version."""
+
+    initial_summary = get_summary(item.id, v.version)
 
     reports: list[ToolCompatibilityReport] = []
     scores: dict[ToolNameVersioned, float] = {}
@@ -68,6 +74,8 @@ def _summarize(item: Item, v: ItemVersion):
             metadata_completeness = report.details.metadata_completeness or 0.0
 
     summary = CompatibilitySummary(
+        rdf_content=initial_summary.rdf_content,
+        rdf_yaml_sha256=initial_summary.rdf_yaml_sha256,
         status=status,
         scores=CompatibilityScores(
             tool_compatibility_version_specific=scores,

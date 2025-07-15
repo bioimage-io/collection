@@ -10,38 +10,49 @@ from loguru import logger
 from pydantic import BaseModel
 
 from backoffice._settings import settings
-from backoffice.utils import get_local_rdf_path, get_report_path
+from backoffice.compatibility import InitialSummary
+from backoffice.utils import (
+    get_report_path,
+    get_summary,
+    get_summary_file_path,
+    yaml,
+)
 
 
 class Node(BaseModel, frozen=True, extra="ignore"):
     pass
 
 
-class ItemVersion(Node, frozen=True):
+class ResponseItemVersion(Node, frozen=True):
     version: str
     comment: Optional[str]
     created_at: datetime
 
 
-class IndexItemVersion(ItemVersion, frozen=True):
+class IndexItemVersion(Node, frozen=True):
+    version: str
+    comment: Optional[str]
+    created_at: datetime
     source: str
     sha256: str
 
 
-class Item(Node, frozen=True):
+class ResponseItem(Node, frozen=True):
     id: str
-    versions: Sequence[ItemVersion]
+    versions: Sequence[ResponseItemVersion]
     type: str
 
 
-class IndexItem(Item, frozen=True):
+class IndexItem(Node, frozen=True):
+    id: str
     versions: Sequence[IndexItemVersion]
+    type: str
 
 
 class Response(Node, frozen=True):
     """Response from Hypha list endpoint"""
 
-    items: list[Item]
+    items: list[ResponseItem]
     total: int
     offset: int
     limit: int
@@ -82,7 +93,7 @@ def create_index() -> Index:
             else:
                 return Response.model_validate_json(r.content)
 
-        items: list[Item] = []
+        items: list[ResponseItem] = []
         for page in range(100):
             response = request(len(items))
             logger.info("Page {}: {} entries", page, len(response.items))
@@ -133,7 +144,9 @@ def create_index() -> Index:
     return index
 
 
-def _initialize_report_directory(item: Item, v: ItemVersion, url: str) -> str:
+def _initialize_report_directory(
+    item: ResponseItem, v: ResponseItemVersion, url: str
+) -> str:
     """Initialize the report directory for an item version.
 
     Returns sha256 of the rdf.yaml file."""
@@ -142,21 +155,37 @@ def _initialize_report_directory(item: Item, v: ItemVersion, url: str) -> str:
     _ = r.raise_for_status()
     data = r.content
     sha256 = hashlib.sha256(data).hexdigest()
-    rdf_path = get_local_rdf_path(item.id, v.version)
-    assert report_path in rdf_path.parents
-    if rdf_path.exists():
-        existing_sha256 = hashlib.sha256(rdf_path.read_bytes()).hexdigest()
-        if existing_sha256 != sha256:
+
+    summary = get_summary(item.id, v.version)
+    existing_sha256 = summary.rdf_yaml_sha256
+    if existing_sha256 == sha256:
+        logger.info(
+            "Found existing summary for {}/{} with matching RDF SHA-256: {}",
+            item.id,
+            v.version,
+            sha256,
+        )
+        return sha256
+    else:
+        if existing_sha256:
             logger.warning(
-                "RDF file at {} already exists with different SHA-256: {} != {}. deleting and replacing...",
-                rdf_path,
+                "Found existing summary for {}/{} with different RDF SHA-256: {} != {}. deleting and replacing...",
+                item.id,
+                v.version,
                 existing_sha256,
                 sha256,
             )
-            shutil.rmtree(report_path)
+
+        shutil.rmtree(report_path)
 
     report_path.mkdir(parents=True, exist_ok=True)
-    _ = rdf_path.write_bytes(data)
+    summary = InitialSummary(
+        rdf_content=yaml.load(data),
+        rdf_yaml_sha256=sha256,
+        status="untested",
+    )
+    summary_path = get_summary_file_path(item.id, v.version)
+    _ = summary_path.write_text(summary.model_dump_json(indent=4), encoding="utf-8")
     logger.info("Initialized report directory {}", report_path)
     return sha256
 

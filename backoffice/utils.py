@@ -1,56 +1,48 @@
-import os
-from pathlib import Path
+import json
+from typing import TYPE_CHECKING, Any
 
-try:
-    import dotenv
-except ImportError:
-    pass
+from pydantic import ValidationError
+
+from backoffice.compatibility import CompatibilitySummary, InitialSummary
+from backoffice.utils_pure import cached_download as cached_download
+from backoffice.utils_pure import get_all_tool_report_paths as get_all_tool_report_paths
+from backoffice.utils_pure import get_log_file as get_log_file
+from backoffice.utils_pure import get_rdf_content_from_id as get_rdf_content_from_id
+from backoffice.utils_pure import get_report_path as get_report_path
+from backoffice.utils_pure import get_summary_data as get_summary_data
+from backoffice.utils_pure import get_summary_file_path as get_summary_file_path
+from backoffice.utils_pure import get_tool_report_path as get_tool_report_path
+
+if TYPE_CHECKING:
+    from ruyaml import YAML
 else:
-    _ = dotenv.load_dotenv()
+    try:
+        from ruyaml import YAML
+    except ImportError:
+        from ruamel.yaml import YAML
+
+yaml = YAML(typ="safe")
 
 
-def get_report_path(
-    item_id: str,
-    version: str,
-) -> Path:
-    return Path(os.getenv("REPORTS", "reports")) / item_id.replace(":", "_") / version
+def get_rdf_content_from_url(url: str, sha256: str) -> dict[str, Any]:
+    local_path = cached_download(url, sha256)
+    return yaml.load(local_path)
 
 
-def get_tool_report_path(
-    item_id: str,
-    version: str,
-    tool_name: str,
-    tool_version: str,
-):
-    """Get the path to the report for a specific item version and tool."""
-    if "_" in tool_name:
-        raise ValueError("Underscore not allowed in tool_name")
+def get_summary(item_id: str, version: str) -> InitialSummary | CompatibilitySummary:
+    """Retrieve the summary for a specific item and version."""
+    summary_path = get_summary_file_path(item_id, version)
+    if not summary_path.exists():
+        return InitialSummary(
+            rdf_content={},
+            rdf_yaml_sha256="",
+            status="untested",
+        )
 
-    if "_" in tool_version:
-        raise ValueError("Underscore not allowed in tool_version")
+    with summary_path.open(encoding="utf-8") as f:
+        data = json.load(f)
 
-    return (
-        get_report_path(item_id, version)
-        / "reports"
-        / f"{tool_name}_{tool_version}.json"
-    )
-
-
-def get_all_tool_report_paths(
-    item_id: str,
-    version: str,
-):
-    return list((get_report_path(item_id, version) / "reports").glob("*.json"))
-
-
-def get_summary_file_path(item_id: str, version: str) -> Path:
-    return get_report_path(item_id, version) / "summary.json"
-
-
-def get_log_file(item_id: str, version: str) -> Path:
-    return get_report_path(item_id, version) / "log.txt"
-
-
-def get_local_rdf_path(item_id: str, version: str) -> Path:
-    """Get the local path to the RDF file for a specific item version."""
-    return get_report_path(item_id, version) / "rdf.yaml"
+    try:
+        return CompatibilitySummary.model_validate(data)
+    except ValidationError:
+        return InitialSummary.model_validate(data)

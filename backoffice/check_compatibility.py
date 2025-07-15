@@ -2,22 +2,15 @@ import json
 import traceback
 import warnings
 from pathlib import Path
-from typing import TYPE_CHECKING, Callable
+from typing import Callable
 
 from backoffice.utils import get_tool_report_path
-
-if TYPE_CHECKING:
-    from ruyaml import YAML
-else:
-    try:
-        from ruyaml import YAML
-    except ImportError:
-        from ruamel.yaml import YAML
 
 try:
     from tqdm import tqdm
 except ImportError:
     tqdm = list
+
 
 try:
     from backoffice.compatibility import ToolCompatibilityReport
@@ -26,7 +19,11 @@ except ImportError:
         ToolCompatibilityReport as ToolCompatibilityReportDict,
     )
 
-yaml = YAML(typ="safe")
+
+ItemId = str
+ItemVersion = str
+Url = str
+Sha256 = str
 
 
 def check_tool_compatibility(
@@ -35,9 +32,11 @@ def check_tool_compatibility(
     *,
     index_path: Path = Path("index.json"),
     check_tool_compatibility_impl: Callable[
-        [str, str], "ToolCompatibilityReport | ToolCompatibilityReportDict"
+        [ItemId, ItemVersion, Url, Sha256],
+        "ToolCompatibilityReport | ToolCompatibilityReportDict",
     ],
     applicable_types: set[str],
+    id_startswith: str = "",
 ):
     """helper to implement tool compatibility checks
 
@@ -55,7 +54,12 @@ def check_tool_compatibility(
     with index_path.open() as f:
         items = json.load(f)["items"]
 
-    filtered_items = [item for item in items if item["type"] in applicable_types]
+    filtered_items = [
+        item
+        for item in items
+        if item["type"] in applicable_types and item["id"].startswith(id_startswith)
+    ]
+    print(f"found {len(filtered_items)} starting with '{id_startswith}'")
 
     for item in tqdm(filtered_items):
         for version in item["versions"]:
@@ -69,7 +73,9 @@ def check_tool_compatibility(
                 continue
 
             try:
-                report = check_tool_compatibility_impl(rdf_url, sha256)
+                report = check_tool_compatibility_impl(
+                    item["id"], version["version"], rdf_url, sha256
+                )
             except Exception as e:
                 traceback.print_exc()
                 warnings.warn(f"failed to check '{rdf_url}': {e}")

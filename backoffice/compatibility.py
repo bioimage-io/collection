@@ -1,5 +1,5 @@
 import warnings
-from typing import Any, Literal, Mapping, Optional, Sequence, Union, get_args
+from typing import Any, Literal, Mapping, Optional, Sequence, Union
 
 from annotated_types import Interval
 from packaging.version import Version
@@ -23,7 +23,7 @@ PARTNER_TOOL_NAMES = (
     "careamics",
 )
 TOOL_NAMES = ("bioimageio.spec", "bioimageio.core", *PARTNER_TOOL_NAMES)
-assert get_args(ToolName) == TOOL_NAMES
+
 ToolNameVersioned = str
 
 
@@ -180,10 +180,18 @@ class CompatibilityScores(Node):
         )
 
 
-class CompatibilitySummary(Node):
-    status: Literal["passed", "failed"]
+class InitialSummary(Node):
+    rdf_content: dict[str, Any]
+    """The RDF content of the original rdf.yaml file."""
+
+    rdf_yaml_sha256: str
+    """SHA-256 of the original RDF YAML file."""
+
+    status: Literal["passed", "failed", "untested"]
     """status of the bioimageio.core reproducibility tests."""
 
+
+class CompatibilitySummary(InitialSummary):
     scores: CompatibilityScores
     """Scores for compatibility with the bioimage.io community tools."""
 
