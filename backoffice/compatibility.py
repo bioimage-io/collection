@@ -48,10 +48,10 @@ class ToolCompatibilityReport(Node, extra="allow"):
     in the bioimageio collection for a version specific tool.
     """
 
-    tool: Annotated[ToolName, Field(exclude=True, pattern=r"^[^_]+_[^_]+$")]
+    tool: Annotated[ToolName, Field(exclude=True, pattern=r"^[a-zA-Z0-9-\.]+$")]
     """tool name"""
 
-    tool_version: Annotated[str, Field(exclude=True, pattern=r"^[^_]+_[^_]+$")]
+    tool_version: Annotated[str, Field(exclude=True, pattern=r"^[a-z0-9\.-]+$")]
     """tool version, ideally in SemVer 2.0 format"""
 
     @property

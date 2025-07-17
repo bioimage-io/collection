@@ -3,6 +3,7 @@ import warnings
 from concurrent.futures import Future, ThreadPoolExecutor, as_completed
 from typing import Any
 
+from loguru import logger
 from tqdm import tqdm
 
 from backoffice.compatibility import (
@@ -28,8 +29,6 @@ def summarize_reports():
         for item in index.items:
             for v in item.versions:
                 futures.append(executor.submit(_summarize, item, v))
-                break
-            break
 
         for _ in tqdm(as_completed(futures), total=len(futures)):
             pass
@@ -86,4 +85,12 @@ def _summarize(item: IndexItem, v: IndexItemVersion):
 
     _ = get_summary_file_path(item.id, v.version).write_text(
         summary.model_dump_json(indent=4), encoding="utf-8"
+    )
+    logger.info(
+        "summarized {} version {} with {} reports, status: {}, metadata completeness: {:.2f}",
+        item.id,
+        v.version,
+        len(reports),
+        status,
+        metadata_completeness,
     )

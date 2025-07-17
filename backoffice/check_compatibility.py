@@ -4,6 +4,8 @@ import warnings
 from pathlib import Path
 from typing import Callable
 
+from loguru import logger
+
 from backoffice.utils import get_tool_report_path
 
 try:
@@ -70,6 +72,7 @@ def check_tool_compatibility(
                 item["id"], version["version"], tool_name, tool_version
             )
             if report_path.exists():
+                logger.info("found existing report at {}", report_path)
                 continue
 
             try:

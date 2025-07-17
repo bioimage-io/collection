@@ -1,17 +1,29 @@
+import subprocess
 from argparse import ArgumentParser
+from typing import Sequence
 
 import bioimageio.core
 from bioimageio.core import test_description
 from bioimageio.spec.common import Sha256
+from loguru import logger
 
 from backoffice.check_compatibility import check_tool_compatibility
 from backoffice.compatibility import ToolCompatibilityReport
 from backoffice.utils import get_log_file
 
 
+def run_command(args: Sequence[str]):
+    logger.info("running '{}'...", " ".join(args))
+    _ = subprocess.run(args, shell=True, text=True, check=False)
+
+
 def check_compatibility_core_impl(item_id: str, version: str, source: str, sha256: str):
     core_summary = test_description(
-        source, sha256=Sha256(sha256), determinism="full", runtime_env="as-described"
+        source,
+        sha256=Sha256(sha256),
+        determinism="full",
+        runtime_env="as-described",
+        run_command=run_command,
     )
 
     log_file = get_log_file(item_id, version)
@@ -23,10 +35,26 @@ def check_compatibility_core_impl(item_id: str, version: str, source: str, sha25
         status=(
             "failed" if core_summary.status == "valid-format" else core_summary.status
         ),
-        score=(1.0 if core_summary.status == "passed" else 0.0),
-        details=core_summary.details,
-        links=["bioimageio/bioimageio.core"],
-        error=None if core_summary.status == "passed" else core_summary.format_html(),
+        score={"passed": 1.0, "valid-format": 0.5}.get(core_summary.status, 0.0),
+        details=core_summary.model_dump(mode="json"),
+        links=["bioimageio/bioimageio.core"] if core_summary.status == "passed" else [],
+        error=(
+            None
+            if core_summary.status == "passed"
+            else "\n\n".join(
+                error_msgs
+                if len(
+                    error_msgs := [
+                        de.msg
+                        for d in core_summary.details
+                        for de in d.errors
+                        if d.status == "failed"
+                    ]
+                )
+                <= 3
+                else error_msgs[:3] + ["..."]
+            )
+        ),
     )
 
 
