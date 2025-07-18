@@ -32,8 +32,8 @@ jobs:
           --logo https://bioimage.io/static/img/bioimage-io-logo.svg \
           --logo-link https://bioimage.io/ \
           --favicon https://bioimage.io/static/img/bioimage-io-icon-small.svg \
-          --footer-text 'bioimageio_collection_backoffice' \
-          -o ./docs bioimageio_collection_backoffice
+          --footer-text 'backoffice' \
+          -o ./docs backoffice
       - name: Deploy to gh-pages 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
