@@ -1,0 +1,90 @@
+name: check compatibility
+
+concurrency: check-compatibility
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/check_compatibility_biapy.yaml
+      - scripts/check_compatibility_biapy.py
+      - .github/workflows/check_compatibility_bioimageio_core.yaml
+      - scripts/check_compatibility_bioimageio_core.py
+      - .github/workflows/check_compatibility_careamics.yaml
+      - scripts/check_compatibility_careamics.py
+      - .github/workflows/check_compatibility_ilastik.yaml
+      - scripts/check_compatibility_ilastik.py
+  workflow_dispatch:
+  schedule:
+    - cron: 0 1 * * *  # update compatibility once a day
+
+jobs:
+  index:
+    runs-on: ubuntu-latest
+    environment: 'production'
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v5
+      with:
+        python-version: "3.12"
+        cache: "pip" # caching pip dependencies
+    - name: Install backoffice
+      run: pip install .
+    - run: backoffice index
+    - uses: actions/upload-artifact@v4
+      with:
+        name: index
+        path: index.json
+
+  check:
+    runs-on: ubuntu-latest
+    environment: 'production'
+    strategy:
+      fail-fast: false
+      matrix:
+        tool:
+        # - biapy
+        - bioimageio_core
+        # - careamics
+        # - ilastik
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/download-artifact@v4
+      with:
+        name: index
+        path: index.json
+    - uses: bioimage-io/collection/.github/workflows/check_compatibility_${{matrix.tool}}.yaml@main
+      with:
+        secrets: inherit
+    - run: ls reports
+    - run: ls reports/bioimage-io
+    # - name: Upload ${{matrix.tool}} reports
+    #   uses: actions/upload-artifact@v4
+    #   with:
+    #     name: reports-${{matrix.tool}}
+    #     path: reports
+
+
+  deploy:
+    needs: check
+    runs-on: ubuntu-latest
+    steps:
+    - name: Download reports
+      uses: actions/download-artifact@v4
+      with:
+        path: reports
+        pattern: reports-*
+        merge-multiple: true
+    - name: Deploy to gh-pages 🚀
+      if: ${{ github.ref == 'refs/heads/main' }}
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        folder: reports
+        target-folder: reports
+        # clean-exclude: |
+        #   backoffice
+        #   backoffice.html
+        #   index.html
+        #   search.json
+

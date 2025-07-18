@@ -3,16 +3,7 @@ name: check compatibility biapy
 concurrency: biapy
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - .github/workflows/check_compatibility_biapy.yaml
-      - scripts/check_compatibility_biapy.py
-  workflow_dispatch:
-  schedule:
-    - cron: 0 1 * * *  # update compatibility once a day
-
+  workflow_call:
 jobs:
   run:
     runs-on: ubuntu-latest
@@ -34,4 +25,8 @@ jobs:
     - run: python scripts/check_compatibility_biapy.py
       env:
         RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
-
+    - name: Upload biapy reports
+      uses: actions/upload-artifact@v4
+      with:
+        name: reports-biapy
+        path: reports

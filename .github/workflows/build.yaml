@@ -8,74 +8,6 @@ concurrency:
 
 
 jobs:
-  initial-cleanup:
-    environment: testing
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-          cache: "pip" # caching pip dependencies
-      - run: pip install .
-      - run: backoffice wipe
-        env:
-          S3_HOST: ${{vars.S3_HOST}}
-          S3_BUCKET: ${{vars.S3_BUCKET}}
-          S3_FOLDER: ${{vars.S3_FOLDER}}
-          S3_ACCESS_KEY_ID: ${{secrets.S3_ACCESS_KEY_ID}}
-          S3_SECRET_ACCESS_KEY: ${{secrets.S3_SECRET_ACCESS_KEY}}
-          RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
-          BIOIMAGEIO_USER_ID: github|${{github.actor_id}}
-
-
-  generate-initial-collection-json:
-    needs: initial-cleanup
-    uses: bioimage-io/collection/.github/workflows/generate_collection_json_call.yaml@main
-    with:
-      environment_name: testing
-    secrets: inherit
-
-  test-stage:
-    needs: generate-initial-collection-json
-    uses: bioimage-io/collection/.github/workflows/stage_call.yaml@main
-    with:
-      concept_id: 'frank-water-buffalo'
-      package_url: 'https://uk1s3.embassy.ebi.ac.uk/public-datasets/examples.bioimage.io/frank-water-buffalo_v1.zip'
-      environment_name: testing
-    secrets: inherit
-
-  test-publish:
-    needs: test-stage
-    uses: bioimage-io/collection/.github/workflows/publish_call.yaml@main
-    with:
-      concept_id: 'frank-water-buffalo'
-      reviewer: 'github|${{github.actor_id}}'
-      environment_name: testing
-    secrets: inherit
-
-  test-generate-collection-json:
-    needs: test-publish
-    uses: bioimage-io/collection/.github/workflows/generate_collection_json_call.yaml@main
-    with:
-      environment_name: testing
-    secrets: inherit
-
-  test-generate-collection-staged-json:
-    needs: test-publish
-    uses: bioimage-io/collection/.github/workflows/generate_collection_json_call.yaml@main
-    with:
-      mode: 'staged'
-      environment_name: testing
-    secrets: inherit
-
-  test-backup:
-    needs: test-generate-collection-json
-    uses: bioimage-io/collection/.github/workflows/backup_call.yaml@main
-    with:
-      environment_name: testing
-    secrets: inherit
-
   build:
     runs-on: ubuntu-latest
     environment: testing
@@ -90,14 +22,7 @@ jobs:
       - run: pyright -p pyproject.toml
       - run: pytest
         env:
-          S3_HOST: ${{vars.S3_HOST}}
-          S3_BUCKET: ${{vars.S3_BUCKET}}
-          S3_FOLDER: ${{vars.S3_FOLDER}}
-          S3_ACCESS_KEY_ID: ${{secrets.S3_ACCESS_KEY_ID}}
-          S3_SECRET_ACCESS_KEY: ${{secrets.S3_SECRET_ACCESS_KEY}}
           RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
-          ZENODO_URL: ${{vars.ZENODO_URL}}
-          ZENODO_API_ACCESS_TOKEN: ${{secrets.ZENODO_API_ACCESS_TOKEN}}
           BIOIMAGEIO_USER_ID: github|${{github.actor_id}}
       - name: export documentation
         run: |
@@ -114,3 +39,4 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: docs
+          clean-exclude: reports
