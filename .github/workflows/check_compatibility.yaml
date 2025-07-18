@@ -4,16 +4,15 @@ concurrency: check-compatibility
 
 on:
   push:
-    branches:
-      - main
     paths:
       - .github/workflows/check_compatibility_biapy.yaml
-      - scripts/check_compatibility_biapy.py
       - .github/workflows/check_compatibility_bioimageio_core.yaml
-      - scripts/check_compatibility_bioimageio_core.py
       - .github/workflows/check_compatibility_careamics.yaml
-      - scripts/check_compatibility_careamics.py
       - .github/workflows/check_compatibility_ilastik.yaml
+      - .github/workflows/check_compatibility.yaml
+      - scripts/check_compatibility_biapy.py
+      - scripts/check_compatibility_bioimageio_core.py
+      - scripts/check_compatibility_careamics.py
       - scripts/check_compatibility_ilastik.py
   workflow_dispatch:
   schedule:
@@ -77,10 +76,10 @@ jobs:
         pattern: reports-*
         merge-multiple: true
     - name: Deploy to gh-pages 🚀
-      if: ${{ github.ref == 'refs/heads/main' }}
       uses: JamesIves/github-pages-deploy-action@v4
       with:
         folder: reports
+        dry-run: ${{ github.ref == 'refs/heads/main' }}
         target-folder: reports
         # clean-exclude: |
         #   backoffice
