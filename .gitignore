@@ -1,5 +1,8 @@
 __pycache__/
 .env
 *.egg-info/
-docs/
 *.pyc
+docs/
+gh-pages/
+index.json
+reports/

@@ -77,7 +77,7 @@ def check_compatibility_ilastik_impl(
 
 
 def check_compatibility_ilastik(
-    ilastik_version: str, all_version_path: Path, output_folder: Path
+    ilastik_version: str, index_path: Path, output_folder: Path
 ):
     """preliminary ilastik check
 
@@ -88,7 +88,7 @@ def check_compatibility_ilastik(
     check_tool_compatibility(
         "ilastik",
         ilastik_version,
-        all_version_path=all_version_path,
+        index_path=index_path,
         output_folder=output_folder,
         check_tool_compatibility_impl=check_compatibility_ilastik_impl,
         applicable_types={"model"},
@@ -98,10 +98,10 @@ def check_compatibility_ilastik(
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     _ = parser.add_argument("ilastik_version")
-    _ = parser.add_argument("all_versions", type=Path)
+    _ = parser.add_argument("index_path", type=Path)
     _ = parser.add_argument("output_folder", type=Path)
 
     args = parser.parse_args()
     check_compatibility_ilastik(
-        args.ilastik_version, args.all_versions, args.output_folder
+        args.ilastik_version, args.index_path, args.output_folder
     )

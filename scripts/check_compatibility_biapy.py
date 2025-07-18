@@ -1,26 +1,25 @@
+from argparse import ArgumentParser
+
 import biapy
 from biapy.models import check_bmz_model_compatibility
-from loguru import logger
 
-from bioimageio_collection_backoffice.db_structure.compatibility import (
-    CompatibilityReport,
-)
-from bioimageio_collection_backoffice.remote_collection import Record, RemoteCollection
-from bioimageio_collection_backoffice.s3_client import Client
+from backoffice.check_compatibility import check_tool_compatibility
+from backoffice.compatibility import ToolCompatibilityReport
+from backoffice.utils import get_rdf_content_from_url
 
 
 def check_compatibility_biapy_impl(
-    record: Record,
-    tool: str,
+    item_id: str,
+    version: str,
+    source: str,
+    sha256: str,
 ):
-    report_path = record.get_compatibility_report_path(tool)
-    if list(record.client.ls(report_path)):
-        return
-
-    rdf = record.get_rdf()
+    rdf = get_rdf_content_from_url(source, sha256)
     if rdf.get("type") != "model":
-        return CompatibilityReport(
-            tool=tool,
+        return ToolCompatibilityReport(
+            tool="biapy",
+            tool_version=biapy.__version__,
+            score=0,
             error=None,
             status="not-applicable",
             details="only 'model' resources can be used in biapy.",
@@ -31,28 +30,31 @@ def check_compatibility_biapy_impl(
     status = "passed" if not error else "failed"
     if error:
         print(f"Reason why BiaPy is not compatible: {error_message}")
-    return CompatibilityReport(
-        tool=tool,
+
+    return ToolCompatibilityReport(
+        tool="biapy",
+        tool_version=biapy.__version__,
         status=status,
+        score=1.0 if status == "passed" else 0.0,
         details=error_message,
         links=["biapy/biapy"],
         error=error_message,
     )
 
 
-def check_compatibility_biapy():
-    collection = RemoteCollection(Client())
-    for record in collection.get_published_versions():
-        try:
-            report = check_compatibility_biapy_impl(
-                record, f"biapy_{biapy.__version__}"
-            )
-        except Exception as e:
-            logger.error(f"failed to check '{record.id}': {e}")
-        else:
-            if report is not None:
-                record.set_compatibility_report(report)
+def check_compatibility(id_startswith: str):
+    check_tool_compatibility(
+        tool_name="biapy",
+        tool_version=biapy.__version__,
+        check_tool_compatibility_impl=check_compatibility_biapy_impl,
+        applicable_types={"model"},
+        id_startswith=id_startswith,
+    )
 
 
 if __name__ == "__main__":
-    check_compatibility_biapy()
+    parser = ArgumentParser()
+    _ = parser.add_argument("--id-startswith", default="", help="Filter by ID prefix")
+    args = parser.parse_args()
+
+    check_compatibility(id_startswith=args.id_startswith)

@@ -4,7 +4,7 @@ preview = true
 
 [tool.pyright]
 exclude = ["**/__pycache__"]
-include = ["bioimageio_collection_backoffice", "tests"]
+include = ["backoffice", "tests"]
 pythonPlatform = "All"
 pythonVersion = "3.12"
 reportIncompatibleMethodOverride = true
