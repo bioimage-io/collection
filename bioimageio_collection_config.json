@@ -87,6 +87,14 @@
             "orcid": "0009-0000-8923-568X",
             "github_user": "IvanHCenalmor",
             "email": "ihidalgo@igc.gulbenkian.pt"
+        },
+        {
+            "id": "github|49943582",
+            "name": "Nils Mechtel",
+            "affiliation": "KTH",
+            "orcid": "0000-0002-1278-7125",
+            "github_user": "nilsmechtel",
+            "email": "nils.mech@gmail.com"
         }
     ],
     "collection_template": {
