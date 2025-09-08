@@ -1,0 +1,3053 @@
+{
+    "items": [
+        {
+            "id": "bioimage-io/affable-shark",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": "Updated rdf.yaml",
+                    "created_at": "2025-07-01T22:53:02Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/affable-shark/files/rdf.yaml?version=v0",
+                    "sha256": "b74944b4949591d3eaf231cf9ab259f91dec679863020178e6c3ddadd52a019c"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/impartial-shrimp",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:53:01Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/impartial-shrimp/files/rdf.yaml?version=v0",
+                    "sha256": "f10f95717f8f07667d7c413f75ffa380d6022b465211827b4063f6e5f4f6791e"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/hiding-blowfish",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:53:01Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/hiding-blowfish/files/rdf.yaml?version=v0",
+                    "sha256": "3536a5c862011f223633525a7a34c8af22d1e574999c61b74b38c7226e13851c"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/humorous-owl",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:53:01Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/humorous-owl/files/rdf.yaml?version=v0",
+                    "sha256": "36a045aae147e325bcea3926b794c1531ce885af2334e5da8a32879f8f236a11"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/hiding-tiger",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:59Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/hiding-tiger/files/rdf.yaml?version=v0",
+                    "sha256": "446a51c2e73e6d2bb60ab5b006a18a2a7733f5bc427024dc746d0758526b1002"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/chatty-frog",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:59Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/chatty-frog/files/rdf.yaml?version=v0",
+                    "sha256": "10fdcca4a8394d50787c4747da9a035d8367e8e72196b68415b27060be699feb"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/organized-badger",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:58Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/organized-badger/files/rdf.yaml?version=v0",
+                    "sha256": "92d3e622c34152bedda4016447a3e2b2bd683348a11e4a86aa600b40f1f2ee28"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/kind-seashell",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:58Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/kind-seashell/files/rdf.yaml?version=v0",
+                    "sha256": "9e8ce9f3ee32305b7f7485ef70a1044de96ab91563bb59e63b48065c64865c31"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/fearless-crab",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:57Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/fearless-crab/files/rdf.yaml?version=v0",
+                    "sha256": "3099ad17dc82d33e8eca644a69e99121b55c7ddb0061f79d5f61915553922fbc"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/discreet-rooster",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:55Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/discreet-rooster/files/rdf.yaml?version=v0",
+                    "sha256": "d3dcc8bcad48d8a19fdc71cb068c445c4bab3d0342a0a2d0d67470c8eac93268"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/loyal-parrot",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:55Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/loyal-parrot/files/rdf.yaml?version=v0",
+                    "sha256": "e183d352211d1e5e0923f31bd2e61326d149778ae2686d01ff9c6ae8315b4b5f"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/placid-llama",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:54Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/placid-llama/files/rdf.yaml?version=v0",
+                    "sha256": "95e0b2895b2bbef2c7d27377cb8bf236ca97d74ad567d32023d3490354e045c4"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/willing-hedgehog",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:53Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/willing-hedgehog/files/rdf.yaml?version=v0",
+                    "sha256": "01c1fcf711bea05a7e3377727e5a79cea357dcd4f9154938ce66148cccb738fd"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/non-judgemental-eagle",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:53Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/non-judgemental-eagle/files/rdf.yaml?version=v0",
+                    "sha256": "0f3f827b2acd435ab3f2c4bd9dabb111f42419452a04f8c975e7159016019034"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/creative-panda",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:50Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/creative-panda/files/rdf.yaml?version=v0",
+                    "sha256": "b1a572dc13d18f265db9242c340c1de98b3ed0c01f4faa8ae12d61fe7ec98ae1"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/conscientious-seashell",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:50Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/conscientious-seashell/files/rdf.yaml?version=v0",
+                    "sha256": "67537c702de64bb5772a1dbd7c700b48ebf5c66f86b7d1a869c856f1b5734cb0"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/powerful-chipmunk",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:51Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/powerful-chipmunk/files/rdf.yaml?version=v0",
+                    "sha256": "f1653cbb2d046eaca7ac70a6a51225cab3ade1f2e2c9842471c84f93b682ad47"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/shivering-raccoon",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:51Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/shivering-raccoon/files/rdf.yaml?version=v0",
+                    "sha256": "177760ab6db88e6e4e82bf793ee944583259b6eb34bcb2ea824e6294bf724fa7"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/powerful-fish",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:50Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/powerful-fish/files/rdf.yaml?version=v0",
+                    "sha256": "666a29b5754cdb4dee387ef664dee0b15e9448aa766285685a5b88b77e009e62"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/loyal-squid",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:47Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/loyal-squid/files/rdf.yaml?version=v0",
+                    "sha256": "05ced0c01083af088ec03ee9038538d11136c20b46c6d686c9d09ce002ef419f"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/wild-whale",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:46Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/rdf.yaml?version=v0",
+                    "sha256": "73bf9772ce1882b7406a6f40d55a42cf6e6bc44137e9a25db57c60d8b7e16dd7"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/pioneering-rhino",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:46Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/pioneering-rhino/files/rdf.yaml?version=v0",
+                    "sha256": "6bddc6e1c6f8687ec305bc4418c650dc8e476f51b011fef4efbb6b713e213ab8"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/straightforward-crocodile",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:46Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/straightforward-crocodile/files/rdf.yaml?version=v0",
+                    "sha256": "616e9e91e645c5c0b137cc011c17b2170420f28a9be0f170291a8cd84bd70fce"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/thoughtful-turtle",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:46Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/thoughtful-turtle/files/rdf.yaml?version=v0",
+                    "sha256": "b2ff75cc8d7926b5dfb4781411ed97d585f08f974c38151e53795f04c2fba665"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/laid-back-lobster",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:44Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/laid-back-lobster/files/rdf.yaml?version=v0",
+                    "sha256": "58107098a5d44c20854fe036cf7131116c2017fbf9968f1bfb7afab72a375940"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/passionate-t-rex",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:43Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/passionate-t-rex/files/rdf.yaml?version=v0",
+                    "sha256": "e8a5976a6dda10f860aeda169617d685d1a994623861d755c27be2cd904dcac1"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/independent-shrimp",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:42Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/independent-shrimp/files/rdf.yaml?version=v0",
+                    "sha256": "8253b9f4dd66c828eebe5691792dea303db8ef313fcc9ae11b3003c2d6596c1b"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/naked-microbe",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:42Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/naked-microbe/files/rdf.yaml?version=v0",
+                    "sha256": "accc1313e098694296ab786b3a2af25af1fde6d1cdeabd77bd97e3ad2ca14370"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/polite-pig",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:42Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/polite-pig/files/rdf.yaml?version=v0",
+                    "sha256": "35b36463461e32d72b302605b53eace35320f1b867c0ad274bde6a7fafa479f7"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/impartial-shark",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:40Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/impartial-shark/files/rdf.yaml?version=v0",
+                    "sha256": "d2cd5c9e1081ca4e99f160256ea7970c064bcec923171c59756127b4e78470d8"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/joyful-deer",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:38Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/joyful-deer/files/rdf.yaml?version=v0",
+                    "sha256": "09faf05e35240aa1552e5809ea4873cfb228417128bc5fca6e0a618fc45bb838"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/determined-chipmunk",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": "Updated rdf.yaml",
+                    "created_at": "2025-07-01T22:52:38Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/determined-chipmunk/files/rdf.yaml?version=v0",
+                    "sha256": "f91fe58506ae8645632252980fe920a89ade1c265fc44cb7e92808289bc70397"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/easy-going-sauropod",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:38Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/easy-going-sauropod/files/rdf.yaml?version=v0",
+                    "sha256": "b407dbe11a8caa0cbaa446cdbcbfc7039d9a0a94c93c604e552d2016c4ad71c7"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/nice-peacock",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:37Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/nice-peacock/files/rdf.yaml?version=v0",
+                    "sha256": "f8da317dc58c5f4db97518debbf99dc1c1dd80c9fc718a2e0007573c1a0b9d00"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/noisy-fish",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:36Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/noisy-fish/files/rdf.yaml?version=v0",
+                    "sha256": "f490c1d2b04f54c2f02ebedf64e1bb9cd7755544d173675230513ff6b9bc0a5e"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/organized-cricket",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:35Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/organized-cricket/files/rdf.yaml?version=v0",
+                    "sha256": "bf63c7d8e41069e112b67a975f96e02b0f3b342b062cd1a923cf7eb4e10109b4"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/noisy-hedgehog",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:34Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/noisy-hedgehog/files/rdf.yaml?version=v0",
+                    "sha256": "c285b50d42c09f0d207c018212f69ecfc23b50d12dcb935af6b88652701bc1f7"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/ambitious-ant",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:33Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/ambitious-ant/files/rdf.yaml?version=v0",
+                    "sha256": "2f6c631611406dffa5bbc4d8517dfb85a31286fab726b415fb0931562916bfd3"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/courteous-otter",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:32Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/courteous-otter/files/rdf.yaml?version=v0",
+                    "sha256": "bc2c71893bb340f3e860c094dbb4009b40af3212a03b75ec96988e28d6e66b7f"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/efficient-chipmunk",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:31Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/efficient-chipmunk/files/rdf.yaml?version=v0",
+                    "sha256": "fb9b3a873ca11240aed4e4c7a131fe42970135866a97a37c1cfbd4acdbe84c6c"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/assertive-hiking-boot",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:31Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/assertive-hiking-boot/files/rdf.yaml?version=v0",
+                    "sha256": "97fd73083875daa6b3218aa4fe24557702c5bc5584c0b1da7f4efc5926e8d5ae"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/amiable-crocodile",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:30Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/amiable-crocodile/files/rdf.yaml?version=v0",
+                    "sha256": "057619d45e82d117311cf0f2ead8b9ecba1fe4ce51412cced3f3b7e68ef06cc2"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/zingy-mango",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:30Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/zingy-mango/files/rdf.yaml?version=v0",
+                    "sha256": "ce2f1f85e2a1e9ae8f029b69b0d7b809f046387ad1996da862f3019398d76496"
+                }
+            ],
+            "type": "dataset"
+        },
+        {
+            "id": "bioimage-io/whimsical-helmet",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:29Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/whimsical-helmet/files/rdf.yaml?version=v0",
+                    "sha256": "ce83de059cd87a078313117fdf1ccaeb294c03beda85fa563bb6f8576695b40d"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/vibrant-scarf",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:27Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/vibrant-scarf/files/rdf.yaml?version=v0",
+                    "sha256": "6fe61a7a206262488844a0107917c44135096acf81aa5f214a1df12253758333"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/uplifting-backpack",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:27Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/uplifting-backpack/files/rdf.yaml?version=v0",
+                    "sha256": "5a4ec4f472d23cc3a09486bc7d6f612c4fb84622e437dec808b4d0294a70d593"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/tempting-pizza",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:27Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/tempting-pizza/files/rdf.yaml?version=v0",
+                    "sha256": "1850d7f56fcb7da70d9ca61eb2b1a1b22c90e132b5d1f86b110e972bb1028c48"
+                }
+            ],
+            "type": "dataset"
+        },
+        {
+            "id": "bioimage-io/velvety-paella",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:27Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/velvety-paella/files/rdf.yaml?version=v0",
+                    "sha256": "514b6ace47d120c9169631cdf6779059c1849ce6b87556ed03e9e16d9e1bd187"
+                }
+            ],
+            "type": "dataset"
+        },
+        {
+            "id": "bioimage-io/timeless-running-shirt",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:25Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/timeless-running-shirt/files/rdf.yaml?version=v0",
+                    "sha256": "d5dc820347276a7464d095576a01e915f911a9e549e5100ece800228fe9bbb81"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/tangible-pepper",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:24Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/tangible-pepper/files/rdf.yaml?version=v0",
+                    "sha256": "0bb183d4b2914c60a70ed6532542f247bb4d585db428e19674df39cc00ddbe0c"
+                }
+            ],
+            "type": "dataset"
+        },
+        {
+            "id": "bioimage-io/sweet-swimsuit",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:24Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/sweet-swimsuit/files/rdf.yaml?version=v0",
+                    "sha256": "f241b1bee25a7175e7f97babc93e91e5f2537a75ce40e064e2a26bef09f16f94"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/sweet-doughnut",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:22Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/sweet-doughnut/files/rdf.yaml?version=v0",
+                    "sha256": "a7bc6fab08397ae65fcc804f4f12615cdce2f21c836c1fc947381f48ff2c0206"
+                }
+            ],
+            "type": "dataset"
+        },
+        {
+            "id": "bioimage-io/sweet-pineapple",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:22Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/sweet-pineapple/files/rdf.yaml?version=v0",
+                    "sha256": "76dbacf6d71202ce86973fc819936562af5c6dd2c262407a05b7664d1c2b49a8"
+                }
+            ],
+            "type": "dataset"
+        },
+        {
+            "id": "bioimage-io/supple-safety-vest",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:22Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/supple-safety-vest/files/rdf.yaml?version=v0",
+                    "sha256": "731fe19ad1f3cb685cfb42437b9dc6d16d4c3cc3ab0bca6cd2f6ee707deb512f"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/striking-necktie",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:21Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/striking-necktie/files/rdf.yaml?version=v0",
+                    "sha256": "03d33e4c05bad206cd332624cf814ba92b0e5eb6a6c9e6939568baba836935fb"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/splendid-pie",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:21Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/splendid-pie/files/rdf.yaml?version=v0",
+                    "sha256": "9e973d646de6f55f07e8caf91cd9c97553d4173de98f5817cef306295c078c88"
+                }
+            ],
+            "type": "dataset"
+        },
+        {
+            "id": "bioimage-io/spicy-cucumber",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:18Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/spicy-cucumber/files/rdf.yaml?version=v0",
+                    "sha256": "e700080b0bf2d31a9295da4593e6aec93000da3dddeee9bd48f255d7bc1bcce7"
+                }
+            ],
+            "type": "dataset"
+        },
+        {
+            "id": "bioimage-io/sparkling-sari",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:18Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/sparkling-sari/files/rdf.yaml?version=v0",
+                    "sha256": "649c9330ef5fa93a435d8c71268d2a8a43a51fad70b3b0b7964645369359f1f8"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/smooth-scarf",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:18Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/smooth-scarf/files/rdf.yaml?version=v0",
+                    "sha256": "f7685f7d612a5d585e584182a6c9ec163f82ad863ae5b6d5667380837610b9cd"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/smooth-safety-vest",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:16Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/smooth-safety-vest/files/rdf.yaml?version=v0",
+                    "sha256": "bff3dbf17d045acf7d8cc2530a6a2452048a14d7868624c9a9f38e614033d927"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/smooth-hat",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:16Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/smooth-hat/files/rdf.yaml?version=v0",
+                    "sha256": "ae220173efd0d66fa3743fa485ae66f979144bdd4d0b7b271f9e4a2aff622089"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/smooth-graduation-hat",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:15Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/smooth-graduation-hat/files/rdf.yaml?version=v0",
+                    "sha256": "b9220baa0b49c68970e73cf9797598c47b14da835798a8699bf81f734f2ee12f"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/slinky-bikini",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:14Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/slinky-bikini/files/rdf.yaml?version=v0",
+                    "sha256": "8788618f8708cc3564326305cf5c012aff7830e72b595d5d198c384be4bcb8c0"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/silky-shorts",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:15Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/silky-shorts/files/rdf.yaml?version=v0",
+                    "sha256": "b5f98d2baa8887b1d369a4f04695cface00c49dbdf9aa7fde76a12b046d181ba"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/silken-briefs",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:12Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/silken-briefs/files/rdf.yaml?version=v0",
+                    "sha256": "63e0744a8141407a47b6799060bff97f367c94d64eb397a574ee2f87d57fcc3b"
+                }
+            ],
+            "type": "notebook"
+        },
+        {
+            "id": "bioimage-io/sharp-running-shirt",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:12Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/sharp-running-shirt/files/rdf.yaml?version=v0",
+                    "sha256": "8f0be892f17686378e6efe3a9b07af03299ec2e13f6b49d2696769f9466d5798"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/seamless-blouse",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:11Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/seamless-blouse/files/rdf.yaml?version=v0",
+                    "sha256": "a7635af535455e59fd8853d649fffeed0f8a4a418d8a5ac604ab49d021b18f98"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/rich-burrito",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:10Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/rich-burrito/files/rdf.yaml?version=v0",
+                    "sha256": "3aa2a01896998013037516b44efcbc98e7f1dffb5cd316929a1f93349d336943"
+                }
+            ],
+            "type": "dataset"
+        },
+        {
+            "id": "bioimage-io/rich-cheese",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:10Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/rich-cheese/files/rdf.yaml?version=v0",
+                    "sha256": "5d50a3b665fef3fb0afdf9887f9dd95c3b6ed8a1033326aae028ec5c68da9ff6"
+                }
+            ],
+            "type": "dataset"
+        },
+        {
+            "id": "bioimage-io/savory-cheese",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:08Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/savory-cheese/files/rdf.yaml?version=v0",
+                    "sha256": "5d9ac630ed735030a88370373f5d03a0cc34575b817f5396e39765528261bf6d"
+                }
+            ],
+            "type": "dataset"
+        },
+        {
+            "id": "bioimage-io/resplendent-ribbon",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:09Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/resplendent-ribbon/files/rdf.yaml?version=v0",
+                    "sha256": "0f6b72918b3a696e304f8cc490d666f8ddf14826d0d59080f228af907dec8ca5"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/resourceful-potato",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:07Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/resourceful-potato/files/rdf.yaml?version=v0",
+                    "sha256": "8ebd671d87d36cd921e25e93a80ab6356209d724b670f86fe2137afda1f1b38b"
+                }
+            ],
+            "type": "dataset"
+        },
+        {
+            "id": "bioimage-io/regal-ribbon",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:06Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/regal-ribbon/files/rdf.yaml?version=v0",
+                    "sha256": "f783d9fa45ccb58705cec90b6462070cc90e616befde4b35666eacd60793608c"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/rare-t-shirt",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:06Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/rare-t-shirt/files/rdf.yaml?version=v0",
+                    "sha256": "51d28900e001e571de04ee052e694bb559984882fcf8f919c41212d166a6367f"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/powerful-sandal",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:04Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/powerful-sandal/files/rdf.yaml?version=v0",
+                    "sha256": "40f7767ffdf1e1476b21471e202e9b7bb7877e1910680977a1d6668c0d93269f"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/polished-t-shirt",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:04Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/polished-t-shirt/files/rdf.yaml?version=v0",
+                    "sha256": "4029f3ae6404cac3fccc707f0a3a6e1158689943763dddeacbdeb90bd5bb1f76"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/piquant-burger",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:04Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/piquant-burger/files/rdf.yaml?version=v0",
+                    "sha256": "a681a485ff3fd302207ec1f2ae4de7af83e7710dde33bb0f5510da07e20c46c2"
+                }
+            ],
+            "type": "dataset"
+        },
+        {
+            "id": "bioimage-io/palatable-curry",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:03Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/palatable-curry/files/rdf.yaml?version=v0",
+                    "sha256": "a180ddf0e2733691d3fa709fccb3f446c65ae4d64f768116d7b425ffbebd4b51"
+                }
+            ],
+            "type": "dataset"
+        },
+        {
+            "id": "bioimage-io/nutty-knuckle",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:03Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/nutty-knuckle/files/rdf.yaml?version=v0",
+                    "sha256": "62e50d9ef9be8dcd27633de97d43a9acabec67729e39bf8b2166daa51c4d3604"
+                }
+            ],
+            "type": "dataset"
+        },
+        {
+            "id": "bioimage-io/nutty-burrito",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:01Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/nutty-burrito/files/rdf.yaml?version=v0",
+                    "sha256": "17416eee1e7c6fd270e47bd4ff6127869592afc3e5d9b6077660ffb675ae68b6"
+                }
+            ],
+            "type": "dataset"
+        },
+        {
+            "id": "bioimage-io/opalescent-ribbon",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:01Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/opalescent-ribbon/files/rdf.yaml?version=v0",
+                    "sha256": "b224a57fa20d31fb8ea6de7a14f0ad42854ef1d48c78c468607a001c152d0673"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/nourishing-baguette",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:52:00Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/nourishing-baguette/files/rdf.yaml?version=v0",
+                    "sha256": "d159f44db82a8c64421a42371020ac669c7eae79b3405da2667598952e4bd122"
+                }
+            ],
+            "type": "dataset"
+        },
+        {
+            "id": "bioimage-io/mesmerizing-shoe",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:59Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/mesmerizing-shoe/files/rdf.yaml?version=v0",
+                    "sha256": "09e7a2822e9a82c76fe12b1b4d916c8d025f1a21246bd960bc78b996ae5086e0"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/mellow-takeout",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:59Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/mellow-takeout/files/rdf.yaml?version=v0",
+                    "sha256": "c34869dd7348cab55dd2b2226c59ed0b67a732c6208759a7ee706e9801dcbe89"
+                }
+            ],
+            "type": "dataset"
+        },
+        {
+            "id": "bioimage-io/luxurious-blouse",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:58Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/luxurious-blouse/files/rdf.yaml?version=v0",
+                    "sha256": "581d0a2c49959b162e2613523e3a5dc73fc559253092f80649836f864ed849bb"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/mellow-broccoli",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:57Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/mellow-broccoli/files/rdf.yaml?version=v0",
+                    "sha256": "8eeb0d679044f68479cafd352c85eaeab4d487c5f445b60edf1940b092170a95"
+                }
+            ],
+            "type": "dataset"
+        },
+        {
+            "id": "bioimage-io/luscious-tomato",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:55Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/luscious-tomato/files/rdf.yaml?version=v0",
+                    "sha256": "23ebfca5bbbbc5d56435eaea2219785c14f496418a5f400d6af7845b4ed4cbd2"
+                }
+            ],
+            "type": "dataset"
+        },
+        {
+            "id": "bioimage-io/luscious-sushi",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:55Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/luscious-sushi/files/rdf.yaml?version=v0",
+                    "sha256": "06dccb7c9e2db885d01271a9d274cc41b714945a666a561ee450f52f27e86dbe"
+                }
+            ],
+            "type": "dataset"
+        },
+        {
+            "id": "bioimage-io/lively-t-shirt",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:55Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/lively-t-shirt/files/rdf.yaml?version=v0",
+                    "sha256": "90e6b927e004ce1d2a137a75c2c22bfbc72085cae624800c5ebac65211b10855"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/lovely-graduation-hat",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:54Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/lovely-graduation-hat/files/rdf.yaml?version=v0",
+                    "sha256": "8a19bbb8bf4894a19a85b608917ed64291bc6cce02aaccea280e0c718f0d30d0"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/limited-edition-crown",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:54Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/limited-edition-crown/files/rdf.yaml?version=v0",
+                    "sha256": "5f41b88c2e0476374acd448f7af803a751ead5025db98ef194e361047ca512ae"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/light-swimsuit",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:51Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/light-swimsuit/files/rdf.yaml?version=v0",
+                    "sha256": "0fdd737cc7bab60fa25e62a9564be5b41291b658c5401892d1685b17f38c597e"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/juicy-peanut",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:51Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/juicy-peanut/files/rdf.yaml?version=v0",
+                    "sha256": "3bbb8056237b73af0544e3e62d1c978d51493d05380de45a3d8d511113bb003e"
+                }
+            ],
+            "type": "dataset"
+        },
+        {
+            "id": "bioimage-io/irresistible-swimsuit",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:51Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/irresistible-swimsuit/files/rdf.yaml?version=v0",
+                    "sha256": "4756c06b6ce6b59c72ce303d06185ba2cb46076279d2b6fc28fd32fdc721b2ca"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/joyful-top-hat",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:51Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/joyful-top-hat/files/rdf.yaml?version=v0",
+                    "sha256": "c614e4b6c08aa684127d72e20f49f1da36cff6c0a0820ad40539a0fa793cf98c"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/indulgent-sandwich",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:51Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/indulgent-sandwich/files/rdf.yaml?version=v0",
+                    "sha256": "24ab380a582f0f2c7fd6bd5034de7f216ee5ec98ad45004ccd5d49d7dcceba58"
+                }
+            ],
+            "type": "dataset"
+        },
+        {
+            "id": "bioimage-io/inspiring-sandal",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:46Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/inspiring-sandal/files/rdf.yaml?version=v0",
+                    "sha256": "f2ef078ffa19e754410a31447115feb616bdc3ccacd9d6bd21aea17484565232"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/gourmet-bacon",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:47Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/gourmet-bacon/files/rdf.yaml?version=v0",
+                    "sha256": "ba2d3c5333edf5615b05fd01ff7fa288c54f8e68f8877b7c15bf71e21cd7ac6e"
+                }
+            ],
+            "type": "dataset"
+        },
+        {
+            "id": "bioimage-io/glorious-graduation-hat",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:45Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/glorious-graduation-hat/files/rdf.yaml?version=v0",
+                    "sha256": "d7343a89d239ce808dbf0057a89102e0e0614a2fb6fed1e882ee1eee8a9b11c6"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/fun-high-heels",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:45Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/fun-high-heels/files/rdf.yaml?version=v0",
+                    "sha256": "7c8f8b804e37ae45ca54a1b1560dab2922031f93fe30d5228c4854e07cdf87c7"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/fruity-sushi",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:44Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/fruity-sushi/files/rdf.yaml?version=v0",
+                    "sha256": "e127dd3f29cb82d7e533399da21f086e21a381d1125705bbcf9e90c26d55bf77"
+                }
+            ],
+            "type": "dataset"
+        },
+        {
+            "id": "bioimage-io/fragrant-baguette",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:42Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/fragrant-baguette/files/rdf.yaml?version=v0",
+                    "sha256": "d54a24f918f2be752a86cec9d969245cd41ae74559e66a216d19719d8d111bb1"
+                }
+            ],
+            "type": "dataset"
+        },
+        {
+            "id": "bioimage-io/fluid-glasses",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:42Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/fluid-glasses/files/rdf.yaml?version=v0",
+                    "sha256": "db14a55fe4232c14eab493969891df88910caa0602edee5a9e5326d2dadf18b2"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/fluffy-popcorn",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:42Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/fluffy-popcorn/files/rdf.yaml?version=v0",
+                    "sha256": "de68d06d177068e2021cbd4857fbaba9947d0181c13d53964158a230fece4079"
+                }
+            ],
+            "type": "dataset"
+        },
+        {
+            "id": "bioimage-io/flexible-sandal",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:42Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/flexible-sandal/files/rdf.yaml?version=v0",
+                    "sha256": "85e986c050bb7fbe7f7e4cfb537e41033c71523013d9e5a0fdb395e03869c09a"
+                }
+            ],
+            "type": "notebook"
+        },
+        {
+            "id": "bioimage-io/flexible-helmet",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:40Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/flexible-helmet/files/rdf.yaml?version=v0",
+                    "sha256": "27adffcb77bd7f62d87839871c0621656bf11a3ba43f63f3042409a02f9fe0ce"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/exquisite-curry",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:39Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/exquisite-curry/files/rdf.yaml?version=v0",
+                    "sha256": "a8cda402d3c3c4914ae0e992e9a54baf48337c14bf280f1683a1543f50aec6f9"
+                }
+            ],
+            "type": "dataset"
+        },
+        {
+            "id": "bioimage-io/flattering-bikini",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:38Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/flattering-bikini/files/rdf.yaml?version=v0",
+                    "sha256": "fb0f03d4f841b1d120b49e60d3f67b6dc6efbdf82691ca8cfc78cdf8a105e861"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/dramatic-dress",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:38Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/dramatic-dress/files/rdf.yaml?version=v0",
+                    "sha256": "5a61006087f023cd3e72a333a7de9c2936ec0d60d896d5124622e4c5b705435b"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/exciting-backpack",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:38Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/exciting-backpack/files/rdf.yaml?version=v0",
+                    "sha256": "1e25ce3e9389773df3b9d23b8bd133cf8b1482160eec2d8e8888f6aa6f3e681f"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/delectable-eggplant",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:36Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/delectable-eggplant/files/rdf.yaml?version=v0",
+                    "sha256": "3861de8358d5fb887669f6818a69e25f11a2d66433deb92a29920a0d81b86970"
+                }
+            ],
+            "type": "dataset"
+        },
+        {
+            "id": "bioimage-io/divine-paella",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:35Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/divine-paella/files/rdf.yaml?version=v0",
+                    "sha256": "27f1c177a7d526f8de841bf69be8992d6c48048851fce5cdc6679043fca86364"
+                }
+            ],
+            "type": "dataset"
+        },
+        {
+            "id": "bioimage-io/delicious-cheese",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:34Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/delicious-cheese/files/rdf.yaml?version=v0",
+                    "sha256": "8856fa05aa856491af76a76a3d035ca7607ffde36b5cb5cf7ba2f43f176aa27d"
+                }
+            ],
+            "type": "dataset"
+        },
+        {
+            "id": "bioimage-io/crunchy-cookie",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:34Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/crunchy-cookie/files/rdf.yaml?version=v0",
+                    "sha256": "f6d6abea6a931a5707e53cf595180e3ad477103d80b587274f589c2a8b15019e"
+                }
+            ],
+            "type": "dataset"
+        },
+        {
+            "id": "bioimage-io/cozy-hiking-boot",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:34Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/cozy-hiking-boot/files/rdf.yaml?version=v0",
+                    "sha256": "d8842886ac688d36e7dfba3b4a2d262a35d09499e86fc11f0fba86643302a069"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/convenient-t-shirt",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:33Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/convenient-t-shirt/files/rdf.yaml?version=v0",
+                    "sha256": "f5f6052b84f768a233f614b48555b25f1d19c4669a9bcf1fe06f0dd3846c2875"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/convenient-purse",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:31Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/convenient-purse/files/rdf.yaml?version=v0",
+                    "sha256": "eda2a07d8844f476533058410a13d0b9560975bf8828748d9d5d59fd7ed2c3e9"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/classy-googles",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:31Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/classy-googles/files/rdf.yaml?version=v0",
+                    "sha256": "de633adc59e6631e18fe0b9475a972dec5ea4238ea7303d1caa87b6200d7e2e7"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/comfortable-hiking-boot",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:31Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/comfortable-hiking-boot/files/rdf.yaml?version=v0",
+                    "sha256": "551a435c9743cfdabf7e5dede8da467a552491fe1f97bb0ad294811ab0f5143d"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/chewy-garlic",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:30Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/chewy-garlic/files/rdf.yaml?version=v0",
+                    "sha256": "821f035436ef78068e1db33c96e80dd81971c411308cd3566e0e66ba3b22e28e"
+                }
+            ],
+            "type": "dataset"
+        },
+        {
+            "id": "bioimage-io/cheerful-cap",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:29Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/cheerful-cap/files/rdf.yaml?version=v0",
+                    "sha256": "a509512c5ba1f337cf7fd563cf541810d0404bda7888a22c7c6ae085ceef5fa6"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/buttery-sandwich",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:27Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/buttery-sandwich/files/rdf.yaml?version=v0",
+                    "sha256": "51e01c89fce4d927bbcc3f85428a104bd7e3623510d0e2b978d79b9da16b9d68"
+                }
+            ],
+            "type": "dataset"
+        },
+        {
+            "id": "bioimage-io/buttery-apple",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:27Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/buttery-apple/files/rdf.yaml?version=v0",
+                    "sha256": "84ff59d5f8d782794f5a54b6f5ee52db993d6df792b395889638321bfedc5e19"
+                }
+            ],
+            "type": "dataset"
+        },
+        {
+            "id": "bioimage-io/brilliant-gloves",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:27Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/brilliant-gloves/files/rdf.yaml?version=v0",
+                    "sha256": "6483d604cce46e3d57ec774f330162533688ef358d9826e68bc01c925051f798"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/bountiful-moon-cake",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:26Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/bountiful-moon-cake/files/rdf.yaml?version=v0",
+                    "sha256": "fd85ae4a376b776892b49cb1852ae2a2e990e87f9cfa2887e5c89c8b53578426"
+                }
+            ],
+            "type": "dataset"
+        },
+        {
+            "id": "bioimage-io/brisk-scarf",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:25Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/brisk-scarf/files/rdf.yaml?version=v0",
+                    "sha256": "8f86940ab1f06887d35ff735f121129608b30b30359d547768f9802d8fa6d3b7"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/bold-shorts",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:24Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/bold-shorts/files/rdf.yaml?version=v0",
+                    "sha256": "51ad9e2bac6cda9f868b6f4889ea4ab2fb10baa77862987a71af5f74f903641d"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/bitter-hot-dog",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:23Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/bitter-hot-dog/files/rdf.yaml?version=v0",
+                    "sha256": "5f6ad7b5d102742a25daa870695406a71c6bd6db4db1fb9a4d01861701a42cf9"
+                }
+            ],
+            "type": "dataset"
+        },
+        {
+            "id": "bioimage-io/authoritative-ballet-shoes",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:23Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/authoritative-ballet-shoes/files/rdf.yaml?version=v0",
+                    "sha256": "02d13795f27f3be200b53880dcb3013542b3c588e624538f21466a5597e76d5d"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/appetizing-eggplant",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:23Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/appetizing-eggplant/files/rdf.yaml?version=v0",
+                    "sha256": "ec711d7b66cd6e8d9a6bf36a1a751bb9c3d0b4463d15cf2dcae6e15543080cb1"
+                }
+            ],
+            "type": "dataset"
+        },
+        {
+            "id": "bioimage-io/appetizing-peach",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:22Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/appetizing-peach/files/rdf.yaml?version=v0",
+                    "sha256": "43f5567a638d579a9e59d77dcb983a250f527bad794ff2d2c9fdf3e4ba978853"
+                }
+            ],
+            "type": "dataset"
+        },
+        {
+            "id": "bioimage-io/appealing-popcorn",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:20Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/appealing-popcorn/files/rdf.yaml?version=v0",
+                    "sha256": "74a3c6584bf6a5117fc4addc925bbb00883e5fcce4b236e9541552f6ac131822"
+                }
+            ],
+            "type": "dataset"
+        },
+        {
+            "id": "bioimage-io/adorable-blouse",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:19Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/adorable-blouse/files/rdf.yaml?version=v0",
+                    "sha256": "8930078ca776cc6525cf16f16471d9ef61d137d3803e8c3848208c9beb8b8fcd"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/emotional-cricket",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:19Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/emotional-cricket/files/rdf.yaml?version=v0",
+                    "sha256": "33865487253126a081074603648a693ab2d8a406080b77936876e4a242389d6c"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/ambitious-sloth",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:19Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/ambitious-sloth/files/rdf.yaml?version=v0",
+                    "sha256": "e150222be2811d5643ca63612eabb11b4a84f2cd6a5888000c7a892b67fb9842"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/charismatic-whale",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:18Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/charismatic-whale/files/rdf.yaml?version=v0",
+                    "sha256": "41f022f875ca20488b17726e80340d4526d3aa1c3dcd3ba8c7ff4460bf71fa86"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/wild-rhino",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:16Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/wild-rhino/files/rdf.yaml?version=v0",
+                    "sha256": "be43087d3acd6c41a78766155217ad33b58736e06df2a5e4fa50aef801072320"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/dazzling-spider",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:13Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/dazzling-spider/files/rdf.yaml?version=v0",
+                    "sha256": "f0f0263cf8c47af3b30f4f59a9d8377c781c151f92d19f7a112365ea95cfd0eb"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/humorous-fox",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:14Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/humorous-fox/files/rdf.yaml?version=v0",
+                    "sha256": "d036e9ee752bc73e1dd46b5655eee625cab481f90746bceea9212377dc3d64ad"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/dynamic-t-rex",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:13Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/dynamic-t-rex/files/rdf.yaml?version=v0",
+                    "sha256": "68de87babbafd64ed90115e139d92a59c36123f2d7f9b659f996d53b4bf3b854"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/famous-fish",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:13Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/famous-fish/files/rdf.yaml?version=v0",
+                    "sha256": "b80321c4ff9ebd223860d517d2587b2cd741fc1069cbe6d175b864896e87b2bd"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/happy-elephant",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:51:14Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/happy-elephant/files/rdf.yaml?version=v0",
+                    "sha256": "a1eee0ee3728039fe5774aaee67c753f4635a48f6f9fc1a4a0989d9b5fb213a9"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/idealistic-rat",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:43:16Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/idealistic-rat/files/rdf.yaml?version=v0",
+                    "sha256": "8991e2848fb216fe239ea85c70ef57f077414f532eb40f2fb67d53acba79a38d"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/faithful-chicken",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:43:16Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/faithful-chicken/files/rdf.yaml?version=v0",
+                    "sha256": "022b122f06f0b9c711da669c913cc5222dfe1d8a24fc07d6129150d194516846"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/humorous-crab",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:43:16Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/humorous-crab/files/rdf.yaml?version=v0",
+                    "sha256": "1a12b7fa7ea67612caae21b07794b6221b1c6e86396dd145d11b0309ca598b8a"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/noisy-ox",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:43:16Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/noisy-ox/files/rdf.yaml?version=v0",
+                    "sha256": "d0b6de1da50f37b993e9b006be9f60c712b932bf9930b339b8f4d0efacdd97b7"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/greedy-whale",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:43:15Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/greedy-whale/files/rdf.yaml?version=v0",
+                    "sha256": "f3fbc706c39c12bf6b5cbb1b843aca7b27cad21365abdbeacdfa8bb3b5458671"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/diplomatic-bug",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:43:13Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/diplomatic-bug/files/rdf.yaml?version=v0",
+                    "sha256": "d256744aab8d284cb23093f1be066e0be9f33f01b5f951144ee1f0d0df35dfe9"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/breezy-handbag",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:43:13Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/breezy-handbag/files/rdf.yaml?version=v0",
+                    "sha256": "534ff08b8a51453f2c2d101e45c8708e8d614a4f561862a4ea93bda483c0f58b"
+                }
+            ],
+            "type": "notebook"
+        },
+        {
+            "id": "bioimage-io/invigorating-lab-coat",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:43:12Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/invigorating-lab-coat/files/rdf.yaml?version=v0",
+                    "sha256": "fe6bdb96dccf24b647f6a4bc193dbf3b5d8b1e293ab595f235e74b42050dea1d"
+                }
+            ],
+            "type": "notebook"
+        },
+        {
+            "id": "bioimage-io/uplifting-ice-cream",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:43:12Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/uplifting-ice-cream/files/rdf.yaml?version=v0",
+                    "sha256": "ee2c697f505c6962b94e339db02bc5d9bb2f554563965185753192642fc6e3fe"
+                }
+            ],
+            "type": "dataset"
+        },
+        {
+            "id": "bioimage-io/stupendous-sheep",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:43:12Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/stupendous-sheep/files/rdf.yaml?version=v0",
+                    "sha256": "3bc528a1e74ed9e738c83f391b0d290b0f99d19c01d77f0509ab7aa0fc939854"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/pioneering-goat",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:43:09Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/pioneering-goat/files/rdf.yaml?version=v0",
+                    "sha256": "79dda8dcd3cf0ff38852a7a9b7cbbf4216f23587d370a22af6e533f3dcef7a98"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/greedy-shark",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:43:09Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/greedy-shark/files/rdf.yaml?version=v0",
+                    "sha256": "eeed0914bb8cc11a1e0b75d14e17f18889f6e0ca53a5ea2b787885837199c045"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/lucky-fox",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:43:08Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/lucky-fox/files/rdf.yaml?version=v0",
+                    "sha256": "d74a0e8a14ed4c1225f26cb868527dfa8c98705ec83e29bd19000ba2c518d378"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/frank-water-buffalo",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:43:08Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/frank-water-buffalo/files/rdf.yaml?version=v0",
+                    "sha256": "1251527a921cc7c087eee7603bea7badd830c1c1003224fd72bcd7621af56c1f"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/imjoy:vizarr",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:43:08Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/imjoy:vizarr/files/rdf.yaml?version=v0",
+                    "sha256": "48c63550b01b7ca1119c370ef9d04a114f35d59814738e1af34bee780ef639dd"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/imjoy:ImageJ.JS",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:43:05Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/imjoy:ImageJ.JS/files/rdf.yaml?version=v0",
+                    "sha256": "f0e663aabf0effccb3592f8385a07e7b658a86662e8cfff5bee0f5c801464709"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/imjoy:ImJoy",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:43:06Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/imjoy:ImJoy/files/rdf.yaml?version=v0",
+                    "sha256": "018a406e5f1c8377eaad0629ce64f511fbc28a590d7459c3148b410a3be36bcf"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/imjoy:HPA-Single-Cell",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:43:04Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/imjoy:HPA-Single-Cell/files/rdf.yaml?version=v0",
+                    "sha256": "0d45996bc0b1b20b22830fcda10ccd2fb80bb89aff9b53a7dca304a8dc408ecc"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/ilastik:mws-segmentation",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:43:04Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/ilastik:mws-segmentation/files/rdf.yaml?version=v0",
+                    "sha256": "d770214201fe28d0199a2797c0d1e70c6f321134b1868dd032c97092384a084e"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/imjoy:GenericBioEngineApp",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:43:04Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/imjoy:GenericBioEngineApp/files/rdf.yaml?version=v0",
+                    "sha256": "0978f482bf17f4dde1d4771795ac2e5c7cee68f2d8a3e7cfb71aeacb69f02f06"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/icy:icy",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:43:02Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/icy:icy/files/rdf.yaml?version=v0",
+                    "sha256": "7291727fd549ee27ace8d68f9ff1f74013279be4eda73fd63d0fb805ac66a2c9"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/hpa:HPA-Classification",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:43:02Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/hpa:HPA-Classification/files/rdf.yaml?version=v0",
+                    "sha256": "39742d75eede371052697f47f63e7bcb4840b7a07aefcee4ef18907aec09d3a7"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/fiji:Fiji",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:43:01Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/fiji:Fiji/files/rdf.yaml?version=v0",
+                    "sha256": "e6fa8acea535ff9de4d36fd62c215015434e73d2cf3263f92e612923a277150b"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/dl4miceverywhere:DL4MicEverywhere",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:43:01Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/dl4miceverywhere:DL4MicEverywhere/files/rdf.yaml?version=v0",
+                    "sha256": "d9ad30ed63aba6dec09b3722a7eabbe9494c08fccce0c09a2d4559b9fc3d3a56"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/deepimagej:smlm-deepimagej",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:43:01Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/deepimagej:smlm-deepimagej/files/rdf.yaml?version=v0",
+                    "sha256": "ffdd969f8c906ecb4ea640ccd94a04321e0daa89f762825b0f9d0380e5fe6f19"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/deepimagej:deepimagej",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:42:58Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/deepimagej:deepimagej/files/rdf.yaml?version=v0",
+                    "sha256": "e5a7057fbd84871728a10cc48fef1b0c07223c3136076a63148ecd69d4be2794"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/biapy:biapy",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:42:57Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/biapy:biapy/files/rdf.yaml?version=v0",
+                    "sha256": "d4918d7dc80401662a51fe26688f94c6cfaecef2d9a1a8d72f9e65255acfe372"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/ilastik:ilastik",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:42:59Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/ilastik:ilastik/files/rdf.yaml?version=v0",
+                    "sha256": "a5960e08e37254440f02352acfe5fa03f189ce2de3ce739304b901bc97b39dc9"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/philosophical-panda",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:42:55Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/philosophical-panda/files/rdf.yaml?version=v0",
+                    "sha256": "bbad75237ecf4f9d9f6259b13b97fc01b5cbeb4e3ea672e72826608d68197a32"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/self-disciplined-blowfish",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:42:54Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/self-disciplined-blowfish/files/rdf.yaml?version=v0",
+                    "sha256": "2fd95e20be75e454d9b90a89512560b2ad19cca2d464596093ff96733e8f5bdf"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/trustworthy-llama",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:42:54Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/trustworthy-llama/files/rdf.yaml?version=v0",
+                    "sha256": "2d75d89d23c0cfce6ed2bab89c4bf84d22ed8e29cbabf30e19661175c551f669"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/flavorful-sweet-potato",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:42:54Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/flavorful-sweet-potato/files/rdf.yaml?version=v0",
+                    "sha256": "53f5986eb5c1ac3e5d92639c0cc613ea8714ca7edec24be156bf2fbd2dbe01b1"
+                }
+            ],
+            "type": "dataset"
+        },
+        {
+            "id": "bioimage-io/divine-melon",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:42:53Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/divine-melon/files/rdf.yaml?version=v0",
+                    "sha256": "b8a7b8c05a9316a6616045d4045c05541cd7cd3ec8163eb4dcc1b83f5d66ccc0"
+                }
+            ],
+            "type": "dataset"
+        },
+        {
+            "id": "bioimage-io/imjoy:BioImageIO-Packager",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:42:51Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/imjoy:BioImageIO-Packager/files/rdf.yaml?version=v0",
+                    "sha256": "fa2c40f13cd3df1c872610f12b23ace8c0dd1cf8829970fb468ec6be1a562658"
+                }
+            ],
+            "type": "application"
+        },
+        {
+            "id": "bioimage-io/exquisite-salad",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:42:39Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/exquisite-salad/files/rdf.yaml?version=v0",
+                    "sha256": "f0d80aec9de17f5babe51605c171e5e3082893c0c45a651af56b556281fbe8d6"
+                }
+            ],
+            "type": "dataset"
+        },
+        {
+            "id": "bioimage-io/sublime-pizza",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:42:38Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/sublime-pizza/files/rdf.yaml?version=v0",
+                    "sha256": "fe4726116c9987177f7610a8af158a25c8c07995f1ba8049ca98ed9906831f66"
+                }
+            ],
+            "type": "dataset"
+        },
+        {
+            "id": "bioimage-io/good-butterfly",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:42:30Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/good-butterfly/files/rdf.yaml?version=v0",
+                    "sha256": "2a76747049906960ca4efae49d591d9a735f703411c78b9885d06c89433acb84"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/zealous-snail",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:42:31Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/zealous-snail/files/rdf.yaml?version=v0",
+                    "sha256": "b66dd2ed497ab976c1c8ea5c6bde9e30894166535e1f08f46d8394bfb06e7fa6"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/exuberant-parrot",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:42:28Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/exuberant-parrot/files/rdf.yaml?version=v0",
+                    "sha256": "9c4b03bbe45967c05f543fe3a44dc4938c9bc56ae08fcaafc2199624d3107625"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/resourceful-otter",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:42:28Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/resourceful-otter/files/rdf.yaml?version=v0",
+                    "sha256": "7e2bbfc88a931f041a0b04d8d89e48b03eaf198bbdc6a4cd61b3c149f34da003"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/merry-gorilla",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:42:27Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/merry-gorilla/files/rdf.yaml?version=v0",
+                    "sha256": "a477d6b81379f2c966f59bf4fc48ad0dc29a1a89ad1a5ec20f3bd25fccc41c7a"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/stupendous-blowfish",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:42:25Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/stupendous-blowfish/files/rdf.yaml?version=v0",
+                    "sha256": "77ed7b01fdae4bd61edb456de8d285f345cb751f40fffcbcdace3d11d6245bd7"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/gorgeous-whale",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:42:25Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/gorgeous-whale/files/rdf.yaml?version=v0",
+                    "sha256": "9b20a62bc14584a9aa5b195666ac57630030e2cd96d5918ac3a3333380c8dfcc"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/thoughtful-chipmunk",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:42:24Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/thoughtful-chipmunk/files/rdf.yaml?version=v0",
+                    "sha256": "ddd7feeb17bae375b6cc73f54e8ceb612a877fe3de2165529a39942a93c81416"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/self-disciplined-honeybee",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:42:24Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/self-disciplined-honeybee/files/rdf.yaml?version=v0",
+                    "sha256": "7de37a57a5d1a2c4557d3e7fe51c32eaadf424f2f8cab0e2a32f1c648f502f7b"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/wild-pig",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:42:22Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/wild-pig/files/rdf.yaml?version=v0",
+                    "sha256": "379a197b15d08e85b48d381a0685916b06c48766497073e839313ba510603706"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/frank-boar",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:42:21Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/frank-boar/files/rdf.yaml?version=v0",
+                    "sha256": "f927e14a6070a03c0e5059a651a7ed1ba695b245f1d3d8dda0dd5b40be8451a4"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/serious-lobster",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:42:21Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/serious-lobster/files/rdf.yaml?version=v0",
+                    "sha256": "8ea50841fed967defa0fbb91b0f9b60e946d121d24bcb9c9b6c273d86537c681"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/artistic-eagle",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:42:20Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/artistic-eagle/files/rdf.yaml?version=v0",
+                    "sha256": "4e1b1c337931d80bce64ee3060ae4ce51dee35f94bd381587043ad4b6f473c95"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/modest-cow",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:42:20Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/modest-cow/files/rdf.yaml?version=v0",
+                    "sha256": "dc26f456e9f3bdcdb49bcb2dfdfdf44820c34afff533849f1c96bd661239010c"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/educated-water-buffalo",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:42:19Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/educated-water-buffalo/files/rdf.yaml?version=v0",
+                    "sha256": "4fb8442bad04ac333a4aec8002633da5add816336aa98abaaad2483729cfed61"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/committed-octopus",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:42:17Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/committed-octopus/files/rdf.yaml?version=v0",
+                    "sha256": "2d9e3e24ec48384183a9c15cb1a646212c59d05128e8a9defd93d41a64cf95af"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/idealistic-water-buffalo",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:42:18Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/idealistic-water-buffalo/files/rdf.yaml?version=v0",
+                    "sha256": "d8a6bf884a15d0b02dfccf0c863d5c91ec485b7d8dcd480ecec4ee3ada1a2dd4"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/chatty-cat",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": "Deleted resunet++.py",
+                    "created_at": "2025-07-01T22:42:17Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/chatty-cat/files/rdf.yaml?version=v0",
+                    "sha256": "2d4a24995bd9932f4375a8a5b1705c4874434895de49e65311268f32ef27bfde"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/youthful-eagle",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:42:18Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/youthful-eagle/files/rdf.yaml?version=v0",
+                    "sha256": "f83076a9259b86d076f84f2641974a50c7f29f54a55e692cf444755d89b66b62"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/calm-otter",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:42:15Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/calm-otter/files/rdf.yaml?version=v0",
+                    "sha256": "51e9d5ac8e741a6e7c0807cfb5ae43b529d0c28efd658ecd3c4f9b66962766da"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/ambitious-kangaroo",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:42:13Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/ambitious-kangaroo/files/rdf.yaml?version=v0",
+                    "sha256": "fe0ad999818bd59207976d5b9085b6c99164e0536d7860cefd15aedfa50da5c9"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/unassuming-shark",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:42:12Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/unassuming-shark/files/rdf.yaml?version=v0",
+                    "sha256": "5e4ea14b6aba287e823e21a574860132a5652b2a594fdb3640e53e6d141d4d2a"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/poisonous-spider",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": "Updated environment.yaml",
+                    "created_at": "2025-07-01T22:42:12Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/poisonous-spider/files/rdf.yaml?version=v0",
+                    "sha256": "b37ca461cdc5f695a82e10cfa5bae24069e2dbffbc4ad65b75e72d322f4ca188"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/jolly-duck",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:42:12Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/jolly-duck/files/rdf.yaml?version=v0",
+                    "sha256": "ed59c3dbe2fb37f004f7a33b052489415c640651f7e5767195583e52d45ce069"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/demanding-dromedary",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:42:12Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/demanding-dromedary/files/rdf.yaml?version=v0",
+                    "sha256": "0f337f151bfc230b4d8ec1628496619e211310d3ecb1aec64d60cf7ecf4d5fe0"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/gleeful-skunk",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:42:10Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/gleeful-skunk/files/rdf.yaml?version=v0",
+                    "sha256": "1cc7f5d3c189b0970903a6a21f6302cd7bad02da74bdaed7094d6479c221aaee"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/rebellious-mouse",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:42:07Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/rebellious-mouse/files/rdf.yaml?version=v0",
+                    "sha256": "8cdd5c01ebd9026646aa6d65f7afd9ef9ea263d9da18fddfda901a2a8f8b5dc1"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/zealous-spider",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:42:07Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/zealous-spider/files/rdf.yaml?version=v0",
+                    "sha256": "e45405a908af55b6daf72c037ffd564aa1951c518388ff350e689d7517e14150"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/sensible-cat",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:42:07Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/sensible-cat/files/rdf.yaml?version=v0",
+                    "sha256": "778b6e21feed588dd18acdbcfeba9a431ac0b13f361b4dedb7f9abf5b8b761e8"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/fearless-deer",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:42:07Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/fearless-deer/files/rdf.yaml?version=v0",
+                    "sha256": "65262091784e2b8b2a6a0cf35166c5142fa7f8d1196f9beabd2211eb04acff6e"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/good-microbe",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:42:07Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/good-microbe/files/rdf.yaml?version=v0",
+                    "sha256": "bad93a0ad8cda151bb8ef02166221dcc79e8265d7bf206a583e7205d878922ad"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/territorial-cricket",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:42:04Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/territorial-cricket/files/rdf.yaml?version=v0",
+                    "sha256": "cdb8de9324b647a42bd53fd42fe91c2f598ed2278fffd46df0376b75ed2bfb59"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/conscientious-dromedary",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:42:04Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/conscientious-dromedary/files/rdf.yaml?version=v0",
+                    "sha256": "850b33ff757339b2373240a853a1c190e5adc906d23300105271d09875fed34e"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/bitter-cookie",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:42:03Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/bitter-cookie/files/rdf.yaml?version=v0",
+                    "sha256": "ec8e26885e38bdbc84a559473fa788b3a59571fdcbbd80d9e5418690005c05fe"
+                }
+            ],
+            "type": "dataset"
+        },
+        {
+            "id": "bioimage-io/serious-turtle",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:42:03Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/serious-turtle/files/rdf.yaml?version=v0",
+                    "sha256": "9d7df2b21f06ec6ae40be783dc82657878c332c0ae414baeb7791afa99b98c3c"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/clean-squid",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:42:03Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/clean-squid/files/rdf.yaml?version=v0",
+                    "sha256": "0cc3c85c5eb62442a85e83d8a2c5183b4bd02683c982d7259f5dcefb37d479a6"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/vengeful-zebra",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:42:00Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/vengeful-zebra/files/rdf.yaml?version=v0",
+                    "sha256": "5eb7faf428b01ff57b8a4ec223b00a2709193403884ff35e205741bbe04eb27a"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/merry-water-buffalo",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:42:00Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/merry-water-buffalo/files/rdf.yaml?version=v0",
+                    "sha256": "d4d242f410ba468a9749456d9fa25ddeeb45580dbb5c19428a53fa6851910c34"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/venomous-swan",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:41:59Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/venomous-swan/files/rdf.yaml?version=v0",
+                    "sha256": "ff3d200a65fed9cb2ddaf4dda7dbc832625800afc811ce9ea3517ac2801b1951"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/funny-butterfly",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": "Updated rdf.yaml",
+                    "created_at": "2025-07-01T22:41:59Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/funny-butterfly/files/rdf.yaml?version=v0",
+                    "sha256": "a7776c910c7b3710a185736ca07f0707c0581b9b56bd7806903f067239c288e5"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/willing-whale",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:41:59Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/willing-whale/files/rdf.yaml?version=v0",
+                    "sha256": "308ac950478c9dd7859d8ed315c66018256eab96a85eb772cd0d21f2914537ed"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/plucky-koala",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:41:56Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/plucky-koala/files/rdf.yaml?version=v0",
+                    "sha256": "aec07eb6ae07036ef04bf65f9f15befb9982f33c502439ed0cd1726500349e94"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/jolly-ox",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:41:55Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/jolly-ox/files/rdf.yaml?version=v0",
+                    "sha256": "316c23611c80e0be88ea8757adf95a733ca3406064df96826f45e8b1c2e73d3b"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/shy-lobster",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:41:56Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/shy-lobster/files/rdf.yaml?version=v0",
+                    "sha256": "77d95ae7bba359e102cb5fa235e6fb330bccdbb64ac9d561f8fb501db9477110"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/educated-goat",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:41:55Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/educated-goat/files/rdf.yaml?version=v0",
+                    "sha256": "a5137c2d7d5f50569c80a06eb635648c5c2c4b2e6a997a85f8fc9708498ea456"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/happy-honeybee",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:41:55Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/happy-honeybee/files/rdf.yaml?version=v0",
+                    "sha256": "f35416f4ac2681eaa0c69f7f1efe28e3155b882e526955895ba5366b6da52dd0"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/intelligent-lion",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:41:52Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/intelligent-lion/files/rdf.yaml?version=v0",
+                    "sha256": "de01723bcce206a71f071727d8cb6bac949c949f629acec2577971dde0dec364"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/idealistic-turtle",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:41:52Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/idealistic-turtle/files/rdf.yaml?version=v0",
+                    "sha256": "d29b6dc78e13adbb45b033302ed6ca81a48fbf327389c39621389fa0540fe25d"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/heroic-otter",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:41:52Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/heroic-otter/files/rdf.yaml?version=v0",
+                    "sha256": "6e3123b63ac6ca641320be34ad6b730eb79810f285ac4c5fa51bc5b8d830dfc8"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/sincere-microbe",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:41:52Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/sincere-microbe/files/rdf.yaml?version=v0",
+                    "sha256": "b5e166d2c52d805f87e40a91f756888d7c1553114cf7f732f5cfd51f6d7d1c41"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/sympathetic-mosquito",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:41:50Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/sympathetic-mosquito/files/rdf.yaml?version=v0",
+                    "sha256": "22e836fb343ebd750b5b314b1aa31bd0f0d75ab69f025c8bca6d167800ce2439"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/patient-swan",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:41:48Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/patient-swan/files/rdf.yaml?version=v0",
+                    "sha256": "b7842a5ece717b2e236c215916f948e049df6f14a5c64dd1a9ebd4c0876b3405"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/modest-spider",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:41:48Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/modest-spider/files/rdf.yaml?version=v0",
+                    "sha256": "722f81b48455e78efb923d40ffbe9bf8483d898e9cd86b0c88220ffb80495940"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/loving-monkey",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:41:48Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/loving-monkey/files/rdf.yaml?version=v0",
+                    "sha256": "2fc5131c1ca7ea295d87058895a69814f8ea077b39c99746acaddc102819c000"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/efficient-raccoon",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:41:47Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/efficient-raccoon/files/rdf.yaml?version=v0",
+                    "sha256": "43da59420fff8c7b0dc394a70663bf2801a0db9a16a4a7a653b9c522f81629a1"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/zestful-bug",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": null,
+                    "created_at": "2025-07-01T22:41:47Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/zestful-bug/files/rdf.yaml?version=v0",
+                    "sha256": "cc350c427d8c5529ddd6ba63da07f8932b9f8a43eb037c400885e2c432e9950f"
+                }
+            ],
+            "type": "model"
+        }
+    ],
+    "total": 234,
+    "count_per_type": {
+        "model": 119,
+        "application": 65,
+        "dataset": 46,
+        "notebook": 4
+    }
+}
