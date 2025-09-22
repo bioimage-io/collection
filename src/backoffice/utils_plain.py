@@ -3,6 +3,8 @@ import os
 from pathlib import Path
 from typing import Any, Optional
 
+import httpx
+
 try:
     import dotenv
 except ImportError:
@@ -68,8 +70,6 @@ def cached_download(url: str, sha256: str) -> Path:
     local_path = Path("cache") / sha256
     if not local_path.exists():
         local_path.parent.mkdir(parents=True, exist_ok=True)
-        import httpx
-
         response = httpx.get(url).raise_for_status()
         with local_path.open("wb") as f:
             _ = f.write(response.content)
@@ -81,3 +81,30 @@ def get_rdf_content_from_id(item_id: str, version: str) -> dict[str, Any]:
     """Get the RDF file content of a specific item version."""
     with get_summary_file_path(item_id, version).open() as f:
         return json.load(f)["rdf_content"]
+
+
+def raise_for_status_discretely(response: httpx.Response):
+    """Raises :class:`httpx.HTTPError` for 4xx or 5xx responses,
+    **but** hides any query and userinfo from url to avoid leaking sensitive data.
+    """
+
+    http_error_msg = ""
+    reason = response.reason_phrase
+
+    discrete_url = response.url.copy_with(
+        query=(b"***query*hidden***" if response.url.query else b""),
+        userinfo=(b"***userinfo*hidden***" if response.url.userinfo else b""),
+    )
+
+    if 400 <= response.status_code < 500:
+        http_error_msg = (
+            f"{response.status_code} Client Error: {reason} for url: {discrete_url}"
+        )
+
+    elif 500 <= response.status_code < 600:
+        http_error_msg = (
+            f"{response.status_code} Server Error: {reason} for url: {discrete_url}"
+        )
+
+    if http_error_msg:
+        raise httpx.HTTPError(http_error_msg)
