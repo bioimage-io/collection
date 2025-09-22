@@ -1,7 +1,7 @@
 from pathlib import Path
-from typing import Sequence
+from typing import Annotated, Sequence
 
-from pydantic import SecretStr
+from pydantic import Field, HttpUrl, SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -18,6 +18,11 @@ class Settings(BaseSettings, extra="ignore"):
             "Authorization": f"Bearer {self.hypha_api_token.get_secret_value()}",
             "Content-Type": "application/json",
         }
+
+    collection_config: Annotated[HttpUrl | Path, Field(union_mode="left_to_right")] = (
+        Path(__file__).parent / "../../bioimageio_collection_config.json"
+    )
+    """collection config"""
 
 
 settings = Settings()  # pyright: ignore[reportCallIssue]

@@ -54,5 +54,5 @@ testpaths = ["tests"]
 
 [project.urls]
 "Bug Reports" = "https://github.com/bioimage-io/collection/issues"
-Documentation = "https://bioimage-io.github.io/collection/bioimageio_collection_backoffice.html"
+Documentation = "https://bioimage-io.github.io/collection/backoffice.html"
 Source = "https://github.com/bioimage-io/collection"
