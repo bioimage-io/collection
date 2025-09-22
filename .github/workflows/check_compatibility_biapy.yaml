@@ -3,16 +3,7 @@ name: check compatibility biapy
 concurrency: biapy
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - .github/workflows/check_compatibility_biapy.yaml
-      - scripts/check_compatibility_biapy.py
-  workflow_dispatch:
-  schedule:
-    - cron: 0 1 * * *  # update compatibility once a day
-
+  workflow_call:
 jobs:
   run:
     runs-on: ubuntu-latest
@@ -33,10 +24,9 @@ jobs:
       run: pip install .
     - run: python scripts/check_compatibility_biapy.py
       env:
-        S3_HOST: ${{vars.S3_HOST}}
-        S3_BUCKET: ${{vars.S3_BUCKET}}
-        S3_FOLDER: ${{vars.S3_FOLDER}}
-        S3_ACCESS_KEY_ID: ${{secrets.S3_ACCESS_KEY_ID}}
-        S3_SECRET_ACCESS_KEY: ${{secrets.S3_SECRET_ACCESS_KEY}}
         RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
-
+    - name: Upload biapy reports
+      uses: actions/upload-artifact@v4
+      with:
+        name: reports-biapy
+        path: reports
