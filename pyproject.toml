@@ -25,6 +25,9 @@ classifiers = [
 ]
 dynamic = ["version"]
 
+[tool.setuptools.dynamic]
+version = { attr = "backoffice._version.VERSION" }
+
 [project.optional-dependencies]
 dev = ["ruff", "pdoc", "pre-commit", "pyright", "respx", "pytest"]
 
