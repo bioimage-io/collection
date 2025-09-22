@@ -18,7 +18,7 @@ jobs:
           python-version: "3.12"
           cache: "pip" # caching pip dependencies
       - run: pip install -e .[dev]
-      - run: black . --check
+      - run: ruff check
       - run: pyright -p pyproject.toml
       # - run: pytest
       #   env:

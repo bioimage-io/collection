@@ -8,8 +8,7 @@
 
 [![ilastik compatibility](https://github.com/bioimage-io/collection/actions/workflows/check_compatibility_ilastik.yaml/badge.svg)](https://github.com/bioimage-io/collection/actions/workflows/check_compatibility_ilastik.yaml)
 
-![code style](https://img.shields.io/badge/code%20style-black-000000.svg)
-
+[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 
 # collection
 
@@ -124,10 +123,12 @@ Reviewers can:
 [zenodo-overview]: https://zenodo.org/search?q=metadata.subjects.subject%3A%22backup.bioimage.io%22&l=list&p=1&s=10&sort=bestmatch
 
 # Add community partner
+
 To link yourself as a community partner, please create a PR to insert relevant metadata into [bioimageio_collection_config.json](https://github.com/bioimage-io/collection/blob/4087336ad00bff0198f5de83c94aa13be357840d/bioimageio_collection_config.json) under `"partners"`.
 Checkout [ilastik partner entry](https://github.com/bioimage-io/collection/blob/4087336ad00bff0198f5de83c94aa13be357840d/bioimageio_collection_config.json#L283-L301) for an example.
 
 ## Add community partner compatibility checks
+
 Any community partner is invited to add a GitHub Actions workflow in this repo (please make a PR) that generates reports on its software compatibility with new and updated resources in the bioimage.io collection.
 See [ilastik compatibility checks workflow](https://github.com/bioimage-io/collection/blob/main/.github/workflows/check_compatibility_ilastik.yaml) for an example.
 
