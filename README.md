@@ -1,6 +1,5 @@
 [![internal tests & docs](https://github.com/bioimage-io/collection/actions/workflows/build.yaml/badge.svg)](https://github.com/bioimage-io/collection/actions/workflows/build.yaml)
 [![collection overview](https://github.com/bioimage-io/collection/actions/workflows/generate_collection_json.yaml/badge.svg)](https://github.com/bioimage-io/collection/actions/workflows/generate_collection_json.yaml)
-[![backup status](https://github.com/bioimage-io/collection/actions/workflows/backup.yaml/badge.svg)](https://github.com/bioimage-io/collection/actions/workflows/backup.yaml)
 
 [![last resource staging](https://github.com/bioimage-io/collection/actions/workflows/stage.yaml/badge.svg)](https://github.com/bioimage-io/collection/actions/workflows/stage.yaml)
 [![last resource testing](https://github.com/bioimage-io/collection/actions/workflows/test.yaml/badge.svg)](https://github.com/bioimage-io/collection/actions/workflows/test.yaml)
@@ -36,6 +35,8 @@ Current reviewers are listed in [`bioimageio_collection_config.json`][review-con
 
 ### Adding a bioimage.io resource
 
+TODO: This section needs to be updated!
+
 A bioimage.io resource is created by a user uploading a _resource package_.
 Such a _resource package_ could e.g. be a newly uploaded _model package_, or _notebook package_.
 Typically, uploaders would go via [bioimage.io/upload][upload].
@@ -60,6 +61,8 @@ graph TD;
 
 #### Staging
 
+TODO: This section needs to be updated!
+
 If the _resource package_ was uploaded via the bioimage.io website, the staging of the new resource draft is initiated automatically by the uploader service.
 Otherwise, given a download URL to a _resource package_, the `stage` workflow needs to be [dispatched manually, or via github api][staging-wf] ("run workflow")[^1].
 
@@ -67,6 +70,8 @@ Staging unpacks the files from the zipped resource package to our public S3.
 Once unpacked, the staged _resource draft_ is automatically tested (the [test workflow][test-wf] is dispatched automatically at the end of the stage workflow).
 
 #### Testing
+
+TODO: This section needs to be updated!
 
 Staged resource drafts are automatically tested:
 
@@ -83,6 +88,8 @@ An overview of all pending _resource drafts_ can be found at <https://bioimageio
 A _draft_ is identified by its concept id (`id` from the `rdf.yaml`).
 
 #### Review
+
+TODO: This section needs to be updated!
 
 Reviewers should check the models for technical correctness (aided by CI, see [Testing section](#testing)) and contents/metadata of the resource.
 
