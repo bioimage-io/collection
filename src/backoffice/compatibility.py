@@ -13,7 +13,7 @@ PartnerToolName = Literal[
     "biapy",
     "careamics",
 ]
-ToolName = Literal["bioimageio.spec", "bioimageio.core", *PartnerToolName]
+ToolName = Literal["bioimageio.spec", "bioimageio.core", PartnerToolName]
 
 PARTNER_TOOL_NAMES = (
     "ilastik",
