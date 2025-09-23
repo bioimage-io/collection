@@ -20,21 +20,8 @@ on:
 
 jobs:
   index:
-    runs-on: ubuntu-latest
-    environment: 'production'
-    steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-python@v5
-      with:
-        python-version: "3.12"
-        cache: "pip" # caching pip dependencies
-    - name: Install backoffice
-      run: pip install .
-    - run: backoffice index
-    - uses: actions/upload-artifact@v4
-      with:
-        name: index
-        path: index.json
+    uses: ./.github/workflows/index.yaml
+    secrets: inherit
 
   check:
     runs-on: ubuntu-latest
@@ -49,10 +36,7 @@ jobs:
         # - ilastik
     steps:
     - uses: actions/checkout@v4
-    - uses: actions/download-artifact@v4
-      with:
-        name: index
-        path: index.json
+    - uses: ./.github/actions/cache_index.yaml
     - uses: bioimage-io/collection/.github/workflows/check_compatibility_${{matrix.tool}}.yaml@main
       with:
         secrets: inherit
@@ -65,25 +49,20 @@ jobs:
     #     path: reports
 
 
-  deploy:
-    needs: check
-    runs-on: ubuntu-latest
-    steps:
-    - name: Download reports
-      uses: actions/download-artifact@v4
-      with:
-        path: reports
-        pattern: reports-*
-        merge-multiple: true
-    - name: Deploy to gh-pages 🚀
-      uses: JamesIves/github-pages-deploy-action@v4
-      with:
-        folder: reports
-        dry-run: ${{ github.ref == 'refs/heads/main' }}
-        target-folder: reports
-        # clean-exclude: |
-        #   backoffice
-        #   backoffice.html
-        #   index.html
-        #   search.json
-
+  # deploy:
+  #   needs: check
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - name: Download reports
+  #     uses: actions/download-artifact@v4
+  #     with:
+  #       path: reports
+  #       pattern: reports-*
+  #       merge-multiple: true
+  #   - name: Deploy to gh-pages 🚀
+  #     uses: JamesIves/github-pages-deploy-action@v4
+  #     with:
+  #       folder: reports
+  #       dry-run: ${{ github.ref != 'refs/heads/main' }}
+  #       target-folder: reports
+  #       clean: false
