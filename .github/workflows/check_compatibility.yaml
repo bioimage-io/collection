@@ -3,26 +3,11 @@ name: check compatibility
 concurrency: check-compatibility
 
 on:
-  push:
-    paths:
-      - .github/workflows/check_compatibility_biapy.yaml
-      - .github/workflows/check_compatibility_bioimageio_core.yaml
-      - .github/workflows/check_compatibility_careamics.yaml
-      - .github/workflows/check_compatibility_ilastik.yaml
-      - .github/workflows/check_compatibility.yaml
-      - scripts/check_compatibility_biapy.py
-      - scripts/check_compatibility_bioimageio_core.py
-      - scripts/check_compatibility_careamics.py
-      - scripts/check_compatibility_ilastik.py
-  workflow_dispatch:
-  schedule:
-    - cron: 0 1 * * *  # update compatibility once a day
+  workflow_run:
+    workflows:
+      - 'index'
 
 jobs:
-  index:
-    uses: ./.github/workflows/index.yaml
-    secrets: inherit
-
   check:
     runs-on: ubuntu-latest
     environment: 'production'

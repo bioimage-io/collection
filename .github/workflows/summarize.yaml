@@ -6,10 +6,6 @@ on:
   workflow_run:
     workflows:
       - 'check compatibility'
-      - 'check compatibility biapy'
-      - 'check compatibility bioimageio_core'
-      - 'check compatibility careamics'
-      - 'check compatibility ilastik'
     types: [completed]
     branches: [main]
 
