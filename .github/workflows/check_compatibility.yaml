@@ -4,8 +4,8 @@ concurrency: check-compatibility
 
 on:
   workflow_run:
-    workflows:
-      - 'index'
+    types: [completed]
+    workflows: ['index']
 
 jobs:
 
