@@ -53,6 +53,9 @@ jobs:
     - name: test published versions with ilastik ${{ matrix.v }}
       shell: bash -l {0}
       run: python scripts/check_compatibility_ilastik.py ${{ matrix.v }} index.json generated-reports
+      env:
+        RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
+        HYPHA_API_TOKEN: ${{secrets.HYPHA_API_TOKEN}}
     - uses: actions/upload-artifact@v4
       with:
         name: reports-ilastik-${{ matrix.v }}
