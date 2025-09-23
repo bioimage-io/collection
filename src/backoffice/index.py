@@ -175,8 +175,8 @@ def _initialize_report_directory(
                 existing_sha256,
                 sha256,
             )
-
-        shutil.rmtree(report_path)
+        if report_path.exists():
+            shutil.rmtree(report_path)
 
     report_path.mkdir(parents=True, exist_ok=True)
     summary = InitialSummary(
