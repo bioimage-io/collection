@@ -20,6 +20,7 @@ jobs:
     - run: python scripts/check_compatibility_bioimageio_core.py
       env:
         RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
+        HYPHA_API_TOKEN: ${{secrets.HYPHA_API_TOKEN}}
     # - name: Upload bioimageio_core reports
     #   uses: actions/upload-artifact@v4
     #   with:

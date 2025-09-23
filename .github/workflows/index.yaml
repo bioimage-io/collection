@@ -26,6 +26,7 @@ concurrency: index
 jobs:
   run:
     runs-on: ubuntu-latest
+    environment: 'production'
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -36,6 +37,7 @@ jobs:
       - run: backoffice index
         env:
           RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
+          HYPHA_API_TOKEN: ${{secrets.HYPHA_API_TOKEN}}
       - name: Deploy to gh-pages 🚀
         if: ${{ github.ref == 'refs/heads/main' }}
         uses: JamesIves/github-pages-deploy-action@v4

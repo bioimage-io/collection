@@ -23,6 +23,7 @@ jobs:
         env:
           RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
           BIOIMAGEIO_USER_ID: github|${{github.actor_id}}
+          HYPHA_API_TOKEN: ${{secrets.HYPHA_API_TOKEN}}
       - name: export documentation
         run: |
           pdoc \
