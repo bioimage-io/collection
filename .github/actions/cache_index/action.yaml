@@ -1,6 +1,11 @@
 name: 'Cache Index'
 description: 'cache the index.json file'
 
+inputs:
+  HYPHA_API_TOKEN:
+    description: 'hypha API token'
+    required: true
+
 outputs:
   index-key:
     description: 'The cache key'
@@ -34,7 +39,7 @@ runs:
       run: backoffice index
       env:
         RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
-        HYPHA_API_TOKEN: ${{secrets.HYPHA_API_TOKEN}}
+        HYPHA_API_TOKEN: ${{inputs.HYPHA_API_TOKEN}}
       shell: bash
     - if: steps.cache.outputs.cache-hit != 'true'
       name: Deploy to gh-pages 🚀
