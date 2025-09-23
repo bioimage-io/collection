@@ -32,6 +32,9 @@ runs:
       shell: bash
     - if: steps.cache.outputs.cache-hit != 'true'
       run: backoffice index
+      env:
+        RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
+        HYPHA_API_TOKEN: ${{secrets.HYPHA_API_TOKEN}}
       shell: bash
     - if: steps.cache.outputs.cache-hit != 'true'
       name: Deploy to gh-pages 🚀
