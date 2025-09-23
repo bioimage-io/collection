@@ -1,0 +1,143 @@
+{
+    "rdf_content": {
+        "authors": [
+            {
+                "affiliation": "EMBL",
+                "name": "Adrian Wolny"
+            },
+            {
+                "affiliation": "Heidelberg University",
+                "name": "Lorenzo Cerrone"
+            }
+        ],
+        "cite": [
+            {
+                "text": "Wolny, Cerrone et al. Accurate and Versatile 3D Segmentation of Plant Tissues at Cellular Resolution. eLife 2020.",
+                "url": "https://elifesciences.org/articles/57613"
+            }
+        ],
+        "config": {
+            "bioimageio": {
+                "nickname": "passionate-t-rex",
+                "nickname_icon": "🦖",
+                "thumbnails": {
+                    "ilastik_pred.png": "ilastik_pred.thumbnail.png",
+                    "ilastik_raw.png": "ilastik_raw.thumbnail.png",
+                    "ilastik_sneak.png": "ilastik_sneak.thumbnail.png"
+                }
+            }
+        },
+        "covers": [
+            "ilastik_raw.png",
+            "ilastik_sneak.png",
+            "ilastik_pred.png"
+        ],
+        "description": "A 3d U-Net trained to predict the cell boundaries in confocal stacks of Arabidopsis ovules. Voxel size: (0.235, 0.150, 0.150) microns ZYX",
+        "documentation": "doc.md",
+        "format_version": "0.4.10",
+        "id": "10.5281/zenodo.6334583/7805434",
+        "id_emoji": "🦖",
+        "inputs": [
+            {
+                "axes": "bczyx",
+                "data_range": [
+                    null,
+                    null
+                ],
+                "data_type": "float32",
+                "name": "input0",
+                "shape": [
+                    1,
+                    1,
+                    100,
+                    128,
+                    128
+                ]
+            }
+        ],
+        "license": "MIT",
+        "links": [
+            "imjoy/BioImageIO-Packager",
+            "ilastik/ilastik"
+        ],
+        "maintainers": [
+            {
+                "github_user": "wolny",
+                "name": "Adrian Wolny"
+            }
+        ],
+        "name": "3D UNet Arabidopsis Ovules",
+        "outputs": [
+            {
+                "axes": "bczyx",
+                "data_range": [
+                    null,
+                    null
+                ],
+                "data_type": "float32",
+                "name": "output0",
+                "shape": [
+                    1,
+                    1,
+                    100,
+                    128,
+                    128
+                ]
+            }
+        ],
+        "tags": [
+            "3d",
+            "torchscript",
+            "ilastik",
+            "unet",
+            "plant",
+            "plantseg",
+            "cell-membrane",
+            "ovules",
+            "tissue",
+            "semantic-segmentation",
+            "arabidopsis",
+            "deepimagej",
+            "pytorch",
+            "fluorescence-light-microscopy",
+            "ilastik"
+        ],
+        "test_inputs": [
+            "test_input.npy"
+        ],
+        "test_outputs": [
+            "test_output.npy"
+        ],
+        "timestamp": "2023-04-06T12:43:33.436336",
+        "type": "model",
+        "uploader": {
+            "email": "bioimageiobot@gmail.com"
+        },
+        "version": 1,
+        "version_number": 1,
+        "weights": {
+            "pytorch_state_dict": {
+                "architecture": "unet.py:UNet3D",
+                "architecture_sha256": "2da9f7149e144b63fee715fb8fe5154e96bf9aa230d176c91e923d528ef0c4e1",
+                "kwargs": {
+                    "f_maps": 32,
+                    "final_sigmoid": true,
+                    "in_channels": 1,
+                    "is_segmentation": true,
+                    "layer_order": "gcr",
+                    "num_groups": 8,
+                    "out_channels": 1
+                },
+                "sha256": "0f11cbd0608d12ef161892586408c6ec1a074f1f27ea6afef9d1ceece3dd3c1f",
+                "source": "unet3d-arabidopsis-ovules-confocal-ds2x.pytorch"
+            },
+            "torchscript": {
+                "pytorch_version": "2.0.0",
+                "sha256": "09be0d33ca00fb8137cca507a69f5e95719a159ada0d709286ae9dc183093aaf",
+                "source": "torchscript_tracing.pt"
+            }
+        }
+    },
+    "rdf_yaml_sha256": "e8a5976a6dda10f860aeda169617d685d1a994623861d755c27be2cd904dcac1",
+    "status": "untested"
+}

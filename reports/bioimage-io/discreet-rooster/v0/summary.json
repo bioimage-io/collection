@@ -1,0 +1,242 @@
+{
+    "rdf_content": {
+        "attachments": {
+            "files": [
+                "U_Net_PhC_C2DL_PSC_segmentation.ipynb",
+                "resultImage.tiff",
+                "exampleImage.tiff",
+                "binarize.ijm",
+                "per_sample_scale_range.ijm"
+            ]
+        },
+        "authors": [
+            {
+                "affiliation": "Ikerbasque EHU UPV",
+                "name": "Ignacio Arganda Carreras"
+            },
+            {
+                "affiliation": "EPFL, UC3M",
+                "name": "DeepImageJ"
+            }
+        ],
+        "cite": [
+            {
+                "doi": "10.1038/s41592-021-01262-9",
+                "text": "Gómez-de-Mariscal E. et al., Nature Methods 2021"
+            },
+            {
+                "doi": "10.1038/nmeth.4473",
+                "text": "Ulman V. et al., Nature Methods 2017"
+            },
+            {
+                "doi": "10.1007/978-3-319-24574-4_28",
+                "text": "Ronneberger O. et al., MICCAI 2015"
+            }
+        ],
+        "config": {
+            "bioimageio": {
+                "nickname": "discreet-rooster",
+                "nickname_icon": "🐓",
+                "thumbnails": {
+                    "exampleImage.png": "exampleImage.thumbnail.png",
+                    "resultImage.png": "resultImage.thumbnail.png"
+                }
+            },
+            "deepimagej": {
+                "allow_tiling": true,
+                "model_keys": {
+                    "tensorflow_model_tag": "tf.saved_model.tag_constants.SERVING",
+                    "tensorflow_siganture_def": "tf.saved_model.signature_constants.DEFAULT_SERVING_SIGNATURE_DEF_KEY"
+                },
+                "prediction": {
+                    "postprocess": [
+                        {
+                            "kwargs": "binarize.ijm",
+                            "spec": "ij.IJ::runMacroFile"
+                        }
+                    ],
+                    "preprocess": [
+                        {
+                            "kwargs": "per_sample_scale_range.ijm",
+                            "spec": "ij.IJ::runMacroFile"
+                        }
+                    ]
+                },
+                "pyramidal_model": false,
+                "test_information": {
+                    "inputs": [
+                        {
+                            "name": "exampleImage.tiff",
+                            "pixel_size": {
+                                "x": "1,60E-04 cm",
+                                "y": "60E-04 cm",
+                                "z": "1.0 pixel"
+                            },
+                            "size": "720 x 576 x 1 x 1"
+                        }
+                    ],
+                    "memory_peak": "328.1 Mb",
+                    "outputs": [
+                        {
+                            "name": "resultImage.tiff",
+                            "size": "720 x 576 x 1 x 1",
+                            "type": "image"
+                        }
+                    ],
+                    "runtime": "2.8 s"
+                }
+            }
+        },
+        "covers": [
+            "exampleImage.png",
+            "resultImage.png"
+        ],
+        "description": "DeepImageJ compatible U-Net trained to segment phase contrast microscopy images of pancreatic stem cells on a 2D polystyrene substrate.",
+        "documentation": "README.md",
+        "format_version": "0.4.10",
+        "id": "10.5281/zenodo.5914248/8186255",
+        "id_emoji": "🐓",
+        "inputs": [
+            {
+                "axes": "byxc",
+                "data_range": [
+                    null,
+                    null
+                ],
+                "data_type": "float32",
+                "name": "input",
+                "preprocessing": [
+                    {
+                        "kwargs": {
+                            "axes": "xy",
+                            "max_percentile": 100,
+                            "min_percentile": 0,
+                            "mode": "per_sample"
+                        },
+                        "name": "scale_range"
+                    }
+                ],
+                "shape": {
+                    "min": [
+                        1,
+                        96,
+                        96,
+                        1
+                    ],
+                    "step": [
+                        0,
+                        8,
+                        8,
+                        0
+                    ]
+                }
+            }
+        ],
+        "license": "BSD-2-Clause",
+        "links": [
+            "imjoy/BioImageIO-Packager",
+            "deepimagej/deepimagej",
+            "ilastik/ilastik",
+            "deepimagej/unet-pancreaticcellsegmentation",
+            "imjoy/BioImageIO-Packager"
+        ],
+        "maintainers": [
+            {
+                "github_user": "esgomezm",
+                "name": "Estibaliz"
+            },
+            {
+                "github_user": "cfusterbarcelo",
+                "name": "Caterina"
+            }
+        ],
+        "name": "Pancreatic Phase Contrast Cell Segmentation (U-Net)",
+        "outputs": [
+            {
+                "axes": "byxc",
+                "data_range": [
+                    0.0,
+                    1.0
+                ],
+                "data_type": "float32",
+                "halo": [
+                    0,
+                    47,
+                    47,
+                    0
+                ],
+                "name": "output",
+                "postprocessing": [
+                    {
+                        "kwargs": {
+                            "threshold": 0.5
+                        },
+                        "name": "binarize"
+                    }
+                ],
+                "shape": {
+                    "offset": [
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "reference_tensor": "input",
+                    "scale": [
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0
+                    ]
+                }
+            }
+        ],
+        "sample_inputs": [
+            "exampleImage.tiff"
+        ],
+        "sample_outputs": [
+            "resultImage.tiff"
+        ],
+        "tags": [
+            "deepimagej",
+            "pancreatic-stem-cells",
+            "segmentation",
+            "phase-contrast",
+            "unet",
+            "neubias",
+            "cell-tracking-challenge",
+            "transmission-light-microscopy",
+            "2d",
+            "cells",
+            "semantic-segmentation",
+            "tensorflow"
+        ],
+        "test_inputs": [
+            "exampleImage.npy"
+        ],
+        "test_outputs": [
+            "resultImage.npy"
+        ],
+        "timestamp": "2023-07-26T10:47:44.642355",
+        "type": "model",
+        "uploader": {
+            "email": "bioimageiobot@gmail.com"
+        },
+        "version": 1,
+        "version_number": 1,
+        "weights": {
+            "keras_hdf5": {
+                "sha256": "4f9f5dd9bbb0eb71eae15928abe24dcbba951c525373f862d19f33ce52d035e4",
+                "source": "keras_model.h5",
+                "tensorflow_version": "1.15"
+            },
+            "tensorflow_saved_model_bundle": {
+                "sha256": "9edc07090be3522a6c9f169f5509e33ad036889093b37505885e1913862a0a38",
+                "source": "tensorflow_saved_model_bundle.zip",
+                "tensorflow_version": "1.15"
+            }
+        }
+    },
+    "rdf_yaml_sha256": "d3dcc8bcad48d8a19fdc71cb068c445c4bab3d0342a0a2d0d67470c8eac93268",
+    "status": "untested"
+}

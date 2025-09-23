@@ -1,0 +1,189 @@
+{
+    "rdf_content": {
+        "authors": [
+            {
+                "affiliation": "Human Technopole",
+                "email": null,
+                "github_user": null,
+                "name": "Vera Galinova"
+            },
+            {
+                "affiliation": null,
+                "email": null,
+                "github_user": null,
+                "name": "Madeline Lovejoy"
+            },
+            {
+                "affiliation": null,
+                "email": null,
+                "github_user": null,
+                "name": "Rafael Garcia-Mata"
+            }
+        ],
+        "cite": [
+            {
+                "doi": "10.1038/s41592-020-01018-x",
+                "text": "Stringer, C., Wang, T., Michaelos, M., & Pachitariu, M. (2021). Cellpose: a generalist algorithm for cellular segmentation. Nature methods, 18(1), 100-106.",
+                "url": null
+            },
+            {
+                "doi": "10.1038/s41592-022-01663-4",
+                "text": "Pachitariu, M. & Stringer, C. (2022). Cellpose 2.0: how to train your own model. Nature methods, 1-8.",
+                "url": null
+            }
+        ],
+        "config": {
+            "bioimageio": {
+                "thumbnails": {
+                    "cover.png": "cover.thumbnail.png"
+                }
+            }
+        },
+        "covers": [
+            "cover.png"
+        ],
+        "description": "Segmentation of Epithelial Cells",
+        "documentation": "doc.md",
+        "format_version": "0.5.3",
+        "git_repo": "https://github.com/ai4life-opencalls/oc-1-project-11",
+        "id": "happy-elephant",
+        "id_emoji": "🐘",
+        "inputs": [
+            {
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "channel_names": [
+                            "channel"
+                        ],
+                        "type": "channel"
+                    },
+                    {
+                        "id": "y",
+                        "size": 1024,
+                        "type": "space"
+                    },
+                    {
+                        "id": "x",
+                        "size": 1024,
+                        "type": "space"
+                    }
+                ],
+                "id": "input",
+                "test_tensor": {
+                    "sha256": "d1a48732323edf3c8c129c4f34a330f445c3364e92807e398750fc3fd701e430",
+                    "source": "input_sample.npy"
+                }
+            }
+        ],
+        "license": "CC-BY-NC-4.0",
+        "links": [
+            "https://github.com/mouseland/cellpose"
+        ],
+        "maintainers": [],
+        "name": "OC1 Project 11 Cellpose",
+        "outputs": [
+            {
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "id": "y",
+                        "size": 1024,
+                        "type": "space"
+                    },
+                    {
+                        "id": "x",
+                        "size": 1024,
+                        "type": "space"
+                    }
+                ],
+                "id": "masks",
+                "test_tensor": {
+                    "sha256": "e2f68b4c525a3ccb8a96db190841039c73bd322a84de6c4ed1662ba967371ec0",
+                    "source": "output1_sample_masks.npy"
+                }
+            },
+            {
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "channel_names": [
+                            "ch_0",
+                            "ch_1",
+                            "ch_2",
+                            "ch_3",
+                            "ch_4",
+                            "ch_5",
+                            "ch_6",
+                            "ch_7"
+                        ],
+                        "type": "channel"
+                    },
+                    {
+                        "id": "y",
+                        "size": 1024,
+                        "type": "space"
+                    },
+                    {
+                        "id": "x",
+                        "size": 1024,
+                        "type": "space"
+                    }
+                ],
+                "id": "flows",
+                "test_tensor": {
+                    "sha256": "6412c1689d2b551c89690f86efd56f4c6ed2dbb3dc5514c23c8fabb3d5ff7c30",
+                    "source": "output2_sample_flows.npy"
+                }
+            }
+        ],
+        "tags": [
+            "nuclei segmentation",
+            "epithelial cells",
+            "fluorescence microscopy",
+            "cell-segmentation",
+            "cellpose",
+            "2D"
+        ],
+        "type": "model",
+        "uploader": {
+            "email": "mehdiseifi@gmail.com",
+            "name": "Mehdi Seifi"
+        },
+        "version": "0.1.0",
+        "weights": {
+            "pytorch_state_dict": {
+                "architecture": {
+                    "callable": "CellPoseWrapper",
+                    "kwargs": {
+                        "batch_size": 8,
+                        "channels": [
+                            0,
+                            0
+                        ],
+                        "diameter": null,
+                        "do_3D": false,
+                        "flow_threshold": 0.4
+                    },
+                    "sha256": "97132b5aeb9590bcc996e1166d2a0c7b3c42dfc2f2ce5f67995b1eb81af493e8",
+                    "source": "model.py"
+                },
+                "dependencies": {
+                    "sha256": "9e4ca19803b67b0b7cc8c2412f31cc923492b15888a262517eaa485569191773",
+                    "source": "env.yml"
+                },
+                "pytorch_version": "2.4.0",
+                "sha256": "02b82974f25f670215bbfba32409e02941e90bf4852e3fcea6a0a8e75edc3936",
+                "source": "model_weights.pth"
+            }
+        }
+    },
+    "rdf_yaml_sha256": "a1eee0ee3728039fe5774aaee67c753f4635a48f6f9fc1a4a0989d9b5fb213a9",
+    "status": "untested"
+}

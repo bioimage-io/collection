@@ -1,0 +1,95 @@
+{
+    "rdf_content": {
+        "authors": [
+            {
+                "name": "Jay Kaimal"
+            },
+            {
+                "name": "Peter Thul"
+            },
+            {
+                "name": "Hao Xu"
+            },
+            {
+                "name": "Wei Ouyang"
+            },
+            {
+                "name": "Emma Lundberg"
+            }
+        ],
+        "cite": [
+            {
+                "doi": "10.5281/zenodo.4665863",
+                "text": "Kaimal et al."
+            }
+        ],
+        "config": {
+            "about_url": "https://www.proteinatlas.org/",
+            "background_image": "static/img/zoo-background.svg",
+            "bioimageio": {
+                "nickname": "tangible-pepper",
+                "nickname_icon": "🌶️",
+                "status": "accepted",
+                "version_id": "latest",
+                "version_name": "latest"
+            },
+            "contact": [
+                {
+                    "affiliation": [
+                        {
+                            "name": "KTH",
+                            "url": "https://kth.se"
+                        },
+                        {
+                            "name": "Stanford",
+                            "url": "https://stanford.edu"
+                        }
+                    ],
+                    "email": "fredbn@stanford.edu",
+                    "github": "OmFrederic",
+                    "name": "Frederic Ballllosera Navarro"
+                }
+            ],
+            "default_type": "model",
+            "docs": "https://www.proteinatlas.org/about",
+            "explore_button_text": "Start Exploring",
+            "icon": "https://raw.githubusercontent.com/bioimage-io/tfjs-bioimage-io/master/apps/hpa-logo.gif",
+            "id": "hpa",
+            "logo": "https://raw.githubusercontent.com/bioimage-io/tfjs-bioimage-io/master/apps/hpa-logo.gif",
+            "name": "HPA",
+            "resource_types": [
+                "model",
+                "application"
+            ],
+            "splash_feature_list": [],
+            "splash_subtitle": null,
+            "splash_title": "The Human Protein Atlas",
+            "tags": [
+                "hpa"
+            ]
+        },
+        "covers": [
+            "hpaseg-cover.png"
+        ],
+        "description": "Annotated images from the Human Protein Atlas for cell segmentation",
+        "documentation": "hpa-cell-image-segmentation-dataset.md",
+        "download_url": "https://zenodo.org/record/4665863/files/hpa_cell_segmentation_dataset_v2_512x512_4train_159test.zip?download=1",
+        "format_version": "0.2.4",
+        "id": "hpa/hpa-cell-image-segmentation-dataset",
+        "license": "CC-BY-4.0",
+        "name": "HPA Cell Image Segmentation Dataset",
+        "source": "https://zenodo.org/record/4665863",
+        "tags": [
+            "fluorescence-light-microscopy",
+            "2D",
+            "cells",
+            "nuclei",
+            "semantic-segmentation",
+            "instance-segmentation"
+        ],
+        "type": "dataset",
+        "version": 1
+    },
+    "rdf_yaml_sha256": "0bb183d4b2914c60a70ed6532542f247bb4d585db428e19674df39cc00ddbe0c",
+    "status": "untested"
+}

@@ -1,0 +1,188 @@
+{
+    "rdf_content": {
+        "authors": [
+            {
+                "affiliation": "Human Technopole",
+                "email": "vera.galinova@fht.org",
+                "github_user": "veegalinova",
+                "name": "Vera Galinova",
+                "orcid": null
+            },
+            {
+                "affiliation": "Human Technopole",
+                "email": "mehdi.seifi@fht.org",
+                "github_user": null,
+                "name": "Mehdi Seifi",
+                "orcid": null
+            },
+            {
+                "affiliation": "Wageningen University",
+                "github_user": null,
+                "name": "Sofia Bengoa Luoni",
+                "orcid": null
+            }
+        ],
+        "cite": [
+            {
+                "text": "Yuxin Wu and Alexander Kirillov and Francisco Massa and Wan-Yen Lo and Ross Girshick, Detectron2, 2019",
+                "url": "https://github.com/facebookresearch/detectron2"
+            }
+        ],
+        "covers": [
+            "cover.png"
+        ],
+        "description": "Leaf plant segmentation",
+        "documentation": "doc.md",
+        "format_version": "0.5.3",
+        "git_repo": "https://github.com/ai4life-opencalls/oc-1-project-74",
+        "id": "witty-whale",
+        "inputs": [
+            {
+                "axes": [
+                    {
+                        "channel_names": [
+                            "channel",
+                            "channel",
+                            "channel"
+                        ],
+                        "type": "channel"
+                    },
+                    {
+                        "id": "y",
+                        "size": 800,
+                        "type": "space"
+                    },
+                    {
+                        "id": "x",
+                        "size": 1067,
+                        "type": "space"
+                    }
+                ],
+                "id": "input",
+                "test_tensor": {
+                    "sha256": "67015dbe64730522fc450f4973576d62630a4016983d2aac01cfae465ed1deba",
+                    "source": "input_sample.npy"
+                }
+            }
+        ],
+        "license": "BSD-3-Clause",
+        "links": [
+            "https://github.com/facebookresearch/detectron2"
+        ],
+        "name": "OC1 Project 74 Leaf segmentation with detectron2",
+        "outputs": [
+            {
+                "axes": [
+                    {
+                        "id": "s",
+                        "size": 7,
+                        "type": "space"
+                    },
+                    {
+                        "id": "p",
+                        "size": 4,
+                        "type": "space"
+                    }
+                ],
+                "id": "bboxes",
+                "test_tensor": {
+                    "sha256": "00d00ed8642a14b8bc9f69b316f1044349f5efe38d787f28ef091ae4f78453ef",
+                    "source": "output_boxes.npy"
+                }
+            },
+            {
+                "axes": [
+                    {
+                        "id": "s",
+                        "size": 7,
+                        "type": "space"
+                    }
+                ],
+                "id": "classes",
+                "test_tensor": {
+                    "sha256": "7aa21c77539786adb918182cbc41d49497c17bc5e6935f499a14fc7f18e9ac32",
+                    "source": "output_classes.npy"
+                }
+            },
+            {
+                "axes": [
+                    {
+                        "id": "s",
+                        "size": 7,
+                        "type": "space"
+                    },
+                    {
+                        "id": "t",
+                        "size": 1,
+                        "type": "space"
+                    },
+                    {
+                        "id": "y",
+                        "size": 28,
+                        "type": "space"
+                    },
+                    {
+                        "id": "x",
+                        "size": 28,
+                        "type": "space"
+                    }
+                ],
+                "id": "masks",
+                "test_tensor": {
+                    "sha256": "12e23c4590297af8aabc9a9b36f9fda7c9051784a736bce6c7435a2bf748b04c",
+                    "source": "output_masks.npy"
+                }
+            },
+            {
+                "axes": [
+                    {
+                        "id": "s",
+                        "size": 7,
+                        "type": "space"
+                    }
+                ],
+                "id": "scores",
+                "test_tensor": {
+                    "sha256": "24cb61ee2b9dbe476dc6dc6314edd7e10eeca9b9bd91c48aae776fb373e74975",
+                    "source": "output_scores.npy"
+                }
+            },
+            {
+                "axes": [
+                    {
+                        "id": "dims",
+                        "size": 2,
+                        "type": "space"
+                    }
+                ],
+                "id": "shape",
+                "test_tensor": {
+                    "sha256": "d1f57d9ef57cfe135872a5251e05a928373583a83ffac60838ded3c43e1ea419",
+                    "source": "output_shape.npy"
+                }
+            }
+        ],
+        "tags": [
+            "Instance segmentation",
+            "Plants",
+            "2D",
+            "RGB",
+            "Detectron2"
+        ],
+        "type": "model",
+        "version": "0.1.1",
+        "weights": {
+            "onnx": {
+                "sha256": "d02a7cfdb0086a4d54981b9ab3a667b32b34a8da488c8e8fe0b08925f119a34f",
+                "source": "model.onnx",
+                "opset_version": 11
+            }
+        },
+        "uploader": {
+            "email": "veegalinova@gmail.com"
+        },
+        "id_emoji": "🐳"
+    },
+    "rdf_yaml_sha256": "f8622690eeff218f66943f16e309922189bd0095fefcc9f79c33045fb5a66ad0",
+    "status": "untested"
+}

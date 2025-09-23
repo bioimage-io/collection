@@ -1,0 +1,137 @@
+{
+    "rdf_content": {
+        "authors": [
+            {
+                "name": "Mehdi Seifi",
+                "affiliation": "Human Technopole"
+            }
+        ],
+        "cite": [
+            {
+                "doi": "10.48550/arXiv.2211.12872",
+                "text": "Ashesh, Alexander Krull, Moises Di Sante, Francesco Silvio Pasqualini and Florian Jug. “μSplit: image decomposition for fluorescence microscopy.” 2023 IEEE/CVF International Conference on Computer Vision (ICCV) (2022): 21162-21172.",
+                "url": null
+            }
+        ],
+        "covers": [
+            "cover.png"
+        ],
+        "config": {
+            "bioimageio": {
+                "test_kwargs": {
+                    "pytorch_state_dict": {
+                        "decimals": 2
+                    }
+                },
+                "thumbnails": {}
+            }
+        },
+        "description": "Superimposed image splitting",
+        "documentation": "doc.md",
+        "format_version": "0.5.0",
+        "git_repo": "https://github.com/juglab/uSplit/tree/main",
+        "id": "affectionate-cow",
+        "id_emoji": "🐄",
+        "inputs": [
+            {
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "channel_names": [
+                            "ch1",
+                            "ch2",
+                            "ch3",
+                            "ch4",
+                            "ch5"
+                        ],
+                        "type": "channel"
+                    },
+                    {
+                        "id": "y",
+                        "size": 64,
+                        "type": "space"
+                    },
+                    {
+                        "id": "x",
+                        "size": 64,
+                        "type": "space"
+                    }
+                ],
+                "id": "input",
+                "test_tensor": {
+                    "sha256": "2698e3ecf13b07c1188d8a4e8286521552548df1c30acddec90af9f5d05b0bda",
+                    "source": "test_input.npy"
+                }
+            }
+        ],
+        "license": "MIT",
+        "links": [
+            "https://ashesh-0.github.io/uSplit/",
+            "https://github.com/juglab/uSplit/tree/main"
+        ],
+        "maintainers": [],
+        "name": "uSplit - fluorescence super imposed images",
+        "outputs": [
+            {
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "channel_names": [
+                            "ch1",
+                            "ch2"
+                        ],
+                        "type": "channel"
+                    },
+                    {
+                        "id": "y",
+                        "size": 64,
+                        "type": "space"
+                    },
+                    {
+                        "id": "x",
+                        "size": 64,
+                        "type": "space"
+                    }
+                ],
+                "id": "prediction",
+                "test_tensor": {
+                    "sha256": "bcb9fefa09e572965fcf17220c0ec7fec339d40fe1ffbcf99112ea9ede5a190c",
+                    "source": "test_output.npy"
+                }
+            }
+        ],
+        "tags": [
+            "Superimposed Image",
+            "Splitting"
+        ],
+        "type": "model",
+        "uploader": {
+            "email": "mehdi.seifi@fht.org",
+            "name": "Mehdi Seifi"
+        },
+        "version": "0.1.0",
+        "weights": {
+            "pytorch_state_dict": {
+                "architecture": {
+                    "callable": "LVAE",
+                    "kwargs": {},
+                    "sha256": "2a930fe9a7d0c71eb4919008b0b0fde779497c5b70826bf7c1191475a65ec004",
+                    "source": "usplit_wrapper.py"
+                },
+                "dependencies": {
+                    "sha256": "bbc029748ea37c9f638308cc90833a32292fd581e6612b1fc7e624d9dce44503",
+                    "source": "env_cuda.yml"
+                },
+                "pytorch_version": "1.13.1",
+                "sha256": "74aad7e97d2c8e0cf951dfa6c76ee78041481cff453f662121ec5f0cff5fd101",
+                "source": "lvae_weights.pth"
+            }
+        }
+    },
+    "rdf_yaml_sha256": "6ce6f054c7bdab0e32a1b241e6fb88b3b44b06aef19d149e96b71511a9e4772c",
+    "status": "untested"
+}

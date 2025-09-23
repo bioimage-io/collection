@@ -1,0 +1,139 @@
+{
+    "rdf_content": {
+        "authors": [
+            {
+                "affiliation": "EMBL",
+                "name": "Qin Yu"
+            },
+            {
+                "name": "Adrian Wolny"
+            }
+        ],
+        "cite": [
+            {
+                "text": "Wolny, Cerrone et al. Accurate and Versatile 3D Segmentation of Plant Tissues at Cellular Resolution. eLife 2020.",
+                "url": "https://elifesciences.org/articles/57613"
+            }
+        ],
+        "config": {
+            "bioimageio": {
+                "nickname": "noisy-fish",
+                "nickname_icon": "🐟",
+                "thumbnails": {
+                    "pmaps.png": "pmaps.thumbnail.png",
+                    "raw.png": "raw.thumbnail.png"
+                }
+            }
+        },
+        "covers": [
+            "raw.png",
+            "pmaps.png"
+        ],
+        "description": "Unet trained on confocal images of Arabidopsis Ovules nuclei",
+        "documentation": "doc.md",
+        "format_version": "0.4.10",
+        "id": "10.5281/zenodo.7772662/7781091",
+        "id_emoji": "🐟",
+        "inputs": [
+            {
+                "axes": "bczyx",
+                "data_range": [
+                    null,
+                    null
+                ],
+                "data_type": "float32",
+                "name": "input0",
+                "shape": [
+                    1,
+                    1,
+                    100,
+                    100,
+                    100
+                ]
+            }
+        ],
+        "license": "MIT",
+        "links": [
+            "imjoy/BioImageIO-Packager"
+        ],
+        "maintainers": [
+            {
+                "github_user": "wolny",
+                "name": "Adrian Wolny"
+            }
+        ],
+        "name": "3D UNet Arabidopsis Ovules Nuclei",
+        "outputs": [
+            {
+                "axes": "bczyx",
+                "data_range": [
+                    null,
+                    null
+                ],
+                "data_type": "float32",
+                "name": "output0",
+                "shape": [
+                    1,
+                    1,
+                    100,
+                    100,
+                    100
+                ]
+            }
+        ],
+        "tags": [
+            "nuclei-segmentation",
+            "plantseg",
+            "unet",
+            "3d",
+            "semantic-segmentation",
+            "arabidopsis",
+            "ovules",
+            "plant",
+            "confocal-microscopy",
+            "pytorch"
+        ],
+        "test_inputs": [
+            "test-input.npy"
+        ],
+        "test_outputs": [
+            "test-output.npy"
+        ],
+        "timestamp": "2023-03-29T11:10:26.329999",
+        "type": "model",
+        "uploader": {
+            "email": "bioimageiobot@gmail.com"
+        },
+        "version": 1,
+        "version_number": 1,
+        "weights": {
+            "pytorch_state_dict": {
+                "architecture": "unet.py:UNet3D",
+                "architecture_sha256": "2da9f7149e144b63fee715fb8fe5154e96bf9aa230d176c91e923d528ef0c4e1",
+                "kwargs": {
+                    "f_maps": [
+                        32,
+                        64,
+                        128,
+                        256
+                    ],
+                    "final_sigmoid": true,
+                    "in_channels": 1,
+                    "is_segmentation": true,
+                    "layer_order": "gcr",
+                    "num_groups": 8,
+                    "out_channels": 1,
+                    "testing": true
+                },
+                "sha256": "a02824ac1a3ac43122ba6345804664be7d70124ac23b07cd1c488818b61895ef",
+                "source": "confocal_3D_unet_ovules_nuclei_ds1x.pytorch"
+            },
+            "torchscript": {
+                "sha256": "b3f6e6597ddf5d937f054020e596184612314b2b17a75eff7ffe942cf652c3e5",
+                "source": "torchscript_tracing.pt"
+            }
+        }
+    },
+    "rdf_yaml_sha256": "f490c1d2b04f54c2f02ebedf64e1bb9cd7755544d173675230513ff6b9bc0a5e",
+    "status": "untested"
+}

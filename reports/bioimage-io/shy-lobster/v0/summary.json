@@ -1,0 +1,202 @@
+{
+    "rdf_content": {
+        "attachments": [
+            {
+                "sha256": "9fdcc6e487e30e5c29abdbcbaf3d3422a1fe748366bd4350348dcd09fc04da3b",
+                "source": "careamics.yaml"
+            }
+        ],
+        "authors": [
+            {
+                "affiliation": "Human Technopole",
+                "name": "CAREamics authors"
+            }
+        ],
+        "cite": [
+            {
+                "doi": "10.1109/cvpr.2019.00223",
+                "text": "Krull, A., Buchholz, T.O. and Jug, F., 2019. \"Noise2Void - Learning denoising from single noisy images\". In Proceedings of the IEEE/CVF conference on computer vision and pattern recognition (pp. 2129-2137)."
+            },
+            {
+                "doi": "10.1109/isbi45749.2020.9098336",
+                "text": "Broaddus, C., Krull, A., Weigert, M., Schmidt, U. and Myers, G., 2020.\"Removing structured noise with self-supervised blind-spot networks\". In 2020 IEEE 17th International Symposium on Biomedical Imaging (ISBI) (pp. 159-163)."
+            }
+        ],
+        "config": {
+            "bioimageio": {
+                "test_kwargs": {
+                    "pytorch_state_dict": {
+                        "absolute_tolerance": 0.01,
+                        "relative_tolerance": 0.01
+                    }
+                },
+                "thumbnails": {
+                    "cover.png": "cover.thumbnail.png"
+                }
+            }
+        },
+        "covers": [
+            "cover.png"
+        ],
+        "description": "This model is a UNet trained using the StructN2V algorithm to denoise images. StructN2V is a variant of Noise2Void that can remove 1D structured noise, the main failure case of the original N2V. The training data consists of a single image of convallaria (*c. majalis*). The notebook used to train this model is available on the CAREamics documentation website at the following link: https://careamics.github.io/0.1/applications/structN2V/Convallaria/.",
+        "documentation": "README.md",
+        "format_version": "0.5.3",
+        "id": "shy-lobster",
+        "id_emoji": "🦞",
+        "inputs": [
+            {
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "channel_names": [
+                            "channel"
+                        ],
+                        "type": "channel"
+                    },
+                    {
+                        "id": "y",
+                        "size": 1024,
+                        "type": "space"
+                    },
+                    {
+                        "id": "x",
+                        "size": 1024,
+                        "type": "space"
+                    }
+                ],
+                "id": "input",
+                "preprocessing": [
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    },
+                    {
+                        "id": "fixed_zero_mean_unit_variance",
+                        "kwargs": {
+                            "axis": "channel",
+                            "mean": [
+                                548.4021234512329
+                            ],
+                            "std": [
+                                99.30965717120093
+                            ]
+                        }
+                    },
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    }
+                ],
+                "test_tensor": {
+                    "sha256": "f107951e7b7860117ff4f40501aee64acc15f6cdba7bf83876f7be31a7d50274",
+                    "source": "inputs.npy"
+                }
+            }
+        ],
+        "license": "BSD-3-Clause",
+        "links": [
+            "https://github.com/CAREamics/careamics",
+            "https://careamics.github.io/latest/"
+        ],
+        "name": "Convallaria_StructN2V",
+        "outputs": [
+            {
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "channel_names": [
+                            "channel"
+                        ],
+                        "type": "channel"
+                    },
+                    {
+                        "id": "y",
+                        "size": 1024,
+                        "type": "space"
+                    },
+                    {
+                        "id": "x",
+                        "size": 1024,
+                        "type": "space"
+                    }
+                ],
+                "id": "prediction",
+                "postprocessing": [
+                    {
+                        "id": "fixed_zero_mean_unit_variance",
+                        "kwargs": {
+                            "axis": "channel",
+                            "mean": [
+                                -5.522142896774823
+                            ],
+                            "std": [
+                                0.010068514067565211
+                            ]
+                        }
+                    },
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    }
+                ],
+                "test_tensor": {
+                    "sha256": "96f857df3655981d03bd91588f0e81765f7be823ec77a40db4082e0073ece26b",
+                    "source": "outputs.npy"
+                }
+            }
+        ],
+        "tags": [
+            "denoising",
+            "restoration",
+            "UNet",
+            "2D",
+            "CAREamics",
+            "pytorch",
+            "Noise2Void",
+            "StructN2V"
+        ],
+        "type": "model",
+        "uploader": {
+            "email": "mehdi.seifi@fht.org",
+            "name": "Mehdi Seifi"
+        },
+        "version": "0.1.0",
+        "weights": {
+            "pytorch_state_dict": {
+                "architecture": {
+                    "callable": "UNet",
+                    "import_from": "careamics.models.unet",
+                    "kwargs": {
+                        "conv_dims": 2,
+                        "depth": 2,
+                        "final_activation": "None",
+                        "in_channels": 1,
+                        "independent_channels": true,
+                        "n2v2": false,
+                        "num_channels_init": 32,
+                        "num_classes": 1
+                    }
+                },
+                "dependencies": {
+                    "sha256": "fcb28a47de772ad4152cc36bed5c7166c0e67bcf50462610439fe1816b84d075",
+                    "source": "environment.yml"
+                },
+                "pytorch_version": "2.5.1",
+                "sha256": "49b8ff4b39b994640efb62b0d64800c701456e7dd33f06c8a02b0648cc771d0d",
+                "source": "weights.pth"
+            }
+        }
+    },
+    "rdf_yaml_sha256": "77d95ae7bba359e102cb5fa235e6fb330bccdbb64ac9d561f8fb501db9477110",
+    "status": "untested"
+}

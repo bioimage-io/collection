@@ -1,0 +1,202 @@
+{
+    "rdf_content": {
+        "authors": [
+            {
+                "affiliation": "Human Technopole",
+                "email": "mehdi.seifi@fht.org",
+                "github_user": "mese79",
+                "name": "Mehdi Seifi",
+                "orcid": null
+            }
+        ],
+        "cite": [
+            {
+                "doi": "10.1038/s41592-020-01018-x",
+                "text": "Stringer, C., Wang, T., Michaelos, M., & Pachitariu, M. (2021). Cellpose: a generalist algorithm for cellular segmentation. Nature methods, 18(1), 100-106."
+            }
+        ],
+        "config": {
+            "bioimageio": {
+                "thumbnails": {
+                    "cover.png": "cover.thumbnail.png"
+                }
+            }
+        },
+        "covers": [
+            "cover.png"
+        ],
+        "description": "CellPose 'cyto3' model",
+        "documentation": "doc.md",
+        "format_version": "0.5.3",
+        "git_repo": "https://github.com/juglab/cellpose-bmz-wrapper",
+        "id": "famous-fish",
+        "id_emoji": "🐟",
+        "inputs": [
+            {
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "id": "y",
+                        "size": 565,
+                        "type": "space"
+                    },
+                    {
+                        "id": "x",
+                        "size": 807,
+                        "type": "space"
+                    },
+                    {
+                        "channel_names": [
+                            "channel"
+                        ],
+                        "type": "channel"
+                    }
+                ],
+                "id": "input",
+                "test_tensor": {
+                    "sha256": "f765246489a2b9913c7726a5706e535543e3ed42dac07ee21a8ffd2e6c129bed",
+                    "source": "input_sample.npy"
+                }
+            }
+        ],
+        "license": "BSD-3-Clause",
+        "links": [
+            "https://github.com/mouseland/cellpose"
+        ],
+        "name": "CellPose(cyto3)",
+        "outputs": [
+            {
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "id": "y",
+                        "size": 807,
+                        "type": "space"
+                    },
+                    {
+                        "id": "x",
+                        "size": 565,
+                        "type": "space"
+                    }
+                ],
+                "id": "masks",
+                "test_tensor": {
+                    "sha256": "6bc2bd4c4b98a41cddbf7446c4500235a57c149710280e620565eb112c5251f2",
+                    "source": "output1_sample_masks.npy"
+                }
+            },
+            {
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "channel_names": [
+                            "ch_0",
+                            "ch_1",
+                            "ch_2",
+                            "ch_3",
+                            "ch_4",
+                            "ch_5",
+                            "ch_6",
+                            "ch_7"
+                        ],
+                        "type": "channel"
+                    },
+                    {
+                        "id": "y",
+                        "size": 807,
+                        "type": "space"
+                    },
+                    {
+                        "id": "x",
+                        "size": 565,
+                        "type": "space"
+                    }
+                ],
+                "id": "flows",
+                "test_tensor": {
+                    "sha256": "112c5afd9e12c690d2cbbcf0a7b0fd673ce753c29f2e3bccbc15d927bf205d24",
+                    "source": "output2_sample_flows.npy"
+                }
+            },
+            {
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "id": "y",
+                        "size": 256,
+                        "type": "space"
+                    }
+                ],
+                "id": "styles",
+                "test_tensor": {
+                    "sha256": "877ea628fdc2bc2aa94603049970da8597dda2c612944b20633ebea9dfac0776",
+                    "source": "output3_sample_styles.npy"
+                }
+            },
+            {
+                "axes": [
+                    {
+                        "type": "batch"
+                    }
+                ],
+                "id": "diams",
+                "test_tensor": {
+                    "sha256": "3b9360ded86c2a4d3e2592bfcce5cf42eefc96026661d5e1acadbb052d1f16b9",
+                    "source": "output4_sample_diams.npy"
+                }
+            }
+        ],
+        "tags": [
+            "Cellpose",
+            "Cell Segmentation",
+            "Segmentation"
+        ],
+        "type": "model",
+        "uploader": {
+            "email": "mehdi.seifi@fht.org",
+            "name": "Mehdi Seifi"
+        },
+        "version": "0.1.0",
+        "weights": {
+            "pytorch_state_dict": {
+                "architecture": {
+                    "callable": "CellPoseWrapper",
+                    "kwargs": {
+                        "cellprob_threshold": 0.0,
+                        "channels": [
+                            0,
+                            0
+                        ],
+                        "cp_batch_size": 8,
+                        "diam_mean": 30.0,
+                        "do_3D": false,
+                        "estimate_diam": true,
+                        "flow_threshold": 0.4,
+                        "gpu": true,
+                        "normalize": true,
+                        "stitch_threshold": 0.0
+                    },
+                    "sha256": "c97dbfc39bc9352607289c7659ee3e70f42189ddd76c273c845802a824ab4210",
+                    "source": "model.py"
+                },
+                "dependencies": {
+                    "sha256": "8b7b307a010225d1741191f4c1a9415ed81d66469da76c59d5164e24ba99fe48",
+                    "source": "env.yml"
+                },
+                "pytorch_version": "2.2.2",
+                "sha256": "2dc3087a8abd7da46d1ab0ddd5824639933cc3ff63b382af3fa1939a392db93c",
+                "source": "cyto3.pth"
+            }
+        }
+    },
+    "rdf_yaml_sha256": "b80321c4ff9ebd223860d517d2587b2cd741fc1069cbe6d175b864896e87b2bd",
+    "status": "untested"
+}

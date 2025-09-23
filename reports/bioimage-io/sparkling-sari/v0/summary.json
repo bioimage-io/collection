@@ -1,0 +1,99 @@
+{
+    "rdf_content": {
+        "authors": [
+            {
+                "name": "Estibaliz GÃ³mez-de-Mariscal"
+            },
+            {
+                "name": "Constantin Pape"
+            },
+            {
+                "name": "IvÃ¡n Hidalgo-Cenalmor"
+            },
+            {
+                "name": "BioImage Model Zoo team"
+            }
+        ],
+        "badges": [
+            {
+                "icon": "https://colab.research.google.com/assets/colab-badge.svg",
+                "label": "Open in Colab",
+                "url": "https://colab.research.google.com/github/HenriquesLab/DL4MicEverywhere/blob/main/notebooks/Bespoke_notebooks/bioimageio-tensorflow/load_bioimageio_tensorflow.ipynb"
+            }
+        ],
+        "cite": [
+            {
+                "doi": "10.1101/2022.06.07.495102",
+                "text": "Wei Ouyang, Fynn Beuttenmueller, Estibaliz GÃ³mez-de-Mariscal, Constantin Pape, et al., BioImage Model Zoo: A Community-Driven Resource for Accessible Deep Learning in BioImage Analysis, bioRxiv 2022"
+            },
+            {
+                "doi": "10.1101/2023.11.19.567606",
+                "text": "IvÃ¡n Hidalgo-Cenalmor, Joanna W PylvÃ¤nÃ¤inen, Mariana G Ferreira, et al., DL4MicEverywhere: Deep learning for microscopy made flexible, shareable, and reproducible, bioRxiv 2023"
+            }
+        ],
+        "config": {
+            "bioimageio": {
+                "nickname": "sparkling-sari",
+                "nickname_icon": "🥻",
+                "status": "accepted",
+                "version_id": "latest",
+                "version_name": "latest"
+            },
+            "dl4miceverywhere": {
+                "cuda_version": "11.2.2",
+                "cudnn_version": "8.1.1.33",
+                "description": "Notebook to load models from the BioImage Model Zoo in TensorFlow",
+                "dl4miceverywhere_version": "2.0.0",
+                "docker_hub_image": "load_bioimageio_tensorflow-b1.0.0-d2.0.0",
+                "notebook_url": "https://raw.githubusercontent.com/HenriquesLab/DL4MicEverywhere/main/notebooks/Bespoke_notebooks/bioimageio-tensorflow/load_bioimageio_tensorflow.ipynb",
+                "notebook_version": "1.0.0",
+                "python_version": "3.9",
+                "requirements_url": "https://raw.githubusercontent.com/HenriquesLab/DL4MicEverywhere/main/notebooks/Bespoke_notebooks/bioimageio-tensorflow/requirements.txt",
+                "sections_to_remove": "1.0.",
+                "ubuntu_version": "20.04"
+            }
+        },
+        "description": "Notebook to load models from the BioImage Model Zoo in TensorFlow",
+        "documentation": "README.md",
+        "download_url": "https://colab.research.google.com/github/HenriquesLab/DL4MicEverywhere/blob/main/notebooks/Bespoke_notebooks/bioimageio-tensorflow/load_bioimageio_tensorflow.ipynb",
+        "format_version": "0.2.4",
+        "git_repo": "https://github.com/bioimage-io/core-bioimage-io-python/tree/main",
+        "id": "dl4miceverywhere/Notebook_bioimageio_tensorflow",
+        "links": [
+            "dl4miceverywhere/Notebook Preview"
+        ],
+        "maintainers": [
+            {
+                "affiliation": "Instituto Gulbenkian de CiÃªncia",
+                "github_user": "IvanHCenalmor",
+                "name": "IvÃ¡n Hidalgo",
+                "orcid": "0009-0000-8923-568X"
+            },
+            {
+                "affiliation": "Instituto Gulbenkian de CiÃªncia",
+                "github_user": "mariana-gferreira",
+                "name": "Mariana G Ferreira",
+                "orcid": "0009-0002-2886-4612"
+            },
+            {
+                "affiliation": "Instituto Gulbenkian de CiÃªncia",
+                "github_user": "esgomezm",
+                "name": "Estibaliz GÃ³mez de Mariscal",
+                "orcid": "0000-0003-2082-3277"
+            }
+        ],
+        "name": "General BioImageIO notebook - TensorFlow",
+        "tags": [
+            "colab",
+            "notebook",
+            "general-notebook",
+            "tensorflow",
+            "ZeroCostDL4Mic",
+            "dl4miceverywhere"
+        ],
+        "type": "application",
+        "version": "1.0.0"
+    },
+    "rdf_yaml_sha256": "649c9330ef5fa93a435d8c71268d2a8a43a51fad70b3b0b7964645369359f1f8",
+    "status": "untested"
+}

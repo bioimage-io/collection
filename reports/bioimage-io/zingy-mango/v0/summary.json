@@ -1,0 +1,78 @@
+{
+    "rdf_content": {
+        "authors": [
+            {
+                "name": "Constantin Pape"
+            }
+        ],
+        "cite": [
+            {
+                "doi": "10.1016/j.cell.2021.07.017",
+                "text": "Vergara, Pape, Meechan et al."
+            }
+        ],
+        "config": {
+            "background_image": "static/img/zoo-background.svg",
+            "bioimageio": {
+                "nickname": "zingy-mango",
+                "nickname_icon": "🥭",
+                "status": "accepted",
+                "version_id": "latest",
+                "version_name": "latest"
+            },
+            "default_type": "model",
+            "explore_button_text": "Start Exploring",
+            "icon": "https://raw.githubusercontent.com/ilastik/bioimage-io-resources/main/image/ilastik-fist-icon.png",
+            "id": "ilastik",
+            "logo": "https://raw.githubusercontent.com/ilastik/bioimage-io-resources/main/image/ilastik-fist-icon.png",
+            "name": "ilastik",
+            "resource_types": [
+                "application"
+            ],
+            "splash_feature_list": null,
+            "splash_subtitle": "the interactive learning and segmentation toolkit",
+            "splash_title": "ilastik",
+            "tags": [
+                "ilastik"
+            ],
+            "url_root": "https://raw.githubusercontent.com/ilastik/bioimage-io-resources/main"
+        },
+        "covers": [
+            "platy-cover0.png"
+        ],
+        "description": "Training data for EM segmentation of cellular membranes, nuclei, cuticle and cilia in Platynereis.",
+        "documentation": "platy.md",
+        "format_version": "0.2.4",
+        "id": "ilastik/platynereis_em_training_data",
+        "license": "CC-BY-4.0",
+        "maintainers": [
+            {
+                "affiliation": "EMBL Heidelberg",
+                "github_user": "fynnbe",
+                "name": "Fynn BeuttenmÃ¼ller",
+                "orcid": "0000-0002-8567-6389"
+            },
+            {
+                "affiliation": "EMBL Heidelberg",
+                "github_user": "constantinpape",
+                "name": "Constantin Pape",
+                "orcid": "0000-0001-6562-7187"
+            }
+        ],
+        "name": "Platynereis EM Traning Data",
+        "source": "https://doi.org/10.5281/zenodo.3675220",
+        "tags": [
+            "electron-microscopy",
+            "platynereis",
+            "cells",
+            "cilia",
+            "nuclei",
+            "instance-segmentation",
+            "3D"
+        ],
+        "type": "dataset",
+        "version": 1
+    },
+    "rdf_yaml_sha256": "ce2f1f85e2a1e9ae8f029b69b0d7b809f046387ad1996da862f3019398d76496",
+    "status": "untested"
+}

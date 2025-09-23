@@ -1,0 +1,66 @@
+{
+    "rdf_content": {
+        "authors": [
+            {
+                "name": "ilastik Team"
+            }
+        ],
+        "badges": [],
+        "cite": [
+            {
+                "doi": "10.1038/s41592-019-0582-9",
+                "text": "Berg, S., Kutra, D., Kroeger, T. et al. ilastik: interactive machine learning for (bio)image analysis. Nat Methods 16, 1226-1232 (2019)."
+            }
+        ],
+        "config": {
+            "background_image": "static/img/zoo-background.svg",
+            "bioimageio": {
+                "thumbnails": {}
+            },
+            "default_type": "model",
+            "explore_button_text": "Start Exploring",
+            "icon": "https://raw.githubusercontent.com/ilastik/bioimage-io-resources/main/image/ilastik-fist-icon.png",
+            "id": "ilastik",
+            "logo": "https://raw.githubusercontent.com/ilastik/bioimage-io-resources/main/image/ilastik-fist-icon.png",
+            "name": "ilastik",
+            "resource_types": [
+                "application"
+            ],
+            "splash_feature_list": null,
+            "splash_subtitle": "the interactive learning and segmentation toolkit",
+            "splash_title": "ilastik",
+            "tags": [
+                "ilastik"
+            ],
+            "url_root": "https://raw.githubusercontent.com/ilastik/bioimage-io-resources/main"
+        },
+        "covers": [],
+        "description": "the interactive learning and segmentation toolkit",
+        "documentation": "Readme.md",
+        "format_version": "0.2.4",
+        "icon": "https://raw.githubusercontent.com/ilastik/bioimage-io-models/master/image/ilastik-fist-icon.png",
+        "id": "ilastik/ilastik",
+        "id_emoji": null,
+        "license": "GPL-2.0-or-later",
+        "maintainers": [
+            {
+                "github_user": "ilastik",
+                "name": "ilastik Team"
+            }
+        ],
+        "name": "ilastik",
+        "source": "ilastik-app.imjoy.html",
+        "tags": [
+            "software",
+            "bioengine"
+        ],
+        "type": "application",
+        "uploader": {
+            "email": "bioimageiobot@gmail.com"
+        },
+        "version": 1,
+        "version_number": 1
+    },
+    "rdf_yaml_sha256": "a5960e08e37254440f02352acfe5fa03f189ce2de3ce739304b901bc97b39dc9",
+    "status": "untested"
+}

@@ -1,0 +1,58 @@
+{
+    "rdf_content": {
+        "authors": [
+            {
+                "affiliation": "MRC LMB",
+                "github_user": "danifranco",
+                "name": "Daniel Franco-Barranco",
+                "orcid": "0000-0002-1109-110X"
+            }
+        ],
+        "cite": [
+            {
+                "text": "Kauffmann, Dorian et. al.'Light My Cells: Bright Field to Fluorescence Imaging Challenge' 2024 IEEE 21th International Symposium on Biomedical Imaging (ISBI). IEEE, 2024.",
+                "url": "https://lightmycells.grand-challenge.org/lightmycells/"
+            }
+        ],
+        "config": {
+            "bioimageio": {
+                "thumbnails": {
+                    "Visual_example_for_Grand_Challenge17_Omvz6ar.png": "Visual_example_for_Grand_Challenge17_Omvz6ar.thumbnail.png",
+                    "lightmycells_dataset.jpeg": "lightmycells_dataset.thumbnail.png"
+                }
+            }
+        },
+        "covers": [
+            "lightmycells_dataset.jpeg",
+            "Visual_example_for_Grand_Challenge17_Omvz6ar.png"
+        ],
+        "description": "The Light My Cells dataset aims to contribute to the development of new image-to-image ‘deep-label’ methods in the fields of biology and microscopy.",
+        "documentation": "LightMyCells.md",
+        "format_version": "0.3.0",
+        "id": "flavorful-sweet-potato",
+        "id_emoji": "🍠",
+        "license": "CC-BY-4.0",
+        "name": "LightMyCells",
+        "source": "https://lightmycells.grand-challenge.org/",
+        "tags": [
+            "image-to-image",
+            "image-reconstruction",
+            "image-restoration",
+            "label-free",
+            "brightfield",
+            "phase-contrast",
+            "Differential Interference Contrast",
+            "2D",
+            "fluorescence",
+            "challenge"
+        ],
+        "type": "dataset",
+        "uploader": {
+            "email": "daniel.franco@dipc.org",
+            "name": "Daniel Franco-Barranco"
+        },
+        "version": "0.1.0"
+    },
+    "rdf_yaml_sha256": "53f5986eb5c1ac3e5d92639c0cc613ea8714ca7edec24be156bf2fbd2dbe01b1",
+    "status": "untested"
+}

@@ -1,0 +1,247 @@
+{
+    "rdf_content": {
+        "attachments": {
+            "files": [
+                "zero_mean_unit_variance.ijm"
+            ]
+        },
+        "authors": [
+            {
+                "name": "Constantin Pape; @constantinpape"
+            }
+        ],
+        "cite": [
+            {
+                "text": "training library",
+                "url": "https://doi.org/10.5281/zenodo.5108853"
+            },
+            {
+                "text": "architecture",
+                "url": "https://doi.org/10.1007/978-3-319-46723-8_49"
+            },
+            {
+                "text": "segmentation algorithm",
+                "url": "https://doi.org/10.1038/nmeth.4151"
+            },
+            {
+                "text": "data",
+                "url": "https://doi.org/10.1101/2020.02.26.961037"
+            }
+        ],
+        "config": {
+            "_conceptdoi": "10.5281/zenodo.6028280",
+            "bioimageio": {
+                "nickname": "willing-hedgehog",
+                "nickname_icon": "🦔",
+                "thumbnails": {
+                    "cover.png": "cover.thumbnail.png"
+                }
+            },
+            "deepimagej": {
+                "allow_tiling": true,
+                "model_keys": null,
+                "prediction": {
+                    "postprocess": [
+                        {
+                            "spec": null
+                        }
+                    ],
+                    "preprocess": [
+                        {
+                            "kwargs": "zero_mean_unit_variance.ijm",
+                            "spec": "ij.IJ::runMacroFile"
+                        }
+                    ]
+                },
+                "pyramidal_model": false,
+                "test_information": {
+                    "inputs": [
+                        {
+                            "name": "sample_input_0.tif",
+                            "pixel_size": {
+                                "x": 1,
+                                "y": 1,
+                                "z": 1
+                            },
+                            "size": "256 x 256 x 32 x 1"
+                        }
+                    ],
+                    "memory_peak": null,
+                    "outputs": [
+                        {
+                            "name": "sample_output_0.tif",
+                            "size": "256 x 256 x 32 x 1",
+                            "type": "image"
+                        }
+                    ],
+                    "runtime": null
+                }
+            }
+        },
+        "covers": [
+            "cover.png"
+        ],
+        "description": "Cell segmentation in EM of platynereis.",
+        "documentation": "documentation.md",
+        "format_version": "0.4.10",
+        "id": "10.5281/zenodo.6028280/6647695",
+        "id_emoji": "🦔",
+        "inputs": [
+            {
+                "axes": "bczyx",
+                "data_range": [
+                    0.0,
+                    255.0
+                ],
+                "data_type": "uint8",
+                "name": "input0",
+                "preprocessing": [
+                    {
+                        "kwargs": {
+                            "axes": "czyx",
+                            "mode": "per_sample"
+                        },
+                        "name": "zero_mean_unit_variance"
+                    }
+                ],
+                "shape": {
+                    "min": [
+                        1,
+                        1,
+                        32,
+                        32,
+                        32
+                    ],
+                    "step": [
+                        0,
+                        0,
+                        16,
+                        16,
+                        16
+                    ]
+                }
+            }
+        ],
+        "license": "CC-BY-4.0",
+        "links": [
+            "deepimagej/deepimagej",
+            "ilastik/platynereis_em_training_data",
+            "ilastik/ilastik",
+            "imjoy/BioImageIO-Packager"
+        ],
+        "maintainers": [
+            {
+                "github_user": "constantinpape",
+                "name": "constantinpape"
+            }
+        ],
+        "name": "PlatynereisEMcellsSegmentationBoundaryModel",
+        "outputs": [
+            {
+                "axes": "bczyx",
+                "data_range": [
+                    null,
+                    null
+                ],
+                "data_type": "float32",
+                "halo": [
+                    0,
+                    0,
+                    8,
+                    8,
+                    8
+                ],
+                "name": "output0",
+                "shape": {
+                    "offset": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "reference_tensor": "input0",
+                    "scale": [
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0
+                    ]
+                }
+            }
+        ],
+        "sample_inputs": [
+            "sample_input_0.tif"
+        ],
+        "sample_outputs": [
+            "sample_output_0.tif"
+        ],
+        "tags": [
+            "unet",
+            "cells",
+            "instance-segmentation",
+            "electron-microscopy",
+            "platynereis"
+        ],
+        "test_inputs": [
+            "test_input_0.npy"
+        ],
+        "test_outputs": [
+            "test_output_0.npy"
+        ],
+        "timestamp": "2022-06-15T22:12:29.012734",
+        "type": "model",
+        "uploader": {
+            "email": "bioimageiobot@gmail.com"
+        },
+        "version": 1,
+        "version_number": 1,
+        "weights": {
+            "pytorch_state_dict": {
+                "architecture": "unet.py:AnisotropicUNet",
+                "architecture_sha256": "7f5b15948e8e2c91f78dcff34fbf30af517073e91ba487f3edb982b948d099b3",
+                "kwargs": {
+                    "anisotropic_kernel": false,
+                    "final_activation": "Sigmoid",
+                    "gain": 2,
+                    "in_channels": 1,
+                    "initial_features": 32,
+                    "out_channels": 1,
+                    "postprocessing": null,
+                    "return_side_outputs": false,
+                    "scale_factors": [
+                        [
+                            2,
+                            2,
+                            2
+                        ],
+                        [
+                            2,
+                            2,
+                            2
+                        ],
+                        [
+                            2,
+                            2,
+                            2
+                        ],
+                        [
+                            2,
+                            2,
+                            2
+                        ]
+                    ]
+                },
+                "sha256": "0e91d6567ee59c2b1b583519b91329e4e8ec6cccb374cda8107d5ec3c6d745c2",
+                "source": "weights.pt"
+            },
+            "torchscript": {
+                "sha256": "1796d1c25e0eee21c953addda903a2eccd1a73a91b9de684743999c153297236",
+                "source": "weights-torchscript.pt"
+            }
+        }
+    },
+    "rdf_yaml_sha256": "01c1fcf711bea05a7e3377727e5a79cea357dcd4f9154938ce66148cccb738fd",
+    "status": "untested"
+}

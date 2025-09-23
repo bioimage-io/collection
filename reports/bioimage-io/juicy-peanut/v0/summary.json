@@ -1,0 +1,69 @@
+{
+    "rdf_content": {
+        "authors": [
+            {
+                "name": "Constantin Pape"
+            }
+        ],
+        "config": {
+            "background_image": "static/img/zoo-background.svg",
+            "bioimageio": {
+                "nickname": "juicy-peanut",
+                "nickname_icon": "🥜",
+                "status": "accepted",
+                "version_id": "latest",
+                "version_name": "latest"
+            },
+            "default_type": "model",
+            "explore_button_text": "Start Exploring",
+            "icon": "https://raw.githubusercontent.com/ilastik/bioimage-io-resources/main/image/ilastik-fist-icon.png",
+            "id": "ilastik",
+            "logo": "https://raw.githubusercontent.com/ilastik/bioimage-io-resources/main/image/ilastik-fist-icon.png",
+            "name": "ilastik",
+            "resource_types": [
+                "application"
+            ],
+            "splash_feature_list": null,
+            "splash_subtitle": "the interactive learning and segmentation toolkit",
+            "splash_title": "ilastik",
+            "tags": [
+                "ilastik"
+            ],
+            "url_root": "https://raw.githubusercontent.com/ilastik/bioimage-io-resources/main"
+        },
+        "covers": [
+            "arabidopsis_atlas.jpg"
+        ],
+        "description": "3D digital tissue atlas of Arabidopsis thaliana, containing image data and cell segmentations.",
+        "documentation": "arabidopsis_tissue_atlas.md",
+        "format_version": "0.2.4",
+        "id": "ilastik/arabidopsis_tissue_atlas",
+        "maintainers": [
+            {
+                "affiliation": "EMBL Heidelberg",
+                "github_user": "fynnbe",
+                "name": "Fynn BeuttenmÃ¼ller",
+                "orcid": "0000-0002-8567-6389"
+            },
+            {
+                "affiliation": "EMBL Heidelberg",
+                "github_user": "constantinpape",
+                "name": "Constantin Pape",
+                "orcid": "0000-0001-6562-7187"
+            }
+        ],
+        "name": "Arabidopsis 3D Digital Tissue Atlas",
+        "source": "https://osf.io/fzr56/",
+        "tags": [
+            "light-microscopy",
+            "arabidopsis",
+            "cells",
+            "instance-segmentation",
+            "3D"
+        ],
+        "type": "dataset",
+        "version": 1
+    },
+    "rdf_yaml_sha256": "3bbb8056237b73af0544e3e62d1c978d51493d05380de45a3d8d511113bb003e",
+    "status": "untested"
+}

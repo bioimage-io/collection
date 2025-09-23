@@ -1,0 +1,179 @@
+{
+    "rdf_content": {
+        "attachments": {
+            "files": [
+                "fixed_zero_mean_unit_variance.ijm"
+            ]
+        },
+        "authors": [
+            {
+                "name": "Hao Xu"
+            },
+            {
+                "name": "Wei Ouyang"
+            }
+        ],
+        "cite": [
+            {
+                "text": "Kaimal, Jay, & Thul, Peter. (2021). HPA Cell Image Segmentation Dataset (Version v2) [Data set]. Zenodo.",
+                "url": "https://doi.org/10.5281/zenodo.4430893"
+            }
+        ],
+        "config": {
+            "bioimageio": {
+                "nickname": "conscientious-seashell",
+                "nickname_icon": "🐚",
+                "thumbnails": {
+                    "hpaseg-cover.png": "hpaseg-cover.thumbnail.png"
+                }
+            },
+            "deepimagej": {
+                "allow_tiling": true,
+                "model_keys": null,
+                "prediction": {
+                    "postprocess": [
+                        {
+                            "spec": null
+                        }
+                    ],
+                    "preprocess": [
+                        {
+                            "kwargs": "fixed_zero_mean_unit_variance.ijm",
+                            "spec": "ij.IJ::runMacroFile"
+                        }
+                    ]
+                },
+                "pyramidal_model": false,
+                "test_information": {
+                    "inputs": [
+                        {
+                            "name": "test_nuclei_input.npy",
+                            "pixel_size": {
+                                "x": 1,
+                                "y": 1,
+                                "z": 1
+                            },
+                            "size": "512 x 512 x 1 x 3"
+                        }
+                    ],
+                    "memory_peak": null,
+                    "outputs": [
+                        {
+                            "name": "test_nuclei_output.npy",
+                            "size": "512 x 512 x 1 x 3",
+                            "type": "image"
+                        }
+                    ],
+                    "runtime": null
+                }
+            }
+        },
+        "covers": [
+            "hpaseg-cover.png"
+        ],
+        "description": "Nuclei segmentation model for segmenting images from the Human Protein Atlas",
+        "documentation": "README.md",
+        "format_version": "0.4.10",
+        "id": "10.5281/zenodo.6200999/7690494",
+        "id_emoji": "🐚",
+        "inputs": [
+            {
+                "axes": "bcyx",
+                "data_range": [
+                    null,
+                    null
+                ],
+                "data_type": "float32",
+                "name": "input0",
+                "preprocessing": [
+                    {
+                        "kwargs": {
+                            "axes": "xy",
+                            "mean": [
+                                0.48627450980392156,
+                                0.4588235294117647,
+                                0.40784313725490196
+                            ],
+                            "mode": "fixed",
+                            "std": [
+                                0.23482446870963955,
+                                0.23482446870963955,
+                                0.23482446870963955
+                            ]
+                        },
+                        "name": "zero_mean_unit_variance"
+                    }
+                ],
+                "shape": [
+                    1,
+                    3,
+                    512,
+                    512
+                ]
+            }
+        ],
+        "license": "CC-BY-4.0",
+        "links": [
+            "deepimagej/deepimagej"
+        ],
+        "maintainers": [
+            {
+                "github_user": "oeway",
+                "name": "Wei Ouyang"
+            }
+        ],
+        "name": "HPA Nucleus Segmentation (DPNUnet)",
+        "outputs": [
+            {
+                "axes": "bcyx",
+                "data_range": [
+                    null,
+                    null
+                ],
+                "data_type": "float32",
+                "name": "output0",
+                "shape": [
+                    1,
+                    3,
+                    512,
+                    512
+                ]
+            }
+        ],
+        "sample_inputs": [
+            "sample_input_0.tif"
+        ],
+        "sample_outputs": [
+            "sample_output_0.tif"
+        ],
+        "tags": [
+            "torchscript",
+            "unet",
+            "nucleus-segmentation",
+            "deepimagej",
+            "pytorch"
+        ],
+        "test_inputs": [
+            "test_nuclei_input.npy"
+        ],
+        "test_outputs": [
+            "test_nuclei_output.npy"
+        ],
+        "timestamp": "2023-03-02T05:53:45.695883",
+        "type": "model",
+        "uploader": {
+            "email": "bioimageiobot@gmail.com"
+        },
+        "version": 1,
+        "version_number": 1,
+        "weights": {
+            "torchscript": {
+                "pytorch_version": "1.13.0",
+                "sha256": "8d3af116378b12d54a15d880b942c2d7e74ba52e11421a7ba16c702d1a112ba5",
+                "source": "nuclei_model.pt"
+            }
+        }
+    },
+    "rdf_yaml_sha256": "67537c702de64bb5772a1dbd7c700b48ebf5c66f86b7d1a869c856f1b5734cb0",
+    "status": "untested"
+}

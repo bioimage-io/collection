@@ -1,0 +1,51 @@
+{
+    "rdf_content": {
+        "authors": [
+            {
+                "affiliation": "EPFL, UC3M",
+                "name": "DeepImageJ"
+            }
+        ],
+        "badges": [],
+        "cite": [
+            {
+                "doi": "10.1101/799270",
+                "text": "Gómez-de-Mariscal, E., García-López-de-Haro, C., Ouyang, W., Donati, L., Lundberg E., Unser, M., Muñoz-Barrutia, A. and Sage, D. DeepImageJ: A user-friendly plugin to run deep learning models in ImageJ, BioRxiv, 2019"
+            }
+        ],
+        "config": {
+            "bioimageio": {
+                "thumbnails": {}
+            },
+            "supported_weight_formats": [
+                "tensorflow_saved_model_bundle",
+                "torchscript"
+            ]
+        },
+        "covers": [],
+        "description": "DeepImageJ is a user-friendly plugin that enables the use of pre-trained deep learning models in ImageJ and Fiji.",
+        "documentation": "short_documentation.md",
+        "format_version": "0.2.4",
+        "git_repo": "https://github.com/deepimagej/deepimagej-plugin",
+        "icon": "https://raw.githubusercontent.com/deepimagej/models/master/logos/icon.png",
+        "id": "deepimagej/deepimagej",
+        "id_emoji": null,
+        "license": "BSD-2-Clause",
+        "maintainers": [],
+        "name": "deepImageJ",
+        "source": "deepimagej-app.imjoy.html",
+        "tags": [
+            "software",
+            "bioengine",
+            "deepimagej"
+        ],
+        "type": "application",
+        "uploader": {
+            "email": "bioimageiobot@gmail.com"
+        },
+        "version": 1,
+        "version_number": 1
+    },
+    "rdf_yaml_sha256": "e5a7057fbd84871728a10cc48fef1b0c07223c3136076a63148ecd69d4be2794",
+    "status": "untested"
+}

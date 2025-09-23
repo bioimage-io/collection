@@ -1,0 +1,162 @@
+{
+    "rdf_content": {
+        "attachments": [
+            {
+                "sha256": "c3d45908d71137990cabac191669e97a0f155842e69844967f06f3ac79e86409",
+                "source": "config.toml"
+            }
+        ],
+        "authors": [
+            {
+                "affiliation": "Dana-Farber Cancer Institute & Wyss Institute",
+                "github_user": "mattaq31",
+                "name": "Matthew Aquilina",
+                "orcid": "0000-0002-4039-1398"
+            }
+        ],
+        "cite": [
+            {
+                "doi": "10.1101/2024.09.06.611479",
+                "text": "Aquilina M, Wu NJW, Kwan K, Busic F, Dodd J, Nicolas-Saenz L, et al. GelGenie: an AI-powered framework for gel electrophoresis image analysis. bioRxiv. 2024 Sep 6;2024.09.06.611479."
+            }
+        ],
+        "config": {
+            "bioimageio": {
+                "thumbnails": {
+                    "cover_1.png": "cover_1.thumbnail.png",
+                    "cover_2.png": "cover_2.thumbnail.png",
+                    "cover_3.png": "cover_3.thumbnail.png"
+                }
+            }
+        },
+        "covers": [
+            "cover_1.png",
+            "cover_2.png",
+            "cover_3.png"
+        ],
+        "description": "U-Net trained to segment and extract gel bands from gel electrophoresis images. This is the universal version (V1) of the model.",
+        "documentation": "README.md",
+        "format_version": "0.5.3",
+        "git_repo": "https://github.com/mattaq31/GelGenie",
+        "id": "self-disciplined-blowfish",
+        "id_emoji": "🐡",
+        "inputs": [
+            {
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "channel_names": [
+                            "input"
+                        ],
+                        "type": "channel"
+                    },
+                    {
+                        "concatenable": false,
+                        "id": "y",
+                        "scale": 1,
+                        "size": {
+                            "min": 32,
+                            "step": 32
+                        },
+                        "type": "space"
+                    },
+                    {
+                        "concatenable": false,
+                        "id": "x",
+                        "scale": 1,
+                        "size": {
+                            "min": 32,
+                            "step": 32
+                        },
+                        "type": "space"
+                    }
+                ],
+                "data": {
+                    "type": "float32"
+                },
+                "id": "input",
+                "sample_tensor": {
+                    "sha256": "9aa3a34a45528600cd54fc7685df6ed12f9f2733908bd17d7c7538f9d6c4e634",
+                    "source": "input_134.tif"
+                },
+                "test_tensor": {
+                    "sha256": "1bdface89e05a0fd71e51dfeb28da57434d9bfcb0412238db0b78c7c2ee10467",
+                    "source": "test_input.npy"
+                }
+            }
+        ],
+        "license": "Apache-2.0",
+        "name": "GelGenie Universal V1",
+        "outputs": [
+            {
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "channel_names": [
+                            "prediction_1",
+                            "prediction_2"
+                        ],
+                        "type": "channel"
+                    },
+                    {
+                        "id": "y",
+                        "scale": 1,
+                        "size": {
+                            "axis_id": "y",
+                            "tensor_id": "input"
+                        },
+                        "type": "space"
+                    },
+                    {
+                        "id": "x",
+                        "scale": 1,
+                        "size": {
+                            "axis_id": "x",
+                            "tensor_id": "input"
+                        },
+                        "type": "space"
+                    }
+                ],
+                "data": {
+                    "type": "float32"
+                },
+                "id": "prediction",
+                "sample_tensor": {
+                    "sha256": "fbbf506fdfea1f593144b77951fa17e372d9bed59a1d7390212cfb36bae63c67",
+                    "source": "output_134.png"
+                },
+                "test_tensor": {
+                    "sha256": "8f85f7cfaa7a0222c83990b1ebbefa5367bcbc10d2da305615e2dc4afe109336",
+                    "source": "test_output.npy"
+                }
+            }
+        ],
+        "tags": [
+            "Gel Electrophoresis",
+            "Gel Quantitation",
+            "Machine Learning",
+            "Image Segmentation",
+            "Pytorch",
+            "QuPath",
+            "DeepImageJ"
+        ],
+        "type": "model",
+        "uploader": {
+            "email": "thefynnbe@gmail.com",
+            "name": "Fynn Beuttenmüller"
+        },
+        "weights": {
+            "torchscript": {
+                "pytorch_version": "2.5.1",
+                "sha256": "fcdca2fc286b1f00b9656fcd023756754d40cd4c62b1de83cbf3341bf0f7dfeb",
+                "source": "unet_dec_21_epoch_579.pt"
+            }
+        }
+    },
+    "rdf_yaml_sha256": "2fd95e20be75e454d9b90a89512560b2ad19cca2d464596093ff96733e8f5bdf",
+    "status": "untested"
+}

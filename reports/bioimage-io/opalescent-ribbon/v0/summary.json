@@ -1,0 +1,76 @@
+{
+    "rdf_content": {
+        "authors": [
+            {
+                "name": "Lucas von Chamier and the ZeroCostDL4Mic Team"
+            }
+        ],
+        "badges": [
+            {
+                "icon": "https://colab.research.google.com/assets/colab-badge.svg",
+                "label": "Open in Colab",
+                "url": "https://colab.research.google.com/github/HenriquesLab/ZeroCostDL4Mic/blob/master/Colab_notebooks/CARE_3D_ZeroCostDL4Mic.ipynb"
+            }
+        ],
+        "cite": [
+            {
+                "doi": "10.1038/s41467-021-22518-0",
+                "text": "von Chamier, L., Laine, R.F., Jukkala, J. et al. Democratising deep learning for microscopy with ZeroCostDL4Mic. Nat Commun 12, 2276 (2021). https://doi.org/10.1038/s41467-021-22518-0"
+            },
+            {
+                "doi": "10.1038/s41592-018-0216-7",
+                "text": "Weigert, M., Schmidt, U., Boothe, T. et al. Content-aware image restoration: pushing the limits of fluorescence microscopy. Nat Methods 15, 1090â€“1097 (2018). https://doi.org/10.1038/s41592-018-0216-7"
+            }
+        ],
+        "config": {
+            "bioimageio": {
+                "nickname": "opalescent-ribbon",
+                "nickname_icon": "🎀",
+                "status": "accepted",
+                "version_id": "latest",
+                "version_name": "latest"
+            },
+            "dl4miceverywhere": {
+                "cuda_version": "11.8.0",
+                "cudnn_version": "8.6.0.163",
+                "description": "CARE_3D_DL4Mic is the conversion of the 3D CARE from ZeroCostDL4Mic.",
+                "dl4miceverywhere_version": "2.0.0",
+                "docker_hub_image": "care_3d_zerocostdl4mic-z1.15.3-d2.0.0",
+                "notebook_url": "https://raw.githubusercontent.com/HenriquesLab/ZeroCostDL4Mic/master/Colab_notebooks/CARE_3D_ZeroCostDL4Mic.ipynb",
+                "notebook_version": "1.15.3",
+                "python_version": "3.9",
+                "requirements_url": "https://raw.githubusercontent.com/HenriquesLab/ZeroCostDL4Mic/master/requirements_files/CARE_3D_requirements_simple.txt",
+                "sections_to_remove": "1.1. 1.2. 2. 6.2.",
+                "ubuntu_version": "22.04"
+            }
+        },
+        "covers": [
+            "3D_CARE_notebook.png"
+        ],
+        "description": "Supervised restoration of 3D images. CARE is a neural network capable of image restoration from corrupted bio-images, first published in 2018 by Weigert et al. in Nature Methods. The network allows image denoising and resolution improvement in 2D and 3D images, in a supervised training manner. The function of the network is essentially determined by the set of images provided in the training dataset. For instance, if noisy images are provided as input and high signal-to-noise ratio images are provided as targets, the network will perform denoising. Note - visit the ZeroCostDL4Mic wiki to check the original publications this network is based on and make sure you cite these.",
+        "documentation": "README.md",
+        "download_url": "https://raw.githubusercontent.com/HenriquesLab/ZeroCostDL4Mic/master/Colab_notebooks/CARE_3D_ZeroCostDL4Mic.ipynb",
+        "format_version": "0.2.4",
+        "git_repo": "https://github.com/HenriquesLab/ZeroCostDL4Mic",
+        "id": "zero/Notebook_CARE_3D_ZeroCostDL4Mic",
+        "links": [
+            "zero/Notebook Preview",
+            "zero/Dataset_CARE_3D_ZeroCostDL4Mic"
+        ],
+        "maintainers": [],
+        "name": "CARE (3D) - ZeroCostDL4Mic",
+        "tags": [
+            "colab",
+            "notebook",
+            "CARE",
+            "denoising",
+            "ZeroCostDL4Mic",
+            "3D",
+            "dl4miceverywhere"
+        ],
+        "type": "application",
+        "version": "1.15.3"
+    },
+    "rdf_yaml_sha256": "b224a57fa20d31fb8ea6de7a14f0ad42854ef1d48c78c468607a001c152d0673",
+    "status": "untested"
+}

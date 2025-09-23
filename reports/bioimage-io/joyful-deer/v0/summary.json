@@ -1,0 +1,288 @@
+{
+    "rdf_content": {
+        "attachments": {
+            "files": [
+                "scale_linear.ijm"
+            ]
+        },
+        "authors": [
+            {
+                "affiliation": "EMBL Heidelberg",
+                "github_user": "jhennies",
+                "name": "Julian Hennies",
+                "orcid": "0000-0002-0555-151X"
+            }
+        ],
+        "cite": [
+            {
+                "doi": "10.1101/2023.04.06.535829",
+                "text": "Hennies et al. 2023, CebraEM: A practical workflow to segment cellular organelles in volume SEM datasets using a transferable CNN-based membrane prediction"
+            }
+        ],
+        "config": {
+            "bioimageio": {
+                "nickname": "joyful-deer",
+                "nickname_icon": "🦌",
+                "test_kwargs": {
+                    "pytorch_state_dict": {
+                        "decimal": 2
+                    },
+                    "torchscript": {
+                        "decimal": 2
+                    }
+                },
+                "thumbnails": {
+                    "coverimage.jpg": "coverimage.thumbnail.png"
+                }
+            }
+        },
+        "covers": [
+            "coverimage.jpg"
+        ],
+        "description": "Cellular membrane prediction model for volume SEM datasets",
+        "documentation": "CebraNET_README.md",
+        "format_version": "0.4.10",
+        "id": "10.5281/zenodo.7274275/8123818",
+        "id_emoji": "🦌",
+        "inputs": [
+            {
+                "axes": "bczyx",
+                "data_range": [
+                    0.0,
+                    255.0
+                ],
+                "data_type": "uint8",
+                "name": "input0",
+                "preprocessing": [
+                    {
+                        "kwargs": {
+                            "axes": "xyz",
+                            "gain": 0.00392156862745098,
+                            "offset": 0.0
+                        },
+                        "name": "scale_linear"
+                    }
+                ],
+                "shape": {
+                    "min": [
+                        1,
+                        1,
+                        64,
+                        64,
+                        64
+                    ],
+                    "step": [
+                        0,
+                        0,
+                        16,
+                        16,
+                        16
+                    ]
+                }
+            }
+        ],
+        "license": "CC-BY-4.0",
+        "links": [
+            "imjoy/BioImageIO-Packager",
+            "ilastik/ilastik"
+        ],
+        "maintainers": [
+            {
+                "affiliation": "EMBL Heidelberg",
+                "github_user": "jhennies",
+                "name": "Julian Hennies",
+                "orcid": "0000-0002-0555-151X"
+            }
+        ],
+        "name": "CebraNET Cellular Membranes in Volume SEM",
+        "outputs": [
+            {
+                "axes": "bczyx",
+                "data_range": [
+                    null,
+                    null
+                ],
+                "data_type": "float32",
+                "halo": [
+                    0,
+                    0,
+                    16,
+                    16,
+                    16
+                ],
+                "name": "output0",
+                "shape": [
+                    1,
+                    1,
+                    64,
+                    64,
+                    64
+                ]
+            }
+        ],
+        "sample_inputs": [
+            "sample_input_0.tif"
+        ],
+        "sample_outputs": [
+            "sample_output_0.tif"
+        ],
+        "tags": [
+            "unet",
+            "3d",
+            "cells",
+            "whole-organism",
+            "ilastik",
+            "semantic-segmentation",
+            "electron-microscopy",
+            "pytorch",
+            "membranes",
+            "hela",
+            "macrophage",
+            "platynereis",
+            "calu-3"
+        ],
+        "test_inputs": [
+            "test_data_raw.npy"
+        ],
+        "test_outputs": [
+            "test_data_out.npy"
+        ],
+        "timestamp": "2023-10-27T11:34:30.252675",
+        "type": "model",
+        "uploader": {
+            "email": "bioimageiobot@gmail.com"
+        },
+        "version": 1,
+        "version_number": 1,
+        "weights": {
+            "pytorch_state_dict": {
+                "architecture": "piled_unets.py:PiledUnet",
+                "architecture_sha256": "4b0f4759b35dfcd868f71acac492fc6c2c9c99897b30b2508126a8e6607e24c7",
+                "kwargs": {
+                    "batch_norm": true,
+                    "filter_sizes_bottleneck": [
+                        [
+                            64,
+                            128
+                        ],
+                        [
+                            64,
+                            128
+                        ],
+                        [
+                            64,
+                            128
+                        ]
+                    ],
+                    "filter_sizes_down": [
+                        [
+                            [
+                                8,
+                                16
+                            ],
+                            [
+                                16,
+                                32
+                            ],
+                            [
+                                32,
+                                64
+                            ]
+                        ],
+                        [
+                            [
+                                8,
+                                16
+                            ],
+                            [
+                                16,
+                                32
+                            ],
+                            [
+                                32,
+                                64
+                            ]
+                        ],
+                        [
+                            [
+                                8,
+                                16
+                            ],
+                            [
+                                16,
+                                32
+                            ],
+                            [
+                                32,
+                                64
+                            ]
+                        ]
+                    ],
+                    "filter_sizes_up": [
+                        [
+                            [
+                                64,
+                                64
+                            ],
+                            [
+                                32,
+                                32
+                            ],
+                            [
+                                16,
+                                16
+                            ]
+                        ],
+                        [
+                            [
+                                64,
+                                64
+                            ],
+                            [
+                                32,
+                                32
+                            ],
+                            [
+                                16,
+                                16
+                            ]
+                        ],
+                        [
+                            [
+                                64,
+                                64
+                            ],
+                            [
+                                32,
+                                32
+                            ],
+                            [
+                                16,
+                                16
+                            ]
+                        ]
+                    ],
+                    "in_channels": 1,
+                    "n_nets": 3,
+                    "out_channels": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "output_activation": "sigmoid",
+                    "predict": true
+                },
+                "pytorch_version": "1.13.1",
+                "sha256": "6b523c9a77916e75306563e39b79ef2cfb72a857540994958a8d0943f46a207c",
+                "source": "model_0097.pt"
+            },
+            "torchscript": {
+                "pytorch_version": "1.13.1",
+                "sha256": "edbb4da356b1d79b0ed0ee73dd80d3760ddf99ebdd969900aba7ff8d1c521734",
+                "source": "weights.torchscript"
+            }
+        }
+    },
+    "rdf_yaml_sha256": "09faf05e35240aa1552e5809ea4873cfb228417128bc5fca6e0a618fc45bb838",
+    "status": "untested"
+}

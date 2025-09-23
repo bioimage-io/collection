@@ -1,0 +1,904 @@
+{
+    "rdf_content": {
+        "attachments": [
+            {
+                "sha256": "8a2670d7182c454b11677bae3a9c1e2bf7078bed5d65a919525a81e7a885b28f",
+                "source": "vit_l_decoder.pt"
+            }
+        ],
+        "authors": [
+            {
+                "affiliation": "University Goettingen",
+                "github_user": "anwai98",
+                "name": "Anwai Archit"
+            },
+            {
+                "affiliation": "University Goettingen",
+                "github_user": "constantinpape",
+                "name": "Constantin Pape"
+            }
+        ],
+        "cite": [
+            {
+                "doi": "10.1101/2023.08.21.554208",
+                "text": "Archit et al. Segment Anything for Microscopy"
+            }
+        ],
+        "config": {
+            "bioimageio": {
+                "thumbnails": {
+                    "cover_em.png": "cover_em.thumbnail.png"
+                }
+            }
+        },
+        "covers": [
+            "cover_em.png"
+        ],
+        "description": "Finetuned Segment Anything Model for Microscopy",
+        "documentation": "documentation.md",
+        "format_version": "0.5.0",
+        "git_repo": "https://github.com/computational-cell-analytics/micro-sam",
+        "id": "humorous-crab",
+        "id_emoji": "🦀",
+        "inputs": [
+            {
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "channel_names": [
+                            "R",
+                            "G",
+                            "B"
+                        ],
+                        "type": "channel"
+                    },
+                    {
+                        "id": "y",
+                        "size": {
+                            "min": 1,
+                            "step": 1
+                        },
+                        "type": "space"
+                    },
+                    {
+                        "id": "x",
+                        "size": {
+                            "min": 1,
+                            "step": 1
+                        },
+                        "type": "space"
+                    }
+                ],
+                "data": {
+                    "type": "uint8"
+                },
+                "id": "image",
+                "test_tensor": {
+                    "sha256": "29ce602a6b2347ab9d4bd6c37b424d27c2a7994187a5b581ef83484f08be6b83",
+                    "source": "input.npy"
+                }
+            },
+            {
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "id": "object",
+                        "size": {
+                            "min": 1,
+                            "step": 1
+                        },
+                        "type": "index"
+                    },
+                    {
+                        "channel_names": [
+                            "h",
+                            "w",
+                            "x",
+                            "y"
+                        ],
+                        "type": "channel"
+                    }
+                ],
+                "data": {
+                    "type": "int64"
+                },
+                "id": "box_prompts",
+                "optional": true,
+                "test_tensor": {
+                    "sha256": "575790514a2970ce720247437cf109064a86a0ff1e159c405da40cec98c45b19",
+                    "source": "box_prompts.npy"
+                }
+            },
+            {
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "id": "object",
+                        "size": {
+                            "min": 1,
+                            "step": 1
+                        },
+                        "type": "index"
+                    },
+                    {
+                        "id": "point",
+                        "size": {
+                            "min": 1,
+                            "step": 1
+                        },
+                        "type": "index"
+                    },
+                    {
+                        "channel_names": [
+                            "x",
+                            "y"
+                        ],
+                        "type": "channel"
+                    }
+                ],
+                "data": {
+                    "type": "int64"
+                },
+                "id": "point_prompts",
+                "optional": true,
+                "test_tensor": {
+                    "sha256": "219846efa381b9b6c2d667f97b0a68db7f6ba1b7e0365ba90d8447e951bb0be4",
+                    "source": "point_prompts.npy"
+                }
+            },
+            {
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "id": "object",
+                        "size": {
+                            "min": 1,
+                            "step": 1
+                        },
+                        "type": "index"
+                    },
+                    {
+                        "id": "point",
+                        "size": {
+                            "min": 1,
+                            "step": 1
+                        },
+                        "type": "index"
+                    }
+                ],
+                "data": {
+                    "type": "int64"
+                },
+                "id": "point_labels",
+                "optional": true,
+                "test_tensor": {
+                    "sha256": "c4e6b5cec2d9be65ad0cd3b2fab7b6add275d16d5a457208777771362de9bb81",
+                    "source": "point_labels.npy"
+                }
+            },
+            {
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "id": "object",
+                        "size": {
+                            "min": 1,
+                            "step": 1
+                        },
+                        "type": "index"
+                    },
+                    {
+                        "channel_names": [
+                            "channel"
+                        ],
+                        "type": "channel"
+                    },
+                    {
+                        "id": "y",
+                        "size": 256,
+                        "type": "space"
+                    },
+                    {
+                        "id": "x",
+                        "size": 256,
+                        "type": "space"
+                    }
+                ],
+                "data": {
+                    "type": "float32"
+                },
+                "id": "mask_prompts",
+                "optional": true,
+                "test_tensor": {
+                    "sha256": "558028ff0fbd03c2ac851d1d2ee6af7c6f3f0a75bbdb7a28d99595a4f6460d90",
+                    "source": "mask_prompts.npy"
+                }
+            },
+            {
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "channel_names": [
+                            "c0",
+                            "c1",
+                            "c2",
+                            "c3",
+                            "c4",
+                            "c5",
+                            "c6",
+                            "c7",
+                            "c8",
+                            "c9",
+                            "c10",
+                            "c11",
+                            "c12",
+                            "c13",
+                            "c14",
+                            "c15",
+                            "c16",
+                            "c17",
+                            "c18",
+                            "c19",
+                            "c20",
+                            "c21",
+                            "c22",
+                            "c23",
+                            "c24",
+                            "c25",
+                            "c26",
+                            "c27",
+                            "c28",
+                            "c29",
+                            "c30",
+                            "c31",
+                            "c32",
+                            "c33",
+                            "c34",
+                            "c35",
+                            "c36",
+                            "c37",
+                            "c38",
+                            "c39",
+                            "c40",
+                            "c41",
+                            "c42",
+                            "c43",
+                            "c44",
+                            "c45",
+                            "c46",
+                            "c47",
+                            "c48",
+                            "c49",
+                            "c50",
+                            "c51",
+                            "c52",
+                            "c53",
+                            "c54",
+                            "c55",
+                            "c56",
+                            "c57",
+                            "c58",
+                            "c59",
+                            "c60",
+                            "c61",
+                            "c62",
+                            "c63",
+                            "c64",
+                            "c65",
+                            "c66",
+                            "c67",
+                            "c68",
+                            "c69",
+                            "c70",
+                            "c71",
+                            "c72",
+                            "c73",
+                            "c74",
+                            "c75",
+                            "c76",
+                            "c77",
+                            "c78",
+                            "c79",
+                            "c80",
+                            "c81",
+                            "c82",
+                            "c83",
+                            "c84",
+                            "c85",
+                            "c86",
+                            "c87",
+                            "c88",
+                            "c89",
+                            "c90",
+                            "c91",
+                            "c92",
+                            "c93",
+                            "c94",
+                            "c95",
+                            "c96",
+                            "c97",
+                            "c98",
+                            "c99",
+                            "c100",
+                            "c101",
+                            "c102",
+                            "c103",
+                            "c104",
+                            "c105",
+                            "c106",
+                            "c107",
+                            "c108",
+                            "c109",
+                            "c110",
+                            "c111",
+                            "c112",
+                            "c113",
+                            "c114",
+                            "c115",
+                            "c116",
+                            "c117",
+                            "c118",
+                            "c119",
+                            "c120",
+                            "c121",
+                            "c122",
+                            "c123",
+                            "c124",
+                            "c125",
+                            "c126",
+                            "c127",
+                            "c128",
+                            "c129",
+                            "c130",
+                            "c131",
+                            "c132",
+                            "c133",
+                            "c134",
+                            "c135",
+                            "c136",
+                            "c137",
+                            "c138",
+                            "c139",
+                            "c140",
+                            "c141",
+                            "c142",
+                            "c143",
+                            "c144",
+                            "c145",
+                            "c146",
+                            "c147",
+                            "c148",
+                            "c149",
+                            "c150",
+                            "c151",
+                            "c152",
+                            "c153",
+                            "c154",
+                            "c155",
+                            "c156",
+                            "c157",
+                            "c158",
+                            "c159",
+                            "c160",
+                            "c161",
+                            "c162",
+                            "c163",
+                            "c164",
+                            "c165",
+                            "c166",
+                            "c167",
+                            "c168",
+                            "c169",
+                            "c170",
+                            "c171",
+                            "c172",
+                            "c173",
+                            "c174",
+                            "c175",
+                            "c176",
+                            "c177",
+                            "c178",
+                            "c179",
+                            "c180",
+                            "c181",
+                            "c182",
+                            "c183",
+                            "c184",
+                            "c185",
+                            "c186",
+                            "c187",
+                            "c188",
+                            "c189",
+                            "c190",
+                            "c191",
+                            "c192",
+                            "c193",
+                            "c194",
+                            "c195",
+                            "c196",
+                            "c197",
+                            "c198",
+                            "c199",
+                            "c200",
+                            "c201",
+                            "c202",
+                            "c203",
+                            "c204",
+                            "c205",
+                            "c206",
+                            "c207",
+                            "c208",
+                            "c209",
+                            "c210",
+                            "c211",
+                            "c212",
+                            "c213",
+                            "c214",
+                            "c215",
+                            "c216",
+                            "c217",
+                            "c218",
+                            "c219",
+                            "c220",
+                            "c221",
+                            "c222",
+                            "c223",
+                            "c224",
+                            "c225",
+                            "c226",
+                            "c227",
+                            "c228",
+                            "c229",
+                            "c230",
+                            "c231",
+                            "c232",
+                            "c233",
+                            "c234",
+                            "c235",
+                            "c236",
+                            "c237",
+                            "c238",
+                            "c239",
+                            "c240",
+                            "c241",
+                            "c242",
+                            "c243",
+                            "c244",
+                            "c245",
+                            "c246",
+                            "c247",
+                            "c248",
+                            "c249",
+                            "c250",
+                            "c251",
+                            "c252",
+                            "c253",
+                            "c254",
+                            "c255"
+                        ],
+                        "type": "channel"
+                    },
+                    {
+                        "id": "y",
+                        "size": 64,
+                        "type": "space"
+                    },
+                    {
+                        "id": "x",
+                        "size": 64,
+                        "type": "space"
+                    }
+                ],
+                "data": {
+                    "type": "float32"
+                },
+                "id": "embeddings",
+                "optional": true,
+                "test_tensor": {
+                    "sha256": "23845424ca305efec2dc5be8d06dccc3c22bab703719cdb853bfe4b77c7e3389",
+                    "source": "embeddings.npy"
+                }
+            }
+        ],
+        "license": "CC-BY-4.0",
+        "name": "vit_l_em_organelles",
+        "outputs": [
+            {
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "id": "object",
+                        "size": {},
+                        "type": "index"
+                    },
+                    {
+                        "channel_names": [
+                            "mask"
+                        ],
+                        "type": "channel"
+                    },
+                    {
+                        "id": "y",
+                        "size": {
+                            "axis_id": "y",
+                            "tensor_id": "image"
+                        },
+                        "type": "space"
+                    },
+                    {
+                        "id": "x",
+                        "size": {
+                            "axis_id": "x",
+                            "tensor_id": "image"
+                        },
+                        "type": "space"
+                    }
+                ],
+                "data": {
+                    "type": "uint8"
+                },
+                "id": "masks",
+                "test_tensor": {
+                    "sha256": "a4e8f99844e8a23d75c6f9ec88d08d5917a3439923854a555dd6acd2ca031227",
+                    "source": "mask.npy"
+                }
+            },
+            {
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "id": "object",
+                        "size": {},
+                        "type": "index"
+                    },
+                    {
+                        "channel_names": [
+                            "mask"
+                        ],
+                        "type": "channel"
+                    }
+                ],
+                "data": {
+                    "type": "float32"
+                },
+                "id": "scores",
+                "test_tensor": {
+                    "sha256": "3f2c88889f75a2ad535c46d0caff58cb392a5b60eb59c02da1a44bd7b2ec82ee",
+                    "source": "scores.npy"
+                }
+            },
+            {
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "channel_names": [
+                            "c0",
+                            "c1",
+                            "c2",
+                            "c3",
+                            "c4",
+                            "c5",
+                            "c6",
+                            "c7",
+                            "c8",
+                            "c9",
+                            "c10",
+                            "c11",
+                            "c12",
+                            "c13",
+                            "c14",
+                            "c15",
+                            "c16",
+                            "c17",
+                            "c18",
+                            "c19",
+                            "c20",
+                            "c21",
+                            "c22",
+                            "c23",
+                            "c24",
+                            "c25",
+                            "c26",
+                            "c27",
+                            "c28",
+                            "c29",
+                            "c30",
+                            "c31",
+                            "c32",
+                            "c33",
+                            "c34",
+                            "c35",
+                            "c36",
+                            "c37",
+                            "c38",
+                            "c39",
+                            "c40",
+                            "c41",
+                            "c42",
+                            "c43",
+                            "c44",
+                            "c45",
+                            "c46",
+                            "c47",
+                            "c48",
+                            "c49",
+                            "c50",
+                            "c51",
+                            "c52",
+                            "c53",
+                            "c54",
+                            "c55",
+                            "c56",
+                            "c57",
+                            "c58",
+                            "c59",
+                            "c60",
+                            "c61",
+                            "c62",
+                            "c63",
+                            "c64",
+                            "c65",
+                            "c66",
+                            "c67",
+                            "c68",
+                            "c69",
+                            "c70",
+                            "c71",
+                            "c72",
+                            "c73",
+                            "c74",
+                            "c75",
+                            "c76",
+                            "c77",
+                            "c78",
+                            "c79",
+                            "c80",
+                            "c81",
+                            "c82",
+                            "c83",
+                            "c84",
+                            "c85",
+                            "c86",
+                            "c87",
+                            "c88",
+                            "c89",
+                            "c90",
+                            "c91",
+                            "c92",
+                            "c93",
+                            "c94",
+                            "c95",
+                            "c96",
+                            "c97",
+                            "c98",
+                            "c99",
+                            "c100",
+                            "c101",
+                            "c102",
+                            "c103",
+                            "c104",
+                            "c105",
+                            "c106",
+                            "c107",
+                            "c108",
+                            "c109",
+                            "c110",
+                            "c111",
+                            "c112",
+                            "c113",
+                            "c114",
+                            "c115",
+                            "c116",
+                            "c117",
+                            "c118",
+                            "c119",
+                            "c120",
+                            "c121",
+                            "c122",
+                            "c123",
+                            "c124",
+                            "c125",
+                            "c126",
+                            "c127",
+                            "c128",
+                            "c129",
+                            "c130",
+                            "c131",
+                            "c132",
+                            "c133",
+                            "c134",
+                            "c135",
+                            "c136",
+                            "c137",
+                            "c138",
+                            "c139",
+                            "c140",
+                            "c141",
+                            "c142",
+                            "c143",
+                            "c144",
+                            "c145",
+                            "c146",
+                            "c147",
+                            "c148",
+                            "c149",
+                            "c150",
+                            "c151",
+                            "c152",
+                            "c153",
+                            "c154",
+                            "c155",
+                            "c156",
+                            "c157",
+                            "c158",
+                            "c159",
+                            "c160",
+                            "c161",
+                            "c162",
+                            "c163",
+                            "c164",
+                            "c165",
+                            "c166",
+                            "c167",
+                            "c168",
+                            "c169",
+                            "c170",
+                            "c171",
+                            "c172",
+                            "c173",
+                            "c174",
+                            "c175",
+                            "c176",
+                            "c177",
+                            "c178",
+                            "c179",
+                            "c180",
+                            "c181",
+                            "c182",
+                            "c183",
+                            "c184",
+                            "c185",
+                            "c186",
+                            "c187",
+                            "c188",
+                            "c189",
+                            "c190",
+                            "c191",
+                            "c192",
+                            "c193",
+                            "c194",
+                            "c195",
+                            "c196",
+                            "c197",
+                            "c198",
+                            "c199",
+                            "c200",
+                            "c201",
+                            "c202",
+                            "c203",
+                            "c204",
+                            "c205",
+                            "c206",
+                            "c207",
+                            "c208",
+                            "c209",
+                            "c210",
+                            "c211",
+                            "c212",
+                            "c213",
+                            "c214",
+                            "c215",
+                            "c216",
+                            "c217",
+                            "c218",
+                            "c219",
+                            "c220",
+                            "c221",
+                            "c222",
+                            "c223",
+                            "c224",
+                            "c225",
+                            "c226",
+                            "c227",
+                            "c228",
+                            "c229",
+                            "c230",
+                            "c231",
+                            "c232",
+                            "c233",
+                            "c234",
+                            "c235",
+                            "c236",
+                            "c237",
+                            "c238",
+                            "c239",
+                            "c240",
+                            "c241",
+                            "c242",
+                            "c243",
+                            "c244",
+                            "c245",
+                            "c246",
+                            "c247",
+                            "c248",
+                            "c249",
+                            "c250",
+                            "c251",
+                            "c252",
+                            "c253",
+                            "c254",
+                            "c255"
+                        ],
+                        "type": "channel"
+                    },
+                    {
+                        "id": "y",
+                        "size": 64,
+                        "type": "space"
+                    },
+                    {
+                        "id": "x",
+                        "size": 64,
+                        "type": "space"
+                    }
+                ],
+                "data": {
+                    "type": "float32"
+                },
+                "id": "embeddings",
+                "test_tensor": {
+                    "sha256": "23845424ca305efec2dc5be8d06dccc3c22bab703719cdb853bfe4b77c7e3389",
+                    "source": "embeddings.npy"
+                }
+            }
+        ],
+        "tags": [
+            "segment-anything",
+            "instance-segmentation"
+        ],
+        "type": "model",
+        "uploader": {
+            "email": "constantin.pape@informatik.uni-goettingen.de"
+        },
+        "version_number": 1,
+        "weights": {
+            "pytorch_state_dict": {
+                "architecture": {
+                    "callable": "PredictorAdaptor",
+                    "kwargs": {
+                        "model_type": "vit_l"
+                    },
+                    "sha256": "c55a850510e70b6b815afbec1d19da92792de97c4cf4384ba95d0024157f5c5d",
+                    "source": "predictor_adaptor.py"
+                },
+                "dependencies": {
+                    "sha256": "25d74fdd33d13778435320bb2d4708c01cfa537fa5d578951f7811f9eca6a97a",
+                    "source": "environment.yaml"
+                },
+                "pytorch_version": "2.1.2",
+                "sha256": "4c8a7a2027ffeb452c5a0f535f04bc6e7f5ccdea3c95dedce1a20d68e04c39e8",
+                "source": "vit_l.pt"
+            }
+        }
+    },
+    "rdf_yaml_sha256": "1a12b7fa7ea67612caae21b07794b6221b1c6e86396dd145d11b0309ca598b8a",
+    "status": "untested"
+}

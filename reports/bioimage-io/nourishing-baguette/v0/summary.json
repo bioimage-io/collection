@@ -1,0 +1,76 @@
+{
+    "rdf_content": {
+        "authors": [
+            {
+                "name": "Constantin Pape"
+            }
+        ],
+        "cite": [
+            {
+                "doi": "10.7554/eLife.57613",
+                "text": "Wolny et al."
+            }
+        ],
+        "config": {
+            "background_image": "static/img/zoo-background.svg",
+            "bioimageio": {
+                "nickname": "nourishing-baguette",
+                "nickname_icon": "🥖",
+                "status": "accepted",
+                "version_id": "latest",
+                "version_name": "latest"
+            },
+            "default_type": "model",
+            "explore_button_text": "Start Exploring",
+            "icon": "https://raw.githubusercontent.com/ilastik/bioimage-io-resources/main/image/ilastik-fist-icon.png",
+            "id": "ilastik",
+            "logo": "https://raw.githubusercontent.com/ilastik/bioimage-io-resources/main/image/ilastik-fist-icon.png",
+            "name": "ilastik",
+            "resource_types": [
+                "application"
+            ],
+            "splash_feature_list": null,
+            "splash_subtitle": "the interactive learning and segmentation toolkit",
+            "splash_title": "ilastik",
+            "tags": [
+                "ilastik"
+            ],
+            "url_root": "https://raw.githubusercontent.com/ilastik/bioimage-io-resources/main"
+        },
+        "covers": [
+            "plantseg_cover.jpg"
+        ],
+        "description": "Training data for cell segmentation in Arabidopsis lateral root.",
+        "documentation": "plantseg_root.md",
+        "format_version": "0.2.4",
+        "id": "ilastik/plantseg_root",
+        "license": "CC-BY-4.0",
+        "maintainers": [
+            {
+                "affiliation": "EMBL Heidelberg",
+                "github_user": "fynnbe",
+                "name": "Fynn BeuttenmÃ¼ller",
+                "orcid": "0000-0002-8567-6389"
+            },
+            {
+                "affiliation": "EMBL Heidelberg",
+                "github_user": "constantinpape",
+                "name": "Constantin Pape",
+                "orcid": "0000-0001-6562-7187"
+            }
+        ],
+        "name": "Arabidopsis Lateral Root Traning Data",
+        "source": "https://osf.io/2rszy/",
+        "tags": [
+            "light-microscopy",
+            "arabidopsis",
+            "cells",
+            "instance-segmentation",
+            "3D"
+        ],
+        "type": "dataset",
+        "version": 1
+    },
+    "rdf_yaml_sha256": "d159f44db82a8c64421a42371020ac669c7eae79b3405da2667598952e4bd122",
+    "status": "untested"
+}

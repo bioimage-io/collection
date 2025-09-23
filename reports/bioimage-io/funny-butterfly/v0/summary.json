@@ -1,0 +1,207 @@
+{
+    "rdf_content": {
+        "attachments": {
+            "files": [
+                "per_sample_scale_range.ijm",
+                "scale_linear.ijm",
+                "pix2pix-tom20-11122023_training_report.pdf"
+            ]
+        },
+        "authors": [
+            {
+                "affiliation": "Instituto Gulbenkian de Ciência",
+                "name": "Estibaliz Gómez de Mariscal"
+            }
+        ],
+        "cite": [
+            {
+                "text": "Isola et al. arXiv in 2016",
+                "url": "https://arxiv.org/abs/1611.07004"
+            },
+            {
+                "doi": "10.1101/2020.03.20.000133",
+                "text": "Lucas von Chamier et al. Nat Communications 2021"
+            }
+        ],
+        "config": {
+            "bioimageio": {
+                "thumbnails": {
+                    "cover.jpg": "cover.thumbnail.png"
+                }
+            },
+            "deepimagej": {
+                "allow_tiling": true,
+                "model_keys": null,
+                "prediction": {
+                    "postprocess": [
+                        {
+                            "spec": null
+                        }
+                    ],
+                    "preprocess": [
+                        {
+                            "kwargs": "per_sample_scale_range.ijm",
+                            "spec": "ij.IJ::runMacroFile"
+                        },
+                        {
+                            "kwargs": "scale_linear.ijm",
+                            "spec": "ij.IJ::runMacroFile"
+                        }
+                    ]
+                },
+                "pyramidal_model": false,
+                "test_information": {
+                    "inputs": [
+                        {
+                            "name": "test-input.npy",
+                            "pixel_size": {
+                                "x": 1,
+                                "y": 1,
+                                "z": 1.0
+                            },
+                            "size": "512 x 512 x 1 x 1"
+                        }
+                    ],
+                    "memory_peak": null,
+                    "outputs": [
+                        {
+                            "name": "test-output.npy",
+                            "size": "512 x 512 x 1 x 1",
+                            "type": "image"
+                        }
+                    ],
+                    "runtime": null
+                }
+            }
+        },
+        "covers": [
+            "cover.jpg"
+        ],
+        "description": "A conditional GAN (a.k.a. pix2pix) trained to infer mitochondrial label TOM20-Alexa Fluor 594 in HeLa cells from brightfield microscopy images. This model infers the corresponding 2D confocal microscopy image from a given brightfield image.",
+        "documentation": "README.md",
+        "format_version": "0.4.10",
+        "id": "funny-butterfly",
+        "id_emoji": "🦋",
+        "inputs": [
+            {
+                "axes": "bcyx",
+                "data_range": [
+                    null,
+                    null
+                ],
+                "data_type": "float32",
+                "name": "input",
+                "preprocessing": [
+                    {
+                        "kwargs": {
+                            "axes": "xy",
+                            "max_percentile": 99.9,
+                            "min_percentile": 1.0,
+                            "mode": "per_sample"
+                        },
+                        "name": "scale_range"
+                    },
+                    {
+                        "kwargs": {
+                            "gain": 2.0,
+                            "offset": -1.0
+                        },
+                        "name": "scale_linear"
+                    }
+                ],
+                "shape": [
+                    1,
+                    1,
+                    512,
+                    512
+                ]
+            }
+        ],
+        "license": "CC-BY-NC-1.0",
+        "links": [
+            "deepimagej/deepimagej",
+            "imjoy/BioImageIO-Packager",
+            "zero/dataset_fnet_3d_zerocostdl4mic",
+            "zero/notebook_pix2pix_2d_zerocostdl4mic",
+            "ilastik/ilastik"
+        ],
+        "maintainers": [
+            {
+                "github_user": "esgomezm",
+                "name": "Estibaliz"
+            }
+        ],
+        "name": "Mitochondria TOM20 artificial labelling - pix2pix",
+        "outputs": [
+            {
+                "axes": "bcyx",
+                "data_range": [
+                    null,
+                    null
+                ],
+                "data_type": "float32",
+                "name": "output",
+                "shape": {
+                    "offset": [
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "reference_tensor": "input",
+                    "scale": [
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0
+                    ]
+                }
+            }
+        ],
+        "sample_inputs": [
+            "sample_input_0.tif"
+        ],
+        "sample_outputs": [
+            "sample_output_0.tif"
+        ],
+        "tags": [
+            "in-silico-labeling",
+            "pytorch",
+            "cyclegan",
+            "conditional-gan",
+            "zerocostdl4mic",
+            "deepimagej",
+            "actin",
+            "dapi",
+            "cells",
+            "nuclei",
+            "fluorescence-light-microscopy",
+            "2d"
+        ],
+        "test_inputs": [
+            "test-input.npy"
+        ],
+        "test_outputs": [
+            "test-output.npy"
+        ],
+        "timestamp": "2024-01-11T15:31:40.010085",
+        "training_data": {
+            "id": "zero/dataset_fnet_3d_zerocostdl4mic"
+        },
+        "type": "model",
+        "uploader": {
+            "email": "bioimageiobot@gmail.com"
+        },
+        "version": 1,
+        "version_number": 2,
+        "weights": {
+            "torchscript": {
+                "pytorch_version": "2.1",
+                "sha256": "86f7daa11efe1071d3d52e698d462113409ee543827e76f597a60e5a1b6dd71c",
+                "source": "latest_net_G_torchscript.pt"
+            }
+        }
+    },
+    "rdf_yaml_sha256": "a7776c910c7b3710a185736ca07f0707c0581b9b56bd7806903f067239c288e5",
+    "status": "untested"
+}

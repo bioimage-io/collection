@@ -1,0 +1,148 @@
+{
+    "rdf_content": {
+        "authors": [
+            {
+                "affiliation": "Donostia International Physics Center",
+                "github_user": "danifranco",
+                "name": "Daniel Franco-Barranco",
+                "orcid": "0000-0002-1109-110X"
+            },
+            {
+                "affiliation": "University of the Basque Country (UPV/EHU)",
+                "github_user": "iarganda",
+                "name": "Ignacio Arganda-Carreras",
+                "orcid": "0000-0003-0229-5722"
+            },
+            {
+                "affiliation": "Universidad Carlos III de Madrid",
+                "github_user": "arratemunoz",
+                "name": "Arrate Muñoz-Barrutia",
+                "orcid": "0000-0002-1573-1661"
+            },
+            {
+                "affiliation": "University of Seville",
+                "github_user": "jansanrom",
+                "name": "Jesús Ángel Andrés-San Román",
+                "orcid": "0000-0003-3197-5014"
+            },
+            {
+                "affiliation": "Cambridge University",
+                "github_user": "pedgomgal1",
+                "name": "Pedro Javier Gómez Gálvez",
+                "orcid": "0000-0002-0509-227X"
+            },
+            {
+                "affiliation": "University of Seville",
+                "github_user": "lmescu",
+                "name": "Luis M. Escudero",
+                "orcid": "0000-0001-8030-1820"
+            },
+            {
+                "affiliation": "Instituto Gulbenkian de Ciência",
+                "github_user": "IvanHCenalmor",
+                "name": "Iván Hidalgo Cenalmor",
+                "orcid": "0009-0000-8923-568X"
+            },
+            {
+                "affiliation": "Biofisika Institute",
+                "github_user": "lenkaback",
+                "name": "Lenka Backová",
+                "orcid": "0000-0002-3076-2618"
+            },
+            {
+                "affiliation": "University of the Basque Country (UPV/EHU)",
+                "github_user": "AAitorG",
+                "name": "Aitor Gonzalez-Marfil",
+                "orcid": "0000-0003-1367-4154"
+            },
+            {
+                "affiliation": "Boston College",
+                "github_user": "donglaiw",
+                "name": "Donglai Wei",
+                "orcid": "0000-0002-2329-5484"
+            },
+            {
+                "affiliation": "Laboratory of Optics and Bioscience",
+                "github_user": "ClementCaporal",
+                "name": "Clement Caporal",
+                "orcid": "0000-0002-9441-9173"
+            }
+        ],
+        "cite": [
+            {
+                "doi": "10.1109/ISBI53787.2023.10230593",
+                "text": "BiaPy: a ready-to-use library for Bioimage Analysis Pipelines. 2023 IEEE 20th International Symposium on Biomedical Imaging (ISBI)"
+            }
+        ],
+        "config": {
+            "background_image": "static/img/zoo-background.svg",
+            "bioimageio": {
+                "thumbnails": {
+                    "BiaPy_256.png": "BiaPy_256.thumbnail.png"
+                }
+            },
+            "contact": [
+                {
+                    "affiliation": [
+                        {
+                            "name": "DIPC",
+                            "url": "https://dipc.ehu.eus/en"
+                        }
+                    ],
+                    "email": "daniel.franco@dipc.org",
+                    "github": "danifranco",
+                    "name": "Daniel Franco-Barranco"
+                }
+            ],
+            "default_type": "model",
+            "docs": "https://biapy.readthedocs.io/en/latest/",
+            "explore_button_text": "Start Exploring",
+            "icon": "https://raw.githubusercontent.com/BiaPyX/BiaPy-bioimage-io/main/logos/BiaPy_256.png",
+            "id": "biapy",
+            "logo": "https://raw.githubusercontent.com/BiaPyX/BiaPy-bioimage-io/main/logos/BiaPy_256.png",
+            "name": "BiaPy",
+            "resource_types": [
+                "model",
+                "application"
+            ],
+            "splash_feature_list": [],
+            "splash_subtitle": "BiaPy is an open source Python library for building bioimage analysis pipelines",
+            "splash_title": "BiaPy",
+            "tags": [
+                "BiaPy"
+            ],
+            "url_root": "https://github.com/BiaPyX/BiaPy-bioimage-io",
+            "version": "3.1.0"
+        },
+        "covers": [
+            "BiaPy_256.png"
+        ],
+        "description": "BiaPy is an open source Python library for building bioimage analysis pipelines",
+        "documentation": "short_documentation.md",
+        "format_version": "0.2.4",
+        "git_repo": "https://github.com/BiaPyX/BiaPy",
+        "icon": "https://raw.githubusercontent.com/BiaPyX/BiaPy-bioimage-io/main/logos/BiaPy_512.png",
+        "id": "biapy/biapy",
+        "id_emoji": null,
+        "license": "MIT",
+        "maintainers": [
+            {
+                "github_user": "danifranco",
+                "name": "BiaPy Team"
+            }
+        ],
+        "name": "BiaPy",
+        "tags": [
+            "software",
+            "biapy"
+        ],
+        "type": "application",
+        "uploader": {
+            "email": "bioimageiobot@gmail.com"
+        },
+        "version": 1,
+        "version_number": 1
+    },
+    "rdf_yaml_sha256": "d4918d7dc80401662a51fe26688f94c6cfaecef2d9a1a8d72f9e65255acfe372",
+    "status": "untested"
+}

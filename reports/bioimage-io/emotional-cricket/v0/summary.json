@@ -1,0 +1,283 @@
+{
+    "rdf_content": {
+        "authors": [
+            {
+                "github_user": "lorenzocerrone",
+                "name": "Lorenzo Cerrone"
+            },
+            {
+                "github_user": "wolny",
+                "name": "Adrian Wolny"
+            }
+        ],
+        "cite": [
+            {
+                "text": "Wolny, Cerrone et al. Accurate and Versatile 3D Segmentation of Plant Tissues at Cellular Resolution. eLife 2020.",
+                "url": "https://elifesciences.org/articles/57613"
+            }
+        ],
+        "config": {
+            "bioimageio": {
+                "nickname": "emotional-cricket",
+                "nickname_icon": "🦗",
+                "thumbnails": {
+                    "pred.png": "pred.thumbnail.png",
+                    "raw.png": "raw.thumbnail.png"
+                }
+            },
+            "deepimagej": {
+                "allow_tiling": true,
+                "model_keys": null,
+                "prediction": {
+                    "postprocess": [
+                        {
+                            "spec": null
+                        }
+                    ],
+                    "preprocess": [
+                        {
+                            "spec": null
+                        }
+                    ]
+                },
+                "pyramidal_model": false,
+                "test_information": {
+                    "inputs": [
+                        {
+                            "name": "test_input.npy",
+                            "pixel_size": {
+                                "x": 1.0,
+                                "y": 1.0,
+                                "z": 1.0
+                            },
+                            "size": "128 x 128 x 100 x 1"
+                        }
+                    ],
+                    "memory_peak": null,
+                    "outputs": [
+                        {
+                            "name": "test_output.npy",
+                            "size": "128 x 128 x 100 x 1",
+                            "type": "image"
+                        }
+                    ],
+                    "runtime": null
+                }
+            }
+        },
+        "covers": [
+            "raw.png",
+            "pred.png"
+        ],
+        "description": "3D Unet trained on confocal images of Arabidopsis thaliana apical stem cell: https://www.repository.cam.ac.uk/handle/1810/262530. Voxel size: [0.25, 0.25, 0.25]",
+        "documentation": "unet3d.md",
+        "format_version": "0.5.3",
+        "git_repo": "https://github.com/kreshuklab/plant-seg",
+        "id": "emotional-cricket",
+        "id_emoji": "🦗",
+        "inputs": [
+            {
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "channel_names": [
+                            "channel0"
+                        ],
+                        "id": "channel",
+                        "type": "channel"
+                    },
+                    {
+                        "id": "z",
+                        "scale": 1.0,
+                        "size": 100,
+                        "type": "space"
+                    },
+                    {
+                        "id": "y",
+                        "scale": 1.0,
+                        "size": 128,
+                        "type": "space"
+                    },
+                    {
+                        "id": "x",
+                        "scale": 1.0,
+                        "size": 128,
+                        "type": "space"
+                    }
+                ],
+                "data": {
+                    "offset": null,
+                    "range": [
+                        null,
+                        null
+                    ],
+                    "scale": 1.0,
+                    "type": "float32",
+                    "unit": "arbitrary unit"
+                },
+                "description": "raw confocal",
+                "id": "raw",
+                "optional": false,
+                "preprocessing": [
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    }
+                ],
+                "sample_tensor": {
+                    "source": "sample_input_0.tif",
+                    "sha256": "05fbcc83d103c5d6368556e288afad6b11360cb21aeddef72d14330e46f41744"
+                },
+                "test_tensor": {
+                    "source": "test_input.npy",
+                    "sha256": "f1f8ca796543958272fa0886bf95fd2b60be86fcb382bddba5795d226c10b2e7"
+                }
+            }
+        ],
+        "license": "MIT",
+        "links": [
+            "imjoy/BioImageIO-Packager",
+            "ilastik/ilastik"
+        ],
+        "maintainers": [
+            {
+                "affiliation": null,
+                "email": null,
+                "github_user": "wolny",
+                "name": null,
+                "orcid": null
+            }
+        ],
+        "name": "3D UNet Arabidopsis Apical Stem Cells",
+        "outputs": [
+            {
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "channel_names": [
+                            "channel0"
+                        ],
+                        "id": "channel",
+                        "type": "channel"
+                    },
+                    {
+                        "halo": 8,
+                        "id": "z",
+                        "scale": 1.0,
+                        "size": {
+                            "axis_id": "z",
+                            "offset": 0,
+                            "tensor_id": "raw"
+                        },
+                        "type": "space"
+                    },
+                    {
+                        "halo": 16,
+                        "id": "y",
+                        "scale": 1.0,
+                        "size": {
+                            "axis_id": "y",
+                            "offset": 0,
+                            "tensor_id": "raw"
+                        },
+                        "type": "space"
+                    },
+                    {
+                        "halo": 16,
+                        "id": "x",
+                        "scale": 1.0,
+                        "size": {
+                            "axis_id": "x",
+                            "offset": 0,
+                            "tensor_id": "raw"
+                        },
+                        "type": "space"
+                    }
+                ],
+                "data": {
+                    "offset": null,
+                    "range": [
+                        null,
+                        null
+                    ],
+                    "scale": 1.0,
+                    "type": "float32",
+                    "unit": "arbitrary unit"
+                },
+                "description": "membrane prediction",
+                "id": "output0",
+                "postprocessing": [
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    }
+                ],
+                "sample_tensor": {
+                    "sha256": "3e9470b1ffc9cc9629ad7d7adde79484c194a3df662259a9146cf2cee8d57414",
+                    "source": "sample_output_0.tif"
+                },
+                "test_tensor": {
+                    "sha256": "9deff125e441645c0ce0c1839523becb1b3d35576c47d6a8074a4fe1daa96e42",
+                    "source": "test_output.npy"
+                }
+            }
+        ],
+        "tags": [
+            "nuclei-segmentation",
+            "plantseg",
+            "unet",
+            "3d",
+            "semantic-segmentation",
+            "arabidopsis",
+            "ovules",
+            "plant",
+            "confocal-microscopy",
+            "pytorch",
+            "ilastik"
+        ],
+        "timestamp": "2023-03-24T17:08:34.402776",
+        "type": "model",
+        "uploader": {
+            "email": "thefynnbe@gmail.com",
+            "name": "Fynn Beuttenmüller"
+        },
+        "version": 1.1,
+        "weights": {
+            "pytorch_state_dict": {
+                "architecture": {
+                    "callable": "UNet3D",
+                    "kwargs": {
+                        "f_maps": 32,
+                        "final_sigmoid": true,
+                        "in_channels": 1,
+                        "is_segmentation": true,
+                        "layer_order": "gcr",
+                        "num_groups": 8,
+                        "out_channels": 1,
+                        "testing": true
+                    },
+                    "sha256": "2da9f7149e144b63fee715fb8fe5154e96bf9aa230d176c91e923d528ef0c4e1",
+                    "source": "unet.py"
+                },
+                "pytorch_version": "1.12.1",
+                "sha256": "636ceb89e6f798fe27b1c4c5ef237dee6815443b0d23915b850624270d91fa76",
+                "source": "confocal_pnas_3d.pytorch"
+            },
+            "torchscript": {
+                "pytorch_version": "1.13.0",
+                "sha256": "f1c0976293f5e50e68a283289ed4560adea53a2d59ea06070bbfd12769cfb7ad",
+                "source": "torchscript_tracing.pt"
+            }
+        }
+    },
+    "rdf_yaml_sha256": "33865487253126a081074603648a693ab2d8a406080b77936876e4a242389d6c",
+    "status": "untested"
+}

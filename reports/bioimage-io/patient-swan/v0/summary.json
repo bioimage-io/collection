@@ -1,0 +1,160 @@
+{
+    "rdf_content": {
+        "attachments": [
+            {
+                "sha256": "3fbae1fcd7e507f94ff9bfc1cdcb800df61fddd3b4953a7f441f3e347c9efe8c",
+                "source": "model_usage.py"
+            }
+        ],
+        "authors": [
+            {
+                "affiliation": "Helmholtz Munich",
+                "email": "padovaf@tcd.ie",
+                "github_user": "ElpadoCan",
+                "name": "Francesco Padovani",
+                "orcid": "0000-0003-2540-8240"
+            }
+        ],
+        "cite": [
+            {
+                "doi": "10.1101/2024.10.22.619610",
+                "text": "Padovani, F., Čavka, I., Neves, A. R. R., López, C. P., Al-Refaie, N., Bolcato, L., Chatzitheodoridou, D., Chadha, Y., Su, X.A., Lengefeld, J., Cabianca D. S., Köhler, S., Schmoller, K. M. SpotMAX: a generalist framework for multi-dimensional automatic spot detection and quantification, bioRxiv (2024) DOI: 10.1101/2024.10.22.619610",
+                "url": "https://www.biorxiv.org/content/10.1101/2024.10.22.619610v1"
+            }
+        ],
+        "config": {
+            "bioimageio": {
+                "thumbnails": {
+                    "cover.png": "cover.thumbnail.png"
+                }
+            }
+        },
+        "covers": [
+            "cover.png"
+        ],
+        "description": "U-Net 2D trained on images containing diffraction-limited fluorescent spots. The model is trained to return a boolean mask of spot areas.",
+        "documentation": "README.md",
+        "format_version": "0.5.3",
+        "git_repo": "https://github.com/ElpadoCan/SpotMAX",
+        "id": "patient-swan",
+        "id_emoji": "🦢",
+        "inputs": [
+            {
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "concatenable": false,
+                        "id": "z",
+                        "size": 43,
+                        "type": "space"
+                    },
+                    {
+                        "concatenable": false,
+                        "id": "y",
+                        "size": 123,
+                        "type": "space"
+                    },
+                    {
+                        "concatenable": false,
+                        "id": "x",
+                        "size": 167,
+                        "type": "space"
+                    }
+                ],
+                "data": {
+                    "type": "uint8"
+                },
+                "id": "mNeon",
+                "test_tensor": {
+                    "sha256": "b3ebf3e5ef1f0547c2bfc70d2a4e80d23a2d3676c984752d49cdbe3d2525f161",
+                    "source": "input_sample.npy"
+                }
+            }
+        ],
+        "license": "GPL-3.0-only",
+        "links": [
+            "https://spotmax.readthedocs.io/en/latest/"
+        ],
+        "maintainers": [],
+        "name": "SpotMAX-AI",
+        "outputs": [
+            {
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "id": "z",
+                        "size": 43,
+                        "type": "space"
+                    },
+                    {
+                        "id": "y",
+                        "size": 123,
+                        "type": "space"
+                    },
+                    {
+                        "id": "x",
+                        "size": 167,
+                        "type": "space"
+                    }
+                ],
+                "data": {
+                    "type": "uint8"
+                },
+                "description": "predicted boolean mask of spot areas",
+                "id": "mask",
+                "test_tensor": {
+                    "sha256": "41ac73f1ca089e6fe631b825bf6e3ab70c0d2d3cf59a24a494ad293fc8541801",
+                    "source": "output_sample_mask.npy"
+                }
+            }
+        ],
+        "tags": [
+            "spot-detection",
+            "diffraction-limited-spots",
+            "pytorch",
+            "fluorescence-light-microscopy",
+            "spotmax"
+        ],
+        "type": "model",
+        "uploader": {
+            "email": "padovaf@tcd.ie",
+            "name": "Francesco Padovani"
+        },
+        "version": "1.0.7",
+        "weights": {
+            "pytorch_state_dict": {
+                "architecture": {
+                    "callable": "Model",
+                    "kwargs": {
+                        "PhysicalSizeX": 0.06725,
+                        "config_yaml_filepath": "spotmax/nnet/config.yaml",
+                        "gaussian_filter_sigma": 0,
+                        "model_type": "2D",
+                        "preprocess_across_experiment": false,
+                        "preprocess_across_timepoints": false,
+                        "remove_hot_pixels": true,
+                        "resolution_multiplier_yx": 1,
+                        "save_prediction_map": false,
+                        "use_gpu": true,
+                        "verbose": false
+                    },
+                    "sha256": "6f309b7a1b5616f8d4f85ab291ae0ea960e1841b44b960099da0bf706e703791",
+                    "source": "model.py"
+                },
+                "dependencies": {
+                    "sha256": "ab73b411af9a529f08de92c2ef12cd1c261c072e8e44f197e5d2a0dba4c2e86a",
+                    "source": "environment.yml"
+                },
+                "pytorch_version": "2.4.1",
+                "sha256": "c1e276f8aa450bac8ecb3b04068754182de77cf20aefe1e4d01729f71804a901",
+                "source": "unet_best.pth"
+            }
+        }
+    },
+    "rdf_yaml_sha256": "b7842a5ece717b2e236c215916f948e049df6f14a5c64dd1a9ebd4c0876b3405",
+    "status": "untested"
+}

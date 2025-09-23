@@ -1,0 +1,68 @@
+{
+    "rdf_content": {
+        "authors": [
+            {
+                "name": "Mia Conduit"
+            },
+            {
+                "name": "SÃ©amus Holden"
+            }
+        ],
+        "cite": [
+            {
+                "doi": "10.1101/2021.11.03.467152",
+                "text": "Christoph Spahn, Romain F. Laine, Pedro Matos Pereira, Estibaliz GÃ³mez-de-Mariscal, Lucas von Chamier, Mia Conduit, Mariana Gomes de Pinho, Guillaume Jacquemet, SÃ©amus Holden, Mike Heilemann, Ricardo Henriques DeepBacs: Bacterial image analysis using open-source deep learning approaches. bioRxiv 2021.11.03.467152; doi: https://doi.org/10.1101/2021.11.03.467152"
+            }
+        ],
+        "config": {
+            "background_image": "static/img/zoo-background.svg",
+            "bioimageio": {
+                "nickname": "delectable-eggplant",
+                "nickname_icon": "🍆",
+                "status": "accepted",
+                "version_id": "latest",
+                "version_name": "latest"
+            },
+            "default_type": "application",
+            "explore_button_text": "Start Exploring",
+            "icon": "https://raw.githubusercontent.com/HenriquesLab/ZeroCostDL4Mic/master/Wiki_files/ZeroCostLogo.png",
+            "id": "zero",
+            "logo": "https://raw.githubusercontent.com/HenriquesLab/ZeroCostDL4Mic/master/Wiki_files/ZeroCostLogo.png",
+            "name": "ZeroCostDL4Mic",
+            "resource_types": [
+                "model",
+                "application",
+                "dataset"
+            ],
+            "splash_feature_list": [],
+            "splash_subtitle": "A Google Colab based no-cost toolbox to explore Deep-Learning in Microscopy",
+            "splash_title": "ZeroCostDL4Mic",
+            "tags": [
+                "ZeroCostDL4Mic"
+            ],
+            "url_root": "https://raw.githubusercontent.com/oeway/ZeroCostDL4Mic/master",
+            "version": "1.7.1"
+        },
+        "covers": [
+            "default.png"
+        ],
+        "description": "Paired bright field images and segmented binary masks of live E. coli cells.",
+        "documentation": "README.md",
+        "download_url": "https://zenodo.org/record/5639253",
+        "format_version": "0.2.4",
+        "id": "zero/Dataset_U-Net_2D_multilabel_DeepBacs",
+        "maintainers": [],
+        "name": "Multi-label U-Net training dataset (Bacillus subtilis) - DeepBacs",
+        "tags": [
+            "U-Net",
+            "multilabel",
+            "segmentation",
+            "DeepBacs",
+            "2D"
+        ],
+        "type": "dataset",
+        "version": 1
+    },
+    "rdf_yaml_sha256": "3861de8358d5fb887669f6818a69e25f11a2d66433deb92a29920a0d81b86970",
+    "status": "untested"
+}

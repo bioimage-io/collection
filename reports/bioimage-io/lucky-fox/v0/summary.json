@@ -1,0 +1,115 @@
+{
+    "rdf_content": {
+        "authors": [
+            {
+                "affiliation": "Fudan University",
+                "name": "Chenxi Ma"
+            },
+            {
+                "affiliation": "Fudan University",
+                "name": "Weimin Tan"
+            },
+            {
+                "affiliation": "Fudan University",
+                "name": "Ruian He"
+            },
+            {
+                "affiliation": "Fudan University",
+                "name": "Bo Yan"
+            }
+        ],
+        "cite": [
+            {
+                "doi": "10.21203/rs.3.rs-3208267/v1",
+                "text": "Chenxi Ma, Weimin Tan, Ruian He and Bo Yan. Pre-training a Foundation Model for Universal Fluorescence Microscopy Image Restoration. (2023)."
+            }
+        ],
+        "config": {
+            "bioimageio": {
+                "thumbnails": {
+                    "cover2.png": "cover2.thumbnail.png",
+                    "cover6.png": "cover6.thumbnail.png"
+                }
+            }
+        },
+        "covers": [
+            "cover6.png",
+            "cover2.png"
+        ],
+        "description": "Pre-training a Foundation Model for Universal Fluorescence Microscopy Image Restoration",
+        "documentation": "doc.md",
+        "format_version": "0.4.10",
+        "id": "lucky-fox",
+        "id_emoji": "🦊",
+        "inputs": [
+            {
+                "axes": "bcyx",
+                "data_range": [
+                    0.0,
+                    1.0
+                ],
+                "data_type": "float32",
+                "name": "input0",
+                "shape": [
+                    1,
+                    64,
+                    64,
+                    64
+                ]
+            }
+        ],
+        "license": "CC-BY-4.0",
+        "maintainers": [
+            {
+                "github_user": "ryanhe312",
+                "name": "Ruian He"
+            }
+        ],
+        "name": "UniFMIRIsotropicReconstructionOnLiver",
+        "outputs": [
+            {
+                "axes": "bcyx",
+                "data_range": [
+                    null,
+                    null
+                ],
+                "data_type": "float32",
+                "name": "output0",
+                "shape": [
+                    1,
+                    64,
+                    64,
+                    64
+                ]
+            }
+        ],
+        "tags": [
+            "fluorescence-light-microscopy",
+            "2d",
+            "pytorch",
+            "image-restoration"
+        ],
+        "test_inputs": [
+            "test-input.npy"
+        ],
+        "test_outputs": [
+            "test-output.npy"
+        ],
+        "timestamp": "2024-02-14T13:17:39.153500",
+        "type": "model",
+        "uploader": {
+            "email": "bioimageiobot@gmail.com"
+        },
+        "version": 1,
+        "version_number": 2,
+        "weights": {
+            "torchscript": {
+                "pytorch_version": "1.10.0",
+                "sha256": "a8bf16f366506d147eca5072be9a9e3c3ef8dcaa6eb99c245d74f9c8c2b2784b",
+                "source": "weights.pt"
+            }
+        }
+    },
+    "rdf_yaml_sha256": "d74a0e8a14ed4c1225f26cb868527dfa8c98705ec83e29bd19000ba2c518d378",
+    "status": "untested"
+}

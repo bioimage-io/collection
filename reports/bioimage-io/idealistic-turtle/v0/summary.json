@@ -1,0 +1,236 @@
+{
+    "rdf_content": {
+        "authors": [
+            {
+                "github_user": "danifranco",
+                "name": "Daniel Franco-Barranco"
+            }
+        ],
+        "cite": [
+            {
+                "doi": "10.1101/2024.02.03.576026",
+                "text": "training library"
+            },
+            {
+                "doi": "10.1109/CVPR.2018.00745",
+                "text": "architecture"
+            },
+            {
+                "doi": "10.1016/j.crmeth.2023.100597",
+                "text": "data"
+            },
+            {
+                "doi": "10.1038/s41592-025-02699-y",
+                "text": "BiaPy: accessible deep learning on bioimages",
+                "url": "https://doi.org/10.1038/s41592-025-02699-y"
+            }
+        ],
+        "config": {
+            "bioimageio": {
+                "thumbnails": {
+                    "cover.png": "cover.thumbnail.png"
+                }
+            }
+        },
+        "covers": [
+            "cover.png"
+        ],
+        "description": "Cyst segmentation for fluorescence microscopy images. This model was trained with 'train_M2' samples according to CartoCell folders in https://zenodo.org/records/10973241 ",
+        "documentation": "documentation.md",
+        "format_version": "0.5.3",
+        "git_repo": "https://github.com/BiaPyX/BiaPy",
+        "id": "idealistic-turtle",
+        "id_emoji": "🐢",
+        "inputs": [
+            {
+                "axes": [
+                    {
+                        "size": 1,
+                        "type": "batch"
+                    },
+                    {
+                        "channel_names": [
+                            "channel0"
+                        ],
+                        "type": "channel"
+                    },
+                    {
+                        "id": "z",
+                        "size": 80,
+                        "type": "space"
+                    },
+                    {
+                        "id": "y",
+                        "size": 80,
+                        "type": "space"
+                    },
+                    {
+                        "id": "x",
+                        "size": 80,
+                        "type": "space"
+                    }
+                ],
+                "data": {
+                    "type": "float32"
+                },
+                "id": "input0",
+                "preprocessing": [
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    },
+                    {
+                        "id": "zero_mean_unit_variance",
+                        "kwargs": {
+                            "axes": [
+                                "channel",
+                                "z",
+                                "y",
+                                "x"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    }
+                ],
+                "test_tensor": {
+                    "sha256": "dd693f8b04f5575e11f79e5433b58bc41c552ccc94ecf7b75fd892ee7c63d86c",
+                    "source": "test-input.npy"
+                }
+            }
+        ],
+        "license": "CC-BY-4.0",
+        "maintainers": [
+            {
+                "github_user": "danifranco",
+                "name": "Daniel Franco-Barranco"
+            }
+        ],
+        "name": "3D Squeeze-and-Excitation U-Net for cyst segmentation in fluorescence",
+        "outputs": [
+            {
+                "axes": [
+                    {
+                        "size": 1,
+                        "type": "batch"
+                    },
+                    {
+                        "channel_names": [
+                            "channel0",
+                            "channel1",
+                            "channel2"
+                        ],
+                        "type": "channel"
+                    },
+                    {
+                        "id": "z",
+                        "size": 80,
+                        "type": "space"
+                    },
+                    {
+                        "id": "y",
+                        "size": 80,
+                        "type": "space"
+                    },
+                    {
+                        "id": "x",
+                        "size": 80,
+                        "type": "space"
+                    }
+                ],
+                "data": {
+                    "type": "float32"
+                },
+                "id": "output0",
+                "postprocessing": [
+                    {
+                        "id": "sigmoid"
+                    },
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    }
+                ],
+                "test_tensor": {
+                    "sha256": "8c97ad1ea6a2784df062ccbb440f346268a0a4b16bd3e487222537b6af8ce2bb",
+                    "source": "test-output.npy"
+                }
+            }
+        ],
+        "tags": [
+            "fluorescence",
+            "cyst",
+            "3d",
+            "pytorch",
+            "biapy",
+            "instance-segmentation",
+            "seunet"
+        ],
+        "training_data": {
+            "id": "divine-melon"
+        },
+        "type": "model",
+        "uploader": {
+            "email": "daniel.franco@dipc.org",
+            "name": "Daniel Franco-Barranco"
+        },
+        "version": "0.1.0",
+        "weights": {
+            "pytorch_state_dict": {
+                "architecture": {
+                    "callable": "SE_U_Net",
+                    "kwargs": {
+                        "activation": "elu",
+                        "drop_values": [
+                            0.1,
+                            0.1,
+                            0.1
+                        ],
+                        "feature_maps": [
+                            52,
+                            68,
+                            84
+                        ],
+                        "image_shape": [
+                            80,
+                            80,
+                            80,
+                            1
+                        ],
+                        "isotropy": [
+                            true,
+                            true,
+                            true
+                        ],
+                        "k_size": 3,
+                        "larger_io": false,
+                        "normalization": "bn",
+                        "output_channels": [
+                            3
+                        ],
+                        "upsample_layer": "convtranspose",
+                        "z_down": [
+                            1,
+                            1
+                        ]
+                    },
+                    "sha256": "b4fb69b11b18fae9df7df4c5b9cf411c1e8a7e4d8a81eac7bd75178ad2fd301d",
+                    "source": "seunet.py"
+                },
+                "pytorch_version": "2.4.0+cu118",
+                "sha256": "69896ee5a80d8f2098b009184898636542fd0883a6a24741fced2e563fafd2c6",
+                "source": "checkpoint.pth"
+            }
+        }
+    },
+    "rdf_yaml_sha256": "305e9a71e83c3bd4b83e7fe5e1b0f2c483660c77ce6a40a376c57f17380933e5",
+    "status": "untested"
+}

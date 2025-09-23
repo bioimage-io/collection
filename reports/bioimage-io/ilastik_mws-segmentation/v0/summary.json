@@ -1,0 +1,66 @@
+{
+    "rdf_content": {
+        "authors": [
+            {
+                "name": "Constantin Pape"
+            }
+        ],
+        "badges": [],
+        "cite": [
+            {
+                "doi": "10.1007/978-3-030-01225-0_34",
+                "text": "Wolf, Pape et al. The Mutex Watershed: Efficient, Parameter-Free Image Partitioning"
+            }
+        ],
+        "config": {
+            "background_image": "static/img/zoo-background.svg",
+            "bioimageio": {
+                "thumbnails": {}
+            },
+            "default_type": "model",
+            "explore_button_text": "Start Exploring",
+            "icon": "https://raw.githubusercontent.com/ilastik/bioimage-io-resources/main/image/ilastik-fist-icon.png",
+            "id": "ilastik",
+            "logo": "https://raw.githubusercontent.com/ilastik/bioimage-io-resources/main/image/ilastik-fist-icon.png",
+            "name": "ilastik",
+            "resource_types": [
+                "application"
+            ],
+            "splash_feature_list": null,
+            "splash_subtitle": "the interactive learning and segmentation toolkit",
+            "splash_title": "ilastik",
+            "tags": [
+                "ilastik"
+            ],
+            "url_root": "https://raw.githubusercontent.com/ilastik/bioimage-io-resources/main"
+        },
+        "covers": [],
+        "description": "Segmentation plugin for models that predict pixel affinities",
+        "documentation": "mws-segmentation.md",
+        "format_version": "0.2.4",
+        "git_repo": "https://github.com/constantinpape/affogato",
+        "icon": "https://raw.githubusercontent.com/ilastik/bioimage-io-models/main/image/mws.png",
+        "id": "ilastik/mws-segmentation",
+        "id_emoji": null,
+        "license": "MIT",
+        "maintainers": [
+            {
+                "github_user": "constantinpape",
+                "name": "Constantin Pape"
+            }
+        ],
+        "name": "Mutex Watershed Plugin",
+        "source": "mws-segmentation.imjoy.html",
+        "tags": [
+            "bioengine"
+        ],
+        "type": "application",
+        "uploader": {
+            "email": "bioimageiobot@gmail.com"
+        },
+        "version": 1,
+        "version_number": 1
+    },
+    "rdf_yaml_sha256": "d770214201fe28d0199a2797c0d1e70c6f321134b1868dd032c97092384a084e",
+    "status": "untested"
+}

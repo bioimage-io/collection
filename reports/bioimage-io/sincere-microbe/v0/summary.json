@@ -1,0 +1,298 @@
+{
+    "rdf_content": {
+        "attachments": {
+            "files": [
+                "stardist_weights.h5",
+                "per_sample_scale_range.ijm",
+                "stardist_postprocessing.ijm",
+                "STARDIST-BRIGHTFIELD-27082022_training_report.pdf",
+                "STARDIST-BRIGHTFIELD-27082022_QC_report.pdf"
+            ]
+        },
+        "authors": [
+            {
+                "affiliation": "Instituto Gulbenkian de Ciência",
+                "name": "Estibaliz Gómez de Mariscal",
+                "orcid": "0000-0003-2082-3277"
+            },
+            {
+                "affiliation": "Instituto Gulbenkian de Ciência",
+                "name": "Mario Del Rosario",
+                "orcid": "0000-0002-0430-1463"
+            }
+        ],
+        "cite": [
+            {
+                "doi": "https://doi.org/10.1007/978-3-030-00934-2_30",
+                "text": "Cell Detection with Star-Convex Polygons",
+                "url": null
+            },
+            {
+                "doi": "https://doi.org/10.1109/WACV45572.2020.9093435",
+                "text": "Star-convex Polyhedra for 3D Object Detection and Segmentation in Microscopy",
+                "url": null
+            }
+        ],
+        "config": {
+            "bioimageio": {
+                "thumbnails": {
+                    "cover.jpg": "cover.thumbnail.png",
+                    "stardist_logo.jpg": "stardist_logo.thumbnail.png"
+                }
+            },
+            "deepimagej": {
+                "allow_tiling": true,
+                "model_keys": null,
+                "prediction": {
+                    "postprocess": [
+                        {
+                            "spec": null
+                        }
+                    ],
+                    "preprocess": [
+                        {
+                            "kwargs": "per_sample_scale_range.ijm",
+                            "spec": "ij.IJ::runMacroFile"
+                        }
+                    ]
+                },
+                "pyramidal_model": false,
+                "test_information": {
+                    "inputs": [
+                        {
+                            "name": "test_input.npy",
+                            "pixel_size": {
+                                "x": 1,
+                                "y": 1,
+                                "z": 1
+                            },
+                            "size": "768 x 768 x 1 x 1"
+                        }
+                    ],
+                    "memory_peak": null,
+                    "outputs": [
+                        {
+                            "name": "test_output.npy",
+                            "size": "768 x 768 x 1 x 33",
+                            "type": "image"
+                        }
+                    ],
+                    "runtime": null
+                }
+            },
+            "stardist": {
+                "config": {
+                    "axes": "YXC",
+                    "backbone": "unet",
+                    "grid": [
+                        2,
+                        2
+                    ],
+                    "n_channel_in": 1,
+                    "n_channel_out": 33,
+                    "n_classes": null,
+                    "n_dim": 2,
+                    "n_rays": 32,
+                    "net_conv_after_unet": 128,
+                    "net_input_shape": [
+                        null,
+                        null,
+                        1
+                    ],
+                    "net_mask_shape": [
+                        null,
+                        null,
+                        1
+                    ],
+                    "train_background_reg": 0.0001,
+                    "train_batch_size": 20,
+                    "train_checkpoint": "weights_best.h5",
+                    "train_checkpoint_epoch": "weights_now.h5",
+                    "train_checkpoint_last": "weights_last.h5",
+                    "train_class_weights": [
+                        1,
+                        1
+                    ],
+                    "train_completion_crop": 32,
+                    "train_dist_loss": "mae",
+                    "train_epochs": 400,
+                    "train_foreground_only": 0.9,
+                    "train_learning_rate": 0.0005,
+                    "train_loss_weights": [
+                        1,
+                        0.2
+                    ],
+                    "train_n_val_patches": null,
+                    "train_patch_size": [
+                        512,
+                        512
+                    ],
+                    "train_reduce_lr": {
+                        "factor": 0.5,
+                        "min_delta": 0,
+                        "patience": 40
+                    },
+                    "train_sample_cache": true,
+                    "train_shape_completion": false,
+                    "train_steps_per_epoch": 100,
+                    "train_tensorboard": true,
+                    "unet_activation": "relu",
+                    "unet_batch_norm": false,
+                    "unet_dropout": 0,
+                    "unet_kernel_size": [
+                        3,
+                        3
+                    ],
+                    "unet_last_activation": "relu",
+                    "unet_n_conv_per_depth": 2,
+                    "unet_n_depth": 3,
+                    "unet_n_filter_base": 32,
+                    "unet_pool": [
+                        2,
+                        2
+                    ],
+                    "unet_prefix": "",
+                    "use_gpu": false
+                },
+                "postprocessing_macro": "stardist_postprocessing.ijm",
+                "python_version": "0.9.1",
+                "thresholds": {
+                    "nms": 0.3,
+                    "prob": 0.3
+                },
+                "weights": "stardist_weights.h5"
+            }
+        },
+        "covers": [
+            "cover.jpg",
+            "stardist_logo.jpg"
+        ],
+        "description": "StarDist model trained to detect cell mitotic rounding in CHO cells imaged in live-cell brightfield microscopy.",
+        "documentation": "README.md",
+        "format_version": "0.4.9",
+        "git_repo": "https://github.com/HenriquesLab/ZeroCostDL4Mic",
+        "id": "sincere-microbe",
+        "id_emoji": "🦠",
+        "inputs": [
+            {
+                "axes": "byxc",
+                "data_range": [
+                    null,
+                    null
+                ],
+                "data_type": "float32",
+                "name": "input",
+                "preprocessing": [
+                    {
+                        "kwargs": {
+                            "axes": "yx",
+                            "max_percentile": 99.8,
+                            "min_percentile": 1,
+                            "mode": "per_sample"
+                        },
+                        "name": "scale_range"
+                    }
+                ],
+                "shape": {
+                    "min": [
+                        1,
+                        208,
+                        208,
+                        1
+                    ],
+                    "step": [
+                        0,
+                        16,
+                        16,
+                        0
+                    ]
+                }
+            }
+        ],
+        "license": "MIT",
+        "links": [
+            "deepimagej/deepimagej",
+            "zero/notebook_stardist_2d_zerocostdl4mic"
+        ],
+        "maintainers": [
+            {
+                "github_user": "esgomezm",
+                "name": "Estibaliz"
+            }
+        ],
+        "name": "CHO mitotic rounding segmentation - brightfield - StarDist",
+        "outputs": [
+            {
+                "axes": "byxc",
+                "data_range": [
+                    null,
+                    null
+                ],
+                "data_type": "float32",
+                "halo": [
+                    0,
+                    96,
+                    96,
+                    0
+                ],
+                "name": "output",
+                "shape": {
+                    "offset": [
+                        0,
+                        0,
+                        0,
+                        16.5
+                    ],
+                    "reference_tensor": "input",
+                    "scale": [
+                        1,
+                        1,
+                        1,
+                        0
+                    ]
+                }
+            }
+        ],
+        "sample_inputs": [
+            "sample_input_0.tif"
+        ],
+        "sample_outputs": [
+            "sample_output_0.tif"
+        ],
+        "tags": [
+            "fluorescence-light-microscopy",
+            "whole-slide-imaging",
+            "other",
+            "2d",
+            "cells",
+            "nuclei",
+            "tensorflow",
+            "fiji",
+            "unet",
+            "instance-segmentation",
+            "object-detection",
+            "stardist"
+        ],
+        "test_inputs": [
+            "test_input.npy"
+        ],
+        "test_outputs": [
+            "test_output.npy"
+        ],
+        "timestamp": "2024-07-15T17:16:03.990304",
+        "type": "model",
+        "uploader": {
+            "email": "esgodema@gmail.com",
+            "name": "Estibaliz"
+        },
+        "weights": {
+            "tensorflow_saved_model_bundle": {
+                "sha256": "cedb99519e08a93e2c1bdd2ae39caefe8814bfc819b527ced0e9ac1801db297f",
+                "source": "TF_SavedModel.zip",
+                "tensorflow_version": "2.11.0"
+            }
+        }
+    },
+    "rdf_yaml_sha256": "b5e166d2c52d805f87e40a91f756888d7c1553114cf7f732f5cfd51f6d7d1c41",
+    "status": "untested"
+}

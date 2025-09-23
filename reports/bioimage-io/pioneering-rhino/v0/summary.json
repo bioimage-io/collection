@@ -1,0 +1,132 @@
+{
+    "rdf_content": {
+        "authors": [
+            {
+                "affiliation": "EMBL",
+                "name": "Adrian Wolny"
+            }
+        ],
+        "cite": [
+            {
+                "text": "Wolny, Cerrone et al. Accurate and Versatile 3D Segmentation of Plant Tissues at Cellular Resolution. eLife 2020.",
+                "url": "https://elifesciences.org/articles/57613"
+            }
+        ],
+        "config": {
+            "bioimageio": {
+                "nickname": "pioneering-rhino",
+                "nickname_icon": "🦏",
+                "thumbnails": {
+                    "pred.png": "pred.thumbnail.png",
+                    "raw.png": "raw.thumbnail.png"
+                }
+            }
+        },
+        "covers": [
+            "raw.png",
+            "pred.png"
+        ],
+        "description": "2D Unet trained on confocal images of Arabidopsis Ovules",
+        "documentation": "doc.md",
+        "format_version": "0.4.10",
+        "id": "10.5281/zenodo.6334383/7805067",
+        "id_emoji": "🦏",
+        "inputs": [
+            {
+                "axes": "bcyx",
+                "data_range": [
+                    null,
+                    null
+                ],
+                "data_type": "float32",
+                "name": "input0",
+                "shape": [
+                    1,
+                    1,
+                    512,
+                    512
+                ]
+            }
+        ],
+        "license": "MIT",
+        "links": [
+            "imjoy/BioImageIO-Packager",
+            "ilastik/ilastik"
+        ],
+        "maintainers": [
+            {
+                "github_user": "wolny",
+                "name": "Adrian Wolny"
+            }
+        ],
+        "name": "2D UNet Arabidopsis Ovules",
+        "outputs": [
+            {
+                "axes": "bcyx",
+                "data_range": [
+                    null,
+                    null
+                ],
+                "data_type": "float32",
+                "name": "output0",
+                "shape": [
+                    1,
+                    1,
+                    512,
+                    512
+                ]
+            }
+        ],
+        "tags": [
+            "unet",
+            "2d",
+            "semantic-segmentation",
+            "arabidopsis",
+            "ovules",
+            "cell-membrane",
+            "plant",
+            "tissue",
+            "fluorescence-light-microscopy",
+            "pytorch",
+            "plantseg",
+            "ilastik"
+        ],
+        "test_inputs": [
+            "test-input.npy"
+        ],
+        "test_outputs": [
+            "test-output.npy"
+        ],
+        "timestamp": "2023-04-06T10:47:26.453147",
+        "type": "model",
+        "uploader": {
+            "email": "bioimageiobot@gmail.com"
+        },
+        "version": 1,
+        "version_number": 1,
+        "weights": {
+            "pytorch_state_dict": {
+                "architecture": "unet.py:UNet2D",
+                "architecture_sha256": "f905821f2882ca182ffcfcb1a4c7fd2737c0548dda88fcb58721f3159a54837f",
+                "kwargs": {
+                    "f_maps": 64,
+                    "final_sigmoid": true,
+                    "in_channels": 1,
+                    "is_segmentation": true,
+                    "layer_order": "gcr",
+                    "num_groups": 8,
+                    "out_channels": 1
+                },
+                "sha256": "4163e310baf0a826640b9a7016b3f2fe2cb6ac38e310b479d9cfee23085c5534",
+                "source": "confocal_2D_unet_ovules_ds2x.pytorch"
+            },
+            "torchscript": {
+                "pytorch_version": "2.0.0",
+                "sha256": "c6d2e01f99d4dedd9c1f5a9093b3525f062d6e2c1f377b0e76c531cdee06cec9",
+                "source": "torchscript_tracing.pt"
+            }
+        }
+    },
+    "rdf_yaml_sha256": "6bddc6e1c6f8687ec305bc4418c650dc8e476f51b011fef4efbb6b713e213ab8",
+    "status": "untested"
+}

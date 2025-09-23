@@ -1,0 +1,121 @@
+{
+    "rdf_content": {
+        "authors": [
+            {
+                "affiliation": "Fudan University",
+                "name": "Chenxi Ma"
+            },
+            {
+                "affiliation": "Fudan University",
+                "name": "Weimin Tan"
+            },
+            {
+                "affiliation": "Fudan University",
+                "name": "Ruian He"
+            },
+            {
+                "affiliation": "Fudan University",
+                "name": "Bo Yan"
+            }
+        ],
+        "cite": [
+            {
+                "doi": "10.21203/rs.3.rs-3208267/v1",
+                "text": "Chenxi Ma, Weimin Tan, Ruian He and Bo Yan. Pre-training a Foundation Model for Universal Fluorescence Microscopy Image Restoration. (2023)."
+            }
+        ],
+        "config": {
+            "bioimageio": {
+                "nickname": "courteous-otter",
+                "nickname_icon": "🦦",
+                "thumbnails": {
+                    "cover1.png": "cover1.thumbnail.png",
+                    "cover2.png": "cover2.thumbnail.png"
+                }
+            }
+        },
+        "covers": [
+            "cover1.png",
+            "cover2.png"
+        ],
+        "description": "Pre-training a Foundation Model for Universal Fluorescence Microscopy Image Restoration",
+        "documentation": "doc.md",
+        "format_version": "0.4.10",
+        "git_repo": "https://github.com/cxm12/UNiFMIR/",
+        "id": "10.5281/zenodo.8420099/8420100",
+        "id_emoji": "🦦",
+        "inputs": [
+            {
+                "axes": "bcyx",
+                "data_range": [
+                    0.0,
+                    1.0
+                ],
+                "data_type": "float32",
+                "name": "input0",
+                "shape": [
+                    1,
+                    1,
+                    128,
+                    128
+                ]
+            }
+        ],
+        "license": "CC-BY-4.0",
+        "links": [
+            "imjoy/BioImageIO-Packager"
+        ],
+        "maintainers": [
+            {
+                "github_user": "ryanhe312",
+                "name": "Ruian He"
+            }
+        ],
+        "name": "UniFMIRSuperResolutionOnFactin",
+        "outputs": [
+            {
+                "axes": "bcyx",
+                "data_range": [
+                    null,
+                    null
+                ],
+                "data_type": "float32",
+                "name": "output0",
+                "shape": [
+                    1,
+                    1,
+                    256,
+                    256
+                ]
+            }
+        ],
+        "tags": [
+            "fluorescence-light-microscopy",
+            "2d",
+            "pytorch",
+            "image-restoration"
+        ],
+        "test_inputs": [
+            "test-input.npy"
+        ],
+        "test_outputs": [
+            "test-output.npy"
+        ],
+        "timestamp": "2023-10-09T07:05:52.763368",
+        "type": "model",
+        "uploader": {
+            "email": "bioimageiobot@gmail.com"
+        },
+        "version": 1,
+        "version_number": 1,
+        "weights": {
+            "torchscript": {
+                "pytorch_version": "1.10.0",
+                "sha256": "76691e61d7c8025632de99aa14bc89f34c369d197cdcbf3032ec2c60815bcf40",
+                "source": "weights.pt"
+            }
+        }
+    },
+    "rdf_yaml_sha256": "bc2c71893bb340f3e860c094dbb4009b40af3212a03b75ec96988e28d6e66b7f",
+    "status": "untested"
+}

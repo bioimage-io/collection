@@ -1,0 +1,202 @@
+{
+    "rdf_content": {
+        "attachments": {
+            "files": []
+        },
+        "authors": [
+            {
+                "name": "Adrian Wolny"
+            },
+            {
+                "name": "Lorenzo Cerrone"
+            }
+        ],
+        "cite": [
+            {
+                "text": "Wolny, Cerrone et al. Accurate and Versatile 3D Segmentation of Plant Tissues at Cellular Resolution. eLife 2020.",
+                "url": "https://elifesciences.org/articles/57613"
+            }
+        ],
+        "config": {
+            "bioimageio": {
+                "nickname": "thoughtful-turtle",
+                "nickname_icon": "🐢",
+                "thumbnails": {
+                    "pred.png": "pred.thumbnail.png",
+                    "raw.png": "raw.thumbnail.png"
+                }
+            },
+            "deepimagej": {
+                "allow_tiling": true,
+                "model_keys": null,
+                "prediction": {
+                    "postprocess": [
+                        {
+                            "spec": null
+                        }
+                    ],
+                    "preprocess": [
+                        {
+                            "spec": null
+                        }
+                    ]
+                },
+                "pyramidal_model": false,
+                "test_information": {
+                    "inputs": [
+                        {
+                            "name": "test_input.npy",
+                            "pixel_size": {
+                                "x": 1.0,
+                                "y": 1.0,
+                                "z": 1.0
+                            },
+                            "size": "128 x 128 x 100 x 1"
+                        }
+                    ],
+                    "memory_peak": null,
+                    "outputs": [
+                        {
+                            "name": "test_output.npy",
+                            "size": "128 x 128 x 100 x 1",
+                            "type": "image"
+                        }
+                    ],
+                    "runtime": null
+                }
+            }
+        },
+        "covers": [
+            "raw.png",
+            "pred.png"
+        ],
+        "description": "A 3D U-Net trained to predict the cell boundaries in lightsheet stacks of Arabidopsis Lateral Root Primordia. (0.25x0.1625x0.1625) microns ZYX",
+        "documentation": "unet3d.md",
+        "format_version": "0.4.10",
+        "id": "10.5281/zenodo.6334777/7765026",
+        "id_emoji": "🐢",
+        "inputs": [
+            {
+                "axes": "bczyx",
+                "data_range": [
+                    null,
+                    null
+                ],
+                "data_type": "float32",
+                "name": "raw",
+                "shape": [
+                    1,
+                    1,
+                    100,
+                    128,
+                    128
+                ]
+            }
+        ],
+        "license": "MIT",
+        "links": [
+            "imjoy/BioImageIO-Packager",
+            "ilastik/ilastik"
+        ],
+        "maintainers": [
+            {
+                "github_user": "wolny"
+            }
+        ],
+        "name": "3D UNet Lateral Root Primordia Cells",
+        "outputs": [
+            {
+                "axes": "bczyx",
+                "data_range": [
+                    0.0,
+                    1.0
+                ],
+                "data_type": "float32",
+                "halo": [
+                    0,
+                    0,
+                    8,
+                    16,
+                    16
+                ],
+                "name": "output0",
+                "shape": {
+                    "offset": [
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "reference_tensor": "raw",
+                    "scale": [
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0
+                    ]
+                }
+            }
+        ],
+        "sample_inputs": [
+            "sample_input_0.tif"
+        ],
+        "sample_outputs": [
+            "sample_output_0.tif"
+        ],
+        "tags": [
+            "unet",
+            "3d",
+            "semantic-segmentation",
+            "arabidopsis",
+            "lateral-root",
+            "cell-membrane",
+            "plant",
+            "tissue",
+            "light-sheet-fluorescence-microscopy",
+            "pytorch",
+            "plantseg",
+            "ilastik"
+        ],
+        "test_inputs": [
+            "test_input.npy"
+        ],
+        "test_outputs": [
+            "test_output.npy"
+        ],
+        "timestamp": "2023-03-23T21:42:30.250688",
+        "type": "model",
+        "uploader": {
+            "email": "bioimageiobot@gmail.com"
+        },
+        "version": 1,
+        "version_number": 1,
+        "weights": {
+            "pytorch_state_dict": {
+                "architecture": "unet.py:UNet3D",
+                "architecture_sha256": "2da9f7149e144b63fee715fb8fe5154e96bf9aa230d176c91e923d528ef0c4e1",
+                "kwargs": {
+                    "f_maps": 32,
+                    "final_sigmoid": true,
+                    "in_channels": 1,
+                    "is_segmentation": true,
+                    "layer_order": "gcr",
+                    "num_groups": 8,
+                    "out_channels": 1,
+                    "testing": true
+                },
+                "pytorch_version": "1.12.1",
+                "sha256": "b8acbc7a6125bc5fc9109ca5126511e04d78dfebf6f983a8bf7f591ccdcb18a0",
+                "source": "unet3d-lateral-root-lightsheet-ds1x.pytorch"
+            },
+            "torchscript": {
+                "pytorch_version": "1.13.0",
+                "sha256": "8ee2ef339e53eeb95d4fb818b74e2c4ff6aeba39a1d6468c1017198945d1b688",
+                "source": "torchscript_tracing.pt"
+            }
+        }
+    },
+    "rdf_yaml_sha256": "b2ff75cc8d7926b5dfb4781411ed97d585f08f974c38151e53795f04c2fba665",
+    "status": "untested"
+}

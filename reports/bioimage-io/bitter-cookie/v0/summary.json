@@ -1,0 +1,52 @@
+{
+    "rdf_content": {
+        "authors": [
+            {
+                "affiliation": "MRC LMB",
+                "github_user": "danifranco",
+                "name": "Daniel Franco-Barranco",
+                "orcid": "0000-0002-1109-110X"
+            }
+        ],
+        "cite": [
+            {
+                "doi": "10.5281/zenodo.7142003",
+                "text": "Arganda-Carreras, I., Seung, H. S., Vishwanathan, A., & Berger, D. R. (2013). SNEMI3D: 3D Segmentation of neurites in EM images [Data set]. Zenodo."
+            }
+        ],
+        "config": {
+            "bioimageio": {
+                "thumbnails": {
+                    "banner.x10.jpeg": "banner.x10.thumbnail.png",
+                    "training-data-animation.gif": "training-data-animation.thumbnail.png"
+                }
+            }
+        },
+        "covers": [
+            "banner.x10.jpeg",
+            "training-data-animation.gif"
+        ],
+        "description": "In this challenge, a full stack of electron microscopy (EM) slices will be used to train machine-learning algorithms for the purpose of automatic segmentation of neurites in 3D. This imaging technique visualizes the resulting volumes in a highly anisotropic way, i.e., the x- and y-directions have a high resolution, whereas the z-direction has a low resolution, primarily dependent on the precision of serial cutting. EM produces the images as a projection of the whole section, so some of the neural membranes that are not orthogonal to a cutting plane can appear very blurred. None of these problems led to major difficulties in the manual labeling of each neurite in the image stack by an expert human neuro-anatomist.",
+        "documentation": "SNEMI3D.md",
+        "format_version": "0.3.0",
+        "id": "bitter-cookie",
+        "id_emoji": "🍪",
+        "license": "CC-BY-4.0",
+        "name": "SNEMI3D",
+        "source": "https://zenodo.org/records/7142003",
+        "tags": [
+            "instance-segmentation",
+            "3D",
+            "neurites",
+            "electron-microscopy"
+        ],
+        "type": "dataset",
+        "uploader": {
+            "email": "daniel.franco@dipc.org",
+            "name": "Daniel Franco-Barranco"
+        },
+        "version": "0.1.0"
+    },
+    "rdf_yaml_sha256": "ec8e26885e38bdbc84a559473fa788b3a59571fdcbbd80d9e5418690005c05fe",
+    "status": "untested"
+}

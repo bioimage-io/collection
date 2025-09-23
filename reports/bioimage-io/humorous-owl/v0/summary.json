@@ -1,0 +1,234 @@
+{
+    "rdf_content": {
+        "attachments": {
+            "files": [
+                "exampleImage.tif",
+                "resultImage.tif",
+                "per_sample_scale_range.ijm",
+                "binarize.ijm",
+                "params.csv"
+            ]
+        },
+        "authors": [
+            {
+                "affiliation": "UC3M, EPFL",
+                "name": "DeepImageJ"
+            },
+            {
+                "affiliation": "UCL, University of Turku and Åbo Akademi University",
+                "name": "ZeroCostDL4Mic"
+            }
+        ],
+        "cite": [
+            {
+                "doi": "10.1007/978-3-319-46723-8_49",
+                "text": "Çiçek, Özgün, et al. MICCAI 2016"
+            },
+            {
+                "doi": "10.1101/2020.03.20.000133",
+                "text": "Lucas von Chamier et al. biorXiv 2020"
+            },
+            {
+                "doi": "10.7554/eLife.57613",
+                "text": "Adrian Wolny et al., eLife 2020"
+            }
+        ],
+        "config": {
+            "bioimageio": {
+                "nickname": "humorous-owl",
+                "nickname_icon": "🦉",
+                "thumbnails": {
+                    "input.png": "input.thumbnail.png",
+                    "output.png": "output.thumbnail.png"
+                }
+            },
+            "deepimagej": {
+                "allow_tiling": true,
+                "model_keys": {
+                    "tensorflow_model_tag": "tf.saved_model.tag_constants.SERVING",
+                    "tensorflow_siganture_def": "tf.saved_model.signature_constants.DEFAULT_SERVING_SIGNATURE_DEF_KEY"
+                },
+                "prediction": {
+                    "postprocess": [
+                        {
+                            "kwargs": "binarize.ijm",
+                            "spec": "ij.IJ::runMacroFile"
+                        }
+                    ],
+                    "preprocess": [
+                        {
+                            "kwargs": "per_sample_scale_range.ijm",
+                            "spec": "ij.IJ::runMacroFile"
+                        }
+                    ]
+                },
+                "pyramidal_model": false,
+                "test_information": {
+                    "device": null,
+                    "inputs": {
+                        "name": "input",
+                        "pixel_size": {
+                            "x": "1 µm",
+                            "y": "1 µm",
+                            "z": "1 µm"
+                        },
+                        "size": "1 x 256 x 256 x 8 x 1"
+                    },
+                    "memory_peak": null,
+                    "outputs": {
+                        "name": "output",
+                        "size": "1 x 256 x 256 x 8 x 1",
+                        "type": "image"
+                    },
+                    "runtime": null
+                }
+            }
+        },
+        "covers": [
+            "input.png",
+            "output.png"
+        ],
+        "description": "A 3D U-net to predict cell membranes in plant tissues, trained on volumes of Arabidopsis thaliana ovules acquired on a confocal microscope.",
+        "documentation": "README.md",
+        "format_version": "0.4.10",
+        "id": "10.5281/zenodo.5749843/5888237",
+        "id_emoji": "🦉",
+        "inputs": [
+            {
+                "axes": "byxzc",
+                "data_range": [
+                    null,
+                    null
+                ],
+                "data_type": "float32",
+                "name": "input",
+                "preprocessing": [
+                    {
+                        "kwargs": {
+                            "axes": "xyzc",
+                            "max_percentile": 100,
+                            "min_percentile": 0,
+                            "mode": "per_sample"
+                        },
+                        "name": "scale_range"
+                    }
+                ],
+                "shape": [
+                    1,
+                    256,
+                    256,
+                    8,
+                    1
+                ]
+            }
+        ],
+        "license": "MIT",
+        "links": [
+            "imjoy/BioImageIO-Packager",
+            "ilastik/ilastik",
+            "deepimagej/deepimagej",
+            "zero/notebook_u-net_3d_zerocostdl4mic"
+        ],
+        "maintainers": [
+            {
+                "github_user": "esgomezm",
+                "name": "Estibaliz Gomez de Mariscal"
+            },
+            {
+                "github_user": "crtorreg",
+                "name": "Cristina de la Torre"
+            }
+        ],
+        "name": "Cell Segmentation from Membrane Staining for Plant Tissues",
+        "outputs": [
+            {
+                "axes": "byxzc",
+                "data_range": [
+                    null,
+                    null
+                ],
+                "data_type": "float32",
+                "halo": [
+                    0,
+                    47,
+                    47,
+                    0,
+                    0
+                ],
+                "name": "output",
+                "shape": {
+                    "offset": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "reference_tensor": "input",
+                    "scale": [
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0
+                    ]
+                }
+            }
+        ],
+        "packaged_by": [
+            {
+                "affiliation": "PIP python package",
+                "name": "pydeepimagej"
+            }
+        ],
+        "sample_inputs": [
+            "exampleImage.tif"
+        ],
+        "sample_outputs": [
+            "resultImage.tif"
+        ],
+        "tags": [
+            "zerocostdl4mic",
+            "deepimagej",
+            "segmentation",
+            "3d",
+            "unet",
+            "fluorescence-light-microscopy",
+            "cell-membrane",
+            "plant",
+            "arabidopsis",
+            "tensorflow"
+        ],
+        "test_inputs": [
+            "exampleImage.npy"
+        ],
+        "test_outputs": [
+            "resultImage.npy"
+        ],
+        "timestamp": "2022-01-21T14:50:48.356997",
+        "training_data": {
+            "id": "ilastik/plantseg_ovules"
+        },
+        "type": "model",
+        "uploader": {
+            "email": "bioimageiobot@gmail.com"
+        },
+        "version": 1,
+        "version_number": 2,
+        "weights": {
+            "keras_hdf5": {
+                "sha256": "4e34b2b630899a28f087ba607f6c8df9f32fd04240e75ee1c5ee50187070eb7c",
+                "source": "keras_model.h5",
+                "tensorflow_version": "1.15.2"
+            },
+            "tensorflow_saved_model_bundle": {
+                "parent": "keras_hdf5",
+                "sha256": "8ae5edc5dad08a00b6c3a22e06414fd950fac751e16c7de6df60a569421b330d",
+                "source": "tensorflow_saved_model_bundle.zip",
+                "tensorflow_version": "1.15.2"
+            }
+        }
+    },
+    "rdf_yaml_sha256": "36a045aae147e325bcea3926b794c1531ce885af2334e5da8a32879f8f236a11",
+    "status": "untested"
+}

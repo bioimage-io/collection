@@ -1,0 +1,238 @@
+{
+    "rdf_content": {
+        "attachments": {
+            "files": [
+                "per_sample_scale_range.ijm",
+                "training_evaluation.csv"
+            ]
+        },
+        "authors": [
+            {
+                "affiliation": "ASMS",
+                "name": "BRUN Aurelien",
+                "orcid": "0000-0003-1289-8869"
+            },
+            {
+                "affiliation": " ASMS",
+                "name": " DENIS Philippe"
+            },
+            {
+                "affiliation": " ASMS",
+                "name": " BARBE Caroline"
+            },
+            {
+                "affiliation": " ASMS",
+                "name": " PINEL Alexandre"
+            },
+            {
+                "affiliation": " ASMS",
+                "name": " MONTAURIER Christophe"
+            },
+            {
+                "affiliation": " ASMS",
+                "name": " TOURON Julianne"
+            },
+            {
+                "affiliation": " ASMS",
+                "name": " GUERRIER Lisa"
+            },
+            {
+                "affiliation": " ASMS",
+                "name": " RAMBEAU Mathieu"
+            },
+            {
+                "affiliation": " ASMS",
+                "name": " LE-BACQUER Olivier"
+            },
+            {
+                "affiliation": " ASMS",
+                "name": " RIGAUDIERE Jean-Paul"
+            },
+            {
+                "affiliation": " ASMS",
+                "name": " SALLES Jerome"
+            },
+            {
+                "affiliation": " ASMS",
+                "name": " VOINEA Raluca"
+            },
+            {
+                "affiliation": " ASMS",
+                "name": " COLLIN Marie-Laure"
+            },
+            {
+                "affiliation": " ASMS",
+                "name": " GUEUGNEAU Marine"
+            },
+            {
+                "affiliation": " ASMS",
+                "name": " CAPEL Frederic"
+            }
+        ],
+        "cite": [
+            {
+                "doi": "https://doi.org/10.1038/s41592-018-0261-2",
+                "text": "Falk et al. Nature Methods 2019",
+                "url": null
+            },
+            {
+                "doi": "https://doi.org/10.1007/978-3-319-24574-4_28",
+                "text": "Ronneberger et al. arXiv in 2015",
+                "url": null
+            },
+            {
+                "doi": "https://doi.org/10.1101/2020.03.20.000133",
+                "text": "Lucas von Chamier et al. biorXiv 2020",
+                "url": null
+            }
+        ],
+        "config": {
+            "bioimageio": {
+                "thumbnails": {
+                    "cover.png": "cover.thumbnail.png"
+                }
+            },
+            "deepimagej": {
+                "allow_tiling": true,
+                "model_keys": null,
+                "prediction": {
+                    "postprocess": [
+                        {
+                            "spec": null
+                        }
+                    ],
+                    "preprocess": [
+                        {
+                            "kwargs": "per_sample_scale_range.ijm",
+                            "spec": "ij.IJ::runMacroFile"
+                        }
+                    ]
+                },
+                "pyramidal_model": false,
+                "test_information": {
+                    "inputs": [
+                        {
+                            "name": "test_input.npy",
+                            "pixel_size": {
+                                "x": 0.465,
+                                "y": 0.465,
+                                "z": 1
+                            },
+                            "size": "512 x 512 x 1 x 1"
+                        }
+                    ],
+                    "memory_peak": null,
+                    "outputs": [
+                        {
+                            "name": "test_output.npy",
+                            "size": "512 x 512 x 1 x 1",
+                            "type": "image"
+                        }
+                    ],
+                    "runtime": null
+                }
+            }
+        },
+        "covers": [
+            "cover.png"
+        ],
+        "description": "TRUEFAD Myotube detection is a model trained on 300 phase-contrast images of differentiated C2C12 with 17,000 myotubes underlined by hand. Images have been taken on four different cameras with an x10 magnification. Image width and height were scaled down to 512pixel",
+        "documentation": "README.md",
+        "format_version": "0.4.6",
+        "git_repo": "https://github.com/AurBrun/TRUEFAD/tree/main",
+        "id": "sympathetic-mosquito",
+        "id_emoji": "🦟",
+        "inputs": [
+            {
+                "axes": "bxyc",
+                "data_range": [
+                    0,
+                    255
+                ],
+                "data_type": "uint8",
+                "name": "input",
+                "preprocessing": [
+                    {
+                        "kwargs": {
+                            "axes": "xyc",
+                            "max_percentile": 99.8,
+                            "min_percentile": 1,
+                            "mode": "per_sample"
+                        },
+                        "name": "scale_range"
+                    }
+                ],
+                "shape": [
+                    1,
+                    512,
+                    512,
+                    1
+                ]
+            }
+        ],
+        "license": "CC-BY-4.0",
+        "links": [
+            "deepimagej/deepimagej"
+        ],
+        "maintainers": [],
+        "name": "TRUEFAD Myotube detection",
+        "outputs": [
+            {
+                "axes": "bxyc",
+                "data_range": [
+                    null,
+                    null
+                ],
+                "data_type": "float32",
+                "name": "output",
+                "shape": [
+                    1,
+                    512,
+                    512,
+                    1
+                ]
+            }
+        ],
+        "sample_inputs": [
+            "sample_input_0.tif"
+        ],
+        "sample_outputs": [
+            "sample_output_0.tif"
+        ],
+        "tags": [
+            "zerocostdl4mic",
+            "deepimagej",
+            "segmentation",
+            "tem",
+            "unet"
+        ],
+        "test_inputs": [
+            "test_input.npy"
+        ],
+        "test_outputs": [
+            "test_output.npy"
+        ],
+        "timestamp": "2022-07-11T11:24:38.214212",
+        "training_data": {
+            "id": "0000"
+        },
+        "type": "model",
+        "uploader": {
+            "email": "aurelien-brun@hotmail.fr"
+        },
+        "weights": {
+            "keras_hdf5": {
+                "sha256": "b3f6c91ce887841e169fe6a85e3af5533c6267f534c2595369c35753c8e506ef",
+                "source": "keras_weights.hdf5",
+                "tensorflow_version": "1.15.2"
+            },
+            "tensorflow_saved_model_bundle": {
+                "sha256": "b0477bfac11c8f37cf8615df1eb3b674524cf2724588a49670a2714dd4bbc03f",
+                "source": "tf_weights.zip",
+                "tensorflow_version": "1.15.2"
+            }
+        }
+    },
+    "rdf_yaml_sha256": "22e836fb343ebd750b5b314b1aa31bd0f0d75ab69f025c8bca6d167800ce2439",
+    "status": "untested"
+}

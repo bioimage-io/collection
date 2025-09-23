@@ -1,0 +1,77 @@
+{
+    "rdf_content": {
+        "authors": [
+            {
+                "name": "Lucas von Chamier and the ZeroCostDL4Mic Team"
+            }
+        ],
+        "badges": [
+            {
+                "icon": "https://colab.research.google.com/assets/colab-badge.svg",
+                "label": "Open in Colab",
+                "url": "https://colab.research.google.com/github/HenriquesLab/ZeroCostDL4Mic/blob/master/Colab_notebooks/fnet_3D_ZeroCostDL4Mic.ipynb"
+            }
+        ],
+        "cite": [
+            {
+                "doi": "10.1038/s41467-021-22518-0",
+                "text": "von Chamier, L., Laine, R.F., Jukkala, J. et al. Democratising deep learning for microscopy with ZeroCostDL4Mic. Nat Commun 12, 2276 (2021). https://doi.org/10.1038/s41467-021-22518-0"
+            },
+            {
+                "doi": "10.1038/s41592-018-0111-2",
+                "text": "Ounkomol, C., Seshamani, S., Maleckar, M.M. et al. Label-free prediction of three-dimensional fluorescence images from transmitted-light microscopy. Nat Methods 15, 917â€“920 (2018). https://doi.org/10.1038/s41592-018-0111-2"
+            }
+        ],
+        "config": {
+            "bioimageio": {
+                "nickname": "authoritative-ballet-shoes",
+                "nickname_icon": "🩰",
+                "status": "accepted",
+                "version_id": "latest",
+                "version_name": "latest"
+            },
+            "dl4miceverywhere": {
+                "cuda_version": "11.8.0",
+                "cudnn_version": "8.6.0.163",
+                "description": "fnet_3D_DL4Mic is the conversion of the 3D fnet from ZeroCostDL4Mic.",
+                "dl4miceverywhere_version": "2.0.0",
+                "docker_hub_image": "fnet_3d_zerocostdl4mic-z1.13.1-d2.0.0",
+                "notebook_url": "https://raw.githubusercontent.com/HenriquesLab/ZeroCostDL4Mic/master/Colab_notebooks/fnet_3D_ZeroCostDL4Mic.ipynb",
+                "notebook_version": "1.13.1",
+                "python_version": "3.7",
+                "requirements_url": "https://raw.githubusercontent.com/HenriquesLab/ZeroCostDL4Mic/master/requirements_files/fnet_3D_requirements_simple.txt",
+                "sections_to_remove": "1.1. 1.2. 2. 6.3.",
+                "ubuntu_version": "22.04"
+            }
+        },
+        "covers": [
+            "fnet_notebook.png"
+        ],
+        "description": "Paired image-to-image translation of 3D images. Label-free Prediction (fnet) is a neural network used to infer the features of cellular structures from brightfield or EM images without coloured labels. The network is trained using paired training images from the same field of view, imaged in a label-free (e.g. brightfield) and labelled condition (e.g. fluorescent protein). When trained, this allows the user to identify certain structures from brightfield images alone. The performance of fnet may depend significantly on the structure at hand. Note - visit the ZeroCostDL4Mic wiki to check the original publications this network is based on and make sure you cite these.",
+        "documentation": "README.md",
+        "download_url": "https://raw.githubusercontent.com/HenriquesLab/ZeroCostDL4Mic/master/Colab_notebooks/fnet_3D_ZeroCostDL4Mic.ipynb",
+        "format_version": "0.2.4",
+        "git_repo": "https://github.com/HenriquesLab/ZeroCostDL4Mic",
+        "id": "zero/Notebook_fnet_3D_ZeroCostDL4Mic",
+        "links": [
+            "zero/Notebook Preview",
+            "zero/Dataset_fnet_3D_ZeroCostDL4Mic"
+        ],
+        "maintainers": [],
+        "name": "Label-free Prediction - fnet - (3D) ZeroCostDL4Mic",
+        "tags": [
+            "colab",
+            "notebook",
+            "fnet",
+            "labelling",
+            "ZeroCostDL4Mic",
+            "3D",
+            "dl4miceverywhere"
+        ],
+        "type": "application",
+        "version": "1.13.1",
+        "license": "MIT"
+    },
+    "rdf_yaml_sha256": "02d13795f27f3be200b53880dcb3013542b3c588e624538f21466a5597e76d5d",
+    "status": "untested"
+}

@@ -1,0 +1,230 @@
+{
+    "rdf_content": {
+        "attachments": [],
+        "authors": [
+            {
+                "affiliation": null,
+                "email": null,
+                "github_user": null,
+                "name": "Iván Hidalgo-Cenalmor"
+            }
+        ],
+        "cite": [
+            {
+                "doi": "10.5281/zenodo.5108853",
+                "text": "training library",
+                "url": null
+            },
+            {
+                "doi": "10.1007/978-3-319-24574-4_28",
+                "text": "architecture",
+                "url": null
+            },
+            {
+                "doi": "10.1038/nmeth.4151",
+                "text": "segmentation algorithm",
+                "url": null
+            },
+            {
+                "doi": "10.5281/zenodo.5639253",
+                "text": "data",
+                "url": null
+            }
+        ],
+        "config": {
+            "bioimageio": {
+                "thumbnails": {
+                    "010bfd64-09df-4422-bd3c-1ec577824ff4_cover_image.png": "010bfd64-09df-4422-bd3c-1ec577824ff4_cover_image.thumbnail.png"
+                },
+                "test_kwargs": {
+                    "torchscript": {
+                        "absolute_tolerance": 0.01,
+                        "relative_tolerance": 0.001
+                    }
+                }
+            }
+        },
+        "covers": [
+            "010bfd64-09df-4422-bd3c-1ec577824ff4_cover_image.png"
+        ],
+        "description": "This model is a fine-tunned verion of `affabable-shark`. This model has been fine-tunned using `delectable-eggplant` dataset, which includes paired bright field images and segmented binary masks of live E. coli cells.",
+        "documentation": "6dfa0d3c-50f9-4e54-86da-f6111383f936_README.md",
+        "format_version": "0.5.3",
+        "git_repo": null,
+        "icon": null,
+        "id": "charismatic-whale",
+        "id_emoji": "🐳",
+        "inputs": [
+            {
+                "axes": [
+                    {
+                        "description": "",
+                        "id": "batch",
+                        "size": 1,
+                        "type": "batch"
+                    },
+                    {
+                        "channel_names": [
+                            "raw"
+                        ],
+                        "description": "",
+                        "id": "channel",
+                        "type": "channel"
+                    },
+                    {
+                        "description": "",
+                        "id": "y",
+                        "scale": 1,
+                        "size": {
+                            "min": 64,
+                            "step": 16
+                        },
+                        "type": "space",
+                        "unit": null
+                    },
+                    {
+                        "description": "",
+                        "id": "x",
+                        "scale": 1,
+                        "size": {
+                            "min": 64,
+                            "step": 16
+                        },
+                        "type": "space",
+                        "unit": null
+                    }
+                ],
+                "description": "",
+                "id": "raw",
+                "optional": false,
+                "preprocessing": [
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    },
+                    {
+                        "id": "zero_mean_unit_variance",
+                        "kwargs": {
+                            "axes": [
+                                "channel",
+                                "y",
+                                "x"
+                            ],
+                            "eps": 9.999999974752427e-7
+                        }
+                    },
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    }
+                ],
+                "sample_tensor": null,
+                "test_tensor": {
+                    "sha256": null,
+                    "source": "cfdcff5e-c4e4-4baf-826f-b453751a139d_raw_test_tensor.npy"
+                }
+            }
+        ],
+        "license": "CC-BY-SA-4.0",
+        "links": [],
+        "maintainers": [],
+        "name": "DeepBacs Segmentation Boundary Model",
+        "outputs": [
+            {
+                "axes": [
+                    {
+                        "description": "",
+                        "id": "batch",
+                        "size": 1,
+                        "type": "batch"
+                    },
+                    {
+                        "channel_names": [
+                            "channel0",
+                            "channel1"
+                        ],
+                        "description": "",
+                        "id": "channel",
+                        "type": "channel"
+                    },
+                    {
+                        "description": "",
+                        "id": "y",
+                        "scale": 1,
+                        "size": {
+                            "axis_id": "y",
+                            "offset": 0,
+                            "tensor_id": "raw"
+                        },
+                        "type": "space",
+                        "unit": null
+                    },
+                    {
+                        "description": "",
+                        "id": "x",
+                        "scale": 1,
+                        "size": {
+                            "axis_id": "x",
+                            "offset": 0,
+                            "tensor_id": "raw"
+                        },
+                        "type": "space",
+                        "unit": null
+                    }
+                ],
+                "description": "",
+                "id": "prob",
+                "postprocessing": [
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    }
+                ],
+                "sample_tensor": null,
+                "test_tensor": {
+                    "sha256": null,
+                    "source": "10c6feba-1e0f-4d4e-92bd-27d7037eadca_prob_test_tensor.npy"
+                }
+            }
+        ],
+        "run_mode": null,
+        "tags": [
+            "instance-segmentation",
+            "2d",
+            "unet",
+            "pytorch",
+            "zerocostdl4mic",
+            "deepbacs"
+        ],
+        "timestamp": "2024-10-19T00:37:37.130Z",
+        "training_data": null,
+        "type": "model",
+        "uploader": {
+            "email": "ivanhcenalmor@gmail.com",
+            "name": "Iván Hidalgo-Cenalmor"
+        },
+        "version": "1.0.1",
+        "weights": {
+            "keras_hdf5": null,
+            "onnx": null,
+            "pytorch_state_dict": null,
+            "tensorflow_js": null,
+            "tensorflow_saved_model_bundle": null,
+            "torchscript": {
+                "authors": null,
+                "parent": null,
+                "pytorch_version": "2.2.0",
+                "sha256": null,
+                "source": "44a0b00b-f171-4fa2-9c39-160e610e9496.pt"
+            }
+        }
+    },
+    "rdf_yaml_sha256": "41f022f875ca20488b17726e80340d4526d3aa1c3dcd3ba8c7ff4460bf71fa86",
+    "status": "untested"
+}

@@ -1,0 +1,76 @@
+{
+    "rdf_content": {
+        "authors": [
+            {
+                "name": "Constantin Pape"
+            }
+        ],
+        "cite": [
+            {
+                "doi": "10.1038/s41592-021-01249-6",
+                "text": "Edlund et al."
+            }
+        ],
+        "config": {
+            "background_image": "static/img/zoo-background.svg",
+            "bioimageio": {
+                "nickname": "luscious-sushi",
+                "nickname_icon": "🍣",
+                "status": "accepted",
+                "version_id": "latest",
+                "version_name": "latest"
+            },
+            "default_type": "model",
+            "explore_button_text": "Start Exploring",
+            "icon": "https://raw.githubusercontent.com/ilastik/bioimage-io-resources/main/image/ilastik-fist-icon.png",
+            "id": "ilastik",
+            "logo": "https://raw.githubusercontent.com/ilastik/bioimage-io-resources/main/image/ilastik-fist-icon.png",
+            "name": "ilastik",
+            "resource_types": [
+                "application"
+            ],
+            "splash_feature_list": null,
+            "splash_subtitle": "the interactive learning and segmentation toolkit",
+            "splash_title": "ilastik",
+            "tags": [
+                "ilastik"
+            ],
+            "url_root": "https://raw.githubusercontent.com/ilastik/bioimage-io-resources/main"
+        },
+        "covers": [
+            "livecell-cover0.jpg"
+        ],
+        "description": "LIVECellâ€”A large-scale dataset for label-free live cell segmentation",
+        "documentation": "livecell.md",
+        "format_version": "0.2.4",
+        "id": "ilastik/livecell_dataset",
+        "license": "CC-BY-NC-4.0",
+        "maintainers": [
+            {
+                "affiliation": "EMBL Heidelberg",
+                "github_user": "fynnbe",
+                "name": "Fynn BeuttenmÃ¼ller",
+                "orcid": "0000-0002-8567-6389"
+            },
+            {
+                "affiliation": "EMBL Heidelberg",
+                "github_user": "constantinpape",
+                "name": "Constantin Pape",
+                "orcid": "0000-0001-6562-7187"
+            }
+        ],
+        "name": "LIVECell",
+        "source": "https://sartorius-research.github.io/LIVECell/",
+        "tags": [
+            "2D",
+            "transmission-light-microscopy",
+            "label-free",
+            "cells",
+            "instance-segmentation"
+        ],
+        "type": "dataset",
+        "version": 1
+    },
+    "rdf_yaml_sha256": "06dccb7c9e2db885d01271a9d274cc41b714945a666a561ee450f52f27e86dbe",
+    "status": "untested"
+}
