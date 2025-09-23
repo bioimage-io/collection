@@ -36,6 +36,8 @@ jobs:
       - name: Deploy to gh-pages 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          dry-run: ${{ github.ref == 'refs/heads/main' }}
+          dry-run: ${{ github.ref != 'refs/heads/main' }}
           folder: docs
-          clean-exclude: reports
+          clean-exclude: |
+            reports
+            index.json
