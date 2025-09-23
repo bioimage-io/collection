@@ -1,13 +1,12 @@
-[![internal tests & docs](https://github.com/bioimage-io/collection/actions/workflows/build.yaml/badge.svg)](https://github.com/bioimage-io/collection/actions/workflows/build.yaml)
-[![collection overview](https://github.com/bioimage-io/collection/actions/workflows/generate_collection_json.yaml/badge.svg)](https://github.com/bioimage-io/collection/actions/workflows/generate_collection_json.yaml)
-
-[![last resource staging](https://github.com/bioimage-io/collection/actions/workflows/stage.yaml/badge.svg)](https://github.com/bioimage-io/collection/actions/workflows/stage.yaml)
-[![last resource testing](https://github.com/bioimage-io/collection/actions/workflows/test.yaml/badge.svg)](https://github.com/bioimage-io/collection/actions/workflows/test.yaml)
-[![last resource publishing](https://github.com/bioimage-io/collection/actions/workflows/publish.yaml/badge.svg)](https://github.com/bioimage-io/collection/actions/workflows/publish.yaml)
-
-[![ilastik compatibility](https://github.com/bioimage-io/collection/actions/workflows/check_compatibility_ilastik.yaml/badge.svg)](https://github.com/bioimage-io/collection/actions/workflows/check_compatibility_ilastik.yaml)
-
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+
+#### workflow status
+
+[![internal tests & docs](https://github.com/bioimage-io/collection/actions/workflows/build.yaml/badge.svg)](https://github.com/bioimage-io/collection/actions/workflows/build.yaml)
+
+| [![create bioimage.io index](https://github.com/bioimage-io/collection/actions/workflows/index.yaml/badge.svg)](https://github.com/bioimage-io/collection/actions/workflows/index.yaml) | [![check compatibility](https://github.com/bioimage-io/collection/actions/workflows/check_compatibility.yaml/badge.svg)](https://github.com/bioimage-io/collection/actions/workflows/check_compatibility.yaml) | [![compatibility summary](https://github.com/bioimage-io/collection/actions/workflows/summarize.yaml/badge.svg)](https://github.com/bioimage-io/collection/actions/workflows/summarize.yaml) |
+| --- | --- | --- |
+| | [![BiaPy compatibility](https://github.com/bioimage-io/collection/actions/workflows/check_compatibility_biapy.yaml/badge.svg)](https://github.com/bioimage-io/collection/actions/workflows/check_compatibility_biapy.yaml)<br>[![bioimageio.core compatibility](https://github.com/bioimage-io/collection/actions/workflows/check_compatibility_bioimageio_core.yaml/badge.svg)](https://github.com/bioimage-io/collection/actions/workflows/check_compatibility_bioimageio_core.yaml)<br>[![CAREamics compatibility](https://github.com/bioimage-io/collection/actions/workflows/check_compatibility_careamics.yaml/badge.svg)](https://github.com/bioimage-io/collection/actions/workflows/check_compatibility_careamics.yaml)<br>[![ilastik compatibility](https://github.com/bioimage-io/collection/actions/workflows/check_compatibility_ilastik.yaml/badge.svg)](https://github.com/bioimage-io/collection/actions/workflows/check_compatibility_ilastik.yaml)
 
 # collection
 
