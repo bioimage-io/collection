@@ -37,6 +37,18 @@
 <a href="https://bioimage.io/">            <img src="https://bioimage.io/static/img/bioimage-io-logo.svg" class="logo" alt="project logo"/>
 </a>
 
+            <h2>Contents</h2>
+            <ul>
+  <li><a href="#collection">collection</a>
+  <ul>
+    <li><a href="#maintaining-the-bioimageio-collection">Maintaining the bioimage.io Collection</a></li>
+  </ul></li>
+  <li><a href="#add-community-partner">Add community partner</a>
+  <ul>
+    <li><a href="#add-community-partner-compatibility-checks">Add community partner compatibility checks</a></li>
+  </ul></li>
+</ul>
+
 
 
             <h2>API Documentation</h2>
@@ -61,7 +73,158 @@
                     <h1 class="modulename">
 backoffice    </h1>
 
-                        <div class="docstring"><p></p>
+                        <div class="docstring"><p><a href="https://github.com/bioimage-io/collection/actions/workflows/build.yaml"><img src="https://github.com/bioimage-io/collection/actions/workflows/build.yaml/badge.svg" alt="internal tests &amp; docs" /></a>
+<a href="https://github.com/bioimage-io/collection/actions/workflows/generate_collection_json.yaml"><img src="https://github.com/bioimage-io/collection/actions/workflows/generate_collection_json.yaml/badge.svg" alt="collection overview" /></a></p>
+
+<p><a href="https://github.com/bioimage-io/collection/actions/workflows/stage.yaml"><img src="https://github.com/bioimage-io/collection/actions/workflows/stage.yaml/badge.svg" alt="last resource staging" /></a>
+<a href="https://github.com/bioimage-io/collection/actions/workflows/test.yaml"><img src="https://github.com/bioimage-io/collection/actions/workflows/test.yaml/badge.svg" alt="last resource testing" /></a>
+<a href="https://github.com/bioimage-io/collection/actions/workflows/publish.yaml"><img src="https://github.com/bioimage-io/collection/actions/workflows/publish.yaml/badge.svg" alt="last resource publishing" /></a></p>
+
+<p><a href="https://github.com/bioimage-io/collection/actions/workflows/check_compatibility_ilastik.yaml"><img src="https://github.com/bioimage-io/collection/actions/workflows/check_compatibility_ilastik.yaml/badge.svg" alt="ilastik compatibility" /></a></p>
+
+<p><a href="https://github.com/astral-sh/ruff"><img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json" alt="Ruff" /></a></p>
+
+<h1 id="collection">collection</h1>
+
+<p>This repository is used to manage the resources displayed on <a href="https://bioimage.io">bioimage.io</a>.</p>
+
+<p>Most users will not directly dispatch the workflows defined in this reporitory, but should instead login on <a href="https://bioimage.io">bioimage.io</a> and use the front-end to interact with the bioimage.io collection.</p>
+
+<p>We currently do not have a workflow for direct upload, but publicly available resource packages may be staged with a stage workflow dispatch.</p>
+
+<h2 id="maintaining-the-bioimageio-collection">Maintaining the bioimage.io Collection</h2>
+
+<p>In order to update or add new resources to the <a href="https://bioimage.io">bioimage.io</a> collection, they have to undergo review.
+Current reviewers are listed in <a href="https://github.com/bioimage-io/collection/blob/main/bioimageio_collection_config.json"><code>bioimageio_collection_config.json</code></a>, under section <code>reviewers</code>.</p>
+
+<h3 id="reviewer-onboarding">Reviewer Onboarding</h3>
+
+<ol>
+<li>Open a pull request, adding a person to the <a href="https://github.com/bioimage-io/collection/blob/main/bioimageio_collection_config.json">list of reviewers</a>, see <a href="https://github.com/bioimage-io/collection/pull/75">https://github.com/bioimage-io/collection/pull/75</a> for an example.
+<ul>
+<li>one public email address is required</li>
+<li>github id can be found using <code>https://api.github.com/users/&lt;github_username&gt;</code></li>
+</ul></li>
+<li>So the changes can be applied, the service needs to be restored manually. Reach out to the team or leave an issue.</li>
+<li>Once the pull request has been merged, the new reviewer can
+<ul>
+<li>accept resource drafts</li>
+<li>request changes on resource drafts</li>
+<li>upload a new version for any resource</li>
+</ul></li>
+</ol>
+
+<h3 id="adding-a-bioimageio-resource">Adding a bioimage.io resource</h3>
+
+<p>TODO: This section needs to be updated!</p>
+
+<p>A bioimage.io resource is created by a user uploading a _resource package_.
+Such a _resource package_ could e.g. be a newly uploaded _model package_, or _notebook package_.
+Typically, uploaders would go via <a href="https://bioimage.io/#/upload">bioimage.io/upload</a>.
+Alternatively, any direct link to a downloadable resource package (<code>.zip</code>-file) would work.
+The latter option is reserved for members of this repository (or the bioimageio org).
+Once available online the _resource package_ is staged (see <a href="#staging">Staging section</a>), tested (see <a href="#testing">Testing section</a>), and reviewed (see <a href="#review">Review section</a>).</p>
+
+<pre class="mermaid-pre"><div class="mermaid">graph TD;
+    stage[stage]
+    test[test]
+    cr[request changes]
+    publish[accept/publish]
+    backup[backup to Zenodo]
+
+    stage--&gt;test
+    test--&gt;cr
+    cr--&gt;stage
+    test--&gt;publish
+    publish--&gt;backup
+</div></pre>
+
+<h4 id="staging">Staging</h4>
+
+<p>TODO: This section needs to be updated!</p>
+
+<p>If the _resource package_ was uploaded via the bioimage.io website, the staging of the new resource draft is initiated automatically by the uploader service.
+Otherwise, given a download URL to a _resource package_, the <code>stage</code> workflow needs to be <a href="https://github.com/bioimage-io/collection/actions/workflows/stage.yaml">dispatched manually, or via github api</a> ("run workflow")<sup class="footnote-ref" id="fnref-1"><a href="#fn-1">1</a></sup>.</p>
+
+<p>Staging unpacks the files from the zipped resource package to our public S3.
+Once unpacked, the staged _resource draft_ is automatically tested (the <a href="https://github.com/bioimage-io/collection/actions/workflows/test.yaml">test workflow</a> is dispatched automatically at the end of the stage workflow).</p>
+
+<h4 id="testing">Testing</h4>
+
+<p>TODO: This section needs to be updated!</p>
+
+<p>Staged resource drafts are automatically tested:</p>
+
+<ul>
+<li>Is their metadata valid?</li>
+<li>Can test outputs be reproduced from test inputs?</li>
+<li>Are linked URLs available?</li>
+<li>...</li>
+</ul>
+
+<p>Tests can also be triggered (via github api or manually) by dispatching the <a href="https://github.com/bioimage-io/collection/actions/workflows/test.yaml">test workflow</a><sup class="footnote-ref" id="fnref-2"><a href="#fn-2">2</a></sup>.</p>
+
+<p>Once the tests are completed, the uploader gets a notification via email that their draft is awaiting review; now a reviewer needs to take a look.</p>
+
+<p>An overview of all pending _resource drafts_ can be found at <a href="https://bioimageio-uploader.netlify.app/#/status">https://bioimageio-uploader.netlify.app/#/status</a>.
+A _draft_ is identified by its concept id (<code>id</code> from the <code>rdf.yaml</code>).</p>
+
+<h4 id="review">Review</h4>
+
+<p>TODO: This section needs to be updated!</p>
+
+<p>Reviewers should check the models for technical correctness (aided by CI, see <a href="#testing">Testing section</a>) and contents/metadata of the resource.</p>
+
+<p>To this end it can be helpful to check the logs displayed at <code>https://bioimageio-uploader.netlify.app/#/status/&lt;concept_id&gt;</code>.
+There information about automated workflow steps and validation outcome is logged.
+Additionally an 'error' status may be shown if an exception occured in the GitHub workflow run producing the log.
+To be able to see all the packaged models along with the 'rdf.yaml' as well as covers and other documentation, go to the <a href="https://bioimage.io/#/?repo=https%3A%2F%2Fuk1s3.embassy.ebi.ac.uk%2Fpublic-datasets%2Fbioimage.io%2Fcollection_draft.json">draft collection</a> and download the model from there.</p>
+
+<p>For models, reviewers can use <a href="https://bioimage.io/docs/#/guides/developers-guide?id=model-documentation">the model documentation</a> as a guide.</p>
+
+<p>Reviewers can:</p>
+
+<ul>
+<li>_request changes_:
+A contributor is expected to upload an updated (fixed) draft (which overwrites the current draft).
+This can be done either by the website, or the stage workflow.
+Important is to keep the <code>id</code> the same.</li>
+<li>_apply minor changes_:
+For minor changes it is often not necessary to involve the contributor directly.
+Such changes could be e.g. obvious typos in some of the fields.
+Reviewers can apply changes locally to the _resource package_ and re-upload (using the same <code>id</code>), or, given S3 credentials, files could also be changed in place.
+Latter way of changing requires manually triggering the tests (see <a href="#testing">Testing section</a>).</li>
+<li>_accept_:
+Accepting the _resource draft_ via the web interface triggers the <a href="https://github.com/bioimage-io/collection/actions/workflows/publish.yaml">publish workflow</a>, which creates a new unique _resource version_.
+As a result, the resource is published, the draft deleted and, thus, the _resource_ is available via the <a href="https://bioimage.io">bioimage.io</a> website.
+The <a href="https://github.com/bioimage-io/collection/actions/workflows/backup.yaml">backup workflow</a> will upload/publish the _resource version_ to zenodo using the bioimage.io bot account (tagged with <a href="https://zenodo.org/search?q=metadata.subjects.subject%3A%22backup.bioimage.io%22&amp;l=list&amp;p=1&amp;s=10&amp;sort=bestmatch"><code>backup.bioimage.io</code></a>).</li>
+</ul>
+
+<h1 id="add-community-partner">Add community partner</h1>
+
+<p>To link yourself as a community partner, please create a PR to insert relevant metadata into <a href="https://github.com/bioimage-io/collection/blob/4087336ad00bff0198f5de83c94aa13be357840d/bioimageio_collection_config.json">bioimageio_collection_config.json</a> under <code>"partners"</code>.
+Checkout <a href="https://github.com/bioimage-io/collection/blob/4087336ad00bff0198f5de83c94aa13be357840d/bioimageio_collection_config.json#L283-L301">ilastik partner entry</a> for an example.</p>
+
+<h2 id="add-community-partner-compatibility-checks">Add community partner compatibility checks</h2>
+
+<p>Any community partner is invited to add a GitHub Actions workflow in this repo (please make a PR) that generates reports on its software compatibility with new and updated resources in the bioimage.io collection.
+See <a href="https://github.com/bioimage-io/collection/blob/main/.github/workflows/check_compatibility_ilastik.yaml">ilastik compatibility checks workflow</a> for an example.</p>
+
+<p>If you are not familiar with GitHub Actions workflows, we can help you to set this up analog to our existing community partner compatibility checks.
+Ideally you can provide a script to create a compatibility report (a relativley simple json file) for a given resource description. see <a href="https://github.com/bioimage-io/collection/blob/main/scripts/check_compatibility_ilastik.py">this Python script as an example</a>.</p>
+
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn-1">
+<p>Parameters to this workflow are <code>bioimage.io resource concept ID</code> (<code>id</code> from the <code>rdf.yaml</code>), and <code>Download URL of the resource package zip-file</code>, which should contain a publicly reachable URL to a _resource package_ <code>.zip</code>-file.&#160;<a href="#fnref-1" class="footnoteBackLink" title="Jump back to footnote 1 in the text.">&#8617;</a></p>
+</li>
+
+<li id="fn-2">
+<p>Parameters to this workflow are <code>Bioimage.io resource concept ID</code> (<code>id</code> from the <code>rdf.yaml</code>), and <code>Published version or 'draft'</code> (optional, usually <code>draft</code>).&#160;<a href="#fnref-2" class="footnoteBackLink" title="Jump back to footnote 2 in the text.">&#8617;</a></p>
+</li>
+</ol>
+</div>
 </div>
 
                         <input id="mod-backoffice-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
@@ -69,7 +232,7 @@ backoffice    </h1>
                         <label class="view-source-button" for="mod-backoffice-view-source"><span>View Source</span></label>
 
                         <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos">1</span></a><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-2"><a href="#L-2"><span class="linenos">2</span></a><span class="sd">.. include:: ../README.md</span>
+</span><span id="L-2"><a href="#L-2"><span class="linenos">2</span></a><span class="sd">.. include:: ../../README.md</span>
 </span><span id="L-3"><a href="#L-3"><span class="linenos">3</span></a><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="L-4"><a href="#L-4"><span class="linenos">4</span></a>
 </span><span id="L-5"><a href="#L-5"><span class="linenos">5</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">._version</span><span class="w"> </span><span class="kn">import</span> <span class="n">VERSION</span> <span class="k">as</span> <span class="n">__version__</span>
