@@ -31,7 +31,7 @@ jobs:
         with:
           cache: "pip"
       - run: pip install .
-      - uses: ./.github/actions/cache_index.yaml
+      - uses: ./.github/actions/cache_index
       - run: backoffice summarize
         env:
           RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}

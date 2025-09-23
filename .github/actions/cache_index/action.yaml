@@ -1,0 +1,43 @@
+name: 'Cache Index'
+description: 'cache the index.json file'
+
+outputs:
+  index-key:
+    description: 'The cache key'
+    value: ${{ steps.index-key.outputs.index-key }}
+  cache-hit:
+    description: 'Whether the cache was hit'
+    value: ${{ steps.cache.outputs.cache-hit }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Get index key
+      id: index-key
+      run: |
+        echo "date=$(date +'%Y-%b')"
+        echo "index-key=index-$(date +'%Y-%m-%d-%H')" >> $GITHUB_OUTPUT
+      shell: bash
+    - uses: actions/cache@v3
+      id: cache
+      with:
+        key: ${{ steps.index-key.outputs.index-key }}
+        path: index.json
+    - if: steps.cache.outputs.cache-hit != 'true'
+      uses: actions/setup-python@v6
+      with:
+        cache: 'pip'
+    - if: steps.cache.outputs.cache-hit != 'true'
+      run: pip install .
+      shell: bash
+    - if: steps.cache.outputs.cache-hit != 'true'
+      run: backoffice index
+      shell: bash
+    - if: steps.cache.outputs.cache-hit != 'true'
+      name: Deploy to gh-pages 🚀
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        folder: reports
+        dry-run: ${{ github.ref != 'refs/heads/main' }}
+        target-folder: reports
+        clean: false

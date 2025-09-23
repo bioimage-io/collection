@@ -36,7 +36,7 @@ jobs:
         # - ilastik
     steps:
     - uses: actions/checkout@v4
-    - uses: ./.github/actions/cache_index.yaml
+    - uses: ./.github/actions/cache_index
     - uses: bioimage-io/collection/.github/workflows/check_compatibility_${{matrix.tool}}.yaml@main
       with:
         secrets: inherit
