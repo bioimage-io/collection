@@ -50,6 +50,9 @@ jobs:
         environment-file: env.yaml
         cache-downloads: true
         cache-environment: false  # gets stuck for 6h?
+    - uses: ./.github/actions/cache_index
+      with:
+        HYPHA_API_TOKEN: ${{secrets.HYPHA_API_TOKEN}}
     - name: test published versions with ilastik ${{ matrix.v }}
       shell: bash -l {0}
       run: python scripts/check_compatibility_ilastik.py ${{ matrix.v }} index.json generated-reports
