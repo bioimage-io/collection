@@ -15,6 +15,7 @@ concurrency: conflate-summaries
 jobs:
   run:
     runs-on: ubuntu-latest
+    environment: 'production'
     steps:
       - uses: actions/checkout@v4
       - uses: actions/checkout@v4
