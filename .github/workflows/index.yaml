@@ -40,9 +40,13 @@ jobs:
         env:
           RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
           HYPHA_API_TOKEN: ${{secrets.HYPHA_API_TOKEN}}
+      - run: |
+          mkdir index
+          mv index.json index/index.json
       - name: Deploy to gh-pages 🚀
         if: ${{ github.ref == 'refs/heads/main' }}
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           dry-run: ${{ inputs.dry-run || false }}
-          folder: gh-pages
+          folder: index
+          clean: false
