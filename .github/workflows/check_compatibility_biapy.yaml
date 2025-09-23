@@ -21,6 +21,9 @@ jobs:
       run: pip install timm torchmetrics[image] pytorch-msssim
     - name: Install backoffice
       run: pip install .
+    - uses: ./.github/actions/cache_index
+      with:
+        HYPHA_API_TOKEN: ${{secrets.HYPHA_API_TOKEN}}
     - run: python scripts/check_compatibility_biapy.py
       env:
         RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}

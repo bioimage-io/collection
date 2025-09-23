@@ -3,15 +3,7 @@ name: check compatibility careamics
 concurrency: careamics
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - .github/workflows/check_compatibility_careamics.yaml
-      - scripts/check_compatibility_careamics.py
-  workflow_dispatch:
-  schedule:
-    - cron: 0 1 * * *  # update compatibility once a day
+  workflow_call:
 
 jobs:
   run:

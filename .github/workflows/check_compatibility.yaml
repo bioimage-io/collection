@@ -8,46 +8,19 @@ on:
       - 'index'
 
 jobs:
-  check:
-    runs-on: ubuntu-latest
-    environment: 'production'
-    strategy:
-      fail-fast: false
-      matrix:
-        tool:
-        # - biapy
-        - bioimageio_core
-        # - careamics
-        # - ilastik
-    steps:
-    - uses: actions/checkout@v4
-    - uses: ./.github/actions/cache_index
-      with:
-        HYPHA_API_TOKEN: ${{secrets.HYPHA_API_TOKEN}}
-    - if: matrix.tool == 'biapy'
-      uses: ./.github/workflows/check_compatibility_biapy.yaml
-      with:
-        secrets: inherit
-    - if: matrix.tool == 'bioimageio_core'
-      uses: ./.github/workflows/check_compatibility_bioimageio_core.yaml
-      with:
-        secrets: inherit
-    - if: matrix.tool == 'careamics'
-      uses: ./.github/workflows/check_compatibility_careamics.yaml
-      with:
-        secrets: inherit
-    - if: matrix.tool == 'ilastik'
-      uses: ./.github/workflows/check_compatibility_ilastik.yaml
-      with:
-        secrets: inherit
-    - run: ls reports
-    - run: ls reports/bioimage-io
-    # - name: Upload ${{matrix.tool}} reports
-    #   uses: actions/upload-artifact@v4
-    #   with:
-    #     name: reports-${{matrix.tool}}
-    #     path: reports
 
+  # biapy:
+  #     uses: ./.github/workflows/check_compatibility_biapy.yaml
+  #     secrets: inherit
+  bioimageio_core:
+      uses: ./.github/workflows/check_compatibility_bioimageio_core.yaml
+      secrets: inherit
+  # careamics:
+  #     uses: ./.github/workflows/check_compatibility_careamics.yaml
+  #     secrets: inherit
+  # ilastik:
+  #     uses: ./.github/workflows/check_compatibility_ilastik.yaml
+  #     secrets: inherit
 
   # deploy:
   #   needs: check
