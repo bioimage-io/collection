@@ -39,7 +39,20 @@ jobs:
     - uses: ./.github/actions/cache_index
       with:
         HYPHA_API_TOKEN: ${{secrets.HYPHA_API_TOKEN}}
-    - uses: bioimage-io/collection/.github/workflows/check_compatibility_${{matrix.tool}}.yaml@main
+    - if: matrix.tool == 'biapy'
+      uses: ./.github/workflows/check_compatibility_biapy.yaml
+      with:
+        secrets: inherit
+    - if: matrix.tool == 'bioimageio_core'
+      uses: ./.github/workflows/check_compatibility_bioimageio_core.yaml
+      with:
+        secrets: inherit
+    - if: matrix.tool == 'careamics'
+      uses: ./.github/workflows/check_compatibility_careamics.yaml
+      with:
+        secrets: inherit
+    - if: matrix.tool == 'ilastik'
+      uses: ./.github/workflows/check_compatibility_ilastik.yaml
       with:
         secrets: inherit
     - run: ls reports
