@@ -57,3 +57,10 @@ jobs:
       with:
         name: reports-ilastik-${{ matrix.v }}
         path: reports
+    - name: Deploy to gh-pages 🚀
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        folder: reports
+        dry-run: ${{ github.ref != 'refs/heads/main' }}
+        target-folder: reports
+        clean: false

@@ -32,6 +32,7 @@ jobs:
         with:
           cache: "pip" # caching pip dependencies
       - run: pip install .
+      - uses: ./.github/actions/cache_index.yaml
       - run: backoffice index
         env:
           RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}

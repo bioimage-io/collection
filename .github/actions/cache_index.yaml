@@ -1,0 +1,16 @@
+name: 'Cache Index'
+description: 'cache the index.json file'
+concurrency: cache-index # not sure concurrency in a composite action works/has any effect
+runs:
+  using: 'composite'
+  steps:
+    - name: Get index key
+      id: index-key
+      run: |
+        echo "date=$(date +'%Y-%b')"
+        echo "index-key=index-$(date +'%Y-%m-%d-%H')" >> $GITHUB_OUTPUT
+      shell: bash
+    - uses: actions/cache@v3
+      with:
+        key: ${{ steps.index-key.outputs.index-key }}
+        path: index.json
