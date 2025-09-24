@@ -1,7 +1,5 @@
 name: check compatibility biapy
 
-concurrency: biapy
-
 on:
   workflow_call:
     inputs:

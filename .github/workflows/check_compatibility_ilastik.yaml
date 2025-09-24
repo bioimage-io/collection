@@ -1,6 +1,5 @@
 name: check compatibility ilastik
 
-concurrency: ilastik
 
 on:
   workflow_call:

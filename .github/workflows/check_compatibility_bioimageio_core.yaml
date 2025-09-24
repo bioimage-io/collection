@@ -1,7 +1,5 @@
 name: check compatibility bioimageio_core
 
-concurrency: bioimageio_core
-
 on:
   workflow_call:
     inputs:

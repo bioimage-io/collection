@@ -1,7 +1,5 @@
 name: check compatibility careamics
 
-concurrency: careamics
-
 on:
   workflow_call:
     inputs:

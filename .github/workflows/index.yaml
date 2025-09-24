@@ -16,8 +16,6 @@ on:
         description: 'Whether the cache was hit'
         value: ${{ jobs.run.outputs.cache-hit }}
 
-concurrency: index
-
 jobs:
   run:
     runs-on: ubuntu-latest
