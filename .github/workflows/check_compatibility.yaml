@@ -51,6 +51,8 @@ jobs:
       with:
         index-key: ${{ needs.index.outputs.index-key }}
   summarize:
+    needs: [index, biapy, bioimageio_core, careamics, ilastik]
+    if: needs.index.outputs.cache-hit != 'true'
     runs-on: ubuntu-latest
     environment: 'production'
     steps:
