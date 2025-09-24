@@ -18,9 +18,9 @@ on:
 jobs:
   index:
     uses: ./.github/workflows/index.yaml
+    secrets: inherit
     with:
       cache-nr: ${{ inputs.cache-nr || 0 }}
-
 
   biapy:
       needs: index
@@ -50,6 +50,7 @@ jobs:
       secrets: inherit
       with:
         index-key: ${{ needs.index.outputs.index-key }}
+
   summarize:
     needs: [index, biapy, bioimageio_core, careamics, ilastik]
     if: needs.index.outputs.cache-hit != 'true'
