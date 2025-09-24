@@ -27,6 +27,7 @@ jobs:
       cache-hit: ${{ steps.cache.outputs.cache-hit }}
 
     steps:
+      - uses: actions/checkout@v4
       - name: Get index key
         id: get-index-key
         run: |
