@@ -8,8 +8,7 @@ on:
       cache-nr:
         description: 'A number that is increased to force re-running the compatibility checks'
         required: false
-        default: 0
-        type: number
+        default: '4'
   push:
     branches: [main]
   schedule:
@@ -60,7 +59,7 @@ jobs:
     uses: ./.github/workflows/index.yaml
     secrets: inherit
     with:
-      cache-nr: ${{ inputs.cache-nr || 0 }}
+      cache-nr: ${{ inputs.cache-nr || '0' }}
 
   biapy:
       needs: index

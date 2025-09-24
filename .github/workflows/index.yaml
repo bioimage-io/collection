@@ -6,8 +6,8 @@ on:
     inputs:
       cache-nr:
         required: false
-        default: 0
-        type: number
+        default: '0'
+        type: string
     outputs:
       index-key:
         description: 'The latest cache key for the index.json file'
