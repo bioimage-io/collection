@@ -13,11 +13,27 @@ runs:
       name: checkout index and existing ${{ inputs.tool }} reports
       with:
         ref: gh-pages
-        path: .
+        path: gh-pages
         sparse-checkout: |
           reports
           index.json
-    - run: |
-        shopt -s globstar
-        rm -f !(reports/**/${{ inputs.tool }}_*.json)
+    - run: mv gh-pages/index.json ./index.json
       shell: bash
+    # - run: mv gh-pages/reports/ ./reports/
+    #   shell: bash
+    # - run: |
+    #     shopt -s globstar
+    #     rm -f ! (reports/**/${{ inputs.tool }}_*.json)
+    #   shell: bash
+    - name: move tool-specific reports
+      run: |
+        from pathlib import Path
+
+        src = Path("gh-pages/reports")
+        tgt = Path("reports")
+        for p_src in src.glob(f"**/{inputs.tool}_*.json"):
+            p_tgt = tgt / p_src.relative_to(src)
+            p_tgt.parent.mkdir(parents=True, exist_ok=True)
+            p_src.rename(p_tgt)
+
+      shell: python
