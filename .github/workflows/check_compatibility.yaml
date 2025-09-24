@@ -8,7 +8,7 @@ on:
       cache-nr:
         description: 'A number that is increased to force re-running the compatibility checks'
         required: false
-        default: '4'
+        default: '0'
   push:
     branches: [main]
   schedule:
