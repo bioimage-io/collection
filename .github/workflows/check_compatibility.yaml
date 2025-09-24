@@ -10,11 +10,11 @@ on:
         required: false
         default: '0'
       rerun:
-        description: 'If set, run compatibility check for the specified tool even if the index cache is hit.'
+        description: 'Chose a tool to run compatibility checks for even if the index cache is hit.'
         type: choice
         default: ''
         required: false
-        options: [biapy, bioimageio_core, careamics, ilastik]
+        options: [only-on-index-update, biapy, bioimageio_core, careamics, ilastik]
 
   push:
     branches: [main]
