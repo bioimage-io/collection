@@ -31,7 +31,7 @@ runs:
 
         src = Path("gh-pages/reports")
         tgt = Path("reports")
-        for p_src in src.glob(f"**/{inputs.tool}_*.json"):
+        for p_src in src.glob(f"**/${{inputs.tool}}_*.json"):
             p_tgt = tgt / p_src.relative_to(src)
             p_tgt.parent.mkdir(parents=True, exist_ok=True)
             p_src.rename(p_tgt)
