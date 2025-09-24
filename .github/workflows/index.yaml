@@ -30,7 +30,7 @@ jobs:
         id: get-index-key
         run: |
           echo "date=$(date +'%Y-%b')"
-          echo "index-key=index-$(date +'%Y-%m-%d-%H')-nr${{ inputs.cache-nr }}" >> $GITHUB_OUTPUT
+          echo "index-key=index-$(date +'%Y-%m-%d')-nr${{ inputs.cache-nr }}" >> $GITHUB_OUTPUT
         shell: bash
       - uses: actions/cache@v3
         id: cache
