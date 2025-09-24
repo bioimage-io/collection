@@ -7,7 +7,7 @@ from typing import Optional, Sequence
 
 import httpx
 from loguru import logger
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from backoffice._settings import settings
 from backoffice.compatibility import InitialSummary
@@ -62,6 +62,7 @@ class Index(Node, frozen=True):
     items: list[IndexItem]
     total: int
     count_per_type: dict[str, int]
+    timestamp: datetime = Field(default_factory=datetime.now)
 
 
 def create_index() -> Index:

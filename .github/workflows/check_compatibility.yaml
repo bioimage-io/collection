@@ -3,39 +3,50 @@ name: check compatibility
 concurrency: check-compatibility
 
 on:
-  workflow_run:
-    types: [completed]
-    workflows: ['index']
+  workflow_dispatch:
+    inputs:
+      cache-nr:
+        description: 'A number that is increased to force re-running the compatibility checks'
+        required: false
+        default: 0
+        type: number
+  push:
+    branches: [main]
+  schedule:
+    - cron: '0 6 * * *'
 
 jobs:
+  index:
+    uses: ./.github/workflows/index.yaml
+    with:
+      cache-nr: ${{ inputs.cache-nr || 0 }}
 
-  # biapy:
-  #     uses: ./.github/workflows/check_compatibility_biapy.yaml
-  #     secrets: inherit
-  bioimageio_core:
-      uses: ./.github/workflows/check_compatibility_bioimageio_core.yaml
+
+  biapy:
+      needs: index
+      if: needs.index.outputs.cache-hit != 'true'
+      uses: ./.github/workflows/check_compatibility_biapy.yaml
       secrets: inherit
-  # careamics:
-  #     uses: ./.github/workflows/check_compatibility_careamics.yaml
-  #     secrets: inherit
-  # ilastik:
-  #     uses: ./.github/workflows/check_compatibility_ilastik.yaml
-  #     secrets: inherit
-
-  # deploy:
-  #   needs: check
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #   - name: Download reports
-  #     uses: actions/download-artifact@v4
-  #     with:
-  #       path: reports
-  #       pattern: reports-*
-  #       merge-multiple: true
-  #   - name: Deploy to gh-pages 🚀
-  #     uses: JamesIves/github-pages-deploy-action@v4
-  #     with:
-  #       folder: reports
-  #       dry-run: ${{ github.ref != 'refs/heads/main' }}
-  #       target-folder: reports
-  #       clean: false
+      with:
+        index-key: ${{ needs.index.outputs.index-key }}
+  bioimageio_core:
+    needs: index
+    if: needs.index.outputs.cache-hit != 'true'
+    uses: ./.github/workflows/check_compatibility_bioimageio_core.yaml
+    secrets: inherit
+    with:
+      index-key: ${{ needs.index.outputs.index-key }}
+  careamics:
+      needs: index
+      if: needs.index.outputs.cache-hit != 'true'
+      uses: ./.github/workflows/check_compatibility_careamics.yaml
+      secrets: inherit
+      with:
+        index-key: ${{ needs.index.outputs.index-key }}
+  ilastik:
+      needs: index
+      if: needs.index.outputs.cache-hit != 'true'
+      uses: ./.github/workflows/check_compatibility_ilastik.yaml
+      secrets: inherit
+      with:
+        index-key: ${{ needs.index.outputs.index-key }}

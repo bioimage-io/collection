@@ -4,22 +4,17 @@ run-name: index bioimage.io resources
 on:
   workflow_call:
     inputs:
-      dry-run:
-        description: 'Run the workflow without making any changes'
+      cache-nr:
         required: false
-        default: false
-        type: boolean
-  workflow_dispatch:
-    inputs:
-      dry-run:
-        description: 'Run the workflow without making any changes'
-        required: false
-        default: false
-        type: boolean
-  push:
-    branches: [main]
-  schedule:
-    - cron: '0 6 * * *'
+        default: 0
+        type: number
+    outputs:
+      index-key:
+        description: 'The latest cache key for the index.json file'
+        value: ${{ jobs.run.outputs.index-key }}
+      cache-hit:
+        description: 'Whether the cache was hit'
+        value: ${{ jobs.run.outputs.cache-hit }}
 
 concurrency: index
 
@@ -27,26 +22,67 @@ jobs:
   run:
     runs-on: ubuntu-latest
     environment: 'production'
+    outputs:
+      index-key: ${{ steps.get-index-key.outputs.index-key }}
+      cache-hit: ${{ steps.cache.outputs.cache-hit }}
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - name: Get index key
+        id: get-index-key
+        run: |
+          echo "date=$(date +'%Y-%b')"
+          echo "index-key=index-$(date +'%Y-%m-%d-%H')-nr${{ inputs.cache-nr }}" >> $GITHUB_OUTPUT
+        shell: bash
+      - uses: actions/cache@v3
+        id: cache
         with:
-          cache: "pip" # caching pip dependencies
-      - run: pip install .
-      - uses: ./.github/actions/cache_index
+          key: ${{ steps.get-index-key.outputs.index-key }}
+          path: index.json
+          lookup-only: true
+      - if: steps.cache.outputs.cache-hit != 'true'
+        name: checkout reports to delete outdated ones (due to in-place RDF changes)
+        uses: actions/checkout@v4
         with:
-          HYPHA_API_TOKEN: ${{secrets.HYPHA_API_TOKEN}}
-      - run: backoffice index
+          ref: gh-pages
+          path: gh-pages
+          sparse-checkout: |
+            reports
+      - if: steps.cache.outputs.cache-hit != 'true'
+        uses: actions/setup-python@v6
+        with:
+          cache: 'pip'
+      - if: steps.cache.outputs.cache-hit != 'true'
+        run: pip install .
+        shell: bash
+      - if: steps.cache.outputs.cache-hit != 'true'
+        run: backoffice index
         env:
           RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
-          HYPHA_API_TOKEN: ${{secrets.HYPHA_API_TOKEN}}
-      - run: |
-          mkdir index
-          mv index.json index/index.json
-      - name: Deploy to gh-pages 🚀
-        if: ${{ github.ref == 'refs/heads/main' }}
+          HYPHA_API_TOKEN: ${{ secrets.HYPHA_API_TOKEN }}
+        shell: bash
+      - if: steps.cache.outputs.cache-hit != 'true'
+        name: Deploy updated reports to gh-pages 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          dry-run: ${{ inputs.dry-run || false }}
+          folder: reports
+          dry-run: ${{ github.ref != 'refs/heads/main' }}
+          target-folder: reports
+          clean: true
+          clean-exclude: |
+            backoffice.html
+            index.html
+            index.json
+            search.js
+      - if: steps.cache.outputs.cache-hit != 'true'
+        name: copy index.json to folder for deployment
+        shell: bash
+        run: |
+          mkdir index
+          cp index.json index/index.json
+      - if: steps.cache.outputs.cache-hit != 'true'
+        name: Deploy index.json to gh-pages 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
           folder: index
+          dry-run: ${{ github.ref != 'refs/heads/main' }}
           clean: false

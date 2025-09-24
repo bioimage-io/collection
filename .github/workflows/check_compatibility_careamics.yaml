@@ -4,6 +4,10 @@ concurrency: careamics
 
 on:
   workflow_call:
+    inputs:
+      index-key:
+        required: true
+        type: string
 
 jobs:
   run:
@@ -11,6 +15,14 @@ jobs:
     environment: 'production'
     steps:
     - uses: actions/checkout@v4
+    - uses: actions/checkout@v4
+      name: checkout index and existing careamics reports
+      with:
+        ref: gh-pages
+        path: .
+        sparse-checkout: |
+          reports/**/careamics_*.json
+          index.json
     - name: Setup careamics env
       uses: mamba-org/setup-micromamba@v1
       with:
@@ -31,9 +43,6 @@ jobs:
     - run: pip install careamics
     - name: Install backoffice
       run: pip install .
-    - uses: ./.github/actions/cache_index
-      with:
-        HYPHA_API_TOKEN: ${{secrets.HYPHA_API_TOKEN}}
     - run: python scripts/check_compatibility_careamics.py
       env:
         RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}

@@ -4,12 +4,25 @@ concurrency: bioimageio_core
 
 on:
   workflow_call:
+    inputs:
+      index-key:
+        required: true
+        type: string
+
 jobs:
   run:
     runs-on: ubuntu-latest
     environment: 'production'
     steps:
     - uses: actions/checkout@v4
+    - uses: actions/checkout@v4
+      name: checkout index and existing bioimageio_core reports
+      with:
+        ref: gh-pages
+        path: .
+        sparse-checkout: |
+          reports/**/bioimageio_core_*.json
+          index.json
     - uses: actions/setup-python@v6
       with:
         cache: "pip"
@@ -17,18 +30,10 @@ jobs:
       run: pip install . bioimageio.core
     - name: Install backoffice
       run: pip install .
-    - uses: ./.github/actions/cache_index
-      with:
-        HYPHA_API_TOKEN: ${{secrets.HYPHA_API_TOKEN}}
     - run: python scripts/check_compatibility_bioimageio_core.py
       env:
         RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
         HYPHA_API_TOKEN: ${{secrets.HYPHA_API_TOKEN}}
-    # - name: Upload bioimageio_core reports
-    #   uses: actions/upload-artifact@v4
-    #   with:
-    #     name: reports-bioimageio_core
-    #     path: reports
     - name: Deploy to gh-pages 🚀
       uses: JamesIves/github-pages-deploy-action@v4
       with:

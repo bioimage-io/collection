@@ -77,7 +77,9 @@ def check_compatibility_ilastik_impl(
 
 
 def check_compatibility_ilastik(
-    ilastik_version: str, index_path: Path, output_folder: Path
+    ilastik_version: str,
+    index_path: Path = Path("index.json"),
+    output_folder: Path = Path("reports"),
 ):
     """preliminary ilastik check
 

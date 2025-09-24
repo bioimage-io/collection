@@ -4,6 +4,10 @@ concurrency: ilastik
 
 on:
   workflow_call:
+    inputs:
+      index-key:
+        required: true
+        type: string
 
 jobs:
   setup:
@@ -37,8 +41,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - run: wget https://${{vars.S3_HOST}}/${{vars.S3_BUCKET}}/${{vars.S3_FOLDER}}/all_versions_draft.json
-    - run: wget https://${{vars.S3_HOST}}/${{vars.S3_BUCKET}}/${{vars.S3_FOLDER}}/all_versions.json
+    - uses: actions/checkout@v4
+      name: checkout index and existing ilastik reports
+      with:
+        ref: gh-pages
+        path: .
+        sparse-checkout: |
+          reports/**/ilastik_*.json
+          index.json
     - name: Download ilastik env
       run: wget --output-document env.yaml ${{ matrix.env_url }}
     - name: ignore unrelated packages
@@ -50,19 +60,12 @@ jobs:
         environment-file: env.yaml
         cache-downloads: true
         cache-environment: false  # gets stuck for 6h?
-    - uses: ./.github/actions/cache_index
-      with:
-        HYPHA_API_TOKEN: ${{secrets.HYPHA_API_TOKEN}}
     - name: test published versions with ilastik ${{ matrix.v }}
       shell: bash -l {0}
-      run: python scripts/check_compatibility_ilastik.py ${{ matrix.v }} index.json generated-reports
+      run: python scripts/check_compatibility_ilastik.py ${{ matrix.v }}
       env:
         RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
         HYPHA_API_TOKEN: ${{secrets.HYPHA_API_TOKEN}}
-    - uses: actions/upload-artifact@v4
-      with:
-        name: reports-ilastik-${{ matrix.v }}
-        path: reports
     - name: Deploy to gh-pages 🚀
       uses: JamesIves/github-pages-deploy-action@v4
       with:
