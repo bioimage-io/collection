@@ -85,6 +85,7 @@ def create_index() -> Index:
                     limit=10000,
                 ),
                 headers=settings.get_hypha_headers(),
+                timeout=settings.http_timeout,
             )
             try:
                 _ = r.raise_for_status()
@@ -152,7 +153,7 @@ def _initialize_report_directory(
 
     Returns sha256 of the rdf.yaml file."""
     report_path = get_report_path(item.id, v.version)
-    r = httpx.get(url, follow_redirects=True)
+    r = httpx.get(url, follow_redirects=True, timeout=settings.http_timeout)
     _ = r.raise_for_status()
     data = r.content
     sha256 = hashlib.sha256(data).hexdigest()

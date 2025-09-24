@@ -70,7 +70,9 @@ def cached_download(url: str, sha256: str) -> Path:
     local_path = Path("cache") / sha256
     if not local_path.exists():
         local_path.parent.mkdir(parents=True, exist_ok=True)
-        response = httpx.get(url).raise_for_status()
+        response = httpx.get(
+            url, timeout=float(os.environ.get("HTTP_TIMEOUT", "30"))
+        ).raise_for_status()
         with local_path.open("wb") as f:
             _ = f.write(response.content)
 

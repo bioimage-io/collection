@@ -20,7 +20,9 @@ class CollectionConfig(ConfigNode, frozen=True):
     @lru_cache
     def load(cls):
         if isinstance(settings.collection_config, HttpUrl):
-            r = httpx.get(str(settings.collection_config))
+            r = httpx.get(
+                str(settings.collection_config), timeout=settings.http_timeout
+            )
             raise_for_status_discretely(r)
             data = r.json()
         else:

@@ -13,6 +13,9 @@ class Settings(BaseSettings, extra="ignore"):
     summaries: Path = Path("summaries")
     tools: Sequence[str] = ("biapy", "bioimageio.core", "careamics", "ilastik")
 
+    http_timeout: int = 30
+    """Timeout for HTTP requests in seconds"""
+
     def get_hypha_headers(self):
         return {
             "Authorization": f"Bearer {self.hypha_api_token.get_secret_value()}",
