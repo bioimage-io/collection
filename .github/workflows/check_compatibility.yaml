@@ -9,6 +9,13 @@ on:
         description: 'A number that is increased to force re-running the compatibility checks'
         required: false
         default: '0'
+      rerun:
+        description: 'If set, run compatibility check for the specified tool even if the index cache is hit.'
+        type: choice
+        default: ''
+        required: false
+        options: [biapy, bioimageio_core, careamics, ilastik]
+
   push:
     branches: [main]
   schedule:
@@ -63,22 +70,22 @@ jobs:
 
   biapy:
       needs: index
-      if: needs.index.outputs.cache-hit != 'true'
+      if: needs.index.outputs.cache-hit != 'true' || contains(github.event.inputs.rerun, 'biapy')
       uses: ./.github/workflows/check_compatibility_biapy.yaml
       secrets: inherit
   bioimageio_core:
     needs: index
-    if: needs.index.outputs.cache-hit != 'true'
+    if: needs.index.outputs.cache-hit != 'true' || contains(github.event.inputs.rerun, 'bioimageio_core')
     uses: ./.github/workflows/check_compatibility_bioimageio_core.yaml
     secrets: inherit
   careamics:
       needs: index
-      if: needs.index.outputs.cache-hit != 'true'
+      if: needs.index.outputs.cache-hit != 'true' || contains(github.event.inputs.rerun, 'careamics')
       uses: ./.github/workflows/check_compatibility_careamics.yaml
       secrets: inherit
   ilastik:
       needs: index
-      if: needs.index.outputs.cache-hit != 'true'
+      if: needs.index.outputs.cache-hit != 'true' || contains(github.event.inputs.rerun, 'ilastik')
       uses: ./.github/workflows/check_compatibility_ilastik.yaml
       secrets: inherit
 
