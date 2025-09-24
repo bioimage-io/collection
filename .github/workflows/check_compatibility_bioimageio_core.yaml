@@ -2,10 +2,6 @@ name: check compatibility bioimageio_core
 
 on:
   workflow_call:
-    inputs:
-      index-key:
-        required: true
-        type: string
 
 jobs:
   run:

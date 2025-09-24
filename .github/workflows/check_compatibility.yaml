@@ -66,29 +66,21 @@ jobs:
       if: needs.index.outputs.cache-hit != 'true'
       uses: ./.github/workflows/check_compatibility_biapy.yaml
       secrets: inherit
-      with:
-        index-key: ${{ needs.index.outputs.index-key }}
   bioimageio_core:
     needs: index
     if: needs.index.outputs.cache-hit != 'true'
     uses: ./.github/workflows/check_compatibility_bioimageio_core.yaml
     secrets: inherit
-    with:
-      index-key: ${{ needs.index.outputs.index-key }}
   careamics:
       needs: index
       if: needs.index.outputs.cache-hit != 'true'
       uses: ./.github/workflows/check_compatibility_careamics.yaml
       secrets: inherit
-      with:
-        index-key: ${{ needs.index.outputs.index-key }}
   ilastik:
       needs: index
       if: needs.index.outputs.cache-hit != 'true'
       uses: ./.github/workflows/check_compatibility_ilastik.yaml
       secrets: inherit
-      with:
-        index-key: ${{ needs.index.outputs.index-key }}
 
   summarize:
     needs: [index, biapy, bioimageio_core, careamics, ilastik]

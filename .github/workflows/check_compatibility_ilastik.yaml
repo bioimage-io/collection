@@ -3,10 +3,6 @@ name: check compatibility ilastik
 
 on:
   workflow_call:
-    inputs:
-      index-key:
-        required: true
-        type: string
 
 jobs:
   setup:
