@@ -50,3 +50,30 @@ jobs:
       secrets: inherit
       with:
         index-key: ${{ needs.index.outputs.index-key }}
+  summarize:
+    runs-on: ubuntu-latest
+    environment: 'production'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          path: gh-pages
+          sparse-checkout: |
+            reports
+            index.json
+      - uses: actions/setup-python@v6
+        with:
+          cache: "pip"
+      - run: pip install .
+      - run: backoffice summarize
+        env:
+          RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
+          HYPHA_API_TOKEN: ${{secrets.HYPHA_API_TOKEN}}
+      - name: Deploy to gh-pages 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: reports
+          dry-run: ${{ github.ref != 'refs/heads/main' }}
+          target-folder: reports
+          clean: false
