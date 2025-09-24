@@ -41,14 +41,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - uses: actions/checkout@v4
-      name: checkout index and existing ilastik reports
+    - uses: ./.github/actions/restore_reports
       with:
-        ref: gh-pages
-        path: .
-        sparse-checkout: |
-          reports/**/ilastik_*.json
-          index.json
+        tool: ilastik
     - name: Download ilastik env
       run: wget --output-document env.yaml ${{ matrix.env_url }}
     - name: ignore unrelated packages

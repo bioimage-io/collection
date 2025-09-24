@@ -15,14 +15,9 @@ jobs:
     environment: 'production'
     steps:
     - uses: actions/checkout@v4
-    - uses: actions/checkout@v4
-      name: checkout index and existing bioimageio_core reports
+    - uses: ./.github/actions/restore_reports
       with:
-        ref: gh-pages
-        path: .
-        sparse-checkout: |
-          reports/**/bioimageio_core_*.json
-          index.json
+        tool: bioimageio_core
     - uses: actions/setup-python@v6
       with:
         cache: "pip"

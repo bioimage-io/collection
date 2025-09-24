@@ -1,0 +1,23 @@
+name: 'Restore reports'
+description: 'Restore the index.json file and tool-specific reports'
+
+inputs:
+  tool:
+    description: 'The tool for which to restore reports (e.g. biapy, bioimageio_core, careamics, ilastik)'
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - uses: actions/checkout@v4
+      name: checkout index and existing ${{ inputs.tool }} reports
+      with:
+        ref: gh-pages
+        path: .
+        sparse-checkout: |
+          reports
+          index.json
+    - run: |
+        shopt -s globstar
+        rm -f !(reports/**/${{ inputs.tool }}_*.json)
+      shell: bash
