@@ -4,5 +4,5 @@ channels:
   - nodefaults
 dependencies:
   - bioimageio.core >=0.9.2
-  - pip:
-      - . # backoffice
+  # - pip:  # fails in CI
+  #     - . # backoffice

@@ -17,9 +17,9 @@ jobs:
         auto-update-conda: true
         environment-file: envs/bioimageio_core_base.yaml
         activate-environment: core
-    # - name: Install backoffice  # TODO: remove, should be done in the env already
-    #   shell: bash -el {0}
-    #   run: pip install .
+    - name: Install backoffice
+      shell: bash -el {0}
+      run: pip install .
     - run: python scripts/check_compatibility_bioimageio_core.py
       shell: bash -el {0}
       env:
