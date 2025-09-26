@@ -1,8 +1,8 @@
 import argparse
-from pathlib import Path
 from typing import TYPE_CHECKING
 
 import bioimageio.core
+from bioimageio.spec.common import Sha256
 from typing_extensions import Literal
 
 if bioimageio.core.__version__.startswith("0.5."):
@@ -10,34 +10,52 @@ if bioimageio.core.__version__.startswith("0.5."):
 else:
     from bioimageio.core import test_model
 
-from script_utils import CompatibilityReportDict, check_tool_compatibility, download_rdf
+from bioimageio.spec._internal.io_utils import open_bioimageio_yaml
+
+from backoffice.check_compatibility import check_tool_compatibility
+from backoffice.compatibility_pure import ToolCompatibilityReport
 
 
 def check_compatibility_ilastik_impl(
+    idem_id: str,
+    version: str,
     rdf_url: str,
     sha256: str,
-) -> CompatibilityReportDict:
-    """Create a `CompatibilityReport` for a resource description.
+) -> ToolCompatibilityReport:
+    """Create a `ToolCompatibilityReport` for a resource description.
 
     Args:
         rdf_url: URL to the rdf.yaml file
         sha256: SHA-256 value of **rdf_url** content
     """
 
-    rdf = download_rdf(rdf_url, sha256)
+    rdf = open_bioimageio_yaml(rdf_url, sha256=Sha256(sha256)).content
 
+    input_len = "unknown number of inputs"
+    output_len = "unknown number of outputs"
     if rdf["type"] != "model":
-        report = CompatibilityReportDict(
+        report = ToolCompatibilityReport(
+            tool="ilastik",
             status="not-applicable",
             error=None,
             details="only 'model' resources can be used in ilastik.",
+            badge=None,
+            links=[],
         )
 
-    elif len(rdf["inputs"]) > 1 or len(rdf["outputs"]) > 1:
-        report = CompatibilityReportDict(
+    elif (
+        not isinstance(rdf["inputs"], list)
+        or not isinstance(rdf["outputs"], list)
+        or (input_len := len(rdf["inputs"])) > 1
+        or (output_len := len(rdf["outputs"])) > 1
+    ):
+        report = ToolCompatibilityReport(
+            tool="ilastik",
             status="failed",
-            error=f"ilastik only supports single tensor input/output (found {len(rdf['inputs'])}/{len(rdf['outputs'])})",
+            error=f"ilastik only supports single tensor input/output (found {input_len}/{output_len})",
             details=None,
+            badge=None,
+            links=[],
         )
     else:
         # produce test summary with bioimageio.core
@@ -66,21 +84,19 @@ def check_compatibility_ilastik_impl(
                 else summary.format()
             )
         )
-        report = CompatibilityReportDict(
+        report = ToolCompatibilityReport(
+            tool="ilastik",
             status=status,
             error=error,
             details=details,
             links=["ilastik/ilastik"],
+            badge=None,
         )
 
     return report
 
 
-def check_compatibility_ilastik(
-    ilastik_version: str,
-    index_path: Path = Path("index.json"),
-    output_folder: Path = Path("reports"),
-):
+def check_compatibility_ilastik(ilastik_version: str):
     """preliminary ilastik check
 
     only checks if test outputs are reproduced for onnx, torchscript, or pytorch_state_dict weights.
@@ -90,8 +106,6 @@ def check_compatibility_ilastik(
     check_tool_compatibility(
         "ilastik",
         ilastik_version,
-        index_path=index_path,
-        output_folder=output_folder,
         check_tool_compatibility_impl=check_compatibility_ilastik_impl,
         applicable_types={"model"},
     )
@@ -100,10 +114,6 @@ def check_compatibility_ilastik(
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     _ = parser.add_argument("ilastik_version")
-    _ = parser.add_argument("index_path", type=Path)
-    _ = parser.add_argument("output_folder", type=Path)
 
     args = parser.parse_args()
-    check_compatibility_ilastik(
-        args.ilastik_version, args.index_path, args.output_folder
-    )
+    check_compatibility_ilastik(args.ilastik_version)

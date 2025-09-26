@@ -9,7 +9,7 @@ from loguru import logger
 
 from backoffice.check_compatibility import check_tool_compatibility
 from backoffice.compatibility import ToolCompatibilityReport
-from backoffice.utils import get_log_file
+from backoffice.utils_pure import get_log_file
 
 
 def run_command(args: Sequence[str]):
