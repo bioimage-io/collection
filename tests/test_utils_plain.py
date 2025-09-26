@@ -3,7 +3,7 @@ from respx import MockRouter
 
 
 def test_raise_for_status_discretely(respx_mock: MockRouter):
-    from backoffice.utils_plain import raise_for_status_discretely
+    from backoffice.utils_pure import raise_for_status_discretely
 
     token = "my_tocken"
     userinfo = "user:password"

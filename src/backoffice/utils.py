@@ -1,19 +1,20 @@
 import json
 from typing import TYPE_CHECKING, Any
 
-from pydantic import ValidationError
+try:
+    from pydantic import ValidationError
+except ImportError as e:
+    raise ImportError(
+        "pydantic is required for backoffice.utils. "
+        "Please install `backoffice[full]` or use backoffice.utils_plain."
+    ) from e
 
 from backoffice.compatibility import CompatibilitySummary, InitialSummary
-from backoffice.utils_plain import cached_download as cached_download
-from backoffice.utils_plain import (
+from backoffice.utils_pure import cached_download as cached_download
+from backoffice.utils_pure import (
     get_all_tool_report_paths as get_all_tool_report_paths,
 )
-from backoffice.utils_plain import get_log_file as get_log_file
-from backoffice.utils_plain import get_rdf_content_from_id as get_rdf_content_from_id
-from backoffice.utils_plain import get_report_path as get_report_path
-from backoffice.utils_plain import get_summary_data as get_summary_data
-from backoffice.utils_plain import get_summary_file_path as get_summary_file_path
-from backoffice.utils_plain import get_tool_report_path as get_tool_report_path
+from backoffice.utils_pure import get_summary_file_path
 
 if TYPE_CHECKING:
     from ruyaml import YAML

@@ -1,9 +1,7 @@
 import json
 import os
 from pathlib import Path
-from typing import Any, Optional
-
-import httpx
+from typing import TYPE_CHECKING, Any, Optional
 
 try:
     import dotenv
@@ -11,6 +9,9 @@ except ImportError:
     pass
 else:
     _ = dotenv.load_dotenv()
+
+if TYPE_CHECKING:
+    import httpx
 
 
 def get_report_path(
@@ -67,6 +68,8 @@ def get_log_file(item_id: str, version: str) -> Path:
 
 def cached_download(url: str, sha256: str) -> Path:
     """Download a file from the given URL and cache it locally."""
+    import httpx
+
     local_path = Path("cache") / sha256
     if not local_path.exists():
         local_path.parent.mkdir(parents=True, exist_ok=True)
@@ -85,10 +88,11 @@ def get_rdf_content_from_id(item_id: str, version: str) -> dict[str, Any]:
         return json.load(f)["rdf_content"]
 
 
-def raise_for_status_discretely(response: httpx.Response):
+def raise_for_status_discretely(response: "httpx.Response"):
     """Raises :class:`httpx.HTTPError` for 4xx or 5xx responses,
     **but** hides any query and userinfo from url to avoid leaking sensitive data.
     """
+    import httpx
 
     http_error_msg = ""
     reason = response.reason_phrase

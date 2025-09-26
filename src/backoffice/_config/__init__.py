@@ -6,7 +6,7 @@ import httpx
 from pydantic import HttpUrl
 
 from .._settings import settings
-from ..utils_plain import raise_for_status_discretely
+from ..utils_pure import raise_for_status_discretely
 from .common import ConfigNode
 from .id_parts import IdParts
 from .reviewers import Reviewers

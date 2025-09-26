@@ -1,4 +1,9 @@
-from ._cli import Backoffice
+try:
+    from ._cli import Backoffice
+except ImportError as e:
+    raise ImportError(
+        "Missing dependencies. Please install `backoffice[full]` to use backoffice CLI."
+    ) from e
 
 
 def main():

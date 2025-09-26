@@ -3,7 +3,15 @@ from typing import Any, Literal, Mapping, Optional, Sequence, Union
 
 from annotated_types import Interval
 from packaging.version import Version
-from pydantic import BaseModel, Field, HttpUrl, computed_field, model_validator
+
+try:
+    from pydantic import BaseModel, Field, HttpUrl, computed_field, model_validator
+except ImportError as e:
+    raise ImportError(
+        "pydantic is required for backoffice.compatibility. "
+        "Please install `backoffice[full]` or use backoffice.compatibility_pure instead."
+    ) from e
+
 from typing_extensions import Annotated
 
 PartnerToolName = Literal[

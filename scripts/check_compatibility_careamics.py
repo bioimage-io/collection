@@ -1,22 +1,21 @@
-from typing import Protocol, Optional, Union, Tuple, List
 import argparse
-from pathlib import Path
 import traceback
 from functools import lru_cache
+from pathlib import Path
+from typing import List, Optional, Protocol, Tuple, Union
 
 import pydantic
-from careamics import __version__ as CAREAMICS_VERSION
-from careamics import CAREamist
-from careamics.lightning import FCNModule, VAEModule
-from careamics.config import Configuration
-from careamics.model_io.bmz_io import load_from_bmz
+from backoffice.compatibiliy import CompatibilityReportDict, check_tool_compatibility
+from bioimageio.core.digest_spec import get_test_inputs
 from bioimageio.spec import load_model_description
 from bioimageio.spec.common import HttpUrl
-from bioimageio.core.digest_spec import get_test_inputs
 from bioimageio.spec.model import AnyModelDescr
-from bioimageio.spec.model.v0_5 import ModelDescr, AxisId
-
-from .script_utils import CompatibilityReportDict, check_tool_compatibility
+from bioimageio.spec.model.v0_5 import AxisId, ModelDescr
+from careamics import CAREamist
+from careamics import __version__ as CAREAMICS_VERSION
+from careamics.config import Configuration
+from careamics.lightning import FCNModule, VAEModule
+from careamics.model_io.bmz_io import load_from_bmz
 
 
 @lru_cache
@@ -27,7 +26,6 @@ def careamics_load_from_bmz(
 
 
 class CompatibilityCheck_v0_5(Protocol):
-
     def __call__(
         self, model_desc: ModelDescr, rdf_url: str
     ) -> Optional[CompatibilityReportDict]: ...

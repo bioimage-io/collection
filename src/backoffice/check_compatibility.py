@@ -6,7 +6,7 @@ from typing import Callable
 
 from loguru import logger
 
-from backoffice.utils import get_tool_report_path
+from .utils_pure import get_tool_report_path
 
 try:
     from tqdm import tqdm
@@ -15,9 +15,9 @@ except ImportError:
 
 
 try:
-    from backoffice.compatibility import ToolCompatibilityReport
+    from .compatibility import ToolCompatibilityReport
 except ImportError:
-    from backoffice.compatibility_fallback import (
+    from .compatibility_pure import (
         ToolCompatibilityReport as ToolCompatibilityReportDict,
     )
 

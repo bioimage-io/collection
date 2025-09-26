@@ -5,18 +5,26 @@ from datetime import datetime
 from pathlib import Path
 from typing import Optional, Sequence
 
-import httpx
-from loguru import logger
-from pydantic import BaseModel, Field
+try:
+    import httpx
+    from loguru import logger
+    from pydantic import BaseModel, Field
 
-from backoffice._settings import settings
-from backoffice.compatibility import InitialSummary
-from backoffice.utils import (
-    get_report_path,
-    get_summary,
-    get_summary_file_path,
-    yaml,
-)
+    from backoffice._settings import settings
+    from backoffice.compatibility import InitialSummary
+    from backoffice.utils import (
+        get_summary,
+        get_summary_file_path,
+        yaml,
+    )
+except ImportError as e:
+    raise ImportError(
+        "Missing dependencies. "
+        "Please install `backoffice[full]` to use backoffice.index."
+    ) from e
+
+
+from .utils_pure import get_report_path
 
 
 class Node(BaseModel, frozen=True, extra="ignore"):
