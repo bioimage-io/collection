@@ -24,7 +24,7 @@
         "covers": [
             "overview_new.jpg"
         ],
-        "description": "NuccMM has fully annotated volumes: one 0.1 mm3 electron microscopy (EM) volume containing nearly the entire zebrafish brain with around 170,000 nuclei; and one 0.25 mm3 micro-CT (uCT) volume containing part of a mouse visual cortex with about 7,000 nuclei. With two imaging modalities and significantly increased volume size and instance numbers, we discover a great diversity of neuronal nuclei in appearance and density, introducing new challenges to the field",
+        "description": "NuccMM has fully annotated volumes: (1) NuccMM-Z: 0.1 mm3 electron microscopy (EM) volume containing nearly the entire zebrafish brain with around 170,000 nuclei ; (2) NucMM-M: 0.25 mm3 micro-CT (uCT) volume containing part of a mouse visual cortex with about 7,000 nuclei.",
         "documentation": "NucMM.md",
         "format_version": "0.3.0",
         "id": "exquisite-salad",
@@ -46,6 +46,6 @@
         },
         "version": "0.1.0"
     },
-    "rdf_yaml_sha256": "f0d80aec9de17f5babe51605c171e5e3082893c0c45a651af56b556281fbe8d6",
+    "rdf_yaml_sha256": "616652c48360411cfb4bd46e058c73ccabe4f28440931151044850c025eb16d7",
     "status": "untested"
 }
