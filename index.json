@@ -1838,7 +1838,7 @@
             "versions": [
                 {
                     "version": "v0",
-                    "comment": null,
+                    "comment": "Added cover.thumbnail.png",
                     "created_at": "2025-07-01T22:51:14Z",
                     "source": "https://hypha.aicell.io/bioimage-io/artifacts/happy-elephant/files/rdf.yaml?version=v0",
                     "sha256": "a1eee0ee3728039fe5774aaee67c753f4635a48f6f9fc1a4a0989d9b5fb213a9"
@@ -3089,5 +3089,5 @@
         "dataset": 46,
         "notebook": 4
     },
-    "timestamp": "2025-09-29T06:34:46.517570"
+    "timestamp": "2025-09-30T06:33:10.344281"
 }
