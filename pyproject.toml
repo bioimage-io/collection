@@ -5,7 +5,7 @@ authors = [{ name = "Fynn Beuttenmüller", email = "thefynnbe@gmail.com" }]
 requires-python = ">=3.10"
 readme = "README.md"
 dependencies = [
-    "bioimageio.core>=0.9.2",
+    "bioimageio.core>=0.9.3",
     "bioimageio.spec>=0.5.4.3",
     "loguru",
     "pydantic-settings",
@@ -29,7 +29,16 @@ dynamic = ["version"]
 version = { attr = "backoffice._version.VERSION" }
 
 [project.optional-dependencies]
-dev = ["ruff", "pdoc", "pre-commit", "pyright", "respx", "pytest"]
+dev = [
+    "biapy",
+    "careamics",
+    "ruff",
+    "pdoc",
+    "pre-commit",
+    "pyright",
+    "respx",
+    "pytest",
+]
 
 [project.scripts]
 backoffice = "backoffice.__main__:main"
