@@ -6,7 +6,7 @@ try:
 except ImportError as e:
     raise ImportError(
         "pydantic is required for backoffice.utils. "
-        "Please install `backoffice[full]` or use backoffice.utils_plain."
+        "Please install `backoffice[dev]` or use backoffice.utils_plain."
     ) from e
 
 from backoffice.compatibility import CompatibilitySummary, InitialSummary

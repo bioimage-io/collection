@@ -4,7 +4,14 @@ description = "backoffice to control bioimage.io collection"
 authors = [{ name = "Fynn Beuttenmüller", email = "thefynnbe@gmail.com" }]
 requires-python = ">=3.10"
 readme = "README.md"
-dependencies = ["loguru", "pydantic-settings", "httpx", "ruyaml", "tqdm"]
+dependencies = [
+    "httpx",
+    "loguru",
+    "packaging",
+    "pydantic-settings",
+    "ruyaml",
+    "tqdm",
+]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",

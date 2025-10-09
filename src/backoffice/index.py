@@ -20,7 +20,7 @@ try:
 except ImportError as e:
     raise ImportError(
         "Missing dependencies. "
-        "Please install `backoffice[full]` to use backoffice.index."
+        "Please install `backoffice[dev]` to use backoffice.index."
     ) from e
 
 

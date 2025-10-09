@@ -9,7 +9,7 @@ try:
 except ImportError as e:
     raise ImportError(
         "pydantic is required for backoffice.compatibility. "
-        "Please install `backoffice[full]` or use backoffice.compatibility_pure instead."
+        "Please install `backoffice[dev]` or use backoffice.compatibility_pure instead."
     ) from e
 
 from typing_extensions import Annotated

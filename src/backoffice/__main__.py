@@ -2,7 +2,7 @@ try:
     from ._cli import Backoffice
 except ImportError as e:
     raise ImportError(
-        "Missing dependencies. Please install `backoffice[full]` to use backoffice CLI."
+        "Missing dependencies. Please install `backoffice[dev]` to use backoffice CLI."
     ) from e
 
 
