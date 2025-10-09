@@ -1,20 +1,12 @@
-import subprocess
 from argparse import ArgumentParser
-from typing import Sequence
 
 import bioimageio.core
 from bioimageio.core import test_description
 from bioimageio.spec.common import Sha256
-from loguru import logger
 
 from backoffice.check_compatibility import check_tool_compatibility
 from backoffice.compatibility import ToolCompatibilityReport
 from backoffice.utils_pure import get_log_file
-
-
-def run_command(args: Sequence[str]):
-    logger.info("running '{}'...", " ".join(args))
-    _ = subprocess.run(args, shell=True, text=True, check=False)
 
 
 def check_compatibility_core_impl(item_id: str, version: str, source: str, sha256: str):
@@ -23,7 +15,6 @@ def check_compatibility_core_impl(item_id: str, version: str, source: str, sha25
         sha256=Sha256(sha256),
         determinism="full",
         runtime_env="as-described",
-        run_command=run_command,
     )
 
     log_file = get_log_file(item_id, version)
