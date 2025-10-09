@@ -1,8 +1,0 @@
-name: core
-channels:
-  - conda-forge
-  - nodefaults
-dependencies:
-  - bioimageio.core >=0.9.3
-  # - pip:  # fails in CI
-  #     - . # backoffice

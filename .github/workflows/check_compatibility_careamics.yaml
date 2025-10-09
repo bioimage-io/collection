@@ -8,38 +8,39 @@ jobs:
     runs-on: ubuntu-latest
     environment: 'production'
     steps:
-    - uses: actions/checkout@v4
-    - uses: ./.github/actions/restore_reports
-      with:
-        tool: careamics
-    - name: Setup careamics env
-      uses: mamba-org/setup-micromamba@v1
-      with:
-        generate-run-shell: false
-        cache-downloads: true
-        environment-name: careamics
-        condarc: |
-          channels:
-            - conda-forge
-            - pytorch
-        create-args: >-
-          pytorch
-          torchvision
-          cpuonly
-          python=3.10
-          numpy
-          pip
-    - run: pip install careamics
-    - name: Install backoffice
-      run: pip install .
-    - run: python scripts/check_compatibility_careamics.py
-      env:
-        RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
-        HYPHA_API_TOKEN: ${{secrets.HYPHA_API_TOKEN}}
-    - name: Deploy to gh-pages 🚀
-      uses: JamesIves/github-pages-deploy-action@v4
-      with:
-        folder: reports
-        dry-run: ${{ github.ref != 'refs/heads/main' }}
-        target-folder: reports
-        clean: false
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/restore_reports
+        with:
+          tool: careamics
+      - name: Setup careamics env
+        uses: mamba-org/setup-micromamba@v1
+        with:
+          generate-run-shell: false
+          cache-downloads: true
+          environment-name: careamics
+          condarc: |
+            channels:
+              - conda-forge
+              - pytorch
+          create-args: >-
+            pytorch
+            torchvision
+            cpuonly
+            python=3.10
+            numpy
+            pip
+      - run: pip install careamics
+      - name: Install backoffice
+        run: pip install .
+      - run: python scripts/check_compatibility_careamics.py
+        env:
+          RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
+          HYPHA_API_TOKEN: ${{secrets.HYPHA_API_TOKEN}}
+      - name: Stage to stage-gh-pages 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: stage-gh-pages
+          folder: reports
+          dry-run: ${{ github.ref != 'refs/heads/main' }}
+          target-folder: reports
+          clean: false

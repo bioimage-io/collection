@@ -14,7 +14,8 @@ on:
         type: choice
         default: ''
         required: false
-        options: [only-on-index-update, biapy, bioimageio_core, careamics, ilastik]
+        options:
+          [only-on-index-update, biapy, bioimageio_core, careamics, ilastik]
 
   push:
     branches: [main]
@@ -69,27 +70,28 @@ jobs:
       cache-nr: ${{ inputs.cache-nr || '0' }}
 
   biapy:
-      needs: index
-      if: needs.index.outputs.cache-hit != 'true' || contains(github.event.inputs.rerun, 'biapy')
-      uses: ./.github/workflows/check_compatibility_biapy.yaml
-      secrets: inherit
+    needs: index
+    if: needs.index.outputs.cache-hit != 'true' || contains(github.event.inputs.rerun, 'biapy')
+    uses: ./.github/workflows/check_compatibility_biapy.yaml
+    secrets: inherit
   bioimageio_core:
     needs: index
     if: needs.index.outputs.cache-hit != 'true' || contains(github.event.inputs.rerun, 'bioimageio_core')
     uses: ./.github/workflows/check_compatibility_bioimageio_core.yaml
     secrets: inherit
   careamics:
-      needs: index
-      if: needs.index.outputs.cache-hit != 'true' || contains(github.event.inputs.rerun, 'careamics')
-      uses: ./.github/workflows/check_compatibility_careamics.yaml
-      secrets: inherit
+    needs: index
+    if: needs.index.outputs.cache-hit != 'true' || contains(github.event.inputs.rerun, 'careamics')
+    uses: ./.github/workflows/check_compatibility_careamics.yaml
+    secrets: inherit
   ilastik:
-      needs: index
-      if: needs.index.outputs.cache-hit != 'true' || contains(github.event.inputs.rerun, 'ilastik')
-      uses: ./.github/workflows/check_compatibility_ilastik.yaml
-      secrets: inherit
+    needs: index
+    if: needs.index.outputs.cache-hit != 'true' || contains(github.event.inputs.rerun, 'ilastik')
+    uses: ./.github/workflows/check_compatibility_ilastik.yaml
+    secrets: inherit
 
   summarize:
+    name: summarize and deploy stage
     needs: [index, biapy, bioimageio_core, careamics, ilastik]
     if: needs.index.outputs.cache-hit != 'true'
     runs-on: ubuntu-latest
@@ -98,14 +100,14 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/checkout@v4
         with:
-          ref: gh-pages
+          ref: stage-gh-pages
           path: gh-pages
           sparse-checkout: |
             reports
             index.json
       - uses: actions/setup-python@v6
         with:
-          cache: "pip"
+          cache: 'pip'
       - run: pip install .
       - run: backoffice summarize
         env:

@@ -1,6 +1,5 @@
 name: check compatibility ilastik
 
-
 on:
   workflow_call:
 
@@ -10,21 +9,21 @@ jobs:
     outputs:
       version_matrix: ${{ steps.cvm.outputs.version_matrix }}
     steps:
-    - name: download version list
-      run: wget https://files.ilastik.org/ilastik-versions-bmz.json
-    - name: create version matrix
-      id: cvm
-      shell: python
-      run: |
-        import json
-        import os
+      - name: download version list
+        run: wget https://files.ilastik.org/ilastik-versions-bmz.json
+      - name: create version matrix
+        id: cvm
+        shell: python
+        run: |
+          import json
+          import os
 
-        with open("ilastik-versions-bmz.json") as f:
-            vs = json.load(f)
+          with open("ilastik-versions-bmz.json") as f:
+              vs = json.load(f)
 
-        version_matrix = dict(include=[dict(v=v, env_url=f"https://files.ilastik.org/ilastik-{v}-Linux.yml") for v in vs])
-        with open(os.environ["GITHUB_OUTPUT"], "a") as fh:
-          print(f"version_matrix={version_matrix}", file=fh)
+          version_matrix = dict(include=[dict(v=v, env_url=f"https://files.ilastik.org/ilastik-{v}-Linux.yml") for v in vs])
+          with open(os.environ["GITHUB_OUTPUT"], "a") as fh:
+            print(f"version_matrix={version_matrix}", file=fh)
 
   generate-reports:
     runs-on: ubuntu-latest
@@ -35,31 +34,32 @@ jobs:
       matrix: ${{ fromJson(needs.setup.outputs.version_matrix) }}
 
     steps:
-    - uses: actions/checkout@v4
-    - uses: ./.github/actions/restore_reports
-      with:
-        tool: ilastik
-    - name: Download ilastik env
-      run: wget --output-document env.yaml ${{ matrix.env_url }}
-    - name: ignore unrelated packages
-      run: sed -i '/multi-hypotheses-tracking-with-gurobi/d; /gurobi-symlink/d' env.yaml
-    - name: Setup ilastik env
-      uses: mamba-org/setup-micromamba@v1
-      with:
-        generate-run-shell: false
-        environment-file: env.yaml
-        cache-downloads: true
-        cache-environment: false  # gets stuck for 6h?
-    - name: test published versions with ilastik ${{ matrix.v }}
-      shell: bash -l {0}
-      run: python scripts/check_compatibility_ilastik.py ${{ matrix.v }}
-      env:
-        RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
-        HYPHA_API_TOKEN: ${{secrets.HYPHA_API_TOKEN}}
-    - name: Deploy to gh-pages 🚀
-      uses: JamesIves/github-pages-deploy-action@v4
-      with:
-        folder: reports
-        dry-run: ${{ github.ref != 'refs/heads/main' }}
-        target-folder: reports
-        clean: false
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/restore_reports
+        with:
+          tool: ilastik
+      - name: Download ilastik env
+        run: wget --output-document env.yaml ${{ matrix.env_url }}
+      - name: ignore unrelated packages
+        run: sed -i '/multi-hypotheses-tracking-with-gurobi/d; /gurobi-symlink/d' env.yaml
+      - name: Setup ilastik env
+        uses: mamba-org/setup-micromamba@v1
+        with:
+          generate-run-shell: false
+          environment-file: env.yaml
+          cache-downloads: true
+          cache-environment: false # gets stuck for 6h?
+      - name: test published versions with ilastik ${{ matrix.v }}
+        shell: bash -l {0}
+        run: python scripts/check_compatibility_ilastik.py ${{ matrix.v }}
+        env:
+          RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
+          HYPHA_API_TOKEN: ${{secrets.HYPHA_API_TOKEN}}
+      - name: Stage to stage-gh-pages 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: stage-gh-pages
+          folder: reports
+          dry-run: ${{ github.ref != 'refs/heads/main' }}
+          target-folder: reports
+          clean: false

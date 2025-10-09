@@ -8,27 +8,29 @@ jobs:
     runs-on: ubuntu-latest
     environment: 'production'
     steps:
-    - uses: actions/checkout@v4
-    - uses: ./.github/actions/restore_reports
-      with:
-        tool: bioimageio_core
-    - uses: conda-incubator/setup-miniconda@v3
-      with:
-        auto-update-conda: true
-        environment-file: envs/bioimageio_core_base.yaml
-        activate-environment: core
-    - name: Install backoffice
-      shell: bash -el {0}
-      run: pip install .
-    - run: python scripts/check_compatibility_bioimageio_core.py
-      shell: bash -el {0}
-      env:
-        RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
-        HYPHA_API_TOKEN: ${{secrets.HYPHA_API_TOKEN}}
-    - name: Deploy to gh-pages 🚀
-      uses: JamesIves/github-pages-deploy-action@v4
-      with:
-        folder: reports
-        dry-run: ${{ github.ref != 'refs/heads/main' }}
-        target-folder: reports
-        clean: false
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/restore_reports
+        with:
+          tool: bioimageio_core
+      - uses: conda-incubator/setup-miniconda@v3
+        with:
+          auto-update-conda: true
+          activate-environment: core
+      - name: Install bioimageio.core and backoffice
+        shell: bash -el {0}
+        run: pip install . bioimageio.core[dev]
+      - run: conda info
+        shell: bash -el {0}
+      - run: python scripts/check_compatibility_bioimageio_core.py
+        shell: bash -el {0}
+        env:
+          RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
+          HYPHA_API_TOKEN: ${{secrets.HYPHA_API_TOKEN}}
+      - name: Stage to stage-gh-pages 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: reports
+          branch: stage-gh-pages
+          dry-run: ${{ github.ref != 'refs/heads/main' }}
+          target-folder: reports
+          clean: false

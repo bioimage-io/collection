@@ -60,9 +60,10 @@ jobs:
           HYPHA_API_TOKEN: ${{ secrets.HYPHA_API_TOKEN }}
         shell: bash
       - if: steps.cache.outputs.cache-hit != 'true'
-        name: Deploy updated reports to gh-pages 🚀
+        name: Stage updated reports to stage-gh-pages 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
+          branch: stage-gh-pages
           folder: reports
           dry-run: ${{ github.ref != 'refs/heads/main' }}
           target-folder: reports
@@ -79,9 +80,10 @@ jobs:
           mkdir index
           cp index.json index/index.json
       - if: steps.cache.outputs.cache-hit != 'true'
-        name: Deploy index.json to gh-pages 🚀
+        name: Stage index.json to stage-gh-pages 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
+          branch: stage-gh-pages
           folder: index
           dry-run: ${{ github.ref != 'refs/heads/main' }}
           clean: false

@@ -6,7 +6,6 @@ requires-python = ">=3.10"
 readme = "README.md"
 dependencies = [
     "bioimageio.core>=0.9.3",
-    "bioimageio.spec>=0.5.4.3",
     "loguru",
     "pydantic-settings",
     "pygithub",
@@ -30,7 +29,8 @@ version = { attr = "backoffice._version.VERSION" }
 
 [project.optional-dependencies]
 dev = [
-    "biapy",
+    "bioimageio.core[dev]",
+    # "biapy",  # has exact bioimageio.core pin
     "careamics",
     "ruff",
     "pdoc",

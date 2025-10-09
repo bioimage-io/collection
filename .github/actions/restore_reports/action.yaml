@@ -10,9 +10,9 @@ runs:
   using: 'composite'
   steps:
     - uses: actions/checkout@v4
-      name: checkout index and existing ${{ inputs.tool }} reports
+      name: checkout staged index and existing ${{ inputs.tool }} reports
       with:
-        ref: gh-pages
+        ref: stage-gh-pages
         path: gh-pages
         sparse-checkout: |
           reports
