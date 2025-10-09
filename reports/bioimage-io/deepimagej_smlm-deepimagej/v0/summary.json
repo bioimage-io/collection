@@ -1,0 +1,105 @@
+{
+    "rdf_content": {
+        "authors": [
+            {
+                "affiliation": "EPFL, UC3M",
+                "name": "DeepImageJ"
+            }
+        ],
+        "cite": [
+            {
+                "doi": "10.1038/s41467-021-22518-0",
+                "text": "Lucas von Chamier et al., Nature Communications 2021"
+            },
+            {
+                "doi": "10.1101/799270",
+                "text": "Gómez de Mariscal et al. bioRxiv 2019"
+            },
+            {
+                "doi": "10.1093/bioinformatics/btu202",
+                "text": "M. Ovesný, et al., Bioinformatics 2014"
+            }
+        ],
+        "config": {
+            "background_image": "static/img/zoo-background.svg",
+            "bioimageio": {
+                "thumbnails": {
+                    "cover.png": "cover.thumbnail.png"
+                }
+            },
+            "contact": [
+                {
+                    "affiliation": [
+                        {
+                            "name": "UC3M",
+                            "url": "https://www.uc3m.es/home"
+                        }
+                    ],
+                    "email": "mamunozb@ing.uc3m.es",
+                    "github": "arratemunoz",
+                    "name": "Arrate Muñoz Barrutia"
+                },
+                {
+                    "affiliation": [
+                        {
+                            "name": "EPFL",
+                            "url": "https://www.epfl.ch/en/"
+                        }
+                    ],
+                    "email": "daniel.sage@epfl.ch",
+                    "github": "dasv74",
+                    "name": "Daniel Sage"
+                }
+            ],
+            "docs": "https://github.com/deepimagej/deepimagej-plugin/wiki",
+            "explore_button_text": "Start Exploring",
+            "icon": "https://raw.githubusercontent.com/deepimagej/models/master/logos/icon.png",
+            "id": "deepimagej",
+            "logo": "https://raw.githubusercontent.com/deepimagej/models/master/logos/logo.png",
+            "name": "DeepImageJ",
+            "resource_types": [
+                "model",
+                "notebook",
+                "application"
+            ],
+            "splash_feature_list": null,
+            "splash_subtitle": "A user-friendly plugin to run deep learning models in ImageJ",
+            "splash_title": "deepImageJ",
+            "tags": [
+                "deepimagej"
+            ],
+            "url_root": "https://raw.githubusercontent.com/deepimagej/models/master"
+        },
+        "covers": [
+            "cover.png"
+        ],
+        "description": "Single molecule localization microscopy (SMLM) processing using deepImageJ and ThunderSTORM in an ImageJ macro.",
+        "documentation": "README.md",
+        "format_version": "0.2.4",
+        "icon": "https://raw.githubusercontent.com/deepimagej/models/master/logos/icon.png",
+        "id": "deepimagej/smlm-deepimagej",
+        "id_emoji": null,
+        "license": "BSD-2-Clause",
+        "maintainers": [],
+        "name": "SMLM-superresolution",
+        "source": "DeepSTORM4stacksThunderSTORM.ijm",
+        "tags": [
+            "deepimagej",
+            "smlm",
+            "macro",
+            "deepstorm",
+            "thunderstorm",
+            "workflow",
+            "pipeline",
+            "superresolution"
+        ],
+        "type": "application",
+        "uploader": {
+            "email": "bioimageiobot@gmail.com"
+        },
+        "version": 1,
+        "version_number": 1
+    },
+    "rdf_yaml_sha256": "ffdd969f8c906ecb4ea640ccd94a04321e0daa89f762825b0f9d0380e5fe6f19",
+    "status": "untested"
+}

@@ -1,0 +1,83 @@
+{
+    "rdf_content": {
+        "authors": [
+            {
+                "name": "Guillaume Jacquemet and the ZeroCostDL4Mic Team"
+            }
+        ],
+        "badges": [
+            {
+                "icon": "https://colab.research.google.com/assets/colab-badge.svg",
+                "label": "Open in Colab",
+                "url": "https://colab.research.google.com/github/HenriquesLab/ZeroCostDL4Mic/blob/master/Colab_notebooks/Cellpose_2D_ZeroCostDL4Mic.ipynb"
+            }
+        ],
+        "cite": [
+            {
+                "doi": "10.1038/s41467-021-22518-0",
+                "text": "von Chamier, L., Laine, R.F., Jukkala, J. et al. Democratising deep learning for microscopy with ZeroCostDL4Mic. Nat Commun 12, 2276 (2021). https://doi.org/10.1038/s41467-021-22518-0"
+            },
+            {
+                "doi": "10.1038/s41592-020-01018-x",
+                "text": "Stringer, C., Wang, T., Michaelos, M. et al. Cellpose: a generalist algorithm for cellular segmentation. Nat Methods 18, 100â€“106 (2021). https://doi.org/10.1038/s41592-020-01018-x"
+            }
+        ],
+        "config": {
+            "bioimageio": {
+                "nickname": "polished-t-shirt",
+                "nickname_icon": "👕",
+                "status": "accepted",
+                "version_id": "latest",
+                "version_name": "latest"
+            },
+            "dl4miceverywhere": {
+                "cuda_version": "11.8.0",
+                "cudnn_version": "8.6.0.163",
+                "description": "Cellpose_2D_DL4Mic is the conversion of the CellPose 2D notebook from ZeroCostDL4Mic.",
+                "dl4miceverywhere_version": "2.0.0",
+                "docker_hub_image": "cellpose_2d_zerocostdl4mic-z1.16.2-d2.0.0",
+                "notebook_url": "https://raw.githubusercontent.com/HenriquesLab/ZeroCostDL4Mic/master/Colab_notebooks/Cellpose_2D_ZeroCostDL4Mic.ipynb",
+                "notebook_version": "1.16.2",
+                "python_version": "3.10",
+                "requirements_url": "https://raw.githubusercontent.com/HenriquesLab/ZeroCostDL4Mic/master/requirements_files/Cellpose_2D_requirements_simple.txt",
+                "sections_to_remove": "1.1. 1.2. 2. 6.3.",
+                "ubuntu_version": "22.04"
+            }
+        },
+        "covers": [
+            "cellpose_notebook.png",
+            "cellpose_notebook_2.png",
+            "cellpose_notebook_3.png",
+            "cellpose_notebook_4.png",
+            "cellpose_notebook_5.png"
+        ],
+        "description": "Instance segmentation of 2D and 3D images. Cellpose is a generalist algorithm for cellular segmentation.",
+        "documentation": "README.md",
+        "download_url": "https://raw.githubusercontent.com/HenriquesLab/ZeroCostDL4Mic/master/Colab_notebooks/Cellpose_2D_ZeroCostDL4Mic.ipynb",
+        "format_version": "0.2.4",
+        "git_repo": "https://github.com/HenriquesLab/ZeroCostDL4Mic",
+        "id": "zero/Notebook_Cellpose_2D_ZeroCostDL4Mic",
+        "links": [
+            "zero/Notebook Preview",
+            "zero/Dataset_StarDist_2D_ZeroCostDL4Mic_2D",
+            "zero/Dataset_StarDist_Fluo_ZeroCostDL4Mic",
+            "zero/Dataset_StarDist_brightfield_ZeroCostDL4Mic",
+            "zero/Dataset_StarDist_brightfield2_ZeroCostDL4Mic",
+            "zero/Dataset_StarDist_fluo2_ZeroCostDL4Mic"
+        ],
+        "maintainers": [],
+        "name": "Cellpose (2D and 3D) - ZeroCostDL4Mic",
+        "tags": [
+            "colab",
+            "notebook",
+            "Cellpose",
+            "Segmentation",
+            "ZeroCostDL4Mic",
+            "dl4miceverywhere"
+        ],
+        "type": "application",
+        "version": "1.16.2"
+    },
+    "rdf_yaml_sha256": "4029f3ae6404cac3fccc707f0a3a6e1158689943763dddeacbdeb90bd5bb1f76",
+    "status": "untested"
+}

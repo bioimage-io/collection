@@ -1,0 +1,55 @@
+{
+    "rdf_content": {
+        "authors": [
+            {
+                "affiliation": "MRC LMB",
+                "github_user": "danifranco",
+                "name": "Daniel Franco-Barranco",
+                "orcid": "0000-0002-1109-110X"
+            }
+        ],
+        "cite": [
+            {
+                "doi": "10.1016/j.crmeth.2023.100597",
+                "text": "Andres-San Roman, Jesus A., et al. 'CartoCell, a high-content pipeline for 3D image analysis, unveils cell morphology patterns in epithelia.' Cell Reports Methods 3.10 (2023)."
+            },
+            {
+                "text": "Franco-Barranco, Daniel, et al. 'BiaPy: Accessible deep learning on bioimages.' bioRxiv (2024): 2024-02.",
+                "url": "https://www.biorxiv.org/content/10.1101/2024.02.03.576026v3"
+            }
+        ],
+        "config": {
+            "bioimageio": {
+                "thumbnails": {
+                    "cartocell.gif": "cartocell.thumbnail.png"
+                }
+            }
+        },
+        "covers": [
+            "cartocell.gif"
+        ],
+        "description": "CartoCell is a deep learning-based image processing pipeline for the high-content segmentation of whole epithelial cysts acquired at low resolution with minimal human intervention. This pipeline enables high-precision cell segmentation that allows a single cell cartography study of major interest for the search of cellular patterns.",
+        "documentation": "CartoCell.md",
+        "format_version": "0.3.0",
+        "id": "divine-melon",
+        "id_emoji": "🍈",
+        "license": "CC-BY-4.0",
+        "name": "CartoCell",
+        "source": "https://zenodo.org/records/10973241",
+        "type": "dataset",
+        "uploader": {
+            "email": "daniel.franco@dipc.org",
+            "name": "Daniel Franco-Barranco"
+        },
+        "version": "0.1.0",
+        "tags": [
+            "instance-segmentation",
+            "3D",
+            "cyst",
+            "biapy",
+            "fluorescence"
+        ]
+    },
+    "rdf_yaml_sha256": "b8a7b8c05a9316a6616045d4045c05541cd7cd3ec8163eb4dcc1b83f5d66ccc0",
+    "status": "untested"
+}

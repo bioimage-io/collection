@@ -1,0 +1,57 @@
+{
+    "rdf_content": {
+        "authors": [
+            {
+                "affiliation": "MRC LMB",
+                "github_user": "danifranco",
+                "name": "Daniel Franco-Barranco",
+                "orcid": "0000-0002-1109-110X"
+            }
+        ],
+        "cite": [
+            {
+                "doi": "10.1109/TMI.2011.2171705",
+                "text": "Lucchi, Aurélien, et al. 'Supervoxel-based segmentation of mitochondria in em image stacks with learned shape features.' IEEE transactions on medical imaging 31.2 (2011): 474-486."
+            },
+            {
+                "text": "Casser, Vincent, et al. 'Fast mitochondria detection for connectomics.' Medical Imaging with Deep Learning. PMLR, 2020",
+                "url": "https://proceedings.mlr.press/v121/casser20a.html"
+            }
+        ],
+        "config": {
+            "bioimageio": {
+                "thumbnails": {
+                    "Screen-Shot-2018-05-22-at-13.44.27.jpg": "Screen-Shot-2018-05-22-at-13.44.27.thumbnail.png",
+                    "lucchi++_presentation.png": "lucchi++_presentation.thumbnail.png"
+                }
+            }
+        },
+        "covers": [
+            "lucchi++_presentation.png",
+            "Screen-Shot-2018-05-22-at-13.44.27.jpg"
+        ],
+        "description": "This dataset consists of segmented mitochondria images originally created by EPFL - CVLAB. However, it has been updated and re-annotated by three experts in neuroscience and biology, commonly referred to as Lucchi++. The dataset represents a 5x5x5µm section from the CA1 hippocampus region of the brain, with a volume of 1065x2048x1536. Each voxel has an approximate resolution of 5x5x5nm.",
+        "documentation": "Lucchi++.md",
+        "format_version": "0.3.0",
+        "id": "sublime-pizza",
+        "id_emoji": "🍕",
+        "license": "Unlicense",
+        "name": "Lucchi++",
+        "source": "https://casser.io/connectomics/",
+        "type": "dataset",
+        "uploader": {
+            "email": "daniel.franco@dipc.org",
+            "name": "Daniel Franco-Barranco"
+        },
+        "version": "0.1.0",
+        "tags": [
+            "semantic-segmentation",
+            "3d",
+            "2d",
+            "mitochondria",
+            "electron-microscopy"
+        ]
+    },
+    "rdf_yaml_sha256": "fe4726116c9987177f7610a8af158a25c8c07995f1ba8049ca98ed9906831f66",
+    "status": "untested"
+}

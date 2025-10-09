@@ -1,0 +1,77 @@
+{
+    "rdf_content": {
+        "authors": [
+            {
+                "name": "Romain Laine and the ZeroCostDL4Mic Team"
+            }
+        ],
+        "badges": [
+            {
+                "icon": "https://colab.research.google.com/assets/colab-badge.svg",
+                "label": "Open in Colab",
+                "url": "https://colab.research.google.com/github/HenriquesLab/ZeroCostDL4Mic/blob/master/Colab_notebooks/Noise2Void_3D_ZeroCostDL4Mic.ipynb"
+            }
+        ],
+        "cite": [
+            {
+                "doi": "10.1038/s41467-021-22518-0",
+                "text": "von Chamier, L., Laine, R.F., Jukkala, J. et al. Democratising deep learning for microscopy with ZeroCostDL4Mic. Nat Commun 12, 2276 (2021). https://doi.org/10.1038/s41467-021-22518-0"
+            },
+            {
+                "doi": "10.1109/CVPR.2019.00223",
+                "text": "A. Krull, T. Buchholz and F. Jug. Noise2Void Learning Denoising From Single Noisy Images. 2019 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 2019, pp. 2124-2132, https://doi.org/10.1109/CVPR.2019.00223."
+            }
+        ],
+        "config": {
+            "bioimageio": {
+                "nickname": "cozy-hiking-boot",
+                "nickname_icon": "🥾",
+                "status": "accepted",
+                "version_id": "latest",
+                "version_name": "latest"
+            },
+            "dl4miceverywhere": {
+                "cuda_version": "11.8.0",
+                "cudnn_version": "8.6.0.163",
+                "description": "Noise2Void_3D_DL4Mic is the conversion of the 3D Noise2Void from ZeroCostDL4Mic.",
+                "dl4miceverywhere_version": "2.0.0",
+                "docker_hub_image": "noise2void_3d_zerocostdl4mic-z1.16.2-d2.0.0",
+                "notebook_url": "https://raw.githubusercontent.com/HenriquesLab/ZeroCostDL4Mic/master/Colab_notebooks/Noise2Void_3D_ZeroCostDL4Mic.ipynb",
+                "notebook_version": "1.16.2",
+                "python_version": "3.10",
+                "requirements_url": "https://raw.githubusercontent.com/HenriquesLab/ZeroCostDL4Mic/master/requirements_files/Noise2Void_3D_requirements_simple.txt",
+                "sections_to_remove": "1.1. 1.2. 2. 6.2.",
+                "ubuntu_version": "22.04"
+            }
+        },
+        "covers": [
+            "N2V_3D_notebook.png",
+            "N2V_3D_notebook_2.png"
+        ],
+        "description": "self-supervised denoising of 3D images. Noise2VOID 3D is deep-learning method that can be used to denoise 3D microscopy images. By running this notebook, you can train your own network and denoise your images. Note - visit the ZeroCostDL4Mic wiki to check the original publications this network is based on and make sure you cite these.",
+        "documentation": "README.md",
+        "download_url": "https://raw.githubusercontent.com/HenriquesLab/ZeroCostDL4Mic/master/Colab_notebooks/Noise2Void_3D_ZeroCostDL4Mic.ipynb",
+        "format_version": "0.2.4",
+        "git_repo": "https://github.com/HenriquesLab/ZeroCostDL4Mic",
+        "id": "zero/Notebook_Noise2Void_3D_ZeroCostDL4Mic",
+        "links": [
+            "zero/Notebook Preview",
+            "zero/Dataset_Noise2Void_3D_ZeroCostDL4Mic"
+        ],
+        "maintainers": [],
+        "name": "Noise2VOID (3D) - ZeroCostDL4Mic",
+        "tags": [
+            "colab",
+            "notebook",
+            "Noise2Void",
+            "denoising",
+            "ZeroCostDL4Mic",
+            "3D",
+            "dl4miceverywhere"
+        ],
+        "type": "application",
+        "version": "1.16.2"
+    },
+    "rdf_yaml_sha256": "d8842886ac688d36e7dfba3b4a2d262a35d09499e86fc11f0fba86643302a069",
+    "status": "untested"
+}

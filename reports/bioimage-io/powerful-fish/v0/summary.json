@@ -1,0 +1,210 @@
+{
+    "rdf_content": {
+        "attachments": {
+            "files": []
+        },
+        "authors": [
+            {
+                "name": "A. Wolny"
+            },
+            {
+                "name": "V. Bondarenko"
+            }
+        ],
+        "cite": [
+            {
+                "text": "V. Bondarenko et al. Ex vivo Engineering Uterine Environment for Peri-implantation Mouse Development",
+                "url": "https://github.com/kreshuklab/mouse-embryo-seg"
+            }
+        ],
+        "config": {
+            "bioimageio": {
+                "nickname": "powerful-fish",
+                "nickname_icon": "🐟",
+                "thumbnails": {
+                    "pred.png": "pred.thumbnail.png",
+                    "raw.png": "raw.thumbnail.png"
+                }
+            },
+            "deepimagej": {
+                "allow_tiling": true,
+                "model_keys": null,
+                "prediction": {
+                    "postprocess": [
+                        {
+                            "spec": null
+                        }
+                    ],
+                    "preprocess": [
+                        {
+                            "spec": null
+                        }
+                    ]
+                },
+                "pyramidal_model": false,
+                "test_information": {
+                    "inputs": [
+                        {
+                            "name": "test_input.npy",
+                            "pixel_size": {
+                                "x": 1.0,
+                                "y": 1.0,
+                                "z": 1.0
+                            },
+                            "size": "128 x 128 x 32 x 1"
+                        }
+                    ],
+                    "memory_peak": null,
+                    "outputs": [
+                        {
+                            "name": "test_output.npy",
+                            "size": "128 x 128 x 32 x 1",
+                            "type": "image"
+                        }
+                    ],
+                    "runtime": null
+                }
+            }
+        },
+        "covers": [
+            "raw.png",
+            "pred.png"
+        ],
+        "description": "A 3D U-Net trained to predict the cell boundaries in live light sheet images of developing mouse embryo. Voxel size: 0.2×0.2×1.0 µm^3",
+        "documentation": "unet3d.md",
+        "format_version": "0.4.10",
+        "id": "10.5281/zenodo.6384845/7774490",
+        "id_emoji": "🐟",
+        "inputs": [
+            {
+                "axes": "bczyx",
+                "data_range": [
+                    null,
+                    null
+                ],
+                "data_type": "float32",
+                "name": "raw",
+                "shape": [
+                    1,
+                    1,
+                    32,
+                    128,
+                    128
+                ]
+            }
+        ],
+        "license": "MIT",
+        "links": [
+            "imjoy/BioImageIO-Packager",
+            "ilastik/ilastik"
+        ],
+        "maintainers": [
+            {
+                "github_user": "wolny"
+            }
+        ],
+        "name": "3D UNet Mouse Embryo Live",
+        "outputs": [
+            {
+                "axes": "bczyx",
+                "data_range": [
+                    0.0,
+                    1.0
+                ],
+                "data_type": "float32",
+                "halo": [
+                    0,
+                    0,
+                    8,
+                    16,
+                    16
+                ],
+                "name": "output0",
+                "shape": {
+                    "offset": [
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "reference_tensor": "raw",
+                    "scale": [
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0
+                    ]
+                }
+            }
+        ],
+        "sample_inputs": [
+            "sample_input_0.tif"
+        ],
+        "sample_outputs": [
+            "sample_output_0.tif"
+        ],
+        "tags": [
+            "3d",
+            "torchscript",
+            "ilastik",
+            "unet",
+            "live",
+            "plantseg",
+            "mouse-embryo",
+            "cell-membrane",
+            "animal",
+            "tissue",
+            "light-sheet-microscopy",
+            "semantic-segmentation",
+            "deepimagej",
+            "pytorch"
+        ],
+        "test_inputs": [
+            "test_input.npy"
+        ],
+        "test_outputs": [
+            "test_output.npy"
+        ],
+        "timestamp": "2023-03-27T12:11:52.357154",
+        "type": "model",
+        "uploader": {
+            "email": "bioimageiobot@gmail.com"
+        },
+        "version": 1,
+        "version_number": 1,
+        "weights": {
+            "pytorch_state_dict": {
+                "architecture": "unet.py:UNet3D",
+                "architecture_sha256": "2da9f7149e144b63fee715fb8fe5154e96bf9aa230d176c91e923d528ef0c4e1",
+                "kwargs": {
+                    "f_maps": [
+                        32,
+                        64,
+                        128,
+                        256,
+                        512
+                    ],
+                    "final_sigmoid": true,
+                    "in_channels": 1,
+                    "is_segmentation": true,
+                    "layer_order": "gcr",
+                    "num_groups": 8,
+                    "out_channels": 1,
+                    "testing": true
+                },
+                "pytorch_version": "1.12.1",
+                "sha256": "dc267bebbd34da4a66ae55c15a4e056ae883f0bcc30176e5548625491690baf7",
+                "source": "unet-bce-dice-cell-boundary-311021.pytorch"
+            },
+            "torchscript": {
+                "pytorch_version": "1.13.0",
+                "sha256": "81543061236a71bed490d0bf2602a58c6e73ccff825ded132e1048a3f04f6976",
+                "source": "torchscript_tracing.pt"
+            }
+        }
+    },
+    "rdf_yaml_sha256": "666a29b5754cdb4dee387ef664dee0b15e9448aa766285685a5b88b77e009e62",
+    "status": "untested"
+}

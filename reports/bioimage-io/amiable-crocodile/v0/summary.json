@@ -1,0 +1,157 @@
+{
+    "rdf_content": {
+        "authors": [
+            {
+                "affiliation": "EMBL Heidelberg",
+                "name": "Jonas Hellgoth",
+                "orcid": "0000-0003-0758-1680"
+            }
+        ],
+        "cite": [
+            {
+                "doi": "10.5281/zenodo.5108853",
+                "text": "training library"
+            },
+            {
+                "doi": "10.1007/978-3-319-46723-8_49",
+                "text": "architecture"
+            },
+            {
+                "doi": "10.1038/nmeth.4151",
+                "text": "segmentation algorithm"
+            },
+            {
+                "doi": "10.3389/fcomp.2022.805166",
+                "text": "shallow2deep"
+            }
+        ],
+        "config": {
+            "bioimageio": {
+                "nickname": "amiable-crocodile",
+                "nickname_icon": "🐊",
+                "thumbnails": {
+                    "cover.png": "cover.thumbnail.png"
+                }
+            }
+        },
+        "covers": [
+            "cover.png"
+        ],
+        "description": "Prediction enhancer for segmenting cell boundaries in EM images.",
+        "documentation": "doc.md",
+        "format_version": "0.4.10",
+        "id": "10.5281/zenodo.8142283/8171247",
+        "id_emoji": "🐊",
+        "inputs": [
+            {
+                "axes": "bcyx",
+                "data_range": [
+                    null,
+                    null
+                ],
+                "data_type": "float32",
+                "name": "input0",
+                "shape": {
+                    "min": [
+                        1,
+                        1,
+                        32,
+                        32
+                    ],
+                    "step": [
+                        0,
+                        0,
+                        16,
+                        16
+                    ]
+                }
+            }
+        ],
+        "license": "MIT",
+        "links": [
+            "imjoy/BioImageIO-Packager"
+        ],
+        "maintainers": [
+            {
+                "email": "jonas.hellgoth@embl.de",
+                "github_user": "JonasHell",
+                "name": "Jonas Hellgoth"
+            }
+        ],
+        "name": "EnhancerBoundaryEM2D",
+        "outputs": [
+            {
+                "axes": "bcyx",
+                "data_range": [
+                    null,
+                    null
+                ],
+                "data_type": "float32",
+                "halo": [
+                    0,
+                    0,
+                    8,
+                    8
+                ],
+                "name": "output0",
+                "shape": {
+                    "offset": [
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "reference_tensor": "input0",
+                    "scale": [
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0
+                    ]
+                }
+            }
+        ],
+        "tags": [
+            "unet",
+            "cells",
+            "electron-microscopy",
+            "instance-segmentation",
+            "2d",
+            "shallow2deep"
+        ],
+        "test_inputs": [
+            "test-input.npy"
+        ],
+        "test_outputs": [
+            "test-output.npy"
+        ],
+        "timestamp": "2023-07-21T09:09:49.349470",
+        "type": "model",
+        "uploader": {
+            "email": "bioimageiobot@gmail.com"
+        },
+        "version": 1,
+        "version_number": 1,
+        "weights": {
+            "pytorch_state_dict": {
+                "architecture": "unet.py:UNet2d",
+                "architecture_sha256": "64af2e39972beb94019a1c97d42b29a8d8827d1b0f0845207c3b82c1a242f354",
+                "kwargs": {
+                    "depth": 4,
+                    "final_activation": "Sigmoid",
+                    "gain": 2,
+                    "in_channels": 1,
+                    "initial_features": 32,
+                    "norm": "BatchNorm",
+                    "out_channels": 1,
+                    "postprocessing": null,
+                    "return_side_outputs": false
+                },
+                "sha256": "86ca482cf9e6e62df27166d8aba9c83397d0a17a262f8350d6cac9665deb77c1",
+                "source": "weights.pt"
+            }
+        }
+    },
+    "rdf_yaml_sha256": "057619d45e82d117311cf0f2ead8b9ecba1fe4ce51412cced3f3b7e68ef06cc2",
+    "status": "untested"
+}

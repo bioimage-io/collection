@@ -1,0 +1,194 @@
+{
+    "rdf_content": {
+        "attachments": {
+            "files": [
+                "training_evaluation.csv",
+                "per_sample_scale_range.ijm"
+            ]
+        },
+        "authors": [
+            {
+                "affiliation": "EMBL Heidelberg",
+                "name": "Constantin Pape"
+            }
+        ],
+        "cite": [
+            {
+                "doi": "10.1038/s41592-018-0261-2",
+                "text": "Falk et al. Nature Methods 2019"
+            },
+            {
+                "doi": "10.1007/978-3-319-24574-4_28",
+                "text": "Ronneberger et al. arXiv in 2015"
+            },
+            {
+                "doi": "10.1101/2020.03.20.000133",
+                "text": "Lucas von Chamier et al. biorXiv 2020"
+            }
+        ],
+        "config": {
+            "bioimageio": {
+                "nickname": "non-judgemental-eagle",
+                "nickname_icon": "🦅",
+                "thumbnails": {
+                    "cover.png": "cover.thumbnail.png"
+                }
+            },
+            "deepimagej": {
+                "allow_tiling": true,
+                "model_keys": null,
+                "prediction": {
+                    "postprocess": [
+                        {
+                            "spec": null
+                        }
+                    ],
+                    "preprocess": [
+                        {
+                            "kwargs": "per_sample_scale_range.ijm",
+                            "spec": "ij.IJ::runMacroFile"
+                        }
+                    ]
+                },
+                "pyramidal_model": false,
+                "test_information": {
+                    "inputs": [
+                        {
+                            "name": "test_input.npy",
+                            "pixel_size": {
+                                "x": 1,
+                                "y": 1,
+                                "z": 1
+                            },
+                            "size": "256 x 256 x 8 x 1"
+                        }
+                    ],
+                    "memory_peak": null,
+                    "outputs": [
+                        {
+                            "name": "test_output.npy",
+                            "size": "256 x 256 x 8 x 1",
+                            "type": "image"
+                        }
+                    ],
+                    "runtime": null
+                }
+            }
+        },
+        "covers": [
+            "cover.png"
+        ],
+        "description": "Perform leaf segmentation in light microscopy images of Arabidopsis",
+        "documentation": "README.md",
+        "format_version": "0.4.10",
+        "id": "10.5281/zenodo.6348728/6348729",
+        "id_emoji": "🦅",
+        "inputs": [
+            {
+                "axes": "bxyzc",
+                "data_range": [
+                    0.0,
+                    65535.0
+                ],
+                "data_type": "uint16",
+                "name": "input",
+                "preprocessing": [
+                    {
+                        "kwargs": {
+                            "axes": "xyzc",
+                            "max_percentile": 100,
+                            "min_percentile": 0,
+                            "mode": "per_sample"
+                        },
+                        "name": "scale_range"
+                    }
+                ],
+                "shape": [
+                    1,
+                    256,
+                    256,
+                    8,
+                    1
+                ]
+            }
+        ],
+        "license": "MIT",
+        "links": [
+            "deepimagej/deepimagej",
+            "imjoy/BioImageIO-Packager",
+            "ilastik/ilastik",
+            "zero/notebook_u-net_3d_zerocostdl4mic"
+        ],
+        "name": "Arabidopsis Leaf Segmentation",
+        "outputs": [
+            {
+                "axes": "bxyzc",
+                "data_range": [
+                    null,
+                    null
+                ],
+                "data_type": "float32",
+                "name": "output",
+                "shape": {
+                    "offset": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "reference_tensor": "input",
+                    "scale": [
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0
+                    ]
+                }
+            }
+        ],
+        "sample_inputs": [
+            "sample_input_0.tif"
+        ],
+        "sample_outputs": [
+            "sample_output_0.tif"
+        ],
+        "tags": [
+            "zerocostdl4mic",
+            "deepimagej",
+            "segmentation",
+            "unet"
+        ],
+        "test_inputs": [
+            "test_input.npy"
+        ],
+        "test_outputs": [
+            "test_output.npy"
+        ],
+        "timestamp": "2022-03-12T09:56:33.055323",
+        "training_data": {
+            "id": "ilastik/arabidopsis_tissue_atlas"
+        },
+        "type": "model",
+        "uploader": {
+            "email": "bioimageiobot@gmail.com"
+        },
+        "version": 1,
+        "version_number": 1,
+        "weights": {
+            "keras_hdf5": {
+                "sha256": "754607fe5932eeee029f988127cebe43fa93d0df075e54f1abd6e21c57e861e2",
+                "source": "keras_weights.hdf5",
+                "tensorflow_version": "1.15.2"
+            },
+            "tensorflow_saved_model_bundle": {
+                "sha256": "3548156e4c67e628a3505fb49252ce3c9d4450672466c8a6f9d09cee90bbedf0",
+                "source": "tf_weights.zip",
+                "tensorflow_version": "1.15.2"
+            }
+        }
+    },
+    "rdf_yaml_sha256": "0f3f827b2acd435ab3f2c4bd9dabb111f42419452a04f8c975e7159016019034",
+    "status": "untested"
+}

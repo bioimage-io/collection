@@ -1,0 +1,69 @@
+{
+    "rdf_content": {
+        "authors": [
+            {
+                "name": "Christoph Spahn"
+            },
+            {
+                "name": "Mike Heilemann"
+            }
+        ],
+        "cite": [
+            {
+                "doi": "10.1101/2021.11.03.467152",
+                "text": "Christoph Spahn, Romain F. Laine, Pedro Matos Pereira, Estibaliz GÃ³mez-de-Mariscal, Lucas von Chamier, Mia Conduit, Mariana Gomes de Pinho, Guillaume Jacquemet, SÃ©amus Holden, Mike Heilemann, Ricardo Henriques DeepBacs: Bacterial image analysis using open-source deep learning approaches. bioRxiv 2021.11.03.467152; doi: https://doi.org/10.1101/2021.11.03.467152"
+            }
+        ],
+        "config": {
+            "background_image": "static/img/zoo-background.svg",
+            "bioimageio": {
+                "nickname": "velvety-paella",
+                "nickname_icon": "🥘",
+                "status": "accepted",
+                "version_id": "latest",
+                "version_name": "latest"
+            },
+            "default_type": "application",
+            "explore_button_text": "Start Exploring",
+            "icon": "https://raw.githubusercontent.com/HenriquesLab/ZeroCostDL4Mic/master/Wiki_files/ZeroCostLogo.png",
+            "id": "zero",
+            "logo": "https://raw.githubusercontent.com/HenriquesLab/ZeroCostDL4Mic/master/Wiki_files/ZeroCostLogo.png",
+            "name": "ZeroCostDL4Mic",
+            "resource_types": [
+                "model",
+                "application",
+                "dataset"
+            ],
+            "splash_feature_list": [],
+            "splash_subtitle": "A Google Colab based no-cost toolbox to explore Deep-Learning in Microscopy",
+            "splash_title": "ZeroCostDL4Mic",
+            "tags": [
+                "ZeroCostDL4Mic"
+            ],
+            "url_root": "https://raw.githubusercontent.com/oeway/ZeroCostDL4Mic/master",
+            "version": "1.7.1"
+        },
+        "covers": [
+            "default.png"
+        ],
+        "description": "Paired training and test images of H-NS-mScarlet-I expressing E. coli cells for image denoising.",
+        "documentation": "README.md",
+        "download_url": "https://zenodo.org/record/5551112",
+        "format_version": "0.2.4",
+        "id": "zero/Dataset_CARE_2D_coli_DeepBacs",
+        "maintainers": [],
+        "name": "Escherichia coli nucleoid denoising dataset - DeepBacs",
+        "tags": [
+            "Noise2Void",
+            "CARE",
+            "denoising",
+            "DeepBacs",
+            "2D"
+        ],
+        "type": "dataset",
+        "version": 1,
+        "license": "CC-BY-4.0"
+    },
+    "rdf_yaml_sha256": "514b6ace47d120c9169631cdf6779059c1849ce6b87556ed03e9e16d9e1bd187",
+    "status": "untested"
+}

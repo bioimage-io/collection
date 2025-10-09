@@ -1,0 +1,173 @@
+{
+    "rdf_content": {
+        "attachments": {
+            "files": [
+                "hpa_labels.txt"
+            ]
+        },
+        "authors": [
+            {
+                "name": "Shubin Dai"
+            }
+        ],
+        "cite": [
+            {
+                "doi": "10.1038/s41592-019-0658-6",
+                "text": "Ouyang, W., Winsnes, C.F., Hjelmare, M. et al. Analysis of the Human Protein Atlas Image Classification competition. Nat Methods 16, 1254–1261 (2019)."
+            }
+        ],
+        "config": {
+            "bioimageio": {
+                "nickname": "straightforward-crocodile",
+                "nickname_icon": "🐊",
+                "test_kwargs": {
+                    "onnx": {
+                        "decimal": 2
+                    },
+                    "torchscript": {
+                        "decimal": 2
+                    }
+                },
+                "thumbnails": {
+                    "diagram-of-InceptionV3.png": "diagram-of-InceptionV3.thumbnail.png"
+                }
+            }
+        },
+        "covers": [
+            "diagram-of-InceptionV3.png"
+        ],
+        "description": "The winning model of HPA image classification 2021 by Bestfitting",
+        "documentation": "README.md",
+        "format_version": "0.4.10",
+        "id": "10.5281/zenodo.5910854/6539073",
+        "id_emoji": "🐊",
+        "inputs": [
+            {
+                "axes": "bcyx",
+                "data_range": [
+                    null,
+                    null
+                ],
+                "data_type": "float32",
+                "description": "HPA image (4 channels [\"red\", \"green\", \"blue\", \"yellow\"])",
+                "name": "image",
+                "preprocessing": [
+                    {
+                        "kwargs": {
+                            "axes": "xy",
+                            "gain": [
+                                0.003921568627,
+                                0.003921568627,
+                                0.003921568627,
+                                0.003921568627
+                            ],
+                            "offset": [
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0
+                            ]
+                        },
+                        "name": "scale_linear"
+                    }
+                ],
+                "shape": [
+                    1,
+                    4,
+                    128,
+                    128
+                ]
+            }
+        ],
+        "license": "MIT",
+        "links": [
+            "imjoy/BioImageIO-Packager",
+            "hpa/hpa-kaggle-2021-dataset"
+        ],
+        "maintainers": [
+            {
+                "github_user": "oeway",
+                "name": "Wei Ouyang"
+            }
+        ],
+        "name": "HPA Bestfitting InceptionV3",
+        "outputs": [
+            {
+                "axes": "bc",
+                "data_range": [
+                    0.0,
+                    null
+                ],
+                "data_type": "float32",
+                "description": "protein localization pattern classes",
+                "name": "classes",
+                "shape": [
+                    1,
+                    19
+                ]
+            },
+            {
+                "axes": "bc",
+                "data_range": [
+                    null,
+                    null
+                ],
+                "data_type": "float32",
+                "description": "features of last fully connected layer",
+                "name": "features",
+                "shape": [
+                    1,
+                    2048
+                ]
+            }
+        ],
+        "sample_inputs": [
+            "sample_image.tif"
+        ],
+        "tags": [
+            "classification",
+            "inception-v3",
+            "hpa",
+            "onnx",
+            "cells",
+            "protein-localization"
+        ],
+        "test_inputs": [
+            "test_input.npy"
+        ],
+        "test_outputs": [
+            "test_output_classes.npy",
+            "test_output_features.npy"
+        ],
+        "timestamp": "2022-05-11T12:52:23.766143",
+        "type": "model",
+        "uploader": {
+            "email": "bioimageiobot@gmail.com"
+        },
+        "version": 1,
+        "version_number": 1,
+        "weights": {
+            "onnx": {
+                "authors": [
+                    {
+                        "name": "Wei OUYANG"
+                    }
+                ],
+                "opset_version": 15,
+                "sha256": "cce5fccae3434f5bf6310d8671a4f8720a4db2c9769adb407b5c2a2bdd292fc7",
+                "source": "bestfitting-inceptionv3-single-cell.onnx"
+            },
+            "torchscript": {
+                "authors": [
+                    {
+                        "name": "Wei OUYANG"
+                    }
+                ],
+                "sha256": "3eb4d8ca9907223c6f79c73cec32cd8a9db0ba642da4967d9b110a0a16e2680e",
+                "source": "bestfitting-inceptionv3-single-cell.pt"
+            }
+        }
+    },
+    "rdf_yaml_sha256": "616e9e91e645c5c0b137cc011c17b2170420f28a9be0f170291a8cd84bd70fce",
+    "status": "untested"
+}

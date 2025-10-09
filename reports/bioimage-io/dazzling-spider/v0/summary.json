@@ -1,0 +1,189 @@
+{
+    "rdf_content": {
+        "attachments": [
+            {
+                "sha256": "5d97253f80d728d48b41842921829b6bc41f9d84370966ba963c85f05fc644f1",
+                "source": "config.yml"
+            }
+        ],
+        "authors": [
+            {
+                "affiliation": "Human Technopole",
+                "name": "CAREamics authors"
+            }
+        ],
+        "cite": [
+            {
+                "doi": "10.1109/cvpr.2019.00223",
+                "text": "Krull, A., Buchholz, T.O. and Jug, F., 2019. \"Noise2Void - Learning denoising from single noisy images\". In Proceedings of the IEEE/CVF conference on computer vision and pattern recognition (pp. 2129-2137)."
+            }
+        ],
+        "config": {
+            "bioimageio": {
+                "thumbnails": {}
+            }
+        },
+        "covers": [
+            "cover.png"
+        ],
+        "description": "This model is the output of an example notebook available on the CAREamics documentation website. It can be found under \"Applications\" in the side bar. ([Link](https://careamics.github.io/latest/applications/Noise2Void/Hagen/).)",
+        "documentation": "README.md",
+        "format_version": "0.5.3",
+        "id": "dazzling-spider",
+        "id_emoji": "🕷",
+        "inputs": [
+            {
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "channel_names": [
+                            "channel"
+                        ],
+                        "type": "channel"
+                    },
+                    {
+                        "id": "y",
+                        "size": 256,
+                        "type": "space"
+                    },
+                    {
+                        "id": "x",
+                        "size": 256,
+                        "type": "space"
+                    }
+                ],
+                "id": "input",
+                "preprocessing": [
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    },
+                    {
+                        "id": "fixed_zero_mean_unit_variance",
+                        "kwargs": {
+                            "axis": "channel",
+                            "mean": [
+                                1719.4048020447358
+                            ],
+                            "std": [
+                                1388.4454665331452
+                            ]
+                        }
+                    },
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    }
+                ],
+                "test_tensor": {
+                    "sha256": "f628017e8cc63f3a75bb4dea53cf8af9b4c3f5ad2a611e6fc7e670f7f9d1789f",
+                    "source": "inputs.npy"
+                }
+            }
+        ],
+        "license": "BSD-3-Clause",
+        "links": [
+            "https://github.com/CAREamics/careamics",
+            "https://careamics.github.io/latest/"
+        ],
+        "name": "Hagen_N2V",
+        "outputs": [
+            {
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "channel_names": [
+                            "channel"
+                        ],
+                        "type": "channel"
+                    },
+                    {
+                        "id": "y",
+                        "size": 256,
+                        "type": "space"
+                    },
+                    {
+                        "id": "x",
+                        "size": 256,
+                        "type": "space"
+                    }
+                ],
+                "id": "prediction",
+                "postprocessing": [
+                    {
+                        "id": "fixed_zero_mean_unit_variance",
+                        "kwargs": {
+                            "axis": "channel",
+                            "mean": [
+                                -1.2383668226449014
+                            ],
+                            "std": [
+                                0.0007192299430432098
+                            ]
+                        }
+                    },
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    }
+                ],
+                "test_tensor": {
+                    "sha256": "e79b272f68fb657e898a46f31ecd157505bc27674a80b892c36da96f15e9763c",
+                    "source": "outputs.npy"
+                }
+            }
+        ],
+        "tags": [
+            "denoising",
+            "restoration",
+            "UNet",
+            "2D",
+            "CAREamics",
+            "pytorch",
+            "Noise2Void"
+        ],
+        "type": "model",
+        "uploader": {
+            "email": "mehdi.seifi@fht.org",
+            "name": "Mehdi Seifi"
+        },
+        "version": "0.1.0",
+        "weights": {
+            "pytorch_state_dict": {
+                "architecture": {
+                    "callable": "UNet",
+                    "import_from": "careamics.models.unet",
+                    "kwargs": {
+                        "conv_dims": 2,
+                        "depth": 2,
+                        "final_activation": "None",
+                        "in_channels": 1,
+                        "independent_channels": true,
+                        "n2v2": false,
+                        "num_channels_init": 32,
+                        "num_classes": 1
+                    }
+                },
+                "dependencies": {
+                    "sha256": "f6daf3b6fe660089befee91ccc3e6b557b6c457ff49553b8f9a258c7e39c8756",
+                    "source": "environment.yml"
+                },
+                "pytorch_version": "2.4.0",
+                "sha256": "fc53b45ee9ab3088c8c39de9db94ddf5ed4ade1acffd6e0a901d0ef90d0d54a6",
+                "source": "weights.pth"
+            }
+        }
+    },
+    "rdf_yaml_sha256": "f0f0263cf8c47af3b30f4f59a9d8377c781c151f92d19f7a112365ea95cfd0eb",
+    "status": "untested"
+}

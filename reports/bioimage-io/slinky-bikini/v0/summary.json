@@ -1,0 +1,74 @@
+{
+    "rdf_content": {
+        "authors": [
+            {
+                "name": "Ivan Hidalgo, Estibaliz GÃ³mez de Mariscal, Ignacio Arganda-Carreras and the ZeroCostDL4Mic Team"
+            }
+        ],
+        "badges": [
+            {
+                "icon": "https://colab.research.google.com/assets/colab-badge.svg",
+                "label": "Open in Colab",
+                "url": "https://colab.research.google.com/github/HenriquesLab/ZeroCostDL4Mic/blob/master/Colab_notebooks/WGAN_ZeroCostDL4Mic.ipynb"
+            }
+        ],
+        "cite": [
+            {
+                "doi": "10.1038/s41467-021-22518-0",
+                "text": "von Chamier, L., Laine, R.F., Jukkala, J. et al. Democratising deep learning for microscopy with ZeroCostDL4Mic. Nat Commun 12, 2276 (2021). https://doi.org/10.1038/s41467-021-22518-0"
+            },
+            {
+                "doi": "10.48550/arXiv.1704.00028",
+                "text": "Gulrajani, I., Ahmed, F., Arjovsky, M., Dumoulin, V. and Courville, A. Improved Training of Wasserstein GANs. arXiv. 2017 doi: https://doi.org/10.48550/arXiv.1704.00028."
+            }
+        ],
+        "config": {
+            "bioimageio": {
+                "nickname": "slinky-bikini",
+                "nickname_icon": "👙",
+                "status": "accepted",
+                "version_id": "latest",
+                "version_name": "latest"
+            },
+            "dl4miceverywhere": {
+                "cuda_version": "11.8.0",
+                "cudnn_version": "8.6.0.163",
+                "description": "WGAN_DL4Mic is the conversion of the WGAN notebook from ZeroCostDL4Mic.",
+                "dl4miceverywhere_version": "2.0.0",
+                "docker_hub_image": "wgan_zerocostdl4mic-z1.15.1-d2.0.0",
+                "notebook_url": "https://raw.githubusercontent.com/HenriquesLab/ZeroCostDL4Mic/master/Colab_notebooks/WGAN_ZeroCostDL4Mic.ipynb",
+                "notebook_version": "1.15.1",
+                "python_version": "3.9",
+                "requirements_url": "https://raw.githubusercontent.com/HenriquesLab/ZeroCostDL4Mic/master/requirements_files/SplineDist_2D_requirements_simple.txt",
+                "sections_to_remove": "2. 6.3.",
+                "ubuntu_version": "22.04"
+            }
+        },
+        "covers": [
+            "WGAN_notebook.png"
+        ],
+        "description": "Super-resolution via super-pixelisation. Wasserstein GAN (DFCAN) is a network created to transform low-resolution (LR) images to super-resolved (SR) images, published by Gulrajani I. et al. arXiv 2017. The training is done using LR-SR image pairs, taking the LR images as input and obtaining an output as close to SR as posible.",
+        "documentation": "README.md",
+        "download_url": "https://raw.githubusercontent.com/HenriquesLab/ZeroCostDL4Mic/master/Colab_notebooks/WGAN_ZeroCostDL4Mic.ipynb",
+        "format_version": "0.2.4",
+        "git_repo": "https://github.com/HenriquesLab/ZeroCostDL4Mic",
+        "id": "zero/WGAN_ZeroCostDL4Mic.ipynb",
+        "links": [
+            "zero/Notebook Preview"
+        ],
+        "maintainers": [],
+        "name": "WGAN - ZeroCostDL4Mic",
+        "tags": [
+            "colab",
+            "notebook",
+            "WGAN",
+            "Super Resolution",
+            "ZeroCostDL4Mic",
+            "dl4miceverywhere"
+        ],
+        "type": "application",
+        "version": "1.15.1"
+    },
+    "rdf_yaml_sha256": "8788618f8708cc3564326305cf5c012aff7830e72b595d5d198c384be4bcb8c0",
+    "status": "untested"
+}

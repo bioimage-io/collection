@@ -1,0 +1,115 @@
+{
+    "rdf_content": {
+        "authors": [
+            {
+                "affiliation": "Fudan University",
+                "name": "Chenxi Ma"
+            },
+            {
+                "affiliation": "Fudan University",
+                "name": "Weimin Tan"
+            },
+            {
+                "affiliation": "Fudan University",
+                "name": "Ruian He"
+            },
+            {
+                "affiliation": "Fudan University",
+                "name": "Bo Yan"
+            }
+        ],
+        "cite": [
+            {
+                "doi": "10.21203/rs.3.rs-3208267/v1",
+                "text": "Chenxi Ma, Weimin Tan, Ruian He and Bo Yan. Pre-training a Foundation Model for Universal Fluorescence Microscopy Image Restoration. (2023)."
+            }
+        ],
+        "config": {
+            "bioimageio": {
+                "thumbnails": {
+                    "cover2.png": "cover2.thumbnail.png",
+                    "cover4.png": "cover4.thumbnail.png"
+                }
+            }
+        },
+        "covers": [
+            "cover4.png",
+            "cover2.png"
+        ],
+        "description": "Pre-training a Foundation Model for Universal Fluorescence Microscopy Image Restoration",
+        "documentation": "doc.md",
+        "format_version": "0.4.10",
+        "id": "frank-water-buffalo",
+        "id_emoji": "🐃",
+        "inputs": [
+            {
+                "axes": "bcyx",
+                "data_range": [
+                    0.0,
+                    1.0
+                ],
+                "data_type": "float32",
+                "name": "input0",
+                "shape": [
+                    1,
+                    1,
+                    256,
+                    256
+                ]
+            }
+        ],
+        "license": "CC-BY-4.0",
+        "maintainers": [
+            {
+                "github_user": "ryanhe312",
+                "name": "Ruian He"
+            }
+        ],
+        "name": "UniFMIRDenoiseOnPlanaria",
+        "outputs": [
+            {
+                "axes": "bcyx",
+                "data_range": [
+                    null,
+                    null
+                ],
+                "data_type": "float32",
+                "name": "output0",
+                "shape": [
+                    1,
+                    1,
+                    256,
+                    256
+                ]
+            }
+        ],
+        "tags": [
+            "fluorescence-light-microscopy",
+            "2d",
+            "pytorch",
+            "image-restoration"
+        ],
+        "test_inputs": [
+            "test-input.npy"
+        ],
+        "test_outputs": [
+            "test-output.npy"
+        ],
+        "timestamp": "2024-02-14T12:46:11.374279",
+        "type": "model",
+        "uploader": {
+            "email": "bioimageiobot@gmail.com"
+        },
+        "version": 1,
+        "version_number": 2,
+        "weights": {
+            "torchscript": {
+                "pytorch_version": "1.10.0",
+                "sha256": "bdfdc27f4b4656998d024d4eb17c6214d29975dfd1f45c3b2facbcd802189b30",
+                "source": "weights.pt"
+            }
+        }
+    },
+    "rdf_yaml_sha256": "1251527a921cc7c087eee7603bea7badd830c1c1003224fd72bcd7621af56c1f",
+    "status": "untested"
+}

@@ -1,0 +1,94 @@
+{
+    "rdf_content": {
+        "authors": [
+            {
+                "affiliation": "EPFL, UC3M",
+                "name": "DeepImageJ"
+            }
+        ],
+        "cite": [
+            {
+                "doi": "10.1109/TMI.2019.2947628",
+                "text": "Neeraj Kumar et al. Transactions on medical imaging 2020"
+            }
+        ],
+        "config": {
+            "background_image": "static/img/zoo-background.svg",
+            "bioimageio": {
+                "nickname": "delicious-cheese",
+                "nickname_icon": "🧀",
+                "status": "accepted",
+                "version_id": "latest",
+                "version_name": "latest"
+            },
+            "contact": [
+                {
+                    "affiliation": [
+                        {
+                            "name": "UC3M",
+                            "url": "https://www.uc3m.es/home"
+                        }
+                    ],
+                    "email": "mamunozb@ing.uc3m.es",
+                    "github": "arratemunoz",
+                    "name": "Arrate MuÃ±oz Barrutia"
+                },
+                {
+                    "affiliation": [
+                        {
+                            "name": "EPFL",
+                            "url": "https://www.epfl.ch/en/"
+                        }
+                    ],
+                    "email": "daniel.sage@epfl.ch",
+                    "github": "dasv74",
+                    "name": "Daniel Sage"
+                }
+            ],
+            "docs": "https://github.com/deepimagej/deepimagej-plugin/wiki",
+            "explore_button_text": "Start Exploring",
+            "icon": "https://raw.githubusercontent.com/deepimagej/models/master/logos/icon.png",
+            "id": "deepimagej",
+            "logo": "https://raw.githubusercontent.com/deepimagej/models/master/logos/logo.png",
+            "name": "DeepImageJ",
+            "resource_types": [
+                "model",
+                "notebook",
+                "application"
+            ],
+            "splash_feature_list": null,
+            "splash_subtitle": "A user-friendly plugin to run deep learning models in ImageJ",
+            "splash_title": "deepImageJ",
+            "tags": [
+                "deepimagej"
+            ],
+            "url_root": "https://raw.githubusercontent.com/deepimagej/models/master"
+        },
+        "covers": [
+            "MoNuSeg1.jpg",
+            "MoNuSeg2.jpg",
+            "MoNuSeg3.jpg"
+        ],
+        "description": "Labelled images for instance segmentation of cell nuclei in digital pathology datasets (MoNuSeg 2018 Challenge).",
+        "documentation": "README.md",
+        "format_version": "0.2.4",
+        "id": "deepimagej/MoNuSeg_digital_pathology_miccai2018",
+        "maintainers": [],
+        "name": "Multi-Organ Nucleus Segmentation Challenge - MICCAI 2018",
+        "source": "https://monuseg.grand-challenge.org/Data/",
+        "tags": [
+            "StarDist",
+            "segmentation",
+            "pathology",
+            "H&E",
+            "histology",
+            "2D",
+            "nuclei segmentation",
+            "digital pathology"
+        ],
+        "type": "dataset",
+        "version": 1
+    },
+    "rdf_yaml_sha256": "8856fa05aa856491af76a76a3d035ca7607ffde36b5cb5cf7ba2f43f176aa27d",
+    "status": "untested"
+}

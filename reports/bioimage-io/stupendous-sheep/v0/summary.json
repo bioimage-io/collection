@@ -1,0 +1,193 @@
+{
+    "rdf_content": {
+        "attachments": {
+            "files": [
+                "MitoNet_v1.pth"
+            ]
+        },
+        "authors": [
+            {
+                "affiliation": "Frederick National Lab, National Cancer Institute, NIH",
+                "email": "abhishek.bhardwaj@nih.gov",
+                "name": "Abhishek Bhardwaj"
+            },
+            {
+                "affiliation": "Frederick National Lab, National Cancer Institute, NIH",
+                "email": "narayank@mail.nih.gov",
+                "name": "Kedar Narayan"
+            }
+        ],
+        "cite": [
+            {
+                "text": "R. Conrad et al. Instance segmentation of mitochondria in electron microscopy images with a generalist deep learning model",
+                "url": "https://github.com/volume-em/empanada-napari"
+            }
+        ],
+        "config": {
+            "bioimageio": {
+                "thumbnails": {
+                    "em.png": "em.thumbnail.png",
+                    "seg.png": "seg.thumbnail.png"
+                }
+            },
+            "deepimagej": {
+                "allow_tiling": true,
+                "model_keys": null,
+                "prediction": {
+                    "postprocess": [
+                        {
+                            "spec": null
+                        }
+                    ],
+                    "preprocess": [
+                        {
+                            "spec": null
+                        }
+                    ]
+                },
+                "pyramidal_model": false,
+                "test_information": {
+                    "inputs": [
+                        {
+                            "name": "test.npy",
+                            "pixel_size": {
+                                "x": 1.0,
+                                "y": 1.0
+                            },
+                            "size": "1250 x 1250"
+                        }
+                    ],
+                    "memory_peak": null,
+                    "outputs": [
+                        {
+                            "name": "test_output.npy",
+                            "size": "1250 x 1250",
+                            "type": "image"
+                        }
+                    ],
+                    "runtime": null
+                }
+            }
+        },
+        "covers": [
+            "em.png",
+            "seg.png"
+        ],
+        "description": "MitoNet [2D]: A generalist mitochondrial 2D instance segmentation model trained [using empanada] for EM images",
+        "documentation": "MitoNet.md",
+        "format_version": "0.4.10",
+        "id": "stupendous-sheep",
+        "id_emoji": "🐑",
+        "inputs": [
+            {
+                "axes": "yx",
+                "data_range": [
+                    null,
+                    null
+                ],
+                "data_type": "float32",
+                "name": "raw",
+                "shape": {
+                    "min": [
+                        224,
+                        224
+                    ],
+                    "step": [
+                        1,
+                        1
+                    ]
+                }
+            }
+        ],
+        "license": "BSD-3-Clause",
+        "links": [
+            "deepimagej/deepimagej",
+            "imjoy/BioImageIO-Packager"
+        ],
+        "maintainers": [
+            {
+                "affiliation": "Frederick National Lab, National Cancer Institute, NIH",
+                "email": "abhishek.bhardwaj@nih.gov",
+                "github_user": "abhishek-bhardwaj-IN",
+                "name": "Abhishek Bhardwaj"
+            }
+        ],
+        "name": "(Empanada) 2D Instance Mitochondrial Segmentation in EM Images - 2D MitoNet",
+        "outputs": [
+            {
+                "axes": "yx",
+                "data_range": [
+                    0.0,
+                    65535.0
+                ],
+                "data_type": "uint16",
+                "name": "output0",
+                "shape": {
+                    "offset": [
+                        0.0,
+                        0.0
+                    ],
+                    "reference_tensor": "raw",
+                    "scale": [
+                        1.0,
+                        1.0
+                    ]
+                }
+            }
+        ],
+        "sample_inputs": [
+            "test.tiff"
+        ],
+        "sample_outputs": [
+            "out.png"
+        ],
+        "tags": [
+            "2d",
+            "electron-microscopy",
+            "resnet",
+            "segmentation",
+            "torchscript",
+            "empanada",
+            "instance-segmentation",
+            "mitochondria",
+            "mitochondrial-segmentation",
+            "deepimagej",
+            "pytorch"
+        ],
+        "test_inputs": [
+            "test.npy"
+        ],
+        "test_outputs": [
+            "out.npy"
+        ],
+        "timestamp": "2023-12-15T16:26:47.077372",
+        "type": "model",
+        "uploader": {
+            "email": "bioimageiobot@gmail.com"
+        },
+        "version": 1,
+        "version_number": 2,
+        "weights": {
+            "pytorch_state_dict": {
+                "architecture": "infer_2d.py:Empanada2DInference",
+                "architecture_sha256": "6e0598690940b79b3e6dbc95cd28c42490c0be562f741b4e865b1d69e0a82641",
+                "dependencies": "pip:./requirements.txt",
+                "kwargs": {
+                    "confidence_thr": 0.3,
+                    "fine_boundaries": true,
+                    "inference_scale": 1,
+                    "label_divisor": 10000,
+                    "model": "MitoNet_v1.pth",
+                    "nms_kernel": 3,
+                    "nms_threshold": 0.1,
+                    "tile_size": 0
+                },
+                "pytorch_version": "1.12.1",
+                "sha256": "ca9f7de681c94b1e89d20cab21ec39135415fc2c8798292cd1f0f6a33aa1e18b",
+                "source": "MitoNet_v1_weights.pth"
+            }
+        }
+    },
+    "rdf_yaml_sha256": "46018e6d97d5266ba8a6136e8e531021f5b37f5b42dfcf49eb19a428aa9294ac",
+    "status": "untested"
+}

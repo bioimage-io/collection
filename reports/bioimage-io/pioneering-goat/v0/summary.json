@@ -1,0 +1,115 @@
+{
+    "rdf_content": {
+        "authors": [
+            {
+                "affiliation": "Fudan University",
+                "name": "Chenxi Ma"
+            },
+            {
+                "affiliation": "Fudan University",
+                "name": "Weimin Tan"
+            },
+            {
+                "affiliation": "Fudan University",
+                "name": "Ruian He"
+            },
+            {
+                "affiliation": "Fudan University",
+                "name": "Bo Yan"
+            }
+        ],
+        "cite": [
+            {
+                "doi": "10.21203/rs.3.rs-3208267/v1",
+                "text": "Chenxi Ma, Weimin Tan, Ruian He and Bo Yan. Pre-training a Foundation Model for Universal Fluorescence Microscopy Image Restoration. (2023)."
+            }
+        ],
+        "config": {
+            "bioimageio": {
+                "thumbnails": {
+                    "cover2.png": "cover2.thumbnail.png",
+                    "cover3.png": "cover3.thumbnail.png"
+                }
+            }
+        },
+        "covers": [
+            "cover3.png",
+            "cover2.png"
+        ],
+        "description": "Pre-training a Foundation Model for Universal Fluorescence Microscopy Image Restoration",
+        "documentation": "doc.md",
+        "format_version": "0.4.10",
+        "id": "pioneering-goat",
+        "id_emoji": "🐐",
+        "inputs": [
+            {
+                "axes": "bcyx",
+                "data_range": [
+                    0.0,
+                    1.0
+                ],
+                "data_type": "float32",
+                "name": "input0",
+                "shape": [
+                    1,
+                    50,
+                    128,
+                    128
+                ]
+            }
+        ],
+        "license": "CC-BY-4.0",
+        "maintainers": [
+            {
+                "github_user": "ryanhe312",
+                "name": "Ruian He"
+            }
+        ],
+        "name": "UniFMIRProjectionOnFlyWing",
+        "outputs": [
+            {
+                "axes": "bcyx",
+                "data_range": [
+                    null,
+                    null
+                ],
+                "data_type": "float32",
+                "name": "output0",
+                "shape": [
+                    1,
+                    1,
+                    128,
+                    128
+                ]
+            }
+        ],
+        "tags": [
+            "fluorescence-light-microscopy",
+            "2d",
+            "pytorch",
+            "image-restoration"
+        ],
+        "test_inputs": [
+            "test-input.npy"
+        ],
+        "test_outputs": [
+            "test-output.npy"
+        ],
+        "timestamp": "2024-02-14T12:04:20.730392",
+        "type": "model",
+        "uploader": {
+            "email": "bioimageiobot@gmail.com"
+        },
+        "version": 1,
+        "version_number": 2,
+        "weights": {
+            "torchscript": {
+                "pytorch_version": "1.10.0",
+                "sha256": "9a64c2d06c0e5b69c0583d57283fe8a3633ea3b8859e096875e88e41522723c3",
+                "source": "weights.pt"
+            }
+        }
+    },
+    "rdf_yaml_sha256": "79dda8dcd3cf0ff38852a7a9b7cbbf4216f23587d370a22af6e533f3dcef7a98",
+    "status": "untested"
+}

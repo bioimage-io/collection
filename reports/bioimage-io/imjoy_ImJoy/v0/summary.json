@@ -1,0 +1,69 @@
+{
+    "rdf_content": {
+        "badges": [],
+        "config": {
+            "background_image": "static/img/zoo-background.svg",
+            "bioimageio": {
+                "thumbnails": {}
+            },
+            "contact": [
+                {
+                    "affiliation": [
+                        {
+                            "name": "KTH",
+                            "url": "https://www.kth.se/en"
+                        }
+                    ],
+                    "email": "wei.ouyang@scilifelab.se",
+                    "github": "oeway",
+                    "name": "Wei Ouyang"
+                }
+            ],
+            "default_type": "application",
+            "docs": "https://imjoy.io/docs/#/",
+            "explore_button_text": "Start Exploring",
+            "icon": "https://imjoy.io/static/img/imjoy-icon.svg",
+            "id": "imjoy",
+            "logo": "https://imjoy.io/static/img/imjoy-icon.svg",
+            "name": "ImJoy",
+            "resource_types": [
+                "notebook",
+                "application"
+            ],
+            "splash_feature_list": [
+                "Minimal and flexible plugin powered web application",
+                "Server-less progressive web application with offline support",
+                "Rich and interactive user interface powered by web technologies"
+            ],
+            "splash_subtitle": "Deep Learning Made Easy!",
+            "splash_title": "ImJoy",
+            "tags": [
+                "imjoy"
+            ],
+            "url_root": "https://raw.githubusercontent.com/imjoy-team/bioimage-io-models/master"
+        },
+        "covers": [],
+        "description": "ImJoy: Supercharging interactivity and scalability!",
+        "documentation": "docs",
+        "format_version": "0.2.4",
+        "icon": "https://imjoy.io/static/img/imjoy-icon.png",
+        "id": "imjoy/ImJoy",
+        "id_emoji": null,
+        "license": "MIT",
+        "name": "ImJoy",
+        "source": "imjoy-app.imjoy.html",
+        "tags": [
+            "software",
+            "imjoy",
+            "bioengine"
+        ],
+        "type": "application",
+        "uploader": {
+            "email": "bioimageiobot@gmail.com"
+        },
+        "version": 1,
+        "version_number": 1
+    },
+    "rdf_yaml_sha256": "018a406e5f1c8377eaad0629ce64f511fbc28a590d7459c3148b410a3be36bcf",
+    "status": "untested"
+}

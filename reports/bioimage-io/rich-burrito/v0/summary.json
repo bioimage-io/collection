@@ -1,0 +1,68 @@
+{
+    "rdf_content": {
+        "authors": [
+            {
+                "name": "Hussein Al-Akhrass"
+            },
+            {
+                "name": "Johanna Ivaska"
+            },
+            {
+                "name": "Guillaume Jacquemet"
+            }
+        ],
+        "cite": [
+            {
+                "doi": "10.1038/s41556-021-00767-x",
+                "text": "Moreno-Layseca P, JÃ¤ntti NZ, Godbole R, Sommer C, Jacquemet G, Al-Akhrass H, Conway JRW, Kronqvist P, KallionpÃ¤Ã¤ RE, Oliveira-Ferrer L, Cervero P, Linder S, Aepfelbacher M, Zauber H, Rae J, Parton RG, Disanza A, Scita G, Mayor S, Selbach M, Veltel S, Ivaska J. Cargo-specific recruitment in clathrin- and dynamin-independent endocytosis. Nat Cell Biol. 2021 Oct;23(10):1073-1084. doi: 10.1038/s41556-021-00767-x. Epub 2021 Oct 6. PMID: 34616024."
+            }
+        ],
+        "config": {
+            "background_image": "static/img/zoo-background.svg",
+            "bioimageio": {
+                "nickname": "rich-burrito",
+                "nickname_icon": "🌯",
+                "status": "accepted",
+                "version_id": "latest",
+                "version_name": "latest"
+            },
+            "default_type": "application",
+            "explore_button_text": "Start Exploring",
+            "icon": "https://raw.githubusercontent.com/HenriquesLab/ZeroCostDL4Mic/master/Wiki_files/ZeroCostLogo.png",
+            "id": "zero",
+            "logo": "https://raw.githubusercontent.com/HenriquesLab/ZeroCostDL4Mic/master/Wiki_files/ZeroCostLogo.png",
+            "name": "ZeroCostDL4Mic",
+            "resource_types": [
+                "model",
+                "application",
+                "dataset"
+            ],
+            "splash_feature_list": [],
+            "splash_subtitle": "A Google Colab based no-cost toolbox to explore Deep-Learning in Microscopy",
+            "splash_title": "ZeroCostDL4Mic",
+            "tags": [
+                "ZeroCostDL4Mic"
+            ],
+            "url_root": "https://raw.githubusercontent.com/oeway/ZeroCostDL4Mic/master",
+            "version": "1.7.1"
+        },
+        "covers": [
+            "Moreno_dataset_stardist.png"
+        ],
+        "description": "Fluorescence microscopy of Nuclei (SiR-DNA) and masks obtained via manual segmentation",
+        "documentation": "README.md",
+        "download_url": "https://zenodo.org/record/4811213",
+        "format_version": "0.2.4",
+        "id": "zero/Dataset_StarDist_fluo2_ZeroCostDL4Mic",
+        "maintainers": [],
+        "name": "training dataset for automated tracking of MDA-MB-231 and BT20 cells",
+        "tags": [
+            "StarDist",
+            "ZeroCostDL4Mic"
+        ],
+        "type": "dataset",
+        "version": 1
+    },
+    "rdf_yaml_sha256": "3aa2a01896998013037516b44efcbc98e7f1dffb5cd316929a1f93349d336943",
+    "status": "untested"
+}

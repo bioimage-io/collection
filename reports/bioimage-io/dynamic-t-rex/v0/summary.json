@@ -1,0 +1,207 @@
+{
+    "rdf_content": {
+        "attachments": {
+            "files": [
+                "per_sample_scale_range.ijm",
+                "scale_linear.ijm",
+                "pix2pix_cho_selectedz_nuclei_ph_contrast_resized1024_18012024_QC_report.pdf",
+                "pix2pix_cho_selectedz_nuclei_ph_contrast_resized1024_18012024_training_report.pdf"
+            ]
+        },
+        "authors": [
+            {
+                "affiliation": "Instituto Gulbenkian de Ciência",
+                "name": "Estibaliz Gómez de Mariscal",
+                "orcid": "0000-0003-2082-3277"
+            },
+            {
+                "affiliation": "Instituto Gulbenkian de Ciência",
+                "name": "Mario Del Rosario",
+                "orcid": "0000-0002-0430-1463"
+            }
+        ],
+        "cite": [
+            {
+                "doi": null,
+                "text": "Isola et al. arXiv in 2016",
+                "url": "https://arxiv.org/abs/1611.07004"
+            },
+            {
+                "doi": "10.1101/2020.03.20.000133",
+                "text": "Lucas von Chamier et al. biorXiv 2020",
+                "url": null
+            }
+        ],
+        "config": {
+            "bioimageio": {
+                "thumbnails": {
+                    "cover.png": "cover.thumbnail.png"
+                }
+            },
+            "deepimagej": {
+                "allow_tiling": true,
+                "model_keys": null,
+                "prediction": {
+                    "postprocess": [
+                        {
+                            "spec": null
+                        }
+                    ],
+                    "preprocess": [
+                        {
+                            "kwargs": "per_sample_scale_range.ijm",
+                            "spec": "ij.IJ::runMacroFile"
+                        },
+                        {
+                            "kwargs": "scale_linear.ijm",
+                            "spec": "ij.IJ::runMacroFile"
+                        }
+                    ]
+                },
+                "pyramidal_model": false,
+                "test_information": {
+                    "inputs": [
+                        {
+                            "name": "test-input.npy",
+                            "pixel_size": {
+                                "x": 1,
+                                "y": 1,
+                                "z": 1
+                            },
+                            "size": "1024 x 1024 x 1 x 1"
+                        }
+                    ],
+                    "memory_peak": null,
+                    "outputs": [
+                        {
+                            "name": "test-output.npy",
+                            "size": "1024 x 1024 x 1 x 1",
+                            "type": "image"
+                        }
+                    ],
+                    "runtime": null
+                }
+            }
+        },
+        "covers": [
+            "cover.png"
+        ],
+        "description": "A conditional cycleGAN trained to infer the cell membrane as seen in a widefield fluorescence image from phase contrast images of CHO cells imaged with phase contrast microscopy. The cells are imaged with a 20x objective.",
+        "documentation": "README.md",
+        "format_version": "0.4.9",
+        "git_repo": "https://github.com/HenriquesLab/ZeroCostDL4Mic",
+        "id": "dynamic-t-rex",
+        "id_emoji": "🦖",
+        "inputs": [
+            {
+                "axes": "bcyx",
+                "data_type": "float32",
+                "name": "input",
+                "preprocessing": [
+                    {
+                        "kwargs": {
+                            "axes": "xy",
+                            "max_percentile": 99.9,
+                            "min_percentile": 1,
+                            "mode": "per_sample"
+                        },
+                        "name": "scale_range"
+                    },
+                    {
+                        "kwargs": {
+                            "axes": "xy",
+                            "gain": 2,
+                            "offset": -1
+                        },
+                        "name": "scale_linear"
+                    }
+                ],
+                "shape": [
+                    1,
+                    1,
+                    1024,
+                    1024
+                ]
+            }
+        ],
+        "license": "MIT",
+        "links": [
+            "deepimagej/deepimagej",
+            "zero/notebook_pix2pix_2d_zerocostdl4mic"
+        ],
+        "maintainers": [
+            {
+                "github_user": "esgomezm",
+                "name": "Estibaliz"
+            }
+        ],
+        "name": "CHO cells nuclei virtual staining - brightfield - Pix2Pix",
+        "outputs": [
+            {
+                "axes": "bcyx",
+                "data_range": [
+                    null,
+                    null
+                ],
+                "data_type": "float32",
+                "name": "output",
+                "shape": {
+                    "offset": [
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "reference_tensor": "input",
+                    "scale": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ]
+                }
+            }
+        ],
+        "sample_inputs": [
+            "sample_input_0.tif"
+        ],
+        "sample_outputs": [
+            "sample_output_0.tif"
+        ],
+        "tags": [
+            "in-silico-labeling",
+            "pytorch",
+            "cyclegan",
+            "conditional-gan",
+            "zerocostdl4mic",
+            "deepimagej",
+            "actin",
+            "dapi",
+            "cells",
+            "nuclei",
+            "fluorescence-light-microscopy",
+            "2d"
+        ],
+        "test_inputs": [
+            "test-input.npy"
+        ],
+        "test_outputs": [
+            "test-output.npy"
+        ],
+        "timestamp": "2024-01-22T18:36:35.928871",
+        "type": "model",
+        "uploader": {
+            "email": "esgodema@gmail.com",
+            "name": "Estibaliz"
+        },
+        "weights": {
+            "torchscript": {
+                "pytorch_version": "2.0.1",
+                "sha256": "3a9c23e2330f0666822903123779f7fcf4e2ceb9a1126bcf5e45c060dd3d6e9e",
+                "source": "latest_net_G_torchscript.pt"
+            }
+        }
+    },
+    "rdf_yaml_sha256": "68de87babbafd64ed90115e139d92a59c36123f2d7f9b659f996d53b4bf3b854",
+    "status": "untested"
+}

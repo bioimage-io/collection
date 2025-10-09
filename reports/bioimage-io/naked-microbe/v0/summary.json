@@ -1,0 +1,241 @@
+{
+    "rdf_content": {
+        "attachments": {
+            "files": [
+                "exampleImage.tiff",
+                "resultImage.tiff",
+                "resultImage_labels.tiff",
+                "preprocessing.txt",
+                "postprocessing.txt",
+                "postprocessingWatershed.txt"
+            ]
+        },
+        "authors": [
+            {
+                "affiliation": "Universidad Carlos III de Madrid",
+                "name": "Estibaliz Gómez-de-Mariscal"
+            },
+            {
+                "affiliation": "Masaryk University",
+                "name": "Martin Maška"
+            },
+            {
+                "affiliation": "Masaryk University",
+                "name": "Anna Kotrbová"
+            },
+            {
+                "affiliation": "Masaryk University",
+                "name": "Vendula Pospíchalová"
+            },
+            {
+                "affiliation": "Masaryk University",
+                "name": "Pavel Matula"
+            },
+            {
+                "affiliation": "Universidad Carlos III de Madrid",
+                "name": "Arrate Muñoz-Barrutia"
+            }
+        ],
+        "cite": [
+            {
+                "doi": "10.1038/s41598-019-49431-3",
+                "text": "Gómez-de-Mariscal, E. et al., Deep-Learning-Based Segmentation of SmallExtracellular Vesicles in Transmission Electron Microscopy Images Scientific Reports, (2019)"
+            }
+        ],
+        "config": {
+            "bioimageio": {
+                "nickname": "naked-microbe",
+                "nickname_icon": "🦠",
+                "thumbnails": {
+                    "frunet_sev.jpg": "frunet_sev.thumbnail.png"
+                }
+            },
+            "deepimagej": {
+                "allow_tiling": true,
+                "model_keys": {
+                    "tensorflow_model_tag": "tf.saved_model.tag_constants.SERVING",
+                    "tensorflow_siganture_def": "tf.saved_model.signature_constants.DEFAULT_SERVING_SIGNATURE_DEF_KEY"
+                },
+                "prediction": {
+                    "postprocess": [
+                        {
+                            "kwargs": "postprocessing.txt",
+                            "spec": "ij.IJ::runMacroFile"
+                        }
+                    ],
+                    "preprocess": [
+                        {
+                            "kwargs": "preprocessing.txt",
+                            "spec": "ij.IJ::runMacroFile"
+                        }
+                    ]
+                },
+                "pyramidal_model": false,
+                "test_information": {
+                    "inputs": [
+                        {
+                            "name": "exampleImage.tiff",
+                            "pixel_size": {
+                                "x": "9.658E-4 µm",
+                                "y": "9.658E-4 µm",
+                                "z": "1.0 pixel"
+                            },
+                            "size": "2048 x 2048 x 1 x 1"
+                        }
+                    ],
+                    "memory_peak": "257.7 Mb",
+                    "outputs": [
+                        {
+                            "name": "resultImage.tiff",
+                            "size": "1264 x 1264 x 1 x 1",
+                            "type": "image"
+                        }
+                    ],
+                    "runtime": "78.8 s"
+                }
+            }
+        },
+        "covers": [
+            "frunet_sev.jpg"
+        ],
+        "description": "DeepImageJ compatible fully residual U-Net trained to segment small extracellular vesicles in 2D TEM images",
+        "documentation": "README.md",
+        "format_version": "0.4.10",
+        "id": "10.5281/zenodo.6559474/6559475",
+        "id_emoji": "🦠",
+        "inputs": [
+            {
+                "axes": "byxc",
+                "data_range": [
+                    null,
+                    null
+                ],
+                "data_type": "float32",
+                "name": "input",
+                "preprocessing": [
+                    {
+                        "kwargs": {
+                            "axes": "xy",
+                            "max_percentile": 100,
+                            "min_percentile": 0,
+                            "mode": "per_sample"
+                        },
+                        "name": "scale_range"
+                    }
+                ],
+                "shape": [
+                    1,
+                    400,
+                    400,
+                    1
+                ]
+            }
+        ],
+        "license": "BSD-3-Clause",
+        "links": [
+            "deepimagej/deepimagej",
+            "deepimagej/EVsTEMsegmentationFRUNet",
+            "imjoy/BioImageIO-Packager",
+            "ilastik/ilastik"
+        ],
+        "maintainers": [
+            {
+                "github_user": "esgomezm",
+                "name": "Estibaliz"
+            }
+        ],
+        "name": "Small Extracellular Vesicle TEM Segmentation (Fully Residual U-Net)",
+        "outputs": [
+            {
+                "axes": "byxc",
+                "data_range": [
+                    0.0,
+                    1.0
+                ],
+                "data_type": "float32",
+                "halo": [
+                    0,
+                    127,
+                    127,
+                    0
+                ],
+                "name": "output",
+                "postprocessing": [
+                    {
+                        "kwargs": {
+                            "threshold": 0.4
+                        },
+                        "name": "binarize"
+                    }
+                ],
+                "shape": {
+                    "offset": [
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "reference_tensor": "input",
+                    "scale": [
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0
+                    ]
+                }
+            }
+        ],
+        "sample_inputs": [
+            "exampleImage.tiff"
+        ],
+        "sample_outputs": [
+            "resultImage.tiff"
+        ],
+        "tags": [
+            "deepimagej",
+            "extracellular-vesicles",
+            "segmentation",
+            "tem",
+            "frunet",
+            "exosomes",
+            "electron-microscopy",
+            "2d-segmentation",
+            "2d",
+            "tensorflow",
+            "segmentation",
+            "instance-segmentation"
+        ],
+        "test_inputs": [
+            "exampleImage.npy"
+        ],
+        "test_outputs": [
+            "resultImage.npy"
+        ],
+        "timestamp": "2022-05-18T09:42:30.953891",
+        "type": "model",
+        "uploader": {
+            "email": "bioimageiobot@gmail.com"
+        },
+        "version": 1,
+        "version_number": 1,
+        "weights": {
+            "keras_hdf5": {
+                "sha256": "5122cbff7451136102eabfc8c80771dbba5ec477d5dac186f729cdfbb4605ff6",
+                "source": "fully_residual_dropout_segmentation.h5",
+                "tensorflow_version": 1.12
+            },
+            "tensorflow_js": {
+                "sha256": "eb27d8f3df23ce5d1d6ae4112cf36117c70a2257ca6f1b56869b9537fa60531e",
+                "source": "model.json",
+                "tensorflow_version": 1.12
+            },
+            "tensorflow_saved_model_bundle": {
+                "sha256": "20bff1da933cc78027690fa311fea3e562cf60df1f0a2018527c45b9fafe8099",
+                "source": "tensorflow_saved_model_bundle.zip",
+                "tensorflow_version": 1.12
+            }
+        }
+    },
+    "rdf_yaml_sha256": "accc1313e098694296ab786b3a2af25af1fde6d1cdeabd77bd97e3ad2ca14370",
+    "status": "untested"
+}

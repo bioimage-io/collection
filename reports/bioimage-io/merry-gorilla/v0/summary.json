@@ -1,0 +1,224 @@
+{
+    "rdf_content": {
+        "authors": [
+            {
+                "affiliation": "Human Technopole",
+                "email": "damian.dalle@fht.org",
+                "github_user": "damiandn",
+                "name": "Damian Dalle Nogare"
+            },
+            {
+                "affiliation": "Human Technopole",
+                "email": "mehdi.seifi@fht.org",
+                "github_user": null,
+                "name": "Mehdi Seifi"
+            }
+        ],
+        "cite": [
+            {
+                "doi": "10.1038/s41592-020-01018-x",
+                "text": "Stringer, C., Wang, T., Michaelos, M. et al. Cellpose: a generalist algorithm for cellular segmentation. Nat Methods 18, 100–106 (2021).",
+                "url": null
+            },
+            {
+                "doi": "10.1038/s41592-022-01663-4",
+                "text": "Pachitariu, M., Stringer, C. Cellpose 2.0: how to train your own model. Nat Methods 19, 1634–1641 (2022).",
+                "url": null
+            },
+            {
+                "doi": "10.1101/2024.02.10.579780",
+                "text": "Stringer, Carsen, and Marius Pachitariu. \"Cellpose3: one-click image restoration for improved cellular segmentation.\" bioRxiv (2024).",
+                "url": null
+            }
+        ],
+        "config": {
+            "bioimageio": {
+                "thumbnails": {
+                    "cover.png": "cover.thumbnail.png"
+                }
+            }
+        },
+        "covers": [
+            "cover.png"
+        ],
+        "description": "Segmentation of nuclei in cultured cells overexpressing motor proteins of the kif family.",
+        "documentation": "doc.md",
+        "format_version": "0.5.3",
+        "git_repo": "https://github.com/ai4life-opencalls/oc_1_project_66",
+        "id": "merry-gorilla",
+        "id_emoji": "🦍",
+        "inputs": [
+            {
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "channel_names": [
+                            "channel"
+                        ],
+                        "type": "channel"
+                    },
+                    {
+                        "id": "y",
+                        "size": 1440,
+                        "type": "space"
+                    },
+                    {
+                        "id": "x",
+                        "size": 1920,
+                        "type": "space"
+                    }
+                ],
+                "id": "input",
+                "test_tensor": {
+                    "sha256": "24d6e99a3a203f5473128500cf55f558cf1a878639c8b85d8e32689c090877db",
+                    "source": "input_sample.npy"
+                }
+            }
+        ],
+        "license": "BSD-3-Clause",
+        "links": [
+            "https://github.com/mouseland/cellpose"
+        ],
+        "maintainers": [],
+        "name": "OC1 Project 66 Cellpose",
+        "outputs": [
+            {
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "id": "y",
+                        "size": 1440,
+                        "type": "space"
+                    },
+                    {
+                        "id": "x",
+                        "size": 1920,
+                        "type": "space"
+                    }
+                ],
+                "id": "masks",
+                "test_tensor": {
+                    "sha256": "e5175d029e499ac10a532840d7b46d555e3fa08ec665bb6124236e5c496a73c1",
+                    "source": "output_sample1_masks.npy"
+                }
+            },
+            {
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "channel_names": [
+                            "ch_0",
+                            "ch_1",
+                            "ch_2",
+                            "ch_3",
+                            "ch_4",
+                            "ch_5"
+                        ],
+                        "type": "channel"
+                    },
+                    {
+                        "id": "y",
+                        "size": 1440,
+                        "type": "space"
+                    },
+                    {
+                        "id": "x",
+                        "size": 1920,
+                        "type": "space"
+                    }
+                ],
+                "id": "flows",
+                "test_tensor": {
+                    "sha256": "7c17c9ae0592ff8c0981b5c87fc195151b85d2c8b343cf2af7cfe72ac172471e",
+                    "source": "output_sample2_flows.npy"
+                }
+            },
+            {
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "id": "y",
+                        "size": 256,
+                        "type": "space"
+                    }
+                ],
+                "id": "styles",
+                "test_tensor": {
+                    "sha256": "7d1b01acb617af866ab8d7d7e9bb9e078eece2f18d12fb31dd0f1a1ad395fe93",
+                    "source": "output_sample3_styles.npy"
+                }
+            },
+            {
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "id": "y",
+                        "size": 1,
+                        "type": "space"
+                    }
+                ],
+                "id": "diams",
+                "test_tensor": {
+                    "sha256": "d055edccdb5c1a97c34832dd66fdf7049466a63c7422d9af875c06bf9de79b8b",
+                    "source": "output_sample4_diams.npy"
+                }
+            }
+        ],
+        "tags": [
+            "Cellpose",
+            "Nuclei Segmentation",
+            "Cilia Analysis",
+            "Fluorescence Microscopy",
+            "2D"
+        ],
+        "type": "model",
+        "uploader": {
+            "email": "mehdi.seifi@fht.org",
+            "name": "Mehdi Seifi"
+        },
+        "version": "0.1.0",
+        "weights": {
+            "pytorch_state_dict": {
+                "architecture": {
+                    "callable": "CellPoseWrapper",
+                    "kwargs": {
+                        "cellprob_threshold": 0,
+                        "channels": [
+                            0,
+                            0
+                        ],
+                        "cp_batch_size": 8,
+                        "do_3D": false,
+                        "estimate_diam": false,
+                        "flow_threshold": 0.4,
+                        "gpu": false,
+                        "model_type": "nuclei",
+                        "normalize": true,
+                        "stitch_threshold": 0
+                    },
+                    "sha256": "55815a78a51843e389578aebfcec2d1a57a96d420aa5e2c61a6a91a18efcc7c3",
+                    "source": "model.py"
+                },
+                "dependencies": {
+                    "sha256": "00ac7eec0874433d577220e6f251f61916edc00c7f1358903319dc8d718e8c6f",
+                    "source": "env.yml"
+                },
+                "pytorch_version": "2.5.1",
+                "sha256": "4deb1ac38f6b9a449c8316bb1a504ce7509fd3b7b21274c3c3970c84c030b2d8",
+                "source": "cilia_cellpose_nuc"
+            }
+        }
+    },
+    "rdf_yaml_sha256": "a477d6b81379f2c966f59bf4fc48ad0dc29a1a89ad1a5ec20f3bd25fccc41c7a",
+    "status": "untested"
+}

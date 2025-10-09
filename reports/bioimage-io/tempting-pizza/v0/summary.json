@@ -1,0 +1,77 @@
+{
+    "rdf_content": {
+        "authors": [
+            {
+                "name": "Constantin Pape"
+            }
+        ],
+        "cite": [
+            {
+                "doi": "10.3389/fnana.2015.00142",
+                "text": "Arganda-Carreras et al."
+            }
+        ],
+        "config": {
+            "background_image": "static/img/zoo-background.svg",
+            "bioimageio": {
+                "nickname": "tempting-pizza",
+                "nickname_icon": "🍕",
+                "status": "accepted",
+                "version_id": "latest",
+                "version_name": "latest"
+            },
+            "default_type": "model",
+            "explore_button_text": "Start Exploring",
+            "icon": "https://raw.githubusercontent.com/ilastik/bioimage-io-resources/main/image/ilastik-fist-icon.png",
+            "id": "ilastik",
+            "logo": "https://raw.githubusercontent.com/ilastik/bioimage-io-resources/main/image/ilastik-fist-icon.png",
+            "name": "ilastik",
+            "resource_types": [
+                "application"
+            ],
+            "splash_feature_list": null,
+            "splash_subtitle": "the interactive learning and segmentation toolkit",
+            "splash_title": "ilastik",
+            "tags": [
+                "ilastik"
+            ],
+            "url_root": "https://raw.githubusercontent.com/ilastik/bioimage-io-resources/main"
+        },
+        "covers": [
+            "isbi2012-cover0.jpg",
+            "isbi2012-cover1.png"
+        ],
+        "description": "Training data from challenge on 2d EM segmentation of neuronal processes.",
+        "documentation": "isbi2012.md",
+        "format_version": "0.2.4",
+        "id": "ilastik/isbi2012_neuron_segmentation_challenge",
+        "maintainers": [
+            {
+                "affiliation": "EMBL Heidelberg",
+                "github_user": "fynnbe",
+                "name": "Fynn BeuttenmÃ¼ller",
+                "orcid": "0000-0002-8567-6389"
+            },
+            {
+                "affiliation": "EMBL Heidelberg",
+                "github_user": "constantinpape",
+                "name": "Constantin Pape",
+                "orcid": "0000-0001-6562-7187"
+            }
+        ],
+        "name": "ISBI Challenge: Segmentation of neuronal structures in EM stacks",
+        "source": "https://oc.embl.de/index.php/s/sXJzYVK0xEgowOz/download",
+        "tags": [
+            "electron-microscopy",
+            "brain",
+            "neurons",
+            "instance-segmentation",
+            "2D",
+            "isbi2012-challenge"
+        ],
+        "type": "dataset",
+        "version": 1
+    },
+    "rdf_yaml_sha256": "1850d7f56fcb7da70d9ca61eb2b1a1b22c90e132b5d1f86b110e972bb1028c48",
+    "status": "untested"
+}

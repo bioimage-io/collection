@@ -1,0 +1,176 @@
+{
+    "rdf_content": {
+        "attachments": {
+            "files": []
+        },
+        "authors": [
+            {
+                "affiliation": "Instituto Gulbenkian de Ciência",
+                "name": "Iván Hidalgo"
+            },
+            {
+                "affiliation": "Instituto Gulbenkian de Ciência",
+                "name": "Estibaliz Gómez de Mariscal"
+            },
+            {
+                "affiliation": "UPV/EHU",
+                "name": "Ignacio Arganda"
+            }
+        ],
+        "cite": [
+            {
+                "doi": "10.48550/arXiv.1704.00028",
+                "text": "Gulrajani I. et al. arXiv 2017"
+            },
+            {
+                "doi": "10.1038/s41467-021-22518-0",
+                "text": "Lucas von Chamier et al. Nat Comms 2021"
+            }
+        ],
+        "config": {
+            "bioimageio": {
+                "nickname": "organized-cricket",
+                "nickname_icon": "🦗",
+                "thumbnails": {
+                    "cover.png": "cover.thumbnail.png"
+                }
+            },
+            "deepimagej": {
+                "allow_tiling": true,
+                "model_keys": null,
+                "prediction": {
+                    "postprocess": [
+                        {
+                            "spec": null
+                        }
+                    ],
+                    "preprocess": [
+                        {
+                            "spec": null
+                        }
+                    ]
+                },
+                "pyramidal_model": false,
+                "test_information": {
+                    "inputs": [
+                        {
+                            "name": "sample_input_0.tif",
+                            "pixel_size": {
+                                "x": 0.0004,
+                                "y": 0.0004,
+                                "z": 1
+                            },
+                            "size": "128 x 128 x 1"
+                        }
+                    ],
+                    "memory_peak": null,
+                    "outputs": [
+                        {
+                            "name": "sample_output_0.tif",
+                            "size": "512 x 512 x 1",
+                            "type": "image"
+                        }
+                    ],
+                    "runtime": null
+                }
+            }
+        },
+        "covers": [
+            "cover.png"
+        ],
+        "description": "Wasserstein GAN (WGAN) trained for super-resolution of confocal scanning microscopy images of mitochondria in U2OS cells. Mitochondria were labelled with MitoTracker and the model was trained to upsample the images by a factor of 4.",
+        "documentation": "README.md",
+        "format_version": "0.4.10",
+        "id": "10.5281/zenodo.7786492/7786493",
+        "id_emoji": "🦗",
+        "inputs": [
+            {
+                "axes": "bcxy",
+                "data_range": [
+                    null,
+                    null
+                ],
+                "data_type": "float32",
+                "name": "input",
+                "shape": [
+                    1,
+                    1,
+                    128,
+                    128
+                ]
+            }
+        ],
+        "license": "MIT",
+        "links": [
+            "deepimagej/deepimagej",
+            "imjoy/BioImageIO-Packager"
+        ],
+        "maintainers": [
+            {
+                "github_user": "esgomezm",
+                "name": "Estibaliz"
+            },
+            {
+                "github_user": "IvanHCenalmor",
+                "name": "Ivan"
+            }
+        ],
+        "name": "Mitochondria resolution enhancement Wasserstein GAN",
+        "outputs": [
+            {
+                "axes": "bcxy",
+                "data_range": [
+                    null,
+                    null
+                ],
+                "data_type": "float32",
+                "name": "output",
+                "shape": [
+                    1,
+                    1,
+                    512,
+                    512
+                ]
+            }
+        ],
+        "sample_inputs": [
+            "sample_input_0.tif"
+        ],
+        "sample_outputs": [
+            "sample_output_0.tif"
+        ],
+        "tags": [
+            "zerocostdl4mic",
+            "deepimagej",
+            "super-resolution",
+            "wgan",
+            "confocal",
+            "mitochondria",
+            "mitotracker",
+            "fluorescence",
+            "upsampling"
+        ],
+        "test_inputs": [
+            "test_input.npy"
+        ],
+        "test_outputs": [
+            "test_output.npy"
+        ],
+        "timestamp": "2023-03-30T16:57:43.433376",
+        "type": "model",
+        "uploader": {
+            "email": "bioimageiobot@gmail.com"
+        },
+        "version": 1,
+        "version_number": 1,
+        "weights": {
+            "torchscript": {
+                "pytorch_version": "1.13.1+cu116",
+                "sha256": "98938b3135ccdc1dba8ad96c65027746712a6d470b8fcdb12f53b7de35bb471d",
+                "source": "weights.pt"
+            }
+        }
+    },
+    "rdf_yaml_sha256": "bf63c7d8e41069e112b67a975f96e02b0f3b342b062cd1a923cf7eb4e10109b4",
+    "status": "untested"
+}

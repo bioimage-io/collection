@@ -1,0 +1,136 @@
+{
+    "rdf_content": {
+        "authors": [
+            {
+                "affiliation": "EMBL",
+                "name": "Adrian Wolny"
+            },
+            {
+                "affiliation": "Heidelberg University",
+                "name": "Lorenzo Cerrone"
+            }
+        ],
+        "cite": [
+            {
+                "text": "Wolny, Cerrone et al. Accurate and Versatile 3D Segmentation of Plant Tissues at Cellular Resolution. eLife 2020.",
+                "url": "https://elifesciences.org/articles/57613"
+            }
+        ],
+        "config": {
+            "bioimageio": {
+                "nickname": "laid-back-lobster",
+                "nickname_icon": "🦞",
+                "thumbnails": {
+                    "pred.png": "pred.thumbnail.png",
+                    "raw.png": "raw.thumbnail.png"
+                }
+            }
+        },
+        "covers": [
+            "raw.png",
+            "pred.png"
+        ],
+        "description": "2D Unet trained on z-slices of confocal images of Arabidopsis thaliana apical stem cells",
+        "documentation": "doc.md",
+        "format_version": "0.4.10",
+        "id": "10.5281/zenodo.6334881/7805026",
+        "id_emoji": "🦞",
+        "inputs": [
+            {
+                "axes": "bcyx",
+                "data_range": [
+                    null,
+                    null
+                ],
+                "data_type": "float32",
+                "name": "input0",
+                "shape": [
+                    1,
+                    1,
+                    512,
+                    512
+                ]
+            }
+        ],
+        "license": "MIT",
+        "links": [
+            "imjoy/BioImageIO-Packager",
+            "ilastik/ilastik"
+        ],
+        "maintainers": [
+            {
+                "github_user": "wolny",
+                "name": "Adrian Wolny"
+            }
+        ],
+        "name": "2D UNet Arabidopsis Apical Stem Cells",
+        "outputs": [
+            {
+                "axes": "bcyx",
+                "data_range": [
+                    null,
+                    null
+                ],
+                "data_type": "float32",
+                "name": "output0",
+                "shape": [
+                    1,
+                    1,
+                    512,
+                    512
+                ]
+            }
+        ],
+        "tags": [
+            "unet",
+            "2d",
+            "semantic-segmentation",
+            "arabidopsis",
+            "stem-cells",
+            "cell-membrane",
+            "plant",
+            "tissue",
+            "fluorescence-light-microscopy",
+            "pytorch",
+            "plantset",
+            "ilastik"
+        ],
+        "test_inputs": [
+            "test-input.npy"
+        ],
+        "test_outputs": [
+            "test-output.npy"
+        ],
+        "timestamp": "2023-04-06T10:26:25.873589",
+        "type": "model",
+        "uploader": {
+            "email": "bioimageiobot@gmail.com"
+        },
+        "version": 1,
+        "version_number": 1,
+        "weights": {
+            "pytorch_state_dict": {
+                "architecture": "unet.py:UNet2D",
+                "architecture_sha256": "f905821f2882ca182ffcfcb1a4c7fd2737c0548dda88fcb58721f3159a54837f",
+                "kwargs": {
+                    "f_maps": 32,
+                    "final_sigmoid": true,
+                    "in_channels": 1,
+                    "is_segmentation": true,
+                    "layer_order": "gcr",
+                    "num_groups": 8,
+                    "out_channels": 1
+                },
+                "sha256": "ce597fc8299061e6d7192ecbe342b142fdbc90664f1f8367039998ee0090e281",
+                "source": "confocal_2d_unet_apical_stem.pytorch"
+            },
+            "torchscript": {
+                "pytorch_version": "2.0.0",
+                "sha256": "feb037051afc5042bcc1675793cda457dec8e7226998101cc925a59a00efc6ab",
+                "source": "torchscript_tracing.pt"
+            }
+        }
+    },
+    "rdf_yaml_sha256": "58107098a5d44c20854fe036cf7131116c2017fbf9968f1bfb7afab72a375940",
+    "status": "untested"
+}

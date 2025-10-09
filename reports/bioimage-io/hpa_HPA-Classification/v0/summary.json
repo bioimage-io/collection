@@ -1,0 +1,71 @@
+{
+    "rdf_content": {
+        "badges": [],
+        "config": {
+            "about_url": "https://www.proteinatlas.org/",
+            "background_image": "static/img/zoo-background.svg",
+            "bioimageio": {
+                "thumbnails": {
+                    "hpa-classification-cover.gif": "hpa-classification-cover.thumbnail.png"
+                }
+            },
+            "contact": [
+                {
+                    "affiliation": [
+                        {
+                            "name": "KTH",
+                            "url": "https://kth.se"
+                        },
+                        {
+                            "name": "Stanford",
+                            "url": "https://stanford.edu"
+                        }
+                    ],
+                    "email": "fredbn@stanford.edu",
+                    "github": "OmFrederic",
+                    "name": "Frederic Ballllosera Navarro"
+                }
+            ],
+            "default_type": "model",
+            "docs": "https://www.proteinatlas.org/about",
+            "explore_button_text": "Start Exploring",
+            "icon": "https://raw.githubusercontent.com/bioimage-io/tfjs-bioimage-io/master/apps/hpa-logo.gif",
+            "id": "hpa",
+            "logo": "https://raw.githubusercontent.com/bioimage-io/tfjs-bioimage-io/master/apps/hpa-logo.gif",
+            "name": "HPA",
+            "resource_types": [
+                "model",
+                "application"
+            ],
+            "splash_feature_list": [],
+            "splash_subtitle": null,
+            "splash_title": "The Human Protein Atlas",
+            "tags": [
+                "hpa"
+            ]
+        },
+        "covers": [
+            "hpa-classification-cover.gif"
+        ],
+        "description": "ShuffleNetV2 for HPA.",
+        "documentation": "hpa-classification-app.md",
+        "format_version": "0.2.4",
+        "icon": "https://raw.githubusercontent.com/bioimage-io/tfjs-bioimage-io/master/apps/hpa-logo.gif",
+        "id": "hpa/HPA-Classification",
+        "id_emoji": null,
+        "license": "MIT",
+        "name": "HPA-Classification",
+        "source": "HPA-Classification.imjoy.html",
+        "tags": [
+            "bioengine"
+        ],
+        "type": "application",
+        "uploader": {
+            "email": "bioimageiobot@gmail.com"
+        },
+        "version": 1,
+        "version_number": 1
+    },
+    "rdf_yaml_sha256": "39742d75eede371052697f47f63e7bcb4840b7a07aefcee4ef18907aec09d3a7",
+    "status": "untested"
+}
