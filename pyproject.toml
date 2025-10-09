@@ -4,15 +4,7 @@ description = "backoffice to control bioimage.io collection"
 authors = [{ name = "Fynn Beuttenmüller", email = "thefynnbe@gmail.com" }]
 requires-python = ">=3.10"
 readme = "README.md"
-dependencies = [
-    "bioimageio.core>=0.9.3",
-    "loguru",
-    "pydantic-settings",
-    "pygithub",
-    "httpx",
-    "ruyaml",
-    "tqdm",
-]
+dependencies = ["loguru", "pydantic-settings", "httpx", "ruyaml", "tqdm"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
@@ -29,7 +21,7 @@ version = { attr = "backoffice._version.VERSION" }
 
 [project.optional-dependencies]
 dev = [
-    "bioimageio.core[dev]",
+    "bioimageio.core[dev]>=0.9.3",
     # "biapy",  # has exact bioimageio.core pin
     "careamics",
     "ruff",
