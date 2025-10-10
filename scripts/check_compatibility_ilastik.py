@@ -35,8 +35,6 @@ def check_compatibility_ilastik_impl(
 
     rdf = open_bioimageio_yaml(rdf_url, sha256=Sha256(sha256)).content
 
-    input_len = "unknown number of inputs"
-    output_len = "unknown number of outputs"
     if rdf["type"] != "model":
         report = ToolCompatibilityReport(
             tool="ilastik",
@@ -50,13 +48,23 @@ def check_compatibility_ilastik_impl(
     elif (
         not isinstance(rdf["inputs"], list)
         or not isinstance(rdf["outputs"], list)
-        or (input_len := len(rdf["inputs"])) > 1
-        or (output_len := len(rdf["outputs"])) > 1
+        or len(rdf["inputs"]) > 1
+        or len(rdf["outputs"]) > 1
     ):
+        if isinstance(rdf["inputs"], list):
+            input_len = len(rdf["inputs"])
+        else:
+            input_len = "missing"
+
+        if isinstance(rdf["outputs"], list):
+            output_len = len(rdf["outputs"])
+        else:
+            output_len = "missing"
+
         report = ToolCompatibilityReport(
             tool="ilastik",
             status="failed",
-            error=f"ilastik only supports single tensor input/output (found {input_len}/{output_len})",
+            error=f"ilastik only supports a single input/output tensor (found {input_len}/{output_len})",
             details=None,
             badge=None,
             links=[],
