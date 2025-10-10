@@ -1,8 +1,12 @@
 import argparse
-from typing import TYPE_CHECKING
+from dataclasses import dataclass
+from typing import TYPE_CHECKING, Any, Dict, Optional
 
 import bioimageio.core
-from typing_extensions import Literal
+from typing_extensions import Literal, Protocol
+
+from backoffice.check_compatibility import check_tool_compatibility
+from backoffice.compatibility_pure import ToolCompatibilityReport
 
 try:
     from bioimageio.spec.common import Sha256
@@ -14,10 +18,47 @@ if bioimageio.core.__version__.startswith("0.5."):
 else:
     from bioimageio.core import test_model
 
-from bioimageio.spec._internal.io_utils import open_bioimageio_yaml
 
-from backoffice.check_compatibility import check_tool_compatibility
-from backoffice.compatibility_pure import ToolCompatibilityReport
+class HasContent(Protocol):
+    @property
+    def content(self) -> Optional[Dict[Any, Any]]: ...
+
+
+def warn_fallback(name: str):
+    print(
+        "::warning file=check_compatibility_ilastik.py,"
+        + f"title=Using `{name}` fallback"
+        + f"::Using custom fallback for `{name}`"
+    )
+
+
+try:
+    from bioimageio.spec._internal.io_utils import open_bioimageio_yaml
+except ImportError:
+    warn_fallback("open_bioimageio_yaml")
+    try:
+        from ruamel.yaml import YAML  # type: ignore
+    except ImportError:
+        import yaml
+
+        yaml.load = yaml.safe_load
+    else:
+        yaml = YAML(typ="safe")  # type: ignore
+
+    try:
+        import requests
+    except ImportError:
+        import httpx as requests
+
+    from io import BytesIO
+
+    @dataclass
+    class DownloadedRDF:
+        content: Optional[Dict[Any, Any]]
+
+    def open_bioimageio_yaml(rdf_url: str, /, **kwargs: Any) -> HasContent:
+        r = requests.get(rdf_url)
+        return DownloadedRDF(yaml.load(BytesIO(r.content)))  # type: ignore
 
 
 def check_compatibility_ilastik_impl(
@@ -35,7 +76,16 @@ def check_compatibility_ilastik_impl(
 
     rdf = open_bioimageio_yaml(rdf_url, sha256=Sha256(sha256)).content
 
-    if rdf["type"] != "model":
+    if not isinstance(rdf, dict):
+        report = ToolCompatibilityReport(
+            tool="ilastik",
+            status="failed",
+            error=None,
+            details="Failed to load resource description.",
+            badge=None,
+            links=[],
+        )
+    elif rdf["type"] != "model":
         report = ToolCompatibilityReport(
             tool="ilastik",
             status="not-applicable",
@@ -48,16 +98,16 @@ def check_compatibility_ilastik_impl(
     elif (
         not isinstance(rdf["inputs"], list)
         or not isinstance(rdf["outputs"], list)
-        or len(rdf["inputs"]) > 1
-        or len(rdf["outputs"]) > 1
+        or len(rdf["inputs"]) > 1  # pyright: ignore[reportUnknownArgumentType]
+        or len(rdf["outputs"]) > 1  # pyright: ignore[reportUnknownArgumentType]
     ):
         if isinstance(rdf["inputs"], list):
-            input_len = len(rdf["inputs"])
+            input_len = len(rdf["inputs"])  # pyright: ignore[reportUnknownArgumentType]
         else:
             input_len = "missing"
 
         if isinstance(rdf["outputs"], list):
-            output_len = len(rdf["outputs"])
+            output_len = len(rdf["outputs"])  # pyright: ignore[reportUnknownArgumentType]
         else:
             output_len = "missing"
 
