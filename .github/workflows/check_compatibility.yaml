@@ -12,10 +12,17 @@ on:
       rerun:
         description: 'Chose a tool to run compatibility checks for even if the index cache is hit.'
         type: choice
-        default: ''
+        default: 'only-on-index-update'
         required: false
         options:
-          [only-on-index-update, biapy, bioimageio_core, careamics, ilastik]
+          [
+            only-on-index-update,
+            all,
+            biapy,
+            bioimageio_core,
+            careamics,
+            ilastik,
+          ]
 
   push:
     branches: [main]
@@ -71,22 +78,22 @@ jobs:
 
   biapy:
     needs: index
-    if: needs.index.outputs.cache-hit != 'true' || contains(github.event.inputs.rerun, 'biapy')
+    if: needs.index.outputs.cache-hit != 'true' || contains(github.event.inputs.rerun, 'all') || contains(github.event.inputs.rerun, 'biapy')
     uses: ./.github/workflows/check_compatibility_biapy.yaml
     secrets: inherit
   bioimageio_core:
     needs: index
-    if: needs.index.outputs.cache-hit != 'true' || contains(github.event.inputs.rerun, 'bioimageio_core')
+    if: needs.index.outputs.cache-hit != 'true' || contains(github.event.inputs.rerun, 'all')|| contains(github.event.inputs.rerun, 'bioimageio_core')
     uses: ./.github/workflows/check_compatibility_bioimageio_core.yaml
     secrets: inherit
   careamics:
     needs: index
-    if: needs.index.outputs.cache-hit != 'true' || contains(github.event.inputs.rerun, 'careamics')
+    if: needs.index.outputs.cache-hit != 'true' || contains(github.event.inputs.rerun, 'all')|| contains(github.event.inputs.rerun, 'careamics')
     uses: ./.github/workflows/check_compatibility_careamics.yaml
     secrets: inherit
   ilastik:
     needs: index
-    if: needs.index.outputs.cache-hit != 'true' || contains(github.event.inputs.rerun, 'ilastik')
+    if: needs.index.outputs.cache-hit != 'true' || contains(github.event.inputs.rerun, 'all')|| contains(github.event.inputs.rerun, 'ilastik')
     uses: ./.github/workflows/check_compatibility_ilastik.yaml
     secrets: inherit
 
