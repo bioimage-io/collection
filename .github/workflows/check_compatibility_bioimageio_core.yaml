@@ -8,9 +8,6 @@ jobs:
     runs-on: ubuntu-latest
     environment: 'production'
     steps:
-      - name: Disk space pre cleanup
-        run: df -h
-
       - name: Maximize available disk space
         uses: AdityaGarg8/remove-unwanted-software@v5
         with:
@@ -18,8 +15,6 @@ jobs:
           remove-dotnet: 'true'
           remove-haskell: 'true'
           remove-codeql: 'true'
-      - name: Disk space post cleanup
-        run: df -h
       - uses: actions/checkout@v4
       - uses: ./.github/actions/restore_reports
         with:
@@ -53,3 +48,5 @@ jobs:
           dry-run: ${{ github.ref != 'refs/heads/main' }}
           target-folder: reports
           clean: false
+      - name: Check final disk space
+        run: df -h
