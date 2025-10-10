@@ -25,9 +25,13 @@ jobs:
           channels: conda-forge
           conda-remove-defaults: 'true'
           activate-environment: 'core'
-      - name: run `conda init` to allow `conda activate`
-        run: conda init bash
+      - run: conda env list | grep core
         shell: bash -el {0}
+      - run: conda env list | grep lalalla
+        shell: bash -el {0}
+      - run: conda activate lalalalal
+        shell: bash -el {0}
+        if: always()
       - name: Install bioimageio.core and backoffice
         shell: bash -el {0}
         run: pip install . bioimageio.core[dev]
