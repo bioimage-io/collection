@@ -8,13 +8,13 @@ jobs:
     runs-on: ubuntu-latest
     environment: 'production'
     steps:
-      - name: Maximize available disk space
-        uses: AdityaGarg8/remove-unwanted-software@v5
-        with:
-          remove-android: 'true'
-          remove-dotnet: 'true'
-          remove-haskell: 'true'
-          remove-codeql: 'true'
+      # - name: Maximize available disk space
+      #   uses: AdityaGarg8/remove-unwanted-software@v5
+      #   with:
+      #     remove-android: 'true'
+      #     remove-dotnet: 'true'
+      #     remove-haskell: 'true'
+      #     remove-codeql: 'true'
       - uses: actions/checkout@v4
       - uses: ./.github/actions/restore_reports
         with:
@@ -25,11 +25,9 @@ jobs:
           channels: conda-forge
           conda-remove-defaults: 'true'
           activate-environment: 'core'
-      - run: conda env list | grep core
+      - run: python -c "import subprocess; subprocess.check_call(['conda', 'env', 'list', '|', 'grep', 'lala'])"
         shell: bash -el {0}
-      - run: conda env list | grep lalalla
-        shell: bash -el {0}
-      - run: conda activate lalalalal
+      - run: python -c "import subprocess; subprocess.check_call(['conda', 'activate', 'lalalalal'])"
         shell: bash -el {0}
         if: always()
       - name: Install bioimageio.core and backoffice
