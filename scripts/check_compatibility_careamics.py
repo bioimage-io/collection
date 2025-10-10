@@ -143,6 +143,8 @@ def check_careamics_can_predict(
 
 
 def check_compatibility_careamics_impl(
+    item_id: str,
+    version: str,
     rdf_url: str,
     sha256: str,
 ) -> ToolCompatibilityReport:
