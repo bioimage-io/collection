@@ -2,8 +2,12 @@ import argparse
 from typing import TYPE_CHECKING
 
 import bioimageio.core
-from bioimageio.spec.common import Sha256
 from typing_extensions import Literal
+
+try:
+    from bioimageio.spec.common import Sha256
+except ImportError:
+    Sha256 = str
 
 if bioimageio.core.__version__.startswith("0.5."):
     from bioimageio.core import test_resource as test_model
