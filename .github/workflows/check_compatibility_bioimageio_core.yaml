@@ -24,11 +24,10 @@ jobs:
           auto-update-conda: true
           channels: conda-forge
           conda-remove-defaults: 'true'
-          # use base so we can still create and activate other envs,
-          # see https://github.com/conda-incubator/setup-miniconda/issues/9
-          # and https://github.com/conda-incubator/setup-miniconda?tab=readme-ov-file#activate-base-environment
-          activate-environment: ''
-          auto-activate-base: true
+          activate-environment: 'core'
+      - name: run `conda init` to allow `conda activate`
+        run: conda init bash
+        shell: bash -el {0}
       - name: Install bioimageio.core and backoffice
         shell: bash -el {0}
         run: pip install . bioimageio.core[dev]
