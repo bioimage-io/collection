@@ -34,8 +34,8 @@ jobs:
       matrix: ${{ fromJson(needs.setup.outputs.version_matrix) }}
 
     steps:
-      - uses: ./.github/actions/max_disk_space
       - uses: actions/checkout@v4
+      - uses: ./.github/actions/max_disk_space
       - uses: ./.github/actions/restore_reports
         with:
           tool: ilastik

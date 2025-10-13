@@ -8,8 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     environment: 'production'
     steps:
-      - uses: ./.github/actions/max_disk_space
       - uses: actions/checkout@v4
+      - uses: ./.github/actions/max_disk_space
       - uses: ./.github/actions/restore_reports
         with:
           tool: careamics

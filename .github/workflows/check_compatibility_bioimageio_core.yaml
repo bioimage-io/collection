@@ -8,14 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     environment: 'production'
     steps:
-      - name: Maximize available disk space
-        uses: AdityaGarg8/remove-unwanted-software@v5
-        with:
-          remove-android: 'true'
-          remove-dotnet: 'true'
-          remove-haskell: 'true'
-          remove-codeql: 'true'
       - uses: actions/checkout@v4
+      - uses: ./.github/actions/max_disk_space
       - uses: ./.github/actions/restore_reports
         with:
           tool: bioimageio_core
