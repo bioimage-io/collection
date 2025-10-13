@@ -1,4 +1,5 @@
 import json
+import shutil
 import traceback
 import warnings
 from pathlib import Path
@@ -89,3 +90,7 @@ def check_tool_compatibility(
                 report_path.parent.mkdir(parents=True, exist_ok=True)
                 with report_path.open("wt", encoding="utf-8") as f:
                     json.dump(report, f)
+
+            _total, _used, free = shutil.disk_usage(".")
+            if free < 5_000_000_000:
+                raise RuntimeError("less than 5GB disk space left, stopping now")
