@@ -25,11 +25,19 @@ jobs:
           channels: conda-forge
           conda-remove-defaults: 'true'
           activate-environment: 'core'
-      - run: python -c "import subprocess; env_list = subprocess.run(['conda', 'env', 'list'], check=True, capture_output=True, encoding='utf-8').stdout; print(env_list)"
+      - run: |
+          conda run -n core python --version
         shell: bash -el {0}
       - run: |
-          source $CONDA/etc/profile.d/conda.sh
-          python -c "import subprocess; subprocess.check_call(['conda', 'activate', 'lalalalal'])"
+          python -c "import subprocess; subprocess.check_call(['conda', 'run', '-n', 'core', 'python', '--version'])"
+        shell: bash -el {0}
+        if: always()
+      - run: |
+          conda run -n lalala python --version
+        shell: bash -el {0}
+        if: always()
+      - run: |
+          python -c "import subprocess; subprocess.check_call(['conda', 'run', '-n', 'lalalal', 'python', '--version'])"
         shell: bash -el {0}
         if: always()
       - run: |
