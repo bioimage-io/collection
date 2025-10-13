@@ -8,13 +8,13 @@ jobs:
     runs-on: ubuntu-latest
     environment: 'production'
     steps:
-      # - name: Maximize available disk space
-      #   uses: AdityaGarg8/remove-unwanted-software@v5
-      #   with:
-      #     remove-android: 'true'
-      #     remove-dotnet: 'true'
-      #     remove-haskell: 'true'
-      #     remove-codeql: 'true'
+      - name: Maximize available disk space
+        uses: AdityaGarg8/remove-unwanted-software@v5
+        with:
+          remove-android: 'true'
+          remove-dotnet: 'true'
+          remove-haskell: 'true'
+          remove-codeql: 'true'
       - uses: actions/checkout@v4
       - uses: ./.github/actions/restore_reports
         with:
@@ -25,26 +25,6 @@ jobs:
           channels: conda-forge
           conda-remove-defaults: 'true'
           activate-environment: 'core'
-      - run: |
-          conda run -n core python --version
-        shell: bash -el {0}
-      - run: |
-          python -c "import subprocess; subprocess.check_call(['conda', 'run', '-n', 'core', 'python', '--version'])"
-        shell: bash -el {0}
-        if: always()
-      - run: |
-          conda run -n lalala python --version
-        shell: bash -el {0}
-        if: always()
-      - run: |
-          python -c "import subprocess; subprocess.check_call(['conda', 'run', '-n', 'lalalal', 'python', '--version'])"
-        shell: bash -el {0}
-        if: always()
-      - run: |
-          source $CONDA/etc/profile.d/conda.sh
-          conda activate lalalalal
-        shell: bash -el {0}
-        if: always()
       - name: Install bioimageio.core and backoffice
         shell: bash -el {0}
         run: pip install . bioimageio.core[dev]
