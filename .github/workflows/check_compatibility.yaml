@@ -108,7 +108,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: stage-gh-pages
-          path: gh-pages
+          path: stage-gh-pages
           sparse-checkout: |
             reports
             index.json
@@ -123,7 +123,6 @@ jobs:
       - name: Deploy to gh-pages 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: reports
+          folder: stage-gh-pages
           dry-run: ${{ github.ref != 'refs/heads/main' }}
-          target-folder: reports
           clean: false
