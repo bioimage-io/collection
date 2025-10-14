@@ -33,7 +33,11 @@ def warn_fallback(name: str):
 
 
 try:
-    from bioimageio.spec._internal.io_utils import open_bioimageio_yaml
+    from bioimageio.spec._internal.io_utils import (
+        open_bioimageio_yaml,  # pyright: ignore[reportAssignmentType]
+        # cannot make 'rdf_url' positional only (in fallback impl of open_bioimageio_yaml)
+        # due to python backwards compatibility
+    )
 except ImportError:
     warn_fallback("open_bioimageio_yaml")
     try:
@@ -56,7 +60,10 @@ except ImportError:
     class DownloadedRDF:
         content: Optional[Dict[Any, Any]]
 
-    def open_bioimageio_yaml(rdf_url: str, /, **kwargs: Any) -> HasContent:
+    def open_bioimageio_yaml(
+        rdf_url: str,  # TODO: make 'rdf_url' positional only
+        **kwargs: Any,
+    ) -> HasContent:
         r = requests.get(rdf_url)
         return DownloadedRDF(yaml.load(BytesIO(r.content)))  # type: ignore
 
