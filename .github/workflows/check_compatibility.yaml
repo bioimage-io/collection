@@ -100,7 +100,7 @@ jobs:
   summarize:
     name: summarize and deploy stage
     needs: [index, biapy, bioimageio_core, careamics, ilastik]
-    if: needs.index.outputs.cache-hit != 'true'
+    if: needs.index.outputs.cache-hit != 'true' || github.event.inputs.rerun != 'only-on-index-update'
     runs-on: ubuntu-latest
     environment: 'production'
     steps:
