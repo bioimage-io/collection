@@ -37,3 +37,5 @@ runs:
             p_src.rename(p_tgt)
 
       shell: python
+    - run: ls reports/bioimage-io
+      shell: bash
