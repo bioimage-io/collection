@@ -3,7 +3,7 @@ import shutil
 import traceback
 import warnings
 from pathlib import Path
-from typing import Callable
+from typing import TYPE_CHECKING, Callable
 
 from loguru import logger
 
@@ -15,11 +15,10 @@ except ImportError:
     tqdm = list
 
 
-try:
+if TYPE_CHECKING:
     from .compatibility import ToolCompatibilityReport
-except ImportError:
     from .compatibility_pure import (
-        ToolCompatibilityReport as ToolCompatibilityReportDict,
+        ToolCompatibilityReportDict as ToolCompatibilityReportDict,
     )
 
 

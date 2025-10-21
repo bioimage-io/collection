@@ -16,7 +16,7 @@ from careamics.lightning import FCNModule, VAEModule
 from careamics.model_io.bmz_io import load_from_bmz
 
 from backoffice.check_compatibility import check_tool_compatibility
-from backoffice.compatibility_pure import ToolCompatibilityReport
+from backoffice.compatibility_pure import ToolCompatibilityReportDict
 
 
 @lru_cache
@@ -29,14 +29,14 @@ def careamics_load_from_bmz(
 class CompatibilityCheck_v0_5(Protocol):
     def __call__(
         self, model_desc: ModelDescr, rdf_url: str
-    ) -> Optional[ToolCompatibilityReport]: ...
+    ) -> Optional[ToolCompatibilityReportDict]: ...
 
 
 def check_model_desc_v0_5(
     model_desc: AnyModelDescr,
-) -> Optional[ToolCompatibilityReport]:
+) -> Optional[ToolCompatibilityReportDict]:
     if not isinstance(model_desc, ModelDescr):
-        return ToolCompatibilityReport(
+        return ToolCompatibilityReportDict(
             status="not-applicable",
             error=None,
             details=(
@@ -50,9 +50,9 @@ def check_model_desc_v0_5(
 
 def check_tagged_careamics(
     model_desc: ModelDescr, rdf_url: str
-) -> Optional[ToolCompatibilityReport]:
+) -> Optional[ToolCompatibilityReportDict]:
     if ("CAREamics" not in model_desc.tags) and ("careamics" not in model_desc.tags):
-        return ToolCompatibilityReport(
+        return ToolCompatibilityReportDict(
             status="not-applicable",
             error=None,
             details="'Model' resource not tagged with 'CAREamics' or 'careamics'.",
@@ -63,7 +63,7 @@ def check_tagged_careamics(
 
 def check_has_careamics_config(
     model_desc: ModelDescr, rdf_url: str
-) -> Optional[ToolCompatibilityReport]:
+) -> Optional[ToolCompatibilityReportDict]:
     attachment_file_paths = [
         (
             attachment.source
@@ -77,7 +77,7 @@ def check_has_careamics_config(
     ]
     # TODO: update to careamics.yaml once files have been updated
     if "careamics.yaml" not in attachment_file_names:
-        return ToolCompatibilityReport(
+        return ToolCompatibilityReportDict(
             status="failed",
             error=None,
             details="CAREamics config file is not present in attachments.",
@@ -88,11 +88,11 @@ def check_has_careamics_config(
 
 def check_careamics_can_load(
     model_desc: ModelDescr, rdf_url: str
-) -> Optional[ToolCompatibilityReport]:
+) -> Optional[ToolCompatibilityReportDict]:
     try:
         _ = careamics_load_from_bmz(rdf_url)
     except (ValueError, pydantic.ValidationError):
-        report = ToolCompatibilityReport(
+        report = ToolCompatibilityReportDict(
             status="failed",
             error="Error: {}".format(traceback.format_exc()),
             details=("Could not load CAREamics configuration or model."),
@@ -104,7 +104,7 @@ def check_careamics_can_load(
 
 def check_careamics_can_predict(
     model_desc: ModelDescr, rdf_url: str
-) -> Optional[ToolCompatibilityReport]:
+) -> Optional[ToolCompatibilityReportDict]:
     model, config = careamics_load_from_bmz(rdf_url)
 
     # initialise CAREamist
@@ -129,7 +129,7 @@ def check_careamics_can_predict(
             axes="SCZYX" if "Z" in config.data_config.axes else "SCYX",
         )
     except Exception:
-        report = ToolCompatibilityReport(
+        report = ToolCompatibilityReportDict(
             status="failed",
             error="Error: {}".format(traceback.format_exc()),
             details=(
@@ -147,7 +147,7 @@ def check_compatibility_careamics_impl(
     version: str,
     rdf_url: str,
     sha256: str,
-) -> ToolCompatibilityReport:
+) -> ToolCompatibilityReportDict:
     """Create a `CompatibilityReport` for a resource description.
 
     Args:
@@ -171,7 +171,7 @@ def check_compatibility_careamics_impl(
         if report is not None:
             return report
 
-    return ToolCompatibilityReport(
+    return ToolCompatibilityReportDict(
         tool="careamics",
         status="passed",
         error=None,
