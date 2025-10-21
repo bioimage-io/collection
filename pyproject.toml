@@ -28,15 +28,17 @@ version = { attr = "backoffice._version.VERSION" }
 
 [project.optional-dependencies]
 dev = [
-    "bioimageio.core[dev]>=0.9.3",
     # "biapy",  # has exact bioimageio.core pin
+    "bioimageio.core[dev]>=0.9.3",
     "careamics",
-    "ruff",
+    "mkdocs-api-autonav",          # docs
+    "griffe-pydantic",             # docs
     "pdoc",
     "pre-commit",
     "pyright",
-    "respx",
     "pytest",
+    "respx",
+    "ruff",
 ]
 
 [project.scripts]

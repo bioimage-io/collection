@@ -1,3 +1,0 @@
-# backoffice API
-
-::: backoffice
