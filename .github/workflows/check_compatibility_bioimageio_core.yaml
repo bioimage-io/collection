@@ -38,5 +38,3 @@ jobs:
           dry-run: ${{ github.ref != 'refs/heads/main' }}
           target-folder: reports
           clean: false
-      - name: Check final disk space
-        run: df -h
