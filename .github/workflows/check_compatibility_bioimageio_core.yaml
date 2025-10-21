@@ -10,9 +10,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/max_disk_space
-      - uses: ./.github/actions/restore_reports
-        with:
-          tool: bioimageio_core
       - uses: conda-incubator/setup-miniconda@v3
         with:
           auto-update-conda: true
@@ -24,6 +21,9 @@ jobs:
         run: pip install . bioimageio.core[dev]
       - run: conda info
         shell: bash -el {0}
+      - uses: ./.github/actions/restore_reports
+        with:
+          tool: bioimageio_core
       - run: python scripts/check_compatibility_bioimageio_core.py
         shell: bash -el {0}
         env:
