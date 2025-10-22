@@ -23,7 +23,7 @@ jobs:
         shell: bash -el {0}
       - uses: ./.github/actions/restore_reports
         with:
-          tool: bioimageio_core
+          tool: bioimageio.core
       - run: python scripts/check_compatibility_bioimageio_core.py
         shell: bash -el {0}
         env:
