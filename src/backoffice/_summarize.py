@@ -45,6 +45,7 @@ def _summarize(item: IndexItem, v: IndexItemVersion):
     metadata_completeness = 0.0
     for report_path in get_all_tool_report_paths(item.id, v.version):
         tool, tool_version = report_path.stem.split("_", 1)
+        tool = tool.lower()
         if tool not in TOOL_NAMES:
             warnings.warn(f"Report {report_path} has unknown tool name '{tool}'.")
             continue
