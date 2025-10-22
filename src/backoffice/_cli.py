@@ -3,6 +3,7 @@ import sys
 from pydantic import BaseModel
 from pydantic_settings import BaseSettings, CliSubCommand
 
+from ._summarize import summarize_reports
 from .index import create_index
 
 
@@ -19,6 +20,8 @@ class IndexCmd(CmdBase):
 class SummarizeCmd(CmdBase):
     def run(self):
         """Conflate tool summaries"""
+
+        summarize_reports()
 
 
 class Backoffice(
