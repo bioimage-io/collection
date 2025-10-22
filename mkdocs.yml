@@ -88,5 +88,5 @@ plugins:
 #   - pymdownx.superfences
 
 nav:
-  - Home: index.md
+  - Home: home.md
   - API Reference
