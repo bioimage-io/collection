@@ -10,7 +10,22 @@ edit_uri: edit/main/docs/
 theme:
   name: material
   features:
-    - navigation.indexes
+    - announce.dismiss
+    - content.action.edit
+    - content.action.view
+    - content.code.annotate
+    - content.code.copy
+    - content.tooltips
+    - navigation.footer
+    - navigation.instant.preview
+    - navigation.path
+    - navigation.sections
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.top
+    - search.highlight
+    - search.suggest
+    - toc.follow
   # features:
   #   - announce.dismiss
   #   - content.action.edit
@@ -71,32 +86,81 @@ theme:
 
 plugins:
   - autorefs
-  - search
+  - coverage
+  - markdown-exec
   - mkdocstrings:
       handlers:
         python:
           options:
+            backlinks: tree
+            docstring_options:
+              ignore_init_summary: true
+            docstring_section_style: list
+            filters: ['!^_']
+            heading_level: 1
+            inherited_members: true
+            merge_init_into_class: true
+            parameter_headings: true
+            separate_signature: true
+            show_root_heading: true
+            show_root_full_path: false
+            show_signature_annotations: true
+            show_source: false
+            show_symbol_type_heading: true
+            show_symbol_type_toc: true
+            signature_crossrefs: true
+            summary: true
             extensions:
               - griffe_pydantic:
                   schema: true
-  - api-autonav:
-      modules: ['src/backoffice']
-      module_options:
-        package.submodule:
-        '.*':
-          docstring_style: google
-          show_signature: true
-          heading_level: 1
-          show_symbol_type_heading: true
+  - search
+  - section-index
+  # - api-autonav:
+  #     modules: ['src/backoffice']
+  #     module_options:
+  #       '.*':
+  #         show_submodules: true
+  #         docstring_style: google
+  #         show_signature: true
+  #         heading_level: 1
+  #         show_symbol_type_heading: true
 
 # markdown_extensions:
 #   - admonition
 #   - pymdownx.details
 #   - pymdownx.superfences
-
+markdown_extensions:
+  - attr_list
+  - admonition
+  - callouts:
+      strip_period: false
+  - footnotes
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      pygments_lang_class: true
+  - pymdownx.magiclink
+  - pymdownx.snippets:
+      base_path: [!relative $config_dir]
+      check_paths: true
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+  - toc:
+      permalink: '¤'
 nav:
   - Home: home.md
-  - API Reference
+  - API Reference: api.md
+  - Changelog: changelog.md
+  - Coverage report: coverage.md
 
 extra:
   social:

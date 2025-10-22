@@ -31,8 +31,12 @@ dev = [
     # "biapy",  # has exact bioimageio.core pin
     "bioimageio.core[dev]>=0.9.3",
     "careamics",
-    "mkdocs-api-autonav",          # docs
     "griffe-pydantic",             # docs
+    "markdown-callouts",           # docs
+    "markdown-exec",               # docs
+    "mkdocs-api-autonav",          # docs
+    "mkdocs-coverage",             # docs
+    "mkdocs-section-index",        # docs
     "pdoc",
     "pre-commit",
     "pyright",
