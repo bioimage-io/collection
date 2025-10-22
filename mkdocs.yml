@@ -81,6 +81,13 @@ plugins:
                   schema: true
   - api-autonav:
       modules: ['src/backoffice']
+      module_options:
+        package.submodule:
+        '.*':
+          docstring_style: google
+          show_signature: true
+          heading_level: 1
+          show_symbol_type_heading: true
 
 # markdown_extensions:
 #   - admonition
@@ -90,3 +97,8 @@ plugins:
 nav:
   - Home: home.md
   - API Reference
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/bioimage-io
