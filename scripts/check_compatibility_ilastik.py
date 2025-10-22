@@ -6,7 +6,7 @@ import bioimageio.core
 from typing_extensions import Literal, Protocol
 
 from backoffice.check_compatibility import check_tool_compatibility
-from backoffice.compatibility_pure import ToolCompatibilityReport
+from backoffice.compatibility_pure import ToolCompatibilityReportDict
 
 try:
     from bioimageio.spec.common import Sha256
@@ -73,8 +73,8 @@ def check_compatibility_ilastik_impl(
     version: str,
     rdf_url: str,
     sha256: str,
-) -> ToolCompatibilityReport:
-    """Create a `ToolCompatibilityReport` for a resource description.
+) -> ToolCompatibilityReportDict:
+    """Create a `ToolCompatibilityReportDict` for a resource description.
 
     Args:
         rdf_url: URL to the rdf.yaml file
@@ -84,7 +84,7 @@ def check_compatibility_ilastik_impl(
     rdf = open_bioimageio_yaml(rdf_url, sha256=Sha256(sha256)).content
 
     if not isinstance(rdf, dict):
-        report = ToolCompatibilityReport(
+        report = ToolCompatibilityReportDict(
             tool="ilastik",
             status="failed",
             error=None,
@@ -93,7 +93,7 @@ def check_compatibility_ilastik_impl(
             links=[],
         )
     elif rdf["type"] != "model":
-        report = ToolCompatibilityReport(
+        report = ToolCompatibilityReportDict(
             tool="ilastik",
             status="not-applicable",
             error=None,
@@ -118,7 +118,7 @@ def check_compatibility_ilastik_impl(
         else:
             output_len = "missing"
 
-        report = ToolCompatibilityReport(
+        report = ToolCompatibilityReportDict(
             tool="ilastik",
             status="failed",
             error=f"ilastik only supports a single input/output tensor (found {input_len}/{output_len})",
@@ -153,7 +153,7 @@ def check_compatibility_ilastik_impl(
                 else summary.format()
             )
         )
-        report = ToolCompatibilityReport(
+        report = ToolCompatibilityReportDict(
             tool="ilastik",
             status=status,
             error=error,

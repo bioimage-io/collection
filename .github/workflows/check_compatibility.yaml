@@ -19,7 +19,7 @@ on:
             only-on-index-update,
             all,
             biapy,
-            bioimageio_core,
+            bioimageio.core,
             careamics,
             ilastik,
           ]
@@ -83,7 +83,7 @@ jobs:
     secrets: inherit
   bioimageio_core:
     needs: index
-    if: needs.index.outputs.cache-hit != 'true' || contains(github.event.inputs.rerun, 'all')|| contains(github.event.inputs.rerun, 'bioimageio_core')
+    if: needs.index.outputs.cache-hit != 'true' || contains(github.event.inputs.rerun, 'all')|| contains(github.event.inputs.rerun, 'bioimageio.core')
     uses: ./.github/workflows/check_compatibility_bioimageio_core.yaml
     secrets: inherit
   careamics:

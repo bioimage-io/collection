@@ -3,13 +3,13 @@ from typing import Any, Optional, Sequence
 from typing_extensions import Literal, TypedDict
 
 
-class Badge(TypedDict):
+class BadgeDict(TypedDict):
     icon: str
     label: str
     url: str
 
 
-class ToolCompatibilityReport(TypedDict):
+class ToolCompatibilityReportDict(TypedDict):
     tool: str
     """toolname (including version separated by an underscore)"""
 
@@ -22,7 +22,7 @@ class ToolCompatibilityReport(TypedDict):
     details: Any
     """details to explain the `status`"""
 
-    badge: Optional[Badge]
+    badge: Optional[BadgeDict]
     """status badge with a resource specific link to the tool"""
 
     links: Sequence[str]
