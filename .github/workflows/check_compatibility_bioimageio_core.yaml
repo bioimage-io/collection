@@ -1,4 +1,4 @@
-name: check compatibility bioimageio_core
+name: check compatibility bioimageio.core
 
 on:
   workflow_call:
