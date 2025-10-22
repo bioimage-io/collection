@@ -17,6 +17,8 @@ runs:
         sparse-checkout: |
           reports
           index.json
+    - run: ls gh-pages/reports/bioimage-io
+      shell: bash
     - run: mv gh-pages/index.json ./index.json
       shell: bash
     # - run: mv gh-pages/reports/ ./reports/
@@ -29,9 +31,11 @@ runs:
       run: |
         from pathlib import Path
 
+        print("cwd:", Path().resolve())
         src = Path("gh-pages/reports")
+        assert src.exists(), f"Source path {src} does not exist"
         tgt = Path("reports")
-        for p_src in src.glob(f"**/${{inputs.tool}}_*.json"):
+        for p_src in src.glob("**/${{inputs.tool}}_*.json"):
             p_tgt = tgt / p_src.relative_to(src)
             p_tgt.parent.mkdir(parents=True, exist_ok=True)
             p_src.rename(p_tgt)
