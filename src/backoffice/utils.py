@@ -1,3 +1,5 @@
+"""utility functions"""
+
 import json
 from typing import TYPE_CHECKING, Any
 

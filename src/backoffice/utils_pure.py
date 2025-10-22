@@ -1,3 +1,5 @@
+"""utility functions available in backoffice without dependencies"""
+
 import json
 import os
 from pathlib import Path

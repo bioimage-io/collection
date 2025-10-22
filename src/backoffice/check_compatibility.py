@@ -1,3 +1,5 @@
+"""check compatibility of tools against resources in the index.json"""
+
 import json
 import shutil
 import traceback
