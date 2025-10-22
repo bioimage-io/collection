@@ -3,7 +3,7 @@ description: 'Restore the index.json file and tool-specific reports'
 
 inputs:
   tool:
-    description: 'The tool for which to restore reports (e.g. biapy, bioimageio_core, careamics, ilastik)'
+    description: 'The tool for which to restore reports (e.g. biapy, bioimageio.core, careamics, ilastik)'
     required: true
 
 runs:
