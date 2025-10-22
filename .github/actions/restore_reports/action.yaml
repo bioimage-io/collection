@@ -35,6 +35,7 @@ runs:
             p_tgt = tgt / p_src.relative_to(src)
             p_tgt.parent.mkdir(parents=True, exist_ok=True)
             p_src.rename(p_tgt)
+            print("Moved", p_src, "to", p_tgt)
 
       shell: python
     - run: ls reports/bioimage-io
