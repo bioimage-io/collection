@@ -51,6 +51,7 @@ jobs:
           cache-downloads: true
           cache-environment: false # gets stuck for 6h?
       - run: pip install . --no-deps # no-deps to avoid changing the ilastik environment
+        shell: bash -l {0}
       - name: test published versions with ilastik ${{ matrix.v }}
         shell: bash -l {0}
         run: python scripts/check_compatibility_ilastik.py ${{ matrix.v }}
