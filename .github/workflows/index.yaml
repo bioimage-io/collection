@@ -46,6 +46,8 @@ jobs:
           path: gh-pages
           sparse-checkout: |
             reports
+      - name: Move checked-out reports for cleanup
+        run: mv gh-pages/reports/ ./reports/
       - if: steps.cache.outputs.cache-hit != 'true'
         uses: actions/setup-python@v6
         with:

@@ -17,8 +17,6 @@ runs:
         sparse-checkout: |
           reports
           index.json
-    - run: ls gh-pages/reports/bioimage-io
-      shell: bash
     - run: mv gh-pages/index.json ./index.json
       shell: bash
     # - run: mv gh-pages/reports/ ./reports/
@@ -42,5 +40,3 @@ runs:
             print("Moved", p_src, "to", p_tgt)
 
       shell: python
-    - run: ls reports/bioimage-io
-      shell: bash
