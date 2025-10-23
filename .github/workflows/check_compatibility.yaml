@@ -104,6 +104,9 @@ jobs:
     runs-on: ubuntu-latest
     environment: 'production'
     steps:
+      - run: echo ${{ needs.index.outputs.cache-hit != 'true' || github.event.inputs.rerun != 'only-on-index-update' }}
+      - run: echo ${{ needs.index.outputs.cache-hit }}
+      - run: echo ${{ github.event.inputs.rerun }}
       # additional 'if' per step as they do not seem to have an affect in `... && !cancelled()`
       - if: needs.index.outputs.cache-hit != 'true' || github.event.inputs.rerun != 'only-on-index-update'
         uses: actions/checkout@v4
