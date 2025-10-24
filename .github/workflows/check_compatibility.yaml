@@ -100,13 +100,14 @@ jobs:
   summarize:
     name: summarize and deploy stage
     needs: [index, biapy, bioimageio_core, careamics, ilastik]
-    if: ${{ !cancelled() }}
+    if: ${{ !cancelled() }} && (needs.index.outputs.cache-hit != 'true' || github.event.inputs.rerun != 'only-on-index-update' || github.event.inputs.rerun != '')
     runs-on: ubuntu-latest
     environment: 'production'
     steps:
-      - run: echo ${{ needs.index.outputs.cache-hit != 'true' || github.event.inputs.rerun != 'only-on-index-update' }}
+      - run: echo ${{ needs.index.outputs.cache-hit != 'true' || github.event.inputs.rerun != 'only-on-index-update'  || github.event.inputs.rerun != ''}}
       - run: echo ${{ needs.index.outputs.cache-hit }}
       - run: echo ${{ github.event.inputs.rerun }}
+      - run: echo ${{ github.event.inputs.rerun == '' }}
       # additional 'if' per step as they do not seem to have an affect in `... && !cancelled()`
       - if: needs.index.outputs.cache-hit != 'true' || github.event.inputs.rerun != 'only-on-index-update'
         uses: actions/checkout@v4
