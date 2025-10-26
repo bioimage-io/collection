@@ -24,14 +24,19 @@ from backoffice.utils import (
 
 def summarize_reports():
     index = create_index()
-    with ThreadPoolExecutor() as executor:
-        futures: list[Future[Any]] = []
-        for item in index.items:
-            for v in item.versions:
-                futures.append(executor.submit(_summarize, item, v))
+    for item in tqdm(index.items):
+        for v in item.versions:
+            _summarize(item, v)
 
-        for _ in tqdm(as_completed(futures), total=len(futures)):
-            pass
+    # TODO: Parallelize?
+    # with ThreadPoolExecutor() as executor:
+    #     futures: list[Future[Any]] = []
+    #     for item in index.items:
+    #         for v in item.versions:
+    #             futures.append(executor.submit(_summarize, item, v))
+
+    #     for _ in tqdm(as_completed(futures), total=len(futures)):
+    #         pass
 
 
 def _summarize(item: IndexItem, v: IndexItemVersion):
