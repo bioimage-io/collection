@@ -198,5 +198,26 @@
         }
     },
     "rdf_yaml_sha256": "77d95ae7bba359e102cb5fa235e6fb330bccdbb64ac9d561f8fb501db9477110",
-    "status": "untested"
+    "status": "failed",
+    "scores": {
+        "tool_compatibility_version_specific": {},
+        "metadata_completeness": 0.0,
+        "metadata_format": 0.0,
+        "core_compatibility": 0.0,
+        "tool_compatibility": {},
+        "overall_partner_tool_compatibility": 0.0,
+        "overall_compatibility": 0.0
+    },
+    "tests": {
+        "biapy_3.6.5": {
+            "status": "failed",
+            "score": 0.0,
+            "error": "[all] pytorch_state_dict not found in model RDF or inputs != 1\n",
+            "details": "[all] pytorch_state_dict not found in model RDF or inputs != 1\n",
+            "badge": null,
+            "links": [
+                "biapy/biapy"
+            ]
+        }
+    }
 }

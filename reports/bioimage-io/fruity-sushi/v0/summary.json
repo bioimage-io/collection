@@ -60,5 +60,15 @@
         "version": 1
     },
     "rdf_yaml_sha256": "e127dd3f29cb82d7e533399da21f086e21a381d1125705bbcf9e90c26d55bf77",
-    "status": "untested"
+    "status": "failed",
+    "scores": {
+        "tool_compatibility_version_specific": {},
+        "metadata_completeness": 0.0,
+        "metadata_format": 0.0,
+        "core_compatibility": 0.0,
+        "tool_compatibility": {},
+        "overall_partner_tool_compatibility": 0.0,
+        "overall_compatibility": 0.0
+    },
+    "tests": {}
 }
