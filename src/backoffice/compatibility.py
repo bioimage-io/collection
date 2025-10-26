@@ -166,25 +166,31 @@ class CompatibilityScores(Node):
     def overall_partner_tool_compatibility(
         self,
     ) -> Annotated[float, Interval(ge=0, le=1.0)]:
-        """Overall partner tool compatibility score."""
-        top4 = sorted(
+        """Overall partner tool compatibility score.
+        Note:
+            - Currently implemented as: Average of the top 3 partner tool compatibility scores.
+            - Implementation is subject to change in the future.
+        """
+        top3 = sorted(
             [v for k, v in self.tool_compatibility.items() if k in PARTNER_TOOL_NAMES],
             reverse=True,
-        )[:4]
-        assert top4
-        return sum(top4) / len(top4)
+        )[:3]
+        if not top3:
+            return 0.0
+        else:
+            return sum(top3) / 3
 
     @computed_field
     @property
     def overall_compatibility(self) -> Annotated[float, Interval(ge=0, le=1.0)]:
         """Weighted, overall score between 0 and 1.
-        Note: The scoring scheme is subject to arbitrary changes.
+        Note: The scoring scheme is subject to change in the future.
         """
         return (
-            0.1 * self.metadata_format
-            + 0.2 * self.metadata_completeness
-            + 0.3 * self.core_compatibility
-            + 0.4 * self.overall_partner_tool_compatibility
+            0.25 * self.metadata_format
+            + 0.25 * self.metadata_completeness
+            + 0.25 * self.core_compatibility
+            + 0.25 * self.overall_partner_tool_compatibility
         )
 
 
