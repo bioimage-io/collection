@@ -109,9 +109,14 @@ def _summarize(item: IndexItem, v: IndexItemVersion):
         tests={report.report_name: report for report in reports},
     )
 
-    _ = get_summary_file_path(item.id, v.version).write_text(
-        summary.model_dump_json(indent=4), encoding="utf-8"
-    )
+    json_dict = summary.model_dump(mode="json")
+    with get_summary_file_path(item.id, v.version).open("wt", encoding="utf-8") as f:
+        json.dump(json_dict, f, indent=4, sort_keys=True, ensure_ascii=False)
+    # TODO: use .model_dump_json once it supports 'sort_keys' argument for a potential speed gain
+    # _ = get_summary_file_path(item.id, v.version).write_text(
+    #     summary.model_dump_json(indent=4), encoding="utf-8"
+    # )
+
     logger.info(
         "summarized {} version {} with {} reports, status: {}, metadata completeness: {:.2f}",
         item.id,
