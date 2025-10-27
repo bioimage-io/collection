@@ -21,7 +21,7 @@ PartnerToolName = Literal[
     "biapy",
     "careamics",
 ]
-ToolName = Literal["bioimageio.spec", "bioimageio.core", PartnerToolName]
+ToolName = Literal["bioimageio.core", PartnerToolName]
 
 PARTNER_TOOL_NAMES = (
     "ilastik",
@@ -30,7 +30,7 @@ PARTNER_TOOL_NAMES = (
     "biapy",
     "careamics",
 )
-TOOL_NAMES = ("bioimageio.spec", "bioimageio.core", *PARTNER_TOOL_NAMES)
+TOOL_NAMES = ("bioimageio.core", *PARTNER_TOOL_NAMES)
 
 ToolNameVersioned = str
 
@@ -49,6 +49,7 @@ class ToolReportDetails(Node, extra="allow"):
     traceback: Optional[Sequence[str]] = None
     warnings: Optional[Mapping[str, Any]] = None
     metadata_completeness: Optional[float] = None
+    status: Union[Literal["passed", "valid-format", "failed"], Any] = None
 
 
 class ToolCompatibilityReport(Node, extra="allow"):
@@ -98,14 +99,19 @@ class CompatibilityScores(Node):
         ToolNameVersioned, Annotated[float, Interval(ge=0, le=1.0)]
     ]
 
-    metadata_completeness: Annotated[float, Interval(ge=0, le=1.0)]
-    """Score for metadata completeness, evaluated by bioimageio.spec"""
+    metadata_completeness: Annotated[float, Interval(ge=0, le=1.0)] = 0.0
+    """Score for metadata completeness.
 
-    @computed_field
-    @property
-    def metadata_format(self) -> Annotated[float, Interval(ge=0, le=1.0)]:
-        """Score for metadata formatting, validated by bioimageio.spec"""
-        return self.tool_compatibility.get("bioimageio.spec", 0.0)
+    A measure of how many optional fields in the resource RDF are filled out.
+    """
+
+    metadata_format: Annotated[float, Interval(ge=0, le=1.0)] = 0.0
+    """Score for metadata formatting.
+
+    - 1.0: resource RDF conforms to the latest spec version
+    - 0.5: resource RDF conforms to an older spec version
+    - 0.0: resource RDF does not conform to any known spec version
+"""
 
     @computed_field
     @property

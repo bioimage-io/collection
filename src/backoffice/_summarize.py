@@ -1,9 +1,8 @@
 import json
 import warnings
-from concurrent.futures import Future, ThreadPoolExecutor, as_completed
-from typing import Any
 
 from loguru import logger
+from packaging.version import Version
 from tqdm import tqdm
 
 from backoffice.compatibility import (
@@ -48,6 +47,10 @@ def _summarize(item: IndexItem, v: IndexItemVersion):
     scores: dict[ToolNameVersioned, float] = {}
     status = "failed"
     metadata_completeness = 0.0
+    metadata_format_score = 0.0
+    metadata_format_version = Version(
+        "0.0.0"
+    )  # to track the latest core version with valid format
     for report_path in get_all_tool_report_paths(item.id, v.version):
         tool, tool_version = report_path.stem.split("_", 1)
         tool = tool.lower()
@@ -68,15 +71,31 @@ def _summarize(item: IndexItem, v: IndexItemVersion):
                 score=0.0,
                 details="Failed to parse compatibility report.",
             )
-        else:
-            if report.tool == "bioimageio.core" and status == "passed":
-                status = "passed"
 
         reports.append(report)
-        if report.tool == "bioimageio.spec" and isinstance(
+        if report.tool == "bioimageio.core" and isinstance(
             report.details, ToolReportDetails
         ):
-            metadata_completeness = report.details.metadata_completeness or 0.0
+            # select the best completeness score among core reports
+            metadata_completeness = max(
+                metadata_completeness, report.details.metadata_completeness or 0.0
+            )
+            # determine metadata format score
+            # - valid-format for latest core report: 1.0
+            # - valid-format for older core report: 0.5
+            # - invalid format for all core reports: 0.0
+            core_version = Version(tool_version)
+            if core_version >= metadata_format_version:
+                metadata_format_version = core_version
+                if report.details.status in ("passed", "valid-format"):
+                    metadata_format_score = 1.0
+                else:
+                    metadata_format_score = 0.5 if metadata_format_score else 0.0
+            elif not metadata_format_score and report.details.status in (
+                "passed",
+                "valid-format",
+            ):
+                metadata_format_score = 0.5
 
     summary = CompatibilitySummary(
         rdf_content=initial_summary.rdf_content,
@@ -85,6 +104,7 @@ def _summarize(item: IndexItem, v: IndexItemVersion):
         scores=CompatibilityScores(
             tool_compatibility_version_specific=scores,
             metadata_completeness=metadata_completeness,
+            metadata_format=metadata_format_score,
         ),
         tests={report.report_name: report for report in reports},
     )
