@@ -88,7 +88,7 @@ def check_tool_compatibility(
 
                 report_path.parent.mkdir(parents=True, exist_ok=True)
                 with report_path.open("wt", encoding="utf-8") as f:
-                    json.dump(report, f)
+                    json.dump(report, f, indent=4, sort_keys=True, ensure_ascii=False)
 
             _total, _used, free = shutil.disk_usage(".")
             if free < 5_000_000_000:
