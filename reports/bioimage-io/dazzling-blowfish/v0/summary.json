@@ -226,5 +226,24 @@
         "overall_partner_tool_compatibility": 0.0,
         "overall_compatibility": 0.0
     },
-    "tests": {}
+    "tests": {
+        "careamics_0.0.17": {
+            "status": "not-applicable",
+            "score": 0.0,
+            "error": null,
+            "details": "'Model' resource not tagged with 'CAREamics' or 'careamics'.",
+            "badge": null,
+            "links": []
+        },
+        "biapy_3.6.5": {
+            "status": "failed",
+            "score": 0.0,
+            "error": "[all] pytorch_state_dict not found in model RDF or inputs != 1\n",
+            "details": "[all] pytorch_state_dict not found in model RDF or inputs != 1\n",
+            "badge": null,
+            "links": [
+                "biapy/biapy"
+            ]
+        }
+    }
 }

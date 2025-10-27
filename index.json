@@ -3080,14 +3080,53 @@
                 }
             ],
             "type": "model"
+        },
+        {
+            "id": "bioimage-io/dazzling-blowfish",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": "Published by danialtza@gmail.com",
+                    "created_at": "2025-10-26T10:16:47Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/dazzling-blowfish/files/rdf.yaml?version=v0",
+                    "sha256": "925593d7f7b5294b7a1062efa5883318e41a4dfc1eb269b41f91b2229fe2c538"
+                }
+            ],
+            "type": "model"
+        },
+        {
+            "id": "bioimage-io/frosty-honey",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": "Published by danialtza@gmail.com",
+                    "created_at": "2025-10-26T10:14:06Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/frosty-honey/files/rdf.yaml?version=v0",
+                    "sha256": "24129933ca1421116c1317e1a09a9da1a5d7823a75a153712b11c0d8f2dcc0b3"
+                }
+            ],
+            "type": "dataset"
+        },
+        {
+            "id": "bioimage-io/enticing-peanut",
+            "versions": [
+                {
+                    "version": "v0",
+                    "comment": "Published by danialtza@gmail.com",
+                    "created_at": "2025-10-26T10:15:35Z",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/enticing-peanut/files/rdf.yaml?version=v0",
+                    "sha256": "bc6e22bae3d77513cfabe38f791e03bb120355e6f7c8222c57f0aa589b7b371d"
+                }
+            ],
+            "type": "dataset"
         }
     ],
-    "total": 237,
+    "total": 240,
     "count_per_type": {
-        "model": 122,
+        "model": 123,
         "application": 65,
-        "dataset": 46,
+        "dataset": 48,
         "notebook": 4
     },
-    "timestamp": "2025-10-26T03:40:09.480091"
+    "timestamp": "2025-10-27T03:51:56.527701"
 }
