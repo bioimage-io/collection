@@ -83,42 +83,33 @@ jobs:
     secrets: inherit
   bioimageio_core:
     needs: index
-    if: needs.index.outputs.cache-hit != 'true' || contains(github.event.inputs.rerun, 'all')|| contains(github.event.inputs.rerun, 'bioimageio.core')
+    if: needs.index.outputs.cache-hit != 'true' || contains(github.event.inputs.rerun, 'all') || contains(github.event.inputs.rerun, 'bioimageio.core')
     uses: ./.github/workflows/check_compatibility_bioimageio_core.yaml
     secrets: inherit
   careamics:
     needs: index
-    if: needs.index.outputs.cache-hit != 'true' || contains(github.event.inputs.rerun, 'all')|| contains(github.event.inputs.rerun, 'careamics')
+    if: needs.index.outputs.cache-hit != 'true' || contains(github.event.inputs.rerun, 'all') || contains(github.event.inputs.rerun, 'careamics')
     uses: ./.github/workflows/check_compatibility_careamics.yaml
     secrets: inherit
   ilastik:
     needs: index
-    if: needs.index.outputs.cache-hit != 'true' || contains(github.event.inputs.rerun, 'all')|| contains(github.event.inputs.rerun, 'ilastik')
+    if: needs.index.outputs.cache-hit != 'true' || contains(github.event.inputs.rerun, 'all') || contains(github.event.inputs.rerun, 'ilastik')
     uses: ./.github/workflows/check_compatibility_ilastik.yaml
     secrets: inherit
 
   summarize:
     name: summarize and deploy stage
     needs: [index, biapy, bioimageio_core, careamics, ilastik]
-    if: ${{ !cancelled() }} && (needs.index.outputs.cache-hit != 'true' || github.event.inputs.rerun != 'only-on-index-update' || github.event.inputs.rerun != '')
+    if: ${{ !cancelled() }} && !(needs.index.outputs.cache-hit == 'true' && (github.event.inputs.rerun == 'only-on-index-update' || github.event.inputs.rerun == ''))
     runs-on: ubuntu-latest
     environment: 'production'
     steps:
-      - run: echo ${{ needs.index.outputs.cache-hit != 'true' || github.event.inputs.rerun != 'only-on-index-update'  || github.event.inputs.rerun != ''}}
-      - run: echo ${{ needs.index.outputs.cache-hit }}
-      - run: echo ${{ github.event.inputs.rerun }}
-      - run: echo ${{ github.event.inputs.rerun == '' }}
-      # additional 'if' per step as they do not seem to have an affect in `... && !cancelled()`
-      - if: needs.index.outputs.cache-hit != 'true' || github.event.inputs.rerun != 'only-on-index-update'
-        uses: actions/checkout@v4
-      - if: needs.index.outputs.cache-hit != 'true' || github.event.inputs.rerun != 'only-on-index-update'
-        uses: actions/setup-python@v6
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
         with:
           cache: 'pip'
-      - if: needs.index.outputs.cache-hit != 'true' || github.event.inputs.rerun != 'only-on-index-update'
-        run: pip install .
-      - if: needs.index.outputs.cache-hit != 'true' || github.event.inputs.rerun != 'only-on-index-update'
-        uses: actions/checkout@v4
+      - run: pip install .
+      - uses: actions/checkout@v4
         name: checkout staged index and reports
         with:
           ref: stage-gh-pages
@@ -126,15 +117,13 @@ jobs:
           sparse-checkout: |
             reports
             index.json
-      - if: needs.index.outputs.cache-hit != 'true' || github.event.inputs.rerun != 'only-on-index-update'
-        name: summarize reports
+      - name: summarize reports
         run: backoffice summarize
         env:
           REPORTS: gh-pages/reports
           RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
           HYPHA_API_TOKEN: ${{secrets.HYPHA_API_TOKEN}}
-      - if: needs.index.outputs.cache-hit != 'true' || github.event.inputs.rerun != 'only-on-index-update'
-        name: Deploy to gh-pages 🚀
+      - name: Deploy to gh-pages 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: gh-pages
