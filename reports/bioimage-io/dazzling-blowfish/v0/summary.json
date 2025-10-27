@@ -1,0 +1,230 @@
+{
+    "rdf_content": {
+        "name": "3D U-Net for Arabidopsis ovule segmentation",
+        "description": "Ovule cell boundary prediction in confocal stacks of Arabidopsis ovules",
+        "covers": [
+            "cover.png"
+        ],
+        "authors": [
+            {
+                "name": "Daniel Franco-Barranco",
+                "github_user": "danifranco",
+                "affiliation": "MRC LMB"
+            }
+        ],
+        "cite": [
+            {
+                "text": "BiaPy: accessible deep learning on bioimages",
+                "doi": "10.1038/s41592-025-02699-y",
+                "url": "https://www.nature.com/articles/s41592-025-02699-y"
+            }
+        ],
+        "license": "CC-BY-4.0",
+        "git_repo": "https://github.com/BiaPyX/BiaPy",
+        "maintainers": [
+            {
+                "name": "Daniel Franco-Barranco",
+                "github_user": "danifranco"
+            }
+        ],
+        "tags": [
+            "Arabidopsis",
+            "ovule",
+            "confocal",
+            "3d",
+            "pytorch",
+            "biapy",
+            "semantic-segmentation",
+            "unet"
+        ],
+        "version": "0.1.0",
+        "format_version": "0.5.4",
+        "type": "model",
+        "documentation": "documentation.md",
+        "inputs": [
+            {
+                "id": "input0",
+                "axes": [
+                    {
+                        "type": "batch",
+                        "size": 1
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "channel0"
+                        ]
+                    },
+                    {
+                        "size": 40,
+                        "id": "z",
+                        "type": "space"
+                    },
+                    {
+                        "size": 128,
+                        "id": "y",
+                        "type": "space"
+                    },
+                    {
+                        "size": 128,
+                        "id": "x",
+                        "type": "space"
+                    }
+                ],
+                "test_tensor": {
+                    "source": "test-input.npy",
+                    "sha256": "37c3829b3d8b9138b68c70a62a4f75d3e1e7c27d768383916b10fa97342fdefe"
+                },
+                "data": {
+                    "type": "float32"
+                },
+                "preprocessing": [
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    },
+                    {
+                        "id": "zero_mean_unit_variance",
+                        "kwargs": {
+                            "axes": [
+                                "channel",
+                                "z",
+                                "y",
+                                "x"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    }
+                ]
+            }
+        ],
+        "outputs": [
+            {
+                "id": "output0",
+                "axes": [
+                    {
+                        "type": "batch",
+                        "size": 1
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "channel0"
+                        ]
+                    },
+                    {
+                        "size": 40,
+                        "id": "z",
+                        "type": "space"
+                    },
+                    {
+                        "size": 128,
+                        "id": "y",
+                        "type": "space"
+                    },
+                    {
+                        "size": 128,
+                        "id": "x",
+                        "type": "space"
+                    }
+                ],
+                "test_tensor": {
+                    "source": "test-output.npy",
+                    "sha256": "683c4764010ff9f18f0a658d7e2a2b82c723bbd8ad88e012c23d4f593fcc3c62"
+                },
+                "data": {
+                    "type": "float32"
+                },
+                "postprocessing": [
+                    {
+                        "id": "sigmoid"
+                    },
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    }
+                ]
+            }
+        ],
+        "training_data": {
+            "id": "nourishing-baguette"
+        },
+        "weights": {
+            "pytorch_state_dict": {
+                "source": "checkpoint.pth",
+                "sha256": "30cd13c9aa757e4a8ad718b27e53c87eeddbd17e17a2c4f393c791b5097b2866",
+                "architecture": {
+                    "source": "model.py",
+                    "sha256": "449b3eb35610dec8b6d5d6faafc57cf768d340d9d7ae113507fedbcabbdb5e97",
+                    "callable": "U_Net",
+                    "kwargs": {
+                        "image_shape": [
+                            40,
+                            128,
+                            128,
+                            1
+                        ],
+                        "activation": "elu",
+                        "feature_maps": [
+                            16,
+                            32,
+                            64,
+                            128,
+                            256
+                        ],
+                        "drop_values": [
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        "normalization": "bn",
+                        "k_size": 3,
+                        "upsample_layer": "convtranspose",
+                        "z_down": [
+                            1,
+                            1,
+                            1,
+                            1
+                        ],
+                        "output_channels": [
+                            1
+                        ],
+                        "contrast": false,
+                        "contrast_proj_dim": 256
+                    }
+                },
+                "pytorch_version": "2.4.0+cu118",
+                "dependencies": null
+            }
+        },
+        "uploader": {
+            "email": "danialtza@gmail.com",
+            "name": "Daniel Franco-Barranco"
+        },
+        "id": "dazzling-blowfish",
+        "id_emoji": "🐡"
+    },
+    "rdf_yaml_sha256": "925593d7f7b5294b7a1062efa5883318e41a4dfc1eb269b41f91b2229fe2c538",
+    "status": "failed",
+    "scores": {
+        "tool_compatibility_version_specific": {},
+        "metadata_completeness": 0.0,
+        "metadata_format": 0.0,
+        "core_compatibility": 0.0,
+        "tool_compatibility": {},
+        "overall_partner_tool_compatibility": 0.0,
+        "overall_compatibility": 0.0
+    },
+    "tests": {}
+}

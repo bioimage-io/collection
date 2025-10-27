@@ -158,5 +158,301 @@
         }
     },
     "rdf_yaml_sha256": "2fd95e20be75e454d9b90a89512560b2ad19cca2d464596093ff96733e8f5bdf",
-    "status": "untested"
+    "status": "failed",
+    "scores": {
+        "tool_compatibility_version_specific": {},
+        "metadata_completeness": 0.0,
+        "metadata_format": 0.0,
+        "core_compatibility": 0.0,
+        "tool_compatibility": {},
+        "overall_partner_tool_compatibility": 0.0,
+        "overall_compatibility": 0.0
+    },
+    "tests": {
+        "bioimageio.core_0.9.4": {
+            "status": "passed",
+            "score": 1.0,
+            "error": null,
+            "details": {
+                "name": "bioimageio format validation",
+                "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/self-disciplined-blowfish/files/rdf.yaml?version=v0",
+                "id": "self-disciplined-blowfish",
+                "type": "model",
+                "format_version": "0.5.5",
+                "status": "passed",
+                "metadata_completeness": 0.6122448979591837,
+                "details": [
+                    {
+                        "name": "Successfully created `ModelDescr` instance.",
+                        "status": "passed",
+                        "loc": [],
+                        "errors": [],
+                        "warnings": [],
+                        "context": {
+                            "file_name": "rdf.yaml",
+                            "original_source_name": null,
+                            "perform_io_checks": true,
+                            "known_files": {
+                                "https://hypha.aicell.io/bioimage-io/artifacts/self-disciplined-blowfish/files/cover_1.png?version=v0": null,
+                                "https://hypha.aicell.io/bioimage-io/artifacts/self-disciplined-blowfish/files/cover_2.png?version=v0": null,
+                                "https://hypha.aicell.io/bioimage-io/artifacts/self-disciplined-blowfish/files/cover_3.png?version=v0": null,
+                                "https://hypha.aicell.io/bioimage-io/artifacts/self-disciplined-blowfish/files/config.toml?version=v0": null,
+                                "config.toml": "c3d45908d71137990cabac191669e97a0f155842e69844967f06f3ac79e86409",
+                                "https://github.com/mattaq31/GelGenie": null,
+                                "https://hypha.aicell.io/bioimage-io/artifacts/self-disciplined-blowfish/files/README.md?version=v0": null,
+                                "https://hypha.aicell.io/bioimage-io/artifacts/self-disciplined-blowfish/files/test_input.npy?version=v0": null,
+                                "test_input.npy": "1bdface89e05a0fd71e51dfeb28da57434d9bfcb0412238db0b78c7c2ee10467",
+                                "https://hypha.aicell.io/bioimage-io/artifacts/self-disciplined-blowfish/files/input_134.tif?version=v0": null,
+                                "input_134.tif": "9aa3a34a45528600cd54fc7685df6ed12f9f2733908bd17d7c7538f9d6c4e634",
+                                "https://hypha.aicell.io/bioimage-io/artifacts/self-disciplined-blowfish/files/test_output.npy?version=v0": null,
+                                "test_output.npy": "8f85f7cfaa7a0222c83990b1ebbefa5367bcbc10d2da305615e2dc4afe109336",
+                                "https://hypha.aicell.io/bioimage-io/artifacts/self-disciplined-blowfish/files/output_134.png?version=v0": null,
+                                "output_134.png": "fbbf506fdfea1f593144b77951fa17e372d9bed59a1d7390212cfb36bae63c67",
+                                "https://hypha.aicell.io/bioimage-io/artifacts/self-disciplined-blowfish/files/unet_dec_21_epoch_579.pt?version=v0": null,
+                                "unet_dec_21_epoch_579.pt": "fcdca2fc286b1f00b9656fcd023756754d40cd4c62b1de83cbf3341bf0f7dfeb"
+                            },
+                            "update_hashes": false,
+                            "root": "https://hypha.aicell.io/bioimage-io/artifacts/self-disciplined-blowfish/files?version=v0"
+                        },
+                        "recommended_env": null,
+                        "saved_conda_compare": null
+                    },
+                    {
+                        "name": "bioimageio.spec format validation model 0.5.5",
+                        "status": "passed",
+                        "loc": [],
+                        "errors": [],
+                        "warnings": [
+                            {
+                                "loc": [
+                                    "documentation"
+                                ],
+                                "msg": "No '# Validation' (sub)section found in README.md.",
+                                "type": "warning",
+                                "severity": 30
+                            }
+                        ],
+                        "context": {
+                            "file_name": "rdf.yaml",
+                            "original_source_name": null,
+                            "perform_io_checks": true,
+                            "known_files": {
+                                "https://hypha.aicell.io/bioimage-io/artifacts/self-disciplined-blowfish/files/cover_1.png?version=v0": null,
+                                "https://hypha.aicell.io/bioimage-io/artifacts/self-disciplined-blowfish/files/cover_2.png?version=v0": null,
+                                "https://hypha.aicell.io/bioimage-io/artifacts/self-disciplined-blowfish/files/cover_3.png?version=v0": null,
+                                "https://hypha.aicell.io/bioimage-io/artifacts/self-disciplined-blowfish/files/config.toml?version=v0": null,
+                                "config.toml": "c3d45908d71137990cabac191669e97a0f155842e69844967f06f3ac79e86409",
+                                "https://github.com/mattaq31/GelGenie": null,
+                                "https://hypha.aicell.io/bioimage-io/artifacts/self-disciplined-blowfish/files/README.md?version=v0": null,
+                                "https://hypha.aicell.io/bioimage-io/artifacts/self-disciplined-blowfish/files/test_input.npy?version=v0": null,
+                                "test_input.npy": "1bdface89e05a0fd71e51dfeb28da57434d9bfcb0412238db0b78c7c2ee10467",
+                                "https://hypha.aicell.io/bioimage-io/artifacts/self-disciplined-blowfish/files/input_134.tif?version=v0": null,
+                                "input_134.tif": "9aa3a34a45528600cd54fc7685df6ed12f9f2733908bd17d7c7538f9d6c4e634",
+                                "https://hypha.aicell.io/bioimage-io/artifacts/self-disciplined-blowfish/files/test_output.npy?version=v0": null,
+                                "test_output.npy": "8f85f7cfaa7a0222c83990b1ebbefa5367bcbc10d2da305615e2dc4afe109336",
+                                "https://hypha.aicell.io/bioimage-io/artifacts/self-disciplined-blowfish/files/output_134.png?version=v0": null,
+                                "output_134.png": "fbbf506fdfea1f593144b77951fa17e372d9bed59a1d7390212cfb36bae63c67",
+                                "https://hypha.aicell.io/bioimage-io/artifacts/self-disciplined-blowfish/files/unet_dec_21_epoch_579.pt?version=v0": null,
+                                "unet_dec_21_epoch_579.pt": "fcdca2fc286b1f00b9656fcd023756754d40cd4c62b1de83cbf3341bf0f7dfeb"
+                            },
+                            "update_hashes": false,
+                            "root": "https://hypha.aicell.io/bioimage-io/artifacts/self-disciplined-blowfish/files?version=v0"
+                        },
+                        "recommended_env": null,
+                        "saved_conda_compare": null
+                    },
+                    {
+                        "name": "Reproduce test outputs from test inputs (torchscript)",
+                        "status": "passed",
+                        "loc": [
+                            "weights",
+                            "torchscript"
+                        ],
+                        "errors": [],
+                        "warnings": [],
+                        "context": null,
+                        "recommended_env": {
+                            "name": null,
+                            "channels": [
+                                "pytorch",
+                                "conda-forge",
+                                "nodefaults"
+                            ],
+                            "dependencies": [
+                                "conda-forge::bioimageio.core",
+                                "numpy >=2,<3",
+                                "pip",
+                                "pytorch==2.5.1",
+                                "torchaudio",
+                                "torchvision"
+                            ]
+                        },
+                        "saved_conda_compare": "Success. All the packages in the specification file are present in the environment with matching version and build string.\n"
+                    },
+                    {
+                        "name": "Run torchscript inference for inputs with batch_size: 1 and size parameter n: 0",
+                        "status": "passed",
+                        "loc": [
+                            "weights",
+                            "torchscript"
+                        ],
+                        "errors": [],
+                        "warnings": [],
+                        "context": null,
+                        "recommended_env": null,
+                        "saved_conda_compare": null
+                    },
+                    {
+                        "name": "Run torchscript inference for inputs with batch_size: 1 and size parameter n: 1",
+                        "status": "passed",
+                        "loc": [
+                            "weights",
+                            "torchscript"
+                        ],
+                        "errors": [],
+                        "warnings": [],
+                        "context": null,
+                        "recommended_env": null,
+                        "saved_conda_compare": null
+                    },
+                    {
+                        "name": "Run torchscript inference for inputs with batch_size: 1 and size parameter n: 2",
+                        "status": "passed",
+                        "loc": [
+                            "weights",
+                            "torchscript"
+                        ],
+                        "errors": [],
+                        "warnings": [],
+                        "context": null,
+                        "recommended_env": null,
+                        "saved_conda_compare": null
+                    },
+                    {
+                        "name": "Run torchscript inference for inputs with batch_size: 2 and size parameter n: 0",
+                        "status": "passed",
+                        "loc": [
+                            "weights",
+                            "torchscript"
+                        ],
+                        "errors": [],
+                        "warnings": [],
+                        "context": null,
+                        "recommended_env": null,
+                        "saved_conda_compare": null
+                    },
+                    {
+                        "name": "Run torchscript inference for inputs with batch_size: 2 and size parameter n: 1",
+                        "status": "passed",
+                        "loc": [
+                            "weights",
+                            "torchscript"
+                        ],
+                        "errors": [],
+                        "warnings": [],
+                        "context": null,
+                        "recommended_env": null,
+                        "saved_conda_compare": null
+                    },
+                    {
+                        "name": "Run torchscript inference for inputs with batch_size: 2 and size parameter n: 2",
+                        "status": "passed",
+                        "loc": [
+                            "weights",
+                            "torchscript"
+                        ],
+                        "errors": [],
+                        "warnings": [],
+                        "context": null,
+                        "recommended_env": null,
+                        "saved_conda_compare": null
+                    }
+                ],
+                "env": [
+                    [
+                        "bioimageio.spec",
+                        "0.5.5.6",
+                        "",
+                        ""
+                    ],
+                    [
+                        "bioimageio.core",
+                        "0.9.4",
+                        "",
+                        ""
+                    ]
+                ],
+                "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/f5cf36dca22712fafe75167b49735f9fa769625f213b98796d94754aea164695:\n#\n# Name                     Version          Build                       Channel\n_openmp_mutex              4.5              5_kmp_llvm                  conda-forge\nannotated-types            0.7.0            pyhd8ed1ab_1                conda-forge\nanyio                      4.11.0           pyhcf101f3_0                conda-forge\naom                        3.9.1            hac33072_0                  conda-forge\nbioimageio.core            0.9.4            pyhd8ed1ab_0                conda-forge\nbioimageio.spec            0.5.5.6          pyhd8ed1ab_0                conda-forge\nblosc                      1.21.6           he440d0b_1                  conda-forge\nbrunsli                    0.1              he3183e4_1                  conda-forge\nbzip2                      1.0.8            hda65f42_8                  conda-forge\nc-ares                     1.34.5           hb9d3cd8_0                  conda-forge\nc-blosc2                   2.21.3           h4cfbee9_0                  conda-forge\nca-certificates            2025.10.5        hbd8a1cb_0                  conda-forge\ncached-property            1.5.2            hd8ed1ab_1                  conda-forge\ncached_property            1.5.2            pyha770c72_1                conda-forge\ncertifi                    2025.10.5        pyhd8ed1ab_0                conda-forge\ncharls                     2.4.2            h59595ed_0                  conda-forge\ncolorama                   0.4.6            pyhd8ed1ab_1                conda-forge\ncpython                    3.12.12          py312hd8ed1ab_1             conda-forge\ncuda-cudart                12.4.127         he02047a_2                  conda-forge\ncuda-cudart_linux-64       12.4.127         h85509e4_2                  conda-forge\ncuda-cupti                 12.4.127         he02047a_2                  conda-forge\ncuda-libraries             12.4.1           ha770c72_1                  conda-forge\ncuda-nvrtc                 12.4.127         he02047a_2                  conda-forge\ncuda-nvtx                  12.4.127         he02047a_2                  conda-forge\ncuda-opencl                12.4.127         he02047a_1                  conda-forge\ncuda-runtime               12.4.1           ha804496_0                  conda-forge\ncuda-version               12.4             h3060b56_3                  conda-forge\ndav1d                      1.2.1            hd590300_0                  conda-forge\ndistro                     1.9.0            pyhd8ed1ab_1                conda-forge\ndnspython                  2.8.0            pyhcf101f3_0                conda-forge\nemail-validator            2.3.0            pyhd8ed1ab_0                conda-forge\nemail_validator            2.3.0            hd8ed1ab_0                  conda-forge\nexceptiongroup             1.3.0            pyhd8ed1ab_0                conda-forge\nfilelock                   3.20.0           pyhd8ed1ab_0                conda-forge\nfsspec                     2025.9.0         pyhd8ed1ab_0                conda-forge\ngenericache                0.5.2            pyhd8ed1ab_0                conda-forge\ngiflib                     5.2.2            hd590300_0                  conda-forge\ngmp                        6.3.0            hac33072_2                  conda-forge\ngmpy2                      2.2.1            py312hcaba1f9_1             conda-forge\nh11                        0.16.0           pyhd8ed1ab_0                conda-forge\nh2                         4.3.0            pyhcf101f3_0                conda-forge\nh5py                       3.15.1           nompi_py312ha4f8f14_100     conda-forge\nhdf5                       1.14.6           nompi_h6e4c0c1_103          conda-forge\nhpack                      4.1.0            pyhd8ed1ab_0                conda-forge\nhttpcore                   1.0.9            pyh29332c3_0                conda-forge\nhttpx                      0.28.1           pyhd8ed1ab_0                conda-forge\nhyperframe                 6.1.0            pyhd8ed1ab_0                conda-forge\nidna                       3.11             pyhd8ed1ab_0                conda-forge\nimagecodecs                2025.8.2         py312h4ecb025_4             conda-forge\nimageio                    2.37.0           pyhfb79c49_0                conda-forge\nimportlib-metadata         8.7.0            pyhe01879c_1                conda-forge\njinja2                     3.1.6            pyhd8ed1ab_0                conda-forge\njxrlib                     1.1              hd590300_3                  conda-forge\nkeyutils                   1.6.3            hb9d3cd8_0                  conda-forge\nkrb5                       1.21.3           h659f571_0                  conda-forge\nlcms2                      2.17             h717163a_0                  conda-forge\nld_impl_linux-64           2.44             h1aa0949_4                  conda-forge\nlerc                       4.0.0            h0aef613_1                  conda-forge\nlibabseil                  20250127.1       cxx17_hbbce691_0            conda-forge\nlibaec                     1.1.4            h3f801dc_0                  conda-forge\nlibavif16                  1.3.0            h6395336_2                  conda-forge\nlibblas                    3.9.0            37_h5875eb1_mkl             conda-forge\nlibbrotlicommon            1.1.0            hb03c661_4                  conda-forge\nlibbrotlidec               1.1.0            hb03c661_4                  conda-forge\nlibbrotlienc               1.1.0            hb03c661_4                  conda-forge\nlibcblas                   3.9.0            37_hfef963f_mkl             conda-forge\nlibcublas                  12.4.5.8         he02047a_2                  conda-forge\nlibcufft                   11.2.1.3         he02047a_2                  conda-forge\nlibcufile                  1.9.1.3          he02047a_2                  conda-forge\nlibcurand                  10.3.5.147       he02047a_2                  conda-forge\nlibcurl                    8.16.0           h4e3cde8_0                  conda-forge\nlibcusolver                11.6.1.9         he02047a_2                  conda-forge\nlibcusparse                12.3.1.170       he02047a_2                  conda-forge\nlibde265                   1.0.15           h00ab1b0_0                  conda-forge\nlibdeflate                 1.24             h86f0d12_0                  conda-forge\nlibedit                    3.1.20250104     pl5321h7949ede_0            conda-forge\nlibev                      4.33             hd590300_2                  conda-forge\nlibexpat                   2.7.1            hecca717_0                  conda-forge\nlibffi                     3.5.2            h9ec8514_0                  conda-forge\nlibfreetype                2.14.1           ha770c72_0                  conda-forge\nlibfreetype6               2.14.1           h73754d4_0                  conda-forge\nlibgcc                     15.2.0           h767d61c_7                  conda-forge\nlibgcc-ng                  15.2.0           h69a702a_7                  conda-forge\nlibgfortran                15.2.0           h69a702a_7                  conda-forge\nlibgfortran5               15.2.0           hcd61629_7                  conda-forge\nlibheif                    1.19.7           gpl_hc18d805_100            conda-forge\nlibhwloc                   2.12.1           default_h7f8ec31_1002       conda-forge\nlibhwy                     1.3.0            h4c17acf_1                  conda-forge\nlibiconv                   1.18             h3b78370_2                  conda-forge\nlibjpeg-turbo              3.1.0            hb9d3cd8_0                  conda-forge\nlibjxl                     0.11.1           h6cb5226_4                  conda-forge\nliblapack                  3.9.0            37_h5e43f62_mkl             conda-forge\nliblzma                    5.8.1            hb9d3cd8_2                  conda-forge\nlibnghttp2                 1.67.0           had1ee68_0                  conda-forge\nlibnpp                     12.2.5.30        he02047a_2                  conda-forge\nlibnsl                     2.0.1            hb9d3cd8_1                  conda-forge\nlibnvfatbin                12.4.127         he02047a_2                  conda-forge\nlibnvjitlink               12.4.127         he02047a_2                  conda-forge\nlibnvjpeg                  12.3.1.117       he02047a_2                  conda-forge\nlibpng                     1.6.50           h421ea60_1                  conda-forge\nlibprotobuf                5.29.3           h7460b1f_2                  conda-forge\nlibsqlite                  3.50.4           h0c1763c_0                  conda-forge\nlibssh2                    1.11.1           hcf80075_0                  conda-forge\nlibstdcxx                  15.2.0           h8f9b012_7                  conda-forge\nlibstdcxx-ng               15.2.0           h4852527_7                  conda-forge\nlibtiff                    4.7.1            h8261f1e_0                  conda-forge\nlibtorch                   2.5.1            cpu_mkl_hf6ddc5a_117        conda-forge\nlibuuid                    2.41.2           he9a06e4_0                  conda-forge\nlibuv                      1.51.0           hb03c661_1                  conda-forge\nlibwebp-base               1.6.0            hd42ef1d_0                  conda-forge\nlibxcb                     1.17.0           h8a09558_0                  conda-forge\nlibxcrypt                  4.4.36           hd590300_1                  conda-forge\nlibxml2                    2.15.1           h031cc0b_0                  conda-forge\nlibxml2-16                 2.15.1           hf2a90c1_0                  conda-forge\nlibzlib                    1.3.1            hb9d3cd8_2                  conda-forge\nlibzopfli                  1.0.3            h9c3ff4c_0                  conda-forge\nllvm-openmp                21.1.4           h4922eb0_0                  conda-forge\nloguru                     0.7.3            pyh707e725_0                conda-forge\nlz4-c                      1.10.0           h5888daf_1                  conda-forge\nmarkdown                   3.9              pyhd8ed1ab_0                conda-forge\nmarkdown-it-py             4.0.0            pyhd8ed1ab_0                conda-forge\nmarkupsafe                 3.0.3            py312h8a5da7c_0             conda-forge\nmdurl                      0.1.2            pyhd8ed1ab_1                conda-forge\nmkl                        2024.2.2         ha770c72_17                 conda-forge\nmpc                        1.3.1            h24ddda3_1                  conda-forge\nmpfr                       4.2.1            h90cbb55_3                  conda-forge\nmpmath                     1.3.0            pyhd8ed1ab_1                conda-forge\nncurses                    6.5              h2d0b736_3                  conda-forge\nnetworkx                   3.5              pyhe01879c_0                conda-forge\nnumpy                      2.3.4            py312h33ff503_0             conda-forge\nocl-icd                    2.3.3            hb9d3cd8_0                  conda-forge\nopencl-headers             2025.06.13       h5888daf_0                  conda-forge\nopenjpeg                   2.5.4            h55fea9a_0                  conda-forge\nopenssl                    3.5.4            h26f9b46_0                  conda-forge\npackaging                  25.0             pyh29332c3_1                conda-forge\npandas                     2.3.3            py312hf79963d_1             conda-forge\npillow                     11.3.0           py312h7b42cdd_3             conda-forge\npip                        25.2             pyh8b19718_0                conda-forge\nplatformdirs               4.5.0            pyhcf101f3_0                conda-forge\npthread-stubs              0.4              hb9d3cd8_1002               conda-forge\npybind11                   3.0.1            pyh7a1b43c_0                conda-forge\npybind11-global            3.0.1            pyhc7ab6ef_0                conda-forge\npydantic                   2.11.10          pyh3cfb1c2_0                conda-forge\npydantic-core              2.33.2           py312h680f630_0             conda-forge\npydantic-settings          2.11.0           pyh3cfb1c2_0                conda-forge\npygments                   2.19.2           pyhd8ed1ab_0                conda-forge\npython                     3.12.12          hd63d673_1_cpython          conda-forge\npython-dateutil            2.9.0.post0      pyhe01879c_2                conda-forge\npython-dotenv              1.1.1            pyhe01879c_0                conda-forge\npython-tzdata              2025.2           pyhd8ed1ab_0                conda-forge\npython_abi                 3.12             8_cp312                     conda-forge\npytorch                    2.5.1            cpu_mkl_py312_h6a7998d_117  conda-forge\npytorch-cuda               12.4             hc786d27_7                  pytorch\npytorch-mutex              1.0              cuda                        pytorch\npytz                       2025.2           pyhd8ed1ab_0                conda-forge\nrav1e                      0.7.1            h8fae777_3                  conda-forge\nreadline                   8.2              h8c095d6_2                  conda-forge\nrich                       14.2.0           pyhcf101f3_0                conda-forge\nruyaml                     0.91.0           pyhd8ed1ab_1                conda-forge\nscipy                      1.16.2           py312h7a1785b_0             conda-forge\nsetuptools                 75.8.2           pyhff2d567_0                conda-forge\nsix                        1.17.0           pyhe01879c_1                conda-forge\nsleef                      3.9.0            ha0421bc_0                  conda-forge\nsnappy                     1.2.2            h03e3b7b_0                  conda-forge\nsniffio                    1.3.1            pyhd8ed1ab_1                conda-forge\nsvt-av1                    3.1.2            hecca717_0                  conda-forge\nsympy                      1.14.0           pyh2585a3b_105              conda-forge\ntbb                        2021.13.0        hb60516a_3                  conda-forge\ntifffile                   2025.10.16       pyhd8ed1ab_0                conda-forge\ntk                         8.6.13           noxft_hd72426e_102          conda-forge\ntorchaudio                 2.5.1            py312_cu124                 pytorch\ntorchvision                0.20.1           cpu_py312_hea98c79_6        conda-forge\ntqdm                       4.67.1           pyhd8ed1ab_1                conda-forge\ntyping-extensions          4.15.0           h396c80c_0                  conda-forge\ntyping-inspection          0.4.2            pyhd8ed1ab_0                conda-forge\ntyping_extensions          4.15.0           pyhcf101f3_0                conda-forge\ntzdata                     2025b            h78e105d_0                  conda-forge\nwheel                      0.45.1           pyhd8ed1ab_1                conda-forge\nx265                       3.5              h924138e_3                  conda-forge\nxarray                     2025.1.2         pyhd8ed1ab_0                conda-forge\nxorg-libxau                1.0.12           hb9d3cd8_0                  conda-forge\nxorg-libxdmcp              1.1.5            hb9d3cd8_0                  conda-forge\nzfp                        1.0.1            h909a3a2_3                  conda-forge\nzipp                       3.23.0           pyhd8ed1ab_0                conda-forge\nzlib-ng                    2.2.5            hde8ca8f_0                  conda-forge\nzstd                       1.5.7            hb8e6e7a_2                  conda-forge\n"
+            },
+            "badge": null,
+            "links": [
+                "bioimageio/bioimageio.core"
+            ]
+        },
+        "careamics_0.0.16": {
+            "status": "not-applicable",
+            "score": 0.0,
+            "error": null,
+            "details": "'Model' resource not tagged with 'CAREamics' or 'careamics'.",
+            "badge": null,
+            "links": []
+        },
+        "careamics_0.0.17": {
+            "status": "not-applicable",
+            "score": 0.0,
+            "error": null,
+            "details": "'Model' resource not tagged with 'CAREamics' or 'careamics'.",
+            "badge": null,
+            "links": []
+        },
+        "biapy_3.6.5": {
+            "status": "failed",
+            "score": 0.0,
+            "error": "[all] pytorch_state_dict not found in model RDF or inputs != 1\n",
+            "details": "[all] pytorch_state_dict not found in model RDF or inputs != 1\n",
+            "badge": null,
+            "links": [
+                "biapy/biapy"
+            ]
+        },
+        "bioimageio.core_0.9.3": {
+            "status": "failed",
+            "score": 0.0,
+            "error": "test command 'conda run -n f5cf36dca22712fafe75167b49735f9fa769625f213b98796d94754aea164695 bioimageio test https://hypha.aicell.io/bioimage-io/artifacts/self-disciplined-blowfish/files/rdf.yaml?version=v0 --summary-path=/tmp/tmpae7xuxpb/torchscript/summary.json --determinism=full --stop-early' did not produce a summary file at /tmp/tmpae7xuxpb/torchscript/summary.json",
+            "details": {
+                "name": "calling bioimageio test command",
+                "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/self-disciplined-blowfish/files/rdf.yaml?version=v0",
+                "id": null,
+                "type": "unknown",
+                "format_version": "unknown",
+                "status": "failed",
+                "metadata_completeness": 0.0,
+                "details": [
+                    {
+                        "name": "run 'bioimageio test'",
+                        "status": "failed",
+                        "loc": [],
+                        "errors": [
+                            {
+                                "loc": [],
+                                "msg": "test command 'conda run -n f5cf36dca22712fafe75167b49735f9fa769625f213b98796d94754aea164695 bioimageio test https://hypha.aicell.io/bioimage-io/artifacts/self-disciplined-blowfish/files/rdf.yaml?version=v0 --summary-path=/tmp/tmpae7xuxpb/torchscript/summary.json --determinism=full --stop-early' did not produce a summary file at /tmp/tmpae7xuxpb/torchscript/summary.json",
+                                "type": "bioimageio cli",
+                                "with_traceback": false,
+                                "traceback_md": "",
+                                "traceback_html": ""
+                            }
+                        ],
+                        "warnings": [],
+                        "context": null,
+                        "recommended_env": null,
+                        "saved_conda_compare": null
+                    }
+                ],
+                "env": [],
+                "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build                    Channel\n_libgcc_mutex              0.1              conda_forge              conda-forge\n_openmp_mutex              4.5              2_gnu                    conda-forge\nannotated-types            0.7.0            pyhd8ed1ab_1             conda-forge\nanyio                      4.11.0           pyhcf101f3_0             conda-forge\naom                        3.9.1            hac33072_0               conda-forge\nbackoffice                 0.1.0            pypi_0                   pypi\nbioimageio.core            0.9.3            pyhd8ed1ab_0             conda-forge\nbioimageio.spec            0.5.5.5          pyhd8ed1ab_0             conda-forge\nblosc                      1.21.6           he440d0b_1               conda-forge\nbrunsli                    0.1              he3183e4_1               conda-forge\nbzip2                      1.0.8            hda65f42_8               conda-forge\nc-ares                     1.34.5           hb9d3cd8_0               conda-forge\nc-blosc2                   2.21.3           h4cfbee9_0               conda-forge\nca-certificates            2025.10.5        hbd8a1cb_0               conda-forge\ncached-property            1.5.2            hd8ed1ab_1               conda-forge\ncached_property            1.5.2            pyha770c72_1             conda-forge\ncertifi                    2025.10.5        pyhd8ed1ab_0             conda-forge\ncffi                       2.0.0            pypi_0                   pypi\ncharls                     2.4.2            h59595ed_0               conda-forge\ncharset-normalizer         3.4.3            pypi_0                   pypi\ncolorama                   0.4.6            pyhd8ed1ab_1             conda-forge\ncryptography               46.0.2           pypi_0                   pypi\ndav1d                      1.2.1            hd590300_0               conda-forge\ndistro                     1.9.0            pyhd8ed1ab_1             conda-forge\ndnspython                  2.8.0            pyhcf101f3_0             conda-forge\nemail-validator            2.3.0            pyhd8ed1ab_0             conda-forge\nemail_validator            2.3.0            hd8ed1ab_0               conda-forge\nexceptiongroup             1.3.0            pyhd8ed1ab_0             conda-forge\nfilelock                   3.20.0           pyhd8ed1ab_0             conda-forge\ngenericache                0.5.2            pyhd8ed1ab_0             conda-forge\ngiflib                     5.2.2            hd590300_0               conda-forge\nh11                        0.16.0           pyhd8ed1ab_0             conda-forge\nh2                         4.3.0            pyhcf101f3_0             conda-forge\nh5py                       3.14.0           nompi_py313h253c126_101  conda-forge\nhdf5                       1.14.6           nompi_h6e4c0c1_103       conda-forge\nhpack                      4.1.0            pyhd8ed1ab_0             conda-forge\nhttpcore                   1.0.9            pyh29332c3_0             conda-forge\nhttpx                      0.28.1           pyhd8ed1ab_0             conda-forge\nhyperframe                 6.1.0            pyhd8ed1ab_0             conda-forge\nidna                       3.10             pyhd8ed1ab_1             conda-forge\nimagecodecs                2025.8.2         py313h718aa22_4          conda-forge\nimageio                    2.37.0           pyhfb79c49_0             conda-forge\nimportlib-metadata         8.7.0            pyhe01879c_1             conda-forge\njxrlib                     1.1              hd590300_3               conda-forge\nkeyutils                   1.6.3            hb9d3cd8_0               conda-forge\nkrb5                       1.21.3           h659f571_0               conda-forge\nlcms2                      2.17             h717163a_0               conda-forge\nld_impl_linux-64           2.44             ha97dd6f_2               conda-forge\nlerc                       4.0.0            h0aef613_1               conda-forge\nlibaec                     1.1.4            h3f801dc_0               conda-forge\nlibavif16                  1.3.0            h6395336_2               conda-forge\nlibblas                    3.9.0            36_h4a7cf45_openblas     conda-forge\nlibbrotlicommon            1.1.0            hb03c661_4               conda-forge\nlibbrotlidec               1.1.0            hb03c661_4               conda-forge\nlibbrotlienc               1.1.0            hb03c661_4               conda-forge\nlibcblas                   3.9.0            36_h0358290_openblas     conda-forge\nlibcurl                    8.14.1           h332b0f4_0               conda-forge\nlibdeflate                 1.24             h86f0d12_0               conda-forge\nlibedit                    3.1.20250104     pl5321h7949ede_0         conda-forge\nlibev                      4.33             hd590300_2               conda-forge\nlibexpat                   2.7.1            hecca717_0               conda-forge\nlibffi                     3.4.6            h2dba641_1               conda-forge\nlibfreetype                2.14.1           ha770c72_0               conda-forge\nlibfreetype6               2.14.1           h73754d4_0               conda-forge\nlibgcc                     15.2.0           h767d61c_7               conda-forge\nlibgcc-ng                  15.2.0           h69a702a_7               conda-forge\nlibgfortran                15.2.0           h69a702a_7               conda-forge\nlibgfortran5               15.2.0           hcd61629_7               conda-forge\nlibgomp                    15.2.0           h767d61c_7               conda-forge\nlibhwy                     1.3.0            h4c17acf_1               conda-forge\nlibjpeg-turbo              3.1.0            hb9d3cd8_0               conda-forge\nlibjxl                     0.11.1           h6cb5226_4               conda-forge\nliblapack                  3.9.0            36_h47877c9_openblas     conda-forge\nliblzma                    5.8.1            hb9d3cd8_2               conda-forge\nlibmpdec                   4.0.0            hb9d3cd8_0               conda-forge\nlibnghttp2                 1.67.0           had1ee68_0               conda-forge\nlibopenblas                0.3.30           pthreads_h94d23a6_2      conda-forge\nlibpng                     1.6.50           h421ea60_1               conda-forge\nlibsqlite                  3.50.4           h0c1763c_0               conda-forge\nlibssh2                    1.11.1           hcf80075_0               conda-forge\nlibstdcxx                  15.2.0           h8f9b012_7               conda-forge\nlibstdcxx-ng               15.2.0           h4852527_7               conda-forge\nlibtiff                    4.7.1            h8261f1e_0               conda-forge\nlibuuid                    2.41.2           he9a06e4_0               conda-forge\nlibwebp-base               1.6.0            hd42ef1d_0               conda-forge\nlibxcb                     1.17.0           h8a09558_0               conda-forge\nlibzlib                    1.3.1            hb9d3cd8_2               conda-forge\nlibzopfli                  1.0.3            h9c3ff4c_0               conda-forge\nloguru                     0.7.3            pyh707e725_0             conda-forge\nlz4-c                      1.10.0           h5888daf_1               conda-forge\nmarkdown                   3.9              pyhd8ed1ab_0             conda-forge\nmarkdown-it-py             4.0.0            pyhd8ed1ab_0             conda-forge\nmdurl                      0.1.2            pyhd8ed1ab_1             conda-forge\nncurses                    6.5              h2d0b736_3               conda-forge\nnumpy                      2.3.3            py313hf6604e3_0          conda-forge\nopenjpeg                   2.5.4            h55fea9a_0               conda-forge\nopenssl                    3.5.4            h26f9b46_0               conda-forge\npackaging                  25.0             pyh29332c3_1             conda-forge\npandas                     2.3.3            py313h08cd8bf_1          conda-forge\npillow                     11.3.0           py313ha492abd_3          conda-forge\npip                        25.2             pyh145f28c_0             conda-forge\nplatformdirs               4.5.0            pyhcf101f3_0             conda-forge\npthread-stubs              0.4              hb9d3cd8_1002            conda-forge\npycparser                  2.23             pypi_0                   pypi\npydantic                   2.11.10          pyh3cfb1c2_0             conda-forge\npydantic-core              2.33.2           py313h4b2b08d_0          conda-forge\npydantic-settings          2.11.0           pyh3cfb1c2_0             conda-forge\npygithub                   2.8.1            pypi_0                   pypi\npygments                   2.19.2           pyhd8ed1ab_0             conda-forge\npyjwt                      2.10.1           pypi_0                   pypi\npynacl                     1.6.0            pypi_0                   pypi\npython                     3.13.7           h2b335a9_100_cp313       conda-forge\npython-dateutil            2.9.0.post0      pyhe01879c_2             conda-forge\npython-dotenv              1.1.1            pyhe01879c_0             conda-forge\npython-tzdata              2025.2           pyhd8ed1ab_0             conda-forge\npython_abi                 3.13             8_cp313                  conda-forge\npytz                       2025.2           pyhd8ed1ab_0             conda-forge\nrav1e                      0.7.1            h8fae777_3               conda-forge\nreadline                   8.2              h8c095d6_2               conda-forge\nrequests                   2.32.5           pypi_0                   pypi\nrich                       14.1.0           pyhe01879c_0             conda-forge\nruyaml                     0.91.0           pyhd8ed1ab_1             conda-forge\nscipy                      1.16.2           py313h11c21cd_0          conda-forge\nsetuptools                 80.9.0           pyhff2d567_0             conda-forge\nsix                        1.17.0           pyhe01879c_1             conda-forge\nsnappy                     1.2.2            h03e3b7b_0               conda-forge\nsniffio                    1.3.1            pyhd8ed1ab_1             conda-forge\nsvt-av1                    3.1.2            hecca717_0               conda-forge\ntifffile                   2025.10.4        pyhd8ed1ab_0             conda-forge\ntk                         8.6.13           noxft_hd72426e_102       conda-forge\ntqdm                       4.67.1           pyhd8ed1ab_1             conda-forge\ntyping-extensions          4.15.0           h396c80c_0               conda-forge\ntyping-inspection          0.4.2            pyhd8ed1ab_0             conda-forge\ntyping_extensions          4.15.0           pyhcf101f3_0             conda-forge\ntzdata                     2025b            h78e105d_0               conda-forge\nurllib3                    2.5.0            pypi_0                   pypi\nxarray                     2025.1.2         pyhd8ed1ab_0             conda-forge\nxorg-libxau                1.0.12           hb9d3cd8_0               conda-forge\nxorg-libxdmcp              1.1.5            hb9d3cd8_0               conda-forge\nzfp                        1.0.1            h909a3a2_3               conda-forge\nzipp                       3.23.0           pyhd8ed1ab_0             conda-forge\nzlib-ng                    2.2.5            hde8ca8f_0               conda-forge\nzstd                       1.5.7            hb8e6e7a_2               conda-forge\n"
+            },
+            "badge": null,
+            "links": []
+        }
+    }
 }

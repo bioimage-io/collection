@@ -1,0 +1,55 @@
+{
+    "rdf_content": {
+        "name": "Lizard",
+        "description": "Developing deep segmentation models for computational pathology (CPath) can advance the discovery of interpretable morphological biomarkers. However, these models require large amounts of accurately labelled data, which is difficult to obtain since detailed annotations depend on pathologists distinguishing complex tissue and cell structures. Manual labelling is impractical at scale, while fully automatic annotations reduce accuracy. To address this, we propose a multi-stage annotation pipeline with pathologist-in-the-loop refinement, enabling large-scale histology datasets. Using this approach, we created the largest known nuclear instance segmentation and classification dataset, nearly half a million labelled nuclei in H&E-stained colon tissue, which we will release to support further CPath research.",
+        "covers": [
+            "lizard1.png",
+            "lizard2.png"
+        ],
+        "authors": [
+            {
+                "affiliation": "MRC LMB",
+                "orcid": "0000-0002-1109-110X",
+                "name": "Daniel Franco-Barranco",
+                "github_user": "danifranco"
+            }
+        ],
+        "cite": [
+            {
+                "text": "Graham, Simon, et al. 'Lizard: a large-scale dataset for colonic nuclear instance segmentation and classification.' Proceedings of the IEEE/CVF international conference on computer vision. 2021.",
+                "doi": "10.1109/ICCVW54120.2021.00082",
+                "url": "https://conic-challenge.grand-challenge.org/"
+            }
+        ],
+        "license": "CC-BY-NC-SA-4.0",
+        "tags": [
+            "instance-segmentation",
+            "2D",
+            "histology",
+            "nuclei"
+        ],
+        "version": "0.1.0",
+        "format_version": "0.3.0",
+        "documentation": "Lizard.md",
+        "type": "dataset",
+        "source": "https://conic-challenge.grand-challenge.org/",
+        "uploader": {
+            "name": "Daniel Franco-Barranco",
+            "email": "danialtza@gmail.com"
+        },
+        "id": "enticing-peanut",
+        "id_emoji": "🥜"
+    },
+    "rdf_yaml_sha256": "bc6e22bae3d77513cfabe38f791e03bb120355e6f7c8222c57f0aa589b7b371d",
+    "status": "failed",
+    "scores": {
+        "tool_compatibility_version_specific": {},
+        "metadata_completeness": 0.0,
+        "metadata_format": 0.0,
+        "core_compatibility": 0.0,
+        "tool_compatibility": {},
+        "overall_partner_tool_compatibility": 0.0,
+        "overall_compatibility": 0.0
+    },
+    "tests": {}
+}

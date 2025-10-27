@@ -53,5 +53,15 @@
         ]
     },
     "rdf_yaml_sha256": "fe4726116c9987177f7610a8af158a25c8c07995f1ba8049ca98ed9906831f66",
-    "status": "untested"
+    "status": "failed",
+    "scores": {
+        "tool_compatibility_version_specific": {},
+        "metadata_completeness": 0.0,
+        "metadata_format": 0.0,
+        "core_compatibility": 0.0,
+        "tool_compatibility": {},
+        "overall_partner_tool_compatibility": 0.0,
+        "overall_compatibility": 0.0
+    },
+    "tests": {}
 }
