@@ -130,7 +130,7 @@
                                 -2.0995642684453917
                             ],
                             "std": [
-                                0.000052538396543070526
+                                5.2538396543070526e-05
                             ]
                         }
                     },
@@ -190,73 +190,97 @@
         }
     },
     "rdf_yaml_sha256": "be43087d3acd6c41a78766155217ad33b58736e06df2a5e4fa50aef801072320",
-    "status": "failed",
     "scores": {
-        "tool_compatibility_version_specific": {},
+        "core_compatibility": 0.0,
         "metadata_completeness": 0.0,
         "metadata_format": 0.0,
-        "core_compatibility": 0.0,
-        "tool_compatibility": {},
+        "overall_compatibility": 0.0,
         "overall_partner_tool_compatibility": 0.0,
-        "overall_compatibility": 0.0
+        "tool_compatibility": {},
+        "tool_compatibility_version_specific": {}
     },
+    "status": "failed",
     "tests": {
-        "bioimageio.core_0.9.4": {
-            "status": "failed",
+        "biapy_3.6.5": {
+            "badge": null,
+            "details": "[all] pytorch_state_dict not found in model RDF or inputs != 1\n",
+            "error": "[all] pytorch_state_dict not found in model RDF or inputs != 1\n",
+            "links": [
+                "biapy/biapy"
+            ],
             "score": 0.0,
-            "error": "Command '['conda', 'env', 'create', '--yes', '--file=/tmp/tmp2mppkg54/pytorch_state_dict/env.yaml', '--name=3d5bf57e23beeafd6ea2183cfc86de256c11395f850f34909b53a65354a43210', '--quiet']' returned non-zero exit status 1.",
+            "status": "failed"
+        },
+        "bioimageio.core_0.9.4": {
+            "badge": null,
             "details": {
-                "name": "bioimageio format validation",
-                "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/wild-rhino/files/rdf.yaml?version=v0",
-                "id": "wild-rhino",
-                "type": "model",
-                "format_version": "0.5.5",
-                "status": "failed",
-                "metadata_completeness": 0.7049180327868853,
                 "details": [
                     {
-                        "name": "Successfully created `ModelDescr` instance.",
-                        "status": "passed",
-                        "loc": [],
-                        "errors": [],
-                        "warnings": [],
                         "context": {
                             "file_name": "rdf.yaml",
-                            "original_source_name": null,
-                            "perform_io_checks": true,
                             "known_files": {
-                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-rhino/files/cover.png?version=v0": null,
-                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-rhino/files/config.yml?version=v0": null,
                                 "config.yml": "08fd44af1bfb5fae763063268be4a3d591357f6cd961adae63d2249b797ba2b4",
-                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-rhino/files/README.md?version=v0": null,
-                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-rhino/files/inputs.npy?version=v0": null,
-                                "inputs.npy": "889f8bbdd258b300276e63bf676e07436830a2117400688fd255dbc2328e5bef",
-                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-rhino/files/outputs.npy?version=v0": null,
-                                "outputs.npy": "23f8b31ed00d7884807a7e75dafebf5efa7512c6d1f2199013be06d6e91657f0",
-                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-rhino/files/weights.pth?version=v0": null,
-                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-rhino/files/environment.yml?version=v0": null,
                                 "environment.yml": "f6daf3b6fe660089befee91ccc3e6b557b6c457ff49553b8f9a258c7e39c8756",
+                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-rhino/files/README.md?version=v0": null,
+                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-rhino/files/config.yml?version=v0": null,
+                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-rhino/files/cover.png?version=v0": null,
+                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-rhino/files/environment.yml?version=v0": null,
+                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-rhino/files/inputs.npy?version=v0": null,
+                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-rhino/files/outputs.npy?version=v0": null,
+                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-rhino/files/weights.pth?version=v0": null,
+                                "inputs.npy": "889f8bbdd258b300276e63bf676e07436830a2117400688fd255dbc2328e5bef",
+                                "outputs.npy": "23f8b31ed00d7884807a7e75dafebf5efa7512c6d1f2199013be06d6e91657f0",
                                 "weights.pth": "11d0b7939575faa46ad8bf31eceba49266228a903df6194a2dd28a7797f50cf9"
                             },
-                            "update_hashes": false,
-                            "root": "https://hypha.aicell.io/bioimage-io/artifacts/wild-rhino/files?version=v0"
+                            "original_source_name": null,
+                            "perform_io_checks": true,
+                            "root": "https://hypha.aicell.io/bioimage-io/artifacts/wild-rhino/files?version=v0",
+                            "update_hashes": false
                         },
+                        "errors": [],
+                        "loc": [],
+                        "name": "Successfully created `ModelDescr` instance.",
                         "recommended_env": null,
-                        "saved_conda_compare": null
+                        "saved_conda_compare": null,
+                        "status": "passed",
+                        "warnings": []
                     },
                     {
-                        "name": "bioimageio.spec format validation model 0.5.5",
-                        "status": "passed",
-                        "loc": [],
+                        "context": {
+                            "file_name": "rdf.yaml",
+                            "known_files": {
+                                "config.yml": "08fd44af1bfb5fae763063268be4a3d591357f6cd961adae63d2249b797ba2b4",
+                                "environment.yml": "f6daf3b6fe660089befee91ccc3e6b557b6c457ff49553b8f9a258c7e39c8756",
+                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-rhino/files/README.md?version=v0": null,
+                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-rhino/files/config.yml?version=v0": null,
+                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-rhino/files/cover.png?version=v0": null,
+                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-rhino/files/environment.yml?version=v0": null,
+                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-rhino/files/inputs.npy?version=v0": null,
+                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-rhino/files/outputs.npy?version=v0": null,
+                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-rhino/files/weights.pth?version=v0": null,
+                                "inputs.npy": "889f8bbdd258b300276e63bf676e07436830a2117400688fd255dbc2328e5bef",
+                                "outputs.npy": "23f8b31ed00d7884807a7e75dafebf5efa7512c6d1f2199013be06d6e91657f0",
+                                "weights.pth": "11d0b7939575faa46ad8bf31eceba49266228a903df6194a2dd28a7797f50cf9"
+                            },
+                            "original_source_name": null,
+                            "perform_io_checks": true,
+                            "root": "https://hypha.aicell.io/bioimage-io/artifacts/wild-rhino/files?version=v0",
+                            "update_hashes": false
+                        },
                         "errors": [],
+                        "loc": [],
+                        "name": "bioimageio.spec format validation model 0.5.5",
+                        "recommended_env": null,
+                        "saved_conda_compare": null,
+                        "status": "passed",
                         "warnings": [
                             {
                                 "loc": [
                                     "documentation"
                                 ],
                                 "msg": "No '# Validation' (sub)section found in README.md.",
-                                "type": "warning",
-                                "severity": 30
+                                "severity": 30,
+                                "type": "warning"
                             },
                             {
                                 "loc": [
@@ -265,8 +289,8 @@
                                     "sample_tensor"
                                 ],
                                 "msg": "Needs to be filled for FAIR compliance",
-                                "type": "warning",
-                                "severity": 35
+                                "severity": 35,
+                                "type": "warning"
                             },
                             {
                                 "loc": [
@@ -275,41 +299,13 @@
                                     "sample_tensor"
                                 ],
                                 "msg": "Needs to be filled for FAIR compliance",
-                                "type": "warning",
-                                "severity": 35
+                                "severity": 35,
+                                "type": "warning"
                             }
-                        ],
-                        "context": {
-                            "file_name": "rdf.yaml",
-                            "original_source_name": null,
-                            "perform_io_checks": true,
-                            "known_files": {
-                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-rhino/files/cover.png?version=v0": null,
-                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-rhino/files/config.yml?version=v0": null,
-                                "config.yml": "08fd44af1bfb5fae763063268be4a3d591357f6cd961adae63d2249b797ba2b4",
-                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-rhino/files/README.md?version=v0": null,
-                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-rhino/files/inputs.npy?version=v0": null,
-                                "inputs.npy": "889f8bbdd258b300276e63bf676e07436830a2117400688fd255dbc2328e5bef",
-                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-rhino/files/outputs.npy?version=v0": null,
-                                "outputs.npy": "23f8b31ed00d7884807a7e75dafebf5efa7512c6d1f2199013be06d6e91657f0",
-                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-rhino/files/weights.pth?version=v0": null,
-                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-rhino/files/environment.yml?version=v0": null,
-                                "environment.yml": "f6daf3b6fe660089befee91ccc3e6b557b6c457ff49553b8f9a258c7e39c8756",
-                                "weights.pth": "11d0b7939575faa46ad8bf31eceba49266228a903df6194a2dd28a7797f50cf9"
-                            },
-                            "update_hashes": false,
-                            "root": "https://hypha.aicell.io/bioimage-io/artifacts/wild-rhino/files?version=v0"
-                        },
-                        "recommended_env": null,
-                        "saved_conda_compare": null
+                        ]
                     },
                     {
-                        "name": "Conda environment creation",
-                        "status": "failed",
-                        "loc": [
-                            "weights",
-                            "pytorch_state_dict"
-                        ],
+                        "context": null,
                         "errors": [
                             {
                                 "loc": [
@@ -317,16 +313,18 @@
                                     "pytorch_state_dict"
                                 ],
                                 "msg": "Command '['conda', 'env', 'create', '--yes', '--file=/tmp/tmp2mppkg54/pytorch_state_dict/env.yaml', '--name=3d5bf57e23beeafd6ea2183cfc86de256c11395f850f34909b53a65354a43210', '--quiet']' returned non-zero exit status 1.",
-                                "type": "conda",
-                                "with_traceback": true,
+                                "traceback_html": "<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"UTF-8\">\n<style>\n.r1 {color: #800000; text-decoration-color: #800000}\n.r2 {color: #800000; text-decoration-color: #800000; font-weight: bold}\n.r3 {color: #bf7f7f; text-decoration-color: #bf7f7f; font-weight: bold}\n.r4 {color: #bfbf7f; text-decoration-color: #bfbf7f}\n.r5 {color: #808000; text-decoration-color: #808000; font-weight: bold}\n.r6 {color: #0000ff; text-decoration-color: #0000ff}\n.r7 {color: #00ff00; text-decoration-color: #00ff00}\n.r8 {color: #7f7f7f; text-decoration-color: #7f7f7f}\n.r9 {color: #00ffff; text-decoration-color: #00ffff}\n.r10 {color: #808000; text-decoration-color: #808000}\n.r11 {color: #00ffff; text-decoration-color: #00ffff; text-decoration: underline}\n.r12 {color: #ff00ff; text-decoration-color: #ff00ff}\n.r13 {color: #ff0000; text-decoration-color: #ff0000; font-weight: bold}\n.r14 {color: #008000; text-decoration-color: #008000}\n.r15 {font-weight: bold}\n.r16 {color: #008080; text-decoration-color: #008080; font-weight: bold}\n.r17 {font-style: italic}\nbody {\n    color: #000000;\n    background-color: #ffffff;\n}\n</style>\n</head>\n<body>\n    <pre style=\"font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace\"><code style=\"font-family:inherit\"><span class=\"r1\">╭─────────────────────────────── </span><span class=\"r2\">Traceback </span><span class=\"r3\">(most recent call last)</span><span class=\"r1\"> ────────────────────────────────╮</span>\n<span class=\"r1\">│</span> <span class=\"r4\">/home/runner/.local/lib/python3.12/site-packages/bioimageio/core/</span><span class=\"r5\">_resource_tests.py</span>:<span class=\"r6\">399</span> in <span class=\"r7\">_test</span> <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>                                                                                                  <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 396 </span><span class=\"r8\">│   │   </span><span class=\"r6\">raise</span> <span class=\"r9\">RuntimeError</span>(<span class=\"r10\">&quot;Conda not available&quot;</span>) <span class=\"r6\">from</span> <span class=\"r11\">e</span>                                  <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 397 </span><span class=\"r8\">│   </span>                                                                                      <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 398 </span><span class=\"r8\">│   </span><span class=\"r6\">try</span>:                                                                                  <span class=\"r1\">│</span>\n<span class=\"r1\">│</span> <span class=\"r1\">❱ </span> 399 <span class=\"r8\">│   │   </span>run_command([CONDA_CMD, <span class=\"r10\">&quot;run&quot;</span>, <span class=\"r10\">&quot;-n&quot;</span>, env_name, <span class=\"r10\">&quot;python&quot;</span>, <span class=\"r10\">&quot;--version&quot;</span>])            <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 400 </span><span class=\"r8\">│   </span><span class=\"r6\">except</span> <span class=\"r9\">Exception</span> <span class=\"r6\">as</span> e:                                                                <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 401 </span><span class=\"r8\">│   │   </span>working_dir.mkdir(parents=<span class=\"r6\">True</span>, exist_ok=<span class=\"r6\">True</span>)                                    <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 402 </span><span class=\"r8\">│   │   </span>path = working_dir / <span class=\"r10\">&quot;env.yaml&quot;</span>                                                   <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>                                                                                                  <span class=\"r1\">│</span>\n<span class=\"r1\">│</span> <span class=\"r4\">/home/runner/.local/lib/python3.12/site-packages/bioimageio/core/</span><span class=\"r5\">_resource_tests.py</span>:<span class=\"r6\">197</span> in <span class=\"r7\">defau</span> <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>                                                                                                  <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 194 </span>                                                                                          <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 195 </span><span class=\"r6\">def</span> <span class=\"r7\">default_run_command</span>(args: Sequence[<span class=\"r9\">str</span>]):                                             <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 196 </span><span class=\"r8\">│   </span>logger.info(<span class=\"r10\">&quot;running &#x27;{}&#x27;...&quot;</span>, <span class=\"r10\">&quot; &quot;</span>.join(args))                                        <span class=\"r1\">│</span>\n<span class=\"r1\">│</span> <span class=\"r1\">❱ </span> 197 <span class=\"r8\">│   </span>_ = subprocess.check_call(args)                                                       <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 198 </span>                                                                                          <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 199 </span>                                                                                          <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 200 </span><span class=\"r6\">def</span> <span class=\"r7\">test_description</span>(                                                                     <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>                                                                                                  <span class=\"r1\">│</span>\n<span class=\"r1\">│</span> <span class=\"r4\">/usr/lib/python3.12/</span><span class=\"r5\">subprocess.py</span>:<span class=\"r6\">413</span> in <span class=\"r7\">check_call</span>                                              <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>                                                                                                  <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 410 </span><span class=\"r8\">│   │   </span>cmd = kwargs.get(<span class=\"r10\">&quot;args&quot;</span>)                                                          <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 411 </span><span class=\"r8\">│   │   </span><span class=\"r6\">if</span> cmd <span class=\"r12\">is</span> <span class=\"r6\">None</span>:                                                                   <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 412 </span><span class=\"r8\">│   │   │   </span>cmd = popenargs[<span class=\"r6\">0</span>]                                                            <span class=\"r1\">│</span>\n<span class=\"r1\">│</span> <span class=\"r1\">❱ </span> 413 <span class=\"r8\">│   │   </span><span class=\"r6\">raise</span> CalledProcessError(retcode, cmd)                                            <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 414 </span><span class=\"r8\">│   </span><span class=\"r6\">return</span> <span class=\"r6\">0</span>                                                                              <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 415 </span>                                                                                          <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 416 </span>                                                                                          <span class=\"r1\">│</span>\n<span class=\"r1\">╰──────────────────────────────────────────────────────────────────────────────────────────────────╯</span>\n<span class=\"r13\">CalledProcessError: </span>Command <span class=\"r14\">&#x27;[&#x27;</span>conda&#x27;, <span class=\"r14\">&#x27;run&#x27;</span>, <span class=\"r14\">&#x27;-n&#x27;</span>, <span class=\"r14\">&#x27;3d5bf57e23beeafd6ea2183cfc86de256c11395f850f34909b53a65354a43210&#x27;</span>, <span class=\"r14\">&#x27;python&#x27;</span>, <span class=\"r14\">&#x27;--version&#x27;</span><span class=\"r15\">]</span>&#x27; returned non-zero exit status <span class=\"r16\">1</span>.\n\n<span class=\"r17\">During handling of the above exception, another exception occurred:</span>\n\n<span class=\"r1\">╭─────────────────────────────── </span><span class=\"r2\">Traceback </span><span class=\"r3\">(most recent call last)</span><span class=\"r1\"> ────────────────────────────────╮</span>\n<span class=\"r1\">│</span> <span class=\"r4\">/home/runner/.local/lib/python3.12/site-packages/bioimageio/core/</span><span class=\"r5\">_resource_tests.py</span>:<span class=\"r6\">406</span> in <span class=\"r7\">_test</span> <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>                                                                                                  <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 403 </span><span class=\"r8\">│   │   </span><span class=\"r6\">try</span>:                                                                              <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 404 </span><span class=\"r8\">│   │   │   </span>_ = path.write_bytes(encoded_env)                                             <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 405 </span><span class=\"r8\">│   │   │   </span>logger.debug(<span class=\"r10\">&quot;written conda env to {}&quot;</span>, path)                                 <span class=\"r1\">│</span>\n<span class=\"r1\">│</span> <span class=\"r1\">❱ </span> 406 <span class=\"r8\">│   │   │   </span>run_command(                                                                  <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 407 </span><span class=\"r8\">│   │   │   │   </span>[                                                                         <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 408 </span><span class=\"r8\">│   │   │   │   │   </span>CONDA_CMD,                                                            <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 409 </span><span class=\"r8\">│   │   │   │   │   </span><span class=\"r10\">&quot;env&quot;</span>,                                                                <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>                                                                                                  <span class=\"r1\">│</span>\n<span class=\"r1\">│</span> <span class=\"r4\">/home/runner/.local/lib/python3.12/site-packages/bioimageio/core/</span><span class=\"r5\">_resource_tests.py</span>:<span class=\"r6\">197</span> in <span class=\"r7\">defau</span> <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>                                                                                                  <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 194 </span>                                                                                          <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 195 </span><span class=\"r6\">def</span> <span class=\"r7\">default_run_command</span>(args: Sequence[<span class=\"r9\">str</span>]):                                             <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 196 </span><span class=\"r8\">│   </span>logger.info(<span class=\"r10\">&quot;running &#x27;{}&#x27;...&quot;</span>, <span class=\"r10\">&quot; &quot;</span>.join(args))                                        <span class=\"r1\">│</span>\n<span class=\"r1\">│</span> <span class=\"r1\">❱ </span> 197 <span class=\"r8\">│   </span>_ = subprocess.check_call(args)                                                       <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 198 </span>                                                                                          <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 199 </span>                                                                                          <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 200 </span><span class=\"r6\">def</span> <span class=\"r7\">test_description</span>(                                                                     <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>                                                                                                  <span class=\"r1\">│</span>\n<span class=\"r1\">│</span> <span class=\"r4\">/usr/lib/python3.12/</span><span class=\"r5\">subprocess.py</span>:<span class=\"r6\">413</span> in <span class=\"r7\">check_call</span>                                              <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>                                                                                                  <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 410 </span><span class=\"r8\">│   │   </span>cmd = kwargs.get(<span class=\"r10\">&quot;args&quot;</span>)                                                          <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 411 </span><span class=\"r8\">│   │   </span><span class=\"r6\">if</span> cmd <span class=\"r12\">is</span> <span class=\"r6\">None</span>:                                                                   <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 412 </span><span class=\"r8\">│   │   │   </span>cmd = popenargs[<span class=\"r6\">0</span>]                                                            <span class=\"r1\">│</span>\n<span class=\"r1\">│</span> <span class=\"r1\">❱ </span> 413 <span class=\"r8\">│   │   </span><span class=\"r6\">raise</span> CalledProcessError(retcode, cmd)                                            <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 414 </span><span class=\"r8\">│   </span><span class=\"r6\">return</span> <span class=\"r6\">0</span>                                                                              <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 415 </span>                                                                                          <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 416 </span>                                                                                          <span class=\"r1\">│</span>\n<span class=\"r1\">╰──────────────────────────────────────────────────────────────────────────────────────────────────╯</span>\n<span class=\"r13\">CalledProcessError: </span>Command <span class=\"r14\">&#x27;[&#x27;</span>conda&#x27;, <span class=\"r14\">&#x27;env&#x27;</span>, <span class=\"r14\">&#x27;create&#x27;</span>, <span class=\"r14\">&#x27;--yes&#x27;</span>, <span class=\"r14\">&#x27;--file=/tmp/tmp2mppkg54/pytorch_state_dict/env.yaml&#x27;</span>, <span class=\"r14\">&#x27;--name=3d5bf57e23beeafd6ea2183cfc86de256c11395f850f34909b53a65354a43210&#x27;</span>, <span class=\"r14\">&#x27;--quiet&#x27;</span><span class=\"r15\">]</span>&#x27; returned non-zero exit status <span class=\"r16\">1</span>.\n</code></pre>\n</body>\n</html>\n",
                                 "traceback_md": "╭─────────────────────────────── Traceback (most recent call last) ────────────────────────────────╮\n│ /home/runner/.local/lib/python3.12/site-packages/bioimageio/core/_resource_tests.py:399 in _test │\n│                                                                                                  │\n│    396 │   │   raise RuntimeError(\"Conda not available\") from e                                  │\n│    397 │                                                                                         │\n│    398 │   try:                                                                                  │\n│ ❱  399 │   │   run_command([CONDA_CMD, \"run\", \"-n\", env_name, \"python\", \"--version\"])            │\n│    400 │   except Exception as e:                                                                │\n│    401 │   │   working_dir.mkdir(parents=True, exist_ok=True)                                    │\n│    402 │   │   path = working_dir / \"env.yaml\"                                                   │\n│                                                                                                  │\n│ /home/runner/.local/lib/python3.12/site-packages/bioimageio/core/_resource_tests.py:197 in defau │\n│                                                                                                  │\n│    194                                                                                           │\n│    195 def default_run_command(args: Sequence[str]):                                             │\n│    196 │   logger.info(\"running '{}'...\", \" \".join(args))                                        │\n│ ❱  197 │   _ = subprocess.check_call(args)                                                       │\n│    198                                                                                           │\n│    199                                                                                           │\n│    200 def test_description(                                                                     │\n│                                                                                                  │\n│ /usr/lib/python3.12/subprocess.py:413 in check_call                                              │\n│                                                                                                  │\n│    410 │   │   cmd = kwargs.get(\"args\")                                                          │\n│    411 │   │   if cmd is None:                                                                   │\n│    412 │   │   │   cmd = popenargs[0]                                                            │\n│ ❱  413 │   │   raise CalledProcessError(retcode, cmd)                                            │\n│    414 │   return 0                                                                              │\n│    415                                                                                           │\n│    416                                                                                           │\n╰──────────────────────────────────────────────────────────────────────────────────────────────────╯\nCalledProcessError: Command '['conda', 'run', '-n', '3d5bf57e23beeafd6ea2183cfc86de256c11395f850f34909b53a65354a43210', 'python', '--version']' returned non-zero exit status 1.\n\nDuring handling of the above exception, another exception occurred:\n\n╭─────────────────────────────── Traceback (most recent call last) ────────────────────────────────╮\n│ /home/runner/.local/lib/python3.12/site-packages/bioimageio/core/_resource_tests.py:406 in _test │\n│                                                                                                  │\n│    403 │   │   try:                                                                              │\n│    404 │   │   │   _ = path.write_bytes(encoded_env)                                             │\n│    405 │   │   │   logger.debug(\"written conda env to {}\", path)                                 │\n│ ❱  406 │   │   │   run_command(                                                                  │\n│    407 │   │   │   │   [                                                                         │\n│    408 │   │   │   │   │   CONDA_CMD,                                                            │\n│    409 │   │   │   │   │   \"env\",                                                                │\n│                                                                                                  │\n│ /home/runner/.local/lib/python3.12/site-packages/bioimageio/core/_resource_tests.py:197 in defau │\n│                                                                                                  │\n│    194                                                                                           │\n│    195 def default_run_command(args: Sequence[str]):                                             │\n│    196 │   logger.info(\"running '{}'...\", \" \".join(args))                                        │\n│ ❱  197 │   _ = subprocess.check_call(args)                                                       │\n│    198                                                                                           │\n│    199                                                                                           │\n│    200 def test_description(                                                                     │\n│                                                                                                  │\n│ /usr/lib/python3.12/subprocess.py:413 in check_call                                              │\n│                                                                                                  │\n│    410 │   │   cmd = kwargs.get(\"args\")                                                          │\n│    411 │   │   if cmd is None:                                                                   │\n│    412 │   │   │   cmd = popenargs[0]                                                            │\n│ ❱  413 │   │   raise CalledProcessError(retcode, cmd)                                            │\n│    414 │   return 0                                                                              │\n│    415                                                                                           │\n│    416                                                                                           │\n╰──────────────────────────────────────────────────────────────────────────────────────────────────╯\nCalledProcessError: Command '['conda', 'env', 'create', '--yes', '--file=/tmp/tmp2mppkg54/pytorch_state_dict/env.yaml', '--name=3d5bf57e23beeafd6ea2183cfc86de256c11395f850f34909b53a65354a43210', '--quiet']' returned non-zero exit status 1.\n",
-                                "traceback_html": "<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"UTF-8\">\n<style>\n.r1 {color: #800000; text-decoration-color: #800000}\n.r2 {color: #800000; text-decoration-color: #800000; font-weight: bold}\n.r3 {color: #bf7f7f; text-decoration-color: #bf7f7f; font-weight: bold}\n.r4 {color: #bfbf7f; text-decoration-color: #bfbf7f}\n.r5 {color: #808000; text-decoration-color: #808000; font-weight: bold}\n.r6 {color: #0000ff; text-decoration-color: #0000ff}\n.r7 {color: #00ff00; text-decoration-color: #00ff00}\n.r8 {color: #7f7f7f; text-decoration-color: #7f7f7f}\n.r9 {color: #00ffff; text-decoration-color: #00ffff}\n.r10 {color: #808000; text-decoration-color: #808000}\n.r11 {color: #00ffff; text-decoration-color: #00ffff; text-decoration: underline}\n.r12 {color: #ff00ff; text-decoration-color: #ff00ff}\n.r13 {color: #ff0000; text-decoration-color: #ff0000; font-weight: bold}\n.r14 {color: #008000; text-decoration-color: #008000}\n.r15 {font-weight: bold}\n.r16 {color: #008080; text-decoration-color: #008080; font-weight: bold}\n.r17 {font-style: italic}\nbody {\n    color: #000000;\n    background-color: #ffffff;\n}\n</style>\n</head>\n<body>\n    <pre style=\"font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace\"><code style=\"font-family:inherit\"><span class=\"r1\">╭─────────────────────────────── </span><span class=\"r2\">Traceback </span><span class=\"r3\">(most recent call last)</span><span class=\"r1\"> ────────────────────────────────╮</span>\n<span class=\"r1\">│</span> <span class=\"r4\">/home/runner/.local/lib/python3.12/site-packages/bioimageio/core/</span><span class=\"r5\">_resource_tests.py</span>:<span class=\"r6\">399</span> in <span class=\"r7\">_test</span> <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>                                                                                                  <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 396 </span><span class=\"r8\">│   │   </span><span class=\"r6\">raise</span> <span class=\"r9\">RuntimeError</span>(<span class=\"r10\">&quot;Conda not available&quot;</span>) <span class=\"r6\">from</span> <span class=\"r11\">e</span>                                  <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 397 </span><span class=\"r8\">│   </span>                                                                                      <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 398 </span><span class=\"r8\">│   </span><span class=\"r6\">try</span>:                                                                                  <span class=\"r1\">│</span>\n<span class=\"r1\">│</span> <span class=\"r1\">❱ </span> 399 <span class=\"r8\">│   │   </span>run_command([CONDA_CMD, <span class=\"r10\">&quot;run&quot;</span>, <span class=\"r10\">&quot;-n&quot;</span>, env_name, <span class=\"r10\">&quot;python&quot;</span>, <span class=\"r10\">&quot;--version&quot;</span>])            <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 400 </span><span class=\"r8\">│   </span><span class=\"r6\">except</span> <span class=\"r9\">Exception</span> <span class=\"r6\">as</span> e:                                                                <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 401 </span><span class=\"r8\">│   │   </span>working_dir.mkdir(parents=<span class=\"r6\">True</span>, exist_ok=<span class=\"r6\">True</span>)                                    <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 402 </span><span class=\"r8\">│   │   </span>path = working_dir / <span class=\"r10\">&quot;env.yaml&quot;</span>                                                   <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>                                                                                                  <span class=\"r1\">│</span>\n<span class=\"r1\">│</span> <span class=\"r4\">/home/runner/.local/lib/python3.12/site-packages/bioimageio/core/</span><span class=\"r5\">_resource_tests.py</span>:<span class=\"r6\">197</span> in <span class=\"r7\">defau</span> <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>                                                                                                  <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 194 </span>                                                                                          <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 195 </span><span class=\"r6\">def</span> <span class=\"r7\">default_run_command</span>(args: Sequence[<span class=\"r9\">str</span>]):                                             <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 196 </span><span class=\"r8\">│   </span>logger.info(<span class=\"r10\">&quot;running &#x27;{}&#x27;...&quot;</span>, <span class=\"r10\">&quot; &quot;</span>.join(args))                                        <span class=\"r1\">│</span>\n<span class=\"r1\">│</span> <span class=\"r1\">❱ </span> 197 <span class=\"r8\">│   </span>_ = subprocess.check_call(args)                                                       <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 198 </span>                                                                                          <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 199 </span>                                                                                          <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 200 </span><span class=\"r6\">def</span> <span class=\"r7\">test_description</span>(                                                                     <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>                                                                                                  <span class=\"r1\">│</span>\n<span class=\"r1\">│</span> <span class=\"r4\">/usr/lib/python3.12/</span><span class=\"r5\">subprocess.py</span>:<span class=\"r6\">413</span> in <span class=\"r7\">check_call</span>                                              <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>                                                                                                  <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 410 </span><span class=\"r8\">│   │   </span>cmd = kwargs.get(<span class=\"r10\">&quot;args&quot;</span>)                                                          <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 411 </span><span class=\"r8\">│   │   </span><span class=\"r6\">if</span> cmd <span class=\"r12\">is</span> <span class=\"r6\">None</span>:                                                                   <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 412 </span><span class=\"r8\">│   │   │   </span>cmd = popenargs[<span class=\"r6\">0</span>]                                                            <span class=\"r1\">│</span>\n<span class=\"r1\">│</span> <span class=\"r1\">❱ </span> 413 <span class=\"r8\">│   │   </span><span class=\"r6\">raise</span> CalledProcessError(retcode, cmd)                                            <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 414 </span><span class=\"r8\">│   </span><span class=\"r6\">return</span> <span class=\"r6\">0</span>                                                                              <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 415 </span>                                                                                          <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 416 </span>                                                                                          <span class=\"r1\">│</span>\n<span class=\"r1\">╰──────────────────────────────────────────────────────────────────────────────────────────────────╯</span>\n<span class=\"r13\">CalledProcessError: </span>Command <span class=\"r14\">&#x27;[&#x27;</span>conda&#x27;, <span class=\"r14\">&#x27;run&#x27;</span>, <span class=\"r14\">&#x27;-n&#x27;</span>, <span class=\"r14\">&#x27;3d5bf57e23beeafd6ea2183cfc86de256c11395f850f34909b53a65354a43210&#x27;</span>, <span class=\"r14\">&#x27;python&#x27;</span>, <span class=\"r14\">&#x27;--version&#x27;</span><span class=\"r15\">]</span>&#x27; returned non-zero exit status <span class=\"r16\">1</span>.\n\n<span class=\"r17\">During handling of the above exception, another exception occurred:</span>\n\n<span class=\"r1\">╭─────────────────────────────── </span><span class=\"r2\">Traceback </span><span class=\"r3\">(most recent call last)</span><span class=\"r1\"> ────────────────────────────────╮</span>\n<span class=\"r1\">│</span> <span class=\"r4\">/home/runner/.local/lib/python3.12/site-packages/bioimageio/core/</span><span class=\"r5\">_resource_tests.py</span>:<span class=\"r6\">406</span> in <span class=\"r7\">_test</span> <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>                                                                                                  <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 403 </span><span class=\"r8\">│   │   </span><span class=\"r6\">try</span>:                                                                              <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 404 </span><span class=\"r8\">│   │   │   </span>_ = path.write_bytes(encoded_env)                                             <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 405 </span><span class=\"r8\">│   │   │   </span>logger.debug(<span class=\"r10\">&quot;written conda env to {}&quot;</span>, path)                                 <span class=\"r1\">│</span>\n<span class=\"r1\">│</span> <span class=\"r1\">❱ </span> 406 <span class=\"r8\">│   │   │   </span>run_command(                                                                  <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 407 </span><span class=\"r8\">│   │   │   │   </span>[                                                                         <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 408 </span><span class=\"r8\">│   │   │   │   │   </span>CONDA_CMD,                                                            <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 409 </span><span class=\"r8\">│   │   │   │   │   </span><span class=\"r10\">&quot;env&quot;</span>,                                                                <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>                                                                                                  <span class=\"r1\">│</span>\n<span class=\"r1\">│</span> <span class=\"r4\">/home/runner/.local/lib/python3.12/site-packages/bioimageio/core/</span><span class=\"r5\">_resource_tests.py</span>:<span class=\"r6\">197</span> in <span class=\"r7\">defau</span> <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>                                                                                                  <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 194 </span>                                                                                          <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 195 </span><span class=\"r6\">def</span> <span class=\"r7\">default_run_command</span>(args: Sequence[<span class=\"r9\">str</span>]):                                             <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 196 </span><span class=\"r8\">│   </span>logger.info(<span class=\"r10\">&quot;running &#x27;{}&#x27;...&quot;</span>, <span class=\"r10\">&quot; &quot;</span>.join(args))                                        <span class=\"r1\">│</span>\n<span class=\"r1\">│</span> <span class=\"r1\">❱ </span> 197 <span class=\"r8\">│   </span>_ = subprocess.check_call(args)                                                       <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 198 </span>                                                                                          <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 199 </span>                                                                                          <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 200 </span><span class=\"r6\">def</span> <span class=\"r7\">test_description</span>(                                                                     <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>                                                                                                  <span class=\"r1\">│</span>\n<span class=\"r1\">│</span> <span class=\"r4\">/usr/lib/python3.12/</span><span class=\"r5\">subprocess.py</span>:<span class=\"r6\">413</span> in <span class=\"r7\">check_call</span>                                              <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>                                                                                                  <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 410 </span><span class=\"r8\">│   │   </span>cmd = kwargs.get(<span class=\"r10\">&quot;args&quot;</span>)                                                          <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 411 </span><span class=\"r8\">│   │   </span><span class=\"r6\">if</span> cmd <span class=\"r12\">is</span> <span class=\"r6\">None</span>:                                                                   <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 412 </span><span class=\"r8\">│   │   │   </span>cmd = popenargs[<span class=\"r6\">0</span>]                                                            <span class=\"r1\">│</span>\n<span class=\"r1\">│</span> <span class=\"r1\">❱ </span> 413 <span class=\"r8\">│   │   </span><span class=\"r6\">raise</span> CalledProcessError(retcode, cmd)                                            <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 414 </span><span class=\"r8\">│   </span><span class=\"r6\">return</span> <span class=\"r6\">0</span>                                                                              <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 415 </span>                                                                                          <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r8\"> 416 </span>                                                                                          <span class=\"r1\">│</span>\n<span class=\"r1\">╰──────────────────────────────────────────────────────────────────────────────────────────────────╯</span>\n<span class=\"r13\">CalledProcessError: </span>Command <span class=\"r14\">&#x27;[&#x27;</span>conda&#x27;, <span class=\"r14\">&#x27;env&#x27;</span>, <span class=\"r14\">&#x27;create&#x27;</span>, <span class=\"r14\">&#x27;--yes&#x27;</span>, <span class=\"r14\">&#x27;--file=/tmp/tmp2mppkg54/pytorch_state_dict/env.yaml&#x27;</span>, <span class=\"r14\">&#x27;--name=3d5bf57e23beeafd6ea2183cfc86de256c11395f850f34909b53a65354a43210&#x27;</span>, <span class=\"r14\">&#x27;--quiet&#x27;</span><span class=\"r15\">]</span>&#x27; returned non-zero exit status <span class=\"r16\">1</span>.\n</code></pre>\n</body>\n</html>\n"
+                                "type": "conda",
+                                "with_traceback": true
                             }
                         ],
-                        "warnings": [],
-                        "context": null,
+                        "loc": [
+                            "weights",
+                            "pytorch_state_dict"
+                        ],
+                        "name": "Conda environment creation",
                         "recommended_env": {
-                            "name": null,
                             "channels": [
                                 "conda-forge",
                                 "nodefaults"
@@ -342,9 +340,12 @@
                                         "git+https://github.com/CAREamics/careamics.git"
                                     ]
                                 }
-                            ]
+                            ],
+                            "name": null
                         },
-                        "saved_conda_compare": "bioimageio.core not found\npip not found\npython not found\npytorch not found\ntorchvision not found\n//github.com/careamics/careamics.git not found\n"
+                        "saved_conda_compare": "bioimageio.core not found\npip not found\npython not found\npytorch not found\ntorchvision not found\n//github.com/careamics/careamics.git not found\n",
+                        "status": "failed",
+                        "warnings": []
                     }
                 ],
                 "env": [
@@ -355,28 +356,27 @@
                         ""
                     ]
                 ],
-                "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n"
+                "format_version": "0.5.5",
+                "id": "wild-rhino",
+                "metadata_completeness": 0.7049180327868853,
+                "name": "bioimageio format validation",
+                "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+                "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/wild-rhino/files/rdf.yaml?version=v0",
+                "status": "failed",
+                "type": "model"
             },
-            "badge": null,
-            "links": []
+            "error": "Command '['conda', 'env', 'create', '--yes', '--file=/tmp/tmp2mppkg54/pytorch_state_dict/env.yaml', '--name=3d5bf57e23beeafd6ea2183cfc86de256c11395f850f34909b53a65354a43210', '--quiet']' returned non-zero exit status 1.",
+            "links": [],
+            "score": 0.0,
+            "status": "failed"
         },
         "careamics_0.0.17": {
-            "status": "failed",
-            "score": 0.0,
-            "error": null,
+            "badge": null,
             "details": "CAREamics config file is not present in attachments.",
-            "badge": null,
-            "links": []
-        },
-        "biapy_3.6.5": {
-            "status": "failed",
+            "error": null,
+            "links": [],
             "score": 0.0,
-            "error": "[all] pytorch_state_dict not found in model RDF or inputs != 1\n",
-            "details": "[all] pytorch_state_dict not found in model RDF or inputs != 1\n",
-            "badge": null,
-            "links": [
-                "biapy/biapy"
-            ]
+            "status": "failed"
         }
     }
 }
