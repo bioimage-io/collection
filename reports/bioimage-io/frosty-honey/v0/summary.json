@@ -1,26 +1,31 @@
 {
     "rdf_content": {
-        "name": "Omnipose",
-        "description": "The Omnipose (bact_phase) dataset is a large-scale collection of bacterial phase-contrast micrographs designed for training and benchmarking cell segmentation algorithms. It comprises 4,833 images capturing approximately 700,900 individual bacterial cells from 14 species, encompassing a wide diversity of cell morphologies and optical characteristics. \nManual cell annotation was performed using a streamlined labeling process, resulting in 47,000 accurately annotated cells that serve as the ground-truth segmentation dataset. These annotations were divided into a training set (27,500 cells) and a benchmarking set (19,500 cells), with comparable distributions of cellular metrics such as area, perimeter, and mean diameter, ensuring that the benchmarking subset faithfully represents the training data.",
-        "covers": [
-            "omnipose.png"
-        ],
         "authors": [
             {
                 "affiliation": "MRC LMB",
-                "orcid": "0000-0002-1109-110X",
+                "github_user": "danifranco",
                 "name": "Daniel Franco-Barranco",
-                "github_user": "danifranco"
+                "orcid": "0000-0002-1109-110X"
             }
         ],
         "cite": [
             {
-                "text": "Cutler, Kevin J., et al. 'Omnipose: a high-precision morphology-independent solution for bacterial cell segmentation.' Nature methods 19.11 (2022): 1438-1448.",
                 "doi": "10.1038/s41592-022-01639-4",
+                "text": "Cutler, Kevin J., et al. 'Omnipose: a high-precision morphology-independent solution for bacterial cell segmentation.' Nature methods 19.11 (2022): 1438-1448.",
                 "url": "https://osf.io/xmury/overview"
             }
         ],
+        "covers": [
+            "omnipose.png"
+        ],
+        "description": "The Omnipose (bact_phase) dataset is a large-scale collection of bacterial phase-contrast micrographs designed for training and benchmarking cell segmentation algorithms. It comprises 4,833 images capturing approximately 700,900 individual bacterial cells from 14 species, encompassing a wide diversity of cell morphologies and optical characteristics. \nManual cell annotation was performed using a streamlined labeling process, resulting in 47,000 accurately annotated cells that serve as the ground-truth segmentation dataset. These annotations were divided into a training set (27,500 cells) and a benchmarking set (19,500 cells), with comparable distributions of cellular metrics such as area, perimeter, and mean diameter, ensuring that the benchmarking subset faithfully represents the training data.",
+        "documentation": "Omnipose.md",
+        "format_version": "0.3.0",
+        "id": "frosty-honey",
+        "id_emoji": "🍯",
         "license": "CC-BY-NC-3.0",
+        "name": "Omnipose",
+        "source": "https://osf.io/xmury/overview",
         "tags": [
             "instance-segmentation",
             "2D",
@@ -28,28 +33,23 @@
             "bacteria",
             "phase-contrast"
         ],
-        "version": "0.1.0",
-        "format_version": "0.3.0",
-        "documentation": "Omnipose.md",
         "type": "dataset",
-        "source": "https://osf.io/xmury/overview",
         "uploader": {
-            "name": "Daniel Franco-Barranco",
-            "email": "danialtza@gmail.com"
+            "email": "danialtza@gmail.com",
+            "name": "Daniel Franco-Barranco"
         },
-        "id": "frosty-honey",
-        "id_emoji": "🍯"
+        "version": "0.1.0"
     },
     "rdf_yaml_sha256": "24129933ca1421116c1317e1a09a9da1a5d7823a75a153712b11c0d8f2dcc0b3",
-    "status": "failed",
     "scores": {
-        "tool_compatibility_version_specific": {},
+        "core_compatibility": 0.0,
         "metadata_completeness": 0.0,
         "metadata_format": 0.0,
-        "core_compatibility": 0.0,
-        "tool_compatibility": {},
+        "overall_compatibility": 0.0,
         "overall_partner_tool_compatibility": 0.0,
-        "overall_compatibility": 0.0
+        "tool_compatibility": {},
+        "tool_compatibility_version_specific": {}
     },
+    "status": "failed",
     "tests": {}
 }

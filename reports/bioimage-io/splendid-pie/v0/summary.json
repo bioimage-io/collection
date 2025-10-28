@@ -51,6 +51,7 @@
         "download_url": "https://doi.org/10.5281/zenodo.3941908",
         "format_version": "0.2.4",
         "id": "zero/Dataset_YOLOv2_ZeroCostDL4Mic",
+        "license": "MIT",
         "maintainers": [],
         "name": "YoloV2 example training and test dataset - ZeroCostDL4Mic",
         "tags": [
@@ -58,19 +59,18 @@
             "ZeroCostDL4Mic"
         ],
         "type": "dataset",
-        "version": 1,
-        "license": "MIT"
+        "version": 1
     },
     "rdf_yaml_sha256": "9e973d646de6f55f07e8caf91cd9c97553d4173de98f5817cef306295c078c88",
-    "status": "failed",
     "scores": {
-        "tool_compatibility_version_specific": {},
+        "core_compatibility": 0.0,
         "metadata_completeness": 0.0,
         "metadata_format": 0.0,
-        "core_compatibility": 0.0,
-        "tool_compatibility": {},
+        "overall_compatibility": 0.0,
         "overall_partner_tool_compatibility": 0.0,
-        "overall_compatibility": 0.0
+        "tool_compatibility": {},
+        "tool_compatibility_version_specific": {}
     },
+    "status": "failed",
     "tests": {}
 }

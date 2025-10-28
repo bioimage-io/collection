@@ -69,6 +69,7 @@
         "format_version": "0.2.4",
         "git_repo": "https://github.com/BiaPyX/BiaPy",
         "id": "biapy/notebook_semantic_segmentation_2d",
+        "license": "MIT",
         "links": [
             "biapy/Notebook Preview"
         ],
@@ -116,19 +117,18 @@
             "2D"
         ],
         "type": "application",
-        "version": 1,
-        "license": "MIT"
+        "version": 1
     },
     "rdf_yaml_sha256": "581d0a2c49959b162e2613523e3a5dc73fc559253092f80649836f864ed849bb",
-    "status": "failed",
     "scores": {
-        "tool_compatibility_version_specific": {},
+        "core_compatibility": 0.0,
         "metadata_completeness": 0.0,
         "metadata_format": 0.0,
-        "core_compatibility": 0.0,
-        "tool_compatibility": {},
+        "overall_compatibility": 0.0,
         "overall_partner_tool_compatibility": 0.0,
-        "overall_compatibility": 0.0
+        "tool_compatibility": {},
+        "tool_compatibility_version_specific": {}
     },
+    "status": "failed",
     "tests": {}
 }

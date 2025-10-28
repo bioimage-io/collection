@@ -1,83 +1,61 @@
 {
     "rdf_content": {
-        "name": "3D U-Net for Arabidopsis ovule segmentation",
-        "description": "Ovule cell boundary prediction in confocal stacks of Arabidopsis ovules",
-        "covers": [
-            "cover.png"
-        ],
         "authors": [
             {
-                "name": "Daniel Franco-Barranco",
+                "affiliation": "MRC LMB",
                 "github_user": "danifranco",
-                "affiliation": "MRC LMB"
+                "name": "Daniel Franco-Barranco"
             }
         ],
         "cite": [
             {
-                "text": "BiaPy: accessible deep learning on bioimages",
                 "doi": "10.1038/s41592-025-02699-y",
+                "text": "BiaPy: accessible deep learning on bioimages",
                 "url": "https://www.nature.com/articles/s41592-025-02699-y"
             }
         ],
-        "license": "CC-BY-4.0",
-        "git_repo": "https://github.com/BiaPyX/BiaPy",
-        "maintainers": [
-            {
-                "name": "Daniel Franco-Barranco",
-                "github_user": "danifranco"
-            }
+        "covers": [
+            "cover.png"
         ],
-        "tags": [
-            "Arabidopsis",
-            "ovule",
-            "confocal",
-            "3d",
-            "pytorch",
-            "biapy",
-            "semantic-segmentation",
-            "unet"
-        ],
-        "version": "0.1.0",
-        "format_version": "0.5.4",
-        "type": "model",
+        "description": "Ovule cell boundary prediction in confocal stacks of Arabidopsis ovules",
         "documentation": "documentation.md",
+        "format_version": "0.5.4",
+        "git_repo": "https://github.com/BiaPyX/BiaPy",
+        "id": "dazzling-blowfish",
+        "id_emoji": "🐡",
         "inputs": [
             {
-                "id": "input0",
                 "axes": [
                     {
-                        "type": "batch",
-                        "size": 1
+                        "size": 1,
+                        "type": "batch"
                     },
                     {
-                        "type": "channel",
                         "channel_names": [
                             "channel0"
-                        ]
+                        ],
+                        "type": "channel"
                     },
                     {
-                        "size": 40,
                         "id": "z",
+                        "size": 40,
                         "type": "space"
                     },
                     {
-                        "size": 128,
                         "id": "y",
+                        "size": 128,
                         "type": "space"
                     },
                     {
-                        "size": 128,
                         "id": "x",
+                        "size": 128,
                         "type": "space"
                     }
                 ],
-                "test_tensor": {
-                    "source": "test-input.npy",
-                    "sha256": "37c3829b3d8b9138b68c70a62a4f75d3e1e7c27d768383916b10fa97342fdefe"
-                },
                 "data": {
                     "type": "float32"
                 },
+                "id": "input0",
                 "preprocessing": [
                     {
                         "id": "ensure_dtype",
@@ -102,46 +80,54 @@
                             "dtype": "float32"
                         }
                     }
-                ]
+                ],
+                "test_tensor": {
+                    "sha256": "37c3829b3d8b9138b68c70a62a4f75d3e1e7c27d768383916b10fa97342fdefe",
+                    "source": "test-input.npy"
+                }
             }
         ],
+        "license": "CC-BY-4.0",
+        "maintainers": [
+            {
+                "github_user": "danifranco",
+                "name": "Daniel Franco-Barranco"
+            }
+        ],
+        "name": "3D U-Net for Arabidopsis ovule segmentation",
         "outputs": [
             {
-                "id": "output0",
                 "axes": [
                     {
-                        "type": "batch",
-                        "size": 1
+                        "size": 1,
+                        "type": "batch"
                     },
                     {
-                        "type": "channel",
                         "channel_names": [
                             "channel0"
-                        ]
+                        ],
+                        "type": "channel"
                     },
                     {
-                        "size": 40,
                         "id": "z",
+                        "size": 40,
                         "type": "space"
                     },
                     {
-                        "size": 128,
                         "id": "y",
+                        "size": 128,
                         "type": "space"
                     },
                     {
-                        "size": 128,
                         "id": "x",
+                        "size": 128,
                         "type": "space"
                     }
                 ],
-                "test_tensor": {
-                    "source": "test-output.npy",
-                    "sha256": "683c4764010ff9f18f0a658d7e2a2b82c723bbd8ad88e012c23d4f593fcc3c62"
-                },
                 "data": {
                     "type": "float32"
                 },
+                "id": "output0",
                 "postprocessing": [
                     {
                         "id": "sigmoid"
@@ -152,35 +138,40 @@
                             "dtype": "float32"
                         }
                     }
-                ]
+                ],
+                "test_tensor": {
+                    "sha256": "683c4764010ff9f18f0a658d7e2a2b82c723bbd8ad88e012c23d4f593fcc3c62",
+                    "source": "test-output.npy"
+                }
             }
+        ],
+        "tags": [
+            "Arabidopsis",
+            "ovule",
+            "confocal",
+            "3d",
+            "pytorch",
+            "biapy",
+            "semantic-segmentation",
+            "unet"
         ],
         "training_data": {
             "id": "nourishing-baguette"
         },
+        "type": "model",
+        "uploader": {
+            "email": "danialtza@gmail.com",
+            "name": "Daniel Franco-Barranco"
+        },
+        "version": "0.1.0",
         "weights": {
             "pytorch_state_dict": {
-                "source": "checkpoint.pth",
-                "sha256": "30cd13c9aa757e4a8ad718b27e53c87eeddbd17e17a2c4f393c791b5097b2866",
                 "architecture": {
-                    "source": "model.py",
-                    "sha256": "449b3eb35610dec8b6d5d6faafc57cf768d340d9d7ae113507fedbcabbdb5e97",
                     "callable": "U_Net",
                     "kwargs": {
-                        "image_shape": [
-                            40,
-                            128,
-                            128,
-                            1
-                        ],
                         "activation": "elu",
-                        "feature_maps": [
-                            16,
-                            32,
-                            64,
-                            128,
-                            256
-                        ],
+                        "contrast": false,
+                        "contrast_proj_dim": 256,
                         "drop_values": [
                             0,
                             0,
@@ -188,43 +179,71 @@
                             0,
                             0
                         ],
-                        "normalization": "bn",
+                        "feature_maps": [
+                            16,
+                            32,
+                            64,
+                            128,
+                            256
+                        ],
+                        "image_shape": [
+                            40,
+                            128,
+                            128,
+                            1
+                        ],
                         "k_size": 3,
+                        "normalization": "bn",
+                        "output_channels": [
+                            1
+                        ],
                         "upsample_layer": "convtranspose",
                         "z_down": [
                             1,
                             1,
                             1,
                             1
-                        ],
-                        "output_channels": [
-                            1
-                        ],
-                        "contrast": false,
-                        "contrast_proj_dim": 256
-                    }
+                        ]
+                    },
+                    "sha256": "449b3eb35610dec8b6d5d6faafc57cf768d340d9d7ae113507fedbcabbdb5e97",
+                    "source": "model.py"
                 },
+                "dependencies": null,
                 "pytorch_version": "2.4.0+cu118",
-                "dependencies": null
+                "sha256": "30cd13c9aa757e4a8ad718b27e53c87eeddbd17e17a2c4f393c791b5097b2866",
+                "source": "checkpoint.pth"
             }
-        },
-        "uploader": {
-            "email": "danialtza@gmail.com",
-            "name": "Daniel Franco-Barranco"
-        },
-        "id": "dazzling-blowfish",
-        "id_emoji": "🐡"
+        }
     },
     "rdf_yaml_sha256": "925593d7f7b5294b7a1062efa5883318e41a4dfc1eb269b41f91b2229fe2c538",
-    "status": "failed",
     "scores": {
-        "tool_compatibility_version_specific": {},
+        "core_compatibility": 0.0,
         "metadata_completeness": 0.0,
         "metadata_format": 0.0,
-        "core_compatibility": 0.0,
-        "tool_compatibility": {},
+        "overall_compatibility": 0.0,
         "overall_partner_tool_compatibility": 0.0,
-        "overall_compatibility": 0.0
+        "tool_compatibility": {},
+        "tool_compatibility_version_specific": {}
     },
-    "tests": {}
+    "status": "failed",
+    "tests": {
+        "biapy_3.6.5": {
+            "badge": null,
+            "details": "[all] pytorch_state_dict not found in model RDF or inputs != 1\n",
+            "error": "[all] pytorch_state_dict not found in model RDF or inputs != 1\n",
+            "links": [
+                "biapy/biapy"
+            ],
+            "score": 0.0,
+            "status": "failed"
+        },
+        "careamics_0.0.17": {
+            "badge": null,
+            "details": "'Model' resource not tagged with 'CAREamics' or 'careamics'.",
+            "error": null,
+            "links": [],
+            "score": 0.0,
+            "status": "not-applicable"
+        }
+    }
 }
