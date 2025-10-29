@@ -117,6 +117,7 @@ jobs:
           sparse-checkout: |
             reports
             index.json
+      - run: cp gh-pages/index.json .
       - name: summarize reports
         run: backoffice summarize
         env:
