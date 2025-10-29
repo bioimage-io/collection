@@ -76,7 +76,7 @@ class ToolCompatibilityReport(Node, extra="allow"):
     @model_validator(mode="before")
     @classmethod
     def _set_default_score(cls, values: dict[str, Any]) -> dict[str, Any]:
-        if "score" not in values:
+        if isinstance(values, dict) and "score" not in values:
             values["score"] = 1.0 if values.get("status") == "passed" else 0.0
 
         return values
