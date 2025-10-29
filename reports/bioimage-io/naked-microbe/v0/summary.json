@@ -248,35 +248,39 @@
     },
     "status": "failed",
     "tests": {
-        "biapy_3.6.5": {
-            "badge": null,
-            "details": "[all] pytorch_state_dict not found in model RDF or inputs != 1\n",
-            "error": "[all] pytorch_state_dict not found in model RDF or inputs != 1\n",
-            "links": [
-                "biapy/biapy"
-            ],
-            "score": 0.0,
-            "status": "failed"
+        "biapy": {
+            "3.6.5": {
+                "badge": null,
+                "details": "[all] pytorch_state_dict not found in model RDF or inputs != 1\n",
+                "error": "[all] pytorch_state_dict not found in model RDF or inputs != 1\n",
+                "links": [
+                    "biapy/biapy"
+                ],
+                "score": 0.0,
+                "status": "failed"
+            }
         },
-        "careamics_0.0.16": {
-            "badge": null,
-            "details": [
-                "CAREamics compatibility check does not support `bioimageio.spec.v0.4` model desciptions."
-            ],
-            "error": null,
-            "links": [],
-            "score": 0.0,
-            "status": "not-applicable"
-        },
-        "careamics_0.0.17": {
-            "badge": null,
-            "details": [
-                "CAREamics compatibility check does not support `bioimageio.spec.v0.4` model desciptions."
-            ],
-            "error": null,
-            "links": [],
-            "score": 0.0,
-            "status": "not-applicable"
+        "careamics": {
+            "0.0.16": {
+                "badge": null,
+                "details": [
+                    "CAREamics compatibility check does not support `bioimageio.spec.v0.4` model desciptions."
+                ],
+                "error": null,
+                "links": [],
+                "score": 0.0,
+                "status": "not-applicable"
+            },
+            "0.0.17": {
+                "badge": null,
+                "details": [
+                    "CAREamics compatibility check does not support `bioimageio.spec.v0.4` model desciptions."
+                ],
+                "error": null,
+                "links": [],
+                "score": 0.0,
+                "status": "not-applicable"
+            }
         }
     }
 }

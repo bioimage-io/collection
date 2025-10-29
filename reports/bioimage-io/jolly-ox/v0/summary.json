@@ -204,15 +204,17 @@
     },
     "status": "failed",
     "tests": {
-        "biapy_3.6.5": {
-            "badge": null,
-            "details": "[all] pytorch_state_dict not found in model RDF or inputs != 1\n",
-            "error": "[all] pytorch_state_dict not found in model RDF or inputs != 1\n",
-            "links": [
-                "biapy/biapy"
-            ],
-            "score": 0.0,
-            "status": "failed"
+        "biapy": {
+            "3.6.5": {
+                "badge": null,
+                "details": "[all] pytorch_state_dict not found in model RDF or inputs != 1\n",
+                "error": "[all] pytorch_state_dict not found in model RDF or inputs != 1\n",
+                "links": [
+                    "biapy/biapy"
+                ],
+                "score": 0.0,
+                "status": "failed"
+            }
         }
     }
 }

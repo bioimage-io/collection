@@ -306,74 +306,80 @@
     },
     "status": "failed",
     "tests": {
-        "biapy_3.6.5": {
-            "badge": null,
-            "details": "[all] pytorch_state_dict not found in model RDF or inputs != 1\n",
-            "error": "[all] pytorch_state_dict not found in model RDF or inputs != 1\n",
-            "links": [
-                "biapy/biapy"
-            ],
-            "score": 0.0,
-            "status": "failed"
-        },
-        "bioimageio.core_0.9.4": {
-            "badge": null,
-            "details": {
-                "details": [
-                    {
-                        "context": null,
-                        "errors": [
-                            {
-                                "loc": [],
-                                "msg": "test command 'conda run -n 99f1ab411a44e1ed25cac8e668d8629617eb7c531527072f14716932e34823f2 bioimageio test https://hypha.aicell.io/bioimage-io/artifacts/fearless-crab/files/rdf.yaml?version=v0 --summary-path=/tmp/tmpn49mwwlb/tensorflow_saved_model_bundle/summary.json --determinism=full --stop-early' did not produce a summary file at /tmp/tmpn49mwwlb/tensorflow_saved_model_bundle/summary.json",
-                                "traceback_html": "",
-                                "traceback_md": "",
-                                "type": "bioimageio cli",
-                                "with_traceback": false
-                            }
-                        ],
-                        "loc": [],
-                        "name": "run 'bioimageio test'",
-                        "recommended_env": null,
-                        "saved_conda_compare": null,
-                        "status": "failed",
-                        "warnings": []
-                    }
+        "biapy": {
+            "3.6.5": {
+                "badge": null,
+                "details": "[all] pytorch_state_dict not found in model RDF or inputs != 1\n",
+                "error": "[all] pytorch_state_dict not found in model RDF or inputs != 1\n",
+                "links": [
+                    "biapy/biapy"
                 ],
-                "env": [],
-                "format_version": "unknown",
-                "id": null,
-                "metadata_completeness": 0.0,
-                "name": "calling bioimageio test command",
-                "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
-                "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/fearless-crab/files/rdf.yaml?version=v0",
-                "status": "failed",
-                "type": "unknown"
+                "score": 0.0,
+                "status": "failed"
+            }
+        },
+        "bioimageio.core": {
+            "0.9.4": {
+                "badge": null,
+                "details": {
+                    "details": [
+                        {
+                            "context": null,
+                            "errors": [
+                                {
+                                    "loc": [],
+                                    "msg": "test command 'conda run -n 99f1ab411a44e1ed25cac8e668d8629617eb7c531527072f14716932e34823f2 bioimageio test https://hypha.aicell.io/bioimage-io/artifacts/fearless-crab/files/rdf.yaml?version=v0 --summary-path=/tmp/tmpn49mwwlb/tensorflow_saved_model_bundle/summary.json --determinism=full --stop-early' did not produce a summary file at /tmp/tmpn49mwwlb/tensorflow_saved_model_bundle/summary.json",
+                                    "traceback_html": "",
+                                    "traceback_md": "",
+                                    "type": "bioimageio cli",
+                                    "with_traceback": false
+                                }
+                            ],
+                            "loc": [],
+                            "name": "run 'bioimageio test'",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "failed",
+                            "warnings": []
+                        }
+                    ],
+                    "env": [],
+                    "format_version": "unknown",
+                    "id": null,
+                    "metadata_completeness": 0.0,
+                    "name": "calling bioimageio test command",
+                    "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+                    "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/fearless-crab/files/rdf.yaml?version=v0",
+                    "status": "failed",
+                    "type": "unknown"
+                },
+                "error": "test command 'conda run -n 99f1ab411a44e1ed25cac8e668d8629617eb7c531527072f14716932e34823f2 bioimageio test https://hypha.aicell.io/bioimage-io/artifacts/fearless-crab/files/rdf.yaml?version=v0 --summary-path=/tmp/tmpn49mwwlb/tensorflow_saved_model_bundle/summary.json --determinism=full --stop-early' did not produce a summary file at /tmp/tmpn49mwwlb/tensorflow_saved_model_bundle/summary.json",
+                "links": [],
+                "score": 0.0,
+                "status": "failed"
+            }
+        },
+        "careamics": {
+            "0.0.16": {
+                "badge": null,
+                "details": [
+                    "CAREamics compatibility check does not support `bioimageio.spec.v0.4` model desciptions."
+                ],
+                "error": null,
+                "links": [],
+                "score": 0.0,
+                "status": "not-applicable"
             },
-            "error": "test command 'conda run -n 99f1ab411a44e1ed25cac8e668d8629617eb7c531527072f14716932e34823f2 bioimageio test https://hypha.aicell.io/bioimage-io/artifacts/fearless-crab/files/rdf.yaml?version=v0 --summary-path=/tmp/tmpn49mwwlb/tensorflow_saved_model_bundle/summary.json --determinism=full --stop-early' did not produce a summary file at /tmp/tmpn49mwwlb/tensorflow_saved_model_bundle/summary.json",
-            "links": [],
-            "score": 0.0,
-            "status": "failed"
-        },
-        "careamics_0.0.16": {
-            "badge": null,
-            "details": [
-                "CAREamics compatibility check does not support `bioimageio.spec.v0.4` model desciptions."
-            ],
-            "error": null,
-            "links": [],
-            "score": 0.0,
-            "status": "not-applicable"
-        },
-        "careamics_0.0.17": {
-            "badge": null,
-            "details": [
-                "CAREamics compatibility check does not support `bioimageio.spec.v0.4` model desciptions."
-            ],
-            "error": null,
-            "links": [],
-            "score": 0.0,
-            "status": "not-applicable"
+            "0.0.17": {
+                "badge": null,
+                "details": [
+                    "CAREamics compatibility check does not support `bioimageio.spec.v0.4` model desciptions."
+                ],
+                "error": null,
+                "links": [],
+                "score": 0.0,
+                "status": "not-applicable"
+            }
         }
     }
 }
