@@ -215,5 +215,5 @@ class CompatibilitySummary(InitialSummary):
     scores: CompatibilityScores
     """Scores for compatibility with the bioimage.io community tools."""
 
-    tests: Mapping[ToolNameVersioned, ToolCompatibilityReport]
-    """Compatibility reports for each tool version evaluated."""
+    tests: Mapping[ToolName, Mapping[str, ToolCompatibilityReport]]
+    """Compatibility reports for each tool for each version."""

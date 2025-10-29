@@ -1,5 +1,7 @@
 import json
 import warnings
+from collections import defaultdict
+from typing import DefaultDict, Dict
 
 from loguru import logger
 from packaging.version import Version
@@ -10,6 +12,7 @@ from backoffice.compatibility import (
     CompatibilityScores,
     CompatibilitySummary,
     ToolCompatibilityReport,
+    ToolName,
     ToolNameVersioned,
     ToolReportDetails,
 )
@@ -97,6 +100,10 @@ def _summarize(item: IndexItem, v: IndexItemVersion):
             ):
                 metadata_format_score = 0.5
 
+    tests: DefaultDict[ToolName, Dict[str, ToolCompatibilityReport]] = defaultdict(dict)
+    for r in reports:
+        tests[r.tool][r.tool_version] = r
+
     summary = CompatibilitySummary(
         rdf_content=initial_summary.rdf_content,
         rdf_yaml_sha256=initial_summary.rdf_yaml_sha256,
@@ -106,7 +113,7 @@ def _summarize(item: IndexItem, v: IndexItemVersion):
             metadata_completeness=metadata_completeness,
             metadata_format=metadata_format_score,
         ),
-        tests={report.report_name: report for report in reports},
+        tests=tests,
     )
 
     json_dict = summary.model_dump(mode="json")
