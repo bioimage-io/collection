@@ -1,6 +1,4 @@
-"""
-.. include:: ../../README.md
-"""
+"""bioimage.io collection backoffice"""
 
 from ._version import VERSION as __version__
 

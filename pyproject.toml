@@ -28,15 +28,26 @@ version = { attr = "backoffice._version.VERSION" }
 
 [project.optional-dependencies]
 dev = [
-    "bioimageio.core[dev]>=0.9.3",
     # "biapy",  # has exact bioimageio.core pin
+    "bioimageio.core[dev]>=0.9.3",
     "careamics",
-    "ruff",
     "pdoc",
     "pre-commit",
     "pyright",
-    "respx",
     "pytest",
+    "pytest-cov",
+    "respx",
+    "ruff",
+]
+docs = [
+    "griffe-pydantic",
+    "markdown-callouts",
+    "markdown-exec",
+    "mike",
+    "mkdocs-api-autonav",
+    "mkdocs-coverage",
+    "mkdocs-material",
+    "mkdocs-section-index",
 ]
 
 [project.scripts]

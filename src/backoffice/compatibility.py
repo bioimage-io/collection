@@ -1,3 +1,5 @@
+"""data models for compatibility reports"""
+
 import warnings
 from typing import Any, Literal, Mapping, Optional, Sequence, Union
 

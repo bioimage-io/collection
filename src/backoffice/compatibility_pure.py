@@ -1,3 +1,7 @@
+"""Pure Python alternative data models for compatibility reports
+
+Usable when installing backoffice without dependencies."""
+
 from typing import Any, Optional, Sequence
 
 from typing_extensions import Literal, TypedDict

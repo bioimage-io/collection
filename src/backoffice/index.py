@@ -1,3 +1,5 @@
+"""Data models and functions for indexing the bioimage.io collection"""
+
 import hashlib
 import json
 import shutil
