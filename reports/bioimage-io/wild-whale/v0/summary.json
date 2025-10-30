@@ -227,368 +227,374 @@
     },
     "status": "failed",
     "tests": {
-        "biapy_3.6.5": {
-            "badge": null,
-            "details": "[all] pytorch_state_dict not found in model RDF or inputs != 1\n",
-            "error": "[all] pytorch_state_dict not found in model RDF or inputs != 1\n",
-            "links": [
-                "biapy/biapy"
-            ],
-            "score": 0.0,
-            "status": "failed"
-        },
-        "bioimageio.core_0.9.3": {
-            "badge": null,
-            "details": {
-                "details": [
-                    {
-                        "context": null,
-                        "errors": [
-                            {
-                                "loc": [],
-                                "msg": "test command 'conda run -n f6605768391b16633282cbfd7b1f9c1901a220e9f22de1cb6412e5d043b3bb10 bioimageio test https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/rdf.yaml?version=v0 --summary-path=/tmp/tmpsh4nhhh0/pytorch_state_dict/summary.json --determinism=full --stop-early' did not produce a summary file at /tmp/tmpsh4nhhh0/pytorch_state_dict/summary.json",
-                                "traceback_html": "",
-                                "traceback_md": "",
-                                "type": "bioimageio cli",
-                                "with_traceback": false
-                            }
-                        ],
-                        "loc": [],
-                        "name": "run 'bioimageio test'",
-                        "recommended_env": null,
-                        "saved_conda_compare": null,
-                        "status": "failed",
-                        "warnings": []
-                    },
-                    {
-                        "context": null,
-                        "errors": [
-                            {
-                                "loc": [],
-                                "msg": "test command 'conda run -n e87a49b5469f491e36944738dbc7dbfd65d4861932e2cffdf644b4f3d28e3f8c bioimageio test https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/rdf.yaml?version=v0 --summary-path=/tmp/tmpsh4nhhh0/torchscript/summary.json --determinism=full --stop-early' did not produce a summary file at /tmp/tmpsh4nhhh0/torchscript/summary.json",
-                                "traceback_html": "",
-                                "traceback_md": "",
-                                "type": "bioimageio cli",
-                                "with_traceback": false
-                            }
-                        ],
-                        "loc": [],
-                        "name": "run 'bioimageio test'",
-                        "recommended_env": null,
-                        "saved_conda_compare": null,
-                        "status": "failed",
-                        "warnings": []
-                    }
+        "biapy": {
+            "3.6.5": {
+                "badge": null,
+                "details": "[all] pytorch_state_dict not found in model RDF or inputs != 1\n",
+                "error": "[all] pytorch_state_dict not found in model RDF or inputs != 1\n",
+                "links": [
+                    "biapy/biapy"
                 ],
-                "env": [],
-                "format_version": "unknown",
-                "id": null,
-                "metadata_completeness": 0.0,
-                "name": "calling bioimageio test command",
-                "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build                    Channel\n_libgcc_mutex              0.1              conda_forge              conda-forge\n_openmp_mutex              4.5              2_gnu                    conda-forge\nannotated-types            0.7.0            pyhd8ed1ab_1             conda-forge\nanyio                      4.11.0           pyhcf101f3_0             conda-forge\naom                        3.9.1            hac33072_0               conda-forge\nbackoffice                 0.1.0            pypi_0                   pypi\nbioimageio.core            0.9.3            pyhd8ed1ab_0             conda-forge\nbioimageio.spec            0.5.5.5          pyhd8ed1ab_0             conda-forge\nblosc                      1.21.6           he440d0b_1               conda-forge\nbrunsli                    0.1              he3183e4_1               conda-forge\nbzip2                      1.0.8            hda65f42_8               conda-forge\nc-ares                     1.34.5           hb9d3cd8_0               conda-forge\nc-blosc2                   2.21.3           h4cfbee9_0               conda-forge\nca-certificates            2025.10.5        hbd8a1cb_0               conda-forge\ncached-property            1.5.2            hd8ed1ab_1               conda-forge\ncached_property            1.5.2            pyha770c72_1             conda-forge\ncertifi                    2025.10.5        pyhd8ed1ab_0             conda-forge\ncffi                       2.0.0            pypi_0                   pypi\ncharls                     2.4.2            h59595ed_0               conda-forge\ncharset-normalizer         3.4.3            pypi_0                   pypi\ncolorama                   0.4.6            pyhd8ed1ab_1             conda-forge\ncryptography               46.0.2           pypi_0                   pypi\ndav1d                      1.2.1            hd590300_0               conda-forge\ndistro                     1.9.0            pyhd8ed1ab_1             conda-forge\ndnspython                  2.8.0            pyhcf101f3_0             conda-forge\nemail-validator            2.3.0            pyhd8ed1ab_0             conda-forge\nemail_validator            2.3.0            hd8ed1ab_0               conda-forge\nexceptiongroup             1.3.0            pyhd8ed1ab_0             conda-forge\nfilelock                   3.20.0           pyhd8ed1ab_0             conda-forge\ngenericache                0.5.2            pyhd8ed1ab_0             conda-forge\ngiflib                     5.2.2            hd590300_0               conda-forge\nh11                        0.16.0           pyhd8ed1ab_0             conda-forge\nh2                         4.3.0            pyhcf101f3_0             conda-forge\nh5py                       3.14.0           nompi_py313h253c126_101  conda-forge\nhdf5                       1.14.6           nompi_h6e4c0c1_103       conda-forge\nhpack                      4.1.0            pyhd8ed1ab_0             conda-forge\nhttpcore                   1.0.9            pyh29332c3_0             conda-forge\nhttpx                      0.28.1           pyhd8ed1ab_0             conda-forge\nhyperframe                 6.1.0            pyhd8ed1ab_0             conda-forge\nidna                       3.10             pyhd8ed1ab_1             conda-forge\nimagecodecs                2025.8.2         py313h718aa22_4          conda-forge\nimageio                    2.37.0           pyhfb79c49_0             conda-forge\nimportlib-metadata         8.7.0            pyhe01879c_1             conda-forge\njxrlib                     1.1              hd590300_3               conda-forge\nkeyutils                   1.6.3            hb9d3cd8_0               conda-forge\nkrb5                       1.21.3           h659f571_0               conda-forge\nlcms2                      2.17             h717163a_0               conda-forge\nld_impl_linux-64           2.44             ha97dd6f_2               conda-forge\nlerc                       4.0.0            h0aef613_1               conda-forge\nlibaec                     1.1.4            h3f801dc_0               conda-forge\nlibavif16                  1.3.0            h6395336_2               conda-forge\nlibblas                    3.9.0            36_h4a7cf45_openblas     conda-forge\nlibbrotlicommon            1.1.0            hb03c661_4               conda-forge\nlibbrotlidec               1.1.0            hb03c661_4               conda-forge\nlibbrotlienc               1.1.0            hb03c661_4               conda-forge\nlibcblas                   3.9.0            36_h0358290_openblas     conda-forge\nlibcurl                    8.14.1           h332b0f4_0               conda-forge\nlibdeflate                 1.24             h86f0d12_0               conda-forge\nlibedit                    3.1.20250104     pl5321h7949ede_0         conda-forge\nlibev                      4.33             hd590300_2               conda-forge\nlibexpat                   2.7.1            hecca717_0               conda-forge\nlibffi                     3.4.6            h2dba641_1               conda-forge\nlibfreetype                2.14.1           ha770c72_0               conda-forge\nlibfreetype6               2.14.1           h73754d4_0               conda-forge\nlibgcc                     15.2.0           h767d61c_7               conda-forge\nlibgcc-ng                  15.2.0           h69a702a_7               conda-forge\nlibgfortran                15.2.0           h69a702a_7               conda-forge\nlibgfortran5               15.2.0           hcd61629_7               conda-forge\nlibgomp                    15.2.0           h767d61c_7               conda-forge\nlibhwy                     1.3.0            h4c17acf_1               conda-forge\nlibjpeg-turbo              3.1.0            hb9d3cd8_0               conda-forge\nlibjxl                     0.11.1           h6cb5226_4               conda-forge\nliblapack                  3.9.0            36_h47877c9_openblas     conda-forge\nliblzma                    5.8.1            hb9d3cd8_2               conda-forge\nlibmpdec                   4.0.0            hb9d3cd8_0               conda-forge\nlibnghttp2                 1.67.0           had1ee68_0               conda-forge\nlibopenblas                0.3.30           pthreads_h94d23a6_2      conda-forge\nlibpng                     1.6.50           h421ea60_1               conda-forge\nlibsqlite                  3.50.4           h0c1763c_0               conda-forge\nlibssh2                    1.11.1           hcf80075_0               conda-forge\nlibstdcxx                  15.2.0           h8f9b012_7               conda-forge\nlibstdcxx-ng               15.2.0           h4852527_7               conda-forge\nlibtiff                    4.7.1            h8261f1e_0               conda-forge\nlibuuid                    2.41.2           he9a06e4_0               conda-forge\nlibwebp-base               1.6.0            hd42ef1d_0               conda-forge\nlibxcb                     1.17.0           h8a09558_0               conda-forge\nlibzlib                    1.3.1            hb9d3cd8_2               conda-forge\nlibzopfli                  1.0.3            h9c3ff4c_0               conda-forge\nloguru                     0.7.3            pyh707e725_0             conda-forge\nlz4-c                      1.10.0           h5888daf_1               conda-forge\nmarkdown                   3.9              pyhd8ed1ab_0             conda-forge\nmarkdown-it-py             4.0.0            pyhd8ed1ab_0             conda-forge\nmdurl                      0.1.2            pyhd8ed1ab_1             conda-forge\nncurses                    6.5              h2d0b736_3               conda-forge\nnumpy                      2.3.3            py313hf6604e3_0          conda-forge\nopenjpeg                   2.5.4            h55fea9a_0               conda-forge\nopenssl                    3.5.4            h26f9b46_0               conda-forge\npackaging                  25.0             pyh29332c3_1             conda-forge\npandas                     2.3.3            py313h08cd8bf_1          conda-forge\npillow                     11.3.0           py313ha492abd_3          conda-forge\npip                        25.2             pyh145f28c_0             conda-forge\nplatformdirs               4.5.0            pyhcf101f3_0             conda-forge\npthread-stubs              0.4              hb9d3cd8_1002            conda-forge\npycparser                  2.23             pypi_0                   pypi\npydantic                   2.11.10          pyh3cfb1c2_0             conda-forge\npydantic-core              2.33.2           py313h4b2b08d_0          conda-forge\npydantic-settings          2.11.0           pyh3cfb1c2_0             conda-forge\npygithub                   2.8.1            pypi_0                   pypi\npygments                   2.19.2           pyhd8ed1ab_0             conda-forge\npyjwt                      2.10.1           pypi_0                   pypi\npynacl                     1.6.0            pypi_0                   pypi\npython                     3.13.7           h2b335a9_100_cp313       conda-forge\npython-dateutil            2.9.0.post0      pyhe01879c_2             conda-forge\npython-dotenv              1.1.1            pyhe01879c_0             conda-forge\npython-tzdata              2025.2           pyhd8ed1ab_0             conda-forge\npython_abi                 3.13             8_cp313                  conda-forge\npytz                       2025.2           pyhd8ed1ab_0             conda-forge\nrav1e                      0.7.1            h8fae777_3               conda-forge\nreadline                   8.2              h8c095d6_2               conda-forge\nrequests                   2.32.5           pypi_0                   pypi\nrich                       14.1.0           pyhe01879c_0             conda-forge\nruyaml                     0.91.0           pyhd8ed1ab_1             conda-forge\nscipy                      1.16.2           py313h11c21cd_0          conda-forge\nsetuptools                 80.9.0           pyhff2d567_0             conda-forge\nsix                        1.17.0           pyhe01879c_1             conda-forge\nsnappy                     1.2.2            h03e3b7b_0               conda-forge\nsniffio                    1.3.1            pyhd8ed1ab_1             conda-forge\nsvt-av1                    3.1.2            hecca717_0               conda-forge\ntifffile                   2025.10.4        pyhd8ed1ab_0             conda-forge\ntk                         8.6.13           noxft_hd72426e_102       conda-forge\ntqdm                       4.67.1           pyhd8ed1ab_1             conda-forge\ntyping-extensions          4.15.0           h396c80c_0               conda-forge\ntyping-inspection          0.4.2            pyhd8ed1ab_0             conda-forge\ntyping_extensions          4.15.0           pyhcf101f3_0             conda-forge\ntzdata                     2025b            h78e105d_0               conda-forge\nurllib3                    2.5.0            pypi_0                   pypi\nxarray                     2025.1.2         pyhd8ed1ab_0             conda-forge\nxorg-libxau                1.0.12           hb9d3cd8_0               conda-forge\nxorg-libxdmcp              1.1.5            hb9d3cd8_0               conda-forge\nzfp                        1.0.1            h909a3a2_3               conda-forge\nzipp                       3.23.0           pyhd8ed1ab_0             conda-forge\nzlib-ng                    2.2.5            hde8ca8f_0               conda-forge\nzstd                       1.5.7            hb8e6e7a_2               conda-forge\n",
-                "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/rdf.yaml?version=v0",
-                "status": "failed",
-                "type": "unknown"
-            },
-            "error": "test command 'conda run -n f6605768391b16633282cbfd7b1f9c1901a220e9f22de1cb6412e5d043b3bb10 bioimageio test https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/rdf.yaml?version=v0 --summary-path=/tmp/tmpsh4nhhh0/pytorch_state_dict/summary.json --determinism=full --stop-early' did not produce a summary file at /tmp/tmpsh4nhhh0/pytorch_state_dict/summary.json\n\ntest command 'conda run -n e87a49b5469f491e36944738dbc7dbfd65d4861932e2cffdf644b4f3d28e3f8c bioimageio test https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/rdf.yaml?version=v0 --summary-path=/tmp/tmpsh4nhhh0/torchscript/summary.json --determinism=full --stop-early' did not produce a summary file at /tmp/tmpsh4nhhh0/torchscript/summary.json",
-            "links": [],
-            "score": 0.0,
-            "status": "failed"
+                "score": 0.0,
+                "status": "failed"
+            }
         },
-        "bioimageio.core_0.9.4": {
-            "badge": null,
-            "details": {
-                "details": [
-                    {
-                        "context": {
-                            "file_name": "rdf.yaml",
-                            "known_files": {
-                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/cover.png?version=v0": null,
-                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/documentation.md?version=v0": null,
-                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/sample_input_0.tif?version=v0": null,
-                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/sample_output_0.tif?version=v0": null,
-                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/test_input_0.npy?version=v0": null,
-                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/test_output_0.npy?version=v0": null,
-                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/torchscript_tracing.pt?version=v0": null,
-                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/unet.py?version=v0": null,
-                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/weights.pt?version=v0": null,
-                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/zero_mean_unit_variance.ijm?version=v0": null,
-                                "torchscript_tracing.pt": "04b6c0de2fc0c4e0bc688999dde83815529eedc1136823104bfaf14d4e6d9ecc",
-                                "weights.pt": "45e08ab0d974bea0963f163d1d229022ea72d6305c929bbe868d365434080495"
-                            },
-                            "original_source_name": null,
-                            "perform_io_checks": true,
-                            "root": "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files?version=v0",
-                            "update_hashes": false
-                        },
-                        "errors": [],
-                        "loc": [],
-                        "name": "Successfully created `ModelDescr` instance.",
-                        "recommended_env": null,
-                        "saved_conda_compare": null,
-                        "status": "passed",
-                        "warnings": []
-                    },
-                    {
-                        "context": {
-                            "file_name": "rdf.yaml",
-                            "known_files": {
-                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/cover.png?version=v0": null,
-                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/documentation.md?version=v0": null,
-                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/sample_input_0.tif?version=v0": null,
-                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/sample_output_0.tif?version=v0": null,
-                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/test_input_0.npy?version=v0": null,
-                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/test_output_0.npy?version=v0": null,
-                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/torchscript_tracing.pt?version=v0": null,
-                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/unet.py?version=v0": null,
-                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/weights.pt?version=v0": null,
-                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/zero_mean_unit_variance.ijm?version=v0": null,
-                                "torchscript_tracing.pt": "04b6c0de2fc0c4e0bc688999dde83815529eedc1136823104bfaf14d4e6d9ecc",
-                                "weights.pt": "45e08ab0d974bea0963f163d1d229022ea72d6305c929bbe868d365434080495"
-                            },
-                            "original_source_name": null,
-                            "perform_io_checks": true,
-                            "root": "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files?version=v0",
-                            "update_hashes": false
-                        },
-                        "errors": [],
-                        "loc": [],
-                        "name": "bioimageio.spec format validation model 0.4.10",
-                        "recommended_env": null,
-                        "saved_conda_compare": null,
-                        "status": "passed",
-                        "warnings": []
-                    },
-                    {
-                        "context": null,
-                        "errors": [],
-                        "loc": [
-                            "weights",
-                            "pytorch_state_dict"
-                        ],
-                        "name": "Reproduce test outputs from test inputs (pytorch_state_dict)",
-                        "recommended_env": {
-                            "channels": [
-                                "pytorch",
-                                "conda-forge",
-                                "nodefaults"
+        "bioimageio.core": {
+            "0.9.3": {
+                "badge": null,
+                "details": {
+                    "details": [
+                        {
+                            "context": null,
+                            "errors": [
+                                {
+                                    "loc": [],
+                                    "msg": "test command 'conda run -n f6605768391b16633282cbfd7b1f9c1901a220e9f22de1cb6412e5d043b3bb10 bioimageio test https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/rdf.yaml?version=v0 --summary-path=/tmp/tmpsh4nhhh0/pytorch_state_dict/summary.json --determinism=full --stop-early' did not produce a summary file at /tmp/tmpsh4nhhh0/pytorch_state_dict/summary.json",
+                                    "traceback_html": "",
+                                    "traceback_md": "",
+                                    "type": "bioimageio cli",
+                                    "with_traceback": false
+                                }
                             ],
-                            "dependencies": [
-                                "conda-forge::bioimageio.core",
-                                "mkl ==2024.0.0",
-                                "numpy <2",
-                                "pip",
-                                "pytorch==1.12.1",
-                                "setuptools <70.0.0",
-                                "torchaudio==0.12.1",
-                                "torchvision==0.13.1"
-                            ],
-                            "name": null
+                            "loc": [],
+                            "name": "run 'bioimageio test'",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "failed",
+                            "warnings": []
                         },
-                        "saved_conda_compare": "Success. All the packages in the specification file are present in the environment with matching version and build string.\n",
-                        "status": "passed",
-                        "warnings": []
-                    },
-                    {
-                        "context": null,
-                        "errors": [],
-                        "loc": [
-                            "weights",
-                            "torchscript"
-                        ],
-                        "name": "Reproduce test outputs from test inputs (torchscript)",
-                        "recommended_env": {
-                            "channels": [
-                                "pytorch",
-                                "conda-forge",
-                                "nodefaults"
+                        {
+                            "context": null,
+                            "errors": [
+                                {
+                                    "loc": [],
+                                    "msg": "test command 'conda run -n e87a49b5469f491e36944738dbc7dbfd65d4861932e2cffdf644b4f3d28e3f8c bioimageio test https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/rdf.yaml?version=v0 --summary-path=/tmp/tmpsh4nhhh0/torchscript/summary.json --determinism=full --stop-early' did not produce a summary file at /tmp/tmpsh4nhhh0/torchscript/summary.json",
+                                    "traceback_html": "",
+                                    "traceback_md": "",
+                                    "type": "bioimageio cli",
+                                    "with_traceback": false
+                                }
                             ],
-                            "dependencies": [
-                                "conda-forge::bioimageio.core",
-                                "mkl ==2024.0.0",
-                                "numpy <2",
-                                "pip",
-                                "pytorch==1.13.0",
-                                "setuptools <70.0.0",
-                                "torchaudio==0.13.0",
-                                "torchvision==0.14.0"
-                            ],
-                            "name": null
-                        },
-                        "saved_conda_compare": "pytorch found but mismatch. Specification pkg: pytorch==1.13.0, Running pkg: pytorch=1.12.1=py3.10_cuda11.6_cudnn8.3.2_0\ntorchaudio found but mismatch. Specification pkg: torchaudio==0.13.0, Running pkg: torchaudio=0.12.1=py310_cu116\ntorchvision found but mismatch. Specification pkg: torchvision==0.14.0, Running pkg: torchvision=0.13.1=py310_cu116\n",
-                        "status": "passed",
-                        "warnings": []
-                    },
-                    {
-                        "context": {
-                            "file_name": "rdf.yaml",
-                            "known_files": {
-                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/cover.png?version=v0": null,
-                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/documentation.md?version=v0": null,
-                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/sample_input_0.tif?version=v0": null,
-                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/sample_output_0.tif?version=v0": null,
-                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/test_input_0.npy?version=v0": null,
-                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/test_output_0.npy?version=v0": null,
-                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/torchscript_tracing.pt?version=v0": null,
-                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/unet.py?version=v0": null,
-                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/weights.pt?version=v0": null,
-                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/zero_mean_unit_variance.ijm?version=v0": null,
-                                "torchscript_tracing.pt": "04b6c0de2fc0c4e0bc688999dde83815529eedc1136823104bfaf14d4e6d9ecc",
-                                "weights.pt": "45e08ab0d974bea0963f163d1d229022ea72d6305c929bbe868d365434080495"
-                            },
-                            "original_source_name": null,
-                            "perform_io_checks": true,
-                            "root": "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files?version=v0",
-                            "update_hashes": false
-                        },
-                        "errors": [],
-                        "loc": [],
-                        "name": "Successfully created `ModelDescr` instance.",
-                        "recommended_env": null,
-                        "saved_conda_compare": null,
-                        "status": "passed",
-                        "warnings": []
-                    },
-                    {
-                        "context": {
-                            "file_name": "rdf.yaml",
-                            "known_files": {
-                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/cover.png?version=v0": null,
-                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/documentation.md?version=v0": null,
-                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/sample_input_0.tif?version=v0": null,
-                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/sample_output_0.tif?version=v0": null,
-                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/test_input_0.npy?version=v0": null,
-                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/test_output_0.npy?version=v0": null,
-                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/torchscript_tracing.pt?version=v0": null,
-                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/unet.py?version=v0": null,
-                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/weights.pt?version=v0": null,
-                                "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/zero_mean_unit_variance.ijm?version=v0": null,
-                                "torchscript_tracing.pt": "04b6c0de2fc0c4e0bc688999dde83815529eedc1136823104bfaf14d4e6d9ecc",
-                                "weights.pt": "45e08ab0d974bea0963f163d1d229022ea72d6305c929bbe868d365434080495"
-                            },
-                            "original_source_name": null,
-                            "perform_io_checks": true,
-                            "root": "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files?version=v0",
-                            "update_hashes": false
-                        },
-                        "errors": [],
-                        "loc": [],
-                        "name": "bioimageio.spec format validation model 0.4.10",
-                        "recommended_env": null,
-                        "saved_conda_compare": null,
-                        "status": "passed",
-                        "warnings": []
-                    },
-                    {
-                        "context": null,
-                        "errors": [],
-                        "loc": [
-                            "weights",
-                            "pytorch_state_dict"
-                        ],
-                        "name": "Reproduce test outputs from test inputs (pytorch_state_dict)",
-                        "recommended_env": {
-                            "channels": [
-                                "pytorch",
-                                "conda-forge",
-                                "nodefaults"
-                            ],
-                            "dependencies": [
-                                "conda-forge::bioimageio.core",
-                                "mkl ==2024.0.0",
-                                "numpy <2",
-                                "pip",
-                                "pytorch==1.12.1",
-                                "setuptools <70.0.0",
-                                "torchaudio==0.12.1",
-                                "torchvision==0.13.1"
-                            ],
-                            "name": null
-                        },
-                        "saved_conda_compare": "pytorch found but mismatch. Specification pkg: pytorch==1.12.1, Running pkg: pytorch=1.13.0=py3.10_cpu_0\ntorchaudio found but mismatch. Specification pkg: torchaudio==0.12.1, Running pkg: torchaudio=0.13.0=py310_cpu\ntorchvision found but mismatch. Specification pkg: torchvision==0.13.1, Running pkg: torchvision=0.14.0=py310_cpu\n",
-                        "status": "passed",
-                        "warnings": []
-                    },
-                    {
-                        "context": null,
-                        "errors": [],
-                        "loc": [
-                            "weights",
-                            "torchscript"
-                        ],
-                        "name": "Reproduce test outputs from test inputs (torchscript)",
-                        "recommended_env": {
-                            "channels": [
-                                "pytorch",
-                                "conda-forge",
-                                "nodefaults"
-                            ],
-                            "dependencies": [
-                                "conda-forge::bioimageio.core",
-                                "mkl ==2024.0.0",
-                                "numpy <2",
-                                "pip",
-                                "pytorch==1.13.0",
-                                "setuptools <70.0.0",
-                                "torchaudio==0.13.0",
-                                "torchvision==0.14.0"
-                            ],
-                            "name": null
-                        },
-                        "saved_conda_compare": "Success. All the packages in the specification file are present in the environment with matching version and build string.\n",
-                        "status": "passed",
-                        "warnings": []
-                    }
-                ],
-                "env": [
-                    [
-                        "bioimageio.core",
-                        "0.9.4",
-                        "",
-                        ""
+                            "loc": [],
+                            "name": "run 'bioimageio test'",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "failed",
+                            "warnings": []
+                        }
                     ],
-                    [
-                        "bioimageio.spec",
-                        "0.5.5.6",
-                        "",
-                        ""
-                    ]
-                ],
-                "format_version": "0.4.10",
-                "id": "10.5281/zenodo.6079314/7695872",
-                "metadata_completeness": 0.7558139534883721,
-                "name": "bioimageio format validation",
-                "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/f6605768391b16633282cbfd7b1f9c1901a220e9f22de1cb6412e5d043b3bb10:\n#\n# Name                       Version          Build                         Channel\n_openmp_mutex                4.5              5_kmp_llvm                    conda-forge\nannotated-types              0.7.0            pyhd8ed1ab_1                  conda-forge\nanyio                        4.11.0           pyhcf101f3_0                  conda-forge\naom                          3.5.0            h27087fc_0                    conda-forge\nbioimageio.core              0.9.4            pyhd8ed1ab_0                  conda-forge\nbioimageio.spec              0.5.5.6          pyhd8ed1ab_0                  conda-forge\nblas                         2.121            mkl                           conda-forge\nblas-devel                   3.9.0            21_linux64_mkl                conda-forge\nblosc                        1.21.5           h0f2a231_0                    conda-forge\nbrotli                       1.0.9            h166bdaf_9                    conda-forge\nbrotli-bin                   1.0.9            h166bdaf_9                    conda-forge\nbrotli-python                1.0.9            py310hd8f1fbe_9               conda-forge\nbrunsli                      0.1              h9c3ff4c_0                    conda-forge\nbzip2                        1.0.8            hda65f42_8                    conda-forge\nc-ares                       1.34.5           hb9d3cd8_0                    conda-forge\nc-blosc2                     2.12.0           hb4ffafa_0                    conda-forge\nca-certificates              2025.10.5        hbd8a1cb_0                    conda-forge\ncached-property              1.5.2            hd8ed1ab_1                    conda-forge\ncached_property              1.5.2            pyha770c72_1                  conda-forge\ncairo                        1.16.0           h35add3b_1015                 conda-forge\ncertifi                      2025.10.5        pyhd8ed1ab_0                  conda-forge\ncffi                         2.0.0            py310h34a4b09_0               conda-forge\ncfitsio                      4.2.0            hd9d235c_0                    conda-forge\ncharls                       2.4.2            h59595ed_0                    conda-forge\ncharset-normalizer           3.4.4            pyhd8ed1ab_0                  conda-forge\ncolorama                     0.4.6            pyhd8ed1ab_1                  conda-forge\ncudatoolkit                  11.6.2           hfc3e2af_13                   conda-forge\ndav1d                        1.2.1            hd590300_0                    conda-forge\ndistro                       1.9.0            pyhd8ed1ab_1                  conda-forge\ndnspython                    2.8.0            pyhcf101f3_0                  conda-forge\nemail-validator              2.3.0            pyhd8ed1ab_0                  conda-forge\nemail_validator              2.3.0            hd8ed1ab_0                    conda-forge\nexceptiongroup               1.3.0            pyhd8ed1ab_0                  conda-forge\nffmpeg                       6.0.0            gpl_hdbbbd96_103              conda-forge\nfilelock                     3.20.0           pyhd8ed1ab_0                  conda-forge\nfont-ttf-dejavu-sans-mono    2.37             hab24e00_0                    conda-forge\nfont-ttf-inconsolata         3.000            h77eed37_0                    conda-forge\nfont-ttf-source-code-pro     2.038            h77eed37_0                    conda-forge\nfont-ttf-ubuntu              0.83             h77eed37_3                    conda-forge\nfontconfig                   2.15.0           h7e30c49_1                    conda-forge\nfonts-conda-ecosystem        1                0                             conda-forge\nfonts-conda-forge            1                0                             conda-forge\nfreetype                     2.14.1           ha770c72_0                    conda-forge\nfribidi                      1.0.16           hb03c661_0                    conda-forge\ngenericache                  0.5.2            pyhd8ed1ab_0                  conda-forge\ngiflib                       5.2.2            hd590300_0                    conda-forge\ngmp                          6.3.0            hac33072_2                    conda-forge\ngnutls                       3.7.9            hb077bed_0                    conda-forge\ngraphite2                    1.3.14           hecca717_2                    conda-forge\nh11                          0.16.0           pyhd8ed1ab_0                  conda-forge\nh2                           4.3.0            pyhcf101f3_0                  conda-forge\nh5py                         3.15.1           nompi_py310h4aa865e_100       conda-forge\nharfbuzz                     7.3.0            hdb3a94d_0                    conda-forge\nhdf5                         1.14.6           nompi_h6e4c0c1_103            conda-forge\nhpack                        4.1.0            pyhd8ed1ab_0                  conda-forge\nhttpcore                     1.0.9            pyh29332c3_0                  conda-forge\nhttpx                        0.28.1           pyhd8ed1ab_0                  conda-forge\nhyperframe                   6.1.0            pyhd8ed1ab_0                  conda-forge\nicu                          72.1             hcb278e6_0                    conda-forge\nidna                         3.11             pyhd8ed1ab_0                  conda-forge\nimagecodecs                  2023.1.23        py310ha3ed6a1_0               conda-forge\nimageio                      2.37.0           pyhfb79c49_0                  conda-forge\nimportlib-metadata           8.7.0            pyhe01879c_1                  conda-forge\njpeg                         9e               h0b41bf4_3                    conda-forge\njxrlib                       1.1              hd590300_3                    conda-forge\nkeyutils                     1.6.3            hb9d3cd8_0                    conda-forge\nkrb5                         1.21.3           h659f571_0                    conda-forge\nlame                         3.100            h166bdaf_1003                 conda-forge\nlcms2                        2.15             hfd0df8a_0                    conda-forge\nld_impl_linux-64             2.44             ha97dd6f_2                    conda-forge\nlerc                         4.0.0            h0aef613_1                    conda-forge\nlibaec                       1.1.4            h3f801dc_0                    conda-forge\nlibass                       0.17.1           hc9aadba_0                    conda-forge\nlibavif                      0.11.1           h8182462_2                    conda-forge\nlibblas                      3.9.0            21_linux64_mkl                conda-forge\nlibbrotlicommon              1.0.9            h166bdaf_9                    conda-forge\nlibbrotlidec                 1.0.9            h166bdaf_9                    conda-forge\nlibbrotlienc                 1.0.9            h166bdaf_9                    conda-forge\nlibcblas                     3.9.0            21_linux64_mkl                conda-forge\nlibcurl                      8.16.0           h4e3cde8_0                    conda-forge\nlibdeflate                   1.17             h0b41bf4_0                    conda-forge\nlibdrm                       2.4.125          hb03c661_1                    conda-forge\nlibedit                      3.1.20250104     pl5321h7949ede_0              conda-forge\nlibev                        4.33             hd590300_2                    conda-forge\nlibexpat                     2.7.1            hecca717_0                    conda-forge\nlibffi                       3.4.6            h2dba641_1                    conda-forge\nlibfreetype                  2.14.1           ha770c72_0                    conda-forge\nlibfreetype6                 2.14.1           h73754d4_0                    conda-forge\nlibgcc                       15.2.0           h767d61c_7                    conda-forge\nlibgcc-ng                    15.2.0           h69a702a_7                    conda-forge\nlibgfortran                  15.2.0           h69a702a_7                    conda-forge\nlibgfortran-ng               15.2.0           h69a702a_7                    conda-forge\nlibgfortran5                 15.2.0           hcd61629_7                    conda-forge\nlibglib                      2.86.0           h1fed272_0                    conda-forge\nlibhwloc                     2.9.3            default_h554bfaf_1009         conda-forge\nlibiconv                     1.18             h3b78370_2                    conda-forge\nlibidn2                      2.3.8            hfac485b_1                    conda-forge\nliblapack                    3.9.0            21_linux64_mkl                conda-forge\nliblapacke                   3.9.0            21_linux64_mkl                conda-forge\nliblzma                      5.8.1            hb9d3cd8_2                    conda-forge\nliblzma-devel                5.8.1            hb9d3cd8_2                    conda-forge\nlibnghttp2                   1.67.0           had1ee68_0                    conda-forge\nlibnsl                       2.0.1            hb9d3cd8_1                    conda-forge\nlibopus                      1.5.2            hd0c01bc_0                    conda-forge\nlibpciaccess                 0.18             hb9d3cd8_0                    conda-forge\nlibpng                       1.6.50           h421ea60_1                    conda-forge\nlibsqlite                    3.50.4           h0c1763c_0                    conda-forge\nlibssh2                      1.11.1           hcf80075_0                    conda-forge\nlibstdcxx                    15.2.0           h8f9b012_7                    conda-forge\nlibstdcxx-ng                 15.2.0           h4852527_7                    conda-forge\nlibtasn1                     4.20.0           hb03c661_1                    conda-forge\nlibtiff                      4.5.0            h6adf6a1_2                    conda-forge\nlibunistring                 0.9.10           h7f98852_0                    conda-forge\nlibuuid                      2.41.2           he9a06e4_0                    conda-forge\nlibva                        2.18.0           h0b41bf4_0                    conda-forge\nlibvpx                       1.13.1           h59595ed_0                    conda-forge\nlibwebp-base                 1.6.0            hd42ef1d_0                    conda-forge\nlibxcb                       1.13             h7f98852_1004                 conda-forge\nlibxcrypt                    4.4.36           hd590300_1                    conda-forge\nlibxml2                      2.11.5           h0d562d8_0                    conda-forge\nlibzlib                      1.3.1            hb9d3cd8_2                    conda-forge\nlibzopfli                    1.0.3            h9c3ff4c_0                    conda-forge\nllvm-openmp                  21.1.4           h4922eb0_0                    conda-forge\nloguru                       0.7.3            pyh707e725_0                  conda-forge\nlz4-c                        1.9.4            hcb278e6_0                    conda-forge\nmarkdown                     3.9              pyhd8ed1ab_0                  conda-forge\nmarkdown-it-py               4.0.0            pyhd8ed1ab_0                  conda-forge\nmdurl                        0.1.2            pyhd8ed1ab_1                  conda-forge\nmkl                          2024.0.0         ha957f24_49657                conda-forge\nmkl-devel                    2024.0.0         ha770c72_49657                conda-forge\nmkl-include                  2024.0.0         ha957f24_49657                conda-forge\nncurses                      6.5              h2d0b736_3                    conda-forge\nnettle                       3.9.1            h7ab15ed_0                    conda-forge\nnumpy                        1.26.4           py310hb13e2d6_0               conda-forge\nopenh264                     2.3.1            hcb278e6_2                    conda-forge\nopenjpeg                     2.5.0            hfec8fc6_2                    conda-forge\nopenssl                      3.5.4            h26f9b46_0                    conda-forge\np11-kit                      0.24.1           hc5aa10d_0                    conda-forge\npackaging                    25.0             pyh29332c3_1                  conda-forge\npandas                       2.3.3            py310h0158d43_1               conda-forge\npcre2                        10.46            h1321c63_0                    conda-forge\npillow                       9.4.0            py310h023d228_1               conda-forge\npip                          25.2             pyh8b19718_0                  conda-forge\npixman                       0.46.4           h54a6638_1                    conda-forge\nplatformdirs                 4.5.0            pyhcf101f3_0                  conda-forge\npthread-stubs                0.4              hb9d3cd8_1002                 conda-forge\npycparser                    2.22             pyh29332c3_1                  conda-forge\npydantic                     2.11.10          pyh3cfb1c2_0                  conda-forge\npydantic-core                2.33.2           py310hbcd0ec0_0               conda-forge\npydantic-settings            2.11.0           pyh3cfb1c2_0                  conda-forge\npygments                     2.19.2           pyhd8ed1ab_0                  conda-forge\npysocks                      1.7.1            pyha55dd90_7                  conda-forge\npython                       3.10.19          hd994cfb_1_cpython            conda-forge\npython-dateutil              2.9.0.post0      pyhe01879c_2                  conda-forge\npython-dotenv                1.1.1            pyhe01879c_0                  conda-forge\npython-tzdata                2025.2           pyhd8ed1ab_0                  conda-forge\npython_abi                   3.10             8_cp310                       conda-forge\npytorch                      1.12.1           py3.10_cuda11.6_cudnn8.3.2_0  pytorch\npytorch-mutex                1.0              cuda                          pytorch\npytz                         2025.2           pyhd8ed1ab_0                  conda-forge\nreadline                     8.2              h8c095d6_2                    conda-forge\nrequests                     2.32.5           pyhd8ed1ab_0                  conda-forge\nrich                         14.2.0           pyhcf101f3_0                  conda-forge\nruyaml                       0.91.0           pyhd8ed1ab_1                  conda-forge\nscipy                        1.15.2           py310h1d65ade_0               conda-forge\nsetuptools                   69.5.1           pyhd8ed1ab_0                  conda-forge\nsix                          1.17.0           pyhe01879c_1                  conda-forge\nsnappy                       1.1.10           hdb0a2a9_1                    conda-forge\nsniffio                      1.3.1            pyhd8ed1ab_1                  conda-forge\nsvt-av1                      1.6.0            h59595ed_0                    conda-forge\ntbb                          2021.11.0        h00ab1b0_1                    conda-forge\ntifffile                     2023.8.12        pyhd8ed1ab_0                  conda-forge\ntk                           8.6.13           noxft_hd72426e_102            conda-forge\ntorchaudio                   0.12.1           py310_cu116                   pytorch\ntorchvision                  0.13.1           py310_cu116                   pytorch\ntqdm                         4.67.1           pyhd8ed1ab_1                  conda-forge\ntyping-extensions            4.15.0           h396c80c_0                    conda-forge\ntyping-inspection            0.4.2            pyhd8ed1ab_0                  conda-forge\ntyping_extensions            4.15.0           pyhcf101f3_0                  conda-forge\ntzdata                       2025b            h78e105d_0                    conda-forge\nurllib3                      2.5.0            pyhd8ed1ab_0                  conda-forge\nwheel                        0.45.1           pyhd8ed1ab_1                  conda-forge\nx264                         1!164.3095       h166bdaf_2                    conda-forge\nx265                         3.5              h924138e_3                    conda-forge\nxarray                       2025.1.2         pyhd8ed1ab_0                  conda-forge\nxorg-fixesproto              5.0              hb9d3cd8_1003                 conda-forge\nxorg-kbproto                 1.0.7            hb9d3cd8_1003                 conda-forge\nxorg-libice                  1.1.2            hb9d3cd8_0                    conda-forge\nxorg-libsm                   1.2.6            he73a12e_0                    conda-forge\nxorg-libx11                  1.8.4            h0b41bf4_0                    conda-forge\nxorg-libxau                  1.0.12           hb9d3cd8_0                    conda-forge\nxorg-libxdmcp                1.1.5            hb9d3cd8_0                    conda-forge\nxorg-libxext                 1.3.4            h0b41bf4_2                    conda-forge\nxorg-libxfixes               5.0.3            h7f98852_1004                 conda-forge\nxorg-libxrender              0.9.10           h7f98852_1003                 conda-forge\nxorg-renderproto             0.11.1           hb9d3cd8_1003                 conda-forge\nxorg-xextproto               7.3.0            hb9d3cd8_1004                 conda-forge\nxorg-xproto                  7.0.31           hb9d3cd8_1008                 conda-forge\nxz                           5.8.1            hbcc6ac9_2                    conda-forge\nxz-gpl-tools                 5.8.1            hbcc6ac9_2                    conda-forge\nxz-tools                     5.8.1            hb9d3cd8_2                    conda-forge\nzfp                          1.0.1            h909a3a2_3                    conda-forge\nzipp                         3.23.0           pyhd8ed1ab_0                  conda-forge\nzlib                         1.3.1            hb9d3cd8_2                    conda-forge\nzlib-ng                      2.0.7            h0b41bf4_0                    conda-forge\nzstandard                    0.25.0           py310h139afa4_0               conda-forge\nzstd                         1.5.7            hb8e6e7a_2                    conda-forge\n",
-                "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/rdf.yaml?version=v0",
-                "status": "passed",
-                "type": "model"
+                    "env": [],
+                    "format_version": "unknown",
+                    "id": null,
+                    "metadata_completeness": 0.0,
+                    "name": "calling bioimageio test command",
+                    "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build                    Channel\n_libgcc_mutex              0.1              conda_forge              conda-forge\n_openmp_mutex              4.5              2_gnu                    conda-forge\nannotated-types            0.7.0            pyhd8ed1ab_1             conda-forge\nanyio                      4.11.0           pyhcf101f3_0             conda-forge\naom                        3.9.1            hac33072_0               conda-forge\nbackoffice                 0.1.0            pypi_0                   pypi\nbioimageio.core            0.9.3            pyhd8ed1ab_0             conda-forge\nbioimageio.spec            0.5.5.5          pyhd8ed1ab_0             conda-forge\nblosc                      1.21.6           he440d0b_1               conda-forge\nbrunsli                    0.1              he3183e4_1               conda-forge\nbzip2                      1.0.8            hda65f42_8               conda-forge\nc-ares                     1.34.5           hb9d3cd8_0               conda-forge\nc-blosc2                   2.21.3           h4cfbee9_0               conda-forge\nca-certificates            2025.10.5        hbd8a1cb_0               conda-forge\ncached-property            1.5.2            hd8ed1ab_1               conda-forge\ncached_property            1.5.2            pyha770c72_1             conda-forge\ncertifi                    2025.10.5        pyhd8ed1ab_0             conda-forge\ncffi                       2.0.0            pypi_0                   pypi\ncharls                     2.4.2            h59595ed_0               conda-forge\ncharset-normalizer         3.4.3            pypi_0                   pypi\ncolorama                   0.4.6            pyhd8ed1ab_1             conda-forge\ncryptography               46.0.2           pypi_0                   pypi\ndav1d                      1.2.1            hd590300_0               conda-forge\ndistro                     1.9.0            pyhd8ed1ab_1             conda-forge\ndnspython                  2.8.0            pyhcf101f3_0             conda-forge\nemail-validator            2.3.0            pyhd8ed1ab_0             conda-forge\nemail_validator            2.3.0            hd8ed1ab_0               conda-forge\nexceptiongroup             1.3.0            pyhd8ed1ab_0             conda-forge\nfilelock                   3.20.0           pyhd8ed1ab_0             conda-forge\ngenericache                0.5.2            pyhd8ed1ab_0             conda-forge\ngiflib                     5.2.2            hd590300_0               conda-forge\nh11                        0.16.0           pyhd8ed1ab_0             conda-forge\nh2                         4.3.0            pyhcf101f3_0             conda-forge\nh5py                       3.14.0           nompi_py313h253c126_101  conda-forge\nhdf5                       1.14.6           nompi_h6e4c0c1_103       conda-forge\nhpack                      4.1.0            pyhd8ed1ab_0             conda-forge\nhttpcore                   1.0.9            pyh29332c3_0             conda-forge\nhttpx                      0.28.1           pyhd8ed1ab_0             conda-forge\nhyperframe                 6.1.0            pyhd8ed1ab_0             conda-forge\nidna                       3.10             pyhd8ed1ab_1             conda-forge\nimagecodecs                2025.8.2         py313h718aa22_4          conda-forge\nimageio                    2.37.0           pyhfb79c49_0             conda-forge\nimportlib-metadata         8.7.0            pyhe01879c_1             conda-forge\njxrlib                     1.1              hd590300_3               conda-forge\nkeyutils                   1.6.3            hb9d3cd8_0               conda-forge\nkrb5                       1.21.3           h659f571_0               conda-forge\nlcms2                      2.17             h717163a_0               conda-forge\nld_impl_linux-64           2.44             ha97dd6f_2               conda-forge\nlerc                       4.0.0            h0aef613_1               conda-forge\nlibaec                     1.1.4            h3f801dc_0               conda-forge\nlibavif16                  1.3.0            h6395336_2               conda-forge\nlibblas                    3.9.0            36_h4a7cf45_openblas     conda-forge\nlibbrotlicommon            1.1.0            hb03c661_4               conda-forge\nlibbrotlidec               1.1.0            hb03c661_4               conda-forge\nlibbrotlienc               1.1.0            hb03c661_4               conda-forge\nlibcblas                   3.9.0            36_h0358290_openblas     conda-forge\nlibcurl                    8.14.1           h332b0f4_0               conda-forge\nlibdeflate                 1.24             h86f0d12_0               conda-forge\nlibedit                    3.1.20250104     pl5321h7949ede_0         conda-forge\nlibev                      4.33             hd590300_2               conda-forge\nlibexpat                   2.7.1            hecca717_0               conda-forge\nlibffi                     3.4.6            h2dba641_1               conda-forge\nlibfreetype                2.14.1           ha770c72_0               conda-forge\nlibfreetype6               2.14.1           h73754d4_0               conda-forge\nlibgcc                     15.2.0           h767d61c_7               conda-forge\nlibgcc-ng                  15.2.0           h69a702a_7               conda-forge\nlibgfortran                15.2.0           h69a702a_7               conda-forge\nlibgfortran5               15.2.0           hcd61629_7               conda-forge\nlibgomp                    15.2.0           h767d61c_7               conda-forge\nlibhwy                     1.3.0            h4c17acf_1               conda-forge\nlibjpeg-turbo              3.1.0            hb9d3cd8_0               conda-forge\nlibjxl                     0.11.1           h6cb5226_4               conda-forge\nliblapack                  3.9.0            36_h47877c9_openblas     conda-forge\nliblzma                    5.8.1            hb9d3cd8_2               conda-forge\nlibmpdec                   4.0.0            hb9d3cd8_0               conda-forge\nlibnghttp2                 1.67.0           had1ee68_0               conda-forge\nlibopenblas                0.3.30           pthreads_h94d23a6_2      conda-forge\nlibpng                     1.6.50           h421ea60_1               conda-forge\nlibsqlite                  3.50.4           h0c1763c_0               conda-forge\nlibssh2                    1.11.1           hcf80075_0               conda-forge\nlibstdcxx                  15.2.0           h8f9b012_7               conda-forge\nlibstdcxx-ng               15.2.0           h4852527_7               conda-forge\nlibtiff                    4.7.1            h8261f1e_0               conda-forge\nlibuuid                    2.41.2           he9a06e4_0               conda-forge\nlibwebp-base               1.6.0            hd42ef1d_0               conda-forge\nlibxcb                     1.17.0           h8a09558_0               conda-forge\nlibzlib                    1.3.1            hb9d3cd8_2               conda-forge\nlibzopfli                  1.0.3            h9c3ff4c_0               conda-forge\nloguru                     0.7.3            pyh707e725_0             conda-forge\nlz4-c                      1.10.0           h5888daf_1               conda-forge\nmarkdown                   3.9              pyhd8ed1ab_0             conda-forge\nmarkdown-it-py             4.0.0            pyhd8ed1ab_0             conda-forge\nmdurl                      0.1.2            pyhd8ed1ab_1             conda-forge\nncurses                    6.5              h2d0b736_3               conda-forge\nnumpy                      2.3.3            py313hf6604e3_0          conda-forge\nopenjpeg                   2.5.4            h55fea9a_0               conda-forge\nopenssl                    3.5.4            h26f9b46_0               conda-forge\npackaging                  25.0             pyh29332c3_1             conda-forge\npandas                     2.3.3            py313h08cd8bf_1          conda-forge\npillow                     11.3.0           py313ha492abd_3          conda-forge\npip                        25.2             pyh145f28c_0             conda-forge\nplatformdirs               4.5.0            pyhcf101f3_0             conda-forge\npthread-stubs              0.4              hb9d3cd8_1002            conda-forge\npycparser                  2.23             pypi_0                   pypi\npydantic                   2.11.10          pyh3cfb1c2_0             conda-forge\npydantic-core              2.33.2           py313h4b2b08d_0          conda-forge\npydantic-settings          2.11.0           pyh3cfb1c2_0             conda-forge\npygithub                   2.8.1            pypi_0                   pypi\npygments                   2.19.2           pyhd8ed1ab_0             conda-forge\npyjwt                      2.10.1           pypi_0                   pypi\npynacl                     1.6.0            pypi_0                   pypi\npython                     3.13.7           h2b335a9_100_cp313       conda-forge\npython-dateutil            2.9.0.post0      pyhe01879c_2             conda-forge\npython-dotenv              1.1.1            pyhe01879c_0             conda-forge\npython-tzdata              2025.2           pyhd8ed1ab_0             conda-forge\npython_abi                 3.13             8_cp313                  conda-forge\npytz                       2025.2           pyhd8ed1ab_0             conda-forge\nrav1e                      0.7.1            h8fae777_3               conda-forge\nreadline                   8.2              h8c095d6_2               conda-forge\nrequests                   2.32.5           pypi_0                   pypi\nrich                       14.1.0           pyhe01879c_0             conda-forge\nruyaml                     0.91.0           pyhd8ed1ab_1             conda-forge\nscipy                      1.16.2           py313h11c21cd_0          conda-forge\nsetuptools                 80.9.0           pyhff2d567_0             conda-forge\nsix                        1.17.0           pyhe01879c_1             conda-forge\nsnappy                     1.2.2            h03e3b7b_0               conda-forge\nsniffio                    1.3.1            pyhd8ed1ab_1             conda-forge\nsvt-av1                    3.1.2            hecca717_0               conda-forge\ntifffile                   2025.10.4        pyhd8ed1ab_0             conda-forge\ntk                         8.6.13           noxft_hd72426e_102       conda-forge\ntqdm                       4.67.1           pyhd8ed1ab_1             conda-forge\ntyping-extensions          4.15.0           h396c80c_0               conda-forge\ntyping-inspection          0.4.2            pyhd8ed1ab_0             conda-forge\ntyping_extensions          4.15.0           pyhcf101f3_0             conda-forge\ntzdata                     2025b            h78e105d_0               conda-forge\nurllib3                    2.5.0            pypi_0                   pypi\nxarray                     2025.1.2         pyhd8ed1ab_0             conda-forge\nxorg-libxau                1.0.12           hb9d3cd8_0               conda-forge\nxorg-libxdmcp              1.1.5            hb9d3cd8_0               conda-forge\nzfp                        1.0.1            h909a3a2_3               conda-forge\nzipp                       3.23.0           pyhd8ed1ab_0             conda-forge\nzlib-ng                    2.2.5            hde8ca8f_0               conda-forge\nzstd                       1.5.7            hb8e6e7a_2               conda-forge\n",
+                    "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/rdf.yaml?version=v0",
+                    "status": "failed",
+                    "type": "unknown"
+                },
+                "error": "test command 'conda run -n f6605768391b16633282cbfd7b1f9c1901a220e9f22de1cb6412e5d043b3bb10 bioimageio test https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/rdf.yaml?version=v0 --summary-path=/tmp/tmpsh4nhhh0/pytorch_state_dict/summary.json --determinism=full --stop-early' did not produce a summary file at /tmp/tmpsh4nhhh0/pytorch_state_dict/summary.json\n\ntest command 'conda run -n e87a49b5469f491e36944738dbc7dbfd65d4861932e2cffdf644b4f3d28e3f8c bioimageio test https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/rdf.yaml?version=v0 --summary-path=/tmp/tmpsh4nhhh0/torchscript/summary.json --determinism=full --stop-early' did not produce a summary file at /tmp/tmpsh4nhhh0/torchscript/summary.json",
+                "links": [],
+                "score": 0.0,
+                "status": "failed"
             },
-            "error": null,
-            "links": [
-                "bioimageio/bioimageio.core"
-            ],
-            "score": 1.0,
-            "status": "passed"
+            "0.9.4": {
+                "badge": null,
+                "details": {
+                    "details": [
+                        {
+                            "context": {
+                                "file_name": "rdf.yaml",
+                                "known_files": {
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/cover.png?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/documentation.md?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/sample_input_0.tif?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/sample_output_0.tif?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/test_input_0.npy?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/test_output_0.npy?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/torchscript_tracing.pt?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/unet.py?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/weights.pt?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/zero_mean_unit_variance.ijm?version=v0": null,
+                                    "torchscript_tracing.pt": "04b6c0de2fc0c4e0bc688999dde83815529eedc1136823104bfaf14d4e6d9ecc",
+                                    "weights.pt": "45e08ab0d974bea0963f163d1d229022ea72d6305c929bbe868d365434080495"
+                                },
+                                "original_source_name": null,
+                                "perform_io_checks": true,
+                                "root": "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files?version=v0",
+                                "update_hashes": false
+                            },
+                            "errors": [],
+                            "loc": [],
+                            "name": "Successfully created `ModelDescr` instance.",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": {
+                                "file_name": "rdf.yaml",
+                                "known_files": {
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/cover.png?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/documentation.md?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/sample_input_0.tif?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/sample_output_0.tif?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/test_input_0.npy?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/test_output_0.npy?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/torchscript_tracing.pt?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/unet.py?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/weights.pt?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/zero_mean_unit_variance.ijm?version=v0": null,
+                                    "torchscript_tracing.pt": "04b6c0de2fc0c4e0bc688999dde83815529eedc1136823104bfaf14d4e6d9ecc",
+                                    "weights.pt": "45e08ab0d974bea0963f163d1d229022ea72d6305c929bbe868d365434080495"
+                                },
+                                "original_source_name": null,
+                                "perform_io_checks": true,
+                                "root": "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files?version=v0",
+                                "update_hashes": false
+                            },
+                            "errors": [],
+                            "loc": [],
+                            "name": "bioimageio.spec format validation model 0.4.10",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "pytorch_state_dict"
+                            ],
+                            "name": "Reproduce test outputs from test inputs (pytorch_state_dict)",
+                            "recommended_env": {
+                                "channels": [
+                                    "pytorch",
+                                    "conda-forge",
+                                    "nodefaults"
+                                ],
+                                "dependencies": [
+                                    "conda-forge::bioimageio.core",
+                                    "mkl ==2024.0.0",
+                                    "numpy <2",
+                                    "pip",
+                                    "pytorch==1.12.1",
+                                    "setuptools <70.0.0",
+                                    "torchaudio==0.12.1",
+                                    "torchvision==0.13.1"
+                                ],
+                                "name": null
+                            },
+                            "saved_conda_compare": "Success. All the packages in the specification file are present in the environment with matching version and build string.\n",
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "torchscript"
+                            ],
+                            "name": "Reproduce test outputs from test inputs (torchscript)",
+                            "recommended_env": {
+                                "channels": [
+                                    "pytorch",
+                                    "conda-forge",
+                                    "nodefaults"
+                                ],
+                                "dependencies": [
+                                    "conda-forge::bioimageio.core",
+                                    "mkl ==2024.0.0",
+                                    "numpy <2",
+                                    "pip",
+                                    "pytorch==1.13.0",
+                                    "setuptools <70.0.0",
+                                    "torchaudio==0.13.0",
+                                    "torchvision==0.14.0"
+                                ],
+                                "name": null
+                            },
+                            "saved_conda_compare": "pytorch found but mismatch. Specification pkg: pytorch==1.13.0, Running pkg: pytorch=1.12.1=py3.10_cuda11.6_cudnn8.3.2_0\ntorchaudio found but mismatch. Specification pkg: torchaudio==0.13.0, Running pkg: torchaudio=0.12.1=py310_cu116\ntorchvision found but mismatch. Specification pkg: torchvision==0.14.0, Running pkg: torchvision=0.13.1=py310_cu116\n",
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": {
+                                "file_name": "rdf.yaml",
+                                "known_files": {
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/cover.png?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/documentation.md?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/sample_input_0.tif?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/sample_output_0.tif?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/test_input_0.npy?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/test_output_0.npy?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/torchscript_tracing.pt?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/unet.py?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/weights.pt?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/zero_mean_unit_variance.ijm?version=v0": null,
+                                    "torchscript_tracing.pt": "04b6c0de2fc0c4e0bc688999dde83815529eedc1136823104bfaf14d4e6d9ecc",
+                                    "weights.pt": "45e08ab0d974bea0963f163d1d229022ea72d6305c929bbe868d365434080495"
+                                },
+                                "original_source_name": null,
+                                "perform_io_checks": true,
+                                "root": "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files?version=v0",
+                                "update_hashes": false
+                            },
+                            "errors": [],
+                            "loc": [],
+                            "name": "Successfully created `ModelDescr` instance.",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": {
+                                "file_name": "rdf.yaml",
+                                "known_files": {
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/cover.png?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/documentation.md?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/sample_input_0.tif?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/sample_output_0.tif?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/test_input_0.npy?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/test_output_0.npy?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/torchscript_tracing.pt?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/unet.py?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/weights.pt?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/zero_mean_unit_variance.ijm?version=v0": null,
+                                    "torchscript_tracing.pt": "04b6c0de2fc0c4e0bc688999dde83815529eedc1136823104bfaf14d4e6d9ecc",
+                                    "weights.pt": "45e08ab0d974bea0963f163d1d229022ea72d6305c929bbe868d365434080495"
+                                },
+                                "original_source_name": null,
+                                "perform_io_checks": true,
+                                "root": "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files?version=v0",
+                                "update_hashes": false
+                            },
+                            "errors": [],
+                            "loc": [],
+                            "name": "bioimageio.spec format validation model 0.4.10",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "pytorch_state_dict"
+                            ],
+                            "name": "Reproduce test outputs from test inputs (pytorch_state_dict)",
+                            "recommended_env": {
+                                "channels": [
+                                    "pytorch",
+                                    "conda-forge",
+                                    "nodefaults"
+                                ],
+                                "dependencies": [
+                                    "conda-forge::bioimageio.core",
+                                    "mkl ==2024.0.0",
+                                    "numpy <2",
+                                    "pip",
+                                    "pytorch==1.12.1",
+                                    "setuptools <70.0.0",
+                                    "torchaudio==0.12.1",
+                                    "torchvision==0.13.1"
+                                ],
+                                "name": null
+                            },
+                            "saved_conda_compare": "pytorch found but mismatch. Specification pkg: pytorch==1.12.1, Running pkg: pytorch=1.13.0=py3.10_cpu_0\ntorchaudio found but mismatch. Specification pkg: torchaudio==0.12.1, Running pkg: torchaudio=0.13.0=py310_cpu\ntorchvision found but mismatch. Specification pkg: torchvision==0.13.1, Running pkg: torchvision=0.14.0=py310_cpu\n",
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "torchscript"
+                            ],
+                            "name": "Reproduce test outputs from test inputs (torchscript)",
+                            "recommended_env": {
+                                "channels": [
+                                    "pytorch",
+                                    "conda-forge",
+                                    "nodefaults"
+                                ],
+                                "dependencies": [
+                                    "conda-forge::bioimageio.core",
+                                    "mkl ==2024.0.0",
+                                    "numpy <2",
+                                    "pip",
+                                    "pytorch==1.13.0",
+                                    "setuptools <70.0.0",
+                                    "torchaudio==0.13.0",
+                                    "torchvision==0.14.0"
+                                ],
+                                "name": null
+                            },
+                            "saved_conda_compare": "Success. All the packages in the specification file are present in the environment with matching version and build string.\n",
+                            "status": "passed",
+                            "warnings": []
+                        }
+                    ],
+                    "env": [
+                        [
+                            "bioimageio.core",
+                            "0.9.4",
+                            "",
+                            ""
+                        ],
+                        [
+                            "bioimageio.spec",
+                            "0.5.5.6",
+                            "",
+                            ""
+                        ]
+                    ],
+                    "format_version": "0.4.10",
+                    "id": "10.5281/zenodo.6079314/7695872",
+                    "metadata_completeness": 0.7558139534883721,
+                    "name": "bioimageio format validation",
+                    "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/f6605768391b16633282cbfd7b1f9c1901a220e9f22de1cb6412e5d043b3bb10:\n#\n# Name                       Version          Build                         Channel\n_openmp_mutex                4.5              5_kmp_llvm                    conda-forge\nannotated-types              0.7.0            pyhd8ed1ab_1                  conda-forge\nanyio                        4.11.0           pyhcf101f3_0                  conda-forge\naom                          3.5.0            h27087fc_0                    conda-forge\nbioimageio.core              0.9.4            pyhd8ed1ab_0                  conda-forge\nbioimageio.spec              0.5.5.6          pyhd8ed1ab_0                  conda-forge\nblas                         2.121            mkl                           conda-forge\nblas-devel                   3.9.0            21_linux64_mkl                conda-forge\nblosc                        1.21.5           h0f2a231_0                    conda-forge\nbrotli                       1.0.9            h166bdaf_9                    conda-forge\nbrotli-bin                   1.0.9            h166bdaf_9                    conda-forge\nbrotli-python                1.0.9            py310hd8f1fbe_9               conda-forge\nbrunsli                      0.1              h9c3ff4c_0                    conda-forge\nbzip2                        1.0.8            hda65f42_8                    conda-forge\nc-ares                       1.34.5           hb9d3cd8_0                    conda-forge\nc-blosc2                     2.12.0           hb4ffafa_0                    conda-forge\nca-certificates              2025.10.5        hbd8a1cb_0                    conda-forge\ncached-property              1.5.2            hd8ed1ab_1                    conda-forge\ncached_property              1.5.2            pyha770c72_1                  conda-forge\ncairo                        1.16.0           h35add3b_1015                 conda-forge\ncertifi                      2025.10.5        pyhd8ed1ab_0                  conda-forge\ncffi                         2.0.0            py310h34a4b09_0               conda-forge\ncfitsio                      4.2.0            hd9d235c_0                    conda-forge\ncharls                       2.4.2            h59595ed_0                    conda-forge\ncharset-normalizer           3.4.4            pyhd8ed1ab_0                  conda-forge\ncolorama                     0.4.6            pyhd8ed1ab_1                  conda-forge\ncudatoolkit                  11.6.2           hfc3e2af_13                   conda-forge\ndav1d                        1.2.1            hd590300_0                    conda-forge\ndistro                       1.9.0            pyhd8ed1ab_1                  conda-forge\ndnspython                    2.8.0            pyhcf101f3_0                  conda-forge\nemail-validator              2.3.0            pyhd8ed1ab_0                  conda-forge\nemail_validator              2.3.0            hd8ed1ab_0                    conda-forge\nexceptiongroup               1.3.0            pyhd8ed1ab_0                  conda-forge\nffmpeg                       6.0.0            gpl_hdbbbd96_103              conda-forge\nfilelock                     3.20.0           pyhd8ed1ab_0                  conda-forge\nfont-ttf-dejavu-sans-mono    2.37             hab24e00_0                    conda-forge\nfont-ttf-inconsolata         3.000            h77eed37_0                    conda-forge\nfont-ttf-source-code-pro     2.038            h77eed37_0                    conda-forge\nfont-ttf-ubuntu              0.83             h77eed37_3                    conda-forge\nfontconfig                   2.15.0           h7e30c49_1                    conda-forge\nfonts-conda-ecosystem        1                0                             conda-forge\nfonts-conda-forge            1                0                             conda-forge\nfreetype                     2.14.1           ha770c72_0                    conda-forge\nfribidi                      1.0.16           hb03c661_0                    conda-forge\ngenericache                  0.5.2            pyhd8ed1ab_0                  conda-forge\ngiflib                       5.2.2            hd590300_0                    conda-forge\ngmp                          6.3.0            hac33072_2                    conda-forge\ngnutls                       3.7.9            hb077bed_0                    conda-forge\ngraphite2                    1.3.14           hecca717_2                    conda-forge\nh11                          0.16.0           pyhd8ed1ab_0                  conda-forge\nh2                           4.3.0            pyhcf101f3_0                  conda-forge\nh5py                         3.15.1           nompi_py310h4aa865e_100       conda-forge\nharfbuzz                     7.3.0            hdb3a94d_0                    conda-forge\nhdf5                         1.14.6           nompi_h6e4c0c1_103            conda-forge\nhpack                        4.1.0            pyhd8ed1ab_0                  conda-forge\nhttpcore                     1.0.9            pyh29332c3_0                  conda-forge\nhttpx                        0.28.1           pyhd8ed1ab_0                  conda-forge\nhyperframe                   6.1.0            pyhd8ed1ab_0                  conda-forge\nicu                          72.1             hcb278e6_0                    conda-forge\nidna                         3.11             pyhd8ed1ab_0                  conda-forge\nimagecodecs                  2023.1.23        py310ha3ed6a1_0               conda-forge\nimageio                      2.37.0           pyhfb79c49_0                  conda-forge\nimportlib-metadata           8.7.0            pyhe01879c_1                  conda-forge\njpeg                         9e               h0b41bf4_3                    conda-forge\njxrlib                       1.1              hd590300_3                    conda-forge\nkeyutils                     1.6.3            hb9d3cd8_0                    conda-forge\nkrb5                         1.21.3           h659f571_0                    conda-forge\nlame                         3.100            h166bdaf_1003                 conda-forge\nlcms2                        2.15             hfd0df8a_0                    conda-forge\nld_impl_linux-64             2.44             ha97dd6f_2                    conda-forge\nlerc                         4.0.0            h0aef613_1                    conda-forge\nlibaec                       1.1.4            h3f801dc_0                    conda-forge\nlibass                       0.17.1           hc9aadba_0                    conda-forge\nlibavif                      0.11.1           h8182462_2                    conda-forge\nlibblas                      3.9.0            21_linux64_mkl                conda-forge\nlibbrotlicommon              1.0.9            h166bdaf_9                    conda-forge\nlibbrotlidec                 1.0.9            h166bdaf_9                    conda-forge\nlibbrotlienc                 1.0.9            h166bdaf_9                    conda-forge\nlibcblas                     3.9.0            21_linux64_mkl                conda-forge\nlibcurl                      8.16.0           h4e3cde8_0                    conda-forge\nlibdeflate                   1.17             h0b41bf4_0                    conda-forge\nlibdrm                       2.4.125          hb03c661_1                    conda-forge\nlibedit                      3.1.20250104     pl5321h7949ede_0              conda-forge\nlibev                        4.33             hd590300_2                    conda-forge\nlibexpat                     2.7.1            hecca717_0                    conda-forge\nlibffi                       3.4.6            h2dba641_1                    conda-forge\nlibfreetype                  2.14.1           ha770c72_0                    conda-forge\nlibfreetype6                 2.14.1           h73754d4_0                    conda-forge\nlibgcc                       15.2.0           h767d61c_7                    conda-forge\nlibgcc-ng                    15.2.0           h69a702a_7                    conda-forge\nlibgfortran                  15.2.0           h69a702a_7                    conda-forge\nlibgfortran-ng               15.2.0           h69a702a_7                    conda-forge\nlibgfortran5                 15.2.0           hcd61629_7                    conda-forge\nlibglib                      2.86.0           h1fed272_0                    conda-forge\nlibhwloc                     2.9.3            default_h554bfaf_1009         conda-forge\nlibiconv                     1.18             h3b78370_2                    conda-forge\nlibidn2                      2.3.8            hfac485b_1                    conda-forge\nliblapack                    3.9.0            21_linux64_mkl                conda-forge\nliblapacke                   3.9.0            21_linux64_mkl                conda-forge\nliblzma                      5.8.1            hb9d3cd8_2                    conda-forge\nliblzma-devel                5.8.1            hb9d3cd8_2                    conda-forge\nlibnghttp2                   1.67.0           had1ee68_0                    conda-forge\nlibnsl                       2.0.1            hb9d3cd8_1                    conda-forge\nlibopus                      1.5.2            hd0c01bc_0                    conda-forge\nlibpciaccess                 0.18             hb9d3cd8_0                    conda-forge\nlibpng                       1.6.50           h421ea60_1                    conda-forge\nlibsqlite                    3.50.4           h0c1763c_0                    conda-forge\nlibssh2                      1.11.1           hcf80075_0                    conda-forge\nlibstdcxx                    15.2.0           h8f9b012_7                    conda-forge\nlibstdcxx-ng                 15.2.0           h4852527_7                    conda-forge\nlibtasn1                     4.20.0           hb03c661_1                    conda-forge\nlibtiff                      4.5.0            h6adf6a1_2                    conda-forge\nlibunistring                 0.9.10           h7f98852_0                    conda-forge\nlibuuid                      2.41.2           he9a06e4_0                    conda-forge\nlibva                        2.18.0           h0b41bf4_0                    conda-forge\nlibvpx                       1.13.1           h59595ed_0                    conda-forge\nlibwebp-base                 1.6.0            hd42ef1d_0                    conda-forge\nlibxcb                       1.13             h7f98852_1004                 conda-forge\nlibxcrypt                    4.4.36           hd590300_1                    conda-forge\nlibxml2                      2.11.5           h0d562d8_0                    conda-forge\nlibzlib                      1.3.1            hb9d3cd8_2                    conda-forge\nlibzopfli                    1.0.3            h9c3ff4c_0                    conda-forge\nllvm-openmp                  21.1.4           h4922eb0_0                    conda-forge\nloguru                       0.7.3            pyh707e725_0                  conda-forge\nlz4-c                        1.9.4            hcb278e6_0                    conda-forge\nmarkdown                     3.9              pyhd8ed1ab_0                  conda-forge\nmarkdown-it-py               4.0.0            pyhd8ed1ab_0                  conda-forge\nmdurl                        0.1.2            pyhd8ed1ab_1                  conda-forge\nmkl                          2024.0.0         ha957f24_49657                conda-forge\nmkl-devel                    2024.0.0         ha770c72_49657                conda-forge\nmkl-include                  2024.0.0         ha957f24_49657                conda-forge\nncurses                      6.5              h2d0b736_3                    conda-forge\nnettle                       3.9.1            h7ab15ed_0                    conda-forge\nnumpy                        1.26.4           py310hb13e2d6_0               conda-forge\nopenh264                     2.3.1            hcb278e6_2                    conda-forge\nopenjpeg                     2.5.0            hfec8fc6_2                    conda-forge\nopenssl                      3.5.4            h26f9b46_0                    conda-forge\np11-kit                      0.24.1           hc5aa10d_0                    conda-forge\npackaging                    25.0             pyh29332c3_1                  conda-forge\npandas                       2.3.3            py310h0158d43_1               conda-forge\npcre2                        10.46            h1321c63_0                    conda-forge\npillow                       9.4.0            py310h023d228_1               conda-forge\npip                          25.2             pyh8b19718_0                  conda-forge\npixman                       0.46.4           h54a6638_1                    conda-forge\nplatformdirs                 4.5.0            pyhcf101f3_0                  conda-forge\npthread-stubs                0.4              hb9d3cd8_1002                 conda-forge\npycparser                    2.22             pyh29332c3_1                  conda-forge\npydantic                     2.11.10          pyh3cfb1c2_0                  conda-forge\npydantic-core                2.33.2           py310hbcd0ec0_0               conda-forge\npydantic-settings            2.11.0           pyh3cfb1c2_0                  conda-forge\npygments                     2.19.2           pyhd8ed1ab_0                  conda-forge\npysocks                      1.7.1            pyha55dd90_7                  conda-forge\npython                       3.10.19          hd994cfb_1_cpython            conda-forge\npython-dateutil              2.9.0.post0      pyhe01879c_2                  conda-forge\npython-dotenv                1.1.1            pyhe01879c_0                  conda-forge\npython-tzdata                2025.2           pyhd8ed1ab_0                  conda-forge\npython_abi                   3.10             8_cp310                       conda-forge\npytorch                      1.12.1           py3.10_cuda11.6_cudnn8.3.2_0  pytorch\npytorch-mutex                1.0              cuda                          pytorch\npytz                         2025.2           pyhd8ed1ab_0                  conda-forge\nreadline                     8.2              h8c095d6_2                    conda-forge\nrequests                     2.32.5           pyhd8ed1ab_0                  conda-forge\nrich                         14.2.0           pyhcf101f3_0                  conda-forge\nruyaml                       0.91.0           pyhd8ed1ab_1                  conda-forge\nscipy                        1.15.2           py310h1d65ade_0               conda-forge\nsetuptools                   69.5.1           pyhd8ed1ab_0                  conda-forge\nsix                          1.17.0           pyhe01879c_1                  conda-forge\nsnappy                       1.1.10           hdb0a2a9_1                    conda-forge\nsniffio                      1.3.1            pyhd8ed1ab_1                  conda-forge\nsvt-av1                      1.6.0            h59595ed_0                    conda-forge\ntbb                          2021.11.0        h00ab1b0_1                    conda-forge\ntifffile                     2023.8.12        pyhd8ed1ab_0                  conda-forge\ntk                           8.6.13           noxft_hd72426e_102            conda-forge\ntorchaudio                   0.12.1           py310_cu116                   pytorch\ntorchvision                  0.13.1           py310_cu116                   pytorch\ntqdm                         4.67.1           pyhd8ed1ab_1                  conda-forge\ntyping-extensions            4.15.0           h396c80c_0                    conda-forge\ntyping-inspection            0.4.2            pyhd8ed1ab_0                  conda-forge\ntyping_extensions            4.15.0           pyhcf101f3_0                  conda-forge\ntzdata                       2025b            h78e105d_0                    conda-forge\nurllib3                      2.5.0            pyhd8ed1ab_0                  conda-forge\nwheel                        0.45.1           pyhd8ed1ab_1                  conda-forge\nx264                         1!164.3095       h166bdaf_2                    conda-forge\nx265                         3.5              h924138e_3                    conda-forge\nxarray                       2025.1.2         pyhd8ed1ab_0                  conda-forge\nxorg-fixesproto              5.0              hb9d3cd8_1003                 conda-forge\nxorg-kbproto                 1.0.7            hb9d3cd8_1003                 conda-forge\nxorg-libice                  1.1.2            hb9d3cd8_0                    conda-forge\nxorg-libsm                   1.2.6            he73a12e_0                    conda-forge\nxorg-libx11                  1.8.4            h0b41bf4_0                    conda-forge\nxorg-libxau                  1.0.12           hb9d3cd8_0                    conda-forge\nxorg-libxdmcp                1.1.5            hb9d3cd8_0                    conda-forge\nxorg-libxext                 1.3.4            h0b41bf4_2                    conda-forge\nxorg-libxfixes               5.0.3            h7f98852_1004                 conda-forge\nxorg-libxrender              0.9.10           h7f98852_1003                 conda-forge\nxorg-renderproto             0.11.1           hb9d3cd8_1003                 conda-forge\nxorg-xextproto               7.3.0            hb9d3cd8_1004                 conda-forge\nxorg-xproto                  7.0.31           hb9d3cd8_1008                 conda-forge\nxz                           5.8.1            hbcc6ac9_2                    conda-forge\nxz-gpl-tools                 5.8.1            hbcc6ac9_2                    conda-forge\nxz-tools                     5.8.1            hb9d3cd8_2                    conda-forge\nzfp                          1.0.1            h909a3a2_3                    conda-forge\nzipp                         3.23.0           pyhd8ed1ab_0                  conda-forge\nzlib                         1.3.1            hb9d3cd8_2                    conda-forge\nzlib-ng                      2.0.7            h0b41bf4_0                    conda-forge\nzstandard                    0.25.0           py310h139afa4_0               conda-forge\nzstd                         1.5.7            hb8e6e7a_2                    conda-forge\n",
+                    "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/wild-whale/files/rdf.yaml?version=v0",
+                    "status": "passed",
+                    "type": "model"
+                },
+                "error": null,
+                "links": [
+                    "bioimageio/bioimageio.core"
+                ],
+                "score": 1.0,
+                "status": "passed"
+            }
         },
-        "careamics_0.0.16": {
-            "badge": null,
-            "details": [
-                "CAREamics compatibility check does not support `bioimageio.spec.v0.4` model desciptions."
-            ],
-            "error": null,
-            "links": [],
-            "score": 0.0,
-            "status": "not-applicable"
-        },
-        "careamics_0.0.17": {
-            "badge": null,
-            "details": [
-                "CAREamics compatibility check does not support `bioimageio.spec.v0.4` model desciptions."
-            ],
-            "error": null,
-            "links": [],
-            "score": 0.0,
-            "status": "not-applicable"
+        "careamics": {
+            "0.0.16": {
+                "badge": null,
+                "details": [
+                    "CAREamics compatibility check does not support `bioimageio.spec.v0.4` model desciptions."
+                ],
+                "error": null,
+                "links": [],
+                "score": 0.0,
+                "status": "not-applicable"
+            },
+            "0.0.17": {
+                "badge": null,
+                "details": [
+                    "CAREamics compatibility check does not support `bioimageio.spec.v0.4` model desciptions."
+                ],
+                "error": null,
+                "links": [],
+                "score": 0.0,
+                "status": "not-applicable"
+            }
         }
     }
 }
