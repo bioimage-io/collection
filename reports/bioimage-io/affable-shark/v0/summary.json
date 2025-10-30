@@ -15,16 +15,16 @@
         ],
         "cite": [
             {
-                "text": "training library",
-                "doi": "10.5281/zenodo.5108853"
+                "doi": "10.5281/zenodo.5108853",
+                "text": "training library"
             },
             {
-                "text": "architecture",
-                "doi": "10.1007/978-3-319-24574-4_28"
+                "doi": "10.1007/978-3-319-24574-4_28",
+                "text": "architecture"
             },
             {
-                "text": "segmentation algorithm",
-                "doi": "10.1038/nmeth.4151"
+                "doi": "10.1038/nmeth.4151",
+                "text": "segmentation algorithm"
             },
             {
                 "text": "data",
@@ -148,7 +148,7 @@
                                 "y",
                                 "x"
                             ],
-                            "eps": 1e-6
+                            "eps": 1e-06
                         }
                     }
                 ],
@@ -249,8 +249,8 @@
         },
         "type": "model",
         "uploader": {
-            "name": "Fynn Beuttenmüller",
-            "email": "thefynnbe@gmail.com"
+            "email": "thefynnbe@gmail.com",
+            "name": "Fynn Beuttenmüller"
         },
         "version": 1.1,
         "weights": {
@@ -289,5 +289,28 @@
         }
     },
     "rdf_yaml_sha256": "2410575911f5da00b22d1fe2db82cdb1bcfee646dddc300f45af745ec0d50fba",
-    "status": "untested"
+    "scores": {
+        "core_compatibility": 0.0,
+        "metadata_completeness": 0.0,
+        "metadata_format": 0.0,
+        "overall_compatibility": 0.0,
+        "overall_partner_tool_compatibility": 0.0,
+        "tool_compatibility": {},
+        "tool_compatibility_version_specific": {}
+    },
+    "status": "failed",
+    "tests": {
+        "biapy": {
+            "3.6.5": {
+                "badge": null,
+                "details": "",
+                "error": "",
+                "links": [
+                    "biapy/biapy"
+                ],
+                "score": 1.0,
+                "status": "passed"
+            }
+        }
+    }
 }
