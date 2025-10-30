@@ -31,12 +31,6 @@ dev = [
     # "biapy",  # has exact bioimageio.core pin
     "bioimageio.core[dev]>=0.9.3",
     "careamics",
-    "griffe-pydantic",             # docs
-    "markdown-callouts",           # docs
-    "markdown-exec",               # docs
-    "mkdocs-api-autonav",          # docs
-    "mkdocs-coverage",             # docs
-    "mkdocs-section-index",        # docs
     "pdoc",
     "pre-commit",
     "pyright",
@@ -44,6 +38,16 @@ dev = [
     "pytest-cov",
     "respx",
     "ruff",
+]
+docs = [
+    "griffe-pydantic",
+    "markdown-callouts",
+    "markdown-exec",
+    "mike",
+    "mkdocs-api-autonav",
+    "mkdocs-coverage",
+    "mkdocs-material",
+    "mkdocs-section-index",
 ]
 
 [project.scripts]

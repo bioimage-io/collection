@@ -24,9 +24,9 @@ jobs:
                   RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
                   BIOIMAGEIO_USER_ID: github|${{github.actor_id}}
                   HYPHA_API_TOKEN: ${{secrets.HYPHA_API_TOKEN}}
+            - run: pip install -e .[docs]
             - run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_OUTPUT
               id: cache-id
-            - run: pip install mike
             - uses: actions/cache@v4
               with:
                   key: mkdocs-material-${{ steps.cache-id.outputs.cache_id }}
