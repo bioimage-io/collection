@@ -26,6 +26,7 @@ jobs:
                   HYPHA_API_TOKEN: ${{secrets.HYPHA_API_TOKEN}}
             - run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_OUTPUT
               id: cache-id
+            - run: pip install mike
             - uses: actions/cache@v4
               with:
                   key: mkdocs-material-${{ steps.cache-id.outputs.cache_id }}
