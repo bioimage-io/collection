@@ -32,4 +32,4 @@ jobs:
                   path: ~/.cache
                   restore-keys: |
                       mkdocs-material-
-            - run: mike deploy --update-aliases 0.1 latest
+            - run: mike deploy ${{ github.ref == 'refs/heads/main' && '--push' || ' ' }} --update-aliases 0.1 latest
