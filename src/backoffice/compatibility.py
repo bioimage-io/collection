@@ -23,7 +23,7 @@ PartnerToolName = Literal[
     "biapy",
     "careamics",
 ]
-ToolName = Literal["bioimageio.spec", "bioimageio.core", PartnerToolName]
+ToolName = Literal["bioimageio.core", PartnerToolName]
 
 PARTNER_TOOL_NAMES = (
     "ilastik",
@@ -32,7 +32,7 @@ PARTNER_TOOL_NAMES = (
     "biapy",
     "careamics",
 )
-TOOL_NAMES = ("bioimageio.spec", "bioimageio.core", *PARTNER_TOOL_NAMES)
+TOOL_NAMES = ("bioimageio.core", *PARTNER_TOOL_NAMES)
 
 ToolNameVersioned = str
 
@@ -51,6 +51,7 @@ class ToolReportDetails(Node, extra="allow"):
     traceback: Optional[Sequence[str]] = None
     warnings: Optional[Mapping[str, Any]] = None
     metadata_completeness: Optional[float] = None
+    status: Union[Literal["passed", "valid-format", "failed"], Any] = None
 
 
 class ToolCompatibilityReport(Node, extra="allow"):
@@ -77,7 +78,7 @@ class ToolCompatibilityReport(Node, extra="allow"):
     @model_validator(mode="before")
     @classmethod
     def _set_default_score(cls, values: dict[str, Any]) -> dict[str, Any]:
-        if "score" not in values:
+        if isinstance(values, dict) and "score" not in values:
             values["score"] = 1.0 if values.get("status") == "passed" else 0.0
 
         return values
@@ -100,14 +101,19 @@ class CompatibilityScores(Node):
         ToolNameVersioned, Annotated[float, Interval(ge=0, le=1.0)]
     ]
 
-    metadata_completeness: Annotated[float, Interval(ge=0, le=1.0)]
-    """Score for metadata completeness, evaluated by bioimageio.spec"""
+    metadata_completeness: Annotated[float, Interval(ge=0, le=1.0)] = 0.0
+    """Score for metadata completeness.
 
-    @computed_field
-    @property
-    def metadata_format(self) -> Annotated[float, Interval(ge=0, le=1.0)]:
-        """Score for metadata formatting, validated by bioimageio.spec"""
-        return self.tool_compatibility.get("bioimageio.spec", 0.0)
+    A measure of how many optional fields in the resource RDF are filled out.
+    """
+
+    metadata_format: Annotated[float, Interval(ge=0, le=1.0)] = 0.0
+    """Score for metadata formatting.
+
+    - 1.0: resource RDF conforms to the latest spec version
+    - 0.5: resource RDF conforms to an older spec version
+    - 0.0: resource RDF does not conform to any known spec version
+"""
 
     @computed_field
     @property
@@ -168,25 +174,31 @@ class CompatibilityScores(Node):
     def overall_partner_tool_compatibility(
         self,
     ) -> Annotated[float, Interval(ge=0, le=1.0)]:
-        """Overall partner tool compatibility score."""
-        top4 = sorted(
+        """Overall partner tool compatibility score.
+        Note:
+            - Currently implemented as: Average of the top 3 partner tool compatibility scores.
+            - Implementation is subject to change in the future.
+        """
+        top3 = sorted(
             [v for k, v in self.tool_compatibility.items() if k in PARTNER_TOOL_NAMES],
             reverse=True,
-        )[:4]
-        assert top4
-        return sum(top4) / len(top4)
+        )[:3]
+        if not top3:
+            return 0.0
+        else:
+            return sum(top3) / 3
 
     @computed_field
     @property
     def overall_compatibility(self) -> Annotated[float, Interval(ge=0, le=1.0)]:
         """Weighted, overall score between 0 and 1.
-        Note: The scoring scheme is subject to arbitrary changes.
+        Note: The scoring scheme is subject to change in the future.
         """
         return (
-            0.1 * self.metadata_format
-            + 0.2 * self.metadata_completeness
-            + 0.3 * self.core_compatibility
-            + 0.4 * self.overall_partner_tool_compatibility
+            0.25 * self.metadata_format
+            + 0.25 * self.metadata_completeness
+            + 0.25 * self.core_compatibility
+            + 0.25 * self.overall_partner_tool_compatibility
         )
 
 
@@ -205,5 +217,5 @@ class CompatibilitySummary(InitialSummary):
     scores: CompatibilityScores
     """Scores for compatibility with the bioimage.io community tools."""
 
-    tests: Mapping[ToolNameVersioned, ToolCompatibilityReport]
-    """Compatibility reports for each tool version evaluated."""
+    tests: Mapping[ToolName, Mapping[str, ToolCompatibilityReport]]
+    """Compatibility reports for each tool for each version."""

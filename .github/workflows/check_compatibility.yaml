@@ -83,24 +83,24 @@ jobs:
     secrets: inherit
   bioimageio_core:
     needs: index
-    if: needs.index.outputs.cache-hit != 'true' || contains(github.event.inputs.rerun, 'all')|| contains(github.event.inputs.rerun, 'bioimageio.core')
+    if: needs.index.outputs.cache-hit != 'true' || contains(github.event.inputs.rerun, 'all') || contains(github.event.inputs.rerun, 'bioimageio.core')
     uses: ./.github/workflows/check_compatibility_bioimageio_core.yaml
     secrets: inherit
   careamics:
     needs: index
-    if: needs.index.outputs.cache-hit != 'true' || contains(github.event.inputs.rerun, 'all')|| contains(github.event.inputs.rerun, 'careamics')
+    if: needs.index.outputs.cache-hit != 'true' || contains(github.event.inputs.rerun, 'all') || contains(github.event.inputs.rerun, 'careamics')
     uses: ./.github/workflows/check_compatibility_careamics.yaml
     secrets: inherit
   ilastik:
     needs: index
-    if: needs.index.outputs.cache-hit != 'true' || contains(github.event.inputs.rerun, 'all')|| contains(github.event.inputs.rerun, 'ilastik')
+    if: needs.index.outputs.cache-hit != 'true' || contains(github.event.inputs.rerun, 'all') || contains(github.event.inputs.rerun, 'ilastik')
     uses: ./.github/workflows/check_compatibility_ilastik.yaml
     secrets: inherit
 
   summarize:
     name: summarize and deploy stage
     needs: [index, biapy, bioimageio_core, careamics, ilastik]
-    if: always() && (needs.index.outputs.cache-hit != 'true' || github.event.inputs.rerun != 'only-on-index-update')
+    if: ${{ !cancelled() }} && !(needs.index.outputs.cache-hit == 'true' && (github.event.inputs.rerun == 'only-on-index-update' || github.event.inputs.rerun == ''))
     runs-on: ubuntu-latest
     environment: 'production'
     steps:
@@ -117,6 +117,7 @@ jobs:
           sparse-checkout: |
             reports
             index.json
+      - run: cp gh-pages/index.json .
       - name: summarize reports
         run: backoffice summarize
         env:

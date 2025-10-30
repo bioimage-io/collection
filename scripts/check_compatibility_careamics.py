@@ -184,7 +184,7 @@ def check_compatibility_careamics_impl(
 def check_compatibility_careamics() -> None:
     """CAREamics compatibility check."""
     check_tool_compatibility(
-        "CAREamics",
+        "careamics",
         CAREAMICS_VERSION,
         check_tool_compatibility_impl=check_compatibility_careamics_impl,
         applicable_types={"model"},

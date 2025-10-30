@@ -26,7 +26,13 @@ def check_compatibility_biapy_impl(
         )
 
     # Check models compatibility using a function inside BiaPy
-    _, error, error_message = check_bmz_model_compatibility(rdf)
+    if biapy.__version__ == "3.6.5":
+        _, error, error_message = check_bmz_model_compatibility(
+            {"raw": {"manifest": rdf}}
+        )
+    else:
+        _, error, error_message = check_bmz_model_compatibility(rdf)
+
     status = "passed" if not error else "failed"
     if error:
         print(f"Reason why BiaPy is not compatible: {error_message}")

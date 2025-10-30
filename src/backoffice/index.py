@@ -1,6 +1,7 @@
 """Data models and functions for indexing the bioimage.io collection"""
 
 import hashlib
+import json
 import shutil
 from collections import defaultdict
 from datetime import datetime
@@ -145,7 +146,12 @@ def create_index() -> Index:
             count_per_type=dict(count_per_type),
         )
 
-        _ = index_path.write_text(index.model_dump_json(indent=4), encoding="utf-8")
+        json_dict = index.model_dump(mode="json")
+        with index_path.open("wt", encoding="utf-8") as f:
+            json.dump(json_dict, f, indent=4, sort_keys=True, ensure_ascii=False)
+        # TODO: use .model_dump_json once it supports 'sort_keys' argument for a potential speed gain
+        # _ = index_path.write_text(index.model_dump_json(indent=4), encoding="utf-8")
+
         logger.info("saved index to {}", index_path)
 
     logger.info(

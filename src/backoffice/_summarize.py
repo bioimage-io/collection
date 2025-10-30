@@ -1,9 +1,10 @@
 import json
 import warnings
-from concurrent.futures import Future, ThreadPoolExecutor, as_completed
-from typing import Any
+from collections import defaultdict
+from typing import DefaultDict, Dict
 
 from loguru import logger
+from packaging.version import Version
 from tqdm import tqdm
 
 from backoffice.compatibility import (
@@ -11,6 +12,7 @@ from backoffice.compatibility import (
     CompatibilityScores,
     CompatibilitySummary,
     ToolCompatibilityReport,
+    ToolName,
     ToolNameVersioned,
     ToolReportDetails,
 )
@@ -24,14 +26,19 @@ from backoffice.utils import (
 
 def summarize_reports():
     index = create_index()
-    with ThreadPoolExecutor() as executor:
-        futures: list[Future[Any]] = []
-        for item in index.items:
-            for v in item.versions:
-                futures.append(executor.submit(_summarize, item, v))
+    for item in tqdm(index.items):
+        for v in item.versions:
+            _summarize(item, v)
 
-        for _ in tqdm(as_completed(futures), total=len(futures)):
-            pass
+    # TODO: Parallelize?
+    # with ThreadPoolExecutor() as executor:
+    #     futures: list[Future[Any]] = []
+    #     for item in index.items:
+    #         for v in item.versions:
+    #             futures.append(executor.submit(_summarize, item, v))
+
+    #     for _ in tqdm(as_completed(futures), total=len(futures)):
+    #         pass
 
 
 def _summarize(item: IndexItem, v: IndexItemVersion):
@@ -43,8 +50,13 @@ def _summarize(item: IndexItem, v: IndexItemVersion):
     scores: dict[ToolNameVersioned, float] = {}
     status = "failed"
     metadata_completeness = 0.0
+    metadata_format_score = 0.0
+    metadata_format_version = Version(
+        "0.0.0"
+    )  # to track the latest core version with valid format
     for report_path in get_all_tool_report_paths(item.id, v.version):
         tool, tool_version = report_path.stem.split("_", 1)
+        tool = tool.lower()
         if tool not in TOOL_NAMES:
             warnings.warn(f"Report {report_path} has unknown tool name '{tool}'.")
             continue
@@ -62,15 +74,35 @@ def _summarize(item: IndexItem, v: IndexItemVersion):
                 score=0.0,
                 details="Failed to parse compatibility report.",
             )
-        else:
-            if report.tool == "bioimageio.core" and status == "passed":
-                status = "passed"
 
         reports.append(report)
-        if report.tool == "bioimageio.spec" and isinstance(
+        if report.tool == "bioimageio.core" and isinstance(
             report.details, ToolReportDetails
         ):
-            metadata_completeness = report.details.metadata_completeness or 0.0
+            # select the best completeness score among core reports
+            metadata_completeness = max(
+                metadata_completeness, report.details.metadata_completeness or 0.0
+            )
+            # determine metadata format score
+            # - valid-format for latest core report: 1.0
+            # - valid-format for older core report: 0.5
+            # - invalid format for all core reports: 0.0
+            core_version = Version(tool_version)
+            if core_version >= metadata_format_version:
+                metadata_format_version = core_version
+                if report.details.status in ("passed", "valid-format"):
+                    metadata_format_score = 1.0
+                else:
+                    metadata_format_score = 0.5 if metadata_format_score else 0.0
+            elif not metadata_format_score and report.details.status in (
+                "passed",
+                "valid-format",
+            ):
+                metadata_format_score = 0.5
+
+    tests: DefaultDict[ToolName, Dict[str, ToolCompatibilityReport]] = defaultdict(dict)
+    for r in reports:
+        tests[r.tool][r.tool_version] = r
 
     summary = CompatibilitySummary(
         rdf_content=initial_summary.rdf_content,
@@ -79,13 +111,19 @@ def _summarize(item: IndexItem, v: IndexItemVersion):
         scores=CompatibilityScores(
             tool_compatibility_version_specific=scores,
             metadata_completeness=metadata_completeness,
+            metadata_format=metadata_format_score,
         ),
-        tests={report.report_name: report for report in reports},
+        tests=tests,
     )
 
-    _ = get_summary_file_path(item.id, v.version).write_text(
-        summary.model_dump_json(indent=4), encoding="utf-8"
-    )
+    json_dict = summary.model_dump(mode="json")
+    with get_summary_file_path(item.id, v.version).open("wt", encoding="utf-8") as f:
+        json.dump(json_dict, f, indent=4, sort_keys=True, ensure_ascii=False)
+    # TODO: use .model_dump_json once it supports 'sort_keys' argument for a potential speed gain
+    # _ = get_summary_file_path(item.id, v.version).write_text(
+    #     summary.model_dump_json(indent=4), encoding="utf-8"
+    # )
+
     logger.info(
         "summarized {} version {} with {} reports, status: {}, metadata completeness: {:.2f}",
         item.id,
