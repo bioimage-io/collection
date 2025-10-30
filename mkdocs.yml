@@ -86,7 +86,8 @@ theme:
 
 plugins:
   - autorefs
-  - coverage
+  - coverage:
+      html_report_dir: htmlcov
   - markdown-exec
   - mkdocstrings:
       handlers:
@@ -166,3 +167,5 @@ extra:
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/bioimage-io
+  version:
+    provider: mike

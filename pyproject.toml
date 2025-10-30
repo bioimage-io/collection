@@ -41,6 +41,7 @@ dev = [
     "pre-commit",
     "pyright",
     "pytest",
+    "pytest-cov",
     "respx",
     "ruff",
 ]

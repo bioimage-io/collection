@@ -30,47 +30,7 @@ on:
     - cron: '0 3 * * *'
 
 jobs:
-  # test-and-docs:
-  #   runs-on: ubuntu-latest
-  #   environment: testing
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - uses: actions/setup-python@v6
-  #       with:
-  #         cache: "pip"
-  #     - run: pip install -e .[dev]
-  #     - run: ruff check
-  #     - run: pyright -p pyproject.toml
-  #     - run: pytest
-  #       env:
-  #         RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
-  #         BIOIMAGEIO_USER_ID: github|${{github.actor_id}}
-  #         HYPHA_API_TOKEN: ${{secrets.HYPHA_API_TOKEN}}
-  #     - name: export documentation
-  #       run: |
-  #         pdoc \
-  #         --mermaid \
-  #         --docformat google \
-  #         --logo https://bioimage.io/static/img/bioimage-io-logo.svg \
-  #         --logo-link https://bioimage.io/ \
-  #         --favicon https://bioimage.io/static/img/bioimage-io-icon-small.svg \
-  #         --footer-text 'backoffice' \
-  #         -o ./docs backoffice
-  #     - name: Deploy to gh-pages 🚀
-  #       uses: JamesIves/github-pages-deploy-action@v4
-  #       with:
-  #         dry-run: ${{ github.ref != 'refs/heads/main' }}
-  #         folder: docs
-  #         clean: true
-  #         clean-exclude: |
-  #           backoffice.html
-  #           index.html
-  #           index.json
-  #           reports
-  #           search.js
-
   index:
-    # needs: test-and-docs
     uses: ./.github/workflows/index.yaml
     secrets: inherit
     with:

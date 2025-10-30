@@ -1,0 +1,35 @@
+name: Test and Docs
+on: push
+
+jobs:
+    run:
+        runs-on: ubuntu-latest
+        environment: testing
+        permissions:
+            contents: write
+        steps:
+            - uses: actions/checkout@v4
+            - name: Configure Git Credentials
+              run: |
+                  git config user.name github-actions[bot]
+                  git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+            - uses: actions/setup-python@v6
+              with:
+                  cache: 'pip'
+            - run: pip install -e .[dev]
+            - run: ruff check
+            - run: pyright -p pyproject.toml
+            - run: pytest --cov=backoffice --cov-report=html:htmlcov
+              env:
+                  RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
+                  BIOIMAGEIO_USER_ID: github|${{github.actor_id}}
+                  HYPHA_API_TOKEN: ${{secrets.HYPHA_API_TOKEN}}
+            - run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_OUTPUT
+              id: cache-id
+            - uses: actions/cache@v4
+              with:
+                  key: mkdocs-material-${{ steps.cache-id.outputs.cache_id }}
+                  path: ~/.cache
+                  restore-keys: |
+                      mkdocs-material-
+            - run: mike deploy --update-aliases 0.1 latest
