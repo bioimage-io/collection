@@ -11,9 +11,9 @@
             "type": "model",
             "versions": [
                 {
-                    "comment": "Deleted new-dir",
+                    "comment": "Added rdf.yaml",
                     "created_at": "2025-07-01T22:53:02Z",
-                    "sha256": "b74944b4949591d3eaf231cf9ab259f91dec679863020178e6c3ddadd52a019c",
+                    "sha256": "2410575911f5da00b22d1fe2db82cdb1bcfee646dddc300f45af745ec0d50fba",
                     "source": "https://hypha.aicell.io/bioimage-io/artifacts/affable-shark/files/rdf.yaml?version=v0",
                     "version": "v0"
                 }
@@ -1844,9 +1844,9 @@
             "type": "model",
             "versions": [
                 {
-                    "comment": "Added cover.thumbnail.png",
+                    "comment": "Updated rdf.yaml",
                     "created_at": "2025-07-01T22:51:14Z",
-                    "sha256": "a1eee0ee3728039fe5774aaee67c753f4635a48f6f9fc1a4a0989d9b5fb213a9",
+                    "sha256": "8be799d7be29ad8c08dc5c6d102ee6fe920fb952e1dcd4372db17f48a393c4a2",
                     "source": "https://hypha.aicell.io/bioimage-io/artifacts/happy-elephant/files/rdf.yaml?version=v0",
                     "version": "v0"
                 }
@@ -3127,6 +3127,6 @@
             ]
         }
     ],
-    "timestamp": "2025-10-29T03:47:46.255012",
+    "timestamp": "2025-10-30T13:42:38.409548",
     "total": 240
 }
