@@ -1,0 +1,79 @@
+authors:
+- {github_user: danifranco, name: Daniel Franco-Barranco}
+cite:
+- {doi: 10.1101/2024.02.03.576026, text: training library}
+- {doi: 10.1109/CVPR52729.2023.01548, text: architecture}
+- {doi: 10.48550/arXiv.1812.06024, text: data}
+- {doi: 10.1038/s41592-025-02699-y, text: 'BiaPy: accessible deep learning on bioimages', url: https://doi.org/10.1038/s41592-025-02699-y}
+config:
+  bioimageio:
+    thumbnails: {cover.png: cover.thumbnail.png}
+covers: [cover.png]
+description: Mitochondria segmentation for electron microscopy
+documentation: documentation.md
+format_version: 0.5.3
+git_repo: https://github.com/BiaPyX/BiaPy
+id: sensible-cat
+id_emoji: 🐈
+inputs:
+- axes:
+  - {size: 1, type: batch}
+  - channel_names: [channel0]
+    type: channel
+  - {id: y, size: 256, type: space}
+  - {id: x, size: 256, type: space}
+  data: {type: float32}
+  id: input0
+  preprocessing:
+  - id: ensure_dtype
+    kwargs: {dtype: float32}
+  - id: zero_mean_unit_variance
+    kwargs:
+      axes: [channel, y, x]
+  - id: ensure_dtype
+    kwargs: {dtype: float32}
+  test_tensor: {sha256: a78a3da046f782e42f9b9db5ed9bf24e3a8d2d924a8a260a8949ad1c122c5570,
+    source: test-input.npy}
+license: CC-BY-4.0
+maintainers:
+- {github_user: danifranco, name: Daniel Franco-Barranco}
+name: 2D U-NeXt V2 for mitochondria segmentation in EM
+outputs:
+- axes:
+  - {size: 1, type: batch}
+  - channel_names: [channel0]
+    type: channel
+  - {id: y, size: 256, type: space}
+  - {id: x, size: 256, type: space}
+  data: {type: float32}
+  id: output0
+  postprocessing:
+  - {id: sigmoid}
+  - id: ensure_dtype
+    kwargs: {dtype: float32}
+  test_tensor: {sha256: cfdabeb06191de0b71b2569caeaf22cea25df29da46827c74f964435c00a97b1,
+    source: test-output.npy}
+tags: [electron-microscopy, mitochondria, 2d, pytorch, biapy, semantic-segmentation,
+  unext-v2]
+training_data: {id: sublime-pizza}
+type: model
+uploader: {email: daniel.franco@dipc.org, name: Daniel Franco-Barranco}
+version: 0.1.0
+weights:
+  pytorch_state_dict:
+    architecture:
+      callable: U_NeXt_V2
+      kwargs:
+        cn_layers: [2, 2, 2, 2, 2]
+        feature_maps: [16, 32, 64, 128, 256]
+        image_shape: [256, 256, 1]
+        isotropy: [true, true, true, true, true]
+        stem_k_size: 2
+        stochastic_depth_prob: 0.1
+        upsample_layer: convtranspose
+        z_down: [2, 2, 2, 2]
+      sha256: 7613993cd32d16944ee0fe51ee99889ae551a83e9ded994df7d39541bc50a56c
+      source: unext_v2.py
+    pytorch_version: 2.4.0+cu118
+    sha256: b35fe8f1edf590a3c0344f62eeaa92fb3b88272888cc2c81cb72dc02b2ba0db8
+    source: checkpoint.pth
