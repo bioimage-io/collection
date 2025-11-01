@@ -31,7 +31,7 @@ def check_compatibility_biapy_impl(
             {"raw": {"manifest": rdf}}
         )
     else:
-        _, error, error_message = check_bmz_model_compatibility(rdf)
+        _, error, error_message, _ = check_bmz_model_compatibility(rdf)
 
     status = "passed" if not error else "failed"
     if error:
