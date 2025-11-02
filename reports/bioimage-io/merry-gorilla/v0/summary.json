@@ -241,6 +241,16 @@
                 ],
                 "score": 0.0,
                 "status": "failed"
+            },
+            "3.6.6": {
+                "badge": null,
+                "details": "[all] no workflow tag recognized in ['Cellpose', 'Nuclei Segmentation', 'Cilia Analysis', 'Fluorescence Microscopy', '2D'].\n",
+                "error": "[all] no workflow tag recognized in ['Cellpose', 'Nuclei Segmentation', 'Cilia Analysis', 'Fluorescence Microscopy', '2D'].\n",
+                "links": [
+                    "biapy/biapy"
+                ],
+                "score": 0.0,
+                "status": "failed"
             }
         },
         "bioimageio.core": {

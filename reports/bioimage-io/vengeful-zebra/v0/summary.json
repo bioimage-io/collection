@@ -233,6 +233,16 @@
                 ],
                 "score": 0.0,
                 "status": "failed"
+            },
+            "3.6.6": {
+                "badge": null,
+                "details": "",
+                "error": "",
+                "links": [
+                    "biapy/biapy"
+                ],
+                "score": 1.0,
+                "status": "passed"
             }
         },
         "bioimageio.core": {
