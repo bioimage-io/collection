@@ -683,6 +683,119 @@
                 "links": [],
                 "score": 0.0,
                 "status": "failed"
+            },
+            "0.9.5": {
+                "badge": null,
+                "details": {
+                    "details": [
+                        {
+                            "context": {
+                                "file_name": "rdf.yaml",
+                                "known_files": {
+                                    "https://github.com/kreshuklab/hylfm-net": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/ambitious-sloth/files/README.md?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/ambitious-sloth/files/cover.png?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/ambitious-sloth/files/model.py?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/ambitious-sloth/files/sample_input.tif?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/ambitious-sloth/files/sample_output.tif?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/ambitious-sloth/files/test_input.npy?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/ambitious-sloth/files/test_output.npy?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/ambitious-sloth/files/weights.onnx?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/ambitious-sloth/files/weights.pt?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/ambitious-sloth/files/weights_torchscript.pt?version=v0": null,
+                                    "model.py": "67c4280cdbd1d815888b9247d80b0af9ad8f525d6b5c802797a908e795db93fc",
+                                    "sample_input.tif": "dc47897c483e5ba42965b00171cbf5b96de33c4bf46b0521cb888358657c8f37",
+                                    "sample_output.tif": "15eb3df516c6c7dd06b23f11f4b0ea5479c342d9fb9a88c870e0e75f48103733",
+                                    "test_input.npy": "39d9cb7a8aeca76e4c915ab21b3ef317429dba81b8fef601fe7a0b18f1338538",
+                                    "test_output.npy": "5c31cdd9d99e67fd10f9d387b4315dc978257c8805e2c8300621212b4a122ef7",
+                                    "weights.onnx": "55ad061651840fe4b6da6733c52402ae3296392f74fed8a9482e4bc62040938f",
+                                    "weights.pt": "461f1151d7fea5857ce8f9ceaf9cdf08b5f78ce41785725e39a77d154ccea90a",
+                                    "weights_torchscript.pt": "ec01e0c212b5eb422dda208af004665799637a2f2729d0ebf2e884e5d9966fc2"
+                                },
+                                "original_source_name": null,
+                                "perform_io_checks": true,
+                                "root": "https://hypha.aicell.io/bioimage-io/artifacts/ambitious-sloth/files?version=v0",
+                                "update_hashes": false
+                            },
+                            "errors": [],
+                            "loc": [],
+                            "name": "Successfully created `ModelDescr` instance.",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [],
+                            "name": "bioimageio.spec format validation model 0.5.6",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "onnx"
+                            ],
+                            "name": "Reproduce test outputs from test inputs (onnx)",
+                            "recommended_env": {
+                                "channels": [
+                                    "conda-forge",
+                                    "nodefaults"
+                                ],
+                                "dependencies": [
+                                    "conda-forge::bioimageio.core",
+                                    "onnxruntime",
+                                    "pip"
+                                ],
+                                "name": null
+                            },
+                            "saved_conda_compare": "Success. All the packages in the specification file are present in the environment with matching version and build string.\n",
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "onnx"
+                            ],
+                            "name": "Run onnx inference for inputs with batch_size: 1 and size parameter n: 0",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        }
+                    ],
+                    "env": [
+                        [
+                            "bioimageio.spec",
+                            "0.5.6.0",
+                            "",
+                            ""
+                        ]
+                    ],
+                    "format_version": "0.5.6",
+                    "id": "ambitious-sloth",
+                    "metadata_completeness": 0.7402597402597403,
+                    "name": "bioimageio format validation",
+                    "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+                    "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/ambitious-sloth/files/rdf.yaml?version=v0",
+                    "status": "passed",
+                    "type": "model"
+                },
+                "error": null,
+                "links": [
+                    "bioimageio/bioimageio.core"
+                ],
+                "score": 1.0,
+                "status": "passed"
             }
         },
         "careamics": {

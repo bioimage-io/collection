@@ -434,6 +434,159 @@
                 ],
                 "score": 1.0,
                 "status": "passed"
+            },
+            "0.9.5": {
+                "badge": null,
+                "details": {
+                    "details": [
+                        {
+                            "context": {
+                                "file_name": "rdf.yaml",
+                                "known_files": {
+                                    "10c6feba-1e0f-4d4e-92bd-27d7037eadca_prob_test_tensor.npy": "e4b8f2bfa5a25eccdb92aed69963be21e6e2f558c3d70d66d26a94a81d25a831",
+                                    "44a0b00b-f171-4fa2-9c39-160e610e9496.pt": "3a723821231e26e835af4f47da3f398b5e21bd341aacee0cca6e5f5d6ca00697",
+                                    "cfdcff5e-c4e4-4baf-826f-b453751a139d_raw_test_tensor.npy": "7bae2cd1ddc8efd1b62154c5896c817c899a8055c2f7b347ae00d9092ab39392",
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/charismatic-whale/files/010bfd64-09df-4422-bd3c-1ec577824ff4_cover_image.png?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/charismatic-whale/files/10c6feba-1e0f-4d4e-92bd-27d7037eadca_prob_test_tensor.npy?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/charismatic-whale/files/44a0b00b-f171-4fa2-9c39-160e610e9496.pt?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/charismatic-whale/files/6dfa0d3c-50f9-4e54-86da-f6111383f936_README.md?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/charismatic-whale/files/cfdcff5e-c4e4-4baf-826f-b453751a139d_raw_test_tensor.npy?version=v0": null
+                                },
+                                "original_source_name": null,
+                                "perform_io_checks": true,
+                                "root": "https://hypha.aicell.io/bioimage-io/artifacts/charismatic-whale/files?version=v0",
+                                "update_hashes": false
+                            },
+                            "errors": [],
+                            "loc": [],
+                            "name": "Successfully created `ModelDescr` instance.",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [],
+                            "name": "bioimageio.spec format validation model 0.5.6",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": [
+                                {
+                                    "loc": [
+                                        "inputs",
+                                        0,
+                                        "sample_tensor"
+                                    ],
+                                    "msg": "Needs to be filled for FAIR compliance",
+                                    "severity": 35,
+                                    "type": "warning"
+                                },
+                                {
+                                    "loc": [
+                                        "outputs",
+                                        0,
+                                        "sample_tensor"
+                                    ],
+                                    "msg": "Needs to be filled for FAIR compliance",
+                                    "severity": 35,
+                                    "type": "warning"
+                                }
+                            ]
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "torchscript"
+                            ],
+                            "name": "Reproduce test outputs from test inputs (torchscript)",
+                            "recommended_env": {
+                                "channels": [
+                                    "pytorch",
+                                    "conda-forge",
+                                    "nodefaults"
+                                ],
+                                "dependencies": [
+                                    "conda-forge::bioimageio.core",
+                                    "numpy <2",
+                                    "pip",
+                                    "pytorch==2.2.0",
+                                    "torchaudio==2.2.0",
+                                    "torchvision==0.17.0"
+                                ],
+                                "name": null
+                            },
+                            "saved_conda_compare": "Success. All the packages in the specification file are present in the environment with matching version and build string.\n",
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "torchscript"
+                            ],
+                            "name": "Run torchscript inference for inputs with batch_size: 1 and size parameter n: 0",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "torchscript"
+                            ],
+                            "name": "Run torchscript inference for inputs with batch_size: 1 and size parameter n: 1",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "torchscript"
+                            ],
+                            "name": "Run torchscript inference for inputs with batch_size: 1 and size parameter n: 2",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        }
+                    ],
+                    "env": [
+                        [
+                            "bioimageio.spec",
+                            "0.5.6.0",
+                            "",
+                            ""
+                        ]
+                    ],
+                    "format_version": "0.5.6",
+                    "id": "charismatic-whale",
+                    "metadata_completeness": 0.9019607843137255,
+                    "name": "bioimageio format validation",
+                    "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+                    "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/charismatic-whale/files/rdf.yaml?version=v0",
+                    "status": "passed",
+                    "type": "model"
+                },
+                "error": null,
+                "links": [
+                    "bioimageio/bioimageio.core"
+                ],
+                "score": 1.0,
+                "status": "passed"
             }
         },
         "careamics": {
