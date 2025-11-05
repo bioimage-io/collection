@@ -1,0 +1,130 @@
+{
+    "badge": null,
+    "details": {
+        "details": [
+            {
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "https://hypha.aicell.io/bioimage-io/artifacts/loyal-squid/files/pred-boundary.png?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/loyal-squid/files/pred-nuclei.png?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/loyal-squid/files/raw.png?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/loyal-squid/files/sample_input_0.tif?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/loyal-squid/files/sample_output_0.tif?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/loyal-squid/files/test_input.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/loyal-squid/files/test_output.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/loyal-squid/files/torchscript_tracing.pt?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/loyal-squid/files/unet-bce-dice-ab-nuclei-boundary-090121.pytorch?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/loyal-squid/files/unet.py?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/loyal-squid/files/unet3d.md?version=v0": null,
+                        "torchscript_tracing.pt": "01b197c06500ab96d5ef051901fcd07add7f5b96ef3bbac9473f34be9c4d7ba0",
+                        "unet-bce-dice-ab-nuclei-boundary-090121.pytorch": "c7c73485fd17273f8018e7e8ba76c030d7b0c8553a242ac1303b23904f6303ef"
+                    },
+                    "original_source_name": null,
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/loyal-squid/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Successfully created `ModelDescr` instance.",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.4.10",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Reproduce test outputs from test inputs (pytorch_state_dict)",
+                "recommended_env": {
+                    "channels": [
+                        "pytorch",
+                        "conda-forge",
+                        "nodefaults"
+                    ],
+                    "dependencies": [
+                        "conda-forge::bioimageio.core",
+                        "mkl ==2024.0.0",
+                        "numpy <2",
+                        "pip",
+                        "pytorch==1.12.1",
+                        "setuptools <70.0.0",
+                        "torchaudio==0.12.1",
+                        "torchvision==0.13.1"
+                    ],
+                    "name": null
+                },
+                "saved_conda_compare": "Success. All the packages in the specification file are present in the environment with matching version and build string.\n",
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "torchscript"
+                ],
+                "name": "Reproduce test outputs from test inputs (torchscript)",
+                "recommended_env": {
+                    "channels": [
+                        "pytorch",
+                        "conda-forge",
+                        "nodefaults"
+                    ],
+                    "dependencies": [
+                        "conda-forge::bioimageio.core",
+                        "mkl ==2024.0.0",
+                        "numpy <2",
+                        "pip",
+                        "pytorch==1.13.0",
+                        "setuptools <70.0.0",
+                        "torchaudio==0.13.0",
+                        "torchvision==0.14.0"
+                    ],
+                    "name": null
+                },
+                "saved_conda_compare": "Success. All the packages in the specification file are present in the environment with matching version and build string.\n",
+                "status": "passed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.spec",
+                "0.5.6.0",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.4.10",
+        "id": "10.5281/zenodo.6383429/7774505",
+        "metadata_completeness": 0.75,
+        "name": "bioimageio format validation",
+        "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/loyal-squid/files/rdf.yaml?version=v0",
+        "status": "passed",
+        "type": "model"
+    },
+    "error": null,
+    "links": [
+        "bioimageio/bioimageio.core"
+    ],
+    "score": 1.0,
+    "status": "passed"
+}
