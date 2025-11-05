@@ -521,6 +521,16 @@
                 "links": [],
                 "score": 0.0,
                 "status": "not-applicable"
+            },
+            "0.0.18": {
+                "badge": null,
+                "details": [
+                    "CAREamics compatibility check does not support `bioimageio.spec.v0.4` model desciptions."
+                ],
+                "error": null,
+                "links": [],
+                "score": 0.0,
+                "status": "not-applicable"
             }
         }
     }

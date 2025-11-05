@@ -441,6 +441,14 @@
                 "links": [],
                 "score": 0.0,
                 "status": "not-applicable"
+            },
+            "0.0.18": {
+                "badge": null,
+                "details": "'Model' resource not tagged with 'CAREamics' or 'careamics'.",
+                "error": null,
+                "links": [],
+                "score": 0.0,
+                "status": "not-applicable"
             }
         }
     }
