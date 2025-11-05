@@ -329,6 +329,102 @@
                 ],
                 "score": 1.0,
                 "status": "passed"
+            },
+            "0.9.5": {
+                "badge": null,
+                "details": {
+                    "details": [
+                        {
+                            "context": {
+                                "file_name": "rdf.yaml",
+                                "known_files": {
+                                    "cell_model.pt": "7e94848c41f2a8a2e881a194fbd0228af15d3df864313c53bf3b130e90ca0275",
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/loyal-parrot/files/README.md?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/loyal-parrot/files/cell_model.pt?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/loyal-parrot/files/fixed_zero_mean_unit_variance.ijm?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/loyal-parrot/files/hpaseg-cover.png?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/loyal-parrot/files/sample_input_0.tif?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/loyal-parrot/files/sample_output_0.tif?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/loyal-parrot/files/test_cell_input.npy?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/loyal-parrot/files/test_cell_output.npy?version=v0": null
+                                },
+                                "original_source_name": null,
+                                "perform_io_checks": true,
+                                "root": "https://hypha.aicell.io/bioimage-io/artifacts/loyal-parrot/files?version=v0",
+                                "update_hashes": false
+                            },
+                            "errors": [],
+                            "loc": [],
+                            "name": "Successfully created `ModelDescr` instance.",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [],
+                            "name": "bioimageio.spec format validation model 0.4.10",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "torchscript"
+                            ],
+                            "name": "Reproduce test outputs from test inputs (torchscript)",
+                            "recommended_env": {
+                                "channels": [
+                                    "pytorch",
+                                    "conda-forge",
+                                    "nodefaults"
+                                ],
+                                "dependencies": [
+                                    "conda-forge::bioimageio.core",
+                                    "mkl ==2024.0.0",
+                                    "numpy <2",
+                                    "pip",
+                                    "pytorch==1.13.0",
+                                    "setuptools <70.0.0",
+                                    "torchaudio==0.13.0",
+                                    "torchvision==0.14.0"
+                                ],
+                                "name": null
+                            },
+                            "saved_conda_compare": "Success. All the packages in the specification file are present in the environment with matching version and build string.\n",
+                            "status": "passed",
+                            "warnings": []
+                        }
+                    ],
+                    "env": [
+                        [
+                            "bioimageio.spec",
+                            "0.5.6.0",
+                            "",
+                            ""
+                        ]
+                    ],
+                    "format_version": "0.4.10",
+                    "id": "10.5281/zenodo.6200635/7702687",
+                    "metadata_completeness": 0.7352941176470589,
+                    "name": "bioimageio format validation",
+                    "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+                    "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/loyal-parrot/files/rdf.yaml?version=v0",
+                    "status": "passed",
+                    "type": "model"
+                },
+                "error": null,
+                "links": [
+                    "bioimageio/bioimageio.core"
+                ],
+                "score": 1.0,
+                "status": "passed"
             }
         },
         "careamics": {
