@@ -1,43 +1,130 @@
 import argparse
-from pathlib import Path
-from typing import TYPE_CHECKING
+from dataclasses import dataclass
+from typing import TYPE_CHECKING, Any, Dict, Optional
 
 import bioimageio.core
-from typing_extensions import Literal
+from typing_extensions import Literal, Protocol
+
+from backoffice.check_compatibility import check_tool_compatibility
+from backoffice.compatibility_pure import ToolCompatibilityReportDict
+
+try:
+    from bioimageio.spec.common import Sha256
+except ImportError:
+    Sha256 = str
 
 if bioimageio.core.__version__.startswith("0.5."):
     from bioimageio.core import test_resource as test_model
 else:
     from bioimageio.core import test_model
 
-from script_utils import CompatibilityReportDict, check_tool_compatibility, download_rdf
+
+class HasContent(Protocol):
+    @property
+    def content(self) -> Optional[Dict[Any, Any]]: ...
+
+
+def warn_fallback(name: str):
+    print(
+        "::warning file=check_compatibility_ilastik.py,"
+        + f"title=Using `{name}` fallback"
+        + f"::Using custom fallback for `{name}`"
+    )
+
+
+try:
+    from bioimageio.spec._internal.io_utils import (
+        open_bioimageio_yaml,  # pyright: ignore[reportAssignmentType]
+        # cannot make 'rdf_url' positional only (in fallback impl of open_bioimageio_yaml)
+        # due to python backwards compatibility
+    )
+except ImportError:
+    warn_fallback("open_bioimageio_yaml")
+    try:
+        from ruamel.yaml import YAML  # type: ignore
+    except ImportError:
+        import yaml
+
+        yaml.load = yaml.safe_load
+    else:
+        yaml = YAML(typ="safe")  # type: ignore
+
+    try:
+        import requests
+    except ImportError:
+        import httpx as requests
+
+    from io import BytesIO
+
+    @dataclass
+    class DownloadedRDF:
+        content: Optional[Dict[Any, Any]]
+
+    def open_bioimageio_yaml(
+        rdf_url: str,  # TODO: make 'rdf_url' positional only
+        **kwargs: Any,
+    ) -> HasContent:
+        r = requests.get(rdf_url)
+        return DownloadedRDF(yaml.load(BytesIO(r.content)))  # type: ignore
 
 
 def check_compatibility_ilastik_impl(
+    idem_id: str,
+    version: str,
     rdf_url: str,
     sha256: str,
-) -> CompatibilityReportDict:
-    """Create a `CompatibilityReport` for a resource description.
+) -> ToolCompatibilityReportDict:
+    """Create a `ToolCompatibilityReportDict` for a resource description.
 
     Args:
         rdf_url: URL to the rdf.yaml file
         sha256: SHA-256 value of **rdf_url** content
     """
 
-    rdf = download_rdf(rdf_url, sha256)
+    rdf = open_bioimageio_yaml(rdf_url, sha256=Sha256(sha256)).content
 
-    if rdf["type"] != "model":
-        report = CompatibilityReportDict(
+    if not isinstance(rdf, dict):
+        report = ToolCompatibilityReportDict(
+            tool="ilastik",
+            status="failed",
+            error=None,
+            details="Failed to load resource description.",
+            badge=None,
+            links=[],
+        )
+    elif rdf["type"] != "model":
+        report = ToolCompatibilityReportDict(
+            tool="ilastik",
             status="not-applicable",
             error=None,
             details="only 'model' resources can be used in ilastik.",
+            badge=None,
+            links=[],
         )
 
-    elif len(rdf["inputs"]) > 1 or len(rdf["outputs"]) > 1:
-        report = CompatibilityReportDict(
+    elif (
+        not isinstance(rdf["inputs"], list)
+        or not isinstance(rdf["outputs"], list)
+        or len(rdf["inputs"]) > 1  # pyright: ignore[reportUnknownArgumentType]
+        or len(rdf["outputs"]) > 1  # pyright: ignore[reportUnknownArgumentType]
+    ):
+        if isinstance(rdf["inputs"], list):
+            input_len = len(rdf["inputs"])  # pyright: ignore[reportUnknownArgumentType]
+        else:
+            input_len = "missing"
+
+        if isinstance(rdf["outputs"], list):
+            output_len = len(rdf["outputs"])  # pyright: ignore[reportUnknownArgumentType]
+        else:
+            output_len = "missing"
+
+        report = ToolCompatibilityReportDict(
+            tool="ilastik",
             status="failed",
-            error=f"ilastik only supports single tensor input/output (found {len(rdf['inputs'])}/{len(rdf['outputs'])})",
+            error=f"ilastik only supports a single input/output tensor (found {input_len}/{output_len})",
             details=None,
+            badge=None,
+            links=[],
         )
     else:
         # produce test summary with bioimageio.core
@@ -66,19 +153,19 @@ def check_compatibility_ilastik_impl(
                 else summary.format()
             )
         )
-        report = CompatibilityReportDict(
+        report = ToolCompatibilityReportDict(
+            tool="ilastik",
             status=status,
             error=error,
             details=details,
             links=["ilastik/ilastik"],
+            badge=None,
         )
 
     return report
 
 
-def check_compatibility_ilastik(
-    ilastik_version: str, all_version_path: Path, output_folder: Path
-):
+def check_compatibility_ilastik(ilastik_version: str):
     """preliminary ilastik check
 
     only checks if test outputs are reproduced for onnx, torchscript, or pytorch_state_dict weights.
@@ -88,8 +175,6 @@ def check_compatibility_ilastik(
     check_tool_compatibility(
         "ilastik",
         ilastik_version,
-        all_version_path=all_version_path,
-        output_folder=output_folder,
         check_tool_compatibility_impl=check_compatibility_ilastik_impl,
         applicable_types={"model"},
     )
@@ -98,10 +183,6 @@ def check_compatibility_ilastik(
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     _ = parser.add_argument("ilastik_version")
-    _ = parser.add_argument("all_versions", type=Path)
-    _ = parser.add_argument("output_folder", type=Path)
 
     args = parser.parse_args()
-    check_compatibility_ilastik(
-        args.ilastik_version, args.all_versions, args.output_folder
-    )
+    check_compatibility_ilastik(args.ilastik_version)

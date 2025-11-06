@@ -1,22 +1,22 @@
-from typing import Protocol, Optional, Union, Tuple, List
-import argparse
-from pathlib import Path
 import traceback
 from functools import lru_cache
+from pathlib import Path
+from typing import List, Optional, Protocol, Tuple, Union
 
 import pydantic
-from careamics import __version__ as CAREAMICS_VERSION
-from careamics import CAREamist
-from careamics.lightning import FCNModule, VAEModule
-from careamics.config import Configuration
-from careamics.model_io.bmz_io import load_from_bmz
-from bioimageio.spec import load_model_description
-from bioimageio.spec.common import HttpUrl
 from bioimageio.core.digest_spec import get_test_inputs
+from bioimageio.spec import load_model_description
+from bioimageio.spec.common import HttpUrl, Sha256
 from bioimageio.spec.model import AnyModelDescr
-from bioimageio.spec.model.v0_5 import ModelDescr, AxisId
+from bioimageio.spec.model.v0_5 import AxisId, ModelDescr
+from careamics import CAREamist
+from careamics import __version__ as CAREAMICS_VERSION
+from careamics.config import Configuration
+from careamics.lightning import FCNModule, VAEModule
+from careamics.model_io.bmz_io import load_from_bmz
 
-from .script_utils import CompatibilityReportDict, check_tool_compatibility
+from backoffice.check_compatibility import check_tool_compatibility
+from backoffice.compatibility_pure import ToolCompatibilityReportDict
 
 
 @lru_cache
@@ -27,17 +27,16 @@ def careamics_load_from_bmz(
 
 
 class CompatibilityCheck_v0_5(Protocol):
-
     def __call__(
         self, model_desc: ModelDescr, rdf_url: str
-    ) -> Optional[CompatibilityReportDict]: ...
+    ) -> Optional[ToolCompatibilityReportDict]: ...
 
 
 def check_model_desc_v0_5(
     model_desc: AnyModelDescr,
-) -> Optional[CompatibilityReportDict]:
+) -> Optional[ToolCompatibilityReportDict]:
     if not isinstance(model_desc, ModelDescr):
-        return CompatibilityReportDict(
+        return ToolCompatibilityReportDict(
             status="not-applicable",
             error=None,
             details=(
@@ -51,9 +50,9 @@ def check_model_desc_v0_5(
 
 def check_tagged_careamics(
     model_desc: ModelDescr, rdf_url: str
-) -> Optional[CompatibilityReportDict]:
+) -> Optional[ToolCompatibilityReportDict]:
     if ("CAREamics" not in model_desc.tags) and ("careamics" not in model_desc.tags):
-        return CompatibilityReportDict(
+        return ToolCompatibilityReportDict(
             status="not-applicable",
             error=None,
             details="'Model' resource not tagged with 'CAREamics' or 'careamics'.",
@@ -64,7 +63,7 @@ def check_tagged_careamics(
 
 def check_has_careamics_config(
     model_desc: ModelDescr, rdf_url: str
-) -> Optional[CompatibilityReportDict]:
+) -> Optional[ToolCompatibilityReportDict]:
     attachment_file_paths = [
         (
             attachment.source
@@ -77,8 +76,8 @@ def check_has_careamics_config(
         Path(path).name for path in attachment_file_paths if path is not None
     ]
     # TODO: update to careamics.yaml once files have been updated
-    if not ("careamics.yaml" in attachment_file_names):
-        return CompatibilityReportDict(
+    if "careamics.yaml" not in attachment_file_names:
+        return ToolCompatibilityReportDict(
             status="failed",
             error=None,
             details="CAREamics config file is not present in attachments.",
@@ -89,11 +88,11 @@ def check_has_careamics_config(
 
 def check_careamics_can_load(
     model_desc: ModelDescr, rdf_url: str
-) -> Optional[CompatibilityReportDict]:
+) -> Optional[ToolCompatibilityReportDict]:
     try:
         _ = careamics_load_from_bmz(rdf_url)
     except (ValueError, pydantic.ValidationError):
-        report = CompatibilityReportDict(
+        report = ToolCompatibilityReportDict(
             status="failed",
             error="Error: {}".format(traceback.format_exc()),
             details=("Could not load CAREamics configuration or model."),
@@ -105,7 +104,7 @@ def check_careamics_can_load(
 
 def check_careamics_can_predict(
     model_desc: ModelDescr, rdf_url: str
-) -> Optional[CompatibilityReportDict]:
+) -> Optional[ToolCompatibilityReportDict]:
     model, config = careamics_load_from_bmz(rdf_url)
 
     # initialise CAREamist
@@ -130,7 +129,7 @@ def check_careamics_can_predict(
             axes="SCZYX" if "Z" in config.data_config.axes else "SCYX",
         )
     except Exception:
-        report = CompatibilityReportDict(
+        report = ToolCompatibilityReportDict(
             status="failed",
             error="Error: {}".format(traceback.format_exc()),
             details=(
@@ -144,16 +143,18 @@ def check_careamics_can_predict(
 
 
 def check_compatibility_careamics_impl(
+    item_id: str,
+    version: str,
     rdf_url: str,
     sha256: str,
-) -> CompatibilityReportDict:
+) -> ToolCompatibilityReportDict:
     """Create a `CompatibilityReport` for a resource description.
 
     Args:
         rdf_url: URL to the rdf.yaml file
         sha256: SHA-256 value of **rdf_url** content
     """
-    model_desc: AnyModelDescr = load_model_description(rdf_url)
+    model_desc: AnyModelDescr = load_model_description(rdf_url, sha256=Sha256(sha256))
     report = check_model_desc_v0_5(model_desc)
     if report is not None:
         return report
@@ -170,29 +171,25 @@ def check_compatibility_careamics_impl(
         if report is not None:
             return report
 
-    return CompatibilityReportDict(
+    return ToolCompatibilityReportDict(
+        tool="careamics",
         status="passed",
         error=None,
         details="CAREamics compatibility checks completed successfully!",
+        badge=None,
+        links=[],
     )
 
 
-def check_compatibility_careamics(all_version_path: Path, output_folder: Path) -> None:
+def check_compatibility_careamics() -> None:
     """CAREamics compatibility check."""
     check_tool_compatibility(
-        "CAREamics",
+        "careamics",
         CAREAMICS_VERSION,
-        all_version_path=all_version_path,
-        output_folder=output_folder,
         check_tool_compatibility_impl=check_compatibility_careamics_impl,
         applicable_types={"model"},
     )
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    _ = parser.add_argument("all_versions", type=Path)
-    _ = parser.add_argument("output_folder", type=Path)
-
-    args = parser.parse_args()
-    check_compatibility_careamics(args.all_versions, args.output_folder)
+    check_compatibility_careamics()

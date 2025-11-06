@@ -1,0 +1,93 @@
+name: index
+run-name: index bioimage.io resources
+
+on:
+  workflow_call:
+    inputs:
+      cache-nr:
+        required: false
+        default: '0'
+        type: string
+    outputs:
+      index-key:
+        description: 'The latest cache key for the index.json file'
+        value: ${{ jobs.run.outputs.index-key }}
+      cache-hit:
+        description: 'Whether the cache was hit'
+        value: ${{ jobs.run.outputs.cache-hit }}
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    environment: 'production'
+    outputs:
+      index-key: ${{ steps.get-index-key.outputs.index-key }}
+      cache-hit: ${{ steps.cache.outputs.cache-hit }}
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Get index key
+        id: get-index-key
+        run: |
+          echo "date=$(date +'%Y-%b')"
+          echo "index-key=index-$(date +'%Y-%m-%d')-nr${{ inputs.cache-nr }}" >> $GITHUB_OUTPUT
+        shell: bash
+      - uses: actions/cache@v3
+        id: cache
+        with:
+          key: ${{ steps.get-index-key.outputs.index-key }}
+          path: index.json
+          lookup-only: true
+      - if: steps.cache.outputs.cache-hit != 'true'
+        name: checkout reports to delete outdated ones (due to in-place RDF changes)
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          path: gh-pages
+          sparse-checkout: |
+            reports
+      - if: steps.cache.outputs.cache-hit != 'true'
+        name: Move checked-out reports for cleanup
+        run: mv gh-pages/reports/ ./reports/
+      - if: steps.cache.outputs.cache-hit != 'true'
+        uses: actions/setup-python@v6
+        with:
+          cache: 'pip'
+          cache-dependency-path: pyproject.toml
+      - if: steps.cache.outputs.cache-hit != 'true'
+        run: pip install .
+        shell: bash
+      - if: steps.cache.outputs.cache-hit != 'true'
+        run: backoffice index
+        env:
+          RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
+          HYPHA_API_TOKEN: ${{ secrets.HYPHA_API_TOKEN }}
+        shell: bash
+      - if: steps.cache.outputs.cache-hit != 'true'
+        name: Stage updated reports to stage-gh-pages 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: stage-gh-pages
+          folder: reports
+          dry-run: ${{ github.ref != 'refs/heads/main' }}
+          target-folder: reports
+          clean: true
+          clean-exclude: |
+            backoffice.html
+            index.html
+            index.json
+            search.js
+      - if: steps.cache.outputs.cache-hit != 'true'
+        name: copy index.json to folder for deployment
+        shell: bash
+        run: |
+          mkdir index
+          cp index.json index/index.json
+      - if: steps.cache.outputs.cache-hit != 'true'
+        name: Stage index.json to stage-gh-pages 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: stage-gh-pages
+          folder: index
+          dry-run: ${{ github.ref != 'refs/heads/main' }}
+          clean: false

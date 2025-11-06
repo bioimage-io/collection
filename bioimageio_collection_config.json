@@ -87,6 +87,14 @@
             "orcid": "0009-0000-8923-568X",
             "github_user": "IvanHCenalmor",
             "email": "ihidalgo@igc.gulbenkian.pt"
+        },
+        {
+            "id": "github|49943582",
+            "name": "Nils Mechtel",
+            "affiliation": "KTH",
+            "orcid": "0000-0002-1278-7125",
+            "github_user": "nilsmechtel",
+            "email": "nils.mech@gmail.com"
         }
     ],
     "collection_template": {
@@ -131,31 +139,8 @@
             "partners": [
                 {
                     "background_image": "static/img/zoo-background.svg",
-                    "default_type": "model",
-                    "explore_button_text": "Start Exploring",
-                    "icon": "https://raw.githubusercontent.com/bioimage-io/bioimage.io/main/public/static/img/bioimage-io-icon.svg",
-                    "id": "bioimageio",
-                    "logo": "https://raw.githubusercontent.com/bioimage-io/bioimage.io/main/public/static/img/bioimage-io-icon.svg",
-                    "name": "BioImage.IO",
-                    "resource_types": [
-                        "model",
-                        "application",
-                        "notebook",
-                        "dataset"
-                    ],
-                    "splash_feature_list": [
-                        "Integrate with Fiji, Ilastik, ImJoy",
-                        "Try model instantly with BioEngine",
-                        "Contribute your models via Zenodo",
-                        "Link models to datasets and applications"
-                    ],
-                    "splash_subtitle": "Advanced AI models in one-click",
-                    "splash_title": "BioImage Model Zoo",
-                    "tags": []
-                },
-                {
-                    "background_image": "static/img/zoo-background.svg",
                     "default_type": "application",
+                    "docs": "https://github.com/HenriquesLab/DeepLearning_Collab/wiki",
                     "explore_button_text": "Start Exploring",
                     "icon": "https://raw.githubusercontent.com/HenriquesLab/ZeroCostDL4Mic/master/Wiki_files/ZeroCostLogo.png",
                     "id": "zero",
@@ -291,6 +276,7 @@
                 {
                     "background_image": "static/img/zoo-background.svg",
                     "default_type": "model",
+                    "docs": "https://www.ilastik.org/documentation/nn/nn",
                     "explore_button_text": "Start Exploring",
                     "icon": "https://raw.githubusercontent.com/ilastik/bioimage-io-resources/main/image/ilastik-fist-icon.png",
                     "id": "ilastik",
@@ -348,6 +334,7 @@
                 {
                     "background_image": "static/img/zoo-background.svg",
                     "default_type": "model",
+                    "docs": "https://icy.bioimageanalysis.org/",
                     "explore_button_text": "Start Exploring",
                     "icon": "https://raw.githubusercontent.com/Icy-imaging/icy-bioimage-io/main/icy_logo.svg",
                     "id": "icy",
@@ -367,6 +354,7 @@
                 {
                     "background_image": "static/img/zoo-background.svg",
                     "default_type": "model",
+                    "docs": "https://qupath.readthedocs.io/",
                     "explore_button_text": "Start Exploring",
                     "icon": "https://raw.githubusercontent.com/qupath/qupath-bioimage-io/main/logos/QuPath_256.png",
                     "id": "qupath",
@@ -437,7 +425,7 @@
                         }
                     ],
                     "default_type": "model",
-                    "docs": "https://biapy.readthedocs.io/en/latest/",
+                    "docs": "https://biapy.readthedocs.io/",
                     "explore_button_text": "Start Exploring",
                     "icon": "https://raw.githubusercontent.com/BiaPyX/BiaPy-bioimage-io/main/logos/BiaPy_256.png",
                     "id": "biapy",
@@ -457,6 +445,7 @@
                 {
                     "background_image": "static/img/zoo-background.svg",
                     "default_type": "application",
+                    "docs": "https://github.com/HenriquesLab/DL4MicEverywhere",
                     "explore_button_text": "Start Exploring",
                     "icon": "https://raw.githubusercontent.com/HenriquesLab/DL4MicEverywhere-bioimage-io/main/logo/dl4miceverywhere-logo-small.png",
                     "id": "dl4miceverywhere",
@@ -529,11 +518,16 @@
                     "id": "careamics",
                     "logo": "https://raw.githubusercontent.com/CAREamics/.github/refs/heads/main/profile/images/logo_careamics_128.png",
                     "name": "CAREamics",
-                    "resource_types": ["model"],
+                    "resource_types": [
+                        "model"
+                    ],
                     "splash_feature_list": [],
                     "splash_subtitle": "CAREamics is a PyTorch library aimed at simplifying the use of Noise2Void and its many variants and cousins (CARE, Noise2Noise, N2V2, P(P)N2V, HDN, muSplit etc.).",
                     "splash_title": "CAREamics",
-                    "tags": ["CAREamics", "careamics"]
+                    "tags": [
+                        "CAREamics",
+                        "careamics"
+                    ]
                 }
             ]
         },

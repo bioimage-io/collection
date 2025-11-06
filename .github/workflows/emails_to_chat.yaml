@@ -23,8 +23,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
-          cache: "pip" # caching pip dependencies
+          cache: "pip"
       - run: pip install .
       - run: backoffice forward_emails_to_chat
         env:

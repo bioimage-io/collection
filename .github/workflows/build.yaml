@@ -1,116 +1,49 @@
-name: test backoffice and build docs
-
+name: Test and Docs
 on: push
 
-concurrency:
-  group: test
-  cancel-in-progress: true
-
-
 jobs:
-  initial-cleanup:
-    environment: testing
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-          cache: "pip" # caching pip dependencies
-      - run: pip install .
-      - run: backoffice wipe
-        env:
-          S3_HOST: ${{vars.S3_HOST}}
-          S3_BUCKET: ${{vars.S3_BUCKET}}
-          S3_FOLDER: ${{vars.S3_FOLDER}}
-          S3_ACCESS_KEY_ID: ${{secrets.S3_ACCESS_KEY_ID}}
-          S3_SECRET_ACCESS_KEY: ${{secrets.S3_SECRET_ACCESS_KEY}}
-          RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
-          BIOIMAGEIO_USER_ID: github|${{github.actor_id}}
-
-
-  generate-initial-collection-json:
-    needs: initial-cleanup
-    uses: bioimage-io/collection/.github/workflows/generate_collection_json_call.yaml@main
-    with:
-      environment_name: testing
-    secrets: inherit
-
-  test-stage:
-    needs: generate-initial-collection-json
-    uses: bioimage-io/collection/.github/workflows/stage_call.yaml@main
-    with:
-      concept_id: 'frank-water-buffalo'
-      package_url: 'https://uk1s3.embassy.ebi.ac.uk/public-datasets/examples.bioimage.io/frank-water-buffalo_v1.zip'
-      environment_name: testing
-    secrets: inherit
-
-  test-publish:
-    needs: test-stage
-    uses: bioimage-io/collection/.github/workflows/publish_call.yaml@main
-    with:
-      concept_id: 'frank-water-buffalo'
-      reviewer: 'github|${{github.actor_id}}'
-      environment_name: testing
-    secrets: inherit
-
-  test-generate-collection-json:
-    needs: test-publish
-    uses: bioimage-io/collection/.github/workflows/generate_collection_json_call.yaml@main
-    with:
-      environment_name: testing
-    secrets: inherit
-
-  test-generate-collection-staged-json:
-    needs: test-publish
-    uses: bioimage-io/collection/.github/workflows/generate_collection_json_call.yaml@main
-    with:
-      mode: 'staged'
-      environment_name: testing
-    secrets: inherit
-
-  test-backup:
-    needs: test-generate-collection-json
-    uses: bioimage-io/collection/.github/workflows/backup_call.yaml@main
-    with:
-      environment_name: testing
-    secrets: inherit
-
-  build:
+  run:
     runs-on: ubuntu-latest
     environment: testing
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
-          cache: "pip" # caching pip dependencies
-      - run: pip install -e .[dev]
-      - run: black . --check
-      - run: pyright -p pyproject.toml
-      - run: pytest
-        env:
-          S3_HOST: ${{vars.S3_HOST}}
-          S3_BUCKET: ${{vars.S3_BUCKET}}
-          S3_FOLDER: ${{vars.S3_FOLDER}}
-          S3_ACCESS_KEY_ID: ${{secrets.S3_ACCESS_KEY_ID}}
-          S3_SECRET_ACCESS_KEY: ${{secrets.S3_SECRET_ACCESS_KEY}}
-          RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
-          ZENODO_URL: ${{vars.ZENODO_URL}}
-          ZENODO_API_ACCESS_TOKEN: ${{secrets.ZENODO_API_ACCESS_TOKEN}}
-          BIOIMAGEIO_USER_ID: github|${{github.actor_id}}
-      - name: export documentation
+          fetch-depth: 0
+      - name: Configure Git Credentials
         run: |
-          pdoc \
-          --mermaid \
-          --docformat google \
-          --logo https://bioimage.io/static/img/bioimage-io-logo.svg \
-          --logo-link https://bioimage.io/ \
-          --favicon https://bioimage.io/static/img/bioimage-io-icon-small.svg \
-          --footer-text 'bioimageio_collection_backoffice' \
-          -o ./docs bioimageio_collection_backoffice
-      - name: Deploy to gh-pages 🚀
-        if: ${{ github.ref == 'refs/heads/main' }}
-        uses: JamesIves/github-pages-deploy-action@v4
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+      - uses: actions/setup-python@v6
         with:
-          folder: docs
+          cache: 'pip'
+          cache-dependency-path: pyproject.toml
+      - run: pip install -e .[dev]
+      - run: ruff check
+      - run: pyright -p pyproject.toml
+      - run: pytest --cov=backoffice --cov-report=html:htmlcov
+        env:
+          RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
+          BIOIMAGEIO_USER_ID: github|${{github.actor_id}}
+          HYPHA_API_TOKEN: ${{secrets.HYPHA_API_TOKEN}}
+      - run: pip install -e .[docs]
+      - uses: actions/checkout@v4
+        name: checkout staged reports for docs generation
+        with:
+          ref: stage-gh-pages
+          path: gh-pages
+          sparse-checkout: |
+            reports
+            index.json
+      - name: Generate reports overview for docs
+        run: python scripts/generate_reports_overview.py
+      - run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_OUTPUT
+        id: cache-id
+      - uses: actions/cache@v4
+        with:
+          key: mkdocs-material-${{ steps.cache-id.outputs.cache_id }}
+          path: ~/.cache
+          restore-keys: |
+            mkdocs-material-
+      - run: mike deploy ${{ github.ref == 'refs/heads/main' && '--push' || ' ' }} --update-aliases 0.1 latest

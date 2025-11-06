@@ -1,12 +1,64 @@
-[tool.black]
-target-version = ["py38", "py39", "py310", "py311", "py312"]
-preview = true
+[project]
+name = "backoffice"
+description = "backoffice to control bioimage.io collection"
+authors = [{ name = "Fynn Beuttenmüller", email = "thefynnbe@gmail.com" }]
+requires-python = ">=3.10"
+readme = "README.md"
+dependencies = [
+    "httpx",
+    "loguru",
+    "packaging",
+    "pydantic-settings",
+    "ruyaml",
+    "tqdm",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
+dynamic = ["version"]
+
+[tool.setuptools.dynamic]
+version = { attr = "backoffice._version.VERSION" }
+
+[project.optional-dependencies]
+dev = [
+    # "biapy",  # has exact bioimageio.core pin
+    "bioimageio.core[dev]>=0.9.3",
+    "careamics",
+    "pdoc",
+    "pre-commit",
+    "pyright",
+    "pytest",
+    "pytest-cov",
+    "respx",
+    "ruff",
+]
+docs = [
+    "griffe-pydantic",
+    "markdown-callouts",
+    "markdown-exec",
+    "mike",
+    "mkdocs-api-autonav",
+    "mkdocs-coverage",
+    "mkdocs-material",
+    "mkdocs-section-index",
+]
+
+[project.scripts]
+backoffice = "backoffice.__main__:main"
+
 
 [tool.pyright]
 exclude = ["**/__pycache__"]
-include = ["bioimageio_collection_backoffice", "tests"]
+include = ["src", "tests"]
 pythonPlatform = "All"
-pythonVersion = "3.8"
+pythonVersion = "3.10"
 reportIncompatibleMethodOverride = true
 reportMissingSuperCall = "error"
 reportMissingTypeArgument = true
@@ -23,3 +75,8 @@ useLibraryCodeForTypes = true
 [tool.pytest.ini_options]
 addopts = "--capture=no --failed-first"
 testpaths = ["tests"]
+
+[project.urls]
+"Bug Reports" = "https://github.com/bioimage-io/collection/issues"
+Documentation = "https://bioimage-io.github.io/collection/backoffice.html"
+Source = "https://github.com/bioimage-io/collection"

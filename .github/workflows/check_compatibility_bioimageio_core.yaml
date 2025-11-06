@@ -1,0 +1,40 @@
+name: check compatibility bioimageio.core
+
+on:
+  workflow_call:
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    environment: 'production'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/max_disk_space
+      - uses: conda-incubator/setup-miniconda@v3
+        with:
+          auto-update-conda: true
+          channels: conda-forge
+          conda-remove-defaults: 'true'
+          activate-environment: 'core'
+      - name: Install bioimageio.core and backoffice
+        shell: bash -el {0}
+        run: pip install . bioimageio.core[dev]
+      - run: conda info
+        shell: bash -el {0}
+      - uses: ./.github/actions/restore_reports
+        with:
+          tool: bioimageio.core
+      - run: python scripts/check_compatibility_bioimageio_core.py
+        shell: bash -el {0}
+        env:
+          RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
+          HYPHA_API_TOKEN: ${{secrets.HYPHA_API_TOKEN}}
+      - name: Stage to stage-gh-pages 🚀
+        if: always()
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: reports
+          branch: stage-gh-pages
+          dry-run: ${{ github.ref != 'refs/heads/main' }}
+          target-folder: reports
+          clean: false

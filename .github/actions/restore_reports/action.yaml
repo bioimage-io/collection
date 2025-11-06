@@ -1,0 +1,39 @@
+name: 'Restore reports'
+description: 'Restore the index.json file and tool-specific reports'
+
+inputs:
+  tool:
+    description: 'The tool for which to restore reports (e.g. biapy, bioimageio.core, careamics, ilastik)'
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - uses: actions/checkout@v4
+      name: checkout staged index and existing ${{ inputs.tool }} reports
+      with:
+        ref: stage-gh-pages
+        path: gh-pages
+        sparse-checkout: |
+          reports
+          index.json
+    - run: mv gh-pages/index.json ./index.json
+      shell: bash
+    - name: move tool-specific reports
+      run: |
+        from pathlib import Path
+
+        print("cwd:", Path().resolve())
+        src = Path("gh-pages/reports")
+        assert src.exists(), f"Source path {src} does not exist"
+        tgt = Path("reports")
+        count = 0
+        for p_src in src.glob("**/${{inputs.tool}}_*.json"):
+            p_tgt = tgt / p_src.relative_to(src)
+            p_tgt.parent.mkdir(parents=True, exist_ok=True)
+            p_src.rename(p_tgt)
+            count += 1
+
+        print("Restored", count, "reports")
+
+      shell: python

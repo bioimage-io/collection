@@ -1,9 +1,14 @@
 __pycache__/
 .env
 *.egg-info/
-docs/
 *.pyc
 TEMP/
 bioimageio-gh-pages
 scripts/check_compatibility_java_software/test_summaries_null_null
 scripts/check_compatibility_java_software/test_summaries_default_default
+build/
+gh-pages/
+index.json
+pdoc_docs/
+reports/
+site/

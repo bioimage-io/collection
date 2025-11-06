@@ -1,0 +1,93 @@
+name: check compatibility
+
+concurrency: check-compatibility
+
+on:
+  workflow_dispatch:
+    inputs:
+      cache-nr:
+        description: 'A number that is increased to force re-running the compatibility checks'
+        required: false
+        default: '0'
+      rerun:
+        description: 'Chose a tool to run compatibility checks for even if the index cache is hit.'
+        type: choice
+        default: 'only-on-index-update'
+        required: false
+        options:
+          [
+            only-on-index-update,
+            all,
+            biapy,
+            bioimageio.core,
+            careamics,
+            ilastik,
+          ]
+
+  push:
+    branches: [main]
+  schedule:
+    - cron: '0 3 * * *'
+
+jobs:
+  index:
+    uses: ./.github/workflows/index.yaml
+    secrets: inherit
+    with:
+      cache-nr: ${{ inputs.cache-nr || '0' }}
+
+  biapy:
+    needs: index
+    if: needs.index.outputs.cache-hit != 'true' || contains(github.event.inputs.rerun, 'all') || contains(github.event.inputs.rerun, 'biapy')
+    uses: ./.github/workflows/check_compatibility_biapy.yaml
+    secrets: inherit
+  bioimageio_core:
+    needs: index
+    if: needs.index.outputs.cache-hit != 'true' || contains(github.event.inputs.rerun, 'all') || contains(github.event.inputs.rerun, 'bioimageio.core')
+    uses: ./.github/workflows/check_compatibility_bioimageio_core.yaml
+    secrets: inherit
+  careamics:
+    needs: index
+    if: needs.index.outputs.cache-hit != 'true' || contains(github.event.inputs.rerun, 'all') || contains(github.event.inputs.rerun, 'careamics')
+    uses: ./.github/workflows/check_compatibility_careamics.yaml
+    secrets: inherit
+  ilastik:
+    needs: index
+    if: needs.index.outputs.cache-hit != 'true' || contains(github.event.inputs.rerun, 'all') || contains(github.event.inputs.rerun, 'ilastik')
+    uses: ./.github/workflows/check_compatibility_ilastik.yaml
+    secrets: inherit
+
+  summarize:
+    name: summarize and deploy stage
+    needs: [index, biapy, bioimageio_core, careamics, ilastik]
+    if: ${{ !cancelled() }} && !(needs.index.outputs.cache-hit == 'true' && (github.event.inputs.rerun == 'only-on-index-update' || github.event.inputs.rerun == ''))
+    runs-on: ubuntu-latest
+    environment: 'production'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          cache: 'pip'
+          cache-dependency-path: pyproject.toml
+      - run: pip install .
+      - uses: actions/checkout@v4
+        name: checkout staged index and reports
+        with:
+          ref: stage-gh-pages
+          path: gh-pages
+          sparse-checkout: |
+            reports
+            index.json
+      - run: cp gh-pages/index.json .
+      - name: summarize reports
+        run: backoffice summarize
+        env:
+          REPORTS: gh-pages/reports
+          RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
+          HYPHA_API_TOKEN: ${{secrets.HYPHA_API_TOKEN}}
+      - name: Deploy to gh-pages 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: gh-pages
+          dry-run: ${{ github.ref != 'refs/heads/main' }}
+          clean: false

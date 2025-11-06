@@ -1,18 +1,7 @@
 name: check compatibility ilastik
 
-concurrency: ilastik
-
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - .github/workflows/check_compatibility_ilastik.yaml
-      - scripts/check_compatibility_ilastik.py
-      - scripts/upload_reports.py
-  workflow_dispatch:
-  schedule:
-    - cron: 0 1 * * *
+  workflow_call:
 
 jobs:
   setup:
@@ -20,21 +9,21 @@ jobs:
     outputs:
       version_matrix: ${{ steps.cvm.outputs.version_matrix }}
     steps:
-    - name: download version list
-      run: wget https://files.ilastik.org/ilastik-versions-bmz.json
-    - name: create version matrix
-      id: cvm
-      shell: python
-      run: |
-        import json
-        import os
+      - name: download version list
+        run: wget https://files.ilastik.org/ilastik-versions-bmz.json
+      - name: create version matrix
+        id: cvm
+        shell: python
+        run: |
+          import json
+          import os
 
-        with open("ilastik-versions-bmz.json") as f:
-            vs = json.load(f)
+          with open("ilastik-versions-bmz.json") as f:
+              vs = json.load(f)
 
-        version_matrix = dict(include=[dict(v=v, env_url=f"https://files.ilastik.org/ilastik-{v}-Linux.yml") for v in vs])
-        with open(os.environ["GITHUB_OUTPUT"], "a") as fh:
-          print(f"version_matrix={version_matrix}", file=fh)
+          version_matrix = dict(include=[dict(v=v, env_url=f"https://files.ilastik.org/ilastik-{v}-Linux.yaml") for v in vs])
+          with open(os.environ["GITHUB_OUTPUT"], "a") as fh:
+            print(f"version_matrix={version_matrix}", file=fh)
 
   generate-reports:
     runs-on: ubuntu-latest
@@ -45,52 +34,36 @@ jobs:
       matrix: ${{ fromJson(needs.setup.outputs.version_matrix) }}
 
     steps:
-    - uses: actions/checkout@v4
-    - run: wget https://${{vars.S3_HOST}}/${{vars.S3_BUCKET}}/${{vars.S3_FOLDER}}/all_versions_draft.json
-    - run: wget https://${{vars.S3_HOST}}/${{vars.S3_BUCKET}}/${{vars.S3_FOLDER}}/all_versions.json
-    - name: Download ilastik env
-      run: wget --output-document env.yaml ${{ matrix.env_url }}
-    - name: ignore unrelated packages
-      run: sed -i '/multi-hypotheses-tracking-with-gurobi/d; /gurobi-symlink/d' env.yaml
-    - name: Setup ilastik env
-      uses: mamba-org/setup-micromamba@v1
-      with:
-        generate-run-shell: false
-        environment-file: env.yaml
-        cache-downloads: true
-        cache-environment: false  # gets stuck for 6h?
-    - name: test drafts with ilastik ${{ matrix.v }}
-      shell: bash -l {0}
-      run: python scripts/check_compatibility_ilastik.py ${{ matrix.v }} all_versions_draft.json generated-reports
-    - name: test published versions with ilastik ${{ matrix.v }}
-      shell: bash -l {0}
-      run: python scripts/check_compatibility_ilastik.py ${{ matrix.v }} all_versions.json generated-reports
-    - uses: actions/upload-artifact@v4
-      with:
-        name: generated-reports-${{ matrix.v }}
-        path: generated-reports
-
-  upload-reports:
-    needs: generate-reports
-    environment: 'production'
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-python@v5
-      with:
-        python-version: "3.12"
-        cache: "pip" # caching pip dependencies
-    - run: pip install .
-    - uses: actions/download-artifact@v4
-      with:
-        merge-multiple: true
-        path: generated-reports
-    - run: python scripts/upload_reports.py generated-reports
-      env:
-        S3_HOST: ${{vars.S3_HOST}}
-        S3_BUCKET: ${{vars.S3_BUCKET}}
-        S3_FOLDER: ${{vars.S3_FOLDER}}
-        S3_ACCESS_KEY_ID: ${{secrets.S3_ACCESS_KEY_ID}}
-        S3_SECRET_ACCESS_KEY: ${{secrets.S3_SECRET_ACCESS_KEY}}
-        RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
-
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/max_disk_space
+      - uses: ./.github/actions/restore_reports
+        with:
+          tool: ilastik
+      - name: Download ilastik env
+        run: wget --output-document env.yaml ${{ matrix.env_url }}
+      - name: ignore unrelated packages
+        run: sed -i '/multi-hypotheses-tracking-with-gurobi/d; /gurobi-symlink/d' env.yaml
+      - name: Setup ilastik env
+        uses: mamba-org/setup-micromamba@v1
+        with:
+          generate-run-shell: false
+          environment-file: env.yaml
+          cache-downloads: true
+          cache-environment: false # gets stuck for 6h?
+      - run: pip install . --no-deps # no-deps to avoid changing the ilastik environment
+        shell: bash -l {0}
+      - name: test published versions with ilastik ${{ matrix.v }}
+        shell: bash -l {0}
+        run: python scripts/check_compatibility_ilastik.py ${{ matrix.v }}
+        env:
+          RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
+          HYPHA_API_TOKEN: ${{secrets.HYPHA_API_TOKEN}}
+      - name: Stage to stage-gh-pages 🚀
+        if: always()
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: stage-gh-pages
+          folder: reports
+          dry-run: ${{ github.ref != 'refs/heads/main' }}
+          target-folder: reports
+          clean: false
