@@ -76,13 +76,17 @@ class Index(Node, frozen=True):
     timestamp: datetime = Field(default_factory=datetime.now)
 
 
+def load_index(path: Path = Path("index.json")) -> Index:
+    logger.info("loading index from {}", path)
+    return Index.model_validate_json(path.read_text(encoding="utf-8"))
+
+
 def create_index() -> Index:
     """Index the bioimage.io collection"""
 
     index_path = Path("index.json")
     if index_path.exists():
-        logger.info("loading index from {}", index_path)
-        index = Index.model_validate_json(index_path.read_text(encoding="utf-8"))
+        index = load_index(index_path)
     else:
         url = f"{settings.hypha_base_url}/public/services/artifact-manager/list"
 

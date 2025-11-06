@@ -28,6 +28,38 @@ Local workflows
 - Generate index: `backoffice index` (writes `index.json` and initializes `<reports>/<id>/<ver>/summary.json`).
 - Run a tool check: e.g. `python scripts/check_compatibility_bioimageio_core.py` (writes JSON under `reports/.../reports/`).
 - Summarize: `backoffice summarize` to aggregate scores into each `summary.json`.
+# Compatibility Reports Overview
+
+This page displays compatibility reports for all resources in the bioimage.io collection.
+
+The overview is dynamically generated from the latest index and summary reports.
+
+```python exec="1" source="above"
+import sys
+from pathlib import Path
+
+# Ensure the script can find backoffice module
+project_root = Path(__file__).parent.parent if hasattr(__file__, 'parent') else Path.cwd()
+
+# Add src to path so we can import backoffice
+sys.path.insert(0, str(project_root / "src"))
+
+# Now we can import from scripts
+exec(open(project_root / "scripts" / "generate_reports_overview.py").read())
+
+# Generate the overview
+generate_reports_overview(
+    index_path=project_root / "gh-pages" / "index.json",
+    output_path=project_root / "docs" / "_reports_generated.md",
+)
+
+# Display the content (skip first header)
+with open(project_root / "docs" / "_reports_generated.md", encoding="utf-8") as f:
+    lines = f.readlines()
+    # Skip title since we have one above
+    print("".join(lines[2:]))
+```
+- Generate docs overview: `python scripts/generate_reports_overview.py` to create `docs/reports_overview.md` from index and summaries.
 - Tests/lint/typecheck: `ruff check`; `pyright -p pyproject.toml`; `pytest` (see `tests/test_utils_plain.py`).
 - Docs: `pip install -e .[docs]` then `mkdocs serve` locally; CI deploys with `mike` (see `mkdocs.yml`).
 

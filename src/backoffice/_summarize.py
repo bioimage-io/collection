@@ -16,7 +16,7 @@ from backoffice.compatibility import (
     ToolNameVersioned,
     ToolReportDetails,
 )
-from backoffice.index import IndexItem, IndexItemVersion, create_index
+from backoffice.index import IndexItem, IndexItemVersion, load_index
 from backoffice.utils import (
     get_all_tool_report_paths,
     get_summary,
@@ -25,7 +25,7 @@ from backoffice.utils import (
 
 
 def summarize_reports():
-    index = create_index()
+    index = load_index()
     for item in tqdm(index.items):
         for v in item.versions:
             _summarize(item, v)
