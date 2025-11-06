@@ -375,6 +375,105 @@
                 ],
                 "score": 1.0,
                 "status": "passed"
+            },
+            "0.9.5": {
+                "badge": null,
+                "details": {
+                    "details": [
+                        {
+                            "context": {
+                                "file_name": "rdf.yaml",
+                                "known_files": {
+                                    "EmbryoNet_GPU_batch_1.onnx": "c47512096a27a9f9efb8798d8d8f4f4c131c2063706c6ecee6fb3112e47bab0f",
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/nice-peacock/files/EmbryoNet_GPU_batch_1.onnx?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/nice-peacock/files/EmbryoNet_labels.txt?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/nice-peacock/files/README.md?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/nice-peacock/files/input_test_image.npy?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/nice-peacock/files/input_test_time_for_conv.npy?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/nice-peacock/files/input_test_time_for_fc.npy?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/nice-peacock/files/phenotypes_features.png?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/nice-peacock/files/result.npy?version=v0": null
+                                },
+                                "original_source_name": null,
+                                "perform_io_checks": true,
+                                "root": "https://hypha.aicell.io/bioimage-io/artifacts/nice-peacock/files?version=v0",
+                                "update_hashes": false
+                            },
+                            "errors": [],
+                            "loc": [],
+                            "name": "Successfully created `ModelDescr` instance.",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [],
+                            "name": "bioimageio.spec format validation model 0.4.10",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": [
+                                {
+                                    "loc": [
+                                        "license"
+                                    ],
+                                    "msg": "Unknown license id 'GPL-3.0'.",
+                                    "severity": 30,
+                                    "type": "warning"
+                                }
+                            ]
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "onnx"
+                            ],
+                            "name": "Reproduce test outputs from test inputs (onnx)",
+                            "recommended_env": {
+                                "channels": [
+                                    "conda-forge",
+                                    "nodefaults"
+                                ],
+                                "dependencies": [
+                                    "conda-forge::bioimageio.core",
+                                    "onnxruntime",
+                                    "pip"
+                                ],
+                                "name": null
+                            },
+                            "saved_conda_compare": "Success. All the packages in the specification file are present in the environment with matching version and build string.\n",
+                            "status": "passed",
+                            "warnings": []
+                        }
+                    ],
+                    "env": [
+                        [
+                            "bioimageio.spec",
+                            "0.5.6.0",
+                            "",
+                            ""
+                        ]
+                    ],
+                    "format_version": "0.4.10",
+                    "id": "10.5281/zenodo.7315440/7315441",
+                    "metadata_completeness": 0.6607142857142857,
+                    "name": "bioimageio format validation",
+                    "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+                    "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/nice-peacock/files/rdf.yaml?version=v0",
+                    "status": "passed",
+                    "type": "model"
+                },
+                "error": null,
+                "links": [
+                    "bioimageio/bioimageio.core"
+                ],
+                "score": 1.0,
+                "status": "passed"
             }
         },
         "careamics": {
@@ -389,6 +488,16 @@
                 "status": "not-applicable"
             },
             "0.0.17": {
+                "badge": null,
+                "details": [
+                    "CAREamics compatibility check does not support `bioimageio.spec.v0.4` model desciptions."
+                ],
+                "error": null,
+                "links": [],
+                "score": 0.0,
+                "status": "not-applicable"
+            },
+            "0.0.18": {
                 "badge": null,
                 "details": [
                     "CAREamics compatibility check does not support `bioimageio.spec.v0.4` model desciptions."

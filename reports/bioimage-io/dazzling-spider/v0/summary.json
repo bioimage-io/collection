@@ -387,6 +387,14 @@
                 "links": [],
                 "score": 0.0,
                 "status": "failed"
+            },
+            "0.0.18": {
+                "badge": null,
+                "details": "CAREamics config file is not present in attachments.",
+                "error": null,
+                "links": [],
+                "score": 0.0,
+                "status": "failed"
             }
         }
     }
