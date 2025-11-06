@@ -2,16 +2,8 @@
 name: check compatibility deepimagej
 concurrency: deepimagej
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - .github/workflows/check_compatibility_deepimagej.yaml
-      - scripts/check_compatibility_deepimagej.py
-      - scripts/deepimagej_jython_scripts/**
-  workflow_dispatch:
-  schedule:
-    - cron: 0 1 * * *
+  workflow_call:
+
 jobs:
   run:
     strategy:
@@ -26,14 +18,15 @@ jobs:
     environment: 'production'
     steps:
       - uses: actions/checkout@v4
+      - uses: ./.github/actions/restore_reports
+        with:
+          tool: deepimagej
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.10"
+          python-version: '3.10'
           cache: pip
       - name: Install backoffice
-        run: pip install .
-      - run: wget https://uk1s3.embassy.ebi.ac.uk/public-datasets/bioimage.io/all_versions_draft.json #wget https://${{vars.S3_HOST}}/${{vars.S3_BUCKET}}/${{vars.S3_FOLDER}}/all_versions_draft.json
-      - run: wget https://uk1s3.embassy.ebi.ac.uk/public-datasets/bioimage.io/all_versions.json #wget https://${{vars.S3_HOST}}/${{vars.S3_BUCKET}}/${{vars.S3_FOLDER}}/all_versions.json
+        run: pip install . ruyaml
       - name: Set up Fiji
         shell: bash
         run: |
@@ -49,32 +42,17 @@ jobs:
         run: fiji/Fiji.app/${{ matrix.fiji_executable }} --headless --console
           scripts/deepimagej_jython_scripts/deepimagej_download_engines.py -engines_path
           fiji/Fiji.app/engines
-      #- name: Run deepImageJ tests for drafts
-      #  run: python scripts/check_compatibility_deepimagej.py all_versions_draft.json generated-reports fiji/Fiji.app/${{ matrix.fiji_executable }} fiji/Fiji.app
-      #  env:
-      #    JSON_OUTS_FNAME: dij_ouputs_file${{ github.run_id }}.json
-      #    MACRO_NAME: dij_macro_ci${{ github.run_id }}.ijm
-      #- name: Save reports for debugging purposes for drafts
-      #  uses: actions/upload-artifact@v4
-      #  with:
-      #    name: generated-reports-dij-drafts
-      #    path: generated-reports
-      - name: Run deepImageJ tests for pusblished versions
-        run: python scripts/check_compatibility_deepimagej.py all_versions.json generated-reports fiji/Fiji.app/${{ matrix.fiji_executable }} fiji/Fiji.app
+      - name: Run deepImageJ tests for published versions
+        run: python scripts/check_compatibility_deepimagej.py fiji/Fiji.app/${{ matrix.fiji_executable }} fiji/Fiji.app
         env:
-          JSON_OUTS_FNAME: dij_ouputs_file${{ github.run_id }}.json
+          JSON_OUTS_FNAME: dij_outputs_file${{ github.run_id }}.json
           MACRO_NAME: dij_macro_ci${{ github.run_id }}.ijm
-      - name: Save reports for debugging purposes
-        uses: actions/upload-artifact@v4
+      - name: Stage to stage-gh-pages 🚀
+        if: always()
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          name: generated-reports-dij
-          path: generated-reports
-      - name: Upload reports
-        run: python scripts/upload_reports.py generated-reports
-        env:
-          S3_HOST: ${{vars.S3_HOST}}
-          S3_BUCKET: ${{vars.S3_BUCKET}}
-          S3_FOLDER: ${{vars.S3_FOLDER}}
-          S3_ACCESS_KEY_ID: ${{secrets.S3_ACCESS_KEY_ID}}
-          S3_SECRET_ACCESS_KEY: ${{secrets.S3_SECRET_ACCESS_KEY}}
-          RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
+          branch: stage-gh-pages
+          folder: reports
+          dry-run: ${{ github.ref != 'refs/heads/main' }}
+          target-folder: reports
+          clean: false
