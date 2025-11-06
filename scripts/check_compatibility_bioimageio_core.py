@@ -20,18 +20,33 @@ def check_compatibility_core_impl(item_id: str, version: str, source: str, sha25
     log_file = get_log_file(item_id, version)
     log_file.parent.mkdir(parents=True, exist_ok=True)
 
+    if core_summary.status == "passed":
+        user_status = "passed"
+    else:
+        # pass if outputs could be reproduced with at least one weights format
+        user_status = "failed"
+        for detail in core_summary.details:
+            if (
+                detail.name.startswith("Reproduce test outputs")
+                and detail.status == "passed"
+            ):
+                user_status = "passed"
+                break
+
     return ToolCompatibilityReport(
         tool="bioimageio.core",
         tool_version=bioimageio.core.__version__,
-        status=(
-            "failed" if core_summary.status == "valid-format" else core_summary.status
-        ),
-        score={"passed": 1.0, "valid-format": 0.5}.get(core_summary.status, 0.0),
+        status=user_status,
+        score=1.0
+        if user_status == "passed"
+        else 0.5
+        if core_summary.status == "valid-format"
+        else 0.0,
         details=core_summary.model_dump(mode="json"),
         links=["bioimageio/bioimageio.core"] if core_summary.status == "passed" else [],
         error=(
             None
-            if core_summary.status == "passed"
+            if user_status == "passed"
             else "\n\n".join(
                 error_msgs
                 if len(
