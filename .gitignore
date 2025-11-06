@@ -9,3 +9,4 @@ pdoc_docs/
 reports/
 site/
 docs/reports_overview.md
+.coverage
