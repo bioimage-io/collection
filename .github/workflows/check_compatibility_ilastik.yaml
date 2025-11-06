@@ -21,7 +21,7 @@ jobs:
           with open("ilastik-versions-bmz.json") as f:
               vs = json.load(f)
 
-          version_matrix = dict(include=[dict(v=v, env_url=f"https://files.ilastik.org/ilastik-{v}-Linux.yml") for v in vs])
+          version_matrix = dict(include=[dict(v=v, env_url=f"https://files.ilastik.org/ilastik-{v}-Linux.yaml") for v in vs])
           with open(os.environ["GITHUB_OUTPUT"], "a") as fh:
             print(f"version_matrix={version_matrix}", file=fh)
 
