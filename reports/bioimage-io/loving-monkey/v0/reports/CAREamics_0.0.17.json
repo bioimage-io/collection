@@ -1,5 +1,1 @@
-{
-    "details": "'Model' resource not tagged with 'CAREamics' or 'careamics'.",
-    "error": null,
-    "status": "not-applicable"
-}
+{"status": "not-applicable", "error": null, "details": "'Model' resource not tagged with 'CAREamics' or 'careamics'."}
