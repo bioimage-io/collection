@@ -1,0 +1,342 @@
+"""Generate a markdown overview page of all compatibility reports."""
+
+import html
+import json
+import os
+from pathlib import Path
+from typing import Any
+
+from backoffice.index import load_index
+
+
+def get_summary_file_path(item_id: str, version: str) -> Path:
+    """Get the path to the summary.json file for a specific item version."""
+    reports_base = Path(os.getenv("REPORTS", "gh-pages/reports"))
+    return reports_base / item_id.replace(":", "_") / version / "summary.json"
+
+
+def generate_html_table(rows: list[dict[str, Any]], total_resources: int) -> str:
+    """Generate an HTML table with sorting and filtering capabilities.
+
+    Args:
+        rows: List of row dictionaries with resource data
+        total_resources: Total number of resources
+
+    Returns:
+        HTML string with table and JavaScript
+    """
+    # Start HTML with styles and filter controls
+    html_parts = [
+        '<div class="reports-table-container">',
+        "<style>",
+        ".reports-table-container { margin: 20px 0; }",
+        ".filter-controls { margin-bottom: 15px; display: flex; gap: 10px; flex-wrap: wrap; }",
+        ".filter-controls input, .filter-controls select { padding: 5px 10px; border: 1px solid #ccc; border-radius: 4px; }",
+        ".reports-table { width: 100%; border-collapse: collapse; font-size: 14px; }",
+        ".reports-table th { background: #f5f5f5; padding: 10px; text-align: left; cursor: pointer; user-select: none; border-bottom: 2px solid #ddd; }",
+        ".reports-table th:hover { background: #e8e8e8; }",
+        '.reports-table th.sorted-asc::after { content: " ↑"; }',
+        '.reports-table th.sorted-desc::after { content: " ↓"; }',
+        ".reports-table td { padding: 8px 10px; border-bottom: 1px solid #eee; }",
+        ".reports-table tr:hover { background: #f9f9f9; }",
+        ".status-passed { color: #22863a; font-weight: 600; }",
+        ".status-failed { color: #cb2431; font-weight: 600; }",
+        ".status-untested { color: #6a737d; }",
+        ".score-high { color: #22863a; font-weight: 600; }",
+        ".score-med { color: #e36209; }",
+        ".score-low { color: #cb2431; }",
+        "</style>",
+        "",
+        '<div class="filter-controls">',
+        '  <input type="text" id="searchInput" placeholder="Search resources..." style="flex: 1; min-width: 200px;">',
+        '  <select id="typeFilter">',
+        '    <option value="">All Types</option>',
+        '    <option value="model">Model</option>',
+        '    <option value="application">Application</option>',
+        '    <option value="dataset">Dataset</option>',
+        '    <option value="notebook">Notebook</option>',
+        "  </select>",
+        '  <select id="statusFilter">',
+        '    <option value="">All Statuses</option>',
+        '    <option value="passed">Passed</option>',
+        '    <option value="failed">Failed</option>',
+        '    <option value="untested">Untested</option>',
+        "  </select>",
+        "</div>",
+        "",
+        '<table class="reports-table" id="reportsTable">',
+        "  <thead>",
+        "    <tr>",
+        '      <th data-sort="id">Resource ID</th>',
+        '      <th data-sort="type">Type</th>',
+        '      <th data-sort="version">Version</th>',
+        '      <th data-sort="status">Status</th>',
+        '      <th data-sort="core">Core</th>',
+        '      <th data-sort="overall">Overall</th>',
+        '      <th data-sort="tools">Partner Tools</th>',
+        "    </tr>",
+        "  </thead>",
+        "  <tbody>",
+    ]
+
+    # Add table rows
+    for row in rows:
+        status_class = f"status-{row['status']}"
+
+        # Determine score color classes
+        core_val = row["core"]
+        core_class = (
+            "score-high"
+            if core_val >= 0.7
+            else ("score-med" if core_val >= 0.3 else "score-low")
+        )
+
+        overall_val = row["overall"]
+        overall_class = (
+            "score-high"
+            if overall_val >= 0.7
+            else ("score-med" if overall_val >= 0.3 else "score-low")
+        )
+
+        html_parts.extend(
+            [
+                "    <tr>",
+                f"      <td>{html.escape(row['id'])}</td>",
+                f"      <td>{html.escape(row['type'])}</td>",
+                f"      <td>{html.escape(row['version'])}</td>",
+                f'      <td class="{status_class}">{html.escape(row["status"])}</td>',
+                f'      <td class="{core_class}" data-value="{core_val}">{html.escape(row["core_str"])}</td>',
+                f'      <td class="{overall_class}" data-value="{overall_val}">{html.escape(row["overall_str"])}</td>',
+                f"      <td>{html.escape(row['tools'])}</td>",
+                "    </tr>",
+            ]
+        )
+
+    # Close table and add JavaScript
+    html_parts.extend(
+        [
+            "  </tbody>",
+            "</table>",
+            "",
+            "<script>",
+            "(function() {",
+            '  const table = document.getElementById("reportsTable");',
+            '  const tbody = table.querySelector("tbody");',
+            '  const headers = table.querySelectorAll("th[data-sort]");',
+            '  const searchInput = document.getElementById("searchInput");',
+            '  const typeFilter = document.getElementById("typeFilter");',
+            '  const statusFilter = document.getElementById("statusFilter");',
+            "  ",
+            '  let currentSort = { column: null, direction: "asc" };',
+            '  let allRows = Array.from(tbody.querySelectorAll("tr"));',
+            "  ",
+            "  // Sorting functionality",
+            "  headers.forEach(header => {",
+            '    header.addEventListener("click", () => {',
+            "      const sortKey = header.dataset.sort;",
+            '      const direction = currentSort.column === sortKey && currentSort.direction === "asc" ? "desc" : "asc";',
+            "      ",
+            '      headers.forEach(h => h.className = "");',
+            '      header.className = direction === "asc" ? "sorted-asc" : "sorted-desc";',
+            "      ",
+            "      currentSort = { column: sortKey, direction };",
+            "      sortTable(sortKey, direction);",
+            "    });",
+            "  });",
+            "  ",
+            "  function sortTable(column, direction) {",
+            "    const sortedRows = [...allRows].sort((a, b) => {",
+            "      let aVal, bVal;",
+            "      const aCell = a.children[getColumnIndex(column)];",
+            "      const bCell = b.children[getColumnIndex(column)];",
+            "      ",
+            '      if (column === "core" || column === "overall") {',
+            "        aVal = parseFloat(aCell.dataset.value) || 0;",
+            "        bVal = parseFloat(bCell.dataset.value) || 0;",
+            "      } else {",
+            "        aVal = aCell.textContent.toLowerCase();",
+            "        bVal = bCell.textContent.toLowerCase();",
+            "      }",
+            "      ",
+            '      if (aVal < bVal) return direction === "asc" ? -1 : 1;',
+            '      if (aVal > bVal) return direction === "asc" ? 1 : -1;',
+            "      return 0;",
+            "    });",
+            "    ",
+            '    tbody.innerHTML = "";',
+            "    sortedRows.forEach(row => tbody.appendChild(row));",
+            "    allRows = sortedRows;",
+            "  }",
+            "  ",
+            "  function getColumnIndex(column) {",
+            "    const map = { id: 0, type: 1, version: 2, status: 3, core: 4, overall: 5, tools: 6 };",
+            "    return map[column];",
+            "  }",
+            "  ",
+            "  // Filtering functionality",
+            "  function filterTable() {",
+            "    const searchTerm = searchInput.value.toLowerCase();",
+            "    const typeValue = typeFilter.value;",
+            "    const statusValue = statusFilter.value;",
+            "    ",
+            "    allRows.forEach(row => {",
+            "      const id = row.children[0].textContent.toLowerCase();",
+            "      const type = row.children[1].textContent.toLowerCase();",
+            "      const status = row.children[3].textContent.toLowerCase();",
+            "      ",
+            "      const matchesSearch = id.includes(searchTerm);",
+            "      const matchesType = !typeValue || type === typeValue;",
+            "      const matchesStatus = !statusValue || status === statusValue;",
+            "      ",
+            '      row.style.display = matchesSearch && matchesType && matchesStatus ? "" : "none";',
+            "    });",
+            "  }",
+            "  ",
+            '  searchInput.addEventListener("input", filterTable);',
+            '  typeFilter.addEventListener("change", filterTable);',
+            '  statusFilter.addEventListener("change", filterTable);',
+            "})();",
+            "</script>",
+            "",
+            "</div>",
+        ]
+    )
+
+    return "\n".join(html_parts)
+
+
+def generate_reports_overview(
+    index_path: Path = Path("gh-pages/index.json"),
+    output_path: Path = Path("docs/reports_overview.md"),
+) -> None:
+    """Generate a markdown page with compatibility report overview.
+
+    Args:
+        index_path: Path to index.json
+        output_path: Path to write the markdown overview
+    """
+    index = load_index(index_path)
+
+    items = index.items
+    count_per_type = index.count_per_type
+
+    # Start building markdown
+    lines = [
+        "<!-- This file is auto-generated by scripts/generate_reports_overview.py. Do not edit manually. -->",
+        "",
+        "# Compatibility Reports Overview",
+        "",
+        f"This page provides an overview of all {index.total} resources in the bioimage.io collection.",
+        "",
+        f"*Last updated: {index.timestamp}*",
+        "",
+        "## Summary by Type",
+        "",
+    ]
+
+    # Add type counts
+    for resource_type, count in sorted(count_per_type.items()):
+        lines.append(f"- **{resource_type}**: {count}")
+
+    lines.extend(
+        [
+            "",
+            "## Compatibility by Resource",
+            "",
+            "The following table shows compatibility test results for each resource. Click column headers to sort.",
+            "",
+        ]
+    )
+
+    # Build compatibility table data
+    rows: list[dict[str, Any]] = []
+    for item in items:
+        item_id = item.id
+        item_type = item.type
+
+        # Get latest version
+        if not item.versions:
+            continue
+
+        latest_version = item.versions[0].version
+
+        # Try to load summary
+        summary_path = get_summary_file_path(item_id, latest_version)
+        if not summary_path.exists():
+            # No summary yet
+            rows.append(
+                {
+                    "id": item_id,
+                    "type": item_type,
+                    "version": latest_version,
+                    "status": "untested",
+                    "core": 0.0,
+                    "core_str": "—",
+                    "overall": 0.0,
+                    "overall_str": "—",
+                    "tools": "—",
+                }
+            )
+            continue
+
+        with summary_path.open(encoding="utf-8") as f:
+            summary: dict[str, Any] = json.load(f)
+
+        # Extract scores
+        scores = summary.get("scores", {})
+        status = summary.get("status", "unknown")
+
+        core_compat = scores.get("core_compatibility", 0.0)
+        overall_compat = scores.get("overall_compatibility", 0.0)
+
+        # Get tool compatibility summary
+        tool_compat = scores.get("tool_compatibility", {})
+        tool_summary_parts: list[str] = []
+        for tool_name in ["biapy", "careamics", "ilastik"]:
+            if tool_name in tool_compat:
+                score = tool_compat[tool_name]
+                tool_summary_parts.append(f"{tool_name}: {score:.2f}")
+
+        tool_summary = ", ".join(tool_summary_parts) if tool_summary_parts else "—"
+
+        row_data = {
+            "id": item_id,
+            "type": item_type,
+            "version": latest_version,
+            "status": status,
+            "core": core_compat,
+            "core_str": f"{core_compat:.2f}",
+            "overall": overall_compat,
+            "overall_str": f"{overall_compat:.2f}",
+            "tools": tool_summary,
+        }
+        rows.append(row_data)
+
+    # Generate HTML table with sorting/filtering
+    html_table = generate_html_table(rows, len(items))
+    lines.append(html_table)
+
+    lines.extend(
+        [
+            "",
+            "## Legend",
+            "",
+            "- **Core**: bioimageio.core compatibility score (0.0-1.0)",
+            "- **Overall**: Overall compatibility score across all tools (0.0-1.0)",
+            "- **Partner Tools**: Compatibility scores for partner tools (biapy, careamics, ilastik)",
+            "",
+            "---",
+            "",
+            f"*Generated from {len(items)} resources*",
+            "",
+        ]
+    )
+
+    # Write output
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    _ = output_path.write_text("\n".join(lines), encoding="utf-8")
+    print(f"Generated reports overview at {output_path}")
+
+
+if __name__ == "__main__":
+    generate_reports_overview()
