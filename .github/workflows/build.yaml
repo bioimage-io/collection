@@ -12,6 +12,8 @@ jobs:
         with:
           fetch-depth: 0
       - run: git branch # debugging
+      - run: git branch gh-pages origin/gh-pages
+      - run: git branch # debugging
       - name: Configure Git Credentials
         run: |
           git config user.name github-actions[bot]
