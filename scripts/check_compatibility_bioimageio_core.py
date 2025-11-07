@@ -5,7 +5,7 @@ from bioimageio.core import test_description
 from bioimageio.spec.common import Sha256
 
 from backoffice.check_compatibility import check_tool_compatibility
-from backoffice.compatibility import ToolCompatibilityReport
+from backoffice.compatibility import ToolCompatibilityReport, ToolReportDetails
 from backoffice.utils_pure import get_log_file
 
 
@@ -42,7 +42,7 @@ def check_compatibility_core_impl(item_id: str, version: str, source: str, sha25
         else 0.5
         if core_summary.status == "valid-format"
         else 0.0,
-        details=core_summary.model_dump(mode="json"),
+        details=ToolReportDetails.model_validate(core_summary.model_dump(mode="json")),
         links=["bioimageio/bioimageio.core"] if core_summary.status == "passed" else [],
         error=(
             None
