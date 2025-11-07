@@ -1,7 +1,6 @@
 import json
 import warnings
-from collections import defaultdict
-from typing import DefaultDict, Dict
+from typing import Dict
 
 from loguru import logger
 from packaging.version import Version
@@ -48,7 +47,6 @@ def _summarize(item: IndexItem, v: IndexItemVersion):
 
     reports: list[ToolCompatibilityReport] = []
     scores: dict[ToolNameVersioned, float] = {}
-    status = "failed"
     metadata_completeness = 0.0
     metadata_format_score = 0.0
     metadata_format_version = Version(
@@ -75,6 +73,7 @@ def _summarize(item: IndexItem, v: IndexItemVersion):
                 details="Failed to parse compatibility report.",
             )
 
+        scores[f"{tool}_{tool_version}"] = report.score
         reports.append(report)
         if report.tool == "bioimageio.core" and isinstance(
             report.details, ToolReportDetails
@@ -94,25 +93,34 @@ def _summarize(item: IndexItem, v: IndexItemVersion):
                     metadata_format_score = 1.0
                 else:
                     metadata_format_score = 0.5 if metadata_format_score else 0.0
+
             elif not metadata_format_score and report.details.status in (
                 "passed",
                 "valid-format",
             ):
                 metadata_format_score = 0.5
 
-    tests: DefaultDict[ToolName, Dict[str, ToolCompatibilityReport]] = defaultdict(dict)
+    tests: Dict[ToolName, Dict[str, ToolCompatibilityReport]] = {}
     for r in reports:
-        tests[r.tool][r.tool_version] = r
+        tests.setdefault(r.tool, {})[r.tool_version] = r
 
+    compatibility_scores = CompatibilityScores(
+        tool_compatibility_version_specific=scores,
+        metadata_completeness=metadata_completeness,
+        metadata_format=metadata_format_score,
+    )
+
+    compatibility_status = (
+        "passed"
+        if compatibility_scores.tool_compatibility
+        and max(compatibility_scores.tool_compatibility.values()) >= 0.5
+        else "failed"
+    )
     summary = CompatibilitySummary(
         rdf_content=initial_summary.rdf_content,
         rdf_yaml_sha256=initial_summary.rdf_yaml_sha256,
-        status=status,
-        scores=CompatibilityScores(
-            tool_compatibility_version_specific=scores,
-            metadata_completeness=metadata_completeness,
-            metadata_format=metadata_format_score,
-        ),
+        status=compatibility_status,
+        scores=compatibility_scores,
         tests=tests,
     )
 
@@ -129,6 +137,10 @@ def _summarize(item: IndexItem, v: IndexItemVersion):
         item.id,
         v.version,
         len(reports),
-        status,
+        compatibility_status,
         metadata_completeness,
     )
+
+
+if __name__ == "__main__":
+    summarize_reports()

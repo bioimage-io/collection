@@ -1,7 +1,7 @@
 """data models for compatibility reports"""
 
 import warnings
-from typing import Any, Literal, Mapping, Optional, Sequence, Union
+from typing import Any, List, Literal, Mapping, Optional, Sequence, Union
 
 from annotated_types import Interval
 from packaging.version import Version
@@ -86,7 +86,7 @@ class ToolCompatibilityReport(Node, extra="allow"):
     error: Optional[str]
     """error message if `status`=='failed'"""
 
-    details: Union[Any, ToolReportDetails] = None
+    details: Union[ToolReportDetails, str, List[str], None] = None
     """details to explain the `status`"""
 
     badge: Optional[Badge] = None
@@ -141,12 +141,7 @@ class CompatibilityScores(Node):
                 version = Version("0.0.0")
                 malus += 0.1  # penalize non-semver versions
 
-            if tool_name not in grouped:
-                grouped[tool_name] = {}
-
-            grouped[tool_name][version] = grouped[tool_name].get(version, 0.0) + value
-
-            grouped[tool_name][version] = value - malus
+            grouped.setdefault(tool_name, {})[version] = value - malus
 
         for tool in list(grouped):
             if not grouped[tool]:
