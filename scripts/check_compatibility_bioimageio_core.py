@@ -69,7 +69,7 @@ def check_compatibility(id_startswith: str):
         tool_name="bioimageio.core",
         tool_version=bioimageio.core.__version__,
         check_tool_compatibility_impl=check_compatibility_core_impl,
-        applicable_types={"model"},
+        applicable_types={"application", "dataset", "model", "notebook"},
         id_startswith=id_startswith,
     )
 
