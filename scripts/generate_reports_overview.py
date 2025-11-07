@@ -259,25 +259,9 @@ def generate_reports_overview(
 
         latest_version = item.versions[0].version
 
-        # Try to load summary
+        # Load summary
         summary_path = get_summary_file_path(item_id, latest_version)
-        if not summary_path.exists():
-            # No summary yet
-            rows.append(
-                {
-                    "id": item_id,
-                    "type": item_type,
-                    "version": latest_version,
-                    "status": "untested",
-                    "core": 0.0,
-                    "core_str": "—",
-                    "overall": 0.0,
-                    "overall_str": "—",
-                    "tools": "—",
-                }
-            )
-            continue
-
+        assert summary_path.exists(), summary_path
         with summary_path.open(encoding="utf-8") as f:
             summary: dict[str, Any] = json.load(f)
 
