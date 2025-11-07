@@ -1,0 +1,60 @@
+{
+    "badge": null,
+    "details": {
+        "details": [
+            {
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "https://doi.org/10.5281/zenodo.3941908": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/splendid-pie/files/README.md?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/splendid-pie/files/yolo_dataset.png?version=v0": null
+                    },
+                    "original_source_name": null,
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/splendid-pie/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Successfully created `DatasetDescr` instance.",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [],
+                "name": "bioimageio.spec format validation dataset 0.2.4",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.spec",
+                "0.5.6.0",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.2.4",
+        "id": "zero/dataset_yolov2_zerocostdl4mic",
+        "metadata_completeness": 0.7777777777777778,
+        "name": "bioimageio format validation",
+        "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/splendid-pie/files/rdf.yaml?version=v0",
+        "status": "valid-format",
+        "traceback": null,
+        "type": "dataset",
+        "warnings": null
+    },
+    "error": "",
+    "links": [],
+    "score": 0.5,
+    "status": "failed"
+}
