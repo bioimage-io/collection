@@ -117,13 +117,13 @@ def generate_html_table(
         # Create hyperlink to bioimage.io with version
         resource_link = f"https://bioimage.io/#/artifacts/{html.escape(row['id'])}/{html.escape(row['version'])}"
         id_html = (
-            f'<a href="{resource_link}" target="_blank">{html.escape(row["id"])}</a>'
+            f'<a href="{resource_link}" target="_blank">{html.escape(row["id"])} <small>({html.escape(row["version"])})</small></a>'
         )
 
         html_parts.extend(
             [
                 "    <tr>",
-                f"      <td>{id_html} <small>({html.escape(row['version'])})</small></td>",
+                f"      <td>{id_html}</td>",
                 f"      <td>{html.escape(row['type'])}</td>",
                 f'      <td class="{status_class}">{html.escape(row["status"])}</td>',
                 f'      <td class="{metadata_class}" data-value="{metadata_val}">{html.escape(row["metadata_str"])}</td>',
