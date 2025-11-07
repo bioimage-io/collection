@@ -66,10 +66,10 @@ def generate_html_table(rows: list[dict[str, Any]]) -> str:
         '<table class="reports-table" id="reportsTable">',
         "  <thead>",
         "    <tr>",
-        '      <th data-sort="id">Resource ID</th>',
+        '      <th data-sort="id">Resource ID (Version)</th>',
         '      <th data-sort="type">Type</th>',
-        '      <th data-sort="version">Version</th>',
         '      <th data-sort="status">Status</th>',
+        '      <th data-sort="metadata">Metadata</th>',
         '      <th data-sort="core">Core</th>',
         '      <th data-sort="overall">Overall</th>',
         '      <th data-sort="tools">Partner Tools</th>',
@@ -97,13 +97,20 @@ def generate_html_table(rows: list[dict[str, Any]]) -> str:
             else ("score-med" if overall_val >= 0.3 else "score-low")
         )
 
+        metadata_val = row["metadata"]
+        metadata_class = (
+            "score-high"
+            if metadata_val >= 0.7
+            else ("score-med" if metadata_val >= 0.3 else "score-low")
+        )
+
         html_parts.extend(
             [
                 "    <tr>",
-                f"      <td>{html.escape(row['id'])}</td>",
+                f"      <td>{html.escape(row['id'])} <small>({html.escape(row['version'])})</small></td>",
                 f"      <td>{html.escape(row['type'])}</td>",
-                f"      <td>{html.escape(row['version'])}</td>",
                 f'      <td class="{status_class}">{html.escape(row["status"])}</td>',
+                f'      <td class="{metadata_class}" data-value="{metadata_val}">{html.escape(row["metadata_str"])}</td>',
                 f'      <td class="{core_class}" data-value="{core_val}">{html.escape(row["core_str"])}</td>',
                 f'      <td class="{overall_class}" data-value="{overall_val}">{html.escape(row["overall_str"])}</td>',
                 f"      <td>{html.escape(row['tools'])}</td>",
@@ -149,7 +156,7 @@ def generate_html_table(rows: list[dict[str, Any]]) -> str:
             "      const aCell = a.children[getColumnIndex(column)];",
             "      const bCell = b.children[getColumnIndex(column)];",
             "      ",
-            '      if (column === "core" || column === "overall") {',
+            '      if (column === "core" || column === "overall" || column === "metadata") {',
             "        aVal = parseFloat(aCell.dataset.value) || 0;",
             "        bVal = parseFloat(bCell.dataset.value) || 0;",
             "      } else {",
@@ -168,7 +175,7 @@ def generate_html_table(rows: list[dict[str, Any]]) -> str:
             "  }",
             "  ",
             "  function getColumnIndex(column) {",
-            "    const map = { id: 0, type: 1, version: 2, status: 3, core: 4, overall: 5, tools: 6 };",
+            "    const map = { id: 0, type: 1, status: 2, metadata: 3, core: 4, overall: 5, tools: 6 };",
             "    return map[column];",
             "  }",
             "  ",
@@ -181,7 +188,7 @@ def generate_html_table(rows: list[dict[str, Any]]) -> str:
             "    allRows.forEach(row => {",
             "      const id = row.children[0].textContent.toLowerCase();",
             "      const type = row.children[1].textContent.toLowerCase();",
-            "      const status = row.children[3].textContent.toLowerCase();",
+            "      const status = row.children[2].textContent.toLowerCase();",
             "      ",
             "      const matchesSearch = id.includes(searchTerm);",
             "      const matchesType = !typeValue || type === typeValue;",
@@ -271,6 +278,7 @@ def generate_reports_overview(
 
         core_compat = scores.get("core_compatibility", 0.0)
         overall_compat = scores.get("overall_compatibility", 0.0)
+        metadata_completeness = scores.get("metadata_completeness", 0.0)
 
         # Get tool compatibility summary
         tool_compat = scores.get("tool_compatibility", {})
@@ -287,6 +295,8 @@ def generate_reports_overview(
             "type": item_type,
             "version": latest_version,
             "status": status,
+            "metadata": metadata_completeness,
+            "metadata_str": f"{metadata_completeness:.2f}",
             "core": core_compat,
             "core_str": f"{core_compat:.2f}",
             "overall": overall_compat,
@@ -304,6 +314,7 @@ def generate_reports_overview(
             "",
             "## Legend",
             "",
+            "- **Metadata**: Metadata completeness score (0.0-1.0)",
             "- **Core**: bioimageio.core compatibility score (0.0-1.0)",
             "- **Overall**: Overall compatibility score across all tools (0.0-1.0)",
             "- **Partner Tools**: Compatibility scores for partner tools (biapy, careamics, ilastik)",
