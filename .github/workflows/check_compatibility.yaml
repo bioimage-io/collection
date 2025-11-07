@@ -97,3 +97,5 @@ jobs:
           folder: gh-pages
           dry-run: ${{ github.ref != 'refs/heads/main' }}
           clean: false
+      - name: update report overview in docs
+        uses: ./.github/workflows/build.yaml

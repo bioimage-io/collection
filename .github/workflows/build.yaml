@@ -1,5 +1,9 @@
 name: Test and Docs
-on: push
+on:
+  push:
+  workflow_call:
+
+concurrency: docs
 
 jobs:
   run:
