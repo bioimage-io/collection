@@ -1,0 +1,109 @@
+{
+    "badge": null,
+    "details": {
+        "conda_list": null,
+        "details": [
+            {
+                "conda_compare": null,
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "sample_input_0.tif": "a24b3c708b6ca6825494eb7c5a4d221335fb3eef5eb9d03f4108907cdaad2bf9",
+                        "sample_output_0.tif": "e8f99aabe8405427f515eba23a49f58ba50302f57d1fdfd07026e1984f836c5e",
+                        "test_input_0.npy": "c29bd6e16e3f7856217b407ba948222b1c2a0da41922a0f79297e25588614fe2",
+                        "test_output_0.npy": "510181f38930e59e4fd8ecc03d6ea7c980eb6609759655f2d4a41fe36108d5f5",
+                        "unet.py": "72aa1d865f203f74b7c059f229ea68dbdfdcedce101e16cf5d8906e48b5380a9",
+                        "weights.pt": "608f52cd7f5119f7a7b8272395b0c169714e8be34536eaf159820f72a1d6a5b7",
+                        "weights_torchscript.pt": "f13a13117c05df7063d32cdd1c222076b19132787a2fb3dfa09365ca58e7566b",
+                        "zero_mean_unit_variance.ijm": "767f2c3a50e36365c30b9e46e57fcf82e606d337e8a48d4a2440dc512813d186"
+                    },
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/affable-shark/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Created `InvalidDescr` object.",
+                "recommended_env": null,
+                "status": "failed",
+                "warnings": []
+            },
+            {
+                "conda_compare": null,
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "sample_input_0.tif": "a24b3c708b6ca6825494eb7c5a4d221335fb3eef5eb9d03f4108907cdaad2bf9",
+                        "sample_output_0.tif": "e8f99aabe8405427f515eba23a49f58ba50302f57d1fdfd07026e1984f836c5e",
+                        "test_input_0.npy": "c29bd6e16e3f7856217b407ba948222b1c2a0da41922a0f79297e25588614fe2",
+                        "test_output_0.npy": "510181f38930e59e4fd8ecc03d6ea7c980eb6609759655f2d4a41fe36108d5f5",
+                        "unet.py": "72aa1d865f203f74b7c059f229ea68dbdfdcedce101e16cf5d8906e48b5380a9",
+                        "weights.pt": "608f52cd7f5119f7a7b8272395b0c169714e8be34536eaf159820f72a1d6a5b7",
+                        "weights_torchscript.pt": "f13a13117c05df7063d32cdd1c222076b19132787a2fb3dfa09365ca58e7566b",
+                        "zero_mean_unit_variance.ijm": "767f2c3a50e36365c30b9e46e57fcf82e606d337e8a48d4a2440dc512813d186"
+                    },
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/affable-shark/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [
+                    {
+                        "loc": [
+                            "weights",
+                            "onnx",
+                            "external_data"
+                        ],
+                        "msg": "Extra inputs are not permitted",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "extra_forbidden",
+                        "with_traceback": false
+                    }
+                ],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.4",
+                "recommended_env": null,
+                "status": "failed",
+                "warnings": []
+            },
+            {
+                "conda_compare": null,
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "type"
+                ],
+                "name": "Has expected resource type",
+                "recommended_env": null,
+                "status": "passed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.core",
+                "0.8.0",
+                "",
+                ""
+            ],
+            [
+                "bioimageio.spec",
+                "0.5.4.1",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.5.4",
+        "id": "affable-shark",
+        "name": "bioimageio format validation",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/affable-shark/files/rdf.yaml?version=v0",
+        "status": "failed",
+        "type": "model"
+    },
+    "error": "\n|        ❌        |                              bioimageio format validation                             |\n|       ---       |                                          ---                                          |\n| status          | failed                                                                                |\n| source          | https://hypha.aicell.io/bioimage-io/artifacts/affable-shark/files/rdf.yaml?version=v0 |\n| id              | affable-shark                                                                         |\n| format version  | model 0.5.4                                                                           |\n| bioimageio.core | 0.8.0                                                                                 |\n| bioimageio.spec | 0.5.4.1                                                                               |\n\n|     |                      Location                     |                                   Details                                    |\n| --- |                        ---                        |                                     ---                                      |\n| ❌   |                                                   | Created `InvalidDescr` object.                                               |\n| 🔍   | `context:perform_io_checks`                       | True                                                                         |\n| 🔍   | `context:root`                                    | https://hypha.aicell.io/bioimage-io/artifacts/affable-shark/files?version=v0 |\n| 🔍   | `context:known_files.zero_mean_unit_variance.ijm` | 767f2c3a50e36365c30b9e46e57fcf82e606d337e8a48d4a2440dc512813d186             |\n| 🔍   | `context:known_files.test_input_0.npy`            | c29bd6e16e3f7856217b407ba948222b1c2a0da41922a0f79297e25588614fe2             |\n| 🔍   | `context:known_files.sample_input_0.tif`          | a24b3c708b6ca6825494eb7c5a4d221335fb3eef5eb9d03f4108907cdaad2bf9             |\n| 🔍   | `context:known_files.test_output_0.npy`           | 510181f38930e59e4fd8ecc03d6ea7c980eb6609759655f2d4a41fe36108d5f5             |\n| 🔍   | `context:known_files.sample_output_0.tif`         | e8f99aabe8405427f515eba23a49f58ba50302f57d1fdfd07026e1984f836c5e             |\n| 🔍   | `context:known_files.unet.py`                     | 72aa1d865f203f74b7c059f229ea68dbdfdcedce101e16cf5d8906e48b5380a9             |\n| 🔍   | `context:known_files.weights.pt`                  | 608f52cd7f5119f7a7b8272395b0c169714e8be34536eaf159820f72a1d6a5b7             |\n| 🔍   | `context:known_files.weights_torchscript.pt`      | f13a13117c05df7063d32cdd1c222076b19132787a2fb3dfa09365ca58e7566b             |\n| ❌   |                                                   | bioimageio.spec format validation model 0.5.4                                |\n| ❌   | `weights.onnx.external_data`                      | Extra inputs are not permitted                                               |\n|     |                                                   |                                                                              |\n| ✔️  | `type`                                            | Has expected resource type                                                   |\n",
+    "links": [
+        "ilastik/ilastik"
+    ],
+    "status": "failed",
+    "tool": "ilastik"
+}

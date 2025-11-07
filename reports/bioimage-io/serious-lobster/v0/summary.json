@@ -479,6 +479,16 @@
                 "score": 0.0,
                 "status": "not-applicable"
             }
+        },
+        "ilastik": {
+            "1.4.1.post1": {
+                "badge": null,
+                "details": "Failed to parse compatibility report.",
+                "error": "backoffice.compatibility.ToolCompatibilityReport() got multiple values for keyword argument 'tool'",
+                "links": [],
+                "score": 0.0,
+                "status": "failed"
+            }
         }
     }
 }
