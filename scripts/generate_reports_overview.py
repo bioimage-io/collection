@@ -76,7 +76,7 @@ def generate_html_table(
         f'<table class="reports-table" id="{table_id}">',
         "  <thead>",
         "    <tr>",
-        '      <th data-sort="id">Resource ID (Version)</th>',
+        '      <th data-sort="id">Resource ID / Version</th>',
         '      <th data-sort="type">Type</th>',
         '      <th data-sort="status">Status</th>',
         '      <th data-sort="metadata">Metadata</th>',
@@ -116,9 +116,7 @@ def generate_html_table(
 
         # Create hyperlink to bioimage.io with version
         resource_link = f"https://bioimage.io/#/artifacts/{html.escape(row['id'])}/{html.escape(row['version'])}"
-        id_html = (
-            f'<a href="{resource_link}" target="_blank">{html.escape(row["id"])} <small>({html.escape(row["version"])})</small></a>'
-        )
+        id_html = f'<a href="{resource_link}" target="_blank">{html.escape(row["id"])}/{html.escape(row["version"])}</a>'
 
         html_parts.extend(
             [
