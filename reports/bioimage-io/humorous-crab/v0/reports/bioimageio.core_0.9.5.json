@@ -1,0 +1,264 @@
+{
+    "badge": null,
+    "details": {
+        "details": [
+            {
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "box_prompts.npy": "575790514a2970ce720247437cf109064a86a0ff1e159c405da40cec98c45b19",
+                        "embeddings.npy": "23845424ca305efec2dc5be8d06dccc3c22bab703719cdb853bfe4b77c7e3389",
+                        "environment.yaml": "25d74fdd33d13778435320bb2d4708c01cfa537fa5d578951f7811f9eca6a97a",
+                        "https://github.com/computational-cell-analytics/micro-sam": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/humorous-crab/files/box_prompts.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/humorous-crab/files/cover_em.png?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/humorous-crab/files/documentation.md?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/humorous-crab/files/embeddings.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/humorous-crab/files/environment.yaml?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/humorous-crab/files/input.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/humorous-crab/files/mask.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/humorous-crab/files/mask_prompts.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/humorous-crab/files/point_labels.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/humorous-crab/files/point_prompts.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/humorous-crab/files/predictor_adaptor.py?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/humorous-crab/files/scores.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/humorous-crab/files/vit_l.pt?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/humorous-crab/files/vit_l_decoder.pt?version=v0": null,
+                        "input.npy": "29ce602a6b2347ab9d4bd6c37b424d27c2a7994187a5b581ef83484f08be6b83",
+                        "mask.npy": "a4e8f99844e8a23d75c6f9ec88d08d5917a3439923854a555dd6acd2ca031227",
+                        "mask_prompts.npy": "558028ff0fbd03c2ac851d1d2ee6af7c6f3f0a75bbdb7a28d99595a4f6460d90",
+                        "point_labels.npy": "c4e6b5cec2d9be65ad0cd3b2fab7b6add275d16d5a457208777771362de9bb81",
+                        "point_prompts.npy": "219846efa381b9b6c2d667f97b0a68db7f6ba1b7e0365ba90d8447e951bb0be4",
+                        "predictor_adaptor.py": "c55a850510e70b6b815afbec1d19da92792de97c4cf4384ba95d0024157f5c5d",
+                        "scores.npy": "3f2c88889f75a2ad535c46d0caff58cb392a5b60eb59c02da1a44bd7b2ec82ee",
+                        "vit_l.pt": "4c8a7a2027ffeb452c5a0f535f04bc6e7f5ccdea3c95dedce1a20d68e04c39e8",
+                        "vit_l_decoder.pt": "8a2670d7182c454b11677bae3a9c1e2bf7078bed5d65a919525a81e7a885b28f"
+                    },
+                    "original_source_name": null,
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/humorous-crab/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Successfully created `ModelDescr` instance.",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.6",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": [
+                    {
+                        "loc": [
+                            "inputs",
+                            0,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "inputs",
+                            1,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "inputs",
+                            2,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "inputs",
+                            3,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "inputs",
+                            4,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "inputs",
+                            5,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "outputs",
+                            0,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "outputs",
+                            1,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "outputs",
+                            2,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    }
+                ]
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Reproduce test outputs from test inputs (pytorch_state_dict)",
+                "recommended_env": {
+                    "channels": [
+                        "pytorch",
+                        "conda-forge",
+                        "nodefaults"
+                    ],
+                    "dependencies": [
+                        "conda-forge::bioimageio.core",
+                        "pip",
+                        "segment-anything"
+                    ],
+                    "name": "sam"
+                },
+                "saved_conda_compare": "Success. All the packages in the specification file are present in the environment with matching version and build string.\n",
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Run pytorch_state_dict inference for inputs with batch_size: 1 and size parameter n: 0",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Run pytorch_state_dict inference for inputs with batch_size: 1 and size parameter n: 1",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Run pytorch_state_dict inference for inputs with batch_size: 1 and size parameter n: 2",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [
+                    {
+                        "loc": [
+                            "weights",
+                            "pytorch_state_dict"
+                        ],
+                        "msg": "",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "bioimageio.core",
+                        "with_traceback": false
+                    }
+                ],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Run pytorch_state_dict inference for inputs with batch_size: 2 and size parameter n: 0",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "failed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.spec",
+                "0.5.6.0",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.5.6",
+        "id": "humorous-crab",
+        "metadata_completeness": 0.6607142857142857,
+        "name": "bioimageio format validation",
+        "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/humorous-crab/files/rdf.yaml?version=v0",
+        "status": "valid-format",
+        "traceback": null,
+        "type": "model",
+        "warnings": null
+    },
+    "error": null,
+    "links": [],
+    "score": 1.0,
+    "status": "passed"
+}
