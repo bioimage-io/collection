@@ -7,19 +7,16 @@ import traceback
 import urllib.request
 from functools import partial
 
+from ruyaml import YAML
+
 from backoffice.check_compatibility import check_tool_compatibility
 from backoffice.compatibility_pure import ToolCompatibilityReportDict
 from backoffice.utils_pure import get_rdf_content_from_id
 
-try:
-    from ruyaml import YAML
-except ImportError:
-    from ruamel.yaml import YAML
-
 yaml = YAML(typ="safe")
 
 
-def find_expected_output(outputs_dir, name):
+def find_expected_output(outputs_dir: str, name: str) -> bool:
     for ff in os.listdir(outputs_dir):
         if ff.endswith("_" + name + ".tif") or ff.endswith("_" + name + ".tiff"):
             return True
@@ -27,7 +24,9 @@ def find_expected_output(outputs_dir, name):
 
 
 def check_dij_macro_generated_outputs(model_dir: str):
-    with open(os.path.join(model_dir, os.getenv("JSON_OUTS_FNAME")), "r") as f:
+    json_outs_name = os.getenv("JSON_OUTS_FNAME")
+    assert json_outs_name is not None, "JSON_OUTS_FNAME environment variable not set"
+    with open(os.path.join(model_dir, json_outs_name), "r") as f:
         expected_outputs = json.load(f)
 
         for output in expected_outputs:
@@ -151,7 +150,7 @@ def test_model_deepimagej(
             report = ToolCompatibilityReportDict(
                 tool=f"deepimagej_{deepimagej_version}",
                 status="failed",
-                error=f"error running the model",
+                error="error running the model",
                 details=out_str,
                 links=["deepimagej/deepimagej"],
                 badge=None,
