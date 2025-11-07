@@ -9,11 +9,21 @@ from backoffice.index import load_index
 from backoffice.utils_pure import get_summary_file_path
 
 
-def generate_html_table(rows: list[dict[str, Any]]) -> str:
+def generate_html_table(
+    rows: list[dict[str, Any]],
+    table_id: str = "reportsTable",
+    search_id: str = "searchInput",
+    type_filter_id: str = "typeFilter",
+    status_filter_id: str = "statusFilter",
+) -> str:
     """Generate an HTML table with sorting and filtering capabilities.
 
     Args:
         rows: List of row dictionaries with resource data
+        table_id: Unique ID for the table element
+        search_id: Unique ID for the search input
+        type_filter_id: Unique ID for the type filter
+        status_filter_id: Unique ID for the status filter
 
     Returns:
         HTML string with table and JavaScript
@@ -47,15 +57,15 @@ def generate_html_table(rows: list[dict[str, Any]]) -> str:
         "</style>",
         "",
         '<div class="filter-controls">',
-        '  <input type="text" id="searchInput" placeholder="Search resources..." style="flex: 1; min-width: 200px;">',
-        '  <select id="typeFilter">',
+        f'  <input type="text" id="{search_id}" placeholder="Search resources..." style="flex: 1; min-width: 200px;">',
+        f'  <select id="{type_filter_id}">',
         '    <option value="">All Types</option>',
         '    <option value="model">Model</option>',
         '    <option value="application">Application</option>',
         '    <option value="dataset">Dataset</option>',
         '    <option value="notebook">Notebook</option>',
         "  </select>",
-        '  <select id="statusFilter">',
+        f'  <select id="{status_filter_id}">',
         '    <option value="">All Statuses</option>',
         '    <option value="passed">Passed</option>',
         '    <option value="failed">Failed</option>',
@@ -63,7 +73,7 @@ def generate_html_table(rows: list[dict[str, Any]]) -> str:
         "  </select>",
         "</div>",
         "",
-        '<table class="reports-table" id="reportsTable">',
+        f'<table class="reports-table" id="{table_id}">',
         "  <thead>",
         "    <tr>",
         '      <th data-sort="id">Resource ID (Version)</th>',
@@ -126,12 +136,12 @@ def generate_html_table(rows: list[dict[str, Any]]) -> str:
             "",
             "<script>",
             "(function() {",
-            '  const table = document.getElementById("reportsTable");',
+            f'  const table = document.getElementById("{table_id}");',
             '  const tbody = table.querySelector("tbody");',
             '  const headers = table.querySelectorAll("th[data-sort]");',
-            '  const searchInput = document.getElementById("searchInput");',
-            '  const typeFilter = document.getElementById("typeFilter");',
-            '  const statusFilter = document.getElementById("statusFilter");',
+            f'  const searchInput = document.getElementById("{search_id}");',
+            f'  const typeFilter = document.getElementById("{type_filter_id}");',
+            f'  const statusFilter = document.getElementById("{status_filter_id}");',
             "  ",
             '  let currentSort = { column: null, direction: "asc" };',
             '  let allRows = Array.from(tbody.querySelectorAll("tr"));',
@@ -249,13 +259,14 @@ def generate_reports_overview(
             "",
             "## Compatibility by Resource",
             "",
-            "The following table shows compatibility test results for each resource. Click column headers to sort.",
+            "The following tables show compatibility test results for each resource. Click column headers to sort.",
             "",
         ]
     )
 
-    # Build compatibility table data
-    rows: list[dict[str, Any]] = []
+    # Group resources by prefix
+    resources_by_prefix: dict[str, list[dict[str, Any]]] = {}
+
     for item in items:
         item_id = item.id
         item_type = item.type
@@ -290,8 +301,16 @@ def generate_reports_overview(
 
         tool_summary = ", ".join(tool_summary_parts) if tool_summary_parts else "—"
 
+        # Extract prefix and short ID
+        if "/" in item_id:
+            prefix, short_id = item_id.split("/", 1)
+        else:
+            prefix = ""
+            short_id = item_id
+
         row_data = {
-            "id": item_id,
+            "id": short_id,  # Use short ID without prefix
+            "full_id": item_id,  # Keep full ID for reference
             "type": item_type,
             "version": latest_version,
             "status": status,
@@ -303,11 +322,30 @@ def generate_reports_overview(
             "overall_str": f"{overall_compat:.2f}",
             "tools": tool_summary,
         }
-        rows.append(row_data)
 
-    # Generate HTML table with sorting/filtering
-    html_table = generate_html_table(rows)
-    lines.append(html_table)
+        if prefix not in resources_by_prefix:
+            resources_by_prefix[prefix] = []
+        resources_by_prefix[prefix].append(row_data)
+
+    # Generate a table for each prefix
+    for idx, (prefix, rows) in enumerate(sorted(resources_by_prefix.items())):
+        prefix_display = prefix if prefix else "No Prefix"
+        lines.append(f"### {prefix_display}")
+        lines.append("")
+        lines.append(f"*{len(rows)} resources*")
+        lines.append("")
+
+        # Generate unique IDs for this table's elements
+        table_id = f"reportsTable{idx}"
+        search_id = f"searchInput{idx}"
+        type_filter_id = f"typeFilter{idx}"
+        status_filter_id = f"statusFilter{idx}"
+
+        html_table = generate_html_table(
+            rows, table_id, search_id, type_filter_id, status_filter_id
+        )
+        lines.append(html_table)
+        lines.append("")
 
     lines.extend(
         [
@@ -318,10 +356,6 @@ def generate_reports_overview(
             "- **Core**: bioimageio.core compatibility score (0.0-1.0)",
             "- **Overall**: Overall compatibility score across all tools (0.0-1.0)",
             "- **Partner Tools**: Compatibility scores for partner tools (biapy, careamics, ilastik)",
-            "",
-            "---",
-            "",
-            f"*Generated from {len(items)} resources*",
             "",
         ]
     )
