@@ -2,17 +2,11 @@
 
 import html
 import json
-import os
 from pathlib import Path
 from typing import Any
 
 from backoffice.index import load_index
-
-
-def get_summary_file_path(item_id: str, version: str) -> Path:
-    """Get the path to the summary.json file for a specific item version."""
-    reports_base = Path(os.getenv("REPORTS", "gh-pages/reports"))
-    return reports_base / item_id.replace(":", "_") / version / "summary.json"
+from backoffice.utils_pure import get_summary_file_path
 
 
 def generate_html_table(rows: list[dict[str, Any]], total_resources: int) -> str:

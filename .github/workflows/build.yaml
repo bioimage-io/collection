@@ -29,15 +29,19 @@ jobs:
           HYPHA_API_TOKEN: ${{secrets.HYPHA_API_TOKEN}}
       - run: pip install -e .[docs]
       - uses: actions/checkout@v4
-        name: checkout staged reports for docs generation
+        name: checkout index and reports for docs generation
         with:
-          ref: stage-gh-pages
+          ref: gh-pages
           path: gh-pages
           sparse-checkout: |
             reports
             index.json
       - name: Generate reports overview for docs
         run: python scripts/generate_reports_overview.py
+        env:
+          REPORTS: gh-pages/reports
+          RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
+          HYPHA_API_TOKEN: ${{secrets.HYPHA_API_TOKEN}}
       - run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_OUTPUT
         id: cache-id
       - uses: actions/cache@v4
