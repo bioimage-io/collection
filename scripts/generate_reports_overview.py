@@ -9,12 +9,11 @@ from backoffice.index import load_index
 from backoffice.utils_pure import get_summary_file_path
 
 
-def generate_html_table(rows: list[dict[str, Any]], total_resources: int) -> str:
+def generate_html_table(rows: list[dict[str, Any]]) -> str:
     """Generate an HTML table with sorting and filtering capabilities.
 
     Args:
         rows: List of row dictionaries with resource data
-        total_resources: Total number of resources
 
     Returns:
         HTML string with table and JavaScript
@@ -307,7 +306,7 @@ def generate_reports_overview(
         rows.append(row_data)
 
     # Generate HTML table with sorting/filtering
-    html_table = generate_html_table(rows, len(items))
+    html_table = generate_html_table(rows)
     lines.append(html_table)
 
     lines.extend(
