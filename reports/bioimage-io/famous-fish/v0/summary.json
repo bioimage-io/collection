@@ -480,6 +480,183 @@
                 "links": [],
                 "score": 0.0,
                 "status": "failed"
+            },
+            "0.9.5": {
+                "badge": null,
+                "details": {
+                    "details": [
+                        {
+                            "context": {
+                                "file_name": "rdf.yaml",
+                                "known_files": {
+                                    "cyto3.pth": "2dc3087a8abd7da46d1ab0ddd5824639933cc3ff63b382af3fa1939a392db93c",
+                                    "env.yml": "8b7b307a010225d1741191f4c1a9415ed81d66469da76c59d5164e24ba99fe48",
+                                    "https://github.com/juglab/cellpose-bmz-wrapper": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/famous-fish/files/cover.png?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/famous-fish/files/cyto3.pth?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/famous-fish/files/doc.md?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/famous-fish/files/env.yml?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/famous-fish/files/input_sample.npy?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/famous-fish/files/model.py?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/famous-fish/files/output1_sample_masks.npy?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/famous-fish/files/output2_sample_flows.npy?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/famous-fish/files/output3_sample_styles.npy?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/famous-fish/files/output4_sample_diams.npy?version=v0": null,
+                                    "input_sample.npy": "f765246489a2b9913c7726a5706e535543e3ed42dac07ee21a8ffd2e6c129bed",
+                                    "model.py": "c97dbfc39bc9352607289c7659ee3e70f42189ddd76c273c845802a824ab4210",
+                                    "output1_sample_masks.npy": "6bc2bd4c4b98a41cddbf7446c4500235a57c149710280e620565eb112c5251f2",
+                                    "output2_sample_flows.npy": "112c5afd9e12c690d2cbbcf0a7b0fd673ce753c29f2e3bccbc15d927bf205d24",
+                                    "output3_sample_styles.npy": "877ea628fdc2bc2aa94603049970da8597dda2c612944b20633ebea9dfac0776",
+                                    "output4_sample_diams.npy": "3b9360ded86c2a4d3e2592bfcce5cf42eefc96026661d5e1acadbb052d1f16b9"
+                                },
+                                "original_source_name": null,
+                                "perform_io_checks": true,
+                                "root": "https://hypha.aicell.io/bioimage-io/artifacts/famous-fish/files?version=v0",
+                                "update_hashes": false
+                            },
+                            "errors": [],
+                            "loc": [],
+                            "name": "Successfully created `ModelDescr` instance.",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [],
+                            "name": "bioimageio.spec format validation model 0.5.6",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": [
+                                {
+                                    "loc": [
+                                        "documentation"
+                                    ],
+                                    "msg": "No '# Validation' (sub)section found in doc.md.",
+                                    "severity": 30,
+                                    "type": "warning"
+                                },
+                                {
+                                    "loc": [
+                                        "inputs",
+                                        0,
+                                        "sample_tensor"
+                                    ],
+                                    "msg": "Needs to be filled for FAIR compliance",
+                                    "severity": 35,
+                                    "type": "warning"
+                                },
+                                {
+                                    "loc": [
+                                        "outputs",
+                                        0,
+                                        "sample_tensor"
+                                    ],
+                                    "msg": "Needs to be filled for FAIR compliance",
+                                    "severity": 35,
+                                    "type": "warning"
+                                },
+                                {
+                                    "loc": [
+                                        "outputs",
+                                        1,
+                                        "sample_tensor"
+                                    ],
+                                    "msg": "Needs to be filled for FAIR compliance",
+                                    "severity": 35,
+                                    "type": "warning"
+                                },
+                                {
+                                    "loc": [
+                                        "outputs",
+                                        2,
+                                        "sample_tensor"
+                                    ],
+                                    "msg": "Needs to be filled for FAIR compliance",
+                                    "severity": 35,
+                                    "type": "warning"
+                                },
+                                {
+                                    "loc": [
+                                        "outputs",
+                                        3,
+                                        "sample_tensor"
+                                    ],
+                                    "msg": "Needs to be filled for FAIR compliance",
+                                    "severity": 35,
+                                    "type": "warning"
+                                }
+                            ]
+                        },
+                        {
+                            "context": null,
+                            "errors": [
+                                {
+                                    "loc": [],
+                                    "msg": "test command 'conda run -n 57cd7396fb1fb1fec5b137531bd6ae0f4389ff84dd4c0587265c52b1aab8f614 bioimageio test https://hypha.aicell.io/bioimage-io/artifacts/famous-fish/files/rdf.yaml?version=v0 --summary-path=/tmp/tmps5qxogzj/pytorch_state_dict/summary.json --determinism=full --stop-early' did not produce a summary file at /tmp/tmps5qxogzj/pytorch_state_dict/summary.json",
+                                    "traceback_html": "",
+                                    "traceback_md": "",
+                                    "type": "bioimageio cli",
+                                    "with_traceback": false
+                                }
+                            ],
+                            "loc": [],
+                            "name": "run 'bioimageio test' command",
+                            "recommended_env": {
+                                "channels": [
+                                    "pytorch",
+                                    "nvidia",
+                                    "conda-forge",
+                                    "nodefaults"
+                                ],
+                                "dependencies": [
+                                    "bioimageio.core",
+                                    "cellpose",
+                                    "cuda=11.8",
+                                    "imagecodecs",
+                                    "pip",
+                                    "python=3.8",
+                                    "pytorch",
+                                    "setuptools",
+                                    "torchvision",
+                                    {
+                                        "pip": [
+                                            "matplotlib",
+                                            "tqdm"
+                                        ]
+                                    }
+                                ],
+                                "name": null
+                            },
+                            "saved_conda_compare": "bioimageio.core not found\ncellpose not found\ncuda not found\nimagecodecs not found\npip not found\npython not found\npytorch not found\nsetuptools not found\ntorchvision not found\nmatplotlib not found\ntqdm not found\n",
+                            "status": "failed",
+                            "warnings": []
+                        }
+                    ],
+                    "env": [
+                        [
+                            "bioimageio.spec",
+                            "0.5.6.0",
+                            "",
+                            ""
+                        ]
+                    ],
+                    "format_version": "0.5.6",
+                    "id": "famous-fish",
+                    "metadata_completeness": 0.7230769230769231,
+                    "name": "bioimageio format validation",
+                    "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+                    "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/famous-fish/files/rdf.yaml?version=v0",
+                    "status": "valid-format",
+                    "type": "model"
+                },
+                "error": "test command 'conda run -n 57cd7396fb1fb1fec5b137531bd6ae0f4389ff84dd4c0587265c52b1aab8f614 bioimageio test https://hypha.aicell.io/bioimage-io/artifacts/famous-fish/files/rdf.yaml?version=v0 --summary-path=/tmp/tmps5qxogzj/pytorch_state_dict/summary.json --determinism=full --stop-early' did not produce a summary file at /tmp/tmps5qxogzj/pytorch_state_dict/summary.json",
+                "links": [],
+                "score": 0.5,
+                "status": "failed"
             }
         },
         "careamics": {
