@@ -134,14 +134,14 @@
     },
     "rdf_yaml_sha256": "6ce6f054c7bdab0e32a1b241e6fb88b3b44b06aef19d149e96b71511a9e4772c",
     "scores": {
-        "core_compatibility": 0.0,
-        "metadata_completeness": 0.0,
-        "metadata_format": 0.0,
-        "overall_compatibility": 0.0,
+        "core_compatibility": 0.16666666666666666,
+        "metadata_completeness": 0.7017543859649122,
+        "metadata_format": 1.0,
+        "overall_compatibility": 0.46710526315789475,
         "overall_partner_tool_compatibility": 0.0,
         "tool_compatibility": {
             "biapy": 0.0,
-            "bioimageio.core": 0.0,
+            "bioimageio.core": 0.16666666666666666,
             "careamics": 0.0,
             "ilastik": 0.0
         },
@@ -150,6 +150,7 @@
             "biapy_3.6.6": 0.0,
             "bioimageio.core_0.9.3": 0.0,
             "bioimageio.core_0.9.4": 0.0,
+            "bioimageio.core_0.9.5": 0.5,
             "careamics_0.0.16": 0.0,
             "careamics_0.0.17": 0.0,
             "careamics_0.0.18": 0.0,
@@ -261,6 +262,174 @@
                 "error": "test command 'conda run -n 11aa6d8d637e1dd304527155d7d9a7655736471c58843e7524c40dd0e82c8dfa bioimageio test https://hypha.aicell.io/bioimage-io/artifacts/affectionate-cow/files/rdf.yaml?version=v0 --summary-path=/tmp/tmp9bha0w2r/pytorch_state_dict/summary.json --determinism=full --stop-early' did not produce a summary file at /tmp/tmp9bha0w2r/pytorch_state_dict/summary.json",
                 "links": [],
                 "score": 0.0,
+                "status": "failed"
+            },
+            "0.9.5": {
+                "badge": null,
+                "details": {
+                    "details": [
+                        {
+                            "context": {
+                                "file_name": "rdf.yaml",
+                                "known_files": {
+                                    "env_cuda.yml": "bbc029748ea37c9f638308cc90833a32292fd581e6612b1fc7e624d9dce44503",
+                                    "https://github.com/juglab/uSplit/tree/main": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/affectionate-cow/files/cover.png?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/affectionate-cow/files/doc.md?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/affectionate-cow/files/env_cuda.yml?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/affectionate-cow/files/lvae_weights.pth?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/affectionate-cow/files/test_input.npy?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/affectionate-cow/files/test_output.npy?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/affectionate-cow/files/usplit_wrapper.py?version=v0": null,
+                                    "lvae_weights.pth": "74aad7e97d2c8e0cf951dfa6c76ee78041481cff453f662121ec5f0cff5fd101",
+                                    "test_input.npy": "2698e3ecf13b07c1188d8a4e8286521552548df1c30acddec90af9f5d05b0bda",
+                                    "test_output.npy": "bcb9fefa09e572965fcf17220c0ec7fec339d40fe1ffbcf99112ea9ede5a190c",
+                                    "usplit_wrapper.py": "2a930fe9a7d0c71eb4919008b0b0fde779497c5b70826bf7c1191475a65ec004"
+                                },
+                                "original_source_name": null,
+                                "perform_io_checks": true,
+                                "root": "https://hypha.aicell.io/bioimage-io/artifacts/affectionate-cow/files?version=v0",
+                                "update_hashes": false
+                            },
+                            "errors": [],
+                            "loc": [],
+                            "name": "Successfully created `ModelDescr` instance.",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [],
+                            "name": "bioimageio.spec format validation model 0.5.6",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": [
+                                {
+                                    "loc": [
+                                        "documentation"
+                                    ],
+                                    "msg": "No '# Validation' (sub)section found in doc.md.",
+                                    "severity": 30,
+                                    "type": "warning"
+                                },
+                                {
+                                    "loc": [
+                                        "inputs",
+                                        0,
+                                        "sample_tensor"
+                                    ],
+                                    "msg": "Needs to be filled for FAIR compliance",
+                                    "severity": 35,
+                                    "type": "warning"
+                                },
+                                {
+                                    "loc": [
+                                        "outputs",
+                                        0,
+                                        "sample_tensor"
+                                    ],
+                                    "msg": "Needs to be filled for FAIR compliance",
+                                    "severity": 35,
+                                    "type": "warning"
+                                }
+                            ]
+                        },
+                        {
+                            "context": null,
+                            "errors": [
+                                {
+                                    "loc": [],
+                                    "msg": "test command 'conda run -n 11aa6d8d637e1dd304527155d7d9a7655736471c58843e7524c40dd0e82c8dfa bioimageio test https://hypha.aicell.io/bioimage-io/artifacts/affectionate-cow/files/rdf.yaml?version=v0 --summary-path=/tmp/tmpy0r4uthr/pytorch_state_dict/summary.json --determinism=full --stop-early' did not produce a summary file at /tmp/tmpy0r4uthr/pytorch_state_dict/summary.json",
+                                    "traceback_html": "",
+                                    "traceback_md": "",
+                                    "type": "bioimageio cli",
+                                    "with_traceback": false
+                                }
+                            ],
+                            "loc": [],
+                            "name": "run 'bioimageio test' command",
+                            "recommended_env": {
+                                "channels": [
+                                    "pytorch",
+                                    "nvidia",
+                                    "anaconda",
+                                    "conda-forge",
+                                    "nodefaults"
+                                ],
+                                "dependencies": [
+                                    "bioimageio.core",
+                                    "ca-certificates",
+                                    "certifi",
+                                    "cuda=11.6.1",
+                                    "czifile",
+                                    "ipykernel",
+                                    "ipython",
+                                    "isort",
+                                    "matplotlib",
+                                    "nbconvert",
+                                    "nd2reader",
+                                    "openssl",
+                                    "pip",
+                                    "python=3.9",
+                                    "pytorch-lightning",
+                                    "pytorch==1.13.1",
+                                    "scikit-learn",
+                                    "seaborn",
+                                    "tensorboard",
+                                    "tifffile",
+                                    "torchvision==0.14.1",
+                                    "wandb",
+                                    "yapf",
+                                    "zarr",
+                                    {
+                                        "pip": [
+                                            "albumentations==1.4.8",
+                                            "git+https://github.com/juglab/uSplit.git@bioimage_io",
+                                            "matplotlib",
+                                            "ml-collections==0.1.1",
+                                            "networkx==3.2.1",
+                                            "opencv-python-headless==4.10.0.82",
+                                            "pillow==10.3.0",
+                                            "scikit-image==0.22.0",
+                                            "scikit-learn==1.5.0",
+                                            "tifffile==2024.5.22",
+                                            "virtualenv==20.26.2"
+                                        ]
+                                    }
+                                ],
+                                "name": null
+                            },
+                            "saved_conda_compare": "bioimageio.core not found\nca-certificates not found\ncertifi not found\ncuda not found\nczifile not found\nipykernel not found\nipython not found\nisort not found\nmatplotlib not found\nnbconvert not found\nnd2reader not found\nopenssl not found\npip not found\npython not found\npytorch-lightning not found\npytorch not found\nscikit-learn not found\nseaborn not found\ntensorboard not found\ntifffile not found\ntorchvision not found\nwandb not found\nyapf not found\nzarr not found\nalbumentations not found\n//github.com/juglab/usplit.git@bioimage_io not found\nmatplotlib not found\nml-collections not found\nnetworkx not found\nopencv-python-headless not found\npillow not found\nscikit-image not found\nscikit-learn not found\ntifffile not found\nvirtualenv not found\n",
+                            "status": "failed",
+                            "warnings": []
+                        }
+                    ],
+                    "env": [
+                        [
+                            "bioimageio.spec",
+                            "0.5.6.0",
+                            "",
+                            ""
+                        ]
+                    ],
+                    "format_version": "0.5.6",
+                    "id": "affectionate-cow",
+                    "metadata_completeness": 0.7017543859649122,
+                    "name": "bioimageio format validation",
+                    "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+                    "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/affectionate-cow/files/rdf.yaml?version=v0",
+                    "status": "valid-format",
+                    "traceback": null,
+                    "type": "model",
+                    "warnings": null
+                },
+                "error": "test command 'conda run -n 11aa6d8d637e1dd304527155d7d9a7655736471c58843e7524c40dd0e82c8dfa bioimageio test https://hypha.aicell.io/bioimage-io/artifacts/affectionate-cow/files/rdf.yaml?version=v0 --summary-path=/tmp/tmpy0r4uthr/pytorch_state_dict/summary.json --determinism=full --stop-early' did not produce a summary file at /tmp/tmpy0r4uthr/pytorch_state_dict/summary.json",
+                "links": [],
+                "score": 0.5,
                 "status": "failed"
             }
         },
