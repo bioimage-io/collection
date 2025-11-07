@@ -93,5 +93,5 @@ def check_tool_compatibility(
                     json.dump(report, f, indent=4, sort_keys=True, ensure_ascii=False)
 
             _total, _used, free = shutil.disk_usage(".")
-            if free < 5_000_000_000:
-                raise RuntimeError("less than 5GB disk space left, stopping now")
+            if free < 7_000_000_000:
+                raise RuntimeError("less than 7GB disk space left, stopping now")

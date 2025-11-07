@@ -71,7 +71,7 @@ CI/CD overview (GitHub Actions)
 Conventions and pitfalls
 - Report naming: `<tool>_<semver>.json`; underscores in names/versions are rejected by `get_tool_report_path`.
 - Only operate on supported resource `type`s (scripts typically filter to `model`). Respect SHA-256 validation when loading RDF.
-- Disk space guard: `check_tool_compatibility` aborts if free space < 5GB.
+- Disk space guard: `check_tool_compatibility` aborts if free space < 7GB.
 - When adding a partner: add a workflow, a `scripts/check_compatibility_<tool>.py`, and integrate via `check_tool_compatibility(...)` following the existing examples.
 
 Useful entry points/examples
