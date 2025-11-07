@@ -97,5 +97,9 @@ jobs:
           folder: gh-pages
           dry-run: ${{ github.ref != 'refs/heads/main' }}
           clean: false
-      - name: update report overview in docs
-        uses: ./.github/workflows/build.yaml
+
+  update-docs:
+    needs: [index, summarize]
+    if: ${{ !cancelled() }} && !(needs.index.outputs.cache-hit == 'true' && (github.event.inputs.rerun == 'only-on-index-update' || github.event.inputs.rerun == ''))
+    uses: ./.github/workflows/build.yaml
+    secrets: inherit
