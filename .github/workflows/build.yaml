@@ -50,4 +50,5 @@ jobs:
           path: ~/.cache
           restore-keys: |
             mkdocs-material-
+      - run: git branch # debugging
       - run: mike deploy ${{ github.ref == 'refs/heads/main' && '--push' || ' ' }} --update-aliases 0.1 latest
