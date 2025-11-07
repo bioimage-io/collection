@@ -901,14 +901,14 @@
     },
     "rdf_yaml_sha256": "f3fbc706c39c12bf6b5cbb1b843aca7b27cad21365abdbeacdfa8bb3b5458671",
     "scores": {
-        "core_compatibility": 0.0,
+        "core_compatibility": 0.16666666666666666,
         "metadata_completeness": 0.6607142857142857,
-        "metadata_format": 0.0,
-        "overall_compatibility": 0.16517857142857142,
+        "metadata_format": 1.0,
+        "overall_compatibility": 0.4568452380952381,
         "overall_partner_tool_compatibility": 0.0,
         "tool_compatibility": {
             "biapy": 0.0,
-            "bioimageio.core": 0.0,
+            "bioimageio.core": 0.16666666666666666,
             "careamics": 0.0,
             "ilastik": 0.0
         },
@@ -917,6 +917,7 @@
             "biapy_3.6.6": 0.0,
             "bioimageio.core_0.9.3": 0.0,
             "bioimageio.core_0.9.4": 0.0,
+            "bioimageio.core_0.9.5": 0.5,
             "careamics_0.0.16": 0.0,
             "careamics_0.0.17": 0.0,
             "careamics_0.0.18": 0.0,
@@ -1245,6 +1246,223 @@
                 "error": "'vit_t'",
                 "links": [],
                 "score": 0.0,
+                "status": "failed"
+            },
+            "0.9.5": {
+                "badge": null,
+                "details": {
+                    "details": [
+                        {
+                            "context": {
+                                "file_name": "rdf.yaml",
+                                "known_files": {
+                                    "box_prompts.npy": "575790514a2970ce720247437cf109064a86a0ff1e159c405da40cec98c45b19",
+                                    "embeddings.npy": "355d52fc5b969651549ccc081ae590a9a895495a56386458561802edf76f4ae8",
+                                    "environment.yaml": "d59adc2c0f89d5dcb0ba668b7dd5bdacc19d18c6e25d418d1c2a1c47bc9c480e",
+                                    "https://github.com/computational-cell-analytics/micro-sam": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/greedy-whale/files/box_prompts.npy?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/greedy-whale/files/cover_em.png?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/greedy-whale/files/documentation.md?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/greedy-whale/files/embeddings.npy?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/greedy-whale/files/environment.yaml?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/greedy-whale/files/input.npy?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/greedy-whale/files/mask.npy?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/greedy-whale/files/mask_prompts.npy?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/greedy-whale/files/point_labels.npy?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/greedy-whale/files/point_prompts.npy?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/greedy-whale/files/predictor_adaptor.py?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/greedy-whale/files/scores.npy?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/greedy-whale/files/vit_t.pt?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/greedy-whale/files/vit_t_decoder.pt?version=v0": null,
+                                    "input.npy": "29ce602a6b2347ab9d4bd6c37b424d27c2a7994187a5b581ef83484f08be6b83",
+                                    "mask.npy": "03e6f97aca0aabed84220dabf6e792e4d955b9ea01464827a02eb88bf858f911",
+                                    "mask_prompts.npy": "558028ff0fbd03c2ac851d1d2ee6af7c6f3f0a75bbdb7a28d99595a4f6460d90",
+                                    "point_labels.npy": "c4e6b5cec2d9be65ad0cd3b2fab7b6add275d16d5a457208777771362de9bb81",
+                                    "point_prompts.npy": "d7b2429bff3e0d413dadbc01e65e12dcb8e29451a54c303f9960354ac82d40c7",
+                                    "predictor_adaptor.py": "c55a850510e70b6b815afbec1d19da92792de97c4cf4384ba95d0024157f5c5d",
+                                    "scores.npy": "7101e6a258bc916544d91bece243969fda76b6492ff5e5afa4f8fe15e003a5c5",
+                                    "vit_t.pt": "3bc964e07d284cbd88d2c2c92b39d3565376f6fe1cac635474978000d2c57258",
+                                    "vit_t_decoder.pt": "4370fd14f60d5186d1b594de99a2dbe2e8e060800e64bb80f3a7ca5b293da174"
+                                },
+                                "original_source_name": null,
+                                "perform_io_checks": true,
+                                "root": "https://hypha.aicell.io/bioimage-io/artifacts/greedy-whale/files?version=v0",
+                                "update_hashes": false
+                            },
+                            "errors": [],
+                            "loc": [],
+                            "name": "Successfully created `ModelDescr` instance.",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [],
+                            "name": "bioimageio.spec format validation model 0.5.6",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": [
+                                {
+                                    "loc": [
+                                        "inputs",
+                                        0,
+                                        "sample_tensor"
+                                    ],
+                                    "msg": "Needs to be filled for FAIR compliance",
+                                    "severity": 35,
+                                    "type": "warning"
+                                },
+                                {
+                                    "loc": [
+                                        "inputs",
+                                        1,
+                                        "sample_tensor"
+                                    ],
+                                    "msg": "Needs to be filled for FAIR compliance",
+                                    "severity": 35,
+                                    "type": "warning"
+                                },
+                                {
+                                    "loc": [
+                                        "inputs",
+                                        2,
+                                        "sample_tensor"
+                                    ],
+                                    "msg": "Needs to be filled for FAIR compliance",
+                                    "severity": 35,
+                                    "type": "warning"
+                                },
+                                {
+                                    "loc": [
+                                        "inputs",
+                                        3,
+                                        "sample_tensor"
+                                    ],
+                                    "msg": "Needs to be filled for FAIR compliance",
+                                    "severity": 35,
+                                    "type": "warning"
+                                },
+                                {
+                                    "loc": [
+                                        "inputs",
+                                        4,
+                                        "sample_tensor"
+                                    ],
+                                    "msg": "Needs to be filled for FAIR compliance",
+                                    "severity": 35,
+                                    "type": "warning"
+                                },
+                                {
+                                    "loc": [
+                                        "inputs",
+                                        5,
+                                        "sample_tensor"
+                                    ],
+                                    "msg": "Needs to be filled for FAIR compliance",
+                                    "severity": 35,
+                                    "type": "warning"
+                                },
+                                {
+                                    "loc": [
+                                        "outputs",
+                                        0,
+                                        "sample_tensor"
+                                    ],
+                                    "msg": "Needs to be filled for FAIR compliance",
+                                    "severity": 35,
+                                    "type": "warning"
+                                },
+                                {
+                                    "loc": [
+                                        "outputs",
+                                        1,
+                                        "sample_tensor"
+                                    ],
+                                    "msg": "Needs to be filled for FAIR compliance",
+                                    "severity": 35,
+                                    "type": "warning"
+                                },
+                                {
+                                    "loc": [
+                                        "outputs",
+                                        2,
+                                        "sample_tensor"
+                                    ],
+                                    "msg": "Needs to be filled for FAIR compliance",
+                                    "severity": 35,
+                                    "type": "warning"
+                                }
+                            ]
+                        },
+                        {
+                            "context": null,
+                            "errors": [
+                                {
+                                    "loc": [
+                                        "weights",
+                                        "pytorch_state_dict"
+                                    ],
+                                    "msg": "'vit_t'",
+                                    "traceback_html": "<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"UTF-8\">\n<style>\n.r1 {color: #800000; text-decoration-color: #800000}\n.r2 {color: #800000; text-decoration-color: #800000; font-weight: bold}\n.r3 {color: #bf7f7f; text-decoration-color: #bf7f7f; font-weight: bold}\n.r4 {color: #7f7f7f; text-decoration-color: #7f7f7f}\n.r5 {color: #0000ff; text-decoration-color: #0000ff}\n.r6 {color: #808000; text-decoration-color: #808000}\n.r7 {color: #00ffff; text-decoration-color: #00ffff}\n.r8 {color: #ff00ff; text-decoration-color: #ff00ff}\n.r9 {font-weight: bold; text-decoration: underline}\n.r10 {color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold; text-decoration: underline}\n.r11 {color: #0000ff; text-decoration-color: #0000ff; font-weight: bold; text-decoration: underline}\n.r12 {color: #808080; text-decoration-color: #808080}\n.r13 {color: #00ffff; text-decoration-color: #00ffff; text-decoration: underline}\n.r14 {font-weight: bold}\n.r15 {color: #bfbf7f; text-decoration-color: #bfbf7f}\n.r16 {color: #00ff00; text-decoration-color: #00ff00}\n.r17 {color: #ff0000; text-decoration-color: #ff0000; font-weight: bold}\n.r18 {color: #008000; text-decoration-color: #008000}\nbody {\n    color: #000000;\n    background-color: #ffffff;\n}\n</style>\n</head>\n<body>\n    <pre style=\"font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace\"><code style=\"font-family:inherit\"><span class=\"r1\">╭─────────────────────────────── </span><span class=\"r2\">Traceback </span><span class=\"r3\">(most recent call last)</span><span class=\"r1\"> ────────────────────────────────╮</span>\n<span class=\"r1\">│</span> <span class=\"r4\">/usr/share/miniconda/envs/46771e8d89d70cdd1f8a607c2df86121277e61f659413ee5ebf5f444a2574f83/lib/p</span> <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>                                                                                                  <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r4\"> 781 </span><span class=\"r4\">│   │   </span>test_input = get_test_input_sample(model)                                         <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r4\"> 782 </span><span class=\"r4\">│   │   </span>expected = get_test_output_sample(model)                                          <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r4\"> 783 </span><span class=\"r4\">│   │   </span>                                                                                  <span class=\"r1\">│</span>\n<span class=\"r1\">│</span> <span class=\"r1\">❱ </span> 784 <span class=\"r4\">│   │   </span><span class=\"r5\">with</span> create_prediction_pipeline(                                                  <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r4\"> 785 </span><span class=\"r4\">│   │   │   </span>bioimageio_model=model, devices=devices, weight_format=weight_format          <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r4\"> 786 </span><span class=\"r4\">│   │   </span>) <span class=\"r5\">as</span> prediction_pipeline:                                                         <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r4\"> 787 </span><span class=\"r4\">│   │   │   </span>results = prediction_pipeline.predict_sample_without_blocking(test_input)     <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>                                                                                                  <span class=\"r1\">│</span>\n<span class=\"r1\">│</span> <span class=\"r4\">/usr/share/miniconda/envs/46771e8d89d70cdd1f8a607c2df86121277e61f659413ee5ebf5f444a2574f83/lib/p</span> <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>                                                                                                  <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r4\">368 </span><span class=\"r4\">│   │   │   </span><span class=\"r6\">f&quot;deprecated create_prediction_pipeline kwargs: {</span><span class=\"r7\">set</span>(deprecated_kwargs)<span class=\"r6\">}&quot;</span>      <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r4\">369 </span><span class=\"r4\">│   │   </span>)                                                                                  <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r4\">370 </span><span class=\"r4\">│   </span>                                                                                       <span class=\"r1\">│</span>\n<span class=\"r1\">│</span> <span class=\"r1\">❱ </span>371 <span class=\"r4\">│   </span>model_adapter = model_adapter <span class=\"r8\">or</span> <span class=\"r9\">create_model_adapter(</span>                                 <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r4\">372 </span><span class=\"r4\">│   │   </span><span class=\"r9\">model_description=bioimageio_model,</span>                                                <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r4\">373 </span><span class=\"r4\">│   │   </span><span class=\"r9\">devices=devices,</span>                                                                   <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r4\">374 </span><span class=\"r4\">│   │   </span><span class=\"r9\">weight_format_priority_order=weights_format </span><span class=\"r10\">and</span><span class=\"r9\"> (weights_format,),</span>                 <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>                                                                                                  <span class=\"r1\">│</span>\n<span class=\"r1\">│</span> <span class=\"r4\">/usr/share/miniconda/envs/46771e8d89d70cdd1f8a607c2df86121277e61f659413ee5ebf5f444a2574f83/lib/p</span> <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>                                                                                                  <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r4\">166 </span><span class=\"r4\">│   │   </span><span class=\"r5\">assert</span> errors                                                                      <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r4\">167 </span><span class=\"r4\">│   │   </span><span class=\"r5\">if</span> <span class=\"r7\">len</span>(weight_format_priority_order) == <span class=\"r5\">1</span>:                                         <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r4\">168 </span><span class=\"r4\">│   │   │   </span><span class=\"r5\">assert</span> <span class=\"r7\">len</span>(errors) == <span class=\"r5\">1</span>                                                        <span class=\"r1\">│</span>\n<span class=\"r1\">│</span> <span class=\"r1\">❱ </span>169 <span class=\"r4\">│   │   │   </span><span class=\"r11\">raise</span><span class=\"r9\"> errors[</span><span class=\"r11\">0</span><span class=\"r9\">]</span>                                                                <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r4\">170 </span><span class=\"r4\">│   │   </span>                                                                                   <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r4\">171 </span><span class=\"r4\">│   │   </span><span class=\"r5\">else</span>:                                                                              <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r4\">172 </span><span class=\"r4\">│   │   │   </span>msg = (                                                                        <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>                                                                                                  <span class=\"r1\">│</span>\n<span class=\"r1\">│</span> <span class=\"r4\">/usr/share/miniconda/envs/46771e8d89d70cdd1f8a607c2df86121277e61f659413ee5ebf5f444a2574f83/lib/p</span> <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>                                                                                                  <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r4\">109 </span><span class=\"r4\">│   │   │   │   </span><span class=\"r5\">try</span>:                                                                       <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r4\">110 </span><span class=\"r4\">│   │   │   │   │   </span><span class=\"r5\">from</span><span class=\"r12\"> </span><span class=\"r13\">.pytorch_backend</span><span class=\"r12\"> </span><span class=\"r5\">import</span> PytorchModelAdapter                       <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r4\">111 </span><span class=\"r4\">│   │   │   │   │   </span>                                                                       <span class=\"r1\">│</span>\n<span class=\"r1\">│</span> <span class=\"r1\">❱ </span>112 <span class=\"r4\">│   │   │   │   │   </span><span class=\"r5\">return</span> PytorchModelAdapter(                                            <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r4\">113 </span><span class=\"r4\">│   │   │   │   │   │   </span>model_description=model_description, devices=devices               <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r4\">114 </span><span class=\"r4\">│   │   │   │   │   </span>)                                                                      <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r4\">115 </span><span class=\"r4\">│   │   │   │   </span><span class=\"r5\">except</span> <span class=\"r7\">Exception</span> <span class=\"r5\">as</span> e:                                                     <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>                                                                                                  <span class=\"r1\">│</span>\n<span class=\"r1\">│</span> <span class=\"r4\">/usr/share/miniconda/envs/46771e8d89d70cdd1f8a607c2df86121277e61f659413ee5ebf5f444a2574f83/lib/p</span> <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>                                                                                                  <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r4\"> 35 </span><span class=\"r4\">│   │   │   </span><span class=\"r5\">raise</span> <span class=\"r7\">ValueError</span>(<span class=\"r6\">&quot;No `pytorch_state_dict` weights found&quot;</span>)                      <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r4\"> 36 </span><span class=\"r4\">│   │   </span>                                                                                   <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r4\"> 37 </span><span class=\"r4\">│   │   </span>devices = get_devices(devices)                                                     <span class=\"r1\">│</span>\n<span class=\"r1\">│</span> <span class=\"r1\">❱ </span> 38 <span class=\"r4\">│   │   </span><span class=\"r7\">self</span>._model = <span class=\"r9\">load_torch_model(weights, load_state=</span><span class=\"r11\">True</span><span class=\"r9\">, devices=devices)</span>          <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r4\"> 39 </span><span class=\"r4\">│   │   </span><span class=\"r5\">if</span> mode == <span class=\"r6\">&quot;eval&quot;</span>:                                                                 <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r4\"> 40 </span><span class=\"r4\">│   │   │   </span><span class=\"r7\">self</span>._model = <span class=\"r7\">self</span>._model.eval()                                               <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r4\"> 41 </span><span class=\"r4\">│   │   </span><span class=\"r5\">elif</span> mode == <span class=\"r6\">&quot;train&quot;</span>:                                                              <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>                                                                                                  <span class=\"r1\">│</span>\n<span class=\"r1\">│</span> <span class=\"r4\">/usr/share/miniconda/envs/46771e8d89d70cdd1f8a607c2df86121277e61f659413ee5ebf5f444a2574f83/lib/p</span> <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>                                                                                                  <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r4\">113 </span><span class=\"r4\">│   │   </span><span class=\"r5\">if</span> <span class=\"r7\">isinstance</span>(weight_spec, v0_4.PytorchStateDictWeightsDescr)                      <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r4\">114 </span><span class=\"r4\">│   │   </span><span class=\"r5\">else</span> weight_spec.architecture.kwargs                                               <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r4\">115 </span><span class=\"r4\">│   </span>)                                                                                      <span class=\"r1\">│</span>\n<span class=\"r1\">│</span> <span class=\"r1\">❱ </span>116 <span class=\"r4\">│   </span>torch_model = <span class=\"r9\">custom_callable(**model_kwargs)</span>                                          <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r4\">117 </span><span class=\"r4\">│   </span>                                                                                       <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r4\">118 </span><span class=\"r4\">│   </span><span class=\"r5\">if</span> <span class=\"r8\">not</span> <span class=\"r7\">isinstance</span>(torch_model, nn.Module):                                             <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r4\">119 </span><span class=\"r4\">│   │   </span><span class=\"r5\">if</span> <span class=\"r7\">isinstance</span>(                                                                     <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>                                                                                                  <span class=\"r1\">│</span>\n<span class=\"r1\">│</span> <span class=\"r4\">/tmp/tmp2tl_qvfk/</span><span class=\"r14\">predictor_adaptor_c55a850510e70b6b815afbec1d19da92792de97c4cf4384ba95d0024157f5</span> <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>                                                                                                  <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r4\"> 28 </span><span class=\"r15\">│   </span><span class=\"r6\">&quot;&quot;&quot;</span>                                                                                    <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r4\"> 29 </span><span class=\"r4\">│   </span><span class=\"r5\">def</span><span class=\"r12\"> </span><span class=\"r16\">__init__</span>(<span class=\"r7\">self</span>, model_type: <span class=\"r7\">str</span>) -&gt; <span class=\"r5\">None</span>:                                           <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r4\"> 30 </span><span class=\"r4\">│   │   </span><span class=\"r7\">super</span>().<span class=\"r16\">__init__</span>()                                                                 <span class=\"r1\">│</span>\n<span class=\"r1\">│</span> <span class=\"r1\">❱ </span> 31 <span class=\"r4\">│   │   </span>sam_model = <span class=\"r9\">sam_model_registry[model_type]</span>()                                       <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r4\"> 32 </span><span class=\"r4\">│   │   </span><span class=\"r7\">self</span>.sam = SamPredictor(sam_model)                                                 <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r4\"> 33 </span><span class=\"r4\">│   </span>                                                                                       <span class=\"r1\">│</span>\n<span class=\"r1\">│</span>   <span class=\"r4\"> 34 </span><span class=\"r4\">│   </span><span class=\"r5\">def</span><span class=\"r12\"> </span><span class=\"r16\">load_state_dict</span>(<span class=\"r7\">self</span>, state):                                                      <span class=\"r1\">│</span>\n<span class=\"r1\">╰──────────────────────────────────────────────────────────────────────────────────────────────────╯</span>\n<span class=\"r17\">KeyError: </span><span class=\"r18\">&#x27;vit_t&#x27;</span>\n</code></pre>\n</body>\n</html>\n",
+                                    "traceback_md": "╭─────────────────────────────── Traceback (most recent call last) ────────────────────────────────╮\n│ /usr/share/miniconda/envs/46771e8d89d70cdd1f8a607c2df86121277e61f659413ee5ebf5f444a2574f83/lib/p │\n│                                                                                                  │\n│    781 │   │   test_input = get_test_input_sample(model)                                         │\n│    782 │   │   expected = get_test_output_sample(model)                                          │\n│    783 │   │                                                                                     │\n│ ❱  784 │   │   with create_prediction_pipeline(                                                  │\n│    785 │   │   │   bioimageio_model=model, devices=devices, weight_format=weight_format          │\n│    786 │   │   ) as prediction_pipeline:                                                         │\n│    787 │   │   │   results = prediction_pipeline.predict_sample_without_blocking(test_input)     │\n│                                                                                                  │\n│ /usr/share/miniconda/envs/46771e8d89d70cdd1f8a607c2df86121277e61f659413ee5ebf5f444a2574f83/lib/p │\n│                                                                                                  │\n│   368 │   │   │   f\"deprecated create_prediction_pipeline kwargs: {set(deprecated_kwargs)}\"      │\n│   369 │   │   )                                                                                  │\n│   370 │                                                                                          │\n│ ❱ 371 │   model_adapter = model_adapter or create_model_adapter(                                 │\n│   372 │   │   model_description=bioimageio_model,                                                │\n│   373 │   │   devices=devices,                                                                   │\n│   374 │   │   weight_format_priority_order=weights_format and (weights_format,),                 │\n│                                                                                                  │\n│ /usr/share/miniconda/envs/46771e8d89d70cdd1f8a607c2df86121277e61f659413ee5ebf5f444a2574f83/lib/p │\n│                                                                                                  │\n│   166 │   │   assert errors                                                                      │\n│   167 │   │   if len(weight_format_priority_order) == 1:                                         │\n│   168 │   │   │   assert len(errors) == 1                                                        │\n│ ❱ 169 │   │   │   raise errors[0]                                                                │\n│   170 │   │                                                                                      │\n│   171 │   │   else:                                                                              │\n│   172 │   │   │   msg = (                                                                        │\n│                                                                                                  │\n│ /usr/share/miniconda/envs/46771e8d89d70cdd1f8a607c2df86121277e61f659413ee5ebf5f444a2574f83/lib/p │\n│                                                                                                  │\n│   109 │   │   │   │   try:                                                                       │\n│   110 │   │   │   │   │   from .pytorch_backend import PytorchModelAdapter                       │\n│   111 │   │   │   │   │                                                                          │\n│ ❱ 112 │   │   │   │   │   return PytorchModelAdapter(                                            │\n│   113 │   │   │   │   │   │   model_description=model_description, devices=devices               │\n│   114 │   │   │   │   │   )                                                                      │\n│   115 │   │   │   │   except Exception as e:                                                     │\n│                                                                                                  │\n│ /usr/share/miniconda/envs/46771e8d89d70cdd1f8a607c2df86121277e61f659413ee5ebf5f444a2574f83/lib/p │\n│                                                                                                  │\n│    35 │   │   │   raise ValueError(\"No `pytorch_state_dict` weights found\")                      │\n│    36 │   │                                                                                      │\n│    37 │   │   devices = get_devices(devices)                                                     │\n│ ❱  38 │   │   self._model = load_torch_model(weights, load_state=True, devices=devices)          │\n│    39 │   │   if mode == \"eval\":                                                                 │\n│    40 │   │   │   self._model = self._model.eval()                                               │\n│    41 │   │   elif mode == \"train\":                                                              │\n│                                                                                                  │\n│ /usr/share/miniconda/envs/46771e8d89d70cdd1f8a607c2df86121277e61f659413ee5ebf5f444a2574f83/lib/p │\n│                                                                                                  │\n│   113 │   │   if isinstance(weight_spec, v0_4.PytorchStateDictWeightsDescr)                      │\n│   114 │   │   else weight_spec.architecture.kwargs                                               │\n│   115 │   )                                                                                      │\n│ ❱ 116 │   torch_model = custom_callable(**model_kwargs)                                          │\n│   117 │                                                                                          │\n│   118 │   if not isinstance(torch_model, nn.Module):                                             │\n│   119 │   │   if isinstance(                                                                     │\n│                                                                                                  │\n│ /tmp/tmp2tl_qvfk/predictor_adaptor_c55a850510e70b6b815afbec1d19da92792de97c4cf4384ba95d0024157f5 │\n│                                                                                                  │\n│    28 │   \"\"\"                                                                                    │\n│    29 │   def __init__(self, model_type: str) -> None:                                           │\n│    30 │   │   super().__init__()                                                                 │\n│ ❱  31 │   │   sam_model = sam_model_registry[model_type]()                                       │\n│    32 │   │   self.sam = SamPredictor(sam_model)                                                 │\n│    33 │                                                                                          │\n│    34 │   def load_state_dict(self, state):                                                      │\n╰──────────────────────────────────────────────────────────────────────────────────────────────────╯\nKeyError: 'vit_t'\n",
+                                    "type": "bioimageio.core",
+                                    "with_traceback": true
+                                }
+                            ],
+                            "loc": [
+                                "weights",
+                                "pytorch_state_dict"
+                            ],
+                            "name": "Reproduce test outputs from test inputs (pytorch_state_dict)",
+                            "recommended_env": {
+                                "channels": [
+                                    "pytorch",
+                                    "conda-forge",
+                                    "nodefaults"
+                                ],
+                                "dependencies": [
+                                    "conda-forge::bioimageio.core",
+                                    "segment-anything",
+                                    {
+                                        "pip": [
+                                            "git+https://github.com/ChaoningZhang/MobileSAM.git"
+                                        ]
+                                    },
+                                    "pip"
+                                ],
+                                "name": "sam"
+                            },
+                            "saved_conda_compare": "//github.com/chaoningzhang/mobilesam.git not found\n",
+                            "status": "failed",
+                            "warnings": []
+                        }
+                    ],
+                    "env": [
+                        [
+                            "bioimageio.spec",
+                            "0.5.6.0",
+                            "",
+                            ""
+                        ]
+                    ],
+                    "format_version": "0.5.6",
+                    "id": "greedy-whale",
+                    "metadata_completeness": 0.6607142857142857,
+                    "name": "bioimageio format validation",
+                    "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+                    "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/greedy-whale/files/rdf.yaml?version=v0",
+                    "status": "valid-format",
+                    "traceback": null,
+                    "type": "model",
+                    "warnings": null
+                },
+                "error": "'vit_t'",
+                "links": [],
+                "score": 0.5,
                 "status": "failed"
             }
         },
