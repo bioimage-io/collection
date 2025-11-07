@@ -34,7 +34,7 @@ def get_rdf_content_from_url(url: str, sha256: str) -> dict[str, Any]:
     return yaml.load(local_path)
 
 
-def get_summary(item_id: str, version: str) -> InitialSummary | CompatibilitySummary:
+def get_summary(item_id: str, version: str) -> "InitialSummary | CompatibilitySummary":
     """Retrieve the summary for a specific item and version."""
     summary_path = get_summary_file_path(item_id, version)
     if not summary_path.exists():

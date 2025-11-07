@@ -22,9 +22,9 @@ class Settings(BaseSettings, extra="ignore"):
             "Content-Type": "application/json",
         }
 
-    collection_config: Annotated[HttpUrl | Path, Field(union_mode="left_to_right")] = (
-        Path(__file__).parent / "../../bioimageio_collection_config.json"
-    )
+    collection_config: Annotated[
+        "HttpUrl | Path", Field(union_mode="left_to_right")
+    ] = Path(__file__).parent / "../../bioimageio_collection_config.json"
     """collection config"""
 
 

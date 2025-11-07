@@ -2,7 +2,7 @@
 name = "backoffice"
 description = "backoffice to control bioimage.io collection"
 authors = [{ name = "Fynn Beuttenmüller", email = "thefynnbe@gmail.com" }]
-requires-python = ">=3.10"
+requires-python = ">=3.9"
 readme = "README.md"
 dependencies = [
     "httpx",
@@ -16,6 +16,7 @@ classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
     "Intended Audience :: Science/Research",
+    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
@@ -58,7 +59,7 @@ backoffice = "backoffice.__main__:main"
 exclude = ["**/__pycache__"]
 include = ["src", "tests"]
 pythonPlatform = "All"
-pythonVersion = "3.10"
+pythonVersion = "3.9"
 reportIncompatibleMethodOverride = true
 reportMissingSuperCall = "error"
 reportMissingTypeArgument = true
