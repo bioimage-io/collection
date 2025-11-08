@@ -13,7 +13,6 @@
                         "https://hypha.aicell.io/bioimage-io/artifacts/affable-shark/files/test_input_0.npy?version=v0": null,
                         "https://hypha.aicell.io/bioimage-io/artifacts/affable-shark/files/test_output_0.npy?version=v0": null,
                         "https://hypha.aicell.io/bioimage-io/artifacts/affable-shark/files/unet.py?version=v0": null,
-                        "https://hypha.aicell.io/bioimage-io/artifacts/affable-shark/files/weights.onnx.data?version=v0": null,
                         "https://hypha.aicell.io/bioimage-io/artifacts/affable-shark/files/weights.onnx?version=v0": null,
                         "https://hypha.aicell.io/bioimage-io/artifacts/affable-shark/files/weights.pt?version=v0": null,
                         "https://hypha.aicell.io/bioimage-io/artifacts/affable-shark/files/weights_torchscript.pt?version=v0": null,
@@ -24,8 +23,7 @@
                         "test_input_0.npy": "c29bd6e16e3f7856217b407ba948222b1c2a0da41922a0f79297e25588614fe2",
                         "test_output_0.npy": "510181f38930e59e4fd8ecc03d6ea7c980eb6609759655f2d4a41fe36108d5f5",
                         "unet.py": "72aa1d865f203f74b7c059f229ea68dbdfdcedce101e16cf5d8906e48b5380a9",
-                        "weights.onnx": "32c5da59a8826c20448905ceeb286780cf59dfde7fd746e86071cfb66cfa273d",
-                        "weights.onnx.data": "cde93a199eb571ca8095a333d7a5d7631307bc94b762db4ee94f2a4cc2fd781a",
+                        "weights.onnx": "27ad45d9252ae7dde6d354d74bdea566f2e6f25c9a255f4131c6e7fab81b2b4e",
                         "weights.pt": "608f52cd7f5119f7a7b8272395b0c169714e8be34536eaf159820f72a1d6a5b7",
                         "weights_torchscript.pt": "f13a13117c05df7063d32cdd1c222076b19132787a2fb3dfa09365ca58e7566b",
                         "zero_mean_unit_variance.ijm": "767f2c3a50e36365c30b9e46e57fcf82e606d337e8a48d4a2440dc512813d186"
@@ -154,6 +152,42 @@
                 "saved_conda_compare": null,
                 "status": "passed",
                 "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [
+                    {
+                        "loc": [],
+                        "msg": "test command 'conda run -n 78eb4fa53055abd847a1d3b0d24337a0fd712c902548587c106015eae7288265 bioimageio test https://hypha.aicell.io/bioimage-io/artifacts/affable-shark/files/rdf.yaml?version=v0 --summary-path=/tmp/tmp0adu7tqm/pytorch_state_dict/summary.json --determinism=full --stop-early' did not produce a summary file at /tmp/tmp0adu7tqm/pytorch_state_dict/summary.json",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "bioimageio cli",
+                        "with_traceback": false
+                    }
+                ],
+                "loc": [],
+                "name": "run 'bioimageio test' command",
+                "recommended_env": {
+                    "channels": [
+                        "pytorch",
+                        "conda-forge",
+                        "nodefaults"
+                    ],
+                    "dependencies": [
+                        "conda-forge::bioimageio.core",
+                        "mkl ==2024.0.0",
+                        "numpy <2",
+                        "pip",
+                        "pytorch==1.10.0",
+                        "setuptools <70.0.0",
+                        "torchaudio==0.10.0",
+                        "torchvision==0.11.0"
+                    ],
+                    "name": null
+                },
+                "saved_conda_compare": "bioimageio.core not found\nmkl not found\nnumpy not found\npip not found\npytorch not found\nsetuptools not found\ntorchaudio not found\ntorchvision not found\n",
+                "status": "failed",
+                "warnings": []
             }
         ],
         "env": [
@@ -166,17 +200,17 @@
         ],
         "format_version": "0.5.6",
         "id": "affable-shark",
-        "metadata_completeness": 0.8191489361702128,
+        "metadata_completeness": 0.8043478260869565,
         "name": "bioimageio format validation",
         "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
         "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/affable-shark/files/rdf.yaml?version=v0",
-        "status": "passed",
-        "type": "model"
+        "status": "valid-format",
+        "traceback": null,
+        "type": "model",
+        "warnings": null
     },
     "error": null,
-    "links": [
-        "bioimageio/bioimageio.core"
-    ],
+    "links": [],
     "score": 1.0,
     "status": "passed"
 }
