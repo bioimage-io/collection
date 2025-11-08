@@ -191,8 +191,15 @@
         "metadata_format": 0.0,
         "overall_compatibility": 0.0,
         "overall_partner_tool_compatibility": 0.0,
-        "tool_compatibility": {},
-        "tool_compatibility_version_specific": {}
+        "tool_compatibility": {
+            "biapy": 0.0,
+            "ilastik": 0.0
+        },
+        "tool_compatibility_version_specific": {
+            "biapy_3.6.5": 0.0,
+            "biapy_3.6.6": 0.0,
+            "ilastik_1.4.1.post1": 0.0
+        }
     },
     "status": "failed",
     "tests": {
@@ -214,6 +221,16 @@
                 "links": [
                     "biapy/biapy"
                 ],
+                "score": 0.0,
+                "status": "failed"
+            }
+        },
+        "ilastik": {
+            "1.4.1.post1": {
+                "badge": null,
+                "details": "Failed to parse compatibility report.",
+                "error": "backoffice.compatibility.ToolCompatibilityReport() got multiple values for keyword argument 'tool'",
+                "links": [],
                 "score": 0.0,
                 "status": "failed"
             }

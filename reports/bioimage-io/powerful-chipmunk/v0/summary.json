@@ -222,15 +222,28 @@
     },
     "rdf_yaml_sha256": "f1653cbb2d046eaca7ac70a6a51225cab3ade1f2e2c9842471c84f93b682ad47",
     "scores": {
-        "core_compatibility": 0.0,
-        "metadata_completeness": 0.0,
-        "metadata_format": 0.0,
-        "overall_compatibility": 0.0,
+        "core_compatibility": 1.0,
+        "metadata_completeness": 0.7415730337078652,
+        "metadata_format": 1.0,
+        "overall_compatibility": 0.6853932584269663,
         "overall_partner_tool_compatibility": 0.0,
-        "tool_compatibility": {},
-        "tool_compatibility_version_specific": {}
+        "tool_compatibility": {
+            "biapy": 0.0,
+            "bioimageio.core": 1.0,
+            "careamics": 0.0,
+            "ilastik": 0.0
+        },
+        "tool_compatibility_version_specific": {
+            "biapy_3.6.5": 0.0,
+            "bioimageio.core_0.9.4": 0.0,
+            "bioimageio.core_0.9.5": 1.0,
+            "careamics_0.0.16": 0.0,
+            "careamics_0.0.17": 0.0,
+            "careamics_0.0.18": 0.0,
+            "ilastik_1.4.1.post1": 0.0
+        }
     },
-    "status": "failed",
+    "status": "passed",
     "tests": {
         "biapy": {
             "3.6.5": {
@@ -535,7 +548,9 @@
                     "saved_conda_list": "usage: conda [-h] [-v] [--no-plugins] [-V] COMMAND ...\n\nconda is a tool for managing and deploying applications, environments and packages.\n\noptions:\n  -h, --help            Show this help message and exit.\n  -v, --verbose         Can be used multiple times. Once for detailed output,\n                        twice for INFO logging, thrice for DEBUG logging, four\n                        times for TRACE logging.\n  --no-plugins          Disable all plugins that are not built into conda.\n  -V, --version         Show the conda version number and exit.\n\ncommands:\n  The following built-in and plugins subcommands are available.\n\n  COMMAND\n    activate            Activate a conda environment.\n    clean               Remove unused packages and caches.\n    commands            List all available conda subcommands (including those\n                        from plugins). Generally only used by tab-completion.\n    compare             Compare packages between conda environments.\n    config              Modify configuration values in .condarc.\n    content-trust       Signing and verification tools for Conda\n    create              Create a new conda environment from a list of\n                        specified packages.\n    deactivate          Deactivate the current active conda environment.\n    doctor              Display a health report for your environment.\n    env                 Create and manage conda environments.\n    export              Export a given environment\n    info                Display information about current conda install.\n    init                Initialize conda for shell interaction.\n    install             Install a list of packages into a specified conda\n                        environment.\n    list                List installed packages in a conda environment.\n    notices             Retrieve latest channel notifications.\n    package             Create low-level conda packages. (EXPERIMENTAL)\n    remove (uninstall)  Remove a list of packages from a specified conda\n                        environment.\n    rename              Rename an existing environment.\n    repoquery           Advanced search for repodata.\n    run                 Run an executable in a conda environment.\n    search              Search for packages and display associated information\n                        using the MatchSpec format.\n    token               See `conda token --help`.\n    tos                 A subcommand for viewing, accepting, rejecting, and\n                        otherwise interacting with a channel's Terms of\n                        Service (ToS). This plugin periodically checks for\n                        updated Terms of Service for the active/selected\n                        channels. Channels with a Terms of Service will need\n                        to be accepted or rejected prior to use. Conda will\n                        only allow package installation from channels without\n                        a Terms of Service or with an accepted Terms of\n                        Service. Attempting to use a channel with a rejected\n                        Terms of Service will result in an error.\n    update (upgrade)    Update conda packages to the latest compatible\n                        version.\n",
                     "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/powerful-chipmunk/files/rdf.yaml?version=v0",
                     "status": "failed",
-                    "type": "model"
+                    "traceback": null,
+                    "type": "model",
+                    "warnings": null
                 },
                 "error": "'unet_7f5b15948e8e2c91f78dcff34fbf30af517073e91ba487f3edb982b948d099b3'\n\n'unet_7f5b15948e8e2c91f78dcff34fbf30af517073e91ba487f3edb982b948d099b3'",
                 "links": [],
@@ -695,7 +710,9 @@
                     "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
                     "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/powerful-chipmunk/files/rdf.yaml?version=v0",
                     "status": "passed",
-                    "type": "model"
+                    "traceback": null,
+                    "type": "model",
+                    "warnings": null
                 },
                 "error": null,
                 "links": [
@@ -735,6 +752,16 @@
                 "links": [],
                 "score": 0.0,
                 "status": "not-applicable"
+            }
+        },
+        "ilastik": {
+            "1.4.1.post1": {
+                "badge": null,
+                "details": "Failed to parse compatibility report.",
+                "error": "backoffice.compatibility.ToolCompatibilityReport() got multiple values for keyword argument 'tool'",
+                "links": [],
+                "score": 0.0,
+                "status": "failed"
             }
         }
     }

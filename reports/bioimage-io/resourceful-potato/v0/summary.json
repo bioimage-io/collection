@@ -65,14 +65,90 @@
     },
     "rdf_yaml_sha256": "8ebd671d87d36cd921e25e93a80ab6356209d724b670f86fe2137afda1f1b38b",
     "scores": {
-        "core_compatibility": 0.0,
-        "metadata_completeness": 0.0,
-        "metadata_format": 0.0,
-        "overall_compatibility": 0.0,
+        "core_compatibility": 0.5,
+        "metadata_completeness": 0.7555555555555555,
+        "metadata_format": 1.0,
+        "overall_compatibility": 0.5638888888888889,
         "overall_partner_tool_compatibility": 0.0,
-        "tool_compatibility": {},
-        "tool_compatibility_version_specific": {}
+        "tool_compatibility": {
+            "bioimageio.core": 0.5
+        },
+        "tool_compatibility_version_specific": {
+            "bioimageio.core_0.9.5": 0.5
+        }
     },
-    "status": "failed",
-    "tests": {}
+    "status": "passed",
+    "tests": {
+        "bioimageio.core": {
+            "0.9.5": {
+                "badge": null,
+                "details": {
+                    "details": [
+                        {
+                            "context": {
+                                "file_name": "rdf.yaml",
+                                "known_files": {
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/resourceful-potato/files/README.md?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/resourceful-potato/files/default.png?version=v0": null,
+                                    "https://zenodo.org/record/5551123": null
+                                },
+                                "original_source_name": null,
+                                "perform_io_checks": true,
+                                "root": "https://hypha.aicell.io/bioimage-io/artifacts/resourceful-potato/files?version=v0",
+                                "update_hashes": false
+                            },
+                            "errors": [],
+                            "loc": [],
+                            "name": "Successfully created `DatasetDescr` instance.",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [],
+                            "name": "bioimageio.spec format validation dataset 0.2.4",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": [
+                                {
+                                    "loc": [
+                                        "license"
+                                    ],
+                                    "msg": "missing",
+                                    "severity": 30,
+                                    "type": "warning"
+                                }
+                            ]
+                        }
+                    ],
+                    "env": [
+                        [
+                            "bioimageio.spec",
+                            "0.5.6.0",
+                            "",
+                            ""
+                        ]
+                    ],
+                    "format_version": "0.2.4",
+                    "id": "zero/dataset_fnet_deepbacs",
+                    "metadata_completeness": 0.7555555555555555,
+                    "name": "bioimageio format validation",
+                    "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+                    "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/resourceful-potato/files/rdf.yaml?version=v0",
+                    "status": "valid-format",
+                    "traceback": null,
+                    "type": "dataset",
+                    "warnings": null
+                },
+                "error": "",
+                "links": [],
+                "score": 0.5,
+                "status": "failed"
+            }
+        }
+    }
 }
