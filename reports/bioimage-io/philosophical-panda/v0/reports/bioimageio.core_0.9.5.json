@@ -1,0 +1,289 @@
+{
+    "badge": null,
+    "details": {
+        "details": [
+            {
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "cp_state_dict_1135_gold.pth": "26c277f3b8f6ca5aab30b4b0a832601aea60183cbed1c2333576f4135a643eb2",
+                        "cp_traced_1135_gold.pt": "f61bae146ab522902350eadda1d509ac1037726fe6d7fb63f6a8a314021d63e7",
+                        "cpnet_wrapper.py": "b8b947cdd0ea8f5b98bd7be5f12f38bb1ea1ebe0b455c62d9a6389cd21d134bf",
+                        "https://github.com/kreshuklab/go-nuclear": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/philosophical-panda/files/README.md?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/philosophical-panda/files/cellpose_raw.jpg?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/philosophical-panda/files/cellpose_raw_and_probability.jpg?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/philosophical-panda/files/cellpose_raw_and_segmentation.jpg?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/philosophical-panda/files/cp_state_dict_1135_gold.pth?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/philosophical-panda/files/cp_traced_1135_gold.pt?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/philosophical-panda/files/cpnet_wrapper.py?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/philosophical-panda/files/test_downsampled_0.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/philosophical-panda/files/test_downsampled_1.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/philosophical-panda/files/test_downsampled_2.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/philosophical-panda/files/test_downsampled_3.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/philosophical-panda/files/test_input.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/philosophical-panda/files/test_output.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/philosophical-panda/files/test_style.npy?version=v0": null,
+                        "test_downsampled_0.npy": "67df53fb440e94dbb9c8e4003dcbde158646a7975c4878cacdd251e1fcfb4225",
+                        "test_downsampled_1.npy": "cb4addbd763d96731ebd18ed001b87ab7195ec9198f01a753a363a06c27bfb1c",
+                        "test_downsampled_2.npy": "9c0225b94d84fcc3adfb9a73eef1303d6adb318b57a5a801e0e2e1638b458e72",
+                        "test_downsampled_3.npy": "1ea789ff37d47197c847b585799f7d063e7592b0c5e9c3094fd0e3ac209b7fc2",
+                        "test_input.npy": "6810255f5b5260fe39153f2192bedf30d9899ec4e770976b7813116c467579f0",
+                        "test_output.npy": "d802e3024da80bff93a9ec50fbe50b9c3946534aab1b60b911511111a8e2dbca",
+                        "test_style.npy": "ab464b406f9050561b40f7d76700ab5edf3aca97e31fe9a6069a51aeeca8bc81"
+                    },
+                    "original_source_name": null,
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/philosophical-panda/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Successfully created `ModelDescr` instance.",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.6",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": [
+                    {
+                        "loc": [
+                            "inputs",
+                            0,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "outputs",
+                            0,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "outputs",
+                            1,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "outputs",
+                            2,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "outputs",
+                            3,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "outputs",
+                            4,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "outputs",
+                            5,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    }
+                ]
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Reproduce test outputs from test inputs (pytorch_state_dict)",
+                "recommended_env": {
+                    "channels": [
+                        "pytorch",
+                        "conda-forge",
+                        "nodefaults"
+                    ],
+                    "dependencies": [
+                        "conda-forge::bioimageio.core",
+                        "numpy >=2,<3",
+                        "pip",
+                        "pytorch==2.3.1",
+                        "torchaudio==2.3.1",
+                        "torchvision==0.18.1"
+                    ],
+                    "name": null
+                },
+                "saved_conda_compare": "Success. All the packages in the specification file are present in the environment with matching version and build string.\n",
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Run pytorch_state_dict inference for inputs with batch_size: 1 and size parameter n: 0",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Run pytorch_state_dict inference for inputs with batch_size: 1 and size parameter n: 1",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Run pytorch_state_dict inference for inputs with batch_size: 1 and size parameter n: 2",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "torchscript"
+                ],
+                "name": "Reproduce test outputs from test inputs (torchscript)",
+                "recommended_env": {
+                    "channels": [
+                        "pytorch",
+                        "conda-forge",
+                        "nodefaults"
+                    ],
+                    "dependencies": [
+                        "conda-forge::bioimageio.core",
+                        "numpy >=2,<3",
+                        "pip",
+                        "pytorch==2.3.1",
+                        "torchaudio==2.3.1",
+                        "torchvision==0.18.1"
+                    ],
+                    "name": null
+                },
+                "saved_conda_compare": "Success. All the packages in the specification file are present in the environment with matching version and build string.\n",
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "torchscript"
+                ],
+                "name": "Run torchscript inference for inputs with batch_size: 1 and size parameter n: 0",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "torchscript"
+                ],
+                "name": "Run torchscript inference for inputs with batch_size: 1 and size parameter n: 1",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "torchscript"
+                ],
+                "name": "Run torchscript inference for inputs with batch_size: 1 and size parameter n: 2",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.spec",
+                "0.5.6.0",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.5.6",
+        "id": "philosophical-panda",
+        "metadata_completeness": 0.7164179104477612,
+        "name": "bioimageio format validation",
+        "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/philosophical-panda/files/rdf.yaml?version=v0",
+        "status": "passed",
+        "traceback": null,
+        "type": "model",
+        "warnings": null
+    },
+    "error": null,
+    "links": [
+        "bioimageio/bioimageio.core"
+    ],
+    "score": 1.0,
+    "status": "passed"
+}
