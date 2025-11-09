@@ -1,0 +1,133 @@
+{
+    "badge": null,
+    "details": {
+        "details": [
+            {
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "attention_unet.py": "3c53c173263cbda0f85d4d8b3e03fd4b6dca052593f7117c44f6072d03b441eb",
+                        "checkpoint.pth": "9a5b3a8773225d3d61ab3e8fdf7fab90f145dd63cc6be76cb77c3481bf91c0ee",
+                        "https://doi.org/10.1038/s41592-025-02699-y": null,
+                        "https://github.com/BiaPyX/BiaPy": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/good-butterfly/files/attention_unet.py?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/good-butterfly/files/checkpoint.pth?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/good-butterfly/files/cover.png?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/good-butterfly/files/documentation.md?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/good-butterfly/files/test-input.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/good-butterfly/files/test-output.npy?version=v0": null,
+                        "test-input.npy": "86491fd75abb1d33d37142cda6799a46093253e2a376e1725d57bd5429dfdfc3",
+                        "test-output.npy": "45fdc48a6611e18f0c7c8bfdb5738a64db1d48bc431129831d6a99d8ba1c73c5"
+                    },
+                    "original_source_name": null,
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/good-butterfly/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Successfully created `ModelDescr` instance.",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.6",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": [
+                    {
+                        "loc": [
+                            "inputs",
+                            0,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "outputs",
+                            0,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    }
+                ]
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Reproduce test outputs from test inputs (pytorch_state_dict)",
+                "recommended_env": {
+                    "channels": [
+                        "pytorch",
+                        "conda-forge",
+                        "nodefaults"
+                    ],
+                    "dependencies": [
+                        "conda-forge::bioimageio.core",
+                        "numpy >=2,<3",
+                        "pip",
+                        "pytorch==2.4.0",
+                        "torchaudio==2.4.0",
+                        "torchvision==0.19.0"
+                    ],
+                    "name": null
+                },
+                "saved_conda_compare": "Success. All the packages in the specification file are present in the environment with matching version and build string.\n",
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Run pytorch_state_dict inference for inputs with batch_size: 1 and size parameter n: 0",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.spec",
+                "0.5.6.0",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.5.6",
+        "id": "good-butterfly",
+        "metadata_completeness": 0.71875,
+        "name": "bioimageio format validation",
+        "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/good-butterfly/files/rdf.yaml?version=v0",
+        "status": "passed",
+        "traceback": null,
+        "type": "model",
+        "warnings": null
+    },
+    "error": null,
+    "links": [
+        "bioimageio/bioimageio.core"
+    ],
+    "score": 1.0,
+    "status": "passed"
+}

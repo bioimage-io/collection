@@ -159,6 +159,7 @@
         "tool_compatibility_version_specific": {
             "biapy_3.6.5": 0.0,
             "biapy_3.6.6": 0.0,
+            "biapy_3.6.7": 0.0,
             "bioimageio.core_0.9.4": 0.0,
             "bioimageio.core_0.9.5": 0.5,
             "careamics_0.0.16": 0.0,
@@ -181,6 +182,16 @@
                 "status": "failed"
             },
             "3.6.6": {
+                "badge": null,
+                "details": "[all] pytorch_state_dict not found in model RDF\n",
+                "error": "[all] pytorch_state_dict not found in model RDF\n",
+                "links": [
+                    "biapy/biapy"
+                ],
+                "score": 0.0,
+                "status": "failed"
+            },
+            "3.6.7": {
                 "badge": null,
                 "details": "[all] pytorch_state_dict not found in model RDF\n",
                 "error": "[all] pytorch_state_dict not found in model RDF\n",

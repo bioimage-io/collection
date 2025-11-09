@@ -157,16 +157,17 @@
         "core_compatibility": 0.16666666666666666,
         "metadata_completeness": 0.6716417910447762,
         "metadata_format": 1.0,
-        "overall_compatibility": 0.4595771144278607,
-        "overall_partner_tool_compatibility": 0.0,
+        "overall_compatibility": 0.542910447761194,
+        "overall_partner_tool_compatibility": 0.3333333333333333,
         "tool_compatibility": {
-            "biapy": 0.0,
+            "biapy": 1.0,
             "bioimageio.core": 0.16666666666666666,
             "careamics": 0.0,
             "ilastik": 0.0
         },
         "tool_compatibility_version_specific": {
             "biapy_3.6.5": 0.0,
+            "biapy_3.6.7": 1.0,
             "bioimageio.core_0.9.3": 0.0,
             "bioimageio.core_0.9.4": 0.0,
             "bioimageio.core_0.9.5": 0.5,
@@ -176,7 +177,7 @@
             "ilastik_1.4.1.post1": 0.0
         }
     },
-    "status": "failed",
+    "status": "passed",
     "tests": {
         "biapy": {
             "3.6.5": {
@@ -188,6 +189,16 @@
                 ],
                 "score": 0.0,
                 "status": "failed"
+            },
+            "3.6.7": {
+                "badge": null,
+                "details": "",
+                "error": "",
+                "links": [
+                    "biapy/biapy"
+                ],
+                "score": 1.0,
+                "status": "passed"
             }
         },
         "bioimageio.core": {

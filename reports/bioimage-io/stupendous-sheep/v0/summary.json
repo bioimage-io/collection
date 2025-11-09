@@ -203,6 +203,7 @@
         },
         "tool_compatibility_version_specific": {
             "biapy_3.6.5": 0.0,
+            "biapy_3.6.7": 0.0,
             "bioimageio.core_0.9.3": 0.0,
             "bioimageio.core_0.9.4": 0.0,
             "bioimageio.core_0.9.5": 0.5,
@@ -219,6 +220,16 @@
                 "badge": null,
                 "details": "[all] pytorch_state_dict not found in model RDF or inputs != 1\n",
                 "error": "[all] pytorch_state_dict not found in model RDF or inputs != 1\n",
+                "links": [
+                    "biapy/biapy"
+                ],
+                "score": 0.0,
+                "status": "failed"
+            },
+            "3.6.7": {
+                "badge": null,
+                "details": "[all] Accepting models only with ['bcyx', 'bczyx'] axis order, found yx\n",
+                "error": "[all] Accepting models only with ['bcyx', 'bczyx'] axis order, found yx\n",
                 "links": [
                     "biapy/biapy"
                 ],

@@ -1,0 +1,191 @@
+{
+    "badge": null,
+    "details": {
+        "details": [
+            {
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "config.toml": "c3d45908d71137990cabac191669e97a0f155842e69844967f06f3ac79e86409",
+                        "https://github.com/mattaq31/GelGenie": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/self-disciplined-blowfish/files/README.md?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/self-disciplined-blowfish/files/config.toml?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/self-disciplined-blowfish/files/cover_1.png?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/self-disciplined-blowfish/files/cover_2.png?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/self-disciplined-blowfish/files/cover_3.png?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/self-disciplined-blowfish/files/input_134.tif?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/self-disciplined-blowfish/files/output_134.png?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/self-disciplined-blowfish/files/test_input.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/self-disciplined-blowfish/files/test_output.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/self-disciplined-blowfish/files/unet_dec_21_epoch_579.pt?version=v0": null,
+                        "input_134.tif": "9aa3a34a45528600cd54fc7685df6ed12f9f2733908bd17d7c7538f9d6c4e634",
+                        "output_134.png": "fbbf506fdfea1f593144b77951fa17e372d9bed59a1d7390212cfb36bae63c67",
+                        "test_input.npy": "1bdface89e05a0fd71e51dfeb28da57434d9bfcb0412238db0b78c7c2ee10467",
+                        "test_output.npy": "8f85f7cfaa7a0222c83990b1ebbefa5367bcbc10d2da305615e2dc4afe109336",
+                        "unet_dec_21_epoch_579.pt": "fcdca2fc286b1f00b9656fcd023756754d40cd4c62b1de83cbf3341bf0f7dfeb"
+                    },
+                    "original_source_name": null,
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/self-disciplined-blowfish/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Successfully created `ModelDescr` instance.",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.6",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": [
+                    {
+                        "loc": [
+                            "documentation"
+                        ],
+                        "msg": "No '# Validation' (sub)section found in README.md.",
+                        "severity": 30,
+                        "type": "warning"
+                    }
+                ]
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "torchscript"
+                ],
+                "name": "Reproduce test outputs from test inputs (torchscript)",
+                "recommended_env": {
+                    "channels": [
+                        "pytorch",
+                        "conda-forge",
+                        "nodefaults"
+                    ],
+                    "dependencies": [
+                        "conda-forge::bioimageio.core",
+                        "numpy >=2,<3",
+                        "pip",
+                        "pytorch==2.5.1",
+                        "torchaudio",
+                        "torchvision"
+                    ],
+                    "name": null
+                },
+                "saved_conda_compare": "Success. All the packages in the specification file are present in the environment with matching version and build string.\n",
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "torchscript"
+                ],
+                "name": "Run torchscript inference for inputs with batch_size: 1 and size parameter n: 0",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "torchscript"
+                ],
+                "name": "Run torchscript inference for inputs with batch_size: 1 and size parameter n: 1",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "torchscript"
+                ],
+                "name": "Run torchscript inference for inputs with batch_size: 1 and size parameter n: 2",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "torchscript"
+                ],
+                "name": "Run torchscript inference for inputs with batch_size: 2 and size parameter n: 0",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "torchscript"
+                ],
+                "name": "Run torchscript inference for inputs with batch_size: 2 and size parameter n: 1",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "torchscript"
+                ],
+                "name": "Run torchscript inference for inputs with batch_size: 2 and size parameter n: 2",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.spec",
+                "0.5.6.0",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.5.6",
+        "id": "self-disciplined-blowfish",
+        "metadata_completeness": 0.6122448979591837,
+        "name": "bioimageio format validation",
+        "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/self-disciplined-blowfish/files/rdf.yaml?version=v0",
+        "status": "passed",
+        "traceback": null,
+        "type": "model",
+        "warnings": null
+    },
+    "error": null,
+    "links": [
+        "bioimageio/bioimageio.core"
+    ],
+    "score": 1.0,
+    "status": "passed"
+}
