@@ -1,0 +1,10 @@
+{
+    "badge": null,
+    "details": "[all] pytorch_state_dict not found in model RDF\n",
+    "error": "[all] pytorch_state_dict not found in model RDF\n",
+    "links": [
+        "biapy/biapy"
+    ],
+    "score": 0.0,
+    "status": "failed"
+}
