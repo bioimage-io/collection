@@ -1,258 +1,38 @@
 {
     "rdf_content": {
-        "name": "Nuclei Segmentation Boundary Model",
-        "description": "Nucleus segmentation for fluorescence microscopy",
-        "covers": [
-            "cover.png"
+        "attachments": [
+            {
+                "sha256": "767f2c3a50e36365c30b9e46e57fcf82e606d337e8a48d4a2440dc512813d186",
+                "source": "zero_mean_unit_variance.ijm"
+            }
         ],
-        "id_emoji": "🦈",
         "authors": [
             {
                 "affiliation": "EMBL Heidelberg",
-                "name": "Constantin Pape",
-                "github_user": "constantinpape"
-            }
-        ],
-        "attachments": [
-            {
-                "source": "zero_mean_unit_variance.ijm",
-                "sha256": "767f2c3a50e36365c30b9e46e57fcf82e606d337e8a48d4a2440dc512813d186"
+                "github_user": "constantinpape",
+                "name": "Constantin Pape"
             }
         ],
         "cite": [
             {
-                "text": "training library",
-                "doi": "10.5281/zenodo.5108853"
+                "doi": "10.5281/zenodo.5108853",
+                "text": "training library"
             },
             {
-                "text": "architecture",
-                "doi": "10.1007/978-3-319-24574-4_28"
+                "doi": "10.1007/978-3-319-24574-4_28",
+                "text": "architecture"
             },
             {
-                "text": "segmentation algorithm",
-                "doi": "10.1038/nmeth.4151"
+                "doi": "10.1038/nmeth.4151",
+                "text": "segmentation algorithm"
             },
             {
                 "text": "data",
                 "url": "https://www.nature.com/articles/s41592-019-0612-7"
             }
         ],
-        "license": "CC-BY-4.0",
-        "links": [
-            "ilastik/stardist_dsb_training_data",
-            "ilastik/ilastik",
-            "deepimagej/deepimagej",
-            "imjoy/BioImageIO-Packager"
-        ],
-        "uploader": {
-            "email": "thefynnbe@gmail.com",
-            "name": "Fynn Beuttenmüller"
-        },
-        "maintainers": [
-            {
-                "name": "Constantin Pape",
-                "github_user": "constantinpape"
-            }
-        ],
-        "tags": [
-            "fluorescence-light-microscopy",
-            "nuclei",
-            "instance-segmentation",
-            "unet",
-            "2d"
-        ],
-        "version": 1.1,
-        "format_version": "0.5.6",
-        "type": "model",
-        "id": "affable-shark",
-        "documentation": "documentation.md",
-        "inputs": [
-            {
-                "id": "input0",
-                "description": "",
-                "axes": [
-                    {
-                        "type": "batch"
-                    },
-                    {
-                        "id": "channel",
-                        "description": "",
-                        "type": "channel",
-                        "channel_names": [
-                            "channel0"
-                        ]
-                    },
-                    {
-                        "size": {
-                            "min": 64,
-                            "step": 16
-                        },
-                        "id": "y",
-                        "description": "",
-                        "type": "space",
-                        "scale": 1.0,
-                        "concatenable": false
-                    },
-                    {
-                        "size": {
-                            "min": 64,
-                            "step": 16
-                        },
-                        "id": "x",
-                        "description": "",
-                        "type": "space",
-                        "scale": 1.0,
-                        "concatenable": false
-                    }
-                ],
-                "test_tensor": {
-                    "source": "test_input_0.npy",
-                    "sha256": "c29bd6e16e3f7856217b407ba948222b1c2a0da41922a0f79297e25588614fe2"
-                },
-                "sample_tensor": {
-                    "source": "sample_input_0.tif",
-                    "sha256": "a24b3c708b6ca6825494eb7c5a4d221335fb3eef5eb9d03f4108907cdaad2bf9"
-                },
-                "data": {
-                    "type": "float32",
-                    "range": [
-                        null,
-                        null
-                    ],
-                    "unit": "arbitrary unit",
-                    "scale": 1.0,
-                    "offset": null
-                },
-                "optional": false,
-                "preprocessing": [
-                    {
-                        "id": "ensure_dtype",
-                        "kwargs": {
-                            "dtype": "float32"
-                        }
-                    },
-                    {
-                        "id": "zero_mean_unit_variance",
-                        "kwargs": {
-                            "axes": [
-                                "channel",
-                                "y",
-                                "x"
-                            ],
-                            "eps": 1e-6
-                        }
-                    },
-                    {
-                        "id": "ensure_dtype",
-                        "kwargs": {
-                            "dtype": "float32"
-                        }
-                    }
-                ]
-            }
-        ],
-        "outputs": [
-            {
-                "id": "output0",
-                "description": "",
-                "axes": [
-                    {
-                        "type": "batch"
-                    },
-                    {
-                        "id": "channel",
-                        "description": "",
-                        "type": "channel",
-                        "channel_names": [
-                            "channel0",
-                            "channel1"
-                        ]
-                    },
-                    {
-                        "halo": 16,
-                        "size": {
-                            "tensor_id": "input0",
-                            "axis_id": "y",
-                            "offset": 0
-                        },
-                        "id": "y",
-                        "type": "space",
-                        "scale": 1.0
-                    },
-                    {
-                        "halo": 16,
-                        "size": {
-                            "tensor_id": "input0",
-                            "axis_id": "x",
-                            "offset": 0
-                        },
-                        "id": "x",
-                        "type": "space",
-                        "scale": 1.0
-                    }
-                ],
-                "test_tensor": {
-                    "source": "test_output_0.npy",
-                    "sha256": "510181f38930e59e4fd8ecc03d6ea7c980eb6609759655f2d4a41fe36108d5f5"
-                },
-                "sample_tensor": {
-                    "source": "sample_output_0.tif",
-                    "sha256": "e8f99aabe8405427f515eba23a49f58ba50302f57d1fdfd07026e1984f836c5e"
-                },
-                "data": {
-                    "type": "float32",
-                    "range": [
-                        null,
-                        null
-                    ],
-                    "unit": "arbitrary unit",
-                    "scale": 1.0,
-                    "offset": null
-                }
-            }
-        ],
-        "timestamp": "2022-06-15T20:06:22+00:00",
-        "training_data": {
-            "id": "ilastik/stradist_dsb_training_data"
-        },
-        "weights": {
-            "onnx": {
-                "source": "weights.onnx",
-                "sha256": "27ad45d9252ae7dde6d354d74bdea566f2e6f25c9a255f4131c6e7fab81b2b4e",
-                "parent": "pytorch_state_dict",
-                "comment": "Converted with bioimageio.core 0.9.5, dynamo=True.",
-                "opset_version": 18
-            },
-            "pytorch_state_dict": {
-                "source": "weights.pt",
-                "sha256": "608f52cd7f5119f7a7b8272395b0c169714e8be34536eaf159820f72a1d6a5b7",
-                "architecture": {
-                    "source": "unet.py",
-                    "sha256": "72aa1d865f203f74b7c059f229ea68dbdfdcedce101e16cf5d8906e48b5380a9",
-                    "callable": "UNet2d",
-                    "kwargs": {
-                        "depth": 4,
-                        "final_activation": "Sigmoid",
-                        "gain": 2,
-                        "in_channels": 1,
-                        "initial_features": 64,
-                        "out_channels": 2,
-                        "postprocessing": null,
-                        "return_side_outputs": false,
-                        "check_shape": false
-                    }
-                },
-                "pytorch_version": "1.10"
-            },
-            "torchscript": {
-                "source": "weights_torchscript.pt",
-                "sha256": "f13a13117c05df7063d32cdd1c222076b19132787a2fb3dfa09365ca58e7566b",
-                "parent": "pytorch_state_dict",
-                "comment": "Converted with bioimageio.core 0.9.5 with use_tracing=False.",
-                "pytorch_version": "2.8.0+cpu"
-            }
-        },
         "config": {
+            "_conceptdoi": "10.5281/zenodo.5764892",
             "bioimageio": {
                 "nickname": "affable-shark",
                 "nickname_icon": "🦈",
@@ -260,7 +40,6 @@
                     "cover.png": "cover.thumbnail.png"
                 }
             },
-            "_conceptdoi": "10.5281/zenodo.5764892",
             "deepimagej": {
                 "allow_tiling": true,
                 "model_keys": null,
@@ -301,8 +80,500 @@
                     "runtime": null
                 }
             }
+        },
+        "covers": [
+            "cover.png"
+        ],
+        "description": "Nucleus segmentation for fluorescence microscopy",
+        "documentation": "documentation.md",
+        "format_version": "0.5.6",
+        "id": "affable-shark",
+        "id_emoji": "🦈",
+        "inputs": [
+            {
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "channel_names": [
+                            "channel0"
+                        ],
+                        "description": "",
+                        "id": "channel",
+                        "type": "channel"
+                    },
+                    {
+                        "concatenable": false,
+                        "description": "",
+                        "id": "y",
+                        "scale": 1.0,
+                        "size": {
+                            "min": 64,
+                            "step": 16
+                        },
+                        "type": "space"
+                    },
+                    {
+                        "concatenable": false,
+                        "description": "",
+                        "id": "x",
+                        "scale": 1.0,
+                        "size": {
+                            "min": 64,
+                            "step": 16
+                        },
+                        "type": "space"
+                    }
+                ],
+                "data": {
+                    "offset": null,
+                    "range": [
+                        null,
+                        null
+                    ],
+                    "scale": 1.0,
+                    "type": "float32",
+                    "unit": "arbitrary unit"
+                },
+                "description": "",
+                "id": "input0",
+                "optional": false,
+                "preprocessing": [
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    },
+                    {
+                        "id": "zero_mean_unit_variance",
+                        "kwargs": {
+                            "axes": [
+                                "channel",
+                                "y",
+                                "x"
+                            ],
+                            "eps": 1e-06
+                        }
+                    },
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    }
+                ],
+                "sample_tensor": {
+                    "sha256": "a24b3c708b6ca6825494eb7c5a4d221335fb3eef5eb9d03f4108907cdaad2bf9",
+                    "source": "sample_input_0.tif"
+                },
+                "test_tensor": {
+                    "sha256": "c29bd6e16e3f7856217b407ba948222b1c2a0da41922a0f79297e25588614fe2",
+                    "source": "test_input_0.npy"
+                }
+            }
+        ],
+        "license": "CC-BY-4.0",
+        "links": [
+            "ilastik/stardist_dsb_training_data",
+            "ilastik/ilastik",
+            "deepimagej/deepimagej",
+            "imjoy/BioImageIO-Packager"
+        ],
+        "maintainers": [
+            {
+                "github_user": "constantinpape",
+                "name": "Constantin Pape"
+            }
+        ],
+        "name": "Nuclei Segmentation Boundary Model",
+        "outputs": [
+            {
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "channel_names": [
+                            "channel0",
+                            "channel1"
+                        ],
+                        "description": "",
+                        "id": "channel",
+                        "type": "channel"
+                    },
+                    {
+                        "halo": 16,
+                        "id": "y",
+                        "scale": 1.0,
+                        "size": {
+                            "axis_id": "y",
+                            "offset": 0,
+                            "tensor_id": "input0"
+                        },
+                        "type": "space"
+                    },
+                    {
+                        "halo": 16,
+                        "id": "x",
+                        "scale": 1.0,
+                        "size": {
+                            "axis_id": "x",
+                            "offset": 0,
+                            "tensor_id": "input0"
+                        },
+                        "type": "space"
+                    }
+                ],
+                "data": {
+                    "offset": null,
+                    "range": [
+                        null,
+                        null
+                    ],
+                    "scale": 1.0,
+                    "type": "float32",
+                    "unit": "arbitrary unit"
+                },
+                "description": "",
+                "id": "output0",
+                "sample_tensor": {
+                    "sha256": "e8f99aabe8405427f515eba23a49f58ba50302f57d1fdfd07026e1984f836c5e",
+                    "source": "sample_output_0.tif"
+                },
+                "test_tensor": {
+                    "sha256": "510181f38930e59e4fd8ecc03d6ea7c980eb6609759655f2d4a41fe36108d5f5",
+                    "source": "test_output_0.npy"
+                }
+            }
+        ],
+        "tags": [
+            "fluorescence-light-microscopy",
+            "nuclei",
+            "instance-segmentation",
+            "unet",
+            "2d"
+        ],
+        "timestamp": "2022-06-15T20:06:22+00:00",
+        "training_data": {
+            "id": "ilastik/stradist_dsb_training_data"
+        },
+        "type": "model",
+        "uploader": {
+            "email": "thefynnbe@gmail.com",
+            "name": "Fynn Beuttenmüller"
+        },
+        "version": 1.1,
+        "weights": {
+            "onnx": {
+                "comment": "Converted with bioimageio.core 0.9.5, dynamo=True.",
+                "opset_version": 18,
+                "parent": "pytorch_state_dict",
+                "sha256": "27ad45d9252ae7dde6d354d74bdea566f2e6f25c9a255f4131c6e7fab81b2b4e",
+                "source": "weights.onnx"
+            },
+            "pytorch_state_dict": {
+                "architecture": {
+                    "callable": "UNet2d",
+                    "kwargs": {
+                        "check_shape": false,
+                        "depth": 4,
+                        "final_activation": "Sigmoid",
+                        "gain": 2,
+                        "in_channels": 1,
+                        "initial_features": 64,
+                        "out_channels": 2,
+                        "postprocessing": null,
+                        "return_side_outputs": false
+                    },
+                    "sha256": "72aa1d865f203f74b7c059f229ea68dbdfdcedce101e16cf5d8906e48b5380a9",
+                    "source": "unet.py"
+                },
+                "pytorch_version": "1.10",
+                "sha256": "608f52cd7f5119f7a7b8272395b0c169714e8be34536eaf159820f72a1d6a5b7",
+                "source": "weights.pt"
+            },
+            "torchscript": {
+                "comment": "Converted with bioimageio.core 0.9.5 with use_tracing=False.",
+                "parent": "pytorch_state_dict",
+                "pytorch_version": "2.8.0+cpu",
+                "sha256": "f13a13117c05df7063d32cdd1c222076b19132787a2fb3dfa09365ca58e7566b",
+                "source": "weights_torchscript.pt"
+            }
         }
     },
     "rdf_yaml_sha256": "b825632dbfd8870529c9992f882dc8361211c8cfe1b0b5027d412b64cb11f802",
-    "status": "untested"
+    "scores": {
+        "core_compatibility": 1.0,
+        "metadata_completeness": 0.8043478260869565,
+        "metadata_format": 1.0,
+        "overall_compatibility": 0.7844202898550725,
+        "overall_partner_tool_compatibility": 0.3333333333333333,
+        "tool_compatibility": {
+            "biapy": 1.0,
+            "bioimageio.core": 1.0,
+            "careamics": 0.0,
+            "ilastik": 0.0
+        },
+        "tool_compatibility_version_specific": {
+            "biapy_3.6.6": 1.0,
+            "bioimageio.core_0.9.5": 1.0,
+            "careamics_0.0.18": 0.0,
+            "ilastik_1.4.1.post1": 0.0
+        }
+    },
+    "status": "passed",
+    "tests": {
+        "biapy": {
+            "3.6.6": {
+                "badge": null,
+                "details": "",
+                "error": "",
+                "links": [
+                    "biapy/biapy"
+                ],
+                "score": 1.0,
+                "status": "passed"
+            }
+        },
+        "bioimageio.core": {
+            "0.9.5": {
+                "badge": null,
+                "details": {
+                    "details": [
+                        {
+                            "context": {
+                                "file_name": "rdf.yaml",
+                                "known_files": {
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/affable-shark/files/cover.png?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/affable-shark/files/documentation.md?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/affable-shark/files/sample_input_0.tif?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/affable-shark/files/sample_output_0.tif?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/affable-shark/files/test_input_0.npy?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/affable-shark/files/test_output_0.npy?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/affable-shark/files/unet.py?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/affable-shark/files/weights.onnx?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/affable-shark/files/weights.pt?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/affable-shark/files/weights_torchscript.pt?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/affable-shark/files/zero_mean_unit_variance.ijm?version=v0": null,
+                                    "https://www.nature.com/articles/s41592-019-0612-7": null,
+                                    "sample_input_0.tif": "a24b3c708b6ca6825494eb7c5a4d221335fb3eef5eb9d03f4108907cdaad2bf9",
+                                    "sample_output_0.tif": "e8f99aabe8405427f515eba23a49f58ba50302f57d1fdfd07026e1984f836c5e",
+                                    "test_input_0.npy": "c29bd6e16e3f7856217b407ba948222b1c2a0da41922a0f79297e25588614fe2",
+                                    "test_output_0.npy": "510181f38930e59e4fd8ecc03d6ea7c980eb6609759655f2d4a41fe36108d5f5",
+                                    "unet.py": "72aa1d865f203f74b7c059f229ea68dbdfdcedce101e16cf5d8906e48b5380a9",
+                                    "weights.onnx": "27ad45d9252ae7dde6d354d74bdea566f2e6f25c9a255f4131c6e7fab81b2b4e",
+                                    "weights.pt": "608f52cd7f5119f7a7b8272395b0c169714e8be34536eaf159820f72a1d6a5b7",
+                                    "weights_torchscript.pt": "f13a13117c05df7063d32cdd1c222076b19132787a2fb3dfa09365ca58e7566b",
+                                    "zero_mean_unit_variance.ijm": "767f2c3a50e36365c30b9e46e57fcf82e606d337e8a48d4a2440dc512813d186"
+                                },
+                                "original_source_name": null,
+                                "perform_io_checks": true,
+                                "root": "https://hypha.aicell.io/bioimage-io/artifacts/affable-shark/files?version=v0",
+                                "update_hashes": false
+                            },
+                            "errors": [],
+                            "loc": [],
+                            "name": "Successfully created `ModelDescr` instance.",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [],
+                            "name": "bioimageio.spec format validation model 0.5.6",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "onnx"
+                            ],
+                            "name": "Reproduce test outputs from test inputs (onnx)",
+                            "recommended_env": {
+                                "channels": [
+                                    "conda-forge",
+                                    "nodefaults"
+                                ],
+                                "dependencies": [
+                                    "conda-forge::bioimageio.core",
+                                    "onnxruntime",
+                                    "pip"
+                                ],
+                                "name": null
+                            },
+                            "saved_conda_compare": "Success. All the packages in the specification file are present in the environment with matching version and build string.\n",
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "onnx"
+                            ],
+                            "name": "Run onnx inference for inputs with batch_size: 1 and size parameter n: 0",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "onnx"
+                            ],
+                            "name": "Run onnx inference for inputs with batch_size: 1 and size parameter n: 1",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "onnx"
+                            ],
+                            "name": "Run onnx inference for inputs with batch_size: 1 and size parameter n: 2",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "onnx"
+                            ],
+                            "name": "Run onnx inference for inputs with batch_size: 2 and size parameter n: 0",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "onnx"
+                            ],
+                            "name": "Run onnx inference for inputs with batch_size: 2 and size parameter n: 1",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "onnx"
+                            ],
+                            "name": "Run onnx inference for inputs with batch_size: 2 and size parameter n: 2",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [
+                                {
+                                    "loc": [],
+                                    "msg": "test command 'conda run -n 78eb4fa53055abd847a1d3b0d24337a0fd712c902548587c106015eae7288265 bioimageio test https://hypha.aicell.io/bioimage-io/artifacts/affable-shark/files/rdf.yaml?version=v0 --summary-path=/tmp/tmp0adu7tqm/pytorch_state_dict/summary.json --determinism=full --stop-early' did not produce a summary file at /tmp/tmp0adu7tqm/pytorch_state_dict/summary.json",
+                                    "traceback_html": "",
+                                    "traceback_md": "",
+                                    "type": "bioimageio cli",
+                                    "with_traceback": false
+                                }
+                            ],
+                            "loc": [],
+                            "name": "run 'bioimageio test' command",
+                            "recommended_env": {
+                                "channels": [
+                                    "pytorch",
+                                    "conda-forge",
+                                    "nodefaults"
+                                ],
+                                "dependencies": [
+                                    "conda-forge::bioimageio.core",
+                                    "mkl ==2024.0.0",
+                                    "numpy <2",
+                                    "pip",
+                                    "pytorch==1.10.0",
+                                    "setuptools <70.0.0",
+                                    "torchaudio==0.10.0",
+                                    "torchvision==0.11.0"
+                                ],
+                                "name": null
+                            },
+                            "saved_conda_compare": "bioimageio.core not found\nmkl not found\nnumpy not found\npip not found\npytorch not found\nsetuptools not found\ntorchaudio not found\ntorchvision not found\n",
+                            "status": "failed",
+                            "warnings": []
+                        }
+                    ],
+                    "env": [
+                        [
+                            "bioimageio.spec",
+                            "0.5.6.0",
+                            "",
+                            ""
+                        ]
+                    ],
+                    "format_version": "0.5.6",
+                    "id": "affable-shark",
+                    "metadata_completeness": 0.8043478260869565,
+                    "name": "bioimageio format validation",
+                    "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+                    "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/affable-shark/files/rdf.yaml?version=v0",
+                    "status": "valid-format",
+                    "traceback": null,
+                    "type": "model",
+                    "warnings": null
+                },
+                "error": null,
+                "links": [],
+                "score": 1.0,
+                "status": "passed"
+            }
+        },
+        "careamics": {
+            "0.0.18": {
+                "badge": null,
+                "details": "'Model' resource not tagged with 'CAREamics' or 'careamics'.",
+                "error": null,
+                "links": [],
+                "score": 0.0,
+                "status": "not-applicable"
+            }
+        },
+        "ilastik": {
+            "1.4.1.post1": {
+                "badge": null,
+                "details": "Failed to parse compatibility report.",
+                "error": "backoffice.compatibility.ToolCompatibilityReport() got multiple values for keyword argument 'tool'",
+                "links": [],
+                "score": 0.0,
+                "status": "failed"
+            }
+        }
+    }
 }
