@@ -1,0 +1,57 @@
+---
+name: test dij
+concurrency: deepimagej
+on:
+  workflow_call:
+  workflow_dispatch:
+
+jobs:
+  run:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: ubuntu
+            os: ubuntu-latest
+            url_file_name: fiji-stable-linux64-jdk.zip
+            fiji_executable: ImageJ-linux64
+    runs-on: ${{ matrix.os }}
+    environment: 'production'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          tool: deepimagej
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: pip
+      - name: Install backoffice
+        run: pip install . ruyaml
+      - name: Set up Fiji
+        shell: bash
+        run: |
+          mkdir -p fiji
+          curl -L -o fiji.zip https://downloads.imagej.net/fiji/stable/${{ matrix.url_file_name }}
+          unzip fiji.zip -d fiji
+      - name: Install deepimageJ
+        run: |
+          fiji/Fiji.app/${{ matrix.fiji_executable }} --headless --update add-update-site "DeepImageJ" "https://sites.imagej.net/DeepImageJ/"
+          fiji/Fiji.app/${{ matrix.fiji_executable }} --headless --update update
+      - name: Install engines
+        shell: bash
+        run: fiji/Fiji.app/${{ matrix.fiji_executable }} --headless --console
+          scripts/deepimagej_jython_scripts/deepimagej_download_engines.py -engines_path fiji/Fiji.app/engines
+      - name: Run deepImageJ tests for published versions
+        run: python scripts/check_compatibility_deepimagej.py fiji/Fiji.app/${{ matrix.fiji_executable }} fiji/Fiji.app
+        env:
+          JSON_OUTS_FNAME: dij_outputs_file${{ github.run_id }}.json
+          MACRO_NAME: dij_macro_ci${{ github.run_id }}.ijm
+      - name: Stage to stage-gh-pages 🚀
+        if: always()
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: stage-gh-pages
+          folder: reports
+          dry-run: ${{ github.ref != 'refs/heads/main' }}
+          target-folder: reports
+          clean: false
