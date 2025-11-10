@@ -26,7 +26,7 @@ jobs:
           python-version: '3.10'
           cache: pip
       - name: Install backoffice
-        run: pip install ruamel.yaml typing-extensions
+        run: pip install ruamel.yaml typing-extensions requests
       - name: Set up Fiji
         shell: bash
         run: |
