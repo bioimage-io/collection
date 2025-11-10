@@ -1,0 +1,10 @@
+{
+    "badge": null,
+    "details": null,
+    "error": "deepimagej only supports single tensor input (found 6)",
+    "links": [
+        "deepimagej/deepimagej"
+    ],
+    "status": "failed",
+    "tool": "deepimagej_3.1.0-snapshot"
+}
