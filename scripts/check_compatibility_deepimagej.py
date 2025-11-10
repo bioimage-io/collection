@@ -1,7 +1,8 @@
 
 from dataclasses import dataclass
+from functools import partial
+from io import BytesIO
 from typing import TYPE_CHECKING, Any, Dict, Optional
-
 from typing_extensions import Literal, Protocol
 
 import json
@@ -10,13 +11,12 @@ import re
 import subprocess
 import traceback
 import urllib.request
-from functools import partial
 
+import requests
 from ruyaml import YAML
 
 from backoffice.check_compatibility import check_tool_compatibility
 from backoffice.compatibility_pure import ToolCompatibilityReportDict
-
 
 try:
     from bioimageio.spec.common import Sha256
@@ -26,53 +26,27 @@ except ImportError:
 
 class HasContent(Protocol):
     @property
-    def content(self) -> Optional[Dict[Any, Any]]: ...
+    def content(self) -> Optional[Dict[Any, Any]]:
+        ...
 
 
-def warn_fallback(name: str):
-    print(
-        "::warning file=check_compatibility_ilastik.py,"
-        + f"title=Using `{name}` fallback"
-        + f"::Using custom fallback for `{name}`"
-    )
+yaml = YAML(typ="safe")  # type: ignore
 
 
-try:
-    from bioimageio.spec._internal.io_utils import (
-        open_bioimageio_yaml,  # pyright: ignore[reportAssignmentType]
-        # cannot make 'rdf_url' positional only (in fallback impl of open_bioimageio_yaml)
-        # due to python backwards compatibility
-    )
-except ImportError:
-    warn_fallback("open_bioimageio_yaml")
-    try:
-        from ruamel.yaml import YAML  # type: ignore
-    except ImportError:
-        import yaml
+@dataclass
+class DownloadedRDF:
+    content: Optional[Dict[Any, Any]]
 
-        yaml.load = yaml.safe_load
-    else:
-        yaml = YAML(typ="safe")  # type: ignore
 
-    try:
-        import requests
-    except ImportError:
-        import httpx as requests
+def open_bioimageio_yaml(
+    rdf_url: str,  # TODO: make 'rdf_url' positional only
+    **kwargs: Any,
+) -> HasContent:
+    r = requests.get(rdf_url)
+    return DownloadedRDF(yaml.load(BytesIO(r.content)))  # type: ignore
 
-    from io import BytesIO
 
-    @dataclass
-    class DownloadedRDF:
-        content: Optional[Dict[Any, Any]]
 
-    def open_bioimageio_yaml(
-        rdf_url: str,  # TODO: make 'rdf_url' positional only
-        **kwargs: Any,
-    ) -> HasContent:
-        r = requests.get(rdf_url)
-        return DownloadedRDF(yaml.load(BytesIO(r.content)))  # type: ignore
-
-yaml = YAML(typ="safe")
 
 
 def find_expected_output(outputs_dir: str, name: str) -> bool:
@@ -263,14 +237,6 @@ def test_model_deepimagej(
         badge=None,
     )
     return report
-
-
-def open_bioimageio_yaml(
-    rdf_url: str,  # TODO: make 'rdf_url' positional only
-    **kwargs: Any,
-) -> HasContent:
-    r = requests.get(rdf_url)
-    return DownloadedRDF(yaml.load(BytesIO(r.content)))  # type: ignore
 
 
 def check_compatibility_deepimagej_impl(
