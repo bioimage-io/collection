@@ -1,0 +1,130 @@
+{
+    "badge": null,
+    "details": {
+        "details": [
+            {
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "checkpoint.pth": "5997875859aa094ccbd61debce272c6a0400ab2cf2b499ffd83964207a0dbfe0",
+                        "https://doi.org/10.1038/s41592-025-02699-y": null,
+                        "https://github.com/BiaPyX/BiaPy": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/serious-lobster/files/checkpoint.pth?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/serious-lobster/files/cover.png?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/serious-lobster/files/documentation.md?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/serious-lobster/files/test-input.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/serious-lobster/files/test-output.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/serious-lobster/files/unext_v2.py?version=v0": null,
+                        "test-input.npy": "d427ecae24b8e6a1c63a26049da5d331f237d88802bdb9c833abc718e0c9107c",
+                        "test-output.npy": "67a37f5498c712c0cad28503f46a436e95c3946050aa0311beabfb6d8b72c8b8",
+                        "unext_v2.py": "7613993cd32d16944ee0fe51ee99889ae551a83e9ded994df7d39541bc50a56c"
+                    },
+                    "original_source_name": null,
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/serious-lobster/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Successfully created `ModelDescr` instance.",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.6",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": [
+                    {
+                        "loc": [
+                            "inputs",
+                            0,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "outputs",
+                            0,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    }
+                ]
+            },
+            {
+                "context": null,
+                "errors": [
+                    {
+                        "loc": [
+                            "weights",
+                            "pytorch_state_dict"
+                        ],
+                        "msg": "Output 'output0' disagrees with 24 of 131072 expected values (183.1 ppm).\n Max relative difference: 2.78e-03 (= \\|8.09e-02 - 8.07e-02\\|/\\|8.07e-02 + 1e-6\\|) at {'batch': np.int64(0), 'channel': np.int64(1), 'y': np.int64(2), 'x': np.int64(235)}\n Max absolute difference not accounted for by relative tolerance: 4.72e-04 (= \\|2.4832426e-01 - 2.4785210e-01\\|) at {'batch': np.int64(0), 'channel': np.int64(1), 'y': np.int64(227), 'x': np.int64(131)}\n Saved actual output to actual_output_output0_pytorch_state_dict.npy.",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "bioimageio.core",
+                        "with_traceback": false
+                    }
+                ],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Reproduce test outputs from test inputs (pytorch_state_dict)",
+                "recommended_env": {
+                    "channels": [
+                        "pytorch",
+                        "conda-forge",
+                        "nodefaults"
+                    ],
+                    "dependencies": [
+                        "conda-forge::bioimageio.core",
+                        "numpy >=2,<3",
+                        "pip",
+                        "pytorch==2.4.0",
+                        "torchaudio==2.4.0",
+                        "torchvision==0.19.0"
+                    ],
+                    "name": null
+                },
+                "saved_conda_compare": "Success. All the packages in the specification file are present in the environment with matching version and build string.\n",
+                "status": "failed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.spec",
+                "0.5.6.0",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.5.6",
+        "id": "serious-lobster",
+        "metadata_completeness": 0.703125,
+        "name": "bioimageio format validation",
+        "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/serious-lobster/files/rdf.yaml?version=v0",
+        "status": "valid-format",
+        "traceback": null,
+        "type": "model",
+        "warnings": null
+    },
+    "error": "Output 'output0' disagrees with 24 of 131072 expected values (183.1 ppm).\n Max relative difference: 2.78e-03 (= \\|8.09e-02 - 8.07e-02\\|/\\|8.07e-02 + 1e-6\\|) at {'batch': np.int64(0), 'channel': np.int64(1), 'y': np.int64(2), 'x': np.int64(235)}\n Max absolute difference not accounted for by relative tolerance: 4.72e-04 (= \\|2.4832426e-01 - 2.4785210e-01\\|) at {'batch': np.int64(0), 'channel': np.int64(1), 'y': np.int64(227), 'x': np.int64(131)}\n Saved actual output to actual_output_output0_pytorch_state_dict.npy.",
+    "links": [],
+    "score": 0.5,
+    "status": "failed"
+}
