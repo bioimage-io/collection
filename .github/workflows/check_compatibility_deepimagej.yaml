@@ -32,7 +32,7 @@ jobs:
         run: |
           mkdir -p fiji
           curl -L -o fiji.zip https://downloads.imagej.net/fiji/stable/${{ matrix.url_file_name }}
-          unzip fiji-stable-linux64-jdk.zip -d fiji
+          unzip fiji.zip -d fiji
       - name: Install deepimageJ
         run: |
           fiji/Fiji.app/${{ matrix.fiji_executable }} --headless --update add-update-site "DeepImageJ" "https://sites.imagej.net/DeepImageJ/"
