@@ -1,0 +1,130 @@
+{
+    "badge": null,
+    "details": {
+        "details": [
+            {
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "checkpoint.pth": "6bd9300ae7cad2d5e4a4df1420bd7b7c877ad79f05aa7c17276e79b1ea98d270",
+                        "https://doi.org/10.1038/s41592-025-02699-y": null,
+                        "https://github.com/BiaPyX/BiaPy": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/territorial-cricket/files/checkpoint.pth?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/territorial-cricket/files/cover.png?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/territorial-cricket/files/documentation.md?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/territorial-cricket/files/test-input.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/territorial-cricket/files/test-output.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/territorial-cricket/files/unet.py?version=v0": null,
+                        "test-input.npy": "a78a3da046f782e42f9b9db5ed9bf24e3a8d2d924a8a260a8949ad1c122c5570",
+                        "test-output.npy": "f1063af34389aa3d074e1fc8ee0c2027525053a88ae423869e94f18dcff96f59",
+                        "unet.py": "cd0e6f35ced9b97f039e12a94cb6886f6bce4d353d973170b1b92634f7c7c821"
+                    },
+                    "original_source_name": null,
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/territorial-cricket/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Successfully created `ModelDescr` instance.",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.6",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": [
+                    {
+                        "loc": [
+                            "inputs",
+                            0,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "outputs",
+                            0,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    }
+                ]
+            },
+            {
+                "context": null,
+                "errors": [
+                    {
+                        "loc": [
+                            "weights",
+                            "pytorch_state_dict"
+                        ],
+                        "msg": "Output 'output0' disagrees with 115 of 65536 expected values (1754.8 ppm).\n Max relative difference: 4.94e-03 (= \\|2.68e-02 - 2.70e-02\\|/\\|2.70e-02 + 1e-6\\|) at {'batch': np.int64(0), 'channel': np.int64(0), 'y': np.int64(209), 'x': np.int64(234)}\n Max absolute difference not accounted for by relative tolerance: 1.48e-03 (= \\|4.7167003e-01 - 4.7314900e-01\\|) at {'batch': np.int64(0), 'channel': np.int64(0), 'y': np.int64(53), 'x': np.int64(237)}\n Saved actual output to actual_output_output0_pytorch_state_dict.npy.",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "bioimageio.core",
+                        "with_traceback": false
+                    }
+                ],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Reproduce test outputs from test inputs (pytorch_state_dict)",
+                "recommended_env": {
+                    "channels": [
+                        "pytorch",
+                        "conda-forge",
+                        "nodefaults"
+                    ],
+                    "dependencies": [
+                        "conda-forge::bioimageio.core",
+                        "numpy >=2,<3",
+                        "pip",
+                        "pytorch==2.4.0",
+                        "torchaudio==2.4.0",
+                        "torchvision==0.19.0"
+                    ],
+                    "name": null
+                },
+                "saved_conda_compare": "Success. All the packages in the specification file are present in the environment with matching version and build string.\n",
+                "status": "failed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.spec",
+                "0.5.6.0",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.5.6",
+        "id": "territorial-cricket",
+        "metadata_completeness": 0.703125,
+        "name": "bioimageio format validation",
+        "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/territorial-cricket/files/rdf.yaml?version=v0",
+        "status": "valid-format",
+        "traceback": null,
+        "type": "model",
+        "warnings": null
+    },
+    "error": "Output 'output0' disagrees with 115 of 65536 expected values (1754.8 ppm).\n Max relative difference: 4.94e-03 (= \\|2.68e-02 - 2.70e-02\\|/\\|2.70e-02 + 1e-6\\|) at {'batch': np.int64(0), 'channel': np.int64(0), 'y': np.int64(209), 'x': np.int64(234)}\n Max absolute difference not accounted for by relative tolerance: 1.48e-03 (= \\|4.7167003e-01 - 4.7314900e-01\\|) at {'batch': np.int64(0), 'channel': np.int64(0), 'y': np.int64(53), 'x': np.int64(237)}\n Saved actual output to actual_output_output0_pytorch_state_dict.npy.",
+    "links": [],
+    "score": 0.5,
+    "status": "failed"
+}
