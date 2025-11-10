@@ -22,6 +22,12 @@ from io.bioimage.modelrunner.engine.installation import EngineInstall
 import os
 import argparse
 
+from java.util.function import Consumer
+
+class NoOpConsumer(Consumer):
+    def accept(self, s):
+        pass  # ignore
+
 
 # Create the argument parser
 parser = argparse.ArgumentParser()
@@ -41,6 +47,7 @@ if not os.path.exists(engines_path) or not os.path.isdir(engines_path):
     os.makedirs(engines_path)
 
 installer = EngineInstall.createInstaller(engines_path)
+installer.setEngineInstalledConsumer(NoOpConsumer())
 installer.basicEngineInstallation()
 
 print(os.path.abspath(engines_path))
