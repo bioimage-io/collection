@@ -13,7 +13,7 @@ import traceback
 import urllib.request
 
 import requests
-from ruyaml import YAML
+from ruamel.yaml import YAML
 
 from backoffice.check_compatibility import check_tool_compatibility
 from backoffice.compatibility_pure import ToolCompatibilityReportDict
