@@ -3,7 +3,6 @@ name: check compatibility deepimagej
 concurrency: deepimagej
 on:
   workflow_call:
-  workflow_dispatch:
 
 jobs:
   run:
