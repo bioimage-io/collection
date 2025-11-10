@@ -206,6 +206,7 @@
         "tool_compatibility_version_specific": {
             "biapy_3.6.5": 0.0,
             "biapy_3.6.6": 1.0,
+            "biapy_3.6.7": 1.0,
             "ilastik_1.4.1.post1": 0.0
         }
     },
@@ -223,6 +224,16 @@
                 "status": "failed"
             },
             "3.6.6": {
+                "badge": null,
+                "details": "",
+                "error": "",
+                "links": [
+                    "biapy/biapy"
+                ],
+                "score": 1.0,
+                "status": "passed"
+            },
+            "3.6.7": {
                 "badge": null,
                 "details": "",
                 "error": "",

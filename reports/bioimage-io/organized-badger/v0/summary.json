@@ -250,16 +250,17 @@
         "core_compatibility": 1.0,
         "metadata_completeness": 0.7415730337078652,
         "metadata_format": 1.0,
-        "overall_compatibility": 0.6853932584269663,
-        "overall_partner_tool_compatibility": 0.0,
+        "overall_compatibility": 0.7687265917602997,
+        "overall_partner_tool_compatibility": 0.3333333333333333,
         "tool_compatibility": {
-            "biapy": 0.0,
+            "biapy": 1.0,
             "bioimageio.core": 1.0,
             "careamics": 0.0,
             "ilastik": 0.0
         },
         "tool_compatibility_version_specific": {
             "biapy_3.6.5": 0.0,
+            "biapy_3.6.7": 1.0,
             "bioimageio.core_0.9.4": 0.0,
             "bioimageio.core_0.9.5": 1.0,
             "careamics_0.0.16": 0.0,
@@ -280,6 +281,16 @@
                 ],
                 "score": 0.0,
                 "status": "failed"
+            },
+            "3.6.7": {
+                "badge": null,
+                "details": "",
+                "error": "",
+                "links": [
+                    "biapy/biapy"
+                ],
+                "score": 1.0,
+                "status": "passed"
             }
         },
         "bioimageio.core": {
