@@ -238,7 +238,6 @@ def generate_reports_overview(
     index = load_index(index_path)
 
     items = index.items
-    count_per_type = index.count_per_type
 
     # Start building markdown
     lines = [
@@ -250,26 +249,11 @@ def generate_reports_overview(
         "",
         f"*Last updated: {index.timestamp}*",
         "",
-        "## Summary by Type",
-        "",
     ]
 
-    # Add type counts
-    for resource_type, count in sorted(count_per_type.items()):
-        lines.append(f"- **{resource_type}**: {count}")
-
-    lines.extend(
-        [
-            "",
-            "## Compatibility by Resource",
-            "",
-            "The following tables show compatibility test results for each resource. Click column headers to sort.",
-            "",
-        ]
-    )
-
-    # Group resources by prefix
+    # Group resources by prefix and collect statistics by type
     resources_by_prefix: dict[str, list[dict[str, Any]]] = {}
+    stats_by_type: dict[str, dict[str, Any]] = {}
 
     for item in items:
         item_id = item.id
@@ -295,6 +279,25 @@ def generate_reports_overview(
         overall_compat = scores.get("overall_compatibility", 0.0)
         metadata_completeness = scores.get("metadata_completeness", 0.0)
 
+        # Collect statistics by type
+        if item_type not in stats_by_type:
+            stats_by_type[item_type] = {
+                "count": 0,
+                "passed": 0,
+                "metadata_scores": [],
+                "core_scores": [],
+                "overall_scores": [],
+                "biapy_scores": [],
+                "careamics_scores": [],
+                "ilastik_scores": [],
+            }
+        stats_by_type[item_type]["count"] += 1
+        if status == "passed":
+            stats_by_type[item_type]["passed"] += 1
+        stats_by_type[item_type]["metadata_scores"].append(metadata_completeness)
+        stats_by_type[item_type]["core_scores"].append(core_compat)
+        stats_by_type[item_type]["overall_scores"].append(overall_compat)
+
         # Get tool compatibility summary
         tool_compat = scores.get("tool_compatibility", {})
         tool_summary_parts: list[str] = []
@@ -302,6 +305,7 @@ def generate_reports_overview(
             if tool_name in tool_compat:
                 score = tool_compat[tool_name]
                 tool_summary_parts.append(f"{tool_name}: {score:.2f}")
+                stats_by_type[item_type][f"{tool_name}_scores"].append(score)
 
         tool_summary = ", ".join(tool_summary_parts) if tool_summary_parts else "—"
 
@@ -330,6 +334,58 @@ def generate_reports_overview(
         if prefix not in resources_by_prefix:
             resources_by_prefix[prefix] = []
         resources_by_prefix[prefix].append(row_data)
+
+    # Generate summary by type table
+    lines.extend(
+        [
+            "## Summary by Type",
+            "",
+            "| Type | Count | % Passed | Avg Metadata | Avg Core | Avg Overall | Avg BiaPy | Avg CAREamics | Avg ilastik |",
+            "| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |",
+        ]
+    )
+
+    for resource_type in sorted(stats_by_type.keys()):
+        stats = stats_by_type[resource_type]
+        count = stats["count"]
+        passed = stats["passed"]
+        pass_percentage = (passed / count * 100) if count > 0 else 0
+
+        metadata_scores = stats["metadata_scores"]
+        avg_metadata = (
+            sum(metadata_scores) / len(metadata_scores) if metadata_scores else 0
+        )
+
+        core_scores = stats["core_scores"]
+        avg_core = sum(core_scores) / len(core_scores) if core_scores else 0
+
+        overall_scores = stats["overall_scores"]
+        avg_overall = sum(overall_scores) / len(overall_scores) if overall_scores else 0
+
+        biapy_scores = stats["biapy_scores"]
+        avg_biapy = sum(biapy_scores) / len(biapy_scores) if biapy_scores else 0
+
+        careamics_scores = stats["careamics_scores"]
+        avg_careamics = (
+            sum(careamics_scores) / len(careamics_scores) if careamics_scores else 0
+        )
+
+        ilastik_scores = stats["ilastik_scores"]
+        avg_ilastik = sum(ilastik_scores) / len(ilastik_scores) if ilastik_scores else 0
+
+        lines.append(
+            f"| {resource_type} | {count} | {pass_percentage:.1f}% | {avg_metadata:.2f} | {avg_core:.2f} | {avg_overall:.2f} | {avg_biapy:.2f} | {avg_careamics:.2f} | {avg_ilastik:.2f} |"
+        )
+
+    lines.extend(
+        [
+            "",
+            "## Compatibility by Resource",
+            "",
+            "The following tables show compatibility test results for each resource. Click column headers to sort.",
+            "",
+        ]
+    )
 
     # Generate a table for each prefix
     for idx, (prefix, rows) in enumerate(sorted(resources_by_prefix.items())):
