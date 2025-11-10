@@ -12,7 +12,7 @@ jobs:
         include:
           - name: ubuntu
             os: ubuntu-latest
-            url_file_name: fiji-linux64.zip
+            url_file_name: fiji-stable-linux64-jdk.zip
             fiji_executable: ImageJ-linux64
     runs-on: ${{ matrix.os }}
     environment: 'production'
@@ -31,8 +31,8 @@ jobs:
         shell: bash
         run: |
           mkdir -p fiji
-          curl -L -o fiji.zip https://downloads.imagej.net/fiji/latest/${{ matrix.url_file_name }}
-          unzip fiji.zip -d fiji
+          curl -L -o fiji.zip https://downloads.imagej.net/fiji/stable/${{ matrix.url_file_name }}
+          unzip fiji-stable-linux64-jdk.zip -d fiji
       - name: Install deepimageJ
         run: |
           fiji/Fiji.app/${{ matrix.fiji_executable }} --headless --update add-update-site "DeepImageJ" "https://sites.imagej.net/DeepImageJ/"
