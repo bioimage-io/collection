@@ -48,6 +48,7 @@ if not os.path.exists(engines_path) or not os.path.isdir(engines_path):
 
 installer = EngineInstall.createInstaller(engines_path)
 installer.setEngineInstalledConsumer(NoOpConsumer())
+installer.setProgresConsumer(NoOpConsumer())
 installer.basicEngineInstallation()
 
 print(os.path.abspath(engines_path))
