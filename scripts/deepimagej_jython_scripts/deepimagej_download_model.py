@@ -30,7 +30,7 @@ import os
 import argparse
 import json
 
-MACRO_STR = 'run("DeepImageJ Run", "modelPath={model_path} inputPath={input_path} outputFolder={output_folder} displayOutput=null")'
+MACRO_STR = 'run("DeepImageJ Run", "model_path={model_path} input_path={input_path} output_folder={output_folder} display_output=null")'
 CREATED_INPUT_SAMPLE_NAME = "converted_sample_input_0.tif"
 CREATED_OUTPUT_SAMPLE_NAME = "converted_sample_ouput_0.tif"
 
