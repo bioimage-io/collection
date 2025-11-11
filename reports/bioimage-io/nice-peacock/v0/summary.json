@@ -191,6 +191,7 @@
             "biapy": 0.0,
             "bioimageio.core": 1.0,
             "careamics": 0.0,
+            "deepimagej": -0.1,
             "ilastik": 0.0
         },
         "tool_compatibility_version_specific": {
@@ -203,6 +204,7 @@
             "careamics_0.0.16": 0.0,
             "careamics_0.0.17": 0.0,
             "careamics_0.0.18": 0.0,
+            "deepimagej_3.1.0-snapshot": 0.0,
             "ilastik_1.4.1.post1": 0.0
         }
     },
@@ -538,6 +540,16 @@
                 "links": [],
                 "score": 0.0,
                 "status": "not-applicable"
+            }
+        },
+        "deepimagej": {
+            "3.1.0-snapshot": {
+                "badge": null,
+                "details": "Failed to parse compatibility report.",
+                "error": "backoffice.compatibility.ToolCompatibilityReport() got multiple values for keyword argument 'tool'",
+                "links": [],
+                "score": 0.0,
+                "status": "failed"
             }
         },
         "ilastik": {
