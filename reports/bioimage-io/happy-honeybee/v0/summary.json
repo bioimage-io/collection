@@ -234,12 +234,13 @@
         "core_compatibility": 1.0,
         "metadata_completeness": 0.703125,
         "metadata_format": 1.0,
-        "overall_compatibility": 0.7591145833333334,
-        "overall_partner_tool_compatibility": 0.3333333333333333,
+        "overall_compatibility": 0.8341145833333333,
+        "overall_partner_tool_compatibility": 0.6333333333333333,
         "tool_compatibility": {
             "biapy": 1.0,
             "bioimageio.core": 1.0,
             "careamics": 0.0,
+            "deepimagej": 0.9,
             "ilastik": 0.0
         },
         "tool_compatibility_version_specific": {
@@ -252,6 +253,7 @@
             "careamics_0.0.16": 0.0,
             "careamics_0.0.17": 0.0,
             "careamics_0.0.18": 0.0,
+            "deepimagej_3.1.0-snapshot": 1.0,
             "ilastik_1.4.1.post1": 0.0
         }
     },
@@ -648,6 +650,18 @@
                 "links": [],
                 "score": 0.0,
                 "status": "not-applicable"
+            }
+        },
+        "deepimagej": {
+            "3.1.0-snapshot": {
+                "badge": null,
+                "details": null,
+                "error": null,
+                "links": [
+                    "deepimagej/deepimagej"
+                ],
+                "score": 1.0,
+                "status": "passed"
             }
         },
         "ilastik": {
