@@ -1,9 +1,8 @@
-
 from dataclasses import dataclass
 from functools import partial
 from io import BytesIO
-from typing import TYPE_CHECKING, Any, Dict, Optional
-from typing_extensions import Literal, Protocol
+from typing import Any, Dict, Optional
+from typing_extensions import Protocol
 
 import json
 import os
@@ -27,8 +26,7 @@ except ImportError:
 
 class HasContent(Protocol):
     @property
-    def content(self) -> Optional[Dict[Any, Any]]:
-        ...
+    def content(self) -> Optional[Dict[Any, Any]]: ...
 
 
 yaml = YAML(typ="safe")  # type: ignore
@@ -45,9 +43,6 @@ def open_bioimageio_yaml(
 ) -> HasContent:
     r = requests.get(rdf_url)
     return DownloadedRDF(yaml.load(BytesIO(r.content)))  # type: ignore
-
-
-
 
 
 def find_expected_output(outputs_dir: str, name: str) -> bool:
