@@ -14,7 +14,7 @@ import traceback
 import urllib.request
 
 import requests
-from ruamel.yaml import YAML
+from ruyaml import YAML
 
 from backoffice.check_compatibility import check_tool_compatibility
 from backoffice.compatibility_pure import ToolCompatibilityReportDict
@@ -244,7 +244,7 @@ def check_compatibility_deepimagej_impl(
         rdf_url: URL to the rdf.yaml file
         sha256: SHA-256 value of **rdf_url** content
     """
-    print(item_id, item_version, file=sys.stderr)
+    print(f"\n{item_id} {item_version} ---- {rdf_url}\n", file=sys.stderr)
     assert fiji_executable != "", "please provide the fiji executable path"
 
     rdf = open_bioimageio_yaml(rdf_url, sha256=Sha256(sha256)).content
