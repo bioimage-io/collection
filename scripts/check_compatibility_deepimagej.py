@@ -7,6 +7,7 @@ from typing_extensions import Protocol
 import json
 import os
 import re
+import sys
 import argparse
 import subprocess
 import traceback
@@ -250,6 +251,7 @@ def check_compatibility_deepimagej_impl(
         rdf_url: URL to the rdf.yaml file
         sha256: SHA-256 value of **rdf_url** content
     """
+    print(item_id, item_version, file=sys.stderr)
     assert fiji_executable != "", "please provide the fiji executable path"
 
     rdf = open_bioimageio_yaml(rdf_url, sha256=Sha256(sha256)).content
