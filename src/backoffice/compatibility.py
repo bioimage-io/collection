@@ -38,6 +38,8 @@ ToolNameVersioned = str
 
 
 class Node(BaseModel):
+    """Base data model with common config"""
+
     pass
 
 

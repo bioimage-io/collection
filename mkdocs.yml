@@ -77,21 +77,26 @@ plugins:
   - mkdocstrings:
       handlers:
         python:
+          inventories:
+            - https://docs.pydantic.dev/latest/objects.inv
           options:
             backlinks: tree
             docstring_options:
               ignore_init_summary: true
             docstring_section_style: list
-            filters: ['!^_']
+            filters: 'public'
             heading_level: 1
             inherited_members: true
+            members: true
             merge_init_into_class: true
             parameter_headings: true
             separate_signature: true
+            scoped_crossrefs: true
             show_root_heading: true
             show_root_full_path: false
             show_signature_annotations: true
-            show_source: false
+            show_if_no_docstring: true
+            show_source: true
             show_symbol_type_heading: true
             show_symbol_type_toc: true
             signature_crossrefs: true
@@ -101,20 +106,7 @@ plugins:
                   schema: true
   - search
   - section-index
-  # - api-autonav:
-  #     modules: ['src/backoffice']
-  #     module_options:
-  #       '.*':
-  #         show_submodules: true
-  #         docstring_style: google
-  #         show_signature: true
-  #         heading_level: 1
-  #         show_symbol_type_heading: true
 
-# markdown_extensions:
-#   - admonition
-#   - pymdownx.details
-#   - pymdownx.superfences
 markdown_extensions:
   - attr_list
   - admonition
@@ -142,6 +134,7 @@ markdown_extensions:
   - pymdownx.tilde
   - toc:
       permalink: '¤'
+
 nav:
   - Home: index.md
   - API Reference: api.md
