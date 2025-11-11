@@ -14,7 +14,7 @@ import traceback
 import urllib.request
 
 import requests
-from ruamel.yaml import YAML
+from ruyaml import YAML
 
 from backoffice.check_compatibility import check_tool_compatibility
 from backoffice.compatibility_pure import ToolCompatibilityReportDict
@@ -91,7 +91,6 @@ def test_model_deepimagej(
         _ = urllib.request.urlretrieve(rdf_url, yaml_file)
     except Exception as e:
         report = ToolCompatibilityReportDict(
-            tool=f"deepimagej_{deepimagej_version}",
             status="failed",
             error="unable to download the yaml file",
             details=f"{e.stderr}{os.linesep}{e.stdout}"
@@ -118,7 +117,6 @@ def test_model_deepimagej(
         )
     except BaseException as e:
         report = ToolCompatibilityReportDict(
-            tool=f"deepimagej_{deepimagej_version}",
             status="failed",
             error="unable to read the yaml file",
             details=f"{e.stderr}{os.linesep}{e.stdout}"
@@ -149,7 +147,6 @@ def test_model_deepimagej(
         model_dir = download_result.stdout.strip().splitlines()[-1]
     except BaseException as e:
         report = ToolCompatibilityReportDict(
-            tool=f"deepimagej_{deepimagej_version}",
             status="failed",
             error="unable to download the model",
             details=f"{e.stderr}{os.linesep}{e.stdout}"
@@ -178,7 +175,6 @@ def test_model_deepimagej(
         out_str = run.stdout
         if not check_dij_macro_generated_outputs(model_dir):
             report = ToolCompatibilityReportDict(
-                tool=f"deepimagej_{deepimagej_version}",
                 status="failed",
                 error="error running the model",
                 details=out_str,
@@ -188,7 +184,6 @@ def test_model_deepimagej(
             return report
     except BaseException as e:
         report = ToolCompatibilityReportDict(
-            tool=f"deepimagej_{deepimagej_version}",
             status="failed",
             error="error running the model",
             details=f"{e.stderr}{os.linesep}{e.stdout}"
@@ -215,7 +210,6 @@ def test_model_deepimagej(
         )
     except BaseException as e:
         report = ToolCompatibilityReportDict(
-            tool=f"deepimagej_{deepimagej_version}",
             status="failed",
             error="error comparing expected outputs and actual outputs",
             details=f"{e.stderr}{os.linesep}{e.stdout}"
@@ -226,7 +220,6 @@ def test_model_deepimagej(
         )
         return report
     report = ToolCompatibilityReportDict(
-        tool=f"deepimagej_{deepimagej_version}",
         status="passed",
         error=None,
         details=None,
@@ -251,14 +244,13 @@ def check_compatibility_deepimagej_impl(
         rdf_url: URL to the rdf.yaml file
         sha256: SHA-256 value of **rdf_url** content
     """
-    print(item_id, item_version, file=sys.stderr)
+    print(f"\n{item_id} {item_version} ---- {rdf_url}\n", file=sys.stderr)
     assert fiji_executable != "", "please provide the fiji executable path"
 
     rdf = open_bioimageio_yaml(rdf_url, sha256=Sha256(sha256)).content
 
     if rdf["type"] != "model":
         report = ToolCompatibilityReportDict(
-            tool=f"deepimagej_{deepimagej_version}",
             status="not-applicable",
             error=None,
             details="only 'model' resources can be used in deepimagej.",
@@ -268,7 +260,6 @@ def check_compatibility_deepimagej_impl(
 
     elif len(rdf["inputs"]) > 1:  # or len(rdf["outputs"]) > 1:
         report = ToolCompatibilityReportDict(
-            tool=f"deepimagej_{deepimagej_version}",
             status="failed",
             # error=f"deepimagej only supports single tensor input/output (found {len(rdf['inputs'])}/{len(rdf['outputs'])})",
             error=f"deepimagej only supports single tensor input (found {len(rdf['inputs'])})",

@@ -28,7 +28,7 @@ jobs:
       - name: Install backoffice and other packages
         run: |
           pip install -e .  # installs the backoffice
-          pip install ruamel.yaml typing-extensions requests
+          pip install ruyaml typing-extensions requests
       - name: Set up Fiji
         shell: bash
         run: |
