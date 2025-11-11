@@ -1,7 +1,7 @@
 ---
 title: API reference
-hide:
-- navigation
+# hide:
+# - navigation
 ---
 
 # ::: backoffice
