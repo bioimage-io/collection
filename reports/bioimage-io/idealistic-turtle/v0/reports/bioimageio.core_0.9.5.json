@@ -1,0 +1,141 @@
+{
+    "badge": null,
+    "details": {
+        "details": [
+            {
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "checkpoint.pth": "69896ee5a80d8f2098b009184898636542fd0883a6a24741fced2e563fafd2c6",
+                        "https://doi.org/10.1038/s41592-025-02699-y": null,
+                        "https://github.com/BiaPyX/BiaPy": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/idealistic-turtle/files/checkpoint.pth?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/idealistic-turtle/files/cover.png?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/idealistic-turtle/files/documentation.md?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/idealistic-turtle/files/seunet.py?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/idealistic-turtle/files/test-input.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/idealistic-turtle/files/test-output.npy?version=v0": null,
+                        "seunet.py": "b4fb69b11b18fae9df7df4c5b9cf411c1e8a7e4d8a81eac7bd75178ad2fd301d",
+                        "test-input.npy": "dd693f8b04f5575e11f79e5433b58bc41c552ccc94ecf7b75fd892ee7c63d86c",
+                        "test-output.npy": "8c97ad1ea6a2784df062ccbb440f346268a0a4b16bd3e487222537b6af8ce2bb"
+                    },
+                    "original_source_name": null,
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/idealistic-turtle/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Successfully created `ModelDescr` instance.",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.6",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": [
+                    {
+                        "loc": [
+                            "name"
+                        ],
+                        "msg": "Name longer than 64 characters.",
+                        "severity": 20,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "inputs",
+                            0,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "outputs",
+                            0,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    }
+                ]
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Reproduce test outputs from test inputs (pytorch_state_dict)",
+                "recommended_env": {
+                    "channels": [
+                        "pytorch",
+                        "conda-forge",
+                        "nodefaults"
+                    ],
+                    "dependencies": [
+                        "conda-forge::bioimageio.core",
+                        "numpy >=2,<3",
+                        "pip",
+                        "pytorch==2.4.0",
+                        "torchaudio==2.4.0",
+                        "torchvision==0.19.0"
+                    ],
+                    "name": null
+                },
+                "saved_conda_compare": "Success. All the packages in the specification file are present in the environment with matching version and build string.\n",
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Run pytorch_state_dict inference for inputs with batch_size: 1 and size parameter n: 0",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.spec",
+                "0.5.6.0",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.5.6",
+        "id": "idealistic-turtle",
+        "metadata_completeness": 0.7121212121212122,
+        "name": "bioimageio format validation",
+        "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/idealistic-turtle/files/rdf.yaml?version=v0",
+        "status": "passed",
+        "traceback": null,
+        "type": "model",
+        "warnings": null
+    },
+    "error": null,
+    "links": [
+        "bioimageio/bioimageio.core"
+    ],
+    "score": 1.0,
+    "status": "passed"
+}
