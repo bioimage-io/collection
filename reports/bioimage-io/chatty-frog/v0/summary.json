@@ -297,6 +297,7 @@
             "biapy": 0.0,
             "bioimageio.core": 0.25,
             "careamics": 0.0,
+            "deepimagej": -0.1,
             "ilastik": 0.0
         },
         "tool_compatibility_version_specific": {
@@ -308,6 +309,7 @@
             "careamics_0.0.16": 0.0,
             "careamics_0.0.17": 0.0,
             "careamics_0.0.18": 0.0,
+            "deepimagej_3.1.0-snapshot": 0.0,
             "ilastik_1.4.1.post1": 0.0
         }
     },
@@ -535,6 +537,18 @@
                 "links": [],
                 "score": 0.0,
                 "status": "not-applicable"
+            }
+        },
+        "deepimagej": {
+            "3.1.0-snapshot": {
+                "badge": null,
+                "details": "OpenJDK 64-Bit Server VM warning: ignoring option PermSize=128m; support was removed in 8.0\nOpenJDK 64-Bit Server VM warning: Using incremental CMS is deprecated and will likely be removed in a future release\nTraceback (most recent call last):\n  File \"scripts/deepimagej_jython_scripts/deepimagej_read_yaml.py\", line 41, in <module>\n    descriptor = ModelDescriptorFactory.readFromLocalFile(yaml_fpath)\n\tat io.bioimage.modelrunner.numpy.DecodeNumpy.loadNpy(DecodeNumpy.java:179)\n\tat io.bioimage.modelrunner.bioimageio.description.stardist.ModelDescriptorStardistV04.modifyTestInputs(ModelDescriptorStardistV04.java:129)\n\tat io.bioimage.modelrunner.bioimageio.description.stardist.ModelDescriptorStardistV04.<init>(ModelDescriptorStardistV04.java:65)\n\tat io.bioimage.modelrunner.bioimageio.description.ModelDescriptorFactory.fromStardistMap(ModelDescriptorFactory.java:140)\n\tat io.bioimage.modelrunner.bioimageio.description.ModelDescriptorFactory.fromMap(ModelDescriptorFactory.java:120)\n\tat io.bioimage.modelrunner.bioimageio.description.ModelDescriptorFactory.fromMap(ModelDescriptorFactory.java:114)\n\tat io.bioimage.modelrunner.bioimageio.description.ModelDescriptorFactory.readFromLocalFile(ModelDescriptorFactory.java:74)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\njava.lang.IllegalArgumentException: java.lang.IllegalArgumentException: Path provided does not correspond to a Numpy file: /home/runner/work/collection/collection/test_input.npy\n\n",
+                "error": "unable to read the yaml file",
+                "links": [
+                    "deepimagej/deepimagej"
+                ],
+                "score": 0.0,
+                "status": "failed"
             }
         },
         "ilastik": {

@@ -234,12 +234,13 @@
         "core_compatibility": 1.0,
         "metadata_completeness": 0.703125,
         "metadata_format": 1.0,
-        "overall_compatibility": 0.7591145833333334,
-        "overall_partner_tool_compatibility": 0.3333333333333333,
+        "overall_compatibility": 0.8341145833333333,
+        "overall_partner_tool_compatibility": 0.6333333333333333,
         "tool_compatibility": {
             "biapy": 1.0,
             "bioimageio.core": 1.0,
             "careamics": 0.0,
+            "deepimagej": 0.9,
             "ilastik": 0.0
         },
         "tool_compatibility_version_specific": {
@@ -248,9 +249,11 @@
             "biapy_3.6.7": 1.0,
             "bioimageio.core_0.9.3": 0.0,
             "bioimageio.core_0.9.4": 1.0,
+            "bioimageio.core_0.9.5": 1.0,
             "careamics_0.0.16": 0.0,
             "careamics_0.0.17": 0.0,
             "careamics_0.0.18": 0.0,
+            "deepimagej_3.1.0-snapshot": 1.0,
             "ilastik_1.4.1.post1": 0.0
         }
     },
@@ -488,6 +491,139 @@
                 ],
                 "score": 1.0,
                 "status": "passed"
+            },
+            "0.9.5": {
+                "badge": null,
+                "details": {
+                    "details": [
+                        {
+                            "context": {
+                                "file_name": "rdf.yaml",
+                                "known_files": {
+                                    "attention_unet.py": "3c53c173263cbda0f85d4d8b3e03fd4b6dca052593f7117c44f6072d03b441eb",
+                                    "checkpoint.pth": "beed6b78df457a1605dd91bd105e5b2add798ce6ff37bca220f82209c8ad9141",
+                                    "https://doi.org/10.1038/s41592-025-02699-y": null,
+                                    "https://github.com/BiaPyX/BiaPy": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/heroic-otter/files/attention_unet.py?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/heroic-otter/files/checkpoint.pth?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/heroic-otter/files/cover.png?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/heroic-otter/files/documentation.md?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/heroic-otter/files/test-input.npy?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/heroic-otter/files/test-output.npy?version=v0": null,
+                                    "test-input.npy": "dd693f8b04f5575e11f79e5433b58bc41c552ccc94ecf7b75fd892ee7c63d86c",
+                                    "test-output.npy": "0277caad9a3541e9d6afa1b8f719cf6c073d2e8665a4f53a7e3f21dca4d92bf1"
+                                },
+                                "original_source_name": null,
+                                "perform_io_checks": true,
+                                "root": "https://hypha.aicell.io/bioimage-io/artifacts/heroic-otter/files?version=v0",
+                                "update_hashes": false
+                            },
+                            "errors": [],
+                            "loc": [],
+                            "name": "Successfully created `ModelDescr` instance.",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [],
+                            "name": "bioimageio.spec format validation model 0.5.6",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": [
+                                {
+                                    "loc": [
+                                        "inputs",
+                                        0,
+                                        "sample_tensor"
+                                    ],
+                                    "msg": "Needs to be filled for FAIR compliance",
+                                    "severity": 35,
+                                    "type": "warning"
+                                },
+                                {
+                                    "loc": [
+                                        "outputs",
+                                        0,
+                                        "sample_tensor"
+                                    ],
+                                    "msg": "Needs to be filled for FAIR compliance",
+                                    "severity": 35,
+                                    "type": "warning"
+                                }
+                            ]
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "pytorch_state_dict"
+                            ],
+                            "name": "Reproduce test outputs from test inputs (pytorch_state_dict)",
+                            "recommended_env": {
+                                "channels": [
+                                    "pytorch",
+                                    "conda-forge",
+                                    "nodefaults"
+                                ],
+                                "dependencies": [
+                                    "conda-forge::bioimageio.core",
+                                    "numpy >=2,<3",
+                                    "pip",
+                                    "pytorch==2.4.0",
+                                    "torchaudio==2.4.0",
+                                    "torchvision==0.19.0"
+                                ],
+                                "name": null
+                            },
+                            "saved_conda_compare": "Success. All the packages in the specification file are present in the environment with matching version and build string.\n",
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "pytorch_state_dict"
+                            ],
+                            "name": "Run pytorch_state_dict inference for inputs with batch_size: 1 and size parameter n: 0",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        }
+                    ],
+                    "env": [
+                        [
+                            "bioimageio.spec",
+                            "0.5.6.0",
+                            "",
+                            ""
+                        ]
+                    ],
+                    "format_version": "0.5.6",
+                    "id": "heroic-otter",
+                    "metadata_completeness": 0.703125,
+                    "name": "bioimageio format validation",
+                    "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+                    "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/heroic-otter/files/rdf.yaml?version=v0",
+                    "status": "passed",
+                    "traceback": null,
+                    "type": "model",
+                    "warnings": null
+                },
+                "error": null,
+                "links": [
+                    "bioimageio/bioimageio.core"
+                ],
+                "score": 1.0,
+                "status": "passed"
             }
         },
         "careamics": {
@@ -514,6 +650,18 @@
                 "links": [],
                 "score": 0.0,
                 "status": "not-applicable"
+            }
+        },
+        "deepimagej": {
+            "3.1.0-snapshot": {
+                "badge": null,
+                "details": null,
+                "error": null,
+                "links": [
+                    "deepimagej/deepimagej"
+                ],
+                "score": 1.0,
+                "status": "passed"
             }
         },
         "ilastik": {

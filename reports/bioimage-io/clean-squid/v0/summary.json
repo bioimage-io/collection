@@ -222,6 +222,7 @@
             "biapy": 1.0,
             "bioimageio.core": 1.0,
             "careamics": 0.0,
+            "deepimagej": -0.1,
             "ilastik": 0.0
         },
         "tool_compatibility_version_specific": {
@@ -230,9 +231,11 @@
             "biapy_3.6.7": 1.0,
             "bioimageio.core_0.9.3": 0.0,
             "bioimageio.core_0.9.4": 1.0,
+            "bioimageio.core_0.9.5": 1.0,
             "careamics_0.0.16": 0.0,
             "careamics_0.0.17": 0.0,
             "careamics_0.0.18": 0.0,
+            "deepimagej_3.1.0-snapshot": 0.0,
             "ilastik_1.4.1.post1": 0.0
         }
     },
@@ -475,6 +478,142 @@
                 ],
                 "score": 1.0,
                 "status": "passed"
+            },
+            "0.9.5": {
+                "badge": null,
+                "details": {
+                    "details": [
+                        {
+                            "context": {
+                                "file_name": "rdf.yaml",
+                                "known_files": {
+                                    "checkpoint.pth": "d90d4a949f35458bd46011a7004d11a122ede5b553d2311bcd96cce9130a6530",
+                                    "environment.yaml": "63075e7a3f8f07ecaebfc2d0d10f4312f956ece9278bd0b118570386c32356d5",
+                                    "https://doi.org/10.1038/s41592-025-02699-y": null,
+                                    "https://github.com/BiaPyX/BiaPy": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/clean-squid/files/checkpoint.pth?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/clean-squid/files/cover.png?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/clean-squid/files/documentation.md?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/clean-squid/files/environment.yaml?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/clean-squid/files/test-input.npy?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/clean-squid/files/test-output.npy?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/clean-squid/files/unetr.py?version=v0": null,
+                                    "test-input.npy": "825283bfb356fc732ce301d82e41e1e33e1358c21eb258e0bfcfc9e0fd75ee15",
+                                    "test-output.npy": "13742f5f19cfcce6318a55773698e7fb0ad3b678a48e68632e1aa16d2fa0bf41",
+                                    "unetr.py": "f3e6e082f95721fdcc398a3dc78b287cce7f6aeb904676241a92695b5e042791"
+                                },
+                                "original_source_name": null,
+                                "perform_io_checks": true,
+                                "root": "https://hypha.aicell.io/bioimage-io/artifacts/clean-squid/files?version=v0",
+                                "update_hashes": false
+                            },
+                            "errors": [],
+                            "loc": [],
+                            "name": "Successfully created `ModelDescr` instance.",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [],
+                            "name": "bioimageio.spec format validation model 0.5.6",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": [
+                                {
+                                    "loc": [
+                                        "inputs",
+                                        0,
+                                        "sample_tensor"
+                                    ],
+                                    "msg": "Needs to be filled for FAIR compliance",
+                                    "severity": 35,
+                                    "type": "warning"
+                                },
+                                {
+                                    "loc": [
+                                        "outputs",
+                                        0,
+                                        "sample_tensor"
+                                    ],
+                                    "msg": "Needs to be filled for FAIR compliance",
+                                    "severity": 35,
+                                    "type": "warning"
+                                }
+                            ]
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "pytorch_state_dict"
+                            ],
+                            "name": "Reproduce test outputs from test inputs (pytorch_state_dict)",
+                            "recommended_env": {
+                                "channels": [
+                                    "conda-forge",
+                                    "nodefaults"
+                                ],
+                                "dependencies": [
+                                    "pip",
+                                    {
+                                        "pip": [
+                                            "timm==1.0.14"
+                                        ]
+                                    },
+                                    "conda-forge::bioimageio.core",
+                                    "python>=3.10"
+                                ],
+                                "name": "biapy"
+                            },
+                            "saved_conda_compare": "Success. All the packages in the specification file are present in the environment with matching version and build string.\n",
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "pytorch_state_dict"
+                            ],
+                            "name": "Run pytorch_state_dict inference for inputs with batch_size: 1 and size parameter n: 0",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        }
+                    ],
+                    "env": [
+                        [
+                            "bioimageio.spec",
+                            "0.5.6.0",
+                            "",
+                            ""
+                        ]
+                    ],
+                    "format_version": "0.5.6",
+                    "id": "clean-squid",
+                    "metadata_completeness": 0.7571428571428571,
+                    "name": "bioimageio format validation",
+                    "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+                    "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/clean-squid/files/rdf.yaml?version=v0",
+                    "status": "passed",
+                    "traceback": null,
+                    "type": "model",
+                    "warnings": null
+                },
+                "error": null,
+                "links": [
+                    "bioimageio/bioimageio.core"
+                ],
+                "score": 1.0,
+                "status": "passed"
             }
         },
         "careamics": {
@@ -501,6 +640,18 @@
                 "links": [],
                 "score": 0.0,
                 "status": "not-applicable"
+            }
+        },
+        "deepimagej": {
+            "3.1.0-snapshot": {
+                "badge": null,
+                "details": "OpenJDK 64-Bit Server VM warning: ignoring option PermSize=128m; support was removed in 8.0\nOpenJDK 64-Bit Server VM warning: Using incremental CMS is deprecated and will likely be removed in a future release\nTraceback (most recent call last):\n  File \"scripts/deepimagej_jython_scripts/deepimagej_check_outputs.py\", line 71, in <module>\n    main(model_dir)\n  File \"scripts/deepimagej_jython_scripts/deepimagej_check_outputs.py\", line 57, in main\n    raise Exception(\"Values of output \" + name + \" differ\")\nException: Values of output output0 differ\n\n",
+                "error": "error comparing expected outputs and actual outputs",
+                "links": [
+                    "deepimagej/deepimagej"
+                ],
+                "score": 0.0,
+                "status": "failed"
             }
         },
         "ilastik": {
