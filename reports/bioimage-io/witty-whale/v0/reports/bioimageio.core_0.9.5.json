@@ -1,0 +1,175 @@
+{
+    "badge": null,
+    "details": {
+        "details": [
+            {
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "https://github.com/ai4life-opencalls/oc-1-project-74": null,
+                        "https://github.com/facebookresearch/detectron2": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/witty-whale/files/cover.png?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/witty-whale/files/doc.md?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/witty-whale/files/input_sample.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/witty-whale/files/model.onnx?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/witty-whale/files/output_boxes.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/witty-whale/files/output_classes.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/witty-whale/files/output_masks.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/witty-whale/files/output_scores.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/witty-whale/files/output_shape.npy?version=v0": null,
+                        "input_sample.npy": "67015dbe64730522fc450f4973576d62630a4016983d2aac01cfae465ed1deba",
+                        "model.onnx": "d02a7cfdb0086a4d54981b9ab3a667b32b34a8da488c8e8fe0b08925f119a34f",
+                        "output_boxes.npy": "00d00ed8642a14b8bc9f69b316f1044349f5efe38d787f28ef091ae4f78453ef",
+                        "output_classes.npy": "7aa21c77539786adb918182cbc41d49497c17bc5e6935f499a14fc7f18e9ac32",
+                        "output_masks.npy": "12e23c4590297af8aabc9a9b36f9fda7c9051784a736bce6c7435a2bf748b04c",
+                        "output_scores.npy": "24cb61ee2b9dbe476dc6dc6314edd7e10eeca9b9bd91c48aae776fb373e74975",
+                        "output_shape.npy": "d1f57d9ef57cfe135872a5251e05a928373583a83ffac60838ded3c43e1ea419"
+                    },
+                    "original_source_name": null,
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/witty-whale/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Successfully created `ModelDescr` instance.",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.6",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": [
+                    {
+                        "loc": [
+                            "inputs",
+                            0,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "outputs",
+                            0,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "outputs",
+                            1,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "outputs",
+                            2,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "outputs",
+                            3,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "outputs",
+                            4,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    }
+                ]
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "onnx"
+                ],
+                "name": "Reproduce test outputs from test inputs (onnx)",
+                "recommended_env": {
+                    "channels": [
+                        "conda-forge",
+                        "nodefaults"
+                    ],
+                    "dependencies": [
+                        "conda-forge::bioimageio.core",
+                        "onnxruntime",
+                        "pip"
+                    ],
+                    "name": null
+                },
+                "saved_conda_compare": "Success. All the packages in the specification file are present in the environment with matching version and build string.\n",
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "onnx"
+                ],
+                "name": "Run onnx inference for inputs with batch_size: 1 and size parameter n: 0",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.spec",
+                "0.5.6.0",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.5.6",
+        "id": "witty-whale",
+        "metadata_completeness": 0.5217391304347826,
+        "name": "bioimageio format validation",
+        "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/witty-whale/files/rdf.yaml?version=v0",
+        "status": "passed",
+        "traceback": null,
+        "type": "model",
+        "warnings": null
+    },
+    "error": null,
+    "links": [
+        "bioimageio/bioimageio.core"
+    ],
+    "score": 1.0,
+    "status": "passed"
+}
