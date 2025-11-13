@@ -143,7 +143,7 @@ class CompatibilityScores(Node):
                 version = Version("0.0.0")
                 malus += 0.1  # penalize non-semver versions
 
-            grouped.setdefault(tool_name, {})[version] = value - malus
+            grouped.setdefault(tool_name, {})[version] = max(0, value - malus)
 
         for tool in list(grouped):
             if not grouped[tool]:
