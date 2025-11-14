@@ -2403,9 +2403,9 @@
             "type": "model",
             "versions": [
                 {
-                    "comment": null,
+                    "comment": "Updated rdf.yaml",
                     "created_at": "2025-07-01T22:42:27Z",
-                    "sha256": "a477d6b81379f2c966f59bf4fc48ad0dc29a1a89ad1a5ec20f3bd25fccc41c7a",
+                    "sha256": "3fd811477665b1421e9a53b055891eb6ca7ca11122fd2a01d2022c93944ddb2f",
                     "source": "https://hypha.aicell.io/bioimage-io/artifacts/merry-gorilla/files/rdf.yaml?version=v0",
                     "version": "v0"
                 }
@@ -2442,9 +2442,9 @@
             "type": "model",
             "versions": [
                 {
-                    "comment": null,
+                    "comment": "Updated rdf.yaml",
                     "created_at": "2025-07-01T22:42:24Z",
-                    "sha256": "ddd7feeb17bae375b6cc73f54e8ceb612a877fe3de2165529a39942a93c81416",
+                    "sha256": "c3ca87649d0d2cd6933381fe12684887d1cafb5bce2cc5c5faea5972f3c29349",
                     "source": "https://hypha.aicell.io/bioimage-io/artifacts/thoughtful-chipmunk/files/rdf.yaml?version=v0",
                     "version": "v0"
                 }
@@ -3127,6 +3127,6 @@
             ]
         }
     ],
-    "timestamp": "2025-11-13T01:50:45.915769",
+    "timestamp": "2025-11-14T01:52:11.355654",
     "total": 240
 }
