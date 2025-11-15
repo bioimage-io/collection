@@ -1,45 +1,113 @@
 {
     "rdf_content": {
-        "name": "OC1 Project 66 Cellpose",
-        "description": "Segmentation of nuclei in cultured cells overexpressing motor proteins of the kif family.",
-        "covers": [
-            "cover.png"
-        ],
-        "id_emoji": "🦍",
         "authors": [
             {
                 "affiliation": "Human Technopole",
                 "email": "damian.dalle@fht.org",
-                "orcid": null,
+                "github_user": "damiandn",
                 "name": "Damian Dalle Nogare",
-                "github_user": "damiandn"
+                "orcid": null
             },
             {
                 "affiliation": "Human Technopole",
                 "email": "mehdi.seifi@fht.org",
-                "orcid": null,
+                "github_user": null,
                 "name": "Mehdi Seifi",
-                "github_user": null
+                "orcid": null
             }
         ],
         "cite": [
             {
-                "text": "Stringer, C., Wang, T., Michaelos, M. et al. Cellpose: a generalist algorithm for cellular segmentation. Nat Methods 18, 100–106 (2021).",
-                "doi": "10.1038/s41592-020-01018-x"
+                "doi": "10.1038/s41592-020-01018-x",
+                "text": "Stringer, C., Wang, T., Michaelos, M. et al. Cellpose: a generalist algorithm for cellular segmentation. Nat Methods 18, 100–106 (2021)."
             },
             {
-                "text": "Pachitariu, M., Stringer, C. Cellpose 2.0: how to train your own model. Nat Methods 19, 1634–1641 (2022).",
-                "doi": "10.1038/s41592-022-01663-4"
+                "doi": "10.1038/s41592-022-01663-4",
+                "text": "Pachitariu, M., Stringer, C. Cellpose 2.0: how to train your own model. Nat Methods 19, 1634–1641 (2022)."
             },
             {
-                "text": "Stringer, Carsen, and Marius Pachitariu. \"Cellpose3: one-click image restoration for improved cellular segmentation.\" bioRxiv (2024).",
-                "doi": "10.1101/2024.02.10.579780"
+                "doi": "10.1101/2024.02.10.579780",
+                "text": "Stringer, Carsen, and Marius Pachitariu. \"Cellpose3: one-click image restoration for improved cellular segmentation.\" bioRxiv (2024)."
+            }
+        ],
+        "config": {
+            "bioimageio": {
+                "reproducibility_tolerance": [
+                    {
+                        "absolute_tolerance": 0.001,
+                        "mismatched_elements_per_million": 5,
+                        "relative_tolerance": 0.01
+                    }
+                ]
+            }
+        },
+        "covers": [
+            "cover.png"
+        ],
+        "description": "Segmentation of nuclei in cultured cells overexpressing motor proteins of the kif family.",
+        "documentation": "doc.md",
+        "format_version": "0.5.6",
+        "git_repo": "https://github.com/ai4life-opencalls/oc_1_project_66",
+        "id": "merry-gorilla",
+        "id_emoji": "🦍",
+        "inputs": [
+            {
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "channel_names": [
+                            "channel"
+                        ],
+                        "type": "channel"
+                    },
+                    {
+                        "id": "y",
+                        "size": 1440,
+                        "type": "space"
+                    },
+                    {
+                        "id": "x",
+                        "size": 1920,
+                        "type": "space"
+                    }
+                ],
+                "id": "input",
+                "test_tensor": {
+                    "sha256": "24d6e99a3a203f5473128500cf55f558cf1a878639c8b85d8e32689c090877db",
+                    "source": "input_sample.npy"
+                }
             }
         ],
         "license": "BSD-3-Clause",
-        "git_repo": "https://github.com/ai4life-opencalls/oc_1_project_66",
         "links": [
             "https://github.com/mouseland/cellpose"
+        ],
+        "name": "OC1 Project 66 Cellpose",
+        "outputs": [
+            {
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "id": "y",
+                        "size": 1440,
+                        "type": "space"
+                    },
+                    {
+                        "id": "x",
+                        "size": 1920,
+                        "type": "space"
+                    }
+                ],
+                "id": "masks",
+                "test_tensor": {
+                    "sha256": "e5175d029e499ac10a532840d7b46d555e3fa08ec665bb6124236e5c496a73c1",
+                    "source": "output_sample_masks.npy"
+                }
+            }
         ],
         "tags": [
             "Cellpose",
@@ -48,108 +116,272 @@
             "Fluorescence Microscopy",
             "2D"
         ],
-        "version": "0.2.0",
-        "format_version": "0.5.6",
         "type": "model",
-        "id": "merry-gorilla",
-        "documentation": "doc.md",
-        "inputs": [
-            {
-                "id": "input",
-                "axes": [
-                    {
-                        "type": "batch"
-                    },
-                    {
-                        "type": "channel",
-                        "channel_names": [
-                            "channel"
-                        ]
-                    },
-                    {
-                        "size": 1440,
-                        "id": "y",
-                        "type": "space"
-                    },
-                    {
-                        "size": 1920,
-                        "id": "x",
-                        "type": "space"
-                    }
-                ],
-                "test_tensor": {
-                    "source": "input_sample.npy",
-                    "sha256": "24d6e99a3a203f5473128500cf55f558cf1a878639c8b85d8e32689c090877db"
-                }
-            }
-        ],
-        "outputs": [
-            {
-                "id": "masks",
-                "axes": [
-                    {
-                        "type": "batch"
-                    },
-                    {
-                        "size": 1440,
-                        "id": "y",
-                        "type": "space"
-                    },
-                    {
-                        "size": 1920,
-                        "id": "x",
-                        "type": "space"
-                    }
-                ],
-                "test_tensor": {
-                    "source": "output_sample_masks.npy",
-                    "sha256": "e5175d029e499ac10a532840d7b46d555e3fa08ec665bb6124236e5c496a73c1"
-                }
-            }
-        ],
+        "version": "0.2.0",
         "weights": {
             "pytorch_state_dict": {
-                "source": "cilia_cellpose_nuc",
-                "sha256": "4deb1ac38f6b9a449c8316bb1a504ce7509fd3b7b21274c3c3970c84c030b2d8",
                 "architecture": {
-                    "source": "model.py",
-                    "sha256": "04cf72414ec2ba36243d808bc7d00f73dea90b8fdb87c068a3c18d9eb80797d4",
                     "callable": "CellPoseWrapper",
                     "kwargs": {
-                        "model_type": "nuclei",
-                        "cp_batch_size": 8,
+                        "cellprob_threshold": 0.0,
                         "channels": [
                             0,
                             0
                         ],
-                        "flow_threshold": 0.4,
-                        "cellprob_threshold": 0.0,
-                        "stitch_threshold": 0.0,
-                        "estimate_diam": false,
-                        "normalize": true,
+                        "cp_batch_size": 8,
                         "do_3D": false,
-                        "gpu": false
-                    }
+                        "estimate_diam": false,
+                        "flow_threshold": 0.4,
+                        "gpu": false,
+                        "model_type": "nuclei",
+                        "normalize": true,
+                        "stitch_threshold": 0.0
+                    },
+                    "sha256": "04cf72414ec2ba36243d808bc7d00f73dea90b8fdb87c068a3c18d9eb80797d4",
+                    "source": "model.py"
+                },
+                "dependencies": {
+                    "sha256": "c79b19a38b3a09c6643ec717e4c743ff73bb3e29e87baeb4b80ce69034f3aaf2",
+                    "source": "environment.yml"
                 },
                 "pytorch_version": "2.6.0",
-                "dependencies": {
-                    "source": "environment.yml",
-                    "sha256": "c79b19a38b3a09c6643ec717e4c743ff73bb3e29e87baeb4b80ce69034f3aaf2"
-                }
-            }
-        },
-        "config": {
-            "bioimageio": {
-                "reproducibility_tolerance": [
-                    {
-                        "relative_tolerance": 0.01,
-                        "absolute_tolerance": 0.001,
-                        "mismatched_elements_per_million": 5
-                    }
-                ]
+                "sha256": "4deb1ac38f6b9a449c8316bb1a504ce7509fd3b7b21274c3c3970c84c030b2d8",
+                "source": "cilia_cellpose_nuc"
             }
         }
     },
     "rdf_yaml_sha256": "3fd811477665b1421e9a53b055891eb6ca7ca11122fd2a01d2022c93944ddb2f",
-    "status": "untested"
+    "scores": {
+        "core_compatibility": 1.0,
+        "metadata_completeness": 0.7049180327868853,
+        "metadata_format": 1.0,
+        "overall_compatibility": 0.6762295081967213,
+        "overall_partner_tool_compatibility": 0.0,
+        "tool_compatibility": {
+            "biapy": 0.0,
+            "bioimageio.core": 1.0,
+            "careamics": 0.0,
+            "deepimagej": 0.0,
+            "ilastik": 0.0
+        },
+        "tool_compatibility_version_specific": {
+            "biapy_3.6.7": 0.0,
+            "bioimageio.core_0.9.5": 1.0,
+            "careamics_0.0.18": 0.0,
+            "deepimagej_3.1.0-snapshot": 0.0,
+            "ilastik_1.4.1.post1": 0.0
+        }
+    },
+    "status": "passed",
+    "tests": {
+        "biapy": {
+            "3.6.7": {
+                "badge": null,
+                "details": "[all] no workflow tag recognized in ['Cellpose', 'Nuclei Segmentation', 'Cilia Analysis', 'Fluorescence Microscopy', '2D'].\n",
+                "error": "[all] no workflow tag recognized in ['Cellpose', 'Nuclei Segmentation', 'Cilia Analysis', 'Fluorescence Microscopy', '2D'].\n",
+                "links": [
+                    "biapy/biapy"
+                ],
+                "score": 0.0,
+                "status": "failed"
+            }
+        },
+        "bioimageio.core": {
+            "0.9.5": {
+                "badge": null,
+                "details": {
+                    "details": [
+                        {
+                            "context": {
+                                "file_name": "rdf.yaml",
+                                "known_files": {
+                                    "cilia_cellpose_nuc": "4deb1ac38f6b9a449c8316bb1a504ce7509fd3b7b21274c3c3970c84c030b2d8",
+                                    "environment.yml": "c79b19a38b3a09c6643ec717e4c743ff73bb3e29e87baeb4b80ce69034f3aaf2",
+                                    "https://github.com/ai4life-opencalls/oc_1_project_66": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/merry-gorilla/files/cilia_cellpose_nuc?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/merry-gorilla/files/cover.png?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/merry-gorilla/files/doc.md?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/merry-gorilla/files/environment.yml?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/merry-gorilla/files/input_sample.npy?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/merry-gorilla/files/model.py?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/merry-gorilla/files/output_sample_masks.npy?version=v0": null,
+                                    "input_sample.npy": "24d6e99a3a203f5473128500cf55f558cf1a878639c8b85d8e32689c090877db",
+                                    "model.py": "04cf72414ec2ba36243d808bc7d00f73dea90b8fdb87c068a3c18d9eb80797d4",
+                                    "output_sample_masks.npy": "e5175d029e499ac10a532840d7b46d555e3fa08ec665bb6124236e5c496a73c1"
+                                },
+                                "original_source_name": null,
+                                "perform_io_checks": true,
+                                "root": "https://hypha.aicell.io/bioimage-io/artifacts/merry-gorilla/files?version=v0",
+                                "update_hashes": false
+                            },
+                            "errors": [],
+                            "loc": [],
+                            "name": "Successfully created `ModelDescr` instance.",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [],
+                            "name": "bioimageio.spec format validation model 0.5.6",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": [
+                                {
+                                    "loc": [
+                                        "inputs",
+                                        0,
+                                        "sample_tensor"
+                                    ],
+                                    "msg": "Needs to be filled for FAIR compliance",
+                                    "severity": 35,
+                                    "type": "warning"
+                                },
+                                {
+                                    "loc": [
+                                        "outputs",
+                                        0,
+                                        "sample_tensor"
+                                    ],
+                                    "msg": "Needs to be filled for FAIR compliance",
+                                    "severity": 35,
+                                    "type": "warning"
+                                }
+                            ]
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "pytorch_state_dict"
+                            ],
+                            "name": "Reproduce test outputs from test inputs (pytorch_state_dict)",
+                            "recommended_env": {
+                                "channels": [
+                                    "pytorch",
+                                    "conda-forge",
+                                    "nodefaults"
+                                ],
+                                "dependencies": [
+                                    "bioimageio.core",
+                                    "imagecodecs",
+                                    "pip",
+                                    "python>=3.9",
+                                    "pytorch",
+                                    "setuptools",
+                                    "torchvision",
+                                    {
+                                        "pip": [
+                                            "cellpose==3.1.0"
+                                        ]
+                                    }
+                                ],
+                                "name": "cellpose"
+                            },
+                            "saved_conda_compare": "Success. All the packages in the specification file are present in the environment with matching version and build string.\n",
+                            "status": "passed",
+                            "warnings": [
+                                {
+                                    "loc": [
+                                        "weights",
+                                        "pytorch_state_dict"
+                                    ],
+                                    "msg": "Output 'masks' disagrees with 1 of 2764800 expected values (0.4 ppm).\n Max relative difference: 1.00e+00 (= \\|0.00e+00 - 9.40e+01\\|/\\|9.40e+01 + 1e-6\\|) at {'batch': np.int64(0), 'y': np.int64(645), 'x': np.int64(1504)}\n Max absolute difference not accounted for by relative tolerance: 9.40e+01 (= \\|0.0000000e+00 - 9.4000000e+01\\|) at {'batch': np.int64(0), 'y': np.int64(645), 'x': np.int64(1504)}\n Saved actual output to actual_output_masks_pytorch_state_dict.npy.",
+                                    "severity": 30,
+                                    "type": "bioimageio.core"
+                                }
+                            ]
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "pytorch_state_dict"
+                            ],
+                            "name": "Run pytorch_state_dict inference for inputs with batch_size: 1 and size parameter n: 0",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "pytorch_state_dict"
+                            ],
+                            "name": "Run pytorch_state_dict inference for inputs with batch_size: 2 and size parameter n: 0",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        }
+                    ],
+                    "env": [
+                        [
+                            "bioimageio.spec",
+                            "0.5.6.0",
+                            "",
+                            ""
+                        ]
+                    ],
+                    "format_version": "0.5.6",
+                    "id": "merry-gorilla",
+                    "metadata_completeness": 0.7049180327868853,
+                    "name": "bioimageio format validation",
+                    "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+                    "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/merry-gorilla/files/rdf.yaml?version=v0",
+                    "status": "passed",
+                    "traceback": null,
+                    "type": "model",
+                    "warnings": null
+                },
+                "error": null,
+                "links": [
+                    "bioimageio/bioimageio.core"
+                ],
+                "score": 1.0,
+                "status": "passed"
+            }
+        },
+        "careamics": {
+            "0.0.18": {
+                "badge": null,
+                "details": "'Model' resource not tagged with 'CAREamics' or 'careamics'.",
+                "error": null,
+                "links": [],
+                "score": 0.0,
+                "status": "not-applicable"
+            }
+        },
+        "deepimagej": {
+            "3.1.0-snapshot": {
+                "badge": null,
+                "details": "OpenJDK 64-Bit Server VM warning: ignoring option PermSize=128m; support was removed in 8.0\nOpenJDK 64-Bit Server VM warning: Using incremental CMS is deprecated and will likely be removed in a future release\njava.lang.IllegalArgumentException: Invalid axis configuration: When axis type is 'spaces', an 'id' must be defined. Current configuration: type='space', id=null\n\tat io.bioimage.modelrunner.bioimageio.description.AxisV05.<init>(AxisV05.java:62)\n\tat io.bioimage.modelrunner.bioimageio.description.AxesV05.<init>(AxesV05.java:52)\n\tat io.bioimage.modelrunner.bioimageio.description.TensorSpecV05.<init>(TensorSpecV05.java:85)\n\tat io.bioimage.modelrunner.bioimageio.description.ModelDescriptorV05.buildInputTensors(ModelDescriptorV05.java:96)\n\tat io.bioimage.modelrunner.bioimageio.description.ModelDescriptor.buildModelDescription(ModelDescriptor.java:212)\n\tat io.bioimage.modelrunner.bioimageio.description.ModelDescriptorV05.<init>(ModelDescriptorV05.java:44)\n\tat io.bioimage.modelrunner.bioimageio.description.ModelDescriptorFactory.fromMap(ModelDescriptorFactory.java:128)\n\tat io.bioimage.modelrunner.bioimageio.description.ModelDescriptorFactory.readFromYamlTextString(ModelDescriptorFactory.java:109)\n\tat io.bioimage.modelrunner.bioimageio.BioimageioRepo.listAllModels(BioimageioRepo.java:202)\n\tat io.bioimage.modelrunner.bioimageio.BioimageioRepo.selectByID(BioimageioRepo.java:418)\n\tat io.bioimage.modelrunner.bioimageio.BioimageioRepo.downloadModelByID(BioimageioRepo.java:521)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\n\tat org.python.core.PyReflectedFunction.__call__(PyReflectedFunction.java:207)\n\tat org.python.core.PyReflectedFunction.__call__(PyReflectedFunction.java:225)\n\tat org.python.core.PyObject.__call__(PyObject.java:494)\n\tat org.python.core.PyObject.__call__(PyObject.java:498)\n\tat org.python.core.PyMethod.__call__(PyMethod.java:156)\n\tat org.python.pycode._pyx0.f$0(scripts/deepimagej_jython_scripts/deepimagej_download_model.py:138)\n\tat org.python.pycode._pyx0.call_function(scripts/deepimagej_jython_scripts/deepimagej_download_model.py)\n\tat org.python.core.PyTableCode.call(PyTableCode.java:173)\n\tat org.python.core.PyCode.call(PyCode.java:18)\n\tat org.python.core.Py.runCode(Py.java:1742)\n\tat org.python.util.PythonInterpreter.execfile(PythonInterpreter.java:297)\n\tat org.python.util.jython.runSimpleFile(jython.java:417)\n\tat org.python.util.jython.runStream(jython.java:449)\n\tat org.python.util.jython.runFile(jython.java:474)\n\tat org.python.util.jython.main(jython.java:678)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\n\tat net.imagej.launcher.ClassLauncher.launch(ClassLauncher.java:279)\n\tat net.imagej.launcher.ClassLauncher.run(ClassLauncher.java:186)\n\tat net.imagej.launcher.ClassLauncher.main(ClassLauncher.java:87)\nTraceback (most recent call last):\n  File \"scripts/deepimagej_jython_scripts/deepimagej_download_model.py\", line 122, in <module>\n    convert_npy_to_tif(\n  File \"scripts/deepimagej_jython_scripts/deepimagej_download_model.py\", line 41, in convert_npy_to_tif\n    rai = DecodeNumpy.loadNpy(os.path.join(folder_path, test_name))\n\tat io.bioimage.modelrunner.numpy.DecodeNumpy.loadNpy(DecodeNumpy.java:179)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\njava.lang.IllegalArgumentException: java.lang.IllegalArgumentException: Path provided does not correspond to a Numpy file: /home/runner/work/collection/collection/fiji/Fiji.app/models/OC1 Project 66 Cellpose_14112025_015415/output_sample_masks.npy\n\nOC1 Project 66 Cellpose: input_sample.npy\n",
+                "error": "unable to download the model",
+                "links": [
+                    "deepimagej/deepimagej"
+                ],
+                "score": 0.0,
+                "status": "failed"
+            }
+        },
+        "ilastik": {
+            "1.4.1.post1": {
+                "badge": null,
+                "details": "Failed to parse compatibility report.",
+                "error": "backoffice.compatibility.ToolCompatibilityReport() got multiple values for keyword argument 'tool'",
+                "links": [],
+                "score": 0.0,
+                "status": "failed"
+            }
+        }
+    }
 }

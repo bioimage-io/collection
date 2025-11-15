@@ -210,7 +210,7 @@
             "biapy": 1.0,
             "bioimageio.core": 0.16666666666666666,
             "careamics": 0.0,
-            "deepimagej": -0.1,
+            "deepimagej": 0.0,
             "ilastik": 0.0
         },
         "tool_compatibility_version_specific": {
