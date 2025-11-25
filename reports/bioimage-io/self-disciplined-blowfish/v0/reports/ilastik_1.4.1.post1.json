@@ -1,0 +1,207 @@
+{
+    "badge": null,
+    "details": {
+        "conda_list": null,
+        "details": [
+            {
+                "conda_compare": null,
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "config.toml": "c3d45908d71137990cabac191669e97a0f155842e69844967f06f3ac79e86409",
+                        "input_134.tif": "9aa3a34a45528600cd54fc7685df6ed12f9f2733908bd17d7c7538f9d6c4e634",
+                        "output_134.png": "fbbf506fdfea1f593144b77951fa17e372d9bed59a1d7390212cfb36bae63c67",
+                        "test_input.npy": "1bdface89e05a0fd71e51dfeb28da57434d9bfcb0412238db0b78c7c2ee10467",
+                        "test_output.npy": "8f85f7cfaa7a0222c83990b1ebbefa5367bcbc10d2da305615e2dc4afe109336",
+                        "unet_dec_21_epoch_579.pt": "fcdca2fc286b1f00b9656fcd023756754d40cd4c62b1de83cbf3341bf0f7dfeb"
+                    },
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/self-disciplined-blowfish/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Successfully created `ModelDescr` object.",
+                "recommended_env": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "conda_compare": null,
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "config.toml": "c3d45908d71137990cabac191669e97a0f155842e69844967f06f3ac79e86409",
+                        "input_134.tif": "9aa3a34a45528600cd54fc7685df6ed12f9f2733908bd17d7c7538f9d6c4e634",
+                        "output_134.png": "fbbf506fdfea1f593144b77951fa17e372d9bed59a1d7390212cfb36bae63c67",
+                        "test_input.npy": "1bdface89e05a0fd71e51dfeb28da57434d9bfcb0412238db0b78c7c2ee10467",
+                        "test_output.npy": "8f85f7cfaa7a0222c83990b1ebbefa5367bcbc10d2da305615e2dc4afe109336",
+                        "unet_dec_21_epoch_579.pt": "fcdca2fc286b1f00b9656fcd023756754d40cd4c62b1de83cbf3341bf0f7dfeb"
+                    },
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/self-disciplined-blowfish/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.4",
+                "recommended_env": null,
+                "status": "passed",
+                "warnings": [
+                    {
+                        "loc": [
+                            "documentation"
+                        ],
+                        "msg": "No '# Validation' (sub)section found in README.md.",
+                        "severity": 30,
+                        "type": "warning"
+                    }
+                ]
+            },
+            {
+                "conda_compare": null,
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "type"
+                ],
+                "name": "Has expected resource type",
+                "recommended_env": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "conda_compare": "usage: conda [-h] [-v] [--no-plugins] [-V] COMMAND ...\n\nconda is a tool for managing and deploying applications, environments and packages.\n\noptions:\n  -h, --help            Show this help message and exit.\n  -v, --verbose         Can be used multiple times. Once for detailed output,\n                        twice for INFO logging, thrice for DEBUG logging, four\n                        times for TRACE logging.\n  --no-plugins          Disable all plugins that are not built into conda.\n  -V, --version         Show the conda version number and exit.\n\ncommands:\n  The following built-in and plugins subcommands are available.\n\n  COMMAND\n    activate            Activate a conda environment.\n    clean               Remove unused packages and caches.\n    commands            List all available conda subcommands (including those\n                        from plugins). Generally only used by tab-completion.\n    compare             Compare packages between conda environments.\n    config              Modify configuration values in .condarc.\n    content-trust       Signing and verification tools for Conda\n    create              Create a new conda environment from a list of\n                        specified packages.\n    deactivate          Deactivate the current active conda environment.\n    doctor              Display a health report for your environment.\n    env                 Create and manage conda environments.\n    export              Export a given environment\n    info                Display information about current conda install.\n    init                Initialize conda for shell interaction.\n    install             Install a list of packages into a specified conda\n                        environment.\n    list                List installed packages in a conda environment.\n    notices             Retrieve latest channel notifications.\n    package             Create low-level conda packages. (EXPERIMENTAL)\n    remove (uninstall)  Remove a list of packages from a specified conda\n                        environment.\n    rename              Rename an existing environment.\n    repoquery           Advanced search for repodata.\n    run                 Run an executable in a conda environment.\n    search              Search for packages and display associated information\n                        using the MatchSpec format.\n    token               Set repository access token and configure\n                        default_channels\n    tos                 A subcommand for viewing, accepting, rejecting, and\n                        otherwise interacting with a channel's Terms of\n                        Service (ToS). This plugin periodically checks for\n                        updated Terms of Service for the active/selected\n                        channels. Channels with a Terms of Service will need\n                        to be accepted or rejected prior to use. Conda will\n                        only allow package installation from channels without\n                        a Terms of Service or with an accepted Terms of\n                        Service. Attempting to use a channel with a rejected\n                        Terms of Service will result in an error.\n    update (upgrade)    Update conda packages to the latest compatible\n                        version.\n",
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "torchscript"
+                ],
+                "name": "Reproduce test outputs from test inputs (torchscript)",
+                "recommended_env": {
+                    "channels": [
+                        "pytorch",
+                        "conda-forge",
+                        "nodefaults"
+                    ],
+                    "dependencies": [
+                        "conda-forge::bioimageio.core",
+                        "numpy >=2,<3",
+                        "pip",
+                        "pytorch==2.5.1",
+                        "torchaudio",
+                        "torchvision"
+                    ],
+                    "name": null
+                },
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "conda_compare": null,
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "torchscript"
+                ],
+                "name": "Run torchscript inference for inputs with batch_size: 1 and size parameter n: 0",
+                "recommended_env": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "conda_compare": null,
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "torchscript"
+                ],
+                "name": "Run torchscript inference for inputs with batch_size: 1 and size parameter n: 1",
+                "recommended_env": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "conda_compare": null,
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "torchscript"
+                ],
+                "name": "Run torchscript inference for inputs with batch_size: 1 and size parameter n: 2",
+                "recommended_env": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "conda_compare": null,
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "torchscript"
+                ],
+                "name": "Run torchscript inference for inputs with batch_size: 2 and size parameter n: 0",
+                "recommended_env": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "conda_compare": null,
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "torchscript"
+                ],
+                "name": "Run torchscript inference for inputs with batch_size: 2 and size parameter n: 1",
+                "recommended_env": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "conda_compare": null,
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "torchscript"
+                ],
+                "name": "Run torchscript inference for inputs with batch_size: 2 and size parameter n: 2",
+                "recommended_env": null,
+                "status": "passed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.core",
+                "0.8.0",
+                "",
+                ""
+            ],
+            [
+                "bioimageio.spec",
+                "0.5.4.1",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.5.4",
+        "id": "self-disciplined-blowfish",
+        "name": "bioimageio format validation",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/self-disciplined-blowfish/files/rdf.yaml?version=v0",
+        "status": "passed",
+        "type": "model"
+    },
+    "error": null,
+    "links": [
+        "ilastik/ilastik"
+    ],
+    "status": "passed",
+    "tool": "ilastik"
+}
