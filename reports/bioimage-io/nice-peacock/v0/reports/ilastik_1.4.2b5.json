@@ -1,8 +1,0 @@
-{
-    "badge": null,
-    "details": null,
-    "error": "ilastik only supports a single input/output tensor (found 3/1)",
-    "links": [],
-    "status": "failed",
-    "tool": "ilastik"
-}
