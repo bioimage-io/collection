@@ -33,7 +33,7 @@ runs:
         skip = os.environ.get("RECOMPUTE_REPORTS_PATTERN", "")
         for p_src in src.glob("**/${{inputs.tool}}_*.json"):
             if skip and fnmatch(p_src.name, skip):
-               print("Skipping", p_src)
+                print("Skipping", p_src)
                 continue
             p_tgt = tgt / p_src.relative_to(src)
             p_tgt.parent.mkdir(parents=True, exist_ok=True)
