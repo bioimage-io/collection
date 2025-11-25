@@ -302,7 +302,7 @@
             "careamics_0.0.17": 0.0,
             "careamics_0.0.18": 0.0,
             "deepimagej_3.1.0-snapshot": 0.0,
-            "ilastik_1.4.1.post1": 0.0,
+            "ilastik_1.4.1.post1": 1.0,
             "ilastik_1.4.2b5": 1.0
         }
     },
@@ -1055,9 +1055,9 @@
                             },
                             "errors": [],
                             "loc": [],
-                            "name": "Created `InvalidDescr` object.",
+                            "name": "Successfully created `ModelDescr` object.",
                             "recommended_env": null,
-                            "status": "failed",
+                            "status": "passed",
                             "warnings": []
                         },
                         {
@@ -1077,24 +1077,11 @@
                                 "root": "https://hypha.aicell.io/bioimage-io/artifacts/emotional-cricket/files?version=v0",
                                 "update_hashes": false
                             },
-                            "errors": [
-                                {
-                                    "loc": [
-                                        "cite",
-                                        0,
-                                        "url"
-                                    ],
-                                    "msg": "Value error, 403: Forbidden https://elifesciences.org/articles/57613",
-                                    "traceback_html": "",
-                                    "traceback_md": "",
-                                    "type": "value_error",
-                                    "with_traceback": false
-                                }
-                            ],
+                            "errors": [],
                             "loc": [],
                             "name": "bioimageio.spec format validation model 0.5.4",
                             "recommended_env": null,
-                            "status": "failed",
+                            "status": "passed",
                             "warnings": [
                                 {
                                     "loc": [
@@ -1150,6 +1137,19 @@
                                     "msg": "Failed to validate URL 'https://hypha.aicell.io/bioimage-io/artifacts/emotional-cricket/files/confocal_pnas_3d.pytorch?version=v0': HTTPSConnectionPool(host='hypha.aicell.io', port=443): Read timed out. (read timeout=3)\nrequest: <PreparedRequest [GET]>\nresponse: None",
                                     "severity": 30,
                                     "type": "warning"
+                                },
+                                {
+                                    "loc": [
+                                        "weights",
+                                        "pytorch_state_dict",
+                                        "architecture",
+                                        "function-after[_validate_sha256(), ArchitectureFromFileDescr]",
+                                        "source",
+                                        "RelativeFilePath"
+                                    ],
+                                    "msg": "Failed to validate URL 'https://hypha.aicell.io/bioimage-io/artifacts/emotional-cricket/files/unet.py?version=v0': HTTPSConnectionPool(host='hypha.aicell.io', port=443): Read timed out. (read timeout=3)\nrequest: <PreparedRequest [GET]>\nresponse: None",
+                                    "severity": 30,
+                                    "type": "warning"
                                 }
                             ]
                         },
@@ -1161,6 +1161,118 @@
                                 "type"
                             ],
                             "name": "Has expected resource type",
+                            "recommended_env": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "conda_compare": "usage: conda [-h] [-v] [--no-plugins] [-V] COMMAND ...\n\nconda is a tool for managing and deploying applications, environments and packages.\n\noptions:\n  -h, --help            Show this help message and exit.\n  -v, --verbose         Can be used multiple times. Once for detailed output,\n                        twice for INFO logging, thrice for DEBUG logging, four\n                        times for TRACE logging.\n  --no-plugins          Disable all plugins that are not built into conda.\n  -V, --version         Show the conda version number and exit.\n\ncommands:\n  The following built-in and plugins subcommands are available.\n\n  COMMAND\n    activate            Activate a conda environment.\n    clean               Remove unused packages and caches.\n    commands            List all available conda subcommands (including those\n                        from plugins). Generally only used by tab-completion.\n    compare             Compare packages between conda environments.\n    config              Modify configuration values in .condarc.\n    content-trust       Signing and verification tools for Conda\n    create              Create a new conda environment from a list of\n                        specified packages.\n    deactivate          Deactivate the current active conda environment.\n    doctor              Display a health report for your environment.\n    env                 Create and manage conda environments.\n    export              Export a given environment\n    info                Display information about current conda install.\n    init                Initialize conda for shell interaction.\n    install             Install a list of packages into a specified conda\n                        environment.\n    list                List installed packages in a conda environment.\n    menuinst            A subcommand for installing and removing shortcuts via\n                        menuinst.\n    notices             Retrieve latest channel notifications.\n    package             Create low-level conda packages. (EXPERIMENTAL)\n    remove (uninstall)  Remove a list of packages from a specified conda\n                        environment.\n    rename              Rename an existing environment.\n    repoquery           Advanced search for repodata.\n    run                 Run an executable in a conda environment.\n    search              Search for packages and display associated information\n                        using the MatchSpec format.\n    token               Set repository access token and configure\n                        default_channels\n    tos                 A subcommand for viewing, accepting, rejecting, and\n                        otherwise interacting with a channel's Terms of\n                        Service (ToS). This plugin periodically checks for\n                        updated Terms of Service for the active/selected\n                        channels. Channels with a Terms of Service will need\n                        to be accepted or rejected prior to use. Conda will\n                        only allow package installation from channels without\n                        a Terms of Service or with an accepted Terms of\n                        Service. Attempting to use a channel with a rejected\n                        Terms of Service will result in an error.\n    update (upgrade)    Update conda packages to the latest compatible\n                        version.\n",
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "pytorch_state_dict"
+                            ],
+                            "name": "Reproduce test outputs from test inputs (pytorch_state_dict)",
+                            "recommended_env": {
+                                "channels": [
+                                    "pytorch",
+                                    "conda-forge",
+                                    "nodefaults"
+                                ],
+                                "dependencies": [
+                                    "conda-forge::bioimageio.core",
+                                    "mkl ==2024.0.0",
+                                    "numpy <2",
+                                    "pip",
+                                    "pytorch==1.12.1",
+                                    "setuptools <70.0.0",
+                                    "torchaudio==0.12.1",
+                                    "torchvision==0.13.1"
+                                ],
+                                "name": null
+                            },
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "conda_compare": null,
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "pytorch_state_dict"
+                            ],
+                            "name": "Run pytorch_state_dict inference for inputs with batch_size: 1 and size parameter n: 0",
+                            "recommended_env": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "conda_compare": null,
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "pytorch_state_dict"
+                            ],
+                            "name": "Run pytorch_state_dict inference for inputs with batch_size: 2 and size parameter n: 0",
+                            "recommended_env": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "conda_compare": "usage: conda [-h] [-v] [--no-plugins] [-V] COMMAND ...\n\nconda is a tool for managing and deploying applications, environments and packages.\n\noptions:\n  -h, --help            Show this help message and exit.\n  -v, --verbose         Can be used multiple times. Once for detailed output,\n                        twice for INFO logging, thrice for DEBUG logging, four\n                        times for TRACE logging.\n  --no-plugins          Disable all plugins that are not built into conda.\n  -V, --version         Show the conda version number and exit.\n\ncommands:\n  The following built-in and plugins subcommands are available.\n\n  COMMAND\n    activate            Activate a conda environment.\n    clean               Remove unused packages and caches.\n    commands            List all available conda subcommands (including those\n                        from plugins). Generally only used by tab-completion.\n    compare             Compare packages between conda environments.\n    config              Modify configuration values in .condarc.\n    content-trust       Signing and verification tools for Conda\n    create              Create a new conda environment from a list of\n                        specified packages.\n    deactivate          Deactivate the current active conda environment.\n    doctor              Display a health report for your environment.\n    env                 Create and manage conda environments.\n    export              Export a given environment\n    info                Display information about current conda install.\n    init                Initialize conda for shell interaction.\n    install             Install a list of packages into a specified conda\n                        environment.\n    list                List installed packages in a conda environment.\n    menuinst            A subcommand for installing and removing shortcuts via\n                        menuinst.\n    notices             Retrieve latest channel notifications.\n    package             Create low-level conda packages. (EXPERIMENTAL)\n    remove (uninstall)  Remove a list of packages from a specified conda\n                        environment.\n    rename              Rename an existing environment.\n    repoquery           Advanced search for repodata.\n    run                 Run an executable in a conda environment.\n    search              Search for packages and display associated information\n                        using the MatchSpec format.\n    token               Set repository access token and configure\n                        default_channels\n    tos                 A subcommand for viewing, accepting, rejecting, and\n                        otherwise interacting with a channel's Terms of\n                        Service (ToS). This plugin periodically checks for\n                        updated Terms of Service for the active/selected\n                        channels. Channels with a Terms of Service will need\n                        to be accepted or rejected prior to use. Conda will\n                        only allow package installation from channels without\n                        a Terms of Service or with an accepted Terms of\n                        Service. Attempting to use a channel with a rejected\n                        Terms of Service will result in an error.\n    update (upgrade)    Update conda packages to the latest compatible\n                        version.\n",
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "torchscript"
+                            ],
+                            "name": "Reproduce test outputs from test inputs (torchscript)",
+                            "recommended_env": {
+                                "channels": [
+                                    "pytorch",
+                                    "conda-forge",
+                                    "nodefaults"
+                                ],
+                                "dependencies": [
+                                    "conda-forge::bioimageio.core",
+                                    "mkl ==2024.0.0",
+                                    "numpy <2",
+                                    "pip",
+                                    "pytorch==1.13.0",
+                                    "setuptools <70.0.0",
+                                    "torchaudio==0.13.0",
+                                    "torchvision==0.14.0"
+                                ],
+                                "name": null
+                            },
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "conda_compare": null,
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "torchscript"
+                            ],
+                            "name": "Run torchscript inference for inputs with batch_size: 1 and size parameter n: 0",
+                            "recommended_env": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "conda_compare": null,
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "torchscript"
+                            ],
+                            "name": "Run torchscript inference for inputs with batch_size: 2 and size parameter n: 0",
                             "recommended_env": null,
                             "status": "passed",
                             "warnings": []
@@ -1185,17 +1297,17 @@
                     "metadata_completeness": null,
                     "name": "bioimageio format validation",
                     "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/emotional-cricket/files/rdf.yaml?version=v0",
-                    "status": "failed",
+                    "status": "passed",
                     "traceback": null,
                     "type": "model",
                     "warnings": null
                 },
-                "error": "\n|        ❌        |                                bioimageio format validation                               |\n|       ---       |                                            ---                                            |\n| status          | failed                                                                                    |\n| source          | https://hypha.aicell.io/bioimage-io/artifacts/emotional-cricket/files/rdf.yaml?version=v0 |\n| id              | emotional-cricket                                                                         |\n| format version  | model 0.5.4                                                                               |\n| bioimageio.core | 0.8.0                                                                                     |\n| bioimageio.spec | 0.5.4.1                                                                                   |\n\n|     |                        Location                        |                                                                                                           Details                                                                                                           |\n| --- |                          ---                           |                                                                                                             ---                                                                                                             |\n| ❌   |                                                        | Created `InvalidDescr` object.                                                                                                                                                                                              |\n| 🔍   | `context:perform_io_checks`                            | True                                                                                                                                                                                                                        |\n| 🔍   | `context:root`                                         | https://hypha.aicell.io/bioimage-io/artifacts/emotional-cricket/files?version=v0                                                                                                                                            |\n| 🔍   | `context:known_files.test_input.npy`                   | f1f8ca796543958272fa0886bf95fd2b60be86fcb382bddba5795d226c10b2e7                                                                                                                                                            |\n| 🔍   | `context:known_files.sample_input_0.tif`               | 05fbcc83d103c5d6368556e288afad6b11360cb21aeddef72d14330e46f41744                                                                                                                                                            |\n| 🔍   | `context:known_files.test_output.npy`                  | 9deff125e441645c0ce0c1839523becb1b3d35576c47d6a8074a4fe1daa96e42                                                                                                                                                            |\n| 🔍   | `context:known_files.sample_output_0.tif`              | 3e9470b1ffc9cc9629ad7d7adde79484c194a3df662259a9146cf2cee8d57414                                                                                                                                                            |\n| 🔍   | `context:known_files.unet.py`                          | 2da9f7149e144b63fee715fb8fe5154e96bf9aa230d176c91e923d528ef0c4e1                                                                                                                                                            |\n| 🔍   | `context:known_files.confocal_pnas_3d.pytorch`         | 636ceb89e6f798fe27b1c4c5ef237dee6815443b0d23915b850624270d91fa76                                                                                                                                                            |\n| 🔍   | `context:known_files.torchscript_tracing.pt`           | f1c0976293f5e50e68a283289ed4560adea53a2d59ea06070bbfd12769cfb7ad                                                                                                                                                            |\n| ❌   |                                                        | bioimageio.spec format validation model 0.5.4                                                                                                                                                                               |\n| ❌   | `cite.0.url`                                           | Value error, 403: Forbidden https://elifesciences.org/articles/57613                                                                                                                                                        |\n|     |                                                        |                                                                                                                                                                                                                             |\n| ⚠   | `documentation`                                        | No '# Validation' (sub)section found in unet3d.md.                                                                                                                                                                          |\n| ⚠   | `inputs.0.sample_tensor.source.(RelativeFilePath)`     | Failed to validate URL 'https://hypha.aicell.io/bioimage-io/artifacts/emotional-cricket/files/sample_input_0.tif?version=v0': HTTPSConnectionPool(host='hypha.aicell.io', port=443): Read timed out. (read timeout=3)       |\n|     |                                                        | request: <PreparedRequest [GET]>                                                                                                                                                                                            |\n|     |                                                        | response: None                                                                                                                                                                                                              |\n| ⚠   | `outputs.0.test_tensor.source.(RelativeFilePath)`      | Failed to validate URL 'https://hypha.aicell.io/bioimage-io/artifacts/emotional-cricket/files/test_output.npy?version=v0': HTTPSConnectionPool(host='hypha.aicell.io', port=443): Read timed out. (read timeout=3)          |\n|     |                                                        | request: <PreparedRequest [GET]>                                                                                                                                                                                            |\n|     |                                                        | response: None                                                                                                                                                                                                              |\n| ⚠   | `outputs.0.sample_tensor.source.(RelativeFilePath)`    | Failed to validate URL 'https://hypha.aicell.io/bioimage-io/artifacts/emotional-cricket/files/sample_output_0.tif?version=v0': HTTPSConnectionPool(host='hypha.aicell.io', port=443): Read timed out. (read timeout=3)      |\n|     |                                                        | request: <PreparedRequest [GET]>                                                                                                                                                                                            |\n|     |                                                        | response: None                                                                                                                                                                                                              |\n| ⚠   | `weights.pytorch_state_dict.source.(RelativeFilePath)` | Failed to validate URL 'https://hypha.aicell.io/bioimage-io/artifacts/emotional-cricket/files/confocal_pnas_3d.pytorch?version=v0': HTTPSConnectionPool(host='hypha.aicell.io', port=443): Read timed out. (read timeout=3) |\n|     |                                                        | request: <PreparedRequest [GET]>                                                                                                                                                                                            |\n|     |                                                        | response: None                                                                                                                                                                                                              |\n| ✔️  | `type`                                                 | Has expected resource type                                                                                                                                                                                                  |\n",
+                "error": null,
                 "links": [
                     "ilastik/ilastik"
                 ],
-                "score": 0.0,
-                "status": "failed"
+                "score": 1.0,
+                "status": "passed"
             },
             "1.4.2b5": {
                 "badge": null,
