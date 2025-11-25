@@ -24,11 +24,19 @@ on:
             deepimagej,
             ilastik,
           ]
+      recompute-reports-pattern:
+        type: string
+        description: 'File name pattern to skip restoring matching reports (to recompute them).'
+        required: false
+        default: ''
 
   push:
     branches: [main]
   schedule:
     - cron: '0 0,6,12,18 * * *'
+
+env:
+  RECOMPUTE_REPORTS_PATTERN: ${{ inputs.recompute-reports-pattern || '' }}
 
 jobs:
   index:

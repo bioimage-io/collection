@@ -21,14 +21,20 @@ runs:
       shell: bash
     - name: move tool-specific reports
       run: |
+        import os
         from pathlib import Path
+        from fnmatch import fnmatch
 
         print("cwd:", Path().resolve())
         src = Path("gh-pages/reports")
         assert src.exists(), f"Source path {src} does not exist"
         tgt = Path("reports")
         count = 0
+        skip = os.environ.get("RECOMPUTE_REPORTS_PATTERN", "")
         for p_src in src.glob("**/${{inputs.tool}}_*.json"):
+            if skip and fnmatch(p_src.name, skip):
+               print("Skipping", p_src)
+                continue
             p_tgt = tgt / p_src.relative_to(src)
             p_tgt.parent.mkdir(parents=True, exist_ok=True)
             p_src.rename(p_tgt)
