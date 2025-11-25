@@ -104,19 +104,6 @@
                         "msg": "Failed to validate URL 'https://hypha.aicell.io/bioimage-io/artifacts/emotional-cricket/files/confocal_pnas_3d.pytorch?version=v0': HTTPSConnectionPool(host='hypha.aicell.io', port=443): Read timed out. (read timeout=3)\nrequest: <PreparedRequest [GET]>\nresponse: None",
                         "severity": 30,
                         "type": "warning"
-                    },
-                    {
-                        "loc": [
-                            "weights",
-                            "pytorch_state_dict",
-                            "architecture",
-                            "function-after[_validate_sha256(), ArchitectureFromFileDescr]",
-                            "source",
-                            "RelativeFilePath"
-                        ],
-                        "msg": "Failed to validate URL 'https://hypha.aicell.io/bioimage-io/artifacts/emotional-cricket/files/unet.py?version=v0': HTTPSConnectionPool(host='hypha.aicell.io', port=443): Read timed out. (read timeout=3)\nrequest: <PreparedRequest [GET]>\nresponse: None",
-                        "severity": 30,
-                        "type": "warning"
                     }
                 ]
             },
