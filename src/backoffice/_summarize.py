@@ -60,6 +60,20 @@ def _summarize(item: IndexItem, v: IndexItemVersion):
             continue
         try:
             data = json.loads(report_path.read_text(encoding="utf-8"))
+            if "tool" in data:
+                if data["tool"] != tool:
+                    warnings.warn(
+                        f"Report {report_path} has inconsistent tool name '{data['tool']}' != '{tool}'."
+                    )
+                del data["tool"]
+
+            if "tool_version" in data:
+                if data["tool_version"] != tool_version:
+                    warnings.warn(
+                        f"Report {report_path} has inconsistent tool version '{data['tool_version']}' != '{tool_version}'."
+                    )
+                del data["tool_version"]
+
             report = ToolCompatibilityReport(
                 tool=tool, tool_version=tool_version, **data
             )
