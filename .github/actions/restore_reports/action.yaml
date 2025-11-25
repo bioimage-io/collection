@@ -34,7 +34,7 @@ runs:
         assert src.exists(), f"Source path {src} does not exist"
         tgt = Path("reports")
         count = 0
-        skip = os.environ.get("RECOMPUTE_REPORTS_PATTERN", "")
+        skip = "${{inputs.recompute-reports-pattern}}"
         for p_src in src.glob("**/${{inputs.tool}}_*.json"):
             if skip and fnmatch(p_src.name, skip):
                 print("Skipping", p_src)
