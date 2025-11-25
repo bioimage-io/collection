@@ -2,6 +2,12 @@ name: check compatibility ilastik
 
 on:
   workflow_call:
+    inputs:
+      recompute-reports-pattern:
+        type: string
+        description: Glob file name pattern to skip reports with (to recompute them).
+        required: false
+        default: ''
 
 jobs:
   setup:
@@ -39,6 +45,7 @@ jobs:
       - uses: ./.github/actions/restore_reports
         with:
           tool: ilastik
+          recompute-reports-pattern: ${{ inputs.recompute-reports-pattern }}
       - name: Download ilastik env
         run: wget --output-document env.yaml ${{ matrix.env_url }}
       - name: ignore unrelated packages

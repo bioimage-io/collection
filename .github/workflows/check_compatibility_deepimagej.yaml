@@ -3,6 +3,12 @@ name: check compatibility deepimagej
 concurrency: deepimagej
 on:
   workflow_call:
+    inputs:
+      recompute-reports-pattern:
+        type: string
+        description: Glob file name pattern to skip reports with (to recompute them).
+        required: false
+        default: ''
 
 jobs:
   run:
@@ -21,6 +27,7 @@ jobs:
       - uses: ./.github/actions/restore_reports
         with:
           tool: deepimagej
+          recompute-reports-pattern: ${{ inputs.recompute-reports-pattern }}
       - uses: actions/setup-python@v5
         with:
           python-version: '3.10'

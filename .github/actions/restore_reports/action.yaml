@@ -5,6 +5,10 @@ inputs:
   tool:
     description: 'The tool for which to restore reports (e.g. biapy, bioimageio.core, careamics, ilastik)'
     required: true
+  recompute-reports-pattern:
+    description: Glob file name pattern to skip reports with (to recompute them).
+    required: false
+    default: ''
 
 runs:
   using: 'composite'

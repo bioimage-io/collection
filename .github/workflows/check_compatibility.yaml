@@ -35,9 +35,6 @@ on:
   schedule:
     - cron: '0 0,6,12,18 * * *'
 
-env:
-  RECOMPUTE_REPORTS_PATTERN: ${{ inputs.recompute-reports-pattern || '' }}
-
 jobs:
   index:
     uses: ./.github/workflows/index.yaml
@@ -49,26 +46,36 @@ jobs:
     needs: index
     if: needs.index.outputs.cache-hit != 'true' || contains(github.event.inputs.rerun, 'all') || contains(github.event.inputs.rerun, 'biapy')
     uses: ./.github/workflows/check_compatibility_biapy.yaml
+    with:
+      recompute-reports-pattern: ${{ inputs.recompute-reports-pattern }}
     secrets: inherit
   bioimageio_core:
     needs: index
     if: needs.index.outputs.cache-hit != 'true' || contains(github.event.inputs.rerun, 'all') || contains(github.event.inputs.rerun, 'bioimageio.core')
     uses: ./.github/workflows/check_compatibility_bioimageio_core.yaml
+    with:
+      recompute-reports-pattern: ${{ inputs.recompute-reports-pattern }}
     secrets: inherit
   careamics:
     needs: index
     if: needs.index.outputs.cache-hit != 'true' || contains(github.event.inputs.rerun, 'all') || contains(github.event.inputs.rerun, 'careamics')
     uses: ./.github/workflows/check_compatibility_careamics.yaml
+    with:
+      recompute-reports-pattern: ${{ inputs.recompute-reports-pattern }}
     secrets: inherit
   deepimagej:
     needs: index
     if: needs.index.outputs.cache-hit != 'true' || contains(github.event.inputs.rerun, 'all') || contains(github.event.inputs.rerun, 'deepimagej')
     uses: ./.github/workflows/check_compatibility_deepimagej.yaml
+    with:
+      recompute-reports-pattern: ${{ inputs.recompute-reports-pattern }}
     secrets: inherit
   ilastik:
     needs: index
     if: needs.index.outputs.cache-hit != 'true' || contains(github.event.inputs.rerun, 'all') || contains(github.event.inputs.rerun, 'ilastik')
     uses: ./.github/workflows/check_compatibility_ilastik.yaml
+    with:
+      recompute-reports-pattern: ${{ inputs.recompute-reports-pattern }}
     secrets: inherit
 
   summarize:

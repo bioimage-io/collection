@@ -2,6 +2,12 @@ name: check compatibility bioimageio.core
 
 on:
   workflow_call:
+    inputs:
+      recompute-reports-pattern:
+        type: string
+        description: Glob file name pattern to skip reports with (to recompute them).
+        required: false
+        default: ''
 
 jobs:
   run:
@@ -24,6 +30,7 @@ jobs:
       - uses: ./.github/actions/restore_reports
         with:
           tool: bioimageio.core
+          recompute-reports-pattern: ${{ inputs.recompute-reports-pattern }}
       - run: python scripts/check_compatibility_bioimageio_core.py
         shell: bash -el {0}
         env:

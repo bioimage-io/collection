@@ -2,6 +2,12 @@ name: check compatibility careamics
 
 on:
   workflow_call:
+    inputs:
+      recompute-reports-pattern:
+        type: string
+        description: Glob file name pattern to skip reports with (to recompute them).
+        required: false
+        default: ''
 
 jobs:
   run:
@@ -13,6 +19,7 @@ jobs:
       - uses: ./.github/actions/restore_reports
         with:
           tool: careamics
+          recompute-reports-pattern: ${{ inputs.recompute-reports-pattern }}
       - name: Setup careamics env
         uses: mamba-org/setup-micromamba@v1
         with:
