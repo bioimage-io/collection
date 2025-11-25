@@ -1509,9 +1509,11 @@
         "deepimagej": {
             "3.1.0-snapshot": {
                 "badge": null,
-                "details": "Failed to parse compatibility report.",
-                "error": "backoffice.compatibility.ToolCompatibilityReport() got multiple values for keyword argument 'tool'",
-                "links": [],
+                "details": null,
+                "error": "deepimagej only supports single tensor input (found 6)",
+                "links": [
+                    "deepimagej/deepimagej"
+                ],
                 "score": 0.0,
                 "status": "failed"
             }
@@ -1519,16 +1521,16 @@
         "ilastik": {
             "1.4.1.post1": {
                 "badge": null,
-                "details": "Failed to parse compatibility report.",
-                "error": "backoffice.compatibility.ToolCompatibilityReport() got multiple values for keyword argument 'tool'",
+                "details": null,
+                "error": "ilastik only supports a single input/output tensor (found 6/3)",
                 "links": [],
                 "score": 0.0,
                 "status": "failed"
             },
             "1.4.2b5": {
                 "badge": null,
-                "details": "Failed to parse compatibility report.",
-                "error": "backoffice.compatibility.ToolCompatibilityReport() got multiple values for keyword argument 'tool'",
+                "details": null,
+                "error": "ilastik only supports a single input/output tensor (found 6/3)",
                 "links": [],
                 "score": 0.0,
                 "status": "failed"

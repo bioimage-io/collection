@@ -230,14 +230,14 @@
         "core_compatibility": 1.0,
         "metadata_completeness": 0.9019607843137255,
         "metadata_format": 1.0,
-        "overall_compatibility": 0.7254901960784313,
-        "overall_partner_tool_compatibility": 0.0,
+        "overall_compatibility": 0.8088235294117647,
+        "overall_partner_tool_compatibility": 0.3333333333333333,
         "tool_compatibility": {
             "biapy": 0.0,
             "bioimageio.core": 1.0,
             "careamics": 0.0,
             "deepimagej": 0.0,
-            "ilastik": 0.0
+            "ilastik": 1.0
         },
         "tool_compatibility_version_specific": {
             "biapy_3.6.5": 0.0,
@@ -248,8 +248,8 @@
             "careamics_0.0.17": 0.0,
             "careamics_0.0.18": 0.0,
             "deepimagej_3.1.0-snapshot": 0.0,
-            "ilastik_1.4.1.post1": 0.0,
-            "ilastik_1.4.2b5": 0.0
+            "ilastik_1.4.1.post1": 1.0,
+            "ilastik_1.4.2b5": 1.0
         }
     },
     "status": "passed",
@@ -641,9 +641,11 @@
         "deepimagej": {
             "3.1.0-snapshot": {
                 "badge": null,
-                "details": "Failed to parse compatibility report.",
-                "error": "backoffice.compatibility.ToolCompatibilityReport() got multiple values for keyword argument 'tool'",
-                "links": [],
+                "details": "OpenJDK 64-Bit Server VM warning: ignoring option PermSize=128m; support was removed in 8.0\nOpenJDK 64-Bit Server VM warning: Using incremental CMS is deprecated and will likely be removed in a future release\njava.lang.IllegalArgumentException: Invalid axis configuration: When axis type is 'spaces', an 'id' must be defined. Current configuration: type='space', id=null\n\tat io.bioimage.modelrunner.bioimageio.description.AxisV05.<init>(AxisV05.java:62)\n\tat io.bioimage.modelrunner.bioimageio.description.AxesV05.<init>(AxesV05.java:52)\n\tat io.bioimage.modelrunner.bioimageio.description.TensorSpecV05.<init>(TensorSpecV05.java:85)\n\tat io.bioimage.modelrunner.bioimageio.description.ModelDescriptorV05.buildInputTensors(ModelDescriptorV05.java:96)\n\tat io.bioimage.modelrunner.bioimageio.description.ModelDescriptor.buildModelDescription(ModelDescriptor.java:212)\n\tat io.bioimage.modelrunner.bioimageio.description.ModelDescriptorV05.<init>(ModelDescriptorV05.java:44)\n\tat io.bioimage.modelrunner.bioimageio.description.ModelDescriptorFactory.fromMap(ModelDescriptorFactory.java:128)\n\tat io.bioimage.modelrunner.bioimageio.description.ModelDescriptorFactory.readFromYamlTextString(ModelDescriptorFactory.java:109)\n\tat io.bioimage.modelrunner.bioimageio.BioimageioRepo.listAllModels(BioimageioRepo.java:202)\n\tat io.bioimage.modelrunner.bioimageio.BioimageioRepo.selectByID(BioimageioRepo.java:418)\n\tat io.bioimage.modelrunner.bioimageio.BioimageioRepo.downloadModelByID(BioimageioRepo.java:521)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\n\tat org.python.core.PyReflectedFunction.__call__(PyReflectedFunction.java:207)\n\tat org.python.core.PyReflectedFunction.__call__(PyReflectedFunction.java:225)\n\tat org.python.core.PyObject.__call__(PyObject.java:494)\n\tat org.python.core.PyObject.__call__(PyObject.java:498)\n\tat org.python.core.PyMethod.__call__(PyMethod.java:156)\n\tat org.python.pycode._pyx0.f$0(scripts/deepimagej_jython_scripts/deepimagej_download_model.py:110)\n\tat org.python.pycode._pyx0.call_function(scripts/deepimagej_jython_scripts/deepimagej_download_model.py)\n\tat org.python.core.PyTableCode.call(PyTableCode.java:173)\n\tat org.python.core.PyCode.call(PyCode.java:18)\n\tat org.python.core.Py.runCode(Py.java:1742)\n\tat org.python.util.PythonInterpreter.execfile(PythonInterpreter.java:297)\n\tat org.python.util.jython.runSimpleFile(jython.java:417)\n\tat org.python.util.jython.runStream(jython.java:449)\n\tat org.python.util.jython.runFile(jython.java:474)\n\tat org.python.util.jython.main(jython.java:678)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\n\tat net.imagej.launcher.ClassLauncher.launch(ClassLauncher.java:279)\n\tat net.imagej.launcher.ClassLauncher.run(ClassLauncher.java:186)\n\tat net.imagej.launcher.ClassLauncher.main(ClassLauncher.java:87)\nTraceback (most recent call last):\n  File \"scripts/deepimagej_jython_scripts/deepimagej_download_model.py\", line 83, in <module>\n    convert_npy_to_tif(mfp, test_name, descriptor.getInputTensors().get(0).getAxesOrder())\n  File \"scripts/deepimagej_jython_scripts/deepimagej_download_model.py\", line 40, in convert_npy_to_tif\n    rai = DecodeNumpy.loadNpy(os.path.join(folder_path, test_name))\n\tat io.bioimage.modelrunner.numpy.DecodeNumpy.loadNpy(DecodeNumpy.java:179)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\njava.lang.IllegalArgumentException: java.lang.IllegalArgumentException: Path provided does not correspond to a Numpy file: /home/runner/work/collection/collection/fiji/Fiji.app/models/DeepBacs Segmentation Boundary Model_10112025_182608/cfdcff5e-c4e4-4baf-826f-b453751a139d_raw_test_tensor.npy\n\nDeepBacs Segmentation Boundary Model: cfdcff5e-c4e4-4baf-826f-b453751a139d_raw_test_tensor.npy\n",
+                "error": "unable to download the model",
+                "links": [
+                    "deepimagej/deepimagej"
+                ],
                 "score": 0.0,
                 "status": "failed"
             }
@@ -651,19 +653,315 @@
         "ilastik": {
             "1.4.1.post1": {
                 "badge": null,
-                "details": "Failed to parse compatibility report.",
-                "error": "backoffice.compatibility.ToolCompatibilityReport() got multiple values for keyword argument 'tool'",
-                "links": [],
-                "score": 0.0,
-                "status": "failed"
+                "details": {
+                    "conda_list": null,
+                    "details": [
+                        {
+                            "conda_compare": null,
+                            "context": {
+                                "file_name": "rdf.yaml",
+                                "known_files": {
+                                    "10c6feba-1e0f-4d4e-92bd-27d7037eadca_prob_test_tensor.npy": "e4b8f2bfa5a25eccdb92aed69963be21e6e2f558c3d70d66d26a94a81d25a831",
+                                    "44a0b00b-f171-4fa2-9c39-160e610e9496.pt": "3a723821231e26e835af4f47da3f398b5e21bd341aacee0cca6e5f5d6ca00697",
+                                    "cfdcff5e-c4e4-4baf-826f-b453751a139d_raw_test_tensor.npy": "7bae2cd1ddc8efd1b62154c5896c817c899a8055c2f7b347ae00d9092ab39392"
+                                },
+                                "perform_io_checks": true,
+                                "root": "https://hypha.aicell.io/bioimage-io/artifacts/charismatic-whale/files?version=v0",
+                                "update_hashes": false
+                            },
+                            "errors": [],
+                            "loc": [],
+                            "name": "Successfully created `ModelDescr` object.",
+                            "recommended_env": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "conda_compare": null,
+                            "context": {
+                                "file_name": "rdf.yaml",
+                                "known_files": {
+                                    "10c6feba-1e0f-4d4e-92bd-27d7037eadca_prob_test_tensor.npy": "e4b8f2bfa5a25eccdb92aed69963be21e6e2f558c3d70d66d26a94a81d25a831",
+                                    "44a0b00b-f171-4fa2-9c39-160e610e9496.pt": "3a723821231e26e835af4f47da3f398b5e21bd341aacee0cca6e5f5d6ca00697",
+                                    "cfdcff5e-c4e4-4baf-826f-b453751a139d_raw_test_tensor.npy": "7bae2cd1ddc8efd1b62154c5896c817c899a8055c2f7b347ae00d9092ab39392"
+                                },
+                                "perform_io_checks": true,
+                                "root": "https://hypha.aicell.io/bioimage-io/artifacts/charismatic-whale/files?version=v0",
+                                "update_hashes": false
+                            },
+                            "errors": [],
+                            "loc": [],
+                            "name": "bioimageio.spec format validation model 0.5.4",
+                            "recommended_env": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "conda_compare": null,
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "type"
+                            ],
+                            "name": "Has expected resource type",
+                            "recommended_env": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "conda_compare": "usage: conda [-h] [-v] [--no-plugins] [-V] COMMAND ...\n\nconda is a tool for managing and deploying applications, environments and packages.\n\noptions:\n  -h, --help            Show this help message and exit.\n  -v, --verbose         Can be used multiple times. Once for detailed output,\n                        twice for INFO logging, thrice for DEBUG logging, four\n                        times for TRACE logging.\n  --no-plugins          Disable all plugins that are not built into conda.\n  -V, --version         Show the conda version number and exit.\n\ncommands:\n  The following built-in and plugins subcommands are available.\n\n  COMMAND\n    activate            Activate a conda environment.\n    clean               Remove unused packages and caches.\n    commands            List all available conda subcommands (including those\n                        from plugins). Generally only used by tab-completion.\n    compare             Compare packages between conda environments.\n    config              Modify configuration values in .condarc.\n    content-trust       Signing and verification tools for Conda\n    create              Create a new conda environment from a list of\n                        specified packages.\n    deactivate          Deactivate the current active conda environment.\n    doctor              Display a health report for your environment.\n    env                 Create and manage conda environments.\n    export              Export a given environment\n    info                Display information about current conda install.\n    init                Initialize conda for shell interaction.\n    install             Install a list of packages into a specified conda\n                        environment.\n    list                List installed packages in a conda environment.\n    notices             Retrieve latest channel notifications.\n    package             Create low-level conda packages. (EXPERIMENTAL)\n    remove (uninstall)  Remove a list of packages from a specified conda\n                        environment.\n    rename              Rename an existing environment.\n    repoquery           Advanced search for repodata.\n    run                 Run an executable in a conda environment.\n    search              Search for packages and display associated information\n                        using the MatchSpec format.\n    token               Set repository access token and configure\n                        default_channels\n    tos                 A subcommand for viewing, accepting, rejecting, and\n                        otherwise interacting with a channel's Terms of\n                        Service (ToS). This plugin periodically checks for\n                        updated Terms of Service for the active/selected\n                        channels. Channels with a Terms of Service will need\n                        to be accepted or rejected prior to use. Conda will\n                        only allow package installation from channels without\n                        a Terms of Service or with an accepted Terms of\n                        Service. Attempting to use a channel with a rejected\n                        Terms of Service will result in an error.\n    update (upgrade)    Update conda packages to the latest compatible\n                        version.\n",
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "torchscript"
+                            ],
+                            "name": "Reproduce test outputs from test inputs (torchscript)",
+                            "recommended_env": {
+                                "channels": [
+                                    "pytorch",
+                                    "conda-forge",
+                                    "nodefaults"
+                                ],
+                                "dependencies": [
+                                    "conda-forge::bioimageio.core",
+                                    "numpy <2",
+                                    "pip",
+                                    "pytorch==2.2.0",
+                                    "torchaudio==2.2.0",
+                                    "torchvision==0.17.0"
+                                ],
+                                "name": null
+                            },
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "conda_compare": null,
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "torchscript"
+                            ],
+                            "name": "Run torchscript inference for inputs with batch_size: 1 and size parameter n: 0",
+                            "recommended_env": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "conda_compare": null,
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "torchscript"
+                            ],
+                            "name": "Run torchscript inference for inputs with batch_size: 1 and size parameter n: 1",
+                            "recommended_env": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "conda_compare": null,
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "torchscript"
+                            ],
+                            "name": "Run torchscript inference for inputs with batch_size: 1 and size parameter n: 2",
+                            "recommended_env": null,
+                            "status": "passed",
+                            "warnings": []
+                        }
+                    ],
+                    "env": [
+                        [
+                            "bioimageio.core",
+                            "0.8.0",
+                            "",
+                            ""
+                        ],
+                        [
+                            "bioimageio.spec",
+                            "0.5.4.1",
+                            "",
+                            ""
+                        ]
+                    ],
+                    "format_version": "0.5.4",
+                    "id": "charismatic-whale",
+                    "metadata_completeness": null,
+                    "name": "bioimageio format validation",
+                    "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/charismatic-whale/files/rdf.yaml?version=v0",
+                    "status": "passed",
+                    "traceback": null,
+                    "type": "model",
+                    "warnings": null
+                },
+                "error": null,
+                "links": [
+                    "ilastik/ilastik"
+                ],
+                "score": 1.0,
+                "status": "passed"
             },
             "1.4.2b5": {
                 "badge": null,
-                "details": "Failed to parse compatibility report.",
-                "error": "backoffice.compatibility.ToolCompatibilityReport() got multiple values for keyword argument 'tool'",
-                "links": [],
-                "score": 0.0,
-                "status": "failed"
+                "details": {
+                    "conda_list": null,
+                    "details": [
+                        {
+                            "conda_compare": null,
+                            "context": {
+                                "file_name": "rdf.yaml",
+                                "known_files": {
+                                    "10c6feba-1e0f-4d4e-92bd-27d7037eadca_prob_test_tensor.npy": "e4b8f2bfa5a25eccdb92aed69963be21e6e2f558c3d70d66d26a94a81d25a831",
+                                    "44a0b00b-f171-4fa2-9c39-160e610e9496.pt": "3a723821231e26e835af4f47da3f398b5e21bd341aacee0cca6e5f5d6ca00697",
+                                    "cfdcff5e-c4e4-4baf-826f-b453751a139d_raw_test_tensor.npy": "7bae2cd1ddc8efd1b62154c5896c817c899a8055c2f7b347ae00d9092ab39392"
+                                },
+                                "perform_io_checks": true,
+                                "root": "https://hypha.aicell.io/bioimage-io/artifacts/charismatic-whale/files?version=v0",
+                                "update_hashes": false
+                            },
+                            "errors": [],
+                            "loc": [],
+                            "name": "Successfully created `ModelDescr` object.",
+                            "recommended_env": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "conda_compare": null,
+                            "context": {
+                                "file_name": "rdf.yaml",
+                                "known_files": {
+                                    "10c6feba-1e0f-4d4e-92bd-27d7037eadca_prob_test_tensor.npy": "e4b8f2bfa5a25eccdb92aed69963be21e6e2f558c3d70d66d26a94a81d25a831",
+                                    "44a0b00b-f171-4fa2-9c39-160e610e9496.pt": "3a723821231e26e835af4f47da3f398b5e21bd341aacee0cca6e5f5d6ca00697",
+                                    "cfdcff5e-c4e4-4baf-826f-b453751a139d_raw_test_tensor.npy": "7bae2cd1ddc8efd1b62154c5896c817c899a8055c2f7b347ae00d9092ab39392"
+                                },
+                                "perform_io_checks": true,
+                                "root": "https://hypha.aicell.io/bioimage-io/artifacts/charismatic-whale/files?version=v0",
+                                "update_hashes": false
+                            },
+                            "errors": [],
+                            "loc": [],
+                            "name": "bioimageio.spec format validation model 0.5.4",
+                            "recommended_env": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "conda_compare": null,
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "type"
+                            ],
+                            "name": "Has expected resource type",
+                            "recommended_env": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "conda_compare": "usage: conda [-h] [-v] [--no-plugins] [-V] COMMAND ...\n\nconda is a tool for managing and deploying applications, environments and packages.\n\noptions:\n  -h, --help            Show this help message and exit.\n  -v, --verbose         Can be used multiple times. Once for detailed output,\n                        twice for INFO logging, thrice for DEBUG logging, four\n                        times for TRACE logging.\n  --no-plugins          Disable all plugins that are not built into conda.\n  -V, --version         Show the conda version number and exit.\n\ncommands:\n  The following built-in and plugins subcommands are available.\n\n  COMMAND\n    activate            Activate a conda environment.\n    clean               Remove unused packages and caches.\n    commands            List all available conda subcommands (including those\n                        from plugins). Generally only used by tab-completion.\n    compare             Compare packages between conda environments.\n    config              Modify configuration values in .condarc.\n    content-trust       Signing and verification tools for Conda\n    create              Create a new conda environment from a list of\n                        specified packages.\n    deactivate          Deactivate the current active conda environment.\n    doctor              Display a health report for your environment.\n    env                 Create and manage conda environments.\n    export              Export a given environment\n    info                Display information about current conda install.\n    init                Initialize conda for shell interaction.\n    install             Install a list of packages into a specified conda\n                        environment.\n    list                List installed packages in a conda environment.\n    menuinst            A subcommand for installing and removing shortcuts via\n                        menuinst.\n    notices             Retrieve latest channel notifications.\n    package             Create low-level conda packages. (EXPERIMENTAL)\n    remove (uninstall)  Remove a list of packages from a specified conda\n                        environment.\n    rename              Rename an existing environment.\n    repoquery           Advanced search for repodata.\n    run                 Run an executable in a conda environment.\n    search              Search for packages and display associated information\n                        using the MatchSpec format.\n    token               Set repository access token and configure\n                        default_channels\n    tos                 A subcommand for viewing, accepting, rejecting, and\n                        otherwise interacting with a channel's Terms of\n                        Service (ToS). This plugin periodically checks for\n                        updated Terms of Service for the active/selected\n                        channels. Channels with a Terms of Service will need\n                        to be accepted or rejected prior to use. Conda will\n                        only allow package installation from channels without\n                        a Terms of Service or with an accepted Terms of\n                        Service. Attempting to use a channel with a rejected\n                        Terms of Service will result in an error.\n    update (upgrade)    Update conda packages to the latest compatible\n                        version.\n",
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "torchscript"
+                            ],
+                            "name": "Reproduce test outputs from test inputs (torchscript)",
+                            "recommended_env": {
+                                "channels": [
+                                    "pytorch",
+                                    "conda-forge",
+                                    "nodefaults"
+                                ],
+                                "dependencies": [
+                                    "conda-forge::bioimageio.core",
+                                    "numpy <2",
+                                    "pip",
+                                    "pytorch==2.2.0",
+                                    "torchaudio==2.2.0",
+                                    "torchvision==0.17.0"
+                                ],
+                                "name": null
+                            },
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "conda_compare": null,
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "torchscript"
+                            ],
+                            "name": "Run torchscript inference for inputs with batch_size: 1 and size parameter n: 0",
+                            "recommended_env": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "conda_compare": null,
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "torchscript"
+                            ],
+                            "name": "Run torchscript inference for inputs with batch_size: 1 and size parameter n: 1",
+                            "recommended_env": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "conda_compare": null,
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "torchscript"
+                            ],
+                            "name": "Run torchscript inference for inputs with batch_size: 1 and size parameter n: 2",
+                            "recommended_env": null,
+                            "status": "passed",
+                            "warnings": []
+                        }
+                    ],
+                    "env": [
+                        [
+                            "bioimageio.core",
+                            "0.8.0",
+                            "",
+                            ""
+                        ],
+                        [
+                            "bioimageio.spec",
+                            "0.5.4.1",
+                            "",
+                            ""
+                        ]
+                    ],
+                    "format_version": "0.5.4",
+                    "id": "charismatic-whale",
+                    "metadata_completeness": null,
+                    "name": "bioimageio format validation",
+                    "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/charismatic-whale/files/rdf.yaml?version=v0",
+                    "status": "passed",
+                    "traceback": null,
+                    "type": "model",
+                    "warnings": null
+                },
+                "error": null,
+                "links": [
+                    "ilastik/ilastik"
+                ],
+                "score": 1.0,
+                "status": "passed"
             }
         }
     }
