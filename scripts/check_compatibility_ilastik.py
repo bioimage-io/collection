@@ -133,13 +133,18 @@ def check_compatibility_ilastik_impl(
             if bioimageio.core.__version__.startswith("0.5."):
                 summary = summary[-1]
 
-        status: Literal["passed", "failed"]
-        status = summary["status"] if isinstance(summary, dict) else summary.status  # type: ignore
-        assert status == "passed" or status == "failed", status
-
         details = (
             summary if isinstance(summary, dict) else summary.model_dump(mode="json")
         )
+        status: Literal["passed", "failed"] = "failed"
+        for d in details.get("details", []):  # pyright: ignore[reportUnknownVariableType]
+            if (
+                d.get("name", "").startswith("Reproduce test outputs from test inputs")
+                and d.get("status") == "passed"
+            ):
+                status = "passed"
+                break
+
         error = (
             None
             if status == "passed"
