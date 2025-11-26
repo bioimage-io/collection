@@ -5,19 +5,20 @@ import json
 from pathlib import Path
 from typing import Any
 
+import mkdocs_gen_files
 from bioimageio.spec.summary import ValidationSummary
 
 from backoffice.index import load_index
 from backoffice.utils_pure import get_summary_file_path
 
 
-def generate_report_page(
+def generate_compatibility_page(
     resource_id: str,
     version: str,
     core_details: dict[str, Any],
     output_dir: Path,
 ) -> Path:
-    """Generate an individual report page with ValidationSummary HTML.
+    """Generate an individual compatibility report with ValidationSummary HTML.
 
     Args:
         resource_id: The resource ID (short form, without prefix)
@@ -26,7 +27,7 @@ def generate_report_page(
         output_dir: Directory to write the report page
 
     Returns:
-        Path to the generated report page (relative to docs/)
+        Path to the generated compatibility report page (relative to docs/)
     """
     # Convert details dict to ValidationSummary
     try:
@@ -40,23 +41,23 @@ def generate_report_page(
     # Create markdown file with HTML content
     # Replace colons with double dash for filesystem compatibility
     safe_resource_id = resource_id.replace(":", "--")
-    report_dir = output_dir / "reports" / safe_resource_id
-    report_dir.mkdir(parents=True, exist_ok=True)
-    report_file = report_dir / f"{version}_core.md"
+    relative_path = Path(output_dir) / safe_resource_id / f"{version}_core.md"
 
     markdown_content = f"""---
-title: {resource_id}/{version} - Core Validation Report
+title: {resource_id}/{version} - Core Compatibility Report
 ---
 
-# Core Validation Report: {resource_id}/{version}
+# Core Compatibility Report: {resource_id}/{version}
 
 {html_content}
 """
 
-    _ = report_file.write_text(markdown_content, encoding="utf-8")
+    # Write using gen-files plugin
+    with mkdocs_gen_files.open(str(relative_path), "w", encoding="utf-8") as f:
+        f.write(markdown_content)
 
-    # Return relative path from docs/ root (with safe resource ID)
-    return Path("reports") / safe_resource_id / f"{version}_core.html"
+    # Return relative path from compatibility/
+    return Path(safe_resource_id) / f"{version}_core"
 
 
 def generate_html_table(
@@ -170,8 +171,7 @@ def generate_html_table(
 
         # Create core score with link to report page if available
         if row.get("core_report_page"):
-            # Use absolute path from site root for proper navigation in deployed docs
-            core_link = "/" + row["core_report_page"].replace("\\", "/")
+            core_link = row["core_report_page"].replace("\\", "/")
             core_html = f'<a href="{core_link}">{html.escape(row["core_str"])}</a>'
         else:
             core_html = html.escape(row["core_str"])
@@ -283,15 +283,15 @@ def generate_html_table(
     return "\n".join(html_parts)
 
 
-def generate_reports_overview(
+def generate_compatibility_overview(
     index_path: Path = Path("gh-pages/index.json"),
-    output_path: Path = Path("docs/reports_overview.md"),
+    output_path: Path = Path("docs/compatibility"),
 ) -> None:
     """Generate a markdown page with compatibility report overview.
 
     Args:
         index_path: Path to index.json
-        output_path: Path to write the markdown overview
+        output_path: Directory to write the markdown overview
     """
     index = load_index(index_path)
 
@@ -305,7 +305,7 @@ def generate_reports_overview(
         "",
         f"This page provides an overview of all {index.total} resources in the bioimage.io collection.",
         "",
-        f"*Last updated: {index.timestamp.isoformat(timespec='minutes')}*",
+        f"*Last updated: {index.timestamp.isoformat(sep=' ', timespec='minutes')}*",
         "",
     ]
 
@@ -385,11 +385,11 @@ def generate_reports_overview(
                 core_report = core_tests[latest_core_version]
                 if isinstance(core_report.get("details"), dict):
                     try:
-                        report_path = generate_report_page(
+                        report_path = generate_compatibility_page(
                             short_id,
                             latest_version,
                             core_report["details"],
-                            output_path.parent,
+                            output_path,
                         )
                         core_report_page = str(report_path).replace("\\", "/")
                     except Exception as e:
@@ -502,11 +502,17 @@ def generate_reports_overview(
         ]
     )
 
-    # Write output
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    _ = output_path.write_text("\n".join(lines), encoding="utf-8")
-    print(f"Generated reports overview at {output_path}")
+    # Write output using gen-files plugin
+    content = "\n".join(lines)
+    with mkdocs_gen_files.open(
+        str(output_path / "index.md"), "w", encoding="utf-8"
+    ) as f:
+        f.write(content)
+    print(f"Generated compatibility overview at {output_path}")
 
 
-if __name__ == "__main__":
-    generate_reports_overview()
+# Generate during MkDocs build via gen-files plugin
+generate_compatibility_overview(
+    index_path=Path("gh-pages/index.json"),
+    output_path=Path("compatibility"),
+)

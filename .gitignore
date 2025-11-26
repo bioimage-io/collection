@@ -9,8 +9,6 @@ scripts/check_compatibility_java_software/test_summaries_default_default
 build/
 gh-pages/
 index.json
-pdoc_docs/
 reports/
 site/
-docs/reports_overview.md
 .coverage

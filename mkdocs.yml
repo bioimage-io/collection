@@ -104,6 +104,9 @@ plugins:
             extensions:
               - griffe_pydantic:
                   schema: true
+  - gen-files:
+      scripts:
+        - scripts/generate_compatibility_overview.py
   - search
   - section-index
 
@@ -138,12 +141,12 @@ markdown_extensions:
 nav:
   - Home: index.md
   - API Reference: api.md
-  - Compatibility Reports: reports_overview.md
+  - Compatibility Reports: compatibility/index.md
   - Changelog: changelog.md
   - Coverage report: coverage.md
 
 not_in_nav: |
-  /reports/**/*.md
+  compatibility/**/*.md
 
 extra:
   social:

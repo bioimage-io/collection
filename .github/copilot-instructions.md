@@ -45,10 +45,10 @@ project_root = Path(__file__).parent.parent if hasattr(__file__, 'parent') else 
 sys.path.insert(0, str(project_root / "src"))
 
 # Now we can import from scripts
-exec(open(project_root / "scripts" / "generate_reports_overview.py").read())
+exec(open(project_root / "scripts" / "generate_compatibility_overview.py").read())
 
 # Generate the overview
-generate_reports_overview(
+generate_compatibility_overview(
     index_path=project_root / "gh-pages" / "index.json",
     output_path=project_root / "docs" / "_reports_generated.md",
 )
@@ -59,7 +59,7 @@ with open(project_root / "docs" / "_reports_generated.md", encoding="utf-8") as 
     # Skip title since we have one above
     print("".join(lines[2:]))
 ```
-- Generate docs overview: `python scripts/generate_reports_overview.py` to create `docs/reports_overview.md` from index and summaries.
+- Generate docs overview: `python scripts/generate_compatibility_overview.py` to create `docs/compatibility/index.md` from index and summaries.
 - Tests/lint/typecheck: `ruff check`; `pyright -p pyproject.toml`; `pytest` (see `tests/test_utils_plain.py`).
 - Docs: `pip install -e .[docs]` then `mkdocs serve` locally; CI deploys with `mike` (see `mkdocs.yml`).
 
