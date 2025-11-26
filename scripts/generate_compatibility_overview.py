@@ -36,6 +36,42 @@ def generate_compatibility_page(
     try:
         validation_summary = ValidationSummary.model_validate(core_details)
         html_content = validation_summary.format_html()
+
+        # Patch the hard-coded colors to be theme-aware
+        # Replace hard-coded background and text colors with CSS variables
+        html_content = html_content.replace(
+            "color: #000000;", "color: var(--md-default-fg-color);"
+        )
+        html_content = html_content.replace(
+            "background-color: #ffffff;",
+            "background-color: var(--md-default-bg-color);",
+        )
+
+        # Make color classes theme-aware by using filter/opacity for dark mode
+        # Add theme-aware styles that work in both light and dark modes
+        theme_aware_styles = """
+<style>
+/* Theme-aware overrides for ValidationSummary */
+@media (prefers-color-scheme: dark) {
+    .r1 { color: #ff9999 !important; }
+    .r2 { color: #ff9999 !important; font-weight: bold; }
+    .r3 { color: #ffcccc !important; font-weight: bold; }
+    .r4 { color: #b0b0b0 !important; }
+    .r5 { color: #8888ff !important; }
+    .r6 { color: #ff88ff !important; }
+    .r7 { color: #ffff88 !important; }
+    .r8 { color: #ff6666 !important; font-weight: bold; }
+    .r9 { color: #ff88ff !important; font-weight: bold; }
+    .r11 { color: #88ff88 !important; }
+    .r13 { color: #88ffff !important; }
+    .r14 { color: #b0b0b0 !important; }
+    .r15 { color: #88ffff !important; text-decoration: underline; }
+}
+</style>
+"""
+        # Insert theme-aware styles before the content
+        html_content = theme_aware_styles + html_content
+
     except Exception as e:
         html_content = (
             f"<p>Error rendering validation summary: {html.escape(str(e))}</p>"
