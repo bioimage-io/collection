@@ -2702,9 +2702,9 @@
             "type": "model",
             "versions": [
                 {
-                    "comment": "Added resunetpp.py",
+                    "comment": "Updated rdf.yaml",
                     "created_at": "2025-07-01T22:42:07Z",
-                    "sha256": "a09fd22d8ba62c64b89e3ee7f60aa27737117b7c1f59eb2a09b4af90252df135",
+                    "sha256": "f1477e873ccc1809f8e5e756bd07be947f83cb17a723b9bf5e27532fab091dc0",
                     "source": "https://hypha.aicell.io/bioimage-io/artifacts/zealous-spider/files/rdf.yaml?version=v0",
                     "version": "v0"
                 }
@@ -3127,6 +3127,6 @@
             ]
         }
     ],
-    "timestamp": "2025-11-25T01:50:13.214516",
+    "timestamp": "2025-11-26T01:50:35.961007",
     "total": 240
 }

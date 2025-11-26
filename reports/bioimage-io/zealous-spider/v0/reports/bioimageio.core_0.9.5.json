@@ -65,19 +65,7 @@
             },
             {
                 "context": null,
-                "errors": [
-                    {
-                        "loc": [
-                            "weights",
-                            "pytorch_state_dict"
-                        ],
-                        "msg": "Output 'output0' disagrees with 36 of 65536 expected values (549.3 ppm).\n Max relative difference: 4.19e-03 (= \\|4.44e-02 - 4.45e-02\\|/\\|4.45e-02 + 1e-6\\|) at {'batch': np.int64(0), 'channel': np.int64(0), 'y': np.int64(204), 'x': np.int64(216)}\n Max absolute difference not accounted for by relative tolerance: 7.26e-04 (= \\|2.9424483e-01 - 2.9497117e-01\\|) at {'batch': np.int64(0), 'channel': np.int64(0), 'y': np.int64(205), 'x': np.int64(218)}\n Saved actual output to actual_output_output0_pytorch_state_dict.npy.",
-                        "traceback_html": "",
-                        "traceback_md": "",
-                        "type": "bioimageio.core",
-                        "with_traceback": false
-                    }
-                ],
+                "errors": [],
                 "loc": [
                     "weights",
                     "pytorch_state_dict"
@@ -100,7 +88,20 @@
                     "name": null
                 },
                 "saved_conda_compare": "Success. All the packages in the specification file are present in the environment with matching version and build string.\n",
-                "status": "failed",
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Run pytorch_state_dict inference for inputs with batch_size: 1 and size parameter n: 0",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
                 "warnings": []
             }
         ],
@@ -114,17 +115,19 @@
         ],
         "format_version": "0.5.6",
         "id": "zealous-spider",
-        "metadata_completeness": 0.703125,
+        "metadata_completeness": 0.71875,
         "name": "bioimageio format validation",
         "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
         "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/zealous-spider/files/rdf.yaml?version=v0",
-        "status": "valid-format",
+        "status": "passed",
         "traceback": null,
         "type": "model",
         "warnings": null
     },
-    "error": "Output 'output0' disagrees with 36 of 65536 expected values (549.3 ppm).\n Max relative difference: 4.19e-03 (= \\|4.44e-02 - 4.45e-02\\|/\\|4.45e-02 + 1e-6\\|) at {'batch': np.int64(0), 'channel': np.int64(0), 'y': np.int64(204), 'x': np.int64(216)}\n Max absolute difference not accounted for by relative tolerance: 7.26e-04 (= \\|2.9424483e-01 - 2.9497117e-01\\|) at {'batch': np.int64(0), 'channel': np.int64(0), 'y': np.int64(205), 'x': np.int64(218)}\n Saved actual output to actual_output_output0_pytorch_state_dict.npy.",
-    "links": [],
-    "score": 0.5,
-    "status": "failed"
+    "error": null,
+    "links": [
+        "bioimageio/bioimageio.core"
+    ],
+    "score": 1.0,
+    "status": "passed"
 }
