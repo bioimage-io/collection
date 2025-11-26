@@ -141,6 +141,8 @@ def generate_html_table(
         ".score-high { color: #22863a; font-weight: 600; }",
         ".score-med { color: #e36209; }",
         ".score-low { color: #cb2431; }",
+        ".score-high a, .score-med a, .score-low a { color: inherit; text-decoration: underline; text-decoration-style: dotted; text-decoration-thickness: 1px; text-underline-offset: 2px; }",
+        ".score-high a:hover, .score-med a:hover, .score-low a:hover { text-decoration-style: solid; text-decoration-thickness: 2px; }",
         "@media (prefers-color-scheme: dark) {",
         "  .reports-table th { background: #2d2d2d; color: #e8e8e8; }",
         "  .reports-table th:hover { background: #3d3d3d; }",
@@ -214,7 +216,7 @@ def generate_html_table(
         # Create core score with link to report page if available
         if row.get("core_report_page"):
             core_link = row["core_report_page"].replace("\\", "/")
-            core_html = f'<a href="{core_link}">{html.escape(row["core_str"])}</a>'
+            core_html = f'<a href="{core_link}" title="View detailed compatibility report">{html.escape(row["core_str"])}</a>'
         else:
             core_html = html.escape(row["core_str"])
 
