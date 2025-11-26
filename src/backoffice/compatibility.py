@@ -161,6 +161,8 @@ class CompatibilityScores(Node):
                 # as penalty if the last_version isn't fully compatible
                 top4 = sorted(version_scores.values(), reverse=True)[:4]
                 score = min(0.8, sum(top4) / len(top4))
+                # however, this score cannot be lower than the latest version score
+                score = max(score, version_scores[latest_version])
 
             agglomerated[tool] = score
 
