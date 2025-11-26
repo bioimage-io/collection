@@ -3,10 +3,11 @@
 import html
 import json
 from pathlib import Path
-from typing import Any
+from typing import Any, Optional
 
 import mkdocs_gen_files
 from bioimageio.spec.summary import ValidationSummary
+from packaging.version import parse as parse_version
 
 from backoffice.index import load_index
 from backoffice.utils_pure import get_summary_file_path
@@ -67,10 +68,21 @@ def generate_compatibility_page(
     .r14 { color: #b0b0b0 !important; }
     .r15 { color: #88ffff !important; text-decoration: underline; }
 }
+/* Horizontal scrolling container for wide reports */
+.validation-summary-container {
+    overflow-x: auto;
+    width: 100%;
+    margin: 20px 0;
+}
 </style>
 """
-        # Insert theme-aware styles before the content
-        html_content = theme_aware_styles + html_content
+        # Insert theme-aware styles and wrap content in scrollable container
+        html_content = (
+            theme_aware_styles
+            + '<div class="validation-summary-container">'
+            + html_content
+            + "</div>"
+        )
 
     except Exception as e:
         html_content = (
@@ -175,7 +187,7 @@ def generate_html_table(
         '      <th data-sort="type">Type</th>',
         '      <th data-sort="status">Status</th>',
         '      <th data-sort="metadata">Metadata</th>',
-        '      <th data-sort="core">Core</th>',
+        '      <th data-sort="core">Core (latest)</th>',
         '      <th data-sort="overall">Overall</th>',
         '      <th data-sort="tools">Partner Tools</th>',
         "    </tr>",
@@ -213,10 +225,28 @@ def generate_html_table(
         resource_link = f"https://bioimage.io/#/artifacts/{html.escape(row['id'])}/{html.escape(row['version'])}"
         id_html = f'<a href="{resource_link}" target="_blank">{html.escape(row["id"])}/{html.escape(row["version"])}</a>'
 
-        # Create core score with link to report page if available
-        if row.get("core_report_page"):
+        # Create core cell: if overall and latest are identical (as displayed),
+        # show only the latest score as a hyperlink (no parentheses).
+        # Otherwise show: overall (latest) with the latest being a link when available.
+        if row.get("core_latest_str") is not None and row.get("core_report_page"):
             core_link = row["core_report_page"].replace("\\", "/")
-            core_html = f'<a href="{core_link}" title="View detailed compatibility report">{html.escape(row["core_str"])}</a>'
+            core_latest_version_esc = html.escape(row.get("core_latest_version", ""))
+            if row.get("core_str") == row.get("core_latest_str"):
+                core_html = (
+                    f'<a href="{core_link}" title="View detailed core {core_latest_version_esc} report">'
+                    f"{html.escape(row['core_latest_str'])}</a>"
+                )
+            else:
+                core_html = (
+                    f"{html.escape(row['core_str'])} ("
+                    f'<a href="{core_link}" title="View detailed core {core_latest_version_esc} report">'
+                    f"{html.escape(row['core_latest_str'])}</a>)"
+                )
+        elif row.get("core_latest_str") is not None:
+            if row.get("core_str") == row.get("core_latest_str"):
+                core_html = f"{html.escape(row['core_latest_str'])}"
+            else:
+                core_html = f"{html.escape(row['core_str'])} ({html.escape(row['core_latest_str'])})"
         else:
             core_html = html.escape(row["core_str"])
 
@@ -418,28 +448,70 @@ def generate_compatibility_overview(
             prefix = ""
             short_id = item_id
 
-        # Generate report page if core details are available
+        # Generate report page if core details are available and determine latest core-version score
         core_report_page = None
+        core_latest_str: Optional[str] = None
+        core_latest_version: Optional[str] = None
         if "tests" in summary and "bioimageio.core" in summary["tests"]:
             # Get the latest core report
             core_tests = summary["tests"]["bioimageio.core"]
             if core_tests:
-                # Get the first (latest) version
-                latest_core_version = next(iter(core_tests.keys()))
+                # Determine latest core version by semantic version sort
+                try:
+                    latest_core_version = max(core_tests.keys(), key=parse_version)
+                except Exception:
+                    # Fallback to first key if parsing fails
+                    latest_core_version = next(iter(core_tests.keys()))
+
                 core_report = core_tests[latest_core_version]
-                if isinstance(core_report.get("details"), dict):
-                    try:
-                        report_path = generate_compatibility_page(
-                            short_id,
-                            latest_version,
-                            core_report["details"],
-                            output_path,
-                        )
-                        core_report_page = str(report_path).replace("\\", "/")
-                    except Exception as e:
-                        print(
-                            f"Warning: Failed to generate report page for {item_id}/{latest_version}: {e}"
-                        )
+
+                # Determine latest core-version score if available
+                latest_score_val: Optional[float] = None
+                if isinstance(core_report, dict):
+                    # try common fields
+                    score_val = core_report.get("score")
+                    if isinstance(score_val, (int, float, str)):
+                        try:
+                            latest_score_val = float(score_val)
+                        except Exception:
+                            latest_score_val = None
+                    else:
+                        details_obj = core_report.get("details")
+                        if isinstance(details_obj, dict):
+                            try:
+                                vs = ValidationSummary.model_validate(details_obj)
+                                # Prefer an attribute named 'score' if present, otherwise try overall/compatibility
+                                latest_score_val = getattr(vs, "score", None)
+                                if latest_score_val is None:
+                                    latest_score_val = getattr(vs, "overall", None)
+                                if latest_score_val is None:
+                                    latest_score_val = getattr(
+                                        vs, "compatibility", None
+                                    )
+                                if latest_score_val is not None:
+                                    latest_score_val = float(latest_score_val)
+                            except Exception:
+                                pass
+
+                    # Generate report page from details if available
+                    details_for_page = core_report.get("details")
+                    if isinstance(details_for_page, dict):
+                        try:
+                            report_path = generate_compatibility_page(
+                                short_id,
+                                latest_version,
+                                details_for_page,
+                                output_path,
+                            )
+                            core_report_page = str(report_path).replace("\\", "/")
+                        except Exception as e:
+                            print(
+                                f"Warning: Failed to generate report page for {item_id}/{latest_version}: {e}"
+                            )
+
+                if latest_score_val is not None:
+                    core_latest_str = f"{latest_score_val:.2f}"
+                    core_latest_version = str(latest_core_version)
 
         row_data = {
             "id": short_id,  # Use short ID without prefix
@@ -452,6 +524,8 @@ def generate_compatibility_overview(
             "core": core_compat,
             "core_str": f"{core_compat:.2f}",
             "core_report_page": core_report_page,
+            "core_latest_str": core_latest_str,
+            "core_latest_version": core_latest_version,
             "overall": overall_compat,
             "overall_str": f"{overall_compat:.2f}",
             "tools": tool_summary,
