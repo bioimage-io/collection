@@ -247,7 +247,7 @@ def generate_reports_overview(
         "",
         f"This page provides an overview of all {index.total} resources in the bioimage.io collection.",
         "",
-        f"*Last updated: {index.timestamp}*",
+        f"*Last updated: {index.timestamp.isoformat(timespec='minutes')}*",
         "",
     ]
 
