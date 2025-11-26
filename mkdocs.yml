@@ -142,6 +142,9 @@ nav:
   - Changelog: changelog.md
   - Coverage report: coverage.md
 
+not_in_nav: |
+  /reports/**/*.md
+
 extra:
   social:
     - icon: fontawesome/brands/github

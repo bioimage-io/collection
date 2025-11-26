@@ -5,8 +5,58 @@ import json
 from pathlib import Path
 from typing import Any
 
+from bioimageio.spec.summary import ValidationSummary
+
 from backoffice.index import load_index
 from backoffice.utils_pure import get_summary_file_path
+
+
+def generate_report_page(
+    resource_id: str,
+    version: str,
+    core_details: dict[str, Any],
+    output_dir: Path,
+) -> Path:
+    """Generate an individual report page with ValidationSummary HTML.
+
+    Args:
+        resource_id: The resource ID (short form, without prefix)
+        version: The resource version
+        core_details: The core report details from summary.json
+        output_dir: Directory to write the report page
+
+    Returns:
+        Path to the generated report page (relative to docs/)
+    """
+    # Convert details dict to ValidationSummary
+    try:
+        validation_summary = ValidationSummary.model_validate(core_details)
+        html_content = validation_summary.format_html()
+    except Exception as e:
+        html_content = (
+            f"<p>Error rendering validation summary: {html.escape(str(e))}</p>"
+        )
+
+    # Create markdown file with HTML content
+    # Replace colons with double dash for filesystem compatibility
+    safe_resource_id = resource_id.replace(":", "--")
+    report_dir = output_dir / "reports" / safe_resource_id
+    report_dir.mkdir(parents=True, exist_ok=True)
+    report_file = report_dir / f"{version}_core.md"
+
+    markdown_content = f"""---
+title: {resource_id}/{version} - Core Validation Report
+---
+
+# Core Validation Report: {resource_id}/{version}
+
+{html_content}
+"""
+
+    _ = report_file.write_text(markdown_content, encoding="utf-8")
+
+    # Return relative path from docs/ root (with safe resource ID)
+    return Path("reports") / safe_resource_id / f"{version}_core.html"
 
 
 def generate_html_table(
@@ -118,6 +168,14 @@ def generate_html_table(
         resource_link = f"https://bioimage.io/#/artifacts/{html.escape(row['id'])}/{html.escape(row['version'])}"
         id_html = f'<a href="{resource_link}" target="_blank">{html.escape(row["id"])}/{html.escape(row["version"])}</a>'
 
+        # Create core score with link to report page if available
+        if row.get("core_report_page"):
+            # Use absolute path from site root for proper navigation in deployed docs
+            core_link = "/" + row["core_report_page"].replace("\\", "/")
+            core_html = f'<a href="{core_link}">{html.escape(row["core_str"])}</a>'
+        else:
+            core_html = html.escape(row["core_str"])
+
         html_parts.extend(
             [
                 "    <tr>",
@@ -125,7 +183,7 @@ def generate_html_table(
                 f"      <td>{html.escape(row['type'])}</td>",
                 f'      <td class="{status_class}">{html.escape(row["status"])}</td>',
                 f'      <td class="{metadata_class}" data-value="{metadata_val}">{html.escape(row["metadata_str"])}</td>',
-                f'      <td class="{core_class}" data-value="{core_val}">{html.escape(row["core_str"])}</td>',
+                f'      <td class="{core_class}" data-value="{core_val}">{core_html}</td>',
                 f'      <td class="{overall_class}" data-value="{overall_val}">{html.escape(row["overall_str"])}</td>',
                 f"      <td>{html.escape(row['tools'])}</td>",
                 "    </tr>",
@@ -316,6 +374,29 @@ def generate_reports_overview(
             prefix = ""
             short_id = item_id
 
+        # Generate report page if core details are available
+        core_report_page = None
+        if "tests" in summary and "bioimageio.core" in summary["tests"]:
+            # Get the latest core report
+            core_tests = summary["tests"]["bioimageio.core"]
+            if core_tests:
+                # Get the first (latest) version
+                latest_core_version = next(iter(core_tests.keys()))
+                core_report = core_tests[latest_core_version]
+                if isinstance(core_report.get("details"), dict):
+                    try:
+                        report_path = generate_report_page(
+                            short_id,
+                            latest_version,
+                            core_report["details"],
+                            output_path.parent,
+                        )
+                        core_report_page = str(report_path).replace("\\", "/")
+                    except Exception as e:
+                        print(
+                            f"Warning: Failed to generate report page for {item_id}/{latest_version}: {e}"
+                        )
+
         row_data = {
             "id": short_id,  # Use short ID without prefix
             "full_id": item_id,  # Keep full ID for reference
@@ -326,6 +407,7 @@ def generate_reports_overview(
             "metadata_str": f"{metadata_completeness:.2f}",
             "core": core_compat,
             "core_str": f"{core_compat:.2f}",
+            "core_report_page": core_report_page,
             "overall": overall_compat,
             "overall_str": f"{overall_compat:.2f}",
             "tools": tool_summary,
