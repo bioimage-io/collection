@@ -11,6 +11,9 @@ from bioimageio.spec.summary import ValidationSummary
 from backoffice.index import load_index
 from backoffice.utils_pure import get_summary_file_path
 
+# Initialize navigation for gen-files plugin
+nav = mkdocs_gen_files.nav.Nav()
+
 
 def generate_compatibility_page(
     resource_id: str,
@@ -55,6 +58,9 @@ title: {resource_id}/{version} - Core Compatibility Report
     # Write using gen-files plugin
     with mkdocs_gen_files.open(str(relative_path), "w", encoding="utf-8") as f:
         f.write(markdown_content)
+
+    # Add to navigation (use just the filename part for nav title)
+    nav[str(relative_path)] = f"{resource_id}/{version} Core Report"
 
     # Return relative path from compatibility/
     return Path(safe_resource_id) / f"{version}_core"
@@ -504,10 +510,13 @@ def generate_compatibility_overview(
 
     # Write output using gen-files plugin
     content = "\n".join(lines)
-    with mkdocs_gen_files.open(
-        str(output_path / "index.md"), "w", encoding="utf-8"
-    ) as f:
+    index_path = output_path / "index.md"
+    with mkdocs_gen_files.open(str(index_path), "w", encoding="utf-8") as f:
         f.write(content)
+
+    # Add to navigation
+    nav[str(index_path)] = "Compatibility Reports"
+
     print(f"Generated compatibility overview at {output_path}")
 
 
@@ -516,3 +525,7 @@ generate_compatibility_overview(
     index_path=Path("gh-pages/index.json"),
     output_path=Path("compatibility"),
 )
+
+# Write the navigation structure
+with mkdocs_gen_files.open("compatibility/SUMMARY.md", "w") as nav_file:
+    nav_file.writelines(nav.build_literate_nav())
