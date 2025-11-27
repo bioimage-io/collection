@@ -42,7 +42,7 @@ jobs:
             reports
             index.json
       - name: Generate reports overview for docs
-        run: python scripts/generate_reports_overview.py
+        run: python scripts/generate_compatibility_overview.py
         env:
           REPORTS: gh-pages/reports
           RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
