@@ -1833,7 +1833,7 @@
                 {
                     "comment": "Updated rdf.yaml",
                     "created_at": "2025-07-01T22:51:13Z",
-                    "sha256": "9e849d0bca89869cef8b46578b40220074f15d3abcf04c363e324ac0713210d3",
+                    "sha256": "ca3d24dcb5b2ed3954e3cb323bb4f6aa50ef045da7dac13a85b4b9774ea6278f",
                     "source": "https://hypha.aicell.io/bioimage-io/artifacts/famous-fish/files/rdf.yaml?version=v0",
                     "version": "v0"
                 }
@@ -3127,6 +3127,6 @@
             ]
         }
     ],
-    "timestamp": "2025-11-26T01:50:35.961007",
+    "timestamp": "2025-11-27T01:48:14.771737",
     "total": 240
 }
