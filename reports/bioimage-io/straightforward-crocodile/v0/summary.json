@@ -170,14 +170,14 @@
     },
     "rdf_yaml_sha256": "616e9e91e645c5c0b137cc011c17b2170420f28a9be0f170291a8cd84bd70fce",
     "scores": {
-        "core_compatibility": 0.16666666666666666,
+        "core_compatibility": 0.5,
         "metadata_completeness": 0.6911764705882353,
         "metadata_format": 1.0,
-        "overall_compatibility": 0.4644607843137255,
+        "overall_compatibility": 0.5477941176470589,
         "overall_partner_tool_compatibility": 0.0,
         "tool_compatibility": {
             "biapy": 0.0,
-            "bioimageio.core": 0.16666666666666666,
+            "bioimageio.core": 0.5,
             "careamics": 0.0,
             "deepimagej": 0.0,
             "ilastik": 0.0
@@ -197,7 +197,7 @@
             "ilastik_1.4.2b5": 0.0
         }
     },
-    "status": "failed",
+    "status": "passed",
     "tests": {
         "biapy": {
             "3.6.5": {

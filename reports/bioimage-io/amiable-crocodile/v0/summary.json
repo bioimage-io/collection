@@ -154,14 +154,14 @@
     },
     "rdf_yaml_sha256": "057619d45e82d117311cf0f2ead8b9ecba1fe4ce51412cced3f3b7e68ef06cc2",
     "scores": {
-        "core_compatibility": 0.16666666666666666,
+        "core_compatibility": 0.5,
         "metadata_completeness": 0.6716417910447762,
         "metadata_format": 1.0,
-        "overall_compatibility": 0.6262437810945274,
+        "overall_compatibility": 0.7095771144278606,
         "overall_partner_tool_compatibility": 0.6666666666666666,
         "tool_compatibility": {
             "biapy": 1.0,
-            "bioimageio.core": 0.16666666666666666,
+            "bioimageio.core": 0.5,
             "careamics": 0.0,
             "deepimagej": 0.0,
             "ilastik": 1.0
