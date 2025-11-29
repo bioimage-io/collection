@@ -2,7 +2,7 @@
     "count_per_type": {
         "application": 65,
         "dataset": 48,
-        "model": 123,
+        "model": 124,
         "notebook": 4
     },
     "items": [
@@ -3125,8 +3125,21 @@
                     "version": "v0"
                 }
             ]
+        },
+        {
+            "id": "bioimage-io/amiable-otter",
+            "type": "model",
+            "versions": [
+                {
+                    "comment": "Updated rdf.yaml",
+                    "created_at": "2025-11-28T17:55:36Z",
+                    "sha256": "a29c20318d4f3cbb975311835b1ed771a10ae436e87118ede499c95923004c26",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/amiable-otter/files/rdf.yaml?version=v0",
+                    "version": "v0"
+                }
+            ]
         }
     ],
-    "timestamp": "2025-11-28T01:48:04.715578",
-    "total": 240
+    "timestamp": "2025-11-29T01:48:30.094904",
+    "total": 241
 }
