@@ -1,0 +1,393 @@
+{
+    "rdf_content": {
+        "name": "scSplit",
+        "description": "scSplit trained on HTLIF24 dataset",
+        "covers": [
+            "cover.png"
+        ],
+        "id_emoji": "🦦",
+        "authors": [
+            {
+                "affiliation": "Human Technopole",
+                "email": "mehdi.seifi@fht.org",
+                "orcid": null,
+                "name": "Mehdi Seifi",
+                "github_user": "mese79"
+            },
+            {
+                "affiliation": "Human Technopole",
+                "email": "Ashesh.Ashesh@fht.org",
+                "orcid": null,
+                "name": "Ashesh",
+                "github_user": "ashesh-0"
+            }
+        ],
+        "attachments": [
+            {
+                "source": "config.yaml",
+                "sha256": "938978f9a3e5585b94e502cb4e1b511d207a2cb4d8c7628d5de2a02cb860561f"
+            }
+        ],
+        "cite": [
+            {
+                "text": "Ashesh and Jug, Florian. scSplit: Bringing Severity Cognizance to Image Decomposition in Fluorescence Microscopy. NeurIPS 2025 (2025).",
+                "doi": "10.48550/arXiv.2503.22983"
+            },
+            {
+                "text": "Ashesh, A., Deschamps, J., Jug, F. (2025). MicroSSIM: Improved Structural Similarity for Comparing Microscopy Data. In: Del Bue, A., Canton, C., Pont-Tuset, J., Tommasi, T. (eds) Computer Vision - ECCV 2024 Workshops. ECCV 2024. Lecture Notes in Computer Science, vol 15638. Springer, Cham.",
+                "doi": "10.1007/978-3-031-91721-9_16"
+            }
+        ],
+        "license": "BSD-3-Clause",
+        "git_repo": "https://github.com/juglab/scSplit",
+        "links": [
+            "https://neurips.cc/virtual/2025/loc/mexico-city/poster/115037",
+            "https://github.com/juglab/MicroSSIM"
+        ],
+        "tags": [
+            "Semantic Unmixing",
+            "Splitting",
+            "Image Dcomposition"
+        ],
+        "version": "1.0.0",
+        "format_version": "0.5.6",
+        "type": "model",
+        "id": "amiable-otter",
+        "documentation": "doc.md",
+        "inputs": [
+            {
+                "id": "input",
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "channel"
+                        ]
+                    },
+                    {
+                        "size": 512,
+                        "id": "y",
+                        "type": "space"
+                    },
+                    {
+                        "size": 512,
+                        "id": "x",
+                        "type": "space"
+                    }
+                ],
+                "test_tensor": {
+                    "source": "input_sample.npy",
+                    "sha256": "338099e1ee4a54ea3d2d9f2b84cb3b669df16c35fba0a64ea72bcd81f94937f3"
+                }
+            }
+        ],
+        "outputs": [
+            {
+                "id": "masks",
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "ch_1",
+                            "ch_2"
+                        ]
+                    },
+                    {
+                        "size": 512,
+                        "id": "y",
+                        "type": "space"
+                    },
+                    {
+                        "size": 512,
+                        "id": "x",
+                        "type": "space"
+                    }
+                ],
+                "test_tensor": {
+                    "source": "output_sample.npy",
+                    "sha256": "010572a5b6e1bbf0586dcd6f0393259fb1b44b29ab87d9061bae721cd9e71801"
+                }
+            }
+        ],
+        "weights": {
+            "pytorch_state_dict": {
+                "source": "joint_indi_plus_HTLIF24.pth",
+                "sha256": "077e584cbdc7055a8c40f7817cd8bbb0bf66f4a4cd3d153010c2c1c2e2f73adf",
+                "architecture": {
+                    "source": "bmz_model.py",
+                    "sha256": "5541387ffb9eefaac2b9c2763b8b45119186c7ee1fe248d025990420cb979225",
+                    "callable": "JointIndiBMZ",
+                    "kwargs": {
+                        "datasets": {
+                            "input_channel_idx": 2,
+                            "max_qval": 1.0,
+                            "normalize_channels": false,
+                            "patch_size": 512,
+                            "train": {
+                                "batch_size": 8,
+                                "datapath": null,
+                                "datatype": "img",
+                                "name": "HT_LIF24",
+                                "num_workers": 4,
+                                "real_input_fraction": 1.0,
+                                "uncorrelated_channels": false,
+                                "use_shuffle": true
+                            },
+                            "upper_clip": false,
+                            "val": {
+                                "data_len": 3,
+                                "datapath": null,
+                                "datatype": "img",
+                                "name": "HT_LIF24",
+                                "patch_size": 512,
+                                "real_input_fraction": 1.0
+                            }
+                        },
+                        "distributed": false,
+                        "t_pred": 0.4274831450647778,
+                        "normalization": {
+                            "input": {
+                                "mean": 1383.904296875,
+                                "std": 1700.3511962890625
+                            },
+                            "train_set": {
+                                "mean": [
+                                    456.0216369628906,
+                                    376.990966796875
+                                ],
+                                "std": [
+                                    621.3798828125,
+                                    319.10345458984375
+                                ]
+                            }
+                        },
+                        "gpu_ids": [
+                            0
+                        ],
+                        "model": {
+                            "allow_full_translation": true,
+                            "beta_schedule": {
+                                "train": {
+                                    "linear_end": 0.01,
+                                    "linear_start": 1e-6,
+                                    "n_timestep": 2000,
+                                    "schedule": "linear"
+                                },
+                                "val": {
+                                    "linear_end": 0.01,
+                                    "linear_start": 1e-6,
+                                    "n_timestep": 1,
+                                    "schedule": "linear"
+                                }
+                            },
+                            "diffusion": {
+                                "channels": 1,
+                                "conditional": false,
+                                "image_size": 32
+                            },
+                            "enable_time_predictor": true,
+                            "finetune_norm": false,
+                            "loss_type": "l1",
+                            "lr_reduction": "mean",
+                            "normalize_xt": true,
+                            "unet": {
+                                "attn_res": [],
+                                "channel_multiplier": [
+                                    1,
+                                    2,
+                                    4,
+                                    8
+                                ],
+                                "dropout": 0.1,
+                                "in_channel": 1,
+                                "inner_channel": 16,
+                                "norm_groups": 16,
+                                "out_channel": 1,
+                                "res_blocks": 1
+                            },
+                            "unsupervised_arithmetic": false,
+                            "w_input_loss": 0.1,
+                            "which_model_G": "joint_indi"
+                        },
+                        "name": "splitting",
+                        "time_predictor": {
+                            "finetune_norm": false,
+                            "loss_type": "l2",
+                            "lr_reduction": "mean",
+                            "scale_augmentation": true,
+                            "scale_augmentation_delta": 0.05,
+                            "unet": {
+                                "attn_res": [],
+                                "channel_multiplier": [
+                                    1,
+                                    2,
+                                    4,
+                                    8
+                                ],
+                                "dropout": 0.2,
+                                "in_channel": 1,
+                                "inner_channel": 16,
+                                "norm_groups": 16,
+                                "out_channel": 1,
+                                "res_blocks": 1
+                            },
+                            "which_model_G": "UnetClassifier"
+                        },
+                        "train": {
+                            "lr_scheduler": {
+                                "patience": 100
+                            },
+                            "n_iter": 1000000,
+                            "optimizer": {
+                                "lr": 0.001,
+                                "type": "adam"
+                            },
+                            "print_freq": 500,
+                            "save_checkpoint_freq": 10000.0,
+                            "val_freq": 10000.0
+                        }
+                    }
+                },
+                "pytorch_version": "1.13.1"
+            }
+        },
+        "config": {
+            "datasets": {
+                "input_channel_idx": 2,
+                "max_qval": 1.0,
+                "normalize_channels": false,
+                "patch_size": 512,
+                "train": {
+                    "batch_size": 8,
+                    "datapath": null,
+                    "datatype": "img",
+                    "name": "HT_LIF24",
+                    "num_workers": 4,
+                    "real_input_fraction": 1.0,
+                    "uncorrelated_channels": false,
+                    "use_shuffle": true
+                },
+                "upper_clip": false,
+                "val": {
+                    "data_len": 3,
+                    "datapath": null,
+                    "datatype": "img",
+                    "name": "HT_LIF24",
+                    "patch_size": 512,
+                    "real_input_fraction": 1.0
+                }
+            },
+            "distributed": false,
+            "t_pred": 0.4274831450647778,
+            "normalization": {
+                "input": {
+                    "mean": 1383.904296875,
+                    "std": 1700.3511962890625
+                },
+                "train_set": {
+                    "mean": [
+                        456.0216369628906,
+                        376.990966796875
+                    ],
+                    "std": [
+                        621.3798828125,
+                        319.10345458984375
+                    ]
+                }
+            },
+            "gpu_ids": [
+                0
+            ],
+            "model": {
+                "allow_full_translation": true,
+                "beta_schedule": {
+                    "train": {
+                        "linear_end": 0.01,
+                        "linear_start": 1e-6,
+                        "n_timestep": 2000,
+                        "schedule": "linear"
+                    },
+                    "val": {
+                        "linear_end": 0.01,
+                        "linear_start": 1e-6,
+                        "n_timestep": 1,
+                        "schedule": "linear"
+                    }
+                },
+                "diffusion": {
+                    "channels": 1,
+                    "conditional": false,
+                    "image_size": 32
+                },
+                "enable_time_predictor": true,
+                "finetune_norm": false,
+                "loss_type": "l1",
+                "lr_reduction": "mean",
+                "normalize_xt": true,
+                "unet": {
+                    "attn_res": [],
+                    "channel_multiplier": [
+                        1,
+                        2,
+                        4,
+                        8
+                    ],
+                    "dropout": 0.1,
+                    "in_channel": 1,
+                    "inner_channel": 16,
+                    "norm_groups": 16,
+                    "out_channel": 1,
+                    "res_blocks": 1
+                },
+                "unsupervised_arithmetic": false,
+                "w_input_loss": 0.1,
+                "which_model_G": "joint_indi"
+            },
+            "name": "splitting",
+            "time_predictor": {
+                "finetune_norm": false,
+                "loss_type": "l2",
+                "lr_reduction": "mean",
+                "scale_augmentation": true,
+                "scale_augmentation_delta": 0.05,
+                "unet": {
+                    "attn_res": [],
+                    "channel_multiplier": [
+                        1,
+                        2,
+                        4,
+                        8
+                    ],
+                    "dropout": 0.2,
+                    "in_channel": 1,
+                    "inner_channel": 16,
+                    "norm_groups": 16,
+                    "out_channel": 1,
+                    "res_blocks": 1
+                },
+                "which_model_G": "UnetClassifier"
+            },
+            "train": {
+                "lr_scheduler": {
+                    "patience": 100
+                },
+                "n_iter": 1000000,
+                "optimizer": {
+                    "lr": 0.001,
+                    "type": "adam"
+                },
+                "print_freq": 500,
+                "save_checkpoint_freq": 10000.0,
+                "val_freq": 10000.0
+            }
+        }
+    },
+    "rdf_yaml_sha256": "a29c20318d4f3cbb975311835b1ed771a10ae436e87118ede499c95923004c26",
+    "status": "untested"
+}
