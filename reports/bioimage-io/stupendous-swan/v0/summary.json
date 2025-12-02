@@ -1,11 +1,10 @@
 {
     "rdf_content": {
-        "name": "scSplit (HTLIF24)",
-        "description": "scSplit trained on HTLIF24 dataset",
+        "name": "scSplit (Hagen)",
+        "description": "scSplit trained on Hagen dataset",
         "covers": [
             "cover.png"
         ],
-        "id_emoji": "🦦",
         "authors": [
             {
                 "affiliation": "Human Technopole",
@@ -25,7 +24,7 @@
         "attachments": [
             {
                 "source": "config.yaml",
-                "sha256": "938978f9a3e5585b94e502cb4e1b511d207a2cb4d8c7628d5de2a02cb860561f"
+                "sha256": "af18d144e2bdc7aa81f2f67a5d57ee3129f8405f51de7c4afc5ee88a444c3fbe"
             }
         ],
         "cite": [
@@ -52,7 +51,6 @@
         "version": "1.0.0",
         "format_version": "0.5.6",
         "type": "model",
-        "id": "amiable-otter",
         "documentation": "doc.md",
         "inputs": [
             {
@@ -80,7 +78,7 @@
                 ],
                 "test_tensor": {
                     "source": "input_sample.npy",
-                    "sha256": "338099e1ee4a54ea3d2d9f2b84cb3b669df16c35fba0a64ea72bcd81f94937f3"
+                    "sha256": "db08397f56d470e2ccf696b5bded944080048c9b0d03e3b9195f4ded52e9624c"
                 }
             }
         ],
@@ -111,29 +109,31 @@
                 ],
                 "test_tensor": {
                     "source": "output_sample.npy",
-                    "sha256": "010572a5b6e1bbf0586dcd6f0393259fb1b44b29ab87d9061bae721cd9e71801"
+                    "sha256": "faf134cb0a89b56f381be606f63d2073c7f8b3f6e7079c3233c3578889a963f7"
                 }
             }
         ],
         "weights": {
             "pytorch_state_dict": {
-                "source": "joint_indi_plus_HTLIF24.pth",
-                "sha256": "077e584cbdc7055a8c40f7817cd8bbb0bf66f4a4cd3d153010c2c1c2e2f73adf",
+                "source": "joint_indi_plus_Hagen.pth",
+                "sha256": "073f96f160b662a17e655c7ccb41774cb5e4c48c767965f33b96cf4549890c24",
                 "architecture": {
                     "source": "bmz_model.py",
-                    "sha256": "5541387ffb9eefaac2b9c2763b8b45119186c7ee1fe248d025990420cb979225",
+                    "sha256": "a0a0eda4a48303c0893ef3841a26f825d07f8d452529015373ea3282af2357dc",
                     "callable": "JointIndiBMZ",
                     "kwargs": {
                         "datasets": {
-                            "input_channel_idx": 2,
                             "max_qval": 1,
                             "normalize_channels": false,
                             "patch_size": 512,
                             "train": {
                                 "batch_size": 8,
-                                "datapath": null,
+                                "datapath": {
+                                    "ch0": "train_actin-60x-noise2-highsnr.tif",
+                                    "ch1": "train_mito-60x-noise2-highsnr.tif"
+                                },
                                 "datatype": "img",
-                                "name": "HT_LIF24",
+                                "name": "Hagen",
                                 "num_workers": 4,
                                 "real_input_fraction": 1,
                                 "uncorrelated_channels": false,
@@ -142,31 +142,17 @@
                             "upper_clip": false,
                             "val": {
                                 "data_len": 3,
-                                "datapath": null,
+                                "datapath": {
+                                    "ch0": "test_actin-60x-noise2-highsnr.tif",
+                                    "ch1": "test_mito-60x-noise2-highsnr.tif"
+                                },
                                 "datatype": "img",
-                                "name": "HT_LIF24",
+                                "name": "Hagen",
                                 "patch_size": 512,
                                 "real_input_fraction": 1
                             }
                         },
                         "distributed": false,
-                        "t_pred": 0.4274831450647778,
-                        "normalization": {
-                            "input": {
-                                "mean": 1383.904296875,
-                                "std": 1700.3511962890625
-                            },
-                            "train_set": {
-                                "mean": [
-                                    456.0216369628906,
-                                    376.990966796875
-                                ],
-                                "std": [
-                                    621.3798828125,
-                                    319.10345458984375
-                                ]
-                            }
-                        },
                         "gpu_ids": [
                             0
                         ],
@@ -216,11 +202,38 @@
                             "which_model_G": "joint_indi"
                         },
                         "name": "splitting",
+                        "normalization": {
+                            "input": {
+                                "mean": 252.44070434570312,
+                                "std": 155.061767578125
+                            },
+                            "train_set": {
+                                "mean": [
+                                    358.07598876953125,
+                                    216.05360412597656
+                                ],
+                                "std": [
+                                    243.53872680664062,
+                                    165.20004272460938
+                                ]
+                            }
+                        },
+                        "path": {
+                            "checkpoint": null,
+                            "experiment_root": null,
+                            "log": null,
+                            "results": null,
+                            "resume_state": null,
+                            "root": null,
+                            "tb_logger": null
+                        },
+                        "phase": "train",
+                        "t_pred": 0.4704400640361163,
                         "time_predictor": {
                             "finetune_norm": false,
                             "loss_type": "l2",
                             "lr_reduction": "mean",
-                            "scale_augmentation": true,
+                            "scale_augmentation": false,
                             "scale_augmentation_delta": 0.05,
                             "unet": {
                                 "attn_res": [],
@@ -254,20 +267,22 @@
                         }
                     }
                 },
-                "pytorch_version": "1.13.1"
+                "pytorch_version": "2.9.1+cu128"
             }
         },
         "config": {
             "datasets": {
-                "input_channel_idx": 2,
                 "max_qval": 1,
                 "normalize_channels": false,
                 "patch_size": 512,
                 "train": {
                     "batch_size": 8,
-                    "datapath": null,
+                    "datapath": {
+                        "ch0": "train_actin-60x-noise2-highsnr.tif",
+                        "ch1": "train_mito-60x-noise2-highsnr.tif"
+                    },
                     "datatype": "img",
-                    "name": "HT_LIF24",
+                    "name": "Hagen",
                     "num_workers": 4,
                     "real_input_fraction": 1,
                     "uncorrelated_channels": false,
@@ -276,31 +291,17 @@
                 "upper_clip": false,
                 "val": {
                     "data_len": 3,
-                    "datapath": null,
+                    "datapath": {
+                        "ch0": "test_actin-60x-noise2-highsnr.tif",
+                        "ch1": "test_mito-60x-noise2-highsnr.tif"
+                    },
                     "datatype": "img",
-                    "name": "HT_LIF24",
+                    "name": "Hagen",
                     "patch_size": 512,
                     "real_input_fraction": 1
                 }
             },
             "distributed": false,
-            "t_pred": 0.4274831450647778,
-            "normalization": {
-                "input": {
-                    "mean": 1383.904296875,
-                    "std": 1700.3511962890625
-                },
-                "train_set": {
-                    "mean": [
-                        456.0216369628906,
-                        376.990966796875
-                    ],
-                    "std": [
-                        621.3798828125,
-                        319.10345458984375
-                    ]
-                }
-            },
             "gpu_ids": [
                 0
             ],
@@ -350,11 +351,38 @@
                 "which_model_G": "joint_indi"
             },
             "name": "splitting",
+            "normalization": {
+                "input": {
+                    "mean": 252.44070434570312,
+                    "std": 155.061767578125
+                },
+                "train_set": {
+                    "mean": [
+                        358.07598876953125,
+                        216.05360412597656
+                    ],
+                    "std": [
+                        243.53872680664062,
+                        165.20004272460938
+                    ]
+                }
+            },
+            "path": {
+                "checkpoint": null,
+                "experiment_root": null,
+                "log": null,
+                "results": null,
+                "resume_state": null,
+                "root": null,
+                "tb_logger": null
+            },
+            "phase": "train",
+            "t_pred": 0.4704400640361163,
             "time_predictor": {
                 "finetune_norm": false,
                 "loss_type": "l2",
                 "lr_reduction": "mean",
-                "scale_augmentation": true,
+                "scale_augmentation": false,
                 "scale_augmentation_delta": 0.05,
                 "unet": {
                     "attn_res": [],
@@ -386,8 +414,13 @@
                 "save_checkpoint_freq": 10000,
                 "val_freq": 10000
             }
-        }
+        },
+        "uploader": {
+            "email": "mehdiseifi@gmail.com"
+        },
+        "id": "stupendous-swan",
+        "id_emoji": "🦢"
     },
-    "rdf_yaml_sha256": "514947df278b1bc6f8350203143be52989e37e5d1ce3050b22ed2e300846ef85",
+    "rdf_yaml_sha256": "022a934420ad0b318d1c2c245f106067f60203fc13cf26193a7a3323306bd802",
     "status": "untested"
 }
