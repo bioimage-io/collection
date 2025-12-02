@@ -2,7 +2,7 @@
     "count_per_type": {
         "application": 65,
         "dataset": 48,
-        "model": 124,
+        "model": 126,
         "notebook": 4
     },
     "items": [
@@ -3131,15 +3131,41 @@
             "type": "model",
             "versions": [
                 {
-                    "comment": "Updated doc.md",
+                    "comment": "Updated rdf.yaml",
                     "created_at": "2025-11-28T17:55:36Z",
-                    "sha256": "a29c20318d4f3cbb975311835b1ed771a10ae436e87118ede499c95923004c26",
+                    "sha256": "514947df278b1bc6f8350203143be52989e37e5d1ce3050b22ed2e300846ef85",
                     "source": "https://hypha.aicell.io/bioimage-io/artifacts/amiable-otter/files/rdf.yaml?version=v0",
+                    "version": "v0"
+                }
+            ]
+        },
+        {
+            "id": "bioimage-io/faithful-swan",
+            "type": "model",
+            "versions": [
+                {
+                    "comment": "Published by mehdiseifi@gmail.com",
+                    "created_at": "2025-12-01T10:52:20Z",
+                    "sha256": "5d4861ea4f98126bb2360d8ff83b634c1b55ab08f1e5f5246c3330c3eb7692d7",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/faithful-swan/files/rdf.yaml?version=v0",
+                    "version": "v0"
+                }
+            ]
+        },
+        {
+            "id": "bioimage-io/stupendous-swan",
+            "type": "model",
+            "versions": [
+                {
+                    "comment": "Published by mehdiseifi@gmail.com",
+                    "created_at": "2025-12-01T13:43:39Z",
+                    "sha256": "022a934420ad0b318d1c2c245f106067f60203fc13cf26193a7a3323306bd802",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/stupendous-swan/files/rdf.yaml?version=v0",
                     "version": "v0"
                 }
             ]
         }
     ],
-    "timestamp": "2025-12-01T02:08:18.795144",
-    "total": 241
+    "timestamp": "2025-12-02T01:55:20.553815",
+    "total": 243
 }
