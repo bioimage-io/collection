@@ -1,0 +1,414 @@
+{
+    "rdf_content": {
+        "name": "scSplit (BioSR)",
+        "description": "scSplit trained on BioSR dataset",
+        "covers": [
+            "cover.png"
+        ],
+        "authors": [
+            {
+                "affiliation": "Human Technopole",
+                "email": "mehdi.seifi@fht.org",
+                "orcid": null,
+                "name": "Mehdi Seifi",
+                "github_user": "mese79"
+            },
+            {
+                "affiliation": "Human Technopole",
+                "email": "Ashesh.Ashesh@fht.org",
+                "orcid": null,
+                "name": "Ashesh",
+                "github_user": "ashesh-0"
+            }
+        ],
+        "attachments": [
+            {
+                "source": "config.yaml",
+                "sha256": "766d9e102b8d03029c389de0de0cf9f496610f034d8cb6f8427322a352918048"
+            }
+        ],
+        "cite": [
+            {
+                "text": "Ashesh and Jug, Florian. scSplit: Bringing Severity Cognizance to Image Decomposition in Fluorescence Microscopy. NeurIPS 2025 (2025).",
+                "doi": "10.48550/arXiv.2503.22983"
+            },
+            {
+                "text": "Ashesh, A., Deschamps, J., Jug, F. (2025). MicroSSIM: Improved Structural Similarity for Comparing Microscopy Data. In: Del Bue, A., Canton, C., Pont-Tuset, J., Tommasi, T. (eds) Computer Vision - ECCV 2024 Workshops. ECCV 2024. Lecture Notes in Computer Science, vol 15638. Springer, Cham.",
+                "doi": "10.1007/978-3-031-91721-9_16"
+            }
+        ],
+        "license": "BSD-3-Clause",
+        "git_repo": "https://github.com/juglab/scSplit",
+        "links": [
+            "https://neurips.cc/virtual/2025/loc/mexico-city/poster/115037",
+            "https://github.com/juglab/MicroSSIM"
+        ],
+        "tags": [
+            "Semantic Unmixing",
+            "Splitting",
+            "Image Dcomposition"
+        ],
+        "version": "1.0.0",
+        "format_version": "0.5.6",
+        "type": "model",
+        "documentation": "doc.md",
+        "inputs": [
+            {
+                "id": "input",
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "channel"
+                        ]
+                    },
+                    {
+                        "size": 512,
+                        "id": "y",
+                        "type": "space"
+                    },
+                    {
+                        "size": 512,
+                        "id": "x",
+                        "type": "space"
+                    }
+                ],
+                "test_tensor": {
+                    "source": "input_sample.npy",
+                    "sha256": "c02170e4a809473b590f461f7e9ac509bfb8e66d86a79ff023779d3423100a13"
+                }
+            }
+        ],
+        "outputs": [
+            {
+                "id": "masks",
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "ch_1",
+                            "ch_2"
+                        ]
+                    },
+                    {
+                        "size": 512,
+                        "id": "y",
+                        "type": "space"
+                    },
+                    {
+                        "size": 512,
+                        "id": "x",
+                        "type": "space"
+                    }
+                ],
+                "test_tensor": {
+                    "source": "output_sample.npy",
+                    "sha256": "4010cf9fe293f7bd02101f657f807ed84638326642957fd6f57fc2642b06cc0e"
+                }
+            }
+        ],
+        "weights": {
+            "pytorch_state_dict": {
+                "source": "joint_indi_plus_BioSR.pth",
+                "sha256": "8bd431d42e449472bf77b2b181ce0f69c63b12703c691049837e0fb1a82b1447",
+                "architecture": {
+                    "source": "bmz_model.py",
+                    "sha256": "a0a0eda4a48303c0893ef3841a26f825d07f8d452529015373ea3282af2357dc",
+                    "callable": "JointIndiBMZ",
+                    "kwargs": {
+                        "datasets": {
+                            "max_qval": 1,
+                            "normalize_channels": false,
+                            "patch_size": 512,
+                            "train": {
+                                "batch_size": 8,
+                                "datapath": "train",
+                                "datatype": "img",
+                                "name": "BioSR",
+                                "num_workers": 4,
+                                "uncorrelated_channels": false,
+                                "use_shuffle": true
+                            },
+                            "upper_clip": false,
+                            "val": {
+                                "data_len": 3,
+                                "datapath": "test",
+                                "datatype": "img",
+                                "name": "BioSR",
+                                "patch_size": 512
+                            }
+                        },
+                        "distributed": false,
+                        "gpu_ids": [
+                            0
+                        ],
+                        "mixing_ratio": 0.35,
+                        "model": {
+                            "allow_full_translation": true,
+                            "beta_schedule": {
+                                "train": {
+                                    "linear_end": 0.01,
+                                    "linear_start": 1e-6,
+                                    "n_timestep": 2000,
+                                    "schedule": "linear"
+                                },
+                                "val": {
+                                    "linear_end": 0.01,
+                                    "linear_start": 1e-6,
+                                    "n_timestep": 1,
+                                    "schedule": "linear"
+                                }
+                            },
+                            "diffusion": {
+                                "channels": 1,
+                                "conditional": false,
+                                "image_size": 32
+                            },
+                            "enable_time_predictor": true,
+                            "finetune_norm": false,
+                            "loss_type": "l1",
+                            "lr_reduction": "mean",
+                            "normalize_xt": true,
+                            "unet": {
+                                "attn_res": [],
+                                "channel_multiplier": [
+                                    1,
+                                    2,
+                                    4,
+                                    8
+                                ],
+                                "dropout": 0.1,
+                                "in_channel": 1,
+                                "inner_channel": 16,
+                                "norm_groups": 16,
+                                "out_channel": 1,
+                                "res_blocks": 1
+                            },
+                            "unsupervised_arithmetic": false,
+                            "w_input_loss": 0.1,
+                            "which_model_G": "joint_indi"
+                        },
+                        "name": "splitting",
+                        "normalization": {
+                            "input": {
+                                "mean": 7138.42529296875,
+                                "std": 4567.0908203125
+                            },
+                            "train_set": {
+                                "mean": [
+                                    6953.716796875,
+                                    7309.849609375
+                                ],
+                                "std": [
+                                    5640.615234375,
+                                    6749.2294921875
+                                ]
+                            }
+                        },
+                        "path": {
+                            "checkpoint": null,
+                            "experiment_root": null,
+                            "log": null,
+                            "results": null,
+                            "resume_state": null,
+                            "root": null,
+                            "tb_logger": null
+                        },
+                        "phase": "train",
+                        "real_input": false,
+                        "t_pred": 0.6208717849519517,
+                        "time_predictor": {
+                            "finetune_norm": false,
+                            "loss_type": "l2",
+                            "lr_reduction": "mean",
+                            "scale_augmentation": false,
+                            "scale_augmentation_delta": 0.05,
+                            "unet": {
+                                "attn_res": [],
+                                "channel_multiplier": [
+                                    1,
+                                    2,
+                                    4,
+                                    8
+                                ],
+                                "dropout": 0.2,
+                                "in_channel": 1,
+                                "inner_channel": 16,
+                                "norm_groups": 16,
+                                "out_channel": 1,
+                                "res_blocks": 1
+                            },
+                            "which_model_G": "UnetClassifier"
+                        },
+                        "train": {
+                            "lr_scheduler": {
+                                "patience": 100
+                            },
+                            "n_iter": 1000000,
+                            "optimizer": {
+                                "lr": 0.001,
+                                "type": "adam"
+                            },
+                            "print_freq": 500,
+                            "save_checkpoint_freq": 10000,
+                            "val_freq": 10000
+                        }
+                    }
+                },
+                "pytorch_version": "2.9.1+cu128"
+            }
+        },
+        "config": {
+            "datasets": {
+                "max_qval": 1,
+                "normalize_channels": false,
+                "patch_size": 512,
+                "train": {
+                    "batch_size": 8,
+                    "datapath": "train",
+                    "datatype": "img",
+                    "name": "BioSR",
+                    "num_workers": 4,
+                    "uncorrelated_channels": false,
+                    "use_shuffle": true
+                },
+                "upper_clip": false,
+                "val": {
+                    "data_len": 3,
+                    "datapath": "test",
+                    "datatype": "img",
+                    "name": "BioSR",
+                    "patch_size": 512
+                }
+            },
+            "distributed": false,
+            "gpu_ids": [
+                0
+            ],
+            "mixing_ratio": 0.35,
+            "model": {
+                "allow_full_translation": true,
+                "beta_schedule": {
+                    "train": {
+                        "linear_end": 0.01,
+                        "linear_start": 1e-6,
+                        "n_timestep": 2000,
+                        "schedule": "linear"
+                    },
+                    "val": {
+                        "linear_end": 0.01,
+                        "linear_start": 1e-6,
+                        "n_timestep": 1,
+                        "schedule": "linear"
+                    }
+                },
+                "diffusion": {
+                    "channels": 1,
+                    "conditional": false,
+                    "image_size": 32
+                },
+                "enable_time_predictor": true,
+                "finetune_norm": false,
+                "loss_type": "l1",
+                "lr_reduction": "mean",
+                "normalize_xt": true,
+                "unet": {
+                    "attn_res": [],
+                    "channel_multiplier": [
+                        1,
+                        2,
+                        4,
+                        8
+                    ],
+                    "dropout": 0.1,
+                    "in_channel": 1,
+                    "inner_channel": 16,
+                    "norm_groups": 16,
+                    "out_channel": 1,
+                    "res_blocks": 1
+                },
+                "unsupervised_arithmetic": false,
+                "w_input_loss": 0.1,
+                "which_model_G": "joint_indi"
+            },
+            "name": "splitting",
+            "normalization": {
+                "input": {
+                    "mean": 7138.42529296875,
+                    "std": 4567.0908203125
+                },
+                "train_set": {
+                    "mean": [
+                        6953.716796875,
+                        7309.849609375
+                    ],
+                    "std": [
+                        5640.615234375,
+                        6749.2294921875
+                    ]
+                }
+            },
+            "path": {
+                "checkpoint": null,
+                "experiment_root": null,
+                "log": null,
+                "results": null,
+                "resume_state": null,
+                "root": null,
+                "tb_logger": null
+            },
+            "phase": "train",
+            "real_input": false,
+            "t_pred": 0.6208717849519517,
+            "time_predictor": {
+                "finetune_norm": false,
+                "loss_type": "l2",
+                "lr_reduction": "mean",
+                "scale_augmentation": false,
+                "scale_augmentation_delta": 0.05,
+                "unet": {
+                    "attn_res": [],
+                    "channel_multiplier": [
+                        1,
+                        2,
+                        4,
+                        8
+                    ],
+                    "dropout": 0.2,
+                    "in_channel": 1,
+                    "inner_channel": 16,
+                    "norm_groups": 16,
+                    "out_channel": 1,
+                    "res_blocks": 1
+                },
+                "which_model_G": "UnetClassifier"
+            },
+            "train": {
+                "lr_scheduler": {
+                    "patience": 100
+                },
+                "n_iter": 1000000,
+                "optimizer": {
+                    "lr": 0.001,
+                    "type": "adam"
+                },
+                "print_freq": 500,
+                "save_checkpoint_freq": 10000,
+                "val_freq": 10000
+            }
+        },
+        "uploader": {
+            "email": "mehdiseifi@gmail.com"
+        },
+        "id": "handsome-sloth",
+        "id_emoji": "🦥"
+    },
+    "rdf_yaml_sha256": "1716b40db3859d5104bb3b4826f52a8aad67ee01bc2c76470ee225b7c2faff47",
+    "status": "untested"
+}
