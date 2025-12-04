@@ -2444,7 +2444,7 @@
                 {
                     "comment": "Updated rdf.yaml",
                     "created_at": "2025-07-01T22:42:24Z",
-                    "sha256": "c3ca87649d0d2cd6933381fe12684887d1cafb5bce2cc5c5faea5972f3c29349",
+                    "sha256": "7e69e7358130e7cc63b7cb10546f6b38924c797cbb7da3c30702c29753c99e8a",
                     "source": "https://hypha.aicell.io/bioimage-io/artifacts/thoughtful-chipmunk/files/rdf.yaml?version=v0",
                     "version": "v0"
                 }
@@ -3192,6 +3192,6 @@
             ]
         }
     ],
-    "timestamp": "2025-12-03T01:51:44.392509",
+    "timestamp": "2025-12-04T01:52:56.040069",
     "total": 245
 }
