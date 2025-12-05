@@ -58,3 +58,7 @@ jobs:
       - name: create local gh-pages branch
         run: git branch gh-pages origin/gh-pages
       - run: mike deploy ${{ github.ref == 'refs/heads/main' && '--push' || ' ' }} --update-aliases 0.1 latest
+        env:
+          RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
+          BIOIMAGEIO_USER_ID: github|${{github.actor_id}}
+          HYPHA_API_TOKEN: ${{secrets.HYPHA_API_TOKEN}}
