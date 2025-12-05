@@ -535,6 +535,19 @@ def generate_compatibility_overview(
             resources_by_prefix[prefix] = []
         resources_by_prefix[prefix].append(row_data)
 
+    lines.extend(
+        [
+            "",
+            "## Legend",
+            "",
+            "- **Metadata**: Metadata completeness score (0.0-1.0)",
+            "- **Core**: bioimageio.core compatibility score (0.0-1.0)",
+            "- **Overall**: Overall compatibility score across all tools (0.0-1.0)",
+            "- **Partner Tools**: Compatibility scores for partner tools (biapy, careamics, ilastik)",
+            "",
+        ]
+    )
+
     # Generate summary by type table
     lines.extend(
         [
@@ -606,19 +619,6 @@ def generate_compatibility_overview(
         )
         lines.append(html_table)
         lines.append("")
-
-    lines.extend(
-        [
-            "",
-            "## Legend",
-            "",
-            "- **Metadata**: Metadata completeness score (0.0-1.0)",
-            "- **Core**: bioimageio.core compatibility score (0.0-1.0)",
-            "- **Overall**: Overall compatibility score across all tools (0.0-1.0)",
-            "- **Partner Tools**: Compatibility scores for partner tools (biapy, careamics, ilastik)",
-            "",
-        ]
-    )
 
     # Write output using gen-files plugin
     content = "\n".join(lines)
