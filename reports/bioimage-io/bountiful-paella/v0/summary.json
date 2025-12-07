@@ -1,0 +1,49 @@
+{
+    "rdf_content": {
+        "name": "SpineDL",
+        "description": "Training, validation, and test images of intact (Uninjured/Sham) and moderately contused thoracic spinal cord cross-sections of adult female C57BL/6J mice. Tissue sections are immunostained for NeuN (Rbfox3) and DAPI. This dataset is released in SpineDL paper and it is composed by two parts: (1) semantic segmentation of neuronal cell bodies and (2) instance segmentation of neuronal cell bodies.",
+        "covers": [
+            "spinedl_structure.png",
+            "spinedl_neuron.png"
+        ],
+        "authors": [
+            {
+                "affiliation": "MRC LMB",
+                "orcid": "0000-0002-1109-110X",
+                "name": "Daniel Franco-Barranco",
+                "github_user": "danifranco"
+            }
+        ],
+        "cite": [
+            {
+                "text": "Ruíz Amezcua, P., Franco-Barranco, D., & Nieto-Diaz, M. (2025). SpineDL dataset: Spinal Cord Cross-Sections from C57BL/6J Mice (1.0) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.17829532",
+                "doi": "10.5281/zenodo.17829532"
+            }
+        ],
+        "license": "CC-BY-4.0",
+        "tags": [
+            "semantic-segmentation",
+            "instance-segmentation",
+            "2D",
+            "histology",
+            "nuclei",
+            "spinal-cord",
+            "contusion injury",
+            "confocal microscopy",
+            "neuroscience",
+            "neurotrauma"
+        ],
+        "version": "1.0.0",
+        "format_version": "0.3.0",
+        "documentation": "SpineDL.md",
+        "type": "dataset",
+        "source": "https://zenodo.org/records/17829532",
+        "uploader": {
+            "email": "danialtza@gmail.com"
+        },
+        "id": "bountiful-paella",
+        "id_emoji": "🥘"
+    },
+    "rdf_yaml_sha256": "7b9305187d5de040740efd24db343dd49fd45d241269796123ec0820018cf762",
+    "status": "untested"
+}

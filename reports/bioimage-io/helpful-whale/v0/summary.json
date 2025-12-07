@@ -1,0 +1,121 @@
+{
+    "rdf_content": {
+        "authors": [
+            {
+                "affiliation": "AI Cell Lab",
+                "name": "BioEngine"
+            }
+        ],
+        "cite": [
+            {
+                "doi": "10.1038/s41592-020-01018-x",
+                "text": "Stringer, C., Wang, T., Michaelos, M. et al. Cellpose: a generalist algorithm for cellular segmentation. Nat Methods 18, 100–106 (2021)."
+            },
+            {
+                "doi": "10.1038/s41592-022-01663-4",
+                "text": "Pachitariu, M., Stringer, C. Cellpose 2.0: how to train your own model. Nat Methods 19, 1634–1641 (2022)."
+            },
+            {
+                "doi": "10.1101/2024.02.10.579780",
+                "text": "Stringer, Carsen, and Marius Pachitariu. Cellpose3: one-click image restoration for improved cellular segmentation. bioRxiv (2024)."
+            }
+        ],
+        "config": {},
+        "description": "Cellpose-SAM model fine-tuned on custom dataset (session: 00e9679a)",
+        "documentation": "doc.md",
+        "format_version": "0.5.6",
+        "id": "helpful-whale",
+        "id_emoji": "🐳",
+        "inputs": [
+            {
+                "axes": [
+                    {
+                        "channel_names": [
+                            "r",
+                            "g",
+                            "b"
+                        ],
+                        "type": "channel"
+                    },
+                    {
+                        "id": "y",
+                        "size": 512,
+                        "type": "space"
+                    },
+                    {
+                        "id": "x",
+                        "size": 512,
+                        "type": "space"
+                    }
+                ],
+                "id": "input",
+                "test_tensor": {
+                    "source": "input_sample.npy"
+                }
+            }
+        ],
+        "license": "BSD-3-Clause",
+        "name": "test-model-703d6c42",
+        "outputs": [
+            {
+                "axes": [
+                    {
+                        "id": "y",
+                        "size": 512,
+                        "type": "space"
+                    },
+                    {
+                        "id": "x",
+                        "size": 512,
+                        "type": "space"
+                    }
+                ],
+                "id": "masks",
+                "test_tensor": {
+                    "source": "output_sample.npy"
+                }
+            }
+        ],
+        "tags": [
+            "Cellpose",
+            "Cellpose-SAM",
+            "Cell Segmentation",
+            "Segmentation",
+            "Fine-tuned"
+        ],
+        "type": "model",
+        "version": "0.1.0",
+        "weights": {
+            "pytorch_state_dict": {
+                "architecture": {
+                    "callable": "CellposeSAMWrapper",
+                    "kwargs": {
+                        "cellprob_threshold": 0,
+                        "channels": [
+                            0,
+                            0
+                        ],
+                        "cp_batch_size": 8,
+                        "diam_mean": 30,
+                        "do_3D": false,
+                        "estimate_diam": false,
+                        "flow_threshold": 0.4,
+                        "gpu": false,
+                        "model_type": "cpsam",
+                        "normalize": true,
+                        "stitch_threshold": 0,
+                        "use_bfloat16": true
+                    },
+                    "source": "model.py"
+                },
+                "pytorch_version": "2.3.0+cu121",
+                "source": "model_weights.pth"
+            }
+        },
+        "uploader": {
+            "email": "oeway007@gmail.com"
+        }
+    },
+    "rdf_yaml_sha256": "4d505eb8f9ec836e7ee2e79b199213e14f98a08c09332e31d6b7534475ce8863",
+    "status": "untested"
+}
