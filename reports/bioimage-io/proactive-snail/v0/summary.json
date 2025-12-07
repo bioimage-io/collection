@@ -1,0 +1,296 @@
+{
+    "rdf_content": {
+        "authors": [
+            {
+                "github_user": "danifranco",
+                "name": "Daniel Franco-Barranco"
+            }
+        ],
+        "cite": [
+            {
+                "doi": "10.1109/TPAMI.2020.2983686",
+                "text": "model"
+            },
+            {
+                "doi": "10.1038/s41592-025-02699-y",
+                "text": "training library"
+            },
+            {
+                "doi": "10.1038/s41592-025-02699-y",
+                "text": "BiaPy: accessible deep learning on bioimages",
+                "url": "https://www.nature.com/articles/s41592-025-02699-y"
+            }
+        ],
+        "covers": [
+            "cover.png"
+        ],
+        "description": "Spinal cord neuron segmentation in confocal images of adult mice with spinal cord injury. Instance segmentation representation: F + P",
+        "documentation": "documentation.md",
+        "format_version": "0.5.4",
+        "git_repo": "https://github.com/BiaPyX/BiaPy",
+        "id": "proactive-snail",
+        "id_emoji": "🐌",
+        "inputs": [
+            {
+                "axes": [
+                    {
+                        "size": 1,
+                        "type": "batch"
+                    },
+                    {
+                        "channel_names": [
+                            "channel0",
+                            "channel1"
+                        ],
+                        "type": "channel"
+                    },
+                    {
+                        "id": "y",
+                        "size": 512,
+                        "type": "space"
+                    },
+                    {
+                        "id": "x",
+                        "size": 512,
+                        "type": "space"
+                    }
+                ],
+                "data": {
+                    "type": "float32"
+                },
+                "id": "input0",
+                "preprocessing": [
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    },
+                    {
+                        "id": "scale_linear",
+                        "kwargs": {
+                            "gain": 0.00392156862745098,
+                            "offset": 0
+                        }
+                    },
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    }
+                ],
+                "test_tensor": {
+                    "sha256": "bd48e651052d6342bb87398963bfa22604d5676ce81ee4e4d24dc462ca334e50",
+                    "source": "test-input.npy"
+                }
+            }
+        ],
+        "license": "CC-BY-4.0",
+        "maintainers": [
+            {
+                "github_user": "danifranco",
+                "name": "Daniel Franco-Barranco"
+            }
+        ],
+        "name": "2D HRNetV2-W48 for spinal cord neuron segmentation",
+        "outputs": [
+            {
+                "axes": [
+                    {
+                        "size": 1,
+                        "type": "batch"
+                    },
+                    {
+                        "channel_names": [
+                            "channel0",
+                            "channel1"
+                        ],
+                        "type": "channel"
+                    },
+                    {
+                        "halo": 64,
+                        "id": "y",
+                        "scale": 1,
+                        "size": {
+                            "axis_id": "y",
+                            "offset": 0,
+                            "tensor_id": "input0"
+                        },
+                        "type": "space"
+                    },
+                    {
+                        "halo": 64,
+                        "id": "x",
+                        "scale": 1,
+                        "size": {
+                            "axis_id": "x",
+                            "offset": 0,
+                            "tensor_id": "input0"
+                        },
+                        "type": "space"
+                    }
+                ],
+                "data": {
+                    "type": "float32"
+                },
+                "id": "output0",
+                "postprocessing": [
+                    {
+                        "id": "sigmoid"
+                    },
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    }
+                ],
+                "test_tensor": {
+                    "sha256": "d979e52e7ff5d37ae0a0c58783f6a49f0688f6eb4db05342f29ced84e7c7ed14",
+                    "source": "test-output.npy"
+                }
+            }
+        ],
+        "tags": [
+            "spinal cord",
+            "neuron",
+            "confocal",
+            "contusion injury",
+            "neuroscience",
+            "histology",
+            "neurotrauma",
+            "2d",
+            "pytorch",
+            "biapy",
+            "instance-segmentation",
+            "hrnet48"
+        ],
+        "training_data": {
+            "id": "bountiful-paella"
+        },
+        "type": "model",
+        "uploader": {
+            "email": "danialtza@gmail.com"
+        },
+        "version": "0.1.0",
+        "weights": {
+            "pytorch_state_dict": {
+                "architecture": {
+                    "callable": "HighResolutionNet",
+                    "kwargs": {
+                        "cfg": {
+                            "STAGE2": {
+                                "BLOCK": "BASIC",
+                                "NUM_BLOCKS": [
+                                    4,
+                                    4
+                                ],
+                                "NUM_BRANCHES": 2,
+                                "NUM_CHANNELS": [
+                                    48,
+                                    96
+                                ],
+                                "NUM_MODULES": 1
+                            },
+                            "STAGE3": {
+                                "BLOCK": "BASIC",
+                                "NUM_BLOCKS": [
+                                    4,
+                                    4,
+                                    4
+                                ],
+                                "NUM_BRANCHES": 3,
+                                "NUM_CHANNELS": [
+                                    48,
+                                    96,
+                                    192
+                                ],
+                                "NUM_MODULES": 4
+                            },
+                            "STAGE4": {
+                                "BLOCK": "BASIC",
+                                "NUM_BLOCKS": [
+                                    4,
+                                    4,
+                                    4,
+                                    4
+                                ],
+                                "NUM_BRANCHES": 4,
+                                "NUM_CHANNELS": [
+                                    48,
+                                    96,
+                                    192,
+                                    384
+                                ],
+                                "NUM_MODULES": 3
+                            },
+                            "Z_DOWN": true
+                        },
+                        "contrast": false,
+                        "contrast_proj_dim": 256,
+                        "head_type": "FCN",
+                        "image_shape": [
+                            512,
+                            512,
+                            2
+                        ],
+                        "normalization": "sync_bn",
+                        "output_channels": [
+                            2
+                        ]
+                    },
+                    "sha256": "ac1fca012d6f92cab83032e6443faec4a6d59d46c15985cf45e60fd08f0dae19",
+                    "source": "model.py"
+                },
+                "dependencies": null,
+                "pytorch_version": "2.9.0+cu126",
+                "sha256": "9f278854b43e1e55c1bd0053ef9a169558fc23978857696053298550212e4076",
+                "source": "checkpoint.pth"
+            }
+        }
+    },
+    "rdf_yaml_sha256": "5906dda0a8e1a6e16eca70201a2056b84f7b2482ebeffd0eec812fcb2aca4427",
+    "scores": {
+        "core_compatibility": 0.0,
+        "metadata_completeness": 0.0,
+        "metadata_format": 0.0,
+        "overall_compatibility": 0.08333333333333333,
+        "overall_partner_tool_compatibility": 0.3333333333333333,
+        "tool_compatibility": {
+            "biapy": 1.0,
+            "deepimagej": 0.0
+        },
+        "tool_compatibility_version_specific": {
+            "biapy_3.6.7": 1.0,
+            "deepimagej_3.1.0-snapshot": 0.0
+        }
+    },
+    "status": "passed",
+    "tests": {
+        "biapy": {
+            "3.6.7": {
+                "badge": null,
+                "details": "",
+                "error": "",
+                "links": [
+                    "biapy/biapy"
+                ],
+                "score": 1.0,
+                "status": "passed"
+            }
+        },
+        "deepimagej": {
+            "3.1.0-snapshot": {
+                "badge": null,
+                "details": "OpenJDK 64-Bit Server VM warning: ignoring option PermSize=128m; support was removed in 8.0\nOpenJDK 64-Bit Server VM warning: Using incremental CMS is deprecated and will likely be removed in a future release\njava.lang.IllegalArgumentException: Invalid axis configuration: When axis type is 'spaces', an 'id' must be defined. Current configuration: type='space', id=null\n\tat io.bioimage.modelrunner.bioimageio.description.AxisV05.<init>(AxisV05.java:62)\n\tat io.bioimage.modelrunner.bioimageio.description.AxesV05.<init>(AxesV05.java:52)\n\tat io.bioimage.modelrunner.bioimageio.description.TensorSpecV05.<init>(TensorSpecV05.java:85)\n\tat io.bioimage.modelrunner.bioimageio.description.ModelDescriptorV05.buildInputTensors(ModelDescriptorV05.java:96)\n\tat io.bioimage.modelrunner.bioimageio.description.ModelDescriptor.buildModelDescription(ModelDescriptor.java:212)\n\tat io.bioimage.modelrunner.bioimageio.description.ModelDescriptorV05.<init>(ModelDescriptorV05.java:44)\n\tat io.bioimage.modelrunner.bioimageio.description.ModelDescriptorFactory.fromMap(ModelDescriptorFactory.java:128)\n\tat io.bioimage.modelrunner.bioimageio.description.ModelDescriptorFactory.readFromYamlTextString(ModelDescriptorFactory.java:109)\n\tat io.bioimage.modelrunner.bioimageio.BioimageioRepo.listAllModels(BioimageioRepo.java:202)\n\tat io.bioimage.modelrunner.bioimageio.BioimageioRepo.selectByID(BioimageioRepo.java:418)\n\tat io.bioimage.modelrunner.bioimageio.BioimageioRepo.downloadModelByID(BioimageioRepo.java:521)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\n\tat org.python.core.PyReflectedFunction.__call__(PyReflectedFunction.java:207)\n\tat org.python.core.PyReflectedFunction.__call__(PyReflectedFunction.java:225)\n\tat org.python.core.PyObject.__call__(PyObject.java:494)\n\tat org.python.core.PyObject.__call__(PyObject.java:498)\n\tat org.python.core.PyMethod.__call__(PyMethod.java:156)\n\tat org.python.pycode._pyx0.f$0(scripts/deepimagej_jython_scripts/deepimagej_download_model.py:138)\n\tat org.python.pycode._pyx0.call_function(scripts/deepimagej_jython_scripts/deepimagej_download_model.py)\n\tat org.python.core.PyTableCode.call(PyTableCode.java:173)\n\tat org.python.core.PyCode.call(PyCode.java:18)\n\tat org.python.core.Py.runCode(Py.java:1742)\n\tat org.python.util.PythonInterpreter.execfile(PythonInterpreter.java:297)\n\tat org.python.util.jython.runSimpleFile(jython.java:417)\n\tat org.python.util.jython.runStream(jython.java:449)\n\tat org.python.util.jython.runFile(jython.java:474)\n\tat org.python.util.jython.main(jython.java:678)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\n\tat net.imagej.launcher.ClassLauncher.launch(ClassLauncher.java:279)\n\tat net.imagej.launcher.ClassLauncher.run(ClassLauncher.java:186)\n\tat net.imagej.launcher.ClassLauncher.main(ClassLauncher.java:87)\nTraceback (most recent call last):\n  File \"scripts/deepimagej_jython_scripts/deepimagej_download_model.py\", line 78, in <module>\n    mfp = br.downloadModelByID(descriptor.getModelID(), models_dir)\n\tat io.bioimage.modelrunner.bioimageio.BioimageioRepo.downloadModelByID(BioimageioRepo.java:523)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\njava.lang.IllegalArgumentException: java.lang.IllegalArgumentException: The provided id does not correspond to an existing model in the Bioimage.io online repo.\n\n",
+                "error": "unable to download the model",
+                "links": [
+                    "deepimagej/deepimagej"
+                ],
+                "score": 0.0,
+                "status": "failed"
+            }
+        }
+    }
+}

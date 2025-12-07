@@ -1,8 +1,8 @@
 {
     "count_per_type": {
         "application": 65,
-        "dataset": 48,
-        "model": 128,
+        "dataset": 49,
+        "model": 130,
         "notebook": 4
     },
     "items": [
@@ -3190,8 +3190,47 @@
                     "version": "v0"
                 }
             ]
+        },
+        {
+            "id": "bioimage-io/helpful-whale",
+            "type": "model",
+            "versions": [
+                {
+                    "comment": "Initial version",
+                    "created_at": "2025-12-06T07:35:20Z",
+                    "sha256": "4d505eb8f9ec836e7ee2e79b199213e14f98a08c09332e31d6b7534475ce8863",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/helpful-whale/files/rdf.yaml?version=v0",
+                    "version": "v0"
+                }
+            ]
+        },
+        {
+            "id": "bioimage-io/bountiful-paella",
+            "type": "dataset",
+            "versions": [
+                {
+                    "comment": "Initial version",
+                    "created_at": "2025-12-06T10:19:23Z",
+                    "sha256": "7b9305187d5de040740efd24db343dd49fd45d241269796123ec0820018cf762",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/bountiful-paella/files/rdf.yaml?version=v0",
+                    "version": "v0"
+                }
+            ]
+        },
+        {
+            "id": "bioimage-io/proactive-snail",
+            "type": "model",
+            "versions": [
+                {
+                    "comment": "Initial version",
+                    "created_at": "2025-12-06T21:13:48Z",
+                    "sha256": "5906dda0a8e1a6e16eca70201a2056b84f7b2482ebeffd0eec812fcb2aca4427",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/proactive-snail/files/rdf.yaml?version=v0",
+                    "version": "v0"
+                }
+            ]
         }
     ],
-    "timestamp": "2025-12-06T01:46:42.992716",
-    "total": 245
+    "timestamp": "2025-12-07T02:01:17.233758",
+    "total": 248
 }
