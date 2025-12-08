@@ -1,0 +1,61 @@
+{
+    "badge": null,
+    "details": {
+        "details": [
+            {
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "https://hypha.aicell.io/bioimage-io/artifacts/bountiful-paella/files/SpineDL.md?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/bountiful-paella/files/spinedl_neuron.png?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/bountiful-paella/files/spinedl_structure.png?version=v0": null,
+                        "https://zenodo.org/records/17829532": null
+                    },
+                    "original_source_name": null,
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/bountiful-paella/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Successfully created `DatasetDescr` instance.",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [],
+                "name": "bioimageio.spec format validation dataset 0.3.0",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.spec",
+                "0.5.6.0",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.3.0",
+        "id": "bountiful-paella",
+        "metadata_completeness": 0.5925925925925926,
+        "name": "bioimageio format validation",
+        "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/bountiful-paella/files/rdf.yaml?version=v0",
+        "status": "valid-format",
+        "traceback": null,
+        "type": "dataset",
+        "warnings": null
+    },
+    "error": "",
+    "links": [],
+    "score": 0.5,
+    "status": "failed"
+}
