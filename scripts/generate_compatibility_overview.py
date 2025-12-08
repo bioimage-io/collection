@@ -189,7 +189,9 @@ def generate_html_table(
         '      <th data-sort="metadata">Metadata</th>',
         '      <th data-sort="core">Core (latest)</th>',
         '      <th data-sort="overall">Overall</th>',
-        '      <th data-sort="tools">Partner Tools</th>',
+        '      <th data-sort="biapy">BiaPy</th>',
+        '      <th data-sort="careamics">CAREamics</th>',
+        '      <th data-sort="ilastik">ilastik</th>',
         "    </tr>",
         "  </thead>",
         "  <tbody>",
@@ -219,6 +221,27 @@ def generate_html_table(
             "score-high"
             if metadata_val >= 0.7
             else ("score-med" if metadata_val >= 0.3 else "score-low")
+        )
+
+        biapy_val = row["biapy"]
+        biapy_class = (
+            "score-high"
+            if biapy_val >= 0.7
+            else ("score-med" if biapy_val >= 0.3 else "score-low")
+        )
+
+        careamics_val = row["careamics"]
+        careamics_class = (
+            "score-high"
+            if careamics_val >= 0.7
+            else ("score-med" if careamics_val >= 0.3 else "score-low")
+        )
+
+        ilastik_val = row["ilastik"]
+        ilastik_class = (
+            "score-high"
+            if ilastik_val >= 0.7
+            else ("score-med" if ilastik_val >= 0.3 else "score-low")
         )
 
         # Create hyperlink to bioimage.io with version
@@ -259,7 +282,9 @@ def generate_html_table(
                 f'      <td class="{metadata_class}" data-value="{metadata_val}">{html.escape(row["metadata_str"])}</td>',
                 f'      <td class="{core_class}" data-value="{core_val}">{core_html}</td>',
                 f'      <td class="{overall_class}" data-value="{overall_val}">{html.escape(row["overall_str"])}</td>',
-                f"      <td>{html.escape(row['tools'])}</td>",
+                f'      <td class="{biapy_class}" data-value="{biapy_val}">{html.escape(row["biapy_str"])}</td>',
+                f'      <td class="{careamics_class}" data-value="{careamics_val}">{html.escape(row["careamics_str"])}</td>',
+                f'      <td class="{ilastik_class}" data-value="{ilastik_val}">{html.escape(row["ilastik_str"])}</td>',
                 "    </tr>",
             ]
         )
@@ -302,7 +327,7 @@ def generate_html_table(
             "      const aCell = a.children[getColumnIndex(column)];",
             "      const bCell = b.children[getColumnIndex(column)];",
             "      ",
-            '      if (column === "core" || column === "overall" || column === "metadata") {',
+            '      if (column === "core" || column === "overall" || column === "metadata" || column === "biapy" || column === "careamics" || column === "ilastik") {',
             "        aVal = parseFloat(aCell.dataset.value) || 0;",
             "        bVal = parseFloat(bCell.dataset.value) || 0;",
             "      } else {",
@@ -321,7 +346,7 @@ def generate_html_table(
             "  }",
             "  ",
             "  function getColumnIndex(column) {",
-            "    const map = { id: 0, type: 1, status: 2, metadata: 3, core: 4, overall: 5, tools: 6 };",
+            "    const map = { id: 0, type: 1, status: 2, metadata: 3, core: 4, overall: 5, biapy: 6, careamics: 7, ilastik: 8 };",
             "    return map[column];",
             "  }",
             "  ",
@@ -430,16 +455,19 @@ def generate_compatibility_overview(
         stats_by_type[item_type]["core_scores"].append(core_compat)
         stats_by_type[item_type]["overall_scores"].append(overall_compat)
 
-        # Get tool compatibility summary
+        # Get tool compatibility scores
         tool_compat = scores.get("tool_compatibility", {})
-        tool_summary_parts: list[str] = []
-        for tool_name in ["biapy", "careamics", "ilastik"]:
-            if tool_name in tool_compat:
-                score = tool_compat[tool_name]
-                tool_summary_parts.append(f"{tool_name}: {score:.2f}")
-                stats_by_type[item_type][f"{tool_name}_scores"].append(score)
+        biapy_score = tool_compat.get("biapy", 0.0)
+        careamics_score = tool_compat.get("careamics", 0.0)
+        ilastik_score = tool_compat.get("ilastik", 0.0)
 
-        tool_summary = ", ".join(tool_summary_parts) if tool_summary_parts else "—"
+        # Collect per-tool statistics
+        if biapy_score > 0:
+            stats_by_type[item_type]["biapy_scores"].append(biapy_score)
+        if careamics_score > 0:
+            stats_by_type[item_type]["careamics_scores"].append(careamics_score)
+        if ilastik_score > 0:
+            stats_by_type[item_type]["ilastik_scores"].append(ilastik_score)
 
         # Extract prefix and short ID
         if "/" in item_id:
@@ -528,7 +556,12 @@ def generate_compatibility_overview(
             "core_latest_version": core_latest_version,
             "overall": overall_compat,
             "overall_str": f"{overall_compat:.2f}",
-            "tools": tool_summary,
+            "biapy": biapy_score,
+            "biapy_str": f"{biapy_score:.2f}",
+            "careamics": careamics_score,
+            "careamics_str": f"{careamics_score:.2f}",
+            "ilastik": ilastik_score,
+            "ilastik_str": f"{ilastik_score:.2f}",
         }
 
         if prefix not in resources_by_prefix:
@@ -543,7 +576,9 @@ def generate_compatibility_overview(
             "- **Metadata**: Metadata completeness score (0.0-1.0)",
             "- **Core**: bioimageio.core compatibility score (0.0-1.0)",
             "- **Overall**: Overall compatibility score across all tools (0.0-1.0)",
-            "- **Partner Tools**: Compatibility scores for partner tools (biapy, careamics, ilastik)",
+            "- **BiaPy**: BiaPy tool compatibility score (0.0-1.0)",
+            "- **CAREamics**: CAREamics tool compatibility score (0.0-1.0)",
+            "- **ilastik**: ilastik tool compatibility score (0.0-1.0)",
             "",
         ]
     )
@@ -622,12 +657,12 @@ def generate_compatibility_overview(
 
     # Write output using gen-files plugin
     content = "\n".join(lines)
-    index_path = output_path / "index.md"
-    with mkdocs_gen_files.open(str(index_path), "w", encoding="utf-8") as f:
+    index_file_path = output_path / "index.md"
+    with mkdocs_gen_files.open(str(index_file_path), "w", encoding="utf-8") as f:
         f.write(content)
 
-    # Add to navigation
-    nav[str(index_path)] = "Compatibility Reports"
+    # Register main overview page in navigation
+    nav[str(index_file_path)] = "Compatibility Reports"
 
     print(f"Generated compatibility overview at {output_path}")
 
@@ -638,6 +673,6 @@ generate_compatibility_overview(
     output_path=Path("compatibility"),
 )
 
-# Write the navigation structure
+# Write the navigation structure using the nav object
 with mkdocs_gen_files.open("compatibility/SUMMARY.md", "w") as nav_file:
     nav_file.writelines(nav.build_literate_nav())
