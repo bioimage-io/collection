@@ -1,0 +1,3724 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="BioImage.IO Partner Compatibility checks and collection backoffice.">
+      
+      
+        <meta name="author" content="Fynn Beuttenmüller">
+      
+      
+        <link rel="canonical" href="https://bioimage-io.github.io/collection/0.1/compatibility/">
+      
+      
+        <link rel="prev" href="../api/">
+      
+      
+        <link rel="next" href="../changelog/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="https://raw.githubusercontent.com/bioimage-io/bioimage.io/refs/heads/gh-pages/icons/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+    
+    
+      
+        <title>Compatibility Reports - bioimageio-collection</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.618322db.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_markdown_exec_pyodide.css">
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#compatibility-reports-overview" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="bioimageio-collection" class="md-header__button md-logo" aria-label="bioimageio-collection" data-md-component="logo">
+      
+  <img src="https://raw.githubusercontent.com/bioimage-io/bioimage.io/refs/heads/gh-pages/img/bioimage-io-icon.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            bioimageio-collection
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Compatibility Reports
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="blue"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/bioimage-io/collection" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    bioimage-io/collection
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../api/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  API Reference
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Compatibility Reports
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../changelog/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Changelog
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../coverage/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Coverage report
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="bioimageio-collection" class="md-nav__button md-logo" aria-label="bioimageio-collection" data-md-component="logo">
+      
+  <img src="https://raw.githubusercontent.com/bioimage-io/bioimage.io/refs/heads/gh-pages/img/bioimage-io-icon.png" alt="logo">
+
+    </a>
+    bioimageio-collection
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/bioimage-io/collection" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    bioimage-io/collection
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compatibility Reports
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compatibility Reports
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#legend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Legend
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-by-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary by Type
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compatibility-by-resource" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Compatibility by Resource
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Compatibility by Resource">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bioimage-io" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bioimage-io
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../coverage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Coverage report
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<!-- This file is auto-generated by scripts/generate_compatibility_overview.py. Do not edit manually. -->
+
+<h1 id="compatibility-reports-overview">Compatibility Reports Overview<a class="headerlink" href="#compatibility-reports-overview" title="Permanent link">¤</a></h1>
+<p>This page provides an overview of all 248 resources in the bioimage.io collection.</p>
+<p><em>Last updated: 2025-12-08 01:53</em></p>
+<h2 id="legend">Legend<a class="headerlink" href="#legend" title="Permanent link">¤</a></h2>
+<ul>
+<li><strong>Metadata</strong>: Metadata completeness score (0.0-1.0)</li>
+<li><strong>Core</strong>: bioimageio.core compatibility score (0.0-1.0)</li>
+<li><strong>Overall</strong>: Overall compatibility score across all tools (0.0-1.0)</li>
+<li><strong>BiaPy</strong>: BiaPy tool compatibility score (0.0-1.0)</li>
+<li><strong>CAREamics</strong>: CAREamics tool compatibility score (0.0-1.0)</li>
+<li><strong>ilastik</strong>: ilastik tool compatibility score (0.0-1.0)</li>
+</ul>
+<h2 id="summary-by-type">Summary by Type<a class="headerlink" href="#summary-by-type" title="Permanent link">¤</a></h2>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th style="text-align: right;">Count</th>
+<th style="text-align: right;">% Passed</th>
+<th style="text-align: right;">Avg Metadata</th>
+<th style="text-align: right;">Avg Core</th>
+<th style="text-align: right;">Avg Overall</th>
+<th style="text-align: right;">Avg BiaPy</th>
+<th style="text-align: right;">Avg CAREamics</th>
+<th style="text-align: right;">Avg ilastik</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>application</td>
+<td style="text-align: right;">65</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">0.83</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">0.58</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+<tr>
+<td>dataset</td>
+<td style="text-align: right;">49</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">0.75</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">0.56</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+<tr>
+<td>model</td>
+<td style="text-align: right;">130</td>
+<td style="text-align: right;">98.5%</td>
+<td style="text-align: right;">0.69</td>
+<td style="text-align: right;">0.73</td>
+<td style="text-align: right;">0.68</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">1.00</td>
+</tr>
+<tr>
+<td>notebook</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">0.79</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">0.57</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+</tbody>
+</table>
+<h2 id="compatibility-by-resource">Compatibility by Resource<a class="headerlink" href="#compatibility-by-resource" title="Permanent link">¤</a></h2>
+<p>The following tables show compatibility test results for each resource. Click column headers to sort.</p>
+<h3 id="bioimage-io">bioimage-io<a class="headerlink" href="#bioimage-io" title="Permanent link">¤</a></h3>
+<p><em>248 resources</em></p>
+<div class="reports-table-container">
+<style>
+.reports-table-container { margin: 20px 0; }
+.filter-controls { margin-bottom: 15px; display: flex; gap: 10px; flex-wrap: wrap; }
+.filter-controls input, .filter-controls select { padding: 5px 10px; border: 1px solid var(--md-default-fg-color--lighter, #ccc); border-radius: 4px; background: var(--md-default-bg-color, white); color: var(--md-default-fg-color, black); }
+.reports-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.reports-table th { background: var(--md-code-bg-color, #f5f5f5); color: var(--md-default-fg-color, black); padding: 10px; text-align: left; cursor: pointer; user-select: none; border-bottom: 2px solid var(--md-default-fg-color--lighter, #ddd); }
+.reports-table th:hover { background: var(--md-code-hl-color, #e8e8e8); }
+.reports-table th.sorted-asc::after { content: " ↑"; }
+.reports-table th.sorted-desc::after { content: " ↓"; }
+.reports-table td { padding: 8px 10px; border-bottom: 1px solid var(--md-default-fg-color--lightest, #eee); }
+.reports-table tr:hover { background: var(--md-code-bg-color, #f9f9f9); }
+.status-passed { color: #22863a; font-weight: 600; }
+.status-failed { color: #cb2431; font-weight: 600; }
+.status-untested { color: #6a737d; }
+.score-high { color: #22863a; font-weight: 600; }
+.score-med { color: #e36209; }
+.score-low { color: #cb2431; }
+.score-high a, .score-med a, .score-low a { color: inherit; text-decoration: underline; text-decoration-style: dotted; text-decoration-thickness: 1px; text-underline-offset: 2px; }
+.score-high a:hover, .score-med a:hover, .score-low a:hover { text-decoration-style: solid; text-decoration-thickness: 2px; }
+@media (prefers-color-scheme: dark) {
+  .reports-table th { background: #2d2d2d; color: #e8e8e8; }
+  .reports-table th:hover { background: #3d3d3d; }
+  .reports-table tr:hover { background: #2d2d2d; }
+  .filter-controls input, .filter-controls select { background: #2d2d2d; color: #e8e8e8; border-color: #555; }
+}
+</style>
+
+<div class="filter-controls">
+  <input type="text" id="searchInput0" placeholder="Search resources..." style="flex: 1; min-width: 200px;">
+  <select id="typeFilter0">
+    <option value="">All Types</option>
+    <option value="model">Model</option>
+    <option value="application">Application</option>
+    <option value="dataset">Dataset</option>
+    <option value="notebook">Notebook</option>
+  </select>
+  <select id="statusFilter0">
+    <option value="">All Statuses</option>
+    <option value="passed">Passed</option>
+    <option value="failed">Failed</option>
+    <option value="untested">Untested</option>
+  </select>
+</div>
+
+<table class="reports-table" id="reportsTable0">
+  <thead>
+    <tr>
+      <th data-sort="id">Resource ID / Version</th>
+      <th data-sort="type">Type</th>
+      <th data-sort="status">Status</th>
+      <th data-sort="metadata">Metadata</th>
+      <th data-sort="core">Core (latest)</th>
+      <th data-sort="overall">Overall</th>
+      <th data-sort="biapy">BiaPy</th>
+      <th data-sort="careamics">CAREamics</th>
+      <th data-sort="ilastik">ilastik</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/affable-shark/v0" target="_blank">affable-shark/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.8043478260869565">0.80</td>
+      <td class="score-high" data-value="1.0"><a href="affable-shark/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-high" data-value="0.8677536231884058">0.87</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/impartial-shrimp/v0" target="_blank">impartial-shrimp/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7738095238095238">0.77</td>
+      <td class="score-high" data-value="1.0"><a href="impartial-shrimp/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-high" data-value="0.8601190476190476">0.86</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/hiding-blowfish/v0" target="_blank">hiding-blowfish/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7528089887640449">0.75</td>
+      <td class="score-high" data-value="1.0"><a href="hiding-blowfish/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-high" data-value="0.8548689138576778">0.85</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/humorous-owl/v0" target="_blank">humorous-owl/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7888888888888889">0.79</td>
+      <td class="score-med" data-value="0.5"><a href="humorous-owl/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5722222222222222">0.57</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/hiding-tiger/v0" target="_blank">hiding-tiger/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7303370786516854">0.73</td>
+      <td class="score-high" data-value="1.0"><a href="hiding-tiger/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-high" data-value="0.849250936329588">0.85</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/chatty-frog/v0" target="_blank">chatty-frog/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.8536585365853658">0.85</td>
+      <td class="score-med" data-value="0.5"><a href="chatty-frog/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5884146341463414">0.59</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/organized-badger/v0" target="_blank">organized-badger/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7415730337078652">0.74</td>
+      <td class="score-high" data-value="1.0"><a href="organized-badger/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-high" data-value="0.8520599250936329">0.85</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/kind-seashell/v0" target="_blank">kind-seashell/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7386363636363636">0.74</td>
+      <td class="score-high" data-value="1.0"><a href="kind-seashell/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-high" data-value="0.8513257575757576">0.85</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/fearless-crab/v0" target="_blank">fearless-crab/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.8617886178861789">0.86</td>
+      <td class="score-med" data-value="0.5"><a href="fearless-crab/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5904471544715447">0.59</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/discreet-rooster/v0" target="_blank">discreet-rooster/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7307692307692307">0.73</td>
+      <td class="score-med" data-value="0.5"><a href="discreet-rooster/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5576923076923077">0.56</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/loyal-parrot/v0" target="_blank">loyal-parrot/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7352941176470589">0.74</td>
+      <td class="score-high" data-value="1.0"><a href="loyal-parrot/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-high" data-value="0.7671568627450981">0.77</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/placid-llama/v0" target="_blank">placid-llama/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7307692307692307">0.73</td>
+      <td class="score-med" data-value="0.5"><a href="placid-llama/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5576923076923077">0.56</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/willing-hedgehog/v0" target="_blank">willing-hedgehog/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7386363636363636">0.74</td>
+      <td class="score-high" data-value="1.0"><a href="willing-hedgehog/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-high" data-value="0.8513257575757576">0.85</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/non-judgemental-eagle/v0" target="_blank">non-judgemental-eagle/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7142857142857143">0.71</td>
+      <td class="score-med" data-value="0.5"><a href="non-judgemental-eagle/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5535714285714286">0.55</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/creative-panda/v0" target="_blank">creative-panda/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7215189873417721">0.72</td>
+      <td class="score-med" data-value="0.5"><a href="creative-panda/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.555379746835443">0.56</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/conscientious-seashell/v0" target="_blank">conscientious-seashell/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7352941176470589">0.74</td>
+      <td class="score-high" data-value="1.0"><a href="conscientious-seashell/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-high" data-value="0.7671568627450981">0.77</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/powerful-chipmunk/v0" target="_blank">powerful-chipmunk/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7415730337078652">0.74</td>
+      <td class="score-high" data-value="1.0"><a href="powerful-chipmunk/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-high" data-value="0.927059925093633">0.93</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/shivering-raccoon/v0" target="_blank">shivering-raccoon/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.75">0.75</td>
+      <td class="score-high" data-value="1.0"><a href="shivering-raccoon/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-high" data-value="0.8541666666666666">0.85</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/powerful-fish/v0" target="_blank">powerful-fish/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7586206896551724">0.76</td>
+      <td class="score-high" data-value="1.0"><a href="powerful-fish/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-high" data-value="0.7729885057471265">0.77</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/loyal-squid/v0" target="_blank">loyal-squid/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.75">0.75</td>
+      <td class="score-high" data-value="1.0"><a href="loyal-squid/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-high" data-value="0.7708333333333334">0.77</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/wild-whale/v0" target="_blank">wild-whale/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7558139534883721">0.76</td>
+      <td class="score-high" data-value="1.0"><a href="wild-whale/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-high" data-value="0.8556201550387597">0.86</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/pioneering-rhino/v0" target="_blank">pioneering-rhino/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-med" data-value="0.6575342465753424">0.66</td>
+      <td class="score-high" data-value="1.0"><a href="pioneering-rhino/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-high" data-value="0.747716894977169">0.75</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/straightforward-crocodile/v0" target="_blank">straightforward-crocodile/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-med" data-value="0.6911764705882353">0.69</td>
+      <td class="score-med" data-value="0.5"><a href="straightforward-crocodile/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5477941176470589">0.55</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/thoughtful-turtle/v0" target="_blank">thoughtful-turtle/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7586206896551724">0.76</td>
+      <td class="score-high" data-value="1.0"><a href="thoughtful-turtle/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-high" data-value="0.7729885057471265">0.77</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/laid-back-lobster/v0" target="_blank">laid-back-lobster/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-med" data-value="0.6575342465753424">0.66</td>
+      <td class="score-high" data-value="1.0"><a href="laid-back-lobster/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-high" data-value="0.747716894977169">0.75</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/passionate-t-rex/v0" target="_blank">passionate-t-rex/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-med" data-value="0.6621621621621622">0.66</td>
+      <td class="score-high" data-value="1.0"><a href="passionate-t-rex/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-high" data-value="0.7488738738738739">0.75</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/independent-shrimp/v0" target="_blank">independent-shrimp/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7528089887640449">0.75</td>
+      <td class="score-high" data-value="1.0"><a href="independent-shrimp/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-high" data-value="0.8548689138576778">0.85</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/naked-microbe/v0" target="_blank">naked-microbe/v0</a></td>
+      <td>model</td>
+      <td class="status-failed">failed</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/polite-pig/v0" target="_blank">polite-pig/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-med" data-value="0.6938775510204082">0.69</td>
+      <td class="score-high" data-value="1.0"><a href="polite-pig/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-med" data-value="0.673469387755102">0.67</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/impartial-shark/v0" target="_blank">impartial-shark/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7831325301204819">0.78</td>
+      <td class="score-med" data-value="0.5"><a href="impartial-shark/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5707831325301205">0.57</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/joyful-deer/v0" target="_blank">joyful-deer/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7375">0.74</td>
+      <td class="score-med" data-value="0.5"><a href="joyful-deer/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.6427083333333333">0.64</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/determined-chipmunk/v0" target="_blank">determined-chipmunk/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.75">0.75</td>
+      <td class="score-high" data-value="1.0"><a href="determined-chipmunk/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-high" data-value="0.8541666666666666">0.85</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/easy-going-sauropod/v0" target="_blank">easy-going-sauropod/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-med" data-value="0.603448275862069">0.60</td>
+      <td class="score-med" data-value="0.5"><a href="easy-going-sauropod/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5258620689655172">0.53</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/nice-peacock/v0" target="_blank">nice-peacock/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-med" data-value="0.6607142857142857">0.66</td>
+      <td class="score-high" data-value="1.0"><a href="nice-peacock/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-med" data-value="0.6651785714285714">0.67</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/noisy-fish/v0" target="_blank">noisy-fish/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-med" data-value="0.6486486486486487">0.65</td>
+      <td class="score-high" data-value="1.0"><a href="noisy-fish/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-high" data-value="0.8204954954954955">0.82</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/organized-cricket/v0" target="_blank">organized-cricket/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7352941176470589">0.74</td>
+      <td class="score-high" data-value="1.0"><a href="organized-cricket/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-high" data-value="0.7671568627450981">0.77</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/modest-octopus/v0" target="_blank">modest-octopus/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.8214285714285714">0.82</td>
+      <td class="score-high" data-value="1.0"><a href="modest-octopus/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-high" data-value="0.7053571428571428">0.71</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/ambitious-ant/v0" target="_blank">ambitious-ant/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-med" data-value="0.625">0.62</td>
+      <td class="score-high" data-value="1.0"><a href="ambitious-ant/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-high" data-value="0.7395833333333334">0.74</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/courteous-otter/v0" target="_blank">courteous-otter/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-med" data-value="0.6428571428571429">0.64</td>
+      <td class="score-high" data-value="1.0"><a href="courteous-otter/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-high" data-value="0.7440476190476191">0.74</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/efficient-chipmunk/v0" target="_blank">efficient-chipmunk/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-med" data-value="0.6507936507936508">0.65</td>
+      <td class="score-med" data-value="0.5"><a href="efficient-chipmunk/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5376984126984127">0.54</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/assertive-hiking-boot/v0" target="_blank">assertive-hiking-boot/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.8">0.80</td>
+      <td class="score-med" data-value="0.5"><a href="assertive-hiking-boot/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.575">0.57</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/amiable-crocodile/v0" target="_blank">amiable-crocodile/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-med" data-value="0.6716417910447762">0.67</td>
+      <td class="score-med" data-value="0.5"><a href="amiable-crocodile/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-high" data-value="0.7095771144278606">0.71</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/zingy-mango/v0" target="_blank">zingy-mango/v0</a></td>
+      <td>dataset</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7727272727272727">0.77</td>
+      <td class="score-med" data-value="0.5"><a href="zingy-mango/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5681818181818181">0.57</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/whimsical-helmet/v0" target="_blank">whimsical-helmet/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.8372093023255814">0.84</td>
+      <td class="score-med" data-value="0.5"><a href="whimsical-helmet/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5843023255813954">0.58</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/vibrant-scarf/v0" target="_blank">vibrant-scarf/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.851063829787234">0.85</td>
+      <td class="score-med" data-value="0.5"><a href="vibrant-scarf/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5877659574468085">0.59</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/uplifting-backpack/v0" target="_blank">uplifting-backpack/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.813953488372093">0.81</td>
+      <td class="score-med" data-value="0.5"><a href="uplifting-backpack/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5784883720930233">0.58</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/tempting-pizza/v0" target="_blank">tempting-pizza/v0</a></td>
+      <td>dataset</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.75">0.75</td>
+      <td class="score-med" data-value="0.5"><a href="tempting-pizza/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5625">0.56</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/velvety-paella/v0" target="_blank">velvety-paella/v0</a></td>
+      <td>dataset</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7777777777777778">0.78</td>
+      <td class="score-med" data-value="0.5"><a href="velvety-paella/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5694444444444444">0.57</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/timeless-running-shirt/v0" target="_blank">timeless-running-shirt/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.8222222222222222">0.82</td>
+      <td class="score-med" data-value="0.5"><a href="timeless-running-shirt/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5805555555555555">0.58</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/tangible-pepper/v0" target="_blank">tangible-pepper/v0</a></td>
+      <td>dataset</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.782608695652174">0.78</td>
+      <td class="score-med" data-value="0.5"><a href="tangible-pepper/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5706521739130435">0.57</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/sweet-swimsuit/v0" target="_blank">sweet-swimsuit/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.851063829787234">0.85</td>
+      <td class="score-med" data-value="0.5"><a href="sweet-swimsuit/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5877659574468085">0.59</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/sweet-doughnut/v0" target="_blank">sweet-doughnut/v0</a></td>
+      <td>dataset</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7777777777777778">0.78</td>
+      <td class="score-med" data-value="0.5"><a href="sweet-doughnut/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5694444444444444">0.57</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/sweet-pineapple/v0" target="_blank">sweet-pineapple/v0</a></td>
+      <td>dataset</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7727272727272727">0.77</td>
+      <td class="score-med" data-value="0.5"><a href="sweet-pineapple/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5681818181818181">0.57</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/supple-safety-vest/v0" target="_blank">supple-safety-vest/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.851063829787234">0.85</td>
+      <td class="score-med" data-value="0.5"><a href="supple-safety-vest/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5877659574468085">0.59</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/striking-necktie/v0" target="_blank">striking-necktie/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.8372093023255814">0.84</td>
+      <td class="score-med" data-value="0.5"><a href="striking-necktie/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5843023255813954">0.58</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/splendid-pie/v0" target="_blank">splendid-pie/v0</a></td>
+      <td>dataset</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7777777777777778">0.78</td>
+      <td class="score-med" data-value="0.5"><a href="splendid-pie/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5694444444444444">0.57</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/spicy-cucumber/v0" target="_blank">spicy-cucumber/v0</a></td>
+      <td>dataset</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7727272727272727">0.77</td>
+      <td class="score-med" data-value="0.5"><a href="spicy-cucumber/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5681818181818181">0.57</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/sparkling-sari/v0" target="_blank">sparkling-sari/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7906976744186046">0.79</td>
+      <td class="score-med" data-value="0.5"><a href="sparkling-sari/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5726744186046512">0.57</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/smooth-scarf/v0" target="_blank">smooth-scarf/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.851063829787234">0.85</td>
+      <td class="score-med" data-value="0.5"><a href="smooth-scarf/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5877659574468085">0.59</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/smooth-safety-vest/v0" target="_blank">smooth-safety-vest/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.813953488372093">0.81</td>
+      <td class="score-med" data-value="0.5"><a href="smooth-safety-vest/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5784883720930233">0.58</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/smooth-hat/v0" target="_blank">smooth-hat/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.813953488372093">0.81</td>
+      <td class="score-med" data-value="0.5"><a href="smooth-hat/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5784883720930233">0.58</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/smooth-graduation-hat/v0" target="_blank">smooth-graduation-hat/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.813953488372093">0.81</td>
+      <td class="score-med" data-value="0.5"><a href="smooth-graduation-hat/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5784883720930233">0.58</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/slinky-bikini/v0" target="_blank">slinky-bikini/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.813953488372093">0.81</td>
+      <td class="score-med" data-value="0.5"><a href="slinky-bikini/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5784883720930233">0.58</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/silky-shorts/v0" target="_blank">silky-shorts/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.8222222222222222">0.82</td>
+      <td class="score-med" data-value="0.5"><a href="silky-shorts/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5805555555555555">0.58</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/silken-briefs/v0" target="_blank">silken-briefs/v0</a></td>
+      <td>notebook</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7727272727272727">0.77</td>
+      <td class="score-med" data-value="0.5"><a href="silken-briefs/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5681818181818181">0.57</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/sharp-running-shirt/v0" target="_blank">sharp-running-shirt/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.851063829787234">0.85</td>
+      <td class="score-med" data-value="0.5"><a href="sharp-running-shirt/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5877659574468085">0.59</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/seamless-blouse/v0" target="_blank">seamless-blouse/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.851063829787234">0.85</td>
+      <td class="score-med" data-value="0.5"><a href="seamless-blouse/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5877659574468085">0.59</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/rich-burrito/v0" target="_blank">rich-burrito/v0</a></td>
+      <td>dataset</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7555555555555555">0.76</td>
+      <td class="score-med" data-value="0.5"><a href="rich-burrito/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5638888888888889">0.56</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/rich-cheese/v0" target="_blank">rich-cheese/v0</a></td>
+      <td>dataset</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7555555555555555">0.76</td>
+      <td class="score-med" data-value="0.5"><a href="rich-cheese/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5638888888888889">0.56</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/savory-cheese/v0" target="_blank">savory-cheese/v0</a></td>
+      <td>dataset</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7555555555555555">0.76</td>
+      <td class="score-med" data-value="0.5"><a href="savory-cheese/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5638888888888889">0.56</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/resplendent-ribbon/v0" target="_blank">resplendent-ribbon/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.813953488372093">0.81</td>
+      <td class="score-med" data-value="0.5"><a href="resplendent-ribbon/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5784883720930233">0.58</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/resourceful-potato/v0" target="_blank">resourceful-potato/v0</a></td>
+      <td>dataset</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7555555555555555">0.76</td>
+      <td class="score-med" data-value="0.5"><a href="resourceful-potato/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5638888888888889">0.56</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/regal-ribbon/v0" target="_blank">regal-ribbon/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.813953488372093">0.81</td>
+      <td class="score-med" data-value="0.5"><a href="regal-ribbon/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5784883720930233">0.58</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/rare-t-shirt/v0" target="_blank">rare-t-shirt/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.8723404255319149">0.87</td>
+      <td class="score-med" data-value="0.5"><a href="rare-t-shirt/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5930851063829787">0.59</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/powerful-sandal/v0" target="_blank">powerful-sandal/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.8">0.80</td>
+      <td class="score-med" data-value="0.5"><a href="powerful-sandal/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.575">0.57</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/polished-t-shirt/v0" target="_blank">polished-t-shirt/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.813953488372093">0.81</td>
+      <td class="score-med" data-value="0.5"><a href="polished-t-shirt/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5784883720930233">0.58</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/piquant-burger/v0" target="_blank">piquant-burger/v0</a></td>
+      <td>dataset</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7727272727272727">0.77</td>
+      <td class="score-med" data-value="0.5"><a href="piquant-burger/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5681818181818181">0.57</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/palatable-curry/v0" target="_blank">palatable-curry/v0</a></td>
+      <td>dataset</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7555555555555555">0.76</td>
+      <td class="score-med" data-value="0.5"><a href="palatable-curry/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5638888888888889">0.56</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/nutty-knuckle/v0" target="_blank">nutty-knuckle/v0</a></td>
+      <td>dataset</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7555555555555555">0.76</td>
+      <td class="score-med" data-value="0.5"><a href="nutty-knuckle/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5638888888888889">0.56</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/nutty-burrito/v0" target="_blank">nutty-burrito/v0</a></td>
+      <td>dataset</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7555555555555555">0.76</td>
+      <td class="score-med" data-value="0.5"><a href="nutty-burrito/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5638888888888889">0.56</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/opalescent-ribbon/v0" target="_blank">opalescent-ribbon/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.813953488372093">0.81</td>
+      <td class="score-med" data-value="0.5"><a href="opalescent-ribbon/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5784883720930233">0.58</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/nourishing-baguette/v0" target="_blank">nourishing-baguette/v0</a></td>
+      <td>dataset</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7727272727272727">0.77</td>
+      <td class="score-med" data-value="0.5"><a href="nourishing-baguette/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5681818181818181">0.57</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/mesmerizing-shoe/v0" target="_blank">mesmerizing-shoe/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.813953488372093">0.81</td>
+      <td class="score-med" data-value="0.5"><a href="mesmerizing-shoe/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5784883720930233">0.58</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/mellow-takeout/v0" target="_blank">mellow-takeout/v0</a></td>
+      <td>dataset</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.782608695652174">0.78</td>
+      <td class="score-med" data-value="0.5"><a href="mellow-takeout/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5706521739130435">0.57</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/luxurious-blouse/v0" target="_blank">luxurious-blouse/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.8723404255319149">0.87</td>
+      <td class="score-med" data-value="0.5"><a href="luxurious-blouse/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5930851063829787">0.59</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/mellow-broccoli/v0" target="_blank">mellow-broccoli/v0</a></td>
+      <td>dataset</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7555555555555555">0.76</td>
+      <td class="score-med" data-value="0.5"><a href="mellow-broccoli/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5638888888888889">0.56</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/luscious-tomato/v0" target="_blank">luscious-tomato/v0</a></td>
+      <td>dataset</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7555555555555555">0.76</td>
+      <td class="score-med" data-value="0.5"><a href="luscious-tomato/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5638888888888889">0.56</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/luscious-sushi/v0" target="_blank">luscious-sushi/v0</a></td>
+      <td>dataset</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7727272727272727">0.77</td>
+      <td class="score-med" data-value="0.5"><a href="luscious-sushi/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5681818181818181">0.57</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/lively-t-shirt/v0" target="_blank">lively-t-shirt/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.8222222222222222">0.82</td>
+      <td class="score-med" data-value="0.5"><a href="lively-t-shirt/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5805555555555555">0.58</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/lovely-graduation-hat/v0" target="_blank">lovely-graduation-hat/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.8723404255319149">0.87</td>
+      <td class="score-med" data-value="0.5"><a href="lovely-graduation-hat/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5930851063829787">0.59</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/limited-edition-crown/v0" target="_blank">limited-edition-crown/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.813953488372093">0.81</td>
+      <td class="score-med" data-value="0.5"><a href="limited-edition-crown/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5784883720930233">0.58</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/light-swimsuit/v0" target="_blank">light-swimsuit/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.8222222222222222">0.82</td>
+      <td class="score-med" data-value="0.5"><a href="light-swimsuit/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5805555555555555">0.58</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/juicy-peanut/v0" target="_blank">juicy-peanut/v0</a></td>
+      <td>dataset</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7272727272727273">0.73</td>
+      <td class="score-med" data-value="0.5"><a href="juicy-peanut/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5568181818181819">0.56</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/irresistible-swimsuit/v0" target="_blank">irresistible-swimsuit/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.813953488372093">0.81</td>
+      <td class="score-med" data-value="0.5"><a href="irresistible-swimsuit/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5784883720930233">0.58</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/joyful-top-hat/v0" target="_blank">joyful-top-hat/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.813953488372093">0.81</td>
+      <td class="score-med" data-value="0.5"><a href="joyful-top-hat/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5784883720930233">0.58</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/indulgent-sandwich/v0" target="_blank">indulgent-sandwich/v0</a></td>
+      <td>dataset</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7555555555555555">0.76</td>
+      <td class="score-med" data-value="0.5"><a href="indulgent-sandwich/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5638888888888889">0.56</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/inspiring-sandal/v0" target="_blank">inspiring-sandal/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.813953488372093">0.81</td>
+      <td class="score-med" data-value="0.5"><a href="inspiring-sandal/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5784883720930233">0.58</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/gourmet-bacon/v0" target="_blank">gourmet-bacon/v0</a></td>
+      <td>dataset</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7727272727272727">0.77</td>
+      <td class="score-med" data-value="0.5"><a href="gourmet-bacon/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5681818181818181">0.57</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/glorious-graduation-hat/v0" target="_blank">glorious-graduation-hat/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.8723404255319149">0.87</td>
+      <td class="score-med" data-value="0.5"><a href="glorious-graduation-hat/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5930851063829787">0.59</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/fun-high-heels/v0" target="_blank">fun-high-heels/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.813953488372093">0.81</td>
+      <td class="score-med" data-value="0.5"><a href="fun-high-heels/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5784883720930233">0.58</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/fruity-sushi/v0" target="_blank">fruity-sushi/v0</a></td>
+      <td>dataset</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7555555555555555">0.76</td>
+      <td class="score-med" data-value="0.5"><a href="fruity-sushi/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5638888888888889">0.56</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/fragrant-baguette/v0" target="_blank">fragrant-baguette/v0</a></td>
+      <td>dataset</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7727272727272727">0.77</td>
+      <td class="score-med" data-value="0.5"><a href="fragrant-baguette/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5681818181818181">0.57</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/fluid-glasses/v0" target="_blank">fluid-glasses/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.813953488372093">0.81</td>
+      <td class="score-med" data-value="0.5"><a href="fluid-glasses/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5784883720930233">0.58</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/fluffy-popcorn/v0" target="_blank">fluffy-popcorn/v0</a></td>
+      <td>dataset</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7555555555555555">0.76</td>
+      <td class="score-med" data-value="0.5"><a href="fluffy-popcorn/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5638888888888889">0.56</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/flexible-sandal/v0" target="_blank">flexible-sandal/v0</a></td>
+      <td>notebook</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7727272727272727">0.77</td>
+      <td class="score-med" data-value="0.5"><a href="flexible-sandal/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5681818181818181">0.57</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/flexible-helmet/v0" target="_blank">flexible-helmet/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.813953488372093">0.81</td>
+      <td class="score-med" data-value="0.5"><a href="flexible-helmet/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5784883720930233">0.58</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/exquisite-curry/v0" target="_blank">exquisite-curry/v0</a></td>
+      <td>dataset</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7555555555555555">0.76</td>
+      <td class="score-med" data-value="0.5"><a href="exquisite-curry/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5638888888888889">0.56</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/flattering-bikini/v0" target="_blank">flattering-bikini/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.813953488372093">0.81</td>
+      <td class="score-med" data-value="0.5"><a href="flattering-bikini/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5784883720930233">0.58</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/dramatic-dress/v0" target="_blank">dramatic-dress/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.851063829787234">0.85</td>
+      <td class="score-med" data-value="0.5"><a href="dramatic-dress/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5877659574468085">0.59</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/exciting-backpack/v0" target="_blank">exciting-backpack/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.813953488372093">0.81</td>
+      <td class="score-med" data-value="0.5"><a href="exciting-backpack/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5784883720930233">0.58</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/delectable-eggplant/v0" target="_blank">delectable-eggplant/v0</a></td>
+      <td>dataset</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7555555555555555">0.76</td>
+      <td class="score-med" data-value="0.5"><a href="delectable-eggplant/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5638888888888889">0.56</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/divine-paella/v0" target="_blank">divine-paella/v0</a></td>
+      <td>dataset</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7555555555555555">0.76</td>
+      <td class="score-med" data-value="0.5"><a href="divine-paella/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5638888888888889">0.56</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/delicious-cheese/v0" target="_blank">delicious-cheese/v0</a></td>
+      <td>dataset</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7555555555555555">0.76</td>
+      <td class="score-med" data-value="0.5"><a href="delicious-cheese/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5638888888888889">0.56</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/crunchy-cookie/v0" target="_blank">crunchy-cookie/v0</a></td>
+      <td>dataset</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.75">0.75</td>
+      <td class="score-med" data-value="0.5"><a href="crunchy-cookie/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5625">0.56</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/cozy-hiking-boot/v0" target="_blank">cozy-hiking-boot/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.813953488372093">0.81</td>
+      <td class="score-med" data-value="0.5"><a href="cozy-hiking-boot/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5784883720930233">0.58</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/convenient-t-shirt/v0" target="_blank">convenient-t-shirt/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.813953488372093">0.81</td>
+      <td class="score-med" data-value="0.5"><a href="convenient-t-shirt/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5784883720930233">0.58</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/convenient-purse/v0" target="_blank">convenient-purse/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.813953488372093">0.81</td>
+      <td class="score-med" data-value="0.5"><a href="convenient-purse/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5784883720930233">0.58</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/classy-googles/v0" target="_blank">classy-googles/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.8">0.80</td>
+      <td class="score-med" data-value="0.5"><a href="classy-googles/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.575">0.57</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/comfortable-hiking-boot/v0" target="_blank">comfortable-hiking-boot/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.851063829787234">0.85</td>
+      <td class="score-med" data-value="0.5"><a href="comfortable-hiking-boot/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5877659574468085">0.59</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/chewy-garlic/v0" target="_blank">chewy-garlic/v0</a></td>
+      <td>dataset</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7555555555555555">0.76</td>
+      <td class="score-med" data-value="0.5"><a href="chewy-garlic/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5638888888888889">0.56</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/cheerful-cap/v0" target="_blank">cheerful-cap/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.813953488372093">0.81</td>
+      <td class="score-med" data-value="0.5"><a href="cheerful-cap/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5784883720930233">0.58</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/buttery-sandwich/v0" target="_blank">buttery-sandwich/v0</a></td>
+      <td>dataset</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.75">0.75</td>
+      <td class="score-med" data-value="0.5"><a href="buttery-sandwich/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5625">0.56</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/buttery-apple/v0" target="_blank">buttery-apple/v0</a></td>
+      <td>dataset</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.782608695652174">0.78</td>
+      <td class="score-med" data-value="0.5"><a href="buttery-apple/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5706521739130435">0.57</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/brilliant-gloves/v0" target="_blank">brilliant-gloves/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.8723404255319149">0.87</td>
+      <td class="score-med" data-value="0.5"><a href="brilliant-gloves/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5930851063829787">0.59</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/bountiful-moon-cake/v0" target="_blank">bountiful-moon-cake/v0</a></td>
+      <td>dataset</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7804878048780488">0.78</td>
+      <td class="score-med" data-value="0.5"><a href="bountiful-moon-cake/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5701219512195121">0.57</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/brisk-scarf/v0" target="_blank">brisk-scarf/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.813953488372093">0.81</td>
+      <td class="score-med" data-value="0.5"><a href="brisk-scarf/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5784883720930233">0.58</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/bold-shorts/v0" target="_blank">bold-shorts/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.813953488372093">0.81</td>
+      <td class="score-med" data-value="0.5"><a href="bold-shorts/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5784883720930233">0.58</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/bitter-hot-dog/v0" target="_blank">bitter-hot-dog/v0</a></td>
+      <td>dataset</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7555555555555555">0.76</td>
+      <td class="score-med" data-value="0.5"><a href="bitter-hot-dog/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5638888888888889">0.56</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/authoritative-ballet-shoes/v0" target="_blank">authoritative-ballet-shoes/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.8372093023255814">0.84</td>
+      <td class="score-med" data-value="0.5"><a href="authoritative-ballet-shoes/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5843023255813954">0.58</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/appetizing-eggplant/v0" target="_blank">appetizing-eggplant/v0</a></td>
+      <td>dataset</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7555555555555555">0.76</td>
+      <td class="score-med" data-value="0.5"><a href="appetizing-eggplant/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5638888888888889">0.56</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/appetizing-peach/v0" target="_blank">appetizing-peach/v0</a></td>
+      <td>dataset</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7555555555555555">0.76</td>
+      <td class="score-med" data-value="0.5"><a href="appetizing-peach/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5638888888888889">0.56</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/appealing-popcorn/v0" target="_blank">appealing-popcorn/v0</a></td>
+      <td>dataset</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7555555555555555">0.76</td>
+      <td class="score-med" data-value="0.5"><a href="appealing-popcorn/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5638888888888889">0.56</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/adorable-blouse/v0" target="_blank">adorable-blouse/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.851063829787234">0.85</td>
+      <td class="score-med" data-value="0.5"><a href="adorable-blouse/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5877659574468085">0.59</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/emotional-cricket/v0" target="_blank">emotional-cricket/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7682926829268293">0.77</td>
+      <td class="score-high" data-value="1.0"><a href="emotional-cricket/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-high" data-value="0.858739837398374">0.86</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/ambitious-sloth/v0" target="_blank">ambitious-sloth/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.75">0.75</td>
+      <td class="score-high" data-value="1.0"><a href="ambitious-sloth/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-high" data-value="0.8541666666666666">0.85</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/charismatic-whale/v0" target="_blank">charismatic-whale/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.9019607843137255">0.90</td>
+      <td class="score-high" data-value="1.0"><a href="charismatic-whale/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-high" data-value="0.8088235294117647">0.81</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/wild-rhino/v0" target="_blank">wild-rhino/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7049180327868853">0.70</td>
+      <td class="score-med" data-value="0.5"><a href="wild-rhino/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.6345628415300547">0.63</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/dazzling-spider/v0" target="_blank">dazzling-spider/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7049180327868853">0.70</td>
+      <td class="score-med" data-value="0.5"><a href="dazzling-spider/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.6345628415300547">0.63</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/humorous-fox/v0" target="_blank">humorous-fox/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7049180327868853">0.70</td>
+      <td class="score-med" data-value="0.5"><a href="humorous-fox/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.6345628415300547">0.63</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/dynamic-t-rex/v0" target="_blank">dynamic-t-rex/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7272727272727273">0.73</td>
+      <td class="score-med" data-value="0.5"><a href="dynamic-t-rex/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5568181818181819">0.56</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/famous-fish/v0" target="_blank">famous-fish/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7230769230769231">0.72</td>
+      <td class="score-high" data-value="1.0"><a href="famous-fish/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-med" data-value="0.6807692307692308">0.68</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/happy-elephant/v0" target="_blank">happy-elephant/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7166666666666667">0.72</td>
+      <td class="score-med" data-value="0.5"><a href="happy-elephant/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5541666666666667">0.55</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/resourceful-lizard/v0" target="_blank">resourceful-lizard/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-med" data-value="0.6727272727272727">0.67</td>
+      <td class="score-med" data-value="0.5"><a href="resourceful-lizard/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5431818181818182">0.54</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/affectionate-cow/v0" target="_blank">affectionate-cow/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7017543859649122">0.70</td>
+      <td class="score-med" data-value="0.5"><a href="affectionate-cow/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5504385964912281">0.55</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/idealistic-rat/v0" target="_blank">idealistic-rat/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-med" data-value="0.6607142857142857">0.66</td>
+      <td class="score-high" data-value="1.0"><a href="idealistic-rat/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-med" data-value="0.6651785714285714">0.67</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/faithful-chicken/v0" target="_blank">faithful-chicken/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-med" data-value="0.6607142857142857">0.66</td>
+      <td class="score-med" data-value="0.5"><a href="faithful-chicken/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5401785714285714">0.54</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/humorous-crab/v0" target="_blank">humorous-crab/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-med" data-value="0.6607142857142857">0.66</td>
+      <td class="score-high" data-value="1.0"><a href="humorous-crab/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-med" data-value="0.6651785714285714">0.67</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/noisy-ox/v0" target="_blank">noisy-ox/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-med" data-value="0.6607142857142857">0.66</td>
+      <td class="score-high" data-value="1.0"><a href="noisy-ox/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-med" data-value="0.6651785714285714">0.67</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/greedy-whale/v0" target="_blank">greedy-whale/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-med" data-value="0.6607142857142857">0.66</td>
+      <td class="score-med" data-value="0.5"><a href="greedy-whale/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5401785714285714">0.54</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/diplomatic-bug/v0" target="_blank">diplomatic-bug/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-med" data-value="0.6607142857142857">0.66</td>
+      <td class="score-high" data-value="1.0"><a href="diplomatic-bug/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-med" data-value="0.6651785714285714">0.67</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/breezy-handbag/v0" target="_blank">breezy-handbag/v0</a></td>
+      <td>notebook</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.813953488372093">0.81</td>
+      <td class="score-med" data-value="0.5"><a href="breezy-handbag/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5784883720930233">0.58</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/invigorating-lab-coat/v0" target="_blank">invigorating-lab-coat/v0</a></td>
+      <td>notebook</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.813953488372093">0.81</td>
+      <td class="score-med" data-value="0.5"><a href="invigorating-lab-coat/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5784883720930233">0.58</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/uplifting-ice-cream/v0" target="_blank">uplifting-ice-cream/v0</a></td>
+      <td>dataset</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7333333333333333">0.73</td>
+      <td class="score-med" data-value="0.5"><a href="uplifting-ice-cream/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5583333333333333">0.56</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/stupendous-sheep/v0" target="_blank">stupendous-sheep/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.782051282051282">0.78</td>
+      <td class="score-med" data-value="0.5"><a href="stupendous-sheep/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5705128205128205">0.57</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/pioneering-goat/v0" target="_blank">pioneering-goat/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-med" data-value="0.5925925925925926">0.59</td>
+      <td class="score-high" data-value="1.0"><a href="pioneering-goat/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-high" data-value="0.7314814814814815">0.73</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/greedy-shark/v0" target="_blank">greedy-shark/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-med" data-value="0.5740740740740741">0.57</td>
+      <td class="score-high" data-value="1.0"><a href="greedy-shark/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-high" data-value="0.7268518518518519">0.73</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/lucky-fox/v0" target="_blank">lucky-fox/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-med" data-value="0.5925925925925926">0.59</td>
+      <td class="score-high" data-value="1.0"><a href="lucky-fox/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-high" data-value="0.7314814814814815">0.73</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/frank-water-buffalo/v0" target="_blank">frank-water-buffalo/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-med" data-value="0.5925925925925926">0.59</td>
+      <td class="score-high" data-value="1.0"><a href="frank-water-buffalo/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-high" data-value="0.7314814814814815">0.73</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/imjoy:vizarr/v0" target="_blank">imjoy:vizarr/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7954545454545454">0.80</td>
+      <td class="score-med" data-value="0.5"><a href="imjoy--vizarr/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5738636363636364">0.57</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/imjoy:ImageJ.JS/v0" target="_blank">imjoy:ImageJ.JS/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7954545454545454">0.80</td>
+      <td class="score-med" data-value="0.5"><a href="imjoy--ImageJ.JS/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5738636363636364">0.57</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/imjoy:ImJoy/v0" target="_blank">imjoy:ImJoy/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7954545454545454">0.80</td>
+      <td class="score-med" data-value="0.5"><a href="imjoy--ImJoy/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5738636363636364">0.57</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/imjoy:HPA-Single-Cell/v0" target="_blank">imjoy:HPA-Single-Cell/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7954545454545454">0.80</td>
+      <td class="score-med" data-value="0.5"><a href="imjoy--HPA-Single-Cell/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5738636363636364">0.57</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/ilastik:mws-segmentation/v0" target="_blank">ilastik:mws-segmentation/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.8809523809523809">0.88</td>
+      <td class="score-med" data-value="0.5"><a href="ilastik--mws-segmentation/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5952380952380952">0.60</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/imjoy:GenericBioEngineApp/v0" target="_blank">imjoy:GenericBioEngineApp/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7954545454545454">0.80</td>
+      <td class="score-med" data-value="0.5"><a href="imjoy--GenericBioEngineApp/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5738636363636364">0.57</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/icy:icy/v0" target="_blank">icy:icy/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.8095238095238095">0.81</td>
+      <td class="score-med" data-value="0.5"><a href="icy--icy/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5773809523809523">0.58</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/hpa:HPA-Classification/v0" target="_blank">hpa:HPA-Classification/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.8">0.80</td>
+      <td class="score-med" data-value="0.5"><a href="hpa--HPA-Classification/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.575">0.57</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/fiji:Fiji/v0" target="_blank">fiji:Fiji/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7906976744186046">0.79</td>
+      <td class="score-med" data-value="0.5"><a href="fiji--Fiji/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5726744186046512">0.57</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/dl4miceverywhere:DL4MicEverywhere/v0" target="_blank">dl4miceverywhere:DL4MicEverywhere/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.8372093023255814">0.84</td>
+      <td class="score-med" data-value="0.5"><a href="dl4miceverywhere--DL4MicEverywhere/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5843023255813954">0.58</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/deepimagej:smlm-deepimagej/v0" target="_blank">deepimagej:smlm-deepimagej/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.8409090909090909">0.84</td>
+      <td class="score-med" data-value="0.5"><a href="deepimagej--smlm-deepimagej/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5852272727272727">0.59</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/deepimagej:deepimagej/v0" target="_blank">deepimagej:deepimagej/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.8333333333333334">0.83</td>
+      <td class="score-med" data-value="0.5"><a href="deepimagej--deepimagej/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5833333333333334">0.58</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/biapy:biapy/v0" target="_blank">biapy:biapy/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.8478260869565217">0.85</td>
+      <td class="score-med" data-value="0.5"><a href="biapy--biapy/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5869565217391304">0.59</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/ilastik:ilastik/v0" target="_blank">ilastik:ilastik/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.8571428571428571">0.86</td>
+      <td class="score-med" data-value="0.5"><a href="ilastik--ilastik/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5892857142857143">0.59</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/philosophical-panda/v0" target="_blank">philosophical-panda/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7164179104477612">0.72</td>
+      <td class="score-high" data-value="1.0"><a href="philosophical-panda/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-med" data-value="0.6791044776119403">0.68</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/self-disciplined-blowfish/v0" target="_blank">self-disciplined-blowfish/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-med" data-value="0.6122448979591837">0.61</td>
+      <td class="score-high" data-value="1.0"><a href="self-disciplined-blowfish/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-high" data-value="0.7363945578231293">0.74</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/trustworthy-llama/v0" target="_blank">trustworthy-llama/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-med" data-value="0.5555555555555556">0.56</td>
+      <td class="score-high" data-value="1.0"><a href="trustworthy-llama/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-high" data-value="0.7222222222222222">0.72</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/flavorful-sweet-potato/v0" target="_blank">flavorful-sweet-potato/v0</a></td>
+      <td>dataset</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7333333333333333">0.73</td>
+      <td class="score-med" data-value="0.5"><a href="flavorful-sweet-potato/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5583333333333333">0.56</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/divine-melon/v0" target="_blank">divine-melon/v0</a></td>
+      <td>dataset</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7241379310344828">0.72</td>
+      <td class="score-med" data-value="0.5"><a href="divine-melon/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5560344827586207">0.56</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/imjoy:BioImageIO-Packager/v0" target="_blank">imjoy:BioImageIO-Packager/v0</a></td>
+      <td>application</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7954545454545454">0.80</td>
+      <td class="score-med" data-value="0.5"><a href="imjoy--BioImageIO-Packager/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5738636363636364">0.57</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/exquisite-salad/v0" target="_blank">exquisite-salad/v0</a></td>
+      <td>dataset</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7241379310344828">0.72</td>
+      <td class="score-med" data-value="0.5"><a href="exquisite-salad/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5560344827586207">0.56</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/sublime-pizza/v0" target="_blank">sublime-pizza/v0</a></td>
+      <td>dataset</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7333333333333333">0.73</td>
+      <td class="score-med" data-value="0.5"><a href="sublime-pizza/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5583333333333333">0.56</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/good-butterfly/v0" target="_blank">good-butterfly/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.71875">0.72</td>
+      <td class="score-high" data-value="1.0"><a href="good-butterfly/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-high" data-value="0.8463541666666666">0.85</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/zealous-snail/v0" target="_blank">zealous-snail/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.71875">0.72</td>
+      <td class="score-med" data-value="0.5"><a href="zealous-snail/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.6380208333333334">0.64</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/exuberant-parrot/v0" target="_blank">exuberant-parrot/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.71875">0.72</td>
+      <td class="score-med" data-value="0.5"><a href="exuberant-parrot/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.6380208333333334">0.64</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/resourceful-otter/v0" target="_blank">resourceful-otter/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.703125">0.70</td>
+      <td class="score-med" data-value="0.5"><a href="resourceful-otter/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.6341145833333334">0.63</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/merry-gorilla/v0" target="_blank">merry-gorilla/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7049180327868853">0.70</td>
+      <td class="score-high" data-value="1.0"><a href="merry-gorilla/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-med" data-value="0.6762295081967213">0.68</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/stupendous-blowfish/v0" target="_blank">stupendous-blowfish/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7121212121212122">0.71</td>
+      <td class="score-med" data-value="0.5"><a href="stupendous-blowfish/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.6363636363636364">0.64</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/gorgeous-whale/v0" target="_blank">gorgeous-whale/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7121212121212122">0.71</td>
+      <td class="score-med" data-value="0.5"><a href="gorgeous-whale/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.6363636363636364">0.64</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/thoughtful-chipmunk/v0" target="_blank">thoughtful-chipmunk/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7">0.70</td>
+      <td class="score-high" data-value="1.0"><a href="thoughtful-chipmunk/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-med" data-value="0.675">0.68</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/self-disciplined-honeybee/v0" target="_blank">self-disciplined-honeybee/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.703125">0.70</td>
+      <td class="score-med" data-value="0.5"><a href="self-disciplined-honeybee/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.6341145833333334">0.63</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/wild-pig/v0" target="_blank">wild-pig/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7121212121212122">0.71</td>
+      <td class="score-med" data-value="0.5"><a href="wild-pig/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.6363636363636364">0.64</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/frank-boar/v0" target="_blank">frank-boar/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7076923076923077">0.71</td>
+      <td class="score-med" data-value="0.5"><a href="frank-boar/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.6352564102564103">0.64</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/serious-lobster/v0" target="_blank">serious-lobster/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.703125">0.70</td>
+      <td class="score-med" data-value="0.5"><a href="serious-lobster/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.6341145833333334">0.63</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/artistic-eagle/v0" target="_blank">artistic-eagle/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7428571428571429">0.74</td>
+      <td class="score-med" data-value="0.5"><a href="artistic-eagle/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.6440476190476191">0.64</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/modest-cow/v0" target="_blank">modest-cow/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-med" data-value="0.6833333333333333">0.68</td>
+      <td class="score-med" data-value="0.5"><a href="modest-cow/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.6291666666666668">0.63</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/educated-water-buffalo/v0" target="_blank">educated-water-buffalo/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.703125">0.70</td>
+      <td class="score-med" data-value="0.5"><a href="educated-water-buffalo/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.6341145833333334">0.63</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/committed-octopus/v0" target="_blank">committed-octopus/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7121212121212122">0.71</td>
+      <td class="score-med" data-value="0.5"><a href="committed-octopus/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.6363636363636364">0.64</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/idealistic-water-buffalo/v0" target="_blank">idealistic-water-buffalo/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7121212121212122">0.71</td>
+      <td class="score-high" data-value="1.0"><a href="idealistic-water-buffalo/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-high" data-value="0.7613636363636364">0.76</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/chatty-cat/v0" target="_blank">chatty-cat/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.703125">0.70</td>
+      <td class="score-med" data-value="0.5"><a href="chatty-cat/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.6341145833333334">0.63</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/youthful-eagle/v0" target="_blank">youthful-eagle/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7121212121212122">0.71</td>
+      <td class="score-med" data-value="0.5"><a href="youthful-eagle/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.6363636363636364">0.64</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/calm-otter/v0" target="_blank">calm-otter/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.703125">0.70</td>
+      <td class="score-med" data-value="0.5"><a href="calm-otter/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.6341145833333334">0.63</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/ambitious-kangaroo/v0" target="_blank">ambitious-kangaroo/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7428571428571429">0.74</td>
+      <td class="score-med" data-value="0.5"><a href="ambitious-kangaroo/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.6440476190476191">0.64</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/unassuming-shark/v0" target="_blank">unassuming-shark/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-med" data-value="0.6833333333333333">0.68</td>
+      <td class="score-high" data-value="1.0"><a href="unassuming-shark/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-high" data-value="0.7541666666666668">0.75</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/poisonous-spider/v0" target="_blank">poisonous-spider/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.703125">0.70</td>
+      <td class="score-med" data-value="0.5"><a href="poisonous-spider/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.6341145833333334">0.63</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/jolly-duck/v0" target="_blank">jolly-duck/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.703125">0.70</td>
+      <td class="score-med" data-value="0.5"><a href="jolly-duck/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.6341145833333334">0.63</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/demanding-dromedary/v0" target="_blank">demanding-dromedary/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7121212121212122">0.71</td>
+      <td class="score-med" data-value="0.5"><a href="demanding-dromedary/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.6363636363636364">0.64</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/gleeful-skunk/v0" target="_blank">gleeful-skunk/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7121212121212122">0.71</td>
+      <td class="score-med" data-value="0.5"><a href="gleeful-skunk/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.6363636363636364">0.64</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/rebellious-mouse/v0" target="_blank">rebellious-mouse/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7121212121212122">0.71</td>
+      <td class="score-med" data-value="0.5"><a href="rebellious-mouse/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.6363636363636364">0.64</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/zealous-spider/v0" target="_blank">zealous-spider/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.71875">0.72</td>
+      <td class="score-high" data-value="1.0"><a href="zealous-spider/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-high" data-value="0.8463541666666666">0.85</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/sensible-cat/v0" target="_blank">sensible-cat/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-med" data-value="0.6984126984126984">0.70</td>
+      <td class="score-high" data-value="1.0"><a href="sensible-cat/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-high" data-value="0.757936507936508">0.76</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/fearless-deer/v0" target="_blank">fearless-deer/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-med" data-value="0.6833333333333333">0.68</td>
+      <td class="score-high" data-value="1.0"><a href="fearless-deer/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-high" data-value="0.7541666666666668">0.75</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/good-microbe/v0" target="_blank">good-microbe/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7428571428571429">0.74</td>
+      <td class="score-high" data-value="1.0"><a href="good-microbe/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-high" data-value="0.7690476190476191">0.77</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/territorial-cricket/v0" target="_blank">territorial-cricket/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.703125">0.70</td>
+      <td class="score-med" data-value="0.5"><a href="territorial-cricket/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.6341145833333334">0.63</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/conscientious-dromedary/v0" target="_blank">conscientious-dromedary/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7272727272727273">0.73</td>
+      <td class="score-high" data-value="1.0"><a href="conscientious-dromedary/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-high" data-value="0.8484848484848485">0.85</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/bitter-cookie/v0" target="_blank">bitter-cookie/v0</a></td>
+      <td>dataset</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7333333333333333">0.73</td>
+      <td class="score-med" data-value="0.5"><a href="bitter-cookie/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5583333333333333">0.56</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/serious-turtle/v0" target="_blank">serious-turtle/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7571428571428571">0.76</td>
+      <td class="score-high" data-value="1.0"><a href="serious-turtle/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-high" data-value="0.7726190476190476">0.77</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/clean-squid/v0" target="_blank">clean-squid/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7571428571428571">0.76</td>
+      <td class="score-high" data-value="1.0"><a href="clean-squid/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-high" data-value="0.7726190476190476">0.77</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/vengeful-zebra/v0" target="_blank">vengeful-zebra/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7571428571428571">0.76</td>
+      <td class="score-high" data-value="1.0"><a href="vengeful-zebra/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-high" data-value="0.7726190476190476">0.77</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/merry-water-buffalo/v0" target="_blank">merry-water-buffalo/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7121212121212122">0.71</td>
+      <td class="score-high" data-value="1.0"><a href="merry-water-buffalo/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-high" data-value="0.9196969696969697">0.92</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/venomous-swan/v0" target="_blank">venomous-swan/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7121212121212122">0.71</td>
+      <td class="score-high" data-value="1.0"><a href="venomous-swan/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-high" data-value="0.9196969696969697">0.92</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/funny-butterfly/v0" target="_blank">funny-butterfly/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7352941176470589">0.74</td>
+      <td class="score-high" data-value="1.0"><a href="funny-butterfly/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-high" data-value="0.7671568627450981">0.77</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/willing-whale/v0" target="_blank">willing-whale/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7272727272727273">0.73</td>
+      <td class="score-med" data-value="0.5"><a href="willing-whale/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.6401515151515152">0.64</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/plucky-koala/v0" target="_blank">plucky-koala/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7571428571428571">0.76</td>
+      <td class="score-high" data-value="1.0"><a href="plucky-koala/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-high" data-value="0.7726190476190476">0.77</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/jolly-ox/v0" target="_blank">jolly-ox/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0"><a href="jolly-ox/v0_core" title="View detailed core 0.9.5 report">0.00</a></td>
+      <td class="score-low" data-value="0.08333333333333333">0.08</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/shy-lobster/v0" target="_blank">shy-lobster/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0"><a href="shy-lobster/v0_core" title="View detailed core 0.9.5 report">0.00</a></td>
+      <td class="score-low" data-value="0.08333333333333333">0.08</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/educated-goat/v0" target="_blank">educated-goat/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7076923076923077">0.71</td>
+      <td class="score-med" data-value="0.5"><a href="educated-goat/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.6352564102564103">0.64</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/happy-honeybee/v0" target="_blank">happy-honeybee/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.703125">0.70</td>
+      <td class="score-high" data-value="1.0"><a href="happy-honeybee/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-high" data-value="0.9174479166666667">0.92</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/intelligent-lion/v0" target="_blank">intelligent-lion/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.703125">0.70</td>
+      <td class="score-high" data-value="1.0"><a href="intelligent-lion/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-high" data-value="0.9174479166666667">0.92</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/idealistic-turtle/v0" target="_blank">idealistic-turtle/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7121212121212122">0.71</td>
+      <td class="score-high" data-value="1.0"><a href="idealistic-turtle/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-high" data-value="0.9196969696969697">0.92</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/heroic-otter/v0" target="_blank">heroic-otter/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.703125">0.70</td>
+      <td class="score-high" data-value="1.0"><a href="heroic-otter/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-high" data-value="0.9174479166666667">0.92</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/sincere-microbe/v0" target="_blank">sincere-microbe/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.8487394957983193">0.85</td>
+      <td class="score-med" data-value="0.5"><a href="sincere-microbe/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5871848739495799">0.59</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/sympathetic-mosquito/v0" target="_blank">sympathetic-mosquito/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7066666666666667">0.71</td>
+      <td class="score-med" data-value="0.5"><a href="sympathetic-mosquito/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.6266666666666666">0.63</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/patient-swan/v0" target="_blank">patient-swan/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7575757575757576">0.76</td>
+      <td class="score-med" data-value="0.5"><a href="patient-swan/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5643939393939394">0.56</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/modest-spider/v0" target="_blank">modest-spider/v0</a></td>
+      <td>model</td>
+      <td class="status-failed">failed</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0"><a href="modest-spider/v0_core" title="View detailed core 0.9.5 report">0.00</a></td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/loving-monkey/v0" target="_blank">loving-monkey/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7272727272727273">0.73</td>
+      <td class="score-high" data-value="1.0"><a href="loving-monkey/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-high" data-value="0.8484848484848485">0.85</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/efficient-raccoon/v0" target="_blank">efficient-raccoon/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0"><a href="efficient-raccoon/v0_core" title="View detailed core 0.9.5 report">0.00</a></td>
+      <td class="score-low" data-value="0.08333333333333333">0.08</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/zestful-bug/v0" target="_blank">zestful-bug/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7428571428571429">0.74</td>
+      <td class="score-med" data-value="0.5"><a href="zestful-bug/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.6440476190476191">0.64</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/witty-whale/v0" target="_blank">witty-whale/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-med" data-value="0.5333333333333333">0.53</td>
+      <td class="score-high" data-value="1.0"><a href="witty-whale/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-med" data-value="0.6333333333333333">0.63</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/dazzling-blowfish/v0" target="_blank">dazzling-blowfish/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-med" data-value="0.6875">0.69</td>
+      <td class="score-high" data-value="1.0"><a href="dazzling-blowfish/v0_core" title="View detailed core 0.9.5 report">1.00</a></td>
+      <td class="score-high" data-value="0.7552083333333334">0.76</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/frosty-honey/v0" target="_blank">frosty-honey/v0</a></td>
+      <td>dataset</td>
+      <td class="status-passed">passed</td>
+      <td class="score-med" data-value="0.6296296296296297">0.63</td>
+      <td class="score-med" data-value="0.5"><a href="frosty-honey/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5324074074074074">0.53</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/enticing-peanut/v0" target="_blank">enticing-peanut/v0</a></td>
+      <td>dataset</td>
+      <td class="status-passed">passed</td>
+      <td class="score-med" data-value="0.6296296296296297">0.63</td>
+      <td class="score-med" data-value="0.5"><a href="enticing-peanut/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5324074074074074">0.53</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/amiable-otter/v0" target="_blank">amiable-otter/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.9148936170212766">0.91</td>
+      <td class="score-med" data-value="0.5"><a href="amiable-otter/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.6037234042553191">0.60</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/faithful-swan/v0" target="_blank">faithful-swan/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.9215686274509803">0.92</td>
+      <td class="score-med" data-value="0.5"><a href="faithful-swan/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.6053921568627451">0.61</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/stupendous-swan/v0" target="_blank">stupendous-swan/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.9233716475095786">0.92</td>
+      <td class="score-med" data-value="0.5"><a href="stupendous-swan/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.6058429118773947">0.61</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/kind-badger/v0" target="_blank">kind-badger/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.9209486166007905">0.92</td>
+      <td class="score-med" data-value="0.5"><a href="kind-badger/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.6052371541501976">0.61</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/handsome-sloth/v0" target="_blank">handsome-sloth/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.9209486166007905">0.92</td>
+      <td class="score-med" data-value="0.5"><a href="handsome-sloth/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.6052371541501976">0.61</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/helpful-whale/v0" target="_blank">helpful-whale/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-med" data-value="0.6190476190476191">0.62</td>
+      <td class="score-med" data-value="0.5"><a href="helpful-whale/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5297619047619048">0.53</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/bountiful-paella/v0" target="_blank">bountiful-paella/v0</a></td>
+      <td>dataset</td>
+      <td class="status-passed">passed</td>
+      <td class="score-med" data-value="0.5925925925925926">0.59</td>
+      <td class="score-med" data-value="0.5"><a href="bountiful-paella/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.5231481481481481">0.52</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+    <tr>
+      <td><a href="https://bioimage.io/#/artifacts/proactive-snail/v0" target="_blank">proactive-snail/v0</a></td>
+      <td>model</td>
+      <td class="status-passed">passed</td>
+      <td class="score-high" data-value="0.7341772151898734">0.73</td>
+      <td class="score-med" data-value="0.5"><a href="proactive-snail/v0_core" title="View detailed core 0.9.5 report">0.50</a></td>
+      <td class="score-med" data-value="0.6418776371308017">0.64</td>
+      <td class="score-high" data-value="1.0">1.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+      <td class="score-low" data-value="0.0">0.00</td>
+    </tr>
+  </tbody>
+</table>
+
+<script>
+(function() {
+  const table = document.getElementById("reportsTable0");
+  const tbody = table.querySelector("tbody");
+  const headers = table.querySelectorAll("th[data-sort]");
+  const searchInput = document.getElementById("searchInput0");
+  const typeFilter = document.getElementById("typeFilter0");
+  const statusFilter = document.getElementById("statusFilter0");
+
+  let currentSort = { column: null, direction: "asc" };
+  let allRows = Array.from(tbody.querySelectorAll("tr"));
+
+  // Sorting functionality
+  headers.forEach(header => {
+    header.addEventListener("click", () => {
+      const sortKey = header.dataset.sort;
+      const direction = currentSort.column === sortKey && currentSort.direction === "asc" ? "desc" : "asc";
+
+      headers.forEach(h => h.className = "");
+      header.className = direction === "asc" ? "sorted-asc" : "sorted-desc";
+
+      currentSort = { column: sortKey, direction };
+      sortTable(sortKey, direction);
+    });
+  });
+
+  function sortTable(column, direction) {
+    const sortedRows = [...allRows].sort((a, b) => {
+      let aVal, bVal;
+      const aCell = a.children[getColumnIndex(column)];
+      const bCell = b.children[getColumnIndex(column)];
+
+      if (column === "core" || column === "overall" || column === "metadata" || column === "biapy" || column === "careamics" || column === "ilastik") {
+        aVal = parseFloat(aCell.dataset.value) || 0;
+        bVal = parseFloat(bCell.dataset.value) || 0;
+      } else {
+        aVal = aCell.textContent.toLowerCase();
+        bVal = bCell.textContent.toLowerCase();
+      }
+
+      if (aVal < bVal) return direction === "asc" ? -1 : 1;
+      if (aVal > bVal) return direction === "asc" ? 1 : -1;
+      return 0;
+    });
+
+    tbody.innerHTML = "";
+    sortedRows.forEach(row => tbody.appendChild(row));
+    allRows = sortedRows;
+  }
+
+  function getColumnIndex(column) {
+    const map = { id: 0, type: 1, status: 2, metadata: 3, core: 4, overall: 5, biapy: 6, careamics: 7, ilastik: 8 };
+    return map[column];
+  }
+
+  // Filtering functionality
+  function filterTable() {
+    const searchTerm = searchInput.value.toLowerCase();
+    const typeValue = typeFilter.value;
+    const statusValue = statusFilter.value;
+
+    allRows.forEach(row => {
+      const id = row.children[0].textContent.toLowerCase();
+      const type = row.children[1].textContent.toLowerCase();
+      const status = row.children[2].textContent.toLowerCase();
+
+      const matchesSearch = id.includes(searchTerm);
+      const matchesType = !typeValue || type === typeValue;
+      const matchesStatus = !statusValue || status === statusValue;
+
+      row.style.display = matchesSearch && matchesType && matchesStatus ? "" : "none";
+    });
+  }
+
+  searchInput.addEventListener("input", filterTable);
+  typeFilter.addEventListener("change", filterTable);
+  statusFilter.addEventListener("change", filterTable);
+})();
+</script>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../api/" class="md-footer__link md-footer__link--prev" aria-label="Previous: API Reference">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                API Reference
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../changelog/" class="md-footer__link md-footer__link--next" aria-label="Next: Changelog">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Changelog
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/bioimage-io" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["announce.dismiss", "content.action.edit", "content.action.view", "content.code.annotate", "content.code.copy", "content.code.select", "content.footnote.tooltips", "content.tabs.link", "content.tooltips", "header.autohide", "navigation.expand", "navigation.footer", "navigation.instant", "navigation.instant.prefetch", "navigation.instant.preview", "navigation.instant.progress", "navigation.path", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest", "toc.follow", "toc.integrate"], "search": "../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.e71a0d61.min.js"></script>
+      
+        <script src="../assets/_markdown_exec_pyodide.js"></script>
+      
+    
+  </body>
+</html>
