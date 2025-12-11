@@ -611,11 +611,6 @@
   </tr>
   <tr>
     <td>⚠</td>
-    <td><code>documentation</code></td>
-    <td><pre>No '# Validation' (sub)section found in README.md.</pre></td>
-  </tr>
-  <tr>
-    <td>⚠</td>
     <td><code>inputs.0.sample_tensor</code></td>
     <td><pre>Needs to be filled for FAIR compliance</pre></td>
   </tr>
@@ -632,7 +627,7 @@
   <tr>
     <td>❌</td>
     <td><code>weights.pytorch_state_dict</code></td>
-    <td><pre>Command '['conda', 'env', 'create', '--yes', '--file=/tmp/tmpva5x8o8l/pytorch_state_dict/env.yaml', '--name=3d5bf57e23beeafd6ea2183cfc86de256c11395f850f34909b53a65354a43210', '--quiet']' returned non-zero exit status 1.</pre></td>
+    <td><pre>Command '['conda', 'env', 'create', '--yes', '--file=/tmp/tmpeis87ueq/pytorch_state_dict/env.yaml', '--name=f5dd7c1599ce87ce43e165d7309cb5ce10fc62589c6ac9cb35e48de70eeb9672', '--quiet']' returned non-zero exit status 1.</pre></td>
   </tr>
   <tr>
     <td></td>
@@ -655,11 +650,11 @@ channels:
 dependencies:
   - conda-forge::bioimageio.core
   - pip
-  - python=3.10
-  - pytorch=2.4.0
-  - torchvision=0.19.0
+  - python=3.12
   - pip:
-      - git+https://github.com/CAREamics/careamics.git
+      - careamics==0.0.16
+      - torch==2.7.1+cu126
+      - torchvision==0.22.1+cu126
 </pre></td>
   </tr>
   <tr>
@@ -670,8 +665,8 @@ dependencies:
   <tr>
     <td></td>
     <td></td>
-    <td><pre>bioimageio.core not found pip not found python not found pytorch not found torchvision not found
-//github.com/careamics/careamics.git not found</pre></td>
+    <td><pre>bioimageio.core not found pip not found python not found careamics not found torch not found
+torchvision not found</pre></td>
   </tr>
 </table>
 <h3 id="traceback-1">Traceback 1</h3>
@@ -735,7 +730,7 @@ body {
 <span class="r1">│</span>   <span class="r8"> 415 </span>                                                                                          <span class="r1">│</span>
 <span class="r1">│</span>   <span class="r8"> 416 </span>                                                                                          <span class="r1">│</span>
 <span class="r1">╰──────────────────────────────────────────────────────────────────────────────────────────────────╯</span>
-<span class="r13">CalledProcessError: </span>Command <span class="r14">&#x27;[&#x27;</span>conda&#x27;, <span class="r14">&#x27;run&#x27;</span>, <span class="r14">&#x27;-n&#x27;</span>, <span class="r14">&#x27;3d5bf57e23beeafd6ea2183cfc86de256c11395f850f34909b53a65354a43210&#x27;</span>, <span class="r14">&#x27;python&#x27;</span>, <span class="r14">&#x27;--version&#x27;</span><span class="r15">]</span>&#x27; returned non-zero exit status <span class="r16">1</span>.
+<span class="r13">CalledProcessError: </span>Command <span class="r14">&#x27;[&#x27;</span>conda&#x27;, <span class="r14">&#x27;run&#x27;</span>, <span class="r14">&#x27;-n&#x27;</span>, <span class="r14">&#x27;f5dd7c1599ce87ce43e165d7309cb5ce10fc62589c6ac9cb35e48de70eeb9672&#x27;</span>, <span class="r14">&#x27;python&#x27;</span>, <span class="r14">&#x27;--version&#x27;</span><span class="r15">]</span>&#x27; returned non-zero exit status <span class="r16">1</span>.
 
 <span class="r17">During handling of the above exception, another exception occurred:</span>
 
@@ -770,7 +765,7 @@ body {
 <span class="r1">│</span>   <span class="r8"> 415 </span>                                                                                          <span class="r1">│</span>
 <span class="r1">│</span>   <span class="r8"> 416 </span>                                                                                          <span class="r1">│</span>
 <span class="r1">╰──────────────────────────────────────────────────────────────────────────────────────────────────╯</span>
-<span class="r13">CalledProcessError: </span>Command <span class="r14">&#x27;[&#x27;</span>conda&#x27;, <span class="r14">&#x27;env&#x27;</span>, <span class="r14">&#x27;create&#x27;</span>, <span class="r14">&#x27;--yes&#x27;</span>, <span class="r14">&#x27;--file=/tmp/tmpva5x8o8l/pytorch_state_dict/env.yaml&#x27;</span>, <span class="r14">&#x27;--name=3d5bf57e23beeafd6ea2183cfc86de256c11395f850f34909b53a65354a43210&#x27;</span>, <span class="r14">&#x27;--quiet&#x27;</span><span class="r15">]</span>&#x27; returned non-zero exit status <span class="r16">1</span>.
+<span class="r13">CalledProcessError: </span>Command <span class="r14">&#x27;[&#x27;</span>conda&#x27;, <span class="r14">&#x27;env&#x27;</span>, <span class="r14">&#x27;create&#x27;</span>, <span class="r14">&#x27;--yes&#x27;</span>, <span class="r14">&#x27;--file=/tmp/tmpeis87ueq/pytorch_state_dict/env.yaml&#x27;</span>, <span class="r14">&#x27;--name=f5dd7c1599ce87ce43e165d7309cb5ce10fc62589c6ac9cb35e48de70eeb9672&#x27;</span>, <span class="r14">&#x27;--quiet&#x27;</span><span class="r15">]</span>&#x27; returned non-zero exit status <span class="r16">1</span>.
 </code></pre>
 </body>
 </html>
