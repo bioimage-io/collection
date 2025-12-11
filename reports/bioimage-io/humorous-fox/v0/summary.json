@@ -1,10 +1,11 @@
 {
     "rdf_content": {
-        "attachments": [
-            {
-                "sha256": "c0c925fd12ecc6a7e1ef2921ca6ff2f177156d306932b98eba73ca46c8856770",
-                "source": "careamics.yml"
-            }
+        "name": "SEM_n2v",
+        "id": "humorous-fox",
+        "id_emoji": "🦊",
+        "description": "This model is a UNet trained using the Noise2Void algorithm to denoise images.The training data consists of crops from an SEM dataset (T.-O. Buchholz et al., Methods Cell Biol, 2020). The notebook used to train this model is available on the CAREamics documentation website at the following link: https://careamics.github.io/0.1/applications/N2V2/SEM/.",
+        "covers": [
+            "cover.png"
         ],
         "authors": [
             {
@@ -12,136 +13,22 @@
                 "name": "CAREamics authors"
             }
         ],
+        "attachments": [
+            {
+                "source": "careamics.yaml",
+                "sha256": "d5d602508ae597470fdc926ac6674848bbbc4ab88120fd5c3da4c138a4c681f1"
+            }
+        ],
         "cite": [
             {
-                "doi": "10.1109/cvpr.2019.00223",
-                "text": "Krull, A., Buchholz, T.O. and Jug, F., 2019. \"Noise2Void - Learning denoising from single noisy images\". In Proceedings of the IEEE/CVF conference on computer vision and pattern recognition (pp. 2129-2137)."
-            }
-        ],
-        "config": {
-            "bioimageio": {
-                "thumbnails": {}
-            }
-        },
-        "covers": [
-            "cover.png"
-        ],
-        "description": "This model is the output of an example notebook available on the CAREamics documentation website. It can be found under \"Applications\" in the side bar. ([Link](https://careamics.github.io/latest/applications/Noise2Void/SEM/).)",
-        "documentation": "README.md",
-        "format_version": "0.5.3",
-        "id": "humorous-fox",
-        "id_emoji": "🦊",
-        "inputs": [
-            {
-                "axes": [
-                    {
-                        "type": "batch"
-                    },
-                    {
-                        "channel_names": [
-                            "channel"
-                        ],
-                        "type": "channel"
-                    },
-                    {
-                        "id": "y",
-                        "size": 256,
-                        "type": "space"
-                    },
-                    {
-                        "id": "x",
-                        "size": 256,
-                        "type": "space"
-                    }
-                ],
-                "id": "input",
-                "preprocessing": [
-                    {
-                        "id": "ensure_dtype",
-                        "kwargs": {
-                            "dtype": "float32"
-                        }
-                    },
-                    {
-                        "id": "fixed_zero_mean_unit_variance",
-                        "kwargs": {
-                            "axis": "channel",
-                            "mean": [
-                                39216.046875
-                            ],
-                            "std": [
-                                18678.18359375
-                            ]
-                        }
-                    },
-                    {
-                        "id": "ensure_dtype",
-                        "kwargs": {
-                            "dtype": "float32"
-                        }
-                    }
-                ],
-                "test_tensor": {
-                    "sha256": "889f8bbdd258b300276e63bf676e07436830a2117400688fd255dbc2328e5bef",
-                    "source": "inputs.npy"
-                }
+                "text": "Krull, A., Buchholz, T.O. and Jug, F., 2019. \"Noise2Void - Learning denoising from single noisy images\". In Proceedings of the IEEE/CVF conference on computer vision and pattern recognition (pp. 2129-2137).",
+                "doi": "10.1109/cvpr.2019.00223"
             }
         ],
         "license": "BSD-3-Clause",
         "links": [
             "https://github.com/CAREamics/careamics",
             "https://careamics.github.io/latest/"
-        ],
-        "name": "SEM_N2V",
-        "outputs": [
-            {
-                "axes": [
-                    {
-                        "type": "batch"
-                    },
-                    {
-                        "channel_names": [
-                            "channel"
-                        ],
-                        "type": "channel"
-                    },
-                    {
-                        "id": "y",
-                        "size": 256,
-                        "type": "space"
-                    },
-                    {
-                        "id": "x",
-                        "size": 256,
-                        "type": "space"
-                    }
-                ],
-                "id": "prediction",
-                "postprocessing": [
-                    {
-                        "id": "fixed_zero_mean_unit_variance",
-                        "kwargs": {
-                            "axis": "channel",
-                            "mean": [
-                                -2.0995642684453917
-                            ],
-                            "std": [
-                                0.000052538396543070526
-                            ]
-                        }
-                    },
-                    {
-                        "id": "ensure_dtype",
-                        "kwargs": {
-                            "dtype": "float32"
-                        }
-                    }
-                ],
-                "test_tensor": {
-                    "sha256": "98dacd0e9f9210adc03ba0b441387a0f00b51c569ffd08090f42ceefbcfbd91f",
-                    "source": "outputs.npy"
-                }
-            }
         ],
         "tags": [
             "denoising",
@@ -152,38 +39,153 @@
             "pytorch",
             "Noise2Void"
         ],
-        "type": "model",
-        "uploader": {
-            "email": "mehdi.seifi@fht.org",
-            "name": "Mehdi Seifi"
-        },
         "version": "0.1.0",
+        "format_version": "0.5.4",
+        "type": "model",
+        "documentation": "README.md",
+        "inputs": [
+            {
+                "id": "input",
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "channel"
+                        ]
+                    },
+                    {
+                        "size": 256,
+                        "id": "y",
+                        "type": "space"
+                    },
+                    {
+                        "size": 256,
+                        "id": "x",
+                        "type": "space"
+                    }
+                ],
+                "test_tensor": {
+                    "source": "inputs.npy",
+                    "sha256": "889f8bbdd258b300276e63bf676e07436830a2117400688fd255dbc2328e5bef"
+                },
+                "preprocessing": [
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    },
+                    {
+                        "id": "fixed_zero_mean_unit_variance",
+                        "kwargs": {
+                            "mean": [
+                                39216.046875
+                            ],
+                            "std": [
+                                18678.18359375
+                            ],
+                            "axis": "channel"
+                        }
+                    },
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    }
+                ]
+            }
+        ],
+        "outputs": [
+            {
+                "id": "prediction",
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "channel"
+                        ]
+                    },
+                    {
+                        "size": 256,
+                        "id": "y",
+                        "type": "space"
+                    },
+                    {
+                        "size": 256,
+                        "id": "x",
+                        "type": "space"
+                    }
+                ],
+                "test_tensor": {
+                    "source": "outputs.npy",
+                    "sha256": "f0b89719944dfb0a3aeb20ac9eebbe109bb2453929d5fe3d16a13c99e502813b"
+                },
+                "postprocessing": [
+                    {
+                        "id": "fixed_zero_mean_unit_variance",
+                        "kwargs": {
+                            "mean": [
+                                -2.0995642684453917
+                            ],
+                            "std": [
+                                0.000052538396543070526
+                            ],
+                            "axis": "channel"
+                        }
+                    },
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    }
+                ]
+            }
+        ],
         "weights": {
             "pytorch_state_dict": {
+                "source": "weights.pth",
+                "sha256": "8d6db553ab4558095fc956fcf8763ae57a87cdc13a608d9738eaab08fe0dea71",
                 "architecture": {
                     "callable": "UNet",
-                    "import_from": "careamics.models.unet",
                     "kwargs": {
                         "conv_dims": 2,
-                        "depth": 2,
-                        "final_activation": "None",
+                        "num_classes": 1,
                         "in_channels": 1,
-                        "independent_channels": true,
-                        "n2v2": false,
+                        "depth": 2,
                         "num_channels_init": 32,
-                        "num_classes": 1
-                    }
+                        "final_activation": "None",
+                        "n2v2": false,
+                        "independent_channels": true,
+                        "use_batch_norm": true
+                    },
+                    "import_from": "careamics.models.unet"
                 },
+                "pytorch_version": "2.7.1+cu126",
                 "dependencies": {
-                    "sha256": "f6daf3b6fe660089befee91ccc3e6b557b6c457ff49553b8f9a258c7e39c8756",
-                    "source": "environment.yml"
-                },
-                "pytorch_version": "2.4.0",
-                "sha256": "6a5a32855cd732b8d104f3da35698d21b4268a4ef298655b952ae34e2239666e",
-                "source": "weights.pth"
+                    "source": "environment.yml",
+                    "sha256": "bb314d1b60ff8b12ff6c156525680cd10e7770e1a088e9d7ca29724ffcad6ee0"
+                }
+            }
+        },
+        "config": {
+            "bioimageio": {
+                "test_kwargs": {
+                    "pytorch_state_dict": {
+                        "absolute_tolerance": 0.01,
+                        "relative_tolerance": 0.01
+                    }
+                }
             }
         }
     },
-    "rdf_yaml_sha256": "0d178fedea6b49ac0b544b64d33a1c5a5a4e54c49abc37b49806d4b8c0335d8f",
+    "rdf_yaml_sha256": "a5c81ba94e649cc8eb53955500b5c655d50eee11945c51c2ed331e50d2e4386e",
     "status": "untested"
 }
