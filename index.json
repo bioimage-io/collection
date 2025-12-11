@@ -1805,9 +1805,9 @@
             "type": "model",
             "versions": [
                 {
-                    "comment": "Added careamics.yml",
+                    "comment": "Deleted test_reports.json",
                     "created_at": "2025-07-01T22:51:14Z",
-                    "sha256": "0d178fedea6b49ac0b544b64d33a1c5a5a4e54c49abc37b49806d4b8c0335d8f",
+                    "sha256": "a5c81ba94e649cc8eb53955500b5c655d50eee11945c51c2ed331e50d2e4386e",
                     "source": "https://hypha.aicell.io/bioimage-io/artifacts/humorous-fox/files/rdf.yaml?version=v0",
                     "version": "v0"
                 }
@@ -3231,6 +3231,6 @@
             ]
         }
     ],
-    "timestamp": "2025-12-10T01:55:39.211730",
+    "timestamp": "2025-12-11T01:56:33.252191",
     "total": 248
 }
