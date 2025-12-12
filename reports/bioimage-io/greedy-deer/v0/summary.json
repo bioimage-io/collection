@@ -1,0 +1,265 @@
+{
+    "rdf_content": {
+        "name": "2D HRNetV2-W48 for spinal cord structure segmentation",
+        "description": "Spinal cord anatomical structure segmentation in confocal images of adult mice with spinal cord injury",
+        "covers": [
+            "cover.png"
+        ],
+        "authors": [
+            {
+                "name": "Daniel Franco-Barranco",
+                "github_user": "danifranco"
+            }
+        ],
+        "cite": [
+            {
+                "text": "model",
+                "doi": "10.1109/TPAMI.2020.2983686"
+            },
+            {
+                "text": "training library",
+                "doi": "10.1038/s41592-025-02699-y"
+            },
+            {
+                "text": "BiaPy: accessible deep learning on bioimages",
+                "doi": "10.1038/s41592-025-02699-y",
+                "url": "https://www.nature.com/articles/s41592-025-02699-y"
+            }
+        ],
+        "license": "CC-BY-4.0",
+        "git_repo": "https://github.com/BiaPyX/BiaPy",
+        "maintainers": [
+            {
+                "name": "Daniel Franco-Barranco",
+                "github_user": "danifranco"
+            }
+        ],
+        "tags": [
+            "spinal cord",
+            "structure",
+            "confocal",
+            "contusion injury",
+            "neuroscience",
+            "histology",
+            "neurotrauma",
+            "2d",
+            "pytorch",
+            "biapy",
+            "semantic-segmentation",
+            "hrnet48"
+        ],
+        "version": "0.1.0",
+        "format_version": "0.5.4",
+        "type": "model",
+        "documentation": "documentation.md",
+        "inputs": [
+            {
+                "id": "input0",
+                "axes": [
+                    {
+                        "type": "batch",
+                        "size": 1
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "channel0",
+                            "channel1"
+                        ]
+                    },
+                    {
+                        "size": 1024,
+                        "id": "y",
+                        "type": "space"
+                    },
+                    {
+                        "size": 1024,
+                        "id": "x",
+                        "type": "space"
+                    }
+                ],
+                "test_tensor": {
+                    "source": "test-input.npy",
+                    "sha256": "f740ddc8cc85eb799d68b1e0151e1773135bf2107172cb27b01aab84b912d90c"
+                },
+                "data": {
+                    "type": "float32"
+                },
+                "preprocessing": [
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    },
+                    {
+                        "id": "scale_linear",
+                        "kwargs": {
+                            "gain": 0.00392156862745098,
+                            "offset": 0
+                        }
+                    },
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    }
+                ]
+            }
+        ],
+        "outputs": [
+            {
+                "id": "output0",
+                "axes": [
+                    {
+                        "type": "batch",
+                        "size": 1
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "channel0",
+                            "channel1",
+                            "channel2",
+                            "channel3",
+                            "channel4"
+                        ]
+                    },
+                    {
+                        "halo": 128,
+                        "size": {
+                            "tensor_id": "input0",
+                            "axis_id": "y",
+                            "offset": 0
+                        },
+                        "id": "y",
+                        "type": "space",
+                        "scale": 1
+                    },
+                    {
+                        "halo": 128,
+                        "size": {
+                            "tensor_id": "input0",
+                            "axis_id": "x",
+                            "offset": 0
+                        },
+                        "id": "x",
+                        "type": "space",
+                        "scale": 1
+                    }
+                ],
+                "test_tensor": {
+                    "source": "test-output.npy",
+                    "sha256": "0d2cf690e7caf3a9181d1ceddabdfcb72b6bd2a40ebef9b6d4526603e742d209"
+                },
+                "data": {
+                    "type": "float32"
+                },
+                "postprocessing": [
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    }
+                ]
+            }
+        ],
+        "training_data": {
+            "id": "bountiful-paella"
+        },
+        "weights": {
+            "pytorch_state_dict": {
+                "source": "checkpoint.pth",
+                "sha256": "b7ca3961307cf2baa01d2170228e0b2dd07e3a6746fdb7b75bbd865e0a0bc726",
+                "architecture": {
+                    "source": "model.py",
+                    "sha256": "c062f077e30a8682e1c37a65f9f73b69998cd37679b188c8675e28cab623dca6",
+                    "callable": "HighResolutionNet",
+                    "kwargs": {
+                        "image_shape": [
+                            1024,
+                            1024,
+                            2
+                        ],
+                        "normalization": "sync_bn",
+                        "output_channels": [
+                            5
+                        ],
+                        "contrast": false,
+                        "contrast_proj_dim": 256,
+                        "head_type": "FCN",
+                        "activations": [
+                            [
+                                "ce_softmax",
+                                "ce_softmax",
+                                "ce_softmax",
+                                "ce_softmax",
+                                "ce_softmax"
+                            ]
+                        ],
+                        "explicit_activations": true,
+                        "cfg": {
+                            "Z_DOWN": true,
+                            "STAGE2": {
+                                "NUM_MODULES": 1,
+                                "NUM_BRANCHES": 2,
+                                "NUM_BLOCKS": [
+                                    4,
+                                    4
+                                ],
+                                "NUM_CHANNELS": [
+                                    48,
+                                    96
+                                ],
+                                "BLOCK": "BASIC"
+                            },
+                            "STAGE3": {
+                                "NUM_MODULES": 4,
+                                "NUM_BRANCHES": 3,
+                                "NUM_BLOCKS": [
+                                    4,
+                                    4,
+                                    4
+                                ],
+                                "NUM_CHANNELS": [
+                                    48,
+                                    96,
+                                    192
+                                ],
+                                "BLOCK": "BASIC"
+                            },
+                            "STAGE4": {
+                                "NUM_MODULES": 3,
+                                "NUM_BRANCHES": 4,
+                                "NUM_BLOCKS": [
+                                    4,
+                                    4,
+                                    4,
+                                    4
+                                ],
+                                "NUM_CHANNELS": [
+                                    48,
+                                    96,
+                                    192,
+                                    384
+                                ],
+                                "BLOCK": "BASIC"
+                            }
+                        }
+                    }
+                },
+                "pytorch_version": "2.9.0+cu126",
+                "dependencies": null
+            }
+        },
+        "uploader": {
+            "email": "danialtza@gmail.com"
+        },
+        "id": "greedy-deer",
+        "id_emoji": "🦌"
+    },
+    "rdf_yaml_sha256": "60d15246c129299aec822513608f08396bd42d01bcc531da35aaae1d089d80db",
+    "status": "untested"
+}
