@@ -404,6 +404,7 @@
         },
         "tool_compatibility_version_specific": {
             "biapy_3.6.7": 0.0,
+            "biapy_3.6.8": 0.0,
             "bioimageio.core_0.9.5": 0.5,
             "careamics_0.0.18": 0.0,
             "deepimagej_3.1.0-snapshot": 0.0,
@@ -415,6 +416,16 @@
     "tests": {
         "biapy": {
             "3.6.7": {
+                "badge": null,
+                "details": "[all] no workflow tag recognized in ['Semantic Unmixing', 'Splitting', 'Image Dcomposition'].\n",
+                "error": "[all] no workflow tag recognized in ['Semantic Unmixing', 'Splitting', 'Image Dcomposition'].\n",
+                "links": [
+                    "biapy/biapy"
+                ],
+                "score": 0.0,
+                "status": "failed"
+            },
+            "3.6.8": {
                 "badge": null,
                 "details": "[all] no workflow tag recognized in ['Semantic Unmixing', 'Splitting', 'Image Dcomposition'].\n",
                 "error": "[all] no workflow tag recognized in ['Semantic Unmixing', 'Splitting', 'Image Dcomposition'].\n",
