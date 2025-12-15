@@ -451,6 +451,7 @@
             "biapy_3.6.5": 0.0,
             "biapy_3.6.6": 0.0,
             "biapy_3.6.7": 0.0,
+            "biapy_3.6.8": 0.0,
             "bioimageio.core_0.9.3": 0.0,
             "bioimageio.core_0.9.4": 0.0,
             "bioimageio.core_0.9.5": 0.5,
@@ -486,6 +487,16 @@
                 "status": "failed"
             },
             "3.6.7": {
+                "badge": null,
+                "details": "[all] no workflow tag recognized in ['SAM', 'mobile-sam', 'feature extraction'].\n",
+                "error": "[all] no workflow tag recognized in ['SAM', 'mobile-sam', 'feature extraction'].\n",
+                "links": [
+                    "biapy/biapy"
+                ],
+                "score": 0.0,
+                "status": "failed"
+            },
+            "3.6.8": {
                 "badge": null,
                 "details": "[all] no workflow tag recognized in ['SAM', 'mobile-sam', 'feature extraction'].\n",
                 "error": "[all] no workflow tag recognized in ['SAM', 'mobile-sam', 'feature extraction'].\n",
