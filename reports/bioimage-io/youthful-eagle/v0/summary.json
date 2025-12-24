@@ -256,7 +256,8 @@
             "careamics_0.0.18": 0.0,
             "deepimagej_3.1.0-snapshot": 0.0,
             "ilastik_1.4.1.post1": 0.0,
-            "ilastik_1.4.2b5": 0.0
+            "ilastik_1.4.2b5": 0.0,
+            "ilastik_1.4.2b6": 0.0
         }
     },
     "status": "passed",
@@ -999,6 +1000,159 @@
                     "warnings": null
                 },
                 "error": "\n|        ❌        |                              bioimageio format validation                              |\n|       ---       |                                          ---                                           |\n| status          | failed                                                                                 |\n| source          | https://hypha.aicell.io/bioimage-io/artifacts/youthful-eagle/files/rdf.yaml?version=v0 |\n| id              | youthful-eagle                                                                         |\n| format version  | model 0.5.4                                                                            |\n| bioimageio.core | 0.8.0                                                                                  |\n| bioimageio.spec | 0.5.4.1                                                                                |\n\n|     |                Location               |                                                               Details                                                               |\n| --- |                  ---                  |                                                                 ---                                                                 |\n| ✔️  |                                       | Successfully created `ModelDescr` object.                                                                                           |\n| 🔍   | `context:perform_io_checks`           | True                                                                                                                                |\n| 🔍   | `context:root`                        | https://hypha.aicell.io/bioimage-io/artifacts/youthful-eagle/files?version=v0                                                       |\n| 🔍   | `context:known_files.test-input.npy`  | 5d520b4473f7d486e0f142bedf73574bb205e2e6d917377c9635b0b6e493d79a                                                                    |\n| 🔍   | `context:known_files.test-output.npy` | de6246f88cee38a12c03589eb0beee49d7066eb60a9d8a30fc94b3b0396ac168                                                                    |\n| 🔍   | `context:known_files.seunet.py`       | b4fb69b11b18fae9df7df4c5b9cf411c1e8a7e4d8a81eac7bd75178ad2fd301d                                                                    |\n| 🔍   | `context:known_files.checkpoint.pth`  | a89fa96bf05f0570e0e597e9c7aa4a2932a2a6e3a88b47c0a89388709a722d4a                                                                    |\n| ✔️  |                                       | bioimageio.spec format validation model 0.5.4                                                                                       |\n| ⚠   | `name`                                | Name longer than 64 characters.                                                                                                     |\n| ✔️  | `type`                                | Has expected resource type                                                                                                          |\n| ❌   | `weights.pytorch_state_dict`          | Reproduce test outputs from test inputs (pytorch_state_dict)                                                                        |\n| 🐍   | `weights.pytorch_state_dict`          | recommended conda env for:                                                                                                          |\n|     |                                       | Reproduce test outputs from test inputs (pytorch_state_dict)                                                                        |\n|     |                                       | See [Conda Environment 1](#conda-environment-1).                                                                                    |\n| 🐍   | `weights.pytorch_state_dict`          | conda compare (Reproduce test outputs from test inputs (pytorch_state_dict)):                                                       |\n|     |                                       | See [Conda Environment Comparison 1](#conda-environment-comparison-1).                                                              |\n| ❌   | `weights.pytorch_state_dict`          | Output 'output0' disagrees with 88 of 131072 expected values.                                                                       |\n|     |                                       |  Max relative difference: 9.81e-03 (= \\|1.18e-03 - 1.17e-03\\|/\\|1.17e-03 + 1e-6\\|) at {'batch': 0, 'channel': 0, 'y': 87, 'x': 179} |\n|     |                                       |  Max absolute difference: 7.85e-04 (= \\|4.3446156e-01 - 4.3367696e-01\\|) at {'batch': 0, 'channel': 1, 'y': 86, 'x': 23}            |\n|     |                                       |                                                                                                                                     |\n| ✔️  | `weights.pytorch_state_dict`          | Run pytorch_state_dict inference for inputs with batch_size: 1 and size parameter n: 0                                              |\n\n### Conda Environment 1\n\n```yaml\n%YAML 1.2\n---\nchannels:\n  - pytorch\n  - conda-forge\n  - nodefaults\ndependencies:\n  - conda-forge::bioimageio.core\n  - numpy >=2,<3\n  - pip\n  - pytorch==2.4.0\n  - torchaudio==2.4.0\n  - torchvision==0.19.0\n```\n\n\n### Conda Environment Comparison 1\n\n```\nusage: conda [-h] [-v] [--no-plugins] [-V] COMMAND ...\n\nconda is a tool for managing and deploying applications, environments and packages.\n\noptions:\n  -h, --help            Show this help message and exit.\n  -v, --verbose         Can be used multiple times. Once for detailed output,\n                        twice for INFO logging, thrice for DEBUG logging, four\n                        times for TRACE logging.\n  --no-plugins          Disable all plugins that are not built into conda.\n  -V, --version         Show the conda version number and exit.\n\ncommands:\n  The following built-in and plugins subcommands are available.\n\n  COMMAND\n    activate            Activate a conda environment.\n    clean               Remove unused packages and caches.\n    commands            List all available conda subcommands (including those\n                        from plugins). Generally only used by tab-completion.\n    compare             Compare packages between conda environments.\n    config              Modify configuration values in .condarc.\n    content-trust       Signing and verification tools for Conda\n    create              Create a new conda environment from a list of\n                        specified packages.\n    deactivate          Deactivate the current active conda environment.\n    doctor              Display a health report for your environment.\n    env                 Create and manage conda environments.\n    export              Export a given environment\n    info                Display information about current conda install.\n    init                Initialize conda for shell interaction.\n    install             Install a list of packages into a specified conda\n                        environment.\n    list                List installed packages in a conda environment.\n    menuinst            A subcommand for installing and removing shortcuts via\n                        menuinst.\n    notices             Retrieve latest channel notifications.\n    package             Create low-level conda packages. (EXPERIMENTAL)\n    remove (uninstall)  Remove a list of packages from a specified conda\n                        environment.\n    rename              Rename an existing environment.\n    repoquery           Advanced search for repodata.\n    run                 Run an executable in a conda environment.\n    search              Search for packages and display associated information\n                        using the MatchSpec format.\n    token               Set repository access token and configure\n                        default_channels\n    tos                 A subcommand for viewing, accepting, rejecting, and\n                        otherwise interacting with a channel's Terms of\n                        Service (ToS). This plugin periodically checks for\n                        updated Terms of Service for the active/selected\n                        channels. Channels with a Terms of Service will need\n                        to be accepted or rejected prior to use. Conda will\n                        only allow package installation from channels without\n                        a Terms of Service or with an accepted Terms of\n                        Service. Attempting to use a channel with a rejected\n                        Terms of Service will result in an error.\n    update (upgrade)    Update conda packages to the latest compatible\n                        version.\n```\n\n",
+                "links": [
+                    "ilastik/ilastik"
+                ],
+                "score": 0.0,
+                "status": "failed"
+            },
+            "1.4.2b6": {
+                "badge": null,
+                "details": {
+                    "conda_list": null,
+                    "details": [
+                        {
+                            "conda_compare": null,
+                            "context": {
+                                "file_name": "rdf.yaml",
+                                "known_files": {
+                                    "checkpoint.pth": "a89fa96bf05f0570e0e597e9c7aa4a2932a2a6e3a88b47c0a89388709a722d4a",
+                                    "seunet.py": "b4fb69b11b18fae9df7df4c5b9cf411c1e8a7e4d8a81eac7bd75178ad2fd301d",
+                                    "test-input.npy": "5d520b4473f7d486e0f142bedf73574bb205e2e6d917377c9635b0b6e493d79a",
+                                    "test-output.npy": "de6246f88cee38a12c03589eb0beee49d7066eb60a9d8a30fc94b3b0396ac168"
+                                },
+                                "perform_io_checks": true,
+                                "root": "https://hypha.aicell.io/bioimage-io/artifacts/youthful-eagle/files?version=v0",
+                                "update_hashes": false
+                            },
+                            "errors": [],
+                            "loc": [],
+                            "name": "Successfully created `ModelDescr` object.",
+                            "recommended_env": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "conda_compare": null,
+                            "context": {
+                                "file_name": "rdf.yaml",
+                                "known_files": {
+                                    "checkpoint.pth": "a89fa96bf05f0570e0e597e9c7aa4a2932a2a6e3a88b47c0a89388709a722d4a",
+                                    "seunet.py": "b4fb69b11b18fae9df7df4c5b9cf411c1e8a7e4d8a81eac7bd75178ad2fd301d",
+                                    "test-input.npy": "5d520b4473f7d486e0f142bedf73574bb205e2e6d917377c9635b0b6e493d79a",
+                                    "test-output.npy": "de6246f88cee38a12c03589eb0beee49d7066eb60a9d8a30fc94b3b0396ac168"
+                                },
+                                "perform_io_checks": true,
+                                "root": "https://hypha.aicell.io/bioimage-io/artifacts/youthful-eagle/files?version=v0",
+                                "update_hashes": false
+                            },
+                            "errors": [],
+                            "loc": [],
+                            "name": "bioimageio.spec format validation model 0.5.4",
+                            "recommended_env": null,
+                            "status": "passed",
+                            "warnings": [
+                                {
+                                    "loc": [
+                                        "name"
+                                    ],
+                                    "msg": "Name longer than 64 characters.",
+                                    "severity": 20,
+                                    "type": "warning"
+                                }
+                            ]
+                        },
+                        {
+                            "conda_compare": null,
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "type"
+                            ],
+                            "name": "Has expected resource type",
+                            "recommended_env": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "conda_compare": "usage: conda [-h] [-v] [--no-plugins] [-V] COMMAND ...\n\nconda is a tool for managing and deploying applications, environments and packages.\n\noptions:\n  -h, --help            Show this help message and exit.\n  -v, --verbose         Can be used multiple times. Once for detailed output,\n                        twice for INFO logging, thrice for DEBUG logging, four\n                        times for TRACE logging.\n  --no-plugins          Disable all plugins that are not built into conda.\n  -V, --version         Show the conda version number and exit.\n\ncommands:\n  The following built-in and plugins subcommands are available.\n\n  COMMAND\n    activate            Activate a conda environment.\n    clean               Remove unused packages and caches.\n    commands            List all available conda subcommands (including those\n                        from plugins). Generally only used by tab-completion.\n    compare             Compare packages between conda environments.\n    config              Modify configuration values in .condarc.\n    content-trust       Signing and verification tools for Conda\n    create              Create a new conda environment from a list of\n                        specified packages.\n    deactivate          Deactivate the current active conda environment.\n    doctor              Display a health report for your environment.\n    env                 Create and manage conda environments.\n    export              Export a given environment\n    info                Display information about current conda install.\n    init                Initialize conda for shell interaction.\n    install             Install a list of packages into a specified conda\n                        environment.\n    list                List installed packages in a conda environment.\n    menuinst            A subcommand for installing and removing shortcuts via\n                        menuinst.\n    notices             Retrieve latest channel notifications.\n    package             Create low-level conda packages. (EXPERIMENTAL)\n    remove (uninstall)  Remove a list of packages from a specified conda\n                        environment.\n    rename              Rename an existing environment.\n    repoquery           Advanced search for repodata.\n    run                 Run an executable in a conda environment.\n    search              Search for packages and display associated information\n                        using the MatchSpec format.\n    token               Set repository access token and configure\n                        default_channels\n    tos                 A subcommand for viewing, accepting, rejecting, and\n                        otherwise interacting with a channel's Terms of\n                        Service (ToS). This plugin periodically checks for\n                        updated Terms of Service for the active/selected\n                        channels. Channels with a Terms of Service will need\n                        to be accepted or rejected prior to use. Conda will\n                        only allow package installation from channels without\n                        a Terms of Service or with an accepted Terms of\n                        Service. Attempting to use a channel with a rejected\n                        Terms of Service will result in an error.\n    update (upgrade)    Update conda packages to the latest compatible\n                        version.\n",
+                            "context": null,
+                            "errors": [
+                                {
+                                    "loc": [
+                                        "weights",
+                                        "pytorch_state_dict"
+                                    ],
+                                    "msg": "Output 'output0' disagrees with 88 of 131072 expected values.\n Max relative difference: 9.81e-03 (= \\|1.18e-03 - 1.17e-03\\|/\\|1.17e-03 + 1e-6\\|) at {'batch': 0, 'channel': 0, 'y': 87, 'x': 179}\n Max absolute difference: 7.85e-04 (= \\|4.3446159e-01 - 4.3367696e-01\\|) at {'batch': 0, 'channel': 1, 'y': 86, 'x': 23}",
+                                    "traceback_html": "",
+                                    "traceback_md": "",
+                                    "type": "bioimageio.core",
+                                    "with_traceback": false
+                                }
+                            ],
+                            "loc": [
+                                "weights",
+                                "pytorch_state_dict"
+                            ],
+                            "name": "Reproduce test outputs from test inputs (pytorch_state_dict)",
+                            "recommended_env": {
+                                "channels": [
+                                    "pytorch",
+                                    "conda-forge",
+                                    "nodefaults"
+                                ],
+                                "dependencies": [
+                                    "conda-forge::bioimageio.core",
+                                    "numpy >=2,<3",
+                                    "pip",
+                                    "pytorch==2.4.0",
+                                    "torchaudio==2.4.0",
+                                    "torchvision==0.19.0"
+                                ],
+                                "name": null
+                            },
+                            "status": "failed",
+                            "warnings": []
+                        },
+                        {
+                            "conda_compare": null,
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "pytorch_state_dict"
+                            ],
+                            "name": "Run pytorch_state_dict inference for inputs with batch_size: 1 and size parameter n: 0",
+                            "recommended_env": null,
+                            "status": "passed",
+                            "warnings": []
+                        }
+                    ],
+                    "env": [
+                        [
+                            "bioimageio.spec",
+                            "0.5.4.1",
+                            "",
+                            ""
+                        ],
+                        [
+                            "bioimageio.core",
+                            "0.8.0",
+                            "",
+                            ""
+                        ]
+                    ],
+                    "format_version": "0.5.4",
+                    "id": "youthful-eagle",
+                    "metadata_completeness": null,
+                    "name": "bioimageio format validation",
+                    "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/youthful-eagle/files/rdf.yaml?version=v0",
+                    "status": "failed",
+                    "traceback": null,
+                    "type": "model",
+                    "warnings": null
+                },
+                "error": "\n|        ❌        |                              bioimageio format validation                              |\n|       ---       |                                          ---                                           |\n| status          | failed                                                                                 |\n| source          | https://hypha.aicell.io/bioimage-io/artifacts/youthful-eagle/files/rdf.yaml?version=v0 |\n| id              | youthful-eagle                                                                         |\n| format version  | model 0.5.4                                                                            |\n| bioimageio.spec | 0.5.4.1                                                                                |\n| bioimageio.core | 0.8.0                                                                                  |\n\n|     |                Location               |                                                               Details                                                               |\n| --- |                  ---                  |                                                                 ---                                                                 |\n| ✔️  |                                       | Successfully created `ModelDescr` object.                                                                                           |\n| 🔍   | `context:perform_io_checks`           | True                                                                                                                                |\n| 🔍   | `context:root`                        | https://hypha.aicell.io/bioimage-io/artifacts/youthful-eagle/files?version=v0                                                       |\n| 🔍   | `context:known_files.test-input.npy`  | 5d520b4473f7d486e0f142bedf73574bb205e2e6d917377c9635b0b6e493d79a                                                                    |\n| 🔍   | `context:known_files.test-output.npy` | de6246f88cee38a12c03589eb0beee49d7066eb60a9d8a30fc94b3b0396ac168                                                                    |\n| 🔍   | `context:known_files.seunet.py`       | b4fb69b11b18fae9df7df4c5b9cf411c1e8a7e4d8a81eac7bd75178ad2fd301d                                                                    |\n| 🔍   | `context:known_files.checkpoint.pth`  | a89fa96bf05f0570e0e597e9c7aa4a2932a2a6e3a88b47c0a89388709a722d4a                                                                    |\n| ✔️  |                                       | bioimageio.spec format validation model 0.5.4                                                                                       |\n| ⚠   | `name`                                | Name longer than 64 characters.                                                                                                     |\n| ✔️  | `type`                                | Has expected resource type                                                                                                          |\n| ❌   | `weights.pytorch_state_dict`          | Reproduce test outputs from test inputs (pytorch_state_dict)                                                                        |\n| 🐍   | `weights.pytorch_state_dict`          | recommended conda env for:                                                                                                          |\n|     |                                       | Reproduce test outputs from test inputs (pytorch_state_dict)                                                                        |\n|     |                                       | See [Conda Environment 1](#conda-environment-1).                                                                                    |\n| 🐍   | `weights.pytorch_state_dict`          | conda compare (Reproduce test outputs from test inputs (pytorch_state_dict)):                                                       |\n|     |                                       | See [Conda Environment Comparison 1](#conda-environment-comparison-1).                                                              |\n| ❌   | `weights.pytorch_state_dict`          | Output 'output0' disagrees with 88 of 131072 expected values.                                                                       |\n|     |                                       |  Max relative difference: 9.81e-03 (= \\|1.18e-03 - 1.17e-03\\|/\\|1.17e-03 + 1e-6\\|) at {'batch': 0, 'channel': 0, 'y': 87, 'x': 179} |\n|     |                                       |  Max absolute difference: 7.85e-04 (= \\|4.3446159e-01 - 4.3367696e-01\\|) at {'batch': 0, 'channel': 1, 'y': 86, 'x': 23}            |\n|     |                                       |                                                                                                                                     |\n| ✔️  | `weights.pytorch_state_dict`          | Run pytorch_state_dict inference for inputs with batch_size: 1 and size parameter n: 0                                              |\n\n### Conda Environment 1\n\n```yaml\n%YAML 1.2\n---\nchannels:\n  - pytorch\n  - conda-forge\n  - nodefaults\ndependencies:\n  - conda-forge::bioimageio.core\n  - numpy >=2,<3\n  - pip\n  - pytorch==2.4.0\n  - torchaudio==2.4.0\n  - torchvision==0.19.0\n```\n\n\n### Conda Environment Comparison 1\n\n```\nusage: conda [-h] [-v] [--no-plugins] [-V] COMMAND ...\n\nconda is a tool for managing and deploying applications, environments and packages.\n\noptions:\n  -h, --help            Show this help message and exit.\n  -v, --verbose         Can be used multiple times. Once for detailed output,\n                        twice for INFO logging, thrice for DEBUG logging, four\n                        times for TRACE logging.\n  --no-plugins          Disable all plugins that are not built into conda.\n  -V, --version         Show the conda version number and exit.\n\ncommands:\n  The following built-in and plugins subcommands are available.\n\n  COMMAND\n    activate            Activate a conda environment.\n    clean               Remove unused packages and caches.\n    commands            List all available conda subcommands (including those\n                        from plugins). Generally only used by tab-completion.\n    compare             Compare packages between conda environments.\n    config              Modify configuration values in .condarc.\n    content-trust       Signing and verification tools for Conda\n    create              Create a new conda environment from a list of\n                        specified packages.\n    deactivate          Deactivate the current active conda environment.\n    doctor              Display a health report for your environment.\n    env                 Create and manage conda environments.\n    export              Export a given environment\n    info                Display information about current conda install.\n    init                Initialize conda for shell interaction.\n    install             Install a list of packages into a specified conda\n                        environment.\n    list                List installed packages in a conda environment.\n    menuinst            A subcommand for installing and removing shortcuts via\n                        menuinst.\n    notices             Retrieve latest channel notifications.\n    package             Create low-level conda packages. (EXPERIMENTAL)\n    remove (uninstall)  Remove a list of packages from a specified conda\n                        environment.\n    rename              Rename an existing environment.\n    repoquery           Advanced search for repodata.\n    run                 Run an executable in a conda environment.\n    search              Search for packages and display associated information\n                        using the MatchSpec format.\n    token               Set repository access token and configure\n                        default_channels\n    tos                 A subcommand for viewing, accepting, rejecting, and\n                        otherwise interacting with a channel's Terms of\n                        Service (ToS). This plugin periodically checks for\n                        updated Terms of Service for the active/selected\n                        channels. Channels with a Terms of Service will need\n                        to be accepted or rejected prior to use. Conda will\n                        only allow package installation from channels without\n                        a Terms of Service or with an accepted Terms of\n                        Service. Attempting to use a channel with a rejected\n                        Terms of Service will result in an error.\n    update (upgrade)    Update conda packages to the latest compatible\n                        version.\n```\n\n",
                 "links": [
                     "ilastik/ilastik"
                 ],

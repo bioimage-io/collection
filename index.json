@@ -1792,9 +1792,9 @@
             "type": "model",
             "versions": [
                 {
-                    "comment": null,
+                    "comment": "Added environment.yml",
                     "created_at": "2025-07-01T22:51:13Z",
-                    "sha256": "f0f0263cf8c47af3b30f4f59a9d8377c781c151f92d19f7a112365ea95cfd0eb",
+                    "sha256": "6934b952faa275c369a009c72b4d369edc5e8ec9710f300f2021cd33ff3a7a59",
                     "source": "https://hypha.aicell.io/bioimage-io/artifacts/dazzling-spider/files/rdf.yaml?version=v0",
                     "version": "v0"
                 }
@@ -2897,9 +2897,9 @@
             "type": "model",
             "versions": [
                 {
-                    "comment": null,
+                    "comment": "Added environment.yml",
                     "created_at": "2025-07-01T22:41:55Z",
-                    "sha256": "316c23611c80e0be88ea8757adf95a733ca3406064df96826f45e8b1c2e73d3b",
+                    "sha256": "ca99f4ecc333b4d9d951a8953a6000f94ef0ab7e1af99104c27299235d99679f",
                     "source": "https://hypha.aicell.io/bioimage-io/artifacts/jolly-ox/files/rdf.yaml?version=v0",
                     "version": "v0"
                 }
@@ -3244,6 +3244,6 @@
             ]
         }
     ],
-    "timestamp": "2025-12-23T01:56:22.576707",
+    "timestamp": "2025-12-24T01:55:08.394042",
     "total": 249
 }
