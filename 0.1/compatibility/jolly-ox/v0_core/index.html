@@ -569,12 +569,12 @@
 </style>
 <div class="validation-summary-container"><table>
   <tr>
-    <th>❌</th>
+    <th>🟡</th>
     <th>bioimageio format validation</th>
   </tr>
   <tr>
     <td>status</td>
-    <td>failed</td>
+    <td>valid-format</td>
   </tr>
   <tr>
     <td>source</td>
@@ -600,20 +600,73 @@
     <th>Details</th>
   </tr>
   <tr>
-    <td>❌</td>
+    <td>✔️</td>
+    <td></td>
+    <td>Successfully created `ModelDescr` instance.</td>
+  </tr>
+  <tr>
+    <td>✔️</td>
     <td></td>
     <td>bioimageio.spec format validation model 0.5.6</td>
   </tr>
   <tr>
+    <td>⚠</td>
+    <td><code>inputs.0.sample_tensor</code></td>
+    <td><pre>Needs to be filled for FAIR compliance</pre></td>
+  </tr>
+  <tr>
+    <td>⚠</td>
+    <td><code>outputs.0.sample_tensor</code></td>
+    <td><pre>Needs to be filled for FAIR compliance</pre></td>
+  </tr>
+  <tr>
     <td>❌</td>
-    <td></td>
-    <td><pre>Client error '404 Not Found' for url 'https://hypha.aicell.io/bioimage-io/artifacts/jolly-ox/files/inputs.npy?version=v0'
-For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404</pre></td>
+    <td><code>weights.pytorch_state_dict</code></td>
+    <td>Reproduce test outputs from test inputs (pytorch_state_dict)</td>
+  </tr>
+  <tr>
+    <td>❌</td>
+    <td><code>weights.pytorch_state_dict</code></td>
+    <td><pre>No module named 'careamics'</pre></td>
   </tr>
   <tr>
     <td></td>
     <td></td>
     <td>See <a href="#traceback-1">Traceback 1</a>.</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td><code>weights.pytorch_state_dict</code></td>
+    <td><pre>recommended conda environment (Reproduce test outputs from test inputs (pytorch_state_dict))</pre></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td><pre lang="yaml">%YAML 1.2
+---
+name: careamics
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - conda-forge::bioimageio.core
+  - pip
+  - python=3.12
+  - pip:
+      - careamics==0.0.16
+      - torch==2.7.1+cu126
+      - torchvision==0.22.1+cu126
+</pre></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td><code>weights.pytorch_state_dict</code></td>
+    <td><pre>conda compare (Reproduce test outputs from test inputs (pytorch_state_dict))</pre></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td><pre>careamics not found torch not found torchvision not found</pre></td>
   </tr>
 </table>
 <h3 id="traceback-1">Traceback 1</h3>
@@ -625,18 +678,19 @@ For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/St
 .r1 {color: #800000; text-decoration-color: #800000}
 .r2 {color: #800000; text-decoration-color: #800000; font-weight: bold}
 .r3 {color: #bf7f7f; text-decoration-color: #bf7f7f; font-weight: bold}
-.r4 {color: #bfbf7f; text-decoration-color: #bfbf7f}
-.r5 {color: #808000; text-decoration-color: #808000; font-weight: bold}
+.r4 {color: #7f7f7f; text-decoration-color: #7f7f7f}
+.r5 {font-weight: bold}
 .r6 {color: #0000ff; text-decoration-color: #0000ff}
-.r7 {color: #7f7f7f; text-decoration-color: #7f7f7f}
+.r7 {color: #808000; text-decoration-color: #808000}
 .r8 {color: #00ffff; text-decoration-color: #00ffff}
 .r9 {color: #ff00ff; text-decoration-color: #ff00ff}
-.r10 {color: #808000; text-decoration-color: #808000}
-.r11 {color: #00ff00; text-decoration-color: #00ff00}
-.r12 {color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold}
-.r13 {color: #ff0000; text-decoration-color: #ff0000; font-weight: bold}
-.r14 {color: #008000; text-decoration-color: #008000}
-.r15 {color: #0000ff; text-decoration-color: #0000ff; text-decoration: underline}
+.r10 {font-weight: bold; text-decoration: underline}
+.r11 {color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold; text-decoration: underline}
+.r12 {color: #0000ff; text-decoration-color: #0000ff; font-weight: bold; text-decoration: underline}
+.r13 {color: #808080; text-decoration-color: #808080}
+.r14 {color: #00ffff; text-decoration-color: #00ffff; text-decoration: underline}
+.r15 {color: #ff0000; text-decoration-color: #ff0000; font-weight: bold}
+.r16 {color: #008000; text-decoration-color: #008000}
 body {
     color: var(--md-default-fg-color);
     background-color: var(--md-default-bg-color);
@@ -645,128 +699,98 @@ body {
 </head>
 <body>
     <pre style="font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><code style="font-family:inherit"><span class="r1">╭─────────────────────────────── </span><span class="r2">Traceback </span><span class="r3">(most recent call last)</span><span class="r1"> ────────────────────────────────╮</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/spec/_internal/</span><span class="r5">common_nodes.py</span>:<span class="r6">284</span> i <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/core/</span><span class="r5">_resource_tests.py</span>:784 in _test <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">281 </span><span class="r7">│   │   </span>                                                                                   <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">282 </span><span class="r7">│   │   </span>context = get_validation_context()                                                 <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">283 </span><span class="r7">│   │   </span><span class="r6">try</span>:                                                                               <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span>284 <span class="r7">│   │   │   </span>rd = <span class="r8">cls</span>.model_validate(data)                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">285 </span><span class="r7">│   │   </span><span class="r6">except</span> pydantic.ValidationError <span class="r6">as</span> e:                                              <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">286 </span><span class="r7">│   │   │   </span><span class="r6">for</span> ee <span class="r9">in</span> e.errors(include_url=<span class="r6">False</span>):                                         <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">287 </span><span class="r7">│   │   │   │   </span><span class="r6">if</span> (severity := ee.get(<span class="r10">&quot;ctx&quot;</span>, {}).get(<span class="r10">&quot;severity&quot;</span>, ERROR)) &lt; ERROR:         <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 781 </span><span class="r4">│   │   </span>test_input = get_test_input_sample(model)                                         <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 782 </span><span class="r4">│   │   </span>expected = get_test_output_sample(model)                                          <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 783 </span><span class="r4">│   │   </span>                                                                                  <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span> 784 <span class="r4">│   │   </span><span class="r6">with</span> create_prediction_pipeline(                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 785 </span><span class="r4">│   │   │   </span>bioimageio_model=model, devices=devices, weight_format=weight_format          <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 786 </span><span class="r4">│   │   </span>) <span class="r6">as</span> prediction_pipeline:                                                         <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 787 </span><span class="r4">│   │   │   </span>results = prediction_pipeline.predict_sample_without_blocking(test_input)     <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/spec/_internal/</span><span class="r5">node.py</span>:<span class="r6">79</span> in <span class="r11">model_v</span> <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/core/</span><span class="r5">_prediction_pipeline.py</span>:371 in  <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">76 </span><span class="r7">│   │   </span>                                                                                    <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">77 </span><span class="r7">│   │   </span><span class="r6">with</span> context:                                                                       <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">78 </span><span class="r7">│   │   │   </span><span class="r7"># use validation context as context manager for equal behavior of __init__ and </span> <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span>79 <span class="r7">│   │   │   </span><span class="r6">return</span> <span class="r8">super</span>().model_validate(                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">80 </span><span class="r7">│   │   │   │   </span>obj, strict=strict, from_attributes=from_attributes                         <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">81 </span><span class="r7">│   │   │   </span>)                                                                               <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">82 </span>                                                                                            <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">368 </span><span class="r4">│   │   │   </span><span class="r7">f&quot;deprecated create_prediction_pipeline kwargs: {</span><span class="r8">set</span>(deprecated_kwargs)<span class="r7">}&quot;</span>      <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">369 </span><span class="r4">│   │   </span>)                                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">370 </span><span class="r4">│   </span>                                                                                       <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>371 <span class="r4">│   </span>model_adapter = model_adapter <span class="r9">or</span> <span class="r10">create_model_adapter(</span>                                 <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">372 </span><span class="r4">│   │   </span><span class="r10">model_description=bioimageio_model,</span>                                                <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">373 </span><span class="r4">│   │   </span><span class="r10">devices=devices,</span>                                                                   <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">374 </span><span class="r4">│   │   </span><span class="r10">weight_format_priority_order=weights_format </span><span class="r11">and</span><span class="r10"> (weights_format,),</span>                 <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/pydantic/</span><span class="r5">main.py</span>:<span class="r6">705</span> in <span class="r11">model_validate</span>          <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/core/backends/</span><span class="r5">_model_adapter.py</span>:169  <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 702 </span><span class="r7">│   │   │   │   </span>code=<span class="r10">&#x27;validate-by-alias-and-name-false&#x27;</span>,                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 703 </span><span class="r7">│   │   │   </span>)                                                                             <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 704 </span><span class="r7">│   │   </span>                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span> 705 <span class="r7">│   │   </span><span class="r6">return</span> <span class="r8">cls</span>.__pydantic_validator__.validate_python(                                <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 706 </span><span class="r7">│   │   │   </span>obj, strict=strict, from_attributes=from_attributes, context=context, by_alia <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 707 </span><span class="r7">│   │   </span>)                                                                                 <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 708 </span>                                                                                          <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">166 </span><span class="r4">│   │   </span><span class="r6">assert</span> errors                                                                      <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">167 </span><span class="r4">│   │   </span><span class="r6">if</span> <span class="r8">len</span>(weight_format_priority_order) == <span class="r6">1</span>:                                         <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">168 </span><span class="r4">│   │   │   </span><span class="r6">assert</span> <span class="r8">len</span>(errors) == <span class="r6">1</span>                                                        <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>169 <span class="r4">│   │   │   </span><span class="r12">raise</span><span class="r10"> errors[</span><span class="r12">0</span><span class="r10">]</span>                                                                <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">170 </span><span class="r4">│   │   </span>                                                                                   <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">171 </span><span class="r4">│   │   </span><span class="r6">else</span>:                                                                              <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">172 </span><span class="r4">│   │   │   </span>msg = (                                                                        <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/pydantic/_internal/</span><span class="r5">_validators.py</span>:<span class="r6">52</span> in <span class="r11">sequenc</span> <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/core/backends/</span><span class="r5">_model_adapter.py</span>:112  <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 49 </span><span class="r7">│   </span><span class="r6">if</span> value_type <span class="r9">is</span> <span class="r8">tuple</span>:                                                                <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 50 </span><span class="r7">│   │   </span>input_value = <span class="r8">list</span>(input_value)                                                    <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 51 </span><span class="r7">│   </span>                                                                                       <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span> 52 <span class="r7">│   </span>v_list = validator(input_value)                                                        <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 53 </span><span class="r7">│   </span>                                                                                       <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 54 </span><span class="r7">│   </span><span class="r7"># the rest of the logic is just re-creating the original type from `v_list`</span>            <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 55 </span><span class="r7">│   </span><span class="r6">if</span> value_type <span class="r9">is</span> <span class="r8">list</span>:                                                                 <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">109 </span><span class="r4">│   │   │   │   </span><span class="r6">try</span>:                                                                       <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">110 </span><span class="r4">│   │   │   │   │   </span><span class="r6">from</span><span class="r13"> </span><span class="r14">.pytorch_backend</span><span class="r13"> </span><span class="r6">import</span> PytorchModelAdapter                       <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">111 </span><span class="r4">│   │   │   │   │   </span>                                                                       <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>112 <span class="r4">│   │   │   │   │   </span><span class="r6">return</span> PytorchModelAdapter(                                            <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">113 </span><span class="r4">│   │   │   │   │   │   </span>model_description=model_description, devices=devices               <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">114 </span><span class="r4">│   │   │   │   │   </span>)                                                                      <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">115 </span><span class="r4">│   │   │   │   </span><span class="r6">except</span> <span class="r8">Exception</span> <span class="r6">as</span> e:                                                     <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/spec/_internal/</span><span class="r5">io.py</span>:<span class="r6">266</span> in <span class="r11">_validat</span> <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/core/backends/</span><span class="r5">pytorch_backend.py</span>:38  <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">263 </span><span class="r7">│   </span><span class="r12">@model_validator</span>(mode=<span class="r10">&quot;after&quot;</span>)                                                         <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">264 </span><span class="r7">│   </span><span class="r6">def</span> <span class="r11">_validate_sha256</span>(<span class="r8">self</span>) -&gt; Self:                                                    <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">265 </span><span class="r7">│   │   </span><span class="r6">if</span> get_validation_context().perform_io_checks:                                     <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span>266 <span class="r7">│   │   │   </span><span class="r8">self</span>.validate_sha256()                                                         <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">267 </span><span class="r7">│   │   </span>                                                                                   <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">268 </span><span class="r7">│   │   </span><span class="r6">return</span> <span class="r8">self</span>                                                                        <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">269 </span>                                                                                           <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 35 </span><span class="r4">│   │   │   </span><span class="r6">raise</span> <span class="r8">ValueError</span>(<span class="r7">&quot;No `pytorch_state_dict` weights found&quot;</span>)                      <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 36 </span><span class="r4">│   │   </span>                                                                                   <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 37 </span><span class="r4">│   │   </span>devices = get_devices(devices)                                                     <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span> 38 <span class="r4">│   │   </span><span class="r8">self</span>._model = <span class="r10">load_torch_model(weights, load_state=</span><span class="r12">True</span><span class="r10">, devices=devices)</span>          <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 39 </span><span class="r4">│   │   </span><span class="r6">if</span> mode == <span class="r7">&quot;eval&quot;</span>:                                                                 <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 40 </span><span class="r4">│   │   │   </span><span class="r8">self</span>._model = <span class="r8">self</span>._model.eval()                                               <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 41 </span><span class="r4">│   │   </span><span class="r6">elif</span> mode == <span class="r7">&quot;train&quot;</span>:                                                              <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/spec/_internal/</span><span class="r5">io.py</span>:<span class="r6">277</span> in <span class="r11">validate</span> <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/core/backends/</span><span class="r5">pytorch_backend.py</span>:103 <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">274 </span><span class="r7">│   │   </span><span class="r6">if</span> <span class="r9">not</span> force_recompute <span class="r9">and</span> src_str <span class="r9">in</span> context.known_files:                         <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">275 </span><span class="r7">│   │   │   </span>actual_sha = context.known_files[src_str]                                      <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">276 </span><span class="r7">│   │   </span><span class="r6">else</span>:                                                                              <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span>277 <span class="r7">│   │   │   </span>reader = get_reader(<span class="r8">self</span>.source, sha256=<span class="r8">self</span>.sha256)                           <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">278 </span><span class="r7">│   │   │   </span><span class="r6">if</span> force_recompute:                                                            <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">279 </span><span class="r7">│   │   │   │   </span>actual_sha = get_sha256(reader)                                            <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">280 </span><span class="r7">│   │   │   </span><span class="r6">else</span>:                                                                          <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">100 </span><span class="r4">│   </span>load_state: <span class="r8">bool</span> = <span class="r6">True</span>,                                                               <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">101 </span><span class="r4">│   </span>devices: Optional[Sequence[Union[<span class="r8">str</span>, torch.device]]] = <span class="r6">None</span>,                          <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">102 </span>) -&gt; nn.Module:                                                                            <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>103 <span class="r4">│   </span>custom_callable = <span class="r10">import_callable(</span>                                                     <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">104 </span><span class="r4">│   │   </span><span class="r10">weight_spec.architecture,</span>                                                          <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">105 </span><span class="r4">│   │   </span><span class="r10">sha256=(</span>                                                                           <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">106 </span><span class="r4">│   │   │   </span><span class="r10">weight_spec.architecture_sha256</span>                                                <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/spec/_internal/</span><span class="r5">io.py</span>:<span class="r6">647</span> in <span class="r11">get_read</span> <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/core/</span><span class="r5">digest_spec.py</span>:71 in import_cal <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">644 </span><span class="r7">│   │   │   </span>source = HttpUrl(source)                                                       <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">645 </span><span class="r7">│   </span>                                                                                       <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">646 </span><span class="r7">│   </span><span class="r6">if</span> <span class="r8">isinstance</span>(source, HttpUrl):                                                        <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span>647 <span class="r7">│   │   </span><span class="r6">return</span> _open_url(source, progressbar=progressbar, **kwargs)                        <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">648 </span><span class="r7">│   </span>                                                                                       <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">649 </span><span class="r7">│   </span><span class="r6">if</span> <span class="r8">isinstance</span>(source, ZipPath):                                                        <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">650 </span><span class="r7">│   │   </span><span class="r6">if</span> <span class="r9">not</span> source.exists():                                                            <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 68 </span><span class="r4">│   │   </span>module = importlib.import_module(node.module_name)                                 <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 69 </span><span class="r4">│   │   </span>c = <span class="r8">getattr</span>(module, <span class="r8">str</span>(node.callable_name))                                       <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 70 </span><span class="r4">│   </span><span class="r6">elif</span> <span class="r8">isinstance</span>(node, ArchitectureFromLibraryDescr):                                   <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span> 71 <span class="r4">│   │   </span>module = <span class="r10">importlib.import_module(node.import_from)</span>                                 <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 72 </span><span class="r4">│   │   </span>c = <span class="r8">getattr</span>(module, <span class="r8">str</span>(node.callable))                                            <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 73 </span><span class="r4">│   </span><span class="r6">elif</span> <span class="r8">isinstance</span>(node, CallableFromFile):                                               <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 74 </span><span class="r4">│   │   </span>c = _import_from_file_impl(node.source_file, <span class="r8">str</span>(node.callable_name), **kwargs)    <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/spec/_internal/</span><span class="r5">io.py</span>:<span class="r6">711</span> in <span class="r11">_open_ur</span> <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/usr/share/miniconda/envs/f5dd7c1599ce87ce43e165d7309cb5ce10fc62589c6ac9cb35e48de70eeb9672/lib/p</span> <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">708 </span><span class="r7">│   │   </span><span class="r9">or</span> hashlib.sha256(<span class="r8">str</span>(source).encode(encoding=<span class="r10">&quot;utf-8&quot;</span>)).hexdigest()                <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">709 </span><span class="r7">│   </span>)                                                                                      <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">710 </span><span class="r7">│   </span>                                                                                       <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span>711 <span class="r7">│   </span>reader = cache.fetch(                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">712 </span><span class="r7">│   │   </span>source,                                                                            <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">713 </span><span class="r7">│   │   </span>fetcher=partial(_fetch_url, progressbar=progressbar),                              <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">714 </span><span class="r7">│   │   </span>force_refetch=digest,                                                              <span class="r1">│</span>
-<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/genericache/</span><span class="r5">__init__.py</span>:<span class="r6">148</span> in <span class="r11">fetch</span>            <span class="r1">│</span>
-<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">145 </span><span class="r7">│   │   </span>retries: <span class="r8">int</span> = <span class="r6">3</span>,                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">146 </span><span class="r7">│   </span>) -&gt; <span class="r10">&quot;CacheEntry&quot;</span>:                                                                     <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">147 </span><span class="r7">│   │   </span><span class="r6">for</span> _ <span class="r9">in</span> <span class="r8">range</span>(retries):                                                           <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span>148 <span class="r7">│   │   │   </span>result = <span class="r8">self</span>.try_fetch(url, fetcher, force_refetch=force_refetch)             <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">149 </span><span class="r7">│   │   │   </span><span class="r6">if</span> <span class="r8">isinstance</span>(result, CacheEntry):                                             <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">150 </span><span class="r7">│   │   │   │   </span><span class="r6">return</span> result                                                              <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">151 </span><span class="r7">│   │   │   </span><span class="r6">if</span> <span class="r8">isinstance</span>(result, FetchInterrupted):                                       <span class="r1">│</span>
-<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/genericache/</span><span class="r5">disk_cache.py</span>:<span class="r6">260</span> in <span class="r11">try_fetch</span>      <span class="r1">│</span>
-<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">257 </span><span class="r7">│   │   │   │   │   │   </span><span class="r6">return</span> out.open()                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">258 </span><span class="r7">│   │   │   │   </span>                                                                           <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">259 </span><span class="r7">│   │   │   │   </span><span class="r8">self</span>._misses += <span class="r6">1</span>                                                          <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span>260 <span class="r7">│   │   │   │   </span>chunks = fetcher(url)                                                      <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">261 </span><span class="r7">│   │   │   │   </span>temp_file = tempfile.NamedTemporaryFile(delete=<span class="r6">False</span>)                      <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">262 </span><span class="r7">│   │   │   │   </span>contents_sha = sha256()                                                    <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">263 </span><span class="r7">│   │   │   │   </span><span class="r6">for</span> chunk <span class="r9">in</span> chunks:                                                       <span class="r1">│</span>
-<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/spec/_internal/</span><span class="r5">io.py</span>:<span class="r6">769</span> in <span class="r11">_fetch_u</span> <span class="r1">│</span>
-<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">766 </span><span class="r7">│   │   </span>headers=headers,                                                                   <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">767 </span><span class="r7">│   │   </span>timeout=settings.http_timeout,                                                     <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">768 </span><span class="r7">│   </span>)                                                                                      <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span>769 <span class="r7">│   </span>_ = r.raise_for_status()                                                               <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">770 </span><span class="r7">│   </span>                                                                                       <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">771 </span><span class="r7">│   </span><span class="r7"># set progressbar.total</span>                                                                <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">772 </span><span class="r7">│   </span>total = r.headers.get(<span class="r10">&quot;content-length&quot;</span>)                                                <span class="r1">│</span>
-<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/httpx/</span><span class="r5">_models.py</span>:<span class="r6">829</span> in <span class="r11">raise_for_status</span>        <span class="r1">│</span>
-<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 826 </span><span class="r7">│   │   </span>}                                                                                 <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 827 </span><span class="r7">│   │   </span>error_type = error_types.get(status_class, <span class="r10">&quot;Invalid status code&quot;</span>)                 <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 828 </span><span class="r7">│   │   </span>message = message.format(<span class="r8">self</span>, error_type=error_type)                             <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span> 829 <span class="r7">│   │   </span><span class="r6">raise</span> HTTPStatusError(message, request=request, response=<span class="r8">self</span>)                    <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 830 </span><span class="r7">│   </span>                                                                                      <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 831 </span><span class="r7">│   </span><span class="r6">def</span> <span class="r11">json</span>(<span class="r8">self</span>, **kwargs: typing.Any) -&gt; typing.Any:                                   <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 832 </span><span class="r7">│   │   </span><span class="r6">return</span> jsonlib.loads(<span class="r8">self</span>.content, **kwargs)                                      <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 87 </span><span class="r4">│   │   │   </span><span class="r6">if</span> character != <span class="r7">&#x27;.&#x27;</span>:                                                           <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 88 </span><span class="r4">│   │   │   │   </span><span class="r6">break</span>                                                                      <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 89 </span><span class="r4">│   │   │   </span>level += <span class="r6">1</span>                                                                     <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span> 90 <span class="r4">│   </span><span class="r6">return</span> <span class="r10">_bootstrap._gcd_import(name[level:], package, level)</span>                            <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 91 </span>                                                                                           <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 92 </span>                                                                                           <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 93 </span>_RELOADING = {}                                                                            <span class="r1">│</span>
+<span class="r1">│</span> in _gcd_import:1387                                                                              <span class="r1">│</span>
+<span class="r1">│</span> in _find_and_load:1360                                                                           <span class="r1">│</span>
+<span class="r1">│</span> in _find_and_load_unlocked:1310                                                                  <span class="r1">│</span>
+<span class="r1">│</span> in _call_with_frames_removed:488                                                                 <span class="r1">│</span>
+<span class="r1">│</span> in _gcd_import:1387                                                                              <span class="r1">│</span>
+<span class="r1">│</span> in _find_and_load:1360                                                                           <span class="r1">│</span>
+<span class="r1">│</span> in _find_and_load_unlocked:1310                                                                  <span class="r1">│</span>
+<span class="r1">│</span> in _call_with_frames_removed:488                                                                 <span class="r1">│</span>
+<span class="r1">│</span> in _gcd_import:1387                                                                              <span class="r1">│</span>
+<span class="r1">│</span> in _find_and_load:1360                                                                           <span class="r1">│</span>
+<span class="r1">│</span> in _find_and_load_unlocked:1324                                                                  <span class="r1">│</span>
 <span class="r1">╰──────────────────────────────────────────────────────────────────────────────────────────────────╯</span>
-<span class="r13">HTTPStatusError: </span>Client error <span class="r14">&#x27;404 Not Found&#x27;</span> for url <span class="r14">&#x27;https://hypha.aicell.io/bioimage-io/artifacts/jolly-ox/files/inputs.npy?version=v0&#x27;</span>
-For more information check: <span class="r15">https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404</span>
+<span class="r15">ModuleNotFoundError: </span>No module named <span class="r16">&#x27;careamics&#x27;</span>
 </code></pre>
 </body>
 </html>
