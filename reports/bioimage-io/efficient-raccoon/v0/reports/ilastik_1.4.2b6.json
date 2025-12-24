@@ -1,0 +1,111 @@
+{
+    "badge": null,
+    "details": {
+        "conda_list": null,
+        "details": [
+            {
+                "conda_compare": null,
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "attention_unet.py": "e8df77bd57ba7c8ee80ecafcfd54ba8d9d038d77f220274dffb98f07479294c6",
+                        "test-input.npy": "d427ecae24b8e6a1c63a26049da5d331f237d88802bdb9c833abc718e0c9107c",
+                        "test-output.npy": "b7248a7ba69c87c4e3f39f79994c352f969fab97cf3223d0bf5ed90944e07b7d"
+                    },
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/efficient-raccoon/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Created `InvalidDescr` object.",
+                "recommended_env": null,
+                "status": "failed",
+                "warnings": []
+            },
+            {
+                "conda_compare": null,
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "attention_unet.py": "e8df77bd57ba7c8ee80ecafcfd54ba8d9d038d77f220274dffb98f07479294c6",
+                        "test-input.npy": "d427ecae24b8e6a1c63a26049da5d331f237d88802bdb9c833abc718e0c9107c",
+                        "test-output.npy": "b7248a7ba69c87c4e3f39f79994c352f969fab97cf3223d0bf5ed90944e07b7d"
+                    },
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/efficient-raccoon/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [
+                    {
+                        "loc": [
+                            "cite",
+                            4,
+                            "url"
+                        ],
+                        "msg": "Value error, 403: Forbidden https://www.biorxiv.org/content/10.1101/2024.02.03.576026.abstract",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "value_error",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "weights",
+                            "pytorch_state_dict",
+                            "dependencies"
+                        ],
+                        "msg": "Value error, SHA256 hash of downloaded file (712a64fbfb325feafd1309af9c0eb859-environment.yaml) does not match the known hash: expected sha256:d1959a76b2e7d5396e2033fb076a9839cd51b17295a768f1aef1c7327507bfb6 but got 4cf135d696bd8f08d302c3fe19e24b383c011d1d0e6a8bce57095c9744fdb67a. Deleted download for safety. The downloaded file may have been corrupted or the known hash may be outdated.",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "value_error",
+                        "with_traceback": false
+                    }
+                ],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.4",
+                "recommended_env": null,
+                "status": "failed",
+                "warnings": []
+            },
+            {
+                "conda_compare": null,
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "type"
+                ],
+                "name": "Has expected resource type",
+                "recommended_env": null,
+                "status": "passed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.spec",
+                "0.5.4.1",
+                "",
+                ""
+            ],
+            [
+                "bioimageio.core",
+                "0.8.0",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.5.4",
+        "id": "efficient-raccoon",
+        "name": "bioimageio format validation",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/efficient-raccoon/files/rdf.yaml?version=v0",
+        "status": "failed",
+        "type": "model"
+    },
+    "error": "\n|        ❌        |                                bioimageio format validation                               |\n|       ---       |                                            ---                                            |\n| status          | failed                                                                                    |\n| source          | https://hypha.aicell.io/bioimage-io/artifacts/efficient-raccoon/files/rdf.yaml?version=v0 |\n| id              | efficient-raccoon                                                                         |\n| format version  | model 0.5.4                                                                               |\n| bioimageio.spec | 0.5.4.1                                                                                   |\n| bioimageio.core | 0.8.0                                                                                     |\n\n|     |                  Location                 |                                                                                                                                                                                                Details                                                                                                                                                                                                |\n| --- |                    ---                    |                                                                                                                                                                                                  ---                                                                                                                                                                                                  |\n| ❌   |                                           | Created `InvalidDescr` object.                                                                                                                                                                                                                                                                                                                                                                        |\n| 🔍   | `context:perform_io_checks`               | True                                                                                                                                                                                                                                                                                                                                                                                                  |\n| 🔍   | `context:root`                            | https://hypha.aicell.io/bioimage-io/artifacts/efficient-raccoon/files?version=v0                                                                                                                                                                                                                                                                                                                      |\n| 🔍   | `context:known_files.test-input.npy`      | d427ecae24b8e6a1c63a26049da5d331f237d88802bdb9c833abc718e0c9107c                                                                                                                                                                                                                                                                                                                                      |\n| 🔍   | `context:known_files.test-output.npy`     | b7248a7ba69c87c4e3f39f79994c352f969fab97cf3223d0bf5ed90944e07b7d                                                                                                                                                                                                                                                                                                                                      |\n| 🔍   | `context:known_files.attention_unet.py`   | e8df77bd57ba7c8ee80ecafcfd54ba8d9d038d77f220274dffb98f07479294c6                                                                                                                                                                                                                                                                                                                                      |\n| ❌   |                                           | bioimageio.spec format validation model 0.5.4                                                                                                                                                                                                                                                                                                                                                         |\n| ❌   | `cite.4.url`                              | Value error, 403: Forbidden https://www.biorxiv.org/content/10.1101/2024.02.03.576026.abstract                                                                                                                                                                                                                                                                                                        |\n|     |                                           |                                                                                                                                                                                                                                                                                                                                                                                                       |\n| ❌   | `weights.pytorch_state_dict.dependencies` | Value error, SHA256 hash of downloaded file (712a64fbfb325feafd1309af9c0eb859-environment.yaml) does not match the known hash: expected sha256:d1959a76b2e7d5396e2033fb076a9839cd51b17295a768f1aef1c7327507bfb6 but got 4cf135d696bd8f08d302c3fe19e24b383c011d1d0e6a8bce57095c9744fdb67a. Deleted download for safety. The downloaded file may have been corrupted or the known hash may be outdated. |\n|     |                                           |                                                                                                                                                                                                                                                                                                                                                                                                       |\n| ✔️  | `type`                                    | Has expected resource type                                                                                                                                                                                                                                                                                                                                                                            |\n",
+    "links": [
+        "ilastik/ilastik"
+    ],
+    "status": "failed",
+    "tool": "ilastik"
+}

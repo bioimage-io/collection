@@ -1,0 +1,248 @@
+{
+    "badge": null,
+    "details": {
+        "conda_list": null,
+        "details": [
+            {
+                "conda_compare": null,
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "careamics.yaml": "9fdcc6e487e30e5c29abdbcbaf3d3422a1fe748366bd4350348dcd09fc04da3b"
+                    },
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/shy-lobster/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Created `InvalidDescr` object.",
+                "recommended_env": null,
+                "status": "failed",
+                "warnings": []
+            },
+            {
+                "conda_compare": null,
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "careamics.yaml": "9fdcc6e487e30e5c29abdbcbaf3d3422a1fe748366bd4350348dcd09fc04da3b"
+                    },
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/shy-lobster/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [
+                    {
+                        "loc": [
+                            "inputs",
+                            0,
+                            "test_tensor",
+                            "source",
+                            "function-after[HttpUrl(), str]"
+                        ],
+                        "msg": "Input should be a valid URL, relative URL without a base",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "url_parsing",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "inputs",
+                            0,
+                            "test_tensor",
+                            "source",
+                            "RelativeFilePath"
+                        ],
+                        "msg": "Value error, 404: Not Found https://hypha.aicell.io/bioimage-io/artifacts/shy-lobster/files/inputs.npy?version=v0",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "value_error",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "inputs",
+                            0,
+                            "test_tensor",
+                            "source",
+                            "function-after[validate_file(), lax-or-strict[lax=union[json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]],function-after[path_validator(), str]],strict=json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]]]]"
+                        ],
+                        "msg": "Path does not point to a file",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_not_file",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "outputs",
+                            0,
+                            "test_tensor",
+                            "source",
+                            "function-after[HttpUrl(), str]"
+                        ],
+                        "msg": "Input should be a valid URL, relative URL without a base",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "url_parsing",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "outputs",
+                            0,
+                            "test_tensor",
+                            "source",
+                            "RelativeFilePath"
+                        ],
+                        "msg": "Value error, 404: Not Found https://hypha.aicell.io/bioimage-io/artifacts/shy-lobster/files/outputs.npy?version=v0",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "value_error",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "outputs",
+                            0,
+                            "test_tensor",
+                            "source",
+                            "function-after[validate_file(), lax-or-strict[lax=union[json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]],function-after[path_validator(), str]],strict=json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]]]]"
+                        ],
+                        "msg": "Path does not point to a file",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_not_file",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "weights",
+                            "pytorch_state_dict",
+                            "source",
+                            "function-after[HttpUrl(), str]"
+                        ],
+                        "msg": "Input should be a valid URL, relative URL without a base",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "url_parsing",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "weights",
+                            "pytorch_state_dict",
+                            "source",
+                            "RelativeFilePath"
+                        ],
+                        "msg": "Value error, 404: Not Found https://hypha.aicell.io/bioimage-io/artifacts/shy-lobster/files/weights.pth?version=v0",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "value_error",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "weights",
+                            "pytorch_state_dict",
+                            "source",
+                            "function-after[validate_file(), lax-or-strict[lax=union[json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]],function-after[path_validator(), str]],strict=json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]]]]"
+                        ],
+                        "msg": "Path does not point to a file",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_not_file",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "weights",
+                            "pytorch_state_dict",
+                            "dependencies",
+                            "source",
+                            "function-after[HttpUrl(), str]"
+                        ],
+                        "msg": "Input should be a valid URL, relative URL without a base",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "url_parsing",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "weights",
+                            "pytorch_state_dict",
+                            "dependencies",
+                            "source",
+                            "RelativeFilePath"
+                        ],
+                        "msg": "Value error, 404: Not Found https://hypha.aicell.io/bioimage-io/artifacts/shy-lobster/files/environment.yml?version=v0",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "value_error",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "weights",
+                            "pytorch_state_dict",
+                            "dependencies",
+                            "source",
+                            "function-after[validate_file(), lax-or-strict[lax=union[json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]],function-after[path_validator(), str]],strict=json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]]]]"
+                        ],
+                        "msg": "Path does not point to a file",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_not_file",
+                        "with_traceback": false
+                    }
+                ],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.4",
+                "recommended_env": null,
+                "status": "failed",
+                "warnings": []
+            },
+            {
+                "conda_compare": null,
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "type"
+                ],
+                "name": "Has expected resource type",
+                "recommended_env": null,
+                "status": "passed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.spec",
+                "0.5.4.1",
+                "",
+                ""
+            ],
+            [
+                "bioimageio.core",
+                "0.8.0",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.5.4",
+        "id": "shy-lobster",
+        "name": "bioimageio format validation",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/shy-lobster/files/rdf.yaml?version=v0",
+        "status": "failed",
+        "type": "model"
+    },
+    "error": "\n|        ❌        |                             bioimageio format validation                            |\n|       ---       |                                         ---                                         |\n| status          | failed                                                                              |\n| source          | https://hypha.aicell.io/bioimage-io/artifacts/shy-lobster/files/rdf.yaml?version=v0 |\n| id              | shy-lobster                                                                         |\n| format version  | model 0.5.4                                                                         |\n| bioimageio.spec | 0.5.4.1                                                                             |\n| bioimageio.core | 0.8.0                                                                               |\n\n|     |                               Location                              |                                                        Details                                                         |\n| --- |                                 ---                                 |                                                          ---                                                           |\n| ❌   |                                                                     | Created `InvalidDescr` object.                                                                                         |\n| 🔍   | `context:perform_io_checks`                                         | True                                                                                                                   |\n| 🔍   | `context:root`                                                      | https://hypha.aicell.io/bioimage-io/artifacts/shy-lobster/files?version=v0                                             |\n| 🔍   | `context:known_files.careamics.yaml`                                | 9fdcc6e487e30e5c29abdbcbaf3d3422a1fe748366bd4350348dcd09fc04da3b                                                       |\n| ❌   |                                                                     | bioimageio.spec format validation model 0.5.4                                                                          |\n| ❌   | `inputs.0.test_tensor.source`                                       | Input should be a valid URL, relative URL without a base                                                               |\n|     |                                                                     |                                                                                                                        |\n| ❌   | `inputs.0.test_tensor.source.(RelativeFilePath)`                    | Value error, 404: Not Found https://hypha.aicell.io/bioimage-io/artifacts/shy-lobster/files/inputs.npy?version=v0      |\n|     |                                                                     |                                                                                                                        |\n| ❌   | `inputs.0.test_tensor.source`                                       | Path does not point to a file                                                                                          |\n|     |                                                                     |                                                                                                                        |\n| ❌   | `outputs.0.test_tensor.source`                                      | Input should be a valid URL, relative URL without a base                                                               |\n|     |                                                                     |                                                                                                                        |\n| ❌   | `outputs.0.test_tensor.source.(RelativeFilePath)`                   | Value error, 404: Not Found https://hypha.aicell.io/bioimage-io/artifacts/shy-lobster/files/outputs.npy?version=v0     |\n|     |                                                                     |                                                                                                                        |\n| ❌   | `outputs.0.test_tensor.source`                                      | Path does not point to a file                                                                                          |\n|     |                                                                     |                                                                                                                        |\n| ❌   | `weights.pytorch_state_dict.source`                                 | Input should be a valid URL, relative URL without a base                                                               |\n|     |                                                                     |                                                                                                                        |\n| ❌   | `weights.pytorch_state_dict.source.(RelativeFilePath)`              | Value error, 404: Not Found https://hypha.aicell.io/bioimage-io/artifacts/shy-lobster/files/weights.pth?version=v0     |\n|     |                                                                     |                                                                                                                        |\n| ❌   | `weights.pytorch_state_dict.source`                                 | Path does not point to a file                                                                                          |\n|     |                                                                     |                                                                                                                        |\n| ❌   | `weights.pytorch_state_dict.dependencies.source`                    | Input should be a valid URL, relative URL without a base                                                               |\n|     |                                                                     |                                                                                                                        |\n| ❌   | `weights.pytorch_state_dict.dependencies.source.(RelativeFilePath)` | Value error, 404: Not Found https://hypha.aicell.io/bioimage-io/artifacts/shy-lobster/files/environment.yml?version=v0 |\n|     |                                                                     |                                                                                                                        |\n| ❌   | `weights.pytorch_state_dict.dependencies.source`                    | Path does not point to a file                                                                                          |\n|     |                                                                     |                                                                                                                        |\n| ✔️  | `type`                                                              | Has expected resource type                                                                                             |\n",
+    "links": [
+        "ilastik/ilastik"
+    ],
+    "status": "failed",
+    "tool": "ilastik"
+}
