@@ -185,7 +185,7 @@
                         }
                     ],
                     "default_type": "model",
-                    "docs": "https://github.com/deepimagej/deepimagej-plugin/wiki",
+                    "docs": "https://deepimagej.github.io/",
                     "explore_button_text": "Start Exploring",
                     "icon": "https://raw.githubusercontent.com/deepimagej/models/master/logos/icon.png",
                     "id": "deepimagej",
@@ -354,7 +354,7 @@
                 {
                     "background_image": "static/img/zoo-background.svg",
                     "default_type": "model",
-                    "docs": "https://qupath.readthedocs.io/",
+                    "docs": "https://qupath.readthedocs.io/en/latest/docs/deep/bioimage.html",
                     "explore_button_text": "Start Exploring",
                     "icon": "https://raw.githubusercontent.com/qupath/qupath-bioimage-io/main/logos/QuPath_256.png",
                     "id": "qupath",
@@ -425,7 +425,7 @@
                         }
                     ],
                     "default_type": "model",
-                    "docs": "https://biapy.readthedocs.io/",
+                    "docs": "https://biapy.readthedocs.io/en/latest/get_started/bmz.html",
                     "explore_button_text": "Start Exploring",
                     "icon": "https://raw.githubusercontent.com/BiaPyX/BiaPy-bioimage-io/main/logos/BiaPy_256.png",
                     "id": "biapy",
