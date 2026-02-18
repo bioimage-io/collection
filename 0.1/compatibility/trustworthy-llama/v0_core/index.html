@@ -21,7 +21,7 @@
       
       
       <link rel="icon" href="https://raw.githubusercontent.com/bioimage-io/bioimage.io/refs/heads/gh-pages/icons/favicon.ico">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.2">
     
     
       
@@ -585,12 +585,16 @@
     <td>trustworthy-llama</td>
   </tr>
   <tr>
-    <td>format version</td>
-    <td>model 0.5.6</td>
+    <td>version</td>
+    <td>0.1.0</td>
+  </tr>
+  <tr>
+    <td>applied format</td>
+    <td>model 0.5.7</td>
   </tr>
   <tr>
     <td>bioimageio.spec</td>
-    <td>0.5.6.0</td>
+    <td>0.5.7.4</td>
   </tr>
 </table>
 <table>
@@ -607,12 +611,17 @@
   <tr>
     <td>✔️</td>
     <td></td>
-    <td>bioimageio.spec format validation model 0.5.6</td>
+    <td>bioimageio.spec format validation model 0.5.7</td>
   </tr>
   <tr>
     <td>⚠</td>
     <td><code>documentation</code></td>
     <td><pre>No '# Validation' (sub)section found in README.md.</pre></td>
+  </tr>
+  <tr>
+    <td>✔️</td>
+    <td><code>weights.torchscript</code></td>
+    <td>Found existing conda environment '392d62073f49982b44da94ed58bb5873213547876ab91b884de2840507212bcb'</td>
   </tr>
   <tr>
     <td>✔️</td>
@@ -630,16 +639,14 @@
     <td><pre lang="yaml">%YAML 1.2
 ---
 channels:
-  - pytorch
   - conda-forge
   - nodefaults
 dependencies:
-  - conda-forge::bioimageio.core
-  - numpy >=2,<3
+  - conda-forge::bioimageio.core>=0.9.4
   - pip
   - pytorch==2.5.1
-  - torchaudio
-  - torchvision
+  - torchaudio==2.5.1
+  - torchvision==0.20.1
 </pre></td>
   </tr>
   <tr>

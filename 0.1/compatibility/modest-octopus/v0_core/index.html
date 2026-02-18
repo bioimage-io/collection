@@ -21,7 +21,7 @@
       
       
       <link rel="icon" href="https://raw.githubusercontent.com/bioimage-io/bioimage.io/refs/heads/gh-pages/icons/favicon.ico">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.2">
     
     
       
@@ -585,12 +585,16 @@
     <td>modest-octopus</td>
   </tr>
   <tr>
-    <td>format version</td>
+    <td>version</td>
+    <td>0.1.3</td>
+  </tr>
+  <tr>
+    <td>applied format</td>
     <td>model 0.4.10</td>
   </tr>
   <tr>
     <td>bioimageio.spec</td>
-    <td>0.5.6.0</td>
+    <td>0.5.7.4</td>
   </tr>
 </table>
 <table>
@@ -612,6 +616,11 @@
   <tr>
     <td>✔️</td>
     <td><code>weights.tensorflow_saved_model_bundle</code></td>
+    <td>Found existing conda environment '10f04a4f2487675083de0f92e106c7bce2b0d90282ba53bf8a159afed0151c1f'</td>
+  </tr>
+  <tr>
+    <td>✔️</td>
+    <td><code>weights.tensorflow_saved_model_bundle</code></td>
     <td>Reproduce test outputs from test inputs (tensorflow_saved_model_bundle)</td>
   </tr>
   <tr>
@@ -628,7 +637,7 @@ channels:
   - conda-forge
   - nodefaults
 dependencies:
-  - bioimageio.core
+  - conda-forge::bioimageio.core>=0.9.4
   - pip
   - tensorflow ==2.17
 </pre></td>
