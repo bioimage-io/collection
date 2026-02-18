@@ -585,12 +585,16 @@
     <td>witty-whale</td>
   </tr>
   <tr>
+    <td>version</td>
+    <td>0.1.1</td>
+  </tr>
+  <tr>
     <td>applied format</td>
-    <td>model 0.5.6</td>
+    <td>model 0.5.7</td>
   </tr>
   <tr>
     <td>bioimageio.spec</td>
-    <td>0.5.6.0</td>
+    <td>0.5.7.4</td>
   </tr>
 </table>
 <table>
@@ -607,7 +611,7 @@
   <tr>
     <td>✔️</td>
     <td></td>
-    <td>bioimageio.spec format validation model 0.5.6</td>
+    <td>bioimageio.spec format validation model 0.5.7</td>
   </tr>
   <tr>
     <td>⚠</td>
@@ -642,6 +646,11 @@
   <tr>
     <td>✔️</td>
     <td><code>weights.onnx</code></td>
+    <td>Created conda environment '4d82a6bc4511b4ad0459f190edebc373e2ca235c8452606867e45b1507100a34'</td>
+  </tr>
+  <tr>
+    <td>✔️</td>
+    <td><code>weights.onnx</code></td>
     <td>Reproduce test outputs from test inputs (onnx)</td>
   </tr>
   <tr>
@@ -658,7 +667,7 @@ channels:
   - conda-forge
   - nodefaults
 dependencies:
-  - conda-forge::bioimageio.core
+  - conda-forge::bioimageio.core>=0.9.4
   - onnxruntime
   - pip
 </pre></td>

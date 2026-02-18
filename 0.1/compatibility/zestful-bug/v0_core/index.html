@@ -585,12 +585,16 @@
     <td>zestful-bug</td>
   </tr>
   <tr>
+    <td>version</td>
+    <td>0.1.0</td>
+  </tr>
+  <tr>
     <td>applied format</td>
-    <td>model 0.5.6</td>
+    <td>model 0.5.7</td>
   </tr>
   <tr>
     <td>bioimageio.spec</td>
-    <td>0.5.6.0</td>
+    <td>0.5.7.4</td>
   </tr>
 </table>
 <table>
@@ -607,7 +611,7 @@
   <tr>
     <td>✔️</td>
     <td></td>
-    <td>bioimageio.spec format validation model 0.5.6</td>
+    <td>bioimageio.spec format validation model 0.5.7</td>
   </tr>
   <tr>
     <td>⚠</td>
@@ -625,6 +629,11 @@
     <td><pre>Needs to be filled for FAIR compliance</pre></td>
   </tr>
   <tr>
+    <td>✔️</td>
+    <td><code>weights.pytorch_state_dict</code></td>
+    <td>Found existing conda environment '4111c99f319e2948cd95fe87067b76f177ebaedbb040f645f088d0658a818ec7'</td>
+  </tr>
+  <tr>
     <td>❌</td>
     <td><code>weights.pytorch_state_dict</code></td>
     <td>Reproduce test outputs from test inputs (pytorch_state_dict)</td>
@@ -632,10 +641,9 @@
   <tr>
     <td>❌</td>
     <td><code>weights.pytorch_state_dict</code></td>
-    <td><pre>Output 'output0' disagrees with 1045282 of 1048576 expected values (996858.6 ppm).
- Max relative difference: 3.54e+04 (= \|-1.81e-01 - 4.12e-06\|/\|4.12e-06 + 1e-6\|) at {'batch': np.int64(0), 'channel': np.int64(0), 'y': np.int64(268), 'x': np.int64(754)}
- Max absolute difference not accounted for by relative tolerance: 1.33e+00 (= \|5.3560781e-01 - 1.8676397e+00\|) at {'batch': np.int64(0), 'channel': np.int64(0), 'y': np.int64(153), 'x': np.int64(466)}
- Saved actual output to actual_output_output0_pytorch_state_dict.npy.</pre></td>
+    <td><pre>Output 'output0' disagrees with 1038195 of 1048576 expected values (990099.9 ppm).
+ Max relative difference not accounted for by absolute tolerance (1.00e-03): 3.54e+04 (= \|-1.81e-01 - 4.12e-06\|/\|4.12e-06 + 1e-6\|) at {'batch': np.int64(0), 'channel': np.int64(0), 'y': np.int64(268), 'x': np.int64(754)}
+ Max absolute difference not accounted for by relative tolerance (1.00e-03): 1.33e+00 (= \|5.3560781e-01 - 1.8676397e+00\|) at {'batch': np.int64(0), 'channel': np.int64(0), 'y': np.int64(153), 'x': np.int64(466)}</pre></td>
   </tr>
   <tr>
     <td></td>
@@ -660,7 +668,7 @@ dependencies:
   - pip
   - pip:
       - timm==1.0.14
-  - conda-forge::bioimageio.core
+  - conda-forge::bioimageio.core>=0.9.4
   - python>=3.10
 </pre></td>
   </tr>
