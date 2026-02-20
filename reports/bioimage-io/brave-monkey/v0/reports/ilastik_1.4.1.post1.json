@@ -1,0 +1,104 @@
+{
+    "badge": null,
+    "details": {
+        "conda_list": null,
+        "details": [
+            {
+                "conda_compare": null,
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "fast_model.pth": "2a8c76168993c6bd3724058203707ffb9943e663db5ab2aed999cace1073cfb1",
+                        "model.py": "a69a3eed3b62aac7eb31fc8c8f4d9400025f3c5157ccccc2013e13f6cee4f48b",
+                        "sample_input.tif": "9c70f6a5966135311f127c093439e19a49b9865252001cdb69cbd86157e45872",
+                        "sample_output.tif": "eebb36ab42706f564f0d20ecc105c4874d06f73e8f6512fc73fccee077a721ef",
+                        "test_input.npy": "0b9b1faf9cd563de0a817a7b32251b7076b99d5aade452273f58d75da5808b54",
+                        "test_output.npy": "4757f55ad1afeebd2f0811e733c9ed81e2efec024063db658f3f067e0246e62b"
+                    },
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/brave-monkey/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Created `InvalidDescr` object.",
+                "recommended_env": null,
+                "status": "failed",
+                "warnings": []
+            },
+            {
+                "conda_compare": null,
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "fast_model.pth": "2a8c76168993c6bd3724058203707ffb9943e663db5ab2aed999cace1073cfb1",
+                        "model.py": "a69a3eed3b62aac7eb31fc8c8f4d9400025f3c5157ccccc2013e13f6cee4f48b",
+                        "sample_input.tif": "9c70f6a5966135311f127c093439e19a49b9865252001cdb69cbd86157e45872",
+                        "sample_output.tif": "eebb36ab42706f564f0d20ecc105c4874d06f73e8f6512fc73fccee077a721ef",
+                        "test_input.npy": "0b9b1faf9cd563de0a817a7b32251b7076b99d5aade452273f58d75da5808b54",
+                        "test_output.npy": "4757f55ad1afeebd2f0811e733c9ed81e2efec024063db658f3f067e0246e62b"
+                    },
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/brave-monkey/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [
+                    {
+                        "loc": [
+                            "outputs",
+                            0
+                        ],
+                        "msg": "Value error, Expected sample tensor to have 3 to 4 dimensions, but found 2 (shape: (1600, 1600)).",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "value_error",
+                        "with_traceback": false
+                    }
+                ],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.4",
+                "recommended_env": null,
+                "status": "failed",
+                "warnings": []
+            },
+            {
+                "conda_compare": null,
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "type"
+                ],
+                "name": "Has expected resource type",
+                "recommended_env": null,
+                "status": "passed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.core",
+                "0.8.0",
+                "",
+                ""
+            ],
+            [
+                "bioimageio.spec",
+                "0.5.4.1",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.5.4",
+        "id": "brave-monkey",
+        "name": "bioimageio format validation",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/brave-monkey/files/rdf.yaml?version=v0",
+        "status": "failed",
+        "type": "model"
+    },
+    "error": "\n|        ❌        |                             bioimageio format validation                             |\n|       ---       |                                         ---                                          |\n| status          | failed                                                                               |\n| source          | https://hypha.aicell.io/bioimage-io/artifacts/brave-monkey/files/rdf.yaml?version=v0 |\n| id              | brave-monkey                                                                         |\n| format version  | model 0.5.4                                                                          |\n| bioimageio.core | 0.8.0                                                                                |\n| bioimageio.spec | 0.5.4.1                                                                              |\n\n|     |                 Location                |                                              Details                                              |\n| --- |                   ---                   |                                                ---                                                |\n| ❌   |                                         | Created `InvalidDescr` object.                                                                    |\n| 🔍   | `context:perform_io_checks`             | True                                                                                              |\n| 🔍   | `context:root`                          | https://hypha.aicell.io/bioimage-io/artifacts/brave-monkey/files?version=v0                       |\n| 🔍   | `context:known_files.test_input.npy`    | 0b9b1faf9cd563de0a817a7b32251b7076b99d5aade452273f58d75da5808b54                                  |\n| 🔍   | `context:known_files.sample_input.tif`  | 9c70f6a5966135311f127c093439e19a49b9865252001cdb69cbd86157e45872                                  |\n| 🔍   | `context:known_files.test_output.npy`   | 4757f55ad1afeebd2f0811e733c9ed81e2efec024063db658f3f067e0246e62b                                  |\n| 🔍   | `context:known_files.sample_output.tif` | eebb36ab42706f564f0d20ecc105c4874d06f73e8f6512fc73fccee077a721ef                                  |\n| 🔍   | `context:known_files.model.py`          | a69a3eed3b62aac7eb31fc8c8f4d9400025f3c5157ccccc2013e13f6cee4f48b                                  |\n| 🔍   | `context:known_files.fast_model.pth`    | 2a8c76168993c6bd3724058203707ffb9943e663db5ab2aed999cace1073cfb1                                  |\n| ❌   |                                         | bioimageio.spec format validation model 0.5.4                                                     |\n| ❌   | `outputs.0`                             | Value error, Expected sample tensor to have 3 to 4 dimensions, but found 2 (shape: (1600, 1600)). |\n|     |                                         |                                                                                                   |\n| ✔️  | `type`                                  | Has expected resource type                                                                        |\n",
+    "links": [
+        "ilastik/ilastik"
+    ],
+    "status": "failed",
+    "tool": "ilastik"
+}

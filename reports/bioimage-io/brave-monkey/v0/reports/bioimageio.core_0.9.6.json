@@ -1,0 +1,52 @@
+{
+    "badge": null,
+    "details": {
+        "details": [
+            {
+                "context": null,
+                "errors": [
+                    {
+                        "loc": [
+                            "outputs",
+                            0
+                        ],
+                        "msg": "Value error, Expected sample tensor to have 3 to 4 dimensions, but found 2 (shape: (1600, 1600)).",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "value_error",
+                        "with_traceback": false
+                    }
+                ],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.7",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "failed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.spec",
+                "0.5.7.4",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.5.7",
+        "id": "brave-monkey",
+        "metadata_completeness": 0.0,
+        "name": "bioimageio format validation",
+        "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/brave-monkey/files/rdf.yaml?version=v0",
+        "status": "failed",
+        "traceback": null,
+        "type": "model",
+        "version": "0.1.0",
+        "warnings": null
+    },
+    "error": "Value error, Expected sample tensor to have 3 to 4 dimensions, but found 2 (shape: (1600, 1600)).",
+    "links": [],
+    "score": 0.0,
+    "status": "failed"
+}
