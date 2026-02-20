@@ -2,7 +2,7 @@
     "count_per_type": {
         "application": 65,
         "dataset": 49,
-        "model": 131,
+        "model": 132,
         "notebook": 4
     },
     "items": [
@@ -3242,8 +3242,21 @@
                     "version": "v0"
                 }
             ]
+        },
+        {
+            "id": "bioimage-io/brave-monkey",
+            "type": "model",
+            "versions": [
+                {
+                    "comment": "Published by vineethaljapur@gmail.com",
+                    "created_at": "2026-02-19T23:17:33Z",
+                    "sha256": "fd471e1313050df4c071f00458d6c86ff4dda8190b971d0a742445cd887d9206",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/brave-monkey/files/rdf.yaml?version=v0",
+                    "version": "v0"
+                }
+            ]
         }
     ],
-    "timestamp": "2026-02-19T02:32:35.071958",
-    "total": 249
+    "timestamp": "2026-02-20T02:27:49.304473",
+    "total": 250
 }
