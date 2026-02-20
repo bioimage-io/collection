@@ -1,0 +1,169 @@
+{
+    "rdf_content": {
+        "name": "2D ResUNet++ for Filamentous Actin Segmentation",
+        "description": "FAST Unet++ actin segmentation model",
+        "covers": [
+            "cover.png"
+        ],
+        "authors": [
+            {
+                "affiliation": "Carleton University",
+                "orcid": "0000-0001-8817-9655",
+                "name": "Vineeth Aljapur"
+            },
+            {
+                "affiliation": "Carleton University",
+                "orcid": "0009-0003-5487-4694",
+                "name": "Andrew R. Harris"
+            }
+        ],
+        "cite": [
+            {
+                "text": "Aljapur, V., Gardner, A., Carayanniotis, J. and Harris, A. R. (2026). FAST: Filamentous Actin Segmentation Tool for quantifying cytoskeletal organization. J Cell Sci, jcs.264265.",
+                "doi": "10.1242/jcs.264265"
+            }
+        ],
+        "license": "CC-BY-4.0",
+        "git_repo": "https://github.com/Carleton-CTE-Lab/FAST",
+        "uploader": {
+            "email": "vineethaljapur@gmail.com",
+            "name": "Vineeth"
+        },
+        "maintainers": [
+            {
+                "name": "Vineeth Aljapur",
+                "github_user": "VineethAljapur",
+                "email": "vineethaljapur@gmail.com"
+            }
+        ],
+        "tags": [
+            "fluorescence-light-microscopy"
+        ],
+        "version": "0.1.0",
+        "format_version": "0.5.4",
+        "type": "model",
+        "documentation": "model_documentation.md",
+        "inputs": [
+            {
+                "id": "input",
+                "axes": [
+                    {
+                        "type": "batch",
+                        "size": 1
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "phalloidin"
+                        ]
+                    },
+                    {
+                        "size": 1600,
+                        "id": "y",
+                        "type": "space"
+                    },
+                    {
+                        "size": 1600,
+                        "id": "x",
+                        "type": "space"
+                    }
+                ],
+                "test_tensor": {
+                    "source": "test_input.npy",
+                    "sha256": "0b9b1faf9cd563de0a817a7b32251b7076b99d5aade452273f58d75da5808b54"
+                },
+                "sample_tensor": {
+                    "source": "sample_input.tif",
+                    "sha256": "9c70f6a5966135311f127c093439e19a49b9865252001cdb69cbd86157e45872"
+                },
+                "preprocessing": [
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    }
+                ]
+            }
+        ],
+        "outputs": [
+            {
+                "id": "output",
+                "axes": [
+                    {
+                        "type": "batch",
+                        "size": 1
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "background",
+                            "actin_and_stress_fibers",
+                            "focal_adhesions",
+                            "lamellipodia_and_lamellar_networks",
+                            "filopodia"
+                        ]
+                    },
+                    {
+                        "size": 1600,
+                        "id": "y",
+                        "type": "space"
+                    },
+                    {
+                        "size": 1600,
+                        "id": "x",
+                        "type": "space"
+                    }
+                ],
+                "test_tensor": {
+                    "source": "test_output.npy",
+                    "sha256": "4757f55ad1afeebd2f0811e733c9ed81e2efec024063db658f3f067e0246e62b"
+                },
+                "sample_tensor": {
+                    "source": "sample_output.tif",
+                    "sha256": "eebb36ab42706f564f0d20ecc105c4874d06f73e8f6512fc73fccee077a721ef"
+                },
+                "postprocessing": [
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    }
+                ]
+            }
+        ],
+        "weights": {
+            "pytorch_state_dict": {
+                "source": "fast_model.pth",
+                "sha256": "2a8c76168993c6bd3724058203707ffb9943e663db5ab2aed999cace1073cfb1",
+                "architecture": {
+                    "source": "model.py",
+                    "sha256": "a69a3eed3b62aac7eb31fc8c8f4d9400025f3c5157ccccc2013e13f6cee4f48b",
+                    "callable": "UnetPlusPlusResNet34",
+                    "kwargs": {
+                        "in_channels": 1,
+                        "classes": 5
+                    }
+                },
+                "pytorch_version": "2.6.0"
+            }
+        },
+        "id": "brave-monkey",
+        "id_emoji": "🐒",
+        "config": {
+            "bioimageio": {
+                "reproducibility_tolerance": [
+                    {
+                        "absolute_tolerance": 0.05
+                    },
+                    {
+                        "relative_tolerance": 0.01
+                    }
+                ]
+            }
+        }
+    },
+    "rdf_yaml_sha256": "fd471e1313050df4c071f00458d6c86ff4dda8190b971d0a742445cd887d9206",
+    "status": "untested"
+}
