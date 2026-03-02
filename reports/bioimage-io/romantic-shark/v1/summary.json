@@ -64,7 +64,7 @@
         "version": 1.2,
         "format_version": "0.5.7",
         "type": "model",
-        "id": "affable-shark",
+        "id": "romantic-shark",
         "documentation": "documentation.md",
         "inputs": [
             {
@@ -90,7 +90,7 @@
                         "id": "y",
                         "description": "",
                         "type": "space",
-                        "scale": 1.0,
+                        "scale": 1,
                         "concatenable": false
                     },
                     {
@@ -101,7 +101,7 @@
                         "id": "x",
                         "description": "",
                         "type": "space",
-                        "scale": 1.0,
+                        "scale": 1,
                         "concatenable": false
                     }
                 ],
@@ -120,7 +120,7 @@
                         null
                     ],
                     "unit": "arbitrary unit",
-                    "scale": 1.0,
+                    "scale": 1,
                     "offset": null
                 },
                 "optional": false,
@@ -177,7 +177,7 @@
                         },
                         "id": "y",
                         "type": "space",
-                        "scale": 1.0
+                        "scale": 1
                     },
                     {
                         "halo": 16,
@@ -188,7 +188,7 @@
                         },
                         "id": "x",
                         "type": "space",
-                        "scale": 1.0
+                        "scale": 1
                     }
                 ],
                 "test_tensor": {
@@ -206,7 +206,7 @@
                         null
                     ],
                     "unit": "arbitrary unit",
-                    "scale": 1.0,
+                    "scale": 1,
                     "offset": null
                 }
             }
@@ -244,13 +244,6 @@
             }
         },
         "config": {
-            "bioimageio": {
-                "nickname": "affable-shark",
-                "nickname_icon": "🦈",
-                "thumbnails": {
-                    "cover.png": "cover.thumbnail.png"
-                }
-            },
             "_conceptdoi": "10.5281/zenodo.5764892",
             "deepimagej": {
                 "allow_tiling": true,
@@ -294,6 +287,6 @@
             }
         }
     },
-    "rdf_yaml_sha256": "a2964847d6dc070afda53f6d5be7a4cb0d697e45f65e1f5a8890d24e6f1cbe08",
+    "rdf_yaml_sha256": "d60f18328ed247925bc9759abdff0ae083c86e98de662c95a5dd4f2b061502d1",
     "status": "untested"
 }
