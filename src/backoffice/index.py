@@ -201,8 +201,13 @@ def _initialize_report_directory(
             shutil.rmtree(report_path)
 
     report_path.mkdir(parents=True, exist_ok=True)
+    try:
+        rdf_content = yaml.load(data)
+    except Exception as e:
+        rdf_content = {"error": str(e)}
+
     summary = InitialSummary(
-        rdf_content=yaml.load(data),
+        rdf_content=rdf_content,
         rdf_yaml_sha256=sha256,
         status="untested",
     )
