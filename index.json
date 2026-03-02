@@ -2,7 +2,7 @@
     "count_per_type": {
         "application": 65,
         "dataset": 49,
-        "model": 132,
+        "model": 134,
         "notebook": 4
     },
     "items": [
@@ -11,9 +11,9 @@
             "type": "model",
             "versions": [
                 {
-                    "comment": "Deleted new-dir",
+                    "comment": "Deleted weights_torchscript.pt",
                     "created_at": "2025-07-01T22:53:02Z",
-                    "sha256": "3b6dcbb4753369171bf03262e639500c281f5aca0b316b12e641eff61332d330",
+                    "sha256": "a2964847d6dc070afda53f6d5be7a4cb0d697e45f65e1f5a8890d24e6f1cbe08",
                     "source": "https://hypha.aicell.io/bioimage-io/artifacts/affable-shark/files/rdf.yaml?version=v0",
                     "version": "v0"
                 }
@@ -403,7 +403,7 @@
                 {
                     "comment": null,
                     "created_at": "2025-07-01T22:52:38Z",
-                    "sha256": "09faf05e35240aa1552e5809ea4873cfb228417128bc5fca6e0a618fc45bb838",
+                    "sha256": "3cfa35e82ea44e53dfd6ff42b8f382cea2742e0f5d82f649a71bf164f3bb62e1",
                     "source": "https://hypha.aicell.io/bioimage-io/artifacts/joyful-deer/files/rdf.yaml?version=v0",
                     "version": "v0"
                 }
@@ -3088,6 +3088,19 @@
             ]
         },
         {
+            "id": "bioimage-io/independent-mouse",
+            "type": "model",
+            "versions": [
+                {
+                    "comment": "Initial version",
+                    "created_at": "2026-02-25T15:34:52Z",
+                    "sha256": "fb017b1ed14e68b1d067ef11eb10357543535e450204802523758debfaf24727",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/independent-mouse/files/rdf.yaml?version=v0",
+                    "version": "v0"
+                }
+            ]
+        },
+        {
             "id": "bioimage-io/dazzling-blowfish",
             "type": "model",
             "versions": [
@@ -3255,8 +3268,28 @@
                     "version": "v0"
                 }
             ]
+        },
+        {
+            "id": "bioimage-io/romantic-shark",
+            "type": "model",
+            "versions": [
+                {
+                    "comment": "Published by oeway007@gmail.com",
+                    "created_at": "2026-02-25T15:27:59Z",
+                    "sha256": "d60f18328ed247925bc9759abdff0ae083c86e98de662c95a5dd4f2b061502d1",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/romantic-shark/files/rdf.yaml?version=v0",
+                    "version": "v0"
+                },
+                {
+                    "comment": "Published by oeway007@gmail.com",
+                    "created_at": "2026-02-26T06:05:35Z",
+                    "sha256": "d60f18328ed247925bc9759abdff0ae083c86e98de662c95a5dd4f2b061502d1",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/romantic-shark/files/rdf.yaml?version=v1",
+                    "version": "v1"
+                }
+            ]
         }
     ],
-    "timestamp": "2026-02-25T02:32:00.289973",
-    "total": 250
+    "timestamp": "2026-03-02T13:02:43.498210",
+    "total": 252
 }
