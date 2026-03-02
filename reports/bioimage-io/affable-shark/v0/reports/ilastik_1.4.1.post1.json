@@ -297,7 +297,7 @@
             ]
         ],
         "format_version": "0.5.4",
-        "id": "10.5281/zenodo.5764892/6647674",
+        "id": "affable-shark",
         "name": "bioimageio format validation",
         "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/affable-shark/files/rdf.yaml?version=v0",
         "status": "passed",
