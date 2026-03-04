@@ -50,13 +50,20 @@ jobs:
         run: wget --output-document env.yaml ${{ matrix.env_url }}
       - name: ignore unrelated packages
         run: sed -i '/multi-hypotheses-tracking-with-gurobi/d; /gurobi-symlink/d' env.yaml
-      - name: Setup ilastik env
-        uses: mamba-org/setup-micromamba@v1
+      - name: Cache conda
+        uses: actions/cache@v4
+        env:
+          CACHE_NUMBER: 0
         with:
-          generate-run-shell: false
+          path: ~/conda_pkgs_dir
+          key: ${{ runner.os }}-conda-${{ env.CACHE_NUMBER }}-${{ hashFiles('env.yaml') }}
+      - name: Setup ilastik env
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          activate-environment: ilastik-env
+          channel-priority: strict
           environment-file: env.yaml
-          cache-downloads: true
-          cache-environment: false # gets stuck for 6h?
+          use-only-tar-bz2: true
       - run: pip install . --no-deps # no-deps to avoid changing the ilastik environment
         shell: bash -l {0}
       - name: test published versions with ilastik ${{ matrix.v }}
