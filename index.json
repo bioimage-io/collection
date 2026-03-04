@@ -2,7 +2,7 @@
     "count_per_type": {
         "application": 65,
         "dataset": 49,
-        "model": 134,
+        "model": 135,
         "notebook": 4
     },
     "items": [
@@ -3257,6 +3257,19 @@
             ]
         },
         {
+            "id": "bioimage-io/talkative-mouse",
+            "type": "model",
+            "versions": [
+                {
+                    "comment": "Published by vineethaljapur@gmail.com",
+                    "created_at": "2026-03-03T16:00:18Z",
+                    "sha256": "5ab84b2ef227e13004e3dbb1b11c0b1b4fcd5e2c01ea7e91e0dc4502a95219b0",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/talkative-mouse/files/rdf.yaml?version=v0",
+                    "version": "v0"
+                }
+            ]
+        },
+        {
             "id": "bioimage-io/brave-monkey",
             "type": "model",
             "versions": [
@@ -3290,6 +3303,6 @@
             ]
         }
     ],
-    "timestamp": "2026-03-03T02:31:51.102384",
-    "total": 252
+    "timestamp": "2026-03-04T02:18:29.071371",
+    "total": 253
 }
