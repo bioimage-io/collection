@@ -1,0 +1,215 @@
+{
+    "badge": null,
+    "details": {
+        "conda_list": null,
+        "details": [
+            {
+                "conda_compare": null,
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "sample_input.tif": "9c70f6a5966135311f127c093439e19a49b9865252001cdb69cbd86157e45872",
+                        "sample_output.tif": "d4c43223075b91ea612b23df8280e6f65406a21fe71e6b7ed42184f92e9eefa9",
+                        "test_input.npy": "0b9b1faf9cd563de0a817a7b32251b7076b99d5aade452273f58d75da5808b54",
+                        "test_output.npy": "4757f55ad1afeebd2f0811e733c9ed81e2efec024063db658f3f067e0246e62b"
+                    },
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/talkative-mouse/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Created `InvalidDescr` object.",
+                "recommended_env": null,
+                "status": "failed",
+                "warnings": []
+            },
+            {
+                "conda_compare": null,
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "sample_input.tif": "9c70f6a5966135311f127c093439e19a49b9865252001cdb69cbd86157e45872",
+                        "sample_output.tif": "d4c43223075b91ea612b23df8280e6f65406a21fe71e6b7ed42184f92e9eefa9",
+                        "test_input.npy": "0b9b1faf9cd563de0a817a7b32251b7076b99d5aade452273f58d75da5808b54",
+                        "test_output.npy": "4757f55ad1afeebd2f0811e733c9ed81e2efec024063db658f3f067e0246e62b"
+                    },
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/talkative-mouse/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [
+                    {
+                        "loc": [
+                            "weights",
+                            "pytorch_state_dict",
+                            "source",
+                            "function-after[HttpUrl(), str]"
+                        ],
+                        "msg": "Input should be a valid URL, relative URL without a base",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "url_parsing",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "weights",
+                            "pytorch_state_dict",
+                            "source",
+                            "RelativeFilePath"
+                        ],
+                        "msg": "Value error, 404: Not Found https://hypha.aicell.io/bioimage-io/artifacts/talkative-mouse/files/fast_model.pth?version=v0",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "value_error",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "weights",
+                            "pytorch_state_dict",
+                            "source",
+                            "function-after[validate_file(), lax-or-strict[lax=union[json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]],function-after[path_validator(), str]],strict=json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]]]]"
+                        ],
+                        "msg": "Path does not point to a file",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_not_file",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "weights",
+                            "pytorch_state_dict",
+                            "architecture",
+                            "function-after[_validate_sha256(), ArchitectureFromFileDescr]",
+                            "source",
+                            "function-after[HttpUrl(), str]"
+                        ],
+                        "msg": "Input should be a valid URL, relative URL without a base",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "url_parsing",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "weights",
+                            "pytorch_state_dict",
+                            "architecture",
+                            "function-after[_validate_sha256(), ArchitectureFromFileDescr]",
+                            "source",
+                            "RelativeFilePath"
+                        ],
+                        "msg": "Value error, 404: Not Found https://hypha.aicell.io/bioimage-io/artifacts/talkative-mouse/files/model.py?version=v0",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "value_error",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "weights",
+                            "pytorch_state_dict",
+                            "architecture",
+                            "function-after[_validate_sha256(), ArchitectureFromFileDescr]",
+                            "source",
+                            "function-after[validate_file(), lax-or-strict[lax=union[json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]],function-after[path_validator(), str]],strict=json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]]]]"
+                        ],
+                        "msg": "Path does not point to a file",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_not_file",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "weights",
+                            "pytorch_state_dict",
+                            "architecture",
+                            "ArchitectureFromLibraryDescr",
+                            "import_from"
+                        ],
+                        "msg": "Field required",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "missing",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "weights",
+                            "pytorch_state_dict",
+                            "architecture",
+                            "ArchitectureFromLibraryDescr",
+                            "source"
+                        ],
+                        "msg": "Extra inputs are not permitted",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "extra_forbidden",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "weights",
+                            "pytorch_state_dict",
+                            "architecture",
+                            "ArchitectureFromLibraryDescr",
+                            "sha256"
+                        ],
+                        "msg": "Extra inputs are not permitted",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "extra_forbidden",
+                        "with_traceback": false
+                    }
+                ],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.4",
+                "recommended_env": null,
+                "status": "failed",
+                "warnings": []
+            },
+            {
+                "conda_compare": null,
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "type"
+                ],
+                "name": "Has expected resource type",
+                "recommended_env": null,
+                "status": "passed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.spec",
+                "0.5.4.1",
+                "",
+                ""
+            ],
+            [
+                "bioimageio.core",
+                "0.8.0",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.5.4",
+        "id": "talkative-mouse",
+        "name": "bioimageio format validation",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/talkative-mouse/files/rdf.yaml?version=v0",
+        "status": "failed",
+        "type": "model"
+    },
+    "error": "\n|        ❌        |                               bioimageio format validation                              |\n|       ---       |                                           ---                                           |\n| status          | failed                                                                                  |\n| source          | https://hypha.aicell.io/bioimage-io/artifacts/talkative-mouse/files/rdf.yaml?version=v0 |\n| id              | talkative-mouse                                                                         |\n| format version  | model 0.5.4                                                                             |\n| bioimageio.spec | 0.5.4.1                                                                                 |\n| bioimageio.core | 0.8.0                                                                                   |\n\n|     |                                       Location                                       |                                                          Details                                                          |\n| --- |                                         ---                                          |                                                            ---                                                            |\n| ❌   |                                                                                      | Created `InvalidDescr` object.                                                                                            |\n| 🔍   | `context:perform_io_checks`                                                          | True                                                                                                                      |\n| 🔍   | `context:root`                                                                       | https://hypha.aicell.io/bioimage-io/artifacts/talkative-mouse/files?version=v0                                            |\n| 🔍   | `context:known_files.test_input.npy`                                                 | 0b9b1faf9cd563de0a817a7b32251b7076b99d5aade452273f58d75da5808b54                                                          |\n| 🔍   | `context:known_files.sample_input.tif`                                               | 9c70f6a5966135311f127c093439e19a49b9865252001cdb69cbd86157e45872                                                          |\n| 🔍   | `context:known_files.test_output.npy`                                                | 4757f55ad1afeebd2f0811e733c9ed81e2efec024063db658f3f067e0246e62b                                                          |\n| 🔍   | `context:known_files.sample_output.tif`                                              | d4c43223075b91ea612b23df8280e6f65406a21fe71e6b7ed42184f92e9eefa9                                                          |\n| ❌   |                                                                                      | bioimageio.spec format validation model 0.5.4                                                                             |\n| ❌   | `weights.pytorch_state_dict.source`                                                  | Input should be a valid URL, relative URL without a base                                                                  |\n|     |                                                                                      |                                                                                                                           |\n| ❌   | `weights.pytorch_state_dict.source.(RelativeFilePath)`                               | Value error, 404: Not Found https://hypha.aicell.io/bioimage-io/artifacts/talkative-mouse/files/fast_model.pth?version=v0 |\n|     |                                                                                      |                                                                                                                           |\n| ❌   | `weights.pytorch_state_dict.source`                                                  | Path does not point to a file                                                                                             |\n|     |                                                                                      |                                                                                                                           |\n| ❌   | `weights.pytorch_state_dict.architecture`                                            | Input should be a valid URL, relative URL without a base                                                                  |\n|     |                                                                                      |                                                                                                                           |\n| ❌   | `weights.pytorch_state_dict.architecture`                                            | Value error, 404: Not Found https://hypha.aicell.io/bioimage-io/artifacts/talkative-mouse/files/model.py?version=v0       |\n|     |                                                                                      |                                                                                                                           |\n| ❌   | `weights.pytorch_state_dict.architecture`                                            | Path does not point to a file                                                                                             |\n|     |                                                                                      |                                                                                                                           |\n| ❌   | `weights.pytorch_state_dict.architecture.(ArchitectureFromLibraryDescr).import_from` | Field required                                                                                                            |\n|     |                                                                                      |                                                                                                                           |\n| ❌   | `weights.pytorch_state_dict.architecture.(ArchitectureFromLibraryDescr).source`      | Extra inputs are not permitted                                                                                            |\n|     |                                                                                      |                                                                                                                           |\n| ❌   | `weights.pytorch_state_dict.architecture.(ArchitectureFromLibraryDescr).sha256`      | Extra inputs are not permitted                                                                                            |\n|     |                                                                                      |                                                                                                                           |\n| ✔️  | `type`                                                                               | Has expected resource type                                                                                                |\n",
+    "links": [
+        "ilastik/ilastik"
+    ],
+    "status": "failed",
+    "tool": "ilastik"
+}
