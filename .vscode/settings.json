@@ -23,4 +23,6 @@
             "packageManager": "ms-python.python:conda"
         }
     ],
+    "python.languageServer": "None",
+    "python.analysis.typeCheckingMode": "off",
 }
