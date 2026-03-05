@@ -1,0 +1,127 @@
+{
+    "badge": null,
+    "details": {
+        "details": [
+            {
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "fast_model.pth": "2a8c76168993c6bd3724058203707ffb9943e663db5ab2aed999cace1073cfb1",
+                        "https://github.com/Carleton-CTE-Lab/FAST": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/reliable-waterbuffalo/files/cover.png?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/reliable-waterbuffalo/files/fast_model.pth?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/reliable-waterbuffalo/files/model.py?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/reliable-waterbuffalo/files/model_documentation.md?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/reliable-waterbuffalo/files/sample_input.tif?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/reliable-waterbuffalo/files/sample_output.tif?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/reliable-waterbuffalo/files/test_input.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/reliable-waterbuffalo/files/test_output.npy?version=v0": null,
+                        "model.py": "4b94471f0081f40ed78af2dcc48f8318330f09593c69f6f03ca7e3786552c8b6",
+                        "sample_input.tif": "ddc074c3be9934ddf09bbdb55649a9e1d29b098f69f3e5e8f5a5d1e47dd25383",
+                        "sample_output.tif": "9a029f1d2ea24e724e83026cd06d2a1968159f2a2b73b9f513d5bd32c05ad6d6",
+                        "test_input.npy": "3068d0ebe0717e66261aa167fb85a3715150bd4d759cc843cc4bbd95e9a1e555",
+                        "test_output.npy": "bb7c9c0baa6af18e7529bb8938a5465c0b74a3ca51b35757e4e421b40863e366"
+                    },
+                    "original_source_name": null,
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/reliable-waterbuffalo/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Successfully created `ModelDescr` instance.",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.7",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Created conda environment '09007f80f16a999458c4e883861c1d237f9506ea5a9e4a215cd95578cd6883ba'",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Reproduce test outputs from test inputs (pytorch_state_dict)",
+                "recommended_env": {
+                    "channels": [
+                        "conda-forge",
+                        "nodefaults"
+                    ],
+                    "dependencies": [
+                        "conda-forge::bioimageio.core>=0.9.4",
+                        "pip",
+                        "pytorch==2.6.0",
+                        "torchaudio==2.6.0",
+                        "torchvision==0.21.0"
+                    ],
+                    "name": null
+                },
+                "saved_conda_compare": "Success. All the packages in the specification file are present in the environment with matching version and build string.\n",
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Run pytorch_state_dict inference for inputs with batch_size: 1 and size parameter n: 0",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.spec",
+                "0.5.7.4",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.5.7",
+        "id": "reliable-waterbuffalo",
+        "metadata_completeness": 0.39325842696629215,
+        "name": "bioimageio format validation",
+        "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/reliable-waterbuffalo/files/rdf.yaml?version=v0",
+        "status": "passed",
+        "traceback": null,
+        "type": "model",
+        "version": "0.1.0",
+        "warnings": null
+    },
+    "error": null,
+    "links": [
+        "bioimageio/bioimageio.core"
+    ],
+    "score": 1.0,
+    "status": "passed"
+}
