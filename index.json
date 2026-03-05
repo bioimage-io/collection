@@ -2,7 +2,7 @@
     "count_per_type": {
         "application": 65,
         "dataset": 49,
-        "model": 135,
+        "model": 136,
         "notebook": 4
     },
     "items": [
@@ -3301,8 +3301,21 @@
                     "version": "v1"
                 }
             ]
+        },
+        {
+            "id": "bioimage-io/reliable-waterbuffalo",
+            "type": "model",
+            "versions": [
+                {
+                    "comment": "Published by vineethaljapur@gmail.com",
+                    "created_at": "2026-03-04T21:25:02Z",
+                    "sha256": "35ee11be86e38484826a3872b77f2b7942a1f089e0af67a346b8b024b4410a76",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/reliable-waterbuffalo/files/rdf.yaml?version=v0",
+                    "version": "v0"
+                }
+            ]
         }
     ],
-    "timestamp": "2026-03-04T02:18:29.071371",
-    "total": 253
+    "timestamp": "2026-03-05T02:28:13.027545",
+    "total": 254
 }
