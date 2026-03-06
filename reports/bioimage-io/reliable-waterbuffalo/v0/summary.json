@@ -1,157 +1,23 @@
 {
     "rdf_content": {
-        "name": "2D ResUNet++ for Filamentous Actin Segmentation",
-        "description": "FAST Unet++ actin segmentation model",
-        "covers": [
-            "cover.png"
-        ],
         "authors": [
             {
                 "affiliation": "Carleton University",
-                "orcid": "0000-0001-8817-9655",
-                "name": "Vineeth Aljapur"
+                "name": "Vineeth Aljapur",
+                "orcid": "0000-0001-8817-9655"
             },
             {
                 "affiliation": "Carleton University",
-                "orcid": "0009-0003-5487-4694",
-                "name": "Andrew R. Harris"
+                "name": "Andrew R. Harris",
+                "orcid": "0009-0003-5487-4694"
             }
         ],
         "cite": [
             {
-                "text": "Aljapur, V., Gardner, A., Carayanniotis, J. and Harris, A. R. (2026). FAST: Filamentous Actin Segmentation Tool for quantifying cytoskeletal organization. J Cell Sci, jcs.264265.",
-                "doi": "10.1242/jcs.264265"
+                "doi": "10.1242/jcs.264265",
+                "text": "Aljapur, V., Gardner, A., Carayanniotis, J. and Harris, A. R. (2026). FAST: Filamentous Actin Segmentation Tool for quantifying cytoskeletal organization. J Cell Sci, jcs.264265."
             }
         ],
-        "license": "CC-BY-4.0",
-        "git_repo": "https://github.com/Carleton-CTE-Lab/FAST",
-        "uploader": {
-            "email": "vineethaljapur@gmail.com",
-            "name": "Vineeth"
-        },
-        "maintainers": [
-            {
-                "email": "vineethaljapur@gmail.com",
-                "name": "Vineeth Aljapur",
-                "github_user": "VineethAljapur"
-            }
-        ],
-        "tags": [
-            "fluorescence-light-microscopy",
-            "2d",
-            "ilastik",
-            "instance-segmentation"
-        ],
-        "version": "0.1.0",
-        "format_version": "0.5.4",
-        "type": "model",
-        "documentation": "model_documentation.md",
-        "inputs": [
-            {
-                "id": "input",
-                "axes": [
-                    {
-                        "type": "batch",
-                        "size": 1
-                    },
-                    {
-                        "type": "channel",
-                        "channel_names": [
-                            "phalloidin"
-                        ]
-                    },
-                    {
-                        "size": 1600,
-                        "id": "y",
-                        "type": "space"
-                    },
-                    {
-                        "size": 1600,
-                        "id": "x",
-                        "type": "space"
-                    }
-                ],
-                "test_tensor": {
-                    "source": "test_input.npy",
-                    "sha256": "3068d0ebe0717e66261aa167fb85a3715150bd4d759cc843cc4bbd95e9a1e555"
-                },
-                "sample_tensor": {
-                    "source": "sample_input.tif",
-                    "sha256": "ddc074c3be9934ddf09bbdb55649a9e1d29b098f69f3e5e8f5a5d1e47dd25383"
-                },
-                "preprocessing": [
-                    {
-                        "id": "ensure_dtype",
-                        "kwargs": {
-                            "dtype": "float32"
-                        }
-                    }
-                ]
-            }
-        ],
-        "outputs": [
-            {
-                "id": "output",
-                "axes": [
-                    {
-                        "type": "batch",
-                        "size": 1
-                    },
-                    {
-                        "type": "channel",
-                        "channel_names": [
-                            "background",
-                            "actin_and_stress_fibers",
-                            "focal_adhesions",
-                            "lamellipodia_and_lamellar_networks",
-                            "filopodia"
-                        ]
-                    },
-                    {
-                        "size": 1600,
-                        "id": "y",
-                        "type": "space"
-                    },
-                    {
-                        "size": 1600,
-                        "id": "x",
-                        "type": "space"
-                    }
-                ],
-                "test_tensor": {
-                    "source": "test_output.npy",
-                    "sha256": "bb7c9c0baa6af18e7529bb8938a5465c0b74a3ca51b35757e4e421b40863e366"
-                },
-                "sample_tensor": {
-                    "source": "sample_output.tif",
-                    "sha256": "9a029f1d2ea24e724e83026cd06d2a1968159f2a2b73b9f513d5bd32c05ad6d6"
-                },
-                "postprocessing": [
-                    {
-                        "id": "ensure_dtype",
-                        "kwargs": {
-                            "dtype": "float32"
-                        }
-                    }
-                ]
-            }
-        ],
-        "weights": {
-            "pytorch_state_dict": {
-                "source": "fast_model.pth",
-                "sha256": "2a8c76168993c6bd3724058203707ffb9943e663db5ab2aed999cace1073cfb1",
-                "architecture": {
-                    "source": "model.py",
-                    "sha256": "4b94471f0081f40ed78af2dcc48f8318330f09593c69f6f03ca7e3786552c8b6",
-                    "callable": "UnetPlusPlusResNet34",
-                    "kwargs": {
-                        "in_channels": 1,
-                        "classes": 5
-                    }
-                },
-                "pytorch_version": "2.6.0"
-            }
-        },
         "config": {
             "bioimageio": {
                 "reproducibility_tolerance": [
@@ -164,9 +30,327 @@
                 ]
             }
         },
+        "covers": [
+            "cover.png"
+        ],
+        "description": "FAST Unet++ actin segmentation model",
+        "documentation": "model_documentation.md",
+        "format_version": "0.5.4",
+        "git_repo": "https://github.com/Carleton-CTE-Lab/FAST",
         "id": "reliable-waterbuffalo",
-        "id_emoji": "🐃"
+        "id_emoji": "🐃",
+        "inputs": [
+            {
+                "axes": [
+                    {
+                        "size": 1,
+                        "type": "batch"
+                    },
+                    {
+                        "channel_names": [
+                            "phalloidin"
+                        ],
+                        "type": "channel"
+                    },
+                    {
+                        "id": "y",
+                        "size": 1600,
+                        "type": "space"
+                    },
+                    {
+                        "id": "x",
+                        "size": 1600,
+                        "type": "space"
+                    }
+                ],
+                "id": "input",
+                "preprocessing": [
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    }
+                ],
+                "sample_tensor": {
+                    "sha256": "ddc074c3be9934ddf09bbdb55649a9e1d29b098f69f3e5e8f5a5d1e47dd25383",
+                    "source": "sample_input.tif"
+                },
+                "test_tensor": {
+                    "sha256": "3068d0ebe0717e66261aa167fb85a3715150bd4d759cc843cc4bbd95e9a1e555",
+                    "source": "test_input.npy"
+                }
+            }
+        ],
+        "license": "CC-BY-4.0",
+        "maintainers": [
+            {
+                "email": "vineethaljapur@gmail.com",
+                "github_user": "VineethAljapur",
+                "name": "Vineeth Aljapur"
+            }
+        ],
+        "name": "2D ResUNet++ for Filamentous Actin Segmentation",
+        "outputs": [
+            {
+                "axes": [
+                    {
+                        "size": 1,
+                        "type": "batch"
+                    },
+                    {
+                        "channel_names": [
+                            "background",
+                            "actin_and_stress_fibers",
+                            "focal_adhesions",
+                            "lamellipodia_and_lamellar_networks",
+                            "filopodia"
+                        ],
+                        "type": "channel"
+                    },
+                    {
+                        "id": "y",
+                        "size": 1600,
+                        "type": "space"
+                    },
+                    {
+                        "id": "x",
+                        "size": 1600,
+                        "type": "space"
+                    }
+                ],
+                "id": "output",
+                "postprocessing": [
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    }
+                ],
+                "sample_tensor": {
+                    "sha256": "9a029f1d2ea24e724e83026cd06d2a1968159f2a2b73b9f513d5bd32c05ad6d6",
+                    "source": "sample_output.tif"
+                },
+                "test_tensor": {
+                    "sha256": "bb7c9c0baa6af18e7529bb8938a5465c0b74a3ca51b35757e4e421b40863e366",
+                    "source": "test_output.npy"
+                }
+            }
+        ],
+        "tags": [
+            "fluorescence-light-microscopy",
+            "2d",
+            "ilastik",
+            "instance-segmentation"
+        ],
+        "type": "model",
+        "uploader": {
+            "email": "vineethaljapur@gmail.com",
+            "name": "Vineeth"
+        },
+        "version": "0.1.0",
+        "weights": {
+            "pytorch_state_dict": {
+                "architecture": {
+                    "callable": "UnetPlusPlusResNet34",
+                    "kwargs": {
+                        "classes": 5,
+                        "in_channels": 1
+                    },
+                    "sha256": "4b94471f0081f40ed78af2dcc48f8318330f09593c69f6f03ca7e3786552c8b6",
+                    "source": "model.py"
+                },
+                "pytorch_version": "2.6.0",
+                "sha256": "2a8c76168993c6bd3724058203707ffb9943e663db5ab2aed999cace1073cfb1",
+                "source": "fast_model.pth"
+            }
+        }
     },
     "rdf_yaml_sha256": "35ee11be86e38484826a3872b77f2b7942a1f089e0af67a346b8b024b4410a76",
-    "status": "untested"
+    "scores": {
+        "core_compatibility": 1.0,
+        "metadata_completeness": 0.39325842696629215,
+        "metadata_format": 1.0,
+        "overall_compatibility": 0.6816479400749064,
+        "overall_partner_tool_compatibility": 0.3333333333333333,
+        "tool_compatibility": {
+            "biapy": 1.0,
+            "bioimageio.core": 1.0,
+            "careamics": 0.0,
+            "deepimagej": 0.0
+        },
+        "tool_compatibility_version_specific": {
+            "biapy_3.6.8": 1.0,
+            "bioimageio.core_0.9.6": 1.0,
+            "careamics_0.0.22": 0.0,
+            "deepimagej_3.1.0-snapshot": 0.0
+        }
+    },
+    "status": "passed",
+    "tests": {
+        "biapy": {
+            "3.6.8": {
+                "badge": null,
+                "details": "",
+                "error": "",
+                "links": [
+                    "biapy/biapy"
+                ],
+                "score": 1.0,
+                "status": "passed"
+            }
+        },
+        "bioimageio.core": {
+            "0.9.6": {
+                "badge": null,
+                "details": {
+                    "details": [
+                        {
+                            "context": {
+                                "file_name": "rdf.yaml",
+                                "known_files": {
+                                    "fast_model.pth": "2a8c76168993c6bd3724058203707ffb9943e663db5ab2aed999cace1073cfb1",
+                                    "https://github.com/Carleton-CTE-Lab/FAST": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/reliable-waterbuffalo/files/cover.png?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/reliable-waterbuffalo/files/fast_model.pth?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/reliable-waterbuffalo/files/model.py?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/reliable-waterbuffalo/files/model_documentation.md?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/reliable-waterbuffalo/files/sample_input.tif?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/reliable-waterbuffalo/files/sample_output.tif?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/reliable-waterbuffalo/files/test_input.npy?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/reliable-waterbuffalo/files/test_output.npy?version=v0": null,
+                                    "model.py": "4b94471f0081f40ed78af2dcc48f8318330f09593c69f6f03ca7e3786552c8b6",
+                                    "sample_input.tif": "ddc074c3be9934ddf09bbdb55649a9e1d29b098f69f3e5e8f5a5d1e47dd25383",
+                                    "sample_output.tif": "9a029f1d2ea24e724e83026cd06d2a1968159f2a2b73b9f513d5bd32c05ad6d6",
+                                    "test_input.npy": "3068d0ebe0717e66261aa167fb85a3715150bd4d759cc843cc4bbd95e9a1e555",
+                                    "test_output.npy": "bb7c9c0baa6af18e7529bb8938a5465c0b74a3ca51b35757e4e421b40863e366"
+                                },
+                                "original_source_name": null,
+                                "perform_io_checks": true,
+                                "root": "https://hypha.aicell.io/bioimage-io/artifacts/reliable-waterbuffalo/files?version=v0",
+                                "update_hashes": false
+                            },
+                            "errors": [],
+                            "loc": [],
+                            "name": "Successfully created `ModelDescr` instance.",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [],
+                            "name": "bioimageio.spec format validation model 0.5.7",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "pytorch_state_dict"
+                            ],
+                            "name": "Created conda environment '09007f80f16a999458c4e883861c1d237f9506ea5a9e4a215cd95578cd6883ba'",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "pytorch_state_dict"
+                            ],
+                            "name": "Reproduce test outputs from test inputs (pytorch_state_dict)",
+                            "recommended_env": {
+                                "channels": [
+                                    "conda-forge",
+                                    "nodefaults"
+                                ],
+                                "dependencies": [
+                                    "conda-forge::bioimageio.core>=0.9.4",
+                                    "pip",
+                                    "pytorch==2.6.0",
+                                    "torchaudio==2.6.0",
+                                    "torchvision==0.21.0"
+                                ],
+                                "name": null
+                            },
+                            "saved_conda_compare": "Success. All the packages in the specification file are present in the environment with matching version and build string.\n",
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "pytorch_state_dict"
+                            ],
+                            "name": "Run pytorch_state_dict inference for inputs with batch_size: 1 and size parameter n: 0",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        }
+                    ],
+                    "env": [
+                        [
+                            "bioimageio.spec",
+                            "0.5.7.4",
+                            "",
+                            ""
+                        ]
+                    ],
+                    "format_version": "0.5.7",
+                    "id": "reliable-waterbuffalo",
+                    "metadata_completeness": 0.39325842696629215,
+                    "name": "bioimageio format validation",
+                    "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+                    "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/reliable-waterbuffalo/files/rdf.yaml?version=v0",
+                    "status": "passed",
+                    "traceback": null,
+                    "type": "model",
+                    "version": "0.1.0",
+                    "warnings": null
+                },
+                "error": null,
+                "links": [
+                    "bioimageio/bioimageio.core"
+                ],
+                "score": 1.0,
+                "status": "passed"
+            }
+        },
+        "careamics": {
+            "0.0.22": {
+                "badge": null,
+                "details": "'Model' resource not tagged with 'CAREamics' or 'careamics'.",
+                "error": null,
+                "links": [],
+                "score": 0.0,
+                "status": "not-applicable"
+            }
+        },
+        "deepimagej": {
+            "3.1.0-snapshot": {
+                "badge": null,
+                "details": "OpenJDK 64-Bit Server VM warning: ignoring option PermSize=128m; support was removed in 8.0\nOpenJDK 64-Bit Server VM warning: Using incremental CMS is deprecated and will likely be removed in a future release\njava.lang.IllegalArgumentException: Invalid axis configuration: When axis type is 'spaces', an 'id' must be defined. Current configuration: type='space', id=null\n\tat io.bioimage.modelrunner.bioimageio.description.AxisV05.<init>(AxisV05.java:62)\n\tat io.bioimage.modelrunner.bioimageio.description.AxesV05.<init>(AxesV05.java:52)\n\tat io.bioimage.modelrunner.bioimageio.description.TensorSpecV05.<init>(TensorSpecV05.java:85)\n\tat io.bioimage.modelrunner.bioimageio.description.ModelDescriptorV05.buildInputTensors(ModelDescriptorV05.java:96)\n\tat io.bioimage.modelrunner.bioimageio.description.ModelDescriptor.buildModelDescription(ModelDescriptor.java:212)\n\tat io.bioimage.modelrunner.bioimageio.description.ModelDescriptorV05.<init>(ModelDescriptorV05.java:44)\n\tat io.bioimage.modelrunner.bioimageio.description.ModelDescriptorFactory.fromMap(ModelDescriptorFactory.java:128)\n\tat io.bioimage.modelrunner.bioimageio.description.ModelDescriptorFactory.readFromYamlTextString(ModelDescriptorFactory.java:109)\n\tat io.bioimage.modelrunner.bioimageio.BioimageioRepo.listAllModels(BioimageioRepo.java:202)\n\tat io.bioimage.modelrunner.bioimageio.BioimageioRepo.selectByID(BioimageioRepo.java:418)\n\tat io.bioimage.modelrunner.bioimageio.BioimageioRepo.downloadModelByID(BioimageioRepo.java:521)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\n\tat org.python.core.PyReflectedFunction.__call__(PyReflectedFunction.java:207)\n\tat org.python.core.PyReflectedFunction.__call__(PyReflectedFunction.java:225)\n\tat org.python.core.PyObject.__call__(PyObject.java:494)\n\tat org.python.core.PyObject.__call__(PyObject.java:498)\n\tat org.python.core.PyMethod.__call__(PyMethod.java:156)\n\tat org.python.pycode._pyx0.f$0(scripts/deepimagej_jython_scripts/deepimagej_download_model.py:138)\n\tat org.python.pycode._pyx0.call_function(scripts/deepimagej_jython_scripts/deepimagej_download_model.py)\n\tat org.python.core.PyTableCode.call(PyTableCode.java:173)\n\tat org.python.core.PyCode.call(PyCode.java:18)\n\tat org.python.core.Py.runCode(Py.java:1742)\n\tat org.python.util.PythonInterpreter.execfile(PythonInterpreter.java:297)\n\tat org.python.util.jython.runSimpleFile(jython.java:417)\n\tat org.python.util.jython.runStream(jython.java:449)\n\tat org.python.util.jython.runFile(jython.java:474)\n\tat org.python.util.jython.main(jython.java:678)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\n\tat net.imagej.launcher.ClassLauncher.launch(ClassLauncher.java:279)\n\tat net.imagej.launcher.ClassLauncher.run(ClassLauncher.java:186)\n\tat net.imagej.launcher.ClassLauncher.main(ClassLauncher.java:87)\nTraceback (most recent call last):\n  File \"scripts/deepimagej_jython_scripts/deepimagej_download_model.py\", line 78, in <module>\n    mfp = br.downloadModelByID(descriptor.getModelID(), models_dir)\n\tat io.bioimage.modelrunner.bioimageio.BioimageioRepo.downloadModelByID(BioimageioRepo.java:523)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\njava.lang.IllegalArgumentException: java.lang.IllegalArgumentException: The provided id does not correspond to an existing model in the Bioimage.io online repo.\n\n",
+                "error": "unable to download the model",
+                "links": [
+                    "deepimagej/deepimagej"
+                ],
+                "score": 0.0,
+                "status": "failed"
+            }
+        }
+    }
 }
