@@ -61,7 +61,7 @@ jobs:
         uses: conda-incubator/setup-miniconda@v3
         with:
           activate-environment: ilastik-env
-          channel-priority: strict
+          channel-priority: flexible
           environment-file: env.yaml
           use-only-tar-bz2: true
       - run: pip install . --no-deps # no-deps to avoid changing the ilastik environment
