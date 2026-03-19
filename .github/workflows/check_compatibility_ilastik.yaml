@@ -63,7 +63,7 @@ jobs:
           activate-environment: ilastik-env
           channel-priority: flexible
           environment-file: env.yaml
-          use-only-tar-bz2: true
+          conda-remove-defaults: 'true'
       - run: pip install . --no-deps # no-deps to avoid changing the ilastik environment
         shell: bash -l {0}
       - name: test published versions with ilastik ${{ matrix.v }}
