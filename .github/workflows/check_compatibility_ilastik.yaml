@@ -61,9 +61,10 @@ jobs:
         uses: conda-incubator/setup-miniconda@v3
         with:
           activate-environment: ilastik-env
+          auto-update-conda: true
           channel-priority: flexible
-          environment-file: env.yaml
           conda-remove-defaults: 'true'
+          environment-file: env.yaml
       - run: pip install . --no-deps # no-deps to avoid changing the ilastik environment
         shell: bash -l {0}
       - name: test published versions with ilastik ${{ matrix.v }}
