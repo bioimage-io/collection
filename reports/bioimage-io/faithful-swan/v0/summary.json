@@ -435,6 +435,7 @@
             "careamics_0.0.20": 0.0,
             "careamics_0.0.21": 0.0,
             "careamics_0.0.22": 0.0,
+            "careamics_0.1.0": 0.0,
             "deepimagej_3.1.0-snapshot": 0.0,
             "ilastik_1.4.1.post1": 0.0,
             "ilastik_1.4.2b5": 0.0,
@@ -775,6 +776,14 @@
                 "status": "not-applicable"
             },
             "0.0.22": {
+                "badge": null,
+                "details": "'Model' resource not tagged with 'CAREamics' or 'careamics'.",
+                "error": null,
+                "links": [],
+                "score": 0.0,
+                "status": "not-applicable"
+            },
+            "0.1.0": {
                 "badge": null,
                 "details": "'Model' resource not tagged with 'CAREamics' or 'careamics'.",
                 "error": null,

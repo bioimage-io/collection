@@ -172,19 +172,22 @@
         "core_compatibility": 1.0,
         "metadata_completeness": 0.39325842696629215,
         "metadata_format": 1.0,
-        "overall_compatibility": 0.6816479400749064,
-        "overall_partner_tool_compatibility": 0.3333333333333333,
+        "overall_compatibility": 0.7649812734082396,
+        "overall_partner_tool_compatibility": 0.6666666666666666,
         "tool_compatibility": {
             "biapy": 1.0,
             "bioimageio.core": 1.0,
             "careamics": 0.0,
-            "deepimagej": 0.0
+            "deepimagej": 0.0,
+            "ilastik": 1.0
         },
         "tool_compatibility_version_specific": {
             "biapy_3.6.8": 1.0,
             "bioimageio.core_0.9.6": 1.0,
             "careamics_0.0.22": 0.0,
-            "deepimagej_3.1.0-snapshot": 0.0
+            "careamics_0.1.0": 0.0,
+            "deepimagej_3.1.0-snapshot": 0.0,
+            "ilastik_1.4.1.post1": 1.0
         }
     },
     "status": "passed",
@@ -338,6 +341,14 @@
                 "links": [],
                 "score": 0.0,
                 "status": "not-applicable"
+            },
+            "0.1.0": {
+                "badge": null,
+                "details": "'Model' resource not tagged with 'CAREamics' or 'careamics'.",
+                "error": null,
+                "links": [],
+                "score": 0.0,
+                "status": "not-applicable"
             }
         },
         "deepimagej": {
@@ -350,6 +361,143 @@
                 ],
                 "score": 0.0,
                 "status": "failed"
+            }
+        },
+        "ilastik": {
+            "1.4.1.post1": {
+                "badge": null,
+                "details": {
+                    "conda_list": null,
+                    "details": [
+                        {
+                            "conda_compare": null,
+                            "context": {
+                                "file_name": "rdf.yaml",
+                                "known_files": {
+                                    "fast_model.pth": "2a8c76168993c6bd3724058203707ffb9943e663db5ab2aed999cace1073cfb1",
+                                    "model.py": "4b94471f0081f40ed78af2dcc48f8318330f09593c69f6f03ca7e3786552c8b6",
+                                    "sample_input.tif": "ddc074c3be9934ddf09bbdb55649a9e1d29b098f69f3e5e8f5a5d1e47dd25383",
+                                    "sample_output.tif": "9a029f1d2ea24e724e83026cd06d2a1968159f2a2b73b9f513d5bd32c05ad6d6",
+                                    "test_input.npy": "3068d0ebe0717e66261aa167fb85a3715150bd4d759cc843cc4bbd95e9a1e555",
+                                    "test_output.npy": "bb7c9c0baa6af18e7529bb8938a5465c0b74a3ca51b35757e4e421b40863e366"
+                                },
+                                "perform_io_checks": true,
+                                "root": "https://hypha.aicell.io/bioimage-io/artifacts/reliable-waterbuffalo/files?version=v0",
+                                "update_hashes": false
+                            },
+                            "errors": [],
+                            "loc": [],
+                            "name": "Successfully created `ModelDescr` object.",
+                            "recommended_env": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "conda_compare": null,
+                            "context": {
+                                "file_name": "rdf.yaml",
+                                "known_files": {
+                                    "fast_model.pth": "2a8c76168993c6bd3724058203707ffb9943e663db5ab2aed999cace1073cfb1",
+                                    "model.py": "4b94471f0081f40ed78af2dcc48f8318330f09593c69f6f03ca7e3786552c8b6",
+                                    "sample_input.tif": "ddc074c3be9934ddf09bbdb55649a9e1d29b098f69f3e5e8f5a5d1e47dd25383",
+                                    "sample_output.tif": "9a029f1d2ea24e724e83026cd06d2a1968159f2a2b73b9f513d5bd32c05ad6d6",
+                                    "test_input.npy": "3068d0ebe0717e66261aa167fb85a3715150bd4d759cc843cc4bbd95e9a1e555",
+                                    "test_output.npy": "bb7c9c0baa6af18e7529bb8938a5465c0b74a3ca51b35757e4e421b40863e366"
+                                },
+                                "perform_io_checks": true,
+                                "root": "https://hypha.aicell.io/bioimage-io/artifacts/reliable-waterbuffalo/files?version=v0",
+                                "update_hashes": false
+                            },
+                            "errors": [],
+                            "loc": [],
+                            "name": "bioimageio.spec format validation model 0.5.4",
+                            "recommended_env": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "conda_compare": null,
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "type"
+                            ],
+                            "name": "Has expected resource type",
+                            "recommended_env": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "conda_compare": "usage: conda [-h] [-v] [--no-plugins] [-V] COMMAND ...\n\nconda is a tool for managing and deploying applications, environments and packages.\n\noptions:\n  -h, --help            Show this help message and exit.\n  -v, --verbose         Can be used multiple times. Once for detailed output,\n                        twice for INFO logging, thrice for DEBUG logging, four\n                        times for TRACE logging.\n  --no-plugins          Disable all plugins that are not built into conda.\n  -V, --version         Show the conda version number and exit.\n\ncommands:\n  The following built-in and plugins subcommands are available.\n\n  COMMAND\n    activate            Activate a conda environment.\n    check               Display a health report for your environment (alias\n                        for doctor).\n    clean               Remove unused packages and caches.\n    commands            List all available conda subcommands (including those\n                        from plugins). Generally only used by tab-completion.\n    compare             Compare packages between conda environments.\n    config              Modify configuration values in .condarc.\n    content-trust       Signing and verification tools for Conda\n    create              Create a new conda environment from a list of\n                        specified packages.\n    deactivate          Deactivate the current active conda environment.\n    doctor              Display a health report for your environment.\n    env                 Create and manage conda environments.\n    export              Export a given environment\n    info                Display information about current conda install.\n    init                Initialize conda for shell interaction.\n    install             Install a list of packages into a specified conda\n                        environment.\n    list                List installed packages in a conda environment.\n    menuinst            A subcommand for installing and removing shortcuts via\n                        menuinst.\n    notices             Retrieve latest channel notifications.\n    package             Create low-level conda packages. (EXPERIMENTAL)\n    remove (uninstall)  Remove a list of packages from a specified conda\n                        environment.\n    rename              Rename an existing environment.\n    repoquery           Advanced search for repodata.\n    run                 Run an executable in a conda environment.\n    search              Search for packages and display associated information\n                        using the MatchSpec format.\n    token               Set repository access token and configure\n                        default_channels\n    tos                 A subcommand for viewing, accepting, rejecting, and\n                        otherwise interacting with a channel's Terms of\n                        Service (ToS). This plugin periodically checks for\n                        updated Terms of Service for the active/selected\n                        channels. Channels with a Terms of Service will need\n                        to be accepted or rejected prior to use. Conda will\n                        only allow package installation from channels without\n                        a Terms of Service or with an accepted Terms of\n                        Service. Attempting to use a channel with a rejected\n                        Terms of Service will result in an error.\n    update (upgrade)    Update conda packages to the latest compatible\n                        version.\n",
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "pytorch_state_dict"
+                            ],
+                            "name": "Reproduce test outputs from test inputs (pytorch_state_dict)",
+                            "recommended_env": {
+                                "channels": [
+                                    "conda-forge",
+                                    "nodefaults"
+                                ],
+                                "dependencies": [
+                                    "conda-forge::bioimageio.core",
+                                    "numpy >=2,<3",
+                                    "pip",
+                                    "pytorch==2.6.0",
+                                    "torchaudio",
+                                    "torchvision"
+                                ],
+                                "name": null
+                            },
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "conda_compare": null,
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "pytorch_state_dict"
+                            ],
+                            "name": "Run pytorch_state_dict inference for inputs with batch_size: 1 and size parameter n: 0",
+                            "recommended_env": null,
+                            "status": "passed",
+                            "warnings": []
+                        }
+                    ],
+                    "env": [
+                        [
+                            "bioimageio.core",
+                            "0.8.0",
+                            "",
+                            ""
+                        ],
+                        [
+                            "bioimageio.spec",
+                            "0.5.4.1",
+                            "",
+                            ""
+                        ]
+                    ],
+                    "format_version": "0.5.4",
+                    "id": "reliable-waterbuffalo",
+                    "metadata_completeness": null,
+                    "name": "bioimageio format validation",
+                    "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/reliable-waterbuffalo/files/rdf.yaml?version=v0",
+                    "status": "passed",
+                    "traceback": null,
+                    "type": "model",
+                    "warnings": null
+                },
+                "error": null,
+                "links": [
+                    "ilastik/ilastik"
+                ],
+                "score": 1.0,
+                "status": "passed"
             }
         }
     }
