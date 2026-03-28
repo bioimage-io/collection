@@ -237,14 +237,14 @@
     },
     "rdf_yaml_sha256": "8b127b87f4b399830d7fc3be38eee69917cf339a0d98fc9c0022f5f63452d516",
     "scores": {
-        "core_compatibility": 0.625,
+        "core_compatibility": 1.0,
         "metadata_completeness": 0.7121212121212122,
         "metadata_format": 1.0,
-        "overall_compatibility": 0.8259469696969697,
+        "overall_compatibility": 0.9196969696969697,
         "overall_partner_tool_compatibility": 0.9666666666666667,
         "tool_compatibility": {
             "biapy": 1.0,
-            "bioimageio.core": 0.625,
+            "bioimageio.core": 1.0,
             "careamics": 0.0,
             "deepimagej": 0.9,
             "ilastik": 1.0
@@ -254,6 +254,7 @@
             "biapy_3.6.6": 1.0,
             "biapy_3.6.7": 1.0,
             "biapy_3.6.8": 1.0,
+            "bioimageio.core_0.10.0": 1.0,
             "bioimageio.core_0.9.3": 0.0,
             "bioimageio.core_0.9.4": 1.0,
             "bioimageio.core_0.9.5": 1.0,
@@ -319,6 +320,160 @@
             }
         },
         "bioimageio.core": {
+            "0.10.0": {
+                "badge": null,
+                "details": {
+                    "details": [
+                        {
+                            "context": {
+                                "file_name": "rdf.yaml",
+                                "known_files": {
+                                    "checkpoint.pth": "2c6a2fc7bfbd601e33ec0a75fbf09033c228bcf0cd133e79dc87454a09a762bb",
+                                    "https://doi.org/10.1038/s41592-025-02699-y": null,
+                                    "https://github.com/BiaPyX/BiaPy": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/merry-water-buffalo/files/checkpoint.pth?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/merry-water-buffalo/files/cover.png?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/merry-water-buffalo/files/documentation.md?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/merry-water-buffalo/files/resunet.py?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/merry-water-buffalo/files/test-input.npy?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/merry-water-buffalo/files/test-output.npy?version=v0": null,
+                                    "resunet.py": "553e1e359c6bda196e4dfdfa6465abff7bd414e5142f9a771ad0c1656c780192",
+                                    "test-input.npy": "dd693f8b04f5575e11f79e5433b58bc41c552ccc94ecf7b75fd892ee7c63d86c",
+                                    "test-output.npy": "6e6c8ddbb6919f8db179908d6c446f6567b4d19f366a7f71dae4f66d603b5d24"
+                                },
+                                "original_source_name": null,
+                                "perform_io_checks": true,
+                                "root": "https://hypha.aicell.io/bioimage-io/artifacts/merry-water-buffalo/files?version=v0",
+                                "update_hashes": false
+                            },
+                            "errors": [],
+                            "loc": [],
+                            "name": "Successfully created `ModelDescr` instance.",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [],
+                            "name": "bioimageio.spec format validation model 0.5.9",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": [
+                                {
+                                    "loc": [
+                                        "inputs",
+                                        0,
+                                        "sample_tensor"
+                                    ],
+                                    "msg": "Needs to be filled for FAIR compliance",
+                                    "severity": 35,
+                                    "type": "warning"
+                                },
+                                {
+                                    "loc": [
+                                        "outputs",
+                                        0,
+                                        "sample_tensor"
+                                    ],
+                                    "msg": "Needs to be filled for FAIR compliance",
+                                    "severity": 35,
+                                    "type": "warning"
+                                }
+                            ]
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "pytorch_state_dict"
+                            ],
+                            "name": "Found existing conda environment 'df87be09262b4f3f7ce399456dada4eaf2aa7e1ca18a46825f1ebf80ab4604e2'",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "pytorch_state_dict"
+                            ],
+                            "name": "Reproduce test outputs from test inputs (pytorch_state_dict)",
+                            "recommended_env": {
+                                "channels": [
+                                    "conda-forge",
+                                    "nodefaults"
+                                ],
+                                "dependencies": [
+                                    "conda-forge::bioimageio.core>=0.9.4",
+                                    "pip",
+                                    "pytorch==2.4.0",
+                                    "torchvision==0.19.0"
+                                ],
+                                "name": null
+                            },
+                            "saved_conda_compare": "Success. All the packages in the specification file are present in the environment with matching version and build string.\n",
+                            "status": "passed",
+                            "warnings": [
+                                {
+                                    "loc": [
+                                        "weights",
+                                        "pytorch_state_dict"
+                                    ],
+                                    "msg": "Output `output0`: all elements agree with expected values.\n Max relative difference not accounted for by absolute tolerance (1.00e-03): 0.00e+00 (= \\|5.08e-02 - 5.08e-02\\|/\\|5.08e-02 + 1e-6\\|) at {'batch': np.int64(0), 'channel': np.int64(0), 'z': np.int64(0), 'y': np.int64(0), 'x': np.int64(0)}\n Max absolute difference not accounted for by relative tolerance (1.00e-03): 0.00e+00 (= \\|3.4849801e-08 - 3.4850466e-08\\|) at {'batch': np.int64(0), 'channel': np.int64(0), 'z': np.int64(51), 'y': np.int64(56), 'x': np.int64(30)}",
+                                    "severity": 20,
+                                    "type": "bioimageio.core"
+                                }
+                            ]
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "pytorch_state_dict"
+                            ],
+                            "name": "Run pytorch_state_dict inference for inputs with batch_size: 1 and size parameter n: 0",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        }
+                    ],
+                    "env": [
+                        [
+                            "bioimageio.spec",
+                            "0.5.9.0",
+                            "",
+                            ""
+                        ]
+                    ],
+                    "format_version": "0.5.9",
+                    "id": "merry-water-buffalo",
+                    "metadata_completeness": 0.4519230769230769,
+                    "name": "bioimageio format validation",
+                    "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+                    "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/merry-water-buffalo/files/rdf.yaml?version=v0",
+                    "status": "passed",
+                    "traceback": null,
+                    "type": "model",
+                    "version": "0.1.0",
+                    "warnings": null
+                },
+                "error": null,
+                "links": [
+                    "bioimageio/bioimageio.core"
+                ],
+                "score": 1.0,
+                "status": "passed"
+            },
             "0.9.3": {
                 "badge": null,
                 "details": {
