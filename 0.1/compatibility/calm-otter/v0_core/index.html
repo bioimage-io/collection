@@ -569,12 +569,12 @@
 </style>
 <div class="validation-summary-container"><table>
   <tr>
-    <th>🟡</th>
+    <th>✔️</th>
     <th>bioimageio format validation</th>
   </tr>
   <tr>
     <td>status</td>
-    <td>valid-format</td>
+    <td>passed</td>
   </tr>
   <tr>
     <td>source</td>
@@ -590,11 +590,11 @@
   </tr>
   <tr>
     <td>applied format</td>
-    <td>model 0.5.7</td>
+    <td>model 0.5.9</td>
   </tr>
   <tr>
     <td>bioimageio.spec</td>
-    <td>0.5.7.4</td>
+    <td>0.5.9.0</td>
   </tr>
 </table>
 <table>
@@ -611,7 +611,7 @@
   <tr>
     <td>✔️</td>
     <td></td>
-    <td>bioimageio.spec format validation model 0.5.7</td>
+    <td>bioimageio.spec format validation model 0.5.9</td>
   </tr>
   <tr>
     <td>⚠</td>
@@ -624,24 +624,26 @@
     <td><pre>Needs to be filled for FAIR compliance</pre></td>
   </tr>
   <tr>
-    <td>❌</td>
+    <td>✔️</td>
     <td><code>weights.pytorch_state_dict</code></td>
-    <td>Conda environment creation</td>
+    <td>Found existing conda environment 'df87be09262b4f3f7ce399456dada4eaf2aa7e1ca18a46825f1ebf80ab4604e2'</td>
   </tr>
   <tr>
-    <td>❌</td>
+    <td>✔️</td>
     <td><code>weights.pytorch_state_dict</code></td>
-    <td><pre>Command '['conda', 'env', 'create', '--yes', '--file=/tmp/tmpapllysv8/pytorch_state_dict/env.yaml', '--name=a701854be6a06393d519227a0bd79c16094f899b578999c4249b1c6c07370efb', '--quiet']' returned non-zero exit status 1.</pre></td>
+    <td>Reproduce test outputs from test inputs (pytorch_state_dict)</td>
+  </tr>
+  <tr>
+    <td>ℹ</td>
+    <td><code>weights.pytorch_state_dict</code></td>
+    <td><pre>Output `output0`: all elements agree with expected values.
+ Max relative difference not accounted for by absolute tolerance (1.00e-03): 0.00e+00 (= \|2.42e-05 - 2.42e-05\|/\|2.42e-05 + 1e-6\|) at {'batch': np.int64(0), 'channel': np.int64(0), 'y': np.int64(0), 'x': np.int64(0)}
+ Max absolute difference not accounted for by relative tolerance (1.00e-03): 0.00e+00 (= \|3.9870192e-06 - 3.9879242e-06\|) at {'batch': np.int64(0), 'channel': np.int64(0), 'y': np.int64(74), 'x': np.int64(196)}</pre></td>
   </tr>
   <tr>
     <td></td>
-    <td></td>
-    <td>See <a href="#traceback-1">Traceback 1</a>.</td>
-  </tr>
-  <tr>
-    <td></td>
     <td><code>weights.pytorch_state_dict</code></td>
-    <td><pre>recommended conda environment (Conda environment creation)</pre></td>
+    <td><pre>recommended conda environment (Reproduce test outputs from test inputs (pytorch_state_dict))</pre></td>
   </tr>
   <tr>
     <td></td>
@@ -655,123 +657,26 @@ dependencies:
   - conda-forge::bioimageio.core>=0.9.4
   - pip
   - pytorch==2.4.0
-  - torchaudio==2.4.0
   - torchvision==0.19.0
 </pre></td>
   </tr>
   <tr>
     <td></td>
     <td><code>weights.pytorch_state_dict</code></td>
-    <td><pre>conda compare (Conda environment creation)</pre></td>
+    <td><pre>conda compare (Reproduce test outputs from test inputs (pytorch_state_dict))</pre></td>
   </tr>
   <tr>
     <td></td>
     <td></td>
-    <td><pre>bioimageio.core not found pip not found pytorch not found torchaudio not found torchvision not
-found</pre></td>
+    <td><pre>Success. All the packages in the specification file are present in the environment with matching
+version and build string.</pre></td>
   </tr>
-</table>
-<h3 id="traceback-1">Traceback 1</h3>
-<pre><!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<style>
-.r1 {color: #800000; text-decoration-color: #800000}
-.r2 {color: #800000; text-decoration-color: #800000; font-weight: bold}
-.r3 {color: #bf7f7f; text-decoration-color: #bf7f7f; font-weight: bold}
-.r4 {color: #bfbf7f; text-decoration-color: #bfbf7f}
-.r5 {color: #808000; text-decoration-color: #808000; font-weight: bold}
-.r6 {color: #0000ff; text-decoration-color: #0000ff}
-.r7 {color: #00ff00; text-decoration-color: #00ff00}
-.r8 {color: #7f7f7f; text-decoration-color: #7f7f7f}
-.r9 {color: #00ffff; text-decoration-color: #00ffff}
-.r10 {color: #808000; text-decoration-color: #808000}
-.r11 {color: #00ffff; text-decoration-color: #00ffff; text-decoration: underline}
-.r12 {color: #ff00ff; text-decoration-color: #ff00ff}
-.r13 {color: #ff0000; text-decoration-color: #ff0000; font-weight: bold}
-.r14 {color: #008000; text-decoration-color: #008000}
-.r15 {font-weight: bold}
-.r16 {color: #008080; text-decoration-color: #008080; font-weight: bold}
-.r17 {font-style: italic}
-body {
-    color: var(--md-default-fg-color);
-    background-color: var(--md-default-bg-color);
-}
-</style>
-</head>
-<body>
-    <pre style="font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><code style="font-family:inherit"><span class="r1">╭─────────────────────────────── </span><span class="r2">Traceback </span><span class="r3">(most recent call last)</span><span class="r1"> ────────────────────────────────╮</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/core/</span><span class="r5">_resource_tests.py</span>:<span class="r6">428</span> in <span class="r7">_test</span> <span class="r1">│</span>
-<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 425 </span><span class="r8">│   │   </span><span class="r6">raise</span> <span class="r9">RuntimeError</span>(<span class="r10">&quot;Conda not available&quot;</span>) <span class="r6">from</span> <span class="r11">e</span>                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 426 </span><span class="r8">│   </span>                                                                                      <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 427 </span><span class="r8">│   </span><span class="r6">try</span>:                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span> 428 <span class="r8">│   │   </span>run_command([CONDA_CMD, <span class="r10">&quot;run&quot;</span>, <span class="r10">&quot;-n&quot;</span>, env_name, <span class="r10">&quot;python&quot;</span>, <span class="r10">&quot;--version&quot;</span>])            <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 429 </span><span class="r8">│   </span><span class="r6">except</span> <span class="r9">Exception</span> <span class="r6">as</span> e:                                                                <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 430 </span><span class="r8">│   │   </span>working_dir.mkdir(parents=<span class="r6">True</span>, exist_ok=<span class="r6">True</span>)                                    <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 431 </span><span class="r8">│   │   </span>path = working_dir / <span class="r10">&quot;env.yaml&quot;</span>                                                   <span class="r1">│</span>
-<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/core/</span><span class="r5">_resource_tests.py</span>:<span class="r6">198</span> in <span class="r7">defau</span> <span class="r1">│</span>
-<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 195 </span>                                                                                          <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 196 </span><span class="r6">def</span> <span class="r7">default_run_command</span>(args: Sequence[<span class="r9">str</span>]):                                             <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 197 </span><span class="r8">│   </span>logger.info(<span class="r10">&quot;running &#x27;{}&#x27;...&quot;</span>, <span class="r10">&quot; &quot;</span>.join(args))                                        <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span> 198 <span class="r8">│   </span>_ = subprocess.check_call(args)                                                       <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 199 </span>                                                                                          <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 200 </span>                                                                                          <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 201 </span><span class="r6">def</span> <span class="r7">test_description</span>(                                                                     <span class="r1">│</span>
-<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r4">/usr/lib/python3.12/</span><span class="r5">subprocess.py</span>:<span class="r6">413</span> in <span class="r7">check_call</span>                                              <span class="r1">│</span>
-<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 410 </span><span class="r8">│   │   </span>cmd = kwargs.get(<span class="r10">&quot;args&quot;</span>)                                                          <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 411 </span><span class="r8">│   │   </span><span class="r6">if</span> cmd <span class="r12">is</span> <span class="r6">None</span>:                                                                   <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 412 </span><span class="r8">│   │   │   </span>cmd = popenargs[<span class="r6">0</span>]                                                            <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span> 413 <span class="r8">│   │   </span><span class="r6">raise</span> CalledProcessError(retcode, cmd)                                            <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 414 </span><span class="r8">│   </span><span class="r6">return</span> <span class="r6">0</span>                                                                              <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 415 </span>                                                                                          <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 416 </span>                                                                                          <span class="r1">│</span>
-<span class="r1">╰──────────────────────────────────────────────────────────────────────────────────────────────────╯</span>
-<span class="r13">CalledProcessError: </span>Command <span class="r14">&#x27;[&#x27;</span>conda&#x27;, <span class="r14">&#x27;run&#x27;</span>, <span class="r14">&#x27;-n&#x27;</span>, <span class="r14">&#x27;a701854be6a06393d519227a0bd79c16094f899b578999c4249b1c6c07370efb&#x27;</span>, <span class="r14">&#x27;python&#x27;</span>, <span class="r14">&#x27;--version&#x27;</span><span class="r15">]</span>&#x27; returned non-zero exit status <span class="r16">1</span>.
-
-<span class="r17">During handling of the above exception, another exception occurred:</span>
-
-<span class="r1">╭─────────────────────────────── </span><span class="r2">Traceback </span><span class="r3">(most recent call last)</span><span class="r1"> ────────────────────────────────╮</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/core/</span><span class="r5">_resource_tests.py</span>:<span class="r6">435</span> in <span class="r7">_test</span> <span class="r1">│</span>
-<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 432 </span><span class="r8">│   │   </span><span class="r6">try</span>:                                                                              <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 433 </span><span class="r8">│   │   │   </span>_ = path.write_bytes(encoded_env)                                             <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 434 </span><span class="r8">│   │   │   </span>logger.debug(<span class="r10">&quot;written conda env to {}&quot;</span>, path)                                 <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span> 435 <span class="r8">│   │   │   </span>run_command(                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 436 </span><span class="r8">│   │   │   │   </span>[                                                                         <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 437 </span><span class="r8">│   │   │   │   │   </span>CONDA_CMD,                                                            <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 438 </span><span class="r8">│   │   │   │   │   </span><span class="r10">&quot;env&quot;</span>,                                                                <span class="r1">│</span>
-<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/core/</span><span class="r5">_resource_tests.py</span>:<span class="r6">198</span> in <span class="r7">defau</span> <span class="r1">│</span>
-<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 195 </span>                                                                                          <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 196 </span><span class="r6">def</span> <span class="r7">default_run_command</span>(args: Sequence[<span class="r9">str</span>]):                                             <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 197 </span><span class="r8">│   </span>logger.info(<span class="r10">&quot;running &#x27;{}&#x27;...&quot;</span>, <span class="r10">&quot; &quot;</span>.join(args))                                        <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span> 198 <span class="r8">│   </span>_ = subprocess.check_call(args)                                                       <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 199 </span>                                                                                          <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 200 </span>                                                                                          <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 201 </span><span class="r6">def</span> <span class="r7">test_description</span>(                                                                     <span class="r1">│</span>
-<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r4">/usr/lib/python3.12/</span><span class="r5">subprocess.py</span>:<span class="r6">413</span> in <span class="r7">check_call</span>                                              <span class="r1">│</span>
-<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 410 </span><span class="r8">│   │   </span>cmd = kwargs.get(<span class="r10">&quot;args&quot;</span>)                                                          <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 411 </span><span class="r8">│   │   </span><span class="r6">if</span> cmd <span class="r12">is</span> <span class="r6">None</span>:                                                                   <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 412 </span><span class="r8">│   │   │   </span>cmd = popenargs[<span class="r6">0</span>]                                                            <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span> 413 <span class="r8">│   │   </span><span class="r6">raise</span> CalledProcessError(retcode, cmd)                                            <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 414 </span><span class="r8">│   </span><span class="r6">return</span> <span class="r6">0</span>                                                                              <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 415 </span>                                                                                          <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 416 </span>                                                                                          <span class="r1">│</span>
-<span class="r1">╰──────────────────────────────────────────────────────────────────────────────────────────────────╯</span>
-<span class="r13">CalledProcessError: </span>Command <span class="r14">&#x27;[&#x27;</span>conda&#x27;, <span class="r14">&#x27;env&#x27;</span>, <span class="r14">&#x27;create&#x27;</span>, <span class="r14">&#x27;--yes&#x27;</span>, <span class="r14">&#x27;--file=/tmp/tmpapllysv8/pytorch_state_dict/env.yaml&#x27;</span>, <span class="r14">&#x27;--name=a701854be6a06393d519227a0bd79c16094f899b578999c4249b1c6c07370efb&#x27;</span>, <span class="r14">&#x27;--quiet&#x27;</span><span class="r15">]</span>&#x27; returned non-zero exit status <span class="r16">1</span>.
-</code></pre>
-</body>
-</html>
-</pre></div>
+  <tr>
+    <td>✔️</td>
+    <td><code>weights.pytorch_state_dict</code></td>
+    <td>Run pytorch_state_dict inference for inputs with batch_size: 1 and size parameter n: 0</td>
+  </tr>
+</table></div>
 
 
 

@@ -590,11 +590,11 @@
   </tr>
   <tr>
     <td>applied format</td>
-    <td>model 0.5.7</td>
+    <td>model 0.5.9</td>
   </tr>
   <tr>
     <td>bioimageio.spec</td>
-    <td>0.5.7.4</td>
+    <td>0.5.9.0</td>
   </tr>
 </table>
 <table>
@@ -611,7 +611,7 @@
   <tr>
     <td>✔️</td>
     <td></td>
-    <td>bioimageio.spec format validation model 0.5.7</td>
+    <td>bioimageio.spec format validation model 0.5.9</td>
   </tr>
   <tr>
     <td>⚠</td>
@@ -708,45 +708,45 @@ body {
 </head>
 <body>
     <pre style="font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><code style="font-family:inherit"><span class="r1">╭─────────────────────────────── </span><span class="r2">Traceback </span><span class="r3">(most recent call last)</span><span class="r1"> ────────────────────────────────╮</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/core/</span><span class="r5">_resource_tests.py</span>:835 in _test <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/core/</span><span class="r5">_resource_tests.py</span>:869 in _test <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 832 </span><span class="r4">│   │   </span>test_input = get_test_input_sample(model)                                         <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 833 </span><span class="r4">│   │   </span>expected = get_test_output_sample(model)                                          <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 834 </span><span class="r4">│   │   </span>                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span> 835 <span class="r4">│   │   </span><span class="r6">with</span> create_prediction_pipeline(                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 836 </span><span class="r4">│   │   │   </span>bioimageio_model=model, devices=devices, weight_format=weight_format          <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 837 </span><span class="r4">│   │   </span>) <span class="r6">as</span> prediction_pipeline:                                                         <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 838 </span><span class="r4">│   │   │   </span>results = prediction_pipeline.predict_sample_without_blocking(test_input)     <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 866 </span><span class="r4">│   │   </span>test_input = get_test_input_sample(model)                                         <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 867 </span><span class="r4">│   │   </span>expected = get_test_output_sample(model)                                          <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 868 </span><span class="r4">│   │   </span>                                                                                  <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span> 869 <span class="r4">│   │   </span><span class="r6">with</span> create_prediction_pipeline(                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 870 </span><span class="r4">│   │   │   </span>bioimageio_model=model, devices=devices, weight_format=weight_format          <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 871 </span><span class="r4">│   │   </span>) <span class="r6">as</span> prediction_pipeline:                                                         <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 872 </span><span class="r4">│   │   │   </span>prediction_pipeline.apply_preprocessing(test_input)                           <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/core/</span><span class="r5">_prediction_pipeline.py</span>:371 in  <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/core/</span><span class="r5">_prediction_pipeline.py</span>:407 in  <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">368 </span><span class="r4">│   │   │   </span><span class="r7">f&quot;deprecated create_prediction_pipeline kwargs: {</span><span class="r8">set</span>(deprecated_kwargs)<span class="r7">}&quot;</span>      <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">369 </span><span class="r4">│   │   </span>)                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">370 </span><span class="r4">│   </span>                                                                                       <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span>371 <span class="r4">│   </span>model_adapter = model_adapter <span class="r9">or</span> <span class="r10">create_model_adapter(</span>                                 <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">372 </span><span class="r4">│   │   </span><span class="r10">model_description=bioimageio_model,</span>                                                <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">373 </span><span class="r4">│   │   </span><span class="r10">devices=devices,</span>                                                                   <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">374 </span><span class="r4">│   │   </span><span class="r10">weight_format_priority_order=weights_format </span><span class="r11">and</span><span class="r10"> (weights_format,),</span>                 <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">404 </span><span class="r4">│   │   │   </span><span class="r7">f&quot;deprecated create_prediction_pipeline kwargs: {</span><span class="r8">set</span>(deprecated_kwargs)<span class="r7">}&quot;</span>      <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">405 </span><span class="r4">│   │   </span>)                                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">406 </span><span class="r4">│   </span>                                                                                       <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>407 <span class="r4">│   </span>model_adapter = model_adapter <span class="r9">or</span> <span class="r10">create_model_adapter(</span>                                 <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">408 </span><span class="r4">│   │   </span><span class="r10">model_description=bioimageio_model,</span>                                                <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">409 </span><span class="r4">│   │   </span><span class="r10">devices=devices,</span>                                                                   <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">410 </span><span class="r4">│   │   </span><span class="r10">weight_format_priority_order=weights_format </span><span class="r11">and</span><span class="r10"> (weights_format,),</span>                 <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/core/backends/</span><span class="r5">_model_adapter.py</span>:169  <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/core/backends/</span><span class="r5">_model_adapter.py</span>:185  <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">166 </span><span class="r4">│   │   </span><span class="r6">assert</span> errors                                                                      <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">167 </span><span class="r4">│   │   </span><span class="r6">if</span> <span class="r8">len</span>(weight_format_priority_order) == <span class="r6">1</span>:                                         <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">168 </span><span class="r4">│   │   │   </span><span class="r6">assert</span> <span class="r8">len</span>(errors) == <span class="r6">1</span>                                                        <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span>169 <span class="r4">│   │   │   </span><span class="r12">raise</span><span class="r10"> errors[</span><span class="r12">0</span><span class="r10">]</span>                                                                <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">170 </span><span class="r4">│   │   </span>                                                                                   <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">171 </span><span class="r4">│   │   </span><span class="r6">else</span>:                                                                              <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">172 </span><span class="r4">│   │   │   </span>msg = (                                                                        <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">182 </span><span class="r4">│   │   </span><span class="r6">assert</span> errors                                                                      <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">183 </span><span class="r4">│   │   </span><span class="r6">if</span> <span class="r8">len</span>(weight_format_priority_order) == <span class="r6">1</span>:                                         <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">184 </span><span class="r4">│   │   │   </span><span class="r6">assert</span> <span class="r8">len</span>(errors) == <span class="r6">1</span>                                                        <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>185 <span class="r4">│   │   │   </span><span class="r12">raise</span><span class="r10"> errors[</span><span class="r12">0</span><span class="r10">]</span>                                                                <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">186 </span><span class="r4">│   │   </span>                                                                                   <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">187 </span><span class="r4">│   │   </span><span class="r6">else</span>:                                                                              <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">188 </span><span class="r4">│   │   │   </span>msg = (                                                                        <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/core/backends/</span><span class="r5">_model_adapter.py</span>:112  <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/core/backends/</span><span class="r5">_model_adapter.py</span>:115  <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">109 </span><span class="r4">│   │   │   │   </span><span class="r6">try</span>:                                                                       <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">110 </span><span class="r4">│   │   │   │   │   </span><span class="r6">from</span><span class="r13"> </span><span class="r14">.pytorch_backend</span><span class="r13"> </span><span class="r6">import</span> PytorchModelAdapter                       <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">111 </span><span class="r4">│   │   │   │   │   </span>                                                                       <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span>112 <span class="r4">│   │   │   │   │   </span><span class="r6">return</span> PytorchModelAdapter(                                            <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">113 </span><span class="r4">│   │   │   │   │   │   </span>model_description=model_description, devices=devices               <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">114 </span><span class="r4">│   │   │   │   │   </span>)                                                                      <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">115 </span><span class="r4">│   │   │   │   </span><span class="r6">except</span> <span class="r8">Exception</span> <span class="r6">as</span> e:                                                     <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">112 </span><span class="r4">│   │   │   │   </span><span class="r6">try</span>:                                                                       <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">113 </span><span class="r4">│   │   │   │   │   </span><span class="r6">from</span><span class="r13"> </span><span class="r14">.pytorch_backend</span><span class="r13"> </span><span class="r6">import</span> PytorchModelAdapter                       <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">114 </span><span class="r4">│   │   │   │   │   </span>                                                                       <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>115 <span class="r4">│   │   │   │   │   </span><span class="r6">return</span> PytorchModelAdapter(                                            <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">116 </span><span class="r4">│   │   │   │   │   │   </span>model_description=model_description, devices=devices               <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">117 </span><span class="r4">│   │   │   │   │   </span>)                                                                      <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">118 </span><span class="r4">│   │   │   │   </span><span class="r6">except</span> <span class="r8">Exception</span> <span class="r6">as</span> e:                                                     <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
 <span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/core/backends/</span><span class="r5">pytorch_backend.py</span>:38  <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>

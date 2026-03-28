@@ -590,11 +590,11 @@
   </tr>
   <tr>
     <td>applied format</td>
-    <td>model 0.5.7</td>
+    <td>model 0.5.9</td>
   </tr>
   <tr>
     <td>bioimageio.spec</td>
-    <td>0.5.7.4</td>
+    <td>0.5.9.0</td>
   </tr>
 </table>
 <table>
@@ -611,7 +611,7 @@
   <tr>
     <td>✔️</td>
     <td></td>
-    <td>bioimageio.spec format validation model 0.5.7</td>
+    <td>bioimageio.spec format validation model 0.5.9</td>
   </tr>
   <tr>
     <td>⚠</td>
@@ -624,14 +624,19 @@
     <td><pre>Needs to be filled for FAIR compliance</pre></td>
   </tr>
   <tr>
-    <td>❌</td>
+    <td>✔️</td>
     <td><code>weights.pytorch_state_dict</code></td>
-    <td>Conda environment creation</td>
+    <td>Found existing conda environment 'a4a69c7b0241722dbb721e78ee9fbbe7c18c681497e88237e37bc450ab1b0458'</td>
   </tr>
   <tr>
     <td>❌</td>
     <td><code>weights.pytorch_state_dict</code></td>
-    <td><pre>Command '['conda', 'env', 'create', '--yes', '--file=/tmp/tmpg4oko_48/pytorch_state_dict/env.yaml', '--name=a4a69c7b0241722dbb721e78ee9fbbe7c18c681497e88237e37bc450ab1b0458', '--quiet']' returned non-zero exit status 1.</pre></td>
+    <td>Reproduce test outputs from test inputs (pytorch_state_dict)</td>
+  </tr>
+  <tr>
+    <td>❌</td>
+    <td><code>weights.pytorch_state_dict</code></td>
+    <td><pre>No module named 'careamics'</pre></td>
   </tr>
   <tr>
     <td></td>
@@ -641,13 +646,14 @@
   <tr>
     <td></td>
     <td><code>weights.pytorch_state_dict</code></td>
-    <td><pre>recommended conda environment (Conda environment creation)</pre></td>
+    <td><pre>recommended conda environment (Reproduce test outputs from test inputs (pytorch_state_dict))</pre></td>
   </tr>
   <tr>
     <td></td>
     <td></td>
     <td><pre lang="yaml">%YAML 1.2
 ---
+name: careamics
 channels:
   - conda-forge
   - nodefaults
@@ -664,13 +670,12 @@ dependencies:
   <tr>
     <td></td>
     <td><code>weights.pytorch_state_dict</code></td>
-    <td><pre>conda compare (Conda environment creation)</pre></td>
+    <td><pre>conda compare (Reproduce test outputs from test inputs (pytorch_state_dict))</pre></td>
   </tr>
   <tr>
     <td></td>
     <td></td>
-    <td><pre>bioimageio.core not found pip not found python not found careamics not found torch not found
-torchvision not found</pre></td>
+    <td><pre>careamics not found torch not found torchvision not found</pre></td>
   </tr>
 </table>
 <h3 id="traceback-1">Traceback 1</h3>
@@ -682,20 +687,19 @@ torchvision not found</pre></td>
 .r1 {color: #800000; text-decoration-color: #800000}
 .r2 {color: #800000; text-decoration-color: #800000; font-weight: bold}
 .r3 {color: #bf7f7f; text-decoration-color: #bf7f7f; font-weight: bold}
-.r4 {color: #bfbf7f; text-decoration-color: #bfbf7f}
-.r5 {color: #808000; text-decoration-color: #808000; font-weight: bold}
+.r4 {color: #7f7f7f; text-decoration-color: #7f7f7f}
+.r5 {font-weight: bold}
 .r6 {color: #0000ff; text-decoration-color: #0000ff}
-.r7 {color: #00ff00; text-decoration-color: #00ff00}
-.r8 {color: #7f7f7f; text-decoration-color: #7f7f7f}
-.r9 {color: #00ffff; text-decoration-color: #00ffff}
-.r10 {color: #808000; text-decoration-color: #808000}
-.r11 {color: #00ffff; text-decoration-color: #00ffff; text-decoration: underline}
-.r12 {color: #ff00ff; text-decoration-color: #ff00ff}
-.r13 {color: #ff0000; text-decoration-color: #ff0000; font-weight: bold}
-.r14 {color: #008000; text-decoration-color: #008000}
-.r15 {font-weight: bold}
-.r16 {color: #008080; text-decoration-color: #008080; font-weight: bold}
-.r17 {font-style: italic}
+.r7 {color: #808000; text-decoration-color: #808000}
+.r8 {color: #00ffff; text-decoration-color: #00ffff}
+.r9 {color: #ff00ff; text-decoration-color: #ff00ff}
+.r10 {font-weight: bold; text-decoration: underline}
+.r11 {color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold; text-decoration: underline}
+.r12 {color: #0000ff; text-decoration-color: #0000ff; font-weight: bold; text-decoration: underline}
+.r13 {color: #808080; text-decoration-color: #808080}
+.r14 {color: #00ffff; text-decoration-color: #00ffff; text-decoration: underline}
+.r15 {color: #ff0000; text-decoration-color: #ff0000; font-weight: bold}
+.r16 {color: #008000; text-decoration-color: #008000}
 body {
     color: var(--md-default-fg-color);
     background-color: var(--md-default-bg-color);
@@ -704,72 +708,98 @@ body {
 </head>
 <body>
     <pre style="font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><code style="font-family:inherit"><span class="r1">╭─────────────────────────────── </span><span class="r2">Traceback </span><span class="r3">(most recent call last)</span><span class="r1"> ────────────────────────────────╮</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/core/</span><span class="r5">_resource_tests.py</span>:<span class="r6">428</span> in <span class="r7">_test</span> <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/core/</span><span class="r5">_resource_tests.py</span>:869 in _test <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 425 </span><span class="r8">│   │   </span><span class="r6">raise</span> <span class="r9">RuntimeError</span>(<span class="r10">&quot;Conda not available&quot;</span>) <span class="r6">from</span> <span class="r11">e</span>                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 426 </span><span class="r8">│   </span>                                                                                      <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 427 </span><span class="r8">│   </span><span class="r6">try</span>:                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span> 428 <span class="r8">│   │   </span>run_command([CONDA_CMD, <span class="r10">&quot;run&quot;</span>, <span class="r10">&quot;-n&quot;</span>, env_name, <span class="r10">&quot;python&quot;</span>, <span class="r10">&quot;--version&quot;</span>])            <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 429 </span><span class="r8">│   </span><span class="r6">except</span> <span class="r9">Exception</span> <span class="r6">as</span> e:                                                                <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 430 </span><span class="r8">│   │   </span>working_dir.mkdir(parents=<span class="r6">True</span>, exist_ok=<span class="r6">True</span>)                                    <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 431 </span><span class="r8">│   │   </span>path = working_dir / <span class="r10">&quot;env.yaml&quot;</span>                                                   <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 866 </span><span class="r4">│   │   </span>test_input = get_test_input_sample(model)                                         <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 867 </span><span class="r4">│   │   </span>expected = get_test_output_sample(model)                                          <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 868 </span><span class="r4">│   │   </span>                                                                                  <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span> 869 <span class="r4">│   │   </span><span class="r6">with</span> create_prediction_pipeline(                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 870 </span><span class="r4">│   │   │   </span>bioimageio_model=model, devices=devices, weight_format=weight_format          <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 871 </span><span class="r4">│   │   </span>) <span class="r6">as</span> prediction_pipeline:                                                         <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 872 </span><span class="r4">│   │   │   </span>prediction_pipeline.apply_preprocessing(test_input)                           <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/core/</span><span class="r5">_resource_tests.py</span>:<span class="r6">198</span> in <span class="r7">defau</span> <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/core/</span><span class="r5">_prediction_pipeline.py</span>:407 in  <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 195 </span>                                                                                          <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 196 </span><span class="r6">def</span> <span class="r7">default_run_command</span>(args: Sequence[<span class="r9">str</span>]):                                             <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 197 </span><span class="r8">│   </span>logger.info(<span class="r10">&quot;running &#x27;{}&#x27;...&quot;</span>, <span class="r10">&quot; &quot;</span>.join(args))                                        <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span> 198 <span class="r8">│   </span>_ = subprocess.check_call(args)                                                       <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 199 </span>                                                                                          <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 200 </span>                                                                                          <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 201 </span><span class="r6">def</span> <span class="r7">test_description</span>(                                                                     <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">404 </span><span class="r4">│   │   │   </span><span class="r7">f&quot;deprecated create_prediction_pipeline kwargs: {</span><span class="r8">set</span>(deprecated_kwargs)<span class="r7">}&quot;</span>      <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">405 </span><span class="r4">│   │   </span>)                                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">406 </span><span class="r4">│   </span>                                                                                       <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>407 <span class="r4">│   </span>model_adapter = model_adapter <span class="r9">or</span> <span class="r10">create_model_adapter(</span>                                 <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">408 </span><span class="r4">│   │   </span><span class="r10">model_description=bioimageio_model,</span>                                                <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">409 </span><span class="r4">│   │   </span><span class="r10">devices=devices,</span>                                                                   <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">410 </span><span class="r4">│   │   </span><span class="r10">weight_format_priority_order=weights_format </span><span class="r11">and</span><span class="r10"> (weights_format,),</span>                 <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r4">/usr/lib/python3.12/</span><span class="r5">subprocess.py</span>:<span class="r6">413</span> in <span class="r7">check_call</span>                                              <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/core/backends/</span><span class="r5">_model_adapter.py</span>:185  <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 410 </span><span class="r8">│   │   </span>cmd = kwargs.get(<span class="r10">&quot;args&quot;</span>)                                                          <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 411 </span><span class="r8">│   │   </span><span class="r6">if</span> cmd <span class="r12">is</span> <span class="r6">None</span>:                                                                   <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 412 </span><span class="r8">│   │   │   </span>cmd = popenargs[<span class="r6">0</span>]                                                            <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span> 413 <span class="r8">│   │   </span><span class="r6">raise</span> CalledProcessError(retcode, cmd)                                            <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 414 </span><span class="r8">│   </span><span class="r6">return</span> <span class="r6">0</span>                                                                              <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 415 </span>                                                                                          <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 416 </span>                                                                                          <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">182 </span><span class="r4">│   │   </span><span class="r6">assert</span> errors                                                                      <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">183 </span><span class="r4">│   │   </span><span class="r6">if</span> <span class="r8">len</span>(weight_format_priority_order) == <span class="r6">1</span>:                                         <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">184 </span><span class="r4">│   │   │   </span><span class="r6">assert</span> <span class="r8">len</span>(errors) == <span class="r6">1</span>                                                        <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>185 <span class="r4">│   │   │   </span><span class="r12">raise</span><span class="r10"> errors[</span><span class="r12">0</span><span class="r10">]</span>                                                                <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">186 </span><span class="r4">│   │   </span>                                                                                   <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">187 </span><span class="r4">│   │   </span><span class="r6">else</span>:                                                                              <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">188 </span><span class="r4">│   │   │   </span>msg = (                                                                        <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/core/backends/</span><span class="r5">_model_adapter.py</span>:115  <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">112 </span><span class="r4">│   │   │   │   </span><span class="r6">try</span>:                                                                       <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">113 </span><span class="r4">│   │   │   │   │   </span><span class="r6">from</span><span class="r13"> </span><span class="r14">.pytorch_backend</span><span class="r13"> </span><span class="r6">import</span> PytorchModelAdapter                       <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">114 </span><span class="r4">│   │   │   │   │   </span>                                                                       <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>115 <span class="r4">│   │   │   │   │   </span><span class="r6">return</span> PytorchModelAdapter(                                            <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">116 </span><span class="r4">│   │   │   │   │   │   </span>model_description=model_description, devices=devices               <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">117 </span><span class="r4">│   │   │   │   │   </span>)                                                                      <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">118 </span><span class="r4">│   │   │   │   </span><span class="r6">except</span> <span class="r8">Exception</span> <span class="r6">as</span> e:                                                     <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/core/backends/</span><span class="r5">pytorch_backend.py</span>:38  <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 35 </span><span class="r4">│   │   │   </span><span class="r6">raise</span> <span class="r8">ValueError</span>(<span class="r7">&quot;No `pytorch_state_dict` weights found&quot;</span>)                      <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 36 </span><span class="r4">│   │   </span>                                                                                   <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 37 </span><span class="r4">│   │   </span>devices = get_devices(devices)                                                     <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span> 38 <span class="r4">│   │   </span><span class="r8">self</span>._model = <span class="r10">load_torch_model(weights, load_state=</span><span class="r12">True</span><span class="r10">, devices=devices)</span>          <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 39 </span><span class="r4">│   │   </span><span class="r6">if</span> mode == <span class="r7">&quot;eval&quot;</span>:                                                                 <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 40 </span><span class="r4">│   │   │   </span><span class="r8">self</span>._model = <span class="r8">self</span>._model.eval()                                               <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 41 </span><span class="r4">│   │   </span><span class="r6">elif</span> mode == <span class="r7">&quot;train&quot;</span>:                                                              <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/core/backends/</span><span class="r5">pytorch_backend.py</span>:103 <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">100 </span><span class="r4">│   </span>load_state: <span class="r8">bool</span> = <span class="r6">True</span>,                                                               <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">101 </span><span class="r4">│   </span>devices: Optional[Sequence[Union[<span class="r8">str</span>, torch.device]]] = <span class="r6">None</span>,                          <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">102 </span>) -&gt; nn.Module:                                                                            <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>103 <span class="r4">│   </span>custom_callable = <span class="r10">import_callable(</span>                                                     <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">104 </span><span class="r4">│   │   </span><span class="r10">weight_spec.architecture,</span>                                                          <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">105 </span><span class="r4">│   │   </span><span class="r10">sha256=(</span>                                                                           <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">106 </span><span class="r4">│   │   │   </span><span class="r10">weight_spec.architecture_sha256</span>                                                <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/core/</span><span class="r5">digest_spec.py</span>:71 in import_cal <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 68 </span><span class="r4">│   │   </span>module = importlib.import_module(node.module_name)                                 <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 69 </span><span class="r4">│   │   </span>c = <span class="r8">getattr</span>(module, <span class="r8">str</span>(node.callable_name))                                       <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 70 </span><span class="r4">│   </span><span class="r6">elif</span> <span class="r8">isinstance</span>(node, ArchitectureFromLibraryDescr):                                   <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span> 71 <span class="r4">│   │   </span>module = <span class="r10">importlib.import_module(node.import_from)</span>                                 <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 72 </span><span class="r4">│   │   </span>c = <span class="r8">getattr</span>(module, <span class="r8">str</span>(node.callable))                                            <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 73 </span><span class="r4">│   </span><span class="r6">elif</span> <span class="r8">isinstance</span>(node, CallableFromFile):                                               <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 74 </span><span class="r4">│   │   </span>c = _import_from_file_impl(node.source_file, <span class="r8">str</span>(node.callable_name), **kwargs)    <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/usr/share/miniconda/envs/a4a69c7b0241722dbb721e78ee9fbbe7c18c681497e88237e37bc450ab1b0458/lib/p</span> <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 87 </span><span class="r4">│   │   │   </span><span class="r6">if</span> character != <span class="r7">&#x27;.&#x27;</span>:                                                           <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 88 </span><span class="r4">│   │   │   │   </span><span class="r6">break</span>                                                                      <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 89 </span><span class="r4">│   │   │   </span>level += <span class="r6">1</span>                                                                     <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span> 90 <span class="r4">│   </span><span class="r6">return</span> <span class="r10">_bootstrap._gcd_import(name[level:], package, level)</span>                            <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 91 </span>                                                                                           <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 92 </span>                                                                                           <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 93 </span>_RELOADING = {}                                                                            <span class="r1">│</span>
+<span class="r1">│</span> in _gcd_import:1387                                                                              <span class="r1">│</span>
+<span class="r1">│</span> in _find_and_load:1360                                                                           <span class="r1">│</span>
+<span class="r1">│</span> in _find_and_load_unlocked:1310                                                                  <span class="r1">│</span>
+<span class="r1">│</span> in _call_with_frames_removed:488                                                                 <span class="r1">│</span>
+<span class="r1">│</span> in _gcd_import:1387                                                                              <span class="r1">│</span>
+<span class="r1">│</span> in _find_and_load:1360                                                                           <span class="r1">│</span>
+<span class="r1">│</span> in _find_and_load_unlocked:1310                                                                  <span class="r1">│</span>
+<span class="r1">│</span> in _call_with_frames_removed:488                                                                 <span class="r1">│</span>
+<span class="r1">│</span> in _gcd_import:1387                                                                              <span class="r1">│</span>
+<span class="r1">│</span> in _find_and_load:1360                                                                           <span class="r1">│</span>
+<span class="r1">│</span> in _find_and_load_unlocked:1324                                                                  <span class="r1">│</span>
 <span class="r1">╰──────────────────────────────────────────────────────────────────────────────────────────────────╯</span>
-<span class="r13">CalledProcessError: </span>Command <span class="r14">&#x27;[&#x27;</span>conda&#x27;, <span class="r14">&#x27;run&#x27;</span>, <span class="r14">&#x27;-n&#x27;</span>, <span class="r14">&#x27;a4a69c7b0241722dbb721e78ee9fbbe7c18c681497e88237e37bc450ab1b0458&#x27;</span>, <span class="r14">&#x27;python&#x27;</span>, <span class="r14">&#x27;--version&#x27;</span><span class="r15">]</span>&#x27; returned non-zero exit status <span class="r16">1</span>.
-
-<span class="r17">During handling of the above exception, another exception occurred:</span>
-
-<span class="r1">╭─────────────────────────────── </span><span class="r2">Traceback </span><span class="r3">(most recent call last)</span><span class="r1"> ────────────────────────────────╮</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/core/</span><span class="r5">_resource_tests.py</span>:<span class="r6">435</span> in <span class="r7">_test</span> <span class="r1">│</span>
-<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 432 </span><span class="r8">│   │   </span><span class="r6">try</span>:                                                                              <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 433 </span><span class="r8">│   │   │   </span>_ = path.write_bytes(encoded_env)                                             <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 434 </span><span class="r8">│   │   │   </span>logger.debug(<span class="r10">&quot;written conda env to {}&quot;</span>, path)                                 <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span> 435 <span class="r8">│   │   │   </span>run_command(                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 436 </span><span class="r8">│   │   │   │   </span>[                                                                         <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 437 </span><span class="r8">│   │   │   │   │   </span>CONDA_CMD,                                                            <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 438 </span><span class="r8">│   │   │   │   │   </span><span class="r10">&quot;env&quot;</span>,                                                                <span class="r1">│</span>
-<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/core/</span><span class="r5">_resource_tests.py</span>:<span class="r6">198</span> in <span class="r7">defau</span> <span class="r1">│</span>
-<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 195 </span>                                                                                          <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 196 </span><span class="r6">def</span> <span class="r7">default_run_command</span>(args: Sequence[<span class="r9">str</span>]):                                             <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 197 </span><span class="r8">│   </span>logger.info(<span class="r10">&quot;running &#x27;{}&#x27;...&quot;</span>, <span class="r10">&quot; &quot;</span>.join(args))                                        <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span> 198 <span class="r8">│   </span>_ = subprocess.check_call(args)                                                       <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 199 </span>                                                                                          <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 200 </span>                                                                                          <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 201 </span><span class="r6">def</span> <span class="r7">test_description</span>(                                                                     <span class="r1">│</span>
-<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r4">/usr/lib/python3.12/</span><span class="r5">subprocess.py</span>:<span class="r6">413</span> in <span class="r7">check_call</span>                                              <span class="r1">│</span>
-<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 410 </span><span class="r8">│   │   </span>cmd = kwargs.get(<span class="r10">&quot;args&quot;</span>)                                                          <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 411 </span><span class="r8">│   │   </span><span class="r6">if</span> cmd <span class="r12">is</span> <span class="r6">None</span>:                                                                   <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 412 </span><span class="r8">│   │   │   </span>cmd = popenargs[<span class="r6">0</span>]                                                            <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span> 413 <span class="r8">│   │   </span><span class="r6">raise</span> CalledProcessError(retcode, cmd)                                            <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 414 </span><span class="r8">│   </span><span class="r6">return</span> <span class="r6">0</span>                                                                              <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 415 </span>                                                                                          <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 416 </span>                                                                                          <span class="r1">│</span>
-<span class="r1">╰──────────────────────────────────────────────────────────────────────────────────────────────────╯</span>
-<span class="r13">CalledProcessError: </span>Command <span class="r14">&#x27;[&#x27;</span>conda&#x27;, <span class="r14">&#x27;env&#x27;</span>, <span class="r14">&#x27;create&#x27;</span>, <span class="r14">&#x27;--yes&#x27;</span>, <span class="r14">&#x27;--file=/tmp/tmpg4oko_48/pytorch_state_dict/env.yaml&#x27;</span>, <span class="r14">&#x27;--name=a4a69c7b0241722dbb721e78ee9fbbe7c18c681497e88237e37bc450ab1b0458&#x27;</span>, <span class="r14">&#x27;--quiet&#x27;</span><span class="r15">]</span>&#x27; returned non-zero exit status <span class="r16">1</span>.
+<span class="r15">ModuleNotFoundError: </span>No module named <span class="r16">&#x27;careamics&#x27;</span>
 </code></pre>
 </body>
 </html>
