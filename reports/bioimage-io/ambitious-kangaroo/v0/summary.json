@@ -231,6 +231,7 @@
             "biapy_3.6.6": 1.0,
             "biapy_3.6.7": 1.0,
             "biapy_3.6.8": 1.0,
+            "bioimageio.core_0.10.0": 1.0,
             "bioimageio.core_0.9.3": 0.0,
             "bioimageio.core_0.9.4": 0.0,
             "bioimageio.core_0.9.5": 0.5,
@@ -296,6 +297,156 @@
             }
         },
         "bioimageio.core": {
+            "0.10.0": {
+                "badge": null,
+                "details": {
+                    "details": [
+                        {
+                            "context": {
+                                "file_name": "rdf.yaml",
+                                "known_files": {
+                                    "checkpoint.pth": "288abc4da94874cf5e23e70a1fa3a3c6a51e8bd722970bfc8e10ad35b39b0b58",
+                                    "environment.yaml": "63075e7a3f8f07ecaebfc2d0d10f4312f956ece9278bd0b118570386c32356d5",
+                                    "https://doi.org/10.1038/s41592-025-02699-y": null,
+                                    "https://github.com/BiaPyX/BiaPy": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/ambitious-kangaroo/files/checkpoint.pth?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/ambitious-kangaroo/files/cover.png?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/ambitious-kangaroo/files/documentation.md?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/ambitious-kangaroo/files/environment.yaml?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/ambitious-kangaroo/files/test-input.npy?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/ambitious-kangaroo/files/test-output.npy?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/ambitious-kangaroo/files/unetr.py?version=v0": null,
+                                    "test-input.npy": "5d520b4473f7d486e0f142bedf73574bb205e2e6d917377c9635b0b6e493d79a",
+                                    "test-output.npy": "0172c4654edf014399e3eb23ebc7936cd91b2faabde60dbf3a69b9bc7fc1b8f4",
+                                    "unetr.py": "f3e6e082f95721fdcc398a3dc78b287cce7f6aeb904676241a92695b5e042791"
+                                },
+                                "original_source_name": null,
+                                "perform_io_checks": true,
+                                "root": "https://hypha.aicell.io/bioimage-io/artifacts/ambitious-kangaroo/files?version=v0",
+                                "update_hashes": false
+                            },
+                            "errors": [],
+                            "loc": [],
+                            "name": "Successfully created `ModelDescr` instance.",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [],
+                            "name": "bioimageio.spec format validation model 0.5.9",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": [
+                                {
+                                    "loc": [
+                                        "inputs",
+                                        0,
+                                        "sample_tensor"
+                                    ],
+                                    "msg": "Needs to be filled for FAIR compliance",
+                                    "severity": 35,
+                                    "type": "warning"
+                                },
+                                {
+                                    "loc": [
+                                        "outputs",
+                                        0,
+                                        "sample_tensor"
+                                    ],
+                                    "msg": "Needs to be filled for FAIR compliance",
+                                    "severity": 35,
+                                    "type": "warning"
+                                }
+                            ]
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "pytorch_state_dict"
+                            ],
+                            "name": "Found existing conda environment '4111c99f319e2948cd95fe87067b76f177ebaedbb040f645f088d0658a818ec7'",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "pytorch_state_dict"
+                            ],
+                            "name": "Reproduce test outputs from test inputs (pytorch_state_dict)",
+                            "recommended_env": {
+                                "channels": [
+                                    "conda-forge",
+                                    "nodefaults"
+                                ],
+                                "dependencies": [
+                                    "pip",
+                                    {
+                                        "pip": [
+                                            "timm==1.0.14"
+                                        ]
+                                    },
+                                    "conda-forge::bioimageio.core>=0.9.4",
+                                    "python>=3.10"
+                                ],
+                                "name": "biapy"
+                            },
+                            "saved_conda_compare": "Success. All the packages in the specification file are present in the environment with matching version and build string.\n",
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "pytorch_state_dict"
+                            ],
+                            "name": "Run pytorch_state_dict inference for inputs with batch_size: 1 and size parameter n: 0",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        }
+                    ],
+                    "env": [
+                        [
+                            "bioimageio.spec",
+                            "0.5.9.0",
+                            "",
+                            ""
+                        ]
+                    ],
+                    "format_version": "0.5.9",
+                    "id": "ambitious-kangaroo",
+                    "metadata_completeness": 0.48148148148148145,
+                    "name": "bioimageio format validation",
+                    "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+                    "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/ambitious-kangaroo/files/rdf.yaml?version=v0",
+                    "status": "passed",
+                    "traceback": null,
+                    "type": "model",
+                    "version": "0.1.0",
+                    "warnings": null
+                },
+                "error": null,
+                "links": [
+                    "bioimageio/bioimageio.core"
+                ],
+                "score": 1.0,
+                "status": "passed"
+            },
             "0.9.3": {
                 "badge": null,
                 "details": {
