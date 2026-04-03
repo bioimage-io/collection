@@ -937,7 +937,8 @@
             "ilastik_1.4.2b5": 0.0,
             "ilastik_1.4.2b6": 0.0,
             "ilastik_1.4.2b7": 0.0,
-            "ilastik_1.4.2b9": 0.0
+            "ilastik_1.4.2b9": 0.0,
+            "ilastik_1.4.2rc1": 0.0
         }
     },
     "status": "passed",
@@ -2272,6 +2273,14 @@
                 "status": "failed"
             },
             "1.4.2b9": {
+                "badge": null,
+                "details": null,
+                "error": "ilastik only supports a single input/output tensor (found 6/3)",
+                "links": [],
+                "score": 0.0,
+                "status": "failed"
+            },
+            "1.4.2rc1": {
                 "badge": null,
                 "details": null,
                 "error": "ilastik only supports a single input/output tensor (found 6/3)",
