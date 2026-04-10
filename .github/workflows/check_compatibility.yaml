@@ -106,6 +106,7 @@ jobs:
           REPORTS: gh-pages/reports
           RUN_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
           HYPHA_API_TOKEN: ${{secrets.HYPHA_API_TOKEN}}
+      - run: cp bioimageio_collection_config.json gh-pages/
       - name: Deploy to gh-pages 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
