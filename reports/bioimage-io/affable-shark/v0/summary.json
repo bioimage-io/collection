@@ -246,7 +246,10 @@
         "config": {
             "bioimageio": {
                 "nickname": "affable-shark",
-                "nickname_icon": "🦈"
+                "nickname_icon": "🦈",
+                "thumbnails": {
+                    "cover.png": "cover.thumbnail.png"
+                }
             },
             "_conceptdoi": "10.5281/zenodo.5764892",
             "deepimagej": {
@@ -291,6 +294,6 @@
             }
         }
     },
-    "rdf_yaml_sha256": "d918f2015f272d3a146ac7dfc4c25486377f6d6703bc1b3421f531c7b3a2ba15",
+    "rdf_yaml_sha256": "a2964847d6dc070afda53f6d5be7a4cb0d697e45f65e1f5a8890d24e6f1cbe08",
     "status": "untested"
 }
