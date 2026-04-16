@@ -569,69 +569,78 @@
 </style>
 <div class="validation-summary-container"><table>
   <tr>
-    <th>🟡</th>
-    <th>bioimageio format validation</th>
+    <th style="text-align:center">🟡</th>
+    <th style="text-align:center">bioimageio format validation</th>
   </tr>
   <tr>
-    <td>status</td>
-    <td>valid-format</td>
+    <td style="text-align:left">status</td>
+    <td style="text-align:left">valid-format</td>
   </tr>
   <tr>
-    <td>source</td>
-    <td>https://hypha.aicell.io/bioimage-io/artifacts/ambitious-sloth/files/rdf.yaml?version=v0</td>
+    <td style="text-align:left">source</td>
+    <td style="text-align:left">https://hypha.aicell.io/bioimage-io/artifacts/ambitious-sloth/files/rdf.yaml?version=v0</td>
   </tr>
   <tr>
-    <td>id</td>
-    <td>ambitious-sloth</td>
+    <td style="text-align:left">id</td>
+    <td style="text-align:left">ambitious-sloth</td>
   </tr>
   <tr>
-    <td>version</td>
-    <td>1.3</td>
+    <td style="text-align:left">version</td>
+    <td style="text-align:left">1.3</td>
   </tr>
   <tr>
-    <td>applied format</td>
-    <td>model 0.5.9</td>
+    <td style="text-align:left">applied format</td>
+    <td style="text-align:left">model 0.5.9</td>
   </tr>
   <tr>
-    <td>bioimageio.spec</td>
-    <td>0.5.9.0</td>
+    <td style="text-align:left">bioimageio.spec</td>
+    <td style="text-align:left">0.5.9.1</td>
   </tr>
 </table>
 <table>
   <tr>
-    <th></th>
-    <th>Location</th>
-    <th>Details</th>
+    <th style="text-align:center"></th>
+    <th style="text-align:center">Location</th>
+    <th style="text-align:center">Details</th>
   </tr>
   <tr>
-    <td>✔️</td>
-    <td></td>
-    <td>Successfully created `ModelDescr` instance.</td>
+    <td style="text-align:left">✔️</td>
+    <td style="text-align:left"></td>
+    <td style="text-align:left">Successfully created `ModelDescr` instance.</td>
   </tr>
   <tr>
-    <td>✔️</td>
-    <td></td>
-    <td>bioimageio.spec format validation model 0.5.9</td>
+    <td style="text-align:left">✔️</td>
+    <td style="text-align:left"></td>
+    <td style="text-align:left">bioimageio.spec format validation model 0.5.9</td>
   </tr>
   <tr>
-    <td>✔️</td>
-    <td><code>weights.onnx</code></td>
-    <td>Found existing conda environment '4d82a6bc4511b4ad0459f190edebc373e2ca235c8452606867e45b1507100a34'</td>
+    <td style="text-align:left">✔️</td>
+    <td style="text-align:left"><code>weights.onnx</code></td>
+    <td style="text-align:left">Found existing conda environment '4d82a6bc4511b4ad0459f190edebc373e2ca235c8452606867e45b1507100a34'</td>
   </tr>
   <tr>
-    <td>✔️</td>
-    <td><code>weights.onnx</code></td>
-    <td>Reproduce test outputs from test inputs (onnx)</td>
+    <td style="text-align:left">✔️</td>
+    <td style="text-align:left"><code>weights.onnx</code></td>
+    <td style="text-align:left">Reproduce test outputs from test inputs (onnx)</td>
   </tr>
   <tr>
-    <td></td>
-    <td><code>weights.onnx</code></td>
-    <td><pre>recommended conda environment (Reproduce test outputs from test inputs (onnx))</pre></td>
+    <td style="text-align:left">ℹ</td>
+    <td style="text-align:left"><code>weights.onnx</code></td>
+    <td style="text-align:left"><pre>Output `prediction`: all elements agree with expected values. 
+Max relative difference not accounted for by absolute tolerance (1.00e-03):
+0.00e+00 (= \|2.37e-03 - 2.37e-03\|/\|2.37e-03 + 1e-6\|) at {'batch': np.int64(0), 'channel': np.int64(0), 'z': np.int64(0), 'y': np.int64(0), 'x': np.int64(0)} 
+Max absolute difference not accounted for by relative tolerance (1.00e-03):
+0.00e+00 (= \|-4.1909516e-09 - -4.2644412e-09\|) at {'batch': np.int64(0), 'channel': np.int64(0), 'z': np.int64(1), 'y': np.int64(222), 'x': np.int64(101)}</pre></td>
   </tr>
   <tr>
-    <td></td>
-    <td></td>
-    <td><pre lang="yaml">%YAML 1.2
+    <td style="text-align:left"></td>
+    <td style="text-align:left"><code>weights.onnx</code></td>
+    <td style="text-align:left"><pre>recommended conda environment (Reproduce test outputs from test inputs (onnx))</pre></td>
+  </tr>
+  <tr>
+    <td style="text-align:left"></td>
+    <td style="text-align:left"></td>
+    <td style="text-align:left"><pre lang="yaml">%YAML 1.2
 ---
 channels:
   - conda-forge
@@ -643,45 +652,45 @@ dependencies:
 </pre></td>
   </tr>
   <tr>
-    <td></td>
-    <td><code>weights.onnx</code></td>
-    <td><pre>conda compare (Reproduce test outputs from test inputs (onnx))</pre></td>
+    <td style="text-align:left"></td>
+    <td style="text-align:left"><code>weights.onnx</code></td>
+    <td style="text-align:left"><pre>conda compare (Reproduce test outputs from test inputs (onnx))</pre></td>
   </tr>
   <tr>
-    <td></td>
-    <td></td>
-    <td><pre>Success. All the packages in the specification file are present in the environment with matching
+    <td style="text-align:left"></td>
+    <td style="text-align:left"></td>
+    <td style="text-align:left"><pre>Success. All the packages in the specification file are present in the environment with matching
 version and build string.</pre></td>
   </tr>
   <tr>
-    <td>✔️</td>
-    <td><code>weights.onnx</code></td>
-    <td>Run onnx inference for inputs with batch_size: 1 and size parameter n: 0</td>
+    <td style="text-align:left">✔️</td>
+    <td style="text-align:left"><code>weights.onnx</code></td>
+    <td style="text-align:left">Run onnx inference for inputs with batch_size: 1 and size parameter n: 0</td>
   </tr>
   <tr>
-    <td>❌</td>
-    <td><code>weights.pytorch_state_dict</code></td>
-    <td>Conda environment creation</td>
+    <td style="text-align:left">❌</td>
+    <td style="text-align:left"><code>weights.pytorch_state_dict</code></td>
+    <td style="text-align:left">Conda environment creation</td>
   </tr>
   <tr>
-    <td>❌</td>
-    <td><code>weights.pytorch_state_dict</code></td>
-    <td><pre>Command '['conda', 'env', 'create', '--yes', '--file=/tmp/tmpah2jscc8/pytorch_state_dict/env.yaml', '--name=35e018c1aca85a2ef91578e5c0b96127a05eb947d37201ce0229bd32c289e284', '--quiet']' returned non-zero exit status 1.</pre></td>
+    <td style="text-align:left">❌</td>
+    <td style="text-align:left"><code>weights.pytorch_state_dict</code></td>
+    <td style="text-align:left"><pre>Command '['conda', 'env', 'create', '--yes', '--file=/tmp/tmp0hm75ipq/pytorch_state_dict/env.yaml', '--name=35e018c1aca85a2ef91578e5c0b96127a05eb947d37201ce0229bd32c289e284', '--quiet']' returned non-zero exit status 1.</pre></td>
   </tr>
   <tr>
-    <td></td>
-    <td></td>
-    <td>See <a href="#traceback-1">Traceback 1</a>.</td>
+    <td style="text-align:left"></td>
+    <td style="text-align:left"></td>
+    <td style="text-align:left">See <a href="#traceback-1">Traceback 1</a>.</td>
   </tr>
   <tr>
-    <td></td>
-    <td><code>weights.pytorch_state_dict</code></td>
-    <td><pre>recommended conda environment (Conda environment creation)</pre></td>
+    <td style="text-align:left"></td>
+    <td style="text-align:left"><code>weights.pytorch_state_dict</code></td>
+    <td style="text-align:left"><pre>recommended conda environment (Conda environment creation)</pre></td>
   </tr>
   <tr>
-    <td></td>
-    <td></td>
-    <td><pre lang="yaml">%YAML 1.2
+    <td style="text-align:left"></td>
+    <td style="text-align:left"></td>
+    <td style="text-align:left"><pre lang="yaml">%YAML 1.2
 ---
 channels:
   - conda-forge
@@ -697,40 +706,40 @@ dependencies:
 </pre></td>
   </tr>
   <tr>
-    <td></td>
-    <td><code>weights.pytorch_state_dict</code></td>
-    <td><pre>conda compare (Conda environment creation)</pre></td>
+    <td style="text-align:left"></td>
+    <td style="text-align:left"><code>weights.pytorch_state_dict</code></td>
+    <td style="text-align:left"><pre>conda compare (Conda environment creation)</pre></td>
   </tr>
   <tr>
-    <td></td>
-    <td></td>
-    <td><pre>bioimageio.core not found mkl not found numpy not found pip not found pytorch not found
+    <td style="text-align:left"></td>
+    <td style="text-align:left"></td>
+    <td style="text-align:left"><pre>bioimageio.core not found mkl not found numpy not found pip not found pytorch not found
 setuptools not found torchvision not found</pre></td>
   </tr>
   <tr>
-    <td>❌</td>
-    <td><code>weights.torchscript</code></td>
-    <td>Conda environment creation</td>
+    <td style="text-align:left">❌</td>
+    <td style="text-align:left"><code>weights.torchscript</code></td>
+    <td style="text-align:left">Conda environment creation</td>
   </tr>
   <tr>
-    <td>❌</td>
-    <td><code>weights.torchscript</code></td>
-    <td><pre>Command '['conda', 'env', 'create', '--yes', '--file=/tmp/tmpah2jscc8/torchscript/env.yaml', '--name=35e018c1aca85a2ef91578e5c0b96127a05eb947d37201ce0229bd32c289e284', '--quiet']' returned non-zero exit status 1.</pre></td>
+    <td style="text-align:left">❌</td>
+    <td style="text-align:left"><code>weights.torchscript</code></td>
+    <td style="text-align:left"><pre>Command '['conda', 'env', 'create', '--yes', '--file=/tmp/tmp0hm75ipq/torchscript/env.yaml', '--name=35e018c1aca85a2ef91578e5c0b96127a05eb947d37201ce0229bd32c289e284', '--quiet']' returned non-zero exit status 1.</pre></td>
   </tr>
   <tr>
-    <td></td>
-    <td></td>
-    <td>See <a href="#traceback-2">Traceback 2</a>.</td>
+    <td style="text-align:left"></td>
+    <td style="text-align:left"></td>
+    <td style="text-align:left">See <a href="#traceback-2">Traceback 2</a>.</td>
   </tr>
   <tr>
-    <td></td>
-    <td><code>weights.torchscript</code></td>
-    <td><pre>recommended conda environment (Conda environment creation)</pre></td>
+    <td style="text-align:left"></td>
+    <td style="text-align:left"><code>weights.torchscript</code></td>
+    <td style="text-align:left"><pre>recommended conda environment (Conda environment creation)</pre></td>
   </tr>
   <tr>
-    <td></td>
-    <td></td>
-    <td><pre lang="yaml">%YAML 1.2
+    <td style="text-align:left"></td>
+    <td style="text-align:left"></td>
+    <td style="text-align:left"><pre lang="yaml">%YAML 1.2
 ---
 channels:
   - conda-forge
@@ -746,14 +755,14 @@ dependencies:
 </pre></td>
   </tr>
   <tr>
-    <td></td>
-    <td><code>weights.torchscript</code></td>
-    <td><pre>conda compare (Conda environment creation)</pre></td>
+    <td style="text-align:left"></td>
+    <td style="text-align:left"><code>weights.torchscript</code></td>
+    <td style="text-align:left"><pre>conda compare (Conda environment creation)</pre></td>
   </tr>
   <tr>
-    <td></td>
-    <td></td>
-    <td><pre>bioimageio.core not found mkl not found numpy not found pip not found pytorch not found
+    <td style="text-align:left"></td>
+    <td style="text-align:left"></td>
+    <td style="text-align:left"><pre>bioimageio.core not found mkl not found numpy not found pip not found pytorch not found
 setuptools not found torchvision not found</pre></td>
   </tr>
 </table>
@@ -788,15 +797,15 @@ body {
 </head>
 <body>
     <pre style="font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><code style="font-family:inherit"><span class="r1">╭─────────────────────────────── </span><span class="r2">Traceback </span><span class="r3">(most recent call last)</span><span class="r1"> ────────────────────────────────╮</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/core/</span><span class="r5">_resource_tests.py</span>:<span class="r6">441</span> in <span class="r7">_test</span> <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/core/</span><span class="r5">_resource_tests.py</span>:<span class="r6">443</span> in <span class="r7">_test</span> <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 438 </span><span class="r8">│   │   </span><span class="r6">raise</span> <span class="r9">RuntimeError</span>(<span class="r10">&quot;Conda not available&quot;</span>) <span class="r6">from</span> <span class="r11">e</span>                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 439 </span><span class="r8">│   </span>                                                                                      <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 440 </span><span class="r8">│   </span><span class="r6">try</span>:                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span> 441 <span class="r8">│   │   </span>run_command([CONDA_CMD, <span class="r10">&quot;run&quot;</span>, <span class="r10">&quot;-n&quot;</span>, env_name, <span class="r10">&quot;python&quot;</span>, <span class="r10">&quot;--version&quot;</span>])            <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 442 </span><span class="r8">│   </span><span class="r6">except</span> <span class="r9">Exception</span>:                                                                     <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 443 </span><span class="r8">│   │   </span>working_dir.mkdir(parents=<span class="r6">True</span>, exist_ok=<span class="r6">True</span>)                                    <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 444 </span><span class="r8">│   │   </span>path = working_dir / <span class="r10">&quot;env.yaml&quot;</span>                                                   <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8"> 440 </span><span class="r8">│   │   </span><span class="r6">raise</span> <span class="r9">RuntimeError</span>(<span class="r10">&quot;Conda not available&quot;</span>) <span class="r6">from</span> <span class="r11">e</span>                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8"> 441 </span><span class="r8">│   </span>                                                                                      <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8"> 442 </span><span class="r8">│   </span><span class="r6">try</span>:                                                                                  <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span> 443 <span class="r8">│   │   </span>run_command([CONDA_CMD, <span class="r10">&quot;run&quot;</span>, <span class="r10">&quot;-n&quot;</span>, env_name, <span class="r10">&quot;python&quot;</span>, <span class="r10">&quot;--version&quot;</span>])            <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8"> 444 </span><span class="r8">│   </span><span class="r6">except</span> <span class="r9">Exception</span>:                                                                     <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8"> 445 </span><span class="r8">│   │   </span>working_dir.mkdir(parents=<span class="r6">True</span>, exist_ok=<span class="r6">True</span>)                                    <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8"> 446 </span><span class="r8">│   │   </span>path = working_dir / <span class="r10">&quot;env.yaml&quot;</span>                                                   <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
 <span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/core/</span><span class="r5">_resource_tests.py</span>:<span class="r6">203</span> in <span class="r7">defau</span> <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
@@ -823,15 +832,15 @@ body {
 <span class="r17">During handling of the above exception, another exception occurred:</span>
 
 <span class="r1">╭─────────────────────────────── </span><span class="r2">Traceback </span><span class="r3">(most recent call last)</span><span class="r1"> ────────────────────────────────╮</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/core/</span><span class="r5">_resource_tests.py</span>:<span class="r6">448</span> in <span class="r7">_test</span> <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/core/</span><span class="r5">_resource_tests.py</span>:<span class="r6">450</span> in <span class="r7">_test</span> <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 445 </span><span class="r8">│   │   </span><span class="r6">try</span>:                                                                              <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 446 </span><span class="r8">│   │   │   </span>_ = path.write_bytes(encoded_env)                                             <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 447 </span><span class="r8">│   │   │   </span>logger.debug(<span class="r10">&quot;written conda env to {}&quot;</span>, path)                                 <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span> 448 <span class="r8">│   │   │   </span>run_command(                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 449 </span><span class="r8">│   │   │   │   </span>[                                                                         <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 450 </span><span class="r8">│   │   │   │   │   </span>CONDA_CMD,                                                            <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 451 </span><span class="r8">│   │   │   │   │   </span><span class="r10">&quot;env&quot;</span>,                                                                <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8"> 447 </span><span class="r8">│   │   </span><span class="r6">try</span>:                                                                              <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8"> 448 </span><span class="r8">│   │   │   </span>_ = path.write_bytes(encoded_env)                                             <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8"> 449 </span><span class="r8">│   │   │   </span>logger.debug(<span class="r10">&quot;written conda env to {}&quot;</span>, path)                                 <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span> 450 <span class="r8">│   │   │   </span>run_command(                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8"> 451 </span><span class="r8">│   │   │   │   </span>[                                                                         <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8"> 452 </span><span class="r8">│   │   │   │   │   </span>CONDA_CMD,                                                            <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8"> 453 </span><span class="r8">│   │   │   │   │   </span><span class="r10">&quot;env&quot;</span>,                                                                <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
 <span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/core/</span><span class="r5">_resource_tests.py</span>:<span class="r6">203</span> in <span class="r7">defau</span> <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
@@ -853,7 +862,7 @@ body {
 <span class="r1">│</span>   <span class="r8"> 415 </span>                                                                                          <span class="r1">│</span>
 <span class="r1">│</span>   <span class="r8"> 416 </span>                                                                                          <span class="r1">│</span>
 <span class="r1">╰──────────────────────────────────────────────────────────────────────────────────────────────────╯</span>
-<span class="r13">CalledProcessError: </span>Command <span class="r14">&#x27;[&#x27;</span>conda&#x27;, <span class="r14">&#x27;env&#x27;</span>, <span class="r14">&#x27;create&#x27;</span>, <span class="r14">&#x27;--yes&#x27;</span>, <span class="r14">&#x27;--file=/tmp/tmpah2jscc8/pytorch_state_dict/env.yaml&#x27;</span>, <span class="r14">&#x27;--name=35e018c1aca85a2ef91578e5c0b96127a05eb947d37201ce0229bd32c289e284&#x27;</span>, <span class="r14">&#x27;--quiet&#x27;</span><span class="r15">]</span>&#x27; returned non-zero exit status <span class="r16">1</span>.
+<span class="r13">CalledProcessError: </span>Command <span class="r14">&#x27;[&#x27;</span>conda&#x27;, <span class="r14">&#x27;env&#x27;</span>, <span class="r14">&#x27;create&#x27;</span>, <span class="r14">&#x27;--yes&#x27;</span>, <span class="r14">&#x27;--file=/tmp/tmp0hm75ipq/pytorch_state_dict/env.yaml&#x27;</span>, <span class="r14">&#x27;--name=35e018c1aca85a2ef91578e5c0b96127a05eb947d37201ce0229bd32c289e284&#x27;</span>, <span class="r14">&#x27;--quiet&#x27;</span><span class="r15">]</span>&#x27; returned non-zero exit status <span class="r16">1</span>.
 </code></pre>
 </body>
 </html>
@@ -889,15 +898,15 @@ body {
 </head>
 <body>
     <pre style="font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><code style="font-family:inherit"><span class="r1">╭─────────────────────────────── </span><span class="r2">Traceback </span><span class="r3">(most recent call last)</span><span class="r1"> ────────────────────────────────╮</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/core/</span><span class="r5">_resource_tests.py</span>:<span class="r6">441</span> in <span class="r7">_test</span> <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/core/</span><span class="r5">_resource_tests.py</span>:<span class="r6">443</span> in <span class="r7">_test</span> <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 438 </span><span class="r8">│   │   </span><span class="r6">raise</span> <span class="r9">RuntimeError</span>(<span class="r10">&quot;Conda not available&quot;</span>) <span class="r6">from</span> <span class="r11">e</span>                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 439 </span><span class="r8">│   </span>                                                                                      <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 440 </span><span class="r8">│   </span><span class="r6">try</span>:                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span> 441 <span class="r8">│   │   </span>run_command([CONDA_CMD, <span class="r10">&quot;run&quot;</span>, <span class="r10">&quot;-n&quot;</span>, env_name, <span class="r10">&quot;python&quot;</span>, <span class="r10">&quot;--version&quot;</span>])            <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 442 </span><span class="r8">│   </span><span class="r6">except</span> <span class="r9">Exception</span>:                                                                     <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 443 </span><span class="r8">│   │   </span>working_dir.mkdir(parents=<span class="r6">True</span>, exist_ok=<span class="r6">True</span>)                                    <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 444 </span><span class="r8">│   │   </span>path = working_dir / <span class="r10">&quot;env.yaml&quot;</span>                                                   <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8"> 440 </span><span class="r8">│   │   </span><span class="r6">raise</span> <span class="r9">RuntimeError</span>(<span class="r10">&quot;Conda not available&quot;</span>) <span class="r6">from</span> <span class="r11">e</span>                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8"> 441 </span><span class="r8">│   </span>                                                                                      <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8"> 442 </span><span class="r8">│   </span><span class="r6">try</span>:                                                                                  <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span> 443 <span class="r8">│   │   </span>run_command([CONDA_CMD, <span class="r10">&quot;run&quot;</span>, <span class="r10">&quot;-n&quot;</span>, env_name, <span class="r10">&quot;python&quot;</span>, <span class="r10">&quot;--version&quot;</span>])            <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8"> 444 </span><span class="r8">│   </span><span class="r6">except</span> <span class="r9">Exception</span>:                                                                     <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8"> 445 </span><span class="r8">│   │   </span>working_dir.mkdir(parents=<span class="r6">True</span>, exist_ok=<span class="r6">True</span>)                                    <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8"> 446 </span><span class="r8">│   │   </span>path = working_dir / <span class="r10">&quot;env.yaml&quot;</span>                                                   <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
 <span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/core/</span><span class="r5">_resource_tests.py</span>:<span class="r6">203</span> in <span class="r7">defau</span> <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
@@ -924,15 +933,15 @@ body {
 <span class="r17">During handling of the above exception, another exception occurred:</span>
 
 <span class="r1">╭─────────────────────────────── </span><span class="r2">Traceback </span><span class="r3">(most recent call last)</span><span class="r1"> ────────────────────────────────╮</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/core/</span><span class="r5">_resource_tests.py</span>:<span class="r6">448</span> in <span class="r7">_test</span> <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/core/</span><span class="r5">_resource_tests.py</span>:<span class="r6">450</span> in <span class="r7">_test</span> <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 445 </span><span class="r8">│   │   </span><span class="r6">try</span>:                                                                              <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 446 </span><span class="r8">│   │   │   </span>_ = path.write_bytes(encoded_env)                                             <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 447 </span><span class="r8">│   │   │   </span>logger.debug(<span class="r10">&quot;written conda env to {}&quot;</span>, path)                                 <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span> 448 <span class="r8">│   │   │   </span>run_command(                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 449 </span><span class="r8">│   │   │   │   </span>[                                                                         <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 450 </span><span class="r8">│   │   │   │   │   </span>CONDA_CMD,                                                            <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 451 </span><span class="r8">│   │   │   │   │   </span><span class="r10">&quot;env&quot;</span>,                                                                <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8"> 447 </span><span class="r8">│   │   </span><span class="r6">try</span>:                                                                              <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8"> 448 </span><span class="r8">│   │   │   </span>_ = path.write_bytes(encoded_env)                                             <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8"> 449 </span><span class="r8">│   │   │   </span>logger.debug(<span class="r10">&quot;written conda env to {}&quot;</span>, path)                                 <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span> 450 <span class="r8">│   │   │   </span>run_command(                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8"> 451 </span><span class="r8">│   │   │   │   </span>[                                                                         <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8"> 452 </span><span class="r8">│   │   │   │   │   </span>CONDA_CMD,                                                            <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8"> 453 </span><span class="r8">│   │   │   │   │   </span><span class="r10">&quot;env&quot;</span>,                                                                <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
 <span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/core/</span><span class="r5">_resource_tests.py</span>:<span class="r6">203</span> in <span class="r7">defau</span> <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
@@ -954,7 +963,7 @@ body {
 <span class="r1">│</span>   <span class="r8"> 415 </span>                                                                                          <span class="r1">│</span>
 <span class="r1">│</span>   <span class="r8"> 416 </span>                                                                                          <span class="r1">│</span>
 <span class="r1">╰──────────────────────────────────────────────────────────────────────────────────────────────────╯</span>
-<span class="r13">CalledProcessError: </span>Command <span class="r14">&#x27;[&#x27;</span>conda&#x27;, <span class="r14">&#x27;env&#x27;</span>, <span class="r14">&#x27;create&#x27;</span>, <span class="r14">&#x27;--yes&#x27;</span>, <span class="r14">&#x27;--file=/tmp/tmpah2jscc8/torchscript/env.yaml&#x27;</span>, <span class="r14">&#x27;--name=35e018c1aca85a2ef91578e5c0b96127a05eb947d37201ce0229bd32c289e284&#x27;</span>, <span class="r14">&#x27;--quiet&#x27;</span><span class="r15">]</span>&#x27; returned non-zero exit status <span class="r16">1</span>.
+<span class="r13">CalledProcessError: </span>Command <span class="r14">&#x27;[&#x27;</span>conda&#x27;, <span class="r14">&#x27;env&#x27;</span>, <span class="r14">&#x27;create&#x27;</span>, <span class="r14">&#x27;--yes&#x27;</span>, <span class="r14">&#x27;--file=/tmp/tmp0hm75ipq/torchscript/env.yaml&#x27;</span>, <span class="r14">&#x27;--name=35e018c1aca85a2ef91578e5c0b96127a05eb947d37201ce0229bd32c289e284&#x27;</span>, <span class="r14">&#x27;--quiet&#x27;</span><span class="r15">]</span>&#x27; returned non-zero exit status <span class="r16">1</span>.
 </code></pre>
 </body>
 </html>
