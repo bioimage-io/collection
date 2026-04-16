@@ -1,0 +1,178 @@
+{
+    "badge": null,
+    "details": {
+        "details": [
+            {
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "densenet_model.onnx": "0cb72ff5e414630de95674a7d523da0de19850b1cada4712201699fdd960c1b0",
+                        "https://hypha.aicell.io/bioimage-io/artifacts/polite-pig/files/README.md?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/polite-pig/files/bestfitting-densenet-diagram.png?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/polite-pig/files/densenet_model.onnx?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/polite-pig/files/test_input.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/polite-pig/files/test_output_classes.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/polite-pig/files/test_output_features.npy?version=v0": null,
+                        "test_input.npy": "c47d7c2d78880a539f2f20ca192756d798422e28157a8310b6944898e6c7614e",
+                        "test_output_classes.npy": "90db7e4bd7f39d56f359bc99aaebbc6f7e1889f4c8c5189a68146f617ebd5e94",
+                        "test_output_features.npy": "225105a32b69f1b7354aab0923c0a6526c5af622d8057ddcbc865cf7eaaf257d"
+                    },
+                    "original_source_name": null,
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/polite-pig/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Successfully created `ModelDescr` instance.",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.9",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": [
+                    {
+                        "loc": [
+                            "documentation"
+                        ],
+                        "msg": "No '# Validation' (sub)section found in README.md.",
+                        "severity": 30,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "inputs",
+                            0,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "outputs",
+                            0,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "outputs",
+                            1,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    }
+                ]
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "onnx"
+                ],
+                "name": "Created conda environment '4d82a6bc4511b4ad0459f190edebc373e2ca235c8452606867e45b1507100a34'",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "onnx"
+                ],
+                "name": "Reproduce test outputs from test inputs (onnx)",
+                "recommended_env": {
+                    "channels": [
+                        "conda-forge",
+                        "nodefaults"
+                    ],
+                    "dependencies": [
+                        "conda-forge::bioimageio.core>=0.9.4",
+                        "onnxruntime",
+                        "pip"
+                    ],
+                    "name": null
+                },
+                "saved_conda_compare": "Success. All the packages in the specification file are present in the environment with matching version and build string.\n",
+                "status": "passed",
+                "warnings": [
+                    {
+                        "loc": [
+                            "weights",
+                            "onnx"
+                        ],
+                        "msg": "Output `classes`: all elements agree with expected values. \nMax relative difference not accounted for by absolute tolerance (1.00e-03):\n0.00e+00 (= \\|3.18e-01 - 3.18e-01\\|/\\|3.18e-01 + 1e-6\\|) at {'batch': np.int64(0), 'channel': np.int64(0)} \nMax absolute difference not accounted for by relative tolerance (1.00e-03):\n0.00e+00 (= \\|2.9347383e-04 - 2.9359723e-04\\|) at {'batch': np.int64(0), 'channel': np.int64(8)}",
+                        "severity": 20,
+                        "type": "bioimageio.core"
+                    },
+                    {
+                        "loc": [
+                            "weights",
+                            "onnx"
+                        ],
+                        "msg": "Output `features`: all elements agree with expected values. \nMax relative difference not accounted for by absolute tolerance (1.00e-03):\n0.00e+00 (= \\|1.52e-01 - 1.52e-01\\|/\\|1.52e-01 + 1e-6\\|) at {'batch': np.int64(0), 'channel': np.int64(0)} \nMax absolute difference not accounted for by relative tolerance (1.00e-03):\n0.00e+00 (= \\|2.2174418e-04 - 2.2174467e-04\\|) at {'batch': np.int64(0), 'channel': np.int64(341)}",
+                        "severity": 20,
+                        "type": "bioimageio.core"
+                    }
+                ]
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "onnx"
+                ],
+                "name": "Run onnx inference for inputs with batch_size: 1 and size parameter n: 0",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.spec",
+                "0.5.9.1",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.5.9",
+        "id": "polite-pig",
+        "metadata_completeness": 0.38636363636363635,
+        "name": "bioimageio format validation",
+        "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/polite-pig/files/rdf.yaml?version=v0",
+        "status": "passed",
+        "traceback": null,
+        "type": "model",
+        "version": 1.1,
+        "warnings": null
+    },
+    "error": null,
+    "links": [
+        "bioimageio/bioimageio.core"
+    ],
+    "score": 1.0,
+    "status": "passed"
+}

@@ -258,6 +258,7 @@
             "biapy_3.6.7": 1.0,
             "biapy_3.6.8": 1.0,
             "bioimageio.core_0.10.0": 0.5,
+            "bioimageio.core_0.10.2": 0.5,
             "bioimageio.core_0.9.4": 0.0,
             "bioimageio.core_0.9.5": 0.5,
             "bioimageio.core_0.9.6": 0.5,
@@ -461,6 +462,160 @@
                     "warnings": null
                 },
                 "error": "Output 'output0': 7498 of 3932160 elements disagree with expected values. (1906.8 ppm).\n Max relative difference not accounted for by absolute tolerance (1.00e-03): 2.24e-02 (= \\|2.88e-01 - 2.94e-01\\|/\\|2.94e-01 + 1e-6\\|) at {'batch': np.int64(0), 'channel': np.int64(0), 'z': np.int64(14), 'y': np.int64(69), 'x': np.int64(180)}\n Max absolute difference not accounted for by relative tolerance (1.00e-03): 9.54e-03 (= \\|6.3214678e-01 - 6.4168340e-01\\|) at {'batch': np.int64(0), 'channel': np.int64(0), 'z': np.int64(14), 'y': np.int64(67), 'x': np.int64(178)}",
+                "links": [],
+                "score": 0.5,
+                "status": "failed"
+            },
+            "0.10.2": {
+                "badge": null,
+                "details": {
+                    "details": [
+                        {
+                            "context": {
+                                "file_name": "rdf.yaml",
+                                "known_files": {
+                                    "attention_unet.py": "3c53c173263cbda0f85d4d8b3e03fd4b6dca052593f7117c44f6072d03b441eb",
+                                    "checkpoint.pth": "feb744fdcde600c9e0e4fc9bfd7ec5869d71149769a48bd03f75b2cfde4fa8fd",
+                                    "https://doi.org/10.1038/s41592-025-02699-y": null,
+                                    "https://github.com/BiaPyX/BiaPy": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/zealous-snail/files/attention_unet.py?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/zealous-snail/files/checkpoint.pth?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/zealous-snail/files/cover.png?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/zealous-snail/files/documentation.md?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/zealous-snail/files/test-input.npy?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/zealous-snail/files/test-output.npy?version=v0": null,
+                                    "test-input.npy": "f4bc2fdc81be2dd800bdac51c1da31600f7830a969e624ba8fd85edb87e65849",
+                                    "test-output.npy": "4a9cae78fbb21c6ccf6db912db816c47a6fdcaf364b13f88df0bd7058692ad04"
+                                },
+                                "original_source_name": null,
+                                "perform_io_checks": true,
+                                "root": "https://hypha.aicell.io/bioimage-io/artifacts/zealous-snail/files?version=v0",
+                                "update_hashes": false
+                            },
+                            "errors": [],
+                            "loc": [],
+                            "name": "Successfully created `ModelDescr` instance.",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [],
+                            "name": "bioimageio.spec format validation model 0.5.9",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": [
+                                {
+                                    "loc": [
+                                        "inputs",
+                                        0,
+                                        "sample_tensor"
+                                    ],
+                                    "msg": "Needs to be filled for FAIR compliance",
+                                    "severity": 35,
+                                    "type": "warning"
+                                },
+                                {
+                                    "loc": [
+                                        "outputs",
+                                        0,
+                                        "sample_tensor"
+                                    ],
+                                    "msg": "Needs to be filled for FAIR compliance",
+                                    "severity": 35,
+                                    "type": "warning"
+                                }
+                            ]
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "pytorch_state_dict"
+                            ],
+                            "name": "Found existing conda environment 'df87be09262b4f3f7ce399456dada4eaf2aa7e1ca18a46825f1ebf80ab4604e2'",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [
+                                {
+                                    "loc": [
+                                        "weights",
+                                        "pytorch_state_dict"
+                                    ],
+                                    "msg": "Output 'output0': 7498 of 3932160 elements disagree with expected values. (1906.8 ppm). \nMax relative difference not accounted for by absolute tolerance (1.00e-03):\n2.24e-02 (= \\|2.88e-01 - 2.94e-01\\|/\\|2.94e-01 + 1e-6\\|) at {'batch': np.int64(0), 'channel': np.int64(0), 'z': np.int64(14), 'y': np.int64(69), 'x': np.int64(180)} \nMax absolute difference not accounted for by relative tolerance (1.00e-03):\n9.54e-03 (= \\|6.3214678e-01 - 6.4168340e-01\\|) at {'batch': np.int64(0), 'channel': np.int64(0), 'z': np.int64(14), 'y': np.int64(67), 'x': np.int64(178)}",
+                                    "traceback_html": "",
+                                    "traceback_md": "",
+                                    "type": "bioimageio.core",
+                                    "with_traceback": false
+                                }
+                            ],
+                            "loc": [
+                                "weights",
+                                "pytorch_state_dict"
+                            ],
+                            "name": "Reproduce test outputs from test inputs (pytorch_state_dict)",
+                            "recommended_env": {
+                                "channels": [
+                                    "conda-forge",
+                                    "nodefaults"
+                                ],
+                                "dependencies": [
+                                    "conda-forge::bioimageio.core>=0.9.4",
+                                    "pip",
+                                    "pytorch==2.4.0",
+                                    "torchvision==0.19.0"
+                                ],
+                                "name": null
+                            },
+                            "saved_conda_compare": "Success. All the packages in the specification file are present in the environment with matching version and build string.\n",
+                            "status": "failed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "pytorch_state_dict"
+                            ],
+                            "name": "Run pytorch_state_dict inference for inputs with batch_size: 1 and size parameter n: 0",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        }
+                    ],
+                    "env": [
+                        [
+                            "bioimageio.spec",
+                            "0.5.9.1",
+                            "",
+                            ""
+                        ]
+                    ],
+                    "format_version": "0.5.9",
+                    "id": "zealous-snail",
+                    "metadata_completeness": 0.45098039215686275,
+                    "name": "bioimageio format validation",
+                    "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+                    "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/zealous-snail/files/rdf.yaml?version=v0",
+                    "status": "valid-format",
+                    "traceback": null,
+                    "type": "model",
+                    "version": "0.1.0",
+                    "warnings": null
+                },
+                "error": "Output 'output0': 7498 of 3932160 elements disagree with expected values. (1906.8 ppm). \nMax relative difference not accounted for by absolute tolerance (1.00e-03):\n2.24e-02 (= \\|2.88e-01 - 2.94e-01\\|/\\|2.94e-01 + 1e-6\\|) at {'batch': np.int64(0), 'channel': np.int64(0), 'z': np.int64(14), 'y': np.int64(69), 'x': np.int64(180)} \nMax absolute difference not accounted for by relative tolerance (1.00e-03):\n9.54e-03 (= \\|6.3214678e-01 - 6.4168340e-01\\|) at {'batch': np.int64(0), 'channel': np.int64(0), 'z': np.int64(14), 'y': np.int64(67), 'x': np.int64(178)}",
                 "links": [],
                 "score": 0.5,
                 "status": "failed"
