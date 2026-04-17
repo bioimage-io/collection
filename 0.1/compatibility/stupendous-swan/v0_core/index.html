@@ -594,7 +594,7 @@
   </tr>
   <tr>
     <td style="text-align:left">bioimageio.spec</td>
-    <td style="text-align:left">0.5.9.0</td>
+    <td style="text-align:left">0.5.9.1</td>
   </tr>
 </table>
 <table>
@@ -660,7 +660,6 @@ dependencies:
   - conda-forge::bioimageio.core>=0.9.4
   - pip
   - pytorch==2.9.1
-  - torchaudio==2.9.1
   - torchvision==0.24.1
 </pre></td>
   </tr>
@@ -672,7 +671,23 @@ dependencies:
   <tr>
     <td style="text-align:left"></td>
     <td style="text-align:left"></td>
-    <td style="text-align:left"><pre>torchaudio not found</pre></td>
+    <td style="text-align:left"><pre>Success. All the packages in the specification file are present in the environment with matching
+version and build string.</pre></td>
+  </tr>
+  <tr>
+    <td style="text-align:left">❌</td>
+    <td style="text-align:left"><code>weights.pytorch_state_dict</code></td>
+    <td style="text-align:left">Run pytorch_state_dict inference for parametrized inputs</td>
+  </tr>
+  <tr>
+    <td style="text-align:left">❌</td>
+    <td style="text-align:left"><code>weights.pytorch_state_dict</code></td>
+    <td style="text-align:left"><pre>Failed to import bmz_model.py</pre></td>
+  </tr>
+  <tr>
+    <td style="text-align:left"></td>
+    <td style="text-align:left"></td>
+    <td style="text-align:left">See <a href="#traceback-2">Traceback 2</a>.</td>
   </tr>
 </table>
 <h3 id="traceback-1">Traceback 1</h3>
@@ -711,17 +726,17 @@ body {
     <pre style="font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><code style="font-family:inherit"><span class="r1">╭─────────────────────────────── </span><span class="r2">Traceback </span><span class="r3">(most recent call last)</span><span class="r1"> ────────────────────────────────╮</span>
 <span class="r1">│</span> <span class="r4">/usr/share/miniconda/envs/f923abbcd927e1b70f314f29827668de2b128bac170663b23d97aaff14a5c225/lib/p</span> <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">142 </span><span class="r4">│   │   │   </span>sys.modules[module_name] = module  <span class="r4"># cache this module</span>                         <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">143 </span><span class="r4">│   │   │   </span>                                                                               <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">144 </span><span class="r4">│   │   │   </span><span class="r5">assert</span> importlib_spec.loader <span class="r6">is</span> <span class="r6">not</span> <span class="r5">None</span>                                       <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span>145 <span class="r4">│   │   │   </span>importlib_spec.loader.exec_module(module)                                      <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">146 </span><span class="r4">│   │   </span>                                                                                   <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">147 </span><span class="r4">│   │   </span><span class="r5">except</span> <span class="r7">Exception</span> <span class="r5">as</span> e:                                                             <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">148 </span><span class="r4">│   │   │   </span><span class="r5">if</span> module_name <span class="r6">in</span> sys.modules:                                                 <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">143 </span><span class="r4">│   │   │   </span>sys.modules[module_name] = module  <span class="r4"># cache this module</span>                         <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">144 </span><span class="r4">│   │   │   </span>                                                                               <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">145 </span><span class="r4">│   │   │   </span><span class="r5">assert</span> importlib_spec.loader <span class="r6">is</span> <span class="r6">not</span> <span class="r5">None</span>                                       <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>146 <span class="r4">│   │   │   </span>importlib_spec.loader.exec_module(module)                                      <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">147 </span><span class="r4">│   │   </span>                                                                                   <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">148 </span><span class="r4">│   │   </span><span class="r5">except</span> <span class="r7">Exception</span> <span class="r5">as</span> e:                                                             <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">149 </span><span class="r4">│   │   │   </span><span class="r5">if</span> module_name <span class="r6">in</span> sys.modules:                                                 <span class="r1">│</span>
 <span class="r1">│</span> in exec_module:1023                                                                              <span class="r1">│</span>
 <span class="r1">│</span> in _call_with_frames_removed:488                                                                 <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r4">/tmp/tmp6_rhhgvv/</span><span class="r8">bmz_model_a0a0eda4a48303c0893ef3841a26f825d07f8d452529015373ea3282af2357dc.py</span>:6 <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/tmp/tmpm_x1chiv/</span><span class="r8">bmz_model_a0a0eda4a48303c0893ef3841a26f825d07f8d452529015373ea3282af2357dc.py</span>:6 <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
 <span class="r1">│</span>   <span class="r4">   3 </span><span class="r5">from</span><span class="r9"> </span><span class="r10">functools</span><span class="r9"> </span><span class="r5">import</span> partial                                                             <span class="r1">│</span>
 <span class="r1">│</span>   <span class="r4">   4 </span><span class="r5">from</span><span class="r9"> </span><span class="r10">inspect</span><span class="r9"> </span><span class="r5">import</span> isfunction                                                            <span class="r1">│</span>
@@ -738,43 +753,43 @@ body {
 <span class="r1">╭─────────────────────────────── </span><span class="r2">Traceback </span><span class="r3">(most recent call last)</span><span class="r1"> ────────────────────────────────╮</span>
 <span class="r1">│</span> <span class="r4">/usr/share/miniconda/envs/f923abbcd927e1b70f314f29827668de2b128bac170663b23d97aaff14a5c225/lib/p</span> <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 832 </span><span class="r4">│   │   </span>test_input = get_test_input_sample(model)                                         <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 833 </span><span class="r4">│   │   </span>expected = get_test_output_sample(model)                                          <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 834 </span><span class="r4">│   │   </span>                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span> 835 <span class="r4">│   │   </span><span class="r5">with</span> create_prediction_pipeline(                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 836 </span><span class="r4">│   │   │   </span>bioimageio_model=model, devices=devices, weight_format=weight_format          <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 837 </span><span class="r4">│   │   </span>) <span class="r5">as</span> prediction_pipeline:                                                         <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 838 </span><span class="r4">│   │   │   </span>results = prediction_pipeline.predict_sample_without_blocking(test_input)     <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 877 </span><span class="r4">│   │   </span>test_input = get_test_input_sample(model)                                         <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 878 </span><span class="r4">│   │   </span>expected = get_test_output_sample(model)                                          <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 879 </span><span class="r4">│   │   </span>                                                                                  <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span> 880 <span class="r4">│   │   </span><span class="r5">with</span> create_prediction_pipeline(                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 881 </span><span class="r4">│   │   │   </span>bioimageio_model=model, devices=devices, weight_format=weight_format          <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 882 </span><span class="r4">│   │   </span>) <span class="r5">as</span> prediction_pipeline:                                                         <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 883 </span><span class="r4">│   │   │   </span>prediction_pipeline.apply_preprocessing(test_input)                           <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
 <span class="r1">│</span> <span class="r4">/usr/share/miniconda/envs/f923abbcd927e1b70f314f29827668de2b128bac170663b23d97aaff14a5c225/lib/p</span> <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">368 </span><span class="r4">│   │   │   </span><span class="r17">f&quot;deprecated create_prediction_pipeline kwargs: {</span><span class="r7">set</span>(deprecated_kwargs)<span class="r17">}&quot;</span>      <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">369 </span><span class="r4">│   │   </span>)                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">370 </span><span class="r4">│   </span>                                                                                       <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span>371 <span class="r4">│   </span>model_adapter = model_adapter <span class="r6">or</span> <span class="r18">create_model_adapter(</span>                                 <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">372 </span><span class="r4">│   │   </span><span class="r18">model_description=bioimageio_model,</span>                                                <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">373 </span><span class="r4">│   │   </span><span class="r18">devices=devices,</span>                                                                   <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">374 </span><span class="r4">│   │   </span><span class="r18">weight_format_priority_order=weights_format </span><span class="r19">and</span><span class="r18"> (weights_format,),</span>                 <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">404 </span><span class="r4">│   │   │   </span><span class="r17">f&quot;deprecated create_prediction_pipeline kwargs: {</span><span class="r7">set</span>(deprecated_kwargs)<span class="r17">}&quot;</span>      <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">405 </span><span class="r4">│   │   </span>)                                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">406 </span><span class="r4">│   </span>                                                                                       <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>407 <span class="r4">│   </span>model_adapter = model_adapter <span class="r6">or</span> <span class="r18">create_model_adapter(</span>                                 <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">408 </span><span class="r4">│   │   </span><span class="r18">model_description=bioimageio_model,</span>                                                <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">409 </span><span class="r4">│   │   </span><span class="r18">devices=devices,</span>                                                                   <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">410 </span><span class="r4">│   │   </span><span class="r18">weight_format_priority_order=weights_format </span><span class="r19">and</span><span class="r18"> (weights_format,),</span>                 <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
 <span class="r1">│</span> <span class="r4">/usr/share/miniconda/envs/f923abbcd927e1b70f314f29827668de2b128bac170663b23d97aaff14a5c225/lib/p</span> <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">166 </span><span class="r4">│   │   </span><span class="r5">assert</span> errors                                                                      <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">167 </span><span class="r4">│   │   </span><span class="r5">if</span> <span class="r7">len</span>(weight_format_priority_order) == <span class="r5">1</span>:                                         <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">168 </span><span class="r4">│   │   │   </span><span class="r5">assert</span> <span class="r7">len</span>(errors) == <span class="r5">1</span>                                                        <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span>169 <span class="r4">│   │   │   </span><span class="r11">raise</span><span class="r18"> errors[</span><span class="r11">0</span><span class="r18">]</span>                                                                <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">170 </span><span class="r4">│   │   </span>                                                                                   <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">171 </span><span class="r4">│   │   </span><span class="r5">else</span>:                                                                              <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">172 </span><span class="r4">│   │   │   </span>msg = (                                                                        <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">182 </span><span class="r4">│   │   </span><span class="r5">assert</span> errors                                                                      <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">183 </span><span class="r4">│   │   </span><span class="r5">if</span> <span class="r7">len</span>(weight_format_priority_order) == <span class="r5">1</span>:                                         <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">184 </span><span class="r4">│   │   │   </span><span class="r5">assert</span> <span class="r7">len</span>(errors) == <span class="r5">1</span>                                                        <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>185 <span class="r4">│   │   │   </span><span class="r11">raise</span><span class="r18"> errors[</span><span class="r11">0</span><span class="r18">]</span>                                                                <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">186 </span><span class="r4">│   │   </span>                                                                                   <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">187 </span><span class="r4">│   │   </span><span class="r5">else</span>:                                                                              <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">188 </span><span class="r4">│   │   │   </span>msg = (                                                                        <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
 <span class="r1">│</span> <span class="r4">/usr/share/miniconda/envs/f923abbcd927e1b70f314f29827668de2b128bac170663b23d97aaff14a5c225/lib/p</span> <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">109 </span><span class="r4">│   │   │   │   </span><span class="r5">try</span>:                                                                       <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">110 </span><span class="r4">│   │   │   │   │   </span><span class="r5">from</span><span class="r9"> </span><span class="r10">.pytorch_backend</span><span class="r9"> </span><span class="r5">import</span> PytorchModelAdapter                       <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">111 </span><span class="r4">│   │   │   │   │   </span>                                                                       <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span>112 <span class="r4">│   │   │   │   │   </span><span class="r5">return</span> PytorchModelAdapter(                                            <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">113 </span><span class="r4">│   │   │   │   │   │   </span>model_description=model_description, devices=devices               <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">114 </span><span class="r4">│   │   │   │   │   </span>)                                                                      <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">115 </span><span class="r4">│   │   │   │   </span><span class="r5">except</span> <span class="r7">Exception</span> <span class="r5">as</span> e:                                                     <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">112 </span><span class="r4">│   │   │   │   </span><span class="r5">try</span>:                                                                       <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">113 </span><span class="r4">│   │   │   │   │   </span><span class="r5">from</span><span class="r9"> </span><span class="r10">.pytorch_backend</span><span class="r9"> </span><span class="r5">import</span> PytorchModelAdapter                       <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">114 </span><span class="r4">│   │   │   │   │   </span>                                                                       <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>115 <span class="r4">│   │   │   │   │   </span><span class="r5">return</span> PytorchModelAdapter(                                            <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">116 </span><span class="r4">│   │   │   │   │   │   </span>model_description=model_description, devices=devices               <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">117 </span><span class="r4">│   │   │   │   │   </span>)                                                                      <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">118 </span><span class="r4">│   │   │   │   </span><span class="r5">except</span> <span class="r7">Exception</span> <span class="r5">as</span> e:                                                     <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
 <span class="r1">│</span> <span class="r4">/usr/share/miniconda/envs/f923abbcd927e1b70f314f29827668de2b128bac170663b23d97aaff14a5c225/lib/p</span> <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
@@ -798,23 +813,169 @@ body {
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
 <span class="r1">│</span> <span class="r4">/usr/share/miniconda/envs/f923abbcd927e1b70f314f29827668de2b128bac170663b23d97aaff14a5c225/lib/p</span> <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 73 </span><span class="r4">│   </span><span class="r5">elif</span> <span class="r7">isinstance</span>(node, CallableFromFile):                                               <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 74 </span><span class="r4">│   │   </span>c = _import_from_file_impl(node.source_file, <span class="r7">str</span>(node.callable_name), **kwargs)    <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 75 </span><span class="r4">│   </span><span class="r5">elif</span> <span class="r7">isinstance</span>(node, ArchitectureFromFileDescr):                                      <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span> 76 <span class="r4">│   │   </span>c = <span class="r18">_import_from_file_impl(node.source, </span><span class="r13">str</span><span class="r18">(node.callable), sha256=node.sha256)</span>    <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 77 </span><span class="r4">│   </span><span class="r5">else</span>:                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 78 </span><span class="r4">│   │   </span>assert_never(node)                                                                 <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 79 </span>                                                                                           <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 74 </span><span class="r4">│   </span><span class="r5">elif</span> <span class="r7">isinstance</span>(node, CallableFromFile):                                               <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 75 </span><span class="r4">│   │   </span>c = _import_from_file_impl(node.source_file, <span class="r7">str</span>(node.callable_name), **kwargs)    <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 76 </span><span class="r4">│   </span><span class="r5">elif</span> <span class="r7">isinstance</span>(node, ArchitectureFromFileDescr):                                      <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span> 77 <span class="r4">│   │   </span>c = <span class="r18">_import_from_file_impl(node.source, </span><span class="r13">str</span><span class="r18">(node.callable), sha256=node.sha256)</span>    <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 78 </span><span class="r4">│   </span><span class="r5">else</span>:                                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 79 </span><span class="r4">│   │   </span>assert_never(node)                                                                 <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 80 </span>                                                                                           <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
 <span class="r1">│</span> <span class="r4">/usr/share/miniconda/envs/f923abbcd927e1b70f314f29827668de2b128bac170663b23d97aaff14a5c225/lib/p</span> <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">148 </span><span class="r4">│   │   │   </span><span class="r5">if</span> module_name <span class="r6">in</span> sys.modules:                                                 <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">149 </span><span class="r4">│   │   │   │   </span><span class="r5">del</span> sys.modules[module_name]                                               <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">150 </span><span class="r4">│   │   │   </span>                                                                               <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span>151 <span class="r4">│   │   │   </span><span class="r11">raise</span><span class="r18"> </span><span class="r13">ImportError</span><span class="r18">(</span><span class="r20">f&quot;Failed to import {</span><span class="r18">source</span><span class="r20">}&quot;</span><span class="r18">) </span><span class="r11">from</span><span class="r12"> </span><span class="r13">e</span>                         <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">152 </span><span class="r4">│   </span>                                                                                       <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">153 </span><span class="r4">│   </span><span class="r5">try</span>:                                                                                   <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">154 </span><span class="r4">│   │   </span>callable_attr = <span class="r7">getattr</span>(module, callable_name)                                     <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">149 </span><span class="r4">│   │   │   </span><span class="r5">if</span> module_name <span class="r6">in</span> sys.modules:                                                 <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">150 </span><span class="r4">│   │   │   │   </span><span class="r5">del</span> sys.modules[module_name]                                               <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">151 </span><span class="r4">│   │   │   </span>                                                                               <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>152 <span class="r4">│   │   │   </span><span class="r11">raise</span><span class="r18"> </span><span class="r13">ImportError</span><span class="r18">(</span><span class="r20">f&quot;Failed to import {</span><span class="r18">source</span><span class="r20">}&quot;</span><span class="r18">) </span><span class="r11">from</span><span class="r12"> </span><span class="r13">e</span>                         <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">153 </span><span class="r4">│   </span>                                                                                       <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">154 </span><span class="r4">│   </span><span class="r5">try</span>:                                                                                   <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">155 </span><span class="r4">│   │   </span>callable_attr = <span class="r7">getattr</span>(module, callable_name)                                     <span class="r1">│</span>
+<span class="r1">╰──────────────────────────────────────────────────────────────────────────────────────────────────╯</span>
+<span class="r14">ImportError: </span>Failed to import bmz_model.py
+</code></pre>
+</body>
+</html>
+</pre>
+<h3 id="traceback-2">Traceback 2</h3>
+<pre><!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+.r1 {color: #800000; text-decoration-color: #800000}
+.r2 {color: #800000; text-decoration-color: #800000; font-weight: bold}
+.r3 {color: #bf7f7f; text-decoration-color: #bf7f7f; font-weight: bold}
+.r4 {color: #7f7f7f; text-decoration-color: #7f7f7f}
+.r5 {color: #0000ff; text-decoration-color: #0000ff}
+.r6 {color: #ff00ff; text-decoration-color: #ff00ff}
+.r7 {color: #00ffff; text-decoration-color: #00ffff}
+.r8 {font-weight: bold}
+.r9 {color: #808080; text-decoration-color: #808080}
+.r10 {color: #00ffff; text-decoration-color: #00ffff; text-decoration: underline}
+.r11 {color: #0000ff; text-decoration-color: #0000ff; font-weight: bold; text-decoration: underline}
+.r12 {color: #808080; text-decoration-color: #808080; font-weight: bold; text-decoration: underline}
+.r13 {color: #00ffff; text-decoration-color: #00ffff; font-weight: bold; text-decoration: underline}
+.r14 {color: #ff0000; text-decoration-color: #ff0000; font-weight: bold}
+.r15 {color: #008000; text-decoration-color: #008000}
+.r16 {font-style: italic}
+.r17 {color: #808000; text-decoration-color: #808000}
+.r18 {font-weight: bold; text-decoration: underline}
+.r19 {color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold; text-decoration: underline}
+.r20 {color: #808000; text-decoration-color: #808000; font-weight: bold; text-decoration: underline}
+body {
+    color: var(--md-default-fg-color);
+    background-color: var(--md-default-bg-color);
+}
+</style>
+</head>
+<body>
+    <pre style="font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><code style="font-family:inherit"><span class="r1">╭─────────────────────────────── </span><span class="r2">Traceback </span><span class="r3">(most recent call last)</span><span class="r1"> ────────────────────────────────╮</span>
+<span class="r1">│</span> <span class="r4">/usr/share/miniconda/envs/f923abbcd927e1b70f314f29827668de2b128bac170663b23d97aaff14a5c225/lib/p</span> <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">143 </span><span class="r4">│   │   │   </span>sys.modules[module_name] = module  <span class="r4"># cache this module</span>                         <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">144 </span><span class="r4">│   │   │   </span>                                                                               <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">145 </span><span class="r4">│   │   │   </span><span class="r5">assert</span> importlib_spec.loader <span class="r6">is</span> <span class="r6">not</span> <span class="r5">None</span>                                       <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>146 <span class="r4">│   │   │   </span>importlib_spec.loader.exec_module(module)                                      <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">147 </span><span class="r4">│   │   </span>                                                                                   <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">148 </span><span class="r4">│   │   </span><span class="r5">except</span> <span class="r7">Exception</span> <span class="r5">as</span> e:                                                             <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">149 </span><span class="r4">│   │   │   </span><span class="r5">if</span> module_name <span class="r6">in</span> sys.modules:                                                 <span class="r1">│</span>
+<span class="r1">│</span> in exec_module:1023                                                                              <span class="r1">│</span>
+<span class="r1">│</span> in _call_with_frames_removed:488                                                                 <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/tmp/tmplxwgakph/</span><span class="r8">bmz_model_a0a0eda4a48303c0893ef3841a26f825d07f8d452529015373ea3282af2357dc.py</span>:6 <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">   3 </span><span class="r5">from</span><span class="r9"> </span><span class="r10">functools</span><span class="r9"> </span><span class="r5">import</span> partial                                                             <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">   4 </span><span class="r5">from</span><span class="r9"> </span><span class="r10">inspect</span><span class="r9"> </span><span class="r5">import</span> isfunction                                                            <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">   5 </span>                                                                                          <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>   6 <span class="r11">import</span><span class="r12"> </span><span class="r13">yaml</span>                                                                               <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">   7 </span><span class="r5">import</span><span class="r9"> </span><span class="r10">torch</span>                                                                              <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">   8 </span><span class="r5">import</span><span class="r9"> </span><span class="r10">torch.nn</span><span class="r9"> </span><span class="r5">as</span><span class="r9"> </span><span class="r10">nn</span>                                                                     <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">   9 </span><span class="r5">import</span><span class="r9"> </span><span class="r10">numpy</span><span class="r9"> </span><span class="r5">as</span><span class="r9"> </span><span class="r10">np</span>                                                                        <span class="r1">│</span>
+<span class="r1">╰──────────────────────────────────────────────────────────────────────────────────────────────────╯</span>
+<span class="r14">ModuleNotFoundError: </span>No module named <span class="r15">&#x27;yaml&#x27;</span>
+
+<span class="r16">The above exception was the direct cause of the following exception:</span>
+
+<span class="r1">╭─────────────────────────────── </span><span class="r2">Traceback </span><span class="r3">(most recent call last)</span><span class="r1"> ────────────────────────────────╮</span>
+<span class="r1">│</span> <span class="r4">/usr/share/miniconda/envs/f923abbcd927e1b70f314f29827668de2b128bac170663b23d97aaff14a5c225/lib/p</span> <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">1120 </span><span class="r4">│   </span><span class="r5">try</span>:                                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">1121 </span><span class="r4">│   │   </span>test_input = get_test_input_sample(model)                                         <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">1122 </span><span class="r4">│   │   </span>                                                                                  <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>1123 <span class="r4">│   │   </span><span class="r5">with</span> create_prediction_pipeline(                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">1124 </span><span class="r4">│   │   │   </span>bioimageio_model=model, devices=devices, weight_format=weight_format          <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">1125 </span><span class="r4">│   │   </span>) <span class="r5">as</span> prediction_pipeline:                                                         <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">1126 </span><span class="r4">│   │   │   </span><span class="r5">for</span> n, batch_size, inputs, exptected_output_shape <span class="r6">in</span> generate_test_cases():   <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/usr/share/miniconda/envs/f923abbcd927e1b70f314f29827668de2b128bac170663b23d97aaff14a5c225/lib/p</span> <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">404 </span><span class="r4">│   │   │   </span><span class="r17">f&quot;deprecated create_prediction_pipeline kwargs: {</span><span class="r7">set</span>(deprecated_kwargs)<span class="r17">}&quot;</span>      <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">405 </span><span class="r4">│   │   </span>)                                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">406 </span><span class="r4">│   </span>                                                                                       <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>407 <span class="r4">│   </span>model_adapter = model_adapter <span class="r6">or</span> <span class="r18">create_model_adapter(</span>                                 <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">408 </span><span class="r4">│   │   </span><span class="r18">model_description=bioimageio_model,</span>                                                <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">409 </span><span class="r4">│   │   </span><span class="r18">devices=devices,</span>                                                                   <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">410 </span><span class="r4">│   │   </span><span class="r18">weight_format_priority_order=weights_format </span><span class="r19">and</span><span class="r18"> (weights_format,),</span>                 <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/usr/share/miniconda/envs/f923abbcd927e1b70f314f29827668de2b128bac170663b23d97aaff14a5c225/lib/p</span> <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">182 </span><span class="r4">│   │   </span><span class="r5">assert</span> errors                                                                      <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">183 </span><span class="r4">│   │   </span><span class="r5">if</span> <span class="r7">len</span>(weight_format_priority_order) == <span class="r5">1</span>:                                         <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">184 </span><span class="r4">│   │   │   </span><span class="r5">assert</span> <span class="r7">len</span>(errors) == <span class="r5">1</span>                                                        <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>185 <span class="r4">│   │   │   </span><span class="r11">raise</span><span class="r18"> errors[</span><span class="r11">0</span><span class="r18">]</span>                                                                <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">186 </span><span class="r4">│   │   </span>                                                                                   <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">187 </span><span class="r4">│   │   </span><span class="r5">else</span>:                                                                              <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">188 </span><span class="r4">│   │   │   </span>msg = (                                                                        <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/usr/share/miniconda/envs/f923abbcd927e1b70f314f29827668de2b128bac170663b23d97aaff14a5c225/lib/p</span> <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">112 </span><span class="r4">│   │   │   │   </span><span class="r5">try</span>:                                                                       <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">113 </span><span class="r4">│   │   │   │   │   </span><span class="r5">from</span><span class="r9"> </span><span class="r10">.pytorch_backend</span><span class="r9"> </span><span class="r5">import</span> PytorchModelAdapter                       <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">114 </span><span class="r4">│   │   │   │   │   </span>                                                                       <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>115 <span class="r4">│   │   │   │   │   </span><span class="r5">return</span> PytorchModelAdapter(                                            <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">116 </span><span class="r4">│   │   │   │   │   │   </span>model_description=model_description, devices=devices               <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">117 </span><span class="r4">│   │   │   │   │   </span>)                                                                      <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">118 </span><span class="r4">│   │   │   │   </span><span class="r5">except</span> <span class="r7">Exception</span> <span class="r5">as</span> e:                                                     <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/usr/share/miniconda/envs/f923abbcd927e1b70f314f29827668de2b128bac170663b23d97aaff14a5c225/lib/p</span> <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 35 </span><span class="r4">│   │   │   </span><span class="r5">raise</span> <span class="r7">ValueError</span>(<span class="r17">&quot;No `pytorch_state_dict` weights found&quot;</span>)                      <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 36 </span><span class="r4">│   │   </span>                                                                                   <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 37 </span><span class="r4">│   │   </span>devices = get_devices(devices)                                                     <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span> 38 <span class="r4">│   │   </span><span class="r7">self</span>._model = <span class="r18">load_torch_model(weights, load_state=</span><span class="r11">True</span><span class="r18">, devices=devices)</span>          <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 39 </span><span class="r4">│   │   </span><span class="r5">if</span> mode == <span class="r17">&quot;eval&quot;</span>:                                                                 <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 40 </span><span class="r4">│   │   │   </span><span class="r7">self</span>._model = <span class="r7">self</span>._model.eval()                                               <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 41 </span><span class="r4">│   │   </span><span class="r5">elif</span> mode == <span class="r17">&quot;train&quot;</span>:                                                              <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/usr/share/miniconda/envs/f923abbcd927e1b70f314f29827668de2b128bac170663b23d97aaff14a5c225/lib/p</span> <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">100 </span><span class="r4">│   </span>load_state: <span class="r7">bool</span> = <span class="r5">True</span>,                                                               <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">101 </span><span class="r4">│   </span>devices: Optional[Sequence[Union[<span class="r7">str</span>, torch.device]]] = <span class="r5">None</span>,                          <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">102 </span>) -&gt; nn.Module:                                                                            <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>103 <span class="r4">│   </span>custom_callable = <span class="r18">import_callable(</span>                                                     <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">104 </span><span class="r4">│   │   </span><span class="r18">weight_spec.architecture,</span>                                                          <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">105 </span><span class="r4">│   │   </span><span class="r18">sha256=(</span>                                                                           <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">106 </span><span class="r4">│   │   │   </span><span class="r18">weight_spec.architecture_sha256</span>                                                <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/usr/share/miniconda/envs/f923abbcd927e1b70f314f29827668de2b128bac170663b23d97aaff14a5c225/lib/p</span> <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 74 </span><span class="r4">│   </span><span class="r5">elif</span> <span class="r7">isinstance</span>(node, CallableFromFile):                                               <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 75 </span><span class="r4">│   │   </span>c = _import_from_file_impl(node.source_file, <span class="r7">str</span>(node.callable_name), **kwargs)    <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 76 </span><span class="r4">│   </span><span class="r5">elif</span> <span class="r7">isinstance</span>(node, ArchitectureFromFileDescr):                                      <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span> 77 <span class="r4">│   │   </span>c = <span class="r18">_import_from_file_impl(node.source, </span><span class="r13">str</span><span class="r18">(node.callable), sha256=node.sha256)</span>    <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 78 </span><span class="r4">│   </span><span class="r5">else</span>:                                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 79 </span><span class="r4">│   │   </span>assert_never(node)                                                                 <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 80 </span>                                                                                           <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/usr/share/miniconda/envs/f923abbcd927e1b70f314f29827668de2b128bac170663b23d97aaff14a5c225/lib/p</span> <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">149 </span><span class="r4">│   │   │   </span><span class="r5">if</span> module_name <span class="r6">in</span> sys.modules:                                                 <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">150 </span><span class="r4">│   │   │   │   </span><span class="r5">del</span> sys.modules[module_name]                                               <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">151 </span><span class="r4">│   │   │   </span>                                                                               <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>152 <span class="r4">│   │   │   </span><span class="r11">raise</span><span class="r18"> </span><span class="r13">ImportError</span><span class="r18">(</span><span class="r20">f&quot;Failed to import {</span><span class="r18">source</span><span class="r20">}&quot;</span><span class="r18">) </span><span class="r11">from</span><span class="r12"> </span><span class="r13">e</span>                         <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">153 </span><span class="r4">│   </span>                                                                                       <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">154 </span><span class="r4">│   </span><span class="r5">try</span>:                                                                                   <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">155 </span><span class="r4">│   │   </span>callable_attr = <span class="r7">getattr</span>(module, callable_name)                                     <span class="r1">│</span>
 <span class="r1">╰──────────────────────────────────────────────────────────────────────────────────────────────────╯</span>
 <span class="r14">ImportError: </span>Failed to import bmz_model.py
 </code></pre>

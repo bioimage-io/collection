@@ -594,7 +594,7 @@
   </tr>
   <tr>
     <td style="text-align:left">bioimageio.spec</td>
-    <td style="text-align:left">0.5.9.0</td>
+    <td style="text-align:left">0.5.9.1</td>
   </tr>
 </table>
 <table>
@@ -648,15 +648,15 @@ body {
 </head>
 <body>
     <pre style="font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><code style="font-family:inherit"><span class="r1">╭─────────────────────────────── </span><span class="r2">Traceback </span><span class="r3">(most recent call last)</span><span class="r1"> ────────────────────────────────╮</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/spec/_internal/</span><span class="r5">common_nodes.py</span>:<span class="r6">304</span> i <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/spec/_internal/</span><span class="r5">common_nodes.py</span>:<span class="r6">302</span> i <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">301 </span><span class="r7">│   │   </span>                                                                                   <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">302 </span><span class="r7">│   │   </span>context = get_validation_context()                                                 <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">303 </span><span class="r7">│   │   </span><span class="r6">try</span>:                                                                               <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span>304 <span class="r7">│   │   │   </span>rd = <span class="r8">cls</span>.model_validate(data)                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">305 </span><span class="r7">│   │   </span><span class="r6">except</span> pydantic.ValidationError <span class="r6">as</span> e:                                              <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">306 </span><span class="r7">│   │   │   </span><span class="r6">for</span> ee <span class="r9">in</span> e.errors(include_url=<span class="r6">False</span>):                                         <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">307 </span><span class="r7">│   │   │   │   </span><span class="r6">if</span> (severity := ee.get(<span class="r10">&quot;ctx&quot;</span>, {}).get(<span class="r10">&quot;severity&quot;</span>, ERROR)) &lt; ERROR:         <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r7">299 </span><span class="r7">│   │   </span>                                                                                   <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r7">300 </span><span class="r7">│   │   </span>context = get_validation_context()                                                 <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r7">301 </span><span class="r7">│   │   </span><span class="r6">try</span>:                                                                               <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>302 <span class="r7">│   │   │   </span>rd = <span class="r8">cls</span>.model_validate(data)                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r7">303 </span><span class="r7">│   │   </span><span class="r6">except</span> pydantic.ValidationError <span class="r6">as</span> e:                                              <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r7">304 </span><span class="r7">│   │   │   </span><span class="r6">for</span> ee <span class="r9">in</span> e.errors(include_url=<span class="r6">False</span>):                                         <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r7">305 </span><span class="r7">│   │   │   │   </span><span class="r6">if</span> (severity := ee.get(<span class="r10">&quot;ctx&quot;</span>, {}).get(<span class="r10">&quot;severity&quot;</span>, ERROR)) &lt; ERROR:         <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
 <span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/spec/_internal/</span><span class="r5">node.py</span>:<span class="r6">91</span> in <span class="r11">model_v</span> <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
@@ -668,45 +668,45 @@ body {
 <span class="r1">│</span>   <span class="r7"> 93 </span><span class="r7">│   │   │   </span>)                                                                              <span class="r1">│</span>
 <span class="r1">│</span>   <span class="r7"> 94 </span>                                                                                           <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/pydantic/</span><span class="r5">main.py</span>:<span class="r6">716</span> in <span class="r11">model_validate</span>          <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/pydantic/</span><span class="r5">main.py</span>:<span class="r6">732</span> in <span class="r11">model_validate</span>          <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 713 </span><span class="r7">│   │   │   │   </span>code=<span class="r10">&#x27;validate-by-alias-and-name-false&#x27;</span>,                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 714 </span><span class="r7">│   │   │   </span>)                                                                             <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 715 </span><span class="r7">│   │   </span>                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span> 716 <span class="r7">│   │   </span><span class="r6">return</span> <span class="r8">cls</span>.__pydantic_validator__.validate_python(                                <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 717 </span><span class="r7">│   │   │   </span>obj,                                                                          <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 718 </span><span class="r7">│   │   │   </span>strict=strict,                                                                <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 719 </span><span class="r7">│   │   │   </span>extra=extra,                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r7"> 729 </span><span class="r7">│   │   │   │   </span>code=<span class="r10">&#x27;validate-by-alias-and-name-false&#x27;</span>,                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r7"> 730 </span><span class="r7">│   │   │   </span>)                                                                             <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r7"> 731 </span><span class="r7">│   │   </span>                                                                                  <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span> 732 <span class="r7">│   │   </span><span class="r6">return</span> <span class="r8">cls</span>.__pydantic_validator__.validate_python(                                <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r7"> 733 </span><span class="r7">│   │   │   </span>obj,                                                                          <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r7"> 734 </span><span class="r7">│   │   │   </span>strict=strict,                                                                <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r7"> 735 </span><span class="r7">│   │   │   </span>extra=extra,                                                                  <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/spec/model/</span><span class="r5">v0_5.py</span>:<span class="r6">3276</span> in <span class="r11">_validate</span> <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/spec/model/</span><span class="r5">v0_5.py</span>:<span class="r6">3282</span> in <span class="r11">_validate</span> <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">3273 </span><span class="r7">│   │   </span><span class="r6">if</span> <span class="r9">not</span> get_validation_context().perform_io_checks <span class="r9">or</span> value <span class="r9">is</span> <span class="r6">None</span>:               <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">3274 </span><span class="r7">│   │   │   </span><span class="r6">return</span> value                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">3275 </span><span class="r7">│   │   </span>                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span>3276 <span class="r7">│   │   </span>doc_reader = get_reader(value)                                                    <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">3277 </span><span class="r7">│   │   </span>doc_content = doc_reader.read().decode(encoding=<span class="r10">&quot;utf-8&quot;</span>)                          <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">3278 </span><span class="r7">│   │   </span><span class="r6">if</span> <span class="r9">not</span> re.search(<span class="r10">&quot;#.*[vV]alidation&quot;</span>, doc_content):                                <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">3279 </span><span class="r7">│   │   │   </span>issue_warning(                                                                <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r7">3279 </span><span class="r7">│   │   </span><span class="r6">if</span> <span class="r9">not</span> get_validation_context().perform_io_checks <span class="r9">or</span> value <span class="r9">is</span> <span class="r6">None</span>:               <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r7">3280 </span><span class="r7">│   │   │   </span><span class="r6">return</span> value                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r7">3281 </span><span class="r7">│   │   </span>                                                                                  <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>3282 <span class="r7">│   │   </span>doc_reader = get_reader(value)                                                    <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r7">3283 </span><span class="r7">│   │   </span>doc_content = doc_reader.read().decode(encoding=<span class="r10">&quot;utf-8&quot;</span>)                          <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r7">3284 </span><span class="r7">│   │   </span><span class="r6">if</span> <span class="r9">not</span> re.search(<span class="r10">&quot;#.*[vV]alidation&quot;</span>, doc_content):                                <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r7">3285 </span><span class="r7">│   │   │   </span>issue_warning(                                                                <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/spec/_internal/</span><span class="r5">io.py</span>:<span class="r6">731</span> in <span class="r11">get_read</span> <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/spec/_internal/</span><span class="r5">io.py</span>:<span class="r6">743</span> in <span class="r11">get_read</span> <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 728 </span><span class="r7">│   │   │   </span>source = HttpUrl(source)                                                      <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 729 </span><span class="r7">│   </span>                                                                                      <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 730 </span><span class="r7">│   </span><span class="r6">if</span> <span class="r8">isinstance</span>(source, HttpUrl):                                                       <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span> 731 <span class="r7">│   │   </span><span class="r6">return</span> _open_url(source, progressbar=progressbar, **kwargs)                       <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 732 </span><span class="r7">│   </span>                                                                                      <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 733 </span><span class="r7">│   </span><span class="r6">if</span> <span class="r8">isinstance</span>(source, ZipPath):                                                       <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 734 </span><span class="r7">│   │   </span><span class="r6">if</span> <span class="r9">not</span> source.exists():                                                           <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r7"> 740 </span><span class="r7">│   │   │   </span>source = HttpUrl(source)                                                      <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r7"> 741 </span><span class="r7">│   </span>                                                                                      <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r7"> 742 </span><span class="r7">│   </span><span class="r6">if</span> <span class="r8">isinstance</span>(source, HttpUrl):                                                       <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span> 743 <span class="r7">│   │   </span><span class="r6">return</span> _open_url(source, progressbar=progressbar, **kwargs)                       <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r7"> 744 </span><span class="r7">│   </span>                                                                                      <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r7"> 745 </span><span class="r7">│   </span><span class="r6">if</span> <span class="r8">isinstance</span>(source, ZipPath):                                                       <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r7"> 746 </span><span class="r7">│   │   </span><span class="r6">if</span> <span class="r9">not</span> source.exists():                                                           <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/spec/_internal/</span><span class="r5">io.py</span>:<span class="r6">795</span> in <span class="r11">_open_ur</span> <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/spec/_internal/</span><span class="r5">io.py</span>:<span class="r6">807</span> in <span class="r11">_open_ur</span> <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 792 </span><span class="r7">│   │   </span><span class="r9">or</span> hashlib.sha256(<span class="r8">str</span>(source).encode(encoding=<span class="r10">&quot;utf-8&quot;</span>)).hexdigest()               <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 793 </span><span class="r7">│   </span>)                                                                                     <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 794 </span><span class="r7">│   </span>                                                                                      <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span> 795 <span class="r7">│   </span>reader = cache.fetch(                                                                 <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 796 </span><span class="r7">│   │   </span>source,                                                                           <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 797 </span><span class="r7">│   │   </span>fetcher=partial(_fetch_url, progressbar=progressbar),                             <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 798 </span><span class="r7">│   │   </span>force_refetch=force_refetch,                                                      <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r7"> 804 </span><span class="r7">│   │   </span><span class="r9">or</span> hashlib.sha256(<span class="r8">str</span>(source).encode(encoding=<span class="r10">&quot;utf-8&quot;</span>)).hexdigest()               <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r7"> 805 </span><span class="r7">│   </span>)                                                                                     <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r7"> 806 </span><span class="r7">│   </span>                                                                                      <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span> 807 <span class="r7">│   </span>reader = cache.fetch(                                                                 <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r7"> 808 </span><span class="r7">│   │   </span>source,                                                                           <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r7"> 809 </span><span class="r7">│   │   </span>fetcher=partial(_fetch_url, progressbar=progressbar),                             <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r7"> 810 </span><span class="r7">│   │   </span>force_refetch=force_refetch,                                                      <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
 <span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/genericache/</span><span class="r5">__init__.py</span>:<span class="r6">148</span> in <span class="r11">fetch</span>            <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
@@ -728,15 +728,15 @@ body {
 <span class="r1">│</span>   <span class="r7">262 </span><span class="r7">│   │   │   │   </span>contents_sha = sha256()                                                    <span class="r1">│</span>
 <span class="r1">│</span>   <span class="r7">263 </span><span class="r7">│   │   │   │   </span><span class="r6">for</span> chunk <span class="r9">in</span> chunks:                                                       <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/spec/_internal/</span><span class="r5">io.py</span>:<span class="r6">853</span> in <span class="r11">_fetch_u</span> <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/spec/_internal/</span><span class="r5">io.py</span>:<span class="r6">865</span> in <span class="r11">_fetch_u</span> <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 850 </span><span class="r7">│   │   </span>headers=headers,                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 851 </span><span class="r7">│   │   </span>timeout=settings.http_timeout,                                                    <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 852 </span><span class="r7">│   </span>)                                                                                     <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span> 853 <span class="r7">│   </span>_ = r.raise_for_status()                                                              <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 854 </span><span class="r7">│   </span>                                                                                      <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 855 </span><span class="r7">│   </span><span class="r7"># set progressbar.total</span>                                                               <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 856 </span><span class="r7">│   </span>total = r.headers.get(<span class="r10">&quot;content-length&quot;</span>)                                               <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r7"> 862 </span><span class="r7">│   │   </span>headers=headers,                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r7"> 863 </span><span class="r7">│   │   </span>timeout=settings.http_timeout,                                                    <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r7"> 864 </span><span class="r7">│   </span>)                                                                                     <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span> 865 <span class="r7">│   </span>_ = r.raise_for_status()                                                              <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r7"> 866 </span><span class="r7">│   </span>                                                                                      <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r7"> 867 </span><span class="r7">│   </span><span class="r7"># set progressbar.total</span>                                                               <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r7"> 868 </span><span class="r7">│   </span>total = r.headers.get(<span class="r10">&quot;content-length&quot;</span>)                                               <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
 <span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/httpx/</span><span class="r5">_models.py</span>:<span class="r6">829</span> in <span class="r11">raise_for_status</span>        <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>

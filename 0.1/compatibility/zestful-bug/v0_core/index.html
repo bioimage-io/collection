@@ -594,7 +594,7 @@
   </tr>
   <tr>
     <td style="text-align:left">bioimageio.spec</td>
-    <td style="text-align:left">0.5.9.0</td>
+    <td style="text-align:left">0.5.9.1</td>
   </tr>
 </table>
 <table>
@@ -631,7 +631,7 @@
   <tr>
     <td style="text-align:left">✔️</td>
     <td style="text-align:left"><code>weights.pytorch_state_dict</code></td>
-    <td style="text-align:left">Found existing conda environment '4111c99f319e2948cd95fe87067b76f177ebaedbb040f645f088d0658a818ec7'</td>
+    <td style="text-align:left">Created conda environment '4111c99f319e2948cd95fe87067b76f177ebaedbb040f645f088d0658a818ec7'</td>
   </tr>
   <tr>
     <td style="text-align:left">❌</td>
@@ -641,9 +641,11 @@
   <tr>
     <td style="text-align:left">❌</td>
     <td style="text-align:left"><code>weights.pytorch_state_dict</code></td>
-    <td style="text-align:left"><pre>Output 'output0' disagrees with 1038197 of 1048576 expected values (990101.8 ppm).
- Max relative difference not accounted for by absolute tolerance (1.00e-03): 3.54e+04 (= \|-1.81e-01 - 4.12e-06\|/\|4.12e-06 + 1e-6\|) at {'batch': np.int64(0), 'channel': np.int64(0), 'y': np.int64(268), 'x': np.int64(754)}
- Max absolute difference not accounted for by relative tolerance (1.00e-03): 1.33e+00 (= \|5.3560752e-01 - 1.8676397e+00\|) at {'batch': np.int64(0), 'channel': np.int64(0), 'y': np.int64(153), 'x': np.int64(466)}</pre></td>
+    <td style="text-align:left"><pre>Output 'output0': 1038195 of 1048576 elements disagree with expected values. (990099.9 ppm). 
+Max relative difference not accounted for by absolute tolerance (1.00e-03):
+3.54e+04 (= \|-1.81e-01 - 4.12e-06\|/\|4.12e-06 + 1e-6\|) at {'batch': np.int64(0), 'channel': np.int64(0), 'y': np.int64(268), 'x': np.int64(754)} 
+Max absolute difference not accounted for by relative tolerance (1.00e-03):
+1.33e+00 (= \|5.3560781e-01 - 1.8676397e+00\|) at {'batch': np.int64(0), 'channel': np.int64(0), 'y': np.int64(153), 'x': np.int64(466)}</pre></td>
   </tr>
   <tr>
     <td style="text-align:left"></td>
@@ -682,6 +684,11 @@ dependencies:
     <td style="text-align:left"></td>
     <td style="text-align:left"><pre>Success. All the packages in the specification file are present in the environment with matching
 version and build string.</pre></td>
+  </tr>
+  <tr>
+    <td style="text-align:left">✔️</td>
+    <td style="text-align:left"><code>weights.pytorch_state_dict</code></td>
+    <td style="text-align:left">Run pytorch_state_dict inference for inputs with batch_size: 1 and size parameter n: 0</td>
   </tr>
 </table></div>
 
