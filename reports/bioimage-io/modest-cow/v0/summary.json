@@ -219,6 +219,7 @@
             "biapy_3.6.7": 1.0,
             "biapy_3.6.8": 1.0,
             "bioimageio.core_0.10.0": 1.0,
+            "bioimageio.core_0.10.2": 1.0,
             "bioimageio.core_0.9.3": 0.0,
             "bioimageio.core_0.9.4": 0.0,
             "bioimageio.core_0.9.5": 0.5,
@@ -417,6 +418,160 @@
                         [
                             "bioimageio.spec",
                             "0.5.9.0",
+                            "",
+                            ""
+                        ]
+                    ],
+                    "format_version": "0.5.9",
+                    "id": "modest-cow",
+                    "metadata_completeness": 0.41836734693877553,
+                    "name": "bioimageio format validation",
+                    "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+                    "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/modest-cow/files/rdf.yaml?version=v0",
+                    "status": "passed",
+                    "traceback": null,
+                    "type": "model",
+                    "version": "0.1.0",
+                    "warnings": null
+                },
+                "error": null,
+                "links": [
+                    "bioimageio/bioimageio.core"
+                ],
+                "score": 1.0,
+                "status": "passed"
+            },
+            "0.10.2": {
+                "badge": null,
+                "details": {
+                    "details": [
+                        {
+                            "context": {
+                                "file_name": "rdf.yaml",
+                                "known_files": {
+                                    "checkpoint.pth": "59b3995453fe36af4873426f960517b31b2cf3824ba1ddaf7be5457b2b062179",
+                                    "https://doi.org/10.1038/s41592-025-02699-y": null,
+                                    "https://github.com/BiaPyX/BiaPy": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/modest-cow/files/checkpoint.pth?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/modest-cow/files/cover.png?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/modest-cow/files/documentation.md?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/modest-cow/files/multiresunet.py?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/modest-cow/files/test-input.npy?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/modest-cow/files/test-output.npy?version=v0": null,
+                                    "multiresunet.py": "dea3733e5d4371da684f29a37e31efe8d15b3069885fd6ac7330895ceaeb9c03",
+                                    "test-input.npy": "d427ecae24b8e6a1c63a26049da5d331f237d88802bdb9c833abc718e0c9107c",
+                                    "test-output.npy": "766b8e468adee0c12a6c5ba11edb5449229d65781e671f67544222ea725fcf23"
+                                },
+                                "original_source_name": null,
+                                "perform_io_checks": true,
+                                "root": "https://hypha.aicell.io/bioimage-io/artifacts/modest-cow/files?version=v0",
+                                "update_hashes": false
+                            },
+                            "errors": [],
+                            "loc": [],
+                            "name": "Successfully created `ModelDescr` instance.",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [],
+                            "name": "bioimageio.spec format validation model 0.5.9",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": [
+                                {
+                                    "loc": [
+                                        "inputs",
+                                        0,
+                                        "sample_tensor"
+                                    ],
+                                    "msg": "Needs to be filled for FAIR compliance",
+                                    "severity": 35,
+                                    "type": "warning"
+                                },
+                                {
+                                    "loc": [
+                                        "outputs",
+                                        0,
+                                        "sample_tensor"
+                                    ],
+                                    "msg": "Needs to be filled for FAIR compliance",
+                                    "severity": 35,
+                                    "type": "warning"
+                                }
+                            ]
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "pytorch_state_dict"
+                            ],
+                            "name": "Found existing conda environment 'df87be09262b4f3f7ce399456dada4eaf2aa7e1ca18a46825f1ebf80ab4604e2'",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "pytorch_state_dict"
+                            ],
+                            "name": "Reproduce test outputs from test inputs (pytorch_state_dict)",
+                            "recommended_env": {
+                                "channels": [
+                                    "conda-forge",
+                                    "nodefaults"
+                                ],
+                                "dependencies": [
+                                    "conda-forge::bioimageio.core>=0.9.4",
+                                    "pip",
+                                    "pytorch==2.4.0",
+                                    "torchvision==0.19.0"
+                                ],
+                                "name": null
+                            },
+                            "saved_conda_compare": "Success. All the packages in the specification file are present in the environment with matching version and build string.\n",
+                            "status": "passed",
+                            "warnings": [
+                                {
+                                    "loc": [
+                                        "weights",
+                                        "pytorch_state_dict"
+                                    ],
+                                    "msg": "Output `output0`: all elements agree with expected values. \nMax relative difference not accounted for by absolute tolerance (1.00e-03):\n0.00e+00 (= \\|6.78e-02 - 6.77e-02\\|/\\|6.77e-02 + 1e-6\\|) at {'batch': np.int64(0), 'channel': np.int64(0), 'y': np.int64(0), 'x': np.int64(0)} \nMax absolute difference not accounted for by relative tolerance (1.00e-03):\n0.00e+00 (= \\|6.1981659e-03 - 6.1982158e-03\\|) at {'batch': np.int64(0), 'channel': np.int64(0), 'y': np.int64(189), 'x': np.int64(254)}",
+                                    "severity": 20,
+                                    "type": "bioimageio.core"
+                                }
+                            ]
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "pytorch_state_dict"
+                            ],
+                            "name": "Run pytorch_state_dict inference for inputs with batch_size: 1 and size parameter n: 0",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        }
+                    ],
+                    "env": [
+                        [
+                            "bioimageio.spec",
+                            "0.5.9.1",
                             "",
                             ""
                         ]
