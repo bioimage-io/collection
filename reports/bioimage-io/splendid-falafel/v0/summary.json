@@ -1,0 +1,47 @@
+{
+    "rdf_content": {
+        "name": "Ovarian reserve  oocyte segmentation dataset",
+        "description": "The database contains seven whole-mount ovarian samples, imaged by SPIM microscopy and stained for DDX4. One ovary is included for each of the following ages: 5, 10, 22, 30, 40, 50, and 60 weeks. The dataset includes the raw images and the corresponding manual segmentations of the oocytes, which were performed by expert annotators. The images are provided in TIFF format, and the segmentations are available as instance masks. This dataset is intended to facilitate the development and benchmarking of image analysis algorithms for oocyte segmentation and quantification in ovarian reserve studies. A detailed tutorial on how to use the dataset can be found at https://biapy.readthedocs.io/en/latest/tutorials/instance_seg/ovarian-reserve.html.\n    ",
+        "covers": [
+            "raw_ovary_overview.png",
+            "oocyte_seg1.png",
+            "oocyte_seg2.png"
+        ],
+        "authors": [
+            {
+                "affiliation": "MRC LMB",
+                "orcid": "0000-0002-1109-110X",
+                "name": "Daniel Franco-Barranco",
+                "github_user": "danifranco"
+            }
+        ],
+        "cite": [
+            {
+                "text": "Arturo D’Angelo, Daniel Franco-Barranco, Marco Musy, James Sharpe, Ignacio Arganda-Carreras, Elvan Böke (2026). Ovarian reserve oocyte segmentation dataset: 3D light-sheet fluorescence microscopy (1.0) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.19085211",
+                "doi": "10.5281/zenodo.19085211",
+                "url": "https://www.biorxiv.org/content/10.1101/2025.11.07.686728v1.abstract"
+            }
+        ],
+        "license": "CC-BY-4.0",
+        "tags": [
+            "instance-segmentation",
+            "3D",
+            "ovarian reserve",
+            "oocyte",
+            "mouse",
+            "light-sheet fluorescence microscopy"
+        ],
+        "version": "1.0.0",
+        "format_version": "0.3.0",
+        "documentation": "Oocytes.md",
+        "type": "dataset",
+        "source": "https://zenodo.org/records/19085211",
+        "uploader": {
+            "email": "danialtza@gmail.com"
+        },
+        "id": "splendid-falafel",
+        "id_emoji": "🧆"
+    },
+    "rdf_yaml_sha256": "ccb0e65dcca2c2816c8af3e10e292afa943b248810ba2e14a6c68005a7be7276",
+    "status": "untested"
+}
