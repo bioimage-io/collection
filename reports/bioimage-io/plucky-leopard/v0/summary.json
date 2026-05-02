@@ -1,0 +1,276 @@
+{
+    "rdf_content": {
+        "name": "3D Residual U-Net for oocyte segmentation",
+        "description": "Oocyte segmentation in 3D light-sheet fluorescence microscopy images. Instance segmentation representation: F + C + Db",
+        "covers": [
+            "cover1.png",
+            "cover2.png"
+        ],
+        "authors": [
+            {
+                "name": "Daniel Franco-Barranco",
+                "github_user": "danifranco"
+            }
+        ],
+        "cite": [
+            {
+                "text": "model",
+                "doi": "10.1109/TPAMI.2020.2983686"
+            },
+            {
+                "text": "training library",
+                "doi": "10.1038/s41592-025-02699-y"
+            },
+            {
+                "text": "BiaPy: accessible deep learning on bioimages",
+                "doi": "10.1038/s41592-025-02699-y",
+                "url": "https://www.nature.com/articles/s41592-025-02699-y"
+            }
+        ],
+        "license": "CC-BY-4.0",
+        "git_repo": "https://github.com/BiaPyX/BiaPy",
+        "maintainers": [
+            {
+                "name": "Daniel Franco-Barranco",
+                "github_user": "danifranco"
+            }
+        ],
+        "tags": [
+            "oocyte",
+            "3D",
+            "light-sheet fluorescence microscopy",
+            "instance segmentation",
+            "3d",
+            "pytorch",
+            "biapy",
+            "instance-segmentation",
+            "resunet"
+        ],
+        "version": "0.1.0",
+        "format_version": "0.5.7",
+        "type": "model",
+        "documentation": "documentation.md",
+        "inputs": [
+            {
+                "id": "input0",
+                "axes": [
+                    {
+                        "type": "batch",
+                        "size": 1
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "channel0"
+                        ]
+                    },
+                    {
+                        "size": 40,
+                        "id": "z",
+                        "type": "space"
+                    },
+                    {
+                        "size": 128,
+                        "id": "y",
+                        "type": "space"
+                    },
+                    {
+                        "size": 128,
+                        "id": "x",
+                        "type": "space"
+                    }
+                ],
+                "test_tensor": {
+                    "source": "test-input.npy",
+                    "sha256": "1b6a2ac5662e1a689a74974894d4076130fa128660095660f94f203547b341cd"
+                },
+                "data": {
+                    "type": "float32"
+                },
+                "preprocessing": [
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    },
+                    {
+                        "id": "clip",
+                        "kwargs": {
+                            "min_percentile": 0.1,
+                            "max_percentile": 99.8,
+                            "axes": [
+                                "z",
+                                "y",
+                                "x"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "zero_mean_unit_variance",
+                        "kwargs": {
+                            "axes": [
+                                "z",
+                                "y",
+                                "x"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    }
+                ]
+            }
+        ],
+        "outputs": [
+            {
+                "id": "output0",
+                "axes": [
+                    {
+                        "type": "batch",
+                        "size": 1
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "F",
+                            "C",
+                            "Dc"
+                        ]
+                    },
+                    {
+                        "halo": 4,
+                        "size": {
+                            "tensor_id": "input0",
+                            "axis_id": "z",
+                            "offset": 0
+                        },
+                        "id": "z",
+                        "type": "space",
+                        "scale": 1
+                    },
+                    {
+                        "halo": 16,
+                        "size": {
+                            "tensor_id": "input0",
+                            "axis_id": "y",
+                            "offset": 0
+                        },
+                        "id": "y",
+                        "type": "space",
+                        "scale": 1
+                    },
+                    {
+                        "halo": 16,
+                        "size": {
+                            "tensor_id": "input0",
+                            "axis_id": "x",
+                            "offset": 0
+                        },
+                        "id": "x",
+                        "type": "space",
+                        "scale": 1
+                    }
+                ],
+                "test_tensor": {
+                    "source": "test-output.npy",
+                    "sha256": "0118395262b3756ff63d2d36b837a58396189cd75293cbd5089904008787bfda"
+                },
+                "data": {
+                    "type": "float32"
+                },
+                "postprocessing": [
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    }
+                ]
+            }
+        ],
+        "training_data": {
+            "id": "splendid-falafel"
+        },
+        "weights": {
+            "pytorch_state_dict": {
+                "source": "checkpoint.pth",
+                "sha256": "23b3ca39834cd52ca639d7362db661f65996bb7e39c6f28c596da4c904e299a2",
+                "architecture": {
+                    "source": "model.py",
+                    "sha256": "c0d86c529b527ae960c5c00d1199fc782c902d36fe237cb27a0d2f9bd0389cce",
+                    "callable": "ResUNet",
+                    "kwargs": {
+                        "image_shape": [
+                            40,
+                            128,
+                            128,
+                            1
+                        ],
+                        "activation": "elu",
+                        "feature_maps": [
+                            48,
+                            64,
+                            80,
+                            96
+                        ],
+                        "drop_values": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        "normalization": "bn",
+                        "k_size": 3,
+                        "upsample_layer": "convtranspose",
+                        "yx_down": [
+                            2,
+                            2,
+                            2
+                        ],
+                        "z_down": [
+                            1,
+                            1,
+                            1
+                        ],
+                        "output_channels": [
+                            3
+                        ],
+                        "output_channel_info": [
+                            "F+C+Db"
+                        ],
+                        "head_activations": [
+                            "ce_sigmoid",
+                            "ce_sigmoid",
+                            "ce_sigmoid"
+                        ],
+                        "explicit_activations": true,
+                        "contrast": false,
+                        "contrast_proj_dim": 256,
+                        "separated_decoders": false,
+                        "isotropy": [
+                            true,
+                            true,
+                            true,
+                            true
+                        ],
+                        "larger_io": false,
+                        "return_one_tensor": true
+                    }
+                },
+                "pytorch_version": "2.9.1",
+                "dependencies": null
+            }
+        },
+        "uploader": {
+            "email": "danialtza@gmail.com"
+        },
+        "id": "plucky-leopard",
+        "id_emoji": "🐆"
+    },
+    "rdf_yaml_sha256": "de269d443784c6da6835612b1116339d421eb46aa252a76efcc365415b3a2073",
+    "status": "untested"
+}
