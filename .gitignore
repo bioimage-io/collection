@@ -12,3 +12,4 @@ index.json
 reports/
 site/
 .coverage
+.DS_Store
