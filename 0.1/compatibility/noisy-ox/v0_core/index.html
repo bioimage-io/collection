@@ -590,11 +590,11 @@
   </tr>
   <tr>
     <td style="text-align:left">applied format</td>
-    <td style="text-align:left">model 0.5.9</td>
+    <td style="text-align:left">model 0.5.10</td>
   </tr>
   <tr>
     <td style="text-align:left">bioimageio.spec</td>
-    <td style="text-align:left">0.5.9.1</td>
+    <td style="text-align:left">0.5.10.1</td>
   </tr>
 </table>
 <table>
@@ -611,7 +611,7 @@
   <tr>
     <td style="text-align:left">✔️</td>
     <td style="text-align:left"></td>
-    <td style="text-align:left">bioimageio.spec format validation model 0.5.9</td>
+    <td style="text-align:left">bioimageio.spec format validation model 0.5.10</td>
   </tr>
   <tr>
     <td style="text-align:left">⚠</td>
@@ -664,36 +664,19 @@
     <td style="text-align:left">Found existing conda environment '08f8ffa27c39c9aa97fede9155e0b8428e8e934a25bbb625c5d1dd8c912d76f5'</td>
   </tr>
   <tr>
-    <td style="text-align:left">✔️</td>
+    <td style="text-align:left">❌</td>
     <td style="text-align:left"><code>weights.pytorch_state_dict</code></td>
     <td style="text-align:left">Reproduce test outputs from test inputs (pytorch_state_dict)</td>
   </tr>
   <tr>
-    <td style="text-align:left">ℹ</td>
+    <td style="text-align:left">❌</td>
     <td style="text-align:left"><code>weights.pytorch_state_dict</code></td>
-    <td style="text-align:left"><pre>Output `masks`: all elements agree with expected values. 
-Max relative difference not accounted for by absolute tolerance (1.00e-03):
-0.00e+00 (= \|0.00e+00 - 0.00e+00\|/\|0.00e+00 + 1e-6\|) at {'batch': np.int64(0), 'object': np.int64(0), 'channel': np.int64(0), 'y': np.int64(0), 'x': np.int64(0)} 
-Max absolute difference not accounted for by relative tolerance (1.00e-03):
-0.00e+00 (= \|0.0000000e+00 - 0.0000000e+00\|) at {'batch': np.int64(0), 'object': np.int64(0), 'channel': np.int64(0), 'y': np.int64(0), 'x': np.int64(0)}</pre></td>
+    <td style="text-align:left"><pre>PredictorAdaptor.load_state_dict() got an unexpected keyword argument 'strict'</pre></td>
   </tr>
   <tr>
-    <td style="text-align:left">ℹ</td>
-    <td style="text-align:left"><code>weights.pytorch_state_dict</code></td>
-    <td style="text-align:left"><pre>Output `scores`: all elements agree with expected values. 
-Max relative difference not accounted for by absolute tolerance (1.00e-03):
-0.00e+00 (= \|8.95e-01 - 8.95e-01\|/\|8.95e-01 + 1e-6\|) at {'batch': np.int64(0), 'object': np.int64(0), 'channel': np.int64(0)} 
-Max absolute difference not accounted for by relative tolerance (1.00e-03):
-0.00e+00 (= \|8.9521253e-01 - 8.9521229e-01\|) at {'batch': np.int64(0), 'object': np.int64(0), 'channel': np.int64(0)}</pre></td>
-  </tr>
-  <tr>
-    <td style="text-align:left">ℹ</td>
-    <td style="text-align:left"><code>weights.pytorch_state_dict</code></td>
-    <td style="text-align:left"><pre>Output `embeddings`: all elements agree with expected values. 
-Max relative difference not accounted for by absolute tolerance (1.00e-03):
-0.00e+00 (= \|-1.66e-02 - -1.66e-02\|/\|-1.66e-02 + 1e-6\|) at {'batch': np.int64(0), 'channel': np.int64(0), 'y': np.int64(0), 'x': np.int64(0)} 
-Max absolute difference not accounted for by relative tolerance (1.00e-03):
-0.00e+00 (= \|1.5401747e-07 - 1.5401747e-07\|) at {'batch': np.int64(0), 'channel': np.int64(228), 'y': np.int64(33), 'x': np.int64(24)}</pre></td>
+    <td style="text-align:left"></td>
+    <td style="text-align:left"></td>
+    <td style="text-align:left">See <a href="#traceback-1">Traceback 1</a>.</td>
   </tr>
   <tr>
     <td style="text-align:left"></td>
@@ -728,66 +711,233 @@ dependencies:
 version and build string.</pre></td>
   </tr>
   <tr>
-    <td style="text-align:left">✔️</td>
+    <td style="text-align:left">❌</td>
     <td style="text-align:left"><code>weights.pytorch_state_dict</code></td>
-    <td style="text-align:left">Run pytorch_state_dict inference for inputs with batch_size: 1 and size parameter n: 0</td>
-  </tr>
-  <tr>
-    <td style="text-align:left">✔️</td>
-    <td style="text-align:left"><code>weights.pytorch_state_dict</code></td>
-    <td style="text-align:left">Run pytorch_state_dict inference for inputs with batch_size: 1 and size parameter n: 1</td>
-  </tr>
-  <tr>
-    <td style="text-align:left">✔️</td>
-    <td style="text-align:left"><code>weights.pytorch_state_dict</code></td>
-    <td style="text-align:left">Run pytorch_state_dict inference for inputs with batch_size: 1 and size parameter n: 2</td>
+    <td style="text-align:left">Run pytorch_state_dict inference for parametrized inputs</td>
   </tr>
   <tr>
     <td style="text-align:left">❌</td>
     <td style="text-align:left"><code>weights.pytorch_state_dict</code></td>
-    <td style="text-align:left">Run pytorch_state_dict inference for inputs with batch_size: 2 and size parameter n: 0</td>
-  </tr>
-  <tr>
-    <td style="text-align:left">❌</td>
-    <td style="text-align:left"><code>weights.pytorch_state_dict</code></td>
-    <td style="text-align:left"><pre></pre></td>
+    <td style="text-align:left"><pre>PredictorAdaptor.load_state_dict() got an unexpected keyword argument 'strict'</pre></td>
   </tr>
   <tr>
     <td style="text-align:left"></td>
     <td style="text-align:left"></td>
-    <td style="text-align:left"></td>
+    <td style="text-align:left">See <a href="#traceback-2">Traceback 2</a>.</td>
   </tr>
-  <tr>
-    <td style="text-align:left">❌</td>
-    <td style="text-align:left"><code>weights.pytorch_state_dict</code></td>
-    <td style="text-align:left">Run pytorch_state_dict inference for inputs with batch_size: 2 and size parameter n: 1</td>
-  </tr>
-  <tr>
-    <td style="text-align:left">❌</td>
-    <td style="text-align:left"><code>weights.pytorch_state_dict</code></td>
-    <td style="text-align:left"><pre></pre></td>
-  </tr>
-  <tr>
-    <td style="text-align:left"></td>
-    <td style="text-align:left"></td>
-    <td style="text-align:left"></td>
-  </tr>
-  <tr>
-    <td style="text-align:left">❌</td>
-    <td style="text-align:left"><code>weights.pytorch_state_dict</code></td>
-    <td style="text-align:left">Run pytorch_state_dict inference for inputs with batch_size: 2 and size parameter n: 2</td>
-  </tr>
-  <tr>
-    <td style="text-align:left">❌</td>
-    <td style="text-align:left"><code>weights.pytorch_state_dict</code></td>
-    <td style="text-align:left"><pre></pre></td>
-  </tr>
-  <tr>
-    <td style="text-align:left"></td>
-    <td style="text-align:left"></td>
-    <td style="text-align:left"></td>
-  </tr>
-</table></div>
+</table>
+<h3 id="traceback-1">Traceback 1</h3>
+<pre><!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+.r1 {color: #800000; text-decoration-color: #800000}
+.r2 {color: #800000; text-decoration-color: #800000; font-weight: bold}
+.r3 {color: #bf7f7f; text-decoration-color: #bf7f7f; font-weight: bold}
+.r4 {color: #7f7f7f; text-decoration-color: #7f7f7f}
+.r5 {color: #0000ff; text-decoration-color: #0000ff}
+.r6 {color: #808000; text-decoration-color: #808000}
+.r7 {color: #00ffff; text-decoration-color: #00ffff}
+.r8 {color: #ff00ff; text-decoration-color: #ff00ff}
+.r9 {font-weight: bold; text-decoration: underline}
+.r10 {color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold; text-decoration: underline}
+.r11 {color: #0000ff; text-decoration-color: #0000ff; font-weight: bold; text-decoration: underline}
+.r12 {color: #808080; text-decoration-color: #808080}
+.r13 {color: #00ffff; text-decoration-color: #00ffff; text-decoration: underline}
+.r14 {color: #ff0000; text-decoration-color: #ff0000; font-weight: bold}
+.r15 {color: #800080; text-decoration-color: #800080; font-weight: bold}
+.r16 {font-weight: bold}
+.r17 {color: #008000; text-decoration-color: #008000}
+body {
+    color: var(--md-default-fg-color);
+    background-color: var(--md-default-bg-color);
+}
+</style>
+</head>
+<body>
+    <pre style="font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><code style="font-family:inherit"><span class="r1">╭─────────────────────────────── </span><span class="r2">Traceback </span><span class="r3">(most recent call last)</span><span class="r1"> ────────────────────────────────╮</span>
+<span class="r1">│</span> <span class="r4">/usr/share/miniconda/envs/08f8ffa27c39c9aa97fede9155e0b8428e8e934a25bbb625c5d1dd8c912d76f5/lib/p</span> <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 877 </span><span class="r4">│   │   </span>test_input = get_test_input_sample(model)                                         <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 878 </span><span class="r4">│   │   </span>expected = get_test_output_sample(model)                                          <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 879 </span><span class="r4">│   │   </span>                                                                                  <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span> 880 <span class="r4">│   │   </span><span class="r5">with</span> create_prediction_pipeline(                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 881 </span><span class="r4">│   │   │   </span>bioimageio_model=model, devices=devices, weight_format=weight_format          <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 882 </span><span class="r4">│   │   </span>) <span class="r5">as</span> prediction_pipeline:                                                         <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 883 </span><span class="r4">│   │   │   </span>prediction_pipeline.apply_preprocessing(test_input)                           <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/usr/share/miniconda/envs/08f8ffa27c39c9aa97fede9155e0b8428e8e934a25bbb625c5d1dd8c912d76f5/lib/p</span> <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">468 </span><span class="r4">│   │   │   </span><span class="r6">f&quot;deprecated create_prediction_pipeline kwargs: {</span><span class="r7">set</span>(deprecated_kwargs)<span class="r6">}&quot;</span>      <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">469 </span><span class="r4">│   │   </span>)                                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">470 </span><span class="r4">│   </span>                                                                                       <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>471 <span class="r4">│   </span>model_adapter = model_adapter <span class="r8">or</span> <span class="r9">create_model_adapter(</span>                                 <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">472 </span><span class="r4">│   │   </span><span class="r9">model_description=bioimageio_model,</span>                                                <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">473 </span><span class="r4">│   │   </span><span class="r9">devices=devices,</span>                                                                   <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">474 </span><span class="r4">│   │   </span><span class="r9">weight_format_priority_order=weights_format </span><span class="r10">and</span><span class="r9"> (weights_format,),</span>                 <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/usr/share/miniconda/envs/08f8ffa27c39c9aa97fede9155e0b8428e8e934a25bbb625c5d1dd8c912d76f5/lib/p</span> <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">183 </span><span class="r4">│   │   </span><span class="r5">assert</span> errors                                                                      <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">184 </span><span class="r4">│   │   </span><span class="r5">if</span> <span class="r7">len</span>(weight_format_priority_order) == <span class="r5">1</span>:                                         <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">185 </span><span class="r4">│   │   │   </span><span class="r5">assert</span> <span class="r7">len</span>(errors) == <span class="r5">1</span>                                                        <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>186 <span class="r4">│   │   │   </span><span class="r11">raise</span><span class="r9"> errors[</span><span class="r11">0</span><span class="r9">]</span>                                                                <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">187 </span><span class="r4">│   │   </span>                                                                                   <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">188 </span><span class="r4">│   │   </span><span class="r5">else</span>:                                                                              <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">189 </span><span class="r4">│   │   │   </span>msg = (                                                                        <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/usr/share/miniconda/envs/08f8ffa27c39c9aa97fede9155e0b8428e8e934a25bbb625c5d1dd8c912d76f5/lib/p</span> <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">113 </span><span class="r4">│   │   │   │   </span><span class="r5">try</span>:                                                                       <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">114 </span><span class="r4">│   │   │   │   │   </span><span class="r5">from</span><span class="r12"> </span><span class="r13">.pytorch_backend</span><span class="r12"> </span><span class="r5">import</span> PytorchModelAdapter                       <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">115 </span><span class="r4">│   │   │   │   │   </span>                                                                       <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>116 <span class="r4">│   │   │   │   │   </span><span class="r5">return</span> PytorchModelAdapter(                                            <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">117 </span><span class="r4">│   │   │   │   │   │   </span>model_description=model_description, devices=devices               <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">118 </span><span class="r4">│   │   │   │   │   </span>)                                                                      <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">119 </span><span class="r4">│   │   │   │   </span><span class="r5">except</span> <span class="r7">Exception</span> <span class="r5">as</span> e:                                                     <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/usr/share/miniconda/envs/08f8ffa27c39c9aa97fede9155e0b8428e8e934a25bbb625c5d1dd8c912d76f5/lib/p</span> <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 62 </span><span class="r4">│   │   │   </span><span class="r5">raise</span> <span class="r7">ValueError</span>(<span class="r6">&quot;No `pytorch_state_dict` weights found&quot;</span>)                      <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 63 </span><span class="r4">│   │   </span>                                                                                   <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 64 </span><span class="r4">│   │   </span>devices = get_devices(devices)                                                     <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span> 65 <span class="r4">│   │   </span><span class="r7">self</span>._model = <span class="r9">load_torch_model(weights, load_state=</span><span class="r11">True</span><span class="r9">, devices=devices)</span>          <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 66 </span><span class="r4">│   │   </span><span class="r5">if</span> mode == <span class="r6">&quot;eval&quot;</span>:                                                                 <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 67 </span><span class="r4">│   │   │   </span><span class="r7">self</span>._model = <span class="r7">self</span>._model.eval()                                               <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 68 </span><span class="r4">│   │   </span><span class="r5">elif</span> mode == <span class="r6">&quot;train&quot;</span>:                                                              <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/usr/share/miniconda/envs/08f8ffa27c39c9aa97fede9155e0b8428e8e934a25bbb625c5d1dd8c912d76f5/lib/p</span> <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">157 </span><span class="r4">│   │   </span>use_devices = get_devices(devices)                                                 <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">158 </span><span class="r4">│   │   </span>torch_model = torch_model.to(use_devices[<span class="r5">0</span>])                                       <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">159 </span><span class="r4">│   │   </span><span class="r5">if</span> load_state:                                                                     <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>160 <span class="r4">│   │   │   </span>torch_model = <span class="r9">load_torch_state_dict(</span>                                           <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">161 </span><span class="r4">│   │   │   │   </span><span class="r9">torch_model,</span>                                                               <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">162 </span><span class="r4">│   │   │   │   </span><span class="r9">path=download(weight_spec),</span>                                                <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">163 </span><span class="r4">│   │   │   │   </span><span class="r9">devices=use_devices,</span>                                                       <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/usr/share/miniconda/envs/08f8ffa27c39c9aa97fede9155e0b8428e8e934a25bbb625c5d1dd8c912d76f5/lib/p</span> <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">204 </span><span class="r4">│   │   │   │   </span>)                                                                          <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">205 </span><span class="r4">│   │   │   │   </span><span class="r5">raise</span> <span class="r7">ValueError</span>(msg) <span class="r5">from</span><span class="r12"> </span><span class="r13">e</span>                                               <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">206 </span><span class="r4">│   </span>                                                                                       <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>207 <span class="r4">│   </span>incompatible = <span class="r9">model.load_state_dict(state, strict=strict)</span>                             <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">208 </span><span class="r4">│   </span><span class="r5">if</span> (                                                                                   <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">209 </span><span class="r4">│   │   </span><span class="r7">isinstance</span>(incompatible, <span class="r7">tuple</span>)                                                    <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">210 </span><span class="r4">│   │   </span><span class="r8">and</span> <span class="r7">hasattr</span>(incompatible, <span class="r6">&quot;missing_keys&quot;</span>)                                          <span class="r1">│</span>
+<span class="r1">╰──────────────────────────────────────────────────────────────────────────────────────────────────╯</span>
+<span class="r14">TypeError: </span><span class="r15">PredictorAdaptor.load_state_dict</span><span class="r16">()</span> got an unexpected keyword argument <span class="r17">&#x27;strict&#x27;</span>
+</code></pre>
+</body>
+</html>
+</pre>
+<h3 id="traceback-2">Traceback 2</h3>
+<pre><!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+.r1 {color: #800000; text-decoration-color: #800000}
+.r2 {color: #800000; text-decoration-color: #800000; font-weight: bold}
+.r3 {color: #bf7f7f; text-decoration-color: #bf7f7f; font-weight: bold}
+.r4 {color: #7f7f7f; text-decoration-color: #7f7f7f}
+.r5 {color: #0000ff; text-decoration-color: #0000ff}
+.r6 {color: #ff00ff; text-decoration-color: #ff00ff}
+.r7 {color: #808000; text-decoration-color: #808000}
+.r8 {color: #00ffff; text-decoration-color: #00ffff}
+.r9 {font-weight: bold; text-decoration: underline}
+.r10 {color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold; text-decoration: underline}
+.r11 {color: #0000ff; text-decoration-color: #0000ff; font-weight: bold; text-decoration: underline}
+.r12 {color: #808080; text-decoration-color: #808080}
+.r13 {color: #00ffff; text-decoration-color: #00ffff; text-decoration: underline}
+.r14 {color: #ff0000; text-decoration-color: #ff0000; font-weight: bold}
+.r15 {color: #800080; text-decoration-color: #800080; font-weight: bold}
+.r16 {font-weight: bold}
+.r17 {color: #008000; text-decoration-color: #008000}
+body {
+    color: var(--md-default-fg-color);
+    background-color: var(--md-default-bg-color);
+}
+</style>
+</head>
+<body>
+    <pre style="font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><code style="font-family:inherit"><span class="r1">╭─────────────────────────────── </span><span class="r2">Traceback </span><span class="r3">(most recent call last)</span><span class="r1"> ────────────────────────────────╮</span>
+<span class="r1">│</span> <span class="r4">/usr/share/miniconda/envs/08f8ffa27c39c9aa97fede9155e0b8428e8e934a25bbb625c5d1dd8c912d76f5/lib/p</span> <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">1124 </span><span class="r4">│   </span><span class="r5">try</span>:                                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">1125 </span><span class="r4">│   │   </span>test_input = get_test_input_sample(model)                                         <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">1126 </span><span class="r4">│   │   </span>                                                                                  <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>1127 <span class="r4">│   │   </span><span class="r5">with</span> create_prediction_pipeline(                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">1128 </span><span class="r4">│   │   │   </span>bioimageio_model=model, devices=devices, weight_format=weight_format          <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">1129 </span><span class="r4">│   │   </span>) <span class="r5">as</span> prediction_pipeline:                                                         <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">1130 </span><span class="r4">│   │   │   </span><span class="r5">for</span> n, batch_size, inputs, exptected_output_shape <span class="r6">in</span> generate_test_cases():   <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/usr/share/miniconda/envs/08f8ffa27c39c9aa97fede9155e0b8428e8e934a25bbb625c5d1dd8c912d76f5/lib/p</span> <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">468 </span><span class="r4">│   │   │   </span><span class="r7">f&quot;deprecated create_prediction_pipeline kwargs: {</span><span class="r8">set</span>(deprecated_kwargs)<span class="r7">}&quot;</span>      <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">469 </span><span class="r4">│   │   </span>)                                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">470 </span><span class="r4">│   </span>                                                                                       <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>471 <span class="r4">│   </span>model_adapter = model_adapter <span class="r6">or</span> <span class="r9">create_model_adapter(</span>                                 <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">472 </span><span class="r4">│   │   </span><span class="r9">model_description=bioimageio_model,</span>                                                <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">473 </span><span class="r4">│   │   </span><span class="r9">devices=devices,</span>                                                                   <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">474 </span><span class="r4">│   │   </span><span class="r9">weight_format_priority_order=weights_format </span><span class="r10">and</span><span class="r9"> (weights_format,),</span>                 <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/usr/share/miniconda/envs/08f8ffa27c39c9aa97fede9155e0b8428e8e934a25bbb625c5d1dd8c912d76f5/lib/p</span> <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">183 </span><span class="r4">│   │   </span><span class="r5">assert</span> errors                                                                      <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">184 </span><span class="r4">│   │   </span><span class="r5">if</span> <span class="r8">len</span>(weight_format_priority_order) == <span class="r5">1</span>:                                         <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">185 </span><span class="r4">│   │   │   </span><span class="r5">assert</span> <span class="r8">len</span>(errors) == <span class="r5">1</span>                                                        <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>186 <span class="r4">│   │   │   </span><span class="r11">raise</span><span class="r9"> errors[</span><span class="r11">0</span><span class="r9">]</span>                                                                <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">187 </span><span class="r4">│   │   </span>                                                                                   <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">188 </span><span class="r4">│   │   </span><span class="r5">else</span>:                                                                              <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">189 </span><span class="r4">│   │   │   </span>msg = (                                                                        <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/usr/share/miniconda/envs/08f8ffa27c39c9aa97fede9155e0b8428e8e934a25bbb625c5d1dd8c912d76f5/lib/p</span> <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">113 </span><span class="r4">│   │   │   │   </span><span class="r5">try</span>:                                                                       <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">114 </span><span class="r4">│   │   │   │   │   </span><span class="r5">from</span><span class="r12"> </span><span class="r13">.pytorch_backend</span><span class="r12"> </span><span class="r5">import</span> PytorchModelAdapter                       <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">115 </span><span class="r4">│   │   │   │   │   </span>                                                                       <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>116 <span class="r4">│   │   │   │   │   </span><span class="r5">return</span> PytorchModelAdapter(                                            <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">117 </span><span class="r4">│   │   │   │   │   │   </span>model_description=model_description, devices=devices               <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">118 </span><span class="r4">│   │   │   │   │   </span>)                                                                      <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">119 </span><span class="r4">│   │   │   │   </span><span class="r5">except</span> <span class="r8">Exception</span> <span class="r5">as</span> e:                                                     <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/usr/share/miniconda/envs/08f8ffa27c39c9aa97fede9155e0b8428e8e934a25bbb625c5d1dd8c912d76f5/lib/p</span> <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 62 </span><span class="r4">│   │   │   </span><span class="r5">raise</span> <span class="r8">ValueError</span>(<span class="r7">&quot;No `pytorch_state_dict` weights found&quot;</span>)                      <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 63 </span><span class="r4">│   │   </span>                                                                                   <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 64 </span><span class="r4">│   │   </span>devices = get_devices(devices)                                                     <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span> 65 <span class="r4">│   │   </span><span class="r8">self</span>._model = <span class="r9">load_torch_model(weights, load_state=</span><span class="r11">True</span><span class="r9">, devices=devices)</span>          <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 66 </span><span class="r4">│   │   </span><span class="r5">if</span> mode == <span class="r7">&quot;eval&quot;</span>:                                                                 <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 67 </span><span class="r4">│   │   │   </span><span class="r8">self</span>._model = <span class="r8">self</span>._model.eval()                                               <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 68 </span><span class="r4">│   │   </span><span class="r5">elif</span> mode == <span class="r7">&quot;train&quot;</span>:                                                              <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/usr/share/miniconda/envs/08f8ffa27c39c9aa97fede9155e0b8428e8e934a25bbb625c5d1dd8c912d76f5/lib/p</span> <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">157 </span><span class="r4">│   │   </span>use_devices = get_devices(devices)                                                 <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">158 </span><span class="r4">│   │   </span>torch_model = torch_model.to(use_devices[<span class="r5">0</span>])                                       <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">159 </span><span class="r4">│   │   </span><span class="r5">if</span> load_state:                                                                     <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>160 <span class="r4">│   │   │   </span>torch_model = <span class="r9">load_torch_state_dict(</span>                                           <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">161 </span><span class="r4">│   │   │   │   </span><span class="r9">torch_model,</span>                                                               <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">162 </span><span class="r4">│   │   │   │   </span><span class="r9">path=download(weight_spec),</span>                                                <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">163 </span><span class="r4">│   │   │   │   </span><span class="r9">devices=use_devices,</span>                                                       <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/usr/share/miniconda/envs/08f8ffa27c39c9aa97fede9155e0b8428e8e934a25bbb625c5d1dd8c912d76f5/lib/p</span> <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">204 </span><span class="r4">│   │   │   │   </span>)                                                                          <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">205 </span><span class="r4">│   │   │   │   </span><span class="r5">raise</span> <span class="r8">ValueError</span>(msg) <span class="r5">from</span><span class="r12"> </span><span class="r13">e</span>                                               <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">206 </span><span class="r4">│   </span>                                                                                       <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>207 <span class="r4">│   </span>incompatible = <span class="r9">model.load_state_dict(state, strict=strict)</span>                             <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">208 </span><span class="r4">│   </span><span class="r5">if</span> (                                                                                   <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">209 </span><span class="r4">│   │   </span><span class="r8">isinstance</span>(incompatible, <span class="r8">tuple</span>)                                                    <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">210 </span><span class="r4">│   │   </span><span class="r6">and</span> <span class="r8">hasattr</span>(incompatible, <span class="r7">&quot;missing_keys&quot;</span>)                                          <span class="r1">│</span>
+<span class="r1">╰──────────────────────────────────────────────────────────────────────────────────────────────────╯</span>
+<span class="r14">TypeError: </span><span class="r15">PredictorAdaptor.load_state_dict</span><span class="r16">()</span> got an unexpected keyword argument <span class="r17">&#x27;strict&#x27;</span>
+</code></pre>
+</body>
+</html>
+</pre></div>
 
 
 

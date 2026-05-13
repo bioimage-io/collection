@@ -569,12 +569,12 @@
 </style>
 <div class="validation-summary-container"><table>
   <tr>
-    <th style="text-align:center">🟡</th>
+    <th style="text-align:center">✔️</th>
     <th style="text-align:center">bioimageio format validation</th>
   </tr>
   <tr>
     <td style="text-align:left">status</td>
-    <td style="text-align:left">valid-format</td>
+    <td style="text-align:left">passed</td>
   </tr>
   <tr>
     <td style="text-align:left">source</td>
@@ -590,11 +590,11 @@
   </tr>
   <tr>
     <td style="text-align:left">applied format</td>
-    <td style="text-align:left">model 0.5.9</td>
+    <td style="text-align:left">model 0.5.10</td>
   </tr>
   <tr>
     <td style="text-align:left">bioimageio.spec</td>
-    <td style="text-align:left">0.5.9.1</td>
+    <td style="text-align:left">0.5.10.1</td>
   </tr>
 </table>
 <table>
@@ -611,7 +611,7 @@
   <tr>
     <td style="text-align:left">✔️</td>
     <td style="text-align:left"></td>
-    <td style="text-align:left">bioimageio.spec format validation model 0.5.9</td>
+    <td style="text-align:left">bioimageio.spec format validation model 0.5.10</td>
   </tr>
   <tr>
     <td style="text-align:left">ℹ</td>
@@ -634,24 +634,23 @@
     <td style="text-align:left">Found existing conda environment 'df87be09262b4f3f7ce399456dada4eaf2aa7e1ca18a46825f1ebf80ab4604e2'</td>
   </tr>
   <tr>
-    <td style="text-align:left">❌</td>
-    <td style="text-align:left"></td>
-    <td style="text-align:left">run 'bioimageio test' command</td>
+    <td style="text-align:left">✔️</td>
+    <td style="text-align:left"><code>weights.pytorch_state_dict</code></td>
+    <td style="text-align:left">Reproduce test outputs from test inputs (pytorch_state_dict)</td>
   </tr>
   <tr>
-    <td style="text-align:left">❌</td>
-    <td style="text-align:left"></td>
-    <td style="text-align:left"><pre>test command 'conda run -n df87be09262b4f3f7ce399456dada4eaf2aa7e1ca18a46825f1ebf80ab4604e2 bioimageio test https://hypha.aicell.io/bioimage-io/artifacts/idealistic-turtle/files/rdf.yaml?version=v0 --summary-path=/tmp/tmposca8uyo/pytorch_state_dict/summary.json --determinism=full --weight-format=pytorch_state_dict' did not produce a summary file at /tmp/tmposca8uyo/pytorch_state_dict/summary.json</pre></td>
+    <td style="text-align:left">ℹ</td>
+    <td style="text-align:left"><code>weights.pytorch_state_dict</code></td>
+    <td style="text-align:left"><pre>Output `output0`: all elements agree with expected values. 
+Max relative difference not accounted for by absolute tolerance (1.00e-03):
+0.00e+00 (= \|3.96e-03 - 3.96e-03\|/\|3.96e-03 + 1e-6\|) at {'batch': np.int64(0), 'channel': np.int64(0), 'z': np.int64(0), 'y': np.int64(0), 'x': np.int64(0)} 
+Max absolute difference not accounted for by relative tolerance (1.00e-03):
+0.00e+00 (= \|8.0828295e-07 - 8.0829619e-07\|) at {'batch': np.int64(0), 'channel': np.int64(2), 'z': np.int64(70), 'y': np.int64(54), 'x': np.int64(6)}</pre></td>
   </tr>
   <tr>
     <td style="text-align:left"></td>
-    <td style="text-align:left"></td>
-    <td style="text-align:left"></td>
-  </tr>
-  <tr>
-    <td style="text-align:left"></td>
-    <td style="text-align:left"></td>
-    <td style="text-align:left"><pre>recommended conda environment (run 'bioimageio test' command)</pre></td>
+    <td style="text-align:left"><code>weights.pytorch_state_dict</code></td>
+    <td style="text-align:left"><pre>recommended conda environment (Reproduce test outputs from test inputs (pytorch_state_dict))</pre></td>
   </tr>
   <tr>
     <td style="text-align:left"></td>
@@ -670,13 +669,19 @@ dependencies:
   </tr>
   <tr>
     <td style="text-align:left"></td>
-    <td style="text-align:left"></td>
-    <td style="text-align:left"><pre>conda compare (run 'bioimageio test' command)</pre></td>
+    <td style="text-align:left"><code>weights.pytorch_state_dict</code></td>
+    <td style="text-align:left"><pre>conda compare (Reproduce test outputs from test inputs (pytorch_state_dict))</pre></td>
   </tr>
   <tr>
     <td style="text-align:left"></td>
     <td style="text-align:left"></td>
-    <td style="text-align:left"><pre>bioimageio.core not found pip not found pytorch not found torchvision not found</pre></td>
+    <td style="text-align:left"><pre>Success. All the packages in the specification file are present in the environment with matching
+version and build string.</pre></td>
+  </tr>
+  <tr>
+    <td style="text-align:left">✔️</td>
+    <td style="text-align:left"><code>weights.pytorch_state_dict</code></td>
+    <td style="text-align:left">Run pytorch_state_dict inference for inputs with batch_size: 1 and size parameter n: 0</td>
   </tr>
 </table></div>
 

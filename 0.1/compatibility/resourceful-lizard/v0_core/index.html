@@ -590,11 +590,11 @@
   </tr>
   <tr>
     <td style="text-align:left">applied format</td>
-    <td style="text-align:left">model 0.5.9</td>
+    <td style="text-align:left">model 0.5.10</td>
   </tr>
   <tr>
     <td style="text-align:left">bioimageio.spec</td>
-    <td style="text-align:left">0.5.9.1</td>
+    <td style="text-align:left">0.5.10.1</td>
   </tr>
 </table>
 <table>
@@ -611,7 +611,7 @@
   <tr>
     <td style="text-align:left">✔️</td>
     <td style="text-align:left"></td>
-    <td style="text-align:left">bioimageio.spec format validation model 0.5.9</td>
+    <td style="text-align:left">bioimageio.spec format validation model 0.5.10</td>
   </tr>
   <tr>
     <td style="text-align:left">⚠</td>
@@ -723,43 +723,43 @@ body {
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
 <span class="r1">│</span> <span class="r4">/usr/share/miniconda/envs/a5da52dafabdde7cdd7c07143428e76b22eb95ad536a51113bc0628f90346b5e/lib/p</span> <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">404 </span><span class="r4">│   │   │   </span><span class="r6">f&quot;deprecated create_prediction_pipeline kwargs: {</span><span class="r7">set</span>(deprecated_kwargs)<span class="r6">}&quot;</span>      <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">405 </span><span class="r4">│   │   </span>)                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">406 </span><span class="r4">│   </span>                                                                                       <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span>407 <span class="r4">│   </span>model_adapter = model_adapter <span class="r8">or</span> create_model_adapter(                                 <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">408 </span><span class="r4">│   │   </span>model_description=bioimageio_model,                                                <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">409 </span><span class="r4">│   │   </span>devices=devices,                                                                   <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">410 </span><span class="r4">│   │   </span>weight_format_priority_order=weights_format <span class="r8">and</span> (weights_format,),                 <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">468 </span><span class="r4">│   │   │   </span><span class="r6">f&quot;deprecated create_prediction_pipeline kwargs: {</span><span class="r7">set</span>(deprecated_kwargs)<span class="r6">}&quot;</span>      <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">469 </span><span class="r4">│   │   </span>)                                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">470 </span><span class="r4">│   </span>                                                                                       <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>471 <span class="r4">│   </span>model_adapter = model_adapter <span class="r8">or</span> create_model_adapter(                                 <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">472 </span><span class="r4">│   │   </span>model_description=bioimageio_model,                                                <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">473 </span><span class="r4">│   │   </span>devices=devices,                                                                   <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">474 </span><span class="r4">│   │   </span>weight_format_priority_order=weights_format <span class="r8">and</span> (weights_format,),                 <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
 <span class="r1">│</span> <span class="r4">/usr/share/miniconda/envs/a5da52dafabdde7cdd7c07143428e76b22eb95ad536a51113bc0628f90346b5e/lib/p</span> <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">182 </span><span class="r4">│   │   </span><span class="r5">assert</span> errors                                                                      <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">183 </span><span class="r4">│   │   </span><span class="r5">if</span> <span class="r7">len</span>(weight_format_priority_order) == <span class="r5">1</span>:                                         <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">184 </span><span class="r4">│   │   │   </span><span class="r5">assert</span> <span class="r7">len</span>(errors) == <span class="r5">1</span>                                                        <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span>185 <span class="r4">│   │   │   </span><span class="r5">raise</span> errors[<span class="r5">0</span>]                                                                <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">186 </span><span class="r4">│   │   </span>                                                                                   <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">187 </span><span class="r4">│   │   </span><span class="r5">else</span>:                                                                              <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">188 </span><span class="r4">│   │   │   </span>msg = (                                                                        <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">183 </span><span class="r4">│   │   </span><span class="r5">assert</span> errors                                                                      <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">184 </span><span class="r4">│   │   </span><span class="r5">if</span> <span class="r7">len</span>(weight_format_priority_order) == <span class="r5">1</span>:                                         <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">185 </span><span class="r4">│   │   │   </span><span class="r5">assert</span> <span class="r7">len</span>(errors) == <span class="r5">1</span>                                                        <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>186 <span class="r4">│   │   │   </span><span class="r5">raise</span> errors[<span class="r5">0</span>]                                                                <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">187 </span><span class="r4">│   │   </span>                                                                                   <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">188 </span><span class="r4">│   │   </span><span class="r5">else</span>:                                                                              <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">189 </span><span class="r4">│   │   │   </span>msg = (                                                                        <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
 <span class="r1">│</span> <span class="r4">/usr/share/miniconda/envs/a5da52dafabdde7cdd7c07143428e76b22eb95ad536a51113bc0628f90346b5e/lib/p</span> <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">110 </span><span class="r4">│   │   │   </span><span class="r5">if</span> wf == <span class="r6">&quot;pytorch_state_dict&quot;</span>:                                                 <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">111 </span><span class="r4">│   │   │   │   </span><span class="r5">assert</span> weights.pytorch_state_dict <span class="r8">is</span> <span class="r8">not</span> <span class="r5">None</span>                              <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">112 </span><span class="r4">│   │   │   │   </span><span class="r5">try</span>:                                                                       <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span>113 <span class="r4">│   │   │   │   │   </span><span class="r5">from</span><span class="r9"> </span><span class="r10">.pytorch_backend</span><span class="r9"> </span><span class="r5">import</span> PytorchModelAdapter                       <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">114 </span><span class="r4">│   │   │   │   │   </span>                                                                       <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">115 </span><span class="r4">│   │   │   │   │   </span><span class="r5">return</span> PytorchModelAdapter(                                            <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">116 </span><span class="r4">│   │   │   │   │   │   </span>model_description=model_description, devices=devices               <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">111 </span><span class="r4">│   │   │   </span><span class="r5">if</span> wf == <span class="r6">&quot;pytorch_state_dict&quot;</span>:                                                 <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">112 </span><span class="r4">│   │   │   │   </span><span class="r5">assert</span> weights.pytorch_state_dict <span class="r8">is</span> <span class="r8">not</span> <span class="r5">None</span>                              <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">113 </span><span class="r4">│   │   │   │   </span><span class="r5">try</span>:                                                                       <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>114 <span class="r4">│   │   │   │   │   </span><span class="r5">from</span><span class="r9"> </span><span class="r10">.pytorch_backend</span><span class="r9"> </span><span class="r5">import</span> PytorchModelAdapter                       <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">115 </span><span class="r4">│   │   │   │   │   </span>                                                                       <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">116 </span><span class="r4">│   │   │   │   │   </span><span class="r5">return</span> PytorchModelAdapter(                                            <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">117 </span><span class="r4">│   │   │   │   │   │   </span>model_description=model_description, devices=devices               <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
 <span class="r1">│</span> <span class="r4">/usr/share/miniconda/envs/a5da52dafabdde7cdd7c07143428e76b22eb95ad536a51113bc0628f90346b5e/lib/p</span> <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">  5 </span><span class="r5">from</span><span class="r9"> </span><span class="r10">pathlib</span><span class="r9"> </span><span class="r5">import</span> Path                                                                   <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">  6 </span><span class="r5">from</span><span class="r9"> </span><span class="r10">typing</span><span class="r9"> </span><span class="r5">import</span> Any, List, Literal, Optional, Sequence, Union                           <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">  7 </span>                                                                                           <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span>  8 <span class="r5">import</span><span class="r9"> </span><span class="r10">torch</span>                                                                               <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">  9 </span><span class="r5">from</span><span class="r9"> </span><span class="r10">loguru</span><span class="r9"> </span><span class="r5">import</span> logger                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 10 </span><span class="r5">from</span><span class="r9"> </span><span class="r10">numpy.typing</span><span class="r9"> </span><span class="r5">import</span> NDArray                                                           <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 11 </span><span class="r5">from</span><span class="r9"> </span><span class="r10">torch</span><span class="r9"> </span><span class="r5">import</span> nn                                                                       <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">  6 </span><span class="r5">from</span><span class="r9"> </span><span class="r10">pathlib</span><span class="r9"> </span><span class="r5">import</span> Path                                                                   <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">  7 </span><span class="r5">from</span><span class="r9"> </span><span class="r10">typing</span><span class="r9"> </span><span class="r5">import</span> Any, List, Literal, Mapping, Optional, Sequence, Tuple, Union           <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">  8 </span>                                                                                           <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>  9 <span class="r5">import</span><span class="r9"> </span><span class="r10">torch</span>                                                                               <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 10 </span><span class="r5">from</span><span class="r9"> </span><span class="r10">loguru</span><span class="r9"> </span><span class="r5">import</span> logger                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 11 </span><span class="r5">from</span><span class="r9"> </span><span class="r10">numpy.typing</span><span class="r9"> </span><span class="r5">import</span> NDArray                                                           <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 12 </span><span class="r5">from</span><span class="r9"> </span><span class="r10">torch</span><span class="r9"> </span><span class="r5">import</span> nn                                                                       <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
 <span class="r1">│</span> <span class="r4">/usr/share/miniconda/envs/a5da52dafabdde7cdd7c07143428e76b22eb95ad536a51113bc0628f90346b5e/lib/p</span> <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
@@ -833,53 +833,53 @@ body {
     <pre style="font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><code style="font-family:inherit"><span class="r1">╭─────────────────────────────── </span><span class="r2">Traceback </span><span class="r3">(most recent call last)</span><span class="r1"> ────────────────────────────────╮</span>
 <span class="r1">│</span> <span class="r4">/usr/share/miniconda/envs/a5da52dafabdde7cdd7c07143428e76b22eb95ad536a51113bc0628f90346b5e/lib/p</span> <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">1120 </span><span class="r4">│   </span><span class="r5">try</span>:                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">1121 </span><span class="r4">│   │   </span>test_input = get_test_input_sample(model)                                         <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">1122 </span><span class="r4">│   │   </span>                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span>1123 <span class="r4">│   │   </span><span class="r5">with</span> create_prediction_pipeline(                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">1124 </span><span class="r4">│   │   │   </span>bioimageio_model=model, devices=devices, weight_format=weight_format          <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">1125 </span><span class="r4">│   │   </span>) <span class="r5">as</span> prediction_pipeline:                                                         <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">1126 </span><span class="r4">│   │   │   </span><span class="r5">for</span> n, batch_size, inputs, exptected_output_shape <span class="r6">in</span> generate_test_cases():   <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">1124 </span><span class="r4">│   </span><span class="r5">try</span>:                                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">1125 </span><span class="r4">│   │   </span>test_input = get_test_input_sample(model)                                         <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">1126 </span><span class="r4">│   │   </span>                                                                                  <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>1127 <span class="r4">│   │   </span><span class="r5">with</span> create_prediction_pipeline(                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">1128 </span><span class="r4">│   │   │   </span>bioimageio_model=model, devices=devices, weight_format=weight_format          <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">1129 </span><span class="r4">│   │   </span>) <span class="r5">as</span> prediction_pipeline:                                                         <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">1130 </span><span class="r4">│   │   │   </span><span class="r5">for</span> n, batch_size, inputs, exptected_output_shape <span class="r6">in</span> generate_test_cases():   <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
 <span class="r1">│</span> <span class="r4">/usr/share/miniconda/envs/a5da52dafabdde7cdd7c07143428e76b22eb95ad536a51113bc0628f90346b5e/lib/p</span> <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">404 </span><span class="r4">│   │   │   </span><span class="r7">f&quot;deprecated create_prediction_pipeline kwargs: {</span><span class="r8">set</span>(deprecated_kwargs)<span class="r7">}&quot;</span>      <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">405 </span><span class="r4">│   │   </span>)                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">406 </span><span class="r4">│   </span>                                                                                       <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span>407 <span class="r4">│   </span>model_adapter = model_adapter <span class="r6">or</span> create_model_adapter(                                 <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">408 </span><span class="r4">│   │   </span>model_description=bioimageio_model,                                                <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">409 </span><span class="r4">│   │   </span>devices=devices,                                                                   <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">410 </span><span class="r4">│   │   </span>weight_format_priority_order=weights_format <span class="r6">and</span> (weights_format,),                 <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">468 </span><span class="r4">│   │   │   </span><span class="r7">f&quot;deprecated create_prediction_pipeline kwargs: {</span><span class="r8">set</span>(deprecated_kwargs)<span class="r7">}&quot;</span>      <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">469 </span><span class="r4">│   │   </span>)                                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">470 </span><span class="r4">│   </span>                                                                                       <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>471 <span class="r4">│   </span>model_adapter = model_adapter <span class="r6">or</span> create_model_adapter(                                 <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">472 </span><span class="r4">│   │   </span>model_description=bioimageio_model,                                                <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">473 </span><span class="r4">│   │   </span>devices=devices,                                                                   <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">474 </span><span class="r4">│   │   </span>weight_format_priority_order=weights_format <span class="r6">and</span> (weights_format,),                 <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
 <span class="r1">│</span> <span class="r4">/usr/share/miniconda/envs/a5da52dafabdde7cdd7c07143428e76b22eb95ad536a51113bc0628f90346b5e/lib/p</span> <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">182 </span><span class="r4">│   │   </span><span class="r5">assert</span> errors                                                                      <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">183 </span><span class="r4">│   │   </span><span class="r5">if</span> <span class="r8">len</span>(weight_format_priority_order) == <span class="r5">1</span>:                                         <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">184 </span><span class="r4">│   │   │   </span><span class="r5">assert</span> <span class="r8">len</span>(errors) == <span class="r5">1</span>                                                        <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span>185 <span class="r4">│   │   │   </span><span class="r5">raise</span> errors[<span class="r5">0</span>]                                                                <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">186 </span><span class="r4">│   │   </span>                                                                                   <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">187 </span><span class="r4">│   │   </span><span class="r5">else</span>:                                                                              <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">188 </span><span class="r4">│   │   │   </span>msg = (                                                                        <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">183 </span><span class="r4">│   │   </span><span class="r5">assert</span> errors                                                                      <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">184 </span><span class="r4">│   │   </span><span class="r5">if</span> <span class="r8">len</span>(weight_format_priority_order) == <span class="r5">1</span>:                                         <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">185 </span><span class="r4">│   │   │   </span><span class="r5">assert</span> <span class="r8">len</span>(errors) == <span class="r5">1</span>                                                        <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>186 <span class="r4">│   │   │   </span><span class="r5">raise</span> errors[<span class="r5">0</span>]                                                                <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">187 </span><span class="r4">│   │   </span>                                                                                   <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">188 </span><span class="r4">│   │   </span><span class="r5">else</span>:                                                                              <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">189 </span><span class="r4">│   │   │   </span>msg = (                                                                        <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
 <span class="r1">│</span> <span class="r4">/usr/share/miniconda/envs/a5da52dafabdde7cdd7c07143428e76b22eb95ad536a51113bc0628f90346b5e/lib/p</span> <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">110 </span><span class="r4">│   │   │   </span><span class="r5">if</span> wf == <span class="r7">&quot;pytorch_state_dict&quot;</span>:                                                 <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">111 </span><span class="r4">│   │   │   │   </span><span class="r5">assert</span> weights.pytorch_state_dict <span class="r6">is</span> <span class="r6">not</span> <span class="r5">None</span>                              <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">112 </span><span class="r4">│   │   │   │   </span><span class="r5">try</span>:                                                                       <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span>113 <span class="r4">│   │   │   │   │   </span><span class="r5">from</span><span class="r9"> </span><span class="r10">.pytorch_backend</span><span class="r9"> </span><span class="r5">import</span> PytorchModelAdapter                       <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">114 </span><span class="r4">│   │   │   │   │   </span>                                                                       <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">115 </span><span class="r4">│   │   │   │   │   </span><span class="r5">return</span> PytorchModelAdapter(                                            <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">116 </span><span class="r4">│   │   │   │   │   │   </span>model_description=model_description, devices=devices               <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">111 </span><span class="r4">│   │   │   </span><span class="r5">if</span> wf == <span class="r7">&quot;pytorch_state_dict&quot;</span>:                                                 <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">112 </span><span class="r4">│   │   │   │   </span><span class="r5">assert</span> weights.pytorch_state_dict <span class="r6">is</span> <span class="r6">not</span> <span class="r5">None</span>                              <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">113 </span><span class="r4">│   │   │   │   </span><span class="r5">try</span>:                                                                       <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>114 <span class="r4">│   │   │   │   │   </span><span class="r5">from</span><span class="r9"> </span><span class="r10">.pytorch_backend</span><span class="r9"> </span><span class="r5">import</span> PytorchModelAdapter                       <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">115 </span><span class="r4">│   │   │   │   │   </span>                                                                       <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">116 </span><span class="r4">│   │   │   │   │   </span><span class="r5">return</span> PytorchModelAdapter(                                            <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">117 </span><span class="r4">│   │   │   │   │   │   </span>model_description=model_description, devices=devices               <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
 <span class="r1">│</span> <span class="r4">/usr/share/miniconda/envs/a5da52dafabdde7cdd7c07143428e76b22eb95ad536a51113bc0628f90346b5e/lib/p</span> <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">  5 </span><span class="r5">from</span><span class="r9"> </span><span class="r10">pathlib</span><span class="r9"> </span><span class="r5">import</span> Path                                                                   <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">  6 </span><span class="r5">from</span><span class="r9"> </span><span class="r10">typing</span><span class="r9"> </span><span class="r5">import</span> Any, List, Literal, Optional, Sequence, Union                           <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">  7 </span>                                                                                           <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span>  8 <span class="r5">import</span><span class="r9"> </span><span class="r10">torch</span>                                                                               <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">  9 </span><span class="r5">from</span><span class="r9"> </span><span class="r10">loguru</span><span class="r9"> </span><span class="r5">import</span> logger                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 10 </span><span class="r5">from</span><span class="r9"> </span><span class="r10">numpy.typing</span><span class="r9"> </span><span class="r5">import</span> NDArray                                                           <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 11 </span><span class="r5">from</span><span class="r9"> </span><span class="r10">torch</span><span class="r9"> </span><span class="r5">import</span> nn                                                                       <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">  6 </span><span class="r5">from</span><span class="r9"> </span><span class="r10">pathlib</span><span class="r9"> </span><span class="r5">import</span> Path                                                                   <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">  7 </span><span class="r5">from</span><span class="r9"> </span><span class="r10">typing</span><span class="r9"> </span><span class="r5">import</span> Any, List, Literal, Mapping, Optional, Sequence, Tuple, Union           <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">  8 </span>                                                                                           <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>  9 <span class="r5">import</span><span class="r9"> </span><span class="r10">torch</span>                                                                               <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 10 </span><span class="r5">from</span><span class="r9"> </span><span class="r10">loguru</span><span class="r9"> </span><span class="r5">import</span> logger                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 11 </span><span class="r5">from</span><span class="r9"> </span><span class="r10">numpy.typing</span><span class="r9"> </span><span class="r5">import</span> NDArray                                                           <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 12 </span><span class="r5">from</span><span class="r9"> </span><span class="r10">torch</span><span class="r9"> </span><span class="r5">import</span> nn                                                                       <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
 <span class="r1">│</span> <span class="r4">/usr/share/miniconda/envs/a5da52dafabdde7cdd7c07143428e76b22eb95ad536a51113bc0628f90346b5e/lib/p</span> <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>

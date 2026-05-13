@@ -590,11 +590,11 @@
   </tr>
   <tr>
     <td style="text-align:left">applied format</td>
-    <td style="text-align:left">model 0.5.9</td>
+    <td style="text-align:left">model 0.5.10</td>
   </tr>
   <tr>
     <td style="text-align:left">bioimageio.spec</td>
-    <td style="text-align:left">0.5.9.1</td>
+    <td style="text-align:left">0.5.10.1</td>
   </tr>
 </table>
 <table>
@@ -606,7 +606,7 @@
   <tr>
     <td style="text-align:left">❌</td>
     <td style="text-align:left"></td>
-    <td style="text-align:left">bioimageio.spec format validation model 0.5.9</td>
+    <td style="text-align:left">bioimageio.spec format validation model 0.5.10</td>
   </tr>
   <tr>
     <td style="text-align:left">❌</td>
@@ -628,18 +628,19 @@
 .r1 {color: #800000; text-decoration-color: #800000}
 .r2 {color: #800000; text-decoration-color: #800000; font-weight: bold}
 .r3 {color: #bf7f7f; text-decoration-color: #bf7f7f; font-weight: bold}
-.r4 {color: #bfbf7f; text-decoration-color: #bfbf7f}
-.r5 {color: #808000; text-decoration-color: #808000; font-weight: bold}
+.r4 {color: #7f7f7f; text-decoration-color: #7f7f7f}
+.r5 {font-weight: bold}
 .r6 {color: #0000ff; text-decoration-color: #0000ff}
-.r7 {color: #7f7f7f; text-decoration-color: #7f7f7f}
-.r8 {color: #00ffff; text-decoration-color: #00ffff}
-.r9 {color: #ff00ff; text-decoration-color: #ff00ff}
-.r10 {color: #808000; text-decoration-color: #808000}
-.r11 {color: #00ff00; text-decoration-color: #00ff00}
+.r7 {color: #00ffff; text-decoration-color: #00ffff}
+.r8 {color: #ff00ff; text-decoration-color: #ff00ff}
+.r9 {color: #808000; text-decoration-color: #808000}
+.r10 {color: #00ffff; text-decoration-color: #00ffff; font-weight: bold; text-decoration: underline}
+.r11 {font-weight: bold; text-decoration: underline}
 .r12 {color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold}
-.r13 {color: #ff0000; text-decoration-color: #ff0000; font-weight: bold}
-.r14 {color: #0000ff; text-decoration-color: #0000ff; text-decoration: underline}
-.r15 {font-weight: bold}
+.r13 {color: #00ff00; text-decoration-color: #00ff00}
+.r14 {color: #0000ff; text-decoration-color: #0000ff; font-weight: bold; text-decoration: underline}
+.r15 {color: #ff0000; text-decoration-color: #ff0000; font-weight: bold}
+.r16 {color: #0000ff; text-decoration-color: #0000ff; text-decoration: underline}
 body {
     color: var(--md-default-fg-color);
     background-color: var(--md-default-bg-color);
@@ -648,87 +649,87 @@ body {
 </head>
 <body>
     <pre style="font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><code style="font-family:inherit"><span class="r1">╭─────────────────────────────── </span><span class="r2">Traceback </span><span class="r3">(most recent call last)</span><span class="r1"> ────────────────────────────────╮</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/spec/_internal/</span><span class="r5">common_nodes.py</span>:<span class="r6">302</span> i <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/spec/_internal/</span><span class="r5">common_nodes.py</span>:302 i <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">299 </span><span class="r7">│   │   </span>                                                                                   <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">300 </span><span class="r7">│   │   </span>context = get_validation_context()                                                 <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">301 </span><span class="r7">│   │   </span><span class="r6">try</span>:                                                                               <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span>302 <span class="r7">│   │   │   </span>rd = <span class="r8">cls</span>.model_validate(data)                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">303 </span><span class="r7">│   │   </span><span class="r6">except</span> pydantic.ValidationError <span class="r6">as</span> e:                                              <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">304 </span><span class="r7">│   │   │   </span><span class="r6">for</span> ee <span class="r9">in</span> e.errors(include_url=<span class="r6">False</span>):                                         <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">305 </span><span class="r7">│   │   │   │   </span><span class="r6">if</span> (severity := ee.get(<span class="r10">&quot;ctx&quot;</span>, {}).get(<span class="r10">&quot;severity&quot;</span>, ERROR)) &lt; ERROR:         <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">299 </span><span class="r4">│   │   </span>                                                                                   <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">300 </span><span class="r4">│   │   </span>context = get_validation_context()                                                 <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">301 </span><span class="r4">│   │   </span><span class="r6">try</span>:                                                                               <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>302 <span class="r4">│   │   │   </span>rd = <span class="r7">cls</span>.model_validate(data)                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">303 </span><span class="r4">│   │   </span><span class="r6">except</span> pydantic.ValidationError <span class="r6">as</span> e:                                              <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">304 </span><span class="r4">│   │   │   </span><span class="r6">for</span> ee <span class="r8">in</span> e.errors(include_url=<span class="r6">False</span>):                                         <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">305 </span><span class="r4">│   │   │   │   </span><span class="r6">if</span> (severity := ee.get(<span class="r9">&quot;ctx&quot;</span>, {}).get(<span class="r9">&quot;severity&quot;</span>, ERROR)) &lt; ERROR:         <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/spec/_internal/</span><span class="r5">node.py</span>:<span class="r6">91</span> in <span class="r11">model_v</span> <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/spec/_internal/</span><span class="r5">node.py</span>:91 in model_v <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 88 </span><span class="r7">│   │   </span>                                                                                   <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 89 </span><span class="r7">│   │   </span><span class="r6">with</span> context:                                                                      <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 90 </span><span class="r7">│   │   │   </span><span class="r7"># use validation context as context manager for equal behavior of __init__ and</span> <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span> 91 <span class="r7">│   │   │   </span><span class="r6">return</span> <span class="r8">super</span>().model_validate(                                                 <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 92 </span><span class="r7">│   │   │   │   </span>obj, strict=strict, from_attributes=from_attributes                        <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 93 </span><span class="r7">│   │   │   </span>)                                                                              <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 94 </span>                                                                                           <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 88 </span><span class="r4">│   │   </span>                                                                                   <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 89 </span><span class="r4">│   │   </span><span class="r6">with</span> context:                                                                      <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 90 </span><span class="r4">│   │   │   </span><span class="r4"># use validation context as context manager for equal behavior of __init__ and</span> <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span> 91 <span class="r4">│   │   │   </span><span class="r6">return</span> <span class="r10">super</span><span class="r11">().model_validate(</span>                                                 <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 92 </span><span class="r4">│   │   │   │   </span><span class="r11">obj, strict=strict, from_attributes=from_attributes</span>                        <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 93 </span><span class="r4">│   │   │   </span><span class="r11">)</span>                                                                              <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 94 </span>                                                                                           <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/pydantic/</span><span class="r5">main.py</span>:<span class="r6">732</span> in <span class="r11">model_validate</span>          <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/pydantic/</span><span class="r5">main.py</span>:732 in model_validate          <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 729 </span><span class="r7">│   │   │   │   </span>code=<span class="r10">&#x27;validate-by-alias-and-name-false&#x27;</span>,                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 730 </span><span class="r7">│   │   │   </span>)                                                                             <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 731 </span><span class="r7">│   │   </span>                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span> 732 <span class="r7">│   │   </span><span class="r6">return</span> <span class="r8">cls</span>.__pydantic_validator__.validate_python(                                <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 733 </span><span class="r7">│   │   │   </span>obj,                                                                          <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 734 </span><span class="r7">│   │   │   </span>strict=strict,                                                                <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 735 </span><span class="r7">│   │   │   </span>extra=extra,                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 729 </span><span class="r4">│   │   │   │   </span>code=<span class="r9">&#x27;validate-by-alias-and-name-false&#x27;</span>,                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 730 </span><span class="r4">│   │   │   </span>)                                                                             <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 731 </span><span class="r4">│   │   </span>                                                                                  <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span> 732 <span class="r4">│   │   </span><span class="r6">return</span> <span class="r10">cls</span><span class="r11">.__pydantic_validator__.validate_python(</span>                                <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 733 </span><span class="r4">│   │   │   </span><span class="r11">obj,</span>                                                                          <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 734 </span><span class="r4">│   │   │   </span><span class="r11">strict=strict,</span>                                                                <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 735 </span><span class="r4">│   │   │   </span><span class="r11">extra=extra,</span>                                                                  <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/spec/_internal/</span><span class="r5">io.py</span>:<span class="r6">272</span> in <span class="r11">_validat</span> <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/spec/_internal/</span><span class="r5">io.py</span>:272 in _validat <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 269 </span><span class="r7">│   </span>                                                                                      <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 270 </span><span class="r7">│   </span><span class="r12">@model_validator</span>(mode=<span class="r10">&quot;after&quot;</span>)                                                        <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 271 </span><span class="r7">│   </span><span class="r6">def</span> <span class="r11">_validate_sha256</span>(<span class="r8">self</span>) -&gt; Self:                                                   <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span> 272 <span class="r7">│   │   </span><span class="r8">self</span>.validate_sha256()                                                            <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 273 </span><span class="r7">│   │   </span><span class="r6">return</span> <span class="r8">self</span>                                                                       <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 274 </span><span class="r7">│   </span>                                                                                      <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 275 </span><span class="r7">│   </span><span class="r6">def</span> <span class="r11">validate_sha256</span>(<span class="r8">self</span>, force_recompute: <span class="r8">bool</span> = <span class="r6">False</span>) -&gt; <span class="r6">None</span>:                     <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 269 </span><span class="r4">│   </span>                                                                                      <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 270 </span><span class="r4">│   </span><span class="r12">@model_validator</span>(mode=<span class="r9">&quot;after&quot;</span>)                                                        <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 271 </span><span class="r4">│   </span><span class="r6">def</span> <span class="r13">_validate_sha256</span>(<span class="r7">self</span>) -&gt; Self:                                                   <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span> 272 <span class="r4">│   │   </span><span class="r10">self</span><span class="r11">.validate_sha256()</span>                                                            <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 273 </span><span class="r4">│   │   </span><span class="r6">return</span> <span class="r7">self</span>                                                                       <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 274 </span><span class="r4">│   </span>                                                                                      <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 275 </span><span class="r4">│   </span><span class="r6">def</span> <span class="r13">validate_sha256</span>(<span class="r7">self</span>, force_recompute: <span class="r7">bool</span> = <span class="r6">False</span>) -&gt; <span class="r6">None</span>:                     <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/spec/_internal/</span><span class="r5">io.py</span>:<span class="r6">286</span> in <span class="r11">validate</span> <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/spec/_internal/</span><span class="r5">io.py</span>:286 in validate <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 283 </span><span class="r7">│   │   </span>                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 284 </span><span class="r7">│   │   </span><span class="r6">if</span> actual_sha <span class="r9">is</span> <span class="r6">None</span>:                                                            <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 285 </span><span class="r7">│   │   │   </span><span class="r6">if</span> context.perform_io_checks <span class="r9">or</span> force_recompute:                              <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span> 286 <span class="r7">│   │   │   │   </span>reader = get_reader(<span class="r8">self</span>.source, sha256=<span class="r8">self</span>.sha256)                      <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 287 </span><span class="r7">│   │   │   │   </span><span class="r6">if</span> force_recompute:                                                       <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 288 </span><span class="r7">│   │   │   │   │   </span>actual_sha = get_sha256(reader)                                       <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 289 </span><span class="r7">│   │   │   │   </span><span class="r6">else</span>:                                                                     <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 283 </span><span class="r4">│   │   </span>                                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 284 </span><span class="r4">│   │   </span><span class="r6">if</span> actual_sha <span class="r8">is</span> <span class="r6">None</span>:                                                            <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 285 </span><span class="r4">│   │   │   </span><span class="r6">if</span> context.perform_io_checks <span class="r8">or</span> force_recompute:                              <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span> 286 <span class="r4">│   │   │   │   </span>reader = <span class="r11">get_reader(</span><span class="r10">self</span><span class="r11">.source, sha256=</span><span class="r10">self</span><span class="r11">.sha256)</span>                      <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 287 </span><span class="r4">│   │   │   │   </span><span class="r6">if</span> force_recompute:                                                       <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 288 </span><span class="r4">│   │   │   │   │   </span>actual_sha = get_sha256(reader)                                       <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 289 </span><span class="r4">│   │   │   │   </span><span class="r6">else</span>:                                                                     <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/spec/_internal/</span><span class="r5">io.py</span>:<span class="r6">743</span> in <span class="r11">get_read</span> <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/spec/_internal/</span><span class="r5">io.py</span>:743 in get_read <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 740 </span><span class="r7">│   │   │   </span>source = HttpUrl(source)                                                      <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 741 </span><span class="r7">│   </span>                                                                                      <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 742 </span><span class="r7">│   </span><span class="r6">if</span> <span class="r8">isinstance</span>(source, HttpUrl):                                                       <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span> 743 <span class="r7">│   │   </span><span class="r6">return</span> _open_url(source, progressbar=progressbar, **kwargs)                       <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 744 </span><span class="r7">│   </span>                                                                                      <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 745 </span><span class="r7">│   </span><span class="r6">if</span> <span class="r8">isinstance</span>(source, ZipPath):                                                       <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 746 </span><span class="r7">│   │   </span><span class="r6">if</span> <span class="r9">not</span> source.exists():                                                           <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 740 </span><span class="r4">│   │   │   </span>source = HttpUrl(source)                                                      <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 741 </span><span class="r4">│   </span>                                                                                      <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 742 </span><span class="r4">│   </span><span class="r6">if</span> <span class="r7">isinstance</span>(source, HttpUrl):                                                       <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span> 743 <span class="r4">│   │   </span><span class="r6">return</span> <span class="r11">_open_url(source, progressbar=progressbar, **kwargs)</span>                       <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 744 </span><span class="r4">│   </span>                                                                                      <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 745 </span><span class="r4">│   </span><span class="r6">if</span> <span class="r7">isinstance</span>(source, ZipPath):                                                       <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 746 </span><span class="r4">│   │   </span><span class="r6">if</span> <span class="r8">not</span> source.exists():                                                           <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/spec/_internal/</span><span class="r5">io.py</span>:<span class="r6">807</span> in <span class="r11">_open_ur</span> <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/spec/_internal/</span><span class="r5">io.py</span>:807 in _open_ur <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 804 </span><span class="r7">│   │   </span><span class="r9">or</span> hashlib.sha256(<span class="r8">str</span>(source).encode(encoding=<span class="r10">&quot;utf-8&quot;</span>)).hexdigest()               <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 805 </span><span class="r7">│   </span>)                                                                                     <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 806 </span><span class="r7">│   </span>                                                                                      <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span> 807 <span class="r7">│   </span>reader = cache.fetch(                                                                 <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 808 </span><span class="r7">│   │   </span>source,                                                                           <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 809 </span><span class="r7">│   │   </span>fetcher=partial(_fetch_url, progressbar=progressbar),                             <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7"> 810 </span><span class="r7">│   │   </span>force_refetch=force_refetch,                                                      <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 804 </span><span class="r4">│   │   </span><span class="r8">or</span> hashlib.sha256(<span class="r7">str</span>(source).encode(encoding=<span class="r9">&quot;utf-8&quot;</span>)).hexdigest()               <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 805 </span><span class="r4">│   </span>)                                                                                     <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 806 </span><span class="r4">│   </span>                                                                                      <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span> 807 <span class="r4">│   </span>reader = <span class="r11">cache.fetch(</span>                                                                 <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 808 </span><span class="r4">│   │   </span><span class="r11">source,</span>                                                                           <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 809 </span><span class="r4">│   │   </span><span class="r11">fetcher=partial(_fetch_url, progressbar=progressbar),</span>                             <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4"> 810 </span><span class="r4">│   │   </span><span class="r11">force_refetch=force_refetch,</span>                                                      <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/genericache/</span><span class="r5">__init__.py</span>:<span class="r6">153</span> in <span class="r11">fetch</span>            <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/genericache/</span><span class="r5">__init__.py</span>:153 in fetch            <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">150 </span><span class="r7">│   │   │   │   </span><span class="r6">return</span> result                                                              <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">151 </span><span class="r7">│   │   │   </span><span class="r6">if</span> <span class="r8">isinstance</span>(result, FetchInterrupted):                                       <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">152 </span><span class="r7">│   │   │   │   </span><span class="r6">continue</span>                                                                   <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span>153 <span class="r7">│   │   │   </span><span class="r6">raise</span> result                                                                   <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">154 </span><span class="r7">│   │   </span>                                                                                   <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">155 </span><span class="r7">│   │   </span><span class="r6">raise</span> <span class="r8">RuntimeError</span>(<span class="r10">&quot;Number of retries exhausted&quot;</span>)                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r7">156 </span>                                                                                           <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">150 </span><span class="r4">│   │   │   │   </span><span class="r6">return</span> result                                                              <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">151 </span><span class="r4">│   │   │   </span><span class="r6">if</span> <span class="r7">isinstance</span>(result, FetchInterrupted):                                       <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">152 </span><span class="r4">│   │   │   │   </span><span class="r6">continue</span>                                                                   <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>153 <span class="r4">│   │   │   </span><span class="r14">raise</span><span class="r11"> result</span>                                                                   <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">154 </span><span class="r4">│   │   </span>                                                                                   <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">155 </span><span class="r4">│   │   </span><span class="r6">raise</span> <span class="r7">RuntimeError</span>(<span class="r9">&quot;Number of retries exhausted&quot;</span>)                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r4">156 </span>                                                                                           <span class="r1">│</span>
 <span class="r1">╰──────────────────────────────────────────────────────────────────────────────────────────────────╯</span>
-<span class="r13">DigestMismatch: </span>Fetched content of <span class="r14">https://hypha.aicell.io/bioimage-io/artifacts/efficient-raccoon/files/environment.yaml?version=v0</span> has unexpected digest 4cf135d696bd8f08d302c3fe19e24b383c011d1d0e6a8bce57095c9744fdb67a <span class="r15">(</span>Expected d1959a76b2e7d5396e2033fb076a9839cd51b17295a768f1aef1c7327507bfb6<span class="r15">)</span>.
+<span class="r15">DigestMismatch: </span>Fetched content of <span class="r16">https://hypha.aicell.io/bioimage-io/artifacts/efficient-raccoon/files/environment.yaml?version=v0</span> has unexpected digest 4cf135d696bd8f08d302c3fe19e24b383c011d1d0e6a8bce57095c9744fdb67a <span class="r5">(</span>Expected d1959a76b2e7d5396e2033fb076a9839cd51b17295a768f1aef1c7327507bfb6<span class="r5">)</span>.
 </code></pre>
 </body>
 </html>
