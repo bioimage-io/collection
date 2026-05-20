@@ -2,7 +2,7 @@
     "count_per_type": {
         "application": 65,
         "dataset": 50,
-        "model": 136,
+        "model": 137,
         "notebook": 4
     },
     "items": [
@@ -3327,8 +3327,21 @@
                     "version": "v0"
                 }
             ]
+        },
+        {
+            "id": "bioimage-io/fearless-badger",
+            "type": "model",
+            "versions": [
+                {
+                    "comment": null,
+                    "created_at": "2026-05-19T13:10:20Z",
+                    "sha256": "60c8cce80ead55fa7141994504b3381fb3f2b8bf4d1a9f3ddbdf7f8e3a9af6df",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/fearless-badger/files/rdf.yaml?version=v0",
+                    "version": "v0"
+                }
+            ]
         }
     ],
-    "timestamp": "2026-05-19T03:54:40.880631",
-    "total": 255
+    "timestamp": "2026-05-20T03:53:28.820433",
+    "total": 256
 }
