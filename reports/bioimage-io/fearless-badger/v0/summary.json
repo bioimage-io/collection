@@ -1,0 +1,225 @@
+{
+    "rdf_content": {
+        "name": "2D-U-Net-HnE-histology",
+        "description": "A U-Net variant for multiclass semantic segmentation of HnE stained histology images.",
+        "covers": [
+            "overlay_output.png"
+        ],
+        "authors": [
+            {
+                "affiliation": "Eberhard Karls Universität Tübingen",
+                "name": "Thusheera Kumarasekara",
+                "github_user": "tckumarasekara"
+            }
+        ],
+        "cite": [
+            {
+                "text": "U-Net architecture",
+                "doi": "10.48550/arXiv.1505.04597"
+            },
+            {
+                "text": "Trained Model",
+                "doi": "10.5281/zenodo.19631105"
+            },
+            {
+                "text": "Training Dataset",
+                "doi": "10.5281/zenodo.7508237"
+            }
+        ],
+        "license": "MIT",
+        "links": [
+            "pytorch/pytorch"
+        ],
+        "uploader": {
+            "email": "tckumarasekara@gmail.com",
+            "name": "Thusheera Kumarasekara"
+        },
+        "maintainers": [
+            {
+                "name": "Thusheera Kumarasekara",
+                "github_user": "tckumarasekara"
+            },
+            {
+                "name": "QBiC, Eberhard Karls Universität Tübingen",
+                "github_user": "qbic-pipelines"
+            }
+        ],
+        "tags": [
+            "histology",
+            "segmentation",
+            "semantic-segmentation",
+            "unet",
+            "pytorch",
+            "2d",
+            "hne",
+            "pathology"
+        ],
+        "version": "1.0.0",
+        "format_version": "0.5.10",
+        "type": "model",
+        "id": "fearless-badger",
+        "documentation": "README.md",
+        "inputs": [
+            {
+                "id": "input0",
+                "description": "RGB histology image",
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "id": "channel",
+                        "description": "",
+                        "type": "channel",
+                        "channel_names": [
+                            "R",
+                            "G",
+                            "B"
+                        ]
+                    },
+                    {
+                        "id": "y",
+                        "description": "",
+                        "type": "space",
+                        "size": {
+                            "min": 64,
+                            "step": 8
+                        },
+                        "scale": 1,
+                        "concatenable": false
+                    },
+                    {
+                        "id": "x",
+                        "description": "",
+                        "type": "space",
+                        "size": {
+                            "min": 64,
+                            "step": 8
+                        },
+                        "scale": 1,
+                        "concatenable": false
+                    }
+                ],
+                "test_tensor": {
+                    "source": "test_input_0.npy",
+                    "sha256": "d25a1f3632073d2bd563f97460878397b137ce6848afe3627402540724eff42d"
+                },
+                "sample_tensor": {
+                    "source": "test_input.tiff",
+                    "sha256": "aa06f716ab44ca969b457b390069a75bf91e900235418f6eb770457d668347e8"
+                },
+                "data": {
+                    "type": "float32"
+                },
+                "optional": false,
+                "preprocessing": [
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    }
+                ]
+            }
+        ],
+        "outputs": [
+            {
+                "id": "output0",
+                "description": "Per-pixel class probabilities for histology segmentation",
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "id": "channel",
+                        "description": "",
+                        "type": "channel",
+                        "channel_names": [
+                            "background",
+                            "neutrophil",
+                            "epithelial",
+                            "lymphocyte",
+                            "plasma",
+                            "eosinophil",
+                            "connective"
+                        ]
+                    },
+                    {
+                        "id": "y",
+                        "type": "space",
+                        "size": {
+                            "tensor_id": "input0",
+                            "axis_id": "y",
+                            "offset": 0
+                        },
+                        "scale": 1
+                    },
+                    {
+                        "id": "x",
+                        "type": "space",
+                        "size": {
+                            "tensor_id": "input0",
+                            "axis_id": "x",
+                            "offset": 0
+                        },
+                        "scale": 1
+                    }
+                ],
+                "test_tensor": {
+                    "source": "test_output_0.npy",
+                    "sha256": "08d690209575c3e00e865d3ea91894865e711e5fc1f094c79fe38a903b866fc5"
+                },
+                "sample_tensor": {
+                    "source": "test_output.tiff",
+                    "sha256": "8486b0b514e5101c8a3828511876bc7a926a72a83a38edd3d8d4e8cb6d94dd8b"
+                },
+                "data": {
+                    "type": "float32"
+                }
+            }
+        ],
+        "timestamp": "2026-05-19T14:30:00Z",
+        "weights": {
+            "torchscript": {
+                "source": "U_Net.pt",
+                "sha256": "96b7207a3a584e29673993c726446f70118a2878ff2d8e6cace44a72566759fd",
+                "pytorch_version": "2.1.1"
+            }
+        },
+        "config": {
+            "_conceptdoi": "10.5281/zenodo.19631104",
+            "deepimagej": {
+                "allow_tiling": true,
+                "prediction": {
+                    "postprocess": [],
+                    "preprocess": []
+                },
+                "pyramidal_model": false,
+                "test_information": {
+                    "inputs": [
+                        {
+                            "name": "test_input.tiff",
+                            "pixel_size": {
+                                "x": 1,
+                                "y": 1,
+                                "z": 1
+                            },
+                            "size": "256 x 256 x 1 x 3"
+                        }
+                    ],
+                    "memory_peak": null,
+                    "outputs": [
+                        {
+                            "name": "test_output.tiff",
+                            "size": "256 x 256 x 1 x 7",
+                            "type": "image"
+                        }
+                    ]
+                }
+            }
+        },
+        "id_emoji": "🦡"
+    },
+    "rdf_yaml_sha256": "60c8cce80ead55fa7141994504b3381fb3f2b8bf4d1a9f3ddbdf7f8e3a9af6df",
+    "status": "untested"
+}
