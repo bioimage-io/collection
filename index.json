@@ -2,7 +2,7 @@
     "count_per_type": {
         "application": 65,
         "dataset": 50,
-        "model": 137,
+        "model": 138,
         "notebook": 4
     },
     "items": [
@@ -3340,8 +3340,21 @@
                     "version": "v0"
                 }
             ]
+        },
+        {
+            "id": "bioimage-io/placid-trex",
+            "type": "model",
+            "versions": [
+                {
+                    "comment": null,
+                    "created_at": "2026-05-20T09:08:32Z",
+                    "sha256": "5db4f27530e03f6ee84612947658b3e05ee0c1a87e704cd9c147f70c54525fb4",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/placid-trex/files/rdf.yaml?version=v0",
+                    "version": "v0"
+                }
+            ]
         }
     ],
-    "timestamp": "2026-05-20T03:53:28.820433",
-    "total": 256
+    "timestamp": "2026-05-21T04:02:43.267742",
+    "total": 257
 }
