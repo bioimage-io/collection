@@ -2,7 +2,7 @@
     "count_per_type": {
         "application": 65,
         "dataset": 50,
-        "model": 138,
+        "model": 137,
         "notebook": 4
     },
     "items": [
@@ -3088,19 +3088,6 @@
             ]
         },
         {
-            "id": "bioimage-io/independent-mouse",
-            "type": "model",
-            "versions": [
-                {
-                    "comment": "Initial version",
-                    "created_at": "2026-02-25T15:34:52Z",
-                    "sha256": "fb017b1ed14e68b1d067ef11eb10357543535e450204802523758debfaf24727",
-                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/independent-mouse/files/rdf.yaml?version=v0",
-                    "version": "v0"
-                }
-            ]
-        },
-        {
             "id": "bioimage-io/dazzling-blowfish",
             "type": "model",
             "versions": [
@@ -3320,9 +3307,9 @@
             "type": "model",
             "versions": [
                 {
-                    "comment": "Initial version",
+                    "comment": "Added checkpoint.pth",
                     "created_at": "2026-05-01T10:13:51Z",
-                    "sha256": "de269d443784c6da6835612b1116339d421eb46aa252a76efcc365415b3a2073",
+                    "sha256": "6f059f0c5c11a4a100829c2456f1ca731d4564c5d215798e5a582d00c928c181",
                     "source": "https://hypha.aicell.io/bioimage-io/artifacts/plucky-leopard/files/rdf.yaml?version=v0",
                     "version": "v0"
                 }
@@ -3355,6 +3342,6 @@
             ]
         }
     ],
-    "timestamp": "2026-05-27T04:07:23.131711",
-    "total": 257
+    "timestamp": "2026-05-28T03:56:10.209735",
+    "total": 256
 }
