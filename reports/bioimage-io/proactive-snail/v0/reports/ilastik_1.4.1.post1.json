@@ -1,0 +1,188 @@
+{
+    "badge": null,
+    "details": {
+        "conda_list": null,
+        "details": [
+            {
+                "conda_compare": null,
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "checkpoint.pth": "51fa7738d0b050c94e8bd5085134b7375eebbddb5a76d385aa0e6fbab65ca915",
+                        "model.py": "ff6a6e0adcdfd596f11b5a97e3ee94893c5fa1ab17ee89cf0b53c4c01d142efc",
+                        "test-input.npy": "94e2b0670eedd280c5dbba66a216d7c1e08e446541e790c9c63f400516dfd048",
+                        "test-output.npy": "0c062398bb1e5d385d93ad6612551dffe72333a00eb9c3ebca898ea39548a1d4"
+                    },
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/proactive-snail/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Created `InvalidDescr` object.",
+                "recommended_env": null,
+                "status": "failed",
+                "warnings": []
+            },
+            {
+                "conda_compare": null,
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "checkpoint.pth": "51fa7738d0b050c94e8bd5085134b7375eebbddb5a76d385aa0e6fbab65ca915",
+                        "model.py": "ff6a6e0adcdfd596f11b5a97e3ee94893c5fa1ab17ee89cf0b53c4c01d142efc",
+                        "test-input.npy": "94e2b0670eedd280c5dbba66a216d7c1e08e446541e790c9c63f400516dfd048",
+                        "test-output.npy": "0c062398bb1e5d385d93ad6612551dffe72333a00eb9c3ebca898ea39548a1d4"
+                    },
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/proactive-snail/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [
+                    {
+                        "loc": [
+                            "inputs",
+                            0,
+                            "preprocessing",
+                            1,
+                            "clip",
+                            "kwargs",
+                            "min"
+                        ],
+                        "msg": "Field required",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "missing",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "inputs",
+                            0,
+                            "preprocessing",
+                            1,
+                            "clip",
+                            "kwargs",
+                            "max"
+                        ],
+                        "msg": "Field required",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "missing",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "inputs",
+                            0,
+                            "preprocessing",
+                            1,
+                            "clip",
+                            "kwargs",
+                            "min_percentile"
+                        ],
+                        "msg": "Extra inputs are not permitted",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "extra_forbidden",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "inputs",
+                            0,
+                            "preprocessing",
+                            1,
+                            "clip",
+                            "kwargs",
+                            "max_percentile"
+                        ],
+                        "msg": "Extra inputs are not permitted",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "extra_forbidden",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "inputs",
+                            0,
+                            "preprocessing",
+                            1,
+                            "clip",
+                            "kwargs",
+                            "axes"
+                        ],
+                        "msg": "Extra inputs are not permitted",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "extra_forbidden",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "outputs"
+                        ],
+                        "msg": "Value error, Invalid tensor axis reference at outputs[0].axes[2].size: tensor_id='input0' axis_id='y' offset=0.",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "value_error",
+                        "with_traceback": false
+                    }
+                ],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.4",
+                "recommended_env": null,
+                "status": "failed",
+                "warnings": [
+                    {
+                        "loc": [
+                            "documentation"
+                        ],
+                        "msg": "No '# Validation' (sub)section found in documentation.md.",
+                        "severity": 30,
+                        "type": "warning"
+                    }
+                ]
+            },
+            {
+                "conda_compare": null,
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "type"
+                ],
+                "name": "Has expected resource type",
+                "recommended_env": null,
+                "status": "passed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.spec",
+                "0.5.4.1",
+                "",
+                ""
+            ],
+            [
+                "bioimageio.core",
+                "0.8.0",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.5.4",
+        "id": "proactive-snail",
+        "name": "bioimageio format validation",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/proactive-snail/files/rdf.yaml?version=v0",
+        "status": "failed",
+        "type": "model"
+    },
+    "error": "\n|        ❌        |                               bioimageio format validation                              |\n|       ---       |                                           ---                                           |\n| status          | failed                                                                                  |\n| source          | https://hypha.aicell.io/bioimage-io/artifacts/proactive-snail/files/rdf.yaml?version=v0 |\n| id              | proactive-snail                                                                         |\n| format version  | model 0.5.4                                                                             |\n| bioimageio.spec | 0.5.4.1                                                                                 |\n| bioimageio.core | 0.8.0                                                                                   |\n\n|     |                        Location                       |                                                     Details                                                     |\n| --- |                          ---                          |                                                       ---                                                       |\n| ❌   |                                                       | Created `InvalidDescr` object.                                                                                  |\n| 🔍   | `context:perform_io_checks`                           | True                                                                                                            |\n| 🔍   | `context:root`                                        | https://hypha.aicell.io/bioimage-io/artifacts/proactive-snail/files?version=v0                                  |\n| 🔍   | `context:known_files.test-input.npy`                  | 94e2b0670eedd280c5dbba66a216d7c1e08e446541e790c9c63f400516dfd048                                                |\n| 🔍   | `context:known_files.test-output.npy`                 | 0c062398bb1e5d385d93ad6612551dffe72333a00eb9c3ebca898ea39548a1d4                                                |\n| 🔍   | `context:known_files.model.py`                        | ff6a6e0adcdfd596f11b5a97e3ee94893c5fa1ab17ee89cf0b53c4c01d142efc                                                |\n| 🔍   | `context:known_files.checkpoint.pth`                  | 51fa7738d0b050c94e8bd5085134b7375eebbddb5a76d385aa0e6fbab65ca915                                                |\n| ❌   |                                                       | bioimageio.spec format validation model 0.5.4                                                                   |\n| ❌   | `inputs.0.preprocessing.1.clip.kwargs.min`            | Field required                                                                                                  |\n|     |                                                       |                                                                                                                 |\n| ❌   | `inputs.0.preprocessing.1.clip.kwargs.max`            | Field required                                                                                                  |\n|     |                                                       |                                                                                                                 |\n| ❌   | `inputs.0.preprocessing.1.clip.kwargs.min_percentile` | Extra inputs are not permitted                                                                                  |\n|     |                                                       |                                                                                                                 |\n| ❌   | `inputs.0.preprocessing.1.clip.kwargs.max_percentile` | Extra inputs are not permitted                                                                                  |\n|     |                                                       |                                                                                                                 |\n| ❌   | `inputs.0.preprocessing.1.clip.kwargs.axes`           | Extra inputs are not permitted                                                                                  |\n|     |                                                       |                                                                                                                 |\n| ❌   | `outputs`                                             | Value error, Invalid tensor axis reference at outputs[0].axes[2].size: tensor_id='input0' axis_id='y' offset=0. |\n|     |                                                       |                                                                                                                 |\n| ⚠   | `documentation`                                       | No '# Validation' (sub)section found in documentation.md.                                                       |\n| ✔️  | `type`                                                | Has expected resource type                                                                                      |\n",
+    "links": [
+        "ilastik/ilastik"
+    ],
+    "status": "failed",
+    "tool": "ilastik"
+}
