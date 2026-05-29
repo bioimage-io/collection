@@ -3209,9 +3209,9 @@
             "type": "model",
             "versions": [
                 {
-                    "comment": "Initial version",
+                    "comment": "Updated rdf.yaml",
                     "created_at": "2025-12-06T21:13:48Z",
-                    "sha256": "5906dda0a8e1a6e16eca70201a2056b84f7b2482ebeffd0eec812fcb2aca4427",
+                    "sha256": "2ac248458d6f3792476879723a03ad042528c8bdf74a494175641c1a9441b898",
                     "source": "https://hypha.aicell.io/bioimage-io/artifacts/proactive-snail/files/rdf.yaml?version=v0",
                     "version": "v0"
                 }
@@ -3222,9 +3222,9 @@
             "type": "model",
             "versions": [
                 {
-                    "comment": "Updated documentation.md",
+                    "comment": "Added test-output.npy",
                     "created_at": "2025-12-11T10:25:44Z",
-                    "sha256": "60d15246c129299aec822513608f08396bd42d01bcc531da35aaae1d089d80db",
+                    "sha256": "b671f120687fc130ab6322c2aa61b5ca1de6bff6ddc001f7e9d16db0b541db9b",
                     "source": "https://hypha.aicell.io/bioimage-io/artifacts/greedy-deer/files/rdf.yaml?version=v0",
                     "version": "v0"
                 }
@@ -3342,6 +3342,6 @@
             ]
         }
     ],
-    "timestamp": "2026-05-28T03:56:10.209735",
+    "timestamp": "2026-05-29T03:58:47.259621",
     "total": 256
 }
