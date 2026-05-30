@@ -3307,9 +3307,9 @@
             "type": "model",
             "versions": [
                 {
-                    "comment": "Added checkpoint.pth",
+                    "comment": "Updated rdf.yaml",
                     "created_at": "2026-05-01T10:13:51Z",
-                    "sha256": "6f059f0c5c11a4a100829c2456f1ca731d4564c5d215798e5a582d00c928c181",
+                    "sha256": "f51ec4feb1f97364847becc54038eadbb3ea9b64ebdd7dfecf5774df7f2f894b",
                     "source": "https://hypha.aicell.io/bioimage-io/artifacts/plucky-leopard/files/rdf.yaml?version=v0",
                     "version": "v0"
                 }
@@ -3342,6 +3342,6 @@
             ]
         }
     ],
-    "timestamp": "2026-05-29T03:58:47.259621",
+    "timestamp": "2026-05-30T03:42:47.366134",
     "total": 256
 }
