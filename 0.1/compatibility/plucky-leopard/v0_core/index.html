@@ -569,12 +569,12 @@
 </style>
 <div class="validation-summary-container"><table>
   <tr>
-    <th style="text-align:center">❌</th>
+    <th style="text-align:center">🟡</th>
     <th style="text-align:center">bioimageio format validation</th>
   </tr>
   <tr>
     <td style="text-align:left">status</td>
-    <td style="text-align:left">failed</td>
+    <td style="text-align:left">valid-format</td>
   </tr>
   <tr>
     <td style="text-align:left">source</td>
@@ -604,136 +604,95 @@
     <th style="text-align:center">Details</th>
   </tr>
   <tr>
-    <td style="text-align:left">❌</td>
+    <td style="text-align:left">✔️</td>
+    <td style="text-align:left"></td>
+    <td style="text-align:left">Successfully created `ModelDescr` instance.</td>
+  </tr>
+  <tr>
+    <td style="text-align:left">✔️</td>
     <td style="text-align:left"></td>
     <td style="text-align:left">bioimageio.spec format validation model 0.5.10</td>
   </tr>
   <tr>
+    <td style="text-align:left">⚠</td>
+    <td style="text-align:left"><code>documentation</code></td>
+    <td style="text-align:left"><pre>No '# Validation' (sub)section found in documentation.md.</pre></td>
+  </tr>
+  <tr>
+    <td style="text-align:left">⚠</td>
+    <td style="text-align:left"><code>inputs.0.sample_tensor</code></td>
+    <td style="text-align:left"><pre>Needs to be filled for FAIR compliance</pre></td>
+  </tr>
+  <tr>
+    <td style="text-align:left">⚠</td>
+    <td style="text-align:left"><code>outputs.0.sample_tensor</code></td>
+    <td style="text-align:left"><pre>Needs to be filled for FAIR compliance</pre></td>
+  </tr>
+  <tr>
+    <td style="text-align:left">✔️</td>
+    <td style="text-align:left"><code>weights.pytorch_state_dict</code></td>
+    <td style="text-align:left">Created conda environment 'f923abbcd927e1b70f314f29827668de2b128bac170663b23d97aaff14a5c225'</td>
+  </tr>
+  <tr>
     <td style="text-align:left">❌</td>
-    <td style="text-align:left"></td>
-    <td style="text-align:left"><pre>Fetched content of https://hypha.aicell.io/bioimage-io/artifacts/plucky-leopard/files/checkpoint.pth?version=v0 has unexpected digest c89c3ce5190b293860220a121509c1a594bf1ce80c571cee36d87a99e1a2c43c (Expected 23b3ca39834cd52ca639d7362db661f65996bb7e39c6f28c596da4c904e299a2).</pre></td>
+    <td style="text-align:left"><code>weights.pytorch_state_dict</code></td>
+    <td style="text-align:left">Reproduce test outputs from test inputs (pytorch_state_dict)</td>
+  </tr>
+  <tr>
+    <td style="text-align:left">❌</td>
+    <td style="text-align:left"><code>weights.pytorch_state_dict</code></td>
+    <td style="text-align:left"><pre>Output 'output0': 9361 of 1966080 elements disagree with expected values. (4761.3 ppm). 
+Max relative difference not accounted for by absolute tolerance (1.00e-03):
+2.35e-01 (= \|3.39e-03 - 4.43e-03\|/\|4.43e-03 + 1e-6\|) at {'batch': np.int64(0), 'channel': np.int64(2), 'z': np.int64(17), 'y': np.int64(14), 'x': np.int64(47)} 
+Max absolute difference not accounted for by relative tolerance (1.00e-03):
+3.15e-03 (= \|5.0009829e-01 - 5.0324339e-01\|) at {'batch': np.int64(0), 'channel': np.int64(1), 'z': np.int64(34), 'y': np.int64(7), 'x': np.int64(6)}</pre></td>
   </tr>
   <tr>
     <td style="text-align:left"></td>
     <td style="text-align:left"></td>
-    <td style="text-align:left">See <a href="#traceback-1">Traceback 1</a>.</td>
+    <td style="text-align:left"></td>
   </tr>
-</table>
-<h3 id="traceback-1">Traceback 1</h3>
-<pre><!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<style>
-.r1 {color: #800000; text-decoration-color: #800000}
-.r2 {color: #800000; text-decoration-color: #800000; font-weight: bold}
-.r3 {color: #bf7f7f; text-decoration-color: #bf7f7f; font-weight: bold}
-.r4 {color: #7f7f7f; text-decoration-color: #7f7f7f}
-.r5 {font-weight: bold}
-.r6 {color: #0000ff; text-decoration-color: #0000ff}
-.r7 {color: #00ffff; text-decoration-color: #00ffff}
-.r8 {color: #ff00ff; text-decoration-color: #ff00ff}
-.r9 {color: #808000; text-decoration-color: #808000}
-.r10 {color: #00ffff; text-decoration-color: #00ffff; font-weight: bold; text-decoration: underline}
-.r11 {font-weight: bold; text-decoration: underline}
-.r12 {color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold}
-.r13 {color: #00ff00; text-decoration-color: #00ff00}
-.r14 {color: #0000ff; text-decoration-color: #0000ff; font-weight: bold; text-decoration: underline}
-.r15 {color: #ff0000; text-decoration-color: #ff0000; font-weight: bold}
-.r16 {color: #0000ff; text-decoration-color: #0000ff; text-decoration: underline}
-body {
-    color: var(--md-default-fg-color);
-    background-color: var(--md-default-bg-color);
-}
-</style>
-</head>
-<body>
-    <pre style="font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><code style="font-family:inherit"><span class="r1">╭─────────────────────────────── </span><span class="r2">Traceback </span><span class="r3">(most recent call last)</span><span class="r1"> ────────────────────────────────╮</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/spec/_internal/</span><span class="r5">common_nodes.py</span>:302 i <span class="r1">│</span>
-<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">299 </span><span class="r4">│   │   </span>                                                                                   <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">300 </span><span class="r4">│   │   </span>context = get_validation_context()                                                 <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">301 </span><span class="r4">│   │   </span><span class="r6">try</span>:                                                                               <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span>302 <span class="r4">│   │   │   </span>rd = <span class="r7">cls</span>.model_validate(data)                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">303 </span><span class="r4">│   │   </span><span class="r6">except</span> pydantic.ValidationError <span class="r6">as</span> e:                                              <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">304 </span><span class="r4">│   │   │   </span><span class="r6">for</span> ee <span class="r8">in</span> e.errors(include_url=<span class="r6">False</span>):                                         <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">305 </span><span class="r4">│   │   │   │   </span><span class="r6">if</span> (severity := ee.get(<span class="r9">&quot;ctx&quot;</span>, {}).get(<span class="r9">&quot;severity&quot;</span>, ERROR)) &lt; ERROR:         <span class="r1">│</span>
-<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/spec/_internal/</span><span class="r5">node.py</span>:91 in model_v <span class="r1">│</span>
-<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 88 </span><span class="r4">│   │   </span>                                                                                   <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 89 </span><span class="r4">│   │   </span><span class="r6">with</span> context:                                                                      <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 90 </span><span class="r4">│   │   │   </span><span class="r4"># use validation context as context manager for equal behavior of __init__ and</span> <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span> 91 <span class="r4">│   │   │   </span><span class="r6">return</span> <span class="r10">super</span><span class="r11">().model_validate(</span>                                                 <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 92 </span><span class="r4">│   │   │   │   </span><span class="r11">obj, strict=strict, from_attributes=from_attributes</span>                        <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 93 </span><span class="r4">│   │   │   </span><span class="r11">)</span>                                                                              <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 94 </span>                                                                                           <span class="r1">│</span>
-<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/pydantic/</span><span class="r5">main.py</span>:732 in model_validate          <span class="r1">│</span>
-<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 729 </span><span class="r4">│   │   │   │   </span>code=<span class="r9">&#x27;validate-by-alias-and-name-false&#x27;</span>,                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 730 </span><span class="r4">│   │   │   </span>)                                                                             <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 731 </span><span class="r4">│   │   </span>                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span> 732 <span class="r4">│   │   </span><span class="r6">return</span> <span class="r10">cls</span><span class="r11">.__pydantic_validator__.validate_python(</span>                                <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 733 </span><span class="r4">│   │   │   </span><span class="r11">obj,</span>                                                                          <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 734 </span><span class="r4">│   │   │   </span><span class="r11">strict=strict,</span>                                                                <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 735 </span><span class="r4">│   │   │   </span><span class="r11">extra=extra,</span>                                                                  <span class="r1">│</span>
-<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/spec/_internal/</span><span class="r5">io.py</span>:272 in _validat <span class="r1">│</span>
-<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 269 </span><span class="r4">│   </span>                                                                                      <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 270 </span><span class="r4">│   </span><span class="r12">@model_validator</span>(mode=<span class="r9">&quot;after&quot;</span>)                                                        <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 271 </span><span class="r4">│   </span><span class="r6">def</span> <span class="r13">_validate_sha256</span>(<span class="r7">self</span>) -&gt; Self:                                                   <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span> 272 <span class="r4">│   │   </span><span class="r10">self</span><span class="r11">.validate_sha256()</span>                                                            <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 273 </span><span class="r4">│   │   </span><span class="r6">return</span> <span class="r7">self</span>                                                                       <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 274 </span><span class="r4">│   </span>                                                                                      <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 275 </span><span class="r4">│   </span><span class="r6">def</span> <span class="r13">validate_sha256</span>(<span class="r7">self</span>, force_recompute: <span class="r7">bool</span> = <span class="r6">False</span>) -&gt; <span class="r6">None</span>:                     <span class="r1">│</span>
-<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/spec/_internal/</span><span class="r5">io.py</span>:286 in validate <span class="r1">│</span>
-<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 283 </span><span class="r4">│   │   </span>                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 284 </span><span class="r4">│   │   </span><span class="r6">if</span> actual_sha <span class="r8">is</span> <span class="r6">None</span>:                                                            <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 285 </span><span class="r4">│   │   │   </span><span class="r6">if</span> context.perform_io_checks <span class="r8">or</span> force_recompute:                              <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span> 286 <span class="r4">│   │   │   │   </span>reader = <span class="r11">get_reader(</span><span class="r10">self</span><span class="r11">.source, sha256=</span><span class="r10">self</span><span class="r11">.sha256)</span>                      <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 287 </span><span class="r4">│   │   │   │   </span><span class="r6">if</span> force_recompute:                                                       <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 288 </span><span class="r4">│   │   │   │   │   </span>actual_sha = get_sha256(reader)                                       <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 289 </span><span class="r4">│   │   │   │   </span><span class="r6">else</span>:                                                                     <span class="r1">│</span>
-<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/spec/_internal/</span><span class="r5">io.py</span>:743 in get_read <span class="r1">│</span>
-<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 740 </span><span class="r4">│   │   │   </span>source = HttpUrl(source)                                                      <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 741 </span><span class="r4">│   </span>                                                                                      <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 742 </span><span class="r4">│   </span><span class="r6">if</span> <span class="r7">isinstance</span>(source, HttpUrl):                                                       <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span> 743 <span class="r4">│   │   </span><span class="r6">return</span> <span class="r11">_open_url(source, progressbar=progressbar, **kwargs)</span>                       <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 744 </span><span class="r4">│   </span>                                                                                      <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 745 </span><span class="r4">│   </span><span class="r6">if</span> <span class="r7">isinstance</span>(source, ZipPath):                                                       <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 746 </span><span class="r4">│   │   </span><span class="r6">if</span> <span class="r8">not</span> source.exists():                                                           <span class="r1">│</span>
-<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/spec/_internal/</span><span class="r5">io.py</span>:807 in _open_ur <span class="r1">│</span>
-<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 804 </span><span class="r4">│   │   </span><span class="r8">or</span> hashlib.sha256(<span class="r7">str</span>(source).encode(encoding=<span class="r9">&quot;utf-8&quot;</span>)).hexdigest()               <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 805 </span><span class="r4">│   </span>)                                                                                     <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 806 </span><span class="r4">│   </span>                                                                                      <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span> 807 <span class="r4">│   </span>reader = <span class="r11">cache.fetch(</span>                                                                 <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 808 </span><span class="r4">│   │   </span><span class="r11">source,</span>                                                                           <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 809 </span><span class="r4">│   │   </span><span class="r11">fetcher=partial(_fetch_url, progressbar=progressbar),</span>                             <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4"> 810 </span><span class="r4">│   │   </span><span class="r11">force_refetch=force_refetch,</span>                                                      <span class="r1">│</span>
-<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/genericache/</span><span class="r5">__init__.py</span>:153 in fetch            <span class="r1">│</span>
-<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">150 </span><span class="r4">│   │   │   │   </span><span class="r6">return</span> result                                                              <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">151 </span><span class="r4">│   │   │   </span><span class="r6">if</span> <span class="r7">isinstance</span>(result, FetchInterrupted):                                       <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">152 </span><span class="r4">│   │   │   │   </span><span class="r6">continue</span>                                                                   <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span>153 <span class="r4">│   │   │   </span><span class="r14">raise</span><span class="r11"> result</span>                                                                   <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">154 </span><span class="r4">│   │   </span>                                                                                   <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">155 </span><span class="r4">│   │   </span><span class="r6">raise</span> <span class="r7">RuntimeError</span>(<span class="r9">&quot;Number of retries exhausted&quot;</span>)                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r4">156 </span>                                                                                           <span class="r1">│</span>
-<span class="r1">╰──────────────────────────────────────────────────────────────────────────────────────────────────╯</span>
-<span class="r15">DigestMismatch: </span>Fetched content of <span class="r16">https://hypha.aicell.io/bioimage-io/artifacts/plucky-leopard/files/checkpoint.pth?version=v0</span> has unexpected digest c89c3ce5190b293860220a121509c1a594bf1ce80c571cee36d87a99e1a2c43c <span class="r5">(</span>Expected 23b3ca39834cd52ca639d7362db661f65996bb7e39c6f28c596da4c904e299a2<span class="r5">)</span>.
-</code></pre>
-</body>
-</html>
-</pre></div>
+  <tr>
+    <td style="text-align:left"></td>
+    <td style="text-align:left"><code>weights.pytorch_state_dict</code></td>
+    <td style="text-align:left"><pre>recommended conda environment (Reproduce test outputs from test inputs (pytorch_state_dict))</pre></td>
+  </tr>
+  <tr>
+    <td style="text-align:left"></td>
+    <td style="text-align:left"></td>
+    <td style="text-align:left"><pre lang="yaml">%YAML 1.2
+---
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - conda-forge::bioimageio.core>=0.9.4
+  - pip
+  - pytorch==2.9.1
+  - torchvision==0.24.1
+</pre></td>
+  </tr>
+  <tr>
+    <td style="text-align:left"></td>
+    <td style="text-align:left"><code>weights.pytorch_state_dict</code></td>
+    <td style="text-align:left"><pre>conda compare (Reproduce test outputs from test inputs (pytorch_state_dict))</pre></td>
+  </tr>
+  <tr>
+    <td style="text-align:left"></td>
+    <td style="text-align:left"></td>
+    <td style="text-align:left"><pre>/usr/share/miniconda/lib/python3.13/site-packages/conda/env/env.py:288: FutureWarning: The
+environment file is not fully CEP 24 compliant is deprecated and will be removed in 26.9. In the
+future, this configuration will be rejected. Please fix the following errors in order to make
+the configuration valid:    - Invalid type for 'name', expected a str   deprecated.topic(
+Success. All the packages in the specification file are present in the environment with matching
+version and build string.</pre></td>
+  </tr>
+  <tr>
+    <td style="text-align:left">✔️</td>
+    <td style="text-align:left"><code>weights.pytorch_state_dict</code></td>
+    <td style="text-align:left">Run pytorch_state_dict inference for inputs with batch_size: 1 and size parameter n: 0</td>
+  </tr>
+</table></div>
 
 
 
