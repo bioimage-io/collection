@@ -1,92 +1,69 @@
 {
     "rdf_content": {
-        "name": "3D Residual U-Net for oocyte segmentation",
-        "description": "Oocyte segmentation in 3D light-sheet fluorescence microscopy images. Instance segmentation representation: F + C + Dc",
-        "covers": [
-            "cover1.png",
-            "cover2.png"
-        ],
         "authors": [
             {
-                "name": "Daniel Franco-Barranco",
-                "github_user": "danifranco"
+                "github_user": "danifranco",
+                "name": "Daniel Franco-Barranco"
             }
         ],
         "cite": [
             {
-                "text": "model",
-                "doi": "10.1109/TPAMI.2020.2983686"
+                "doi": "10.1109/TPAMI.2020.2983686",
+                "text": "model"
             },
             {
-                "text": "training library",
-                "doi": "10.1038/s41592-025-02699-y"
-            },
-            {
-                "text": "BiaPy: accessible deep learning on bioimages",
                 "doi": "10.1038/s41592-025-02699-y",
+                "text": "training library"
+            },
+            {
+                "doi": "10.1038/s41592-025-02699-y",
+                "text": "BiaPy: accessible deep learning on bioimages",
                 "url": "https://www.nature.com/articles/s41592-025-02699-y"
             }
         ],
-        "license": "CC-BY-4.0",
-        "git_repo": "https://github.com/BiaPyX/BiaPy",
-        "maintainers": [
-            {
-                "name": "Daniel Franco-Barranco",
-                "github_user": "danifranco"
-            }
+        "covers": [
+            "cover1.png",
+            "cover2.png"
         ],
-        "tags": [
-            "oocyte",
-            "3D",
-            "light-sheet fluorescence microscopy",
-            "instance segmentation",
-            "3d",
-            "pytorch",
-            "biapy",
-            "instance-segmentation",
-            "resunet"
-        ],
-        "version": "0.1.0",
-        "format_version": "0.5.7",
-        "type": "model",
+        "description": "Oocyte segmentation in 3D light-sheet fluorescence microscopy images. Instance segmentation representation: F + C + Dc",
         "documentation": "documentation.md",
+        "format_version": "0.5.7",
+        "git_repo": "https://github.com/BiaPyX/BiaPy",
+        "id": "plucky-leopard",
+        "id_emoji": "🐆",
         "inputs": [
             {
-                "id": "input0",
                 "axes": [
                     {
-                        "type": "batch",
-                        "size": 1
+                        "size": 1,
+                        "type": "batch"
                     },
                     {
-                        "type": "channel",
                         "channel_names": [
                             "channel0"
-                        ]
+                        ],
+                        "type": "channel"
                     },
                     {
-                        "size": 40,
                         "id": "z",
+                        "size": 40,
                         "type": "space"
                     },
                     {
-                        "size": 128,
                         "id": "y",
+                        "size": 128,
                         "type": "space"
                     },
                     {
-                        "size": 128,
                         "id": "x",
+                        "size": 128,
                         "type": "space"
                     }
                 ],
-                "test_tensor": {
-                    "source": "test-input.npy",
-                    "sha256": "1b6a2ac5662e1a689a74974894d4076130fa128660095660f94f203547b341cd"
-                },
                 "data": {
                     "type": "float32"
                 },
+                "id": "input0",
                 "preprocessing": [
                     {
                         "id": "ensure_dtype",
@@ -97,13 +74,13 @@
                     {
                         "id": "clip",
                         "kwargs": {
-                            "min_percentile": 0.1,
-                            "max_percentile": 99.8,
                             "axes": [
                                 "z",
                                 "y",
                                 "x"
-                            ]
+                            ],
+                            "max_percentile": 99.8,
+                            "min_percentile": 0.1
                         }
                     },
                     {
@@ -122,66 +99,74 @@
                             "dtype": "float32"
                         }
                     }
-                ]
+                ],
+                "test_tensor": {
+                    "sha256": "1b6a2ac5662e1a689a74974894d4076130fa128660095660f94f203547b341cd",
+                    "source": "test-input.npy"
+                }
             }
         ],
+        "license": "CC-BY-4.0",
+        "maintainers": [
+            {
+                "github_user": "danifranco",
+                "name": "Daniel Franco-Barranco"
+            }
+        ],
+        "name": "3D Residual U-Net for oocyte segmentation",
         "outputs": [
             {
-                "id": "output0",
                 "axes": [
                     {
-                        "type": "batch",
-                        "size": 1
+                        "size": 1,
+                        "type": "batch"
                     },
                     {
-                        "type": "channel",
                         "channel_names": [
                             "channel0",
                             "channel1",
                             "channel2"
-                        ]
+                        ],
+                        "type": "channel"
                     },
                     {
                         "halo": 4,
-                        "size": {
-                            "tensor_id": "input0",
-                            "axis_id": "z",
-                            "offset": 0
-                        },
                         "id": "z",
-                        "type": "space",
-                        "scale": 1
+                        "scale": 1,
+                        "size": {
+                            "axis_id": "z",
+                            "offset": 0,
+                            "tensor_id": "input0"
+                        },
+                        "type": "space"
                     },
                     {
                         "halo": 16,
-                        "size": {
-                            "tensor_id": "input0",
-                            "axis_id": "y",
-                            "offset": 0
-                        },
                         "id": "y",
-                        "type": "space",
-                        "scale": 1
+                        "scale": 1,
+                        "size": {
+                            "axis_id": "y",
+                            "offset": 0,
+                            "tensor_id": "input0"
+                        },
+                        "type": "space"
                     },
                     {
                         "halo": 16,
-                        "size": {
-                            "tensor_id": "input0",
-                            "axis_id": "x",
-                            "offset": 0
-                        },
                         "id": "x",
-                        "type": "space",
-                        "scale": 1
+                        "scale": 1,
+                        "size": {
+                            "axis_id": "x",
+                            "offset": 0,
+                            "tensor_id": "input0"
+                        },
+                        "type": "space"
                     }
                 ],
-                "test_tensor": {
-                    "source": "test-output.npy",
-                    "sha256": "3e0c8617ea2698302f5670ca39f7cebede26dfae002904b65e0159847bda86fa"
-                },
                 "data": {
                     "type": "float32"
                 },
+                "id": "output0",
                 "postprocessing": [
                     {
                         "id": "ensure_dtype",
@@ -189,42 +174,85 @@
                             "dtype": "float32"
                         }
                     }
-                ]
+                ],
+                "test_tensor": {
+                    "sha256": "3e0c8617ea2698302f5670ca39f7cebede26dfae002904b65e0159847bda86fa",
+                    "source": "test-output.npy"
+                }
             }
+        ],
+        "tags": [
+            "oocyte",
+            "3D",
+            "light-sheet fluorescence microscopy",
+            "instance segmentation",
+            "3d",
+            "pytorch",
+            "biapy",
+            "instance-segmentation",
+            "resunet"
         ],
         "training_data": {
             "id": "splendid-falafel"
         },
+        "type": "model",
+        "uploader": {
+            "email": "danialtza@gmail.com"
+        },
+        "version": "0.1.0",
         "weights": {
             "pytorch_state_dict": {
-                "source": "checkpoint.pth",
-                "sha256": "c89c3ce5190b293860220a121509c1a594bf1ce80c571cee36d87a99e1a2c43c",
                 "architecture": {
-                    "source": "model.py",
-                    "sha256": "c0d86c529b527ae960c5c00d1199fc782c902d36fe237cb27a0d2f9bd0389cce",
                     "callable": "ResUNet",
                     "kwargs": {
-                        "image_shape": [
-                            40,
-                            128,
-                            128,
-                            1
-                        ],
                         "activation": "elu",
-                        "feature_maps": [
-                            48,
-                            64,
-                            80,
-                            96
-                        ],
+                        "contrast": false,
+                        "contrast_proj_dim": 256,
                         "drop_values": [
                             0,
                             0,
                             0,
                             0
                         ],
-                        "normalization": "in",
+                        "explicit_activations": true,
+                        "feature_maps": [
+                            48,
+                            64,
+                            80,
+                            96
+                        ],
+                        "head_activations": [
+                            "ce_sigmoid",
+                            "ce_sigmoid",
+                            "linear"
+                        ],
+                        "image_shape": [
+                            40,
+                            128,
+                            128,
+                            1
+                        ],
+                        "isotropy": [
+                            true,
+                            true,
+                            true,
+                            true
+                        ],
                         "k_size": 3,
+                        "larger_io": false,
+                        "normalization": "in",
+                        "output_channel_info": [
+                            "F",
+                            "C",
+                            "Dc"
+                        ],
+                        "output_channels": [
+                            1,
+                            1,
+                            1
+                        ],
+                        "return_one_tensor": true,
+                        "separated_decoders": false,
                         "upsample_layer": "convtranspose",
                         "yx_down": [
                             2,
@@ -235,46 +263,421 @@
                             1,
                             1,
                             1
-                        ],
-                        "output_channels": [
-                            1,
-                            1,
-                            1
-                        ],
-                        "output_channel_info": [
-                            "F",
-                            "C",
-                            "Dc"
-                        ],
-                        "head_activations": [
-                            "ce_sigmoid",
-                            "ce_sigmoid",
-                            "linear"
-                        ],
-                        "explicit_activations": true,
-                        "contrast": false,
-                        "contrast_proj_dim": 256,
-                        "separated_decoders": false,
-                        "isotropy": [
-                            true,
-                            true,
-                            true,
-                            true
-                        ],
-                        "larger_io": false,
-                        "return_one_tensor": true
-                    }
+                        ]
+                    },
+                    "sha256": "c0d86c529b527ae960c5c00d1199fc782c902d36fe237cb27a0d2f9bd0389cce",
+                    "source": "model.py"
                 },
+                "dependencies": null,
                 "pytorch_version": "2.9.1",
-                "dependencies": null
+                "sha256": "c89c3ce5190b293860220a121509c1a594bf1ce80c571cee36d87a99e1a2c43c",
+                "source": "checkpoint.pth"
             }
-        },
-        "uploader": {
-            "email": "danialtza@gmail.com"
-        },
-        "id": "plucky-leopard",
-        "id_emoji": "🐆"
+        }
     },
     "rdf_yaml_sha256": "b4f047110873cd911dcc9d10641143cfd2f9901d5c3811a259dc5331266be683",
-    "status": "untested"
+    "scores": {
+        "core_compatibility": 0.5,
+        "metadata_completeness": 0.4594594594594595,
+        "metadata_format": 1.0,
+        "overall_compatibility": 0.48986486486486486,
+        "overall_partner_tool_compatibility": 0.0,
+        "tool_compatibility": {
+            "biapy": 0.0,
+            "bioimageio.core": 0.5,
+            "deepimagej": 0.0,
+            "ilastik": 0.0
+        },
+        "tool_compatibility_version_specific": {
+            "biapy_3.6.8": 0.0,
+            "bioimageio.core_0.10.4": 0.5,
+            "deepimagej_3.1.0-snapshot": 0.0,
+            "ilastik_1.4.1.post1": 0.0
+        }
+    },
+    "status": "passed",
+    "tests": {
+        "biapy": {
+            "3.6.8": {
+                "badge": null,
+                "details": "[all] More than one preprocessing from BMZ not implemented yet bczyx\n",
+                "error": "[all] More than one preprocessing from BMZ not implemented yet bczyx\n",
+                "links": [
+                    "biapy/biapy"
+                ],
+                "score": 0.0,
+                "status": "failed"
+            }
+        },
+        "bioimageio.core": {
+            "0.10.4": {
+                "badge": null,
+                "details": {
+                    "details": [
+                        {
+                            "context": {
+                                "file_name": "rdf.yaml",
+                                "known_files": {
+                                    "checkpoint.pth": "c89c3ce5190b293860220a121509c1a594bf1ce80c571cee36d87a99e1a2c43c",
+                                    "https://github.com/BiaPyX/BiaPy": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/plucky-leopard/files/checkpoint.pth?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/plucky-leopard/files/cover1.png?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/plucky-leopard/files/cover2.png?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/plucky-leopard/files/documentation.md?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/plucky-leopard/files/model.py?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/plucky-leopard/files/test-input.npy?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/plucky-leopard/files/test-output.npy?version=v0": null,
+                                    "https://www.nature.com/articles/s41592-025-02699-y": null,
+                                    "model.py": "c0d86c529b527ae960c5c00d1199fc782c902d36fe237cb27a0d2f9bd0389cce",
+                                    "test-input.npy": "1b6a2ac5662e1a689a74974894d4076130fa128660095660f94f203547b341cd",
+                                    "test-output.npy": "3e0c8617ea2698302f5670ca39f7cebede26dfae002904b65e0159847bda86fa"
+                                },
+                                "original_source_name": null,
+                                "perform_io_checks": true,
+                                "root": "https://hypha.aicell.io/bioimage-io/artifacts/plucky-leopard/files?version=v0",
+                                "update_hashes": false
+                            },
+                            "errors": [],
+                            "loc": [],
+                            "name": "Successfully created `ModelDescr` instance.",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [],
+                            "name": "bioimageio.spec format validation model 0.5.10",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": [
+                                {
+                                    "loc": [
+                                        "documentation"
+                                    ],
+                                    "msg": "No '# Validation' (sub)section found in documentation.md.",
+                                    "severity": 30,
+                                    "type": "warning"
+                                },
+                                {
+                                    "loc": [
+                                        "inputs",
+                                        0,
+                                        "sample_tensor"
+                                    ],
+                                    "msg": "Needs to be filled for FAIR compliance",
+                                    "severity": 35,
+                                    "type": "warning"
+                                },
+                                {
+                                    "loc": [
+                                        "outputs",
+                                        0,
+                                        "sample_tensor"
+                                    ],
+                                    "msg": "Needs to be filled for FAIR compliance",
+                                    "severity": 35,
+                                    "type": "warning"
+                                }
+                            ]
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "pytorch_state_dict"
+                            ],
+                            "name": "Created conda environment 'f923abbcd927e1b70f314f29827668de2b128bac170663b23d97aaff14a5c225'",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [
+                                {
+                                    "loc": [
+                                        "weights",
+                                        "pytorch_state_dict"
+                                    ],
+                                    "msg": "Output 'output0': 9361 of 1966080 elements disagree with expected values. (4761.3 ppm). \nMax relative difference not accounted for by absolute tolerance (1.00e-03):\n2.35e-01 (= \\|3.39e-03 - 4.43e-03\\|/\\|4.43e-03 + 1e-6\\|) at {'batch': np.int64(0), 'channel': np.int64(2), 'z': np.int64(17), 'y': np.int64(14), 'x': np.int64(47)} \nMax absolute difference not accounted for by relative tolerance (1.00e-03):\n3.15e-03 (= \\|5.0009829e-01 - 5.0324339e-01\\|) at {'batch': np.int64(0), 'channel': np.int64(1), 'z': np.int64(34), 'y': np.int64(7), 'x': np.int64(6)}",
+                                    "traceback_html": "",
+                                    "traceback_md": "",
+                                    "type": "bioimageio.core",
+                                    "with_traceback": false
+                                }
+                            ],
+                            "loc": [
+                                "weights",
+                                "pytorch_state_dict"
+                            ],
+                            "name": "Reproduce test outputs from test inputs (pytorch_state_dict)",
+                            "recommended_env": {
+                                "channels": [
+                                    "conda-forge",
+                                    "nodefaults"
+                                ],
+                                "dependencies": [
+                                    "conda-forge::bioimageio.core>=0.9.4",
+                                    "pip",
+                                    "pytorch==2.9.1",
+                                    "torchvision==0.24.1"
+                                ],
+                                "name": null
+                            },
+                            "saved_conda_compare": "/usr/share/miniconda/lib/python3.13/site-packages/conda/env/env.py:288: FutureWarning: The environment file is not fully CEP 24 compliant is deprecated and will be removed in 26.9. In the future, this configuration will be rejected. Please fix the following errors in order to make the configuration valid: \n  - Invalid type for 'name', expected a str\n  deprecated.topic(\nSuccess. All the packages in the specification file are present in the environment with matching version and build string.\n",
+                            "status": "failed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "pytorch_state_dict"
+                            ],
+                            "name": "Run pytorch_state_dict inference for inputs with batch_size: 1 and size parameter n: 0",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        }
+                    ],
+                    "env": [
+                        [
+                            "bioimageio.spec",
+                            "0.5.10.2",
+                            "",
+                            ""
+                        ]
+                    ],
+                    "format_version": "0.5.10",
+                    "id": "plucky-leopard",
+                    "metadata_completeness": 0.4594594594594595,
+                    "name": "bioimageio format validation",
+                    "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+                    "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/plucky-leopard/files/rdf.yaml?version=v0",
+                    "status": "valid-format",
+                    "traceback": null,
+                    "type": "model",
+                    "version": "0.1.0",
+                    "warnings": null
+                },
+                "error": "Output 'output0': 9361 of 1966080 elements disagree with expected values. (4761.3 ppm). \nMax relative difference not accounted for by absolute tolerance (1.00e-03):\n2.35e-01 (= \\|3.39e-03 - 4.43e-03\\|/\\|4.43e-03 + 1e-6\\|) at {'batch': np.int64(0), 'channel': np.int64(2), 'z': np.int64(17), 'y': np.int64(14), 'x': np.int64(47)} \nMax absolute difference not accounted for by relative tolerance (1.00e-03):\n3.15e-03 (= \\|5.0009829e-01 - 5.0324339e-01\\|) at {'batch': np.int64(0), 'channel': np.int64(1), 'z': np.int64(34), 'y': np.int64(7), 'x': np.int64(6)}",
+                "links": [],
+                "score": 0.5,
+                "status": "failed"
+            }
+        },
+        "deepimagej": {
+            "3.1.0-snapshot": {
+                "badge": null,
+                "details": "OpenJDK 64-Bit Server VM warning: ignoring option PermSize=128m; support was removed in 8.0\nOpenJDK 64-Bit Server VM warning: Using incremental CMS is deprecated and will likely be removed in a future release\njava.lang.IllegalArgumentException: Invalid axis configuration: When axis type is 'spaces', an 'id' must be defined. Current configuration: type='space', id=null\n\tat io.bioimage.modelrunner.bioimageio.description.AxisV05.<init>(AxisV05.java:62)\n\tat io.bioimage.modelrunner.bioimageio.description.AxesV05.<init>(AxesV05.java:52)\n\tat io.bioimage.modelrunner.bioimageio.description.TensorSpecV05.<init>(TensorSpecV05.java:85)\n\tat io.bioimage.modelrunner.bioimageio.description.ModelDescriptorV05.buildInputTensors(ModelDescriptorV05.java:96)\n\tat io.bioimage.modelrunner.bioimageio.description.ModelDescriptor.buildModelDescription(ModelDescriptor.java:212)\n\tat io.bioimage.modelrunner.bioimageio.description.ModelDescriptorV05.<init>(ModelDescriptorV05.java:44)\n\tat io.bioimage.modelrunner.bioimageio.description.ModelDescriptorFactory.fromMap(ModelDescriptorFactory.java:128)\n\tat io.bioimage.modelrunner.bioimageio.description.ModelDescriptorFactory.readFromYamlTextString(ModelDescriptorFactory.java:109)\n\tat io.bioimage.modelrunner.bioimageio.BioimageioRepo.listAllModels(BioimageioRepo.java:202)\n\tat io.bioimage.modelrunner.bioimageio.BioimageioRepo.selectByID(BioimageioRepo.java:418)\n\tat io.bioimage.modelrunner.bioimageio.BioimageioRepo.downloadModelByID(BioimageioRepo.java:521)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\n\tat org.python.core.PyReflectedFunction.__call__(PyReflectedFunction.java:207)\n\tat org.python.core.PyReflectedFunction.__call__(PyReflectedFunction.java:225)\n\tat org.python.core.PyObject.__call__(PyObject.java:494)\n\tat org.python.core.PyObject.__call__(PyObject.java:498)\n\tat org.python.core.PyMethod.__call__(PyMethod.java:156)\n\tat org.python.pycode._pyx0.f$0(scripts/deepimagej_jython_scripts/deepimagej_download_model.py:138)\n\tat org.python.pycode._pyx0.call_function(scripts/deepimagej_jython_scripts/deepimagej_download_model.py)\n\tat org.python.core.PyTableCode.call(PyTableCode.java:173)\n\tat org.python.core.PyCode.call(PyCode.java:18)\n\tat org.python.core.Py.runCode(Py.java:1742)\n\tat org.python.util.PythonInterpreter.execfile(PythonInterpreter.java:297)\n\tat org.python.util.jython.runSimpleFile(jython.java:417)\n\tat org.python.util.jython.runStream(jython.java:449)\n\tat org.python.util.jython.runFile(jython.java:474)\n\tat org.python.util.jython.main(jython.java:678)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\n\tat net.imagej.launcher.ClassLauncher.launch(ClassLauncher.java:279)\n\tat net.imagej.launcher.ClassLauncher.run(ClassLauncher.java:186)\n\tat net.imagej.launcher.ClassLauncher.main(ClassLauncher.java:87)\nTraceback (most recent call last):\n  File \"scripts/deepimagej_jython_scripts/deepimagej_download_model.py\", line 78, in <module>\n    mfp = br.downloadModelByID(descriptor.getModelID(), models_dir)\n\tat io.bioimage.modelrunner.bioimageio.BioimageioRepo.downloadModelByID(BioimageioRepo.java:523)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\njava.lang.IllegalArgumentException: java.lang.IllegalArgumentException: The provided id does not correspond to an existing model in the Bioimage.io online repo.\n\n",
+                "error": "unable to download the model",
+                "links": [
+                    "deepimagej/deepimagej"
+                ],
+                "score": 0.0,
+                "status": "failed"
+            }
+        },
+        "ilastik": {
+            "1.4.1.post1": {
+                "badge": null,
+                "details": {
+                    "conda_list": null,
+                    "details": [
+                        {
+                            "conda_compare": null,
+                            "context": {
+                                "file_name": "rdf.yaml",
+                                "known_files": {
+                                    "checkpoint.pth": "c89c3ce5190b293860220a121509c1a594bf1ce80c571cee36d87a99e1a2c43c",
+                                    "model.py": "c0d86c529b527ae960c5c00d1199fc782c902d36fe237cb27a0d2f9bd0389cce",
+                                    "test-input.npy": "1b6a2ac5662e1a689a74974894d4076130fa128660095660f94f203547b341cd",
+                                    "test-output.npy": "3e0c8617ea2698302f5670ca39f7cebede26dfae002904b65e0159847bda86fa"
+                                },
+                                "perform_io_checks": true,
+                                "root": "https://hypha.aicell.io/bioimage-io/artifacts/plucky-leopard/files?version=v0",
+                                "update_hashes": false
+                            },
+                            "errors": [],
+                            "loc": [],
+                            "name": "Created `InvalidDescr` object.",
+                            "recommended_env": null,
+                            "status": "failed",
+                            "warnings": []
+                        },
+                        {
+                            "conda_compare": null,
+                            "context": {
+                                "file_name": "rdf.yaml",
+                                "known_files": {
+                                    "checkpoint.pth": "c89c3ce5190b293860220a121509c1a594bf1ce80c571cee36d87a99e1a2c43c",
+                                    "model.py": "c0d86c529b527ae960c5c00d1199fc782c902d36fe237cb27a0d2f9bd0389cce",
+                                    "test-input.npy": "1b6a2ac5662e1a689a74974894d4076130fa128660095660f94f203547b341cd",
+                                    "test-output.npy": "3e0c8617ea2698302f5670ca39f7cebede26dfae002904b65e0159847bda86fa"
+                                },
+                                "perform_io_checks": true,
+                                "root": "https://hypha.aicell.io/bioimage-io/artifacts/plucky-leopard/files?version=v0",
+                                "update_hashes": false
+                            },
+                            "errors": [
+                                {
+                                    "loc": [
+                                        "inputs",
+                                        0,
+                                        "preprocessing",
+                                        1,
+                                        "clip",
+                                        "kwargs",
+                                        "min"
+                                    ],
+                                    "msg": "Field required",
+                                    "traceback_html": "",
+                                    "traceback_md": "",
+                                    "type": "missing",
+                                    "with_traceback": false
+                                },
+                                {
+                                    "loc": [
+                                        "inputs",
+                                        0,
+                                        "preprocessing",
+                                        1,
+                                        "clip",
+                                        "kwargs",
+                                        "max"
+                                    ],
+                                    "msg": "Field required",
+                                    "traceback_html": "",
+                                    "traceback_md": "",
+                                    "type": "missing",
+                                    "with_traceback": false
+                                },
+                                {
+                                    "loc": [
+                                        "inputs",
+                                        0,
+                                        "preprocessing",
+                                        1,
+                                        "clip",
+                                        "kwargs",
+                                        "min_percentile"
+                                    ],
+                                    "msg": "Extra inputs are not permitted",
+                                    "traceback_html": "",
+                                    "traceback_md": "",
+                                    "type": "extra_forbidden",
+                                    "with_traceback": false
+                                },
+                                {
+                                    "loc": [
+                                        "inputs",
+                                        0,
+                                        "preprocessing",
+                                        1,
+                                        "clip",
+                                        "kwargs",
+                                        "max_percentile"
+                                    ],
+                                    "msg": "Extra inputs are not permitted",
+                                    "traceback_html": "",
+                                    "traceback_md": "",
+                                    "type": "extra_forbidden",
+                                    "with_traceback": false
+                                },
+                                {
+                                    "loc": [
+                                        "inputs",
+                                        0,
+                                        "preprocessing",
+                                        1,
+                                        "clip",
+                                        "kwargs",
+                                        "axes"
+                                    ],
+                                    "msg": "Extra inputs are not permitted",
+                                    "traceback_html": "",
+                                    "traceback_md": "",
+                                    "type": "extra_forbidden",
+                                    "with_traceback": false
+                                },
+                                {
+                                    "loc": [
+                                        "outputs"
+                                    ],
+                                    "msg": "Value error, Invalid tensor axis reference at outputs[0].axes[2].size: tensor_id='input0' axis_id='z' offset=0.",
+                                    "traceback_html": "",
+                                    "traceback_md": "",
+                                    "type": "value_error",
+                                    "with_traceback": false
+                                }
+                            ],
+                            "loc": [],
+                            "name": "bioimageio.spec format validation model 0.5.4",
+                            "recommended_env": null,
+                            "status": "failed",
+                            "warnings": [
+                                {
+                                    "loc": [
+                                        "documentation"
+                                    ],
+                                    "msg": "No '# Validation' (sub)section found in documentation.md.",
+                                    "severity": 30,
+                                    "type": "warning"
+                                }
+                            ]
+                        },
+                        {
+                            "conda_compare": null,
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "type"
+                            ],
+                            "name": "Has expected resource type",
+                            "recommended_env": null,
+                            "status": "passed",
+                            "warnings": []
+                        }
+                    ],
+                    "env": [
+                        [
+                            "bioimageio.core",
+                            "0.8.0",
+                            "",
+                            ""
+                        ],
+                        [
+                            "bioimageio.spec",
+                            "0.5.4.1",
+                            "",
+                            ""
+                        ]
+                    ],
+                    "format_version": "0.5.4",
+                    "id": "plucky-leopard",
+                    "metadata_completeness": null,
+                    "name": "bioimageio format validation",
+                    "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/plucky-leopard/files/rdf.yaml?version=v0",
+                    "status": "failed",
+                    "traceback": null,
+                    "type": "model",
+                    "warnings": null
+                },
+                "error": "\n|        ❌        |                              bioimageio format validation                              |\n|       ---       |                                          ---                                           |\n| status          | failed                                                                                 |\n| source          | https://hypha.aicell.io/bioimage-io/artifacts/plucky-leopard/files/rdf.yaml?version=v0 |\n| id              | plucky-leopard                                                                         |\n| format version  | model 0.5.4                                                                            |\n| bioimageio.core | 0.8.0                                                                                  |\n| bioimageio.spec | 0.5.4.1                                                                                |\n\n|     |                        Location                       |                                                     Details                                                     |\n| --- |                          ---                          |                                                       ---                                                       |\n| ❌   |                                                       | Created `InvalidDescr` object.                                                                                  |\n| 🔍   | `context:perform_io_checks`                           | True                                                                                                            |\n| 🔍   | `context:root`                                        | https://hypha.aicell.io/bioimage-io/artifacts/plucky-leopard/files?version=v0                                   |\n| 🔍   | `context:known_files.test-input.npy`                  | 1b6a2ac5662e1a689a74974894d4076130fa128660095660f94f203547b341cd                                                |\n| 🔍   | `context:known_files.test-output.npy`                 | 3e0c8617ea2698302f5670ca39f7cebede26dfae002904b65e0159847bda86fa                                                |\n| 🔍   | `context:known_files.model.py`                        | c0d86c529b527ae960c5c00d1199fc782c902d36fe237cb27a0d2f9bd0389cce                                                |\n| 🔍   | `context:known_files.checkpoint.pth`                  | c89c3ce5190b293860220a121509c1a594bf1ce80c571cee36d87a99e1a2c43c                                                |\n| ❌   |                                                       | bioimageio.spec format validation model 0.5.4                                                                   |\n| ❌   | `inputs.0.preprocessing.1.clip.kwargs.min`            | Field required                                                                                                  |\n|     |                                                       |                                                                                                                 |\n| ❌   | `inputs.0.preprocessing.1.clip.kwargs.max`            | Field required                                                                                                  |\n|     |                                                       |                                                                                                                 |\n| ❌   | `inputs.0.preprocessing.1.clip.kwargs.min_percentile` | Extra inputs are not permitted                                                                                  |\n|     |                                                       |                                                                                                                 |\n| ❌   | `inputs.0.preprocessing.1.clip.kwargs.max_percentile` | Extra inputs are not permitted                                                                                  |\n|     |                                                       |                                                                                                                 |\n| ❌   | `inputs.0.preprocessing.1.clip.kwargs.axes`           | Extra inputs are not permitted                                                                                  |\n|     |                                                       |                                                                                                                 |\n| ❌   | `outputs`                                             | Value error, Invalid tensor axis reference at outputs[0].axes[2].size: tensor_id='input0' axis_id='z' offset=0. |\n|     |                                                       |                                                                                                                 |\n| ⚠   | `documentation`                                       | No '# Validation' (sub)section found in documentation.md.                                                       |\n| ✔️  | `type`                                                | Has expected resource type                                                                                      |\n",
+                "links": [
+                    "ilastik/ilastik"
+                ],
+                "score": 0.0,
+                "status": "failed"
+            }
+        }
+    }
 }
