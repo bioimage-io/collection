@@ -1,0 +1,10 @@
+{
+    "badge": null,
+    "details": "OpenJDK 64-Bit Server VM warning: ignoring option PermSize=128m; support was removed in 8.0\nOpenJDK 64-Bit Server VM warning: Using incremental CMS is deprecated and will likely be removed in a future release\nTraceback (most recent call last):\n  File \"scripts/deepimagej_jython_scripts/deepimagej_check_outputs.py\", line 71, in <module>\n    main(model_dir)\n  File \"scripts/deepimagej_jython_scripts/deepimagej_check_outputs.py\", line 57, in main\n    raise Exception(\"Values of output \" + name + \" differ\")\nException: Values of output output0 differ\n\n",
+    "error": "error comparing expected outputs and actual outputs",
+    "links": [
+        "deepimagej/deepimagej"
+    ],
+    "status": "failed",
+    "tool": "deepimagej"
+}

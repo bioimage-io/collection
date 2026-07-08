@@ -1,0 +1,10 @@
+{
+    "badge": null,
+    "details": "OpenJDK 64-Bit Server VM warning: ignoring option PermSize=128m; support was removed in 8.0\nOpenJDK 64-Bit Server VM warning: Using incremental CMS is deprecated and will likely be removed in a future release\nTraceback (most recent call last):\n  File \"scripts/deepimagej_jython_scripts/deepimagej_check_outputs.py\", line 71, in <module>\n    main(model_dir)\n  File \"scripts/deepimagej_jython_scripts/deepimagej_check_outputs.py\", line 40, in main\n    assert dij_shape == expected_shape, (\nAssertionError: Output prediction in deepimagej has different shape array('l', [1360L, 1024L, 2L]) vs array('l', [1376L, 1056L, 2L])\n\n",
+    "error": "error comparing expected outputs and actual outputs",
+    "links": [
+        "deepimagej/deepimagej"
+    ],
+    "status": "failed",
+    "tool": "deepimagej"
+}
