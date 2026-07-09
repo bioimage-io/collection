@@ -1857,9 +1857,9 @@
             "type": "model",
             "versions": [
                 {
-                    "comment": "Accepted by github|1878378",
+                    "comment": "Accepted by github|15139589",
                     "created_at": "2025-07-16T09:13:40Z",
-                    "sha256": "e828b585a4e627ccc6b2e53762ff544e082e349ee19a13b9eb33e4d657348cdf",
+                    "sha256": "1113cc7c69a1a7bd47c955e70c3a042ae4ed30d1d1c0345ec9e547987656f291",
                     "source": "https://hypha.aicell.io/bioimage-io/artifacts/resourceful-lizard/files/rdf.yaml?version=v0",
                     "version": "v0"
                 }
@@ -3355,19 +3355,19 @@
             ]
         },
         {
-            "id": "bioimage-io/amusing-angelfish",
+            "id": "bioimage-io/noisy-parrot",
             "type": "model",
             "versions": [
                 {
-                    "comment": "Initial version",
-                    "created_at": "2026-07-07T11:38:26Z",
-                    "sha256": "13eb9b65c006f91fed1b01e2facddfe6f4c60c6a9d6f1ba952f7da1531f57bc9",
-                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/amusing-angelfish/files/rdf.yaml?version=v0",
+                    "comment": null,
+                    "created_at": "2026-07-08T16:19:59Z",
+                    "sha256": "4102c44d58f8df75f5ddb68eb0025c1c53da00c260a48187f0efb9bc28f58053",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/noisy-parrot/files/rdf.yaml?version=v0",
                     "version": "v0"
                 }
             ]
         }
     ],
-    "timestamp": "2026-07-08T02:56:16.618627",
+    "timestamp": "2026-07-09T03:34:03.667411",
     "total": 258
 }
