@@ -15,7 +15,7 @@
                         "https://hypha.aicell.io/bioimage-io/artifacts/resourceful-lizard/files/test_input.npy?version=v0": null,
                         "https://hypha.aicell.io/bioimage-io/artifacts/resourceful-lizard/files/test_output.npy?version=v0": null,
                         "mobile_sam_encoder.pth": "1e0a33e8d0bf617513d3bf822f8dfbe9c582fee6a1aa14f21b3509a69b1ded97",
-                        "mobilesam_encoder.py": "d14120ef30dee0f90e937309d31474d04a312ab5172a74b3d15a7c9f30465bcc",
+                        "mobilesam_encoder.py": "220e11ebef57b2d46f288f902c8ce6edfbad174f0aac56b4966550fd9b5b51b9",
                         "test_input.npy": "e6faad2d74dc69026872342374a6a4e88d79f4da2f116d8918776a1f04aed49e",
                         "test_output.npy": "d7a8c237d609d74738830a4445306eea770f8f7fb5b35c32b2a71398965900f6"
                     },
