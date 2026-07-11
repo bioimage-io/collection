@@ -1,0 +1,190 @@
+{
+    "rdf_content": {
+        "name": "Cellpose-SAM",
+        "format_version": "0.5.10",
+        "type": "model",
+        "inputs": [
+            {
+                "id": "input",
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "channel0",
+                            "channel1",
+                            "channel2"
+                        ]
+                    },
+                    {
+                        "size": 256,
+                        "id": "y",
+                        "type": "space"
+                    },
+                    {
+                        "size": 256,
+                        "id": "x",
+                        "type": "space"
+                    }
+                ],
+                "test_tensor": {
+                    "source": "test_input.npy",
+                    "sha256": "7e34819961280eacad2bf2c85d6cb0919ff2125f6d1de3812e513fec4f709de1"
+                },
+                "sample_tensor": {
+                    "source": "sample_input.png",
+                    "sha256": "7f0e6b3c15adb1c41fdc10ab5105d6a5944e0e83912c370ad7ba5db24278305f"
+                },
+                "pad": {
+                    "value": 0
+                },
+                "preprocessing": [
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    },
+                    {
+                        "id": "scale_range",
+                        "kwargs": {
+                            "axes": [
+                                "batch",
+                                "y",
+                                "x"
+                            ],
+                            "min_percentile": 1,
+                            "max_percentile": 99,
+                            "eps": 1e-8
+                        }
+                    },
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    }
+                ]
+            }
+        ],
+        "outputs": [
+            {
+                "id": "labels",
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "description": "Output labels, 0=background",
+                        "type": "channel",
+                        "channel_names": [
+                            "labels"
+                        ]
+                    },
+                    {
+                        "halo": 16,
+                        "size": {
+                            "tensor_id": "input",
+                            "axis_id": "y"
+                        },
+                        "id": "y",
+                        "type": "space"
+                    },
+                    {
+                        "halo": 16,
+                        "size": {
+                            "tensor_id": "input",
+                            "axis_id": "x"
+                        },
+                        "id": "x",
+                        "type": "space"
+                    }
+                ],
+                "test_tensor": {
+                    "source": "test_output.npy",
+                    "sha256": "66f406aef148b7934e24e4853f5240252f3e14dcafc1cc7617d285f0557b42e2"
+                },
+                "sample_tensor": {
+                    "source": "sample_output.png",
+                    "sha256": "2a20439b8021a1eb62d10ff1e4e636e9e34d8458815a9ace74f63494b76e63db"
+                },
+                "postprocessing": [
+                    {
+                        "id": "cellpose_flow_dynamics",
+                        "kwargs": {
+                            "cellprob_threshold": 0,
+                            "flow_threshold": 0.4,
+                            "do_3D": false,
+                            "min_size": 15
+                        }
+                    },
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    }
+                ]
+            }
+        ],
+        "documentation": "README.md",
+        "weights": {
+            "pytorch_state_dict": {
+                "source": "cpsam",
+                "sha256": "e1440429eb384f95afe32bcba6510f90d518eaedc917ede549bed6804004abe2",
+                "architecture": {
+                    "source": "cellpose_vit_bioimageio.py",
+                    "sha256": "c42254d2fd0e5a8b7a9eb69b5b7eba89f328b31d3c842e6165410d79ff6e2949",
+                    "callable": "CPnetBioImageIO"
+                },
+                "pytorch_version": "2.10.0",
+                "dependencies": {
+                    "source": "environment.yaml",
+                    "sha256": "3f3704fe580b837042252c6a8aa34ba2234308f7e8cfe9dfd145159d3a9ae61d"
+                },
+                "strict": false
+            }
+        },
+        "config": {},
+        "covers": [
+            "cellpose_cover1.png",
+            "cellpose_cover2.png",
+            "cellpose_cover3.png"
+        ],
+        "uploader": {
+            "email": "danialtza@gmail.com",
+            "name": "Daniel Franco Barranco"
+        },
+        "description": "Modern algorithms for biological segmentation can match inter-human agreement in annotation quality. This however is not a performance bound: a hypothetical human-consensus segmentation could reduce error rates in half. To obtain a model that generalizes better we adapted the pretrained transformer backbone of a foundation model (SAM) to the Cellpose framework. The resulting Cellpose-SAM model substantially outperforms inter-human agreement and approaches the human-consensus bound. We increase generalization performance further by making the model robust to channel shuffling, cell size, shot noise, downsampling, isotropic and anisotropic blur. The new model can be readily adopted into the Cellpose ecosystem which includes finetuning, human-in-the-loop training, image restoration and 3D segmentation approaches. These properties establish Cellpose-SAM as a foundation model for biological segmentation.",
+        "version": "0.1.0",
+        "license": "BSD-3-Clause",
+        "git_repo": "https://github.com/MouseLand/cellpose",
+        "tags": [
+            "instance-segmentation",
+            "cellpose",
+            "cells",
+            "2d",
+            "pytorch"
+        ],
+        "authors": [
+            {
+                "name": "Daniel Franco Barranco",
+                "affiliation": "MRC Laboratory of Molecular Biology",
+                "orcid": "0000-0002-1109-110X"
+            }
+        ],
+        "cite": [
+            {
+                "text": "Pachitariu, Marius, Michael Rariden, and Carsen Stringer. \"Cellpose-SAM: superhuman generalization for cellular segmentation.\" BioRxiv (2025): 2025-04.",
+                "doi": "10.1101/2025.04.28.651001",
+                "url": "https://www.biorxiv.org/content/10.1101/2025.04.28.651001v1"
+            }
+        ],
+        "id": "idealistic-eagle",
+        "id_emoji": "🦅"
+    },
+    "rdf_yaml_sha256": "097d5d9e6df3735323e29090a8805ae2fa907065fbbd4542cc6124467090569c",
+    "status": "untested"
+}
