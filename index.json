@@ -2,7 +2,7 @@
     "count_per_type": {
         "application": 65,
         "dataset": 50,
-        "model": 138,
+        "model": 139,
         "notebook": 4
     },
     "items": [
@@ -3353,8 +3353,21 @@
                     "version": "v0"
                 }
             ]
+        },
+        {
+            "id": "bioimage-io/idealistic-eagle",
+            "type": "model",
+            "versions": [
+                {
+                    "comment": "Accepted by github|32868330",
+                    "created_at": "2026-07-10T21:20:24Z",
+                    "sha256": "097d5d9e6df3735323e29090a8805ae2fa907065fbbd4542cc6124467090569c",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/idealistic-eagle/files/rdf.yaml?version=v0",
+                    "version": "v0"
+                }
+            ]
         }
     ],
-    "timestamp": "2026-07-10T03:36:31.390037",
-    "total": 257
+    "timestamp": "2026-07-11T02:52:52.068234",
+    "total": 258
 }

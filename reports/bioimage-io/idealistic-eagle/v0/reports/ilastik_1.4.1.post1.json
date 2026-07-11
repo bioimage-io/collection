@@ -1,0 +1,147 @@
+{
+    "badge": null,
+    "details": {
+        "conda_list": null,
+        "details": [
+            {
+                "conda_compare": null,
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "cellpose_vit_bioimageio.py": "c42254d2fd0e5a8b7a9eb69b5b7eba89f328b31d3c842e6165410d79ff6e2949",
+                        "environment.yaml": "3f3704fe580b837042252c6a8aa34ba2234308f7e8cfe9dfd145159d3a9ae61d",
+                        "sample_input.png": "7f0e6b3c15adb1c41fdc10ab5105d6a5944e0e83912c370ad7ba5db24278305f",
+                        "sample_output.png": "2a20439b8021a1eb62d10ff1e4e636e9e34d8458815a9ace74f63494b76e63db",
+                        "test_input.npy": "7e34819961280eacad2bf2c85d6cb0919ff2125f6d1de3812e513fec4f709de1",
+                        "test_output.npy": "66f406aef148b7934e24e4853f5240252f3e14dcafc1cc7617d285f0557b42e2"
+                    },
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/idealistic-eagle/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Created `InvalidDescr` object.",
+                "recommended_env": null,
+                "status": "failed",
+                "warnings": []
+            },
+            {
+                "conda_compare": null,
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "cellpose_vit_bioimageio.py": "c42254d2fd0e5a8b7a9eb69b5b7eba89f328b31d3c842e6165410d79ff6e2949",
+                        "environment.yaml": "3f3704fe580b837042252c6a8aa34ba2234308f7e8cfe9dfd145159d3a9ae61d",
+                        "sample_input.png": "7f0e6b3c15adb1c41fdc10ab5105d6a5944e0e83912c370ad7ba5db24278305f",
+                        "sample_output.png": "2a20439b8021a1eb62d10ff1e4e636e9e34d8458815a9ace74f63494b76e63db",
+                        "test_input.npy": "7e34819961280eacad2bf2c85d6cb0919ff2125f6d1de3812e513fec4f709de1",
+                        "test_output.npy": "66f406aef148b7934e24e4853f5240252f3e14dcafc1cc7617d285f0557b42e2"
+                    },
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/idealistic-eagle/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [
+                    {
+                        "loc": [
+                            "inputs",
+                            0,
+                            "pad"
+                        ],
+                        "msg": "Extra inputs are not permitted",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "extra_forbidden",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "outputs",
+                            0,
+                            "postprocessing",
+                            0
+                        ],
+                        "msg": "Input tag 'cellpose_flow_dynamics' found using 'id' does not match any of the expected tags: 'binarize', 'clip', 'ensure_dtype', 'scale_linear', 'sigmoid', 'fixed_zero_mean_unit_variance', 'zero_mean_unit_variance', 'scale_range', 'scale_mean_variance'",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "union_tag_invalid",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "weights",
+                            "pytorch_state_dict",
+                            "strict"
+                        ],
+                        "msg": "Extra inputs are not permitted",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "extra_forbidden",
+                        "with_traceback": false
+                    }
+                ],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.4",
+                "recommended_env": null,
+                "status": "failed",
+                "warnings": [
+                    {
+                        "loc": [
+                            "description"
+                        ],
+                        "msg": "Description longer than 512 characters.",
+                        "severity": 30,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "documentation"
+                        ],
+                        "msg": "No '# Validation' (sub)section found in README.md.",
+                        "severity": 30,
+                        "type": "warning"
+                    }
+                ]
+            },
+            {
+                "conda_compare": null,
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "type"
+                ],
+                "name": "Has expected resource type",
+                "recommended_env": null,
+                "status": "passed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.core",
+                "0.8.0",
+                "",
+                ""
+            ],
+            [
+                "bioimageio.spec",
+                "0.5.4.1",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.5.4",
+        "id": "idealistic-eagle",
+        "name": "bioimageio format validation",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/idealistic-eagle/files/rdf.yaml?version=v0",
+        "status": "failed",
+        "type": "model"
+    },
+    "error": "\n|        ❌        |                               bioimageio format validation                               |\n|       ---       |                                           ---                                            |\n| status          | failed                                                                                   |\n| source          | https://hypha.aicell.io/bioimage-io/artifacts/idealistic-eagle/files/rdf.yaml?version=v0 |\n| id              | idealistic-eagle                                                                         |\n| format version  | model 0.5.4                                                                              |\n| bioimageio.core | 0.8.0                                                                                    |\n| bioimageio.spec | 0.5.4.1                                                                                  |\n\n|     |                     Location                     |                                                                                                                           Details                                                                                                                            |\n| --- |                       ---                        |                                                                                                                             ---                                                                                                                              |\n| ❌   |                                                  | Created `InvalidDescr` object.                                                                                                                                                                                                                               |\n| 🔍   | `context:perform_io_checks`                      | True                                                                                                                                                                                                                                                         |\n| 🔍   | `context:root`                                   | https://hypha.aicell.io/bioimage-io/artifacts/idealistic-eagle/files?version=v0                                                                                                                                                                              |\n| 🔍   | `context:known_files.test_input.npy`             | 7e34819961280eacad2bf2c85d6cb0919ff2125f6d1de3812e513fec4f709de1                                                                                                                                                                                             |\n| 🔍   | `context:known_files.sample_input.png`           | 7f0e6b3c15adb1c41fdc10ab5105d6a5944e0e83912c370ad7ba5db24278305f                                                                                                                                                                                             |\n| 🔍   | `context:known_files.test_output.npy`            | 66f406aef148b7934e24e4853f5240252f3e14dcafc1cc7617d285f0557b42e2                                                                                                                                                                                             |\n| 🔍   | `context:known_files.sample_output.png`          | 2a20439b8021a1eb62d10ff1e4e636e9e34d8458815a9ace74f63494b76e63db                                                                                                                                                                                             |\n| 🔍   | `context:known_files.cellpose_vit_bioimageio.py` | c42254d2fd0e5a8b7a9eb69b5b7eba89f328b31d3c842e6165410d79ff6e2949                                                                                                                                                                                             |\n| 🔍   | `context:known_files.environment.yaml`           | 3f3704fe580b837042252c6a8aa34ba2234308f7e8cfe9dfd145159d3a9ae61d                                                                                                                                                                                             |\n| ❌   |                                                  | bioimageio.spec format validation model 0.5.4                                                                                                                                                                                                                |\n| ❌   | `inputs.0.pad`                                   | Extra inputs are not permitted                                                                                                                                                                                                                               |\n|     |                                                  |                                                                                                                                                                                                                                                              |\n| ❌   | `outputs.0.postprocessing.0`                     | Input tag 'cellpose_flow_dynamics' found using 'id' does not match any of the expected tags: 'binarize', 'clip', 'ensure_dtype', 'scale_linear', 'sigmoid', 'fixed_zero_mean_unit_variance', 'zero_mean_unit_variance', 'scale_range', 'scale_mean_variance' |\n|     |                                                  |                                                                                                                                                                                                                                                              |\n| ❌   | `weights.pytorch_state_dict.strict`              | Extra inputs are not permitted                                                                                                                                                                                                                               |\n|     |                                                  |                                                                                                                                                                                                                                                              |\n| ⚠   | `description`                                    | Description longer than 512 characters.                                                                                                                                                                                                                      |\n| ⚠   | `documentation`                                  | No '# Validation' (sub)section found in README.md.                                                                                                                                                                                                           |\n| ✔️  | `type`                                           | Has expected resource type                                                                                                                                                                                                                                   |\n",
+    "links": [
+        "ilastik/ilastik"
+    ],
+    "status": "failed",
+    "tool": "ilastik"
+}
