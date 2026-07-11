@@ -1,0 +1,10 @@
+{
+    "badge": null,
+    "details": "[all] Couldn't extract kwargs from model description.\n",
+    "error": "[all] Couldn't extract kwargs from model description.\n",
+    "links": [
+        "biapy/biapy"
+    ],
+    "score": 0.0,
+    "status": "failed"
+}
