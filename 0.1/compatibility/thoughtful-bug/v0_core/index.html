@@ -12,7 +12,7 @@
         <meta name="author" content="Fynn Beuttenmüller">
       
       
-        <link rel="canonical" href="https://bioimage-io.github.io/collection/0.1/compatibility/kind-seashell/v0_core/">
+        <link rel="canonical" href="https://bioimage-io.github.io/collection/0.1/compatibility/thoughtful-bug/v0_core/">
       
       
       
@@ -25,7 +25,7 @@
     
     
       
-        <title>kind-seashell/v0 - Core Compatibility Report - bioimageio-collection</title>
+        <title>thoughtful-bug/v0 - Core Compatibility Report - bioimageio-collection</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#core-compatibility-report-kind-seashellv0" class="md-skip">
+        <a href="#core-compatibility-report-thoughtful-bugv0" class="md-skip">
           Skip to content
         </a>
       
@@ -119,7 +119,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              kind-seashell/v0 - Core Compatibility Report
+              thoughtful-bug/v0 - Core Compatibility Report
             
           </span>
         </div>
@@ -542,7 +542,7 @@
 
 
 
-<h1 id="core-compatibility-report-kind-seashellv0">Core Compatibility Report: kind-seashell/v0<a class="headerlink" href="#core-compatibility-report-kind-seashellv0" title="Permanent link">¤</a></h1>
+<h1 id="core-compatibility-report-thoughtful-bugv0">Core Compatibility Report: thoughtful-bug/v0<a class="headerlink" href="#core-compatibility-report-thoughtful-bugv0" title="Permanent link">¤</a></h1>
 <style>
 /* Theme-aware overrides for ValidationSummary */
 @media (prefers-color-scheme: dark) {
@@ -578,19 +578,19 @@
   </tr>
   <tr>
     <td style="text-align:left">source</td>
-    <td style="text-align:left">https://hypha.aicell.io/bioimage-io/artifacts/kind-seashell/files/rdf.yaml?version=v0</td>
+    <td style="text-align:left">https://hypha.aicell.io/bioimage-io/artifacts/thoughtful-bug/files/rdf.yaml?version=v0</td>
   </tr>
   <tr>
     <td style="text-align:left">id</td>
-    <td style="text-align:left">10.5281/zenodo.5874841/6630266</td>
+    <td style="text-align:left">thoughtful-bug</td>
   </tr>
   <tr>
     <td style="text-align:left">version</td>
-    <td style="text-align:left">1</td>
+    <td style="text-align:left">0.1.2</td>
   </tr>
   <tr>
     <td style="text-align:left">applied format</td>
-    <td style="text-align:left">model 0.4.10</td>
+    <td style="text-align:left">model 0.5.10</td>
   </tr>
   <tr>
     <td style="text-align:left">bioimageio.spec</td>
@@ -606,7 +606,7 @@
   <tr>
     <td style="text-align:left">❌</td>
     <td style="text-align:left"></td>
-    <td style="text-align:left">bioimageio.spec format validation model 0.4.10</td>
+    <td style="text-align:left">bioimageio.spec format validation model 0.5.10</td>
   </tr>
   <tr>
     <td style="text-align:left">❌</td>
@@ -617,16 +617,6 @@
     <td style="text-align:left"></td>
     <td style="text-align:left"></td>
     <td style="text-align:left">See <a href="#traceback-1">Traceback 1</a>.</td>
-  </tr>
-  <tr>
-    <td style="text-align:left">⚠</td>
-    <td style="text-align:left"><code>weights.pytorch_state_dict.pytorch_version</code></td>
-    <td style="text-align:left"><pre>missing. Please specify the PyTorch version these PyTorch state dict weights were created with.</pre></td>
-  </tr>
-  <tr>
-    <td style="text-align:left">⚠</td>
-    <td style="text-align:left"><code>weights.torchscript.pytorch_version</code></td>
-    <td style="text-align:left"><pre>missing. Please specify the PyTorch version these Torchscript weights were created with.</pre></td>
   </tr>
 </table>
 <h3 id="traceback-1">Traceback 1</h3>
@@ -644,8 +634,8 @@
 .r7 {color: #00ff00; text-decoration-color: #00ff00}
 .r8 {color: #7f7f7f; text-decoration-color: #7f7f7f}
 .r9 {color: #00ffff; text-decoration-color: #00ffff}
-.r10 {color: #ff00ff; text-decoration-color: #ff00ff}
-.r11 {color: #808000; text-decoration-color: #808000}
+.r10 {color: #808000; text-decoration-color: #808000}
+.r11 {color: #ff00ff; text-decoration-color: #ff00ff}
 .r12 {color: #00ffff; text-decoration-color: #00ffff; text-decoration: underline}
 .r13 {color: #ff0000; text-decoration-color: #ff0000; font-weight: bold}
 .r14 {font-style: italic}
@@ -669,71 +659,81 @@ body {
 <span class="r1">│</span>   <span class="r8">103 </span><span class="r8">│   │   </span>mapped_exc = <span class="r6">None</span>                                                                  <span class="r1">│</span>
 <span class="r1">│</span>   <span class="r8">104 </span>                                                                                           <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/httpx/_transports/</span><span class="r5">default.py</span>:<span class="r6">127</span> in <span class="r7">__iter__</span>    <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/httpx/_transports/</span><span class="r5">default.py</span>:<span class="r6">250</span> in <span class="r7">handle_requ</span> <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8">124 </span><span class="r8">│   </span>                                                                                       <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8">125 </span><span class="r8">│   </span><span class="r6">def</span> <span class="r7">__iter__</span>(<span class="r9">self</span>) -&gt; typing.Iterator[<span class="r9">bytes</span>]:                                          <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8">126 </span><span class="r8">│   │   </span><span class="r6">with</span> map_httpcore_exceptions():                                                    <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span>127 <span class="r8">│   │   │   </span><span class="r6">for</span> part <span class="r10">in</span> <span class="r9">self</span>._httpcore_stream:                                             <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8">128 </span><span class="r8">│   │   │   │   </span><span class="r6">yield</span> part                                                                 <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8">129 </span><span class="r8">│   </span>                                                                                       <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8">130 </span><span class="r8">│   </span><span class="r6">def</span> <span class="r7">close</span>(<span class="r9">self</span>) -&gt; <span class="r6">None</span>:                                                               <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">247 </span><span class="r8">│   │   │   </span>extensions=request.extensions,                                                 <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">248 </span><span class="r8">│   │   </span>)                                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">249 </span><span class="r8">│   │   </span><span class="r6">with</span> map_httpcore_exceptions():                                                    <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>250 <span class="r8">│   │   │   </span>resp = <span class="r9">self</span>._pool.handle_request(req)                                          <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">251 </span><span class="r8">│   │   </span>                                                                                   <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">252 </span><span class="r8">│   │   </span><span class="r6">assert</span> <span class="r9">isinstance</span>(resp.stream, typing.Iterable)                                    <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">253 </span>                                                                                           <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/httpcore/_sync/</span><span class="r5">connection_pool.py</span>:<span class="r6">407</span> in <span class="r7">__iter</span> <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/httpcore/_sync/</span><span class="r5">connection_pool.py</span>:<span class="r6">256</span> in <span class="r7">handle</span> <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8">404 </span><span class="r8">│   │   │   │   </span><span class="r6">yield</span> part                                                                 <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8">405 </span><span class="r8">│   │   </span><span class="r6">except</span> <span class="r9">BaseException</span> <span class="r6">as</span> exc:                                                       <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8">406 </span><span class="r8">│   │   │   </span><span class="r9">self</span>.close()                                                                   <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span>407 <span class="r8">│   │   │   </span><span class="r6">raise</span> exc <span class="r6">from</span> <span class="r6">None</span>                                                            <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8">408 </span><span class="r8">│   </span>                                                                                       <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8">409 </span><span class="r8">│   </span><span class="r6">def</span> <span class="r7">close</span>(<span class="r9">self</span>) -&gt; <span class="r6">None</span>:                                                               <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8">410 </span><span class="r8">│   │   </span><span class="r6">if</span> <span class="r10">not</span> <span class="r9">self</span>._closed:                                                               <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">253 </span><span class="r8">│   │   │   │   </span>closing = <span class="r9">self</span>._assign_requests_to_connections()                           <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">254 </span><span class="r8">│   │   │   </span>                                                                               <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">255 </span><span class="r8">│   │   │   </span><span class="r9">self</span>._close_connections(closing)                                               <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>256 <span class="r8">│   │   │   </span><span class="r6">raise</span> exc <span class="r6">from</span> <span class="r6">None</span>                                                            <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">257 </span><span class="r8">│   │   </span>                                                                                   <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">258 </span><span class="r8">│   │   </span><span class="r8"># Return the response. Note that in this case we still have to manage</span>              <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">259 </span><span class="r8">│   │   </span><span class="r8"># the point at which the response is closed.</span>                                       <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/httpcore/_sync/</span><span class="r5">connection_pool.py</span>:<span class="r6">403</span> in <span class="r7">__iter</span> <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/httpcore/_sync/</span><span class="r5">connection_pool.py</span>:<span class="r6">236</span> in <span class="r7">handle</span> <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8">400 </span><span class="r8">│   </span>                                                                                       <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8">401 </span><span class="r8">│   </span><span class="r6">def</span> <span class="r7">__iter__</span>(<span class="r9">self</span>) -&gt; typing.Iterator[<span class="r9">bytes</span>]:                                          <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8">402 </span><span class="r8">│   │   </span><span class="r6">try</span>:                                                                               <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span>403 <span class="r8">│   │   │   </span><span class="r6">for</span> part <span class="r10">in</span> <span class="r9">self</span>._stream:                                                      <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8">404 </span><span class="r8">│   │   │   │   </span><span class="r6">yield</span> part                                                                 <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8">405 </span><span class="r8">│   │   </span><span class="r6">except</span> <span class="r9">BaseException</span> <span class="r6">as</span> exc:                                                       <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8">406 </span><span class="r8">│   │   │   </span><span class="r9">self</span>.close()                                                                   <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">233 </span><span class="r8">│   │   │   │   </span>                                                                           <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">234 </span><span class="r8">│   │   │   │   </span><span class="r6">try</span>:                                                                       <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">235 </span><span class="r8">│   │   │   │   │   </span><span class="r8"># Send the request on the assigned connection.</span>                         <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>236 <span class="r8">│   │   │   │   │   </span>response = connection.handle_request(                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">237 </span><span class="r8">│   │   │   │   │   │   </span>pool_request.request                                               <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">238 </span><span class="r8">│   │   │   │   │   </span>)                                                                      <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">239 </span><span class="r8">│   │   │   │   </span><span class="r6">except</span> ConnectionNotAvailable:                                             <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/httpcore/_sync/</span><span class="r5">http11.py</span>:<span class="r6">342</span> in <span class="r7">__iter__</span>        <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/httpcore/_sync/</span><span class="r5">connection.py</span>:<span class="r6">103</span> in <span class="r7">handle_requ</span> <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8">339 </span><span class="r8">│   │   │   </span><span class="r8"># before raising that exception.</span>                                               <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8">340 </span><span class="r8">│   │   │   </span><span class="r6">with</span> ShieldCancellation():                                                     <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8">341 </span><span class="r8">│   │   │   │   </span><span class="r9">self</span>.close()                                                               <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span>342 <span class="r8">│   │   │   </span><span class="r6">raise</span> exc                                                                      <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8">343 </span><span class="r8">│   </span>                                                                                       <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8">344 </span><span class="r8">│   </span><span class="r6">def</span> <span class="r7">close</span>(<span class="r9">self</span>) -&gt; <span class="r6">None</span>:                                                               <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8">345 </span><span class="r8">│   │   </span><span class="r6">if</span> <span class="r10">not</span> <span class="r9">self</span>._closed:                                                               <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">100 </span><span class="r8">│   │   │   </span><span class="r9">self</span>._connect_failed = <span class="r6">True</span>                                                    <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">101 </span><span class="r8">│   │   │   </span><span class="r6">raise</span> exc                                                                      <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">102 </span><span class="r8">│   │   </span>                                                                                   <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>103 <span class="r8">│   │   </span><span class="r6">return</span> <span class="r9">self</span>._connection.handle_request(request)                                    <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">104 </span><span class="r8">│   </span>                                                                                       <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">105 </span><span class="r8">│   </span><span class="r6">def</span> <span class="r7">_connect</span>(<span class="r9">self</span>, request: Request) -&gt; NetworkStream:                                 <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">106 </span><span class="r8">│   │   </span>timeouts = request.extensions.get(<span class="r10">&quot;timeout&quot;</span>, {})                                   <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/httpcore/_sync/</span><span class="r5">http11.py</span>:<span class="r6">334</span> in <span class="r7">__iter__</span>        <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/httpcore/_sync/</span><span class="r5">http11.py</span>:<span class="r6">136</span> in <span class="r7">handle_request</span>  <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8">331 </span><span class="r8">│   │   </span>kwargs = {<span class="r11">&quot;request&quot;</span>: <span class="r9">self</span>._request}                                                <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8">332 </span><span class="r8">│   │   </span><span class="r6">try</span>:                                                                               <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8">333 </span><span class="r8">│   │   │   </span><span class="r6">with</span> Trace(<span class="r11">&quot;receive_response_body&quot;</span>, logger, <span class="r9">self</span>._request, kwargs):            <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span>334 <span class="r8">│   │   │   │   </span><span class="r6">for</span> chunk <span class="r10">in</span> <span class="r9">self</span>._connection._receive_response_body(**kwargs):            <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8">335 </span><span class="r8">│   │   │   │   │   </span><span class="r6">yield</span> chunk                                                            <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8">336 </span><span class="r8">│   │   </span><span class="r6">except</span> <span class="r9">BaseException</span> <span class="r6">as</span> exc:                                                       <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8">337 </span><span class="r8">│   │   │   </span><span class="r8"># If we get an exception while streaming the response,</span>                         <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">133 </span><span class="r8">│   │   │   </span><span class="r6">with</span> ShieldCancellation():                                                     <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">134 </span><span class="r8">│   │   │   │   </span><span class="r6">with</span> Trace(<span class="r10">&quot;response_closed&quot;</span>, logger, request) <span class="r6">as</span> trace:                   <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">135 </span><span class="r8">│   │   │   │   │   </span><span class="r9">self</span>._response_closed()                                                <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>136 <span class="r8">│   │   │   </span><span class="r6">raise</span> exc                                                                      <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">137 </span><span class="r8">│   </span>                                                                                       <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">138 </span><span class="r8">│   </span><span class="r8"># Sending the request...</span>                                                               <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">139 </span>                                                                                           <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/httpcore/_sync/</span><span class="r5">http11.py</span>:<span class="r6">203</span> in <span class="r7">_receive_respon</span> <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/httpcore/_sync/</span><span class="r5">http11.py</span>:<span class="r6">106</span> in <span class="r7">handle_request</span>  <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8">200 </span><span class="r8">│   │   </span>timeout = timeouts.get(<span class="r11">&quot;read&quot;</span>, <span class="r6">None</span>)                                               <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8">201 </span><span class="r8">│   │   </span>                                                                                   <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8">202 </span><span class="r8">│   │   </span><span class="r6">while</span> <span class="r6">True</span>:                                                                        <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span>203 <span class="r8">│   │   │   </span>event = <span class="r9">self</span>._receive_event(timeout=timeout)                                   <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8">204 </span><span class="r8">│   │   │   </span><span class="r6">if</span> <span class="r9">isinstance</span>(event, h11.Data):                                                <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8">205 </span><span class="r8">│   │   │   │   </span><span class="r6">yield</span> <span class="r9">bytes</span>(event.data)                                                    <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8">206 </span><span class="r8">│   │   │   </span><span class="r6">elif</span> <span class="r9">isinstance</span>(event, (h11.EndOfMessage, h11.PAUSED)):                        <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">103 </span><span class="r8">│   │   │   │   │   </span>reason_phrase,                                                         <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">104 </span><span class="r8">│   │   │   │   │   </span>headers,                                                               <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">105 </span><span class="r8">│   │   │   │   │   </span>trailing_data,                                                         <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>106 <span class="r8">│   │   │   │   </span>) = <span class="r9">self</span>._receive_response_headers(**kwargs)                               <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">107 </span><span class="r8">│   │   │   │   </span>trace.return_value = (                                                     <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">108 </span><span class="r8">│   │   │   │   │   </span>http_version,                                                          <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">109 </span><span class="r8">│   │   │   │   │   </span>status,                                                                <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/httpcore/_sync/</span><span class="r5">http11.py</span>:<span class="r6">177</span> in <span class="r7">_receive_respon</span> <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">174 </span><span class="r8">│   │   </span>timeout = timeouts.get(<span class="r10">&quot;read&quot;</span>, <span class="r6">None</span>)                                               <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">175 </span><span class="r8">│   │   </span>                                                                                   <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">176 </span><span class="r8">│   │   </span><span class="r6">while</span> <span class="r6">True</span>:                                                                        <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>177 <span class="r8">│   │   │   </span>event = <span class="r9">self</span>._receive_event(timeout=timeout)                                   <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">178 </span><span class="r8">│   │   │   </span><span class="r6">if</span> <span class="r9">isinstance</span>(event, h11.Response):                                            <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">179 </span><span class="r8">│   │   │   │   </span><span class="r6">break</span>                                                                      <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">180 </span><span class="r8">│   │   │   </span><span class="r6">if</span> (                                                                           <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
 <span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/httpcore/_sync/</span><span class="r5">http11.py</span>:<span class="r6">217</span> in <span class="r7">_receive_event</span>  <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
 <span class="r1">│</span>   <span class="r8">214 </span><span class="r8">│   │   │   │   </span>event = <span class="r9">self</span>._h11_state.next_event()                                       <span class="r1">│</span>
 <span class="r1">│</span>   <span class="r8">215 </span><span class="r8">│   │   │   </span>                                                                               <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8">216 </span><span class="r8">│   │   │   </span><span class="r6">if</span> event <span class="r10">is</span> h11.NEED_DATA:                                                     <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">216 </span><span class="r8">│   │   │   </span><span class="r6">if</span> event <span class="r11">is</span> h11.NEED_DATA:                                                     <span class="r1">│</span>
 <span class="r1">│</span> <span class="r1">❱ </span>217 <span class="r8">│   │   │   │   </span>data = <span class="r9">self</span>._network_stream.read(                                          <span class="r1">│</span>
 <span class="r1">│</span>   <span class="r8">218 </span><span class="r8">│   │   │   │   │   </span><span class="r9">self</span>.READ_NUM_BYTES, timeout=timeout                                   <span class="r1">│</span>
 <span class="r1">│</span>   <span class="r8">219 </span><span class="r8">│   │   │   │   </span>)                                                                          <span class="r1">│</span>
@@ -762,7 +762,7 @@ body {
 <span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/httpcore/</span><span class="r5">_exceptions.py</span>:<span class="r6">14</span> in <span class="r7">map_exceptions</span>    <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
 <span class="r1">│</span>   <span class="r8">11 </span><span class="r8">│   </span><span class="r6">except</span> <span class="r9">Exception</span> <span class="r6">as</span> exc:  <span class="r8"># noqa: PIE786</span>                                                <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8">12 </span><span class="r8">│   │   </span><span class="r6">for</span> from_exc, to_exc <span class="r10">in</span> <span class="r9">map</span>.items():                                                <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">12 </span><span class="r8">│   │   </span><span class="r6">for</span> from_exc, to_exc <span class="r11">in</span> <span class="r9">map</span>.items():                                                <span class="r1">│</span>
 <span class="r1">│</span>   <span class="r8">13 </span><span class="r8">│   │   │   </span><span class="r6">if</span> <span class="r9">isinstance</span>(exc, from_exc):                                                   <span class="r1">│</span>
 <span class="r1">│</span> <span class="r1">❱ </span>14 <span class="r8">│   │   │   │   </span><span class="r6">raise</span> to_exc(exc) <span class="r6">from</span> <span class="r12">exc</span>                                                  <span class="r1">│</span>
 <span class="r1">│</span>   <span class="r8">15 </span><span class="r8">│   │   </span><span class="r6">raise</span>  <span class="r8"># pragma: nocover</span>                                                            <span class="r1">│</span>
@@ -781,8 +781,8 @@ body {
 <span class="r1">│</span>   <span class="r8">301 </span><span class="r8">│   │   </span><span class="r6">try</span>:                                                                               <span class="r1">│</span>
 <span class="r1">│</span> <span class="r1">❱ </span>302 <span class="r8">│   │   │   </span>rd = <span class="r9">cls</span>.model_validate(data)                                                  <span class="r1">│</span>
 <span class="r1">│</span>   <span class="r8">303 </span><span class="r8">│   │   </span><span class="r6">except</span> pydantic.ValidationError <span class="r6">as</span> e:                                              <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8">304 </span><span class="r8">│   │   │   </span><span class="r6">for</span> ee <span class="r10">in</span> e.errors(include_url=<span class="r6">False</span>):                                         <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8">305 </span><span class="r8">│   │   │   │   </span><span class="r6">if</span> (severity := ee.get(<span class="r11">&quot;ctx&quot;</span>, {}).get(<span class="r11">&quot;severity&quot;</span>, ERROR)) &lt; ERROR:         <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">304 </span><span class="r8">│   │   │   </span><span class="r6">for</span> ee <span class="r11">in</span> e.errors(include_url=<span class="r6">False</span>):                                         <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">305 </span><span class="r8">│   │   │   │   </span><span class="r6">if</span> (severity := ee.get(<span class="r10">&quot;ctx&quot;</span>, {}).get(<span class="r10">&quot;severity&quot;</span>, ERROR)) &lt; ERROR:         <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
 <span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/spec/_internal/</span><span class="r5">node.py</span>:<span class="r6">91</span> in <span class="r7">model_v</span> <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
@@ -796,7 +796,7 @@ body {
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
 <span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/pydantic/</span><span class="r5">main.py</span>:<span class="r6">732</span> in <span class="r7">model_validate</span>          <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 729 </span><span class="r8">│   │   │   │   </span>code=<span class="r11">&#x27;validate-by-alias-and-name-false&#x27;</span>,                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8"> 729 </span><span class="r8">│   │   │   │   </span>code=<span class="r10">&#x27;validate-by-alias-and-name-false&#x27;</span>,                                  <span class="r1">│</span>
 <span class="r1">│</span>   <span class="r8"> 730 </span><span class="r8">│   │   │   </span>)                                                                             <span class="r1">│</span>
 <span class="r1">│</span>   <span class="r8"> 731 </span><span class="r8">│   │   </span>                                                                                  <span class="r1">│</span>
 <span class="r1">│</span> <span class="r1">❱ </span> 732 <span class="r8">│   │   </span><span class="r6">return</span> <span class="r9">cls</span>.__pydantic_validator__.validate_python(                                <span class="r1">│</span>
@@ -804,10 +804,20 @@ body {
 <span class="r1">│</span>   <span class="r8"> 734 </span><span class="r8">│   │   │   </span>strict=strict,                                                                <span class="r1">│</span>
 <span class="r1">│</span>   <span class="r8"> 735 </span><span class="r8">│   │   │   </span>extra=extra,                                                                  <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/pydantic/_internal/</span><span class="r5">_validators.py</span>:<span class="r6">53</span> in <span class="r7">sequenc</span> <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8"> 50 </span><span class="r8">│   </span><span class="r6">if</span> value_type <span class="r11">is</span> <span class="r9">tuple</span>:                                                                <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8"> 51 </span><span class="r8">│   │   </span>input_value = <span class="r9">list</span>(input_value)                                                    <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8"> 52 </span><span class="r8">│   </span>                                                                                       <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span> 53 <span class="r8">│   </span>v_list = validator(input_value)                                                        <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8"> 54 </span><span class="r8">│   </span>                                                                                       <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8"> 55 </span><span class="r8">│   </span><span class="r8"># the rest of the logic is just re-creating the original type from `v_list`</span>            <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8"> 56 </span><span class="r8">│   </span><span class="r6">if</span> value_type <span class="r11">is</span> <span class="r9">list</span>:                                                                 <span class="r1">│</span>
+<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
 <span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/spec/_internal/</span><span class="r5">io.py</span>:<span class="r6">272</span> in <span class="r7">_validat</span> <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
 <span class="r1">│</span>   <span class="r8"> 269 </span><span class="r8">│   </span>                                                                                      <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 270 </span><span class="r8">│   </span><span class="r15">@model_validator</span>(mode=<span class="r11">&quot;after&quot;</span>)                                                        <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8"> 270 </span><span class="r8">│   </span><span class="r15">@model_validator</span>(mode=<span class="r10">&quot;after&quot;</span>)                                                        <span class="r1">│</span>
 <span class="r1">│</span>   <span class="r8"> 271 </span><span class="r8">│   </span><span class="r6">def</span> <span class="r7">_validate_sha256</span>(<span class="r9">self</span>) -&gt; Self:                                                   <span class="r1">│</span>
 <span class="r1">│</span> <span class="r1">❱ </span> 272 <span class="r8">│   │   </span><span class="r9">self</span>.validate_sha256()                                                            <span class="r1">│</span>
 <span class="r1">│</span>   <span class="r8"> 273 </span><span class="r8">│   │   </span><span class="r6">return</span> <span class="r9">self</span>                                                                       <span class="r1">│</span>
@@ -817,8 +827,8 @@ body {
 <span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/spec/_internal/</span><span class="r5">io.py</span>:<span class="r6">286</span> in <span class="r7">validate</span> <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
 <span class="r1">│</span>   <span class="r8"> 283 </span><span class="r8">│   │   </span>                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 284 </span><span class="r8">│   │   </span><span class="r6">if</span> actual_sha <span class="r10">is</span> <span class="r6">None</span>:                                                            <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 285 </span><span class="r8">│   │   │   </span><span class="r6">if</span> context.perform_io_checks <span class="r10">or</span> force_recompute:                              <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8"> 284 </span><span class="r8">│   │   </span><span class="r6">if</span> actual_sha <span class="r11">is</span> <span class="r6">None</span>:                                                            <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8"> 285 </span><span class="r8">│   │   │   </span><span class="r6">if</span> context.perform_io_checks <span class="r11">or</span> force_recompute:                              <span class="r1">│</span>
 <span class="r1">│</span> <span class="r1">❱ </span> 286 <span class="r8">│   │   │   │   </span>reader = get_reader(<span class="r9">self</span>.source, sha256=<span class="r9">self</span>.sha256)                      <span class="r1">│</span>
 <span class="r1">│</span>   <span class="r8"> 287 </span><span class="r8">│   │   │   │   </span><span class="r6">if</span> force_recompute:                                                       <span class="r1">│</span>
 <span class="r1">│</span>   <span class="r8"> 288 </span><span class="r8">│   │   │   │   │   </span>actual_sha = get_sha256(reader)                                       <span class="r1">│</span>
@@ -832,11 +842,11 @@ body {
 <span class="r1">│</span> <span class="r1">❱ </span> 743 <span class="r8">│   │   </span><span class="r6">return</span> _open_url(source, progressbar=progressbar, **kwargs)                       <span class="r1">│</span>
 <span class="r1">│</span>   <span class="r8"> 744 </span><span class="r8">│   </span>                                                                                      <span class="r1">│</span>
 <span class="r1">│</span>   <span class="r8"> 745 </span><span class="r8">│   </span><span class="r6">if</span> <span class="r9">isinstance</span>(source, ZipPath):                                                       <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 746 </span><span class="r8">│   │   </span><span class="r6">if</span> <span class="r10">not</span> source.exists():                                                           <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8"> 746 </span><span class="r8">│   │   </span><span class="r6">if</span> <span class="r11">not</span> source.exists():                                                           <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
 <span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/spec/_internal/</span><span class="r5">io.py</span>:<span class="r6">807</span> in <span class="r7">_open_ur</span> <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 804 </span><span class="r8">│   │   </span><span class="r10">or</span> hashlib.sha256(<span class="r9">str</span>(source).encode(encoding=<span class="r11">&quot;utf-8&quot;</span>)).hexdigest()               <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8"> 804 </span><span class="r8">│   │   </span><span class="r11">or</span> hashlib.sha256(<span class="r9">str</span>(source).encode(encoding=<span class="r10">&quot;utf-8&quot;</span>)).hexdigest()               <span class="r1">│</span>
 <span class="r1">│</span>   <span class="r8"> 805 </span><span class="r8">│   </span>)                                                                                     <span class="r1">│</span>
 <span class="r1">│</span>   <span class="r8"> 806 </span><span class="r8">│   </span>                                                                                      <span class="r1">│</span>
 <span class="r1">│</span> <span class="r1">❱ </span> 807 <span class="r8">│   </span>reader = cache.fetch(                                                                 <span class="r1">│</span>
@@ -847,8 +857,8 @@ body {
 <span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/genericache/</span><span class="r5">__init__.py</span>:<span class="r6">148</span> in <span class="r7">fetch</span>            <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
 <span class="r1">│</span>   <span class="r8">145 </span><span class="r8">│   │   </span>retries: <span class="r9">int</span> = <span class="r6">3</span>,                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8">146 </span><span class="r8">│   </span>) -&gt; <span class="r11">&quot;CacheEntry&quot;</span>:                                                                     <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8">147 </span><span class="r8">│   │   </span><span class="r6">for</span> _ <span class="r10">in</span> <span class="r9">range</span>(retries):                                                           <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">146 </span><span class="r8">│   </span>) -&gt; <span class="r10">&quot;CacheEntry&quot;</span>:                                                                     <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">147 </span><span class="r8">│   │   </span><span class="r6">for</span> _ <span class="r11">in</span> <span class="r9">range</span>(retries):                                                           <span class="r1">│</span>
 <span class="r1">│</span> <span class="r1">❱ </span>148 <span class="r8">│   │   │   </span>result = <span class="r9">self</span>.try_fetch(url, fetcher, force_refetch=force_refetch)             <span class="r1">│</span>
 <span class="r1">│</span>   <span class="r8">149 </span><span class="r8">│   │   │   </span><span class="r6">if</span> <span class="r9">isinstance</span>(result, CacheEntry):                                             <span class="r1">│</span>
 <span class="r1">│</span>   <span class="r8">150 </span><span class="r8">│   │   │   │   </span><span class="r6">return</span> result                                                              <span class="r1">│</span>
@@ -862,12 +872,12 @@ body {
 <span class="r1">│</span> <span class="r1">❱ </span>260 <span class="r8">│   │   │   │   </span>chunks = fetcher(url)                                                      <span class="r1">│</span>
 <span class="r1">│</span>   <span class="r8">261 </span><span class="r8">│   │   │   │   </span>temp_file = tempfile.NamedTemporaryFile(delete=<span class="r6">False</span>)                      <span class="r1">│</span>
 <span class="r1">│</span>   <span class="r8">262 </span><span class="r8">│   │   │   │   </span>contents_sha = sha256()                                                    <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8">263 </span><span class="r8">│   │   │   │   </span><span class="r6">for</span> chunk <span class="r10">in</span> chunks:                                                       <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">263 </span><span class="r8">│   │   │   │   </span><span class="r6">for</span> chunk <span class="r11">in</span> chunks:                                                       <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
 <span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/bioimageio/spec/_internal/</span><span class="r5">io.py</span>:<span class="r6">859</span> in <span class="r7">_fetch_u</span> <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
 <span class="r1">│</span>   <span class="r8"> 856 </span><span class="r8">│   </span><span class="r6">elif</span> settings.CI:                                                                     <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 857 </span><span class="r8">│   │   </span>headers[<span class="r11">&quot;User-Agent&quot;</span>] = <span class="r11">&quot;ci&quot;</span>                                                      <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8"> 857 </span><span class="r8">│   │   </span>headers[<span class="r10">&quot;User-Agent&quot;</span>] = <span class="r10">&quot;ci&quot;</span>                                                      <span class="r1">│</span>
 <span class="r1">│</span>   <span class="r8"> 858 </span><span class="r8">│   </span>                                                                                      <span class="r1">│</span>
 <span class="r1">│</span> <span class="r1">❱ </span> 859 <span class="r8">│   </span>r = httpx.get(                                                                        <span class="r1">│</span>
 <span class="r1">│</span>   <span class="r8"> 860 </span><span class="r8">│   │   </span><span class="r9">str</span>(source),                                                                      <span class="r1">│</span>
@@ -876,11 +886,11 @@ body {
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
 <span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/httpx/</span><span class="r5">_api.py</span>:<span class="r6">195</span> in <span class="r7">get</span>                        <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8">192 </span><span class="r4">│   </span><span class="r11">Note that the `data`, `files`, `json` and `content` parameters are not available</span>       <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8">193 </span><span class="r4">│   </span><span class="r11">on this function, as `GET` requests should not include a request body.</span>                 <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8">194 </span><span class="r4">│   </span><span class="r11">&quot;&quot;&quot;</span>                                                                                    <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">192 </span><span class="r4">│   </span><span class="r10">Note that the `data`, `files`, `json` and `content` parameters are not available</span>       <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">193 </span><span class="r4">│   </span><span class="r10">on this function, as `GET` requests should not include a request body.</span>                 <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">194 </span><span class="r4">│   </span><span class="r10">&quot;&quot;&quot;</span>                                                                                    <span class="r1">│</span>
 <span class="r1">│</span> <span class="r1">❱ </span>195 <span class="r8">│   </span><span class="r6">return</span> request(                                                                        <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8">196 </span><span class="r8">│   │   </span><span class="r11">&quot;GET&quot;</span>,                                                                             <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">196 </span><span class="r8">│   │   </span><span class="r10">&quot;GET&quot;</span>,                                                                             <span class="r1">│</span>
 <span class="r1">│</span>   <span class="r8">197 </span><span class="r8">│   │   </span>url,                                                                               <span class="r1">│</span>
 <span class="r1">│</span>   <span class="r8">198 </span><span class="r8">│   │   </span>params=params,                                                                     <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
@@ -904,75 +914,55 @@ body {
 <span class="r1">│</span>   <span class="r8"> 827 </span><span class="r8">│   </span><span class="r15">@contextmanager</span>                                                                       <span class="r1">│</span>
 <span class="r1">│</span>   <span class="r8"> 828 </span><span class="r8">│   </span><span class="r6">def</span> <span class="r7">stream</span>(                                                                           <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/httpx/</span><span class="r5">_client.py</span>:<span class="r6">928</span> in <span class="r7">send</span>                    <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/httpx/</span><span class="r5">_client.py</span>:<span class="r6">914</span> in <span class="r7">send</span>                    <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 925 </span><span class="r8">│   │   </span>                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 926 </span><span class="r8">│   │   </span><span class="r6">except</span> <span class="r9">BaseException</span> <span class="r6">as</span> exc:                                                      <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 927 </span><span class="r8">│   │   │   </span>response.close()                                                              <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span> 928 <span class="r8">│   │   │   </span><span class="r6">raise</span> exc                                                                     <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 929 </span><span class="r8">│   </span>                                                                                      <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 930 </span><span class="r8">│   </span><span class="r6">def</span> <span class="r7">_send_handling_auth</span>(                                                              <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 931 </span><span class="r8">│   │   </span><span class="r9">self</span>,                                                                             <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8"> 911 </span><span class="r8">│   │   </span>                                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8"> 912 </span><span class="r8">│   │   </span>auth = <span class="r9">self</span>._build_request_auth(request, auth)                                    <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8"> 913 </span><span class="r8">│   │   </span>                                                                                  <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span> 914 <span class="r8">│   │   </span>response = <span class="r9">self</span>._send_handling_auth(                                              <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8"> 915 </span><span class="r8">│   │   │   </span>request,                                                                      <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8"> 916 </span><span class="r8">│   │   │   </span>auth=auth,                                                                    <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8"> 917 </span><span class="r8">│   │   │   </span>follow_redirects=follow_redirects,                                            <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/httpx/</span><span class="r5">_client.py</span>:<span class="r6">922</span> in <span class="r7">send</span>                    <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/httpx/</span><span class="r5">_client.py</span>:<span class="r6">942</span> in <span class="r7">_send_handling_auth</span>     <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 919 </span><span class="r8">│   │   </span>)                                                                                 <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 920 </span><span class="r8">│   │   </span><span class="r6">try</span>:                                                                              <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 921 </span><span class="r8">│   │   │   </span><span class="r6">if</span> <span class="r10">not</span> stream:                                                                <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span> 922 <span class="r8">│   │   │   │   </span>response.read()                                                           <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 923 </span><span class="r8">│   │   │   </span>                                                                              <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 924 </span><span class="r8">│   │   │   </span><span class="r6">return</span> response                                                               <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 925 </span>                                                                                          <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8"> 939 </span><span class="r8">│   │   │   </span>request = <span class="r9">next</span>(auth_flow)                                                     <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8"> 940 </span><span class="r8">│   │   │   </span>                                                                              <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8"> 941 </span><span class="r8">│   │   │   </span><span class="r6">while</span> <span class="r6">True</span>:                                                                   <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span> 942 <span class="r8">│   │   │   │   </span>response = <span class="r9">self</span>._send_handling_redirects(                                 <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8"> 943 </span><span class="r8">│   │   │   │   │   </span>request,                                                              <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8"> 944 </span><span class="r8">│   │   │   │   │   </span>follow_redirects=follow_redirects,                                    <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8"> 945 </span><span class="r8">│   │   │   │   │   </span>history=history,                                                      <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/httpx/</span><span class="r5">_models.py</span>:<span class="r6">881</span> in <span class="r7">read</span>                    <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/httpx/</span><span class="r5">_client.py</span>:<span class="r6">979</span> in <span class="r7">_send_handling_redirect</span> <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 878 </span><span class="r4">│   │   </span><span class="r11">Read and return the response content.</span>                                             <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 879 </span><span class="r4">│   │   </span><span class="r11">&quot;&quot;&quot;</span>                                                                               <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 880 </span><span class="r8">│   │   </span><span class="r6">if</span> <span class="r10">not</span> <span class="r9">hasattr</span>(<span class="r9">self</span>, <span class="r11">&quot;_content&quot;</span>):                                                 <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span> 881 <span class="r8">│   │   │   </span><span class="r9">self</span>._content = <span class="r11">b&quot;&quot;</span>.join(<span class="r9">self</span>.iter_bytes())                                   <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 882 </span><span class="r8">│   │   </span><span class="r6">return</span> <span class="r9">self</span>._content                                                              <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 883 </span><span class="r8">│   </span>                                                                                      <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 884 </span><span class="r8">│   </span><span class="r6">def</span> <span class="r7">iter_bytes</span>(<span class="r9">self</span>, chunk_size: <span class="r9">int</span> | <span class="r6">None</span> = <span class="r6">None</span>) -&gt; typing.Iterator[<span class="r9">bytes</span>]:        <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8"> 976 </span><span class="r8">│   │   │   </span><span class="r6">for</span> hook <span class="r11">in</span> <span class="r9">self</span>._event_hooks[<span class="r10">&quot;request&quot;</span>]:                                     <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8"> 977 </span><span class="r8">│   │   │   │   </span>hook(request)                                                             <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8"> 978 </span><span class="r8">│   │   │   </span>                                                                              <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span> 979 <span class="r8">│   │   │   </span>response = <span class="r9">self</span>._send_single_request(request)                                 <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8"> 980 </span><span class="r8">│   │   │   </span><span class="r6">try</span>:                                                                          <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8"> 981 </span><span class="r8">│   │   │   │   </span><span class="r6">for</span> hook <span class="r11">in</span> <span class="r9">self</span>._event_hooks[<span class="r10">&quot;response&quot;</span>]:                                <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8"> 982 </span><span class="r8">│   │   │   │   │   </span>hook(response)                                                        <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/httpx/</span><span class="r5">_models.py</span>:<span class="r6">897</span> in <span class="r7">iter_bytes</span>              <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/httpx/</span><span class="r5">_client.py</span>:<span class="r6">1014</span> in <span class="r7">_send_single_request</span>   <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 894 </span><span class="r8">│   │   │   </span>decoder = <span class="r9">self</span>._get_content_decoder()                                         <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 895 </span><span class="r8">│   │   │   </span>chunker = ByteChunker(chunk_size=chunk_size)                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 896 </span><span class="r8">│   │   │   </span><span class="r6">with</span> request_context(request=<span class="r9">self</span>._request):                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span> 897 <span class="r8">│   │   │   │   </span><span class="r6">for</span> raw_bytes <span class="r10">in</span> <span class="r9">self</span>.iter_raw():                                         <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 898 </span><span class="r8">│   │   │   │   │   </span>decoded = decoder.decode(raw_bytes)                                   <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 899 </span><span class="r8">│   │   │   │   │   </span><span class="r6">for</span> chunk <span class="r10">in</span> chunker.decode(decoded):                                 <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 900 </span><span class="r8">│   │   │   │   │   │   </span><span class="r6">yield</span> chunk                                                       <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">1011 </span><span class="r8">│   │   │   </span>)                                                                             <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">1012 </span><span class="r8">│   │   </span>                                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">1013 </span><span class="r8">│   │   </span><span class="r6">with</span> request_context(request=request):                                            <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>1014 <span class="r8">│   │   │   </span>response = transport.handle_request(request)                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">1015 </span><span class="r8">│   │   </span>                                                                                  <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">1016 </span><span class="r8">│   │   </span><span class="r6">assert</span> <span class="r9">isinstance</span>(response.stream, SyncByteStream)                                <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">1017 </span>                                                                                          <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/httpx/</span><span class="r5">_models.py</span>:<span class="r6">951</span> in <span class="r7">iter_raw</span>                <span class="r1">│</span>
+<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/httpx/_transports/</span><span class="r5">default.py</span>:<span class="r6">249</span> in <span class="r7">handle_requ</span> <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 948 </span><span class="r8">│   │   </span>chunker = ByteChunker(chunk_size=chunk_size)                                      <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 949 </span><span class="r8">│   │   </span>                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 950 </span><span class="r8">│   │   </span><span class="r6">with</span> request_context(request=<span class="r9">self</span>._request):                                      <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span> 951 <span class="r8">│   │   │   </span><span class="r6">for</span> raw_stream_bytes <span class="r10">in</span> <span class="r9">self</span>.stream:                                          <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 952 </span><span class="r8">│   │   │   │   </span><span class="r9">self</span>._num_bytes_downloaded += <span class="r9">len</span>(raw_stream_bytes)                       <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 953 </span><span class="r8">│   │   │   │   </span><span class="r6">for</span> chunk <span class="r10">in</span> chunker.decode(raw_stream_bytes):                            <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 954 </span><span class="r8">│   │   │   │   │   </span><span class="r6">yield</span> chunk                                                           <span class="r1">│</span>
-<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/httpx/</span><span class="r5">_client.py</span>:<span class="r6">153</span> in <span class="r7">__iter__</span>                <span class="r1">│</span>
-<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 150 </span><span class="r8">│   │   </span><span class="r9">self</span>._start = start                                                               <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 151 </span><span class="r8">│   </span>                                                                                      <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 152 </span><span class="r8">│   </span><span class="r6">def</span> <span class="r7">__iter__</span>(<span class="r9">self</span>) -&gt; typing.Iterator[<span class="r9">bytes</span>]:                                         <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span> 153 <span class="r8">│   │   </span><span class="r6">for</span> chunk <span class="r10">in</span> <span class="r9">self</span>._stream:                                                        <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 154 </span><span class="r8">│   │   │   </span><span class="r6">yield</span> chunk                                                                   <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 155 </span><span class="r8">│   </span>                                                                                      <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8"> 156 </span><span class="r8">│   </span><span class="r6">def</span> <span class="r7">close</span>(<span class="r9">self</span>) -&gt; <span class="r6">None</span>:                                                              <span class="r1">│</span>
-<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span> <span class="r4">/home/runner/.local/lib/python3.12/site-packages/httpx/_transports/</span><span class="r5">default.py</span>:<span class="r6">126</span> in <span class="r7">__iter__</span>    <span class="r1">│</span>
-<span class="r1">│</span>                                                                                                  <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8">123 </span><span class="r8">│   │   </span><span class="r9">self</span>._httpcore_stream = httpcore_stream                                            <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8">124 </span><span class="r8">│   </span>                                                                                       <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8">125 </span><span class="r8">│   </span><span class="r6">def</span> <span class="r7">__iter__</span>(<span class="r9">self</span>) -&gt; typing.Iterator[<span class="r9">bytes</span>]:                                          <span class="r1">│</span>
-<span class="r1">│</span> <span class="r1">❱ </span>126 <span class="r8">│   │   </span><span class="r6">with</span> map_httpcore_exceptions():                                                    <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8">127 </span><span class="r8">│   │   │   </span><span class="r6">for</span> part <span class="r10">in</span> <span class="r9">self</span>._httpcore_stream:                                             <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8">128 </span><span class="r8">│   │   │   │   </span><span class="r6">yield</span> part                                                                 <span class="r1">│</span>
-<span class="r1">│</span>   <span class="r8">129 </span>                                                                                           <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">246 </span><span class="r8">│   │   │   </span>content=request.stream,                                                        <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">247 </span><span class="r8">│   │   │   </span>extensions=request.extensions,                                                 <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">248 </span><span class="r8">│   │   </span>)                                                                                  <span class="r1">│</span>
+<span class="r1">│</span> <span class="r1">❱ </span>249 <span class="r8">│   │   </span><span class="r6">with</span> map_httpcore_exceptions():                                                    <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">250 </span><span class="r8">│   │   │   </span>resp = <span class="r9">self</span>._pool.handle_request(req)                                          <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">251 </span><span class="r8">│   │   </span>                                                                                   <span class="r1">│</span>
+<span class="r1">│</span>   <span class="r8">252 </span><span class="r8">│   │   </span><span class="r6">assert</span> <span class="r9">isinstance</span>(resp.stream, typing.Iterable)                                    <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
 <span class="r1">│</span> <span class="r4">/usr/lib/python3.12/</span><span class="r5">contextlib.py</span>:<span class="r6">158</span> in <span class="r7">__exit__</span>                                                <span class="r1">│</span>
 <span class="r1">│</span>                                                                                                  <span class="r1">│</span>
