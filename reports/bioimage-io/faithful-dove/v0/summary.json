@@ -1,0 +1,80 @@
+{
+    "rdf_content": {
+        "format_version": "0.4.10",
+        "name": "CELLECT-1frame",
+        "description": "Pretrained CELLECT model for 3D  cell tracking and segmentation.",
+        "authors": [
+            {
+                "name": "zzz333",
+                "email": "1258313031@qq.com"
+            }
+        ],
+        "cite": [
+            {
+                "text": "Zhou et al., CELLECT: Contrastive Embedding Learning for Large-scale Efficient Cell Tracking, 2025.",
+                "url": "https://github.com/zzz333za/CELLECT/"
+            }
+        ],
+        "documentation": "README.md",
+        "covers": [
+            "CELLECT.png"
+        ],
+        "license": "GPL-2.0-only",
+        "tags": [
+            "cell tracking",
+            "3D",
+            "microscopy",
+            "deep learning"
+        ],
+        "inputs": [
+            {
+                "name": "input0",
+                "description": "A 3D image stack with shape (2, 256, 256, 32) representing 2 consecutive frames.",
+                "axes": "txyz",
+                "shape": [
+                    2,
+                    256,
+                    256,
+                    32
+                ],
+                "data_type": "float32"
+            }
+        ],
+        "outputs": [
+            {
+                "name": "output0",
+                "description": "Tracking ID map or instance segmentation mask with same shape as input.",
+                "axes": "txyz",
+                "shape": [
+                    1,
+                    256,
+                    256,
+                    32
+                ],
+                "data_type": "int32"
+            }
+        ],
+        "weights": {
+            "torchscript": {
+                "pytorch_version": "2.3.0",
+                "sha256": "55d65c3620544d12f9c678ee0e7020a8cb7d72095202b9e19afe7ba4a087238d",
+                "source": "model3.pt"
+            }
+        },
+        "type": "model",
+        "timestamp": "2025-07-22T00:00:00Z",
+        "test_inputs": [
+            "input.npy"
+        ],
+        "test_outputs": [
+            "output.npy"
+        ],
+        "uploader": {
+            "email": "nourzhou@mail.tsinghua.edu.cn"
+        },
+        "id": "faithful-dove",
+        "id_emoji": "🕊"
+    },
+    "rdf_yaml_sha256": "7a38408da577346b46d24345a251a52d26585946c388d8a32a565646f962f4c5",
+    "status": "untested"
+}

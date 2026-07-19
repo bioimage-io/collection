@@ -1,0 +1,38 @@
+{
+    "rdf_content": {
+        "format_version": "0.4.10",
+        "name": "CELLECT-pretrained-mskcc",
+        "description": "Pretrained CELLECT model trained on the mskcc-confocal dataset for 3D cell tracking.",
+        "authors": [
+            {
+                "name": "zzz333",
+                "email": "1258313031@qq.com"
+            }
+        ],
+        "cite": [
+            {
+                "text": "Zhou et al., CELLECT: Contrastive Embedding Learning for Large-scale Efficient Cell Tracking, 2025.",
+                "url": "https://github.com/zzz333za/CELLECT/"
+            }
+        ],
+        "documentation": "readme.md",
+        "covers": [
+            "CELLECT.png"
+        ],
+        "license": "GPL-2.0-only",
+        "tags": [
+            "cell tracking",
+            "3D",
+            "microscopy",
+            "deep learning"
+        ],
+        "type": "application",
+        "uploader": {
+            "email": "nourzhou@mail.tsinghua.edu.cn"
+        },
+        "id": "shimmering-dress",
+        "id_emoji": "🦒"
+    },
+    "rdf_yaml_sha256": "77ea0428e4feba849435d48ce3b96cccd7f59d74c87c8a216161d668b644577d",
+    "status": "untested"
+}

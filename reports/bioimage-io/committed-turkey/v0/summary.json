@@ -1,0 +1,214 @@
+{
+    "rdf_content": {
+        "attachments": {
+            "files": [
+                "per_sample_scale_range.ijm",
+                "binarize.ijm"
+            ]
+        },
+        "authors": [
+            {
+                "affiliation": "Walter and Eliza Hall Institute of Medical Research",
+                "github_user": "pr4deepr",
+                "name": "Pradeep Rajasekhar"
+            },
+            {
+                "affiliation": "Monash Institute of Pharmaceutical Sciences",
+                "name": "Daniel P. Poole"
+            }
+        ],
+        "cite": [
+            {
+                "doi": "10.1038/s41592-021-01262-9",
+                "text": "Gómez-de-Mariscal et al. Nat. Methods 2021"
+            },
+            {
+                "doi": "10.1038/s41592-018-0261-2",
+                "text": "Falk et al. Nature Methods 2019"
+            },
+            {
+                "doi": "10.1007/978-3-319-24574-4_28",
+                "text": "Ronneberger et al. arXiv in 2015"
+            },
+            {
+                "doi": "10.1038/s41467-021-22518-0",
+                "text": "Lucas von Chamier et al. Nat. Comm 2021"
+            }
+        ],
+        "config": {
+            "bioimageio": {
+                "thumbnails": {
+                    "cover.png": "cover.thumbnail.png"
+                }
+            },
+            "deepimagej": {
+                "allow_tiling": true,
+                "model_keys": null,
+                "prediction": {
+                    "postprocess": [
+                        {
+                            "kwargs": "binarize.ijm",
+                            "spec": "ij.IJ::runMacroFile"
+                        }
+                    ],
+                    "preprocess": [
+                        {
+                            "kwargs": "per_sample_scale_range.ijm",
+                            "spec": "ij.IJ::runMacroFile"
+                        }
+                    ]
+                },
+                "pyramidal_model": false,
+                "test_information": {
+                    "inputs": [
+                        {
+                            "name": "test_input.npy",
+                            "pixel_size": {
+                                "x": 0.378,
+                                "y": 0.378,
+                                "z": 1.0
+                            },
+                            "size": "768 x 768 x 1 x 3"
+                        }
+                    ],
+                    "memory_peak": null,
+                    "outputs": [
+                        {
+                            "name": "test_output.npy",
+                            "size": "768 x 768 x 1 x 1",
+                            "type": "image"
+                        }
+                    ],
+                    "runtime": null
+                }
+            }
+        },
+        "covers": [
+            "cover.png"
+        ],
+        "description": "Model to segment 2D fluorescent images of enteric ganglia in the gut wall based on colabeling of neuron marker (Hu) and a 2nd marker that labels ganglia (ChAT, nNOS etc..)",
+        "documentation": "README.md",
+        "format_version": "0.4.10",
+        "id": "committed-turkey",
+        "id_emoji": "🦃",
+        "inputs": [
+            {
+                "axes": "bxyc",
+                "data_range": [
+                    0.0,
+                    255.0
+                ],
+                "data_type": "uint8",
+                "name": "input",
+                "preprocessing": [
+                    {
+                        "kwargs": {
+                            "axes": "xyc",
+                            "max_percentile": 99.8,
+                            "min_percentile": 1,
+                            "mode": "per_sample"
+                        },
+                        "name": "scale_range"
+                    }
+                ],
+                "shape": [
+                    1,
+                    768,
+                    768,
+                    3
+                ]
+            }
+        ],
+        "license": "BSD-3-Clause-Modification",
+        "links": [
+            "deepimagej/deepimagej"
+        ],
+        "name": "2D Enteric Ganglia segmentation U-Net",
+        "outputs": [
+            {
+                "axes": "bxyc",
+                "data_range": [
+                    0.0,
+                    255.0
+                ],
+                "data_type": "uint8",
+                "halo": [
+                    0,
+                    191,
+                    191,
+                    0
+                ],
+                "name": "output",
+                "postprocessing": [
+                    {
+                        "kwargs": {
+                            "threshold": 0.7364705882352942
+                        },
+                        "name": "binarize"
+                    }
+                ],
+                "shape": {
+                    "offset": [
+                        0,
+                        0,
+                        0,
+                        -1
+                    ],
+                    "reference_tensor": "input",
+                    "scale": [
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0
+                    ]
+                }
+            }
+        ],
+        "sample_inputs": [
+            "sample_input_0.tif"
+        ],
+        "sample_outputs": [
+            "sample_output_0.tif"
+        ],
+        "tags": [
+            "zerocostdl4mic",
+            "deepimagej",
+            "segmentation",
+            "enteric ganglia",
+            "enteric nervous-system",
+            "fluorescence",
+            "RGB",
+            "gut",
+            "unet",
+            "tensorflow",
+            "2d"
+        ],
+        "test_inputs": [
+            "test_input.npy"
+        ],
+        "test_outputs": [
+            "test_output.npy"
+        ],
+        "timestamp": "2024-02-01T21:53:56.068963",
+        "type": "model",
+        "uploader": {
+            "email": "bioimageiobot@gmail.com"
+        },
+        "version": 1.1,
+        "version_number": 2,
+        "weights": {
+            "keras_hdf5": {
+                "sha256": "506cdbfe922267b8065d1ab32d2fd33078322efe7b28f3ee5c7c475531ff3e32",
+                "source": "keras_weights.hdf5",
+                "tensorflow_version": "1.15"
+            },
+            "tensorflow_saved_model_bundle": {
+                "sha256": "5cbfe1b7d31ad75ac6d97eb68dfb2f997e367ec2eb736a9f739e2e6e08d09d5e",
+                "source": "tf_weights.zip",
+                "tensorflow_version": "1.15"
+            }
+        }
+    },
+    "rdf_yaml_sha256": "a6d35e2504f5221193e713d167a0ce04721a7f5a6928f67c111d997e21a2d9e4",
+    "status": "untested"
+}

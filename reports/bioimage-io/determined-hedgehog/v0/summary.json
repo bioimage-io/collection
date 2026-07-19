@@ -1,0 +1,158 @@
+{
+    "rdf_content": {
+        "attachments": {
+            "files": []
+        },
+        "authors": [
+            {
+                "github_user": "patrisvalera",
+                "name": "Patris Valera"
+            },
+            {
+                "github_user": "pvjosue",
+                "name": "Josue Page Vizcaino"
+            }
+        ],
+        "cite": [
+            {
+                "doi": "10.1002/xyzacab123",
+                "text": "Gizmo et al."
+            }
+        ],
+        "config": {
+            "bioimageio": {
+                "thumbnails": {
+                    "cover.png": "cover.thumbnail.png"
+                }
+            },
+            "deepimagej": {
+                "allow_tiling": true,
+                "model_keys": null,
+                "prediction": {
+                    "postprocess": [
+                        {
+                            "spec": null
+                        }
+                    ],
+                    "preprocess": [
+                        {
+                            "spec": null
+                        }
+                    ]
+                },
+                "pyramidal_model": false,
+                "test_information": {
+                    "inputs": [
+                        {
+                            "name": "test-input.npy",
+                            "pixel_size": {
+                                "x": 1.0,
+                                "y": 1.0,
+                                "z": 1.0
+                            },
+                            "size": "3 x 1 x 256 x 256"
+                        }
+                    ],
+                    "memory_peak": null,
+                    "outputs": [
+                        {
+                            "name": "test-output.npy",
+                            "size": "3 x 1 x 256 x 256",
+                            "type": "image"
+                        }
+                    ],
+                    "runtime": null
+                }
+            }
+        },
+        "covers": [
+            "cover.png"
+        ],
+        "description": "an SLNet model trained to extract the sparse component of a set of 3 images.",
+        "documentation": "doc.md",
+        "format_version": "0.4.10",
+        "git_repo": "https://github.com/pvjosue/SLNet_STORM",
+        "id": "determined-hedgehog",
+        "id_emoji": "🦔",
+        "inputs": [
+            {
+                "axes": "bcxyz",
+                "data_range": [
+                    null,
+                    null
+                ],
+                "data_type": "float32",
+                "name": "input0",
+                "shape": [
+                    1,
+                    1,
+                    256,
+                    256,
+                    3
+                ]
+            }
+        ],
+        "license": "CC-BY-4.0",
+        "links": [
+            "deepimagej/deepimagej"
+        ],
+        "name": "SLNet_STORM_10100_it",
+        "outputs": [
+            {
+                "axes": "bcxyz",
+                "data_range": [
+                    null,
+                    null
+                ],
+                "data_type": "float32",
+                "name": "output0",
+                "shape": [
+                    1,
+                    1,
+                    256,
+                    256,
+                    3
+                ]
+            }
+        ],
+        "sample_inputs": [
+            "sample_input_0.tif"
+        ],
+        "sample_outputs": [
+            "sample_output_0.tif"
+        ],
+        "tags": [
+            "fluorescence-light-microscopy",
+            "2d",
+            "pytorch",
+            "storm",
+            "sparse-imaging",
+            "imagej",
+            "fiji",
+            "deepimagej",
+            "background-removal"
+        ],
+        "test_inputs": [
+            "test-input.npy"
+        ],
+        "test_outputs": [
+            "test-output.npy"
+        ],
+        "timestamp": "2024-02-14T20:07:19.767983",
+        "type": "model",
+        "uploader": {
+            "email": "bioimageiobot@gmail.com"
+        },
+        "version": 1,
+        "version_number": 1,
+        "weights": {
+            "torchscript": {
+                "pytorch_version": "1.13.1",
+                "sha256": "d3eabf5ae9893ab9f483a2f8a5ee6c579d61ea2abefc1d918292bd6852512c9a",
+                "source": "weights.pt"
+            }
+        }
+    },
+    "rdf_yaml_sha256": "3e8cd754937dd65635e3507c64949db5b135a12d28e48b84f80b3ee597e535e7",
+    "status": "untested"
+}
