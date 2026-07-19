@@ -1,0 +1,227 @@
+{
+    "badge": null,
+    "details": {
+        "conda_list": null,
+        "details": [
+            {
+                "conda_compare": null,
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {},
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/angry-turkey/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Created `InvalidDescr` object.",
+                "recommended_env": null,
+                "status": "failed",
+                "warnings": []
+            },
+            {
+                "conda_compare": null,
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {},
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/angry-turkey/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [
+                    {
+                        "loc": [
+                            "documentation",
+                            "function-after[HttpUrl(), str]"
+                        ],
+                        "msg": "Input should be a valid URL, relative URL without a base",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "url_parsing",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "documentation",
+                            "RelativeFilePath"
+                        ],
+                        "msg": "Value error, 404: Not Found https://hypha.aicell.io/bioimage-io/artifacts/angry-turkey/files/readme.md?version=v0",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "value_error",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "documentation",
+                            "function-after[validate_file(), lax-or-strict[lax=union[json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]],function-after[path_validator(), str]],strict=json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]]]]"
+                        ],
+                        "msg": "Path does not point to a file",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_not_file",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "test_inputs",
+                            0,
+                            "function-after[HttpUrl(), str]"
+                        ],
+                        "msg": "URL scheme should be 'http' or 'https'",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "url_scheme",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "test_inputs",
+                            0,
+                            "RelativeFilePath"
+                        ],
+                        "msg": "Value error, 404: Not Found https://hypha.aicell.io/bioimage-io/artifacts/angry-turkey/files/source:input.npy?version=v0",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "value_error",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "test_inputs",
+                            0,
+                            "function-after[validate_file(), lax-or-strict[lax=union[json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]],function-after[path_validator(), str]],strict=json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]]]]"
+                        ],
+                        "msg": "Path does not point to a file",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_not_file",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "test_outputs",
+                            0,
+                            "function-after[HttpUrl(), str]"
+                        ],
+                        "msg": "URL scheme should be 'http' or 'https'",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "url_scheme",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "test_outputs",
+                            0,
+                            "RelativeFilePath"
+                        ],
+                        "msg": "Value error, 404: Not Found https://hypha.aicell.io/bioimage-io/artifacts/angry-turkey/files/source:output.npy?version=v0",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "value_error",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "test_outputs",
+                            0,
+                            "function-after[validate_file(), lax-or-strict[lax=union[json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]],function-after[path_validator(), str]],strict=json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]]]]"
+                        ],
+                        "msg": "Path does not point to a file",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_not_file",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "weights",
+                            "pytorch_state_dict",
+                            "architecture",
+                            "function-after[CallableFromFile(), str]",
+                            "source_file",
+                            "RelativeFilePath"
+                        ],
+                        "msg": "Value error, 404: Not Found https://hypha.aicell.io/bioimage-io/artifacts/angry-turkey/files/unetext3Dn_con7sk?version=v0",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "value_error",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "weights",
+                            "pytorch_state_dict",
+                            "architecture",
+                            "function-after[CallableFromFile(), str]",
+                            "source_file",
+                            "function-after[HttpUrl(), str]"
+                        ],
+                        "msg": "Input should be a valid URL, relative URL without a base",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "url_parsing",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "weights",
+                            "pytorch_state_dict",
+                            "architecture",
+                            "function-after[CallableFromDepencency(), str]"
+                        ],
+                        "msg": "String should match pattern '^.+\\..+$'",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "string_pattern_mismatch",
+                        "with_traceback": false
+                    }
+                ],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.4.10",
+                "recommended_env": null,
+                "status": "failed",
+                "warnings": []
+            },
+            {
+                "conda_compare": null,
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "type"
+                ],
+                "name": "Has expected resource type",
+                "recommended_env": null,
+                "status": "passed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.spec",
+                "0.5.4.1",
+                "",
+                ""
+            ],
+            [
+                "bioimageio.core",
+                "0.8.0",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.4.10",
+        "id": "angry-turkey",
+        "name": "bioimageio format validation",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/angry-turkey/files/rdf.yaml?version=v0",
+        "status": "failed",
+        "type": "model"
+    },
+    "error": "\n|        ❌        |                             bioimageio format validation                             |\n|       ---       |                                         ---                                          |\n| status          | failed                                                                               |\n| source          | https://hypha.aicell.io/bioimage-io/artifacts/angry-turkey/files/rdf.yaml?version=v0 |\n| id              | angry-turkey                                                                         |\n| format version  | model 0.4.10                                                                         |\n| bioimageio.spec | 0.5.4.1                                                                              |\n| bioimageio.core | 0.8.0                                                                                |\n\n|     |                  Location                 |                                                          Details                                                          |\n| --- |                    ---                    |                                                            ---                                                            |\n| ❌   |                                           | Created `InvalidDescr` object.                                                                                            |\n| 🔍   | `context:perform_io_checks`               | True                                                                                                                      |\n| 🔍   | `context:root`                            | https://hypha.aicell.io/bioimage-io/artifacts/angry-turkey/files?version=v0                                               |\n| ❌   |                                           | bioimageio.spec format validation model 0.4.10                                                                            |\n| ❌   | `documentation`                           | Input should be a valid URL, relative URL without a base                                                                  |\n|     |                                           |                                                                                                                           |\n| ❌   | `documentation.(RelativeFilePath)`        | Value error, 404: Not Found https://hypha.aicell.io/bioimage-io/artifacts/angry-turkey/files/readme.md?version=v0         |\n|     |                                           |                                                                                                                           |\n| ❌   | `documentation`                           | Path does not point to a file                                                                                             |\n|     |                                           |                                                                                                                           |\n| ❌   | `test_inputs.0`                           | URL scheme should be 'http' or 'https'                                                                                    |\n|     |                                           |                                                                                                                           |\n| ❌   | `test_inputs.0.(RelativeFilePath)`        | Value error, 404: Not Found https://hypha.aicell.io/bioimage-io/artifacts/angry-turkey/files/source:input.npy?version=v0  |\n|     |                                           |                                                                                                                           |\n| ❌   | `test_inputs.0`                           | Path does not point to a file                                                                                             |\n|     |                                           |                                                                                                                           |\n| ❌   | `test_outputs.0`                          | URL scheme should be 'http' or 'https'                                                                                    |\n|     |                                           |                                                                                                                           |\n| ❌   | `test_outputs.0.(RelativeFilePath)`       | Value error, 404: Not Found https://hypha.aicell.io/bioimage-io/artifacts/angry-turkey/files/source:output.npy?version=v0 |\n|     |                                           |                                                                                                                           |\n| ❌   | `test_outputs.0`                          | Path does not point to a file                                                                                             |\n|     |                                           |                                                                                                                           |\n| ❌   | `weights.pytorch_state_dict.architecture` | Value error, 404: Not Found https://hypha.aicell.io/bioimage-io/artifacts/angry-turkey/files/unetext3Dn_con7sk?version=v0 |\n|     |                                           |                                                                                                                           |\n| ❌   | `weights.pytorch_state_dict.architecture` | Input should be a valid URL, relative URL without a base                                                                  |\n|     |                                           |                                                                                                                           |\n| ❌   | `weights.pytorch_state_dict.architecture` | String should match pattern '^.+\\..+$'                                                                                    |\n|     |                                           |                                                                                                                           |\n| ✔️  | `type`                                    | Has expected resource type                                                                                                |\n",
+    "links": [
+        "ilastik/ilastik"
+    ],
+    "status": "failed",
+    "tool": "ilastik"
+}
