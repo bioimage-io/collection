@@ -127,8 +127,17 @@ def create_index() -> Index:
             domain, item_id_wo_domain = item.id.split("/", 1)
             versions: list[IndexItemVersion] = []
             for v in item.versions:
-                url = f"{settings.hypha_base_url}/{domain}/artifacts/{item_id_wo_domain}/files/rdf.yaml?version={v.version}"
-                sha256 = _initialize_report_directory(item, v, url)
+
+                def get_bioimageio_yaml_url(bioimageio_yaml: str) -> str:
+                    return f"{settings.hypha_base_url}/{domain}/artifacts/{item_id_wo_domain}/files/{bioimageio_yaml}?version={v.version}"
+
+                url = get_bioimageio_yaml_url("bioimageio.yaml")
+                try:
+                    sha256 = _initialize_report_directory(item, v, url)
+                except Exception:
+                    url = get_bioimageio_yaml_url("rdf.yaml")
+                    sha256 = _initialize_report_directory(item, v, url)
+
                 versions.append(
                     IndexItemVersion(
                         version=v.version,
