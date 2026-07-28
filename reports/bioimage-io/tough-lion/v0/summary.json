@@ -1,0 +1,150 @@
+{
+    "rdf_content": {
+        "format_version": "0.5.4",
+        "type": "model",
+        "name": "DnCNN Blind Gaussian Denoiser for Fluorescence Microscopy",
+        "description": "A 20-layer fully-convolutional residual network (DnCNN) for blind Gaussian noise removal in 2D grayscale fluorescence microscopy images. The network predicts the noise component and subtracts it from the input, producing a denoised image without requiring knowledge of the noise level.",
+        "license": "MIT",
+        "authors": [
+            {
+                "name": "Kai Zhang",
+                "github_user": "cszn",
+                "affiliation": "ETH Zurich"
+            }
+        ],
+        "cite": [
+            {
+                "text": "K. Zhang, W. Zuo, Y. Chen, D. Meng, L. Zhang. Beyond a Gaussian Denoiser: Residual Learning of Deep CNN for Image Denoising. IEEE Transactions on Image Processing, 2017.",
+                "doi": "10.1109/TIP.2017.2662206"
+            },
+            {
+                "text": "KAIR: Image restoration toolbox. https://github.com/cszn/KAIR",
+                "url": "https://github.com/cszn/KAIR"
+            }
+        ],
+        "git_repo": "https://github.com/cszn/KAIR",
+        "tags": [
+            "denoising",
+            "fluorescence",
+            "2D",
+            "pytorch",
+            "torchscript",
+            "grayscale",
+            "restoration",
+            "dncnn",
+            "widefield",
+            "confocal"
+        ],
+        "documentation": "README.md",
+        "covers": [
+            "cover.png"
+        ],
+        "timestamp": "2026-04-16T00:00:00+00:00",
+        "inputs": [
+            {
+                "id": "raw",
+                "description": "Noisy 2D grayscale fluorescence image, normalized to [0,1]",
+                "axes": [
+                    {
+                        "type": "batch",
+                        "size": 1
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "raw_fluorescence"
+                        ]
+                    },
+                    {
+                        "type": "space",
+                        "id": "y",
+                        "size": 256
+                    },
+                    {
+                        "type": "space",
+                        "id": "x",
+                        "size": 256
+                    }
+                ],
+                "test_tensor": {
+                    "source": "test_input.npy",
+                    "sha256": "e307685a4df176ac68e7f602d99b363a413100be10fe99446ff379ab482dc71c"
+                },
+                "preprocessing": [
+                    {
+                        "id": "scale_range",
+                        "kwargs": {
+                            "axes": [
+                                "y",
+                                "x"
+                            ],
+                            "min_percentile": 0,
+                            "max_percentile": 100
+                        }
+                    },
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    }
+                ]
+            }
+        ],
+        "outputs": [
+            {
+                "id": "denoised",
+                "description": "Denoised 2D grayscale image in [0,1]",
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "denoised_fluorescence"
+                        ]
+                    },
+                    {
+                        "type": "space",
+                        "id": "y",
+                        "size": {
+                            "tensor_id": "raw",
+                            "axis_id": "y"
+                        }
+                    },
+                    {
+                        "type": "space",
+                        "id": "x",
+                        "size": {
+                            "tensor_id": "raw",
+                            "axis_id": "x"
+                        }
+                    }
+                ],
+                "test_tensor": {
+                    "source": "test_output.npy",
+                    "sha256": "e9599470bb31f6fc6023b70fa843a8919b0ff12678fe684c6e612e06c04bb89e"
+                },
+                "postprocessing": [
+                    {
+                        "id": "clip",
+                        "kwargs": {
+                            "min": 0.0,
+                            "max": 1.0
+                        }
+                    }
+                ]
+            }
+        ],
+        "weights": {
+            "torchscript": {
+                "source": "weights.pt",
+                "sha256": "c1bc1ade186a645dc58291df87232f3827ab69ece6f85f12c3441cb2c44c6e66",
+                "pytorch_version": "1.13.1"
+            }
+        }
+    },
+    "rdf_yaml_sha256": "ca4c0b64d18e677133f53ee4dac4c30fd92ec76036a5cb962083594c8f7e15c3",
+    "status": "untested"
+}

@@ -1,0 +1,175 @@
+{
+    "rdf_content": {
+        "format_version": "0.5.10",
+        "type": "model",
+        "name": "NAFNet-GAN Poisson-Gaussian Microscopy Denoiser",
+        "description": "NAFNet-GAN is a supervised denoising model for 2D fluorescence microscopy images affected by realistic Poisson-Gaussian noise. It was developed for the AI4Life Microscopy Supervised Denoising Challenge 2025 and presented at ISBI 2026. The model was trained on the Poisson-Gaussian microscopy dataset, which includes confocal, two-photon, and widefield images from diverse biological samples. It uses a NAFNet-based adversarial framework to reduce noise while preserving fine image structures and the original input intensity range.",
+        "authors": [
+            {
+                "name": "Guillermo Rey-Paniagua",
+                "affiliation": "Universidad Carlos III de Madrid, Getafe, Madrid, Spain",
+                "orcid": "0009-0001-1903-2892"
+            },
+            {
+                "name": "Dariusz Lachowski",
+                "affiliation": "Universidad Carlos III de Madrid, Getafe, Madrid, Spain",
+                "orcid": "0000-0003-1194-8019"
+            },
+            {
+                "name": "Arrate Muñoz-Barrutia",
+                "affiliation": "Universidad Carlos III de Madrid; Instituto de Investigación Sanitaria Gregorio Marañón, Madrid, Spain",
+                "orcid": "0000-0002-1573-1661"
+            }
+        ],
+        "license": "CC-BY-NC-4.0",
+        "documentation": "README.md",
+        "covers": [
+            "cover.jpg"
+        ],
+        "cite": [
+            {
+                "text": "Rey-Paniagua, Lachowski, and Muñoz-Barrutia. NAFNet-GAN: An Adversarial Framework for Supervised Fluorescence Microscopy Denoising. ISBI.",
+                "url": "https://github.com/GolpedeRemo37/NafNet-in-AI4Life-Microscopy-Supervised-Denoising-Challenge",
+                "doi": "10.1109/ISBI61048.2026.11515733"
+            },
+            {
+                "text": "AI4Life Microscopy Supervised Denoising Challenge 2025",
+                "url": "https://ai4life-mdc25.grand-challenge.org/"
+            }
+        ],
+        "git_repo": "https://github.com/GolpedeRemo37/NafNet-in-AI4Life-Microscopy-Supervised-Denoising-Challenge",
+        "tags": [
+            "fluorescence-microscopy",
+            "denoising",
+            "restoration",
+            "poisson-gaussian-noise",
+            "confocal",
+            "two-photon",
+            "widefield",
+            "nafnet",
+            "gan",
+            "ai4life",
+            "isbi",
+            "pytorch",
+            "torchscript",
+            "deepimagej"
+        ],
+        "timestamp": "2026-06-25T00:00:00+02:00",
+        "config": {},
+        "inputs": [
+            {
+                "id": "input",
+                "description": "Single-channel 2D noisy microscopy image in its original intensity range.",
+                "axes": [
+                    {
+                        "type": "batch",
+                        "size": 1
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "noisy_intensity"
+                        ]
+                    },
+                    {
+                        "id": "y",
+                        "type": "space",
+                        "size": {
+                            "min": 16,
+                            "step": 16
+                        }
+                    },
+                    {
+                        "id": "x",
+                        "type": "space",
+                        "size": {
+                            "min": 16,
+                            "step": 16
+                        }
+                    }
+                ],
+                "preprocessing": [
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    }
+                ],
+                "test_tensor": {
+                    "source": "test_input.npy",
+                    "sha256": "97d42d182d126d699b6e764d5efaca8af9e180087ea0152614a60b572ecc31ca"
+                },
+                "sample_tensor": {
+                    "source": "sample_input.png",
+                    "sha256": "c4acd1b2dee9636da2af69116454ed0c7735e3d3e6bec092195caa05d35d296e"
+                }
+            }
+        ],
+        "outputs": [
+            {
+                "id": "output",
+                "description": "Denoised float32 image restored to the input intensity range.",
+                "axes": [
+                    {
+                        "type": "batch",
+                        "size": 1
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "denoised_intensity"
+                        ]
+                    },
+                    {
+                        "id": "y",
+                        "type": "space",
+                        "size": {
+                            "tensor_id": "input",
+                            "axis_id": "y"
+                        }
+                    },
+                    {
+                        "id": "x",
+                        "type": "space",
+                        "size": {
+                            "tensor_id": "input",
+                            "axis_id": "x"
+                        }
+                    }
+                ],
+                "postprocessing": [
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    }
+                ],
+                "test_tensor": {
+                    "source": "test_output.npy",
+                    "sha256": "f1cb70e006c664524b0e59f673c1a3b98dd3379cad64501ef5cd1b55f7e875aa"
+                },
+                "sample_tensor": {
+                    "source": "sample_output.png",
+                    "sha256": "7b4ec2c2323f17d15b1a52390d8581d1331d21748805446ffae8ac684daaf7c6"
+                }
+            }
+        ],
+        "weights": {
+            "torchscript": {
+                "source": "weights-torchscript.pt",
+                "sha256": "085befb2c2a9812a6b6225934cc267b9c0c588ba755059212d6923fabe5baba3",
+                "pytorch_version": "2.0.0",
+                "comment": "Scripted with PyTorch 2.0.0 for compatibility with the PyTorch 2.0.0 JDLL engine installed in the tested Fiji/DeepImageJ environment."
+            }
+        },
+        "uploader": {
+            "email": "guillerm@pa.uc3m.es"
+        },
+        "id": "lucky-boar",
+        "id_emoji": "🐗"
+    },
+    "rdf_yaml_sha256": "833fb3b22e3daa02a5a33f00b52ef2de2e1bbb3379dbfc96ca195c038d6e4d4e",
+    "status": "untested"
+}

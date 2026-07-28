@@ -1,0 +1,177 @@
+{
+    "rdf_content": {
+        "format_version": "0.5.10",
+        "type": "model",
+        "name": "NAFNet-GAN Planaria Spinning-Disk Denoiser",
+        "description": "NAFNet-GAN is a supervised denoising model for single 2D slices from CARE Schmidtea mediterranea fluorescence microscopy stacks acquired with spinning-disk microscopy. It was developed for Dataset 1 of the AI4Life Microscopy Supervised Denoising Challenge 2025 and presented at ISBI 2026 in the paper “NAFNet-GAN: An Adversarial Framework for Supervised Fluorescence Microscopy Denoising.” The model uses a NAFNet-based adversarial framework to reduce low-light microscopy noise while preserving biological structures and restoring the original input intensity range.",
+        "authors": [
+            {
+                "name": "Guillermo Rey-Paniagua",
+                "affiliation": "Universidad Carlos III de Madrid, Getafe, Madrid, Spain",
+                "orcid": "0009-0001-1903-2892"
+            },
+            {
+                "name": "Dariusz Lachowski",
+                "affiliation": "Universidad Carlos III de Madrid, Getafe, Madrid, Spain",
+                "orcid": "0000-0003-1194-8019"
+            },
+            {
+                "name": "Arrate Muñoz-Barrutia",
+                "affiliation": "Universidad Carlos III de Madrid; Instituto de Investigación Sanitaria Gregorio Marañón, Madrid, Spain",
+                "orcid": "0000-0002-1573-1661"
+            }
+        ],
+        "license": "CC-BY-NC-4.0",
+        "documentation": "README.md",
+        "covers": [
+            "cover.jpg"
+        ],
+        "cite": [
+            {
+                "text": "Rey-Paniagua, Lachowski, and Muñoz-Barrutia. NAFNet-GAN: An Adversarial Framework for Supervised Fluorescence Microscopy Denoising. ISBI.",
+                "url": "https://github.com/GolpedeRemo37/NafNet-in-AI4Life-Microscopy-Supervised-Denoising-Challenge",
+                "doi": "10.1109/ISBI61048.2026.11515733"
+            },
+            {
+                "text": "AI4Life Microscopy Supervised Denoising Challenge 2025",
+                "url": "https://ai4life-mdc25.grand-challenge.org/"
+            }
+        ],
+        "git_repo": "https://github.com/GolpedeRemo37/NafNet-in-AI4Life-Microscopy-Supervised-Denoising-Challenge",
+        "tags": [
+            "fluorescence-microscopy",
+            "denoising",
+            "restoration",
+            "schmidtea-mediterranea",
+            "planaria",
+            "spinning-disk",
+            "care-dataset",
+            "2d-slices",
+            "mixed-crops",
+            "nafnet",
+            "gan",
+            "ai4life",
+            "isbi",
+            "pytorch",
+            "torchscript",
+            "deepimagej"
+        ],
+        "timestamp": "2026-06-25T00:00:00+02:00",
+        "config": {},
+        "inputs": [
+            {
+                "id": "input",
+                "description": "Single-channel 2D noisy microscopy image in its original intensity range.",
+                "axes": [
+                    {
+                        "type": "batch",
+                        "size": 1
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "noisy_intensity"
+                        ]
+                    },
+                    {
+                        "id": "y",
+                        "type": "space",
+                        "size": {
+                            "min": 16,
+                            "step": 16
+                        }
+                    },
+                    {
+                        "id": "x",
+                        "type": "space",
+                        "size": {
+                            "min": 16,
+                            "step": 16
+                        }
+                    }
+                ],
+                "preprocessing": [
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    }
+                ],
+                "test_tensor": {
+                    "source": "test_input.npy",
+                    "sha256": "e102dee1a7776b4ef5b7f61009fcfe4b41676fc4d767df96bf46a93ae6f7ec20"
+                },
+                "sample_tensor": {
+                    "source": "sample_input.png",
+                    "sha256": "644d2b329c7684257c07a405bdcbecf397e19b910f1df6b6024d26b6a62d9563"
+                }
+            }
+        ],
+        "outputs": [
+            {
+                "id": "output",
+                "description": "Denoised float32 image restored to the input intensity range.",
+                "axes": [
+                    {
+                        "type": "batch",
+                        "size": 1
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "denoised_intensity"
+                        ]
+                    },
+                    {
+                        "id": "y",
+                        "type": "space",
+                        "size": {
+                            "tensor_id": "input",
+                            "axis_id": "y"
+                        }
+                    },
+                    {
+                        "id": "x",
+                        "type": "space",
+                        "size": {
+                            "tensor_id": "input",
+                            "axis_id": "x"
+                        }
+                    }
+                ],
+                "postprocessing": [
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    }
+                ],
+                "test_tensor": {
+                    "source": "test_output.npy",
+                    "sha256": "d3b8b1b830290ebb2aae26fc2f158fcfa5bb73d517484cc0a2c530a146a2a4cf"
+                },
+                "sample_tensor": {
+                    "source": "sample_output.png",
+                    "sha256": "4d808cb375d138e4846b56ee6f6d81b3e98d331d800ccd5de7adb673e163943c"
+                }
+            }
+        ],
+        "weights": {
+            "torchscript": {
+                "source": "weights-torchscript.pt",
+                "sha256": "18eb15a0209fb9c6a9d06e9ce9cb7d0f797955409f7418f63856239778dea1df",
+                "pytorch_version": "2.0.0",
+                "comment": "Scripted with PyTorch 2.0.0 for compatibility with the PyTorch 2.0.0 JDLL engine installed in the tested Fiji/DeepImageJ environment."
+            }
+        },
+        "uploader": {
+            "email": "guillerm@pa.uc3m.es"
+        },
+        "id": "determined-cricket",
+        "id_emoji": "🦗"
+    },
+    "rdf_yaml_sha256": "1ab503678ff93693315d0548ae20825dd0d33ed31202a6986e4354d086d15a15",
+    "status": "untested"
+}

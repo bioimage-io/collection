@@ -1,0 +1,198 @@
+{
+    "rdf_content": {
+        "name": "3D Nuclei Denoising",
+        "description": "This model was trained using Noise2Void (N2V) in CAREamics to denoise 3D images of nuclear mScarlet signal. It was developed as part of AI4Life Open Calls Project 11: 3D Matrix Motility Map (3DM³).",
+        "covers": [
+            "cover.png"
+        ],
+        "authors": [
+            {
+                "name": "Florian Meyer"
+            }
+        ],
+        "attachments": [
+            {
+                "source": "careamics.yaml",
+                "sha256": "d1ec003f952363904c4dfff6581c336777df01f6054c04072faf255fdb52f04c"
+            }
+        ],
+        "cite": [
+            {
+                "text": "Krull, A., Buchholz, T.O. and Jug, F., 2019. \"Noise2Void - Learning denoising from single noisy images\". In Proceedings of the IEEE/CVF conference on computer vision and pattern recognition (pp. 2129-2137).",
+                "doi": "10.1109/cvpr.2019.00223"
+            }
+        ],
+        "license": "CC-BY-4.0",
+        "links": [
+            "https://github.com/CAREamics/careamics",
+            "https://careamics.github.io/latest/"
+        ],
+        "tags": [
+            "denoising",
+            "restoration",
+            "unet",
+            "3d",
+            "careamics",
+            "pytorch",
+            "noise2void",
+            "nuclei",
+            "spheroid"
+        ],
+        "version": "0.3.2",
+        "format_version": "0.5.10",
+        "type": "model",
+        "documentation": "README.md",
+        "inputs": [
+            {
+                "id": "input",
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "channel"
+                        ]
+                    },
+                    {
+                        "size": 12,
+                        "id": "z",
+                        "type": "space"
+                    },
+                    {
+                        "size": 256,
+                        "id": "y",
+                        "type": "space"
+                    },
+                    {
+                        "size": 256,
+                        "id": "x",
+                        "type": "space"
+                    }
+                ],
+                "test_tensor": {
+                    "source": "inputs.npy",
+                    "sha256": "93d0c887f6d02c1ca2adc334e1257c1e057d9d84545b3aaa9dfd906da2be794c"
+                },
+                "preprocessing": [
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    },
+                    {
+                        "id": "fixed_zero_mean_unit_variance",
+                        "kwargs": {
+                            "mean": [
+                                27.00178337097168
+                            ],
+                            "std": [
+                                144.6224095159056
+                            ],
+                            "axis": "channel"
+                        }
+                    },
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    }
+                ]
+            }
+        ],
+        "outputs": [
+            {
+                "id": "prediction",
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "channel"
+                        ]
+                    },
+                    {
+                        "size": 12,
+                        "id": "z",
+                        "type": "space"
+                    },
+                    {
+                        "size": 256,
+                        "id": "y",
+                        "type": "space"
+                    },
+                    {
+                        "size": 256,
+                        "id": "x",
+                        "type": "space"
+                    }
+                ],
+                "test_tensor": {
+                    "source": "outputs.npy",
+                    "sha256": "378e68d42f9795fae9d775a8bb4ec093d9b2c19b07ab417d792ddfc61e40de24"
+                },
+                "postprocessing": [
+                    {
+                        "id": "fixed_zero_mean_unit_variance",
+                        "kwargs": {
+                            "mean": [
+                                -0.1867053887060057
+                            ],
+                            "std": [
+                                0.006913557684612924
+                            ],
+                            "axis": "channel"
+                        }
+                    },
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    }
+                ]
+            }
+        ],
+        "weights": {
+            "pytorch_state_dict": {
+                "source": "weights.pth",
+                "sha256": "7872c22d5658f96a5a2b05d7d82c334c800989c0fda59ac389cb9e9805d9a980",
+                "architecture": {
+                    "callable": "UNet",
+                    "kwargs": {
+                        "conv_dims": 3,
+                        "num_classes": 1,
+                        "in_channels": 1,
+                        "depth": 2,
+                        "num_channels_init": 32,
+                        "residual": false,
+                        "final_activation": "None",
+                        "n2v2": false,
+                        "independent_channels": true,
+                        "use_batch_norm": true
+                    },
+                    "import_from": "careamics.models.unet"
+                },
+                "pytorch_version": "2.9.1+cu126",
+                "dependencies": {
+                    "source": "environment.yml",
+                    "sha256": "69470404150e5d9d9ffca408cdf8deb6aecf708f8589c833ffed789924d3d494"
+                }
+            }
+        },
+        "config": {},
+        "uploader": {
+            "email": "florianm.mengen@hotmail.com"
+        },
+        "git_repo": "https://github.com/ai4life-opencalls/oc_3_project_11",
+        "id": "vain-shark",
+        "id_emoji": "🦈"
+    },
+    "rdf_yaml_sha256": "bf9ad5fc82bd7109e1c31be368a3ac449cfc835619837cf98d4236d74ed2eff6",
+    "status": "untested"
+}
