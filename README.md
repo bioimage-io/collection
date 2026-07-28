@@ -2,7 +2,7 @@
 
 # collection
 
-This repository is used to add information to the resources displayed on [bioimage.io][https://bioimage.io].
+This repository is used to add information to the resources displayed on [bioimage.io](https://bioimage.io).
 Primarily it adds information about software compatibility of bioimage.io community partners.
 
 ## Maintaining the bioimage.io Collection
