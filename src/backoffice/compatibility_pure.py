@@ -2,7 +2,8 @@
 
 Usable when installing backoffice without dependencies."""
 
-from typing import Any, Optional, Sequence
+from collections.abc import Sequence
+from typing import Any, Optional
 
 from typing_extensions import Literal, TypedDict
 

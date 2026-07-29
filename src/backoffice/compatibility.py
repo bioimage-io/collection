@@ -1,7 +1,8 @@
 """data models for compatibility reports"""
 
 import warnings
-from typing import Any, List, Literal, Mapping, Optional, Sequence, Union
+from collections.abc import Mapping, Sequence
+from typing import Any, List, Literal, Optional, Union
 
 from annotated_types import Interval
 from packaging.version import Version
@@ -14,7 +15,7 @@ except ImportError as e:
         "Please install `backoffice[dev]` or use backoffice.compatibility_pure instead."
     ) from e
 
-from typing_extensions import Annotated
+from typing import Annotated
 
 PartnerToolName = Literal[
     "ilastik",
@@ -40,7 +41,6 @@ ToolNameVersioned = str
 class Node(BaseModel):
     """Base data model with common config"""
 
-    pass
 
 
 class Badge(Node):

@@ -8,7 +8,6 @@ from bioimageio.spec import load_model_description
 from bioimageio.spec.common import Sha256
 from bioimageio.spec.model import AnyModelDescr
 from bioimageio.spec.model.v0_5 import AxisId, ModelDescr
-
 from careamics import CAREamist
 from careamics import __version__ as CAREAMICS_VERSION
 
@@ -84,7 +83,7 @@ def check_careamics_can_load(
     except (ValueError, pydantic.ValidationError):
         report = ToolCompatibilityReportDict(
             status="failed",
-            error="Error: {}".format(traceback.format_exc()),
+            error=f"Error: {traceback.format_exc()}",
             details=("Could not load CAREamics configuration or model."),
         )
         return report
@@ -117,7 +116,7 @@ def check_careamics_can_predict(
     except Exception:
         report = ToolCompatibilityReportDict(
             status="failed",
-            error="Error: {}".format(traceback.format_exc()),
+            error=f"Error: {traceback.format_exc()}",
             details=(
                 "Calling prediction failed.\nModel created with CAREamics version: "
                 f"{config.version}."

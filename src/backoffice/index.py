@@ -4,9 +4,10 @@ import hashlib
 import json
 import shutil
 from collections import defaultdict
+from collections.abc import Sequence
 from datetime import datetime
 from pathlib import Path
-from typing import Optional, Sequence
+from typing import Optional
 
 try:
     import httpx

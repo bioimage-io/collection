@@ -18,17 +18,15 @@ Jython script that downloads the wanted model(s) from the Bioimage.io repo and
 creates a macro to run the model(s) downloaded on the sample input with deepimageJ
 """
 
+import argparse
+import json
+import os
 from io.bioimage.modelrunner.bioimageio import BioimageioRepo
 from io.bioimage.modelrunner.bioimageio.description import ModelDescriptorFactory
 from io.bioimage.modelrunner.numpy import DecodeNumpy
 
 from deepimagej.tools import ImPlusRaiManager
-
 from ij import IJ
-
-import os
-import argparse
-import json
 
 MACRO_STR = 'run("DeepImageJ Run", "model_path={model_path} input_path={input_path} output_folder={output_folder} display_output=null")'
 CREATED_INPUT_SAMPLE_NAME = "converted_sample_input_0.tif"

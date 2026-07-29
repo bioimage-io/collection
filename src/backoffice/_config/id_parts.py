@@ -1,6 +1,6 @@
 """describes a file holding all parts to create resource ids"""
 
-from typing import Mapping, Sequence
+from collections.abc import Mapping, Sequence
 
 from pydantic import field_validator
 

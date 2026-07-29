@@ -2,13 +2,12 @@
 Python script that checks that the wanted objects have actually been created and correspond to the expected ones
 """
 
+import argparse
 import json
 import os
-import argparse
-
-from net.imglib2.img.display.imagej import ImageJFunctions
 
 from ij import IJ
+from net.imglib2.img.display.imagej import ImageJFunctions
 
 
 def find_expected_output(outputs_dir, name):

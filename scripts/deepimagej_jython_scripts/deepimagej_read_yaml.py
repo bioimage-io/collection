@@ -17,10 +17,8 @@
 Jython script that checks if a yaml file corresponds to the bioimage.io format and is supported by deepimagej
 """
 
-from io.bioimage.modelrunner.bioimageio.description import ModelDescriptorFactory
-
-
 import argparse
+from io.bioimage.modelrunner.bioimageio.description import ModelDescriptorFactory
 
 # Create the argument parser
 parser = argparse.ArgumentParser()
