@@ -31,7 +31,12 @@ def check_compatibility_biapy_impl(
             {"raw": {"manifest": rdf}}
         )
     else:
-        _, error, error_message, _ = check_bmz_model_compatibility(rdf)
+        # From BiaPy 3.6.8 on, the function returns a dict, so new keys can be
+        # added in the future without breaking this script. Only "error" and
+        # "reason_message" are needed here.
+        compatibility_report = check_bmz_model_compatibility(rdf)
+        error = compatibility_report["error"]
+        error_message = compatibility_report["reason_message"]
 
     status = "passed" if not error else "failed"
     if error:
