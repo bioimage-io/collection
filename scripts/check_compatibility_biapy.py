@@ -17,8 +17,6 @@ def check_compatibility_biapy_impl(
     rdf = get_rdf_content_from_url(source, sha256)
     if rdf.get("type") != "model":
         return ToolCompatibilityReport(
-            tool="biapy",
-            tool_version=biapy.__version__,
             score=0,
             error=None,
             status="not-applicable",
@@ -43,8 +41,6 @@ def check_compatibility_biapy_impl(
         print(f"Reason why BiaPy is not compatible: {error_message}")
 
     return ToolCompatibilityReport(
-        tool="biapy",
-        tool_version=biapy.__version__,
         status=status,
         score=1.0 if status == "passed" else 0.0,
         details=error_message,

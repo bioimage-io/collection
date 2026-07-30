@@ -34,6 +34,8 @@ def check_model_desc_v0_5(
                 "CAREamics compatibility check does not support `bioimageio.spec.v0.4` "
                 + "model desciptions.",
             ),
+            badge=None,
+            links=[],
         )
     else:
         return None
@@ -47,6 +49,8 @@ def check_tagged_careamics(
             status="not-applicable",
             error=None,
             details="'Model' resource not tagged with 'CAREamics' or 'careamics'.",
+            badge=None,
+            links=[],
         )
     else:
         return None
@@ -71,6 +75,8 @@ def check_has_careamics_config(
             status="failed",
             error=None,
             details="CAREamics config file is not present in attachments.",
+            badge=None,
+            links=[],
         )
     else:
         return None
@@ -86,6 +92,8 @@ def check_careamics_can_load(
             status="failed",
             error=f"Error: {traceback.format_exc()}",
             details=("Could not load CAREamics configuration or model."),
+            badge=None,
+            links=[],
         )
         return report
     else:
@@ -122,6 +130,8 @@ def check_careamics_can_predict(
                 "Calling prediction failed.\nModel created with CAREamics version: "
                 f"{config.version}."
             ),
+            badge=None,
+            links=[],
         )
         return report
     else:

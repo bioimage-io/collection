@@ -87,7 +87,6 @@ def check_compatibility_ilastik_impl(
 
     if not isinstance(rdf, dict):
         report = ToolCompatibilityReportDict(
-            tool="ilastik",
             status="failed",
             error=None,
             details="Failed to load resource description.",
@@ -96,7 +95,6 @@ def check_compatibility_ilastik_impl(
         )
     elif rdf["type"] != "model":
         report = ToolCompatibilityReportDict(
-            tool="ilastik",
             status="not-applicable",
             error=None,
             details="only 'model' resources can be used in ilastik.",
@@ -121,7 +119,6 @@ def check_compatibility_ilastik_impl(
             output_len = "missing"
 
         report = ToolCompatibilityReportDict(
-            tool="ilastik",
             status="failed",
             error=f"ilastik only supports a single input/output tensor (found {input_len}/{output_len})",
             details=None,
@@ -160,7 +157,6 @@ def check_compatibility_ilastik_impl(
             )
         )
         report = ToolCompatibilityReportDict(
-            tool="ilastik",
             status=status,
             error=error,
             details=details,

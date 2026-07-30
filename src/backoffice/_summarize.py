@@ -9,17 +9,14 @@ from backoffice.compatibility import (
     TOOL_NAMES,
     CompatibilityScores,
     CompatibilitySummary,
-    ToolCompatibilityReport,
+    ToolCompatibilityReportWithToolInfo,
     ToolName,
     ToolNameVersioned,
     ToolReportDetails,
 )
 from backoffice.index import IndexItem, IndexItemVersion, load_index
-from backoffice.utils import (
-    get_all_tool_report_paths,
-    get_summary,
-    get_summary_file_path,
-)
+from backoffice.utils import get_summary, get_summary_file_path
+from backoffice.utils_pure import get_all_tool_report_paths
 
 
 def summarize_reports():
@@ -44,7 +41,7 @@ def _summarize(item: IndexItem, v: IndexItemVersion):
 
     initial_summary = get_summary(item.id, v.version)
 
-    reports: list[ToolCompatibilityReport] = []
+    reports: list[ToolCompatibilityReportWithToolInfo] = []
     scores: dict[ToolNameVersioned, float] = {}
     metadata_completeness = 0.0
     metadata_format_score = 0.0
@@ -73,11 +70,11 @@ def _summarize(item: IndexItem, v: IndexItemVersion):
                     )
                 del data["tool_version"]
 
-            report = ToolCompatibilityReport(
+            report = ToolCompatibilityReportWithToolInfo(
                 tool=tool, tool_version=tool_version, **data
             )
         except Exception as e:
-            report = ToolCompatibilityReport(
+            report = ToolCompatibilityReportWithToolInfo(
                 tool=tool,
                 tool_version=tool_version,
                 status="failed",
@@ -113,7 +110,7 @@ def _summarize(item: IndexItem, v: IndexItemVersion):
             ):
                 metadata_format_score = 0.5
 
-    tests: dict[ToolName, dict[str, ToolCompatibilityReport]] = {}
+    tests: dict[ToolName, dict[str, ToolCompatibilityReportWithToolInfo]] = {}
     for r in reports:
         tests.setdefault(r.tool, {})[r.tool_version] = r
 
