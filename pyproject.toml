@@ -59,7 +59,6 @@ backoffice = "backoffice.__main__:main"
 ignore = ["BLE001"]
 
 [tool.pyright]
-exclude = ["**/__pycache__"]
 include = ["src", "tests"]
 pythonPlatform = "All"
 pythonVersion = "3.9"
