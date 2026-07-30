@@ -1,6 +1,8 @@
+from __future__ import annotations
+
 import traceback
 from pathlib import Path
-from typing import List, Optional, Protocol
+from typing import Protocol
 
 import pydantic
 from bioimageio.core.digest_spec import get_test_inputs
@@ -18,13 +20,12 @@ from backoffice.compatibility_pure import ToolCompatibilityReportDict
 class CompatibilityCheck_v0_5(Protocol):
     def __call__(
         self, model_desc: ModelDescr, rdf_url: str
-    ) -> Optional[ToolCompatibilityReportDict]:
-        ...
+    ) -> ToolCompatibilityReportDict | None: ...
 
 
 def check_model_desc_v0_5(
     model_desc: AnyModelDescr,
-) -> Optional[ToolCompatibilityReportDict]:
+) -> ToolCompatibilityReportDict | None:
     if not isinstance(model_desc, ModelDescr):
         return ToolCompatibilityReportDict(
             status="not-applicable",
@@ -40,7 +41,7 @@ def check_model_desc_v0_5(
 
 def check_tagged_careamics(
     model_desc: ModelDescr, rdf_url: str
-) -> Optional[ToolCompatibilityReportDict]:
+) -> ToolCompatibilityReportDict | None:
     if ("CAREamics" not in model_desc.tags) and ("careamics" not in model_desc.tags):
         return ToolCompatibilityReportDict(
             status="not-applicable",
@@ -53,7 +54,7 @@ def check_tagged_careamics(
 
 def check_has_careamics_config(
     model_desc: ModelDescr, rdf_url: str
-) -> Optional[ToolCompatibilityReportDict]:
+) -> ToolCompatibilityReportDict | None:
     attachment_file_paths = [
         (
             attachment.source
@@ -77,7 +78,7 @@ def check_has_careamics_config(
 
 def check_careamics_can_load(
     model_desc: ModelDescr, rdf_url: str
-) -> Optional[ToolCompatibilityReportDict]:
+) -> ToolCompatibilityReportDict | None:
     try:
         _ = CAREamist(bmz_path=rdf_url)
     except (ValueError, pydantic.ValidationError):
@@ -93,13 +94,13 @@ def check_careamics_can_load(
 
 def check_careamics_can_predict(
     model_desc: ModelDescr, rdf_url: str
-) -> Optional[ToolCompatibilityReportDict]:
+) -> ToolCompatibilityReportDict | None:
     careamist = CAREamist(bmz_path=rdf_url)
     config = careamist.config
 
     # get input tensor
     input_sample = get_test_inputs(model_desc)
-    input_tensor = list(input_sample.members.values())[0]
+    input_tensor = next(iter(input_sample.members.values()))
     input_tensor = input_tensor.transpose(
         [AxisId("batch"), AxisId("channel"), AxisId("z"), AxisId("y"), AxisId("x")]
         if "Z" in config.data_config.axes
@@ -145,7 +146,7 @@ def check_compatibility_careamics_impl(
         return report
     assert isinstance(model_desc, ModelDescr)
 
-    careamics_compatibility_checks: List[CompatibilityCheck_v0_5] = [
+    careamics_compatibility_checks: list[CompatibilityCheck_v0_5] = [
         check_tagged_careamics,
         check_has_careamics_config,
         check_careamics_can_load,

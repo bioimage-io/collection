@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import argparse
 import json
 import os
@@ -9,7 +11,7 @@ import urllib.request
 from dataclasses import dataclass
 from functools import partial
 from io import BytesIO
-from typing import Any, Dict, Optional
+from typing import Any
 
 import requests
 from ruyaml import YAML
@@ -26,7 +28,7 @@ except ImportError:
 
 class HasContent(Protocol):
     @property
-    def content(self) -> Optional[Dict[Any, Any]]: ...
+    def content(self) -> dict[Any, Any] | None: ...
 
 
 yaml = YAML(typ="safe")
@@ -34,7 +36,7 @@ yaml = YAML(typ="safe")
 
 @dataclass
 class DownloadedRDF:
-    content: Optional[Dict[Any, Any]]
+    content: dict[Any, Any] | None
 
 
 def open_bioimageio_yaml(
@@ -47,7 +49,7 @@ def open_bioimageio_yaml(
 
 def find_expected_output(outputs_dir: str, name: str) -> bool:
     for ff in os.listdir(outputs_dir):
-        if ff.endswith("_" + name + ".tif") or ff.endswith("_" + name + ".tiff"):
+        if ff.endswith(("_" + name + ".tif", "_" + name + ".tiff")):
             return True
     return False
 
@@ -111,8 +113,7 @@ def test_model_deepimagej(
                 yaml_file,
             ],
             check=True,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
+            capture_output=True,
             text=True,
         )
     except BaseException as e:
@@ -143,8 +144,7 @@ def test_model_deepimagej(
                 os.path.join(fiji_path, "models"),
             ],
             check=True,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
+            capture_output=True,
             text=True,
         )
         model_dir = download_result.stdout.strip().splitlines()[-1]
@@ -172,8 +172,7 @@ def test_model_deepimagej(
                 macro_path,
             ],
             check=True,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
+            capture_output=True,
             text=True,
         )
         out_str = run.stdout
@@ -210,8 +209,7 @@ def test_model_deepimagej(
                 model_dir,
             ],
             check=True,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
+            capture_output=True,
             text=True,
         )
     except BaseException as e:

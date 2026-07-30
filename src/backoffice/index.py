@@ -1,4 +1,5 @@
 """Data models and functions for indexing the bioimage.io collection"""
+from __future__ import annotations
 
 import hashlib
 import json
@@ -7,7 +8,6 @@ from collections import defaultdict
 from collections.abc import Sequence
 from datetime import datetime
 from pathlib import Path
-from typing import Optional
 
 try:
     import httpx
@@ -37,13 +37,13 @@ class Node(BaseModel, frozen=True, extra="ignore"):
 
 class ResponseItemVersion(Node, frozen=True):
     version: str
-    comment: Optional[str]
+    comment: str | None
     created_at: datetime
 
 
 class IndexItemVersion(Node, frozen=True):
     version: str
-    comment: Optional[str]
+    comment: str | None
     created_at: datetime
     source: str
     sha256: str
@@ -94,20 +94,20 @@ def create_index() -> Index:
         def request(offset: int) -> Response:
             r = httpx.get(
                 url,
-                params=dict(
-                    parent_id="bioimage-io/bioimage.io",
-                    offset=offset,
-                    pagination=True,
-                    limit=10000,
-                ),
+                params={
+                    "parent_id": "bioimage-io/bioimage.io",
+                    "offset": offset,
+                    "pagination": True,
+                    "limit": 10000,
+                },
                 headers=settings.get_hypha_headers(),
                 timeout=settings.http_timeout,
             )
             try:
                 _ = r.raise_for_status()
-            except Exception as e:
+            except Exception:
                 logger.error(r.json())
-                raise e
+                raise
             else:
                 return Response.model_validate_json(r.content)
 

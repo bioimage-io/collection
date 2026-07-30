@@ -1,9 +1,10 @@
 """Generate a markdown overview page of all compatibility reports."""
+from __future__ import annotations
 
 import html
 import json
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any
 
 import mkdocs_gen_files
 from bioimageio.spec.summary import ValidationSummary
@@ -478,8 +479,8 @@ def generate_compatibility_overview(
 
         # Generate report page if core details are available and determine latest core-version score
         core_report_page = None
-        core_latest_str: Optional[str] = None
-        core_latest_version: Optional[str] = None
+        core_latest_str: str | None = None
+        core_latest_version: str | None = None
         if "tests" in summary and "bioimageio.core" in summary["tests"]:
             # Get the latest core report
             core_tests = summary["tests"]["bioimageio.core"]
@@ -494,7 +495,7 @@ def generate_compatibility_overview(
                 core_report = core_tests[latest_core_version]
 
                 # Determine latest core-version score if available
-                latest_score_val: Optional[float] = None
+                latest_score_val: float | None = None
                 if isinstance(core_report, dict):
                     # try common fields
                     score_val = core_report.get("score")

@@ -20,7 +20,7 @@ except ImportError:
 if TYPE_CHECKING:
     from .compatibility import ToolCompatibilityReport
     from .compatibility_pure import (
-        ToolCompatibilityReportDict as ToolCompatibilityReportDict,
+        ToolCompatibilityReportDict,
     )
 
 

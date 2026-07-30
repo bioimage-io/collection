@@ -1,6 +1,8 @@
+from __future__ import annotations
+
 from collections.abc import Sequence
 from pathlib import Path
-from typing import Annotated, Union
+from typing import Annotated
 
 from pydantic import Field, HttpUrl, SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -24,7 +26,7 @@ class Settings(BaseSettings, extra="ignore"):
         }
 
     collection_config: Annotated[
-        Union[HttpUrl, Path], Field(union_mode="left_to_right")
+        HttpUrl | Path, Field(union_mode="left_to_right")
     ] = Path(__file__).parent / "../../bioimageio_collection_config.json"
     """collection config"""
 

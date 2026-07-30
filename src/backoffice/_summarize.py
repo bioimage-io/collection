@@ -1,6 +1,5 @@
 import json
 import warnings
-from typing import Dict
 
 from loguru import logger
 from packaging.version import Version
@@ -114,7 +113,7 @@ def _summarize(item: IndexItem, v: IndexItemVersion):
             ):
                 metadata_format_score = 0.5
 
-    tests: Dict[ToolName, Dict[str, ToolCompatibilityReport]] = {}
+    tests: dict[ToolName, dict[str, ToolCompatibilityReport]] = {}
     for r in reports:
         tests.setdefault(r.tool, {})[r.tool_version] = r
 

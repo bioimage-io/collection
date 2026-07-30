@@ -12,7 +12,7 @@ from net.imglib2.img.display.imagej import ImageJFunctions
 
 def find_expected_output(outputs_dir, name):
     for ff in os.listdir(outputs_dir):
-        if ff.endswith("_" + name + ".tif") or ff.endswith("_" + name + ".tiff"):
+        if ff.endswith(("_" + name + ".tif", "_" + name + ".tiff")):
             return os.path.join(outputs_dir, ff)
     raise Exception("Expected output for " + name + " not found")
 
