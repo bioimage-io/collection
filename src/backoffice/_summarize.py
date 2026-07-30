@@ -1,5 +1,9 @@
+from __future__ import annotations
+
 import json
 import warnings
+from concurrent.futures import Future, ThreadPoolExecutor, as_completed
+from typing import Any
 
 from loguru import logger
 from packaging.version import Version
@@ -25,15 +29,17 @@ def summarize_reports():
         for v in item.versions:
             _summarize(item, v)
 
-    # TODO: Parallelize?
-    # with ThreadPoolExecutor() as executor:
-    #     futures: list[Future[Any]] = []
-    #     for item in index.items:
-    #         for v in item.versions:
-    #             futures.append(executor.submit(_summarize, item, v))
 
-    #     for _ in tqdm(as_completed(futures), total=len(futures)):
-    #         pass
+def summarize_reports_parallel(max_workers: int | None = None):
+    index = load_index()
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        futures: list[Future[Any]] = []
+        for item in index.items:
+            for v in item.versions:
+                futures.append(executor.submit(_summarize, item, v))
+
+        for _ in tqdm(as_completed(futures), total=len(futures)):
+            pass
 
 
 def _summarize(item: IndexItem, v: IndexItemVersion):

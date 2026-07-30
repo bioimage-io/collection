@@ -86,7 +86,7 @@ with open(macro_path, "a") as file:
         test_name = descriptor.getInputTensors().get(0).getTestTensorName()
         print(descriptor.getName() + ": " + test_name)
         if test_name is None:
-            raise Exception(
+            raise RuntimeError(
                 "There are no test inputs for model: " + descriptor.getModelID()
             )
         convert_npy_to_tif(
@@ -113,7 +113,7 @@ for n in range(descriptor.getOutputTensors().size()):
     if test_name is None:
         sample_name = descriptor.getOutputTensors().get(n).getSampleTensorName()
         if sample_name is None:
-            raise Exception(
+            raise RuntimeError(
                 "There are no test ouputs for model: " + descriptor.getModelID()
             )
     else:

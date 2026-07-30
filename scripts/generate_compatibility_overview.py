@@ -1,4 +1,5 @@
 """Generate a markdown overview page of all compatibility reports."""
+
 from __future__ import annotations
 
 import html
@@ -10,6 +11,7 @@ import mkdocs_gen_files
 from bioimageio.spec.summary import ValidationSummary
 from packaging.version import parse as parse_version
 
+from backoffice.compatibility import CompatibilitySummary, ToolReportDetails
 from backoffice.index import load_index
 from backoffice.utils_pure import get_summary_file_path
 
@@ -20,7 +22,7 @@ nav = mkdocs_gen_files.nav.Nav()
 def generate_compatibility_page(
     resource_id: str,
     version: str,
-    core_details: dict[str, Any],
+    core_details: ToolReportDetails,
     output_dir: Path,
 ) -> Path:
     """Generate an individual compatibility report with ValidationSummary HTML.
@@ -427,15 +429,13 @@ def generate_compatibility_overview(
         summary_path = get_summary_file_path(item_id, latest_version)
         assert summary_path.exists(), summary_path
         with summary_path.open(encoding="utf-8") as f:
-            summary: dict[str, Any] = json.load(f)
+            summary_data = json.load(f)
+
+        summary = CompatibilitySummary.model_validate(summary_data)
 
         # Extract scores
-        scores = summary.get("scores", {})
-        status = summary.get("status", "unknown")
-
-        core_compat = scores.get("core_compatibility", 0.0)
-        overall_compat = scores.get("overall_compatibility", 0.0)
-        metadata_completeness = scores.get("metadata_completeness", 0.0)
+        scores = summary.scores
+        status = summary.status
 
         # Collect statistics by type
         if item_type not in stats_by_type:
@@ -452,12 +452,12 @@ def generate_compatibility_overview(
         stats_by_type[item_type]["count"] += 1
         if status == "passed":
             stats_by_type[item_type]["passed"] += 1
-        stats_by_type[item_type]["metadata_scores"].append(metadata_completeness)
-        stats_by_type[item_type]["core_scores"].append(core_compat)
-        stats_by_type[item_type]["overall_scores"].append(overall_compat)
+        stats_by_type[item_type]["metadata_scores"].append(scores.metadata_completeness)
+        stats_by_type[item_type]["core_scores"].append(scores.core_compatibility)
+        stats_by_type[item_type]["overall_scores"].append(scores.overall_compatibility)
 
         # Get tool compatibility scores
-        tool_compat = scores.get("tool_compatibility", {})
+        tool_compat = scores.tool_compatibility
         biapy_score = tool_compat.get("biapy", 0.0)
         careamics_score = tool_compat.get("careamics", 0.0)
         ilastik_score = tool_compat.get("ilastik", 0.0)
@@ -481,9 +481,9 @@ def generate_compatibility_overview(
         core_report_page = None
         core_latest_str: str | None = None
         core_latest_version: str | None = None
-        if "tests" in summary and "bioimageio.core" in summary["tests"]:
+        if "bioimageio.core" in summary.tests:
             # Get the latest core report
-            core_tests = summary["tests"]["bioimageio.core"]
+            core_tests = summary.tests["bioimageio.core"]
             if core_tests:
                 # Determine latest core version by semantic version sort
                 try:
@@ -493,54 +493,25 @@ def generate_compatibility_overview(
                     latest_core_version = next(iter(core_tests.keys()))
 
                 core_report = core_tests[latest_core_version]
+                latest_score_val = core_report.score
 
-                # Determine latest core-version score if available
-                latest_score_val: float | None = None
-                if isinstance(core_report, dict):
-                    # try common fields
-                    score_val = core_report.get("score")
-                    if isinstance(score_val, (int, float, str)):
-                        try:
-                            latest_score_val = float(score_val)
-                        except Exception:
-                            latest_score_val = None
-                    else:
-                        details_obj = core_report.get("details")
-                        if isinstance(details_obj, dict):
-                            try:
-                                vs = ValidationSummary.model_validate(details_obj)
-                                # Prefer an attribute named 'score' if present, otherwise try overall/compatibility
-                                latest_score_val = getattr(vs, "score", None)
-                                if latest_score_val is None:
-                                    latest_score_val = getattr(vs, "overall", None)
-                                if latest_score_val is None:
-                                    latest_score_val = getattr(
-                                        vs, "compatibility", None
-                                    )
-                                if latest_score_val is not None:
-                                    latest_score_val = float(latest_score_val)
-                            except Exception:
-                                pass
+                details_for_page = core_report.details
+                assert isinstance(details_for_page, ToolReportDetails)
+                try:
+                    report_path = generate_compatibility_page(
+                        short_id,
+                        latest_version,
+                        details_for_page,
+                        output_path,
+                    )
+                    core_report_page = str(report_path).replace("\\", "/")
+                except Exception as e:
+                    print(
+                        f"Warning: Failed to generate report page for {item_id}/{latest_version}: {e}"
+                    )
 
-                    # Generate report page from details if available
-                    details_for_page = core_report.get("details")
-                    if isinstance(details_for_page, dict):
-                        try:
-                            report_path = generate_compatibility_page(
-                                short_id,
-                                latest_version,
-                                details_for_page,
-                                output_path,
-                            )
-                            core_report_page = str(report_path).replace("\\", "/")
-                        except Exception as e:
-                            print(
-                                f"Warning: Failed to generate report page for {item_id}/{latest_version}: {e}"
-                            )
-
-                if latest_score_val is not None:
-                    core_latest_str = f"{latest_score_val:.2f}"
-                    core_latest_version = str(latest_core_version)
+                core_latest_str = f"{latest_score_val:.2f}"
+                core_latest_version = str(latest_core_version)
 
         row_data = {
             "id": short_id,  # Use short ID without prefix
@@ -548,15 +519,15 @@ def generate_compatibility_overview(
             "type": item_type,
             "version": latest_version,
             "status": status,
-            "metadata": metadata_completeness,
-            "metadata_str": f"{metadata_completeness:.2f}",
-            "core": core_compat,
-            "core_str": f"{core_compat:.2f}",
+            "metadata": scores.metadata_completeness,
+            "metadata_str": f"{scores.metadata_completeness:.2f}",
+            "core": scores.core_compatibility,
+            "core_str": f"{scores.core_compatibility:.2f}",
             "core_report_page": core_report_page,
             "core_latest_str": core_latest_str,
             "core_latest_version": core_latest_version,
-            "overall": overall_compat,
-            "overall_str": f"{overall_compat:.2f}",
+            "overall": scores.overall_compatibility,
+            "overall_str": f"{scores.overall_compatibility:.2f}",
             "biapy": biapy_score,
             "biapy_str": f"{biapy_score:.2f}",
             "careamics": careamics_score,

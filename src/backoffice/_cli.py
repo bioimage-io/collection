@@ -1,9 +1,11 @@
+from __future__ import annotations
+
 import sys
 
 from pydantic import BaseModel
 from pydantic_settings import BaseSettings, CliSubCommand
 
-from ._summarize import summarize_reports
+from ._summarize import summarize_reports, summarize_reports_parallel
 from .index import create_index
 
 
@@ -18,10 +20,15 @@ class IndexCmd(CmdBase):
 
 
 class SummarizeCmd(CmdBase):
+    max_workers: int | None = None
+    """Maximum number of worker threads to use for parallel processing."""
+
     def run(self):
         """Conflate tool summaries"""
-
-        summarize_reports()
+        if self.max_workers == 0:
+            summarize_reports()
+        else:
+            summarize_reports_parallel(max_workers=self.max_workers)
 
 
 class Backoffice(

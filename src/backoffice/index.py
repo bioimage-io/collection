@@ -1,4 +1,5 @@
 """Data models and functions for indexing the bioimage.io collection"""
+
 from __future__ import annotations
 
 import hashlib
@@ -128,15 +129,18 @@ def create_index() -> Index:
             domain, item_id_wo_domain = item.id.split("/", 1)
             versions: list[IndexItemVersion] = []
             for v in item.versions:
+                bioimageio_yaml_base_url = f"{settings.hypha_base_url}/{domain}/artifacts/{item_id_wo_domain}/files/{{bioimageio_yaml}}?version={v.version}"
 
-                def get_bioimageio_yaml_url(bioimageio_yaml: str) -> str:
-                    return f"{settings.hypha_base_url}/{domain}/artifacts/{item_id_wo_domain}/files/{bioimageio_yaml}?version={v.version}"
+                def get_bioimageio_yaml_url(base_url: str, bioimageio_yaml: str) -> str:
+                    return base_url.format(bioimageio_yaml=bioimageio_yaml)
 
-                url = get_bioimageio_yaml_url("bioimageio.yaml")
+                url = get_bioimageio_yaml_url(
+                    bioimageio_yaml_base_url, "bioimageio.yaml"
+                )
                 try:
                     sha256 = _initialize_report_directory(item, v, url)
                 except Exception:
-                    url = get_bioimageio_yaml_url("rdf.yaml")
+                    url = get_bioimageio_yaml_url(bioimageio_yaml_base_url, "rdf.yaml")
                     sha256 = _initialize_report_directory(item, v, url)
 
                 versions.append(
