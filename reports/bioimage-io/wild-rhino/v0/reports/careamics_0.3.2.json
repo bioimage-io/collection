@@ -1,0 +1,9 @@
+{
+    "badge": null,
+    "details": "CAREamics config file is not present in attachments.",
+    "error": null,
+    "links": [],
+    "status": "failed",
+    "tool": "careamics",
+    "tool_version": "0.3.2"
+}
