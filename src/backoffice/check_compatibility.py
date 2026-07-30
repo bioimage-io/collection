@@ -20,7 +20,7 @@ except ImportError:
 if TYPE_CHECKING:
     from .compatibility import ToolCompatibilityReport
     from .compatibility_pure import (
-        ToolCompatibilityReportDict as ToolCompatibilityReportDict,
+        ToolCompatibilityReportDict,
     )
 
 
@@ -86,11 +86,20 @@ def check_tool_compatibility(
                 warnings.warn(f"failed to check '{rdf_url}': {e}")
             else:
                 if not isinstance(report, dict):
-                    report = report.model_dump(mode="json")
+                    report_data = report.model_dump(mode="json")
+                else:
+                    report_data = dict(report)
+
+                del report
+                # add tool name and version so it does not have to be extracted from the filename when needed
+                report_data["tool"] = tool_name
+                report_data["tool_version"] = tool_version
 
                 report_path.parent.mkdir(parents=True, exist_ok=True)
                 with report_path.open("wt", encoding="utf-8") as f:
-                    json.dump(report, f, indent=4, sort_keys=True, ensure_ascii=False)
+                    json.dump(
+                        report_data, f, indent=4, sort_keys=True, ensure_ascii=False
+                    )
 
             _total, _used, free = shutil.disk_usage(".")
             if free < 7_000_000_000:

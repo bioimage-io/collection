@@ -1,7 +1,10 @@
 """data models for compatibility reports"""
 
+from __future__ import annotations
+
 import warnings
-from typing import Any, List, Literal, Mapping, Optional, Sequence, Union
+from collections.abc import Mapping, Sequence
+from typing import Any, Literal
 
 from annotated_types import Interval
 from packaging.version import Version
@@ -14,33 +17,18 @@ except ImportError as e:
         "Please install `backoffice[dev]` or use backoffice.compatibility_pure instead."
     ) from e
 
-from typing_extensions import Annotated
+from typing import Annotated
 
-PartnerToolName = Literal[
-    "ilastik",
-    "deepimagej",
-    "icy",
-    "biapy",
-    "careamics",
-]
-ToolName = Literal["bioimageio.core", PartnerToolName]
-
-PARTNER_TOOL_NAMES = (
-    "ilastik",
-    "deepimagej",
-    "icy",
-    "biapy",
-    "careamics",
+from .compatibility_pure import (
+    PARTNER_TOOL_NAMES,
+    TOOL_NAMES,
+    ToolName,
+    ToolNameVersioned,
 )
-TOOL_NAMES = ("bioimageio.core", *PARTNER_TOOL_NAMES)
-
-ToolNameVersioned = str
 
 
 class Node(BaseModel):
     """Base data model with common config"""
-
-    pass
 
 
 class Badge(Node):
@@ -50,26 +38,16 @@ class Badge(Node):
 
 
 class ToolReportDetails(Node, extra="allow"):
-    traceback: Optional[Sequence[str]] = None
-    warnings: Optional[Mapping[str, Any]] = None
-    metadata_completeness: Optional[float] = None
-    status: Union[Literal["passed", "valid-format", "failed"], Any] = None
+    traceback: Sequence[str] | None = None
+    warnings: Mapping[str, Any] | None = None
+    metadata_completeness: float | None = None
+    status: Literal["passed", "valid-format", "failed"] | Any = None
 
 
 class ToolCompatibilityReport(Node, extra="allow"):
     """Used to report on the compatibility of resource description
     in the bioimageio collection for a version specific tool.
     """
-
-    tool: Annotated[ToolName, Field(exclude=True, pattern=r"^[a-zA-Z0-9-\.]+$")]
-    """tool name"""
-
-    tool_version: Annotated[str, Field(exclude=True, pattern=r"^[a-z0-9\.-]+$")]
-    """tool version, ideally in SemVer 2.0 format"""
-
-    @property
-    def report_name(self) -> str:
-        return f"{self.tool}_{self.tool_version}"
 
     status: Literal["passed", "failed", "not-applicable"]
     """status of this tool for this resource"""
@@ -85,17 +63,29 @@ class ToolCompatibilityReport(Node, extra="allow"):
 
         return values
 
-    error: Optional[str]
+    error: str | None
     """error message if `status`=='failed'"""
 
-    details: Union[ToolReportDetails, str, List[str], None] = None
+    details: ToolReportDetails | str | list[str] | None = None
     """details to explain the `status`"""
 
-    badge: Optional[Badge] = None
+    badge: Badge | None = None
     """status badge with a resource specific link to the tool"""
 
     links: Sequence[str] = ()
     """the checked resource should link these other bioimage.io resources"""
+
+
+class ToolCompatibilityReportWithToolInfo(ToolCompatibilityReport):
+    tool: ToolName
+    """tool name"""
+
+    tool_version: Annotated[str, Field(exclude=True, pattern=r"^[a-z0-9\.-]+$")]
+    """tool version, ideally in SemVer 2.0 format"""
+
+    @property
+    def report_name(self) -> str:
+        return f"{self.tool}_{self.tool_version}"
 
 
 class CompatibilityScores(Node):

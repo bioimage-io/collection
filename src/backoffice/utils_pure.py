@@ -1,9 +1,10 @@
 """utility functions available in backoffice without dependencies"""
+from __future__ import annotations
 
 import json
 import os
 from pathlib import Path
-from typing import TYPE_CHECKING, Any, Optional
+from typing import TYPE_CHECKING, Any
 
 try:
     import dotenv
@@ -50,7 +51,7 @@ def get_all_tool_report_paths(
     return list((get_report_path(item_id, version) / "reports").glob("*.json"))
 
 
-def get_summary_data(item_id: str, version: str) -> Optional[dict[str, Any]]:
+def get_summary_data(item_id: str, version: str) -> dict[str, Any] | None:
     """Get the summary data of a specific item version."""
     summary_file_path = get_summary_file_path(item_id, version)
     if not summary_file_path.exists():
@@ -90,7 +91,7 @@ def get_rdf_content_from_id(item_id: str, version: str) -> dict[str, Any]:
         return json.load(f)["rdf_content"]
 
 
-def raise_for_status_discretely(response: "httpx.Response"):
+def raise_for_status_discretely(response: httpx.Response):
     """Raises :class:`httpx.HTTPError` for 4xx or 5xx responses,
     **but** hides any query and userinfo from url to avoid leaking sensitive data.
     """

@@ -1,6 +1,9 @@
+from __future__ import annotations
+
 import json
 import warnings
-from typing import Dict
+from concurrent.futures import Future, ThreadPoolExecutor, as_completed
+from typing import Any
 
 from loguru import logger
 from packaging.version import Version
@@ -10,17 +13,14 @@ from backoffice.compatibility import (
     TOOL_NAMES,
     CompatibilityScores,
     CompatibilitySummary,
-    ToolCompatibilityReport,
+    ToolCompatibilityReportWithToolInfo,
     ToolName,
     ToolNameVersioned,
     ToolReportDetails,
 )
 from backoffice.index import IndexItem, IndexItemVersion, load_index
-from backoffice.utils import (
-    get_all_tool_report_paths,
-    get_summary,
-    get_summary_file_path,
-)
+from backoffice.utils import get_summary, get_summary_file_path
+from backoffice.utils_pure import get_all_tool_report_paths
 
 
 def summarize_reports():
@@ -29,15 +29,17 @@ def summarize_reports():
         for v in item.versions:
             _summarize(item, v)
 
-    # TODO: Parallelize?
-    # with ThreadPoolExecutor() as executor:
-    #     futures: list[Future[Any]] = []
-    #     for item in index.items:
-    #         for v in item.versions:
-    #             futures.append(executor.submit(_summarize, item, v))
 
-    #     for _ in tqdm(as_completed(futures), total=len(futures)):
-    #         pass
+def summarize_reports_parallel(max_workers: int | None = None):
+    index = load_index()
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        futures: list[Future[Any]] = []
+        for item in index.items:
+            for v in item.versions:
+                futures.append(executor.submit(_summarize, item, v))
+
+        for _ in tqdm(as_completed(futures), total=len(futures)):
+            pass
 
 
 def _summarize(item: IndexItem, v: IndexItemVersion):
@@ -45,7 +47,7 @@ def _summarize(item: IndexItem, v: IndexItemVersion):
 
     initial_summary = get_summary(item.id, v.version)
 
-    reports: list[ToolCompatibilityReport] = []
+    reports: list[ToolCompatibilityReportWithToolInfo] = []
     scores: dict[ToolNameVersioned, float] = {}
     metadata_completeness = 0.0
     metadata_format_score = 0.0
@@ -74,11 +76,11 @@ def _summarize(item: IndexItem, v: IndexItemVersion):
                     )
                 del data["tool_version"]
 
-            report = ToolCompatibilityReport(
+            report = ToolCompatibilityReportWithToolInfo(
                 tool=tool, tool_version=tool_version, **data
             )
         except Exception as e:
-            report = ToolCompatibilityReport(
+            report = ToolCompatibilityReportWithToolInfo(
                 tool=tool,
                 tool_version=tool_version,
                 status="failed",
@@ -114,7 +116,7 @@ def _summarize(item: IndexItem, v: IndexItemVersion):
             ):
                 metadata_format_score = 0.5
 
-    tests: Dict[ToolName, Dict[str, ToolCompatibilityReport]] = {}
+    tests: dict[ToolName, dict[str, ToolCompatibilityReportWithToolInfo]] = {}
     for r in reports:
         tests.setdefault(r.tool, {})[r.tool_version] = r
 

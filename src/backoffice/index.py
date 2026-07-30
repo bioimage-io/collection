@@ -1,12 +1,14 @@
 """Data models and functions for indexing the bioimage.io collection"""
 
+from __future__ import annotations
+
 import hashlib
 import json
 import shutil
 from collections import defaultdict
+from collections.abc import Sequence
 from datetime import datetime
 from pathlib import Path
-from typing import Optional, Sequence
 
 try:
     import httpx
@@ -36,13 +38,13 @@ class Node(BaseModel, frozen=True, extra="ignore"):
 
 class ResponseItemVersion(Node, frozen=True):
     version: str
-    comment: Optional[str]
+    comment: str | None
     created_at: datetime
 
 
 class IndexItemVersion(Node, frozen=True):
     version: str
-    comment: Optional[str]
+    comment: str | None
     created_at: datetime
     source: str
     sha256: str
@@ -93,20 +95,20 @@ def create_index() -> Index:
         def request(offset: int) -> Response:
             r = httpx.get(
                 url,
-                params=dict(
-                    parent_id="bioimage-io/bioimage.io",
-                    offset=offset,
-                    pagination=True,
-                    limit=10000,
-                ),
+                params={
+                    "parent_id": "bioimage-io/bioimage.io",
+                    "offset": offset,
+                    "pagination": True,
+                    "limit": 10000,
+                },
                 headers=settings.get_hypha_headers(),
                 timeout=settings.http_timeout,
             )
             try:
                 _ = r.raise_for_status()
-            except Exception as e:
+            except Exception:
                 logger.error(r.json())
-                raise e
+                raise
             else:
                 return Response.model_validate_json(r.content)
 
@@ -127,15 +129,18 @@ def create_index() -> Index:
             domain, item_id_wo_domain = item.id.split("/", 1)
             versions: list[IndexItemVersion] = []
             for v in item.versions:
+                bioimageio_yaml_base_url = f"{settings.hypha_base_url}/{domain}/artifacts/{item_id_wo_domain}/files/{{bioimageio_yaml}}?version={v.version}"
 
-                def get_bioimageio_yaml_url(bioimageio_yaml: str) -> str:
-                    return f"{settings.hypha_base_url}/{domain}/artifacts/{item_id_wo_domain}/files/{bioimageio_yaml}?version={v.version}"
+                def get_bioimageio_yaml_url(base_url: str, bioimageio_yaml: str) -> str:
+                    return base_url.format(bioimageio_yaml=bioimageio_yaml)
 
-                url = get_bioimageio_yaml_url("bioimageio.yaml")
+                url = get_bioimageio_yaml_url(
+                    bioimageio_yaml_base_url, "bioimageio.yaml"
+                )
                 try:
                     sha256 = _initialize_report_directory(item, v, url)
                 except Exception:
-                    url = get_bioimageio_yaml_url("rdf.yaml")
+                    url = get_bioimageio_yaml_url(bioimageio_yaml_base_url, "rdf.yaml")
                     sha256 = _initialize_report_directory(item, v, url)
 
                 versions.append(

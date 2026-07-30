@@ -55,6 +55,8 @@ docs = [
 [project.scripts]
 backoffice = "backoffice.__main__:main"
 
+[tool.ruff.lint]
+ignore = ["BLE001"]
 
 [tool.pyright]
 exclude = ["**/__pycache__"]

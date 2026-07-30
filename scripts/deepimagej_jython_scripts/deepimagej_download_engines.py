@@ -17,10 +17,9 @@
 Jython script that downloads the basic engines needed to run most of the Deep Learning models
 """
 
-from io.bioimage.modelrunner.engine.installation import EngineInstall
-
-import os
 import argparse
+import os
+from io.bioimage.modelrunner.engine.installation import EngineInstall
 
 from java.util.function import Consumer
 

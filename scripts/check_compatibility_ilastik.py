@@ -1,6 +1,8 @@
+from __future__ import annotations
+
 import argparse
 from dataclasses import dataclass
-from typing import TYPE_CHECKING, Any, Dict, Optional
+from typing import TYPE_CHECKING, Any
 
 import bioimageio.core
 from typing_extensions import Literal, Protocol
@@ -21,7 +23,7 @@ else:
 
 class HasContent(Protocol):
     @property
-    def content(self) -> Optional[Dict[Any, Any]]: ...
+    def content(self) -> dict[Any, Any] | None: ...
 
 
 def warn_fallback(name: str):
@@ -58,7 +60,7 @@ except ImportError:
 
     @dataclass
     class DownloadedRDF:
-        content: Optional[Dict[Any, Any]]
+        content: dict[Any, Any] | None
 
     def open_bioimageio_yaml(
         rdf_url: str,  # TODO: make 'rdf_url' positional only
@@ -85,7 +87,6 @@ def check_compatibility_ilastik_impl(
 
     if not isinstance(rdf, dict):
         report = ToolCompatibilityReportDict(
-            tool="ilastik",
             status="failed",
             error=None,
             details="Failed to load resource description.",
@@ -94,7 +95,6 @@ def check_compatibility_ilastik_impl(
         )
     elif rdf["type"] != "model":
         report = ToolCompatibilityReportDict(
-            tool="ilastik",
             status="not-applicable",
             error=None,
             details="only 'model' resources can be used in ilastik.",
@@ -119,7 +119,6 @@ def check_compatibility_ilastik_impl(
             output_len = "missing"
 
         report = ToolCompatibilityReportDict(
-            tool="ilastik",
             status="failed",
             error=f"ilastik only supports a single input/output tensor (found {input_len}/{output_len})",
             details=None,
@@ -129,9 +128,8 @@ def check_compatibility_ilastik_impl(
     else:
         # produce test summary with bioimageio.core
         summary = test_model(rdf_url)
-        if not TYPE_CHECKING:
-            if bioimageio.core.__version__.startswith("0.5."):
-                summary = summary[-1]
+        if not TYPE_CHECKING and bioimageio.core.__version__.startswith("0.5."):
+            summary = summary[-1]
 
         details = (
             summary if isinstance(summary, dict) else summary.model_dump(mode="json")
@@ -159,7 +157,6 @@ def check_compatibility_ilastik_impl(
             )
         )
         report = ToolCompatibilityReportDict(
-            tool="ilastik",
             status=status,
             error=error,
             details=details,
