@@ -168,7 +168,6 @@ def check_compatibility_careamics_impl(
             return report
 
     return ToolCompatibilityReportDict(
-        tool="careamics",
         status="passed",
         error=None,
         details="CAREamics compatibility checks completed successfully!",
