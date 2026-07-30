@@ -224,10 +224,10 @@
         "core_compatibility": 0.5,
         "metadata_completeness": 0.75,
         "metadata_format": 1.0,
-        "overall_compatibility": 0.7291666666666666,
-        "overall_partner_tool_compatibility": 0.6666666666666666,
+        "overall_compatibility": 0.6875,
+        "overall_partner_tool_compatibility": 0.5,
         "tool_compatibility": {
-            "biapy": 1.0,
+            "biapy": 0.5,
             "bioimageio.core": 0.5,
             "careamics": 0.0,
             "deepimagej": 0.0,
@@ -237,6 +237,7 @@
             "biapy_3.6.5": 0.0,
             "biapy_3.6.7": 1.0,
             "biapy_3.6.8": 1.0,
+            "biapy_3.7.0": 0.0,
             "bioimageio.core_0.11.0": 0.5,
             "bioimageio.core_0.9.3": 0.0,
             "bioimageio.core_0.9.4": 0.0,
@@ -295,6 +296,16 @@
                 ],
                 "score": 1.0,
                 "status": "passed"
+            },
+            "3.7.0": {
+                "badge": null,
+                "details": "[all] Couldn't load model for dependency check.\n",
+                "error": "[all] Couldn't load model for dependency check.\n",
+                "links": [
+                    "biapy/biapy"
+                ],
+                "score": 0.0,
+                "status": "failed"
             }
         },
         "bioimageio.core": {

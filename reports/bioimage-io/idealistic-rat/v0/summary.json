@@ -918,6 +918,7 @@
             "biapy_3.6.6": 0.0,
             "biapy_3.6.7": 0.0,
             "biapy_3.6.8": 0.0,
+            "biapy_3.7.0": 0.0,
             "bioimageio.core_0.10.0": 1.0,
             "bioimageio.core_0.10.2": 1.0,
             "bioimageio.core_0.10.3": 0.5,
@@ -935,6 +936,7 @@
             "careamics_0.0.21": 0.0,
             "careamics_0.0.22": 0.0,
             "careamics_0.1.0": 0.0,
+            "careamics_0.3.2": 0.0,
             "deepimagej_3.1.0-snapshot": 0.0,
             "deepimagej_3.2.0-snapshot": 0.0,
             "ilastik_1.4.1.post1": 0.0,
@@ -981,6 +983,16 @@
                 "status": "failed"
             },
             "3.6.8": {
+                "badge": null,
+                "details": "[all] Model needs to have a single input.\n",
+                "error": "[all] Model needs to have a single input.\n",
+                "links": [
+                    "biapy/biapy"
+                ],
+                "score": 0.0,
+                "status": "failed"
+            },
+            "3.7.0": {
                 "badge": null,
                 "details": "[all] Model needs to have a single input.\n",
                 "error": "[all] Model needs to have a single input.\n",
@@ -3328,6 +3340,14 @@
                 "status": "not-applicable"
             },
             "0.1.0": {
+                "badge": null,
+                "details": "'Model' resource not tagged with 'CAREamics' or 'careamics'.",
+                "error": null,
+                "links": [],
+                "score": 0.0,
+                "status": "not-applicable"
+            },
+            "0.3.2": {
                 "badge": null,
                 "details": "'Model' resource not tagged with 'CAREamics' or 'careamics'.",
                 "error": null,

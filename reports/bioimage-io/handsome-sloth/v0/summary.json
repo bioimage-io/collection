@@ -426,6 +426,7 @@
         "tool_compatibility_version_specific": {
             "biapy_3.6.7": 0.0,
             "biapy_3.6.8": 0.0,
+            "biapy_3.7.0": 0.0,
             "bioimageio.core_0.10.0": 0.5,
             "bioimageio.core_0.10.2": 0.5,
             "bioimageio.core_0.10.3": 0.5,
@@ -466,6 +467,16 @@
                 "status": "failed"
             },
             "3.6.8": {
+                "badge": null,
+                "details": "[all] no workflow tag recognized in ['Semantic Unmixing', 'Splitting', 'Image Dcomposition'].\n",
+                "error": "[all] no workflow tag recognized in ['Semantic Unmixing', 'Splitting', 'Image Dcomposition'].\n",
+                "links": [
+                    "biapy/biapy"
+                ],
+                "score": 0.0,
+                "status": "failed"
+            },
+            "3.7.0": {
                 "badge": null,
                 "details": "[all] no workflow tag recognized in ['Semantic Unmixing', 'Splitting', 'Image Dcomposition'].\n",
                 "error": "[all] no workflow tag recognized in ['Semantic Unmixing', 'Splitting', 'Image Dcomposition'].\n",

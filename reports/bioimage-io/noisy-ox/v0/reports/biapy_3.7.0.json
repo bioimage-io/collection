@@ -1,0 +1,12 @@
+{
+    "badge": null,
+    "details": "[all] Model needs to have a single input.\n",
+    "error": "[all] Model needs to have a single input.\n",
+    "links": [
+        "biapy/biapy"
+    ],
+    "score": 0.0,
+    "status": "failed",
+    "tool": "biapy",
+    "tool_version": "3.7.0"
+}
