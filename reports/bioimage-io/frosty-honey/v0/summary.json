@@ -43,9 +43,9 @@
     "rdf_yaml_sha256": "24129933ca1421116c1317e1a09a9da1a5d7823a75a153712b11c0d8f2dcc0b3",
     "scores": {
         "core_compatibility": 1.0,
-        "metadata_completeness": 0.6296296296296297,
+        "metadata_completeness": 0.6551724137931034,
         "metadata_format": 1.0,
-        "overall_compatibility": 0.6574074074074074,
+        "overall_compatibility": 0.6637931034482758,
         "overall_partner_tool_compatibility": 0.0,
         "tool_compatibility": {
             "bioimageio.core": 1.0
@@ -55,6 +55,7 @@
             "bioimageio.core_0.10.2": 1.0,
             "bioimageio.core_0.10.3": 1.0,
             "bioimageio.core_0.10.4": 1.0,
+            "bioimageio.core_0.11.0": 1.0,
             "bioimageio.core_0.9.5": 0.5,
             "bioimageio.core_0.9.6": 0.5
         }
@@ -332,6 +333,80 @@
                     "format_version": "0.3.0",
                     "id": "frosty-honey",
                     "metadata_completeness": 0.6296296296296297,
+                    "name": "bioimageio format validation",
+                    "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+                    "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/frosty-honey/files/rdf.yaml?version=v0",
+                    "status": "passed",
+                    "traceback": null,
+                    "type": "dataset",
+                    "version": "0.1.0",
+                    "warnings": null
+                },
+                "error": null,
+                "links": [
+                    "bioimageio/bioimageio.core"
+                ],
+                "score": 1.0,
+                "status": "passed"
+            },
+            "0.11.0": {
+                "badge": null,
+                "details": {
+                    "details": [
+                        {
+                            "context": {
+                                "file_name": "rdf.yaml",
+                                "known_files": {
+                                    "Omnipose.md": "7bd07566a658e9e63a0d2a940c8b514c21d04b62b129055789bb14eb07f4ff92",
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/frosty-honey/files/Omnipose.md?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/frosty-honey/files/omnipose.png?version=v0": null,
+                                    "https://osf.io/xmury/overview": null,
+                                    "omnipose.png": "0b2043f0563bd5fc273936bdf6c84af02388566ba396c58c9cc393d536585bf1"
+                                },
+                                "original_source_name": null,
+                                "perform_io_checks": true,
+                                "root": "https://hypha.aicell.io/bioimage-io/artifacts/frosty-honey/files?version=v0",
+                                "update_hashes": false
+                            },
+                            "errors": [],
+                            "loc": [],
+                            "name": "Successfully created `DatasetDescr` instance.",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [],
+                            "name": "bioimageio.spec format validation dataset 0.3.4",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": [
+                                {
+                                    "loc": [
+                                        "description"
+                                    ],
+                                    "msg": "Description longer than 512 characters.",
+                                    "severity": 30,
+                                    "type": "warning"
+                                }
+                            ]
+                        }
+                    ],
+                    "env": [
+                        [
+                            "bioimageio.spec",
+                            "0.5.12.0",
+                            "",
+                            ""
+                        ]
+                    ],
+                    "format_version": "0.3.4",
+                    "id": "frosty-honey",
+                    "metadata_completeness": 0.6551724137931034,
                     "name": "bioimageio format validation",
                     "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
                     "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/frosty-honey/files/rdf.yaml?version=v0",

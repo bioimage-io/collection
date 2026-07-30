@@ -1,0 +1,66 @@
+{
+    "badge": null,
+    "details": {
+        "details": [
+            {
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "CartoCell.md": "9e7630fa589eb385a716116b2b1eb043ce01e4b0c4e0cb6790dcc8a59d0cda48",
+                        "cartocell.gif": "419800f4413a58ee939ecb549d279082ea660ffc16d6549e6ac0e171bad3e8ba",
+                        "https://hypha.aicell.io/bioimage-io/artifacts/divine-melon/files/CartoCell.md?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/divine-melon/files/cartocell.gif?version=v0": null,
+                        "https://www.biorxiv.org/content/10.1101/2024.02.03.576026v3": null,
+                        "https://zenodo.org/records/10973241": null
+                    },
+                    "original_source_name": null,
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/divine-melon/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Successfully created `DatasetDescr` instance.",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [],
+                "name": "bioimageio.spec format validation dataset 0.3.4",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.spec",
+                "0.5.12.0",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.3.4",
+        "id": "divine-melon",
+        "metadata_completeness": 0.7419354838709677,
+        "name": "bioimageio format validation",
+        "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/divine-melon/files/rdf.yaml?version=v0",
+        "status": "passed",
+        "traceback": null,
+        "type": "dataset",
+        "version": "0.1.0",
+        "warnings": null
+    },
+    "error": null,
+    "links": [
+        "bioimageio/bioimageio.core"
+    ],
+    "score": 1.0,
+    "status": "passed"
+}

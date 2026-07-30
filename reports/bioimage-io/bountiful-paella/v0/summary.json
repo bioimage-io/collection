@@ -47,9 +47,9 @@
     "rdf_yaml_sha256": "7b9305187d5de040740efd24db343dd49fd45d241269796123ec0820018cf762",
     "scores": {
         "core_compatibility": 1.0,
-        "metadata_completeness": 0.5925925925925926,
+        "metadata_completeness": 0.6206896551724138,
         "metadata_format": 1.0,
-        "overall_compatibility": 0.6481481481481481,
+        "overall_compatibility": 0.6551724137931034,
         "overall_partner_tool_compatibility": 0.0,
         "tool_compatibility": {
             "bioimageio.core": 1.0
@@ -59,6 +59,7 @@
             "bioimageio.core_0.10.2": 1.0,
             "bioimageio.core_0.10.3": 1.0,
             "bioimageio.core_0.10.4": 1.0,
+            "bioimageio.core_0.11.0": 1.0,
             "bioimageio.core_0.9.5": 0.5,
             "bioimageio.core_0.9.6": 0.5
         }
@@ -304,6 +305,73 @@
                     "format_version": "0.3.0",
                     "id": "bountiful-paella",
                     "metadata_completeness": 0.5925925925925926,
+                    "name": "bioimageio format validation",
+                    "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+                    "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/bountiful-paella/files/rdf.yaml?version=v0",
+                    "status": "passed",
+                    "traceback": null,
+                    "type": "dataset",
+                    "version": "1.0.0",
+                    "warnings": null
+                },
+                "error": null,
+                "links": [
+                    "bioimageio/bioimageio.core"
+                ],
+                "score": 1.0,
+                "status": "passed"
+            },
+            "0.11.0": {
+                "badge": null,
+                "details": {
+                    "details": [
+                        {
+                            "context": {
+                                "file_name": "rdf.yaml",
+                                "known_files": {
+                                    "SpineDL.md": "e005d32410078b0a3ad09621cd34d87dcb10506ae60a78524cf170667ce52730",
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/bountiful-paella/files/SpineDL.md?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/bountiful-paella/files/spinedl_neuron.png?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/bountiful-paella/files/spinedl_structure.png?version=v0": null,
+                                    "https://zenodo.org/records/17829532": null,
+                                    "spinedl_neuron.png": "e844a264d1dfa1a86c2585cc249fbc00d161e0e92d7b76ab2a73e567fba5305c",
+                                    "spinedl_structure.png": "c014a3aa492b26898f89b7025547d2ab027bddf6a353bd9ff2f1d0ad97fbe5f9"
+                                },
+                                "original_source_name": null,
+                                "perform_io_checks": true,
+                                "root": "https://hypha.aicell.io/bioimage-io/artifacts/bountiful-paella/files?version=v0",
+                                "update_hashes": false
+                            },
+                            "errors": [],
+                            "loc": [],
+                            "name": "Successfully created `DatasetDescr` instance.",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [],
+                            "name": "bioimageio.spec format validation dataset 0.3.4",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        }
+                    ],
+                    "env": [
+                        [
+                            "bioimageio.spec",
+                            "0.5.12.0",
+                            "",
+                            ""
+                        ]
+                    ],
+                    "format_version": "0.3.4",
+                    "id": "bountiful-paella",
+                    "metadata_completeness": 0.6206896551724138,
                     "name": "bioimageio format validation",
                     "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
                     "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/bountiful-paella/files/rdf.yaml?version=v0",
