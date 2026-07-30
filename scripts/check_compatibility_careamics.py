@@ -188,9 +188,4 @@ def check_compatibility_careamics() -> None:
 
 
 if __name__ == "__main__":
-    model_path = "CAREamics/saved_models/Noise2Void_2D_careamics_n2v"
-    # model_path = "CAREamics/saved_models/Noise2Void_2D_careamics_n2v.zip"
-    model_desc = load_model_description(model_path)
-    check_has_careamics_config(model_desc, rdf_url=None)
-    check_careamics_can_load(model_desc, model_path)
-    check_careamics_can_predict(model_desc, model_path)
+    check_compatibility_careamics()
