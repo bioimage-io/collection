@@ -1,0 +1,76 @@
+{
+    "badge": null,
+    "details": {
+        "details": [
+            {
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "Lizard.md": "93d0e8b34ecc5b7bbbd69540a3a1feb6292aeb511acbd4f6c6e6119452559100",
+                        "https://conic-challenge.grand-challenge.org/": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/enticing-peanut/files/Lizard.md?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/enticing-peanut/files/lizard1.png?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/enticing-peanut/files/lizard2.png?version=v0": null,
+                        "lizard1.png": "88b5fe30d89263cbd84cf838c29363edef592944f07b0116e7db15fec4304171",
+                        "lizard2.png": "10e563817003103765fd258990a045b5082d4abd560c3190ffb24a10cb87f4d3"
+                    },
+                    "original_source_name": null,
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/enticing-peanut/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Successfully created `DatasetDescr` instance.",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [],
+                "name": "bioimageio.spec format validation dataset 0.3.4",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": [
+                    {
+                        "loc": [
+                            "description"
+                        ],
+                        "msg": "Description longer than 512 characters.",
+                        "severity": 30,
+                        "type": "warning"
+                    }
+                ]
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.spec",
+                "0.5.12.0",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.3.4",
+        "id": "enticing-peanut",
+        "metadata_completeness": 0.6551724137931034,
+        "name": "bioimageio format validation",
+        "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/enticing-peanut/files/rdf.yaml?version=v0",
+        "status": "passed",
+        "traceback": null,
+        "type": "dataset",
+        "version": "0.1.0",
+        "warnings": null
+    },
+    "error": null,
+    "links": [
+        "bioimageio/bioimageio.core"
+    ],
+    "score": 1.0,
+    "status": "passed"
+}

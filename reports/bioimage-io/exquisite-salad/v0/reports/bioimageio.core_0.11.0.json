@@ -1,0 +1,65 @@
+{
+    "badge": null,
+    "details": {
+        "details": [
+            {
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "NucMM.md": "ee56dfddac654df173f54fcc4ea86f78b9b1e214430cab9e2b034bef478e57f3",
+                        "https://hypha.aicell.io/bioimage-io/artifacts/exquisite-salad/files/NucMM.md?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/exquisite-salad/files/overview_new.jpg?version=v0": null,
+                        "https://zenodo.org/records/10973241": null,
+                        "overview_new.jpg": "ced6a07131d8c09640a5a4b1c8593da0ad07aff76434d7820b831a37f2f23fec"
+                    },
+                    "original_source_name": null,
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/exquisite-salad/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Successfully created `DatasetDescr` instance.",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [],
+                "name": "bioimageio.spec format validation dataset 0.3.4",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.spec",
+                "0.5.12.0",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.3.4",
+        "id": "exquisite-salad",
+        "metadata_completeness": 0.7419354838709677,
+        "name": "bioimageio format validation",
+        "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/exquisite-salad/files/rdf.yaml?version=v0",
+        "status": "passed",
+        "traceback": null,
+        "type": "dataset",
+        "version": "0.1.0",
+        "warnings": null
+    },
+    "error": null,
+    "links": [
+        "bioimageio/bioimageio.core"
+    ],
+    "score": 1.0,
+    "status": "passed"
+}

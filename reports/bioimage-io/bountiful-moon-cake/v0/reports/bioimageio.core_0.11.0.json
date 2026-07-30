@@ -1,0 +1,60 @@
+{
+    "badge": null,
+    "details": {
+        "details": [
+            {
+                "context": null,
+                "errors": [
+                    {
+                        "loc": [
+                            "download_url"
+                        ],
+                        "msg": "Extra inputs are not permitted",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "extra_forbidden",
+                        "with_traceback": false
+                    }
+                ],
+                "loc": [],
+                "name": "bioimageio.spec format validation dataset 0.3.4",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "failed",
+                "warnings": [
+                    {
+                        "loc": [
+                            "source"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    }
+                ]
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.spec",
+                "0.5.12.0",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.3.4",
+        "id": "bountiful-moon-cake",
+        "metadata_completeness": 0.0,
+        "name": "bioimageio format validation",
+        "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/bountiful-moon-cake/files/rdf.yaml?version=v0",
+        "status": "failed",
+        "traceback": null,
+        "type": "dataset",
+        "version": 1.1,
+        "warnings": null
+    },
+    "error": "Extra inputs are not permitted",
+    "links": [],
+    "score": 0.0,
+    "status": "failed"
+}
