@@ -1,0 +1,12 @@
+{
+    "badge": null,
+    "details": "[all] Couldn't load model for dependency check.\n",
+    "error": "[all] Couldn't load model for dependency check.\n",
+    "links": [
+        "biapy/biapy"
+    ],
+    "score": 0.0,
+    "status": "failed",
+    "tool": "biapy",
+    "tool_version": "3.7.0"
+}
