@@ -307,6 +307,7 @@
             "bioimageio.core_0.10.2": 0.5,
             "bioimageio.core_0.10.3": 0.5,
             "bioimageio.core_0.10.4": 1.0,
+            "bioimageio.core_0.11.0": 1.0,
             "bioimageio.core_0.9.5": 0.0,
             "bioimageio.core_0.9.6": 0.5,
             "careamics_0.0.18": 0.0,
@@ -906,6 +907,170 @@
                     "format_version": "0.5.10",
                     "id": "greedy-deer",
                     "metadata_completeness": 0.4642857142857143,
+                    "name": "bioimageio format validation",
+                    "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+                    "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/greedy-deer/files/rdf.yaml?version=v0",
+                    "status": "passed",
+                    "traceback": null,
+                    "type": "model",
+                    "version": "0.1.0",
+                    "warnings": null
+                },
+                "error": null,
+                "links": [
+                    "bioimageio/bioimageio.core"
+                ],
+                "score": 1.0,
+                "status": "passed"
+            },
+            "0.11.0": {
+                "badge": null,
+                "details": {
+                    "details": [
+                        {
+                            "context": {
+                                "file_name": "rdf.yaml",
+                                "known_files": {
+                                    "checkpoint.pth": "225d627e37f8335f3b5f82b9569c318a28080005bba74f974b96523a4fddf5c7",
+                                    "cover.png": "c014a3aa492b26898f89b7025547d2ab027bddf6a353bd9ff2f1d0ad97fbe5f9",
+                                    "documentation.md": "cde4b1109c0a2e83b05ef2299464f759b1ea0908ffb6f7a38673fb06e4da893c",
+                                    "https://github.com/BiaPyX/BiaPy": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/greedy-deer/files/checkpoint.pth?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/greedy-deer/files/cover.png?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/greedy-deer/files/documentation.md?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/greedy-deer/files/model.py?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/greedy-deer/files/test-input.npy?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/greedy-deer/files/test-output.npy?version=v0": null,
+                                    "https://www.nature.com/articles/s41592-025-02699-y": null,
+                                    "model.py": "1f3df63c7b8ca6fdc44e798141f76dd034479da9fadc025e440ea2f7a2b0e998",
+                                    "test-input.npy": "d64e9c40809e61d9dc47563578307b4ccc2bb8b3b0eb2a44f0e25b89f82cc5e8",
+                                    "test-output.npy": "f9b342526b0fed28e9628d31aac85db77094f8024216a61c2aac15f436113ca0"
+                                },
+                                "original_source_name": null,
+                                "perform_io_checks": true,
+                                "root": "https://hypha.aicell.io/bioimage-io/artifacts/greedy-deer/files?version=v0",
+                                "update_hashes": false
+                            },
+                            "errors": [],
+                            "loc": [],
+                            "name": "Successfully created `ModelDescr` instance.",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [],
+                            "name": "bioimageio.spec format validation model 0.5.12",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": [
+                                {
+                                    "loc": [
+                                        "documentation"
+                                    ],
+                                    "msg": "No '# Validation' (sub)section found in source=RelativePath('documentation.md') sha256='cde4b1109c0a2e83b05ef2299464f759b1ea0908ffb6f7a38673fb06e4da893c'.",
+                                    "severity": 30,
+                                    "type": "warning"
+                                },
+                                {
+                                    "loc": [
+                                        "inputs",
+                                        0,
+                                        "sample_tensor"
+                                    ],
+                                    "msg": "Needs to be filled for FAIR compliance",
+                                    "severity": 35,
+                                    "type": "warning"
+                                },
+                                {
+                                    "loc": [
+                                        "outputs",
+                                        0,
+                                        "sample_tensor"
+                                    ],
+                                    "msg": "Needs to be filled for FAIR compliance",
+                                    "severity": 35,
+                                    "type": "warning"
+                                }
+                            ]
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "pytorch_state_dict"
+                            ],
+                            "name": "Found existing conda environment 'f923abbcd927e1b70f314f29827668de2b128bac170663b23d97aaff14a5c225'",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "pytorch_state_dict"
+                            ],
+                            "name": "Reproduce test outputs from test inputs (pytorch_state_dict)",
+                            "recommended_env": {
+                                "channels": [
+                                    "conda-forge",
+                                    "nodefaults"
+                                ],
+                                "dependencies": [
+                                    "conda-forge::bioimageio.core>=0.9.4",
+                                    "pip",
+                                    "pytorch==2.9.1",
+                                    "torchvision==0.24.1"
+                                ],
+                                "name": null
+                            },
+                            "saved_conda_compare": "/usr/share/miniconda/lib/python3.14/site-packages/conda/env/env.py:288: FutureWarning: The environment file is not fully CEP 24 compliant is deprecated and will be removed in 26.9. In the future, this configuration will be rejected. Please fix the following errors in order to make the configuration valid: \n  - Invalid type for 'name', expected a str\n  deprecated.topic(\nSuccess. All the packages in the specification file are present in the environment with matching version and build string.\n",
+                            "status": "passed",
+                            "warnings": [
+                                {
+                                    "loc": [
+                                        "weights",
+                                        "pytorch_state_dict"
+                                    ],
+                                    "msg": "Output `output0`: all elements agree with expected values. \nMax relative difference not accounted for by absolute tolerance (1.00e-03):\n0.00e+00 (= \\|8.60e-03 - 8.59e-03\\|/\\|8.59e-03 + 1e-6\\|) at {'batch': np.int64(0), 'channel': np.int64(0), 'y': np.int64(0), 'x': np.int64(0)} \nMax absolute difference not accounted for by relative tolerance (1.00e-03):\n0.00e+00 (= \\|3.8395578e-43 - 3.8395578e-43\\|) at {'batch': np.int64(0), 'channel': np.int64(2), 'y': np.int64(0), 'x': np.int64(33)}",
+                                    "severity": 20,
+                                    "type": "bioimageio.core"
+                                }
+                            ]
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "pytorch_state_dict"
+                            ],
+                            "name": "Run pytorch_state_dict inference for inputs with batch_size: 1 and size parameter n: 0",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        }
+                    ],
+                    "env": [
+                        [
+                            "bioimageio.spec",
+                            "0.5.12.0",
+                            "",
+                            ""
+                        ]
+                    ],
+                    "format_version": "0.5.12",
+                    "id": "greedy-deer",
+                    "metadata_completeness": 0.47368421052631576,
                     "name": "bioimageio format validation",
                     "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
                     "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/greedy-deer/files/rdf.yaml?version=v0",
