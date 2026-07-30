@@ -1,0 +1,80 @@
+{
+    "badge": null,
+    "details": {
+        "details": [
+            {
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "Oocytes.md": "bfdee5cf9186b83f7145d99f3ef05185cd9dbb335f9aedba0638383f990b90f3",
+                        "https://hypha.aicell.io/bioimage-io/artifacts/splendid-falafel/files/Oocytes.md?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/splendid-falafel/files/oocyte_seg1.png?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/splendid-falafel/files/oocyte_seg2.png?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/splendid-falafel/files/raw_ovary_overview.png?version=v0": null,
+                        "https://www.biorxiv.org/content/10.1101/2025.11.07.686728v1.abstract": null,
+                        "oocyte_seg1.png": "d5dfdcae2ba142bb62298164c75262cf74384aa1ab06a1568aaee9e4bed3a794",
+                        "oocyte_seg2.png": "c06bce3e652c3cbb1f39a03d0151834b2ffd0344aea341ec2afb91d8d68d8877",
+                        "raw_ovary_overview.png": "0e39109151c542ba77e974a5511bbcb668b375086790ebb554b61c70d3c56d95"
+                    },
+                    "original_source_name": null,
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/splendid-falafel/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Successfully created `DatasetDescr` instance.",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [],
+                "name": "bioimageio.spec format validation dataset 0.3.4",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": [
+                    {
+                        "loc": [
+                            "description"
+                        ],
+                        "msg": "Description longer than 512 characters.",
+                        "severity": 30,
+                        "type": "warning"
+                    }
+                ]
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.spec",
+                "0.5.12.0",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.3.4",
+        "id": "splendid-falafel",
+        "metadata_completeness": 0.6206896551724138,
+        "name": "bioimageio format validation",
+        "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/splendid-falafel/files/rdf.yaml?version=v0",
+        "status": "passed",
+        "traceback": null,
+        "type": "dataset",
+        "version": "1.0.0",
+        "warnings": null
+    },
+    "error": null,
+    "links": [
+        "bioimageio/bioimageio.core"
+    ],
+    "score": 1.0,
+    "status": "passed",
+    "tool": "bioimageio.core",
+    "tool_version": "0.11.0"
+}
