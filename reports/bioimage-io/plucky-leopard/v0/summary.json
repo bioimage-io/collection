@@ -278,9 +278,9 @@
     "rdf_yaml_sha256": "b4f047110873cd911dcc9d10641143cfd2f9901d5c3811a259dc5331266be683",
     "scores": {
         "core_compatibility": 0.5,
-        "metadata_completeness": 0.4594594594594595,
+        "metadata_completeness": 0.4690265486725664,
         "metadata_format": 1.0,
-        "overall_compatibility": 0.48986486486486486,
+        "overall_compatibility": 0.4922566371681416,
         "overall_partner_tool_compatibility": 0.0,
         "tool_compatibility": {
             "biapy": 0.0,
@@ -293,6 +293,7 @@
             "bioimageio.core_0.10.2": 0.0,
             "bioimageio.core_0.10.3": 0.0,
             "bioimageio.core_0.10.4": 0.5,
+            "bioimageio.core_0.11.0": 0.5,
             "deepimagej_3.1.0-snapshot": 0.0,
             "deepimagej_3.2.0-snapshot": 0.0,
             "ilastik_1.4.1.post1": 0.0,
@@ -562,6 +563,172 @@
                     "format_version": "0.5.10",
                     "id": "plucky-leopard",
                     "metadata_completeness": 0.4594594594594595,
+                    "name": "bioimageio format validation",
+                    "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+                    "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/plucky-leopard/files/rdf.yaml?version=v0",
+                    "status": "valid-format",
+                    "traceback": null,
+                    "type": "model",
+                    "version": "0.1.0",
+                    "warnings": null
+                },
+                "error": "Output 'output0': 9361 of 1966080 elements disagree with expected values. (4761.3 ppm). \nMax relative difference not accounted for by absolute tolerance (1.00e-03):\n2.35e-01 (= \\|3.39e-03 - 4.43e-03\\|/\\|4.43e-03 + 1e-6\\|) at {'batch': np.int64(0), 'channel': np.int64(2), 'z': np.int64(17), 'y': np.int64(14), 'x': np.int64(47)} \nMax absolute difference not accounted for by relative tolerance (1.00e-03):\n3.15e-03 (= \\|5.0009829e-01 - 5.0324339e-01\\|) at {'batch': np.int64(0), 'channel': np.int64(1), 'z': np.int64(34), 'y': np.int64(7), 'x': np.int64(6)}",
+                "links": [],
+                "score": 0.5,
+                "status": "failed"
+            },
+            "0.11.0": {
+                "badge": null,
+                "details": {
+                    "details": [
+                        {
+                            "context": {
+                                "file_name": "rdf.yaml",
+                                "known_files": {
+                                    "checkpoint.pth": "c89c3ce5190b293860220a121509c1a594bf1ce80c571cee36d87a99e1a2c43c",
+                                    "cover1.png": "dc1ca431640b84189aa7c52cf241d29528c0f22d2ea32976463654be6b7290d8",
+                                    "cover2.png": "21e7cc7d1fe93b31ab66244e123dcd1d989b9d089d5de472264fa3c8bfdf016c",
+                                    "documentation.md": "7b717cf05f2a969d5fdfdc7b38ecc5f5cd2d2a5b8217e4a379bfc79a74e3ef48",
+                                    "https://github.com/BiaPyX/BiaPy": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/plucky-leopard/files/checkpoint.pth?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/plucky-leopard/files/cover1.png?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/plucky-leopard/files/cover2.png?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/plucky-leopard/files/documentation.md?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/plucky-leopard/files/model.py?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/plucky-leopard/files/test-input.npy?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/plucky-leopard/files/test-output.npy?version=v0": null,
+                                    "https://www.nature.com/articles/s41592-025-02699-y": null,
+                                    "model.py": "c0d86c529b527ae960c5c00d1199fc782c902d36fe237cb27a0d2f9bd0389cce",
+                                    "test-input.npy": "1b6a2ac5662e1a689a74974894d4076130fa128660095660f94f203547b341cd",
+                                    "test-output.npy": "3e0c8617ea2698302f5670ca39f7cebede26dfae002904b65e0159847bda86fa"
+                                },
+                                "original_source_name": null,
+                                "perform_io_checks": true,
+                                "root": "https://hypha.aicell.io/bioimage-io/artifacts/plucky-leopard/files?version=v0",
+                                "update_hashes": false
+                            },
+                            "errors": [],
+                            "loc": [],
+                            "name": "Successfully created `ModelDescr` instance.",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [],
+                            "name": "bioimageio.spec format validation model 0.5.12",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": [
+                                {
+                                    "loc": [
+                                        "documentation"
+                                    ],
+                                    "msg": "No '# Validation' (sub)section found in source=RelativePath('documentation.md') sha256='7b717cf05f2a969d5fdfdc7b38ecc5f5cd2d2a5b8217e4a379bfc79a74e3ef48'.",
+                                    "severity": 30,
+                                    "type": "warning"
+                                },
+                                {
+                                    "loc": [
+                                        "inputs",
+                                        0,
+                                        "sample_tensor"
+                                    ],
+                                    "msg": "Needs to be filled for FAIR compliance",
+                                    "severity": 35,
+                                    "type": "warning"
+                                },
+                                {
+                                    "loc": [
+                                        "outputs",
+                                        0,
+                                        "sample_tensor"
+                                    ],
+                                    "msg": "Needs to be filled for FAIR compliance",
+                                    "severity": 35,
+                                    "type": "warning"
+                                }
+                            ]
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "pytorch_state_dict"
+                            ],
+                            "name": "Created conda environment 'f923abbcd927e1b70f314f29827668de2b128bac170663b23d97aaff14a5c225'",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [
+                                {
+                                    "loc": [
+                                        "weights",
+                                        "pytorch_state_dict"
+                                    ],
+                                    "msg": "Output 'output0': 9361 of 1966080 elements disagree with expected values. (4761.3 ppm). \nMax relative difference not accounted for by absolute tolerance (1.00e-03):\n2.35e-01 (= \\|3.39e-03 - 4.43e-03\\|/\\|4.43e-03 + 1e-6\\|) at {'batch': np.int64(0), 'channel': np.int64(2), 'z': np.int64(17), 'y': np.int64(14), 'x': np.int64(47)} \nMax absolute difference not accounted for by relative tolerance (1.00e-03):\n3.15e-03 (= \\|5.0009829e-01 - 5.0324339e-01\\|) at {'batch': np.int64(0), 'channel': np.int64(1), 'z': np.int64(34), 'y': np.int64(7), 'x': np.int64(6)}",
+                                    "traceback_html": "",
+                                    "traceback_md": "",
+                                    "type": "bioimageio.core",
+                                    "with_traceback": false
+                                }
+                            ],
+                            "loc": [
+                                "weights",
+                                "pytorch_state_dict"
+                            ],
+                            "name": "Reproduce test outputs from test inputs (pytorch_state_dict)",
+                            "recommended_env": {
+                                "channels": [
+                                    "conda-forge",
+                                    "nodefaults"
+                                ],
+                                "dependencies": [
+                                    "conda-forge::bioimageio.core>=0.9.4",
+                                    "pip",
+                                    "pytorch==2.9.1",
+                                    "torchvision==0.24.1"
+                                ],
+                                "name": null
+                            },
+                            "saved_conda_compare": "/usr/share/miniconda/lib/python3.14/site-packages/conda/env/env.py:288: FutureWarning: The environment file is not fully CEP 24 compliant is deprecated and will be removed in 26.9. In the future, this configuration will be rejected. Please fix the following errors in order to make the configuration valid: \n  - Invalid type for 'name', expected a str\n  deprecated.topic(\nSuccess. All the packages in the specification file are present in the environment with matching version and build string.\n",
+                            "status": "failed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "pytorch_state_dict"
+                            ],
+                            "name": "Run pytorch_state_dict inference for inputs with batch_size: 1 and size parameter n: 0",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        }
+                    ],
+                    "env": [
+                        [
+                            "bioimageio.spec",
+                            "0.5.12.0",
+                            "",
+                            ""
+                        ]
+                    ],
+                    "format_version": "0.5.12",
+                    "id": "plucky-leopard",
+                    "metadata_completeness": 0.4690265486725664,
                     "name": "bioimageio format validation",
                     "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
                     "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/plucky-leopard/files/rdf.yaml?version=v0",
