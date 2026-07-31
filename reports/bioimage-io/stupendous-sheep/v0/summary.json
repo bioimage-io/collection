@@ -206,6 +206,7 @@
             "biapy_3.6.5": 0.0,
             "biapy_3.6.7": 0.0,
             "biapy_3.6.8": 0.0,
+            "biapy_3.7.0": 0.0,
             "bioimageio.core_0.10.4": 0.0,
             "bioimageio.core_0.11.0": 0.5,
             "bioimageio.core_0.9.3": 0.0,
@@ -257,6 +258,16 @@
                 "status": "failed"
             },
             "3.6.8": {
+                "badge": null,
+                "details": "[all] Accepting models only with ['bcyx', 'bczyx'] axis order, found yx\n",
+                "error": "[all] Accepting models only with ['bcyx', 'bczyx'] axis order, found yx\n",
+                "links": [
+                    "biapy/biapy"
+                ],
+                "score": 0.0,
+                "status": "failed"
+            },
+            "3.7.0": {
                 "badge": null,
                 "details": "[all] Accepting models only with ['bcyx', 'bczyx'] axis order, found yx\n",
                 "error": "[all] Accepting models only with ['bcyx', 'bczyx'] axis order, found yx\n",

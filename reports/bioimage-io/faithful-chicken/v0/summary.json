@@ -918,6 +918,7 @@
             "biapy_3.6.6": 0.0,
             "biapy_3.6.7": 0.0,
             "biapy_3.6.8": 0.0,
+            "biapy_3.7.0": 0.0,
             "bioimageio.core_0.10.0": 0.5,
             "bioimageio.core_0.10.2": 0.5,
             "bioimageio.core_0.10.3": 0.5,
@@ -982,6 +983,16 @@
                 "status": "failed"
             },
             "3.6.8": {
+                "badge": null,
+                "details": "[all] Model needs to have a single input.\n",
+                "error": "[all] Model needs to have a single input.\n",
+                "links": [
+                    "biapy/biapy"
+                ],
+                "score": 0.0,
+                "status": "failed"
+            },
+            "3.7.0": {
                 "badge": null,
                 "details": "[all] Model needs to have a single input.\n",
                 "error": "[all] Model needs to have a single input.\n",
