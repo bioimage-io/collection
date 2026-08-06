@@ -3542,9 +3542,9 @@
             "type": "model",
             "versions": [
                 {
-                    "comment": "Accepted by github|32868330",
+                    "comment": "Add reproducibility_tolerance (3000 ppm) for label-map output; test-metadata only, weights/outputs unchanged",
                     "created_at": "2026-07-10T21:20:24Z",
-                    "sha256": "097d5d9e6df3735323e29090a8805ae2fa907065fbbd4542cc6124467090569c",
+                    "sha256": "da23717f1e979ae2eb08767122e730f24f4f63589b9c75b5e2283471415d4936",
                     "source": "https://hypha.aicell.io/bioimage-io/artifacts/idealistic-eagle/files/rdf.yaml?version=v0",
                     "version": "v0"
                 }
@@ -3564,6 +3564,6 @@
             ]
         }
     ],
-    "timestamp": "2026-08-05T02:48:23.007353",
+    "timestamp": "2026-08-06T02:52:02.051557",
     "total": 273
 }

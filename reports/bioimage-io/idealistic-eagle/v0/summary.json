@@ -14,7 +14,17 @@
                 "url": "https://www.biorxiv.org/content/10.1101/2025.04.28.651001v1"
             }
         ],
-        "config": {},
+        "config": {
+            "bioimageio": {
+                "reproducibility_tolerance": [
+                    {
+                        "absolute_tolerance": 0.001,
+                        "mismatched_elements_per_million": 3000,
+                        "relative_tolerance": 0.01
+                    }
+                ]
+            }
+        },
         "covers": [
             "cellpose_cover1.png",
             "cellpose_cover2.png",
@@ -185,25 +195,21 @@
             }
         }
     },
-    "rdf_yaml_sha256": "097d5d9e6df3735323e29090a8805ae2fa907065fbbd4542cc6124467090569c",
+    "rdf_yaml_sha256": "da23717f1e979ae2eb08767122e730f24f4f63589b9c75b5e2283471415d4936",
     "scores": {
-        "core_compatibility": 0.5,
-        "metadata_completeness": 0.3723404255319149,
+        "core_compatibility": 1.0,
+        "metadata_completeness": 0.39361702127659576,
         "metadata_format": 1.0,
-        "overall_compatibility": 0.46808510638297873,
+        "overall_compatibility": 0.5984042553191489,
         "overall_partner_tool_compatibility": 0.0,
         "tool_compatibility": {
-            "biapy": 0.0,
-            "bioimageio.core": 0.5,
+            "bioimageio.core": 1.0,
             "careamics": 0.0,
             "deepimagej": 0.0,
             "ilastik": 0.0
         },
         "tool_compatibility_version_specific": {
-            "biapy_3.6.8": 0.0,
-            "biapy_3.7.0": 0.0,
-            "bioimageio.core_0.10.4": 0.5,
-            "bioimageio.core_0.11.0": 0.5,
+            "bioimageio.core_0.11.0": 1.0,
             "careamics_0.3.2": 0.0,
             "deepimagej_3.2.0-snapshot": 0.0,
             "ilastik_1.4.1.post1": 0.0,
@@ -212,204 +218,7 @@
     },
     "status": "passed",
     "tests": {
-        "biapy": {
-            "3.6.8": {
-                "badge": null,
-                "details": "[all] Couldn't extract kwargs from model description.\n",
-                "error": "[all] Couldn't extract kwargs from model description.\n",
-                "links": [
-                    "biapy/biapy"
-                ],
-                "score": 0.0,
-                "status": "failed"
-            },
-            "3.7.0": {
-                "badge": null,
-                "details": "[all] Couldn't extract kwargs from model description.\n",
-                "error": "[all] Couldn't extract kwargs from model description.\n",
-                "links": [
-                    "biapy/biapy"
-                ],
-                "score": 0.0,
-                "status": "failed"
-            }
-        },
         "bioimageio.core": {
-            "0.10.4": {
-                "badge": null,
-                "details": {
-                    "details": [
-                        {
-                            "context": {
-                                "file_name": "rdf.yaml",
-                                "known_files": {
-                                    "cellpose_vit_bioimageio.py": "c42254d2fd0e5a8b7a9eb69b5b7eba89f328b31d3c842e6165410d79ff6e2949",
-                                    "cpsam": "e1440429eb384f95afe32bcba6510f90d518eaedc917ede549bed6804004abe2",
-                                    "environment.yaml": "3f3704fe580b837042252c6a8aa34ba2234308f7e8cfe9dfd145159d3a9ae61d",
-                                    "https://github.com/MouseLand/cellpose": null,
-                                    "https://hypha.aicell.io/bioimage-io/artifacts/idealistic-eagle/files/README.md?version=v0": null,
-                                    "https://hypha.aicell.io/bioimage-io/artifacts/idealistic-eagle/files/cellpose_cover1.png?version=v0": null,
-                                    "https://hypha.aicell.io/bioimage-io/artifacts/idealistic-eagle/files/cellpose_cover2.png?version=v0": null,
-                                    "https://hypha.aicell.io/bioimage-io/artifacts/idealistic-eagle/files/cellpose_cover3.png?version=v0": null,
-                                    "https://hypha.aicell.io/bioimage-io/artifacts/idealistic-eagle/files/cellpose_vit_bioimageio.py?version=v0": null,
-                                    "https://hypha.aicell.io/bioimage-io/artifacts/idealistic-eagle/files/cpsam?version=v0": null,
-                                    "https://hypha.aicell.io/bioimage-io/artifacts/idealistic-eagle/files/environment.yaml?version=v0": null,
-                                    "https://hypha.aicell.io/bioimage-io/artifacts/idealistic-eagle/files/sample_input.png?version=v0": null,
-                                    "https://hypha.aicell.io/bioimage-io/artifacts/idealistic-eagle/files/sample_output.png?version=v0": null,
-                                    "https://hypha.aicell.io/bioimage-io/artifacts/idealistic-eagle/files/test_input.npy?version=v0": null,
-                                    "https://hypha.aicell.io/bioimage-io/artifacts/idealistic-eagle/files/test_output.npy?version=v0": null,
-                                    "https://www.biorxiv.org/content/10.1101/2025.04.28.651001v1": null,
-                                    "sample_input.png": "7f0e6b3c15adb1c41fdc10ab5105d6a5944e0e83912c370ad7ba5db24278305f",
-                                    "sample_output.png": "2a20439b8021a1eb62d10ff1e4e636e9e34d8458815a9ace74f63494b76e63db",
-                                    "test_input.npy": "7e34819961280eacad2bf2c85d6cb0919ff2125f6d1de3812e513fec4f709de1",
-                                    "test_output.npy": "66f406aef148b7934e24e4853f5240252f3e14dcafc1cc7617d285f0557b42e2"
-                                },
-                                "original_source_name": null,
-                                "perform_io_checks": true,
-                                "root": "https://hypha.aicell.io/bioimage-io/artifacts/idealistic-eagle/files?version=v0",
-                                "update_hashes": false
-                            },
-                            "errors": [],
-                            "loc": [],
-                            "name": "Successfully created `ModelDescr` instance.",
-                            "recommended_env": null,
-                            "saved_conda_compare": null,
-                            "status": "passed",
-                            "warnings": []
-                        },
-                        {
-                            "context": null,
-                            "errors": [],
-                            "loc": [],
-                            "name": "bioimageio.spec format validation model 0.5.10",
-                            "recommended_env": null,
-                            "saved_conda_compare": null,
-                            "status": "passed",
-                            "warnings": [
-                                {
-                                    "loc": [
-                                        "description"
-                                    ],
-                                    "msg": "Description longer than 512 characters.",
-                                    "severity": 30,
-                                    "type": "warning"
-                                },
-                                {
-                                    "loc": [
-                                        "documentation"
-                                    ],
-                                    "msg": "No '# Validation' (sub)section found in README.md.",
-                                    "severity": 30,
-                                    "type": "warning"
-                                }
-                            ]
-                        },
-                        {
-                            "context": null,
-                            "errors": [],
-                            "loc": [
-                                "weights",
-                                "pytorch_state_dict"
-                            ],
-                            "name": "Created conda environment 'd732c7f7ed5b614806501d35f1158be58f229d505789d2df261253ecc9f68fdd'",
-                            "recommended_env": null,
-                            "saved_conda_compare": null,
-                            "status": "passed",
-                            "warnings": []
-                        },
-                        {
-                            "context": null,
-                            "errors": [
-                                {
-                                    "loc": [
-                                        "weights",
-                                        "pytorch_state_dict"
-                                    ],
-                                    "msg": "Output 'labels': 115 of 65536 elements disagree with expected values. (1754.8 ppm). \nMax relative difference not accounted for by absolute tolerance (1.00e-03):\n9.70e+07 (= \\|9.70e+01 - 0.00e+00\\|/\\|0.00e+00 + 1e-6\\|) at {'batch': np.int64(0), 'channel': np.int64(0), 'y': np.int64(237), 'x': np.int64(37)} \nMax absolute difference not accounted for by relative tolerance (1.00e-03):\n9.70e+01 (= \\|9.7000000e+01 - 0.0000000e+00\\|) at {'batch': np.int64(0), 'channel': np.int64(0), 'y': np.int64(237), 'x': np.int64(37)}",
-                                    "traceback_html": "",
-                                    "traceback_md": "",
-                                    "type": "bioimageio.core",
-                                    "with_traceback": false
-                                }
-                            ],
-                            "loc": [
-                                "weights",
-                                "pytorch_state_dict"
-                            ],
-                            "name": "Reproduce test outputs from test inputs (pytorch_state_dict)",
-                            "recommended_env": {
-                                "channels": [
-                                    "conda-forge",
-                                    "nodefaults"
-                                ],
-                                "dependencies": [
-                                    "pip",
-                                    {
-                                        "pip": [
-                                            "cellpose==4.2.1.1"
-                                        ]
-                                    },
-                                    "conda-forge::bioimageio.core>=0.9.4",
-                                    "python>=3.11"
-                                ],
-                                "name": "cellpose-sam"
-                            },
-                            "saved_conda_compare": "Success. All the packages in the specification file are present in the environment with matching version and build string.\n",
-                            "status": "failed",
-                            "warnings": []
-                        },
-                        {
-                            "context": null,
-                            "errors": [],
-                            "loc": [
-                                "weights",
-                                "pytorch_state_dict"
-                            ],
-                            "name": "Run pytorch_state_dict inference for inputs with batch_size: 1 and size parameter n: 0",
-                            "recommended_env": null,
-                            "saved_conda_compare": null,
-                            "status": "passed",
-                            "warnings": []
-                        },
-                        {
-                            "context": null,
-                            "errors": [],
-                            "loc": [
-                                "weights",
-                                "pytorch_state_dict"
-                            ],
-                            "name": "Run pytorch_state_dict inference for inputs with batch_size: 2 and size parameter n: 0",
-                            "recommended_env": null,
-                            "saved_conda_compare": null,
-                            "status": "passed",
-                            "warnings": []
-                        }
-                    ],
-                    "env": [
-                        [
-                            "bioimageio.spec",
-                            "0.5.10.2",
-                            "",
-                            ""
-                        ]
-                    ],
-                    "format_version": "0.5.10",
-                    "id": "idealistic-eagle",
-                    "metadata_completeness": 0.358695652173913,
-                    "name": "bioimageio format validation",
-                    "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
-                    "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/idealistic-eagle/files/rdf.yaml?version=v0",
-                    "status": "valid-format",
-                    "traceback": null,
-                    "type": "model",
-                    "version": "0.1.0",
-                    "warnings": null
-                },
-                "error": "Output 'labels': 115 of 65536 elements disagree with expected values. (1754.8 ppm). \nMax relative difference not accounted for by absolute tolerance (1.00e-03):\n9.70e+07 (= \\|9.70e+01 - 0.00e+00\\|/\\|0.00e+00 + 1e-6\\|) at {'batch': np.int64(0), 'channel': np.int64(0), 'y': np.int64(237), 'x': np.int64(37)} \nMax absolute difference not accounted for by relative tolerance (1.00e-03):\n9.70e+01 (= \\|9.7000000e+01 - 0.0000000e+00\\|) at {'batch': np.int64(0), 'channel': np.int64(0), 'y': np.int64(237), 'x': np.int64(37)}",
-                "links": [],
-                "score": 0.5,
-                "status": "failed"
-            },
             "0.11.0": {
                 "badge": null,
                 "details": {
@@ -498,19 +307,7 @@
                         },
                         {
                             "context": null,
-                            "errors": [
-                                {
-                                    "loc": [
-                                        "weights",
-                                        "pytorch_state_dict"
-                                    ],
-                                    "msg": "Output 'labels': 115 of 65536 elements disagree with expected values. (1754.8 ppm). \nMax relative difference not accounted for by absolute tolerance (1.00e-03):\n9.70e+07 (= \\|9.70e+01 - 0.00e+00\\|/\\|0.00e+00 + 1e-6\\|) at {'batch': np.int64(0), 'channel': np.int64(0), 'y': np.int64(237), 'x': np.int64(37)} \nMax absolute difference not accounted for by relative tolerance (1.00e-03):\n9.70e+01 (= \\|9.7000000e+01 - 0.0000000e+00\\|) at {'batch': np.int64(0), 'channel': np.int64(0), 'y': np.int64(237), 'x': np.int64(37)}",
-                                    "traceback_html": "",
-                                    "traceback_md": "",
-                                    "type": "bioimageio.core",
-                                    "with_traceback": false
-                                }
-                            ],
+                            "errors": [],
                             "loc": [
                                 "weights",
                                 "pytorch_state_dict"
@@ -534,8 +331,18 @@
                                 "name": "cellpose-sam"
                             },
                             "saved_conda_compare": "Success. All the packages in the specification file are present in the environment with matching version and build string.\n",
-                            "status": "failed",
-                            "warnings": []
+                            "status": "passed",
+                            "warnings": [
+                                {
+                                    "loc": [
+                                        "weights",
+                                        "pytorch_state_dict"
+                                    ],
+                                    "msg": "Output 'labels': 115 of 65536 elements disagree with expected values (0.2%). \nMax relative difference not accounted for by absolute tolerance (1.00e-03):\n9.70e+07 (= \\|9.70e+01 - 0.00e+00\\|/\\|0.00e+00 + 1e-6\\|) at {'batch': np.int64(0), 'channel': np.int64(0), 'y': np.int64(237), 'x': np.int64(37)} \nMax absolute difference not accounted for by relative tolerance (1.00e-02):\n9.70e+01 (= \\|9.7000000e+01 - 0.0000000e+00\\|) at {'batch': np.int64(0), 'channel': np.int64(0), 'y': np.int64(237), 'x': np.int64(37)}",
+                                    "severity": 30,
+                                    "type": "bioimageio.core"
+                                }
+                            ]
                         },
                         {
                             "context": null,
@@ -574,20 +381,22 @@
                     ],
                     "format_version": "0.5.12",
                     "id": "idealistic-eagle",
-                    "metadata_completeness": 0.3723404255319149,
+                    "metadata_completeness": 0.39361702127659576,
                     "name": "bioimageio format validation",
                     "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
                     "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/idealistic-eagle/files/rdf.yaml?version=v0",
-                    "status": "valid-format",
+                    "status": "passed",
                     "traceback": null,
                     "type": "model",
                     "version": "0.1.0",
                     "warnings": null
                 },
-                "error": "Output 'labels': 115 of 65536 elements disagree with expected values. (1754.8 ppm). \nMax relative difference not accounted for by absolute tolerance (1.00e-03):\n9.70e+07 (= \\|9.70e+01 - 0.00e+00\\|/\\|0.00e+00 + 1e-6\\|) at {'batch': np.int64(0), 'channel': np.int64(0), 'y': np.int64(237), 'x': np.int64(37)} \nMax absolute difference not accounted for by relative tolerance (1.00e-03):\n9.70e+01 (= \\|9.7000000e+01 - 0.0000000e+00\\|) at {'batch': np.int64(0), 'channel': np.int64(0), 'y': np.int64(237), 'x': np.int64(37)}",
-                "links": [],
-                "score": 0.5,
-                "status": "failed"
+                "error": null,
+                "links": [
+                    "bioimageio/bioimageio.core"
+                ],
+                "score": 1.0,
+                "status": "passed"
             }
         },
         "careamics": {
@@ -603,7 +412,7 @@
         "deepimagej": {
             "3.2.0-snapshot": {
                 "badge": null,
-                "details": "OpenJDK 64-Bit Server VM warning: ignoring option PermSize=128m; support was removed in 8.0\nOpenJDK 64-Bit Server VM warning: Using incremental CMS is deprecated and will likely be removed in a future release\njava.lang.IllegalArgumentException: Invalid axis configuration: When axis type is 'spaces', an 'id' must be defined. Current configuration: type='space', id=null\n\tat io.bioimage.modelrunner.bioimageio.description.AxisV05.<init>(AxisV05.java:62)\n\tat io.bioimage.modelrunner.bioimageio.description.AxesV05.<init>(AxesV05.java:52)\n\tat io.bioimage.modelrunner.bioimageio.description.TensorSpecV05.<init>(TensorSpecV05.java:85)\n\tat io.bioimage.modelrunner.bioimageio.description.ModelDescriptorV05.buildInputTensors(ModelDescriptorV05.java:96)\n\tat io.bioimage.modelrunner.bioimageio.description.ModelDescriptor.buildModelDescription(ModelDescriptor.java:212)\n\tat io.bioimage.modelrunner.bioimageio.description.ModelDescriptorV05.<init>(ModelDescriptorV05.java:44)\n\tat io.bioimage.modelrunner.bioimageio.description.ModelDescriptorFactory.fromMap(ModelDescriptorFactory.java:128)\n\tat io.bioimage.modelrunner.bioimageio.description.ModelDescriptorFactory.readFromYamlTextString(ModelDescriptorFactory.java:109)\n\tat io.bioimage.modelrunner.bioimageio.BioimageioRepo.listAllModels(BioimageioRepo.java:202)\n\tat io.bioimage.modelrunner.bioimageio.BioimageioRepo.selectByID(BioimageioRepo.java:418)\n\tat io.bioimage.modelrunner.bioimageio.BioimageioRepo.downloadModelByID(BioimageioRepo.java:521)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\n\tat org.python.core.PyReflectedFunction.__call__(PyReflectedFunction.java:207)\n\tat org.python.core.PyReflectedFunction.__call__(PyReflectedFunction.java:225)\n\tat org.python.core.PyObject.__call__(PyObject.java:494)\n\tat org.python.core.PyObject.__call__(PyObject.java:498)\n\tat org.python.core.PyMethod.__call__(PyMethod.java:156)\n\tat org.python.pycode._pyx0.f$0(scripts/deepimagej_jython_scripts/deepimagej_download_model.py:138)\n\tat org.python.pycode._pyx0.call_function(scripts/deepimagej_jython_scripts/deepimagej_download_model.py)\n\tat org.python.core.PyTableCode.call(PyTableCode.java:173)\n\tat org.python.core.PyCode.call(PyCode.java:18)\n\tat org.python.core.Py.runCode(Py.java:1742)\n\tat org.python.util.PythonInterpreter.execfile(PythonInterpreter.java:297)\n\tat org.python.util.jython.runSimpleFile(jython.java:417)\n\tat org.python.util.jython.runStream(jython.java:449)\n\tat org.python.util.jython.runFile(jython.java:474)\n\tat org.python.util.jython.main(jython.java:678)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\n\tat net.imagej.launcher.ClassLauncher.launch(ClassLauncher.java:279)\n\tat net.imagej.launcher.ClassLauncher.run(ClassLauncher.java:186)\n\tat net.imagej.launcher.ClassLauncher.main(ClassLauncher.java:87)\nTraceback (most recent call last):\n  File \"scripts/deepimagej_jython_scripts/deepimagej_download_model.py\", line 78, in <module>\n    mfp = br.downloadModelByID(descriptor.getModelID(), models_dir)\n\tat io.bioimage.modelrunner.bioimageio.BioimageioRepo.downloadModelByID(BioimageioRepo.java:523)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\njava.lang.IllegalArgumentException: java.lang.IllegalArgumentException: The provided id does not correspond to an existing model in the Bioimage.io online repo.\n\n",
+                "details": "OpenJDK 64-Bit Server VM warning: ignoring option PermSize=128m; support was removed in 8.0\nOpenJDK 64-Bit Server VM warning: Using incremental CMS is deprecated and will likely be removed in a future release\njava.lang.IllegalArgumentException: Invalid axis configuration: When axis type is 'spaces', an 'id' must be defined. Current configuration: type='space', id=null\n\tat io.bioimage.modelrunner.bioimageio.description.AxisV05.<init>(AxisV05.java:62)\n\tat io.bioimage.modelrunner.bioimageio.description.AxesV05.<init>(AxesV05.java:52)\n\tat io.bioimage.modelrunner.bioimageio.description.TensorSpecV05.<init>(TensorSpecV05.java:85)\n\tat io.bioimage.modelrunner.bioimageio.description.ModelDescriptorV05.buildInputTensors(ModelDescriptorV05.java:96)\n\tat io.bioimage.modelrunner.bioimageio.description.ModelDescriptor.buildModelDescription(ModelDescriptor.java:212)\n\tat io.bioimage.modelrunner.bioimageio.description.ModelDescriptorV05.<init>(ModelDescriptorV05.java:44)\n\tat io.bioimage.modelrunner.bioimageio.description.ModelDescriptorFactory.fromMap(ModelDescriptorFactory.java:128)\n\tat io.bioimage.modelrunner.bioimageio.description.ModelDescriptorFactory.readFromYamlTextString(ModelDescriptorFactory.java:109)\n\tat io.bioimage.modelrunner.bioimageio.BioimageioRepo.listAllModels(BioimageioRepo.java:202)\n\tat io.bioimage.modelrunner.bioimageio.BioimageioRepo.selectByID(BioimageioRepo.java:418)\n\tat io.bioimage.modelrunner.bioimageio.BioimageioRepo.downloadModelByID(BioimageioRepo.java:521)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\n\tat org.python.core.PyReflectedFunction.__call__(PyReflectedFunction.java:207)\n\tat org.python.core.PyReflectedFunction.__call__(PyReflectedFunction.java:225)\n\tat org.python.core.PyObject.__call__(PyObject.java:494)\n\tat org.python.core.PyObject.__call__(PyObject.java:498)\n\tat org.python.core.PyMethod.__call__(PyMethod.java:156)\n\tat org.python.pycode._pyx0.f$0(scripts/deepimagej_jython_scripts/deepimagej_download_model.py:136)\n\tat org.python.pycode._pyx0.call_function(scripts/deepimagej_jython_scripts/deepimagej_download_model.py)\n\tat org.python.core.PyTableCode.call(PyTableCode.java:173)\n\tat org.python.core.PyCode.call(PyCode.java:18)\n\tat org.python.core.Py.runCode(Py.java:1742)\n\tat org.python.util.PythonInterpreter.execfile(PythonInterpreter.java:297)\n\tat org.python.util.jython.runSimpleFile(jython.java:417)\n\tat org.python.util.jython.runStream(jython.java:449)\n\tat org.python.util.jython.runFile(jython.java:474)\n\tat org.python.util.jython.main(jython.java:678)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\n\tat net.imagej.launcher.ClassLauncher.launch(ClassLauncher.java:279)\n\tat net.imagej.launcher.ClassLauncher.run(ClassLauncher.java:186)\n\tat net.imagej.launcher.ClassLauncher.main(ClassLauncher.java:87)\nTraceback (most recent call last):\n  File \"scripts/deepimagej_jython_scripts/deepimagej_download_model.py\", line 76, in <module>\n    mfp = br.downloadModelByID(descriptor.getModelID(), models_dir)\n\tat io.bioimage.modelrunner.bioimageio.BioimageioRepo.downloadModelByID(BioimageioRepo.java:523)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\njava.lang.IllegalArgumentException: java.lang.IllegalArgumentException: The provided id does not correspond to an existing model in the Bioimage.io online repo.\n\n",
                 "error": "unable to download the model",
                 "links": [
                     "deepimagej/deepimagej"
@@ -660,6 +469,18 @@
                             "errors": [
                                 {
                                     "loc": [
+                                        "cite",
+                                        0,
+                                        "url"
+                                    ],
+                                    "msg": "Value error, 429: Too Many Requests https://www.biorxiv.org/content/10.1101/2025.04.28.651001v1",
+                                    "traceback_html": "",
+                                    "traceback_md": "",
+                                    "type": "value_error",
+                                    "with_traceback": false
+                                },
+                                {
+                                    "loc": [
                                         "inputs",
                                         0,
                                         "pad"
@@ -693,6 +514,20 @@
                                     "traceback_html": "",
                                     "traceback_md": "",
                                     "type": "extra_forbidden",
+                                    "with_traceback": false
+                                },
+                                {
+                                    "loc": [
+                                        "config",
+                                        "bioimageio",
+                                        "reproducibility_tolerance",
+                                        0,
+                                        "mismatched_elements_per_million"
+                                    ],
+                                    "msg": "Input should be less than or equal to 100",
+                                    "traceback_html": "",
+                                    "traceback_md": "",
+                                    "type": "less_than_equal",
                                     "with_traceback": false
                                 }
                             ],
@@ -734,14 +569,14 @@
                     ],
                     "env": [
                         [
-                            "bioimageio.core",
-                            "0.8.0",
+                            "bioimageio.spec",
+                            "0.5.4.1",
                             "",
                             ""
                         ],
                         [
-                            "bioimageio.spec",
-                            "0.5.4.1",
+                            "bioimageio.core",
+                            "0.8.0",
                             "",
                             ""
                         ]
@@ -756,7 +591,7 @@
                     "type": "model",
                     "warnings": null
                 },
-                "error": "\n|        ❌        |                               bioimageio format validation                               |\n|       ---       |                                           ---                                            |\n| status          | failed                                                                                   |\n| source          | https://hypha.aicell.io/bioimage-io/artifacts/idealistic-eagle/files/rdf.yaml?version=v0 |\n| id              | idealistic-eagle                                                                         |\n| format version  | model 0.5.4                                                                              |\n| bioimageio.core | 0.8.0                                                                                    |\n| bioimageio.spec | 0.5.4.1                                                                                  |\n\n|     |                     Location                     |                                                                                                                           Details                                                                                                                            |\n| --- |                       ---                        |                                                                                                                             ---                                                                                                                              |\n| ❌   |                                                  | Created `InvalidDescr` object.                                                                                                                                                                                                                               |\n| 🔍   | `context:perform_io_checks`                      | True                                                                                                                                                                                                                                                         |\n| 🔍   | `context:root`                                   | https://hypha.aicell.io/bioimage-io/artifacts/idealistic-eagle/files?version=v0                                                                                                                                                                              |\n| 🔍   | `context:known_files.test_input.npy`             | 7e34819961280eacad2bf2c85d6cb0919ff2125f6d1de3812e513fec4f709de1                                                                                                                                                                                             |\n| 🔍   | `context:known_files.sample_input.png`           | 7f0e6b3c15adb1c41fdc10ab5105d6a5944e0e83912c370ad7ba5db24278305f                                                                                                                                                                                             |\n| 🔍   | `context:known_files.test_output.npy`            | 66f406aef148b7934e24e4853f5240252f3e14dcafc1cc7617d285f0557b42e2                                                                                                                                                                                             |\n| 🔍   | `context:known_files.sample_output.png`          | 2a20439b8021a1eb62d10ff1e4e636e9e34d8458815a9ace74f63494b76e63db                                                                                                                                                                                             |\n| 🔍   | `context:known_files.cellpose_vit_bioimageio.py` | c42254d2fd0e5a8b7a9eb69b5b7eba89f328b31d3c842e6165410d79ff6e2949                                                                                                                                                                                             |\n| 🔍   | `context:known_files.environment.yaml`           | 3f3704fe580b837042252c6a8aa34ba2234308f7e8cfe9dfd145159d3a9ae61d                                                                                                                                                                                             |\n| ❌   |                                                  | bioimageio.spec format validation model 0.5.4                                                                                                                                                                                                                |\n| ❌   | `inputs.0.pad`                                   | Extra inputs are not permitted                                                                                                                                                                                                                               |\n|     |                                                  |                                                                                                                                                                                                                                                              |\n| ❌   | `outputs.0.postprocessing.0`                     | Input tag 'cellpose_flow_dynamics' found using 'id' does not match any of the expected tags: 'binarize', 'clip', 'ensure_dtype', 'scale_linear', 'sigmoid', 'fixed_zero_mean_unit_variance', 'zero_mean_unit_variance', 'scale_range', 'scale_mean_variance' |\n|     |                                                  |                                                                                                                                                                                                                                                              |\n| ❌   | `weights.pytorch_state_dict.strict`              | Extra inputs are not permitted                                                                                                                                                                                                                               |\n|     |                                                  |                                                                                                                                                                                                                                                              |\n| ⚠   | `description`                                    | Description longer than 512 characters.                                                                                                                                                                                                                      |\n| ⚠   | `documentation`                                  | No '# Validation' (sub)section found in README.md.                                                                                                                                                                                                           |\n| ✔️  | `type`                                           | Has expected resource type                                                                                                                                                                                                                                   |\n",
+                "error": "\n|        ❌        |                               bioimageio format validation                               |\n|       ---       |                                           ---                                            |\n| status          | failed                                                                                   |\n| source          | https://hypha.aicell.io/bioimage-io/artifacts/idealistic-eagle/files/rdf.yaml?version=v0 |\n| id              | idealistic-eagle                                                                         |\n| format version  | model 0.5.4                                                                              |\n| bioimageio.spec | 0.5.4.1                                                                                  |\n| bioimageio.core | 0.8.0                                                                                    |\n\n|     |                                     Location                                    |                                                                                                                           Details                                                                                                                            |\n| --- |                                       ---                                       |                                                                                                                             ---                                                                                                                              |\n| ❌   |                                                                                 | Created `InvalidDescr` object.                                                                                                                                                                                                                               |\n| 🔍   | `context:perform_io_checks`                                                     | True                                                                                                                                                                                                                                                         |\n| 🔍   | `context:root`                                                                  | https://hypha.aicell.io/bioimage-io/artifacts/idealistic-eagle/files?version=v0                                                                                                                                                                              |\n| 🔍   | `context:known_files.test_input.npy`                                            | 7e34819961280eacad2bf2c85d6cb0919ff2125f6d1de3812e513fec4f709de1                                                                                                                                                                                             |\n| 🔍   | `context:known_files.sample_input.png`                                          | 7f0e6b3c15adb1c41fdc10ab5105d6a5944e0e83912c370ad7ba5db24278305f                                                                                                                                                                                             |\n| 🔍   | `context:known_files.test_output.npy`                                           | 66f406aef148b7934e24e4853f5240252f3e14dcafc1cc7617d285f0557b42e2                                                                                                                                                                                             |\n| 🔍   | `context:known_files.sample_output.png`                                         | 2a20439b8021a1eb62d10ff1e4e636e9e34d8458815a9ace74f63494b76e63db                                                                                                                                                                                             |\n| 🔍   | `context:known_files.cellpose_vit_bioimageio.py`                                | c42254d2fd0e5a8b7a9eb69b5b7eba89f328b31d3c842e6165410d79ff6e2949                                                                                                                                                                                             |\n| 🔍   | `context:known_files.environment.yaml`                                          | 3f3704fe580b837042252c6a8aa34ba2234308f7e8cfe9dfd145159d3a9ae61d                                                                                                                                                                                             |\n| ❌   |                                                                                 | bioimageio.spec format validation model 0.5.4                                                                                                                                                                                                                |\n| ❌   | `cite.0.url`                                                                    | Value error, 429: Too Many Requests https://www.biorxiv.org/content/10.1101/2025.04.28.651001v1                                                                                                                                                              |\n|     |                                                                                 |                                                                                                                                                                                                                                                              |\n| ❌   | `inputs.0.pad`                                                                  | Extra inputs are not permitted                                                                                                                                                                                                                               |\n|     |                                                                                 |                                                                                                                                                                                                                                                              |\n| ❌   | `outputs.0.postprocessing.0`                                                    | Input tag 'cellpose_flow_dynamics' found using 'id' does not match any of the expected tags: 'binarize', 'clip', 'ensure_dtype', 'scale_linear', 'sigmoid', 'fixed_zero_mean_unit_variance', 'zero_mean_unit_variance', 'scale_range', 'scale_mean_variance' |\n|     |                                                                                 |                                                                                                                                                                                                                                                              |\n| ❌   | `weights.pytorch_state_dict.strict`                                             | Extra inputs are not permitted                                                                                                                                                                                                                               |\n|     |                                                                                 |                                                                                                                                                                                                                                                              |\n| ❌   | `config.bioimageio.reproducibility_tolerance.0.mismatched_elements_per_million` | Input should be less than or equal to 100                                                                                                                                                                                                                    |\n|     |                                                                                 |                                                                                                                                                                                                                                                              |\n| ⚠   | `description`                                                                   | Description longer than 512 characters.                                                                                                                                                                                                                      |\n| ⚠   | `documentation`                                                                 | No '# Validation' (sub)section found in README.md.                                                                                                                                                                                                           |\n| ✔️  | `type`                                                                          | Has expected resource type                                                                                                                                                                                                                                   |\n",
                 "links": [
                     "ilastik/ilastik"
                 ],
@@ -805,6 +640,20 @@
                                     "traceback_html": "",
                                     "traceback_md": "",
                                     "type": "extra_forbidden",
+                                    "with_traceback": false
+                                },
+                                {
+                                    "loc": [
+                                        "config",
+                                        "bioimageio",
+                                        "reproducibility_tolerance",
+                                        0,
+                                        "mismatched_elements_per_million"
+                                    ],
+                                    "msg": "Input should be less than or equal to 1000",
+                                    "traceback_html": "",
+                                    "traceback_md": "",
+                                    "type": "less_than_equal",
                                     "with_traceback": false
                                 }
                             ],
@@ -858,14 +707,14 @@
                     ],
                     "env": [
                         [
-                            "bioimageio.spec",
-                            "0.5.9.1",
+                            "bioimageio.core",
+                            "0.10.2",
                             "",
                             ""
                         ],
                         [
-                            "bioimageio.core",
-                            "0.10.2",
+                            "bioimageio.spec",
+                            "0.5.9.1",
                             "",
                             ""
                         ]
@@ -882,7 +731,7 @@
                     "version": "0.1.0",
                     "warnings": null
                 },
-                "error": "\n|        ❌        |                               bioimageio format validation                               |\n|       ---       |                                           ---                                            |\n| status          | failed                                                                                   |\n| source          | https://hypha.aicell.io/bioimage-io/artifacts/idealistic-eagle/files/rdf.yaml?version=v0 |\n| id              | idealistic-eagle                                                                         |\n| version         | 0.1.0                                                                                    |\n| applied format  | model 0.5.9                                                                              |\n| bioimageio.core | 0.10.2                                                                                   |\n| bioimageio.spec | 0.5.9.1                                                                                  |\n\n|     |               Location              |                                                                                                                                              Details                                                                                                                                               |\n| --- |                 ---                 |                                                                                                                                                ---                                                                                                                                                 |\n| ❌   |                                     | bioimageio.spec format validation model 0.5.9                                                                                                                                                                                                                                                      |\n| ❌   | `inputs.0.pad`                      | Extra inputs are not permitted                                                                                                                                                                                                                                                                     |\n|     |                                     |                                                                                                                                                                                                                                                                                                    |\n| ❌   | `outputs.0.postprocessing.0`        | Input tag 'cellpose_flow_dynamics' found using 'id' does not match any of the expected tags: 'binarize', 'clip', 'ensure_dtype', 'fixed_zero_mean_unit_variance', 'scale_linear', 'scale_mean_variance', 'scale_range', 'sigmoid', 'softmax', 'stardist_postprocessing', 'zero_mean_unit_variance' |\n|     |                                     |                                                                                                                                                                                                                                                                                                    |\n| ❌   | `weights.pytorch_state_dict.strict` | Extra inputs are not permitted                                                                                                                                                                                                                                                                     |\n|     |                                     |                                                                                                                                                                                                                                                                                                    |\n| ⚠   | `description`                       | Description longer than 512 characters.                                                                                                                                                                                                                                                            |\n| ⚠   | `documentation`                     | No '# Validation' (sub)section found in README.md.                                                                                                                                                                                                                                                 |\n| ❌   | `type`                              | Has expected resource type                                                                                                                                                                                                                                                                         |\n| ❌   | `type`                              | Expected type model, found model                                                                                                                                                                                                                                                                   |\n|     |                                     |                                                                                                                                                                                                                                                                                                    |\n",
+                "error": "\n|        ❌        |                               bioimageio format validation                               |\n|       ---       |                                           ---                                            |\n| status          | failed                                                                                   |\n| source          | https://hypha.aicell.io/bioimage-io/artifacts/idealistic-eagle/files/rdf.yaml?version=v0 |\n| id              | idealistic-eagle                                                                         |\n| version         | 0.1.0                                                                                    |\n| applied format  | model 0.5.9                                                                              |\n| bioimageio.core | 0.10.2                                                                                   |\n| bioimageio.spec | 0.5.9.1                                                                                  |\n\n|     |                                     Location                                    |                                                                                                                                              Details                                                                                                                                               |\n| --- |                                       ---                                       |                                                                                                                                                ---                                                                                                                                                 |\n| ❌   |                                                                                 | bioimageio.spec format validation model 0.5.9                                                                                                                                                                                                                                                      |\n| ❌   | `inputs.0.pad`                                                                  | Extra inputs are not permitted                                                                                                                                                                                                                                                                     |\n|     |                                                                                 |                                                                                                                                                                                                                                                                                                    |\n| ❌   | `outputs.0.postprocessing.0`                                                    | Input tag 'cellpose_flow_dynamics' found using 'id' does not match any of the expected tags: 'binarize', 'clip', 'ensure_dtype', 'fixed_zero_mean_unit_variance', 'scale_linear', 'scale_mean_variance', 'scale_range', 'sigmoid', 'softmax', 'stardist_postprocessing', 'zero_mean_unit_variance' |\n|     |                                                                                 |                                                                                                                                                                                                                                                                                                    |\n| ❌   | `weights.pytorch_state_dict.strict`                                             | Extra inputs are not permitted                                                                                                                                                                                                                                                                     |\n|     |                                                                                 |                                                                                                                                                                                                                                                                                                    |\n| ❌   | `config.bioimageio.reproducibility_tolerance.0.mismatched_elements_per_million` | Input should be less than or equal to 1000                                                                                                                                                                                                                                                         |\n|     |                                                                                 |                                                                                                                                                                                                                                                                                                    |\n| ⚠   | `description`                                                                   | Description longer than 512 characters.                                                                                                                                                                                                                                                            |\n| ⚠   | `documentation`                                                                 | No '# Validation' (sub)section found in README.md.                                                                                                                                                                                                                                                 |\n| ❌   | `type`                                                                          | Has expected resource type                                                                                                                                                                                                                                                                         |\n| ❌   | `type`                                                                          | Expected type model, found model                                                                                                                                                                                                                                                                   |\n|     |                                                                                 |                                                                                                                                                                                                                                                                                                    |\n",
                 "links": [
                     "ilastik/ilastik"
                 ],
