@@ -1,0 +1,11 @@
+{
+    "badge": null,
+    "details": "OpenJDK 64-Bit Server VM warning: ignoring option PermSize=128m; support was removed in 8.0\nOpenJDK 64-Bit Server VM warning: Using incremental CMS is deprecated and will likely be removed in a future release\nTraceback (most recent call last):\n  File \"scripts/deepimagej_jython_scripts/deepimagej_read_yaml.py\", line 39, in <module>\n    descriptor = ModelDescriptorFactory.readFromLocalFile(yaml_fpath)\n\tat io.bioimage.modelrunner.bioimageio.description.ModelDescriptorV05.<init>(ModelDescriptorV05.java:47)\n\tat io.bioimage.modelrunner.bioimageio.description.ModelDescriptorFactory.fromMap(ModelDescriptorFactory.java:128)\n\tat io.bioimage.modelrunner.bioimageio.description.ModelDescriptorFactory.fromMap(ModelDescriptorFactory.java:114)\n\tat io.bioimage.modelrunner.bioimageio.description.ModelDescriptorFactory.readFromLocalFile(ModelDescriptorFactory.java:74)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\njava.lang.NullPointerException: java.lang.NullPointerException\n\n",
+    "error": "unable to read the yaml file",
+    "links": [
+        "deepimagej/deepimagej"
+    ],
+    "status": "failed",
+    "tool": "deepimagej",
+    "tool_version": "3.2.0-snapshot"
+}
