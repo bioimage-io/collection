@@ -1,0 +1,190 @@
+{
+    "rdf_content": {
+        "name": "SEM_n2v",
+        "description": "This model is a UNet trained using the Noise2Void algorithm to denoise images.The training data consists of crops from an SEM dataset (T.-O. Buchholz et al., Methods Cell Biol, 2020). The notebook used to train this model is available on the CAREamics documentation website at the following link: https://careamics.github.io/0.1/applications/N2V2/SEM/.",
+        "covers": [
+            "cover.png"
+        ],
+        "authors": [
+            {
+                "affiliation": "Human Technopole",
+                "name": "CAREamics authors"
+            }
+        ],
+        "attachments": [
+            {
+                "source": "careamics.yaml",
+                "sha256": "eec1e33908233563e091445738be798f512795aa0629754aaf829cbed6032e9a"
+            }
+        ],
+        "cite": [
+            {
+                "text": "Krull, A., Buchholz, T.O. and Jug, F., 2019. \"Noise2Void - Learning denoising from single noisy images\". In Proceedings of the IEEE/CVF conference on computer vision and pattern recognition (pp. 2129-2137).",
+                "doi": "10.1109/cvpr.2019.00223"
+            }
+        ],
+        "license": "BSD-3-Clause",
+        "links": [
+            "https://github.com/CAREamics/careamics",
+            "https://careamics.github.io/latest/"
+        ],
+        "tags": [
+            "denoising",
+            "restoration",
+            "UNet",
+            "2D",
+            "CAREamics",
+            "pytorch",
+            "Noise2Void"
+        ],
+        "version": "0.3.2",
+        "format_version": "0.5.10",
+        "type": "model",
+        "documentation": "README.md",
+        "inputs": [
+            {
+                "id": "input",
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "channel"
+                        ]
+                    },
+                    {
+                        "size": 256,
+                        "id": "y",
+                        "type": "space"
+                    },
+                    {
+                        "size": 256,
+                        "id": "x",
+                        "type": "space"
+                    }
+                ],
+                "test_tensor": {
+                    "source": "inputs.npy",
+                    "sha256": "889f8bbdd258b300276e63bf676e07436830a2117400688fd255dbc2328e5bef"
+                },
+                "preprocessing": [
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    },
+                    {
+                        "id": "fixed_zero_mean_unit_variance",
+                        "kwargs": {
+                            "mean": [
+                                39282.9453125
+                            ],
+                            "std": [
+                                18714.581073582434
+                            ],
+                            "axis": "channel"
+                        }
+                    },
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    }
+                ]
+            }
+        ],
+        "outputs": [
+            {
+                "id": "prediction",
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "channel"
+                        ]
+                    },
+                    {
+                        "size": 256,
+                        "id": "y",
+                        "type": "space"
+                    },
+                    {
+                        "size": 256,
+                        "id": "x",
+                        "type": "space"
+                    }
+                ],
+                "test_tensor": {
+                    "source": "outputs.npy",
+                    "sha256": "d94964d8d1f731554e5194c5712339618e4fbc411dd4e89aac4f54ac5f795f7b"
+                },
+                "postprocessing": [
+                    {
+                        "id": "fixed_zero_mean_unit_variance",
+                        "kwargs": {
+                            "mean": [
+                                -2.0990555522427847
+                            ],
+                            "std": [
+                                0.000052434271171486124
+                            ],
+                            "axis": "channel"
+                        }
+                    },
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    }
+                ]
+            }
+        ],
+        "weights": {
+            "pytorch_state_dict": {
+                "source": "weights.pth",
+                "sha256": "ad866a1d83747aa841eba0b0adaf6a937da496cf862d3cfdd192f3d383688b29",
+                "architecture": {
+                    "callable": "UNet",
+                    "kwargs": {
+                        "conv_dims": 2,
+                        "num_classes": 1,
+                        "in_channels": 1,
+                        "depth": 2,
+                        "num_channels_init": 32,
+                        "residual": false,
+                        "final_activation": "None",
+                        "n2v2": false,
+                        "independent_channels": true,
+                        "use_batch_norm": true
+                    },
+                    "import_from": "careamics.models.unet"
+                },
+                "pytorch_version": "2.9.1+cu128",
+                "dependencies": {
+                    "source": "environment.yml",
+                    "sha256": "c9c26cdba90270f7466964c12a150562ea86bf6d1e6c4f8e3edfc38c04b93f9b"
+                }
+            }
+        },
+        "config": {
+            "bioimageio": {
+                "test_kwargs": {
+                    "pytorch_state_dict": {
+                        "absolute_tolerance": 0.01,
+                        "relative_tolerance": 0.01
+                    }
+                }
+            }
+        }
+    },
+    "rdf_yaml_sha256": "188253f5de1b3f7e46f31905e71abce69b1c236982171381dd8b8d49230492c8",
+    "status": "untested"
+}
