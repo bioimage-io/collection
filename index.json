@@ -1798,6 +1798,13 @@
                     "sha256": "be43087d3acd6c41a78766155217ad33b58736e06df2a5e4fa50aef801072320",
                     "source": "https://hypha.aicell.io/bioimage-io/artifacts/wild-rhino/files/rdf.yaml?version=v0",
                     "version": "v0"
+                },
+                {
+                    "comment": "Updated model",
+                    "created_at": "2026-08-06T10:02:07Z",
+                    "sha256": "f7ce031edffe62bed77d44618b3008e0d751add3a2a6fd911b4ad100aa7955f8",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/wild-rhino/files/rdf.yaml?version=v1",
+                    "version": "v1"
                 }
             ]
         },
@@ -1811,6 +1818,13 @@
                     "sha256": "6934b952faa275c369a009c72b4d369edc5e8ec9710f300f2021cd33ff3a7a59",
                     "source": "https://hypha.aicell.io/bioimage-io/artifacts/dazzling-spider/files/rdf.yaml?version=v0",
                     "version": "v0"
+                },
+                {
+                    "comment": "Updated model",
+                    "created_at": "2026-08-06T10:33:59Z",
+                    "sha256": "8576ff40a72cee09eec2aa190af5a900c5595ad389eb79184782471d483fba75",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/dazzling-spider/files/rdf.yaml?version=v1",
+                    "version": "v1"
                 }
             ]
         },
@@ -1824,6 +1838,13 @@
                     "sha256": "a5c81ba94e649cc8eb53955500b5c655d50eee11945c51c2ed331e50d2e4386e",
                     "source": "https://hypha.aicell.io/bioimage-io/artifacts/humorous-fox/files/rdf.yaml?version=v0",
                     "version": "v0"
+                },
+                {
+                    "comment": "Updated model",
+                    "created_at": "2026-08-06T09:57:14Z",
+                    "sha256": "188253f5de1b3f7e46f31905e71abce69b1c236982171381dd8b8d49230492c8",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/humorous-fox/files/rdf.yaml?version=v1",
+                    "version": "v1"
                 }
             ]
         },
@@ -2955,6 +2976,13 @@
                     "sha256": "ca99f4ecc333b4d9d951a8953a6000f94ef0ab7e1af99104c27299235d99679f",
                     "source": "https://hypha.aicell.io/bioimage-io/artifacts/jolly-ox/files/rdf.yaml?version=v0",
                     "version": "v0"
+                },
+                {
+                    "comment": "Updated model",
+                    "created_at": "2026-08-06T10:18:44Z",
+                    "sha256": "92f5e8966b769bcbfc9fa3f50a33d5a0b648f16be17693fa33a4559c2d7ec4a7",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/jolly-ox/files/rdf.yaml?version=v1",
+                    "version": "v1"
                 }
             ]
         },
@@ -2968,6 +2996,13 @@
                     "sha256": "77d95ae7bba359e102cb5fa235e6fb330bccdbb64ac9d561f8fb501db9477110",
                     "source": "https://hypha.aicell.io/bioimage-io/artifacts/shy-lobster/files/rdf.yaml?version=v0",
                     "version": "v0"
+                },
+                {
+                    "comment": "Updated model",
+                    "created_at": "2026-08-06T11:08:24Z",
+                    "sha256": "b8222eb5681ae883864e83382bc2f5451a54b385847b74f3f62daae4ea0368fd",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/shy-lobster/files/rdf.yaml?version=v1",
+                    "version": "v1"
                 }
             ]
         },
@@ -3564,6 +3599,6 @@
             ]
         }
     ],
-    "timestamp": "2026-08-06T02:52:02.051557",
+    "timestamp": "2026-08-07T00:11:42.701240",
     "total": 273
 }
