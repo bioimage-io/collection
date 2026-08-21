@@ -407,6 +407,13 @@
                     "sha256": "430d713665b695222b6ad77381f6fd1759da206c0769ff69d0f39dccaa16000c",
                     "source": "https://hypha.aicell.io/bioimage-io/artifacts/joyful-deer/files/rdf.yaml?version=v0",
                     "version": "v0"
+                },
+                {
+                    "comment": "Updated model",
+                    "created_at": "2026-08-20T13:18:07Z",
+                    "sha256": "2aa379dca3a6f7f4a70265af927616d099a783e25bf85ebcb151e66c10835897",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/joyful-deer/files/rdf.yaml?version=v1",
+                    "version": "v1"
                 }
             ]
         },
@@ -3599,6 +3606,6 @@
             ]
         }
     ],
-    "timestamp": "2026-08-20T01:31:38.937728",
+    "timestamp": "2026-08-21T01:35:07.850776",
     "total": 273
 }
