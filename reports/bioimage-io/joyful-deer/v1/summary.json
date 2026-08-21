@@ -1,0 +1,345 @@
+{
+    "rdf_content": {
+        "type": "model",
+        "format_version": "0.5.3",
+        "name": "CebraNET Cellular Membranes",
+        "id": "joyful-deer",
+        "id_emoji": "🦌",
+        "timestamp": "2023-10-27T11:34:30.252675",
+        "version": 1.1,
+        "description": "Cellular membrane prediction model for volume SEM datasets",
+        "authors": [
+            {
+                "affiliation": "EMBL Heidelberg",
+                "github_user": "jhennies",
+                "name": "Julian Hennies",
+                "orcid": "0000-0002-0555-151X"
+            },
+            {
+                "affiliation": "EMBL Heidelberg",
+                "github_user": "k-wavy",
+                "name": "Seth Frazer",
+                "orcid": "0000-0002-3800-212X"
+            }
+        ],
+        "cite": [
+            {
+                "doi": "10.1101/2023.04.06.535829",
+                "text": "Hennies et al. 2023, CebraEM: A practical workflow to segment cellular organelles in volume SEM datasets using a transferable CNN-based membrane prediction"
+            }
+        ],
+        "documentation": "CebraNET_README.md",
+        "tags": [
+            "unet",
+            "3d",
+            "cells",
+            "whole-organism",
+            "ilastik",
+            "semantic-segmentation",
+            "electron-microscopy",
+            "pytorch",
+            "membranes",
+            "hela",
+            "macrophage",
+            "platynereis",
+            "calu-3"
+        ],
+        "license": "CC-BY-4.0",
+        "covers": [
+            "coverimage.jpg"
+        ],
+        "config": {
+            "bioimageio": {
+                "nickname": "joyful-deer",
+                "nickname_icon": "🦌",
+                "test_kwargs": {
+                    "pytorch_state_dict": {
+                        "decimal": 2
+                    },
+                    "torchscript": {
+                        "decimal": 2
+                    }
+                },
+                "thumbnails": {
+                    "coverimage.jpg": "coverimage.thumbnail.png"
+                }
+            }
+        },
+        "inputs": [
+            {
+                "id": "input0",
+                "data": {
+                    "type": "uint8"
+                },
+                "axes": [
+                    {
+                        "type": "batch",
+                        "id": "b"
+                    },
+                    {
+                        "type": "channel",
+                        "id": "c",
+                        "channel_names": [
+                            "channel0"
+                        ]
+                    },
+                    {
+                        "type": "space",
+                        "id": "z",
+                        "size": {
+                            "min": 128,
+                            "step": 16
+                        }
+                    },
+                    {
+                        "type": "space",
+                        "id": "y",
+                        "size": {
+                            "min": 128,
+                            "step": 16
+                        }
+                    },
+                    {
+                        "type": "space",
+                        "id": "x",
+                        "size": {
+                            "min": 128,
+                            "step": 16
+                        }
+                    }
+                ],
+                "preprocessing": [
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    },
+                    {
+                        "id": "scale_range",
+                        "kwargs": {
+                            "axes": [
+                                "z",
+                                "y",
+                                "x"
+                            ],
+                            "min_percentile": 2.5,
+                            "max_percentile": 97.5,
+                            "eps": 1e-6
+                        }
+                    },
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    }
+                ],
+                "test_tensor": {
+                    "source": "test_input.npy",
+                    "sha256": "b9eb7326754af4737cc212b98223596439e5bf69cc4c0eefad1c131b7c38f2e9"
+                }
+            }
+        ],
+        "outputs": [
+            {
+                "id": "output0",
+                "data": {
+                    "type": "float32"
+                },
+                "axes": [
+                    {
+                        "type": "batch",
+                        "id": "b"
+                    },
+                    {
+                        "type": "channel",
+                        "id": "c",
+                        "channel_names": [
+                            "channel0"
+                        ]
+                    },
+                    {
+                        "type": "space",
+                        "id": "z",
+                        "size": {
+                            "tensor_id": "input0",
+                            "axis_id": "z"
+                        },
+                        "halo": 32
+                    },
+                    {
+                        "type": "space",
+                        "id": "y",
+                        "size": {
+                            "tensor_id": "input0",
+                            "axis_id": "y"
+                        },
+                        "halo": 32
+                    },
+                    {
+                        "type": "space",
+                        "id": "x",
+                        "size": {
+                            "tensor_id": "input0",
+                            "axis_id": "x"
+                        },
+                        "halo": 32
+                    }
+                ],
+                "test_tensor": {
+                    "source": "test_output.npy",
+                    "sha256": "4f5c7fe66033a927d8076f6239e293eab3438acb7ce301cfd5fb74f77aadcb96"
+                }
+            }
+        ],
+        "weights": {
+            "pytorch_state_dict": {
+                "architecture": {
+                    "source": "piled_unets.py",
+                    "callable": "PiledUnet",
+                    "sha256": "023d215175db693f8091d5d6895c783e79383638ed9a50f57c76b13ce1ca0e59",
+                    "kwargs": {
+                        "n_nets": 3,
+                        "in_channels": 1,
+                        "out_channels": [
+                            1,
+                            1,
+                            1
+                        ],
+                        "filter_sizes_down": [
+                            [
+                                [
+                                    8,
+                                    16
+                                ],
+                                [
+                                    16,
+                                    32
+                                ],
+                                [
+                                    32,
+                                    64
+                                ]
+                            ],
+                            [
+                                [
+                                    8,
+                                    16
+                                ],
+                                [
+                                    16,
+                                    32
+                                ],
+                                [
+                                    32,
+                                    64
+                                ]
+                            ],
+                            [
+                                [
+                                    8,
+                                    16
+                                ],
+                                [
+                                    16,
+                                    32
+                                ],
+                                [
+                                    32,
+                                    64
+                                ]
+                            ]
+                        ],
+                        "filter_sizes_bottleneck": [
+                            [
+                                64,
+                                128
+                            ],
+                            [
+                                64,
+                                128
+                            ],
+                            [
+                                64,
+                                128
+                            ]
+                        ],
+                        "filter_sizes_up": [
+                            [
+                                [
+                                    64,
+                                    64
+                                ],
+                                [
+                                    32,
+                                    32
+                                ],
+                                [
+                                    16,
+                                    16
+                                ]
+                            ],
+                            [
+                                [
+                                    64,
+                                    64
+                                ],
+                                [
+                                    32,
+                                    32
+                                ],
+                                [
+                                    16,
+                                    16
+                                ]
+                            ],
+                            [
+                                [
+                                    64,
+                                    64
+                                ],
+                                [
+                                    32,
+                                    32
+                                ],
+                                [
+                                    16,
+                                    16
+                                ]
+                            ]
+                        ],
+                        "batch_norm": true,
+                        "output_activation": "sigmoid",
+                        "predict": true
+                    }
+                },
+                "dependencies": {
+                    "source": "conda.yaml",
+                    "sha256": "bcba47aba32563e5ff83e36c6b2c366c54e0d4b672b729457a5e00560618b4e8"
+                },
+                "pytorch_version": "1.13.0",
+                "source": "model_0097.pt",
+                "sha256": "6b523c9a77916e75306563e39b79ef2cfb72a857540994958a8d0943f46a207c"
+            },
+            "torchscript": {
+                "source": "weights_cpu.torchscript",
+                "parent": "pytorch_state_dict",
+                "pytorch_version": "1.13.1",
+                "sha256": "5ca014eddf430a71b52240d149f4ee3cb06498d09093c47c36898171145a5eee"
+            }
+        },
+        "maintainers": [
+            {
+                "name": "Seth Frazer",
+                "github_user": "k-wavy",
+                "email": "seth.frazer@embl.de"
+            }
+        ],
+        "uploader": {
+            "email": "seth.frazer@embl.de"
+        }
+    },
+    "rdf_yaml_sha256": "2aa379dca3a6f7f4a70265af927616d099a783e25bf85ebcb151e66c10835897",
+    "status": "untested"
+}
