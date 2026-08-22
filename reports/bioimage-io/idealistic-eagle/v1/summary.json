@@ -103,11 +103,11 @@
                 ],
                 "test_tensor": {
                     "source": "test_output.npy",
-                    "sha256": "66f406aef148b7934e24e4853f5240252f3e14dcafc1cc7617d285f0557b42e2"
+                    "sha256": "de898cefca615690a8cac2b03e8a8544d59bd443dad63f27a366f0a8f0fb935f"
                 },
                 "sample_tensor": {
                     "source": "sample_output.png",
-                    "sha256": "2a20439b8021a1eb62d10ff1e4e636e9e34d8458815a9ace74f63494b76e63db"
+                    "sha256": "c2395efe6b58fbc486562650e4b5f9b7dc4606dd8f7852d5aaef70ca7e515232"
                 },
                 "postprocessing": [
                     {
@@ -132,7 +132,7 @@
         "weights": {
             "pytorch_state_dict": {
                 "source": "cpsam",
-                "sha256": "e1440429eb384f95afe32bcba6510f90d518eaedc917ede549bed6804004abe2",
+                "sha256": "0f1cc3f7ecdd8a037a57c6c48d9d8921391be4cbce3fa9f13c3e3a2e1253c667",
                 "architecture": {
                     "source": "cellpose_vit_bioimageio.py",
                     "sha256": "c42254d2fd0e5a8b7a9eb69b5b7eba89f328b31d3c842e6165410d79ff6e2949",
@@ -166,8 +166,8 @@
             "email": "danialtza@gmail.com",
             "name": "Daniel Franco Barranco"
         },
-        "description": "Modern algorithms for biological segmentation can match inter-human agreement in annotation quality. This however is not a performance bound: a hypothetical human-consensus segmentation could reduce error rates in half. To obtain a model that generalizes better we adapted the pretrained transformer backbone of a foundation model (SAM) to the Cellpose framework. The resulting Cellpose-SAM model substantially outperforms inter-human agreement and approaches the human-consensus bound. We increase generalization performance further by making the model robust to channel shuffling, cell size, shot noise, downsampling, isotropic and anisotropic blur. The new model can be readily adopted into the Cellpose ecosystem which includes finetuning, human-in-the-loop training, image restoration and 3D segmentation approaches. These properties establish Cellpose-SAM as a foundation model for biological segmentation.",
-        "version": "0.1.0",
+        "description": "Modern algorithms for biological segmentation can match inter-human agreement in annotation quality. This however is not a performance bound: a hypothetical human-consensus segmentation could reduce error rates in half. To obtain a model that generalizes better we adapted the pretrained transformer backbone of a foundation model (SAM) to the Cellpose framework. The resulting Cellpose-SAM model substantially outperforms inter-human agreement and approaches the human-consensus bound. We increase generalization performance further by making the model robust to channel shuffling, cell size, shot noise, downsampling, isotropic and anisotropic blur. The new model can be readily adopted into the Cellpose ecosystem which includes finetuning, human-in-the-loop training, image restoration and 3D segmentation approaches. These properties establish Cellpose-SAM as a foundation model for biological segmentation. This entry ships the cpsam_v2 checkpoint; the architecture is unchanged from cpsam, only the weights differ.",
+        "version": "0.2.0",
         "license": "BSD-3-Clause",
         "git_repo": "https://github.com/MouseLand/cellpose",
         "tags": [
@@ -194,6 +194,6 @@
         "id": "idealistic-eagle",
         "id_emoji": "🦅"
     },
-    "rdf_yaml_sha256": "16af5d03e6a6ebc8d1e6464828925592965be123d09a76db73cc7d9bd527af65",
+    "rdf_yaml_sha256": "4969ffc99950134411396507523c746e00f8a09ddf83c83215c1b6f2c8cc1b39",
     "status": "untested"
 }
