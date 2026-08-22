@@ -142,5 +142,6 @@
         "ilastik/ilastik"
     ],
     "status": "failed",
-    "tool": "ilastik"
+    "tool": "ilastik",
+    "tool_version": "1.4.2"
 }

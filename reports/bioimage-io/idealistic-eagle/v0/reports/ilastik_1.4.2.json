@@ -107,14 +107,14 @@
         ],
         "env": [
             [
-                "bioimageio.core",
-                "0.10.2",
+                "bioimageio.spec",
+                "0.5.9.1",
                 "",
                 ""
             ],
             [
-                "bioimageio.spec",
-                "0.5.9.1",
+                "bioimageio.core",
+                "0.10.2",
                 "",
                 ""
             ]
