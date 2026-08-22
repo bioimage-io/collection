@@ -25,9 +25,9 @@
             "type": "model",
             "versions": [
                 {
-                    "comment": null,
+                    "comment": "Make input normalisation per-sample (stateless) instead of per-dataset; metadata-only, weights and test tensors unchanged",
                     "created_at": "2025-07-01T22:53:01Z",
-                    "sha256": "f10f95717f8f07667d7c413f75ffa380d6022b465211827b4063f6e5f4f6791e",
+                    "sha256": "817407475ecc6896e283a6807e1b6e1b444e9541e55a689c8d66436ed8244271",
                     "source": "https://hypha.aicell.io/bioimage-io/artifacts/impartial-shrimp/files/rdf.yaml?version=v0",
                     "version": "v0"
                 }
@@ -539,9 +539,9 @@
             "type": "model",
             "versions": [
                 {
-                    "comment": null,
+                    "comment": "Make input normalisation per-sample (stateless) instead of per-dataset; metadata-only, weights and test tensors unchanged",
                     "created_at": "2025-07-01T22:52:31Z",
-                    "sha256": "fb9b3a873ca11240aed4e4c7a131fe42970135866a97a37c1cfbd4acdbe84c6c",
+                    "sha256": "c49308177b4aca376d1ac4bb534aa9e807a732070593ef56f89b2d6970f25228",
                     "source": "https://hypha.aicell.io/bioimage-io/artifacts/efficient-chipmunk/files/rdf.yaml?version=v0",
                     "version": "v0"
                 }
@@ -3584,11 +3584,18 @@
             "type": "model",
             "versions": [
                 {
-                    "comment": "Add reproducibility_tolerance (3000 ppm) for label-map output; test-metadata only, weights/outputs unchanged",
+                    "comment": "Fix scale_range axes: drop 'batch' so normalisation is per-sample not per-dataset; metadata-only, weights/test tensors unchanged",
                     "created_at": "2026-07-10T21:20:24Z",
-                    "sha256": "da23717f1e979ae2eb08767122e730f24f4f63589b9c75b5e2283471415d4936",
+                    "sha256": "16af5d03e6a6ebc8d1e6464828925592965be123d09a76db73cc7d9bd527af65",
                     "source": "https://hypha.aicell.io/bioimage-io/artifacts/idealistic-eagle/files/rdf.yaml?version=v0",
                     "version": "v0"
+                },
+                {
+                    "comment": "Cellpose-SAM v2: swap in the cpsam_v2 checkpoint (architecture unchanged), regenerate test_output.npy and sample_output.png, bump model version to 0.2.0",
+                    "created_at": "2026-08-21T21:22:49Z",
+                    "sha256": "4969ffc99950134411396507523c746e00f8a09ddf83c83215c1b6f2c8cc1b39",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/idealistic-eagle/files/rdf.yaml?version=v1",
+                    "version": "v1"
                 }
             ]
         },
@@ -3606,6 +3613,6 @@
             ]
         }
     ],
-    "timestamp": "2026-08-21T01:35:07.850776",
+    "timestamp": "2026-08-22T01:30:53.501192",
     "total": 273
 }
