@@ -1,0 +1,244 @@
+{
+    "rdf_content": {
+        "format_version": "0.5.10",
+        "type": "model",
+        "name": "CellposeDINO ViT-B 2D Microscopy Instance Segmenter",
+        "description": "CellposeDINO with a DINOv3 ViT-B backbone for instance segmentation of 2D microscopy images. Following Cellpose-SAM v2, the network takes three input channels. Single-channel images should be replicated across all three. The network predicts Cellpose flows and cell probability. BioImage.IO flow dynamics converts them into uint16 labels.",
+        "version": "0.1.6",
+        "authors": [
+            {
+                "name": "Guillermo Rey-Paniagua",
+                "affiliation": "Neuroscience and Life Sciences Department, Universidad Carlos III de Madrid",
+                "github_user": "GolpedeRemo37"
+            }
+        ],
+        "maintainers": [
+            {
+                "name": "Guillermo Rey-Paniagua",
+                "affiliation": "Neuroscience and Life Sciences Department, Universidad Carlos III de Madrid",
+                "email": "guillerm@pa.uc3m.es",
+                "github_user": "GolpedeRemo37"
+            }
+        ],
+        "packaged_by": [
+            {
+                "name": "Guillermo Rey-Paniagua",
+                "affiliation": "Neuroscience and Life Sciences Department, Universidad Carlos III de Madrid",
+                "email": "guillerm@pa.uc3m.es",
+                "github_user": "GolpedeRemo37"
+            }
+        ],
+        "uploader": {
+            "name": "Guillermo Rey-Paniagua",
+            "email": "guillerm@pa.uc3m.es"
+        },
+        "license": "BSD-3-Clause",
+        "documentation": "README.md",
+        "git_repo": "https://github.com/MouseLand/cellpose",
+        "training_data": {
+            "id": "10.25378/janelia.13270466"
+        },
+        "covers": [
+            "cover.jpg",
+            "cover_input_output.jpg",
+            "cover_labels.jpg",
+            "cover_boundaries.jpg"
+        ],
+        "links": [
+            "famous-sheep"
+        ],
+        "cite": [
+            {
+                "text": "Stringer, Wang, Michaelos and Pachitariu. Cellpose: a generalist algorithm for cellular segmentation. Nature Methods (2021).",
+                "doi": "10.1038/s41592-020-01018-x",
+                "url": "https://doi.org/10.1038/s41592-020-01018-x"
+            },
+            {
+                "text": "Pachitariu and Stringer. Cellpose 2.0: how to train your own model. Nature Methods (2022).",
+                "doi": "10.1038/s41592-022-01663-4",
+                "url": "https://doi.org/10.1038/s41592-022-01663-4"
+            },
+            {
+                "text": "Pachitariu, Rariden and Stringer. Cellpose-SAM: superhuman generalization for cellular segmentation. bioRxiv (2025).",
+                "doi": "10.1101/2025.04.28.651001",
+                "url": "https://doi.org/10.1101/2025.04.28.651001"
+            },
+            {
+                "text": "Siméoni et al. DINOv3. arXiv:2508.10104 (2025).",
+                "doi": "10.48550/arXiv.2508.10104",
+                "url": "https://arxiv.org/abs/2508.10104"
+            }
+        ],
+        "tags": [
+            "fluorescence-microscopy",
+            "microscopy",
+            "segmentation",
+            "instance-segmentation",
+            "cell-segmentation",
+            "cellpose",
+            "cellpose-dino",
+            "dinov3",
+            "pytorch",
+            "bioimageio"
+        ],
+        "timestamp": "2026-08-10T00:00:00+02:00",
+        "config": {
+            "bioimageio": {
+                "reproducibility_tolerance": [
+                    {
+                        "output_ids": [
+                            "labels"
+                        ],
+                        "weights_formats": [
+                            "pytorch_state_dict"
+                        ],
+                        "relative_tolerance": 0,
+                        "absolute_tolerance": 0.001,
+                        "mismatched_elements_per_million": 3000
+                    }
+                ]
+            }
+        },
+        "inputs": [
+            {
+                "id": "input",
+                "description": "2D microscopy image with exactly 3 channels. Single-channel images should be replicated across all three.",
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "channel0",
+                            "channel1",
+                            "channel2"
+                        ]
+                    },
+                    {
+                        "id": "y",
+                        "type": "space",
+                        "size": {
+                            "min": 64,
+                            "step": 8
+                        }
+                    },
+                    {
+                        "id": "x",
+                        "type": "space",
+                        "size": {
+                            "min": 64,
+                            "step": 8
+                        }
+                    }
+                ],
+                "pad": {
+                    "value": 0
+                },
+                "preprocessing": [
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    },
+                    {
+                        "id": "scale_range",
+                        "kwargs": {
+                            "axes": [
+                                "y",
+                                "x"
+                            ],
+                            "min_percentile": 1.0,
+                            "max_percentile": 99.0,
+                            "eps": 1e-6
+                        }
+                    }
+                ],
+                "test_tensor": {
+                    "source": "test_input.npy",
+                    "sha256": "716df1cdfa5a9b26e89ae4d359ed3c2ed5ca23a8ba817b8f85b65e6ea08802d7"
+                },
+                "sample_tensor": {
+                    "source": "sample_input.png",
+                    "sha256": "28417a3f87ec960155fd441e26bfcf9b005b04d5ae728b55a7302cb9e5d16fa9"
+                }
+            }
+        ],
+        "outputs": [
+            {
+                "id": "labels",
+                "description": "Instance labels produced from flow_y, flow_x and cell probability.",
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "labels"
+                        ]
+                    },
+                    {
+                        "id": "y",
+                        "type": "space",
+                        "halo": 16,
+                        "size": {
+                            "tensor_id": "input",
+                            "axis_id": "y"
+                        }
+                    },
+                    {
+                        "id": "x",
+                        "type": "space",
+                        "halo": 16,
+                        "size": {
+                            "tensor_id": "input",
+                            "axis_id": "x"
+                        }
+                    }
+                ],
+                "postprocessing": [
+                    {
+                        "id": "cellpose_flow_dynamics",
+                        "kwargs": {
+                            "cellprob_threshold": 0,
+                            "flow_threshold": 0.4,
+                            "do_3D": false,
+                            "min_size": 15,
+                            "output_dtype": "uint16"
+                        }
+                    }
+                ],
+                "test_tensor": {
+                    "source": "test_output.npy",
+                    "sha256": "56ccc67461498c3b1edcef30fc03858eea72bfc76da0339411540989f7820869"
+                },
+                "sample_tensor": {
+                    "source": "sample_output.png",
+                    "sha256": "7bd419534babd08381a54188ffd9a9c25738a48ef63bbf7e35ac57107f42d63a"
+                }
+            }
+        ],
+        "weights": {
+            "pytorch_state_dict": {
+                "source": "https://huggingface.co/mouseland/cellpose-sam/resolve/main/cpdino-vitb",
+                "sha256": "3ed4c06a3963ab13ff377d4e2957174aaaf637434eb031ae9931fcbfaf9a217f",
+                "dependencies": {
+                    "source": "environment.yaml",
+                    "sha256": "dd636a815b4e54b16530dce9d899548a0c1040857071510f1c4885fd0d4cb465"
+                },
+                "architecture": {
+                    "source": "cpdino_vitb_instance_labels_arch.py",
+                    "sha256": "5fb5a9b451c298b155badd78b0a491235a46632ace23b71c95ca04e3c310ea4f",
+                    "callable": "CellposeDINOModel"
+                },
+                "pytorch_version": "2.7.1",
+                "strict": false,
+                "comment": "Upstream MouseLand cpdino-vitb checkpoint. The architecture returns float32 flow_y, flow_x and cell-probability maps; instance masks are generated by the standard BioImage.IO cellpose_flow_dynamics postprocessing operation."
+            }
+        }
+    },
+    "rdf_yaml_sha256": "488ad1157d696d1a31dafd92e7867bac8124872797f46e411901d04b7af2156e",
+    "status": "untested"
+}
