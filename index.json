@@ -2,7 +2,7 @@
     "count_per_type": {
         "application": 65,
         "dataset": 50,
-        "model": 153,
+        "model": 155,
         "notebook": 4,
         "tracking": 1
     },
@@ -3600,6 +3600,32 @@
             ]
         },
         {
+            "id": "bioimage-io/famous-sheep",
+            "type": "model",
+            "versions": [
+                {
+                    "comment": "Round 3 review accepted. bioimageio.core 0.10.4 passes 10/10 with reproducibility exact on CPU and GPU; BioEngine test passed; weight URLs verified against declared sha256; runs in cellpose4-runner. Manifest synced to rdf.yaml.",
+                    "created_at": "2026-08-22T09:01:31Z",
+                    "sha256": "24bce7927328de21016320918373ac28b676bae939c25969e77e9a66e749b320",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/famous-sheep/files/rdf.yaml?version=v0",
+                    "version": "v0"
+                }
+            ]
+        },
+        {
+            "id": "bioimage-io/passionate-bug",
+            "type": "model",
+            "versions": [
+                {
+                    "comment": "Round 3 review accepted. bioimageio.core 0.10.4 passes 10/10 with reproducibility exact on CPU and GPU; BioEngine test passed; weight URLs verified against declared sha256; runs in cellpose4-runner. Manifest synced to rdf.yaml.",
+                    "created_at": "2026-08-22T09:01:34Z",
+                    "sha256": "488ad1157d696d1a31dafd92e7867bac8124872797f46e411901d04b7af2156e",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/passionate-bug/files/rdf.yaml?version=v0",
+                    "version": "v0"
+                }
+            ]
+        },
+        {
             "id": "bioimage-io/vain-shark",
             "type": "model",
             "versions": [
@@ -3613,6 +3639,6 @@
             ]
         }
     ],
-    "timestamp": "2026-08-22T01:30:53.501192",
-    "total": 273
+    "timestamp": "2026-08-23T01:33:24.106093",
+    "total": 275
 }

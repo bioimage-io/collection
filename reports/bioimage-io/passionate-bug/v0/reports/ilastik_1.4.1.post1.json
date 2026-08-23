@@ -1,0 +1,145 @@
+{
+    "badge": null,
+    "details": {
+        "conda_list": null,
+        "details": [
+            {
+                "conda_compare": null,
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "cpdino_vitb_instance_labels_arch.py": "5fb5a9b451c298b155badd78b0a491235a46632ace23b71c95ca04e3c310ea4f",
+                        "environment.yaml": "dd636a815b4e54b16530dce9d899548a0c1040857071510f1c4885fd0d4cb465",
+                        "sample_input.png": "28417a3f87ec960155fd441e26bfcf9b005b04d5ae728b55a7302cb9e5d16fa9",
+                        "sample_output.png": "7bd419534babd08381a54188ffd9a9c25738a48ef63bbf7e35ac57107f42d63a",
+                        "test_input.npy": "716df1cdfa5a9b26e89ae4d359ed3c2ed5ca23a8ba817b8f85b65e6ea08802d7",
+                        "test_output.npy": "56ccc67461498c3b1edcef30fc03858eea72bfc76da0339411540989f7820869"
+                    },
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/passionate-bug/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Created `InvalidDescr` object.",
+                "recommended_env": null,
+                "status": "failed",
+                "warnings": []
+            },
+            {
+                "conda_compare": null,
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "cpdino_vitb_instance_labels_arch.py": "5fb5a9b451c298b155badd78b0a491235a46632ace23b71c95ca04e3c310ea4f",
+                        "environment.yaml": "dd636a815b4e54b16530dce9d899548a0c1040857071510f1c4885fd0d4cb465",
+                        "sample_input.png": "28417a3f87ec960155fd441e26bfcf9b005b04d5ae728b55a7302cb9e5d16fa9",
+                        "sample_output.png": "7bd419534babd08381a54188ffd9a9c25738a48ef63bbf7e35ac57107f42d63a",
+                        "test_input.npy": "716df1cdfa5a9b26e89ae4d359ed3c2ed5ca23a8ba817b8f85b65e6ea08802d7",
+                        "test_output.npy": "56ccc67461498c3b1edcef30fc03858eea72bfc76da0339411540989f7820869"
+                    },
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/passionate-bug/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [
+                    {
+                        "loc": [
+                            "inputs",
+                            0,
+                            "pad"
+                        ],
+                        "msg": "Extra inputs are not permitted",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "extra_forbidden",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "outputs",
+                            0,
+                            "postprocessing",
+                            0
+                        ],
+                        "msg": "Input tag 'cellpose_flow_dynamics' found using 'id' does not match any of the expected tags: 'binarize', 'clip', 'ensure_dtype', 'scale_linear', 'sigmoid', 'fixed_zero_mean_unit_variance', 'zero_mean_unit_variance', 'scale_range', 'scale_mean_variance'",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "union_tag_invalid",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "weights",
+                            "pytorch_state_dict",
+                            "strict"
+                        ],
+                        "msg": "Extra inputs are not permitted",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "extra_forbidden",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "config",
+                            "bioimageio",
+                            "reproducibility_tolerance",
+                            0,
+                            "mismatched_elements_per_million"
+                        ],
+                        "msg": "Input should be less than or equal to 100",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "less_than_equal",
+                        "with_traceback": false
+                    }
+                ],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.4",
+                "recommended_env": null,
+                "status": "failed",
+                "warnings": []
+            },
+            {
+                "conda_compare": null,
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "type"
+                ],
+                "name": "Has expected resource type",
+                "recommended_env": null,
+                "status": "passed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.spec",
+                "0.5.4.1",
+                "",
+                ""
+            ],
+            [
+                "bioimageio.core",
+                "0.8.0",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.5.4",
+        "id": null,
+        "name": "bioimageio format validation",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/passionate-bug/files/rdf.yaml?version=v0",
+        "status": "failed",
+        "type": "model"
+    },
+    "error": "\n|        ❌        |                              bioimageio format validation                              |\n|       ---       |                                          ---                                           |\n| status          | failed                                                                                 |\n| source          | https://hypha.aicell.io/bioimage-io/artifacts/passionate-bug/files/rdf.yaml?version=v0 |\n| format version  | model 0.5.4                                                                            |\n| bioimageio.spec | 0.5.4.1                                                                                |\n| bioimageio.core | 0.8.0                                                                                  |\n\n|     |                                     Location                                    |                                                                                                                           Details                                                                                                                            |\n| --- |                                       ---                                       |                                                                                                                             ---                                                                                                                              |\n| ❌   |                                                                                 | Created `InvalidDescr` object.                                                                                                                                                                                                                               |\n| 🔍   | `context:perform_io_checks`                                                     | True                                                                                                                                                                                                                                                         |\n| 🔍   | `context:root`                                                                  | https://hypha.aicell.io/bioimage-io/artifacts/passionate-bug/files?version=v0                                                                                                                                                                                |\n| 🔍   | `context:known_files.test_input.npy`                                            | 716df1cdfa5a9b26e89ae4d359ed3c2ed5ca23a8ba817b8f85b65e6ea08802d7                                                                                                                                                                                             |\n| 🔍   | `context:known_files.sample_input.png`                                          | 28417a3f87ec960155fd441e26bfcf9b005b04d5ae728b55a7302cb9e5d16fa9                                                                                                                                                                                             |\n| 🔍   | `context:known_files.test_output.npy`                                           | 56ccc67461498c3b1edcef30fc03858eea72bfc76da0339411540989f7820869                                                                                                                                                                                             |\n| 🔍   | `context:known_files.sample_output.png`                                         | 7bd419534babd08381a54188ffd9a9c25738a48ef63bbf7e35ac57107f42d63a                                                                                                                                                                                             |\n| 🔍   | `context:known_files.cpdino_vitb_instance_labels_arch.py`                       | 5fb5a9b451c298b155badd78b0a491235a46632ace23b71c95ca04e3c310ea4f                                                                                                                                                                                             |\n| 🔍   | `context:known_files.environment.yaml`                                          | dd636a815b4e54b16530dce9d899548a0c1040857071510f1c4885fd0d4cb465                                                                                                                                                                                             |\n| ❌   |                                                                                 | bioimageio.spec format validation model 0.5.4                                                                                                                                                                                                                |\n| ❌   | `inputs.0.pad`                                                                  | Extra inputs are not permitted                                                                                                                                                                                                                               |\n|     |                                                                                 |                                                                                                                                                                                                                                                              |\n| ❌   | `outputs.0.postprocessing.0`                                                    | Input tag 'cellpose_flow_dynamics' found using 'id' does not match any of the expected tags: 'binarize', 'clip', 'ensure_dtype', 'scale_linear', 'sigmoid', 'fixed_zero_mean_unit_variance', 'zero_mean_unit_variance', 'scale_range', 'scale_mean_variance' |\n|     |                                                                                 |                                                                                                                                                                                                                                                              |\n| ❌   | `weights.pytorch_state_dict.strict`                                             | Extra inputs are not permitted                                                                                                                                                                                                                               |\n|     |                                                                                 |                                                                                                                                                                                                                                                              |\n| ❌   | `config.bioimageio.reproducibility_tolerance.0.mismatched_elements_per_million` | Input should be less than or equal to 100                                                                                                                                                                                                                    |\n|     |                                                                                 |                                                                                                                                                                                                                                                              |\n| ✔️  | `type`                                                                          | Has expected resource type                                                                                                                                                                                                                                   |\n",
+    "links": [
+        "ilastik/ilastik"
+    ],
+    "status": "failed",
+    "tool": "ilastik",
+    "tool_version": "1.4.1.post1"
+}

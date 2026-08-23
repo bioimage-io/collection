@@ -1,0 +1,224 @@
+{
+    "badge": null,
+    "details": {
+        "details": [
+            {
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "README.md": "5cfb614b133060dc606abda39dc40a6514849b88b4d3465e81848e0a0afb6dda",
+                        "cover.jpg": "26505dfebeaf874299ed1b61722193b67bb495d0df3b96b2c6c38ffe7d757e42",
+                        "cover_boundaries.jpg": "28266303df1a13efbef7ac4109da19e684092403aa7599cc86e455854ad80a65",
+                        "cover_input_output.jpg": "bfd2b2e97be26d577b9b365a94fcdb4356376d8c5b5e5510d3a579d2d3c13727",
+                        "cover_labels.jpg": "7ff50b66550e1170f283c62061f276d70d558076a2c890c9c92267db97ab4940",
+                        "cpdino_instance_labels_arch.py": "ac34c875af36de417c3d15ea6f90b03484671cfa5634e48dcbe32148347d41c1",
+                        "environment.yaml": "544cbf1e364bcbf74827c2f0917feaaeb91d4adbdcda73df7bfba4291488246c",
+                        "https://arxiv.org/abs/2508.10104": null,
+                        "https://doi.org/10.1038/s41592-020-01018-x": null,
+                        "https://doi.org/10.1038/s41592-022-01663-4": null,
+                        "https://doi.org/10.1101/2025.04.28.651001": null,
+                        "https://github.com/MouseLand/cellpose": null,
+                        "https://huggingface.co/mouseland/cellpose-sam/resolve/main/cpdino": "fad0dda262554922da1c5ab0e0004b00c1b14b8a48bea6781b89222567577573",
+                        "https://hypha.aicell.io/bioimage-io/artifacts/famous-sheep/files/README.md?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/famous-sheep/files/cover.jpg?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/famous-sheep/files/cover_boundaries.jpg?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/famous-sheep/files/cover_input_output.jpg?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/famous-sheep/files/cover_labels.jpg?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/famous-sheep/files/cpdino_instance_labels_arch.py?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/famous-sheep/files/environment.yaml?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/famous-sheep/files/sample_input.png?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/famous-sheep/files/sample_output.png?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/famous-sheep/files/test_input.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/famous-sheep/files/test_output.npy?version=v0": null,
+                        "sample_input.png": "28417a3f87ec960155fd441e26bfcf9b005b04d5ae728b55a7302cb9e5d16fa9",
+                        "sample_output.png": "073e2d6a016279a989c63615e10cabc300db2413785da75c690423621c2ed8d5",
+                        "test_input.npy": "716df1cdfa5a9b26e89ae4d359ed3c2ed5ca23a8ba817b8f85b65e6ea08802d7",
+                        "test_output.npy": "9d027e1af0e1551774889aaceb1dcd538af594d28572d7209f29401aea942efc"
+                    },
+                    "original_source_name": null,
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/famous-sheep/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Successfully created `ModelDescr` instance.",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.12",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Created conda environment 'ad9a24f345830e946c8b0560f0ecbce7e8af7549835a00e7e8fad1a9015f9fbc'",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Reproduce test outputs from test inputs (pytorch_state_dict)",
+                "recommended_env": {
+                    "channels": [
+                        "conda-forge",
+                        "nodefaults"
+                    ],
+                    "dependencies": [
+                        "pip",
+                        "python=3.11",
+                        {
+                            "pip": [
+                                "bioimageio.core==0.10.4",
+                                "cellpose==4.2.1.1",
+                                "git+https://github.com/facebookresearch/dinov3.git@346f38fee679c56a6888f91c51670fae61d364e0",
+                                "segment-anything==1.0",
+                                "torch==2.7.1",
+                                "torchvision==0.22.1"
+                            ]
+                        }
+                    ],
+                    "name": "bioimageio-cpdino-vitl-runtime"
+                },
+                "saved_conda_compare": "\nInvalidMatchSpec: Invalid spec 'git+https://github.com/facebookresearch/dinov3.git@346f38fee679c56a6888f91c51670fae61d364e0': Invalid spec 'git+https://github.com/facebookresearch/dinov3.git@346f38fee679c56a6888f91c51670fae61d364e0': package name contains invalid characters (/@)\n\n",
+                "status": "passed",
+                "warnings": [
+                    {
+                        "loc": [
+                            "weights",
+                            "pytorch_state_dict"
+                        ],
+                        "msg": "Output `labels`: all elements agree with expected values. \nMax relative difference not accounted for by absolute tolerance (1.00e-03):\n0.00e+00 (= \\|0.00e+00 - 0.00e+00\\|/\\|0.00e+00 + 1e-6\\|) at {'batch': np.int64(0), 'channel': np.int64(0), 'y': np.int64(0), 'x': np.int64(0)} \nMax absolute difference not accounted for by relative tolerance (0.00e+00):\n0.00e+00 (= \\|0.0000000e+00 - 0.0000000e+00\\|) at {'batch': np.int64(0), 'channel': np.int64(0), 'y': np.int64(0), 'x': np.int64(0)}",
+                        "severity": 20,
+                        "type": "bioimageio.core"
+                    }
+                ]
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Run pytorch_state_dict inference for inputs with batch_size: 1 and size parameter n: 0",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Run pytorch_state_dict inference for inputs with batch_size: 1 and size parameter n: 1",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Run pytorch_state_dict inference for inputs with batch_size: 1 and size parameter n: 2",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Run pytorch_state_dict inference for inputs with batch_size: 2 and size parameter n: 0",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Run pytorch_state_dict inference for inputs with batch_size: 2 and size parameter n: 1",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Run pytorch_state_dict inference for inputs with batch_size: 2 and size parameter n: 2",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.spec",
+                "0.5.12.0",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.5.12",
+        "id": null,
+        "metadata_completeness": 0.4375,
+        "name": "bioimageio format validation",
+        "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/famous-sheep/files/rdf.yaml?version=v0",
+        "status": "passed",
+        "traceback": null,
+        "type": "model",
+        "version": "0.1.5",
+        "warnings": null
+    },
+    "error": null,
+    "links": [
+        "bioimageio/bioimageio.core"
+    ],
+    "score": 1.0,
+    "status": "passed",
+    "tool": "bioimageio.core",
+    "tool_version": "0.11.0"
+}

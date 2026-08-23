@@ -1,0 +1,145 @@
+{
+    "badge": null,
+    "details": {
+        "conda_list": null,
+        "details": [
+            {
+                "conda_compare": null,
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "cpdino_instance_labels_arch.py": "ac34c875af36de417c3d15ea6f90b03484671cfa5634e48dcbe32148347d41c1",
+                        "environment.yaml": "544cbf1e364bcbf74827c2f0917feaaeb91d4adbdcda73df7bfba4291488246c",
+                        "sample_input.png": "28417a3f87ec960155fd441e26bfcf9b005b04d5ae728b55a7302cb9e5d16fa9",
+                        "sample_output.png": "073e2d6a016279a989c63615e10cabc300db2413785da75c690423621c2ed8d5",
+                        "test_input.npy": "716df1cdfa5a9b26e89ae4d359ed3c2ed5ca23a8ba817b8f85b65e6ea08802d7",
+                        "test_output.npy": "9d027e1af0e1551774889aaceb1dcd538af594d28572d7209f29401aea942efc"
+                    },
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/famous-sheep/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Created `InvalidDescr` object.",
+                "recommended_env": null,
+                "status": "failed",
+                "warnings": []
+            },
+            {
+                "conda_compare": null,
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "cpdino_instance_labels_arch.py": "ac34c875af36de417c3d15ea6f90b03484671cfa5634e48dcbe32148347d41c1",
+                        "environment.yaml": "544cbf1e364bcbf74827c2f0917feaaeb91d4adbdcda73df7bfba4291488246c",
+                        "sample_input.png": "28417a3f87ec960155fd441e26bfcf9b005b04d5ae728b55a7302cb9e5d16fa9",
+                        "sample_output.png": "073e2d6a016279a989c63615e10cabc300db2413785da75c690423621c2ed8d5",
+                        "test_input.npy": "716df1cdfa5a9b26e89ae4d359ed3c2ed5ca23a8ba817b8f85b65e6ea08802d7",
+                        "test_output.npy": "9d027e1af0e1551774889aaceb1dcd538af594d28572d7209f29401aea942efc"
+                    },
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/famous-sheep/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [
+                    {
+                        "loc": [
+                            "inputs",
+                            0,
+                            "pad"
+                        ],
+                        "msg": "Extra inputs are not permitted",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "extra_forbidden",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "outputs",
+                            0,
+                            "postprocessing",
+                            0
+                        ],
+                        "msg": "Input tag 'cellpose_flow_dynamics' found using 'id' does not match any of the expected tags: 'binarize', 'clip', 'ensure_dtype', 'scale_linear', 'sigmoid', 'fixed_zero_mean_unit_variance', 'zero_mean_unit_variance', 'scale_range', 'scale_mean_variance'",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "union_tag_invalid",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "weights",
+                            "pytorch_state_dict",
+                            "strict"
+                        ],
+                        "msg": "Extra inputs are not permitted",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "extra_forbidden",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "config",
+                            "bioimageio",
+                            "reproducibility_tolerance",
+                            0,
+                            "mismatched_elements_per_million"
+                        ],
+                        "msg": "Input should be less than or equal to 100",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "less_than_equal",
+                        "with_traceback": false
+                    }
+                ],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.4",
+                "recommended_env": null,
+                "status": "failed",
+                "warnings": []
+            },
+            {
+                "conda_compare": null,
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "type"
+                ],
+                "name": "Has expected resource type",
+                "recommended_env": null,
+                "status": "passed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.spec",
+                "0.5.4.1",
+                "",
+                ""
+            ],
+            [
+                "bioimageio.core",
+                "0.8.0",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.5.4",
+        "id": null,
+        "name": "bioimageio format validation",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/famous-sheep/files/rdf.yaml?version=v0",
+        "status": "failed",
+        "type": "model"
+    },
+    "error": "\n|        ❌        |                             bioimageio format validation                             |\n|       ---       |                                         ---                                          |\n| status          | failed                                                                               |\n| source          | https://hypha.aicell.io/bioimage-io/artifacts/famous-sheep/files/rdf.yaml?version=v0 |\n| format version  | model 0.5.4                                                                          |\n| bioimageio.spec | 0.5.4.1                                                                              |\n| bioimageio.core | 0.8.0                                                                                |\n\n|     |                                     Location                                    |                                                                                                                           Details                                                                                                                            |\n| --- |                                       ---                                       |                                                                                                                             ---                                                                                                                              |\n| ❌   |                                                                                 | Created `InvalidDescr` object.                                                                                                                                                                                                                               |\n| 🔍   | `context:perform_io_checks`                                                     | True                                                                                                                                                                                                                                                         |\n| 🔍   | `context:root`                                                                  | https://hypha.aicell.io/bioimage-io/artifacts/famous-sheep/files?version=v0                                                                                                                                                                                  |\n| 🔍   | `context:known_files.test_input.npy`                                            | 716df1cdfa5a9b26e89ae4d359ed3c2ed5ca23a8ba817b8f85b65e6ea08802d7                                                                                                                                                                                             |\n| 🔍   | `context:known_files.sample_input.png`                                          | 28417a3f87ec960155fd441e26bfcf9b005b04d5ae728b55a7302cb9e5d16fa9                                                                                                                                                                                             |\n| 🔍   | `context:known_files.test_output.npy`                                           | 9d027e1af0e1551774889aaceb1dcd538af594d28572d7209f29401aea942efc                                                                                                                                                                                             |\n| 🔍   | `context:known_files.sample_output.png`                                         | 073e2d6a016279a989c63615e10cabc300db2413785da75c690423621c2ed8d5                                                                                                                                                                                             |\n| 🔍   | `context:known_files.cpdino_instance_labels_arch.py`                            | ac34c875af36de417c3d15ea6f90b03484671cfa5634e48dcbe32148347d41c1                                                                                                                                                                                             |\n| 🔍   | `context:known_files.environment.yaml`                                          | 544cbf1e364bcbf74827c2f0917feaaeb91d4adbdcda73df7bfba4291488246c                                                                                                                                                                                             |\n| ❌   |                                                                                 | bioimageio.spec format validation model 0.5.4                                                                                                                                                                                                                |\n| ❌   | `inputs.0.pad`                                                                  | Extra inputs are not permitted                                                                                                                                                                                                                               |\n|     |                                                                                 |                                                                                                                                                                                                                                                              |\n| ❌   | `outputs.0.postprocessing.0`                                                    | Input tag 'cellpose_flow_dynamics' found using 'id' does not match any of the expected tags: 'binarize', 'clip', 'ensure_dtype', 'scale_linear', 'sigmoid', 'fixed_zero_mean_unit_variance', 'zero_mean_unit_variance', 'scale_range', 'scale_mean_variance' |\n|     |                                                                                 |                                                                                                                                                                                                                                                              |\n| ❌   | `weights.pytorch_state_dict.strict`                                             | Extra inputs are not permitted                                                                                                                                                                                                                               |\n|     |                                                                                 |                                                                                                                                                                                                                                                              |\n| ❌   | `config.bioimageio.reproducibility_tolerance.0.mismatched_elements_per_million` | Input should be less than or equal to 100                                                                                                                                                                                                                    |\n|     |                                                                                 |                                                                                                                                                                                                                                                              |\n| ✔️  | `type`                                                                          | Has expected resource type                                                                                                                                                                                                                                   |\n",
+    "links": [
+        "ilastik/ilastik"
+    ],
+    "status": "failed",
+    "tool": "ilastik",
+    "tool_version": "1.4.1.post1"
+}
