@@ -1,0 +1,184 @@
+{
+    "badge": null,
+    "details": {
+        "details": [
+            {
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "cover.png": "2fab57036b033402624d5318c408d9b3d2cc4ebf2a505745ee9dd5225193d9a2",
+                        "doc.md": "2ec3828c35ae0be967e49a1ac9457285cfc9e2e2202927e8766895d1614bc26b",
+                        "env.yml": "9ab77312801a6e8a3d7e64edcc00330839cd31ac95af77825371b677f523d521",
+                        "https://github.com/ai4life-opencalls/oc-1-project-11": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/happy-elephant/files/cover.png?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/happy-elephant/files/doc.md?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/happy-elephant/files/env.yml?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/happy-elephant/files/input_sample.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/happy-elephant/files/model.py?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/happy-elephant/files/model_weights.pth?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/happy-elephant/files/output_sample.npy?version=v0": null,
+                        "input_sample.npy": "d1a48732323edf3c8c129c4f34a330f445c3364e92807e398750fc3fd701e430",
+                        "model.py": "5a3793fb0f3cd877ec251083495b25086a643fa378a1096d4c9a409aa815b7e3",
+                        "model_weights.pth": "02b82974f25f670215bbfba32409e02941e90bf4852e3fcea6a0a8e75edc3936",
+                        "output_sample.npy": "5f4e23ad4ce69da62c89681d9cd02d75675708b53c19ea78b5825addeb639469"
+                    },
+                    "original_source_name": null,
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/happy-elephant/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Successfully created `ModelDescr` instance.",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.12",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": [
+                    {
+                        "loc": [
+                            "documentation"
+                        ],
+                        "msg": "No '# Validation' (sub)section found in source=RelativePath('doc.md') sha256='2ec3828c35ae0be967e49a1ac9457285cfc9e2e2202927e8766895d1614bc26b'.",
+                        "severity": 30,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "inputs",
+                            0,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "outputs",
+                            0,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    }
+                ]
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Found existing conda environment 'd31dee3892deeaa5902b7748ba4d5c869e98ca1f92327cdeb74ff529eaa5793c'",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [
+                    {
+                        "loc": [
+                            "weights",
+                            "pytorch_state_dict"
+                        ],
+                        "msg": "Output 'masks': 253629 of 1048576 elements disagree with expected values (24.2%). \nMax relative difference not accounted for by absolute tolerance (1.00e-03):\n8.88e+08 (= \\|8.88e+02 - 0.00e+00\\|/\\|0.00e+00 + 1e-6\\|) at {'batch': np.int64(0), 'y': np.int64(998), 'x': np.int64(912)} \nMax absolute difference not accounted for by relative tolerance (1.00e-03):\n8.88e+02 (= \\|8.8800000e+02 - 0.0000000e+00\\|) at {'batch': np.int64(0), 'y': np.int64(998), 'x': np.int64(912)}",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "bioimageio.core",
+                        "with_traceback": false
+                    }
+                ],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Reproduce test outputs from test inputs (pytorch_state_dict)",
+                "recommended_env": {
+                    "channels": [
+                        "conda-forge",
+                        "nodefaults"
+                    ],
+                    "dependencies": [
+                        "bioimageio.core",
+                        "cellpose=3.1.0",
+                        "imagecodecs",
+                        "pip",
+                        "python=3.11",
+                        "pytorch",
+                        "setuptools",
+                        "torchvision"
+                    ],
+                    "name": "cellpose3"
+                },
+                "saved_conda_compare": "Success. All the packages in the specification file are present in the environment with matching version and build string.\n",
+                "status": "failed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Run pytorch_state_dict inference for inputs with batch_size: 1 and size parameter n: 0",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Run pytorch_state_dict inference for inputs with batch_size: 2 and size parameter n: 0",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.spec",
+                "0.5.12.0",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.5.12",
+        "id": "happy-elephant",
+        "metadata_completeness": 0.44554455445544555,
+        "name": "bioimageio format validation",
+        "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/happy-elephant/files/rdf.yaml?version=v0",
+        "status": "valid-format",
+        "traceback": null,
+        "type": "model",
+        "version": "0.1.0",
+        "warnings": null
+    },
+    "error": "Output 'masks': 253629 of 1048576 elements disagree with expected values (24.2%). \nMax relative difference not accounted for by absolute tolerance (1.00e-03):\n8.88e+08 (= \\|8.88e+02 - 0.00e+00\\|/\\|0.00e+00 + 1e-6\\|) at {'batch': np.int64(0), 'y': np.int64(998), 'x': np.int64(912)} \nMax absolute difference not accounted for by relative tolerance (1.00e-03):\n8.88e+02 (= \\|8.8800000e+02 - 0.0000000e+00\\|) at {'batch': np.int64(0), 'y': np.int64(998), 'x': np.int64(912)}",
+    "links": [],
+    "score": 0.5,
+    "status": "failed",
+    "tool": "bioimageio.core",
+    "tool_version": "0.11.0"
+}
