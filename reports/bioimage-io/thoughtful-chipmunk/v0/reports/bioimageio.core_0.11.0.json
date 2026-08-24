@@ -9,7 +9,7 @@
                         "cellpose_model": "a8c01b41546e3a0b02aedba6f06beac22bc7e5c77fb70b2424fd3c068ce00e07",
                         "cover.png": "7b32de79f249a1a127bfac8740ed2cdab00949a36816cd8b10a809c0dc68940e",
                         "doc.md": "a5711b5dfba9d4ba7981070145069ea7cc218b0dd8479b3c3ba144cbd6e64c80",
-                        "environment.yml": "817fc28ba370a68f4e458f643b73c522dd534f573e6cbe8077f2cfcc5b76bae0",
+                        "environment.yml": "9ab77312801a6e8a3d7e64edcc00330839cd31ac95af77825371b677f523d521",
                         "https://github.com/ai4life-opencalls/oc-1-project-6": null,
                         "https://hypha.aicell.io/bioimage-io/artifacts/thoughtful-chipmunk/files/cellpose_model?version=v0": null,
                         "https://hypha.aicell.io/bioimage-io/artifacts/thoughtful-chipmunk/files/cover.png?version=v0": null,
@@ -73,7 +73,7 @@
                     "weights",
                     "pytorch_state_dict"
                 ],
-                "name": "Found existing conda environment 'ef1c05b6df561758fe3fb414f76da731344df3d2de91919109a29942a98d6531'",
+                "name": "Found existing conda environment 'd31dee3892deeaa5902b7748ba4d5c869e98ca1f92327cdeb74ff529eaa5793c'",
                 "recommended_env": null,
                 "saved_conda_compare": null,
                 "status": "passed",
@@ -81,19 +81,7 @@
             },
             {
                 "context": null,
-                "errors": [
-                    {
-                        "loc": [
-                            "weights",
-                            "pytorch_state_dict"
-                        ],
-                        "msg": "Output 'masks': 1222213 of 2478000 elements disagree with expected values. (493225.6 ppm). \nMax relative difference not accounted for by absolute tolerance (1.00e-03):\n4.91e+08 (= \\|4.91e+02 - 0.00e+00\\|/\\|0.00e+00 + 1e-6\\|) at {'batch': np.int64(0), 'y': np.int64(1648), 'x': np.int64(1284)} \nMax absolute difference not accounted for by relative tolerance (1.00e-02):\n4.91e+08 (= \\|4.9100000e+02 - 0.0000000e+00\\|) at {'batch': np.int64(0), 'y': np.int64(1648), 'x': np.int64(1284)}",
-                        "traceback_html": "",
-                        "traceback_md": "",
-                        "type": "bioimageio.core",
-                        "with_traceback": false
-                    }
-                ],
+                "errors": [],
                 "loc": [
                     "weights",
                     "pytorch_state_dict"
@@ -101,29 +89,34 @@
                 "name": "Reproduce test outputs from test inputs (pytorch_state_dict)",
                 "recommended_env": {
                     "channels": [
-                        "pytorch",
                         "conda-forge",
                         "nodefaults"
                     ],
                     "dependencies": [
                         "bioimageio.core",
+                        "cellpose=3.1.0",
                         "imagecodecs",
                         "pip",
-                        "python>=3.9",
+                        "python=3.11",
                         "pytorch",
                         "setuptools",
-                        "torchvision",
-                        {
-                            "pip": [
-                                "cellpose==3.1.0"
-                            ]
-                        }
+                        "torchvision"
                     ],
-                    "name": "oc1_p6"
+                    "name": "cellpose3"
                 },
                 "saved_conda_compare": "Success. All the packages in the specification file are present in the environment with matching version and build string.\n",
-                "status": "failed",
-                "warnings": []
+                "status": "passed",
+                "warnings": [
+                    {
+                        "loc": [
+                            "weights",
+                            "pytorch_state_dict"
+                        ],
+                        "msg": "Output 'masks': 1 of 2478000 elements disagree with expected values (0.4 ppm). \nMax relative difference not accounted for by absolute tolerance (1.00e-03):\n1.05e-02 (= \\|5.67e+02 - 5.73e+02\\|/\\|5.73e+02 + 1e-6\\|) at {'batch': np.int64(0), 'y': np.int64(844), 'x': np.int64(1140)} \nMax absolute difference not accounted for by relative tolerance (1.00e-02):\n6.00e+00 (= \\|5.6700000e+02 - 5.7300000e+02\\|) at {'batch': np.int64(0), 'y': np.int64(844), 'x': np.int64(1140)}",
+                        "severity": 30,
+                        "type": "bioimageio.core"
+                    }
+                ]
             },
             {
                 "context": null,
@@ -166,14 +159,18 @@
         "name": "bioimageio format validation",
         "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
         "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/thoughtful-chipmunk/files/rdf.yaml?version=v0",
-        "status": "valid-format",
+        "status": "passed",
         "traceback": null,
         "type": "model",
         "version": "0.2.0",
         "warnings": null
     },
-    "error": "Output 'masks': 1222213 of 2478000 elements disagree with expected values. (493225.6 ppm). \nMax relative difference not accounted for by absolute tolerance (1.00e-03):\n4.91e+08 (= \\|4.91e+02 - 0.00e+00\\|/\\|0.00e+00 + 1e-6\\|) at {'batch': np.int64(0), 'y': np.int64(1648), 'x': np.int64(1284)} \nMax absolute difference not accounted for by relative tolerance (1.00e-02):\n4.91e+08 (= \\|4.9100000e+02 - 0.0000000e+00\\|) at {'batch': np.int64(0), 'y': np.int64(1648), 'x': np.int64(1284)}",
-    "links": [],
-    "score": 0.5,
-    "status": "failed"
+    "error": null,
+    "links": [
+        "bioimageio/bioimageio.core"
+    ],
+    "score": 1.0,
+    "status": "passed",
+    "tool": "bioimageio.core",
+    "tool_version": "0.11.0"
 }

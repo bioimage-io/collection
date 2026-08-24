@@ -1875,7 +1875,7 @@
                 {
                     "comment": "Updated rdf.yaml",
                     "created_at": "2025-07-01T22:51:13Z",
-                    "sha256": "ca3d24dcb5b2ed3954e3cb323bb4f6aa50ef045da7dac13a85b4b9774ea6278f",
+                    "sha256": "8ff5c1f650ac23951632ef5ada0b77c8ea8bcc89dcc3d6f99d92efe4386b3ffb",
                     "source": "https://hypha.aicell.io/bioimage-io/artifacts/famous-fish/files/rdf.yaml?version=v0",
                     "version": "v0"
                 }
@@ -1888,7 +1888,7 @@
                 {
                     "comment": "Updated rdf.yaml",
                     "created_at": "2025-07-01T22:51:14Z",
-                    "sha256": "8be799d7be29ad8c08dc5c6d102ee6fe920fb952e1dcd4372db17f48a393c4a2",
+                    "sha256": "94fd5c580305972ba915aa0fd13180342d471759d31b75caa46210f1bd09099b",
                     "source": "https://hypha.aicell.io/bioimage-io/artifacts/happy-elephant/files/rdf.yaml?version=v0",
                     "version": "v0"
                 }
@@ -2486,7 +2486,7 @@
                 {
                     "comment": "Updated rdf.yaml",
                     "created_at": "2025-07-01T22:42:27Z",
-                    "sha256": "3fd811477665b1421e9a53b055891eb6ca7ca11122fd2a01d2022c93944ddb2f",
+                    "sha256": "0e4f1856f1452fb97d445fafea441a289598a4c839d4f08d22b3cce50e4ea2fc",
                     "source": "https://hypha.aicell.io/bioimage-io/artifacts/merry-gorilla/files/rdf.yaml?version=v0",
                     "version": "v0"
                 }
@@ -2525,7 +2525,7 @@
                 {
                     "comment": "Updated rdf.yaml",
                     "created_at": "2025-07-01T22:42:24Z",
-                    "sha256": "7e69e7358130e7cc63b7cb10546f6b38924c797cbb7da3c30702c29753c99e8a",
+                    "sha256": "fa7c3aa75bc70e08f05f3234c329c3e77833c466cfa5c8256bb353a5e1e0d836",
                     "source": "https://hypha.aicell.io/bioimage-io/artifacts/thoughtful-chipmunk/files/rdf.yaml?version=v0",
                     "version": "v0"
                 }
@@ -3639,6 +3639,6 @@
             ]
         }
     ],
-    "timestamp": "2026-08-23T01:33:24.106093",
+    "timestamp": "2026-08-24T01:30:31.341690",
     "total": 275
 }

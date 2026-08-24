@@ -8,7 +8,7 @@
                     "known_files": {
                         "cover.png": "2fab57036b033402624d5318c408d9b3d2cc4ebf2a505745ee9dd5225193d9a2",
                         "doc.md": "2ec3828c35ae0be967e49a1ac9457285cfc9e2e2202927e8766895d1614bc26b",
-                        "env.yml": "9e4ca19803b67b0b7cc8c2412f31cc923492b15888a262517eaa485569191773",
+                        "env.yml": "9ab77312801a6e8a3d7e64edcc00330839cd31ac95af77825371b677f523d521",
                         "https://github.com/ai4life-opencalls/oc-1-project-11": null,
                         "https://hypha.aicell.io/bioimage-io/artifacts/happy-elephant/files/cover.png?version=v0": null,
                         "https://hypha.aicell.io/bioimage-io/artifacts/happy-elephant/files/doc.md?version=v0": null,
@@ -81,7 +81,7 @@
                     "weights",
                     "pytorch_state_dict"
                 ],
-                "name": "Created conda environment '57cd7396fb1fb1fec5b137531bd6ae0f4389ff84dd4c0587265c52b1aab8f614'",
+                "name": "Found existing conda environment 'd31dee3892deeaa5902b7748ba4d5c869e98ca1f92327cdeb74ff529eaa5793c'",
                 "recommended_env": null,
                 "saved_conda_compare": null,
                 "status": "passed",
@@ -91,44 +91,67 @@
                 "context": null,
                 "errors": [
                     {
-                        "loc": [],
-                        "msg": "test command 'conda run -n 57cd7396fb1fb1fec5b137531bd6ae0f4389ff84dd4c0587265c52b1aab8f614 bioimageio test https://hypha.aicell.io/bioimage-io/artifacts/happy-elephant/files/rdf.yaml?version=v0 --summary-path=/tmp/tmpoyxx7mfk/pytorch_state_dict/summary.json --determinism=full --weight-format=pytorch_state_dict' did not produce a summary file at /tmp/tmpoyxx7mfk/pytorch_state_dict/summary.json",
+                        "loc": [
+                            "weights",
+                            "pytorch_state_dict"
+                        ],
+                        "msg": "Output 'masks': 253629 of 1048576 elements disagree with expected values (24.2%). \nMax relative difference not accounted for by absolute tolerance (1.00e-03):\n8.88e+08 (= \\|8.88e+02 - 0.00e+00\\|/\\|0.00e+00 + 1e-6\\|) at {'batch': np.int64(0), 'y': np.int64(998), 'x': np.int64(912)} \nMax absolute difference not accounted for by relative tolerance (1.00e-03):\n8.88e+02 (= \\|8.8800000e+02 - 0.0000000e+00\\|) at {'batch': np.int64(0), 'y': np.int64(998), 'x': np.int64(912)}",
                         "traceback_html": "",
                         "traceback_md": "",
-                        "type": "bioimageio cli",
+                        "type": "bioimageio.core",
                         "with_traceback": false
                     }
                 ],
-                "loc": [],
-                "name": "run 'bioimageio test' command",
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Reproduce test outputs from test inputs (pytorch_state_dict)",
                 "recommended_env": {
                     "channels": [
-                        "pytorch",
-                        "nvidia",
                         "conda-forge",
                         "nodefaults"
                     ],
                     "dependencies": [
                         "bioimageio.core",
-                        "cellpose",
-                        "cuda=11.8",
+                        "cellpose=3.1.0",
                         "imagecodecs",
                         "pip",
-                        "python=3.8",
+                        "python=3.11",
                         "pytorch",
                         "setuptools",
-                        "torchvision",
-                        {
-                            "pip": [
-                                "matplotlib",
-                                "tqdm"
-                            ]
-                        }
+                        "torchvision"
                     ],
-                    "name": null
+                    "name": "cellpose3"
                 },
-                "saved_conda_compare": "/usr/share/miniconda/lib/python3.14/site-packages/conda/env/env.py:288: FutureWarning: The environment file is not fully CEP 24 compliant is deprecated and will be removed in 26.9. In the future, this configuration will be rejected. Please fix the following errors in order to make the configuration valid: \n  - Invalid type for 'name', expected a str\n  deprecated.topic(\nbioimageio.core not found\ncellpose not found\ncuda not found\nimagecodecs not found\npip not found\npython not found\npytorch not found\nsetuptools not found\ntorchvision not found\nmatplotlib not found\ntqdm not found\n",
+                "saved_conda_compare": "Success. All the packages in the specification file are present in the environment with matching version and build string.\n",
                 "status": "failed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Run pytorch_state_dict inference for inputs with batch_size: 1 and size parameter n: 0",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Run pytorch_state_dict inference for inputs with batch_size: 2 and size parameter n: 0",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
                 "warnings": []
             }
         ],
@@ -152,8 +175,10 @@
         "version": "0.1.0",
         "warnings": null
     },
-    "error": "test command 'conda run -n 57cd7396fb1fb1fec5b137531bd6ae0f4389ff84dd4c0587265c52b1aab8f614 bioimageio test https://hypha.aicell.io/bioimage-io/artifacts/happy-elephant/files/rdf.yaml?version=v0 --summary-path=/tmp/tmpoyxx7mfk/pytorch_state_dict/summary.json --determinism=full --weight-format=pytorch_state_dict' did not produce a summary file at /tmp/tmpoyxx7mfk/pytorch_state_dict/summary.json",
+    "error": "Output 'masks': 253629 of 1048576 elements disagree with expected values (24.2%). \nMax relative difference not accounted for by absolute tolerance (1.00e-03):\n8.88e+08 (= \\|8.88e+02 - 0.00e+00\\|/\\|0.00e+00 + 1e-6\\|) at {'batch': np.int64(0), 'y': np.int64(998), 'x': np.int64(912)} \nMax absolute difference not accounted for by relative tolerance (1.00e-03):\n8.88e+02 (= \\|8.8800000e+02 - 0.0000000e+00\\|) at {'batch': np.int64(0), 'y': np.int64(998), 'x': np.int64(912)}",
     "links": [],
     "score": 0.5,
-    "status": "failed"
+    "status": "failed",
+    "tool": "bioimageio.core",
+    "tool_version": "0.11.0"
 }
