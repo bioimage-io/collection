@@ -1,0 +1,10 @@
+{
+    "badge": null,
+    "details": "[all] no workflow tag recognized in ['Cellpose', 'Cell Segmentation', 'Segmentation'].\n",
+    "error": "[all] no workflow tag recognized in ['Cellpose', 'Cell Segmentation', 'Segmentation'].\n",
+    "links": [
+        "biapy/biapy"
+    ],
+    "score": 0.0,
+    "status": "failed"
+}

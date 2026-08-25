@@ -1,0 +1,163 @@
+{
+    "badge": null,
+    "details": {
+        "details": [
+            {
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "cilia_cellpose_nuc": "4deb1ac38f6b9a449c8316bb1a504ce7509fd3b7b21274c3c3970c84c030b2d8",
+                        "environment.yml": "c79b19a38b3a09c6643ec717e4c743ff73bb3e29e87baeb4b80ce69034f3aaf2",
+                        "https://github.com/ai4life-opencalls/oc_1_project_66": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/merry-gorilla/files/cilia_cellpose_nuc?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/merry-gorilla/files/cover.png?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/merry-gorilla/files/doc.md?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/merry-gorilla/files/environment.yml?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/merry-gorilla/files/input_sample.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/merry-gorilla/files/model.py?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/merry-gorilla/files/output_sample_masks.npy?version=v0": null,
+                        "input_sample.npy": "24d6e99a3a203f5473128500cf55f558cf1a878639c8b85d8e32689c090877db",
+                        "model.py": "04cf72414ec2ba36243d808bc7d00f73dea90b8fdb87c068a3c18d9eb80797d4",
+                        "output_sample_masks.npy": "e5175d029e499ac10a532840d7b46d555e3fa08ec665bb6124236e5c496a73c1"
+                    },
+                    "original_source_name": null,
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/merry-gorilla/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Successfully created `ModelDescr` instance.",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.6",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": [
+                    {
+                        "loc": [
+                            "inputs",
+                            0,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "outputs",
+                            0,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    }
+                ]
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Reproduce test outputs from test inputs (pytorch_state_dict)",
+                "recommended_env": {
+                    "channels": [
+                        "pytorch",
+                        "conda-forge",
+                        "nodefaults"
+                    ],
+                    "dependencies": [
+                        "bioimageio.core",
+                        "imagecodecs",
+                        "pip",
+                        "python>=3.9",
+                        "pytorch",
+                        "setuptools",
+                        "torchvision",
+                        {
+                            "pip": [
+                                "cellpose==3.1.0"
+                            ]
+                        }
+                    ],
+                    "name": "cellpose"
+                },
+                "saved_conda_compare": "Success. All the packages in the specification file are present in the environment with matching version and build string.\n",
+                "status": "passed",
+                "warnings": [
+                    {
+                        "loc": [
+                            "weights",
+                            "pytorch_state_dict"
+                        ],
+                        "msg": "Output 'masks' disagrees with 1 of 2764800 expected values (0.4 ppm).\n Max relative difference: 1.00e+00 (= \\|0.00e+00 - 9.40e+01\\|/\\|9.40e+01 + 1e-6\\|) at {'batch': np.int64(0), 'y': np.int64(645), 'x': np.int64(1504)}\n Max absolute difference not accounted for by relative tolerance: 9.40e+01 (= \\|0.0000000e+00 - 9.4000000e+01\\|) at {'batch': np.int64(0), 'y': np.int64(645), 'x': np.int64(1504)}\n Saved actual output to actual_output_masks_pytorch_state_dict.npy.",
+                        "severity": 30,
+                        "type": "bioimageio.core"
+                    }
+                ]
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Run pytorch_state_dict inference for inputs with batch_size: 1 and size parameter n: 0",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Run pytorch_state_dict inference for inputs with batch_size: 2 and size parameter n: 0",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.spec",
+                "0.5.6.0",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.5.6",
+        "id": "merry-gorilla",
+        "metadata_completeness": 0.7049180327868853,
+        "name": "bioimageio format validation",
+        "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/merry-gorilla/files/rdf.yaml?version=v0",
+        "status": "passed",
+        "traceback": null,
+        "type": "model",
+        "warnings": null
+    },
+    "error": null,
+    "links": [
+        "bioimageio/bioimageio.core"
+    ],
+    "score": 1.0,
+    "status": "passed"
+}
