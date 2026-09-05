@@ -1,0 +1,306 @@
+{
+    "rdf_content": {
+        "name": "U2OS concept LoRA-MoE (SAM 3)",
+        "description": "Concept-selectable instance segmentation of U2OS cells in brightfield microscopy. One shared SAM 3 backbone plus five LoRA experts — cells, adherent cells, non-viable cells, cytoplasm, nuclei — chosen by a single optional integer selector; returns one integer instance-label map. Research use.",
+        "covers": [
+            {
+                "source": "cover.png",
+                "sha256": "b43f441a39de62fe2592ddde78d7dc8971fb0f0c985f1ea6cffcfc39b80e6821"
+            }
+        ],
+        "documentation": {
+            "source": "README.md",
+            "sha256": "5a5d99595f6ea7ed836a4cd11e7ba6315451c49f2532223d44e748096c95031f"
+        },
+        "authors": [
+            {
+                "affiliation": "KTH Royal Institute of Technology, AICell Lab",
+                "name": "Simon Britzelli"
+            },
+            {
+                "affiliation": "KTH Royal Institute of Technology, AICell Lab",
+                "name": "Nils Mechtel"
+            },
+            {
+                "affiliation": "KTH Royal Institute of Technology, AICell Lab",
+                "name": "Hanzhao Zhang"
+            },
+            {
+                "affiliation": "KTH Royal Institute of Technology, AICell Lab",
+                "name": "Wei Ouyang"
+            }
+        ],
+        "cite": [
+            {
+                "text": "Carion, N. et al. SAM 3: Segment Anything with Concepts. arXiv:2511.16719 (2025).",
+                "url": "https://arxiv.org/abs/2511.16719"
+            },
+            {
+                "text": "Kirillov, A. et al. Segment Anything. arXiv:2304.02643 (2023).",
+                "url": "https://arxiv.org/abs/2304.02643"
+            },
+            {
+                "text": "BBBC039v1, nuclei of U2OS cells in a chemical screen, Broad Bioimage Benchmark Collection — auxiliary nucleus-morphology supervision for the nucleus expert.",
+                "url": "https://bbbc.broadinstitute.org/BBBC039"
+            }
+        ],
+        "license": {
+            "source": "LICENSE_SAM.txt",
+            "sha256": "4dea99bfaa016e21bc860d73f344236bd1e5c4977d1a9a8fd32f822b500ae1be"
+        },
+        "git_repo": "https://github.com/aicell-lab/sam3-concept-finetune",
+        "maintainers": [
+            {
+                "affiliation": "KTH Royal Institute of Technology, AICell Lab",
+                "name": "Simon Britzelli",
+                "github_user": "Cyerme"
+            }
+        ],
+        "tags": [
+            "instance-segmentation",
+            "segmentation",
+            "sam",
+            "sam3",
+            "lora",
+            "mixture-of-experts",
+            "brightfield",
+            "light-microscopy",
+            "u2os",
+            "cells",
+            "nuclei",
+            "cytoplasm",
+            "2d",
+            "pytorch"
+        ],
+        "version": "1.0.0",
+        "format_version": "0.5.12",
+        "type": "model",
+        "inputs": [
+            {
+                "id": "image",
+                "description": "Brightfield RGB image, 8-bit. No separate preprocessing is declared; SAM 3 preprocessing runs inside the architecture wrapper.",
+                "axes": [
+                    {
+                        "type": "batch",
+                        "size": 1
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "r",
+                            "g",
+                            "b"
+                        ]
+                    },
+                    {
+                        "size": 1008,
+                        "id": "y",
+                        "type": "space"
+                    },
+                    {
+                        "size": 1008,
+                        "id": "x",
+                        "type": "space"
+                    }
+                ],
+                "test_tensor": {
+                    "source": "test_input.npy",
+                    "sha256": "0cd9edfdc725c51086d930ed18921d944046389fc05b5a69868e6788c7d58946"
+                },
+                "sample_tensor": {
+                    "source": "sample_input.png",
+                    "sha256": "a99908e3268147678214afcd0cc156931dad95616f560d7f3b086925313a956c"
+                },
+                "data": {
+                    "type": "uint8"
+                }
+            },
+            {
+                "id": "selector",
+                "description": "0=cells;1=adherent;2=non-viable;3=cytoplasm;4=nuclei. Default 0. Lab U2OS brightfield only; nuclei expert undersegments BBBC039.",
+                "axes": [
+                    {
+                        "size": 1,
+                        "id": "index",
+                        "type": "index"
+                    }
+                ],
+                "test_tensor": {
+                    "source": "test_selector.npy",
+                    "sha256": "fc44e6cab97678b988677b1e24dc073c80b029ccf6566c7bc1bd9ec1061a6106"
+                },
+                "data": {
+                    "values": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4
+                    ],
+                    "type": "int64"
+                },
+                "optional": true
+            }
+        ],
+        "outputs": [
+            {
+                "id": "instance_labels",
+                "description": "Instance-label map: 0 = background, each positive value = one instance. Instances are mutually exclusive.",
+                "axes": [
+                    {
+                        "type": "batch",
+                        "size": 1
+                    },
+                    {
+                        "size": {
+                            "tensor_id": "image",
+                            "axis_id": "y"
+                        },
+                        "id": "y",
+                        "type": "space"
+                    },
+                    {
+                        "size": {
+                            "tensor_id": "image",
+                            "axis_id": "x"
+                        },
+                        "id": "x",
+                        "type": "space"
+                    }
+                ],
+                "test_tensor": {
+                    "source": "test_output.npy",
+                    "sha256": "629d894e3cde9840bbef09095d3c537ddd64f51c7dce41551bba82fcd484d65f"
+                },
+                "sample_tensor": {
+                    "source": "sample_output.png",
+                    "sha256": "3fed06d7e7da2aad51e321d1aaa23e70dfdf6b7c856e70c64b2dcfb9464e5fd4"
+                },
+                "data": {
+                    "type": "uint16"
+                }
+            }
+        ],
+        "packaged_by": [
+            {
+                "affiliation": "KTH Royal Institute of Technology, AICell Lab",
+                "name": "Simon Britzelli"
+            }
+        ],
+        "timestamp": "2026-09-04T12:55:24+00:00",
+        "training_data": {
+            "name": "U2OS brightfield instance annotations (not publicly available)",
+            "description": "The primary training data comprise privately held, laboratory-acquired U2OS brightfield images with manual instance annotations. They have not been deposited in a public repository and are not distributed with this model. BBBC039 was used only as auxiliary supervision for the nuclei expert.",
+            "format_version": "0.3.4",
+            "type": "dataset"
+        },
+        "weights": {
+            "pytorch_state_dict": {
+                "source": "weights.pt",
+                "sha256": "c301f1f62ac1fed328b3c2a29e20ba9683c2647db96b6de6d89f652a850b9104",
+                "comment": "One pure string -> tensor state dict: the shared SAM 3 base exactly once (1134 tensors), all five LoRA expert states (86), the five bitwise-validated fp16 concept embeddings (15), the frozen inference-policy buffers (18) and four scalar constants. Loads with torch.load(..., weights_only=True); no nested metadata, NumPy objects, source checkpoints or duplicated base weights. Base provenance: sam3.pt, SHA-256 9999e2341ceef5e136daa386eecb55cb414446a00ac2b55eb2dfd2f7c3cf8c9e.",
+                "architecture": {
+                    "source": "sam3_lora_moe_arch.py",
+                    "sha256": "fb4db8d584395896e9359d11c6a524bf8666f6f8db4fae355fbfd70b1d8e95a4",
+                    "callable": "load_model",
+                    "kwargs": {
+                        "lora_targets": [
+                            "dot_prod_scoring.hs_proj",
+                            "dot_prod_scoring.prompt_mlp.layers.0",
+                            "dot_prod_scoring.prompt_mlp.layers.1",
+                            "dot_prod_scoring.prompt_proj",
+                            "segmentation_head.mask_predictor.mask_embed.layers.0",
+                            "segmentation_head.mask_predictor.mask_embed.layers.1",
+                            "segmentation_head.mask_predictor.mask_embed.layers.2",
+                            "transformer.decoder.bbox_embed.layers.0",
+                            "transformer.decoder.bbox_embed.layers.1",
+                            "transformer.decoder.bbox_embed.layers.2",
+                            "transformer.decoder.boxRPB_embed_x.layers.0",
+                            "transformer.decoder.boxRPB_embed_x.layers.1",
+                            "transformer.decoder.boxRPB_embed_y.layers.0",
+                            "transformer.decoder.boxRPB_embed_y.layers.1",
+                            "transformer.decoder.layers.0.linear1",
+                            "transformer.decoder.layers.0.linear2",
+                            "transformer.decoder.layers.1.linear1",
+                            "transformer.decoder.layers.1.linear2",
+                            "transformer.decoder.layers.2.linear1",
+                            "transformer.decoder.layers.2.linear2",
+                            "transformer.decoder.layers.3.linear1",
+                            "transformer.decoder.layers.3.linear2",
+                            "transformer.decoder.layers.4.linear1",
+                            "transformer.decoder.layers.4.linear2",
+                            "transformer.decoder.layers.5.linear1",
+                            "transformer.decoder.layers.5.linear2",
+                            "transformer.decoder.presence_token_head.layers.0",
+                            "transformer.decoder.presence_token_head.layers.1",
+                            "transformer.decoder.presence_token_head.layers.2",
+                            "transformer.decoder.ref_point_head.layers.0",
+                            "transformer.decoder.ref_point_head.layers.1",
+                            "transformer.encoder.layers.0.linear1",
+                            "transformer.encoder.layers.0.linear2",
+                            "transformer.encoder.layers.1.linear1",
+                            "transformer.encoder.layers.1.linear2",
+                            "transformer.encoder.layers.2.linear1",
+                            "transformer.encoder.layers.2.linear2",
+                            "transformer.encoder.layers.3.linear1",
+                            "transformer.encoder.layers.3.linear2",
+                            "transformer.encoder.layers.4.linear1",
+                            "transformer.encoder.layers.4.linear2",
+                            "transformer.encoder.layers.5.linear1",
+                            "transformer.encoder.layers.5.linear2"
+                        ],
+                        "n_experts": 5,
+                        "lora_rank": 8,
+                        "lora_alpha": 16.0,
+                        "text_len": 32,
+                        "text_feature_dim": 256,
+                        "text_embed_dim": 1024
+                    }
+                },
+                "pytorch_version": "2.8.0",
+                "dependencies": {
+                    "source": "environment.yaml",
+                    "sha256": "261769060231c8040854027aa8e4b7d35bda45071567d39184e94dbe887b48d8"
+                },
+                "strict": true
+            }
+        },
+        "config": {
+            "bioimageio": {
+                "reproducibility_tolerance": [
+                    {
+                        "mismatched_elements_per_million": 2800,
+                        "output_ids": [
+                            "instance_labels"
+                        ],
+                        "weights_formats": [
+                            "pytorch_state_dict"
+                        ]
+                    }
+                ],
+                "architecture_type": "SAM3 + LoRA MoE",
+                "architecture_description": "SAM 3 image model with a mixture of five rank-8 LoRA experts (alpha 16.0) over 43 linear modules of the detection/scoring head. All five expert states are resident; a scalar selector picks one per call without mutating shared parameters. Each selector has its own precomputed concept embedding and its own LoRA state; the LoRA adapters do not modify the language backbone, and because the embeddings are precomputed the text tower is built but never run at inference. No separate BioImage.IO preprocessing or postprocessing operations are declared; the complete SAM 3 preprocessing and expert-specific instance-filtering pipeline is implemented inside the architecture wrapper and applied automatically. Calls that share one loaded model instance are serialized, so concurrent use cannot race on the expert selection.",
+                "modality": "brightfield light microscopy",
+                "target_structure": [
+                    "cell",
+                    "adherent cell",
+                    "non-viable cell",
+                    "cell cytoplasm",
+                    "cell nucleus"
+                ],
+                "task": "instance segmentation",
+                "out_of_scope_use": "Not for clinical or diagnostic use. The evaluated domain is U2OS cells in brightfield (LED-matrix illumination) at 1008x1008 px. Other cell lines, imaging modalities, instruments and acquisition settings are out of scope: no cross-instrument, cross-modality or cross-cell-line evidence exists for this resource.",
+                "bias_risks_limitations": {
+                    "known_biases": "Training and evaluation data come from a single cell line (U2OS) on a single brightfield instrument, so the model is biased towards that appearance. The manual annotations are non-exhaustive: unmatched predictions are not necessarily false positives, and instance-level agreement figures bound only what the annotations can attest. The nucleus expert additionally saw BBBC039 (Hoechst/DNA fluorescence) as auxiliary nucleus-morphology supervision, a different modality from the target one.",
+                    "risks": "Quantification derived from these masks can be systematically wrong in ways the metrics do not reveal: the nucleus expert under-segments severely on fluorescence images and leaves residual non-viable-cell segmentation; cytoplasm masks are fragmented and leak into nuclei; the non-viable expert also segments some adjacent viable cells. Counts, areas and per-object intensities computed from these outputs should be treated as provisional and visually checked.",
+                    "limitations": "Known limitations of this release. (1) Nuclei: severe under-segmentation on BBBC039 (ap50 0.183, union_iou 0.013, 960 predictions vs 4727 annotated nuclei); on manual U2OS brightfield ap50 0.185 / union_iou 0.305; residual non-viable-cell segmentation. (2) Cytoplasm fragmentation: 36 holes >= 500 px across the three test tiles (19 on validation); components do not preserve stable parent-cell identity. (3) Cytoplasm nucleus leakage: 0.2819 of the paired-nucleus penalty region is predicted as cytoplasm (validation 0.1541); this is measured against a constructed penalty region, so it is independent of annotation exhaustiveness. (4) Non-viable cells: the expert also segments some adjacent viable cells. (5) Non-exhaustive ground truth throughout. (6) Generalisation outside the evaluated setting is unestablished.",
+                    "recommendations": "Use for research on U2OS brightfield tiles and inspect the overlays before trusting derived measurements, especially for cytoplasm and nuclei. Treat instance-level agreement numbers as lower bounds because the ground truth is non-exhaustive. Do not use the nucleus expert on fluorescence images. Revalidate on your own data before applying the model to another cell line, modality or instrument."
+                },
+                "memory_requirements_inference": "About 8 GB of GPU memory for one 1008x1008 image in fp16 autocast. The combined state dict is 3.15 GiB on disk.",
+                "reproducibility_tolerance_rationale": "Why mismatched_elements_per_million is 2800. The forward pass runs under fp16 autocast, so the accumulation order of an fp16 GEMM - which depends on the GPU architecture and on the cuBLAS kernel the driver selects - perturbs the mask logits slightly. Where a logit sits within that perturbation of the binarisation threshold the pixel falls on the other side, moving an instance edge by a pixel or two. Measured twice, independently: a BioEngine worker on other hardware differed from the reference in 430.1 ppm of elements, and locally, disabling fp16 reduced-precision accumulation differed in 459.6 ppm. In the local case the structure was provably intact - the same 25 instances, the same label set, nothing split, merged, added or removed, every instance matched one-to-one at IoU >= 0.9828, and all 242 differing connected components attached to a reference instance boundary with none detached. The bound is therefore derived from the structure of the output rather than fitted to those measurements. The output has 1016064 elements and the smallest instance in the reference output is 2907 px, so an allowance only becomes capable of concealing an entire instance at about 2861 ppm. 2800 ppm is approximately 2845 of 1016064 elements: below that ceiling, so the allowance remains arithmetically incapable of hiding an instance that was dropped, added, split or merged, while leaving about 6.5x headroom over the 430.1 ppm actually observed instead of the 1.16x that 500 ppm left. relative_tolerance and absolute_tolerance stay at the spec defaults of 1e-3 because for an integer label map they are inert - two different instance IDs are never numerically close - so only the count of differing elements is relaxed. Scoped to the instance_labels output and the pytorch_state_dict weights format."
+            }
+        }
+    },
+    "rdf_yaml_sha256": "440a718df91ff243a3e581a42535e5cb3c676746c3569fcbb54c59a1faf56604",
+    "status": "untested"
+}
