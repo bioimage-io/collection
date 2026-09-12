@@ -200,6 +200,7 @@
         },
         "tool_compatibility_version_specific": {
             "biapy_3.7.0": 0.0,
+            "biapy_3.7.1": 0.0,
             "bioimageio.core_0.11.0": 0.5,
             "deepimagej_3.2.0-snapshot": 0.0,
             "ilastik_1.4.1.post1": 0.0,
@@ -211,6 +212,16 @@
     "tests": {
         "biapy": {
             "3.7.0": {
+                "badge": null,
+                "details": "[all] Couldn't load model for dependency check.\n",
+                "error": "[all] Couldn't load model for dependency check.\n",
+                "links": [
+                    "biapy/biapy"
+                ],
+                "score": 0.0,
+                "status": "failed"
+            },
+            "3.7.1": {
                 "badge": null,
                 "details": "[all] Couldn't load model for dependency check.\n",
                 "error": "[all] Couldn't load model for dependency check.\n",

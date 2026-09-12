@@ -292,6 +292,7 @@
         "tool_compatibility_version_specific": {
             "biapy_3.6.8": 0.0,
             "biapy_3.7.0": 1.0,
+            "biapy_3.7.1": 1.0,
             "bioimageio.core_0.10.2": 0.0,
             "bioimageio.core_0.10.3": 0.0,
             "bioimageio.core_0.10.4": 0.5,
@@ -319,6 +320,16 @@
                 "status": "failed"
             },
             "3.7.0": {
+                "badge": null,
+                "details": "",
+                "error": "",
+                "links": [
+                    "biapy/biapy"
+                ],
+                "score": 1.0,
+                "status": "passed"
+            },
+            "3.7.1": {
                 "badge": null,
                 "details": "",
                 "error": "",
