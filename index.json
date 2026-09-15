@@ -2081,9 +2081,9 @@
             "type": "model",
             "versions": [
                 {
-                    "comment": "Updated rdf.yaml",
+                    "comment": "Follow the spec: build the architecture in code instead of loading a TorchScript graph passed as an attachment (GH bioimage.io#91, core#503)",
                     "created_at": "2025-07-01T22:43:12Z",
-                    "sha256": "46018e6d97d5266ba8a6136e8e531021f5b37f5b42dfcf49eb19a428aa9294ac",
+                    "sha256": "3d3572b17b0450009cccf76f89a69be49e8a6f9e6e63b89b444ea0e843af3518",
                     "source": "https://hypha.aicell.io/bioimage-io/artifacts/stupendous-sheep/files/rdf.yaml?version=v0",
                     "version": "v0"
                 }
@@ -3652,6 +3652,6 @@
             ]
         }
     ],
-    "timestamp": "2026-09-14T04:03:34.091601",
+    "timestamp": "2026-09-15T04:04:39.259773",
     "total": 276
 }
