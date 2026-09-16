@@ -166,7 +166,7 @@
             "pytorch_state_dict": {
                 "architecture": "infer_2d.py:Empanada2DInference",
                 "architecture_sha256": "7d76a7c6e020e021eb97f56b3fab2e109863f0dc1fd06489f3cf305ec034dbe3",
-                "dependencies": "pip:./requirements.txt",
+                "dependencies": "conda:environment.yaml",
                 "kwargs": {
                     "confidence_thr": 0.3,
                     "fine_boundaries": true,
@@ -182,6 +182,6 @@
             }
         }
     },
-    "rdf_yaml_sha256": "3d3572b17b0450009cccf76f89a69be49e8a6f9e6e63b89b444ea0e843af3518",
+    "rdf_yaml_sha256": "b18fa78bcd7ae4e4ff0ec6b18c04a8819ad2e5d904dac1f7d6901e2c6185df9c",
     "status": "untested"
 }
