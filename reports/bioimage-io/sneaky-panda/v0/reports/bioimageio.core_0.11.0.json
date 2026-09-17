@@ -1,0 +1,159 @@
+{
+    "badge": null,
+    "details": {
+        "details": [
+            {
+                "context": {
+                    "file_name": "bioimageio.yaml",
+                    "known_files": {
+                        "README.md": "c28f01be09cb60be2d62351b30c655a0ec9aa7c6894df1f122e3f7bd50ceb987",
+                        "cellpose_vit_bioimageio.py": "7344226e499c5a6dc090424aeca8f648cfb33a75fb9bc2d97cfcd95538573377",
+                        "cl_cele_meiotic_nuclei_3d": "5bc7639bcb5fb10a38d350fa1684d35904fc68365059373696a69f551efa64fb",
+                        "environment.yaml": "d34bc94c00bbbc8a2b0a5e6586a575ccc4789adc9fe8dafb2e0cd163fd288acd",
+                        "https://github.com/carltonlab/carltonlab-napari-tools": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/sneaky-panda/files/README.md?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/sneaky-panda/files/cellpose_vit_bioimageio.py?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/sneaky-panda/files/cl_cele_meiotic_nuclei_3d?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/sneaky-panda/files/environment.yaml?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/sneaky-panda/files/meiotic_nuclei_segmentation_model_v1.png?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/sneaky-panda/files/sample_input.png?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/sneaky-panda/files/sample_output.png?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/sneaky-panda/files/test_input.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/sneaky-panda/files/test_output.npy?version=v0": null,
+                        "meiotic_nuclei_segmentation_model_v1.png": "356bde59a41a610959ee7d4fff328bf3d7f45f9617d10cf68d59b90ce818b9b3",
+                        "sample_input.png": "944172db5ce36326c5502d9b80b4f96fba54f5f2475abb77b8395e926e82dcee",
+                        "sample_output.png": "8c11d851a20cb09099adb1335a952b1621951a12a38043bc3bd34c8552d761de",
+                        "test_input.npy": "6a5e02e59e6a577e46f534a687c73ba19371aef1972e69ce2186752e99405d57",
+                        "test_output.npy": "124b97767926a125ad7fbfbaeb010784c49c0897e09c3c9341354f8143496f6f"
+                    },
+                    "original_source_name": null,
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/sneaky-panda/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Successfully created `ModelDescr` instance.",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.12",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Created conda environment 'df1a681278458be332a33558da24e9850be4d6e0866db1bf60d043f46cec8b4b'",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Reproduce test outputs from test inputs (pytorch_state_dict)",
+                "recommended_env": {
+                    "channels": [
+                        "conda-forge",
+                        "nodefaults"
+                    ],
+                    "dependencies": [
+                        "pip",
+                        {
+                            "pip": [
+                                "cellpose==4.1.1"
+                            ]
+                        },
+                        "conda-forge::bioimageio.core>=0.9.4",
+                        "python>=3.11"
+                    ],
+                    "name": "carltonlab-cellpose-sam"
+                },
+                "saved_conda_compare": "Success. All the packages in the specification file are present in the environment with matching version and build string.\n",
+                "status": "passed",
+                "warnings": [
+                    {
+                        "loc": [
+                            "weights",
+                            "pytorch_state_dict"
+                        ],
+                        "msg": "Output 'labels': 2 of 65536 elements disagree with expected values (30.5 ppm). \nMax relative difference not accounted for by absolute tolerance (1.00e-03):\n3.00e+06 (= \\|3.00e+00 - 0.00e+00\\|/\\|0.00e+00 + 1e-6\\|) at {'batch': np.int64(0), 'channel': np.int64(0), 'y': np.int64(59), 'x': np.int64(86)} \nMax absolute difference not accounted for by relative tolerance (1.00e-03):\n3.00e+00 (= \\|3.0000000e+00 - 0.0000000e+00\\|) at {'batch': np.int64(0), 'channel': np.int64(0), 'y': np.int64(59), 'x': np.int64(86)}",
+                        "severity": 30,
+                        "type": "bioimageio.core"
+                    }
+                ]
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Run pytorch_state_dict inference for inputs with batch_size: 1 and size parameter n: 0",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Run pytorch_state_dict inference for inputs with batch_size: 2 and size parameter n: 0",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.spec",
+                "0.5.12.0",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.5.12",
+        "id": "sneaky-panda",
+        "metadata_completeness": 0.3723404255319149,
+        "name": "bioimageio format validation",
+        "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/sneaky-panda/files/bioimageio.yaml?version=v0",
+        "status": "passed",
+        "traceback": null,
+        "type": "model",
+        "version": "0.1.0",
+        "warnings": null
+    },
+    "error": null,
+    "links": [
+        "bioimageio/bioimageio.core"
+    ],
+    "score": 1.0,
+    "status": "passed",
+    "tool": "bioimageio.core",
+    "tool_version": "0.11.0"
+}
