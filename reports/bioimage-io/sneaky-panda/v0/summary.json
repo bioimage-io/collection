@@ -1,0 +1,220 @@
+{
+    "rdf_content": {
+        "name": "CarltonLab C elegans Gonad Nuclei 3D",
+        "description": "A Cellpose-SAM model trained for 3D instance segmentation of nuclei in single-channel DAPI volumes of C. elegans gonads.",
+        "covers": [
+            {
+                "source": "meiotic_nuclei_segmentation_model_v1.png",
+                "sha256": "356bde59a41a610959ee7d4fff328bf3d7f45f9617d10cf68d59b90ce818b9b3"
+            }
+        ],
+        "documentation": {
+            "source": "README.md",
+            "sha256": "c28f01be09cb60be2d62351b30c655a0ec9aa7c6894df1f122e3f7bd50ceb987"
+        },
+        "authors": [
+            {
+                "affiliation": "Graduate School of Biostudies, Kyoto University",
+                "orcid": "0009-0000-1876-711X",
+                "name": "Carlos M. Rodriguez-Reza",
+                "github_user": "carlosmariorr"
+            },
+            {
+                "affiliation": "Graduate School of Biostudies and Radiation Biology Center, Kyoto University",
+                "orcid": "0000-0002-5320-6024",
+                "name": "Peter M. Carlton",
+                "github_user": "pmcarlton"
+            },
+            {
+                "affiliation": "Graduate School of Biostudies, Kyoto University",
+                "name": "Li Zhou"
+            }
+        ],
+        "cite": [
+            {
+                "text": "Cellpose-SAM - superhuman generalization for cellular segmentation",
+                "doi": "10.1101/2025.04.28.651001",
+                "url": "https://www.biorxiv.org/content/10.1101/2025.04.28.651001v1"
+            },
+            {
+                "text": "Cellpose 2.0 - how to train your own model",
+                "doi": "10.1038/s41592-022-01663-4"
+            }
+        ],
+        "license": "BSD-3-Clause",
+        "git_repo": "https://github.com/carltonlab/carltonlab-napari-tools",
+        "tags": [
+            "instance-segmentation",
+            "cellpose",
+            "cellpose-sam",
+            "nuclei",
+            "dapi",
+            "fluorescence-microscopy",
+            "3d",
+            "c-elegans",
+            "gonad",
+            "pytorch"
+        ],
+        "version": "0.1.0",
+        "format_version": "0.5.12",
+        "type": "model",
+        "inputs": [
+            {
+                "id": "input",
+                "description": "A DAPI plane represented in the three-channel format expected by Cellpose-SAM.",
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "DAPI",
+                            "empty_1",
+                            "empty_2"
+                        ]
+                    },
+                    {
+                        "size": 256,
+                        "id": "y",
+                        "type": "space"
+                    },
+                    {
+                        "size": 256,
+                        "id": "x",
+                        "type": "space"
+                    }
+                ],
+                "test_tensor": {
+                    "source": "test_input.npy",
+                    "sha256": "6a5e02e59e6a577e46f534a687c73ba19371aef1972e69ce2186752e99405d57"
+                },
+                "sample_tensor": {
+                    "source": "sample_input.png",
+                    "sha256": "944172db5ce36326c5502d9b80b4f96fba54f5f2475abb77b8395e926e82dcee"
+                },
+                "pad": {
+                    "value": 0
+                },
+                "preprocessing": [
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    },
+                    {
+                        "id": "scale_range",
+                        "kwargs": {
+                            "axes": [
+                                "y",
+                                "x"
+                            ],
+                            "min_percentile": 1,
+                            "max_percentile": 99,
+                            "eps": 1e-8
+                        }
+                    },
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    }
+                ]
+            }
+        ],
+        "outputs": [
+            {
+                "id": "labels",
+                "description": "Two-dimensional instance labels used to verify the underlying Cellpose-SAM network.",
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "labels"
+                        ]
+                    },
+                    {
+                        "halo": 16,
+                        "size": {
+                            "tensor_id": "input",
+                            "axis_id": "y"
+                        },
+                        "id": "y",
+                        "type": "space"
+                    },
+                    {
+                        "halo": 16,
+                        "size": {
+                            "tensor_id": "input",
+                            "axis_id": "x"
+                        },
+                        "id": "x",
+                        "type": "space"
+                    }
+                ],
+                "test_tensor": {
+                    "source": "test_output.npy",
+                    "sha256": "124b97767926a125ad7fbfbaeb010784c49c0897e09c3c9341354f8143496f6f"
+                },
+                "sample_tensor": {
+                    "source": "sample_output.png",
+                    "sha256": "8c11d851a20cb09099adb1335a952b1621951a12a38043bc3bd34c8552d761de"
+                },
+                "postprocessing": [
+                    {
+                        "id": "cellpose_flow_dynamics",
+                        "kwargs": {
+                            "cellprob_threshold": 0,
+                            "flow_threshold": 0.4,
+                            "do_3D": false,
+                            "min_size": 15
+                        }
+                    },
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    }
+                ]
+            }
+        ],
+        "weights": {
+            "pytorch_state_dict": {
+                "source": "cl_cele_meiotic_nuclei_3d",
+                "sha256": "5bc7639bcb5fb10a38d350fa1684d35904fc68365059373696a69f551efa64fb",
+                "architecture": {
+                    "source": "cellpose_vit_bioimageio.py",
+                    "sha256": "7344226e499c5a6dc090424aeca8f648cfb33a75fb9bc2d97cfcd95538573377",
+                    "callable": "CPnetBioImageIO"
+                },
+                "pytorch_version": "2.12.0",
+                "dependencies": {
+                    "source": "environment.yaml",
+                    "sha256": "d34bc94c00bbbc8a2b0a5e6586a575ccc4789adc9fe8dafb2e0cd163fd288acd"
+                },
+                "strict": false
+            }
+        },
+        "uploader": {
+            "email": "carlosmariorr90@gmail.com",
+            "name": "Carlos Mario Rodriguez Reza"
+        },
+        "maintainers": [
+            {
+                "name": "Carlos Mario Rodriguez Reza",
+                "github_user": "carlosmariorr",
+                "email": "carlosmariorr90@hotmail.com"
+            }
+        ],
+        "id": "sneaky-panda",
+        "id_emoji": "🐼"
+    },
+    "rdf_yaml_sha256": "3a83c89b2b982ee0495e871c126209c4c247dc213e8795d2fed47a3139b2956a",
+    "status": "untested"
+}
