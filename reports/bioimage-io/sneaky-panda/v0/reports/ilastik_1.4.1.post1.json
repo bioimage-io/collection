@@ -1,0 +1,200 @@
+{
+    "badge": null,
+    "details": {
+        "conda_list": null,
+        "details": [
+            {
+                "conda_compare": null,
+                "context": {
+                    "file_name": "bioimageio.yaml",
+                    "known_files": {
+                        "cellpose_vit_bioimageio.py": "7344226e499c5a6dc090424aeca8f648cfb33a75fb9bc2d97cfcd95538573377",
+                        "environment.yaml": "d34bc94c00bbbc8a2b0a5e6586a575ccc4789adc9fe8dafb2e0cd163fd288acd",
+                        "sample_input.png": "944172db5ce36326c5502d9b80b4f96fba54f5f2475abb77b8395e926e82dcee",
+                        "sample_output.png": "8c11d851a20cb09099adb1335a952b1621951a12a38043bc3bd34c8552d761de",
+                        "test_input.npy": "6a5e02e59e6a577e46f534a687c73ba19371aef1972e69ce2186752e99405d57",
+                        "test_output.npy": "124b97767926a125ad7fbfbaeb010784c49c0897e09c3c9341354f8143496f6f"
+                    },
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/sneaky-panda/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Created `InvalidDescr` object.",
+                "recommended_env": null,
+                "status": "failed",
+                "warnings": []
+            },
+            {
+                "conda_compare": null,
+                "context": {
+                    "file_name": "bioimageio.yaml",
+                    "known_files": {
+                        "cellpose_vit_bioimageio.py": "7344226e499c5a6dc090424aeca8f648cfb33a75fb9bc2d97cfcd95538573377",
+                        "environment.yaml": "d34bc94c00bbbc8a2b0a5e6586a575ccc4789adc9fe8dafb2e0cd163fd288acd",
+                        "sample_input.png": "944172db5ce36326c5502d9b80b4f96fba54f5f2475abb77b8395e926e82dcee",
+                        "sample_output.png": "8c11d851a20cb09099adb1335a952b1621951a12a38043bc3bd34c8552d761de",
+                        "test_input.npy": "6a5e02e59e6a577e46f534a687c73ba19371aef1972e69ce2186752e99405d57",
+                        "test_output.npy": "124b97767926a125ad7fbfbaeb010784c49c0897e09c3c9341354f8143496f6f"
+                    },
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/sneaky-panda/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [
+                    {
+                        "loc": [
+                            "covers",
+                            0,
+                            "function-after[val_func(), function-after[validate_file(), lax-or-strict[lax=union[json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]],function-after[path_validator(), str]],strict=json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]]]]]"
+                        ],
+                        "msg": "Input is not a valid path for <class 'pathlib.Path'>",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "covers",
+                            0,
+                            "RelativeFilePath"
+                        ],
+                        "msg": "Input is not a valid path for <class 'pathlib.PurePath'>",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "covers",
+                            0,
+                            "function-after[HttpUrl(), str]"
+                        ],
+                        "msg": "Input should be a valid string",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "string_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "documentation",
+                            "function-after[val_func(), function-after[validate_file(), lax-or-strict[lax=union[json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]],function-after[path_validator(), str]],strict=json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]]]]]"
+                        ],
+                        "msg": "Input is not a valid path for <class 'pathlib.Path'>",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "documentation",
+                            "RelativeFilePath"
+                        ],
+                        "msg": "Input is not a valid path for <class 'pathlib.PurePath'>",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "documentation",
+                            "function-after[HttpUrl(), str]"
+                        ],
+                        "msg": "Input should be a valid string",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "string_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "inputs",
+                            0,
+                            "pad"
+                        ],
+                        "msg": "Extra inputs are not permitted",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "extra_forbidden",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "outputs",
+                            0,
+                            "postprocessing",
+                            0
+                        ],
+                        "msg": "Input tag 'cellpose_flow_dynamics' found using 'id' does not match any of the expected tags: 'binarize', 'clip', 'ensure_dtype', 'scale_linear', 'sigmoid', 'fixed_zero_mean_unit_variance', 'zero_mean_unit_variance', 'scale_range', 'scale_mean_variance'",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "union_tag_invalid",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "weights",
+                            "pytorch_state_dict",
+                            "strict"
+                        ],
+                        "msg": "Extra inputs are not permitted",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "extra_forbidden",
+                        "with_traceback": false
+                    }
+                ],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.4",
+                "recommended_env": null,
+                "status": "failed",
+                "warnings": []
+            },
+            {
+                "conda_compare": null,
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "type"
+                ],
+                "name": "Has expected resource type",
+                "recommended_env": null,
+                "status": "passed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.core",
+                "0.8.0",
+                "",
+                ""
+            ],
+            [
+                "bioimageio.spec",
+                "0.5.4.1",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.5.4",
+        "id": "sneaky-panda",
+        "name": "bioimageio format validation",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/sneaky-panda/files/bioimageio.yaml?version=v0",
+        "status": "failed",
+        "type": "model"
+    },
+    "error": "\n|        ❌        |                                 bioimageio format validation                                |\n|       ---       |                                             ---                                             |\n| status          | failed                                                                                      |\n| source          | https://hypha.aicell.io/bioimage-io/artifacts/sneaky-panda/files/bioimageio.yaml?version=v0 |\n| id              | sneaky-panda                                                                                |\n| format version  | model 0.5.4                                                                                 |\n| bioimageio.core | 0.8.0                                                                                       |\n| bioimageio.spec | 0.5.4.1                                                                                     |\n\n|     |                     Location                     |                                                                                                                           Details                                                                                                                            |\n| --- |                       ---                        |                                                                                                                             ---                                                                                                                              |\n| ❌   |                                                  | Created `InvalidDescr` object.                                                                                                                                                                                                                               |\n| 🔍   | `context:perform_io_checks`                      | True                                                                                                                                                                                                                                                         |\n| 🔍   | `context:root`                                   | https://hypha.aicell.io/bioimage-io/artifacts/sneaky-panda/files?version=v0                                                                                                                                                                                  |\n| 🔍   | `context:known_files.test_input.npy`             | 6a5e02e59e6a577e46f534a687c73ba19371aef1972e69ce2186752e99405d57                                                                                                                                                                                             |\n| 🔍   | `context:known_files.sample_input.png`           | 944172db5ce36326c5502d9b80b4f96fba54f5f2475abb77b8395e926e82dcee                                                                                                                                                                                             |\n| 🔍   | `context:known_files.test_output.npy`            | 124b97767926a125ad7fbfbaeb010784c49c0897e09c3c9341354f8143496f6f                                                                                                                                                                                             |\n| 🔍   | `context:known_files.sample_output.png`          | 8c11d851a20cb09099adb1335a952b1621951a12a38043bc3bd34c8552d761de                                                                                                                                                                                             |\n| 🔍   | `context:known_files.cellpose_vit_bioimageio.py` | 7344226e499c5a6dc090424aeca8f648cfb33a75fb9bc2d97cfcd95538573377                                                                                                                                                                                             |\n| 🔍   | `context:known_files.environment.yaml`           | d34bc94c00bbbc8a2b0a5e6586a575ccc4789adc9fe8dafb2e0cd163fd288acd                                                                                                                                                                                             |\n| ❌   |                                                  | bioimageio.spec format validation model 0.5.4                                                                                                                                                                                                                |\n| ❌   | `covers.0`                                       | Input is not a valid path for <class 'pathlib.Path'>                                                                                                                                                                                                         |\n|     |                                                  |                                                                                                                                                                                                                                                              |\n| ❌   | `covers.0.(RelativeFilePath)`                    | Input is not a valid path for <class 'pathlib.PurePath'>                                                                                                                                                                                                     |\n|     |                                                  |                                                                                                                                                                                                                                                              |\n| ❌   | `covers.0`                                       | Input should be a valid string                                                                                                                                                                                                                               |\n|     |                                                  |                                                                                                                                                                                                                                                              |\n| ❌   | `documentation`                                  | Input is not a valid path for <class 'pathlib.Path'>                                                                                                                                                                                                         |\n|     |                                                  |                                                                                                                                                                                                                                                              |\n| ❌   | `documentation.(RelativeFilePath)`               | Input is not a valid path for <class 'pathlib.PurePath'>                                                                                                                                                                                                     |\n|     |                                                  |                                                                                                                                                                                                                                                              |\n| ❌   | `documentation`                                  | Input should be a valid string                                                                                                                                                                                                                               |\n|     |                                                  |                                                                                                                                                                                                                                                              |\n| ❌   | `inputs.0.pad`                                   | Extra inputs are not permitted                                                                                                                                                                                                                               |\n|     |                                                  |                                                                                                                                                                                                                                                              |\n| ❌   | `outputs.0.postprocessing.0`                     | Input tag 'cellpose_flow_dynamics' found using 'id' does not match any of the expected tags: 'binarize', 'clip', 'ensure_dtype', 'scale_linear', 'sigmoid', 'fixed_zero_mean_unit_variance', 'zero_mean_unit_variance', 'scale_range', 'scale_mean_variance' |\n|     |                                                  |                                                                                                                                                                                                                                                              |\n| ❌   | `weights.pytorch_state_dict.strict`              | Extra inputs are not permitted                                                                                                                                                                                                                               |\n|     |                                                  |                                                                                                                                                                                                                                                              |\n| ✔️  | `type`                                           | Has expected resource type                                                                                                                                                                                                                                   |\n",
+    "links": [
+        "ilastik/ilastik"
+    ],
+    "status": "failed",
+    "tool": "ilastik",
+    "tool_version": "1.4.1.post1"
+}
