@@ -1,0 +1,210 @@
+{
+    "badge": null,
+    "details": {
+        "conda_list": null,
+        "details": [
+            {
+                "conda_compare": null,
+                "context": {
+                    "file_name": "bioimageio.yaml",
+                    "known_files": {
+                        "MitoNet_v1_weights.pth": "ca9f7de681c94b1e89d20cab21ec39135415fc2c8798292cd1f0f6a33aa1e18b",
+                        "environment.yaml": "cf72943b4ab995ce6dd1d54637e38935e831c22b8542ec3de1d9ba3bb4112b9c",
+                        "infer_2d.py": "7d76a7c6e020e021eb97f56b3fab2e109863f0dc1fd06489f3cf305ec034dbe3",
+                        "out.npy": "9a5200940d46e05c1eadcad1690e0c2fda1ae7659a15ce2a446a87113b5dd96c",
+                        "out.png": "9ebc24dd39578b6188a9a61a8fe313e94a9eef19f25336088f628a2a0e3813f0",
+                        "test.npy": "dd6f521adaf15d77a2c0f3d6e66abf1e7cd406a3687a1682f586d55c7d879c7d",
+                        "test.tiff": "e7e344f34ff5854bb43448b92ebd64642c214374c1311c2e962d2838d3880da8"
+                    },
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/stupendous-sheep/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Created `InvalidDescr` object.",
+                "recommended_env": null,
+                "status": "failed",
+                "warnings": []
+            },
+            {
+                "conda_compare": null,
+                "context": {
+                    "file_name": "bioimageio.yaml",
+                    "known_files": {
+                        "MitoNet_v1_weights.pth": "ca9f7de681c94b1e89d20cab21ec39135415fc2c8798292cd1f0f6a33aa1e18b",
+                        "environment.yaml": "cf72943b4ab995ce6dd1d54637e38935e831c22b8542ec3de1d9ba3bb4112b9c",
+                        "infer_2d.py": "7d76a7c6e020e021eb97f56b3fab2e109863f0dc1fd06489f3cf305ec034dbe3",
+                        "out.npy": "9a5200940d46e05c1eadcad1690e0c2fda1ae7659a15ce2a446a87113b5dd96c",
+                        "out.png": "9ebc24dd39578b6188a9a61a8fe313e94a9eef19f25336088f628a2a0e3813f0",
+                        "test.npy": "dd6f521adaf15d77a2c0f3d6e66abf1e7cd406a3687a1682f586d55c7d879c7d",
+                        "test.tiff": "e7e344f34ff5854bb43448b92ebd64642c214374c1311c2e962d2838d3880da8"
+                    },
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/stupendous-sheep/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [
+                    {
+                        "loc": [
+                            "covers",
+                            0,
+                            "function-after[val_func(), function-after[validate_file(), lax-or-strict[lax=union[json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]],function-after[path_validator(), str]],strict=json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]]]]]"
+                        ],
+                        "msg": "Input is not a valid path for <class 'pathlib.Path'>",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "covers",
+                            0,
+                            "RelativeFilePath"
+                        ],
+                        "msg": "Input is not a valid path for <class 'pathlib.PurePath'>",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "covers",
+                            0,
+                            "function-after[HttpUrl(), str]"
+                        ],
+                        "msg": "Input should be a valid string",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "string_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "covers",
+                            1,
+                            "function-after[val_func(), function-after[validate_file(), lax-or-strict[lax=union[json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]],function-after[path_validator(), str]],strict=json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]]]]]"
+                        ],
+                        "msg": "Input is not a valid path for <class 'pathlib.Path'>",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "covers",
+                            1,
+                            "RelativeFilePath"
+                        ],
+                        "msg": "Input is not a valid path for <class 'pathlib.PurePath'>",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "covers",
+                            1,
+                            "function-after[HttpUrl(), str]"
+                        ],
+                        "msg": "Input should be a valid string",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "string_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "documentation",
+                            "function-after[val_func(), function-after[validate_file(), lax-or-strict[lax=union[json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]],function-after[path_validator(), str]],strict=json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]]]]]"
+                        ],
+                        "msg": "Input is not a valid path for <class 'pathlib.Path'>",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "documentation",
+                            "RelativeFilePath"
+                        ],
+                        "msg": "Input is not a valid path for <class 'pathlib.PurePath'>",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "documentation",
+                            "function-after[HttpUrl(), str]"
+                        ],
+                        "msg": "Input should be a valid string",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "string_type",
+                        "with_traceback": false
+                    }
+                ],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.4",
+                "recommended_env": null,
+                "status": "failed",
+                "warnings": [
+                    {
+                        "loc": [
+                            "name"
+                        ],
+                        "msg": "Name longer than 64 characters.",
+                        "severity": 20,
+                        "type": "warning"
+                    }
+                ]
+            },
+            {
+                "conda_compare": null,
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "type"
+                ],
+                "name": "Has expected resource type",
+                "recommended_env": null,
+                "status": "passed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.spec",
+                "0.5.4.1",
+                "",
+                ""
+            ],
+            [
+                "bioimageio.core",
+                "0.8.0",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.5.4",
+        "id": "stupendous-sheep",
+        "name": "bioimageio format validation",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/stupendous-sheep/files/bioimageio.yaml?version=v0",
+        "status": "failed",
+        "type": "model"
+    },
+    "error": "\n|        ❌        |                                   bioimageio format validation                                  |\n|       ---       |                                               ---                                               |\n| status          | failed                                                                                          |\n| source          | https://hypha.aicell.io/bioimage-io/artifacts/stupendous-sheep/files/bioimageio.yaml?version=v0 |\n| id              | stupendous-sheep                                                                                |\n| format version  | model 0.5.4                                                                                     |\n| bioimageio.spec | 0.5.4.1                                                                                         |\n| bioimageio.core | 0.8.0                                                                                           |\n\n|     |                   Location                   |                                     Details                                     |\n| --- |                     ---                      |                                       ---                                       |\n| ❌   |                                              | Created `InvalidDescr` object.                                                  |\n| 🔍   | `context:perform_io_checks`                  | True                                                                            |\n| 🔍   | `context:root`                               | https://hypha.aicell.io/bioimage-io/artifacts/stupendous-sheep/files?version=v0 |\n| 🔍   | `context:known_files.test.npy`               | dd6f521adaf15d77a2c0f3d6e66abf1e7cd406a3687a1682f586d55c7d879c7d                |\n| 🔍   | `context:known_files.test.tiff`              | e7e344f34ff5854bb43448b92ebd64642c214374c1311c2e962d2838d3880da8                |\n| 🔍   | `context:known_files.out.npy`                | 9a5200940d46e05c1eadcad1690e0c2fda1ae7659a15ce2a446a87113b5dd96c                |\n| 🔍   | `context:known_files.out.png`                | 9ebc24dd39578b6188a9a61a8fe313e94a9eef19f25336088f628a2a0e3813f0                |\n| 🔍   | `context:known_files.infer_2d.py`            | 7d76a7c6e020e021eb97f56b3fab2e109863f0dc1fd06489f3cf305ec034dbe3                |\n| 🔍   | `context:known_files.environment.yaml`       | cf72943b4ab995ce6dd1d54637e38935e831c22b8542ec3de1d9ba3bb4112b9c                |\n| 🔍   | `context:known_files.MitoNet_v1_weights.pth` | ca9f7de681c94b1e89d20cab21ec39135415fc2c8798292cd1f0f6a33aa1e18b                |\n| ❌   |                                              | bioimageio.spec format validation model 0.5.4                                   |\n| ❌   | `covers.0`                                   | Input is not a valid path for <class 'pathlib.Path'>                            |\n|     |                                              |                                                                                 |\n| ❌   | `covers.0.(RelativeFilePath)`                | Input is not a valid path for <class 'pathlib.PurePath'>                        |\n|     |                                              |                                                                                 |\n| ❌   | `covers.0`                                   | Input should be a valid string                                                  |\n|     |                                              |                                                                                 |\n| ❌   | `covers.1`                                   | Input is not a valid path for <class 'pathlib.Path'>                            |\n|     |                                              |                                                                                 |\n| ❌   | `covers.1.(RelativeFilePath)`                | Input is not a valid path for <class 'pathlib.PurePath'>                        |\n|     |                                              |                                                                                 |\n| ❌   | `covers.1`                                   | Input should be a valid string                                                  |\n|     |                                              |                                                                                 |\n| ❌   | `documentation`                              | Input is not a valid path for <class 'pathlib.Path'>                            |\n|     |                                              |                                                                                 |\n| ❌   | `documentation.(RelativeFilePath)`           | Input is not a valid path for <class 'pathlib.PurePath'>                        |\n|     |                                              |                                                                                 |\n| ❌   | `documentation`                              | Input should be a valid string                                                  |\n|     |                                              |                                                                                 |\n| ⚠   | `name`                                       | Name longer than 64 characters.                                                 |\n| ✔️  | `type`                                       | Has expected resource type                                                      |\n",
+    "links": [
+        "ilastik/ilastik"
+    ],
+    "status": "failed",
+    "tool": "ilastik",
+    "tool_version": "1.4.1.post1"
+}
