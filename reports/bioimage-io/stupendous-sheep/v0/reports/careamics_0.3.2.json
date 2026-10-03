@@ -1,0 +1,11 @@
+{
+    "badge": null,
+    "details": [
+        "CAREamics compatibility check does not support `bioimageio.spec.v0.4` model desciptions."
+    ],
+    "error": null,
+    "links": [],
+    "status": "not-applicable",
+    "tool": "careamics",
+    "tool_version": "0.3.2"
+}

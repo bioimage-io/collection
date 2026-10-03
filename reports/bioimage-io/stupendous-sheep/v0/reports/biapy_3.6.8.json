@@ -1,0 +1,10 @@
+{
+    "badge": null,
+    "details": "[all] Accepting models only with ['bcyx', 'bczyx'] axis order, found yx\n",
+    "error": "[all] Accepting models only with ['bcyx', 'bczyx'] axis order, found yx\n",
+    "links": [
+        "biapy/biapy"
+    ],
+    "score": 0.0,
+    "status": "failed"
+}
