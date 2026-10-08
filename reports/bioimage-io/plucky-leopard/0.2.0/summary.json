@@ -46,7 +46,7 @@
             "instance-segmentation",
             "resunet"
         ],
-        "version": "0.1.0",
+        "version": "0.2.0",
         "format_version": "0.5.7",
         "type": "model",
         "documentation": "documentation.md",
@@ -82,7 +82,7 @@
                 ],
                 "test_tensor": {
                     "source": "test-input.npy",
-                    "sha256": "1b6a2ac5662e1a689a74974894d4076130fa128660095660f94f203547b341cd"
+                    "sha256": "25fe94d3e6d94801b1d8db71574d4ef36e382395ee2d5146490ac996cc319d64"
                 },
                 "data": {
                     "type": "float32"
@@ -177,7 +177,7 @@
                 ],
                 "test_tensor": {
                     "source": "test-output.npy",
-                    "sha256": "0118395262b3756ff63d2d36b837a58396189cd75293cbd5089904008787bfda"
+                    "sha256": "89b71de2f7e04506474c3d25853794f0e577dbc53854d4aebf3640ff44baad84"
                 },
                 "data": {
                     "type": "float32"
@@ -198,7 +198,7 @@
         "weights": {
             "pytorch_state_dict": {
                 "source": "checkpoint.pth",
-                "sha256": "23b3ca39834cd52ca639d7362db661f65996bb7e39c6f28c596da4c904e299a2",
+                "sha256": "7344d172b28588a0c700beb475235326e00618b39de39887083f86e75a994d83",
                 "architecture": {
                     "source": "model.py",
                     "sha256": "5ff62be573a2ff9eb25fa852322ecac4f97de2b7b92b2d3e499bd02a0bae2d3e",
@@ -279,6 +279,6 @@
         "id": "plucky-leopard",
         "id_emoji": "🐆"
     },
-    "rdf_yaml_sha256": "f9cffac8d42a16dbcdf845cfa7944e5a5a18ff43493ebc6ddf2c6acaaf84b9e2",
+    "rdf_yaml_sha256": "42f04750457f015960233aaef94e99e74f57ef6a2e04ead050b08520fddebb90",
     "status": "untested"
 }

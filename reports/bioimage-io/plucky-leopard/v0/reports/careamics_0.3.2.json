@@ -1,9 +1,0 @@
-{
-    "badge": null,
-    "details": "'Model' resource not tagged with 'CAREamics' or 'careamics'.",
-    "error": null,
-    "links": [],
-    "status": "not-applicable",
-    "tool": "careamics",
-    "tool_version": "0.3.2"
-}

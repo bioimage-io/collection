@@ -1,0 +1,172 @@
+{
+    "rdf_content": {
+        "format_version": "0.5.11",
+        "type": "model",
+        "name": "KimmelNET - Zebrafish Embryo Age Prediction",
+        "description": "Predicts the age (hours post fertilisation) of individual zebrafish embryos from 2D brightfield microscopy images. A convolutional neural network that regresses a single continuous staging value.",
+        "license": "GPL-3.0",
+        "timestamp": "2026-09-20T12:00:00+00:00",
+        "config": {
+            "bioimageio": {
+                "modality": "brightfield",
+                "task": "regression",
+                "model_parameter_count": 821121,
+                "bias_risks_limitations": {
+                    "limitations": "Trained on brightfield images; may underperform on very different aspect ratios or acquisition settings. Most reliable within the training age range (~4.5 to 50 hpf).",
+                    "risks": "Predictions may be inaccurate for embryos outside the training age range.",
+                    "known_biases": "Trained on wild-type zebrafish at two incubation temperatures.",
+                    "recommendations": "Validate predictions against established staging references for critical use."
+                },
+                "out_of_scope_use": "Images with substantially different aspect ratios, acquisition settings, or developmental stages outside the training range.",
+                "training": {
+                    "optimizer": "adam",
+                    "loss_function": "mean_squared_error",
+                    "initial_learning_rate": 0.0005,
+                    "training_epochs": 500,
+                    "training_batch_size": 64
+                }
+            }
+        },
+        "authors": [
+            {
+                "name": "Rebecca A. Jones",
+                "orcid": "0000-0002-1530-5400",
+                "affiliation": "The Francis Crick Institute"
+            },
+            {
+                "name": "Matthew J. Renshaw",
+                "affiliation": "The Francis Crick Institute"
+            },
+            {
+                "name": "David J. Barry",
+                "orcid": "0000-0003-2763-5244",
+                "github_user": "djpbarry",
+                "affiliation": "The Francis Crick Institute"
+            }
+        ],
+        "packaged_by": [
+            {
+                "name": "David J. Barry",
+                "github_user": "djpbarry",
+                "affiliation": "The Francis Crick Institute"
+            }
+        ],
+        "maintainers": [
+            {
+                "name": "David J. Barry",
+                "github_user": "djpbarry",
+                "affiliation": "The Francis Crick Institute"
+            }
+        ],
+        "cite": [
+            {
+                "text": "Jones RA, Renshaw MJ and Barry DJ. Automated staging of zebrafish embryos with deep learning. Life Science Alliance, 7 (1): e202302351.",
+                "doi": "10.26508/lsa.202302351"
+            }
+        ],
+        "git_repo": "https://github.com/djpbarry/KimmelNET",
+        "tags": [
+            "brightfield",
+            "light-microscopy",
+            "zebrafish",
+            "embryo",
+            "staging",
+            "hpf",
+            "regression",
+            "developmental-biology",
+            "cnn",
+            "tensorflow",
+            "2d"
+        ],
+        "covers": [
+            {
+                "source": "cover0.png",
+                "sha256": "754aba2460dcc00dceace2c38517cb71d09e80b72ec0169144ad66af81676d15"
+            }
+        ],
+        "documentation": {
+            "source": "README.md",
+            "sha256": "6851df567a004d2fdb8eb5ad76e7c76cea830d45811809960fa59be9dc366833"
+        },
+        "inputs": [
+            {
+                "id": "raw",
+                "description": "Grayscale brightfield image of a zebrafish embryo, 0-255 intensity",
+                "axes": [
+                    {
+                        "type": "batch",
+                        "size": 1
+                    },
+                    {
+                        "type": "space",
+                        "id": "y",
+                        "size": 224
+                    },
+                    {
+                        "type": "space",
+                        "id": "x",
+                        "size": 268
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "intensity"
+                        ]
+                    }
+                ],
+                "test_tensor": {
+                    "source": "test_input.npy",
+                    "sha256": "4500f622264274c359ed6d13f4068d8a5fa295576a5411450a010a86f9230b32"
+                },
+                "sample_tensor": {
+                    "source": "sample_input.png",
+                    "sha256": "7d562076252cbb6cb683724521e24d29adb58c5184a9071d59061a2681255546"
+                },
+                "preprocessing": [
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    }
+                ]
+            }
+        ],
+        "outputs": [
+            {
+                "id": "age",
+                "description": "Predicted developmental age in hours post fertilisation",
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "hpf"
+                        ]
+                    }
+                ],
+                "test_tensor": {
+                    "source": "test_output.npy",
+                    "sha256": "17f4c029ba86863814efe1d2e627f5bba651ac4865daf52cbef8b184eb3b9d93"
+                },
+                "data": {
+                    "range": [
+                        0.0,
+                        60.0
+                    ]
+                }
+            }
+        ],
+        "weights": {
+            "tensorflow_saved_model_bundle": {
+                "source": "tf_weights.zip",
+                "sha256": "a4cf16f6b42dfc72d4cafac110bbaf1a8792f0c570066cd54db09d1db2dfc52c",
+                "tensorflow_version": "2.21"
+            }
+        }
+    },
+    "rdf_yaml_sha256": "ca38458035ae38f7ed79ac7ce4e9bfb7fd1bb9f823c27ffd9dc4b4031324b49c",
+    "status": "untested"
+}

@@ -1,0 +1,129 @@
+{
+    "rdf_content": {
+        "name": "Fine-tuned Cellpose-SAM",
+        "description": "Fine-tuned Cellpose-SAM model. Short demo fine-tune of Cellpose-SAM (cpsam) on a tiny synthetic blob dataset (draft, for pipeline testing).",
+        "authors": [
+            {
+                "name": "Nils Mechtel",
+                "email": "nils.mech@gmail.com"
+            }
+        ],
+        "cite": [
+            {
+                "text": "Stringer, C., Wang, T., Michaelos, M. et al. Cellpose: a generalist algorithm for cellular segmentation. Nat Methods 18, 100–106 (2021).",
+                "doi": "10.1038/s41592-020-01018-x"
+            },
+            {
+                "text": "Pachitariu, M., Stringer, C. Cellpose 2.0: how to train your own model. Nat Methods 19, 1634–1641 (2022).",
+                "doi": "10.1038/s41592-022-01663-4"
+            }
+        ],
+        "license": "BSD-3-Clause",
+        "tags": [
+            "Cellpose",
+            "Cellpose-SAM",
+            "Cell Segmentation",
+            "Segmentation",
+            "Fine-tuned"
+        ],
+        "version": "0.1.0",
+        "format_version": "0.5.6",
+        "type": "model",
+        "id_emoji": "🔬",
+        "documentation": "documentation.md",
+        "inputs": [
+            {
+                "id": "input",
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "r",
+                            "g",
+                            "b"
+                        ]
+                    },
+                    {
+                        "size": 256,
+                        "id": "y",
+                        "type": "space"
+                    },
+                    {
+                        "size": 256,
+                        "id": "x",
+                        "type": "space"
+                    }
+                ],
+                "test_tensor": {
+                    "source": "input_sample.npy"
+                }
+            }
+        ],
+        "outputs": [
+            {
+                "id": "masks",
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "size": 256,
+                        "id": "y",
+                        "type": "space"
+                    },
+                    {
+                        "size": 256,
+                        "id": "x",
+                        "type": "space"
+                    }
+                ],
+                "test_tensor": {
+                    "source": "output_sample.npy"
+                }
+            }
+        ],
+        "weights": {
+            "pytorch_state_dict": {
+                "source": "model_weights.pth",
+                "architecture": {
+                    "source": "model.py",
+                    "callable": "CellposeSAMWrapper",
+                    "kwargs": {
+                        "model_type": "cpsam",
+                        "diam_mean": 24.0,
+                        "cp_batch_size": 8,
+                        "channels": [
+                            0,
+                            0
+                        ],
+                        "flow_threshold": 0.4,
+                        "cellprob_threshold": 0.0,
+                        "stitch_threshold": 0.0,
+                        "estimate_diam": false,
+                        "normalize": true,
+                        "do_3D": false,
+                        "gpu": false,
+                        "use_bfloat16": false
+                    }
+                },
+                "pytorch_version": "2.7.1+cu126"
+            }
+        },
+        "config": {
+            "bioimageio": {
+                "reproducibility_tolerance": [
+                    {
+                        "relative_tolerance": 0.01,
+                        "absolute_tolerance": 0.001,
+                        "mismatched_elements_per_million": 20
+                    }
+                ]
+            }
+        }
+    },
+    "rdf_yaml_sha256": "6b589cd8205ec86578948c4c150a4b55704df11c537e694b52feaabccbbdc9a4",
+    "status": "untested"
+}
