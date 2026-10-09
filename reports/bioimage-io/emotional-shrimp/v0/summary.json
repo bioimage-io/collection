@@ -1,55 +1,70 @@
 {
     "rdf_content": {
-        "name": "SAM3-Image-Encoder",
+        "authors": [
+            {
+                "affiliation": "MRC Laboratory of Molecular Biology",
+                "name": "Daniel Franco Barranco",
+                "orcid": "0000-0002-1109-110X"
+            }
+        ],
+        "cite": [
+            {
+                "doi": "10.48550/arXiv.2511.16719",
+                "text": "Carion, Nicolas, et al. \"Sam 3: Segment anything with concepts.\" arXiv preprint arXiv:2511.16719 (2025).",
+                "url": "https://arxiv.org/abs/2511.16719"
+            }
+        ],
+        "config": {},
         "description": "Vision encoder of Meta's SAM 3 (Segment Anything with Concepts). Maps a 1008x1008 RGB image to a 256-channel 72x72 feature map (the backbone 'vision_features'). License: https://github.com/facebookresearch/sam3/blob/main/LICENSE (custom SAM license)",
+        "documentation": "README.md",
         "format_version": "0.5.10",
-        "type": "model",
+        "git_repo": "https://github.com/facebookresearch/sam3/tree/main",
+        "id": "emotional-shrimp",
+        "id_emoji": "🦐",
         "inputs": [
             {
-                "id": "input",
                 "axes": [
                     {
                         "type": "batch"
                     },
                     {
-                        "type": "channel",
                         "channel_names": [
                             "red",
                             "green",
                             "blue"
-                        ]
+                        ],
+                        "type": "channel"
                     },
                     {
-                        "size": 1008,
                         "id": "y",
+                        "size": 1008,
                         "type": "space"
                     },
                     {
-                        "size": 1008,
                         "id": "x",
+                        "size": 1008,
                         "type": "space"
                     }
                 ],
-                "test_tensor": {
-                    "source": "test_input.npy",
-                    "sha256": "9d98e741ca95a08901e7b920815a72e4be650442d12af04fcca0080005e5d258"
-                },
+                "id": "input",
                 "sample_tensor": {
-                    "source": "sample_input.png",
-                    "sha256": "7f0e6b3c15adb1c41fdc10ab5105d6a5944e0e83912c370ad7ba5db24278305f"
+                    "sha256": "7f0e6b3c15adb1c41fdc10ab5105d6a5944e0e83912c370ad7ba5db24278305f",
+                    "source": "sample_input.png"
+                },
+                "test_tensor": {
+                    "sha256": "9d98e741ca95a08901e7b920815a72e4be650442d12af04fcca0080005e5d258",
+                    "source": "test_input.npy"
                 }
             }
         ],
+        "name": "SAM3-Image-Encoder",
         "outputs": [
             {
-                "id": "vision_features",
                 "axes": [
                     {
                         "type": "batch"
                     },
                     {
-                        "description": "SAM 3 backbone vision_features channels",
-                        "type": "channel",
                         "channel_names": [
                             "feature000",
                             "feature001",
@@ -307,49 +322,28 @@
                             "feature253",
                             "feature254",
                             "feature255"
-                        ]
+                        ],
+                        "description": "SAM 3 backbone vision_features channels",
+                        "type": "channel"
                     },
                     {
-                        "size": 72,
                         "id": "y",
+                        "size": 72,
                         "type": "space"
                     },
                     {
-                        "size": 72,
                         "id": "x",
+                        "size": 72,
                         "type": "space"
                     }
                 ],
+                "id": "vision_features",
                 "test_tensor": {
-                    "source": "test_output.npy",
-                    "sha256": "2a7686e154e959bc1efbe46774acff030b0ad8ef53325965a490a9be2ad8df5e"
+                    "sha256": "2a7686e154e959bc1efbe46774acff030b0ad8ef53325965a490a9be2ad8df5e",
+                    "source": "test_output.npy"
                 }
             }
         ],
-        "weights": {
-            "pytorch_state_dict": {
-                "source": "https://huggingface.co/facebook/sam3/resolve/main/sam3.pt",
-                "sha256": "9999e2341ceef5e136daa386eecb55cb414446a00ac2b55eb2dfd2f7c3cf8c9e",
-                "architecture": {
-                    "source": "sam3_encoder_bioimageio.py",
-                    "sha256": "9ef2d944804acc5542e85f8d81666f10f3848da139e69d3970c017b858e51333",
-                    "callable": "Sam3EncoderBioImageIO"
-                },
-                "pytorch_version": "2.11.0",
-                "dependencies": {
-                    "source": "environment.yaml",
-                    "sha256": "a1f94acbbf85304c31af1b54856a1c5b46d9a9846c182bff2b2a1805a6858eea"
-                },
-                "strict": false
-            }
-        },
-        "config": {},
-        "uploader": {
-            "email": "danialtza@gmail.com",
-            "name": "Daniel Franco Barranco"
-        },
-        "version": "0.1.0",
-        "git_repo": "https://github.com/facebookresearch/sam3/tree/main",
         "tags": [
             "foundation-models",
             "embeddings",
@@ -358,24 +352,237 @@
             "2d",
             "2d-t"
         ],
-        "authors": [
-            {
-                "name": "Daniel Franco Barranco",
-                "affiliation": "MRC Laboratory of Molecular Biology",
-                "orcid": "0000-0002-1109-110X"
+        "type": "model",
+        "uploader": {
+            "email": "danialtza@gmail.com",
+            "name": "Daniel Franco Barranco"
+        },
+        "version": "0.1.0",
+        "weights": {
+            "pytorch_state_dict": {
+                "architecture": {
+                    "callable": "Sam3EncoderBioImageIO",
+                    "sha256": "9ef2d944804acc5542e85f8d81666f10f3848da139e69d3970c017b858e51333",
+                    "source": "sam3_encoder_bioimageio.py"
+                },
+                "dependencies": {
+                    "sha256": "a1f94acbbf85304c31af1b54856a1c5b46d9a9846c182bff2b2a1805a6858eea",
+                    "source": "environment.yaml"
+                },
+                "pytorch_version": "2.11.0",
+                "sha256": "9999e2341ceef5e136daa386eecb55cb414446a00ac2b55eb2dfd2f7c3cf8c9e",
+                "source": "https://huggingface.co/facebook/sam3/resolve/main/sam3.pt",
+                "strict": false
             }
-        ],
-        "cite": [
-            {
-                "text": "Carion, Nicolas, et al. \"Sam 3: Segment anything with concepts.\" arXiv preprint arXiv:2511.16719 (2025).",
-                "doi": "10.48550/arXiv.2511.16719",
-                "url": "https://arxiv.org/abs/2511.16719"
-            }
-        ],
-        "documentation": "README.md",
-        "id": "emotional-shrimp",
-        "id_emoji": "🦐"
+        }
     },
     "rdf_yaml_sha256": "89f44221cd6dee1e2fd5d98fcb6e130e88829577030be9f5c412886460b41559",
-    "status": "untested"
+    "scores": {
+        "core_compatibility": 0.0,
+        "metadata_completeness": 0.0,
+        "metadata_format": 0.0,
+        "overall_compatibility": 0.0,
+        "overall_partner_tool_compatibility": 0.0,
+        "tool_compatibility": {
+            "biapy": 0.0,
+            "ilastik": 0.0
+        },
+        "tool_compatibility_version_specific": {
+            "biapy_3.7.1": 0.0,
+            "ilastik_1.4.1.post1": 0.0
+        }
+    },
+    "status": "failed",
+    "tests": {
+        "biapy": {
+            "3.7.1": {
+                "badge": null,
+                "details": "[all] Couldn't extract kwargs from model description.\n",
+                "error": "[all] Couldn't extract kwargs from model description.\n",
+                "links": [
+                    "biapy/biapy"
+                ],
+                "score": 0.0,
+                "status": "failed"
+            }
+        },
+        "ilastik": {
+            "1.4.1.post1": {
+                "badge": null,
+                "details": {
+                    "conda_list": null,
+                    "details": [
+                        {
+                            "conda_compare": null,
+                            "context": {
+                                "file_name": "rdf.yaml",
+                                "known_files": {
+                                    "environment.yaml": "a1f94acbbf85304c31af1b54856a1c5b46d9a9846c182bff2b2a1805a6858eea",
+                                    "sam3_encoder_bioimageio.py": "9ef2d944804acc5542e85f8d81666f10f3848da139e69d3970c017b858e51333",
+                                    "sample_input.png": "7f0e6b3c15adb1c41fdc10ab5105d6a5944e0e83912c370ad7ba5db24278305f",
+                                    "test_input.npy": "9d98e741ca95a08901e7b920815a72e4be650442d12af04fcca0080005e5d258",
+                                    "test_output.npy": "2a7686e154e959bc1efbe46774acff030b0ad8ef53325965a490a9be2ad8df5e"
+                                },
+                                "perform_io_checks": true,
+                                "root": "https://hypha.aicell.io/bioimage-io/artifacts/emotional-shrimp/files?version=v0",
+                                "update_hashes": false
+                            },
+                            "errors": [],
+                            "loc": [],
+                            "name": "Created `InvalidDescr` object.",
+                            "recommended_env": null,
+                            "status": "failed",
+                            "warnings": []
+                        },
+                        {
+                            "conda_compare": null,
+                            "context": {
+                                "file_name": "rdf.yaml",
+                                "known_files": {
+                                    "environment.yaml": "a1f94acbbf85304c31af1b54856a1c5b46d9a9846c182bff2b2a1805a6858eea",
+                                    "sam3_encoder_bioimageio.py": "9ef2d944804acc5542e85f8d81666f10f3848da139e69d3970c017b858e51333",
+                                    "sample_input.png": "7f0e6b3c15adb1c41fdc10ab5105d6a5944e0e83912c370ad7ba5db24278305f",
+                                    "test_input.npy": "9d98e741ca95a08901e7b920815a72e4be650442d12af04fcca0080005e5d258",
+                                    "test_output.npy": "2a7686e154e959bc1efbe46774acff030b0ad8ef53325965a490a9be2ad8df5e"
+                                },
+                                "perform_io_checks": true,
+                                "root": "https://hypha.aicell.io/bioimage-io/artifacts/emotional-shrimp/files?version=v0",
+                                "update_hashes": false
+                            },
+                            "errors": [
+                                {
+                                    "loc": [
+                                        "license"
+                                    ],
+                                    "msg": "Field required",
+                                    "traceback_html": "",
+                                    "traceback_md": "",
+                                    "type": "missing",
+                                    "with_traceback": false
+                                },
+                                {
+                                    "loc": [
+                                        "weights",
+                                        "pytorch_state_dict",
+                                        "source",
+                                        "function-after[HttpUrl(), str]"
+                                    ],
+                                    "msg": "Value error, 401: Unauthorized https://huggingface.co/facebook/sam3/resolve/main/sam3.pt",
+                                    "traceback_html": "",
+                                    "traceback_md": "",
+                                    "type": "value_error",
+                                    "with_traceback": false
+                                },
+                                {
+                                    "loc": [
+                                        "weights",
+                                        "pytorch_state_dict",
+                                        "source",
+                                        "RelativeFilePath"
+                                    ],
+                                    "msg": "Value error, https:/huggingface.co/facebook/sam3/resolve/main/sam3.pt looks like an http url.",
+                                    "traceback_html": "",
+                                    "traceback_md": "",
+                                    "type": "value_error",
+                                    "with_traceback": false
+                                },
+                                {
+                                    "loc": [
+                                        "weights",
+                                        "pytorch_state_dict",
+                                        "source",
+                                        "function-after[validate_file(), lax-or-strict[lax=union[json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]],function-after[path_validator(), str]],strict=json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]]]]"
+                                    ],
+                                    "msg": "Path does not point to a file",
+                                    "traceback_html": "",
+                                    "traceback_md": "",
+                                    "type": "path_not_file",
+                                    "with_traceback": false
+                                },
+                                {
+                                    "loc": [
+                                        "weights",
+                                        "pytorch_state_dict",
+                                        "strict"
+                                    ],
+                                    "msg": "Extra inputs are not permitted",
+                                    "traceback_html": "",
+                                    "traceback_md": "",
+                                    "type": "extra_forbidden",
+                                    "with_traceback": false
+                                }
+                            ],
+                            "loc": [],
+                            "name": "bioimageio.spec format validation model 0.5.4",
+                            "recommended_env": null,
+                            "status": "failed",
+                            "warnings": [
+                                {
+                                    "loc": [
+                                        "documentation"
+                                    ],
+                                    "msg": "No '# Validation' (sub)section found in README.md.",
+                                    "severity": 30,
+                                    "type": "warning"
+                                },
+                                {
+                                    "loc": [
+                                        "inputs",
+                                        0,
+                                        "test_tensor",
+                                        "source",
+                                        "RelativeFilePath"
+                                    ],
+                                    "msg": "Failed to validate URL 'https://hypha.aicell.io/bioimage-io/artifacts/emotional-shrimp/files/test_input.npy?version=v0': HTTPSConnectionPool(host='hypha.aicell.io', port=443): Read timed out. (read timeout=3)\nrequest: <PreparedRequest [GET]>\nresponse: None",
+                                    "severity": 30,
+                                    "type": "warning"
+                                }
+                            ]
+                        },
+                        {
+                            "conda_compare": null,
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "type"
+                            ],
+                            "name": "Has expected resource type",
+                            "recommended_env": null,
+                            "status": "passed",
+                            "warnings": []
+                        }
+                    ],
+                    "env": [
+                        [
+                            "bioimageio.spec",
+                            "0.5.4.1",
+                            "",
+                            ""
+                        ],
+                        [
+                            "bioimageio.core",
+                            "0.8.0",
+                            "",
+                            ""
+                        ]
+                    ],
+                    "format_version": "0.5.4",
+                    "id": "emotional-shrimp",
+                    "metadata_completeness": null,
+                    "name": "bioimageio format validation",
+                    "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/emotional-shrimp/files/rdf.yaml?version=v0",
+                    "status": "failed",
+                    "traceback": null,
+                    "type": "model",
+                    "warnings": null
+                },
+                "error": "\n|        ❌        |                               bioimageio format validation                               |\n|       ---       |                                           ---                                            |\n| status          | failed                                                                                   |\n| source          | https://hypha.aicell.io/bioimage-io/artifacts/emotional-shrimp/files/rdf.yaml?version=v0 |\n| id              | emotional-shrimp                                                                         |\n| format version  | model 0.5.4                                                                              |\n| bioimageio.spec | 0.5.4.1                                                                                  |\n| bioimageio.core | 0.8.0                                                                                    |\n\n|     |                        Location                        |                                                                                                     Details                                                                                                      |\n| --- |                          ---                           |                                                                                                       ---                                                                                                        |\n| ❌   |                                                        | Created `InvalidDescr` object.                                                                                                                                                                                   |\n| 🔍   | `context:perform_io_checks`                            | True                                                                                                                                                                                                             |\n| 🔍   | `context:root`                                         | https://hypha.aicell.io/bioimage-io/artifacts/emotional-shrimp/files?version=v0                                                                                                                                  |\n| 🔍   | `context:known_files.test_input.npy`                   | 9d98e741ca95a08901e7b920815a72e4be650442d12af04fcca0080005e5d258                                                                                                                                                 |\n| 🔍   | `context:known_files.sample_input.png`                 | 7f0e6b3c15adb1c41fdc10ab5105d6a5944e0e83912c370ad7ba5db24278305f                                                                                                                                                 |\n| 🔍   | `context:known_files.test_output.npy`                  | 2a7686e154e959bc1efbe46774acff030b0ad8ef53325965a490a9be2ad8df5e                                                                                                                                                 |\n| 🔍   | `context:known_files.sam3_encoder_bioimageio.py`       | 9ef2d944804acc5542e85f8d81666f10f3848da139e69d3970c017b858e51333                                                                                                                                                 |\n| 🔍   | `context:known_files.environment.yaml`                 | a1f94acbbf85304c31af1b54856a1c5b46d9a9846c182bff2b2a1805a6858eea                                                                                                                                                 |\n| ❌   |                                                        | bioimageio.spec format validation model 0.5.4                                                                                                                                                                    |\n| ❌   | `license`                                              | Field required                                                                                                                                                                                                   |\n|     |                                                        |                                                                                                                                                                                                                  |\n| ❌   | `weights.pytorch_state_dict.source`                    | Value error, 401: Unauthorized https://huggingface.co/facebook/sam3/resolve/main/sam3.pt                                                                                                                         |\n|     |                                                        |                                                                                                                                                                                                                  |\n| ❌   | `weights.pytorch_state_dict.source.(RelativeFilePath)` | Value error, https:/huggingface.co/facebook/sam3/resolve/main/sam3.pt looks like an http url.                                                                                                                    |\n|     |                                                        |                                                                                                                                                                                                                  |\n| ❌   | `weights.pytorch_state_dict.source`                    | Path does not point to a file                                                                                                                                                                                    |\n|     |                                                        |                                                                                                                                                                                                                  |\n| ❌   | `weights.pytorch_state_dict.strict`                    | Extra inputs are not permitted                                                                                                                                                                                   |\n|     |                                                        |                                                                                                                                                                                                                  |\n| ⚠   | `documentation`                                        | No '# Validation' (sub)section found in README.md.                                                                                                                                                               |\n| ⚠   | `inputs.0.test_tensor.source.(RelativeFilePath)`       | Failed to validate URL 'https://hypha.aicell.io/bioimage-io/artifacts/emotional-shrimp/files/test_input.npy?version=v0': HTTPSConnectionPool(host='hypha.aicell.io', port=443): Read timed out. (read timeout=3) |\n|     |                                                        | request: <PreparedRequest [GET]>                                                                                                                                                                                 |\n|     |                                                        | response: None                                                                                                                                                                                                   |\n| ✔️  | `type`                                                 | Has expected resource type                                                                                                                                                                                       |\n",
+                "links": [
+                    "ilastik/ilastik"
+                ],
+                "score": 0.0,
+                "status": "failed"
+            }
+        }
+    }
 }
