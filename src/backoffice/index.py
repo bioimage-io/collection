@@ -127,32 +127,47 @@ def create_index() -> Index:
         index_items: list[IndexItem] = []
         for item in items:
             domain, item_id_wo_domain = item.id.split("/", 1)
-            versions: list[IndexItemVersion] = []
-            for v in item.versions:
-                bioimageio_yaml_base_url = f"{settings.hypha_base_url}/{domain}/artifacts/{item_id_wo_domain}/files/{{bioimageio_yaml}}?version={v.version}"
+            try:
+                item_id = item.id
+                item_type = item.type
+                versions: list[IndexItemVersion] = []
+                for v in item.versions:
+                    bioimageio_yaml_base_url = f"{settings.hypha_base_url}/{domain}/artifacts/{item_id_wo_domain}/files/{{bioimageio_yaml}}?version={v.version}"
 
-                def get_bioimageio_yaml_url(base_url: str, bioimageio_yaml: str) -> str:
-                    return base_url.format(bioimageio_yaml=bioimageio_yaml)
+                    def get_bioimageio_yaml_url(
+                        base_url: str, bioimageio_yaml: str
+                    ) -> str:
+                        return base_url.format(bioimageio_yaml=bioimageio_yaml)
 
-                url = get_bioimageio_yaml_url(
-                    bioimageio_yaml_base_url, "bioimageio.yaml"
-                )
-                try:
-                    sha256 = _initialize_report_directory(item, v, url)
-                except Exception:
-                    url = get_bioimageio_yaml_url(bioimageio_yaml_base_url, "rdf.yaml")
-                    sha256 = _initialize_report_directory(item, v, url)
-
-                versions.append(
-                    IndexItemVersion(
-                        version=v.version,
-                        comment=v.comment,
-                        created_at=v.created_at,
-                        source=url,
-                        sha256=sha256,
+                    url = get_bioimageio_yaml_url(
+                        bioimageio_yaml_base_url, "bioimageio.yaml"
                     )
+                    try:
+                        sha256 = _initialize_report_directory(item, v, url)
+                    except Exception:
+                        url = get_bioimageio_yaml_url(
+                            bioimageio_yaml_base_url, "rdf.yaml"
+                        )
+                        sha256 = _initialize_report_directory(item, v, url)
+
+                    versions.append(
+                        IndexItemVersion(
+                            version=v.version,
+                            comment=v.comment,
+                            created_at=v.created_at,
+                            source=url,
+                            sha256=sha256,
+                        )
+                    )
+                index_items.append(
+                    IndexItem(id=item_id, versions=versions, type=item_type)
                 )
-            index_items.append(IndexItem(id=item.id, versions=versions, type=item.type))
+            except Exception as e:
+                logger.error(
+                    "Error processing index item {}: {}. Skipping this item.",
+                    item,
+                    str(e),
+                )
 
         count_per_type = defaultdict[str, int](int)
         for item in index_items:
