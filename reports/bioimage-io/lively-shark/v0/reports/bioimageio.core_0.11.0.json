@@ -1,0 +1,146 @@
+{
+    "badge": null,
+    "details": {
+        "details": [
+            {
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "README.md": "6851df567a004d2fdb8eb5ad76e7c76cea830d45811809960fa59be9dc366833",
+                        "cover0.png": "754aba2460dcc00dceace2c38517cb71d09e80b72ec0169144ad66af81676d15",
+                        "https://github.com/djpbarry/KimmelNET": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/lively-shark/files/README.md?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/lively-shark/files/cover0.png?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/lively-shark/files/sample_input.png?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/lively-shark/files/test_input.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/lively-shark/files/test_output.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/lively-shark/files/tf_weights.zip?version=v0": null,
+                        "sample_input.png": "7d562076252cbb6cb683724521e24d29adb58c5184a9071d59061a2681255546",
+                        "test_input.npy": "4500f622264274c359ed6d13f4068d8a5fa295576a5411450a010a86f9230b32",
+                        "test_output.npy": "17f4c029ba86863814efe1d2e627f5bba651ac4865daf52cbef8b184eb3b9d93",
+                        "tf_weights.zip": "a4cf16f6b42dfc72d4cafac110bbaf1a8792f0c570066cd54db09d1db2dfc52c"
+                    },
+                    "original_source_name": null,
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/lively-shark/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Successfully created `ModelDescr` instance.",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.12",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": [
+                    {
+                        "loc": [
+                            "outputs",
+                            0,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    }
+                ]
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "tensorflow_saved_model_bundle"
+                ],
+                "name": "Created conda environment '5798a022f911a92ce256c68cfa569a34486ecab0d49354d194f5ffe60e67736b'",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "tensorflow_saved_model_bundle"
+                ],
+                "name": "Reproduce test outputs from test inputs (tensorflow_saved_model_bundle)",
+                "recommended_env": {
+                    "channels": [
+                        "conda-forge",
+                        "nodefaults"
+                    ],
+                    "dependencies": [
+                        "conda-forge::bioimageio.core>=0.9.4",
+                        "pip",
+                        "tensorflow ==2.21"
+                    ],
+                    "name": null
+                },
+                "saved_conda_compare": "/usr/share/miniconda/lib/python3.14/site-packages/conda/env/env.py:293: FutureWarning: The environment file is not fully CEP 24 compliant is deprecated and will be removed in 26.9. In the future, this configuration will be rejected. Please fix the following errors in order to make the configuration valid: \n  - Invalid type for 'name', expected a str\n  deprecated.topic(\nSuccess. All the packages in the specification file are present in the environment with matching version and build string.\n",
+                "status": "passed",
+                "warnings": [
+                    {
+                        "loc": [
+                            "weights",
+                            "tensorflow_saved_model_bundle"
+                        ],
+                        "msg": "Output `age`: all elements agree with expected values. \nMax relative difference not accounted for by absolute tolerance (1.00e-03):\n0.00e+00 (= \\|2.21e+01 - 2.21e+01\\|/\\|2.21e+01 + 1e-6\\|) at {'batch': np.int64(0), 'channel': np.int64(0)} \nMax absolute difference not accounted for by relative tolerance (1.00e-03):\n0.00e+00 (= \\|2.2077560e+01 - 2.2077553e+01\\|) at {'batch': np.int64(0), 'channel': np.int64(0)}",
+                        "severity": 20,
+                        "type": "bioimageio.core"
+                    }
+                ]
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "tensorflow_saved_model_bundle"
+                ],
+                "name": "Run tensorflow_saved_model_bundle inference for inputs with batch_size: 1 and size parameter n: 0",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.spec",
+                "0.5.12.0",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.5.12",
+        "id": null,
+        "metadata_completeness": 0.47619047619047616,
+        "name": "bioimageio format validation",
+        "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/lively-shark/files/rdf.yaml?version=v0",
+        "status": "passed",
+        "traceback": null,
+        "type": "model",
+        "version": null,
+        "warnings": null
+    },
+    "error": null,
+    "links": [
+        "bioimageio/bioimageio.core"
+    ],
+    "score": 1.0,
+    "status": "passed",
+    "tool": "bioimageio.core",
+    "tool_version": "0.11.0"
+}

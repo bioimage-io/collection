@@ -1,0 +1,228 @@
+{
+    "badge": null,
+    "details": {
+        "details": [
+            {
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "cover_lm.png": "fa16ac050017cab09507c08fd901117af5dde83adecee9ac7e64a352e7729b76",
+                        "documentation.md": "11bcf5b1ce291a0b3ce81c6e77f07a406055ea6fbe32dec8ef7ce55ec0ec18b7",
+                        "embeddings.npy": "d4b19d34cc2f950b8499e07d7dfb972d14a4c7b47e5ce34e2046218e57874b32",
+                        "environment.yaml": "3db4ab8fb73b7b219d0bdc963ac01ecc3217600a4389f4ab03cb077f2f0d5b3c",
+                        "https://github.com/computational-cell-analytics/micro-sam": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/idealistic-rat/files/cover_lm.png?version=v1": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/idealistic-rat/files/documentation.md?version=v1": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/idealistic-rat/files/embeddings.npy?version=v1": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/idealistic-rat/files/environment.yaml?version=v1": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/idealistic-rat/files/input.npy?version=v1": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/idealistic-rat/files/mask.npy?version=v1": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/idealistic-rat/files/predictor_adaptor.py?version=v1": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/idealistic-rat/files/scores.npy?version=v1": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/idealistic-rat/files/vit_l.pt?version=v1": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/idealistic-rat/files/vit_l_decoder.pt?version=v1": null,
+                        "input.npy": "81248ee1a4b156b07640d1ca2b3a3c38af712b380331c04f78106d657a6ad057",
+                        "mask.npy": "14b02c1078d3fc9db2fc5088e935afdeff821f91db1c8da85114d83ba0db9263",
+                        "predictor_adaptor.py": "7dad546ee39511a71d4c3c3365687aa9e4f788b29e6a3535c7b66e7b77bc3f51",
+                        "scores.npy": "cca489eab6c37180ae4bfe9eb5ad9f7368ec2d314fb19dbb908279c3956faf12",
+                        "vit_l.pt": "6c64e89e585a230152a726b4599ca9c8c987861d60438a2aa55f98b765c6f8be",
+                        "vit_l_decoder.pt": "c0db6502e41eb4fbe462f0c08e7a27ade281dc98c818c57258bf53e83335f7ab"
+                    },
+                    "original_source_name": null,
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/idealistic-rat/files?version=v1",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Successfully created `ModelDescr` instance.",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.12",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": [
+                    {
+                        "loc": [
+                            "inputs",
+                            0,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "outputs",
+                            0,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "outputs",
+                            1,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "outputs",
+                            2,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    }
+                ]
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Created conda environment '84bde89bdb570356c54a9f85b2e435541ed259a827e71a943fe99b64d0c65503'",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Reproduce test outputs from test inputs (pytorch_state_dict)",
+                "recommended_env": {
+                    "channels": [
+                        "conda-forge",
+                        "nodefaults"
+                    ],
+                    "dependencies": [
+                        "conda-forge::bioimageio.core>=0.9.4",
+                        "micro_sam",
+                        "pip"
+                    ],
+                    "name": "sam"
+                },
+                "saved_conda_compare": "Success. All the packages in the specification file are present in the environment with matching version and build string.\n",
+                "status": "passed",
+                "warnings": [
+                    {
+                        "loc": [
+                            "weights",
+                            "pytorch_state_dict"
+                        ],
+                        "msg": "Output `masks`: all elements agree with expected values. \nMax relative difference not accounted for by absolute tolerance (1.00e-03):\n0.00e+00 (= \\|0.00e+00 - 0.00e+00\\|/\\|0.00e+00 + 1e-6\\|) at {'batch': np.int64(0), 'object': np.int64(0), 'channel': np.int64(0), 'y': np.int64(0), 'x': np.int64(0)} \nMax absolute difference not accounted for by relative tolerance (1.00e-03):\n0.00e+00 (= \\|0.0000000e+00 - 0.0000000e+00\\|) at {'batch': np.int64(0), 'object': np.int64(0), 'channel': np.int64(0), 'y': np.int64(0), 'x': np.int64(0)}",
+                        "severity": 20,
+                        "type": "bioimageio.core"
+                    },
+                    {
+                        "loc": [
+                            "weights",
+                            "pytorch_state_dict"
+                        ],
+                        "msg": "Output `scores`: all elements agree with expected values. \nMax relative difference not accounted for by absolute tolerance (1.00e-03):\n0.00e+00 (= \\|1.00e+00 - 1.00e+00\\|/\\|1.00e+00 + 1e-6\\|) at {'batch': np.int64(0), 'object': np.int64(0), 'channel': np.int64(0)} \nMax absolute difference not accounted for by relative tolerance (1.00e-03):\n0.00e+00 (= \\|1.0000000e+00 - 1.0000000e+00\\|) at {'batch': np.int64(0), 'object': np.int64(0), 'channel': np.int64(0)}",
+                        "severity": 20,
+                        "type": "bioimageio.core"
+                    },
+                    {
+                        "loc": [
+                            "weights",
+                            "pytorch_state_dict"
+                        ],
+                        "msg": "Output `embeddings`: all elements agree with expected values. \nMax relative difference not accounted for by absolute tolerance (1.00e-03):\n0.00e+00 (= \\|2.02e-01 - 2.02e-01\\|/\\|2.02e-01 + 1e-6\\|) at {'batch': np.int64(0), 'channel': np.int64(0), 'y': np.int64(0), 'x': np.int64(0)} \nMax absolute difference not accounted for by relative tolerance (1.00e-03):\n0.00e+00 (= \\|-3.9115548e-08 - -6.8917871e-08\\|) at {'batch': np.int64(0), 'channel': np.int64(148), 'y': np.int64(13), 'x': np.int64(10)}",
+                        "severity": 20,
+                        "type": "bioimageio.core"
+                    }
+                ]
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Run pytorch_state_dict inference for inputs with batch_size: 1 and size parameter n: 0",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Run pytorch_state_dict inference for inputs with batch_size: 1 and size parameter n: 1",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Run pytorch_state_dict inference for inputs with batch_size: 1 and size parameter n: 2",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.spec",
+                "0.5.12.0",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.5.12",
+        "id": "idealistic-rat",
+        "metadata_completeness": 0.41237113402061853,
+        "name": "bioimageio format validation",
+        "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/idealistic-rat/files/rdf.yaml?version=v1",
+        "status": "passed",
+        "traceback": null,
+        "type": "model",
+        "version": 2,
+        "warnings": null
+    },
+    "error": null,
+    "links": [
+        "bioimageio/bioimageio.core"
+    ],
+    "score": 1.0,
+    "status": "passed",
+    "tool": "bioimageio.core",
+    "tool_version": "0.11.0"
+}
