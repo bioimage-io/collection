@@ -35,6 +35,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: setup
     environment: 'production'
+    env:
+      CONDA_OVERRIDE_ARCHSPEC: x86_64
     strategy:
       fail-fast: false
       matrix: ${{ fromJson(needs.setup.outputs.version_matrix) }}
