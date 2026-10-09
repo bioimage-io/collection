@@ -1,0 +1,168 @@
+{
+    "badge": null,
+    "details": {
+        "conda_list": null,
+        "details": [
+            {
+                "conda_compare": null,
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "sample_input.png": "7d562076252cbb6cb683724521e24d29adb58c5184a9071d59061a2681255546",
+                        "test_input.npy": "4500f622264274c359ed6d13f4068d8a5fa295576a5411450a010a86f9230b32",
+                        "test_output.npy": "17f4c029ba86863814efe1d2e627f5bba651ac4865daf52cbef8b184eb3b9d93",
+                        "tf_weights.zip": "a4cf16f6b42dfc72d4cafac110bbaf1a8792f0c570066cd54db09d1db2dfc52c"
+                    },
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/lively-shark/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Created `InvalidDescr` object.",
+                "recommended_env": null,
+                "status": "failed",
+                "warnings": []
+            },
+            {
+                "conda_compare": null,
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "sample_input.png": "7d562076252cbb6cb683724521e24d29adb58c5184a9071d59061a2681255546",
+                        "test_input.npy": "4500f622264274c359ed6d13f4068d8a5fa295576a5411450a010a86f9230b32",
+                        "test_output.npy": "17f4c029ba86863814efe1d2e627f5bba651ac4865daf52cbef8b184eb3b9d93",
+                        "tf_weights.zip": "a4cf16f6b42dfc72d4cafac110bbaf1a8792f0c570066cd54db09d1db2dfc52c"
+                    },
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/lively-shark/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [
+                    {
+                        "loc": [
+                            "covers",
+                            0,
+                            "function-after[val_func(), function-after[validate_file(), lax-or-strict[lax=union[json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]],function-after[path_validator(), str]],strict=json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]]]]]"
+                        ],
+                        "msg": "Input is not a valid path for <class 'pathlib.Path'>",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "covers",
+                            0,
+                            "RelativeFilePath"
+                        ],
+                        "msg": "Input is not a valid path for <class 'pathlib.PurePath'>",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "covers",
+                            0,
+                            "function-after[HttpUrl(), str]"
+                        ],
+                        "msg": "Input should be a valid string",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "string_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "documentation",
+                            "function-after[val_func(), function-after[validate_file(), lax-or-strict[lax=union[json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]],function-after[path_validator(), str]],strict=json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]]]]]"
+                        ],
+                        "msg": "Input is not a valid path for <class 'pathlib.Path'>",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "documentation",
+                            "RelativeFilePath"
+                        ],
+                        "msg": "Input is not a valid path for <class 'pathlib.PurePath'>",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "documentation",
+                            "function-after[HttpUrl(), str]"
+                        ],
+                        "msg": "Input should be a valid string",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "string_type",
+                        "with_traceback": false
+                    }
+                ],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.4",
+                "recommended_env": null,
+                "status": "failed",
+                "warnings": [
+                    {
+                        "loc": [
+                            "license"
+                        ],
+                        "msg": "GPL-3.0 is deprecated, see https://spdx.org/licenses/GPL-3.0.html",
+                        "severity": 30,
+                        "type": "warning"
+                    }
+                ]
+            },
+            {
+                "conda_compare": null,
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "type"
+                ],
+                "name": "Has expected resource type",
+                "recommended_env": null,
+                "status": "passed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.spec",
+                "0.5.4.1",
+                "",
+                ""
+            ],
+            [
+                "bioimageio.core",
+                "0.8.0",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.5.4",
+        "id": null,
+        "name": "bioimageio format validation",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/lively-shark/files/rdf.yaml?version=v0",
+        "status": "failed",
+        "type": "model"
+    },
+    "error": "\n|        ❌        |                             bioimageio format validation                             |\n|       ---       |                                         ---                                          |\n| status          | failed                                                                               |\n| source          | https://hypha.aicell.io/bioimage-io/artifacts/lively-shark/files/rdf.yaml?version=v0 |\n| format version  | model 0.5.4                                                                          |\n| bioimageio.spec | 0.5.4.1                                                                              |\n| bioimageio.core | 0.8.0                                                                                |\n\n|     |                Location                |                                   Details                                   |\n| --- |                  ---                   |                                     ---                                     |\n| ❌   |                                        | Created `InvalidDescr` object.                                              |\n| 🔍   | `context:perform_io_checks`            | True                                                                        |\n| 🔍   | `context:root`                         | https://hypha.aicell.io/bioimage-io/artifacts/lively-shark/files?version=v0 |\n| 🔍   | `context:known_files.test_input.npy`   | 4500f622264274c359ed6d13f4068d8a5fa295576a5411450a010a86f9230b32            |\n| 🔍   | `context:known_files.sample_input.png` | 7d562076252cbb6cb683724521e24d29adb58c5184a9071d59061a2681255546            |\n| 🔍   | `context:known_files.test_output.npy`  | 17f4c029ba86863814efe1d2e627f5bba651ac4865daf52cbef8b184eb3b9d93            |\n| 🔍   | `context:known_files.tf_weights.zip`   | a4cf16f6b42dfc72d4cafac110bbaf1a8792f0c570066cd54db09d1db2dfc52c            |\n| ❌   |                                        | bioimageio.spec format validation model 0.5.4                               |\n| ❌   | `covers.0`                             | Input is not a valid path for <class 'pathlib.Path'>                        |\n|     |                                        |                                                                             |\n| ❌   | `covers.0.(RelativeFilePath)`          | Input is not a valid path for <class 'pathlib.PurePath'>                    |\n|     |                                        |                                                                             |\n| ❌   | `covers.0`                             | Input should be a valid string                                              |\n|     |                                        |                                                                             |\n| ❌   | `documentation`                        | Input is not a valid path for <class 'pathlib.Path'>                        |\n|     |                                        |                                                                             |\n| ❌   | `documentation.(RelativeFilePath)`     | Input is not a valid path for <class 'pathlib.PurePath'>                    |\n|     |                                        |                                                                             |\n| ❌   | `documentation`                        | Input should be a valid string                                              |\n|     |                                        |                                                                             |\n| ⚠   | `license`                              | GPL-3.0 is deprecated, see https://spdx.org/licenses/GPL-3.0.html           |\n| ✔️  | `type`                                 | Has expected resource type                                                  |\n",
+    "links": [
+        "ilastik/ilastik"
+    ],
+    "status": "failed",
+    "tool": "ilastik",
+    "tool_version": "1.4.1.post1"
+}
