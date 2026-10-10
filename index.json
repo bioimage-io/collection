@@ -2,7 +2,7 @@
     "count_per_type": {
         "application": 65,
         "dataset": 50,
-        "model": 164,
+        "model": 167,
         "notebook": 4,
         "tracking": 1
     },
@@ -3803,8 +3803,47 @@
                     "version": "v0"
                 }
             ]
+        },
+        {
+            "id": "bioimage-io/gregarious-seashell",
+            "type": "model",
+            "versions": [
+                {
+                    "comment": "Updated model",
+                    "created_at": "2026-10-09T15:58:13Z",
+                    "sha256": "bdb91092a08beb03169d77fec843137e2f553d150e4797479b1a36cf891ff2da",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/gregarious-seashell/files/bioimageio.yaml?version=v0",
+                    "version": "v0"
+                }
+            ]
+        },
+        {
+            "id": "bioimage-io/playful-boar",
+            "type": "model",
+            "versions": [
+                {
+                    "comment": "Updated model",
+                    "created_at": "2026-10-09T15:59:15Z",
+                    "sha256": "a13fc241b1a46de1769bcc6dbe6b4f561e7bab747c008bc324e60c5b1ae31fa2",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/playful-boar/files/bioimageio.yaml?version=v0",
+                    "version": "v0"
+                }
+            ]
+        },
+        {
+            "id": "bioimage-io/elegant-leopard",
+            "type": "model",
+            "versions": [
+                {
+                    "comment": "Updated model",
+                    "created_at": "2026-10-09T16:04:35Z",
+                    "sha256": "e64c5f2b376b061ed3a30a87370197cf4fb5a67d63cae62a590e064638bdd45a",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/elegant-leopard/files/bioimageio.yaml?version=v0",
+                    "version": "v0"
+                }
+            ]
         }
     ],
-    "timestamp": "2026-10-09T07:47:50.060508",
-    "total": 284
+    "timestamp": "2026-10-10T05:03:46.906847",
+    "total": 287
 }
