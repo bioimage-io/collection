@@ -1,0 +1,131 @@
+{
+    "badge": null,
+    "details": {
+        "details": [
+            {
+                "context": {
+                    "file_name": "bioimageio.yaml",
+                    "known_files": {
+                        "README.md": "616131fc7c2a8c040c4d69bba98f7a1dfedc27b005c0757581c3a0baf32b75ff",
+                        "cover_mmse.png": "e619e11bd72415266bb97e9994f77b6befb10647442b8e26b3b18dbe37f24b12",
+                        "cover_uncertainty.png": "0c9d116e88f8298e7ef370b777918e9835d5efaed68198b720ec35fcc309add9",
+                        "environment.yaml": "d9fb74bc0e6f729acb3d9028cbb2eab9d3c199a3278cbd8d82f2557996930086",
+                        "hdn_mmse.py": "c622057ac119c2f03c660d8ebd81176ada1db6c97dad0b2838f3dcc9d35d6f7e",
+                        "https://github.com/CAREamics/careamics": null,
+                        "https://github.com/ai4life-opencalls/oc2_project_23": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/playful-boar/files/README.md?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/playful-boar/files/cover_mmse.png?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/playful-boar/files/cover_uncertainty.png?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/playful-boar/files/environment.yaml?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/playful-boar/files/hdn_mmse.py?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/playful-boar/files/sample_input.tif?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/playful-boar/files/sample_output.tif?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/playful-boar/files/test_input.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/playful-boar/files/test_output.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/playful-boar/files/weights.pt?version=v0": null,
+                        "sample_input.tif": "50d35b669e6a32927fe6e17fb5a3e92c4987878d79e6003b0799b61350757d91",
+                        "sample_output.tif": "c43e01221025f44e51caec2011f85e448158f1f66ff68d0a3b5964c066ff6c41",
+                        "test_input.npy": "88d16f99b8f0e01a4ad29c657fcc1b1693e280a975395653ff29a448e9c07fd0",
+                        "test_output.npy": "ad77d09cadb91f4e2a30dd4dc26121f2242db4f145777c60bc3c06bcdb4d9ffb",
+                        "weights.pt": "d2d134bf1c74484f9c71c266aa04e627f0923d1d9963a76cbf6798b9eb4f4900"
+                    },
+                    "original_source_name": null,
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/playful-boar/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Successfully created `ModelDescr` instance.",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.12",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Created conda environment '3f01d28ecc7ab37730fdf6c4869472c1fdc4acdd5c2bf758df11d6f059d05662'",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [
+                    {
+                        "loc": [],
+                        "msg": "test command 'conda run -n 3f01d28ecc7ab37730fdf6c4869472c1fdc4acdd5c2bf758df11d6f059d05662 bioimageio test https://hypha.aicell.io/bioimage-io/artifacts/playful-boar/files/bioimageio.yaml?version=v0 --summary-path=/tmp/tmpzcmhsivb/pytorch_state_dict/summary.json --determinism=full --weight-format=pytorch_state_dict' did not produce a summary file at /tmp/tmpzcmhsivb/pytorch_state_dict/summary.json",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "bioimageio cli",
+                        "with_traceback": false
+                    }
+                ],
+                "loc": [],
+                "name": "run 'bioimageio test' command",
+                "recommended_env": {
+                    "channels": [
+                        "conda-forge",
+                        "nodefaults"
+                    ],
+                    "dependencies": [
+                        "pip",
+                        "python=3.12",
+                        {
+                            "pip": [
+                                "bioimageio.core>=0.11",
+                                "careamics @ git+https://github.com/CAREamics/careamics.git@da6ba955bc08ead5ef9c7c574450ba6511cc9d68",
+                                "torch==2.11.*"
+                            ]
+                        }
+                    ],
+                    "name": null
+                },
+                "saved_conda_compare": "/usr/share/miniconda/lib/python3.14/site-packages/conda/env/env.py:293: FutureWarning: The environment file is not fully CEP 24 compliant is deprecated and will be removed in 26.9. In the future, this configuration will be rejected. Please fix the following errors in order to make the configuration valid: \n  - Invalid type for 'name', expected a str\n  deprecated.topic(\n\nInvalidMatchSpec: Invalid spec 'careamics @ git+https://github.com/CAREamics/careamics.git@da6ba955bc08ead5ef9c7c574450ba6511cc9d68': Invalid spec 'careamics @ git+https://github.com/CAREamics/careamics.git@da6ba955bc08ead5ef9c7c574450ba6511cc9d68': package name contains invalid characters (/@)\n\n",
+                "status": "failed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.spec",
+                "0.5.12.0",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.5.12",
+        "id": "playful-boar",
+        "metadata_completeness": 0.49137931034482757,
+        "name": "bioimageio format validation",
+        "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/playful-boar/files/bioimageio.yaml?version=v0",
+        "status": "valid-format",
+        "traceback": null,
+        "type": "model",
+        "version": null,
+        "warnings": null
+    },
+    "error": "test command 'conda run -n 3f01d28ecc7ab37730fdf6c4869472c1fdc4acdd5c2bf758df11d6f059d05662 bioimageio test https://hypha.aicell.io/bioimage-io/artifacts/playful-boar/files/bioimageio.yaml?version=v0 --summary-path=/tmp/tmpzcmhsivb/pytorch_state_dict/summary.json --determinism=full --weight-format=pytorch_state_dict' did not produce a summary file at /tmp/tmpzcmhsivb/pytorch_state_dict/summary.json",
+    "links": [],
+    "score": 0.5,
+    "status": "failed",
+    "tool": "bioimageio.core",
+    "tool_version": "0.11.0"
+}

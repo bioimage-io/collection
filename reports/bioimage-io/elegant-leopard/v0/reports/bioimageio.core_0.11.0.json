@@ -1,0 +1,132 @@
+{
+    "badge": null,
+    "details": {
+        "details": [
+            {
+                "context": {
+                    "file_name": "bioimageio.yaml",
+                    "known_files": {
+                        "README.md": "c4c9a38a9f3077f717ad380526f66e136ffb99ca304a67db6d89428d4acb67db",
+                        "cover_mmse.png": "2b83fda88ded9815ae2ef5a3d22adc34f43b5463e42feebd0934771704678bb1",
+                        "cover_uncertainty.png": "c4a847cb004c7f3554e05496f475ef65f9739d5a69c4242c0ae9f084f9cf869e",
+                        "environment.yaml": "1771f762068cf3c3351ddd5bab6aeda224a6438bad7c081bd07e93ebda7a15de",
+                        "https://github.com/ai4life-opencalls/oc2_project_23": null,
+                        "https://github.com/juglab/resmatching": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/elegant-leopard/files/README.md?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/elegant-leopard/files/cover_mmse.png?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/elegant-leopard/files/cover_uncertainty.png?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/elegant-leopard/files/environment.yaml?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/elegant-leopard/files/resmatching_mmse.py?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/elegant-leopard/files/sample_input.tif?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/elegant-leopard/files/sample_output.tif?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/elegant-leopard/files/test_input.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/elegant-leopard/files/test_output.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/elegant-leopard/files/weights.pt?version=v0": null,
+                        "resmatching_mmse.py": "3cfafda94c8bfa2a1ef3288ad60d5e2442365a9dff3f2f823ce05f7d57460535",
+                        "sample_input.tif": "50d35b669e6a32927fe6e17fb5a3e92c4987878d79e6003b0799b61350757d91",
+                        "sample_output.tif": "6414f7f3085f41a45630b3ac915318fd6f5dfd4850dd96d2c79430ad0b42be4d",
+                        "test_input.npy": "88d16f99b8f0e01a4ad29c657fcc1b1693e280a975395653ff29a448e9c07fd0",
+                        "test_output.npy": "d0e3796484940b570921d8e80cd93dcf6bc187fcfc564e27a0a6f8381203c7cc",
+                        "weights.pt": "8ca22873a2b32a749550a58d1398f42fdf70f04813847b8b64bcd5401e70705a"
+                    },
+                    "original_source_name": null,
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/elegant-leopard/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Successfully created `ModelDescr` instance.",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.12",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Created conda environment '9ba9d40cb98966966f3144afc3f2d742d741d1071ec8861cc07022203a17c370'",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [
+                    {
+                        "loc": [],
+                        "msg": "test command 'conda run -n 9ba9d40cb98966966f3144afc3f2d742d741d1071ec8861cc07022203a17c370 bioimageio test https://hypha.aicell.io/bioimage-io/artifacts/elegant-leopard/files/bioimageio.yaml?version=v0 --summary-path=/tmp/tmpfim1uzv2/pytorch_state_dict/summary.json --determinism=full --weight-format=pytorch_state_dict' did not produce a summary file at /tmp/tmpfim1uzv2/pytorch_state_dict/summary.json",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "bioimageio cli",
+                        "with_traceback": false
+                    }
+                ],
+                "loc": [],
+                "name": "run 'bioimageio test' command",
+                "recommended_env": {
+                    "channels": [
+                        "conda-forge",
+                        "nodefaults"
+                    ],
+                    "dependencies": [
+                        "pip",
+                        "python=3.12",
+                        {
+                            "pip": [
+                                "bioimageio.core>=0.11",
+                                "pydantic<2.14",
+                                "torch==2.14.*",
+                                "torchcfm==1.0.7"
+                            ]
+                        }
+                    ],
+                    "name": null
+                },
+                "saved_conda_compare": "/usr/share/miniconda/lib/python3.14/site-packages/conda/env/env.py:293: FutureWarning: The environment file is not fully CEP 24 compliant is deprecated and will be removed in 26.9. In the future, this configuration will be rejected. Please fix the following errors in order to make the configuration valid: \n  - Invalid type for 'name', expected a str\n  deprecated.topic(\npip not found\npython not found\nbioimageio.core not found\npydantic not found\ntorch not found\ntorchcfm not found\n",
+                "status": "failed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.spec",
+                "0.5.12.0",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.5.12",
+        "id": "elegant-leopard",
+        "metadata_completeness": 0.46788990825688076,
+        "name": "bioimageio format validation",
+        "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/elegant-leopard/files/bioimageio.yaml?version=v0",
+        "status": "valid-format",
+        "traceback": null,
+        "type": "model",
+        "version": null,
+        "warnings": null
+    },
+    "error": "test command 'conda run -n 9ba9d40cb98966966f3144afc3f2d742d741d1071ec8861cc07022203a17c370 bioimageio test https://hypha.aicell.io/bioimage-io/artifacts/elegant-leopard/files/bioimageio.yaml?version=v0 --summary-path=/tmp/tmpfim1uzv2/pytorch_state_dict/summary.json --determinism=full --weight-format=pytorch_state_dict' did not produce a summary file at /tmp/tmpfim1uzv2/pytorch_state_dict/summary.json",
+    "links": [],
+    "score": 0.5,
+    "status": "failed",
+    "tool": "bioimageio.core",
+    "tool_version": "0.11.0"
+}
