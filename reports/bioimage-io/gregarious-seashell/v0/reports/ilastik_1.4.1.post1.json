@@ -1,0 +1,163 @@
+{
+    "badge": null,
+    "details": {
+        "conda_list": null,
+        "details": [
+            {
+                "conda_compare": null,
+                "context": {
+                    "file_name": "bioimageio.yaml",
+                    "known_files": {
+                        "sample_input.tif": "fa55ed746fd2a296e8e12b175eb1af5cc50f9ffa24969f01d5525596ed085e4d",
+                        "sample_output.tif": "fc842eb88bc6aa73bd70763945ac75ffbec99374cf7abe9b3021ee6a07b69eb4",
+                        "saved_model.zip": "cc5b80375571257faea866349d4bc702994d2ea48dde92e89fa6e51be6c548e7",
+                        "test_input.npy": "41810224efee7feadc09035d120728b3e5150b8f10a73948699654d96b863319",
+                        "test_output.npy": "854b231fffd4917685e66a7a336e6676942eb1e21040b6e7d10d804d959c02d2",
+                        "weights.h5": "82477c823de4c37d21fc0401bff2ae939ed2a4bbf5e4a5ad0d0c0bf1209d6516"
+                    },
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/gregarious-seashell/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Created `InvalidDescr` object.",
+                "recommended_env": null,
+                "status": "failed",
+                "warnings": []
+            },
+            {
+                "conda_compare": null,
+                "context": {
+                    "file_name": "bioimageio.yaml",
+                    "known_files": {
+                        "sample_input.tif": "fa55ed746fd2a296e8e12b175eb1af5cc50f9ffa24969f01d5525596ed085e4d",
+                        "sample_output.tif": "fc842eb88bc6aa73bd70763945ac75ffbec99374cf7abe9b3021ee6a07b69eb4",
+                        "saved_model.zip": "cc5b80375571257faea866349d4bc702994d2ea48dde92e89fa6e51be6c548e7",
+                        "test_input.npy": "41810224efee7feadc09035d120728b3e5150b8f10a73948699654d96b863319",
+                        "test_output.npy": "854b231fffd4917685e66a7a336e6676942eb1e21040b6e7d10d804d959c02d2",
+                        "weights.h5": "82477c823de4c37d21fc0401bff2ae939ed2a4bbf5e4a5ad0d0c0bf1209d6516"
+                    },
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/gregarious-seashell/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [
+                    {
+                        "loc": [
+                            "covers",
+                            0,
+                            "function-after[val_func(), function-after[validate_file(), lax-or-strict[lax=union[json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]],function-after[path_validator(), str]],strict=json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]]]]]"
+                        ],
+                        "msg": "Input is not a valid path for <class 'pathlib.Path'>",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "covers",
+                            0,
+                            "RelativeFilePath"
+                        ],
+                        "msg": "Input is not a valid path for <class 'pathlib.PurePath'>",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "covers",
+                            0,
+                            "function-after[HttpUrl(), str]"
+                        ],
+                        "msg": "Input should be a valid string",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "string_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "documentation",
+                            "function-after[val_func(), function-after[validate_file(), lax-or-strict[lax=union[json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]],function-after[path_validator(), str]],strict=json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]]]]]"
+                        ],
+                        "msg": "Input is not a valid path for <class 'pathlib.Path'>",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "documentation",
+                            "RelativeFilePath"
+                        ],
+                        "msg": "Input is not a valid path for <class 'pathlib.PurePath'>",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "documentation",
+                            "function-after[HttpUrl(), str]"
+                        ],
+                        "msg": "Input should be a valid string",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "string_type",
+                        "with_traceback": false
+                    }
+                ],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.4",
+                "recommended_env": null,
+                "status": "failed",
+                "warnings": []
+            },
+            {
+                "conda_compare": null,
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "type"
+                ],
+                "name": "Has expected resource type",
+                "recommended_env": null,
+                "status": "passed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.spec",
+                "0.5.4.1",
+                "",
+                ""
+            ],
+            [
+                "bioimageio.core",
+                "0.8.0",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.5.4",
+        "id": "gregarious-seashell",
+        "name": "bioimageio format validation",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/gregarious-seashell/files/bioimageio.yaml?version=v0",
+        "status": "failed",
+        "type": "model"
+    },
+    "error": "\n|        ❌        |                                    bioimageio format validation                                    |\n|       ---       |                                                ---                                                 |\n| status          | failed                                                                                             |\n| source          | https://hypha.aicell.io/bioimage-io/artifacts/gregarious-seashell/files/bioimageio.yaml?version=v0 |\n| id              | gregarious-seashell                                                                                |\n| format version  | model 0.5.4                                                                                        |\n| bioimageio.spec | 0.5.4.1                                                                                            |\n| bioimageio.core | 0.8.0                                                                                              |\n\n|     |                 Location                |                                      Details                                       |\n| --- |                   ---                   |                                        ---                                         |\n| ❌   |                                         | Created `InvalidDescr` object.                                                     |\n| 🔍   | `context:perform_io_checks`             | True                                                                               |\n| 🔍   | `context:root`                          | https://hypha.aicell.io/bioimage-io/artifacts/gregarious-seashell/files?version=v0 |\n| 🔍   | `context:known_files.test_input.npy`    | 41810224efee7feadc09035d120728b3e5150b8f10a73948699654d96b863319                   |\n| 🔍   | `context:known_files.sample_input.tif`  | fa55ed746fd2a296e8e12b175eb1af5cc50f9ffa24969f01d5525596ed085e4d                   |\n| 🔍   | `context:known_files.test_output.npy`   | 854b231fffd4917685e66a7a336e6676942eb1e21040b6e7d10d804d959c02d2                   |\n| 🔍   | `context:known_files.sample_output.tif` | fc842eb88bc6aa73bd70763945ac75ffbec99374cf7abe9b3021ee6a07b69eb4                   |\n| 🔍   | `context:known_files.weights.h5`        | 82477c823de4c37d21fc0401bff2ae939ed2a4bbf5e4a5ad0d0c0bf1209d6516                   |\n| 🔍   | `context:known_files.saved_model.zip`   | cc5b80375571257faea866349d4bc702994d2ea48dde92e89fa6e51be6c548e7                   |\n| ❌   |                                         | bioimageio.spec format validation model 0.5.4                                      |\n| ❌   | `covers.0`                              | Input is not a valid path for <class 'pathlib.Path'>                               |\n|     |                                         |                                                                                    |\n| ❌   | `covers.0.(RelativeFilePath)`           | Input is not a valid path for <class 'pathlib.PurePath'>                           |\n|     |                                         |                                                                                    |\n| ❌   | `covers.0`                              | Input should be a valid string                                                     |\n|     |                                         |                                                                                    |\n| ❌   | `documentation`                         | Input is not a valid path for <class 'pathlib.Path'>                               |\n|     |                                         |                                                                                    |\n| ❌   | `documentation.(RelativeFilePath)`      | Input is not a valid path for <class 'pathlib.PurePath'>                           |\n|     |                                         |                                                                                    |\n| ❌   | `documentation`                         | Input should be a valid string                                                     |\n|     |                                         |                                                                                    |\n| ✔️  | `type`                                  | Has expected resource type                                                         |\n",
+    "links": [
+        "ilastik/ilastik"
+    ],
+    "status": "failed",
+    "tool": "ilastik",
+    "tool_version": "1.4.1.post1"
+}

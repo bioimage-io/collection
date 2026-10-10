@@ -1,0 +1,215 @@
+{
+    "badge": null,
+    "details": {
+        "conda_list": null,
+        "details": [
+            {
+                "conda_compare": null,
+                "context": {
+                    "file_name": "bioimageio.yaml",
+                    "known_files": {
+                        "environment.yaml": "d9fb74bc0e6f729acb3d9028cbb2eab9d3c199a3278cbd8d82f2557996930086",
+                        "hdn_mmse.py": "c622057ac119c2f03c660d8ebd81176ada1db6c97dad0b2838f3dcc9d35d6f7e",
+                        "sample_input.tif": "50d35b669e6a32927fe6e17fb5a3e92c4987878d79e6003b0799b61350757d91",
+                        "sample_output.tif": "c43e01221025f44e51caec2011f85e448158f1f66ff68d0a3b5964c066ff6c41",
+                        "test_input.npy": "88d16f99b8f0e01a4ad29c657fcc1b1693e280a975395653ff29a448e9c07fd0",
+                        "test_output.npy": "ad77d09cadb91f4e2a30dd4dc26121f2242db4f145777c60bc3c06bcdb4d9ffb",
+                        "weights.pt": "d2d134bf1c74484f9c71c266aa04e627f0923d1d9963a76cbf6798b9eb4f4900"
+                    },
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/playful-boar/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Created `InvalidDescr` object.",
+                "recommended_env": null,
+                "status": "failed",
+                "warnings": []
+            },
+            {
+                "conda_compare": null,
+                "context": {
+                    "file_name": "bioimageio.yaml",
+                    "known_files": {
+                        "environment.yaml": "d9fb74bc0e6f729acb3d9028cbb2eab9d3c199a3278cbd8d82f2557996930086",
+                        "hdn_mmse.py": "c622057ac119c2f03c660d8ebd81176ada1db6c97dad0b2838f3dcc9d35d6f7e",
+                        "sample_input.tif": "50d35b669e6a32927fe6e17fb5a3e92c4987878d79e6003b0799b61350757d91",
+                        "sample_output.tif": "c43e01221025f44e51caec2011f85e448158f1f66ff68d0a3b5964c066ff6c41",
+                        "test_input.npy": "88d16f99b8f0e01a4ad29c657fcc1b1693e280a975395653ff29a448e9c07fd0",
+                        "test_output.npy": "ad77d09cadb91f4e2a30dd4dc26121f2242db4f145777c60bc3c06bcdb4d9ffb",
+                        "weights.pt": "d2d134bf1c74484f9c71c266aa04e627f0923d1d9963a76cbf6798b9eb4f4900"
+                    },
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/playful-boar/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [
+                    {
+                        "loc": [
+                            "covers",
+                            0,
+                            "function-after[val_func(), function-after[validate_file(), lax-or-strict[lax=union[json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]],function-after[path_validator(), str]],strict=json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]]]]]"
+                        ],
+                        "msg": "Input is not a valid path for <class 'pathlib.Path'>",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "covers",
+                            0,
+                            "RelativeFilePath"
+                        ],
+                        "msg": "Input is not a valid path for <class 'pathlib.PurePath'>",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "covers",
+                            0,
+                            "function-after[HttpUrl(), str]"
+                        ],
+                        "msg": "Input should be a valid string",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "string_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "covers",
+                            1,
+                            "function-after[val_func(), function-after[validate_file(), lax-or-strict[lax=union[json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]],function-after[path_validator(), str]],strict=json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]]]]]"
+                        ],
+                        "msg": "Input is not a valid path for <class 'pathlib.Path'>",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "covers",
+                            1,
+                            "RelativeFilePath"
+                        ],
+                        "msg": "Input is not a valid path for <class 'pathlib.PurePath'>",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "covers",
+                            1,
+                            "function-after[HttpUrl(), str]"
+                        ],
+                        "msg": "Input should be a valid string",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "string_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "documentation",
+                            "function-after[val_func(), function-after[validate_file(), lax-or-strict[lax=union[json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]],function-after[path_validator(), str]],strict=json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]]]]]"
+                        ],
+                        "msg": "Input is not a valid path for <class 'pathlib.Path'>",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "documentation",
+                            "RelativeFilePath"
+                        ],
+                        "msg": "Input is not a valid path for <class 'pathlib.PurePath'>",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "documentation",
+                            "function-after[HttpUrl(), str]"
+                        ],
+                        "msg": "Input should be a valid string",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "string_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "config",
+                            "bioimageio",
+                            "reproducibility_tolerance",
+                            0,
+                            "mismatched_elements_per_million"
+                        ],
+                        "msg": "Input should be less than or equal to 100",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "less_than_equal",
+                        "with_traceback": false
+                    }
+                ],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.4",
+                "recommended_env": null,
+                "status": "failed",
+                "warnings": []
+            },
+            {
+                "conda_compare": null,
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "type"
+                ],
+                "name": "Has expected resource type",
+                "recommended_env": null,
+                "status": "passed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.spec",
+                "0.5.4.1",
+                "",
+                ""
+            ],
+            [
+                "bioimageio.core",
+                "0.8.0",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.5.4",
+        "id": "playful-boar",
+        "name": "bioimageio format validation",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/playful-boar/files/bioimageio.yaml?version=v0",
+        "status": "failed",
+        "type": "model"
+    },
+    "error": "\n|        ❌        |                                 bioimageio format validation                                |\n|       ---       |                                             ---                                             |\n| status          | failed                                                                                      |\n| source          | https://hypha.aicell.io/bioimage-io/artifacts/playful-boar/files/bioimageio.yaml?version=v0 |\n| id              | playful-boar                                                                                |\n| format version  | model 0.5.4                                                                                 |\n| bioimageio.spec | 0.5.4.1                                                                                     |\n| bioimageio.core | 0.8.0                                                                                       |\n\n|     |                                     Location                                    |                                   Details                                   |\n| --- |                                       ---                                       |                                     ---                                     |\n| ❌   |                                                                                 | Created `InvalidDescr` object.                                              |\n| 🔍   | `context:perform_io_checks`                                                     | True                                                                        |\n| 🔍   | `context:root`                                                                  | https://hypha.aicell.io/bioimage-io/artifacts/playful-boar/files?version=v0 |\n| 🔍   | `context:known_files.test_input.npy`                                            | 88d16f99b8f0e01a4ad29c657fcc1b1693e280a975395653ff29a448e9c07fd0            |\n| 🔍   | `context:known_files.sample_input.tif`                                          | 50d35b669e6a32927fe6e17fb5a3e92c4987878d79e6003b0799b61350757d91            |\n| 🔍   | `context:known_files.test_output.npy`                                           | ad77d09cadb91f4e2a30dd4dc26121f2242db4f145777c60bc3c06bcdb4d9ffb            |\n| 🔍   | `context:known_files.sample_output.tif`                                         | c43e01221025f44e51caec2011f85e448158f1f66ff68d0a3b5964c066ff6c41            |\n| 🔍   | `context:known_files.hdn_mmse.py`                                               | c622057ac119c2f03c660d8ebd81176ada1db6c97dad0b2838f3dcc9d35d6f7e            |\n| 🔍   | `context:known_files.environment.yaml`                                          | d9fb74bc0e6f729acb3d9028cbb2eab9d3c199a3278cbd8d82f2557996930086            |\n| 🔍   | `context:known_files.weights.pt`                                                | d2d134bf1c74484f9c71c266aa04e627f0923d1d9963a76cbf6798b9eb4f4900            |\n| ❌   |                                                                                 | bioimageio.spec format validation model 0.5.4                               |\n| ❌   | `covers.0`                                                                      | Input is not a valid path for <class 'pathlib.Path'>                        |\n|     |                                                                                 |                                                                             |\n| ❌   | `covers.0.(RelativeFilePath)`                                                   | Input is not a valid path for <class 'pathlib.PurePath'>                    |\n|     |                                                                                 |                                                                             |\n| ❌   | `covers.0`                                                                      | Input should be a valid string                                              |\n|     |                                                                                 |                                                                             |\n| ❌   | `covers.1`                                                                      | Input is not a valid path for <class 'pathlib.Path'>                        |\n|     |                                                                                 |                                                                             |\n| ❌   | `covers.1.(RelativeFilePath)`                                                   | Input is not a valid path for <class 'pathlib.PurePath'>                    |\n|     |                                                                                 |                                                                             |\n| ❌   | `covers.1`                                                                      | Input should be a valid string                                              |\n|     |                                                                                 |                                                                             |\n| ❌   | `documentation`                                                                 | Input is not a valid path for <class 'pathlib.Path'>                        |\n|     |                                                                                 |                                                                             |\n| ❌   | `documentation.(RelativeFilePath)`                                              | Input is not a valid path for <class 'pathlib.PurePath'>                    |\n|     |                                                                                 |                                                                             |\n| ❌   | `documentation`                                                                 | Input should be a valid string                                              |\n|     |                                                                                 |                                                                             |\n| ❌   | `config.bioimageio.reproducibility_tolerance.0.mismatched_elements_per_million` | Input should be less than or equal to 100                                   |\n|     |                                                                                 |                                                                             |\n| ✔️  | `type`                                                                          | Has expected resource type                                                  |\n",
+    "links": [
+        "ilastik/ilastik"
+    ],
+    "status": "failed",
+    "tool": "ilastik",
+    "tool_version": "1.4.1.post1"
+}

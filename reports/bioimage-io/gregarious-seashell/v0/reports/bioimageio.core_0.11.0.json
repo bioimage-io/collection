@@ -1,0 +1,329 @@
+{
+    "badge": null,
+    "details": {
+        "details": [
+            {
+                "context": {
+                    "file_name": "bioimageio.yaml",
+                    "known_files": {
+                        "README.md": "817fbeea85fe418c9b39d7b1c4a8e3db06074c4f4ae2073c745ebf3cfe5250f9",
+                        "cover.png": "b62014155c221c362aba6929db912802b3efc27e19ef557397c02923bf1180b7",
+                        "https://github.com/ai4life-opencalls/oc2_project_23": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/gregarious-seashell/files/README.md?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/gregarious-seashell/files/cover.png?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/gregarious-seashell/files/sample_input.tif?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/gregarious-seashell/files/sample_output.tif?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/gregarious-seashell/files/saved_model.zip?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/gregarious-seashell/files/test_input.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/gregarious-seashell/files/test_output.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/gregarious-seashell/files/weights.h5?version=v0": null,
+                        "sample_input.tif": "fa55ed746fd2a296e8e12b175eb1af5cc50f9ffa24969f01d5525596ed085e4d",
+                        "sample_output.tif": "fc842eb88bc6aa73bd70763945ac75ffbec99374cf7abe9b3021ee6a07b69eb4",
+                        "saved_model.zip": "cc5b80375571257faea866349d4bc702994d2ea48dde92e89fa6e51be6c548e7",
+                        "test_input.npy": "41810224efee7feadc09035d120728b3e5150b8f10a73948699654d96b863319",
+                        "test_output.npy": "854b231fffd4917685e66a7a336e6676942eb1e21040b6e7d10d804d959c02d2",
+                        "weights.h5": "82477c823de4c37d21fc0401bff2ae939ed2a4bbf5e4a5ad0d0c0bf1209d6516"
+                    },
+                    "original_source_name": null,
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/gregarious-seashell/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Successfully created `ModelDescr` instance.",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.12",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "keras_hdf5"
+                ],
+                "name": "Created conda environment '40cecc9ee868ec577eb10938804001fbd135f44d35dc23d641762399802107a5'",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "keras_hdf5"
+                ],
+                "name": "Reproduce test outputs from test inputs (keras_hdf5)",
+                "recommended_env": {
+                    "channels": [
+                        "conda-forge",
+                        "nodefaults"
+                    ],
+                    "dependencies": [
+                        "conda-forge::bioimageio.core>=0.9.4",
+                        "pip",
+                        "tensorflow ==2.19.1"
+                    ],
+                    "name": null
+                },
+                "saved_conda_compare": "/usr/share/miniconda/lib/python3.14/site-packages/conda/env/env.py:293: FutureWarning: The environment file is not fully CEP 24 compliant is deprecated and will be removed in 26.9. In the future, this configuration will be rejected. Please fix the following errors in order to make the configuration valid: \n  - Invalid type for 'name', expected a str\n  deprecated.topic(\nSuccess. All the packages in the specification file are present in the environment with matching version and build string.\n",
+                "status": "passed",
+                "warnings": [
+                    {
+                        "loc": [
+                            "weights",
+                            "keras_hdf5"
+                        ],
+                        "msg": "Output `restored`: all elements agree with expected values. \nMax relative difference not accounted for by absolute tolerance (1.00e-03):\n0.00e+00 (= \\|-2.69e-03 - -2.69e-03\\|/\\|-2.69e-03 + 1e-6\\|) at {'batch': np.int64(0), 'z': np.int64(0), 'y': np.int64(0), 'x': np.int64(0), 'channel': np.int64(0)} \nMax absolute difference not accounted for by relative tolerance (1.00e-03):\n0.00e+00 (= \\|2.7218834e-04 - 2.7221814e-04\\|) at {'batch': np.int64(0), 'z': np.int64(15), 'y': np.int64(24), 'x': np.int64(42), 'channel': np.int64(0)}",
+                        "severity": 20,
+                        "type": "bioimageio.core"
+                    }
+                ]
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "keras_hdf5"
+                ],
+                "name": "Run keras_hdf5 inference for inputs with batch_size: 1 and size parameter n: 0",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "keras_hdf5"
+                ],
+                "name": "Run keras_hdf5 inference for inputs with batch_size: 1 and size parameter n: 1",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "keras_hdf5"
+                ],
+                "name": "Run keras_hdf5 inference for inputs with batch_size: 1 and size parameter n: 2",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "keras_hdf5"
+                ],
+                "name": "Run keras_hdf5 inference for inputs with batch_size: 2 and size parameter n: 0",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "keras_hdf5"
+                ],
+                "name": "Run keras_hdf5 inference for inputs with batch_size: 2 and size parameter n: 1",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "keras_hdf5"
+                ],
+                "name": "Run keras_hdf5 inference for inputs with batch_size: 2 and size parameter n: 2",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "tensorflow_saved_model_bundle"
+                ],
+                "name": "Found existing conda environment '40cecc9ee868ec577eb10938804001fbd135f44d35dc23d641762399802107a5'",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "tensorflow_saved_model_bundle"
+                ],
+                "name": "Reproduce test outputs from test inputs (tensorflow_saved_model_bundle)",
+                "recommended_env": {
+                    "channels": [
+                        "conda-forge",
+                        "nodefaults"
+                    ],
+                    "dependencies": [
+                        "conda-forge::bioimageio.core>=0.9.4",
+                        "pip",
+                        "tensorflow ==2.19.1"
+                    ],
+                    "name": null
+                },
+                "saved_conda_compare": "/usr/share/miniconda/lib/python3.14/site-packages/conda/env/env.py:293: FutureWarning: The environment file is not fully CEP 24 compliant is deprecated and will be removed in 26.9. In the future, this configuration will be rejected. Please fix the following errors in order to make the configuration valid: \n  - Invalid type for 'name', expected a str\n  deprecated.topic(\nSuccess. All the packages in the specification file are present in the environment with matching version and build string.\n",
+                "status": "passed",
+                "warnings": [
+                    {
+                        "loc": [
+                            "weights",
+                            "tensorflow_saved_model_bundle"
+                        ],
+                        "msg": "Output `restored`: all elements agree with expected values. \nMax relative difference not accounted for by absolute tolerance (1.00e-03):\n0.00e+00 (= \\|-2.69e-03 - -2.69e-03\\|/\\|-2.69e-03 + 1e-6\\|) at {'batch': np.int64(0), 'z': np.int64(0), 'y': np.int64(0), 'x': np.int64(0), 'channel': np.int64(0)} \nMax absolute difference not accounted for by relative tolerance (1.00e-03):\n0.00e+00 (= \\|2.7218461e-04 - 2.7221814e-04\\|) at {'batch': np.int64(0), 'z': np.int64(15), 'y': np.int64(24), 'x': np.int64(42), 'channel': np.int64(0)}",
+                        "severity": 20,
+                        "type": "bioimageio.core"
+                    }
+                ]
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "tensorflow_saved_model_bundle"
+                ],
+                "name": "Run tensorflow_saved_model_bundle inference for inputs with batch_size: 1 and size parameter n: 0",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "tensorflow_saved_model_bundle"
+                ],
+                "name": "Run tensorflow_saved_model_bundle inference for inputs with batch_size: 1 and size parameter n: 1",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "tensorflow_saved_model_bundle"
+                ],
+                "name": "Run tensorflow_saved_model_bundle inference for inputs with batch_size: 1 and size parameter n: 2",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "tensorflow_saved_model_bundle"
+                ],
+                "name": "Run tensorflow_saved_model_bundle inference for inputs with batch_size: 2 and size parameter n: 0",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "tensorflow_saved_model_bundle"
+                ],
+                "name": "Run tensorflow_saved_model_bundle inference for inputs with batch_size: 2 and size parameter n: 1",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "tensorflow_saved_model_bundle"
+                ],
+                "name": "Run tensorflow_saved_model_bundle inference for inputs with batch_size: 2 and size parameter n: 2",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.spec",
+                "0.5.12.0",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.5.12",
+        "id": "gregarious-seashell",
+        "metadata_completeness": 0.31521739130434784,
+        "name": "bioimageio format validation",
+        "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/gregarious-seashell/files/bioimageio.yaml?version=v0",
+        "status": "passed",
+        "traceback": null,
+        "type": "model",
+        "version": null,
+        "warnings": null
+    },
+    "error": null,
+    "links": [
+        "bioimageio/bioimageio.core"
+    ],
+    "score": 1.0,
+    "status": "passed",
+    "tool": "bioimageio.core",
+    "tool_version": "0.11.0"
+}

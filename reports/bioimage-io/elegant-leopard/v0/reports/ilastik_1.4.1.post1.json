@@ -1,0 +1,215 @@
+{
+    "badge": null,
+    "details": {
+        "conda_list": null,
+        "details": [
+            {
+                "conda_compare": null,
+                "context": {
+                    "file_name": "bioimageio.yaml",
+                    "known_files": {
+                        "environment.yaml": "1771f762068cf3c3351ddd5bab6aeda224a6438bad7c081bd07e93ebda7a15de",
+                        "resmatching_mmse.py": "3cfafda94c8bfa2a1ef3288ad60d5e2442365a9dff3f2f823ce05f7d57460535",
+                        "sample_input.tif": "50d35b669e6a32927fe6e17fb5a3e92c4987878d79e6003b0799b61350757d91",
+                        "sample_output.tif": "6414f7f3085f41a45630b3ac915318fd6f5dfd4850dd96d2c79430ad0b42be4d",
+                        "test_input.npy": "88d16f99b8f0e01a4ad29c657fcc1b1693e280a975395653ff29a448e9c07fd0",
+                        "test_output.npy": "d0e3796484940b570921d8e80cd93dcf6bc187fcfc564e27a0a6f8381203c7cc",
+                        "weights.pt": "8ca22873a2b32a749550a58d1398f42fdf70f04813847b8b64bcd5401e70705a"
+                    },
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/elegant-leopard/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Created `InvalidDescr` object.",
+                "recommended_env": null,
+                "status": "failed",
+                "warnings": []
+            },
+            {
+                "conda_compare": null,
+                "context": {
+                    "file_name": "bioimageio.yaml",
+                    "known_files": {
+                        "environment.yaml": "1771f762068cf3c3351ddd5bab6aeda224a6438bad7c081bd07e93ebda7a15de",
+                        "resmatching_mmse.py": "3cfafda94c8bfa2a1ef3288ad60d5e2442365a9dff3f2f823ce05f7d57460535",
+                        "sample_input.tif": "50d35b669e6a32927fe6e17fb5a3e92c4987878d79e6003b0799b61350757d91",
+                        "sample_output.tif": "6414f7f3085f41a45630b3ac915318fd6f5dfd4850dd96d2c79430ad0b42be4d",
+                        "test_input.npy": "88d16f99b8f0e01a4ad29c657fcc1b1693e280a975395653ff29a448e9c07fd0",
+                        "test_output.npy": "d0e3796484940b570921d8e80cd93dcf6bc187fcfc564e27a0a6f8381203c7cc",
+                        "weights.pt": "8ca22873a2b32a749550a58d1398f42fdf70f04813847b8b64bcd5401e70705a"
+                    },
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/elegant-leopard/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [
+                    {
+                        "loc": [
+                            "covers",
+                            0,
+                            "function-after[val_func(), function-after[validate_file(), lax-or-strict[lax=union[json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]],function-after[path_validator(), str]],strict=json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]]]]]"
+                        ],
+                        "msg": "Input is not a valid path for <class 'pathlib.Path'>",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "covers",
+                            0,
+                            "RelativeFilePath"
+                        ],
+                        "msg": "Input is not a valid path for <class 'pathlib.PurePath'>",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "covers",
+                            0,
+                            "function-after[HttpUrl(), str]"
+                        ],
+                        "msg": "Input should be a valid string",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "string_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "covers",
+                            1,
+                            "function-after[val_func(), function-after[validate_file(), lax-or-strict[lax=union[json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]],function-after[path_validator(), str]],strict=json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]]]]]"
+                        ],
+                        "msg": "Input is not a valid path for <class 'pathlib.Path'>",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "covers",
+                            1,
+                            "RelativeFilePath"
+                        ],
+                        "msg": "Input is not a valid path for <class 'pathlib.PurePath'>",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "covers",
+                            1,
+                            "function-after[HttpUrl(), str]"
+                        ],
+                        "msg": "Input should be a valid string",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "string_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "documentation",
+                            "function-after[val_func(), function-after[validate_file(), lax-or-strict[lax=union[json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]],function-after[path_validator(), str]],strict=json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]]]]]"
+                        ],
+                        "msg": "Input is not a valid path for <class 'pathlib.Path'>",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "documentation",
+                            "RelativeFilePath"
+                        ],
+                        "msg": "Input is not a valid path for <class 'pathlib.PurePath'>",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "documentation",
+                            "function-after[HttpUrl(), str]"
+                        ],
+                        "msg": "Input should be a valid string",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "string_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "config",
+                            "bioimageio",
+                            "reproducibility_tolerance",
+                            0,
+                            "mismatched_elements_per_million"
+                        ],
+                        "msg": "Input should be less than or equal to 100",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "less_than_equal",
+                        "with_traceback": false
+                    }
+                ],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.4",
+                "recommended_env": null,
+                "status": "failed",
+                "warnings": []
+            },
+            {
+                "conda_compare": null,
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "type"
+                ],
+                "name": "Has expected resource type",
+                "recommended_env": null,
+                "status": "passed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.spec",
+                "0.5.4.1",
+                "",
+                ""
+            ],
+            [
+                "bioimageio.core",
+                "0.8.0",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.5.4",
+        "id": "elegant-leopard",
+        "name": "bioimageio format validation",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/elegant-leopard/files/bioimageio.yaml?version=v0",
+        "status": "failed",
+        "type": "model"
+    },
+    "error": "\n|        ❌        |                                  bioimageio format validation                                  |\n|       ---       |                                              ---                                               |\n| status          | failed                                                                                         |\n| source          | https://hypha.aicell.io/bioimage-io/artifacts/elegant-leopard/files/bioimageio.yaml?version=v0 |\n| id              | elegant-leopard                                                                                |\n| format version  | model 0.5.4                                                                                    |\n| bioimageio.spec | 0.5.4.1                                                                                        |\n| bioimageio.core | 0.8.0                                                                                          |\n\n|     |                                     Location                                    |                                    Details                                     |\n| --- |                                       ---                                       |                                      ---                                       |\n| ❌   |                                                                                 | Created `InvalidDescr` object.                                                 |\n| 🔍   | `context:perform_io_checks`                                                     | True                                                                           |\n| 🔍   | `context:root`                                                                  | https://hypha.aicell.io/bioimage-io/artifacts/elegant-leopard/files?version=v0 |\n| 🔍   | `context:known_files.test_input.npy`                                            | 88d16f99b8f0e01a4ad29c657fcc1b1693e280a975395653ff29a448e9c07fd0               |\n| 🔍   | `context:known_files.sample_input.tif`                                          | 50d35b669e6a32927fe6e17fb5a3e92c4987878d79e6003b0799b61350757d91               |\n| 🔍   | `context:known_files.test_output.npy`                                           | d0e3796484940b570921d8e80cd93dcf6bc187fcfc564e27a0a6f8381203c7cc               |\n| 🔍   | `context:known_files.sample_output.tif`                                         | 6414f7f3085f41a45630b3ac915318fd6f5dfd4850dd96d2c79430ad0b42be4d               |\n| 🔍   | `context:known_files.resmatching_mmse.py`                                       | 3cfafda94c8bfa2a1ef3288ad60d5e2442365a9dff3f2f823ce05f7d57460535               |\n| 🔍   | `context:known_files.environment.yaml`                                          | 1771f762068cf3c3351ddd5bab6aeda224a6438bad7c081bd07e93ebda7a15de               |\n| 🔍   | `context:known_files.weights.pt`                                                | 8ca22873a2b32a749550a58d1398f42fdf70f04813847b8b64bcd5401e70705a               |\n| ❌   |                                                                                 | bioimageio.spec format validation model 0.5.4                                  |\n| ❌   | `covers.0`                                                                      | Input is not a valid path for <class 'pathlib.Path'>                           |\n|     |                                                                                 |                                                                                |\n| ❌   | `covers.0.(RelativeFilePath)`                                                   | Input is not a valid path for <class 'pathlib.PurePath'>                       |\n|     |                                                                                 |                                                                                |\n| ❌   | `covers.0`                                                                      | Input should be a valid string                                                 |\n|     |                                                                                 |                                                                                |\n| ❌   | `covers.1`                                                                      | Input is not a valid path for <class 'pathlib.Path'>                           |\n|     |                                                                                 |                                                                                |\n| ❌   | `covers.1.(RelativeFilePath)`                                                   | Input is not a valid path for <class 'pathlib.PurePath'>                       |\n|     |                                                                                 |                                                                                |\n| ❌   | `covers.1`                                                                      | Input should be a valid string                                                 |\n|     |                                                                                 |                                                                                |\n| ❌   | `documentation`                                                                 | Input is not a valid path for <class 'pathlib.Path'>                           |\n|     |                                                                                 |                                                                                |\n| ❌   | `documentation.(RelativeFilePath)`                                              | Input is not a valid path for <class 'pathlib.PurePath'>                       |\n|     |                                                                                 |                                                                                |\n| ❌   | `documentation`                                                                 | Input should be a valid string                                                 |\n|     |                                                                                 |                                                                                |\n| ❌   | `config.bioimageio.reproducibility_tolerance.0.mismatched_elements_per_million` | Input should be less than or equal to 100                                      |\n|     |                                                                                 |                                                                                |\n| ✔️  | `type`                                                                          | Has expected resource type                                                     |\n",
+    "links": [
+        "ilastik/ilastik"
+    ],
+    "status": "failed",
+    "tool": "ilastik",
+    "tool_version": "1.4.1.post1"
+}
