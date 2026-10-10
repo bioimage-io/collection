@@ -1,0 +1,252 @@
+{
+    "rdf_content": {
+        "name": "OC2-23 ResMatching digital expansion microscopy (3D)",
+        "description": "3D conditional flow matching model (ResMatching) that restores in-vivo two-photon image stacks so that they resemble 4x expansion microscopy. Trained on synthetic low-resolution inputs simulated from expansion microscopy ground truth. Returns the MMSE over 4 samples (10 Euler steps each) and the pixel-wise standard deviation as an uncertainty map.",
+        "covers": [
+            {
+                "source": "cover_mmse.png",
+                "sha256": "2b83fda88ded9815ae2ef5a3d22adc34f43b5463e42feebd0934771704678bb1"
+            },
+            {
+                "source": "cover_uncertainty.png",
+                "sha256": "c4a847cb004c7f3554e05496f475ef65f9739d5a69c4242c0ae9f084f9cf869e"
+            }
+        ],
+        "documentation": {
+            "source": "README.md",
+            "sha256": "c4c9a38a9f3077f717ad380526f66e136ffb99ca304a67db6d89428d4acb67db"
+        },
+        "authors": [
+            {
+                "name": "Vera Galinova",
+                "github_user": "veegalinova"
+            },
+            {
+                "name": "Anirban Ray"
+            },
+            {
+                "name": "Ekin Reyhan"
+            }
+        ],
+        "cite": [
+            {
+                "text": "ResMatching: Noise-Resilient Computational Super-Resolution via Guided Conditional Flow Matching",
+                "url": "https://github.com/juglab/resmatching",
+                "doi": "10.48550/arXiv.2510.26601"
+            }
+        ],
+        "license": "CC-BY-4.0",
+        "tags": [
+            "3d",
+            "fluorescence-light-microscopy",
+            "image-restoration",
+            "super-resolution",
+            "expansion-microscopy",
+            "flow-matching",
+            "generative",
+            "uncertainty",
+            "pytorch",
+            "ai4life"
+        ],
+        "format_version": "0.5.12",
+        "type": "model",
+        "inputs": [
+            {
+                "id": "raw",
+                "description": "Two-photon image stack (single channel)",
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "fluorescence"
+                        ]
+                    },
+                    {
+                        "size": 16,
+                        "id": "z",
+                        "type": "space"
+                    },
+                    {
+                        "size": 64,
+                        "id": "y",
+                        "type": "space"
+                    },
+                    {
+                        "size": 64,
+                        "id": "x",
+                        "type": "space"
+                    }
+                ],
+                "test_tensor": {
+                    "source": "test_input.npy",
+                    "sha256": "88d16f99b8f0e01a4ad29c657fcc1b1693e280a975395653ff29a448e9c07fd0"
+                },
+                "sample_tensor": {
+                    "source": "sample_input.tif",
+                    "sha256": "50d35b669e6a32927fe6e17fb5a3e92c4987878d79e6003b0799b61350757d91"
+                },
+                "preprocessing": [
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    },
+                    {
+                        "id": "fixed_zero_mean_unit_variance",
+                        "kwargs": {
+                            "mean": 2046.2235107421875,
+                            "std": 2148.646484375
+                        }
+                    },
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    }
+                ]
+            }
+        ],
+        "outputs": [
+            {
+                "id": "restored",
+                "description": "MMSE over 4 samples (channel 0) and standard deviation across samples (channel 1)",
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "mmse",
+                            "std"
+                        ]
+                    },
+                    {
+                        "halo": 2,
+                        "size": {
+                            "tensor_id": "raw",
+                            "axis_id": "z"
+                        },
+                        "id": "z",
+                        "type": "space"
+                    },
+                    {
+                        "halo": 8,
+                        "size": {
+                            "tensor_id": "raw",
+                            "axis_id": "y"
+                        },
+                        "id": "y",
+                        "type": "space"
+                    },
+                    {
+                        "halo": 8,
+                        "size": {
+                            "tensor_id": "raw",
+                            "axis_id": "x"
+                        },
+                        "id": "x",
+                        "type": "space"
+                    }
+                ],
+                "test_tensor": {
+                    "source": "test_output.npy",
+                    "sha256": "d0e3796484940b570921d8e80cd93dcf6bc187fcfc564e27a0a6f8381203c7cc"
+                },
+                "sample_tensor": {
+                    "source": "sample_output.tif",
+                    "sha256": "6414f7f3085f41a45630b3ac915318fd6f5dfd4850dd96d2c79430ad0b42be4d"
+                },
+                "postprocessing": [
+                    {
+                        "id": "scale_linear",
+                        "kwargs": {
+                            "axis": "channel",
+                            "gain": [
+                                2309.972900390625,
+                                2309.972900390625
+                            ],
+                            "offset": [
+                                1592.1451416015625,
+                                0
+                            ]
+                        }
+                    },
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    }
+                ]
+            }
+        ],
+        "weights": {
+            "pytorch_state_dict": {
+                "source": "weights.pt",
+                "sha256": "8ca22873a2b32a749550a58d1398f42fdf70f04813847b8b64bcd5401e70705a",
+                "architecture": {
+                    "source": "resmatching_mmse.py",
+                    "sha256": "3cfafda94c8bfa2a1ef3288ad60d5e2442365a9dff3f2f823ce05f7d57460535",
+                    "callable": "ResMatchingMMSE",
+                    "kwargs": {
+                        "n_samples": 4,
+                        "num_steps": 10,
+                        "seed": 42,
+                        "image_size": 64,
+                        "in_channels": 2,
+                        "model_channels": 32,
+                        "out_channels": 1,
+                        "num_res_blocks": 1,
+                        "attention_resolutions": [
+                            4
+                        ],
+                        "channel_mult": [
+                            1,
+                            2,
+                            3,
+                            4
+                        ],
+                        "dims": 3
+                    }
+                },
+                "pytorch_version": "2.14.1",
+                "dependencies": {
+                    "source": "environment.yaml",
+                    "sha256": "1771f762068cf3c3351ddd5bab6aeda224a6438bad7c081bd07e93ebda7a15de"
+                }
+            }
+        },
+        "config": {
+            "bioimageio": {
+                "reproducibility_tolerance": [
+                    {
+                        "relative_tolerance": 0.01,
+                        "absolute_tolerance": 10,
+                        "mismatched_elements_per_million": 1000
+                    }
+                ],
+                "test_kwargs": {
+                    "pytorch_state_dict": {
+                        "absolute_tolerance": 50,
+                        "relative_tolerance": 0.01
+                    }
+                }
+            }
+        },
+        "uploader": {
+            "email": "veegalinova@gmail.com"
+        },
+        "git_repo": "https://github.com/ai4life-opencalls/oc2_project_23",
+        "maintainers": [],
+        "id": "elegant-leopard",
+        "id_emoji": "🐆"
+    },
+    "rdf_yaml_sha256": "e64c5f2b376b061ed3a30a87370197cf4fb5a67d63cae62a590e064638bdd45a",
+    "status": "untested"
+}

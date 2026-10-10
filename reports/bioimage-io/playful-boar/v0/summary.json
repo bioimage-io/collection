@@ -1,0 +1,276 @@
+{
+    "rdf_content": {
+        "name": "OC2-23 HDN digital expansion microscopy (3D)",
+        "description": "3D Hierarchical DivNoising (HDN) model that restores in-vivo two-photon image stacks so that they resemble 4x expansion microscopy. Trained supervised on synthetic low-resolution inputs simulated from expansion microscopy ground truth. Returns the MMSE over 15 posterior samples and the pixel-wise standard deviation as an uncertainty map.",
+        "covers": [
+            {
+                "source": "cover_mmse.png",
+                "sha256": "e619e11bd72415266bb97e9994f77b6befb10647442b8e26b3b18dbe37f24b12"
+            },
+            {
+                "source": "cover_uncertainty.png",
+                "sha256": "0c9d116e88f8298e7ef370b777918e9835d5efaed68198b720ec35fcc309add9"
+            }
+        ],
+        "documentation": {
+            "source": "README.md",
+            "sha256": "616131fc7c2a8c040c4d69bba98f7a1dfedc27b005c0757581c3a0baf32b75ff"
+        },
+        "authors": [
+            {
+                "name": "Vera Galinova",
+                "github_user": "veegalinova"
+            },
+            {
+                "name": "Ekin Reyhan"
+            }
+        ],
+        "cite": [
+            {
+                "text": "Prakash et al. Interpretable Unsupervised Diversity Denoising and Artefact Removal. ICLR (2022)",
+                "doi": "10.48550/arXiv.2104.01374"
+            },
+            {
+                "text": "CAREamics",
+                "url": "https://github.com/CAREamics/careamics"
+            }
+        ],
+        "license": "CC-BY-4.0",
+        "tags": [
+            "3d",
+            "fluorescence-light-microscopy",
+            "image-restoration",
+            "super-resolution",
+            "expansion-microscopy",
+            "hdn",
+            "vae",
+            "uncertainty",
+            "careamics",
+            "pytorch",
+            "ai4life"
+        ],
+        "format_version": "0.5.12",
+        "type": "model",
+        "inputs": [
+            {
+                "id": "raw",
+                "description": "Two-photon image stack (single channel)",
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "fluorescence"
+                        ]
+                    },
+                    {
+                        "size": {
+                            "min": 16,
+                            "step": 4
+                        },
+                        "id": "z",
+                        "type": "space"
+                    },
+                    {
+                        "size": {
+                            "min": 64,
+                            "step": 8
+                        },
+                        "id": "y",
+                        "type": "space"
+                    },
+                    {
+                        "size": {
+                            "min": 64,
+                            "step": 8
+                        },
+                        "id": "x",
+                        "type": "space"
+                    }
+                ],
+                "test_tensor": {
+                    "source": "test_input.npy",
+                    "sha256": "88d16f99b8f0e01a4ad29c657fcc1b1693e280a975395653ff29a448e9c07fd0"
+                },
+                "sample_tensor": {
+                    "source": "sample_input.tif",
+                    "sha256": "50d35b669e6a32927fe6e17fb5a3e92c4987878d79e6003b0799b61350757d91"
+                },
+                "preprocessing": [
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    },
+                    {
+                        "id": "fixed_zero_mean_unit_variance",
+                        "kwargs": {
+                            "mean": 2146.1748046875,
+                            "std": 2385.873575582949
+                        }
+                    },
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    }
+                ]
+            }
+        ],
+        "outputs": [
+            {
+                "id": "restored",
+                "description": "MMSE over 15 samples (channel 0) and standard deviation across samples (channel 1)",
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "mmse",
+                            "std"
+                        ]
+                    },
+                    {
+                        "halo": 4,
+                        "size": {
+                            "tensor_id": "raw",
+                            "axis_id": "z"
+                        },
+                        "id": "z",
+                        "type": "space"
+                    },
+                    {
+                        "halo": 8,
+                        "size": {
+                            "tensor_id": "raw",
+                            "axis_id": "y"
+                        },
+                        "id": "y",
+                        "type": "space"
+                    },
+                    {
+                        "halo": 8,
+                        "size": {
+                            "tensor_id": "raw",
+                            "axis_id": "x"
+                        },
+                        "id": "x",
+                        "type": "space"
+                    }
+                ],
+                "test_tensor": {
+                    "source": "test_output.npy",
+                    "sha256": "ad77d09cadb91f4e2a30dd4dc26121f2242db4f145777c60bc3c06bcdb4d9ffb"
+                },
+                "sample_tensor": {
+                    "source": "sample_output.tif",
+                    "sha256": "c43e01221025f44e51caec2011f85e448158f1f66ff68d0a3b5964c066ff6c41"
+                },
+                "postprocessing": [
+                    {
+                        "id": "scale_linear",
+                        "kwargs": {
+                            "axis": "channel",
+                            "gain": [
+                                2619.991611080912,
+                                2619.991611080912
+                            ],
+                            "offset": [
+                                1705.69091796875,
+                                0
+                            ]
+                        }
+                    },
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    }
+                ]
+            }
+        ],
+        "weights": {
+            "pytorch_state_dict": {
+                "source": "weights.pt",
+                "sha256": "d2d134bf1c74484f9c71c266aa04e627f0923d1d9963a76cbf6798b9eb4f4900",
+                "architecture": {
+                    "source": "hdn_mmse.py",
+                    "sha256": "c622057ac119c2f03c660d8ebd81176ada1db6c97dad0b2838f3dcc9d35d6f7e",
+                    "callable": "HDNMMSE",
+                    "kwargs": {
+                        "n_samples": 15,
+                        "seed": 42,
+                        "input_shape": [
+                            16,
+                            64,
+                            64
+                        ],
+                        "encoder_conv_strides": [
+                            1,
+                            2,
+                            2
+                        ],
+                        "decoder_conv_strides": [
+                            1,
+                            2,
+                            2
+                        ],
+                        "multiscale_count": 1,
+                        "z_dims": [
+                            128,
+                            128
+                        ],
+                        "output_channels": 1,
+                        "n_filters": 32,
+                        "encoder_dropout": 0,
+                        "decoder_dropout": 0,
+                        "encoder_blocks_per_layer": 1,
+                        "encoder_first_conv_kernel": 5,
+                        "decoder_blocks_per_layer": 1,
+                        "nonlinearity": "ReLU",
+                        "predict_logvar": true,
+                        "analytical_kl": true,
+                        "enable_topdown_normalize_factor": false
+                    }
+                },
+                "pytorch_version": "2.11.0",
+                "dependencies": {
+                    "source": "environment.yaml",
+                    "sha256": "d9fb74bc0e6f729acb3d9028cbb2eab9d3c199a3278cbd8d82f2557996930086"
+                }
+            }
+        },
+        "config": {
+            "bioimageio": {
+                "reproducibility_tolerance": [
+                    {
+                        "relative_tolerance": 0.01,
+                        "absolute_tolerance": 10,
+                        "mismatched_elements_per_million": 1000
+                    }
+                ],
+                "test_kwargs": {
+                    "pytorch_state_dict": {
+                        "absolute_tolerance": 50,
+                        "relative_tolerance": 0.01
+                    }
+                }
+            }
+        },
+        "uploader": {
+            "email": "veegalinova@gmail.com"
+        },
+        "git_repo": "https://github.com/ai4life-opencalls/oc2_project_23",
+        "id": "playful-boar",
+        "id_emoji": "🐗"
+    },
+    "rdf_yaml_sha256": "a13fc241b1a46de1769bcc6dbe6b4f561e7bab747c008bc324e60c5b1ae31fa2",
+    "status": "untested"
+}

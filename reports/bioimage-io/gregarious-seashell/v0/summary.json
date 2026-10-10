@@ -1,0 +1,189 @@
+{
+    "rdf_content": {
+        "name": "OC2-23 CARE digital expansion microscopy (3D)",
+        "description": "3D CARE UNet that restores in-vivo two-photon image stacks so that they resemble 4x expansion microscopy. Trained on synthetic low-resolution inputs simulated from expansion microscopy ground truth.",
+        "covers": [
+            {
+                "source": "cover.png",
+                "sha256": "b62014155c221c362aba6929db912802b3efc27e19ef557397c02923bf1180b7"
+            }
+        ],
+        "documentation": {
+            "source": "README.md",
+            "sha256": "817fbeea85fe418c9b39d7b1c4a8e3db06074c4f4ae2073c745ebf3cfe5250f9"
+        },
+        "authors": [
+            {
+                "name": "Vera Galinova",
+                "github_user": "veegalinova"
+            }
+        ],
+        "cite": [
+            {
+                "text": "Weigert et al. Content-aware image restoration: pushing the limits of fluorescence microscopy. Nature Methods (2018)",
+                "doi": "10.1038/s41592-018-0216-7"
+            }
+        ],
+        "license": "CC-BY-4.0",
+        "tags": [
+            "3d",
+            "fluorescence-light-microscopy",
+            "two-photon",
+            "image-restoration",
+            "super-resolution",
+            "care",
+            "tensorflow",
+            "ai4life"
+        ],
+        "format_version": "0.5.12",
+        "type": "model",
+        "inputs": [
+            {
+                "id": "raw",
+                "description": "Two-photon image stack (single channel)",
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "size": {
+                            "min": 16,
+                            "step": 4
+                        },
+                        "id": "z",
+                        "type": "space"
+                    },
+                    {
+                        "size": {
+                            "min": 64,
+                            "step": 16
+                        },
+                        "id": "y",
+                        "type": "space"
+                    },
+                    {
+                        "size": {
+                            "min": 64,
+                            "step": 16
+                        },
+                        "id": "x",
+                        "type": "space"
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "fluorescence"
+                        ]
+                    }
+                ],
+                "test_tensor": {
+                    "source": "test_input.npy",
+                    "sha256": "41810224efee7feadc09035d120728b3e5150b8f10a73948699654d96b863319"
+                },
+                "sample_tensor": {
+                    "source": "sample_input.tif",
+                    "sha256": "fa55ed746fd2a296e8e12b175eb1af5cc50f9ffa24969f01d5525596ed085e4d"
+                },
+                "preprocessing": [
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    },
+                    {
+                        "id": "scale_range",
+                        "kwargs": {
+                            "axes": [
+                                "z",
+                                "y",
+                                "x"
+                            ],
+                            "min_percentile": 2,
+                            "max_percentile": 99.8
+                        }
+                    },
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    }
+                ]
+            }
+        ],
+        "outputs": [
+            {
+                "id": "restored",
+                "description": "Restored stack in percentile-normalized intensity units",
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "halo": 4,
+                        "size": {
+                            "tensor_id": "raw",
+                            "axis_id": "z"
+                        },
+                        "id": "z",
+                        "type": "space"
+                    },
+                    {
+                        "halo": 16,
+                        "size": {
+                            "tensor_id": "raw",
+                            "axis_id": "y"
+                        },
+                        "id": "y",
+                        "type": "space"
+                    },
+                    {
+                        "halo": 16,
+                        "size": {
+                            "tensor_id": "raw",
+                            "axis_id": "x"
+                        },
+                        "id": "x",
+                        "type": "space"
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "restored"
+                        ]
+                    }
+                ],
+                "test_tensor": {
+                    "source": "test_output.npy",
+                    "sha256": "854b231fffd4917685e66a7a336e6676942eb1e21040b6e7d10d804d959c02d2"
+                },
+                "sample_tensor": {
+                    "source": "sample_output.tif",
+                    "sha256": "fc842eb88bc6aa73bd70763945ac75ffbec99374cf7abe9b3021ee6a07b69eb4"
+                }
+            }
+        ],
+        "weights": {
+            "keras_hdf5": {
+                "source": "weights.h5",
+                "sha256": "82477c823de4c37d21fc0401bff2ae939ed2a4bbf5e4a5ad0d0c0bf1209d6516",
+                "tensorflow_version": "2.19.1"
+            },
+            "tensorflow_saved_model_bundle": {
+                "source": "saved_model.zip",
+                "sha256": "cc5b80375571257faea866349d4bc702994d2ea48dde92e89fa6e51be6c548e7",
+                "parent": "keras_hdf5",
+                "tensorflow_version": "2.19.1"
+            }
+        },
+        "uploader": {
+            "email": "veegalinova@gmail.com"
+        },
+        "git_repo": "https://github.com/ai4life-opencalls/oc2_project_23",
+        "id": "gregarious-seashell",
+        "id_emoji": "🐚"
+    },
+    "rdf_yaml_sha256": "bdb91092a08beb03169d77fec843137e2f553d150e4797479b1a36cf891ff2da",
+    "status": "untested"
+}
