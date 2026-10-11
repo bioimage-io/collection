@@ -192,11 +192,13 @@
         "overall_compatibility": 0.5788043478260869,
         "overall_partner_tool_compatibility": 0.0,
         "tool_compatibility": {
+            "biapy": 0.0,
             "bioimageio.core": 1.0,
             "careamics": 0.0,
             "ilastik": 0.0
         },
         "tool_compatibility_version_specific": {
+            "biapy_3.7.1": 0.0,
             "bioimageio.core_0.11.0": 1.0,
             "careamics_0.3.4": 0.0,
             "ilastik_1.4.1.post1": 0.0,
@@ -206,6 +208,18 @@
     },
     "status": "passed",
     "tests": {
+        "biapy": {
+            "3.7.1": {
+                "badge": null,
+                "details": "[all] pytorch_state_dict not found in model RDF\n",
+                "error": "[all] pytorch_state_dict not found in model RDF\n",
+                "links": [
+                    "biapy/biapy"
+                ],
+                "score": 0.0,
+                "status": "failed"
+            }
+        },
         "bioimageio.core": {
             "0.11.0": {
                 "badge": null,
