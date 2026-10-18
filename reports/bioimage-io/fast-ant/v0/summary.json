@@ -1,0 +1,231 @@
+{
+    "rdf_content": {
+        "name": "OC3 Project 26 Microtubule UNet",
+        "description": "Microtubule Segmentation in Cryo-ET Tomograms",
+        "covers": [
+            {
+                "source": "cover.png",
+                "sha256": "11ad1c36d9349f6605d5c4db261f5b9492130bd32af0a94a8ae8f66057a43042"
+            }
+        ],
+        "documentation": {
+            "source": "documentation.md",
+            "sha256": "fe7cf98f3a62be798dc08144598af10d92fb242a73c43c5a02ec58303f476c90"
+        },
+        "authors": [
+            {
+                "affiliation": "Human Technopole",
+                "email": "mehdi.seifi@fht.org",
+                "orcid": null,
+                "name": "Mehdi Seifi",
+                "github_user": "mese79"
+            }
+        ],
+        "cite": [
+            {
+                "text": "Franco-Barranco, Daniel, et al. \"BiaPy: Accessible deep learning on bioimages.\" Nature Methods (2025): 1-3.",
+                "doi": "10.1038/s41592-025-02699-y"
+            }
+        ],
+        "license": "CC-BY-4.0",
+        "git_repo": "https://github.com/ai4life-opencalls/oc_3_project_26",
+        "links": [
+            "https://github.com/mouseland/cellpose"
+        ],
+        "tags": [
+            "cryo-et",
+            "tomogram",
+            "microtubule",
+            "electron tomography",
+            "segmentation",
+            "3D"
+        ],
+        "version": "0.1.0",
+        "format_version": "0.5.14",
+        "type": "model",
+        "inputs": [
+            {
+                "id": "input",
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "channel"
+                        ]
+                    },
+                    {
+                        "size": 32,
+                        "id": "z",
+                        "type": "space"
+                    },
+                    {
+                        "size": 64,
+                        "id": "y",
+                        "type": "space"
+                    },
+                    {
+                        "size": 64,
+                        "id": "x",
+                        "type": "space"
+                    }
+                ],
+                "test_tensor": {
+                    "source": "test-input.npy",
+                    "sha256": "5e6dcbcb93f76ccf4cfbecc06b04f76125c25e1e54ec79804d5ded59ca0b27de"
+                },
+                "preprocessing": [
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    },
+                    {
+                        "id": "zero_mean_unit_variance",
+                        "kwargs": {
+                            "axes": [
+                                "z",
+                                "y",
+                                "x"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    }
+                ]
+            }
+        ],
+        "outputs": [
+            {
+                "id": "masks",
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "channel"
+                        ]
+                    },
+                    {
+                        "size": 32,
+                        "id": "z",
+                        "type": "space"
+                    },
+                    {
+                        "size": 64,
+                        "id": "y",
+                        "type": "space"
+                    },
+                    {
+                        "size": 64,
+                        "id": "x",
+                        "type": "space"
+                    }
+                ],
+                "test_tensor": {
+                    "source": "test-output.npy",
+                    "sha256": "03f43cc5f3d1017f9867ff088751d7ea817a47bd9389815c8ddce987dd7cd835"
+                }
+            }
+        ],
+        "weights": {
+            "pytorch_state_dict": {
+                "source": "checkpoint.pth",
+                "sha256": "6e42f56fa372daff63668f3b41b6af9b09bdf12d683d4fda35b2d0692548943e",
+                "architecture": {
+                    "source": "model.py",
+                    "sha256": "8e93b18ca8d2cfa5d9c45d95e8238b2695b32eecc6864f28dd079299cd857ddd",
+                    "callable": "U_Net",
+                    "kwargs": {
+                        "image_shape": [
+                            32,
+                            64,
+                            64,
+                            1
+                        ],
+                        "activation": "elu",
+                        "feature_maps": [
+                            16,
+                            32,
+                            64,
+                            128,
+                            256
+                        ],
+                        "drop_values": [
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        "normalization": "in",
+                        "k_size": 3,
+                        "upsample_layer": "convtranspose",
+                        "yx_down": [
+                            2,
+                            2,
+                            2,
+                            2
+                        ],
+                        "z_down": [
+                            1,
+                            1,
+                            1,
+                            1
+                        ],
+                        "output_channels": [
+                            1
+                        ],
+                        "output_channel_info": [
+                            "pred0"
+                        ],
+                        "head_activations": [
+                            "ce_sigmoid"
+                        ],
+                        "explicit_activations": true,
+                        "contrast": false,
+                        "contrast_proj_dim": 256,
+                        "separated_decoders": false,
+                        "divide_decoder_feature_maps": false,
+                        "isotropy": [
+                            true,
+                            true,
+                            true,
+                            true,
+                            true
+                        ],
+                        "larger_io": false,
+                        "conv_layers": [
+                            2,
+                            2,
+                            2,
+                            2,
+                            2
+                        ],
+                        "conv_block_order": "conv_norm_act",
+                        "return_one_tensor": true
+                    }
+                },
+                "pytorch_version": "2.12.1",
+                "dependencies": null
+            }
+        },
+        "config": {},
+        "uploader": {
+            "email": "mehdiseifi@gmail.com"
+        },
+        "id": "fast-ant",
+        "id_emoji": "🐜"
+    },
+    "rdf_yaml_sha256": "9df7866cea72deb1eff01b16b7b26479e21e6bd5ba83cb982fb2be747f53e6e8",
+    "status": "untested"
+}
