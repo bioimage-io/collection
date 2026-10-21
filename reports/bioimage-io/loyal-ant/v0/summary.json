@@ -1,0 +1,322 @@
+{
+    "rdf_content": {
+        "name": "CochleaNet Ribbon Synapse Detection",
+        "description": "3D U-Net for the detection of ribbon synapses in light-sheet microscopy of cleared cochleae, stained for CtBP2. It predicts a heatmap with a Gaussian peak at each synapse. Local maxima of the heatmap give the synapse positions. Trained on annotated CtBP2-stained cochleae at 0.38 um isotropic voxel size.",
+        "covers": [
+            "cover.png"
+        ],
+        "authors": [
+            {
+                "affiliation": "Institute for Auditory Neuroscience and InnerEarLab, University Medical Center Göttingen, Göttingen, Germany; Department of Otolaryngology, University Medical Center Göttingen, Göttingen, Germany; Cluster of Excellence \"Multiscale Bioimaging: from Molecular Machines to Networks of Excitable Cells\" (MBExC), University of Göttingen, Göttingen, Germany; Else-Kröner-Fresenius Center for Optogenetic Therapies, University Medical Center Göttingen, Göttingen, Germany",
+                "orcid": "0009-0007-8051-7964",
+                "name": "Lennart Roos"
+            },
+            {
+                "affiliation": "Institute for Auditory Neuroscience and InnerEarLab, University Medical Center Göttingen, Göttingen, Germany; Cluster of Excellence \"Multiscale Bioimaging: from Molecular Machines to Networks of Excitable Cells\" (MBExC), University of Göttingen, Göttingen, Germany; Auditory Neuroscience & Synaptic Nanophysiology Group, Max-Planck-Institute for Multidisciplinary Sciences, Göttingen, Germany; Göttingen Graduate School for Neurosciences and Molecular Biosciences, University of Göttingen, Göttingen, Germany; Collaborative Research Center CRC 1690 \"Disease Mechanisms and Functional Restoration of Sensory and Motor Systems\", University of Göttingen, 37075, Göttingen, Germany",
+                "orcid": "0009-0002-5372-8639",
+                "name": "Aleyna Miraç Diniz"
+            },
+            {
+                "affiliation": "Institute for Auditory Neuroscience and InnerEarLab, University Medical Center Göttingen, Göttingen, Germany; Cluster of Excellence \"Multiscale Bioimaging: from Molecular Machines to Networks of Excitable Cells\" (MBExC), University of Göttingen, Göttingen, Germany; Göttingen Graduate School for Neurosciences and Molecular Biosciences, University of Göttingen, Göttingen, Germany",
+                "orcid": "0000-0001-8040-9444",
+                "name": "Elisabeth Koert"
+            },
+            {
+                "affiliation": "Cluster of Excellence \"Multiscale Bioimaging: from Molecular Machines to Networks of Excitable Cells\" (MBExC), University of Göttingen, Göttingen, Germany; Institute of Computer Science, University of Göttingen, Göttingen, Germany; Collaborative Research Center CRC 1690 \"Disease Mechanisms and Functional Restoration of Sensory and Motor Systems\", University of Göttingen, 37075, Göttingen, Germany",
+                "email": "martin.schilling@med.uni-goettingen.de",
+                "orcid": "0000-0003-3639-3187",
+                "name": "Martin Schilling",
+                "github_user": "schilling40"
+            },
+            {
+                "affiliation": "Institute for Auditory Neuroscience and InnerEarLab, University Medical Center Göttingen, Göttingen, Germany; Else-Kröner-Fresenius Center for Optogenetic Therapies, University Medical Center Göttingen, Göttingen, Germany; Göttingen Graduate School for Neurosciences and Molecular Biosciences, University of Göttingen, Göttingen, Germany; Functional Auditory Genomics Group, Auditory Neuroscience and Optogenetics laboratory, German Primate Center, Göttingen, Germany",
+                "orcid": "0009-0009-4340-1422",
+                "name": "Mara Uhl"
+            },
+            {
+                "affiliation": "Institute for Auditory Neuroscience and InnerEarLab, University Medical Center Göttingen, Göttingen, Germany; Cluster of Excellence \"Multiscale Bioimaging: from Molecular Machines to Networks of Excitable Cells\" (MBExC), University of Göttingen, Göttingen, Germany",
+                "orcid": "0000-0002-3624-0343",
+                "name": "Anupriya Thirumalai"
+            },
+            {
+                "affiliation": "Multiscale Biology, Department of Biology and Psychology, University of Göttingen, Göttingen, Germany",
+                "orcid": "0000-0003-4685-5576",
+                "name": "Mostafa Aakhte"
+            },
+            {
+                "affiliation": "Institute for Auditory Neuroscience and InnerEarLab, University Medical Center Göttingen, Göttingen, Germany; Else-Kröner-Fresenius Center for Optogenetic Therapies, University Medical Center Göttingen, Göttingen, Germany; Collaborative Research Center CRC 1690 \"Disease Mechanisms and Functional Restoration of Sensory and Motor Systems\", University of Göttingen, 37075, Göttingen, Germany; Functional Auditory Genomics Group, Auditory Neuroscience and Optogenetics laboratory, German Primate Center, Göttingen, Germany",
+                "orcid": "0000-0002-5079-502X",
+                "name": "Kathrin Kusch"
+            },
+            {
+                "affiliation": "Cluster of Excellence \"Multiscale Bioimaging: from Molecular Machines to Networks of Excitable Cells\" (MBExC), University of Göttingen, Göttingen, Germany; Multiscale Biology, Department of Biology and Psychology, University of Göttingen, Göttingen, Germany",
+                "orcid": "0000-0001-7250-3756",
+                "name": "Jan Huisken"
+            },
+            {
+                "affiliation": "Institute for Auditory Neuroscience and InnerEarLab, University Medical Center Göttingen, Göttingen, Germany; Department of Otolaryngology, University Medical Center Göttingen, Göttingen, Germany; Cluster of Excellence \"Multiscale Bioimaging: from Molecular Machines to Networks of Excitable Cells\" (MBExC), University of Göttingen, Göttingen, Germany; Else-Kröner-Fresenius Center for Optogenetic Therapies, University Medical Center Göttingen, Göttingen, Germany; Auditory Neuroscience & Synaptic Nanophysiology Group, Max-Planck-Institute for Multidisciplinary Sciences, Göttingen, Germany; Collaborative Research Center CRC 1690 \"Disease Mechanisms and Functional Restoration of Sensory and Motor Systems\", University of Göttingen, 37075, Göttingen, Germany; CAIMed - Lower Saxony Center for Artificial Intelligence and Causal Methods in Medicine, Göttingen; German Center for Child and Adolescent Health (DZKJ), partner site Göttingen, Göttingen, Germany",
+                "orcid": "0000-0001-7145-0533",
+                "name": "Tobias Moser"
+            },
+            {
+                "affiliation": "Cluster of Excellence \"Multiscale Bioimaging: from Molecular Machines to Networks of Excitable Cells\" (MBExC), University of Göttingen, Göttingen, Germany; Institute of Computer Science, University of Göttingen, Göttingen, Germany; Collaborative Research Center CRC 1690 \"Disease Mechanisms and Functional Restoration of Sensory and Motor Systems\", University of Göttingen, 37075, Göttingen, Germany; CAIMed - Lower Saxony Center for Artificial Intelligence and Causal Methods in Medicine, Göttingen; Machine Intelligence in the Life Sciences Group, Max-Planck-Institute for Multidisciplinary Sciences, Göttingen, Germany",
+                "email": "constantin.pape@informatik.uni-goettingen.de",
+                "orcid": "0000-0001-6562-7187",
+                "name": "Constantin Pape",
+                "github_user": "constantinpape"
+            }
+        ],
+        "cite": [
+            {
+                "text": "Roos et al. CochleaNet: deep learning-based image analysis for cochlear connectomics and gene therapy. bioRxiv 2025.",
+                "doi": "10.1101/2025.11.16.688700"
+            },
+            {
+                "text": "Roos et al. CochleaNet training data for SGN segmentation, IHC segmentation and ribbon synapse detection. Zenodo 2026.",
+                "doi": "10.5281/zenodo.23478267"
+            },
+            {
+                "text": "Cicek et al. 3D U-Net: Learning Dense Volumetric Segmentation from Sparse Annotation. MICCAI 2016.",
+                "doi": "10.1007/978-3-319-46723-8_49"
+            }
+        ],
+        "license": "MIT",
+        "git_repo": "https://github.com/computational-cell-analytics/flamingo-tools",
+        "maintainers": [
+            {
+                "affiliation": "Cluster of Excellence \"Multiscale Bioimaging: from Molecular Machines to Networks of Excitable Cells\" (MBExC), University of Göttingen, Göttingen, Germany; Institute of Computer Science, University of Göttingen, Göttingen, Germany; Collaborative Research Center CRC 1690 \"Disease Mechanisms and Functional Restoration of Sensory and Motor Systems\", University of Göttingen, 37075, Göttingen, Germany",
+                "email": "martin.schilling@med.uni-goettingen.de",
+                "orcid": "0000-0003-3639-3187",
+                "name": "Martin Schilling",
+                "github_user": "schilling40"
+            }
+        ],
+        "tags": [
+            "3d",
+            "light-sheet",
+            "fluorescence-light-microscopy",
+            "cochlea",
+            "unet",
+            "pytorch",
+            "cochlea-net",
+            "detection",
+            "synapses",
+            "ribbon-synapses",
+            "ctbp2"
+        ],
+        "version": "1",
+        "format_version": "0.5.10",
+        "type": "model",
+        "documentation": "README.md",
+        "inputs": [
+            {
+                "id": "raw",
+                "description": "Light-sheet volume of the CtBP2 channel at 0.38 um voxel size.",
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "CtBP2"
+                        ]
+                    },
+                    {
+                        "size": {
+                            "min": 40,
+                            "step": 8
+                        },
+                        "id": "z",
+                        "type": "space",
+                        "unit": "micrometer",
+                        "scale": 0.38
+                    },
+                    {
+                        "size": {
+                            "min": 144,
+                            "step": 16
+                        },
+                        "id": "y",
+                        "type": "space",
+                        "unit": "micrometer",
+                        "scale": 0.38
+                    },
+                    {
+                        "size": {
+                            "min": 144,
+                            "step": 16
+                        },
+                        "id": "x",
+                        "type": "space",
+                        "unit": "micrometer",
+                        "scale": 0.38
+                    }
+                ],
+                "test_tensor": {
+                    "source": "test_input.npy",
+                    "sha256": "a6726796b72d249034045bed9f5c943e06e9e95588fcf103f8015fcb51dfa344"
+                },
+                "sample_tensor": {
+                    "source": "sample_input.tif",
+                    "sha256": "180fa71a7de7158fe6294b69dfaca154f4ab81cf34409cc4f77ff9ff7b5b6676"
+                },
+                "preprocessing": [
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    },
+                    {
+                        "id": "zero_mean_unit_variance",
+                        "kwargs": {
+                            "axes": [
+                                "z",
+                                "y",
+                                "x"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    }
+                ]
+            }
+        ],
+        "outputs": [
+            {
+                "id": "heatmap",
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "synapse_heatmap"
+                        ]
+                    },
+                    {
+                        "halo": 16,
+                        "size": {
+                            "tensor_id": "raw",
+                            "axis_id": "z"
+                        },
+                        "id": "z",
+                        "type": "space",
+                        "unit": "micrometer",
+                        "scale": 0.38
+                    },
+                    {
+                        "halo": 64,
+                        "size": {
+                            "tensor_id": "raw",
+                            "axis_id": "y"
+                        },
+                        "id": "y",
+                        "type": "space",
+                        "unit": "micrometer",
+                        "scale": 0.38
+                    },
+                    {
+                        "halo": 64,
+                        "size": {
+                            "tensor_id": "raw",
+                            "axis_id": "x"
+                        },
+                        "id": "x",
+                        "type": "space",
+                        "unit": "micrometer",
+                        "scale": 0.38
+                    }
+                ],
+                "test_tensor": {
+                    "source": "test_output.npy",
+                    "sha256": "2bb6ee723dc1ebce63f9589503cd5c259e9640295560c51b806b259821cc7a5a"
+                },
+                "sample_tensor": {
+                    "source": "sample_output.tif",
+                    "sha256": "0efc0576c3df341ed7c427323f04e37f52be40206074a3544218cebe70b2dc92"
+                },
+                "data": {
+                    "type": "float32",
+                    "range": [
+                        null,
+                        null
+                    ]
+                }
+            }
+        ],
+        "timestamp": "2025-06-14T22:00:00+00:00",
+        "weights": {
+            "pytorch_state_dict": {
+                "source": "weights.pt",
+                "sha256": "37c435e34665df08b67673835f5fa0e69388d99fe3a46717f5d052a19a749856",
+                "architecture": {
+                    "source": "unet.py",
+                    "sha256": "2f3fdc10ca7922afa377250e7622326f4285b94ef7fc90bff09c171cffe1f349",
+                    "callable": "AnisotropicUNet",
+                    "kwargs": {
+                        "in_channels": 1,
+                        "out_channels": 1,
+                        "scale_factors": [
+                            [
+                                1,
+                                2,
+                                2
+                            ],
+                            [
+                                2,
+                                2,
+                                2
+                            ],
+                            [
+                                2,
+                                2,
+                                2
+                            ],
+                            [
+                                2,
+                                2,
+                                2
+                            ]
+                        ],
+                        "initial_features": 32,
+                        "gain": 2,
+                        "final_activation": null,
+                        "return_side_outputs": false,
+                        "anisotropic_kernel": false,
+                        "postprocessing": null
+                    }
+                },
+                "pytorch_version": "2.12.1"
+            }
+        },
+        "config": {
+            "bioimageio": {
+                "architecture_type": "3D U-Net",
+                "modality": "light-sheet fluorescence microscopy of cleared tissue",
+                "target_structure": [
+                    "ribbon synapses"
+                ],
+                "task": "object detection",
+                "model_parameter_count": 21356769,
+                "training": {
+                    "training_preprocessing": "None. The network starts with an instance normalization.",
+                    "training_batch_size": 32.0,
+                    "initial_learning_rate": 0.0001,
+                    "loss_function": "torch.nn.MSELoss"
+                }
+            },
+            "cochlea_net": {
+                "source_checkpoint": "synapse_detection_model_v3.pt"
+            }
+        }
+    },
+    "rdf_yaml_sha256": "9306967b8da1e73409f2b37954506dd208fcf3e73a901fe9df688b6879839613",
+    "status": "untested"
+}
