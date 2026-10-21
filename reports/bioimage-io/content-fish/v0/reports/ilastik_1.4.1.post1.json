@@ -1,0 +1,125 @@
+{
+    "badge": null,
+    "details": {
+        "conda_list": null,
+        "details": [
+            {
+                "conda_compare": null,
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "sample_input.tif": "fd209413a8e92a2e5af7842fa12eef1fa3ac21ccbcc04cb4d8f5d3381f1248c4",
+                        "sample_output.tif": "cd70b7c767c658afb9118280d29c36c9d682631cd2dda3102d8cbdd0c81ec035",
+                        "test_input.npy": "842befdb8f771fc3ba688b8b5ca1d34042e7d850c915239867d20fc6ef80ab94",
+                        "test_output.npy": "1c471e132892e0e7e1d4eba59c32a7e0dc4d4e9f5f2740ad36b9a2512f5d7912",
+                        "unet.py": "2f3fdc10ca7922afa377250e7622326f4285b94ef7fc90bff09c171cffe1f349",
+                        "weights.pt": "8c345996ea30256eb479553b0121a4f2ea978d11b596c19477881b67f8174a09"
+                    },
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/content-fish/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Created `InvalidDescr` object.",
+                "recommended_env": null,
+                "status": "failed",
+                "warnings": []
+            },
+            {
+                "conda_compare": null,
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "sample_input.tif": "fd209413a8e92a2e5af7842fa12eef1fa3ac21ccbcc04cb4d8f5d3381f1248c4",
+                        "sample_output.tif": "cd70b7c767c658afb9118280d29c36c9d682631cd2dda3102d8cbdd0c81ec035",
+                        "test_input.npy": "842befdb8f771fc3ba688b8b5ca1d34042e7d850c915239867d20fc6ef80ab94",
+                        "test_output.npy": "1c471e132892e0e7e1d4eba59c32a7e0dc4d4e9f5f2740ad36b9a2512f5d7912",
+                        "unet.py": "2f3fdc10ca7922afa377250e7622326f4285b94ef7fc90bff09c171cffe1f349",
+                        "weights.pt": "8c345996ea30256eb479553b0121a4f2ea978d11b596c19477881b67f8174a09"
+                    },
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/content-fish/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [
+                    {
+                        "loc": [
+                            "inputs",
+                            0
+                        ],
+                        "msg": "Value error, <COMPRESSION.ADOBE_DEFLATE: 8> requires the 'imagecodecs' package",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "value_error",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "outputs",
+                            0
+                        ],
+                        "msg": "Value error, <COMPRESSION.ADOBE_DEFLATE: 8> requires the 'imagecodecs' package",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "value_error",
+                        "with_traceback": false
+                    }
+                ],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.4",
+                "recommended_env": null,
+                "status": "failed",
+                "warnings": [
+                    {
+                        "loc": [
+                            "git_repo"
+                        ],
+                        "msg": "URL redirected (301): consider updating https://github.com/computational-cell-analytics/flamingo-tools with new location: https://github.com/computational-cell-analytics/cochlea-net",
+                        "severity": 30,
+                        "type": "warning"
+                    }
+                ]
+            },
+            {
+                "conda_compare": null,
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "type"
+                ],
+                "name": "Has expected resource type",
+                "recommended_env": null,
+                "status": "passed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.core",
+                "0.8.0",
+                "",
+                ""
+            ],
+            [
+                "bioimageio.spec",
+                "0.5.4.1",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.5.4",
+        "id": null,
+        "name": "bioimageio format validation",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/content-fish/files/rdf.yaml?version=v0",
+        "status": "failed",
+        "type": "model"
+    },
+    "error": "\n|        ❌        |                             bioimageio format validation                             |\n|       ---       |                                         ---                                          |\n| status          | failed                                                                               |\n| source          | https://hypha.aicell.io/bioimage-io/artifacts/content-fish/files/rdf.yaml?version=v0 |\n| format version  | model 0.5.4                                                                          |\n| bioimageio.core | 0.8.0                                                                                |\n| bioimageio.spec | 0.5.4.1                                                                              |\n\n|     |                 Location                |                                                                                        Details                                                                                        |\n| --- |                   ---                   |                                                                                          ---                                                                                          |\n| ❌   |                                         | Created `InvalidDescr` object.                                                                                                                                                        |\n| 🔍   | `context:perform_io_checks`             | True                                                                                                                                                                                  |\n| 🔍   | `context:root`                          | https://hypha.aicell.io/bioimage-io/artifacts/content-fish/files?version=v0                                                                                                           |\n| 🔍   | `context:known_files.test_input.npy`    | 842befdb8f771fc3ba688b8b5ca1d34042e7d850c915239867d20fc6ef80ab94                                                                                                                      |\n| 🔍   | `context:known_files.sample_input.tif`  | fd209413a8e92a2e5af7842fa12eef1fa3ac21ccbcc04cb4d8f5d3381f1248c4                                                                                                                      |\n| 🔍   | `context:known_files.test_output.npy`   | 1c471e132892e0e7e1d4eba59c32a7e0dc4d4e9f5f2740ad36b9a2512f5d7912                                                                                                                      |\n| 🔍   | `context:known_files.sample_output.tif` | cd70b7c767c658afb9118280d29c36c9d682631cd2dda3102d8cbdd0c81ec035                                                                                                                      |\n| 🔍   | `context:known_files.unet.py`           | 2f3fdc10ca7922afa377250e7622326f4285b94ef7fc90bff09c171cffe1f349                                                                                                                      |\n| 🔍   | `context:known_files.weights.pt`        | 8c345996ea30256eb479553b0121a4f2ea978d11b596c19477881b67f8174a09                                                                                                                      |\n| ❌   |                                         | bioimageio.spec format validation model 0.5.4                                                                                                                                         |\n| ❌   | `inputs.0`                              | Value error, <COMPRESSION.ADOBE_DEFLATE: 8> requires the 'imagecodecs' package                                                                                                        |\n|     |                                         |                                                                                                                                                                                       |\n| ❌   | `outputs.0`                             | Value error, <COMPRESSION.ADOBE_DEFLATE: 8> requires the 'imagecodecs' package                                                                                                        |\n|     |                                         |                                                                                                                                                                                       |\n| ⚠   | `git_repo`                              | URL redirected (301): consider updating https://github.com/computational-cell-analytics/flamingo-tools with new location: https://github.com/computational-cell-analytics/cochlea-net |\n| ✔️  | `type`                                  | Has expected resource type                                                                                                                                                            |\n",
+    "links": [
+        "ilastik/ilastik"
+    ],
+    "status": "failed",
+    "tool": "ilastik",
+    "tool_version": "1.4.1.post1"
+}

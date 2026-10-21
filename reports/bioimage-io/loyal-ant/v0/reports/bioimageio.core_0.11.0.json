@@ -1,0 +1,109 @@
+{
+    "badge": null,
+    "details": {
+        "details": [
+            {
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "README.md": "73fc00198a548280714a7ced57b5d4cf6f48e98451bd351702bd0859de884bab",
+                        "cover.png": "8d35e2c1f32e6ddf8884cbe7642e208fbe8aaa5ff7a1f0e583a907397abade67",
+                        "https://github.com/computational-cell-analytics/flamingo-tools": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/loyal-ant/files/README.md?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/loyal-ant/files/cover.png?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/loyal-ant/files/sample_input.tif?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/loyal-ant/files/sample_output.tif?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/loyal-ant/files/test_input.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/loyal-ant/files/test_output.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/loyal-ant/files/unet.py?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/loyal-ant/files/weights.pt?version=v0": null,
+                        "sample_input.tif": "180fa71a7de7158fe6294b69dfaca154f4ab81cf34409cc4f77ff9ff7b5b6676",
+                        "sample_output.tif": "0efc0576c3df341ed7c427323f04e37f52be40206074a3544218cebe70b2dc92",
+                        "test_input.npy": "a6726796b72d249034045bed9f5c943e06e9e95588fcf103f8015fcb51dfa344",
+                        "test_output.npy": "2bb6ee723dc1ebce63f9589503cd5c259e9640295560c51b806b259821cc7a5a",
+                        "unet.py": "2f3fdc10ca7922afa377250e7622326f4285b94ef7fc90bff09c171cffe1f349",
+                        "weights.pt": "37c435e34665df08b67673835f5fa0e69388d99fe3a46717f5d052a19a749856"
+                    },
+                    "original_source_name": null,
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/loyal-ant/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Successfully created `ModelDescr` instance.",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.12",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Found existing conda environment 'b6b5ebd79f47045c80afb43cbfe8cf8d074866762d4134bed55b54447af21d9a'",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [
+                    {
+                        "loc": [],
+                        "msg": "Value error, Error calling function `package_file_descr_serializer`: TypeError: 'index_key' is expected to be an integer or a string, got 'SerializationInfo(include=None, exclude=None, context=None, mode='json', by_alias=False, exclude_unset=True, exclude_defaults=False, exclude_none=False, exclude_computed_fields=False, round_trip=False, serialize_as_any=False)'",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "value_error",
+                        "with_traceback": false
+                    }
+                ],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.12",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "failed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.spec",
+                "0.5.12.0",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.5.12",
+        "id": null,
+        "metadata_completeness": 0.504950495049505,
+        "name": "bioimageio format validation",
+        "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/loyal-ant/files/rdf.yaml?version=v0",
+        "status": "valid-format",
+        "traceback": null,
+        "type": "model",
+        "version": "1",
+        "warnings": null
+    },
+    "error": "Value error, Error calling function `package_file_descr_serializer`: TypeError: 'index_key' is expected to be an integer or a string, got 'SerializationInfo(include=None, exclude=None, context=None, mode='json', by_alias=False, exclude_unset=True, exclude_defaults=False, exclude_none=False, exclude_computed_fields=False, round_trip=False, serialize_as_any=False)'",
+    "links": [],
+    "score": 0.5,
+    "status": "failed",
+    "tool": "bioimageio.core",
+    "tool_version": "0.11.0"
+}

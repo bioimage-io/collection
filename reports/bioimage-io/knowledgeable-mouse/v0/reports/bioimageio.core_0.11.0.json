@@ -1,0 +1,109 @@
+{
+    "badge": null,
+    "details": {
+        "details": [
+            {
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "README.md": "551a4f491e728428155ad77115ad41f142c032f8ef7b8022e2b4f7c36bfef3b8",
+                        "cover.png": "b65170031d14b2e7a38fa5ab833525c7356297e059e2a331c52942da7bbbcd31",
+                        "https://github.com/computational-cell-analytics/flamingo-tools": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/knowledgeable-mouse/files/README.md?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/knowledgeable-mouse/files/cover.png?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/knowledgeable-mouse/files/sample_input.tif?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/knowledgeable-mouse/files/sample_output.tif?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/knowledgeable-mouse/files/test_input.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/knowledgeable-mouse/files/test_output.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/knowledgeable-mouse/files/unet.py?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/knowledgeable-mouse/files/weights.pt?version=v0": null,
+                        "sample_input.tif": "9837815fd45856fe6b0949027e23d34e73696591ad1402667203d009dd2662c9",
+                        "sample_output.tif": "2adca9370159c35b5139dd374fed671fbf4cf92a3ec934dc4a5742a507dec2c7",
+                        "test_input.npy": "687b58147db5fc4fe83ae31a7f7dd8f0fa81f199b91207827d82b2ed8ee47ece",
+                        "test_output.npy": "a52c560aef142b776092aa4837d6bddf0925db6341e1c8cd704c4267e64d18ac",
+                        "unet.py": "2f3fdc10ca7922afa377250e7622326f4285b94ef7fc90bff09c171cffe1f349",
+                        "weights.pt": "fb25affdbf7b05d9ea02458e44125866ceb93dadcc35389ae7d2c7c368887f52"
+                    },
+                    "original_source_name": null,
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/knowledgeable-mouse/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Successfully created `ModelDescr` instance.",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.12",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Created conda environment 'b6b5ebd79f47045c80afb43cbfe8cf8d074866762d4134bed55b54447af21d9a'",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [
+                    {
+                        "loc": [],
+                        "msg": "Value error, Error calling function `package_file_descr_serializer`: TypeError: 'index_key' is expected to be an integer or a string, got 'SerializationInfo(include=None, exclude=None, context=None, mode='json', by_alias=False, exclude_unset=True, exclude_defaults=False, exclude_none=False, exclude_computed_fields=False, round_trip=False, serialize_as_any=False)'",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "value_error",
+                        "with_traceback": false
+                    }
+                ],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.12",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "failed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.spec",
+                "0.5.12.0",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.5.12",
+        "id": null,
+        "metadata_completeness": 0.5346534653465347,
+        "name": "bioimageio format validation",
+        "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/knowledgeable-mouse/files/rdf.yaml?version=v0",
+        "status": "valid-format",
+        "traceback": null,
+        "type": "model",
+        "version": "1",
+        "warnings": null
+    },
+    "error": "Value error, Error calling function `package_file_descr_serializer`: TypeError: 'index_key' is expected to be an integer or a string, got 'SerializationInfo(include=None, exclude=None, context=None, mode='json', by_alias=False, exclude_unset=True, exclude_defaults=False, exclude_none=False, exclude_computed_fields=False, round_trip=False, serialize_as_any=False)'",
+    "links": [],
+    "score": 0.5,
+    "status": "failed",
+    "tool": "bioimageio.core",
+    "tool_version": "0.11.0"
+}
