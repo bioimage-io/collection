@@ -1,0 +1,137 @@
+{
+    "badge": null,
+    "details": {
+        "conda_list": null,
+        "details": [
+            {
+                "conda_compare": null,
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "sample_input.tif": "65e363514271c6fa87477812af8a9db7438fa924b06f06ad4cbf5edc15cb51ef",
+                        "sample_output.tif": "bcbf473b9a5a13827d658f32c37305806aa7dbd2c51eb3bec2038de80d448daf",
+                        "test_input.npy": "d973868be53b51df9c7179f069891619fe39ecd642db7eeb2c01f958de1a3b5a",
+                        "test_output.npy": "c51ef14c236a7aafc9cf5b994fbe3eaa7fe29ba7d476f482a3fe83e295fb7ea3",
+                        "unet.py": "2f3fdc10ca7922afa377250e7622326f4285b94ef7fc90bff09c171cffe1f349",
+                        "weights.pt": "77785144b839af15f95f2542946f04fab86061dd793a76798fdd8169eee60014"
+                    },
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/confused-cow/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Created `InvalidDescr` object.",
+                "recommended_env": null,
+                "status": "failed",
+                "warnings": []
+            },
+            {
+                "conda_compare": null,
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "sample_input.tif": "65e363514271c6fa87477812af8a9db7438fa924b06f06ad4cbf5edc15cb51ef",
+                        "sample_output.tif": "bcbf473b9a5a13827d658f32c37305806aa7dbd2c51eb3bec2038de80d448daf",
+                        "test_input.npy": "d973868be53b51df9c7179f069891619fe39ecd642db7eeb2c01f958de1a3b5a",
+                        "test_output.npy": "c51ef14c236a7aafc9cf5b994fbe3eaa7fe29ba7d476f482a3fe83e295fb7ea3",
+                        "unet.py": "2f3fdc10ca7922afa377250e7622326f4285b94ef7fc90bff09c171cffe1f349",
+                        "weights.pt": "77785144b839af15f95f2542946f04fab86061dd793a76798fdd8169eee60014"
+                    },
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/confused-cow/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [
+                    {
+                        "loc": [
+                            "inputs",
+                            0
+                        ],
+                        "msg": "Value error, <COMPRESSION.ADOBE_DEFLATE: 8> requires the 'imagecodecs' package",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "value_error",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "outputs",
+                            0
+                        ],
+                        "msg": "Value error, <COMPRESSION.ADOBE_DEFLATE: 8> requires the 'imagecodecs' package",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "value_error",
+                        "with_traceback": false
+                    }
+                ],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.4",
+                "recommended_env": null,
+                "status": "failed",
+                "warnings": [
+                    {
+                        "loc": [
+                            "git_repo"
+                        ],
+                        "msg": "URL redirected (301): consider updating https://github.com/computational-cell-analytics/flamingo-tools with new location: https://github.com/computational-cell-analytics/cochlea-net",
+                        "severity": 30,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "inputs",
+                            0,
+                            "test_tensor",
+                            "source",
+                            "RelativeFilePath"
+                        ],
+                        "msg": "Failed to validate URL 'https://hypha.aicell.io/bioimage-io/artifacts/confused-cow/files/test_input.npy?version=v0': HTTPSConnectionPool(host='hypha.aicell.io', port=443): Read timed out. (read timeout=3)\nrequest: <PreparedRequest [GET]>\nresponse: None",
+                        "severity": 30,
+                        "type": "warning"
+                    }
+                ]
+            },
+            {
+                "conda_compare": null,
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "type"
+                ],
+                "name": "Has expected resource type",
+                "recommended_env": null,
+                "status": "passed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.core",
+                "0.8.0",
+                "",
+                ""
+            ],
+            [
+                "bioimageio.spec",
+                "0.5.4.1",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.5.4",
+        "id": null,
+        "name": "bioimageio format validation",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/confused-cow/files/rdf.yaml?version=v0",
+        "status": "failed",
+        "type": "model"
+    },
+    "error": "\n|        ❌        |                             bioimageio format validation                             |\n|       ---       |                                         ---                                          |\n| status          | failed                                                                               |\n| source          | https://hypha.aicell.io/bioimage-io/artifacts/confused-cow/files/rdf.yaml?version=v0 |\n| format version  | model 0.5.4                                                                          |\n| bioimageio.core | 0.8.0                                                                                |\n| bioimageio.spec | 0.5.4.1                                                                              |\n\n|     |                     Location                     |                                                                                                   Details                                                                                                    |\n| --- |                       ---                        |                                                                                                     ---                                                                                                      |\n| ❌   |                                                  | Created `InvalidDescr` object.                                                                                                                                                                               |\n| 🔍   | `context:perform_io_checks`                      | True                                                                                                                                                                                                         |\n| 🔍   | `context:root`                                   | https://hypha.aicell.io/bioimage-io/artifacts/confused-cow/files?version=v0                                                                                                                                  |\n| 🔍   | `context:known_files.test_input.npy`             | d973868be53b51df9c7179f069891619fe39ecd642db7eeb2c01f958de1a3b5a                                                                                                                                             |\n| 🔍   | `context:known_files.sample_input.tif`           | 65e363514271c6fa87477812af8a9db7438fa924b06f06ad4cbf5edc15cb51ef                                                                                                                                             |\n| 🔍   | `context:known_files.test_output.npy`            | c51ef14c236a7aafc9cf5b994fbe3eaa7fe29ba7d476f482a3fe83e295fb7ea3                                                                                                                                             |\n| 🔍   | `context:known_files.sample_output.tif`          | bcbf473b9a5a13827d658f32c37305806aa7dbd2c51eb3bec2038de80d448daf                                                                                                                                             |\n| 🔍   | `context:known_files.unet.py`                    | 2f3fdc10ca7922afa377250e7622326f4285b94ef7fc90bff09c171cffe1f349                                                                                                                                             |\n| 🔍   | `context:known_files.weights.pt`                 | 77785144b839af15f95f2542946f04fab86061dd793a76798fdd8169eee60014                                                                                                                                             |\n| ❌   |                                                  | bioimageio.spec format validation model 0.5.4                                                                                                                                                                |\n| ❌   | `inputs.0`                                       | Value error, <COMPRESSION.ADOBE_DEFLATE: 8> requires the 'imagecodecs' package                                                                                                                               |\n|     |                                                  |                                                                                                                                                                                                              |\n| ❌   | `outputs.0`                                      | Value error, <COMPRESSION.ADOBE_DEFLATE: 8> requires the 'imagecodecs' package                                                                                                                               |\n|     |                                                  |                                                                                                                                                                                                              |\n| ⚠   | `git_repo`                                       | URL redirected (301): consider updating https://github.com/computational-cell-analytics/flamingo-tools with new location: https://github.com/computational-cell-analytics/cochlea-net                        |\n| ⚠   | `inputs.0.test_tensor.source.(RelativeFilePath)` | Failed to validate URL 'https://hypha.aicell.io/bioimage-io/artifacts/confused-cow/files/test_input.npy?version=v0': HTTPSConnectionPool(host='hypha.aicell.io', port=443): Read timed out. (read timeout=3) |\n|     |                                                  | request: <PreparedRequest [GET]>                                                                                                                                                                             |\n|     |                                                  | response: None                                                                                                                                                                                               |\n| ✔️  | `type`                                           | Has expected resource type                                                                                                                                                                                   |\n",
+    "links": [
+        "ilastik/ilastik"
+    ],
+    "status": "failed",
+    "tool": "ilastik",
+    "tool_version": "1.4.1.post1"
+}

@@ -1,0 +1,137 @@
+{
+    "badge": null,
+    "details": {
+        "conda_list": null,
+        "details": [
+            {
+                "conda_compare": null,
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "sample_input.tif": "9837815fd45856fe6b0949027e23d34e73696591ad1402667203d009dd2662c9",
+                        "sample_output.tif": "2adca9370159c35b5139dd374fed671fbf4cf92a3ec934dc4a5742a507dec2c7",
+                        "test_input.npy": "687b58147db5fc4fe83ae31a7f7dd8f0fa81f199b91207827d82b2ed8ee47ece",
+                        "test_output.npy": "a52c560aef142b776092aa4837d6bddf0925db6341e1c8cd704c4267e64d18ac",
+                        "unet.py": "2f3fdc10ca7922afa377250e7622326f4285b94ef7fc90bff09c171cffe1f349",
+                        "weights.pt": "fb25affdbf7b05d9ea02458e44125866ceb93dadcc35389ae7d2c7c368887f52"
+                    },
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/knowledgeable-mouse/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Created `InvalidDescr` object.",
+                "recommended_env": null,
+                "status": "failed",
+                "warnings": []
+            },
+            {
+                "conda_compare": null,
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "sample_input.tif": "9837815fd45856fe6b0949027e23d34e73696591ad1402667203d009dd2662c9",
+                        "sample_output.tif": "2adca9370159c35b5139dd374fed671fbf4cf92a3ec934dc4a5742a507dec2c7",
+                        "test_input.npy": "687b58147db5fc4fe83ae31a7f7dd8f0fa81f199b91207827d82b2ed8ee47ece",
+                        "test_output.npy": "a52c560aef142b776092aa4837d6bddf0925db6341e1c8cd704c4267e64d18ac",
+                        "unet.py": "2f3fdc10ca7922afa377250e7622326f4285b94ef7fc90bff09c171cffe1f349",
+                        "weights.pt": "fb25affdbf7b05d9ea02458e44125866ceb93dadcc35389ae7d2c7c368887f52"
+                    },
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/knowledgeable-mouse/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [
+                    {
+                        "loc": [
+                            "inputs",
+                            0
+                        ],
+                        "msg": "Value error, <COMPRESSION.ADOBE_DEFLATE: 8> requires the 'imagecodecs' package",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "value_error",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "outputs",
+                            0
+                        ],
+                        "msg": "Value error, <COMPRESSION.ADOBE_DEFLATE: 8> requires the 'imagecodecs' package",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "value_error",
+                        "with_traceback": false
+                    }
+                ],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.4",
+                "recommended_env": null,
+                "status": "failed",
+                "warnings": [
+                    {
+                        "loc": [
+                            "git_repo"
+                        ],
+                        "msg": "URL redirected (301): consider updating https://github.com/computational-cell-analytics/flamingo-tools with new location: https://github.com/computational-cell-analytics/cochlea-net",
+                        "severity": 30,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "inputs",
+                            0,
+                            "test_tensor",
+                            "source",
+                            "RelativeFilePath"
+                        ],
+                        "msg": "Failed to validate URL 'https://hypha.aicell.io/bioimage-io/artifacts/knowledgeable-mouse/files/test_input.npy?version=v0': HTTPSConnectionPool(host='hypha.aicell.io', port=443): Read timed out. (read timeout=3)\nrequest: <PreparedRequest [GET]>\nresponse: None",
+                        "severity": 30,
+                        "type": "warning"
+                    }
+                ]
+            },
+            {
+                "conda_compare": null,
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "type"
+                ],
+                "name": "Has expected resource type",
+                "recommended_env": null,
+                "status": "passed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.core",
+                "0.8.0",
+                "",
+                ""
+            ],
+            [
+                "bioimageio.spec",
+                "0.5.4.1",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.5.4",
+        "id": null,
+        "name": "bioimageio format validation",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/knowledgeable-mouse/files/rdf.yaml?version=v0",
+        "status": "failed",
+        "type": "model"
+    },
+    "error": "\n|        ❌        |                                 bioimageio format validation                                |\n|       ---       |                                             ---                                             |\n| status          | failed                                                                                      |\n| source          | https://hypha.aicell.io/bioimage-io/artifacts/knowledgeable-mouse/files/rdf.yaml?version=v0 |\n| format version  | model 0.5.4                                                                                 |\n| bioimageio.core | 0.8.0                                                                                       |\n| bioimageio.spec | 0.5.4.1                                                                                     |\n\n|     |                     Location                     |                                                                                                       Details                                                                                                       |\n| --- |                       ---                        |                                                                                                         ---                                                                                                         |\n| ❌   |                                                  | Created `InvalidDescr` object.                                                                                                                                                                                      |\n| 🔍   | `context:perform_io_checks`                      | True                                                                                                                                                                                                                |\n| 🔍   | `context:root`                                   | https://hypha.aicell.io/bioimage-io/artifacts/knowledgeable-mouse/files?version=v0                                                                                                                                  |\n| 🔍   | `context:known_files.test_input.npy`             | 687b58147db5fc4fe83ae31a7f7dd8f0fa81f199b91207827d82b2ed8ee47ece                                                                                                                                                    |\n| 🔍   | `context:known_files.sample_input.tif`           | 9837815fd45856fe6b0949027e23d34e73696591ad1402667203d009dd2662c9                                                                                                                                                    |\n| 🔍   | `context:known_files.test_output.npy`            | a52c560aef142b776092aa4837d6bddf0925db6341e1c8cd704c4267e64d18ac                                                                                                                                                    |\n| 🔍   | `context:known_files.sample_output.tif`          | 2adca9370159c35b5139dd374fed671fbf4cf92a3ec934dc4a5742a507dec2c7                                                                                                                                                    |\n| 🔍   | `context:known_files.unet.py`                    | 2f3fdc10ca7922afa377250e7622326f4285b94ef7fc90bff09c171cffe1f349                                                                                                                                                    |\n| 🔍   | `context:known_files.weights.pt`                 | fb25affdbf7b05d9ea02458e44125866ceb93dadcc35389ae7d2c7c368887f52                                                                                                                                                    |\n| ❌   |                                                  | bioimageio.spec format validation model 0.5.4                                                                                                                                                                       |\n| ❌   | `inputs.0`                                       | Value error, <COMPRESSION.ADOBE_DEFLATE: 8> requires the 'imagecodecs' package                                                                                                                                      |\n|     |                                                  |                                                                                                                                                                                                                     |\n| ❌   | `outputs.0`                                      | Value error, <COMPRESSION.ADOBE_DEFLATE: 8> requires the 'imagecodecs' package                                                                                                                                      |\n|     |                                                  |                                                                                                                                                                                                                     |\n| ⚠   | `git_repo`                                       | URL redirected (301): consider updating https://github.com/computational-cell-analytics/flamingo-tools with new location: https://github.com/computational-cell-analytics/cochlea-net                               |\n| ⚠   | `inputs.0.test_tensor.source.(RelativeFilePath)` | Failed to validate URL 'https://hypha.aicell.io/bioimage-io/artifacts/knowledgeable-mouse/files/test_input.npy?version=v0': HTTPSConnectionPool(host='hypha.aicell.io', port=443): Read timed out. (read timeout=3) |\n|     |                                                  | request: <PreparedRequest [GET]>                                                                                                                                                                                    |\n|     |                                                  | response: None                                                                                                                                                                                                      |\n| ✔️  | `type`                                           | Has expected resource type                                                                                                                                                                                          |\n",
+    "links": [
+        "ilastik/ilastik"
+    ],
+    "status": "failed",
+    "tool": "ilastik",
+    "tool_version": "1.4.1.post1"
+}

@@ -1,0 +1,125 @@
+{
+    "badge": null,
+    "details": {
+        "conda_list": null,
+        "details": [
+            {
+                "conda_compare": null,
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "sample_input.tif": "7f1f8d0eb558bfbf644afc773a9cdac7f2d95f29c641e994ddbee427beed9502",
+                        "sample_output.tif": "ffa049cf76ba01af042166c8713b29a77c2d3673cf9891de9b32fde1ffe3671d",
+                        "test_input.npy": "30404d88c4efea5d0e5327c42726d87e41e46ebe8b285ea4c0bab3fa7708e670",
+                        "test_output.npy": "7883b1126ccde1498cdc3be2e01c4959451422c7672e89dfd345672b114c4422",
+                        "unet.py": "2f3fdc10ca7922afa377250e7622326f4285b94ef7fc90bff09c171cffe1f349",
+                        "weights.pt": "2fe193929460a5933550b087c8221950fb92fcf313bb695d94e7c40fed7c0e17"
+                    },
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/nervous-shark/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Created `InvalidDescr` object.",
+                "recommended_env": null,
+                "status": "failed",
+                "warnings": []
+            },
+            {
+                "conda_compare": null,
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "sample_input.tif": "7f1f8d0eb558bfbf644afc773a9cdac7f2d95f29c641e994ddbee427beed9502",
+                        "sample_output.tif": "ffa049cf76ba01af042166c8713b29a77c2d3673cf9891de9b32fde1ffe3671d",
+                        "test_input.npy": "30404d88c4efea5d0e5327c42726d87e41e46ebe8b285ea4c0bab3fa7708e670",
+                        "test_output.npy": "7883b1126ccde1498cdc3be2e01c4959451422c7672e89dfd345672b114c4422",
+                        "unet.py": "2f3fdc10ca7922afa377250e7622326f4285b94ef7fc90bff09c171cffe1f349",
+                        "weights.pt": "2fe193929460a5933550b087c8221950fb92fcf313bb695d94e7c40fed7c0e17"
+                    },
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/nervous-shark/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [
+                    {
+                        "loc": [
+                            "inputs",
+                            0
+                        ],
+                        "msg": "Value error, <COMPRESSION.ADOBE_DEFLATE: 8> requires the 'imagecodecs' package",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "value_error",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "outputs",
+                            0
+                        ],
+                        "msg": "Value error, <COMPRESSION.ADOBE_DEFLATE: 8> requires the 'imagecodecs' package",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "value_error",
+                        "with_traceback": false
+                    }
+                ],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.4",
+                "recommended_env": null,
+                "status": "failed",
+                "warnings": [
+                    {
+                        "loc": [
+                            "git_repo"
+                        ],
+                        "msg": "URL redirected (301): consider updating https://github.com/computational-cell-analytics/flamingo-tools with new location: https://github.com/computational-cell-analytics/cochlea-net",
+                        "severity": 30,
+                        "type": "warning"
+                    }
+                ]
+            },
+            {
+                "conda_compare": null,
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "type"
+                ],
+                "name": "Has expected resource type",
+                "recommended_env": null,
+                "status": "passed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.core",
+                "0.8.0",
+                "",
+                ""
+            ],
+            [
+                "bioimageio.spec",
+                "0.5.4.1",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.5.4",
+        "id": null,
+        "name": "bioimageio format validation",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/nervous-shark/files/rdf.yaml?version=v0",
+        "status": "failed",
+        "type": "model"
+    },
+    "error": "\n|        ❌        |                              bioimageio format validation                             |\n|       ---       |                                          ---                                          |\n| status          | failed                                                                                |\n| source          | https://hypha.aicell.io/bioimage-io/artifacts/nervous-shark/files/rdf.yaml?version=v0 |\n| format version  | model 0.5.4                                                                           |\n| bioimageio.core | 0.8.0                                                                                 |\n| bioimageio.spec | 0.5.4.1                                                                               |\n\n|     |                 Location                |                                                                                        Details                                                                                        |\n| --- |                   ---                   |                                                                                          ---                                                                                          |\n| ❌   |                                         | Created `InvalidDescr` object.                                                                                                                                                        |\n| 🔍   | `context:perform_io_checks`             | True                                                                                                                                                                                  |\n| 🔍   | `context:root`                          | https://hypha.aicell.io/bioimage-io/artifacts/nervous-shark/files?version=v0                                                                                                          |\n| 🔍   | `context:known_files.test_input.npy`    | 30404d88c4efea5d0e5327c42726d87e41e46ebe8b285ea4c0bab3fa7708e670                                                                                                                      |\n| 🔍   | `context:known_files.sample_input.tif`  | 7f1f8d0eb558bfbf644afc773a9cdac7f2d95f29c641e994ddbee427beed9502                                                                                                                      |\n| 🔍   | `context:known_files.test_output.npy`   | 7883b1126ccde1498cdc3be2e01c4959451422c7672e89dfd345672b114c4422                                                                                                                      |\n| 🔍   | `context:known_files.sample_output.tif` | ffa049cf76ba01af042166c8713b29a77c2d3673cf9891de9b32fde1ffe3671d                                                                                                                      |\n| 🔍   | `context:known_files.unet.py`           | 2f3fdc10ca7922afa377250e7622326f4285b94ef7fc90bff09c171cffe1f349                                                                                                                      |\n| 🔍   | `context:known_files.weights.pt`        | 2fe193929460a5933550b087c8221950fb92fcf313bb695d94e7c40fed7c0e17                                                                                                                      |\n| ❌   |                                         | bioimageio.spec format validation model 0.5.4                                                                                                                                         |\n| ❌   | `inputs.0`                              | Value error, <COMPRESSION.ADOBE_DEFLATE: 8> requires the 'imagecodecs' package                                                                                                        |\n|     |                                         |                                                                                                                                                                                       |\n| ❌   | `outputs.0`                             | Value error, <COMPRESSION.ADOBE_DEFLATE: 8> requires the 'imagecodecs' package                                                                                                        |\n|     |                                         |                                                                                                                                                                                       |\n| ⚠   | `git_repo`                              | URL redirected (301): consider updating https://github.com/computational-cell-analytics/flamingo-tools with new location: https://github.com/computational-cell-analytics/cochlea-net |\n| ✔️  | `type`                                  | Has expected resource type                                                                                                                                                            |\n",
+    "links": [
+        "ilastik/ilastik"
+    ],
+    "status": "failed",
+    "tool": "ilastik",
+    "tool_version": "1.4.1.post1"
+}
