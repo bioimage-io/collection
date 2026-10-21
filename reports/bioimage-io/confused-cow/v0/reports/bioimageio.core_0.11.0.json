@@ -1,0 +1,109 @@
+{
+    "badge": null,
+    "details": {
+        "details": [
+            {
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "README.md": "839281b3d9a5ea5b8b39e0a99f760e76cebfe2a3ac8c2c14cd5250bbbb7ee739",
+                        "cover.png": "ca0f21105acea41fa4c4dff627f1ef7df2425a5049b9c3660ef0c0749fe4ae3d",
+                        "https://github.com/computational-cell-analytics/flamingo-tools": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/confused-cow/files/README.md?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/confused-cow/files/cover.png?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/confused-cow/files/sample_input.tif?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/confused-cow/files/sample_output.tif?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/confused-cow/files/test_input.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/confused-cow/files/test_output.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/confused-cow/files/unet.py?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/confused-cow/files/weights.pt?version=v0": null,
+                        "sample_input.tif": "65e363514271c6fa87477812af8a9db7438fa924b06f06ad4cbf5edc15cb51ef",
+                        "sample_output.tif": "bcbf473b9a5a13827d658f32c37305806aa7dbd2c51eb3bec2038de80d448daf",
+                        "test_input.npy": "d973868be53b51df9c7179f069891619fe39ecd642db7eeb2c01f958de1a3b5a",
+                        "test_output.npy": "c51ef14c236a7aafc9cf5b994fbe3eaa7fe29ba7d476f482a3fe83e295fb7ea3",
+                        "unet.py": "2f3fdc10ca7922afa377250e7622326f4285b94ef7fc90bff09c171cffe1f349",
+                        "weights.pt": "77785144b839af15f95f2542946f04fab86061dd793a76798fdd8169eee60014"
+                    },
+                    "original_source_name": null,
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/confused-cow/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Successfully created `ModelDescr` instance.",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.12",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Found existing conda environment 'b6b5ebd79f47045c80afb43cbfe8cf8d074866762d4134bed55b54447af21d9a'",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [
+                    {
+                        "loc": [],
+                        "msg": "Value error, Error calling function `package_file_descr_serializer`: TypeError: 'index_key' is expected to be an integer or a string, got 'SerializationInfo(include=None, exclude=None, context=None, mode='json', by_alias=False, exclude_unset=True, exclude_defaults=False, exclude_none=False, exclude_computed_fields=False, round_trip=False, serialize_as_any=False)'",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "value_error",
+                        "with_traceback": false
+                    }
+                ],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.12",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "failed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.spec",
+                "0.5.12.0",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.5.12",
+        "id": null,
+        "metadata_completeness": 0.5445544554455446,
+        "name": "bioimageio format validation",
+        "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/confused-cow/files/rdf.yaml?version=v0",
+        "status": "valid-format",
+        "traceback": null,
+        "type": "model",
+        "version": "1",
+        "warnings": null
+    },
+    "error": "Value error, Error calling function `package_file_descr_serializer`: TypeError: 'index_key' is expected to be an integer or a string, got 'SerializationInfo(include=None, exclude=None, context=None, mode='json', by_alias=False, exclude_unset=True, exclude_defaults=False, exclude_none=False, exclude_computed_fields=False, round_trip=False, serialize_as_any=False)'",
+    "links": [],
+    "score": 0.5,
+    "status": "failed",
+    "tool": "bioimageio.core",
+    "tool_version": "0.11.0"
+}

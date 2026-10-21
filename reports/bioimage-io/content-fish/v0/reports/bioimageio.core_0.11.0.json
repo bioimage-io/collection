@@ -1,0 +1,109 @@
+{
+    "badge": null,
+    "details": {
+        "details": [
+            {
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "README.md": "aa3ba706bb7f5e6503923d4002346f955a8fcfc4275a6a9e478548ff20a933c0",
+                        "cover.png": "2abcf1a1fd898aca8bcfd6f392e624cca72aaede9396362bf7d980387336a323",
+                        "https://github.com/computational-cell-analytics/flamingo-tools": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/content-fish/files/README.md?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/content-fish/files/cover.png?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/content-fish/files/sample_input.tif?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/content-fish/files/sample_output.tif?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/content-fish/files/test_input.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/content-fish/files/test_output.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/content-fish/files/unet.py?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/content-fish/files/weights.pt?version=v0": null,
+                        "sample_input.tif": "fd209413a8e92a2e5af7842fa12eef1fa3ac21ccbcc04cb4d8f5d3381f1248c4",
+                        "sample_output.tif": "cd70b7c767c658afb9118280d29c36c9d682631cd2dda3102d8cbdd0c81ec035",
+                        "test_input.npy": "842befdb8f771fc3ba688b8b5ca1d34042e7d850c915239867d20fc6ef80ab94",
+                        "test_output.npy": "1c471e132892e0e7e1d4eba59c32a7e0dc4d4e9f5f2740ad36b9a2512f5d7912",
+                        "unet.py": "2f3fdc10ca7922afa377250e7622326f4285b94ef7fc90bff09c171cffe1f349",
+                        "weights.pt": "8c345996ea30256eb479553b0121a4f2ea978d11b596c19477881b67f8174a09"
+                    },
+                    "original_source_name": null,
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/content-fish/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Successfully created `ModelDescr` instance.",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.12",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Found existing conda environment 'b6b5ebd79f47045c80afb43cbfe8cf8d074866762d4134bed55b54447af21d9a'",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [
+                    {
+                        "loc": [],
+                        "msg": "Value error, Error calling function `package_file_descr_serializer`: TypeError: 'index_key' is expected to be an integer or a string, got 'SerializationInfo(include=None, exclude=None, context=None, mode='json', by_alias=False, exclude_unset=True, exclude_defaults=False, exclude_none=False, exclude_computed_fields=False, round_trip=False, serialize_as_any=False)'",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "value_error",
+                        "with_traceback": false
+                    }
+                ],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.12",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "failed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.spec",
+                "0.5.12.0",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.5.12",
+        "id": null,
+        "metadata_completeness": 0.5346534653465347,
+        "name": "bioimageio format validation",
+        "saved_conda_list": "# packages in environment at /usr/share/miniconda/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/content-fish/files/rdf.yaml?version=v0",
+        "status": "valid-format",
+        "traceback": null,
+        "type": "model",
+        "version": "1",
+        "warnings": null
+    },
+    "error": "Value error, Error calling function `package_file_descr_serializer`: TypeError: 'index_key' is expected to be an integer or a string, got 'SerializationInfo(include=None, exclude=None, context=None, mode='json', by_alias=False, exclude_unset=True, exclude_defaults=False, exclude_none=False, exclude_computed_fields=False, round_trip=False, serialize_as_any=False)'",
+    "links": [],
+    "score": 0.5,
+    "status": "failed",
+    "tool": "bioimageio.core",
+    "tool_version": "0.11.0"
+}
