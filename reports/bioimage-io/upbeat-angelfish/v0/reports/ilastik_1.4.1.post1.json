@@ -1,0 +1,170 @@
+{
+    "badge": null,
+    "details": {
+        "conda_list": null,
+        "details": [
+            {
+                "conda_compare": null,
+                "context": {
+                    "file_name": "bioimageio.yaml",
+                    "known_files": {
+                        "checkpoint.pth": "8cb09fe5a783cf12f0c5760ddb7b4bc272b9862ecec4bd53387d13d20da42500",
+                        "environment.yaml": "cc832ec423dc05b226505e0d6dbd5bc53e2a42be520546634f3e20674b1e0c34",
+                        "model.py": "2b00ca9c5d1254637140c9c7f98f13cb681eaee0f3ca014b11f0c161613a3fe2",
+                        "test-input.npy": "07d5659dc701146975b2edc90c40412a31d6aa18affb47364ddef65ae00f65ea",
+                        "test-output.npy": "75a35d863c1a07a0e69e6522b8f0289694cabfa19c5e45a4adc225d6aea75bb0"
+                    },
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/upbeat-angelfish/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Created `InvalidDescr` object.",
+                "recommended_env": null,
+                "status": "failed",
+                "warnings": []
+            },
+            {
+                "conda_compare": null,
+                "context": {
+                    "file_name": "bioimageio.yaml",
+                    "known_files": {
+                        "checkpoint.pth": "8cb09fe5a783cf12f0c5760ddb7b4bc272b9862ecec4bd53387d13d20da42500",
+                        "environment.yaml": "cc832ec423dc05b226505e0d6dbd5bc53e2a42be520546634f3e20674b1e0c34",
+                        "model.py": "2b00ca9c5d1254637140c9c7f98f13cb681eaee0f3ca014b11f0c161613a3fe2",
+                        "test-input.npy": "07d5659dc701146975b2edc90c40412a31d6aa18affb47364ddef65ae00f65ea",
+                        "test-output.npy": "75a35d863c1a07a0e69e6522b8f0289694cabfa19c5e45a4adc225d6aea75bb0"
+                    },
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/upbeat-angelfish/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [
+                    {
+                        "loc": [
+                            "covers",
+                            0,
+                            "function-after[val_func(), function-after[validate_file(), lax-or-strict[lax=union[json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]],function-after[path_validator(), str]],strict=json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]]]]]"
+                        ],
+                        "msg": "Input is not a valid path for <class 'pathlib.Path'>",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "covers",
+                            0,
+                            "RelativeFilePath"
+                        ],
+                        "msg": "Input is not a valid path for <class 'pathlib.PurePath'>",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "covers",
+                            0,
+                            "function-after[HttpUrl(), str]"
+                        ],
+                        "msg": "Input should be a valid string",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "string_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "documentation",
+                            "function-after[val_func(), function-after[validate_file(), lax-or-strict[lax=union[json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]],function-after[path_validator(), str]],strict=json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]]]]]"
+                        ],
+                        "msg": "Input is not a valid path for <class 'pathlib.Path'>",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "documentation",
+                            "RelativeFilePath"
+                        ],
+                        "msg": "Input is not a valid path for <class 'pathlib.PurePath'>",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "documentation",
+                            "function-after[HttpUrl(), str]"
+                        ],
+                        "msg": "Input should be a valid string",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "string_type",
+                        "with_traceback": false
+                    }
+                ],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.4",
+                "recommended_env": null,
+                "status": "failed",
+                "warnings": [
+                    {
+                        "loc": [
+                            "description"
+                        ],
+                        "msg": "Description longer than 512 characters.",
+                        "severity": 30,
+                        "type": "warning"
+                    }
+                ]
+            },
+            {
+                "conda_compare": null,
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "type"
+                ],
+                "name": "Has expected resource type",
+                "recommended_env": null,
+                "status": "passed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.spec",
+                "0.5.4.1",
+                "",
+                ""
+            ],
+            [
+                "bioimageio.core",
+                "0.8.0",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.5.4",
+        "id": "upbeat-angelfish",
+        "name": "bioimageio format validation",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/upbeat-angelfish/files/bioimageio.yaml?version=v0",
+        "status": "failed",
+        "type": "model"
+    },
+    "error": "\n|        ❌        |                                   bioimageio format validation                                  |\n|       ---       |                                               ---                                               |\n| status          | failed                                                                                          |\n| source          | https://hypha.aicell.io/bioimage-io/artifacts/upbeat-angelfish/files/bioimageio.yaml?version=v0 |\n| id              | upbeat-angelfish                                                                                |\n| format version  | model 0.5.4                                                                                     |\n| bioimageio.spec | 0.5.4.1                                                                                         |\n| bioimageio.core | 0.8.0                                                                                           |\n\n|     |                Location                |                                     Details                                     |\n| --- |                  ---                   |                                       ---                                       |\n| ❌   |                                        | Created `InvalidDescr` object.                                                  |\n| 🔍   | `context:perform_io_checks`            | True                                                                            |\n| 🔍   | `context:root`                         | https://hypha.aicell.io/bioimage-io/artifacts/upbeat-angelfish/files?version=v0 |\n| 🔍   | `context:known_files.test-input.npy`   | 07d5659dc701146975b2edc90c40412a31d6aa18affb47364ddef65ae00f65ea                |\n| 🔍   | `context:known_files.test-output.npy`  | 75a35d863c1a07a0e69e6522b8f0289694cabfa19c5e45a4adc225d6aea75bb0                |\n| 🔍   | `context:known_files.model.py`         | 2b00ca9c5d1254637140c9c7f98f13cb681eaee0f3ca014b11f0c161613a3fe2                |\n| 🔍   | `context:known_files.environment.yaml` | cc832ec423dc05b226505e0d6dbd5bc53e2a42be520546634f3e20674b1e0c34                |\n| 🔍   | `context:known_files.checkpoint.pth`   | 8cb09fe5a783cf12f0c5760ddb7b4bc272b9862ecec4bd53387d13d20da42500                |\n| ❌   |                                        | bioimageio.spec format validation model 0.5.4                                   |\n| ❌   | `covers.0`                             | Input is not a valid path for <class 'pathlib.Path'>                            |\n|     |                                        |                                                                                 |\n| ❌   | `covers.0.(RelativeFilePath)`          | Input is not a valid path for <class 'pathlib.PurePath'>                        |\n|     |                                        |                                                                                 |\n| ❌   | `covers.0`                             | Input should be a valid string                                                  |\n|     |                                        |                                                                                 |\n| ❌   | `documentation`                        | Input is not a valid path for <class 'pathlib.Path'>                            |\n|     |                                        |                                                                                 |\n| ❌   | `documentation.(RelativeFilePath)`     | Input is not a valid path for <class 'pathlib.PurePath'>                        |\n|     |                                        |                                                                                 |\n| ❌   | `documentation`                        | Input should be a valid string                                                  |\n|     |                                        |                                                                                 |\n| ⚠   | `description`                          | Description longer than 512 characters.                                         |\n| ✔️  | `type`                                 | Has expected resource type                                                      |\n",
+    "links": [
+        "ilastik/ilastik"
+    ],
+    "status": "failed",
+    "tool": "ilastik",
+    "tool_version": "1.4.1.post1"
+}
