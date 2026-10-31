@@ -1,0 +1,181 @@
+{
+    "badge": null,
+    "details": {
+        "details": [
+            {
+                "context": {
+                    "file_name": "bioimageio.yaml",
+                    "known_files": {
+                        "checkpoint.pth": "2930a62bca64df386245ef21997a50cbe690f681d6c4380b379b113c210e1b3b",
+                        "cover.png": "5135c902e25975cde45f4954a6386d6677624534f09b4b003519182435f34251",
+                        "documentation.md": "2dccc17c9542287e9dbd0148b5d2fc3d021c0ea92d5958054a996f5866b213a8",
+                        "environment.yaml": "cc832ec423dc05b226505e0d6dbd5bc53e2a42be520546634f3e20674b1e0c34",
+                        "https://github.com/BiaPyX/BiaPy": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/passionate-rhino/files/checkpoint.pth?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/passionate-rhino/files/cover.png?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/passionate-rhino/files/documentation.md?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/passionate-rhino/files/environment.yaml?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/passionate-rhino/files/model.py?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/passionate-rhino/files/test-input.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/passionate-rhino/files/test-output.npy?version=v0": null,
+                        "model.py": "2b00ca9c5d1254637140c9c7f98f13cb681eaee0f3ca014b11f0c161613a3fe2",
+                        "test-input.npy": "03f62935dba05a0e5efcca1c772e89cb32e0962889bea3992b2e60ed99767c6b",
+                        "test-output.npy": "360528f9ee40046219ceb619f7b9bb03cd1f04abcd2644cc5169a35b1d6ad90d"
+                    },
+                    "original_source_name": null,
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/passionate-rhino/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Successfully created `ModelDescr` instance.",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.12",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": [
+                    {
+                        "loc": [
+                            "description"
+                        ],
+                        "msg": "Description longer than 512 characters.",
+                        "severity": 30,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "documentation"
+                        ],
+                        "msg": "No '# Validation' (sub)section found in source=RelativePath('documentation.md') sha256='2dccc17c9542287e9dbd0148b5d2fc3d021c0ea92d5958054a996f5866b213a8'.",
+                        "severity": 30,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "inputs",
+                            0,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "outputs",
+                            0,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    }
+                ]
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Found existing conda environment '32d4ca7de1252575adf45dbfd99c46256d888d3f3a54d7f690e95db7cc4fbc42'",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [
+                    {
+                        "loc": [],
+                        "msg": "Value error, Error calling function `package_file_descr_serializer`: TypeError: 'index_key' is expected to be an integer or a string, got 'SerializationInfo(include=None, exclude=None, context=None, mode='json', by_alias=False, exclude_unset=True, exclude_defaults=False, exclude_none=False, exclude_computed_fields=False, round_trip=False, serialize_as_any=False)'",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "value_error",
+                        "with_traceback": false
+                    }
+                ],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.12",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "failed",
+                "warnings": [
+                    {
+                        "loc": [
+                            "description"
+                        ],
+                        "msg": "Description longer than 512 characters.",
+                        "severity": 30,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "documentation"
+                        ],
+                        "msg": "No '# Validation' (sub)section found in source=RelativePath('documentation.md') sha256='2dccc17c9542287e9dbd0148b5d2fc3d021c0ea92d5958054a996f5866b213a8'.",
+                        "severity": 30,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "inputs",
+                            0,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "outputs",
+                            0,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    }
+                ]
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.spec",
+                "0.5.12.0",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.5.12",
+        "id": "passionate-rhino",
+        "metadata_completeness": 0.49137931034482757,
+        "name": "bioimageio format validation",
+        "saved_conda_list": "Error while loading conda entry point: conda-anaconda-telemetry (cannot import name '_ExtendedAttributes' from 'opentelemetry.util.types' (/home/runner/.local/lib/python3.14/site-packages/opentelemetry/util/types.py))\nError while loading conda entry point: conda-anaconda-telemetry (cannot import name '_ExtendedAttributes' from 'opentelemetry.util.types' (/home/runner/.local/lib/python3.14/site-packages/opentelemetry/util/types.py))\n# packages in environment at /home/runner/miniconda3/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/passionate-rhino/files/bioimageio.yaml?version=v0",
+        "status": "valid-format",
+        "traceback": null,
+        "type": "model",
+        "version": "0.1.0",
+        "warnings": null
+    },
+    "error": "Value error, Error calling function `package_file_descr_serializer`: TypeError: 'index_key' is expected to be an integer or a string, got 'SerializationInfo(include=None, exclude=None, context=None, mode='json', by_alias=False, exclude_unset=True, exclude_defaults=False, exclude_none=False, exclude_computed_fields=False, round_trip=False, serialize_as_any=False)'",
+    "links": [],
+    "score": 0.5,
+    "status": "failed",
+    "tool": "bioimageio.core",
+    "tool_version": "0.11.0"
+}
