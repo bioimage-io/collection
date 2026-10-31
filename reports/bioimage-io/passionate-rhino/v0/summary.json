@@ -1,0 +1,236 @@
+{
+    "rdf_content": {
+        "name": "Cellpose-SAM (cpsam_v2) grayscale",
+        "description": "Cellpose-SAM (cpsam_v2 weights), the generalist cell and nucleus segmentation model of Cellpose 4 (SAM's ViT-L image encoder), for single-channel (grayscale) 2D images. Re-implemented with BiaPy, so it does not need the cellpose package. It outputs Cellpose's raw maps, named with BiaPy's channel codes: 'F' (cell probability, after a sigmoid), 'Gv' and 'Gh' (vertical and horizontal flows, x5). Cellpose's flow-following post-processing turns them into instances (as BiaPy does when consuming it).\nrepresentation: F+Gv+Gh",
+        "covers": [
+            {
+                "source": "cover.png",
+                "sha256": "5135c902e25975cde45f4954a6386d6677624534f09b4b003519182435f34251"
+            }
+        ],
+        "documentation": {
+            "source": "documentation.md",
+            "sha256": "2dccc17c9542287e9dbd0148b5d2fc3d021c0ea92d5958054a996f5866b213a8"
+        },
+        "authors": [
+            {
+                "name": "Daniel Franco-Barranco",
+                "github_user": "danifranco"
+            }
+        ],
+        "cite": [
+            {
+                "text": "Pachitariu, Rariden and Stringer. Cellpose-SAM: superhuman generalization for cellular segmentation. bioRxiv (2025)",
+                "doi": "10.1101/2025.04.28.651001"
+            },
+            {
+                "text": "Stringer, Wang, Michaelos and Pachitariu. Cellpose: a generalist algorithm for cellular segmentation. Nature Methods (2021)",
+                "doi": "10.1038/s41592-020-01018-x"
+            },
+            {
+                "text": "BiaPy: accessible deep learning on bioimages",
+                "doi": "10.1038/s41592-025-02699-y"
+            }
+        ],
+        "license": "BSD-3-Clause",
+        "git_repo": "https://github.com/BiaPyX/BiaPy",
+        "maintainers": [
+            {
+                "name": "Daniel Franco-Barranco",
+                "github_user": "danifranco"
+            }
+        ],
+        "tags": [
+            "cellpose",
+            "cells",
+            "nuclei",
+            "fluorescence-light-microscopy",
+            "brightfield",
+            "2d",
+            "cellpose-sam",
+            "segment-anything",
+            "pytorch",
+            "biapy",
+            "instance-segmentation",
+            "vit-readout"
+        ],
+        "version": "0.1.0",
+        "format_version": "0.5.12",
+        "type": "model",
+        "inputs": [
+            {
+                "id": "input0",
+                "axes": [
+                    {
+                        "type": "batch",
+                        "size": 1
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "channel0"
+                        ]
+                    },
+                    {
+                        "size": 256,
+                        "id": "y",
+                        "type": "space"
+                    },
+                    {
+                        "size": 256,
+                        "id": "x",
+                        "type": "space"
+                    }
+                ],
+                "test_tensor": {
+                    "source": "test-input.npy",
+                    "sha256": "03f62935dba05a0e5efcca1c772e89cb32e0962889bea3992b2e60ed99767c6b"
+                },
+                "data": {
+                    "type": "float32"
+                },
+                "preprocessing": [
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    },
+                    {
+                        "id": "scale_range",
+                        "kwargs": {
+                            "axes": [
+                                "y",
+                                "x"
+                            ],
+                            "min_percentile": 1,
+                            "max_percentile": 99
+                        }
+                    },
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    }
+                ]
+            }
+        ],
+        "outputs": [
+            {
+                "id": "output0",
+                "axes": [
+                    {
+                        "type": "batch",
+                        "size": 1
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "F",
+                            "Gv",
+                            "Gh"
+                        ]
+                    },
+                    {
+                        "halo": 32,
+                        "size": {
+                            "tensor_id": "input0",
+                            "axis_id": "y",
+                            "offset": 0
+                        },
+                        "id": "y",
+                        "type": "space",
+                        "scale": 1
+                    },
+                    {
+                        "halo": 32,
+                        "size": {
+                            "tensor_id": "input0",
+                            "axis_id": "x",
+                            "offset": 0
+                        },
+                        "id": "x",
+                        "type": "space",
+                        "scale": 1
+                    }
+                ],
+                "test_tensor": {
+                    "source": "test-output.npy",
+                    "sha256": "360528f9ee40046219ceb619f7b9bb03cd1f04abcd2644cc5169a35b1d6ad90d"
+                },
+                "data": {
+                    "type": "float32"
+                },
+                "postprocessing": [
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    }
+                ]
+            }
+        ],
+        "training_data": null,
+        "weights": {
+            "pytorch_state_dict": {
+                "source": "checkpoint.pth",
+                "sha256": "2930a62bca64df386245ef21997a50cbe690f681d6c4380b379b113c210e1b3b",
+                "architecture": {
+                    "source": "model.py",
+                    "sha256": "2b00ca9c5d1254637140c9c7f98f13cb681eaee0f3ca014b11f0c161613a3fe2",
+                    "callable": "ViTReadout",
+                    "kwargs": {
+                        "input_shape": [
+                            256,
+                            256,
+                            1
+                        ],
+                        "patch_size": 16,
+                        "embed_dim": 768,
+                        "depth": 12,
+                        "num_heads": 12,
+                        "mlp_ratio": 4,
+                        "vit_model": "cellpose_sam_vit",
+                        "token_stride": -1,
+                        "drop_path_rate": 0,
+                        "grad_checkpointing": false,
+                        "normalization": "in",
+                        "decoder_activation": "elu",
+                        "output_channels": [
+                            3
+                        ],
+                        "output_channel_info": [
+                            "F+Gv+Gh"
+                        ],
+                        "head_activations": [
+                            "ce_sigmoid",
+                            "linear",
+                            "linear"
+                        ],
+                        "explicit_activations": true,
+                        "return_one_tensor": true,
+                        "readout_features": 3,
+                        "refine_layers": 0,
+                        "input_skip": false,
+                        "k_size": 3,
+                        "dropout": 0
+                    }
+                },
+                "pytorch_version": "2.12.1+cu130",
+                "dependencies": {
+                    "source": "environment.yaml",
+                    "sha256": "cc832ec423dc05b226505e0d6dbd5bc53e2a42be520546634f3e20674b1e0c34"
+                }
+            }
+        },
+        "uploader": {
+            "email": "danialtza@gmail.com"
+        },
+        "id": "passionate-rhino",
+        "id_emoji": "🦏"
+    },
+    "rdf_yaml_sha256": "a1ce143c02038858bc97fcf903fda75d70c883075ce3930fb3bb62caa85f228d",
+    "status": "untested"
+}

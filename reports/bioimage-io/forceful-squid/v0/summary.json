@@ -1,0 +1,246 @@
+{
+    "rdf_content": {
+        "name": "Cellpose-DINO ViT-L (cpdino) 3-channel",
+        "description": "Cellpose-DINO ViT-L (cpdino weights), the generalist cell and nucleus segmentation model of Cellpose 4 (DINOv3's ViT-L/16 encoder with 8-pixel token stride), for 2D images with up to 3 channels (e.g. cytoplasm, nuclei); unused channels must be zero, and a grayscale image goes in the first channel with the other two set to zero, as Cellpose does. Re-implemented with BiaPy, so it does not need the cellpose package. It outputs Cellpose's raw maps, named with BiaPy's channel codes: 'F' (cell probability, after a sigmoid), 'Gv' and 'Gh' (vertical and horizontal flows, x5). Cellpose's flow-following post-processing turns them into instances (as BiaPy does when consuming it).\nrepresentation: F+Gv+Gh",
+        "covers": [
+            {
+                "source": "cover.png",
+                "sha256": "7275007da45ca2376fc6535987ed6ff0d1740319fd967f2f43a78313f085b876"
+            }
+        ],
+        "documentation": {
+            "source": "documentation.md",
+            "sha256": "ef6c5376e54e3ca833eb47ad1e755b8f029c3f45d36c745920272641f2f92b38"
+        },
+        "authors": [
+            {
+                "name": "Daniel Franco-Barranco",
+                "github_user": "danifranco"
+            }
+        ],
+        "cite": [
+            {
+                "text": "Pachitariu, Rariden and Stringer. Cellpose-SAM: superhuman generalization for cellular segmentation. bioRxiv (2025)",
+                "doi": "10.1101/2025.04.28.651001"
+            },
+            {
+                "text": "Stringer, Wang, Michaelos and Pachitariu. Cellpose: a generalist algorithm for cellular segmentation. Nature Methods (2021)",
+                "doi": "10.1038/s41592-020-01018-x"
+            },
+            {
+                "text": "Siméoni et al. DINOv3. arXiv (2025)",
+                "doi": "10.48550/arXiv.2508.10104"
+            },
+            {
+                "text": "BiaPy: accessible deep learning on bioimages",
+                "doi": "10.1038/s41592-025-02699-y"
+            },
+            {
+                "text": "DINOv3",
+                "url": "https://arxiv.org/abs/2508.10104"
+            }
+        ],
+        "license": "BSD-3-Clause",
+        "git_repo": "https://github.com/BiaPyX/BiaPy",
+        "maintainers": [
+            {
+                "name": "Daniel Franco-Barranco",
+                "github_user": "danifranco"
+            }
+        ],
+        "tags": [
+            "cellpose",
+            "cells",
+            "nuclei",
+            "fluorescence-light-microscopy",
+            "brightfield",
+            "2d",
+            "cellpose-dino",
+            "dinov3",
+            "pytorch",
+            "biapy",
+            "instance-segmentation",
+            "vit-readout"
+        ],
+        "version": "0.1.0",
+        "format_version": "0.5.12",
+        "type": "model",
+        "inputs": [
+            {
+                "id": "input0",
+                "axes": [
+                    {
+                        "type": "batch",
+                        "size": 1
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "channel0",
+                            "channel1",
+                            "channel2"
+                        ]
+                    },
+                    {
+                        "size": 384,
+                        "id": "y",
+                        "type": "space"
+                    },
+                    {
+                        "size": 384,
+                        "id": "x",
+                        "type": "space"
+                    }
+                ],
+                "test_tensor": {
+                    "source": "test-input.npy",
+                    "sha256": "a38101b969056b774663609c9057342242c8227a50eb27c28ddc8143e0a6fc2c"
+                },
+                "data": {
+                    "type": "float32"
+                },
+                "preprocessing": [
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    },
+                    {
+                        "id": "scale_range",
+                        "kwargs": {
+                            "axes": [
+                                "y",
+                                "x"
+                            ],
+                            "min_percentile": 1,
+                            "max_percentile": 99
+                        }
+                    },
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    }
+                ]
+            }
+        ],
+        "outputs": [
+            {
+                "id": "output0",
+                "axes": [
+                    {
+                        "type": "batch",
+                        "size": 1
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "F",
+                            "Gv",
+                            "Gh"
+                        ]
+                    },
+                    {
+                        "halo": 48,
+                        "size": {
+                            "tensor_id": "input0",
+                            "axis_id": "y",
+                            "offset": 0
+                        },
+                        "id": "y",
+                        "type": "space",
+                        "scale": 1
+                    },
+                    {
+                        "halo": 48,
+                        "size": {
+                            "tensor_id": "input0",
+                            "axis_id": "x",
+                            "offset": 0
+                        },
+                        "id": "x",
+                        "type": "space",
+                        "scale": 1
+                    }
+                ],
+                "test_tensor": {
+                    "source": "test-output.npy",
+                    "sha256": "75a35d863c1a07a0e69e6522b8f0289694cabfa19c5e45a4adc225d6aea75bb0"
+                },
+                "data": {
+                    "type": "float32"
+                },
+                "postprocessing": [
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    }
+                ]
+            }
+        ],
+        "training_data": null,
+        "weights": {
+            "pytorch_state_dict": {
+                "source": "checkpoint.pth",
+                "sha256": "8c9c9ac2e7699abfd1f0f3edaf3146bc54169a8e17482f658ea39cfdffd51f14",
+                "architecture": {
+                    "source": "model.py",
+                    "sha256": "2b00ca9c5d1254637140c9c7f98f13cb681eaee0f3ca014b11f0c161613a3fe2",
+                    "callable": "ViTReadout",
+                    "kwargs": {
+                        "input_shape": [
+                            384,
+                            384,
+                            3
+                        ],
+                        "patch_size": 16,
+                        "embed_dim": 768,
+                        "depth": 12,
+                        "num_heads": 12,
+                        "mlp_ratio": 4,
+                        "vit_model": "dinov3_vit",
+                        "token_stride": 8,
+                        "drop_path_rate": 0,
+                        "grad_checkpointing": false,
+                        "normalization": "in",
+                        "decoder_activation": "elu",
+                        "output_channels": [
+                            3
+                        ],
+                        "output_channel_info": [
+                            "F+Gv+Gh"
+                        ],
+                        "head_activations": [
+                            "ce_sigmoid",
+                            "linear",
+                            "linear"
+                        ],
+                        "explicit_activations": true,
+                        "return_one_tensor": true,
+                        "readout_features": 3,
+                        "refine_layers": 0,
+                        "input_skip": false,
+                        "k_size": 3,
+                        "dropout": 0
+                    }
+                },
+                "pytorch_version": "2.12.1+cu130",
+                "dependencies": {
+                    "source": "environment.yaml",
+                    "sha256": "cc832ec423dc05b226505e0d6dbd5bc53e2a42be520546634f3e20674b1e0c34"
+                }
+            }
+        },
+        "uploader": {
+            "email": "danialtza@gmail.com"
+        },
+        "id": "forceful-squid",
+        "id_emoji": "🦑"
+    },
+    "rdf_yaml_sha256": "8637e696340a8153f491555cf6fbb12c61698a68eb87b2426453acb865bfe572",
+    "status": "untested"
+}
