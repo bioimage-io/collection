@@ -2,7 +2,7 @@
     "count_per_type": {
         "application": 65,
         "dataset": 50,
-        "model": 167,
+        "model": 173,
         "notebook": 4,
         "tracking": 1
     },
@@ -3842,8 +3842,86 @@
                     "version": "v0"
                 }
             ]
+        },
+        {
+            "id": "bioimage-io/nice-flamingo",
+            "type": "model",
+            "versions": [
+                {
+                    "comment": "Updated model",
+                    "created_at": "2026-10-30T16:05:28Z",
+                    "sha256": "42cdb2e807bb7e23118ea5a387c699c4b9eaf9d9a958448e3ed9ed1a3fdc70f0",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/nice-flamingo/files/bioimageio.yaml?version=v0",
+                    "version": "v0"
+                }
+            ]
+        },
+        {
+            "id": "bioimage-io/powerful-sloth",
+            "type": "model",
+            "versions": [
+                {
+                    "comment": "Updated model",
+                    "created_at": "2026-10-30T16:05:40Z",
+                    "sha256": "fed67990c412601a3e45a1c9d652ff6d4f808b3293745e3c12bdd8109c57ba5d",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/powerful-sloth/files/bioimageio.yaml?version=v0",
+                    "version": "v0"
+                }
+            ]
+        },
+        {
+            "id": "bioimage-io/upbeat-angelfish",
+            "type": "model",
+            "versions": [
+                {
+                    "comment": "Updated model",
+                    "created_at": "2026-10-30T16:06:29Z",
+                    "sha256": "9865099190ef5ae019a1fce9ea38129c9a4addf711755e988f2514e241b1d670",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/upbeat-angelfish/files/bioimageio.yaml?version=v0",
+                    "version": "v0"
+                }
+            ]
+        },
+        {
+            "id": "bioimage-io/forceful-squid",
+            "type": "model",
+            "versions": [
+                {
+                    "comment": "Updated model",
+                    "created_at": "2026-10-30T16:35:52Z",
+                    "sha256": "8637e696340a8153f491555cf6fbb12c61698a68eb87b2426453acb865bfe572",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/forceful-squid/files/bioimageio.yaml?version=v0",
+                    "version": "v0"
+                }
+            ]
+        },
+        {
+            "id": "bioimage-io/passionate-rhino",
+            "type": "model",
+            "versions": [
+                {
+                    "comment": "Accepted by github|32868330",
+                    "created_at": "2026-10-30T16:52:11Z",
+                    "sha256": "a1ce143c02038858bc97fcf903fda75d70c883075ce3930fb3bb62caa85f228d",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/passionate-rhino/files/bioimageio.yaml?version=v0",
+                    "version": "v0"
+                }
+            ]
+        },
+        {
+            "id": "bioimage-io/playful-scorpion",
+            "type": "model",
+            "versions": [
+                {
+                    "comment": "Accepted by github|32868330",
+                    "created_at": "2026-10-30T16:54:56Z",
+                    "sha256": "ac7c4f83ca8063374a7493ad3a5f6e9244a4785e76a5899ca7ac44c98383021d",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/playful-scorpion/files/bioimageio.yaml?version=v0",
+                    "version": "v0"
+                }
+            ]
         }
     ],
-    "timestamp": "2026-10-30T05:01:37.441279",
-    "total": 287
+    "timestamp": "2026-10-31T04:47:06.816124",
+    "total": 293
 }
