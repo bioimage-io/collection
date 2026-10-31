@@ -1,0 +1,181 @@
+{
+    "badge": null,
+    "details": {
+        "details": [
+            {
+                "context": {
+                    "file_name": "bioimageio.yaml",
+                    "known_files": {
+                        "checkpoint.pth": "8f0d799a8a90a1be6c7868b0915bf5840cf643b9f3e4118502a2dc5ac6090d29",
+                        "cover.png": "5847e9b733ef91193ae303cac9c49b2fcf59950a8a134a4a7160cba8e4a063ae",
+                        "documentation.md": "9f6f02c49f69876920885d3db205848604a79a790d4e71c648a90adfceb6e9cf",
+                        "environment.yaml": "cc832ec423dc05b226505e0d6dbd5bc53e2a42be520546634f3e20674b1e0c34",
+                        "https://github.com/BiaPyX/BiaPy": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/playful-scorpion/files/checkpoint.pth?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/playful-scorpion/files/cover.png?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/playful-scorpion/files/documentation.md?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/playful-scorpion/files/environment.yaml?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/playful-scorpion/files/model.py?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/playful-scorpion/files/test-input.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/playful-scorpion/files/test-output.npy?version=v0": null,
+                        "model.py": "2b00ca9c5d1254637140c9c7f98f13cb681eaee0f3ca014b11f0c161613a3fe2",
+                        "test-input.npy": "e678f0a44a0b6ef50d85a5e018afa4ec5e42a72fe1ddcc44e07cf0eb661df1bf",
+                        "test-output.npy": "21d1f1179db19d831a4674933724ef98fb4ea24c11cb984d73fe36126977b476"
+                    },
+                    "original_source_name": null,
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/playful-scorpion/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Successfully created `ModelDescr` instance.",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.12",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": [
+                    {
+                        "loc": [
+                            "description"
+                        ],
+                        "msg": "Description longer than 512 characters.",
+                        "severity": 30,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "documentation"
+                        ],
+                        "msg": "No '# Validation' (sub)section found in source=RelativePath('documentation.md') sha256='9f6f02c49f69876920885d3db205848604a79a790d4e71c648a90adfceb6e9cf'.",
+                        "severity": 30,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "inputs",
+                            0,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "outputs",
+                            0,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    }
+                ]
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Found existing conda environment '32d4ca7de1252575adf45dbfd99c46256d888d3f3a54d7f690e95db7cc4fbc42'",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [
+                    {
+                        "loc": [],
+                        "msg": "Value error, Error calling function `package_file_descr_serializer`: TypeError: 'index_key' is expected to be an integer or a string, got 'SerializationInfo(include=None, exclude=None, context=None, mode='json', by_alias=False, exclude_unset=True, exclude_defaults=False, exclude_none=False, exclude_computed_fields=False, round_trip=False, serialize_as_any=False)'",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "value_error",
+                        "with_traceback": false
+                    }
+                ],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.12",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "failed",
+                "warnings": [
+                    {
+                        "loc": [
+                            "description"
+                        ],
+                        "msg": "Description longer than 512 characters.",
+                        "severity": 30,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "documentation"
+                        ],
+                        "msg": "No '# Validation' (sub)section found in source=RelativePath('documentation.md') sha256='9f6f02c49f69876920885d3db205848604a79a790d4e71c648a90adfceb6e9cf'.",
+                        "severity": 30,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "inputs",
+                            0,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "outputs",
+                            0,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    }
+                ]
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.spec",
+                "0.5.12.0",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.5.12",
+        "id": "playful-scorpion",
+        "metadata_completeness": 0.49137931034482757,
+        "name": "bioimageio format validation",
+        "saved_conda_list": "Error while loading conda entry point: conda-anaconda-telemetry (cannot import name '_ExtendedAttributes' from 'opentelemetry.util.types' (/home/runner/.local/lib/python3.14/site-packages/opentelemetry/util/types.py))\nError while loading conda entry point: conda-anaconda-telemetry (cannot import name '_ExtendedAttributes' from 'opentelemetry.util.types' (/home/runner/.local/lib/python3.14/site-packages/opentelemetry/util/types.py))\n# packages in environment at /home/runner/miniconda3/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/playful-scorpion/files/bioimageio.yaml?version=v0",
+        "status": "valid-format",
+        "traceback": null,
+        "type": "model",
+        "version": "0.1.0",
+        "warnings": null
+    },
+    "error": "Value error, Error calling function `package_file_descr_serializer`: TypeError: 'index_key' is expected to be an integer or a string, got 'SerializationInfo(include=None, exclude=None, context=None, mode='json', by_alias=False, exclude_unset=True, exclude_defaults=False, exclude_none=False, exclude_computed_fields=False, round_trip=False, serialize_as_any=False)'",
+    "links": [],
+    "score": 0.5,
+    "status": "failed",
+    "tool": "bioimageio.core",
+    "tool_version": "0.11.0"
+}
