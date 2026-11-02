@@ -1,0 +1,12 @@
+{
+    "badge": null,
+    "details": "[all] Model 'wild-whale' is excluded from the SEMANTIC_SEG workflow in BiaPy: it predicts the affinities of the cells' boundaries, to be used to create instances (instance segmentation), but it is only tagged as 'segmentation'\n",
+    "error": "[all] Model 'wild-whale' is excluded from the SEMANTIC_SEG workflow in BiaPy: it predicts the affinities of the cells' boundaries, to be used to create instances (instance segmentation), but it is only tagged as 'segmentation'\n",
+    "links": [
+        "biapy/biapy"
+    ],
+    "score": 0.0,
+    "status": "failed",
+    "tool": "biapy",
+    "tool_version": "3.7.2"
+}
