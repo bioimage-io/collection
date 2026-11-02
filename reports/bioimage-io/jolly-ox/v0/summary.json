@@ -206,6 +206,7 @@
             "biapy_3.6.8": 1.0,
             "biapy_3.7.0": 0.0,
             "biapy_3.7.1": 0.0,
+            "biapy_3.7.2": 0.0,
             "bioimageio.core_0.10.0": 0.5,
             "bioimageio.core_0.10.2": 0.5,
             "bioimageio.core_0.10.3": 0.5,
@@ -281,6 +282,16 @@
                 "status": "failed"
             },
             "3.7.1": {
+                "badge": null,
+                "details": "[all] Couldn't load model for dependency check.\n",
+                "error": "[all] Couldn't load model for dependency check.\n",
+                "links": [
+                    "biapy/biapy"
+                ],
+                "score": 0.0,
+                "status": "failed"
+            },
+            "3.7.2": {
                 "badge": null,
                 "details": "[all] Couldn't load model for dependency check.\n",
                 "error": "[all] Couldn't load model for dependency check.\n",
