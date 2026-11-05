@@ -171,6 +171,7 @@
             "biapy_3.7.0": 0.0,
             "biapy_3.7.1": 0.0,
             "biapy_3.7.2": 0.0,
+            "biapy_3.7.3": 0.0,
             "bioimageio.core_0.11.0": 0.5,
             "careamics_0.3.2": 0.0,
             "careamics_0.3.3": 0.0,
@@ -217,6 +218,16 @@
                 "status": "failed"
             },
             "3.7.2": {
+                "badge": null,
+                "details": "[all] no workflow tag recognized in ['label-free', '2d', 'fluorescence', 'brightfield', 'unet', 'cells'].\n",
+                "error": "[all] no workflow tag recognized in ['label-free', '2d', 'fluorescence', 'brightfield', 'unet', 'cells'].\n",
+                "links": [
+                    "biapy/biapy"
+                ],
+                "score": 0.0,
+                "status": "failed"
+            },
+            "3.7.3": {
                 "badge": null,
                 "details": "[all] no workflow tag recognized in ['label-free', '2d', 'fluorescence', 'brightfield', 'unet', 'cells'].\n",
                 "error": "[all] no workflow tag recognized in ['label-free', '2d', 'fluorescence', 'brightfield', 'unet', 'cells'].\n",

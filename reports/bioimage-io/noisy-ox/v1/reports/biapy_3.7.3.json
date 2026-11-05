@@ -1,0 +1,12 @@
+{
+    "badge": null,
+    "details": "[all] Model has incompatible dependencies: micro_sam\n",
+    "error": "[all] Model has incompatible dependencies: micro_sam\n",
+    "links": [
+        "biapy/biapy"
+    ],
+    "score": 0.0,
+    "status": "failed",
+    "tool": "biapy",
+    "tool_version": "3.7.3"
+}

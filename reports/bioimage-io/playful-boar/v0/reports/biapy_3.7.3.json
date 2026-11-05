@@ -1,0 +1,12 @@
+{
+    "badge": null,
+    "details": "[all] Model has incompatible dependencies: careamics @ git+https://github.com/CAREamics/careamics.git@da6ba955bc08ead5ef9c7c574450ba6511cc9d68\n",
+    "error": "[all] Model has incompatible dependencies: careamics @ git+https://github.com/CAREamics/careamics.git@da6ba955bc08ead5ef9c7c574450ba6511cc9d68\n",
+    "links": [
+        "biapy/biapy"
+    ],
+    "score": 0.0,
+    "status": "failed",
+    "tool": "biapy",
+    "tool_version": "3.7.3"
+}

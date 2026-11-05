@@ -236,6 +236,7 @@
             "biapy_3.7.0": 1.0,
             "biapy_3.7.1": 1.0,
             "biapy_3.7.2": 0.0,
+            "biapy_3.7.3": 0.0,
             "bioimageio.core_0.10.2": 0.0,
             "bioimageio.core_0.11.0": 0.5,
             "bioimageio.core_0.9.3": 0.0,
@@ -322,6 +323,16 @@
                 "status": "passed"
             },
             "3.7.2": {
+                "badge": null,
+                "details": "[all] Model 'wild-whale' is excluded from the SEMANTIC_SEG workflow in BiaPy: it predicts the affinities of the cells' boundaries, to be used to create instances (instance segmentation), but it is only tagged as 'segmentation'\n",
+                "error": "[all] Model 'wild-whale' is excluded from the SEMANTIC_SEG workflow in BiaPy: it predicts the affinities of the cells' boundaries, to be used to create instances (instance segmentation), but it is only tagged as 'segmentation'\n",
+                "links": [
+                    "biapy/biapy"
+                ],
+                "score": 0.0,
+                "status": "failed"
+            },
+            "3.7.3": {
                 "badge": null,
                 "details": "[all] Model 'wild-whale' is excluded from the SEMANTIC_SEG workflow in BiaPy: it predicts the affinities of the cells' boundaries, to be used to create instances (instance segmentation), but it is only tagged as 'segmentation'\n",
                 "error": "[all] Model 'wild-whale' is excluded from the SEMANTIC_SEG workflow in BiaPy: it predicts the affinities of the cells' boundaries, to be used to create instances (instance segmentation), but it is only tagged as 'segmentation'\n",
