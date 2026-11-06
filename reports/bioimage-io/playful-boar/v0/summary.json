@@ -287,6 +287,7 @@
         "tool_compatibility_version_specific": {
             "biapy_3.7.1": 0.0,
             "biapy_3.7.2": 0.0,
+            "biapy_3.7.3": 0.0,
             "bioimageio.core_0.11.0": 0.5,
             "careamics_0.3.4": 0.0,
             "ilastik_1.4.1.post1": 0.0,
@@ -312,6 +313,16 @@
                 "badge": null,
                 "details": "[all] Couldn't load model for dependency check.\n",
                 "error": "[all] Couldn't load model for dependency check.\n",
+                "links": [
+                    "biapy/biapy"
+                ],
+                "score": 0.0,
+                "status": "failed"
+            },
+            "3.7.3": {
+                "badge": null,
+                "details": "[all] Model has incompatible dependencies: careamics @ git+https://github.com/CAREamics/careamics.git@da6ba955bc08ead5ef9c7c574450ba6511cc9d68\n",
+                "error": "[all] Model has incompatible dependencies: careamics @ git+https://github.com/CAREamics/careamics.git@da6ba955bc08ead5ef9c7c574450ba6511cc9d68\n",
                 "links": [
                     "biapy/biapy"
                 ],
