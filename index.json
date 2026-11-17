@@ -1912,9 +1912,9 @@
             "type": "model",
             "versions": [
                 {
-                    "comment": "Published to Model Zoo",
+                    "comment": "Updated model",
                     "created_at": "2025-07-15T13:39:04Z",
-                    "sha256": "6ce6f054c7bdab0e32a1b241e6fb88b3b44b06aef19d149e96b71511a9e4772c",
+                    "sha256": "83390cbabe210cbe6fb8fd6762d18cb443278b5108631bc9ebb1d489bffa6df1",
                     "source": "https://hypha.aicell.io/bioimage-io/artifacts/affectionate-cow/files/rdf.yaml?version=v0",
                     "version": "v0"
                 }
@@ -3922,6 +3922,6 @@
             ]
         }
     ],
-    "timestamp": "2026-11-16T05:31:40.901162",
+    "timestamp": "2026-11-17T01:50:50.180382",
     "total": 293
 }
