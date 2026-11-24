@@ -41,6 +41,7 @@ def check_tool_compatibility(
     ],
     applicable_types: set[str],
     id_startswith: str = "",
+    overwrite: bool = False,
 ):
     """helper to implement tool compatibility checks
 
@@ -54,6 +55,7 @@ def check_tool_compatibility(
             And returning a compatibility report.
         applicable_types: Set of resource types
             **check_tool_compatibility_impl** is applicable to.
+        overwrite: Refresh existing reports, e.g. when importing external results.
     """
     with index_path.open() as f:
         items = json.load(f)["items"]
@@ -73,7 +75,7 @@ def check_tool_compatibility(
             report_path = get_tool_report_path(
                 item["id"], version["version"], tool_name, tool_version
             )
-            if report_path.exists():
+            if report_path.exists() and not overwrite:
                 logger.info("found existing report at {}", report_path)
                 continue
 
