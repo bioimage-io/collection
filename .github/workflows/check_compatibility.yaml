@@ -22,6 +22,7 @@ on:
             bioimageio.core,
             careamics,
             deepimagej,
+            eosc,
             ilastik,
           ]
       recompute-reports-pattern:
@@ -70,6 +71,13 @@ jobs:
     with:
       recompute-reports-pattern: ${{ inputs.recompute-reports-pattern }}
     secrets: inherit
+  # External results can change without an index update, so always refresh them.
+  eosc:
+    needs: index
+    uses: ./.github/workflows/check_compatibility_eosc.yaml
+    with:
+      recompute-reports-pattern: ${{ inputs.recompute-reports-pattern }}
+    secrets: inherit
   ilastik:
     needs: index
     if: needs.index.outputs.cache-hit != 'true' || contains(github.event.inputs.rerun, 'all') || contains(github.event.inputs.rerun, 'ilastik')
@@ -80,8 +88,8 @@ jobs:
 
   summarize:
     name: summarize and deploy stage
-    needs: [index, biapy, bioimageio_core, careamics, deepimagej, ilastik]
-    if: ${{!cancelled() && !(needs.index.outputs.cache-hit == 'true' && (github.event.inputs.rerun == 'only-on-index-update' || github.event.inputs.rerun == ''))}}
+    needs: [index, biapy, bioimageio_core, careamics, deepimagej, eosc, ilastik]
+    if: ${{ !cancelled() && (needs.eosc.result == 'success' || !(needs.index.outputs.cache-hit == 'true' && (github.event.inputs.rerun == 'only-on-index-update' || github.event.inputs.rerun == ''))) }}
     runs-on: ubuntu-latest
     environment: 'production'
     steps:
@@ -116,6 +124,6 @@ jobs:
 
   update-docs:
     needs: [index, summarize]
-    if: ${{ !cancelled() && !(needs.index.outputs.cache-hit == 'true' && (github.event.inputs.rerun == 'only-on-index-update' || github.event.inputs.rerun == '')) }}
+    if: ${{ !cancelled() && needs.summarize.result == 'success' }}
     uses: ./.github/workflows/build.yaml
     secrets: inherit

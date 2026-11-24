@@ -15,6 +15,7 @@ PartnerToolName = Literal[
     "icy",
     "biapy",
     "careamics",
+    "eosc",
 ]
 ToolName = Literal["bioimageio.core", PartnerToolName]
 
@@ -24,6 +25,7 @@ PARTNER_TOOL_NAMES = (
     "icy",
     "biapy",
     "careamics",
+    "eosc",
 )
 TOOL_NAMES = ("bioimageio.core", *PARTNER_TOOL_NAMES)
 ToolNameVersioned = str

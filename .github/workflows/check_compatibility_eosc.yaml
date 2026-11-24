@@ -1,0 +1,38 @@
+name: check compatibility eosc
+
+on:
+  workflow_call:
+    inputs:
+      recompute-reports-pattern:
+        type: string
+        description: Glob file name pattern to skip reports with (to recompute them).
+        required: false
+        default: ''
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    environment: 'production'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/restore_reports
+        with:
+          tool: eosc
+          recompute-reports-pattern: ${{ inputs.recompute-reports-pattern }}
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+      - name: Install backoffice
+        run: pip install .
+      - name: Import published AI4EOSC compatibility results
+        run: python scripts/check_compatibility_eosc.py
+      - name: Stage to stage-gh-pages 🚀
+        if: always()
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: reports
+          branch: stage-gh-pages
+          dry-run: ${{ github.ref != 'refs/heads/main' }}
+          target-folder: reports
+          clean: false
