@@ -2,7 +2,7 @@
     "count_per_type": {
         "application": 65,
         "dataset": 50,
-        "model": 173,
+        "model": 174,
         "notebook": 4,
         "tracking": 1
     },
@@ -3920,8 +3920,21 @@
                     "version": "v0"
                 }
             ]
+        },
+        {
+            "id": "bioimage-io/brave-hedgehog",
+            "type": "model",
+            "versions": [
+                {
+                    "comment": "Published by c.pape@gmx.net",
+                    "created_at": "2026-11-25T21:39:36Z",
+                    "sha256": "dc3c3f2ddb069ca311930a499a4cea02842b09908fca9156d44616fd3c8ac06d",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/brave-hedgehog/files/rdf.yaml?version=v0",
+                    "version": "v0"
+                }
+            ]
         }
     ],
-    "timestamp": "2026-11-25T07:41:15.687869",
-    "total": 293
+    "timestamp": "2026-11-26T07:31:45.115487",
+    "total": 294
 }

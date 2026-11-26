@@ -1,0 +1,161 @@
+{
+    "badge": null,
+    "details": {
+        "conda_list": null,
+        "details": [
+            {
+                "conda_compare": null,
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "model.py": "bdbfcd61f0d33df2be4df3c24586eb0495c8141b0987a1e71b4cd05fd9fc5159",
+                        "test_input.npy": "a3de25e32a357b819469addc6ec514f1ecd485d6b6cd4edee5b38241a879ef1b",
+                        "test_output.npy": "8a925fc9b88f1061f1cbfd32510125e06067ab8069696757a5dfd93a6d823695",
+                        "weights.pt": "45b3e890d928bd9145ecf3b8676f4e1ed5f9938cad1ab51343b9ed07f2d1de24",
+                        "weights_torchscript.pt": "a92591d38eaa6fb71f039403ce67f589c44e9de4747044aa642cce2402545600"
+                    },
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/brave-hedgehog/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Created `InvalidDescr` object.",
+                "recommended_env": null,
+                "status": "failed",
+                "warnings": []
+            },
+            {
+                "conda_compare": null,
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "model.py": "bdbfcd61f0d33df2be4df3c24586eb0495c8141b0987a1e71b4cd05fd9fc5159",
+                        "test_input.npy": "a3de25e32a357b819469addc6ec514f1ecd485d6b6cd4edee5b38241a879ef1b",
+                        "test_output.npy": "8a925fc9b88f1061f1cbfd32510125e06067ab8069696757a5dfd93a6d823695",
+                        "weights.pt": "45b3e890d928bd9145ecf3b8676f4e1ed5f9938cad1ab51343b9ed07f2d1de24",
+                        "weights_torchscript.pt": "a92591d38eaa6fb71f039403ce67f589c44e9de4747044aa642cce2402545600"
+                    },
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/brave-hedgehog/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [
+                    {
+                        "loc": [
+                            "covers",
+                            0,
+                            "function-after[val_func(), function-after[validate_file(), lax-or-strict[lax=union[json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]],function-after[path_validator(), str]],strict=json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]]]]]"
+                        ],
+                        "msg": "Input is not a valid path for <class 'pathlib.Path'>",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "covers",
+                            0,
+                            "RelativeFilePath"
+                        ],
+                        "msg": "Input is not a valid path for <class 'pathlib.PurePath'>",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "covers",
+                            0,
+                            "function-after[HttpUrl(), str]"
+                        ],
+                        "msg": "Input should be a valid string",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "string_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "documentation",
+                            "function-after[val_func(), function-after[validate_file(), lax-or-strict[lax=union[json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]],function-after[path_validator(), str]],strict=json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]]]]]"
+                        ],
+                        "msg": "Input is not a valid path for <class 'pathlib.Path'>",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "documentation",
+                            "RelativeFilePath"
+                        ],
+                        "msg": "Input is not a valid path for <class 'pathlib.PurePath'>",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "documentation",
+                            "function-after[HttpUrl(), str]"
+                        ],
+                        "msg": "Input should be a valid string",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "string_type",
+                        "with_traceback": false
+                    }
+                ],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.4",
+                "recommended_env": null,
+                "status": "failed",
+                "warnings": []
+            },
+            {
+                "conda_compare": null,
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "type"
+                ],
+                "name": "Has expected resource type",
+                "recommended_env": null,
+                "status": "passed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.core",
+                "0.8.0",
+                "",
+                ""
+            ],
+            [
+                "bioimageio.spec",
+                "0.5.4.1",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.5.4",
+        "id": "brave-hedgehog",
+        "name": "bioimageio format validation",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/brave-hedgehog/files/rdf.yaml?version=v0",
+        "status": "failed",
+        "type": "model"
+    },
+    "error": "\n|        ❌        |                              bioimageio format validation                              |\n|       ---       |                                          ---                                           |\n| status          | failed                                                                                 |\n| source          | https://hypha.aicell.io/bioimage-io/artifacts/brave-hedgehog/files/rdf.yaml?version=v0 |\n| id              | brave-hedgehog                                                                         |\n| format version  | model 0.5.4                                                                            |\n| bioimageio.core | 0.8.0                                                                                  |\n| bioimageio.spec | 0.5.4.1                                                                                |\n\n|     |                   Location                   |                                    Details                                    |\n| --- |                     ---                      |                                      ---                                      |\n| ❌   |                                              | Created `InvalidDescr` object.                                                |\n| 🔍   | `context:perform_io_checks`                  | True                                                                          |\n| 🔍   | `context:root`                               | https://hypha.aicell.io/bioimage-io/artifacts/brave-hedgehog/files?version=v0 |\n| 🔍   | `context:known_files.test_input.npy`         | a3de25e32a357b819469addc6ec514f1ecd485d6b6cd4edee5b38241a879ef1b              |\n| 🔍   | `context:known_files.test_output.npy`        | 8a925fc9b88f1061f1cbfd32510125e06067ab8069696757a5dfd93a6d823695              |\n| 🔍   | `context:known_files.model.py`               | bdbfcd61f0d33df2be4df3c24586eb0495c8141b0987a1e71b4cd05fd9fc5159              |\n| 🔍   | `context:known_files.weights.pt`             | 45b3e890d928bd9145ecf3b8676f4e1ed5f9938cad1ab51343b9ed07f2d1de24              |\n| 🔍   | `context:known_files.weights_torchscript.pt` | a92591d38eaa6fb71f039403ce67f589c44e9de4747044aa642cce2402545600              |\n| ❌   |                                              | bioimageio.spec format validation model 0.5.4                                 |\n| ❌   | `covers.0`                                   | Input is not a valid path for <class 'pathlib.Path'>                          |\n|     |                                              |                                                                               |\n| ❌   | `covers.0.(RelativeFilePath)`                | Input is not a valid path for <class 'pathlib.PurePath'>                      |\n|     |                                              |                                                                               |\n| ❌   | `covers.0`                                   | Input should be a valid string                                                |\n|     |                                              |                                                                               |\n| ❌   | `documentation`                              | Input is not a valid path for <class 'pathlib.Path'>                          |\n|     |                                              |                                                                               |\n| ❌   | `documentation.(RelativeFilePath)`           | Input is not a valid path for <class 'pathlib.PurePath'>                      |\n|     |                                              |                                                                               |\n| ❌   | `documentation`                              | Input should be a valid string                                                |\n|     |                                              |                                                                               |\n| ✔️  | `type`                                       | Has expected resource type                                                    |\n",
+    "links": [
+        "ilastik/ilastik"
+    ],
+    "status": "failed",
+    "tool": "ilastik",
+    "tool_version": "1.4.1.post1"
+}
