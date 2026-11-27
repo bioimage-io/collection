@@ -2,7 +2,7 @@
     "count_per_type": {
         "application": 65,
         "dataset": 50,
-        "model": 174,
+        "model": 185,
         "notebook": 4,
         "tracking": 1
     },
@@ -3933,8 +3933,151 @@
                     "version": "v0"
                 }
             ]
+        },
+        {
+            "id": "bioimage-io/gorgeous-eagle",
+            "type": "model",
+            "versions": [
+                {
+                    "comment": "Published by c.pape@gmx.net",
+                    "created_at": "2026-11-26T13:46:56Z",
+                    "sha256": "6cc575decf70011acfcec71fafc63e70fc4b72d86f72350a020e22ff8cb41f2c",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/gorgeous-eagle/files/rdf.yaml?version=v0",
+                    "version": "v0"
+                }
+            ]
+        },
+        {
+            "id": "bioimage-io/affable-zebra",
+            "type": "model",
+            "versions": [
+                {
+                    "comment": "Published by c.pape@gmx.net",
+                    "created_at": "2026-11-26T13:59:17Z",
+                    "sha256": "9f368e4097dbdf15aa372a490bdda2507e38387eb0c641e119d179d73524c941",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/affable-zebra/files/rdf.yaml?version=v0",
+                    "version": "v0"
+                }
+            ]
+        },
+        {
+            "id": "bioimage-io/funny-bug",
+            "type": "model",
+            "versions": [
+                {
+                    "comment": "Published by c.pape@gmx.net",
+                    "created_at": "2026-11-26T14:04:33Z",
+                    "sha256": "a0b7328cd12f779bb3dfb9993244cc3bd114c79f56fb03d964e756f63699b839",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/funny-bug/files/rdf.yaml?version=v0",
+                    "version": "v0"
+                }
+            ]
+        },
+        {
+            "id": "bioimage-io/adaptable-microbe",
+            "type": "model",
+            "versions": [
+                {
+                    "comment": "Published by c.pape@gmx.net",
+                    "created_at": "2026-11-26T14:05:00Z",
+                    "sha256": "c9b4fe4d8d17a2e36b411b5ccdbed2cd888e237a0c9de18c9a3692a67bcad1d8",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/adaptable-microbe/files/rdf.yaml?version=v0",
+                    "version": "v0"
+                }
+            ]
+        },
+        {
+            "id": "bioimage-io/loyal-butterfly",
+            "type": "model",
+            "versions": [
+                {
+                    "comment": "Published by c.pape@gmx.net",
+                    "created_at": "2026-11-26T14:05:27Z",
+                    "sha256": "87cd19e4e45811c7c7d737e0248d5769b747652bae0bf1b4e9cefb2d13b16474",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/loyal-butterfly/files/rdf.yaml?version=v0",
+                    "version": "v0"
+                }
+            ]
+        },
+        {
+            "id": "bioimage-io/quiet-lobster",
+            "type": "model",
+            "versions": [
+                {
+                    "comment": "Published by c.pape@gmx.net",
+                    "created_at": "2026-11-26T14:05:55Z",
+                    "sha256": "d8569d87e1569acc2493c0db4932dd25cecbed69dd836e46d0a82172b8231ff9",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/quiet-lobster/files/rdf.yaml?version=v0",
+                    "version": "v0"
+                }
+            ]
+        },
+        {
+            "id": "bioimage-io/angry-flamingo",
+            "type": "model",
+            "versions": [
+                {
+                    "comment": "Published by c.pape@gmx.net",
+                    "created_at": "2026-11-26T14:07:25Z",
+                    "sha256": "e762cad55975fb55dc16aedad52eacafa5715b13e8e4a0dc2c2abb8a3cfad966",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/angry-flamingo/files/rdf.yaml?version=v0",
+                    "version": "v0"
+                }
+            ]
+        },
+        {
+            "id": "bioimage-io/hardworking-parrot",
+            "type": "model",
+            "versions": [
+                {
+                    "comment": "Published by c.pape@gmx.net",
+                    "created_at": "2026-11-26T14:07:48Z",
+                    "sha256": "f60662b8a8b4e8df4472f8ef998e6720f48cd8e5c47df26046614c7037fd21ad",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/hardworking-parrot/files/rdf.yaml?version=v0",
+                    "version": "v0"
+                }
+            ]
+        },
+        {
+            "id": "bioimage-io/generous-lobster",
+            "type": "model",
+            "versions": [
+                {
+                    "comment": "Published by c.pape@gmx.net",
+                    "created_at": "2026-11-26T14:08:10Z",
+                    "sha256": "4e09a7df1487746e7fbf3ed3f83821861bcc76a359c60a4d0c78b93ded5e3b96",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/generous-lobster/files/rdf.yaml?version=v0",
+                    "version": "v0"
+                }
+            ]
+        },
+        {
+            "id": "bioimage-io/determined-bat",
+            "type": "model",
+            "versions": [
+                {
+                    "comment": "Published by c.pape@gmx.net",
+                    "created_at": "2026-11-26T14:08:32Z",
+                    "sha256": "2227ee47926dd3d255c7f6642bb51d386d43819050c82556a05baf9660539bec",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/determined-bat/files/rdf.yaml?version=v0",
+                    "version": "v0"
+                }
+            ]
+        },
+        {
+            "id": "bioimage-io/discreet-angelfish",
+            "type": "model",
+            "versions": [
+                {
+                    "comment": "Published by c.pape@gmx.net",
+                    "created_at": "2026-11-26T14:08:57Z",
+                    "sha256": "a3d2c9d023ed2f6bf995da2df8f1e5597a5c70599733b18ab7de3c49cc1745cb",
+                    "source": "https://hypha.aicell.io/bioimage-io/artifacts/discreet-angelfish/files/rdf.yaml?version=v0",
+                    "version": "v0"
+                }
+            ]
         }
     ],
-    "timestamp": "2026-11-26T07:31:45.115487",
-    "total": 294
+    "timestamp": "2026-11-27T07:36:06.164999",
+    "total": 305
 }
