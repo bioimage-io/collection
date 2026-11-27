@@ -1,0 +1,198 @@
+{
+    "rdf_content": {
+        "format_version": "0.5.12",
+        "type": "model",
+        "name": "SynapseNet Vesicles - 2D TEM",
+        "description": "2D U-Net from SynapseNet that segments synaptic vesicles in 2D transmission electron micrographs of synapses at a voxel size of 1.35 nm.",
+        "license": "CC-BY-4.0",
+        "authors": [
+            {
+                "name": "Sarah Muth",
+                "github_user": "SarahMuth"
+            }
+        ],
+        "maintainers": [
+            {
+                "name": "Luca Freckmann",
+                "github_user": "lufre1"
+            }
+        ],
+        "cite": [
+            {
+                "text": "Muth et al. SynapseNet: Deep learning for automatic synapse reconstruction. Molecular Biology of the Cell, 2025.",
+                "doi": "10.1091/mbc.E24-11-0519"
+            }
+        ],
+        "tags": [
+            "synapsenet",
+            "electron-microscopy",
+            "electron-microscopy-2d",
+            "synapse",
+            "segmentation",
+            "unet",
+            "pytorch",
+            "vesicles",
+            "2d",
+            "transmission-electron-microscopy"
+        ],
+        "git_repo": "https://github.com/computational-cell-analytics/synapse-net",
+        "documentation": {
+            "source": "README.md",
+            "sha256": "d07f1d5be0025771ec7d711b0360f4d327a564710e2cda724563211977b1c819"
+        },
+        "covers": [
+            {
+                "source": "cover.png",
+                "sha256": "385031286e49e9a4f6c445a20f30679847cd147a3adc5dc6b9c4370de14a6765"
+            }
+        ],
+        "inputs": [
+            {
+                "id": "raw",
+                "description": "Electron microscopy data",
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "raw"
+                        ]
+                    },
+                    {
+                        "type": "space",
+                        "id": "y",
+                        "size": {
+                            "min": 64,
+                            "step": 16
+                        }
+                    },
+                    {
+                        "type": "space",
+                        "id": "x",
+                        "size": {
+                            "min": 64,
+                            "step": 16
+                        }
+                    }
+                ],
+                "test_tensor": {
+                    "source": "test_input.npy",
+                    "sha256": "0cd6f464ec8eaa2928b100e456bc0a53949f926e00a4c9e428c0a3db014a2d36"
+                },
+                "preprocessing": [
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    },
+                    {
+                        "id": "zero_mean_unit_variance",
+                        "kwargs": {
+                            "axes": [
+                                "y",
+                                "x"
+                            ],
+                            "eps": 1e-7
+                        }
+                    }
+                ]
+            }
+        ],
+        "outputs": [
+            {
+                "id": "prediction",
+                "description": "Vesicle foreground and boundary probabilities",
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "foreground",
+                            "boundaries"
+                        ]
+                    },
+                    {
+                        "type": "space",
+                        "id": "y",
+                        "size": {
+                            "tensor_id": "raw",
+                            "axis_id": "y"
+                        },
+                        "halo": 16
+                    },
+                    {
+                        "type": "space",
+                        "id": "x",
+                        "size": {
+                            "tensor_id": "raw",
+                            "axis_id": "x"
+                        },
+                        "halo": 16
+                    }
+                ],
+                "test_tensor": {
+                    "source": "test_output.npy",
+                    "sha256": "7ba544cfa1ac3ea75dd0c546c485baa94de2e4f576449841678f651d99fe0653"
+                },
+                "data": {
+                    "range": [
+                        0.0,
+                        1.0
+                    ]
+                }
+            }
+        ],
+        "weights": {
+            "pytorch_state_dict": {
+                "source": "weights.pt",
+                "sha256": "0ddfbcd4cf2ba45f11f854d3bd60726dc1248af186e75fd95934e19a7fdc21a3",
+                "pytorch_version": "2.7.1",
+                "architecture": {
+                    "source": "model.py",
+                    "callable": "UNet",
+                    "sha256": "1fb1a1c74a22cf6d27f19a8fea242280ef154481fe8e9c5caf392a73585f0831",
+                    "kwargs": {
+                        "in_channels": 1,
+                        "out_channels": 2,
+                        "scale_factors": [
+                            [
+                                2,
+                                2
+                            ],
+                            [
+                                2,
+                                2
+                            ],
+                            [
+                                2,
+                                2
+                            ],
+                            [
+                                2,
+                                2
+                            ]
+                        ],
+                        "initial_features": 32,
+                        "gain": 2,
+                        "norm": "InstanceNorm"
+                    }
+                }
+            },
+            "torchscript": {
+                "source": "weights_torchscript.pt",
+                "sha256": "503a63973d48fd756f775554f5ceb4db52a5259b2a0985ccee85383c60ca4b96",
+                "parent": "pytorch_state_dict",
+                "pytorch_version": "2.7.1"
+            }
+        },
+        "id": "adaptable-microbe",
+        "id_emoji": "🦠"
+    },
+    "rdf_yaml_sha256": "c9b4fe4d8d17a2e36b411b5ccdbed2cd888e237a0c9de18c9a3692a67bcad1d8",
+    "status": "untested"
+}

@@ -1,0 +1,218 @@
+{
+    "rdf_content": {
+        "format_version": "0.5.12",
+        "type": "model",
+        "name": "SynapseNet Active Zone - Electron Tomography",
+        "description": "3D U-Net from SynapseNet that segments the presynaptic active zone in electron tomograms of synapses at a voxel size of 1.38 nm (isotropic).",
+        "license": "CC-BY-4.0",
+        "authors": [
+            {
+                "name": "Sarah Muth",
+                "github_user": "SarahMuth"
+            }
+        ],
+        "maintainers": [
+            {
+                "name": "Luca Freckmann",
+                "github_user": "lufre1"
+            }
+        ],
+        "cite": [
+            {
+                "text": "Muth et al. SynapseNet: Deep learning for automatic synapse reconstruction. Molecular Biology of the Cell, 2025.",
+                "doi": "10.1091/mbc.E24-11-0519"
+            }
+        ],
+        "tags": [
+            "synapsenet",
+            "electron-microscopy",
+            "electron-tomography",
+            "synapse",
+            "segmentation",
+            "unet",
+            "pytorch",
+            "active-zone",
+            "3d"
+        ],
+        "git_repo": "https://github.com/computational-cell-analytics/synapse-net",
+        "documentation": {
+            "source": "README.md",
+            "sha256": "205e1fc1e6aa0471c9d7263b2a3d226c6423f8f1f9d78053c3fdc3597665b6a2"
+        },
+        "covers": [
+            {
+                "source": "cover.png",
+                "sha256": "e016b22a410ef0112778208d7bd9f8f156c2823a33bfd6469e43bb29e3c9ba55"
+            }
+        ],
+        "inputs": [
+            {
+                "id": "raw",
+                "description": "Electron microscopy data",
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "raw"
+                        ]
+                    },
+                    {
+                        "type": "space",
+                        "id": "z",
+                        "size": {
+                            "min": 16,
+                            "step": 8
+                        }
+                    },
+                    {
+                        "type": "space",
+                        "id": "y",
+                        "size": {
+                            "min": 64,
+                            "step": 16
+                        }
+                    },
+                    {
+                        "type": "space",
+                        "id": "x",
+                        "size": {
+                            "min": 64,
+                            "step": 16
+                        }
+                    }
+                ],
+                "test_tensor": {
+                    "source": "test_input.npy",
+                    "sha256": "e813dd67f3c3679953e8cccb61f90501f15ed065e90f0864ae54f2322163ae77"
+                },
+                "preprocessing": [
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    },
+                    {
+                        "id": "zero_mean_unit_variance",
+                        "kwargs": {
+                            "axes": [
+                                "z",
+                                "y",
+                                "x"
+                            ],
+                            "eps": 1e-7
+                        }
+                    }
+                ]
+            }
+        ],
+        "outputs": [
+            {
+                "id": "prediction",
+                "description": "Active zone probability",
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "active_zone"
+                        ]
+                    },
+                    {
+                        "type": "space",
+                        "id": "z",
+                        "size": {
+                            "tensor_id": "raw",
+                            "axis_id": "z"
+                        },
+                        "halo": 4
+                    },
+                    {
+                        "type": "space",
+                        "id": "y",
+                        "size": {
+                            "tensor_id": "raw",
+                            "axis_id": "y"
+                        },
+                        "halo": 16
+                    },
+                    {
+                        "type": "space",
+                        "id": "x",
+                        "size": {
+                            "tensor_id": "raw",
+                            "axis_id": "x"
+                        },
+                        "halo": 16
+                    }
+                ],
+                "test_tensor": {
+                    "source": "test_output.npy",
+                    "sha256": "9984b7d8ec4b7f19cb575d67eaec07c810d28626e9ad8102399d256d57364918"
+                },
+                "data": {
+                    "range": [
+                        0.0,
+                        1.0
+                    ]
+                }
+            }
+        ],
+        "weights": {
+            "pytorch_state_dict": {
+                "source": "weights.pt",
+                "sha256": "e953ba83cae6edb24fd74cd6c8ec05ac4f2c406f286b946ea69352d9cbc040b3",
+                "pytorch_version": "2.7.1",
+                "architecture": {
+                    "source": "model.py",
+                    "callable": "UNet",
+                    "sha256": "1fb1a1c74a22cf6d27f19a8fea242280ef154481fe8e9c5caf392a73585f0831",
+                    "kwargs": {
+                        "in_channels": 1,
+                        "out_channels": 1,
+                        "scale_factors": [
+                            [
+                                1,
+                                2,
+                                2
+                            ],
+                            [
+                                2,
+                                2,
+                                2
+                            ],
+                            [
+                                2,
+                                2,
+                                2
+                            ],
+                            [
+                                2,
+                                2,
+                                2
+                            ]
+                        ],
+                        "initial_features": 32,
+                        "gain": 2,
+                        "norm": "InstanceNorm"
+                    }
+                }
+            },
+            "torchscript": {
+                "source": "weights_torchscript.pt",
+                "sha256": "7e718781b12591f90eac8ef73af60a3fb4edfb7635526b220625a2fa181e566d",
+                "parent": "pytorch_state_dict",
+                "pytorch_version": "2.7.1"
+            }
+        },
+        "id": "loyal-butterfly",
+        "id_emoji": "🦋"
+    },
+    "rdf_yaml_sha256": "87cd19e4e45811c7c7d737e0248d5769b747652bae0bf1b4e9cefb2d13b16474",
+    "status": "untested"
+}

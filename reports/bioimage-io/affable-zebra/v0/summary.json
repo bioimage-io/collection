@@ -1,0 +1,222 @@
+{
+    "rdf_content": {
+        "format_version": "0.5.12",
+        "type": "model",
+        "name": "SynapseNet Mitochondria - FIB-SEM",
+        "description": "3D U-Net from SynapseNet that predicts mitochondria foreground and boundary probabilities in FIB-SEM volume EM at a voxel size of 25 nm in z and 5 nm in xy.",
+        "license": "CC-BY-4.0",
+        "authors": [
+            {
+                "name": "Luca Freckmann",
+                "github_user": "lufre1",
+                "orcid": "0000-0002-8285-2586"
+            }
+        ],
+        "maintainers": [
+            {
+                "name": "Luca Freckmann",
+                "github_user": "lufre1"
+            }
+        ],
+        "documentation": {
+            "source": "README.md",
+            "sha256": "cce5e703ddb2b01b34d9c7ba19b78b07688800d4651d747adbca79d8ce09b4c4"
+        },
+        "covers": [
+            {
+                "source": "cover.png",
+                "sha256": "2b38b42c2d660535966a2aaad26152ef5537ff50a8cc2007ff7d5b299ca04b72"
+            }
+        ],
+        "inputs": [
+            {
+                "id": "raw",
+                "description": "FIB-SEM volume",
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "raw"
+                        ]
+                    },
+                    {
+                        "type": "space",
+                        "id": "z",
+                        "size": {
+                            "min": 16,
+                            "step": 4
+                        }
+                    },
+                    {
+                        "type": "space",
+                        "id": "y",
+                        "size": {
+                            "min": 64,
+                            "step": 16
+                        }
+                    },
+                    {
+                        "type": "space",
+                        "id": "x",
+                        "size": {
+                            "min": 64,
+                            "step": 16
+                        }
+                    }
+                ],
+                "test_tensor": {
+                    "source": "test_input.npy",
+                    "sha256": "b621a762125cf49cc5d58a444a5fa84e2e6f3640db8ed037631cb4edb050a06f"
+                },
+                "preprocessing": [
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    },
+                    {
+                        "id": "scale_range",
+                        "kwargs": {
+                            "axes": [
+                                "z",
+                                "y",
+                                "x"
+                            ],
+                            "min_percentile": 1.0,
+                            "max_percentile": 99.0,
+                            "eps": 1e-7
+                        }
+                    }
+                ]
+            }
+        ],
+        "outputs": [
+            {
+                "id": "prediction",
+                "description": "Mitochondria foreground and boundary probabilities",
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "foreground",
+                            "boundaries"
+                        ]
+                    },
+                    {
+                        "type": "space",
+                        "id": "z",
+                        "size": {
+                            "tensor_id": "raw",
+                            "axis_id": "z"
+                        },
+                        "halo": 4
+                    },
+                    {
+                        "type": "space",
+                        "id": "y",
+                        "size": {
+                            "tensor_id": "raw",
+                            "axis_id": "y"
+                        },
+                        "halo": 16
+                    },
+                    {
+                        "type": "space",
+                        "id": "x",
+                        "size": {
+                            "tensor_id": "raw",
+                            "axis_id": "x"
+                        },
+                        "halo": 16
+                    }
+                ],
+                "test_tensor": {
+                    "source": "test_output.npy",
+                    "sha256": "65d657969248d6039d479bc50215abf8957c48dcdaf1eadcbbbab83d3a498d30"
+                },
+                "data": {
+                    "range": [
+                        0.0,
+                        1.0
+                    ]
+                }
+            }
+        ],
+        "weights": {
+            "pytorch_state_dict": {
+                "source": "weights.pt",
+                "sha256": "092d94e11753473f4590c4b0aa9a6406b60b81639bdf6a37a1edcffb7476dbca",
+                "pytorch_version": "2.7.1",
+                "architecture": {
+                    "source": "model.py",
+                    "callable": "AnisotropicUNet3d",
+                    "sha256": "d33416747f5171a517409b1b4b4951ac75f3605e91aabe6412457373ab84f101",
+                    "kwargs": {
+                        "in_channels": 1,
+                        "out_channels": 2,
+                        "scale_factors": [
+                            [
+                                1,
+                                2,
+                                2
+                            ],
+                            [
+                                1,
+                                2,
+                                2
+                            ],
+                            [
+                                2,
+                                2,
+                                2
+                            ],
+                            [
+                                2,
+                                2,
+                                2
+                            ]
+                        ],
+                        "initial_features": 32,
+                        "gain": 2,
+                        "norm": "none"
+                    }
+                }
+            },
+            "torchscript": {
+                "source": "weights_torchscript.pt",
+                "sha256": "b556bc2f2b9a855c240c4ff5471ee443a36e8d789bcde017a153a0afc9fdb086",
+                "parent": "pytorch_state_dict",
+                "pytorch_version": "2.7.1"
+            }
+        },
+        "tags": [
+            "synapsenet",
+            "electron-microscopy",
+            "segmentation",
+            "unet",
+            "pytorch",
+            "3d",
+            "mitochondria",
+            "fib-sem",
+            "volume-em"
+        ],
+        "cite": [
+            {
+                "text": "SynapseNet: deep learning for automatic synapse reconstruction (software).",
+                "url": "https://github.com/computational-cell-analytics/synapse-net"
+            }
+        ],
+        "git_repo": "https://github.com/computational-cell-analytics/synapse-net",
+        "id": "affable-zebra",
+        "id_emoji": "🦓"
+    },
+    "rdf_yaml_sha256": "9f368e4097dbdf15aa372a490bdda2507e38387eb0c641e119d179d73524c941",
+    "status": "untested"
+}

@@ -1,0 +1,271 @@
+{
+    "rdf_content": {
+        "format_version": "0.5.12",
+        "type": "model",
+        "name": "SynapseNet Cristae - Electron Tomography",
+        "description": "3D U-Net from SynapseNet that predicts mitochondrial cristae foreground and boundary probabilities in electron tomograms at a voxel size of 1.74 nm, given the tomogram and a mitochondria mask.",
+        "license": "CC-BY-4.0",
+        "authors": [
+            {
+                "name": "Luca Freckmann",
+                "github_user": "lufre1",
+                "orcid": "0000-0002-8285-2586"
+            }
+        ],
+        "maintainers": [
+            {
+                "name": "Luca Freckmann",
+                "github_user": "lufre1"
+            }
+        ],
+        "documentation": {
+            "source": "README.md",
+            "sha256": "9306b861460659934417406f8e934c5fc747108a03c2a383d7399d11d6f6c982"
+        },
+        "covers": [
+            {
+                "source": "cover.png",
+                "sha256": "7cd6c81368c81fc3ca99a4beae54fab9c171466e4d294f7f782a07cffee0d453"
+            }
+        ],
+        "inputs": [
+            {
+                "id": "raw",
+                "description": "Electron tomogram",
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "raw"
+                        ]
+                    },
+                    {
+                        "type": "space",
+                        "id": "z",
+                        "size": {
+                            "min": 16,
+                            "step": 8
+                        }
+                    },
+                    {
+                        "type": "space",
+                        "id": "y",
+                        "size": {
+                            "min": 64,
+                            "step": 16
+                        }
+                    },
+                    {
+                        "type": "space",
+                        "id": "x",
+                        "size": {
+                            "min": 64,
+                            "step": 16
+                        }
+                    }
+                ],
+                "test_tensor": {
+                    "source": "test_raw.npy",
+                    "sha256": "49bd5b93747875ae069bc13a5aa8e971f099a0180f06aa678890209feaf008fe"
+                },
+                "preprocessing": [
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    },
+                    {
+                        "id": "zero_mean_unit_variance",
+                        "kwargs": {
+                            "axes": [
+                                "z",
+                                "y",
+                                "x"
+                            ],
+                            "eps": 1e-7
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "mito_mask",
+                "description": "Binary mitochondria mask (1 inside mitochondria, 0 outside)",
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "mito_mask"
+                        ]
+                    },
+                    {
+                        "type": "space",
+                        "id": "z",
+                        "size": {
+                            "tensor_id": "raw",
+                            "axis_id": "z"
+                        }
+                    },
+                    {
+                        "type": "space",
+                        "id": "y",
+                        "size": {
+                            "tensor_id": "raw",
+                            "axis_id": "y"
+                        }
+                    },
+                    {
+                        "type": "space",
+                        "id": "x",
+                        "size": {
+                            "tensor_id": "raw",
+                            "axis_id": "x"
+                        }
+                    }
+                ],
+                "test_tensor": {
+                    "source": "test_mito_mask.npy",
+                    "sha256": "391ebfa87a95f74d99a671701134c4fb437a879581dcf21743bd690f165b201d"
+                },
+                "preprocessing": [
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    }
+                ]
+            }
+        ],
+        "outputs": [
+            {
+                "id": "prediction",
+                "description": "Cristae foreground and boundary probabilities",
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "foreground",
+                            "boundaries"
+                        ]
+                    },
+                    {
+                        "type": "space",
+                        "id": "z",
+                        "size": {
+                            "tensor_id": "raw",
+                            "axis_id": "z"
+                        },
+                        "halo": 4
+                    },
+                    {
+                        "type": "space",
+                        "id": "y",
+                        "size": {
+                            "tensor_id": "raw",
+                            "axis_id": "y"
+                        },
+                        "halo": 16
+                    },
+                    {
+                        "type": "space",
+                        "id": "x",
+                        "size": {
+                            "tensor_id": "raw",
+                            "axis_id": "x"
+                        },
+                        "halo": 16
+                    }
+                ],
+                "test_tensor": {
+                    "source": "test_output.npy",
+                    "sha256": "0e734e083895f7ee5abced5d20285a05e677be2405a8b1dfd9f7d89611f03042"
+                },
+                "data": {
+                    "range": [
+                        0.0,
+                        1.0
+                    ]
+                }
+            }
+        ],
+        "weights": {
+            "pytorch_state_dict": {
+                "source": "weights.pt",
+                "sha256": "70c13da6687dd994c8a01c30fc5e19613fb55761778db2ae98529cf3a4a55b51",
+                "pytorch_version": "2.7.1",
+                "architecture": {
+                    "source": "model.py",
+                    "callable": "CristaeUNet3d",
+                    "sha256": "d33416747f5171a517409b1b4b4951ac75f3605e91aabe6412457373ab84f101",
+                    "kwargs": {
+                        "in_channels": 2,
+                        "out_channels": 2,
+                        "scale_factors": [
+                            [
+                                1,
+                                2,
+                                2
+                            ],
+                            [
+                                2,
+                                2,
+                                2
+                            ],
+                            [
+                                2,
+                                2,
+                                2
+                            ],
+                            [
+                                2,
+                                2,
+                                2
+                            ]
+                        ],
+                        "initial_features": 32,
+                        "gain": 2,
+                        "norm": "none"
+                    }
+                }
+            },
+            "torchscript": {
+                "source": "weights_torchscript.pt",
+                "sha256": "6582bd19284d242b006979bda0a7aca4a2f0cb7158280b7a5448e4e9582888bd",
+                "parent": "pytorch_state_dict",
+                "pytorch_version": "2.7.1"
+            }
+        },
+        "tags": [
+            "synapsenet",
+            "electron-microscopy",
+            "segmentation",
+            "unet",
+            "pytorch",
+            "3d",
+            "mitochondria",
+            "electron-tomography",
+            "cristae"
+        ],
+        "cite": [
+            {
+                "text": "SynapseNet: deep learning for automatic synapse reconstruction (software).",
+                "url": "https://github.com/computational-cell-analytics/synapse-net"
+            }
+        ],
+        "git_repo": "https://github.com/computational-cell-analytics/synapse-net",
+        "id": "gorgeous-eagle",
+        "id_emoji": "🦅"
+    },
+    "rdf_yaml_sha256": "6cc575decf70011acfcec71fafc63e70fc4b72d86f72350a020e22ff8cb41f2c",
+    "status": "untested"
+}

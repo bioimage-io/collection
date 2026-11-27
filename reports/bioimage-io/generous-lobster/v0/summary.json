@@ -1,0 +1,221 @@
+{
+    "rdf_content": {
+        "format_version": "0.5.12",
+        "type": "model",
+        "name": "SynapseNet Vesicles - Cryo-Electron Tomography",
+        "description": "3D U-Net from SynapseNet that segments synaptic vesicles in cryo-electron tomograms at a voxel size of 1.35 nm in y/x and 0.88 nm in z.",
+        "license": "CC-BY-4.0",
+        "authors": [
+            {
+                "name": "Sarah Muth",
+                "github_user": "SarahMuth"
+            }
+        ],
+        "maintainers": [
+            {
+                "name": "Luca Freckmann",
+                "github_user": "lufre1"
+            }
+        ],
+        "cite": [
+            {
+                "text": "Muth et al. SynapseNet: Deep learning for automatic synapse reconstruction. Molecular Biology of the Cell, 2025.",
+                "doi": "10.1091/mbc.E24-11-0519"
+            }
+        ],
+        "tags": [
+            "synapsenet",
+            "electron-microscopy",
+            "electron-tomography",
+            "synapse",
+            "segmentation",
+            "unet",
+            "pytorch",
+            "vesicles",
+            "3d",
+            "cryo-electron-tomography",
+            "domain-adaptation"
+        ],
+        "git_repo": "https://github.com/computational-cell-analytics/synapse-net",
+        "documentation": {
+            "source": "README.md",
+            "sha256": "c502ec494aa353e3b0f467ab03f988eac3bd895245654ef322c93d0f47250cb7"
+        },
+        "covers": [
+            {
+                "source": "cover.png",
+                "sha256": "a7dd59d31b537b2f4205ffdcf66c9c4d24f2d9e978b3cdc037f2b19a48abe336"
+            }
+        ],
+        "inputs": [
+            {
+                "id": "raw",
+                "description": "Electron microscopy data",
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "raw"
+                        ]
+                    },
+                    {
+                        "type": "space",
+                        "id": "z",
+                        "size": {
+                            "min": 16,
+                            "step": 8
+                        }
+                    },
+                    {
+                        "type": "space",
+                        "id": "y",
+                        "size": {
+                            "min": 64,
+                            "step": 16
+                        }
+                    },
+                    {
+                        "type": "space",
+                        "id": "x",
+                        "size": {
+                            "min": 64,
+                            "step": 16
+                        }
+                    }
+                ],
+                "test_tensor": {
+                    "source": "test_input.npy",
+                    "sha256": "e1dbd731826a2268048c7b5a9757f6f4e64d16a37c87b388d8065456c43b5585"
+                },
+                "preprocessing": [
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    },
+                    {
+                        "id": "zero_mean_unit_variance",
+                        "kwargs": {
+                            "axes": [
+                                "z",
+                                "y",
+                                "x"
+                            ],
+                            "eps": 1e-7
+                        }
+                    }
+                ]
+            }
+        ],
+        "outputs": [
+            {
+                "id": "prediction",
+                "description": "Vesicle foreground and boundary probabilities",
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "foreground",
+                            "boundaries"
+                        ]
+                    },
+                    {
+                        "type": "space",
+                        "id": "z",
+                        "size": {
+                            "tensor_id": "raw",
+                            "axis_id": "z"
+                        },
+                        "halo": 4
+                    },
+                    {
+                        "type": "space",
+                        "id": "y",
+                        "size": {
+                            "tensor_id": "raw",
+                            "axis_id": "y"
+                        },
+                        "halo": 16
+                    },
+                    {
+                        "type": "space",
+                        "id": "x",
+                        "size": {
+                            "tensor_id": "raw",
+                            "axis_id": "x"
+                        },
+                        "halo": 16
+                    }
+                ],
+                "test_tensor": {
+                    "source": "test_output.npy",
+                    "sha256": "d279c8b7c20eeb6925f6e391e6c18260b19ff1cc83de41d555d2998fd6641ce5"
+                },
+                "data": {
+                    "range": [
+                        0.0,
+                        1.0
+                    ]
+                }
+            }
+        ],
+        "weights": {
+            "pytorch_state_dict": {
+                "source": "weights.pt",
+                "sha256": "8b5a4678da3984346e595f3245b45ac63e1d6dd7722b4cd041dd2b145d5ea548",
+                "pytorch_version": "2.7.1",
+                "architecture": {
+                    "source": "model.py",
+                    "callable": "UNet",
+                    "sha256": "1fb1a1c74a22cf6d27f19a8fea242280ef154481fe8e9c5caf392a73585f0831",
+                    "kwargs": {
+                        "in_channels": 1,
+                        "out_channels": 2,
+                        "scale_factors": [
+                            [
+                                1,
+                                2,
+                                2
+                            ],
+                            [
+                                2,
+                                2,
+                                2
+                            ],
+                            [
+                                2,
+                                2,
+                                2
+                            ],
+                            [
+                                2,
+                                2,
+                                2
+                            ]
+                        ],
+                        "initial_features": 32,
+                        "gain": 2,
+                        "norm": "InstanceNorm"
+                    }
+                }
+            },
+            "torchscript": {
+                "source": "weights_torchscript.pt",
+                "sha256": "651b855a2ccad16581bb06d3f078d7d3ba8a9505d2ab6536f2d94f38976e9b97",
+                "parent": "pytorch_state_dict",
+                "pytorch_version": "2.7.1"
+            }
+        },
+        "id": "generous-lobster",
+        "id_emoji": "🦞"
+    },
+    "rdf_yaml_sha256": "4e09a7df1487746e7fbf3ed3f83821861bcc76a359c60a4d0c78b93ded5e3b96",
+    "status": "untested"
+}

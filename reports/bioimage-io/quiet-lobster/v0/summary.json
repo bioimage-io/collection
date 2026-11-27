@@ -1,0 +1,220 @@
+{
+    "rdf_content": {
+        "format_version": "0.5.12",
+        "type": "model",
+        "name": "SynapseNet Synaptic Compartments - Electron Tomography",
+        "description": "3D U-Net from SynapseNet that segments synaptic compartments (pre- and postsynaptic boutons) via their boundaries in electron tomograms at a voxel size of 3.47 nm (isotropic).",
+        "license": "CC-BY-4.0",
+        "authors": [
+            {
+                "name": "Sarah Muth",
+                "github_user": "SarahMuth"
+            }
+        ],
+        "maintainers": [
+            {
+                "name": "Luca Freckmann",
+                "github_user": "lufre1"
+            }
+        ],
+        "cite": [
+            {
+                "text": "Muth et al. SynapseNet: Deep learning for automatic synapse reconstruction. Molecular Biology of the Cell, 2025.",
+                "doi": "10.1091/mbc.E24-11-0519"
+            }
+        ],
+        "tags": [
+            "synapsenet",
+            "electron-microscopy",
+            "electron-tomography",
+            "synapse",
+            "segmentation",
+            "unet",
+            "pytorch",
+            "synaptic-compartments",
+            "boundary-prediction",
+            "3d"
+        ],
+        "git_repo": "https://github.com/computational-cell-analytics/synapse-net",
+        "documentation": {
+            "source": "README.md",
+            "sha256": "3dcf048d0cef9643a28c2989096ea4b784c5afa86238d7c72180e843f64d164e"
+        },
+        "covers": [
+            {
+                "source": "cover.png",
+                "sha256": "2a46a8ff0f7d82d145d409863d04406c348300187ca9ee9d7d3e5d60d080c74b"
+            }
+        ],
+        "inputs": [
+            {
+                "id": "raw",
+                "description": "Electron microscopy data",
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "raw"
+                        ]
+                    },
+                    {
+                        "type": "space",
+                        "id": "z",
+                        "size": {
+                            "min": 16,
+                            "step": 8
+                        }
+                    },
+                    {
+                        "type": "space",
+                        "id": "y",
+                        "size": {
+                            "min": 64,
+                            "step": 16
+                        }
+                    },
+                    {
+                        "type": "space",
+                        "id": "x",
+                        "size": {
+                            "min": 64,
+                            "step": 16
+                        }
+                    }
+                ],
+                "test_tensor": {
+                    "source": "test_input.npy",
+                    "sha256": "a8f02efd7c67303f289013fb57e5f81a379c275196f582a93313ac50ec754f82"
+                },
+                "preprocessing": [
+                    {
+                        "id": "ensure_dtype",
+                        "kwargs": {
+                            "dtype": "float32"
+                        }
+                    },
+                    {
+                        "id": "zero_mean_unit_variance",
+                        "kwargs": {
+                            "axes": [
+                                "z",
+                                "y",
+                                "x"
+                            ],
+                            "eps": 1e-7
+                        }
+                    }
+                ]
+            }
+        ],
+        "outputs": [
+            {
+                "id": "prediction",
+                "description": "Compartment boundary probability and boundary distance",
+                "axes": [
+                    {
+                        "type": "batch"
+                    },
+                    {
+                        "type": "channel",
+                        "channel_names": [
+                            "boundaries",
+                            "boundary_distance"
+                        ]
+                    },
+                    {
+                        "type": "space",
+                        "id": "z",
+                        "size": {
+                            "tensor_id": "raw",
+                            "axis_id": "z"
+                        },
+                        "halo": 4
+                    },
+                    {
+                        "type": "space",
+                        "id": "y",
+                        "size": {
+                            "tensor_id": "raw",
+                            "axis_id": "y"
+                        },
+                        "halo": 16
+                    },
+                    {
+                        "type": "space",
+                        "id": "x",
+                        "size": {
+                            "tensor_id": "raw",
+                            "axis_id": "x"
+                        },
+                        "halo": 16
+                    }
+                ],
+                "test_tensor": {
+                    "source": "test_output.npy",
+                    "sha256": "0f90d6febf1bf01ab2c84cd594c904c066836886067ecb12085b6024d8456d0c"
+                },
+                "data": {
+                    "range": [
+                        0.0,
+                        1.0
+                    ]
+                }
+            }
+        ],
+        "weights": {
+            "pytorch_state_dict": {
+                "source": "weights.pt",
+                "sha256": "c4cba43527930e162ce600f71b37ae78d1e76a127de240413086f008bd00cc24",
+                "pytorch_version": "2.7.1",
+                "architecture": {
+                    "source": "model.py",
+                    "callable": "UNet",
+                    "sha256": "1fb1a1c74a22cf6d27f19a8fea242280ef154481fe8e9c5caf392a73585f0831",
+                    "kwargs": {
+                        "in_channels": 1,
+                        "out_channels": 2,
+                        "scale_factors": [
+                            [
+                                1,
+                                2,
+                                2
+                            ],
+                            [
+                                2,
+                                2,
+                                2
+                            ],
+                            [
+                                2,
+                                2,
+                                2
+                            ],
+                            [
+                                2,
+                                2,
+                                2
+                            ]
+                        ],
+                        "initial_features": 32,
+                        "gain": 2,
+                        "norm": "InstanceNorm"
+                    }
+                }
+            },
+            "torchscript": {
+                "source": "weights_torchscript.pt",
+                "sha256": "f68dbaa2867b27b7743ea3a7d1c740700bc6d3b1baf33d35649547c3858fd7fe",
+                "parent": "pytorch_state_dict",
+                "pytorch_version": "2.7.1"
+            }
+        },
+        "id": "quiet-lobster",
+        "id_emoji": "🦞"
+    },
+    "rdf_yaml_sha256": "d8569d87e1569acc2493c0db4932dd25cecbed69dd836e46d0a82172b8231ff9",
+    "status": "untested"
+}
