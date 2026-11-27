@@ -1,0 +1,221 @@
+{
+    "badge": null,
+    "details": {
+        "conda_list": null,
+        "details": [
+            {
+                "conda_compare": null,
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "model.py": "1fb1a1c74a22cf6d27f19a8fea242280ef154481fe8e9c5caf392a73585f0831",
+                        "test_input.npy": "e1dbd731826a2268048c7b5a9757f6f4e64d16a37c87b388d8065456c43b5585",
+                        "test_output.npy": "d279c8b7c20eeb6925f6e391e6c18260b19ff1cc83de41d555d2998fd6641ce5",
+                        "weights.pt": "8b5a4678da3984346e595f3245b45ac63e1d6dd7722b4cd041dd2b145d5ea548",
+                        "weights_torchscript.pt": "651b855a2ccad16581bb06d3f078d7d3ba8a9505d2ab6536f2d94f38976e9b97"
+                    },
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/generous-lobster/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Created `InvalidDescr` object.",
+                "recommended_env": null,
+                "status": "failed",
+                "warnings": []
+            },
+            {
+                "conda_compare": null,
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "model.py": "1fb1a1c74a22cf6d27f19a8fea242280ef154481fe8e9c5caf392a73585f0831",
+                        "test_input.npy": "e1dbd731826a2268048c7b5a9757f6f4e64d16a37c87b388d8065456c43b5585",
+                        "test_output.npy": "d279c8b7c20eeb6925f6e391e6c18260b19ff1cc83de41d555d2998fd6641ce5",
+                        "weights.pt": "8b5a4678da3984346e595f3245b45ac63e1d6dd7722b4cd041dd2b145d5ea548",
+                        "weights_torchscript.pt": "651b855a2ccad16581bb06d3f078d7d3ba8a9505d2ab6536f2d94f38976e9b97"
+                    },
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/generous-lobster/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [
+                    {
+                        "loc": [
+                            "covers",
+                            0,
+                            "function-after[val_func(), function-after[validate_file(), lax-or-strict[lax=union[json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]],function-after[path_validator(), str]],strict=json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]]]]]"
+                        ],
+                        "msg": "Input is not a valid path for <class 'pathlib.Path'>",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "covers",
+                            0,
+                            "RelativeFilePath"
+                        ],
+                        "msg": "Input is not a valid path for <class 'pathlib.PurePath'>",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "covers",
+                            0,
+                            "function-after[HttpUrl(), str]"
+                        ],
+                        "msg": "Input should be a valid string",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "string_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "documentation",
+                            "function-after[val_func(), function-after[validate_file(), lax-or-strict[lax=union[json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]],function-after[path_validator(), str]],strict=json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]]]]]"
+                        ],
+                        "msg": "Input is not a valid path for <class 'pathlib.Path'>",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "documentation",
+                            "RelativeFilePath"
+                        ],
+                        "msg": "Input is not a valid path for <class 'pathlib.PurePath'>",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "documentation",
+                            "function-after[HttpUrl(), str]"
+                        ],
+                        "msg": "Input should be a valid string",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "string_type",
+                        "with_traceback": false
+                    }
+                ],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.4",
+                "recommended_env": null,
+                "status": "failed",
+                "warnings": [
+                    {
+                        "loc": [
+                            "inputs",
+                            0,
+                            "test_tensor",
+                            "source",
+                            "RelativeFilePath"
+                        ],
+                        "msg": "Failed to validate URL 'https://hypha.aicell.io/bioimage-io/artifacts/generous-lobster/files/test_input.npy?version=v0': HTTPSConnectionPool(host='hypha.aicell.io', port=443): Read timed out. (read timeout=3)\nrequest: <PreparedRequest [GET]>\nresponse: None",
+                        "severity": 30,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "outputs",
+                            0,
+                            "test_tensor",
+                            "source",
+                            "RelativeFilePath"
+                        ],
+                        "msg": "Failed to validate URL 'https://hypha.aicell.io/bioimage-io/artifacts/generous-lobster/files/test_output.npy?version=v0': HTTPSConnectionPool(host='hypha.aicell.io', port=443): Read timed out. (read timeout=3)\nrequest: <PreparedRequest [GET]>\nresponse: None",
+                        "severity": 30,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "weights",
+                            "pytorch_state_dict",
+                            "source",
+                            "RelativeFilePath"
+                        ],
+                        "msg": "Failed to validate URL 'https://hypha.aicell.io/bioimage-io/artifacts/generous-lobster/files/weights.pt?version=v0': HTTPSConnectionPool(host='hypha.aicell.io', port=443): Read timed out. (read timeout=3)\nrequest: <PreparedRequest [GET]>\nresponse: None",
+                        "severity": 30,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "weights",
+                            "pytorch_state_dict",
+                            "architecture",
+                            "function-after[_validate_sha256(), ArchitectureFromFileDescr]",
+                            "source",
+                            "RelativeFilePath"
+                        ],
+                        "msg": "Failed to validate URL 'https://hypha.aicell.io/bioimage-io/artifacts/generous-lobster/files/model.py?version=v0': HTTPSConnectionPool(host='hypha.aicell.io', port=443): Read timed out. (read timeout=3)\nrequest: <PreparedRequest [GET]>\nresponse: None",
+                        "severity": 30,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "weights",
+                            "torchscript",
+                            "source",
+                            "RelativeFilePath"
+                        ],
+                        "msg": "Failed to validate URL 'https://hypha.aicell.io/bioimage-io/artifacts/generous-lobster/files/weights_torchscript.pt?version=v0': HTTPSConnectionPool(host='hypha.aicell.io', port=443): Read timed out. (read timeout=3)\nrequest: <PreparedRequest [GET]>\nresponse: None",
+                        "severity": 30,
+                        "type": "warning"
+                    }
+                ]
+            },
+            {
+                "conda_compare": null,
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "type"
+                ],
+                "name": "Has expected resource type",
+                "recommended_env": null,
+                "status": "passed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.spec",
+                "0.5.4.1",
+                "",
+                ""
+            ],
+            [
+                "bioimageio.core",
+                "0.8.0",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.5.4",
+        "id": "generous-lobster",
+        "name": "bioimageio format validation",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/generous-lobster/files/rdf.yaml?version=v0",
+        "status": "failed",
+        "type": "model"
+    },
+    "error": "\n|        ❌        |                               bioimageio format validation                               |\n|       ---       |                                           ---                                            |\n| status          | failed                                                                                   |\n| source          | https://hypha.aicell.io/bioimage-io/artifacts/generous-lobster/files/rdf.yaml?version=v0 |\n| id              | generous-lobster                                                                         |\n| format version  | model 0.5.4                                                                              |\n| bioimageio.spec | 0.5.4.1                                                                                  |\n| bioimageio.core | 0.8.0                                                                                    |\n\n|     |                        Location                        |                                                                                                         Details                                                                                                          |\n| --- |                          ---                           |                                                                                                           ---                                                                                                            |\n| ❌   |                                                        | Created `InvalidDescr` object.                                                                                                                                                                                           |\n| 🔍   | `context:perform_io_checks`                            | True                                                                                                                                                                                                                     |\n| 🔍   | `context:root`                                         | https://hypha.aicell.io/bioimage-io/artifacts/generous-lobster/files?version=v0                                                                                                                                          |\n| 🔍   | `context:known_files.test_input.npy`                   | e1dbd731826a2268048c7b5a9757f6f4e64d16a37c87b388d8065456c43b5585                                                                                                                                                         |\n| 🔍   | `context:known_files.test_output.npy`                  | d279c8b7c20eeb6925f6e391e6c18260b19ff1cc83de41d555d2998fd6641ce5                                                                                                                                                         |\n| 🔍   | `context:known_files.model.py`                         | 1fb1a1c74a22cf6d27f19a8fea242280ef154481fe8e9c5caf392a73585f0831                                                                                                                                                         |\n| 🔍   | `context:known_files.weights.pt`                       | 8b5a4678da3984346e595f3245b45ac63e1d6dd7722b4cd041dd2b145d5ea548                                                                                                                                                         |\n| 🔍   | `context:known_files.weights_torchscript.pt`           | 651b855a2ccad16581bb06d3f078d7d3ba8a9505d2ab6536f2d94f38976e9b97                                                                                                                                                         |\n| ❌   |                                                        | bioimageio.spec format validation model 0.5.4                                                                                                                                                                            |\n| ❌   | `covers.0`                                             | Input is not a valid path for <class 'pathlib.Path'>                                                                                                                                                                     |\n|     |                                                        |                                                                                                                                                                                                                          |\n| ❌   | `covers.0.(RelativeFilePath)`                          | Input is not a valid path for <class 'pathlib.PurePath'>                                                                                                                                                                 |\n|     |                                                        |                                                                                                                                                                                                                          |\n| ❌   | `covers.0`                                             | Input should be a valid string                                                                                                                                                                                           |\n|     |                                                        |                                                                                                                                                                                                                          |\n| ❌   | `documentation`                                        | Input is not a valid path for <class 'pathlib.Path'>                                                                                                                                                                     |\n|     |                                                        |                                                                                                                                                                                                                          |\n| ❌   | `documentation.(RelativeFilePath)`                     | Input is not a valid path for <class 'pathlib.PurePath'>                                                                                                                                                                 |\n|     |                                                        |                                                                                                                                                                                                                          |\n| ❌   | `documentation`                                        | Input should be a valid string                                                                                                                                                                                           |\n|     |                                                        |                                                                                                                                                                                                                          |\n| ⚠   | `inputs.0.test_tensor.source.(RelativeFilePath)`       | Failed to validate URL 'https://hypha.aicell.io/bioimage-io/artifacts/generous-lobster/files/test_input.npy?version=v0': HTTPSConnectionPool(host='hypha.aicell.io', port=443): Read timed out. (read timeout=3)         |\n|     |                                                        | request: <PreparedRequest [GET]>                                                                                                                                                                                         |\n|     |                                                        | response: None                                                                                                                                                                                                           |\n| ⚠   | `outputs.0.test_tensor.source.(RelativeFilePath)`      | Failed to validate URL 'https://hypha.aicell.io/bioimage-io/artifacts/generous-lobster/files/test_output.npy?version=v0': HTTPSConnectionPool(host='hypha.aicell.io', port=443): Read timed out. (read timeout=3)        |\n|     |                                                        | request: <PreparedRequest [GET]>                                                                                                                                                                                         |\n|     |                                                        | response: None                                                                                                                                                                                                           |\n| ⚠   | `weights.pytorch_state_dict.source.(RelativeFilePath)` | Failed to validate URL 'https://hypha.aicell.io/bioimage-io/artifacts/generous-lobster/files/weights.pt?version=v0': HTTPSConnectionPool(host='hypha.aicell.io', port=443): Read timed out. (read timeout=3)             |\n|     |                                                        | request: <PreparedRequest [GET]>                                                                                                                                                                                         |\n|     |                                                        | response: None                                                                                                                                                                                                           |\n| ⚠   | `weights.pytorch_state_dict.architecture`              | Failed to validate URL 'https://hypha.aicell.io/bioimage-io/artifacts/generous-lobster/files/model.py?version=v0': HTTPSConnectionPool(host='hypha.aicell.io', port=443): Read timed out. (read timeout=3)               |\n|     |                                                        | request: <PreparedRequest [GET]>                                                                                                                                                                                         |\n|     |                                                        | response: None                                                                                                                                                                                                           |\n| ⚠   | `weights.torchscript.source.(RelativeFilePath)`        | Failed to validate URL 'https://hypha.aicell.io/bioimage-io/artifacts/generous-lobster/files/weights_torchscript.pt?version=v0': HTTPSConnectionPool(host='hypha.aicell.io', port=443): Read timed out. (read timeout=3) |\n|     |                                                        | request: <PreparedRequest [GET]>                                                                                                                                                                                         |\n|     |                                                        | response: None                                                                                                                                                                                                           |\n| ✔️  | `type`                                                 | Has expected resource type                                                                                                                                                                                               |\n",
+    "links": [
+        "ilastik/ilastik"
+    ],
+    "status": "failed",
+    "tool": "ilastik",
+    "tool_version": "1.4.1.post1"
+}

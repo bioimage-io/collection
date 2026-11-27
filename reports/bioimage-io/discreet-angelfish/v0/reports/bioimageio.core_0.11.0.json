@@ -1,0 +1,162 @@
+{
+    "badge": null,
+    "details": {
+        "details": [
+            {
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "README.md": "ec1d130ba2537faeb01469fa08f6996ec3559f1c0a9f13ea7da17db579c3eee3",
+                        "cover.png": "658bb4fb6c2ce6278f1f1d1c95e5943c26d4d0c88b1335348732c575f0a8aac7",
+                        "https://github.com/computational-cell-analytics/synapse-net": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/discreet-angelfish/files/README.md?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/discreet-angelfish/files/cover.png?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/discreet-angelfish/files/model.py?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/discreet-angelfish/files/test_input.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/discreet-angelfish/files/test_output.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/discreet-angelfish/files/weights.pt?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/discreet-angelfish/files/weights_torchscript.pt?version=v0": null,
+                        "model.py": "1fb1a1c74a22cf6d27f19a8fea242280ef154481fe8e9c5caf392a73585f0831",
+                        "test_input.npy": "9ff94a05def95720800ffc6e5fb20475190b8a1dacadcc07db5398557715df18",
+                        "test_output.npy": "0a85dd351371c94d29a34c7b5a7fbeff74233d0ee572dd04a88844dc755c24cf",
+                        "weights.pt": "679615657484c1c93c1e241cd328943fead2a907e17259853ed5fe8166110696",
+                        "weights_torchscript.pt": "875997e5ea08462362b428fdf38e6f5711947adcac700a13a4da9035c6482e4a"
+                    },
+                    "original_source_name": null,
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/discreet-angelfish/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Successfully created `ModelDescr` instance.",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.12",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": [
+                    {
+                        "loc": [
+                            "inputs",
+                            0,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "outputs",
+                            0,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    }
+                ]
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Found existing conda environment 'c31e7ed05eae7728b5162e6e2e909621c902e290b6b2b504d11cdaba101447ab'",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [
+                    {
+                        "loc": [],
+                        "msg": "Value error, Error calling function `package_file_descr_serializer`: TypeError: 'index_key' is expected to be an integer or a string, got 'SerializationInfo(include=None, exclude=None, context=None, mode='json', by_alias=False, exclude_unset=True, exclude_defaults=False, exclude_none=False, exclude_computed_fields=False, round_trip=False, serialize_as_any=False)'",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "value_error",
+                        "with_traceback": false
+                    }
+                ],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.12",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "failed",
+                "warnings": [
+                    {
+                        "loc": [
+                            "inputs",
+                            0,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "outputs",
+                            0,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    }
+                ]
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "torchscript"
+                ],
+                "name": "Found existing conda environment 'c31e7ed05eae7728b5162e6e2e909621c902e290b6b2b504d11cdaba101447ab'",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.spec",
+                "0.5.12.0",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.5.12",
+        "id": "discreet-angelfish",
+        "metadata_completeness": 0.38235294117647056,
+        "name": "bioimageio format validation",
+        "saved_conda_list": "Error while loading conda entry point: conda-anaconda-telemetry (cannot import name '_ExtendedAttributes' from 'opentelemetry.util.types' (/home/runner/.local/lib/python3.14/site-packages/opentelemetry/util/types.py))\nError while loading conda entry point: conda-anaconda-telemetry (cannot import name '_ExtendedAttributes' from 'opentelemetry.util.types' (/home/runner/.local/lib/python3.14/site-packages/opentelemetry/util/types.py))\n# packages in environment at /home/runner/miniconda3/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/discreet-angelfish/files/rdf.yaml?version=v0",
+        "status": "valid-format",
+        "traceback": null,
+        "type": "model",
+        "version": null,
+        "warnings": null
+    },
+    "error": "Value error, Error calling function `package_file_descr_serializer`: TypeError: 'index_key' is expected to be an integer or a string, got 'SerializationInfo(include=None, exclude=None, context=None, mode='json', by_alias=False, exclude_unset=True, exclude_defaults=False, exclude_none=False, exclude_computed_fields=False, round_trip=False, serialize_as_any=False)'",
+    "links": [],
+    "score": 0.5,
+    "status": "failed",
+    "tool": "bioimageio.core",
+    "tool_version": "0.11.0"
+}

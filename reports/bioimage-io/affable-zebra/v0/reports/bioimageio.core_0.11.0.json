@@ -1,0 +1,162 @@
+{
+    "badge": null,
+    "details": {
+        "details": [
+            {
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "README.md": "cce5e703ddb2b01b34d9c7ba19b78b07688800d4651d747adbca79d8ce09b4c4",
+                        "cover.png": "2b38b42c2d660535966a2aaad26152ef5537ff50a8cc2007ff7d5b299ca04b72",
+                        "https://github.com/computational-cell-analytics/synapse-net": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/affable-zebra/files/README.md?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/affable-zebra/files/cover.png?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/affable-zebra/files/model.py?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/affable-zebra/files/test_input.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/affable-zebra/files/test_output.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/affable-zebra/files/weights.pt?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/affable-zebra/files/weights_torchscript.pt?version=v0": null,
+                        "model.py": "d33416747f5171a517409b1b4b4951ac75f3605e91aabe6412457373ab84f101",
+                        "test_input.npy": "b621a762125cf49cc5d58a444a5fa84e2e6f3640db8ed037631cb4edb050a06f",
+                        "test_output.npy": "65d657969248d6039d479bc50215abf8957c48dcdaf1eadcbbbab83d3a498d30",
+                        "weights.pt": "092d94e11753473f4590c4b0aa9a6406b60b81639bdf6a37a1edcffb7476dbca",
+                        "weights_torchscript.pt": "b556bc2f2b9a855c240c4ff5471ee443a36e8d789bcde017a153a0afc9fdb086"
+                    },
+                    "original_source_name": null,
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/affable-zebra/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Successfully created `ModelDescr` instance.",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.12",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": [
+                    {
+                        "loc": [
+                            "inputs",
+                            0,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "outputs",
+                            0,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    }
+                ]
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Found existing conda environment 'c31e7ed05eae7728b5162e6e2e909621c902e290b6b2b504d11cdaba101447ab'",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [
+                    {
+                        "loc": [],
+                        "msg": "Value error, Error calling function `package_file_descr_serializer`: TypeError: 'index_key' is expected to be an integer or a string, got 'SerializationInfo(include=None, exclude=None, context=None, mode='json', by_alias=False, exclude_unset=True, exclude_defaults=False, exclude_none=False, exclude_computed_fields=False, round_trip=False, serialize_as_any=False)'",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "value_error",
+                        "with_traceback": false
+                    }
+                ],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.12",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "failed",
+                "warnings": [
+                    {
+                        "loc": [
+                            "inputs",
+                            0,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "outputs",
+                            0,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    }
+                ]
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "torchscript"
+                ],
+                "name": "Found existing conda environment 'c31e7ed05eae7728b5162e6e2e909621c902e290b6b2b504d11cdaba101447ab'",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.spec",
+                "0.5.12.0",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.5.12",
+        "id": "affable-zebra",
+        "metadata_completeness": 0.38235294117647056,
+        "name": "bioimageio format validation",
+        "saved_conda_list": "Error while loading conda entry point: conda-anaconda-telemetry (cannot import name '_ExtendedAttributes' from 'opentelemetry.util.types' (/home/runner/.local/lib/python3.14/site-packages/opentelemetry/util/types.py))\nError while loading conda entry point: conda-anaconda-telemetry (cannot import name '_ExtendedAttributes' from 'opentelemetry.util.types' (/home/runner/.local/lib/python3.14/site-packages/opentelemetry/util/types.py))\n# packages in environment at /home/runner/miniconda3/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/affable-zebra/files/rdf.yaml?version=v0",
+        "status": "valid-format",
+        "traceback": null,
+        "type": "model",
+        "version": null,
+        "warnings": null
+    },
+    "error": "Value error, Error calling function `package_file_descr_serializer`: TypeError: 'index_key' is expected to be an integer or a string, got 'SerializationInfo(include=None, exclude=None, context=None, mode='json', by_alias=False, exclude_unset=True, exclude_defaults=False, exclude_none=False, exclude_computed_fields=False, round_trip=False, serialize_as_any=False)'",
+    "links": [],
+    "score": 0.5,
+    "status": "failed",
+    "tool": "bioimageio.core",
+    "tool_version": "0.11.0"
+}

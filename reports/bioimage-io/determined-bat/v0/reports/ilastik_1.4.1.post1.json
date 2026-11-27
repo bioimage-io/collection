@@ -1,0 +1,174 @@
+{
+    "badge": null,
+    "details": {
+        "conda_list": null,
+        "details": [
+            {
+                "conda_compare": null,
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "model.py": "1fb1a1c74a22cf6d27f19a8fea242280ef154481fe8e9c5caf392a73585f0831",
+                        "test_input.npy": "9ff94a05def95720800ffc6e5fb20475190b8a1dacadcc07db5398557715df18",
+                        "test_output.npy": "865d7c1dc5db699b6a2c48a32a89662cce13c1f111c1d2d7ac4325e673e3a121",
+                        "weights.pt": "22b89cf25bdca3477612c403f1c8402b61e8e17f93fa3b6ba988201a0ca076e0",
+                        "weights_torchscript.pt": "b840a7b4c59c3e343a59d24720ff7353d8736cf5be8332600e62dfebcf9cbb2c"
+                    },
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/determined-bat/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Created `InvalidDescr` object.",
+                "recommended_env": null,
+                "status": "failed",
+                "warnings": []
+            },
+            {
+                "conda_compare": null,
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "model.py": "1fb1a1c74a22cf6d27f19a8fea242280ef154481fe8e9c5caf392a73585f0831",
+                        "test_input.npy": "9ff94a05def95720800ffc6e5fb20475190b8a1dacadcc07db5398557715df18",
+                        "test_output.npy": "865d7c1dc5db699b6a2c48a32a89662cce13c1f111c1d2d7ac4325e673e3a121",
+                        "weights.pt": "22b89cf25bdca3477612c403f1c8402b61e8e17f93fa3b6ba988201a0ca076e0",
+                        "weights_torchscript.pt": "b840a7b4c59c3e343a59d24720ff7353d8736cf5be8332600e62dfebcf9cbb2c"
+                    },
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/determined-bat/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [
+                    {
+                        "loc": [
+                            "covers",
+                            0,
+                            "function-after[val_func(), function-after[validate_file(), lax-or-strict[lax=union[json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]],function-after[path_validator(), str]],strict=json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]]]]]"
+                        ],
+                        "msg": "Input is not a valid path for <class 'pathlib.Path'>",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "covers",
+                            0,
+                            "RelativeFilePath"
+                        ],
+                        "msg": "Input is not a valid path for <class 'pathlib.PurePath'>",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "covers",
+                            0,
+                            "function-after[HttpUrl(), str]"
+                        ],
+                        "msg": "Input should be a valid string",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "string_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "documentation",
+                            "function-after[val_func(), function-after[validate_file(), lax-or-strict[lax=union[json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]],function-after[path_validator(), str]],strict=json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]]]]]"
+                        ],
+                        "msg": "Input is not a valid path for <class 'pathlib.Path'>",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "documentation",
+                            "RelativeFilePath"
+                        ],
+                        "msg": "Input is not a valid path for <class 'pathlib.PurePath'>",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "documentation",
+                            "function-after[HttpUrl(), str]"
+                        ],
+                        "msg": "Input should be a valid string",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "string_type",
+                        "with_traceback": false
+                    }
+                ],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.4",
+                "recommended_env": null,
+                "status": "failed",
+                "warnings": [
+                    {
+                        "loc": [
+                            "inputs",
+                            0,
+                            "test_tensor",
+                            "source",
+                            "RelativeFilePath"
+                        ],
+                        "msg": "Failed to validate URL 'https://hypha.aicell.io/bioimage-io/artifacts/determined-bat/files/test_input.npy?version=v0': HTTPSConnectionPool(host='hypha.aicell.io', port=443): Read timed out. (read timeout=3)\nrequest: <PreparedRequest [GET]>\nresponse: None",
+                        "severity": 30,
+                        "type": "warning"
+                    }
+                ]
+            },
+            {
+                "conda_compare": null,
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "type"
+                ],
+                "name": "Has expected resource type",
+                "recommended_env": null,
+                "status": "passed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.spec",
+                "0.5.4.1",
+                "",
+                ""
+            ],
+            [
+                "bioimageio.core",
+                "0.8.0",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.5.4",
+        "id": "determined-bat",
+        "name": "bioimageio format validation",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/determined-bat/files/rdf.yaml?version=v0",
+        "status": "failed",
+        "type": "model"
+    },
+    "error": "\n|        ❌        |                              bioimageio format validation                              |\n|       ---       |                                          ---                                           |\n| status          | failed                                                                                 |\n| source          | https://hypha.aicell.io/bioimage-io/artifacts/determined-bat/files/rdf.yaml?version=v0 |\n| id              | determined-bat                                                                         |\n| format version  | model 0.5.4                                                                            |\n| bioimageio.spec | 0.5.4.1                                                                                |\n| bioimageio.core | 0.8.0                                                                                  |\n\n|     |                     Location                     |                                                                                                    Details                                                                                                     |\n| --- |                       ---                        |                                                                                                      ---                                                                                                       |\n| ❌   |                                                  | Created `InvalidDescr` object.                                                                                                                                                                                 |\n| 🔍   | `context:perform_io_checks`                      | True                                                                                                                                                                                                           |\n| 🔍   | `context:root`                                   | https://hypha.aicell.io/bioimage-io/artifacts/determined-bat/files?version=v0                                                                                                                                  |\n| 🔍   | `context:known_files.test_input.npy`             | 9ff94a05def95720800ffc6e5fb20475190b8a1dacadcc07db5398557715df18                                                                                                                                               |\n| 🔍   | `context:known_files.test_output.npy`            | 865d7c1dc5db699b6a2c48a32a89662cce13c1f111c1d2d7ac4325e673e3a121                                                                                                                                               |\n| 🔍   | `context:known_files.model.py`                   | 1fb1a1c74a22cf6d27f19a8fea242280ef154481fe8e9c5caf392a73585f0831                                                                                                                                               |\n| 🔍   | `context:known_files.weights.pt`                 | 22b89cf25bdca3477612c403f1c8402b61e8e17f93fa3b6ba988201a0ca076e0                                                                                                                                               |\n| 🔍   | `context:known_files.weights_torchscript.pt`     | b840a7b4c59c3e343a59d24720ff7353d8736cf5be8332600e62dfebcf9cbb2c                                                                                                                                               |\n| ❌   |                                                  | bioimageio.spec format validation model 0.5.4                                                                                                                                                                  |\n| ❌   | `covers.0`                                       | Input is not a valid path for <class 'pathlib.Path'>                                                                                                                                                           |\n|     |                                                  |                                                                                                                                                                                                                |\n| ❌   | `covers.0.(RelativeFilePath)`                    | Input is not a valid path for <class 'pathlib.PurePath'>                                                                                                                                                       |\n|     |                                                  |                                                                                                                                                                                                                |\n| ❌   | `covers.0`                                       | Input should be a valid string                                                                                                                                                                                 |\n|     |                                                  |                                                                                                                                                                                                                |\n| ❌   | `documentation`                                  | Input is not a valid path for <class 'pathlib.Path'>                                                                                                                                                           |\n|     |                                                  |                                                                                                                                                                                                                |\n| ❌   | `documentation.(RelativeFilePath)`               | Input is not a valid path for <class 'pathlib.PurePath'>                                                                                                                                                       |\n|     |                                                  |                                                                                                                                                                                                                |\n| ❌   | `documentation`                                  | Input should be a valid string                                                                                                                                                                                 |\n|     |                                                  |                                                                                                                                                                                                                |\n| ⚠   | `inputs.0.test_tensor.source.(RelativeFilePath)` | Failed to validate URL 'https://hypha.aicell.io/bioimage-io/artifacts/determined-bat/files/test_input.npy?version=v0': HTTPSConnectionPool(host='hypha.aicell.io', port=443): Read timed out. (read timeout=3) |\n|     |                                                  | request: <PreparedRequest [GET]>                                                                                                                                                                               |\n|     |                                                  | response: None                                                                                                                                                                                                 |\n| ✔️  | `type`                                           | Has expected resource type                                                                                                                                                                                     |\n",
+    "links": [
+        "ilastik/ilastik"
+    ],
+    "status": "failed",
+    "tool": "ilastik",
+    "tool_version": "1.4.1.post1"
+}

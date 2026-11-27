@@ -1,0 +1,184 @@
+{
+    "badge": null,
+    "details": {
+        "details": [
+            {
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "README.md": "9306b861460659934417406f8e934c5fc747108a03c2a383d7399d11d6f6c982",
+                        "cover.png": "7cd6c81368c81fc3ca99a4beae54fab9c171466e4d294f7f782a07cffee0d453",
+                        "https://github.com/computational-cell-analytics/synapse-net": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/gorgeous-eagle/files/README.md?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/gorgeous-eagle/files/cover.png?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/gorgeous-eagle/files/model.py?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/gorgeous-eagle/files/test_mito_mask.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/gorgeous-eagle/files/test_output.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/gorgeous-eagle/files/test_raw.npy?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/gorgeous-eagle/files/weights.pt?version=v0": null,
+                        "https://hypha.aicell.io/bioimage-io/artifacts/gorgeous-eagle/files/weights_torchscript.pt?version=v0": null,
+                        "model.py": "d33416747f5171a517409b1b4b4951ac75f3605e91aabe6412457373ab84f101",
+                        "test_mito_mask.npy": "391ebfa87a95f74d99a671701134c4fb437a879581dcf21743bd690f165b201d",
+                        "test_output.npy": "0e734e083895f7ee5abced5d20285a05e677be2405a8b1dfd9f7d89611f03042",
+                        "test_raw.npy": "49bd5b93747875ae069bc13a5aa8e971f099a0180f06aa678890209feaf008fe",
+                        "weights.pt": "70c13da6687dd994c8a01c30fc5e19613fb55761778db2ae98529cf3a4a55b51",
+                        "weights_torchscript.pt": "6582bd19284d242b006979bda0a7aca4a2f0cb7158280b7a5448e4e9582888bd"
+                    },
+                    "original_source_name": null,
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/gorgeous-eagle/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Successfully created `ModelDescr` instance.",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.12",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": [
+                    {
+                        "loc": [
+                            "inputs",
+                            0,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "inputs",
+                            1,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "outputs",
+                            0,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    }
+                ]
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "pytorch_state_dict"
+                ],
+                "name": "Created conda environment 'c31e7ed05eae7728b5162e6e2e909621c902e290b6b2b504d11cdaba101447ab'",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            },
+            {
+                "context": null,
+                "errors": [
+                    {
+                        "loc": [],
+                        "msg": "Value error, Error calling function `package_file_descr_serializer`: TypeError: 'index_key' is expected to be an integer or a string, got 'SerializationInfo(include=None, exclude=None, context=None, mode='json', by_alias=False, exclude_unset=True, exclude_defaults=False, exclude_none=False, exclude_computed_fields=False, round_trip=False, serialize_as_any=False)'",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "value_error",
+                        "with_traceback": false
+                    }
+                ],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.12",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "failed",
+                "warnings": [
+                    {
+                        "loc": [
+                            "inputs",
+                            0,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "inputs",
+                            1,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    },
+                    {
+                        "loc": [
+                            "outputs",
+                            0,
+                            "sample_tensor"
+                        ],
+                        "msg": "Needs to be filled for FAIR compliance",
+                        "severity": 35,
+                        "type": "warning"
+                    }
+                ]
+            },
+            {
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "weights",
+                    "torchscript"
+                ],
+                "name": "Found existing conda environment 'c31e7ed05eae7728b5162e6e2e909621c902e290b6b2b504d11cdaba101447ab'",
+                "recommended_env": null,
+                "saved_conda_compare": null,
+                "status": "passed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.spec",
+                "0.5.12.0",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.5.12",
+        "id": "gorgeous-eagle",
+        "metadata_completeness": 0.38235294117647056,
+        "name": "bioimageio format validation",
+        "saved_conda_list": "Error while loading conda entry point: conda-anaconda-telemetry (cannot import name '_ExtendedAttributes' from 'opentelemetry.util.types' (/home/runner/.local/lib/python3.14/site-packages/opentelemetry/util/types.py))\nError while loading conda entry point: conda-anaconda-telemetry (cannot import name '_ExtendedAttributes' from 'opentelemetry.util.types' (/home/runner/.local/lib/python3.14/site-packages/opentelemetry/util/types.py))\n# packages in environment at /home/runner/miniconda3/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/gorgeous-eagle/files/rdf.yaml?version=v0",
+        "status": "valid-format",
+        "traceback": null,
+        "type": "model",
+        "version": null,
+        "warnings": null
+    },
+    "error": "Value error, Error calling function `package_file_descr_serializer`: TypeError: 'index_key' is expected to be an integer or a string, got 'SerializationInfo(include=None, exclude=None, context=None, mode='json', by_alias=False, exclude_unset=True, exclude_defaults=False, exclude_none=False, exclude_computed_fields=False, round_trip=False, serialize_as_any=False)'",
+    "links": [],
+    "score": 0.5,
+    "status": "failed",
+    "tool": "bioimageio.core",
+    "tool_version": "0.11.0"
+}

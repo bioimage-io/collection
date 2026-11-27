@@ -1,0 +1,161 @@
+{
+    "badge": null,
+    "details": {
+        "conda_list": null,
+        "details": [
+            {
+                "conda_compare": null,
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "model.py": "1fb1a1c74a22cf6d27f19a8fea242280ef154481fe8e9c5caf392a73585f0831",
+                        "test_input.npy": "0cd6f464ec8eaa2928b100e456bc0a53949f926e00a4c9e428c0a3db014a2d36",
+                        "test_output.npy": "5ff523c7ee34a042cbedce4ffd0e141c3540e7ff4cd95b11043fe24ea347a38a",
+                        "weights.pt": "99f70f1ba300f7d0b6468f07457dfcae0250917775d01f1b09b317b6c2e55c96",
+                        "weights_torchscript.pt": "38e2e70b061d494958acb42b5e5c180cc171ac3487f2fce99fa617579b90163e"
+                    },
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/hardworking-parrot/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [],
+                "loc": [],
+                "name": "Created `InvalidDescr` object.",
+                "recommended_env": null,
+                "status": "failed",
+                "warnings": []
+            },
+            {
+                "conda_compare": null,
+                "context": {
+                    "file_name": "rdf.yaml",
+                    "known_files": {
+                        "model.py": "1fb1a1c74a22cf6d27f19a8fea242280ef154481fe8e9c5caf392a73585f0831",
+                        "test_input.npy": "0cd6f464ec8eaa2928b100e456bc0a53949f926e00a4c9e428c0a3db014a2d36",
+                        "test_output.npy": "5ff523c7ee34a042cbedce4ffd0e141c3540e7ff4cd95b11043fe24ea347a38a",
+                        "weights.pt": "99f70f1ba300f7d0b6468f07457dfcae0250917775d01f1b09b317b6c2e55c96",
+                        "weights_torchscript.pt": "38e2e70b061d494958acb42b5e5c180cc171ac3487f2fce99fa617579b90163e"
+                    },
+                    "perform_io_checks": true,
+                    "root": "https://hypha.aicell.io/bioimage-io/artifacts/hardworking-parrot/files?version=v0",
+                    "update_hashes": false
+                },
+                "errors": [
+                    {
+                        "loc": [
+                            "covers",
+                            0,
+                            "function-after[val_func(), function-after[validate_file(), lax-or-strict[lax=union[json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]],function-after[path_validator(), str]],strict=json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]]]]]"
+                        ],
+                        "msg": "Input is not a valid path for <class 'pathlib.Path'>",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "covers",
+                            0,
+                            "RelativeFilePath"
+                        ],
+                        "msg": "Input is not a valid path for <class 'pathlib.PurePath'>",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "covers",
+                            0,
+                            "function-after[HttpUrl(), str]"
+                        ],
+                        "msg": "Input should be a valid string",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "string_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "documentation",
+                            "function-after[val_func(), function-after[validate_file(), lax-or-strict[lax=union[json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]],function-after[path_validator(), str]],strict=json-or-python[json=function-after[path_validator(), str],python=is-instance[Path]]]]]"
+                        ],
+                        "msg": "Input is not a valid path for <class 'pathlib.Path'>",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "documentation",
+                            "RelativeFilePath"
+                        ],
+                        "msg": "Input is not a valid path for <class 'pathlib.PurePath'>",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "path_type",
+                        "with_traceback": false
+                    },
+                    {
+                        "loc": [
+                            "documentation",
+                            "function-after[HttpUrl(), str]"
+                        ],
+                        "msg": "Input should be a valid string",
+                        "traceback_html": "",
+                        "traceback_md": "",
+                        "type": "string_type",
+                        "with_traceback": false
+                    }
+                ],
+                "loc": [],
+                "name": "bioimageio.spec format validation model 0.5.4",
+                "recommended_env": null,
+                "status": "failed",
+                "warnings": []
+            },
+            {
+                "conda_compare": null,
+                "context": null,
+                "errors": [],
+                "loc": [
+                    "type"
+                ],
+                "name": "Has expected resource type",
+                "recommended_env": null,
+                "status": "passed",
+                "warnings": []
+            }
+        ],
+        "env": [
+            [
+                "bioimageio.spec",
+                "0.5.4.1",
+                "",
+                ""
+            ],
+            [
+                "bioimageio.core",
+                "0.8.0",
+                "",
+                ""
+            ]
+        ],
+        "format_version": "0.5.4",
+        "id": "hardworking-parrot",
+        "name": "bioimageio format validation",
+        "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/hardworking-parrot/files/rdf.yaml?version=v0",
+        "status": "failed",
+        "type": "model"
+    },
+    "error": "\n|        ❌        |                                bioimageio format validation                                |\n|       ---       |                                            ---                                             |\n| status          | failed                                                                                     |\n| source          | https://hypha.aicell.io/bioimage-io/artifacts/hardworking-parrot/files/rdf.yaml?version=v0 |\n| id              | hardworking-parrot                                                                         |\n| format version  | model 0.5.4                                                                                |\n| bioimageio.spec | 0.5.4.1                                                                                    |\n| bioimageio.core | 0.8.0                                                                                      |\n\n|     |                   Location                   |                                      Details                                      |\n| --- |                     ---                      |                                        ---                                        |\n| ❌   |                                              | Created `InvalidDescr` object.                                                    |\n| 🔍   | `context:perform_io_checks`                  | True                                                                              |\n| 🔍   | `context:root`                               | https://hypha.aicell.io/bioimage-io/artifacts/hardworking-parrot/files?version=v0 |\n| 🔍   | `context:known_files.test_input.npy`         | 0cd6f464ec8eaa2928b100e456bc0a53949f926e00a4c9e428c0a3db014a2d36                  |\n| 🔍   | `context:known_files.test_output.npy`        | 5ff523c7ee34a042cbedce4ffd0e141c3540e7ff4cd95b11043fe24ea347a38a                  |\n| 🔍   | `context:known_files.model.py`               | 1fb1a1c74a22cf6d27f19a8fea242280ef154481fe8e9c5caf392a73585f0831                  |\n| 🔍   | `context:known_files.weights.pt`             | 99f70f1ba300f7d0b6468f07457dfcae0250917775d01f1b09b317b6c2e55c96                  |\n| 🔍   | `context:known_files.weights_torchscript.pt` | 38e2e70b061d494958acb42b5e5c180cc171ac3487f2fce99fa617579b90163e                  |\n| ❌   |                                              | bioimageio.spec format validation model 0.5.4                                     |\n| ❌   | `covers.0`                                   | Input is not a valid path for <class 'pathlib.Path'>                              |\n|     |                                              |                                                                                   |\n| ❌   | `covers.0.(RelativeFilePath)`                | Input is not a valid path for <class 'pathlib.PurePath'>                          |\n|     |                                              |                                                                                   |\n| ❌   | `covers.0`                                   | Input should be a valid string                                                    |\n|     |                                              |                                                                                   |\n| ❌   | `documentation`                              | Input is not a valid path for <class 'pathlib.Path'>                              |\n|     |                                              |                                                                                   |\n| ❌   | `documentation.(RelativeFilePath)`           | Input is not a valid path for <class 'pathlib.PurePath'>                          |\n|     |                                              |                                                                                   |\n| ❌   | `documentation`                              | Input should be a valid string                                                    |\n|     |                                              |                                                                                   |\n| ✔️  | `type`                                       | Has expected resource type                                                        |\n",
+    "links": [
+        "ilastik/ilastik"
+    ],
+    "status": "failed",
+    "tool": "ilastik",
+    "tool_version": "1.4.1.post1"
+}
