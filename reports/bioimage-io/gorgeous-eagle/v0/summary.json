@@ -1,76 +1,72 @@
 {
     "rdf_content": {
-        "format_version": "0.5.12",
-        "type": "model",
-        "name": "SynapseNet Cristae - Electron Tomography",
-        "description": "3D U-Net from SynapseNet that predicts mitochondrial cristae foreground and boundary probabilities in electron tomograms at a voxel size of 1.74 nm, given the tomogram and a mitochondria mask.",
-        "license": "CC-BY-4.0",
         "authors": [
             {
-                "name": "Luca Freckmann",
                 "github_user": "lufre1",
+                "name": "Luca Freckmann",
                 "orcid": "0000-0002-8285-2586"
             }
         ],
-        "maintainers": [
+        "cite": [
             {
-                "name": "Luca Freckmann",
-                "github_user": "lufre1"
+                "text": "SynapseNet: deep learning for automatic synapse reconstruction (software).",
+                "url": "https://github.com/computational-cell-analytics/synapse-net"
             }
         ],
-        "documentation": {
-            "source": "README.md",
-            "sha256": "9306b861460659934417406f8e934c5fc747108a03c2a383d7399d11d6f6c982"
-        },
         "covers": [
             {
-                "source": "cover.png",
-                "sha256": "7cd6c81368c81fc3ca99a4beae54fab9c171466e4d294f7f782a07cffee0d453"
+                "sha256": "7cd6c81368c81fc3ca99a4beae54fab9c171466e4d294f7f782a07cffee0d453",
+                "source": "cover.png"
             }
         ],
+        "description": "3D U-Net from SynapseNet that predicts mitochondrial cristae foreground and boundary probabilities in electron tomograms at a voxel size of 1.74 nm, given the tomogram and a mitochondria mask.",
+        "documentation": {
+            "sha256": "9306b861460659934417406f8e934c5fc747108a03c2a383d7399d11d6f6c982",
+            "source": "README.md"
+        },
+        "format_version": "0.5.12",
+        "git_repo": "https://github.com/computational-cell-analytics/synapse-net",
+        "id": "gorgeous-eagle",
+        "id_emoji": "🦅",
         "inputs": [
             {
-                "id": "raw",
-                "description": "Electron tomogram",
                 "axes": [
                     {
                         "type": "batch"
                     },
                     {
-                        "type": "channel",
                         "channel_names": [
                             "raw"
-                        ]
+                        ],
+                        "type": "channel"
                     },
                     {
-                        "type": "space",
                         "id": "z",
                         "size": {
                             "min": 16,
                             "step": 8
-                        }
+                        },
+                        "type": "space"
                     },
                     {
-                        "type": "space",
                         "id": "y",
                         "size": {
                             "min": 64,
                             "step": 16
-                        }
+                        },
+                        "type": "space"
                     },
                     {
-                        "type": "space",
                         "id": "x",
                         "size": {
                             "min": 64,
                             "step": 16
-                        }
+                        },
+                        "type": "space"
                     }
                 ],
-                "test_tensor": {
-                    "source": "test_raw.npy",
-                    "sha256": "49bd5b93747875ae069bc13a5aa8e971f099a0180f06aa678890209feaf008fe"
-                },
+                "description": "Electron tomogram",
+                "id": "raw",
                 "preprocessing": [
                     {
                         "id": "ensure_dtype",
@@ -86,53 +82,53 @@
                                 "y",
                                 "x"
                             ],
-                            "eps": 1e-7
+                            "eps": 1e-07
                         }
                     }
-                ]
+                ],
+                "test_tensor": {
+                    "sha256": "49bd5b93747875ae069bc13a5aa8e971f099a0180f06aa678890209feaf008fe",
+                    "source": "test_raw.npy"
+                }
             },
             {
-                "id": "mito_mask",
-                "description": "Binary mitochondria mask (1 inside mitochondria, 0 outside)",
                 "axes": [
                     {
                         "type": "batch"
                     },
                     {
-                        "type": "channel",
                         "channel_names": [
                             "mito_mask"
-                        ]
+                        ],
+                        "type": "channel"
                     },
                     {
-                        "type": "space",
                         "id": "z",
                         "size": {
-                            "tensor_id": "raw",
-                            "axis_id": "z"
-                        }
+                            "axis_id": "z",
+                            "tensor_id": "raw"
+                        },
+                        "type": "space"
                     },
                     {
-                        "type": "space",
                         "id": "y",
                         "size": {
-                            "tensor_id": "raw",
-                            "axis_id": "y"
-                        }
+                            "axis_id": "y",
+                            "tensor_id": "raw"
+                        },
+                        "type": "space"
                     },
                     {
-                        "type": "space",
                         "id": "x",
                         "size": {
-                            "tensor_id": "raw",
-                            "axis_id": "x"
-                        }
+                            "axis_id": "x",
+                            "tensor_id": "raw"
+                        },
+                        "type": "space"
                     }
                 ],
-                "test_tensor": {
-                    "source": "test_mito_mask.npy",
-                    "sha256": "391ebfa87a95f74d99a671701134c4fb437a879581dcf21743bd690f165b201d"
-                },
+                "description": "Binary mitochondria mask (1 inside mitochondria, 0 outside)",
+                "id": "mito_mask",
                 "preprocessing": [
                     {
                         "id": "ensure_dtype",
@@ -140,75 +136,97 @@
                             "dtype": "float32"
                         }
                     }
-                ]
+                ],
+                "test_tensor": {
+                    "sha256": "391ebfa87a95f74d99a671701134c4fb437a879581dcf21743bd690f165b201d",
+                    "source": "test_mito_mask.npy"
+                }
             }
         ],
+        "license": "CC-BY-4.0",
+        "maintainers": [
+            {
+                "github_user": "lufre1",
+                "name": "Luca Freckmann"
+            }
+        ],
+        "name": "SynapseNet Cristae - Electron Tomography",
         "outputs": [
             {
-                "id": "prediction",
-                "description": "Cristae foreground and boundary probabilities",
                 "axes": [
                     {
                         "type": "batch"
                     },
                     {
-                        "type": "channel",
                         "channel_names": [
                             "foreground",
                             "boundaries"
-                        ]
+                        ],
+                        "type": "channel"
                     },
                     {
-                        "type": "space",
+                        "halo": 4,
                         "id": "z",
                         "size": {
-                            "tensor_id": "raw",
-                            "axis_id": "z"
+                            "axis_id": "z",
+                            "tensor_id": "raw"
                         },
-                        "halo": 4
+                        "type": "space"
                     },
                     {
-                        "type": "space",
+                        "halo": 16,
                         "id": "y",
                         "size": {
-                            "tensor_id": "raw",
-                            "axis_id": "y"
+                            "axis_id": "y",
+                            "tensor_id": "raw"
                         },
-                        "halo": 16
+                        "type": "space"
                     },
                     {
-                        "type": "space",
+                        "halo": 16,
                         "id": "x",
                         "size": {
-                            "tensor_id": "raw",
-                            "axis_id": "x"
+                            "axis_id": "x",
+                            "tensor_id": "raw"
                         },
-                        "halo": 16
+                        "type": "space"
                     }
                 ],
-                "test_tensor": {
-                    "source": "test_output.npy",
-                    "sha256": "0e734e083895f7ee5abced5d20285a05e677be2405a8b1dfd9f7d89611f03042"
-                },
                 "data": {
                     "range": [
                         0.0,
                         1.0
                     ]
+                },
+                "description": "Cristae foreground and boundary probabilities",
+                "id": "prediction",
+                "test_tensor": {
+                    "sha256": "0e734e083895f7ee5abced5d20285a05e677be2405a8b1dfd9f7d89611f03042",
+                    "source": "test_output.npy"
                 }
             }
         ],
+        "tags": [
+            "synapsenet",
+            "electron-microscopy",
+            "segmentation",
+            "unet",
+            "pytorch",
+            "3d",
+            "mitochondria",
+            "electron-tomography",
+            "cristae"
+        ],
+        "type": "model",
         "weights": {
             "pytorch_state_dict": {
-                "source": "weights.pt",
-                "sha256": "70c13da6687dd994c8a01c30fc5e19613fb55761778db2ae98529cf3a4a55b51",
-                "pytorch_version": "2.7.1",
                 "architecture": {
-                    "source": "model.py",
                     "callable": "CristaeUNet3d",
-                    "sha256": "d33416747f5171a517409b1b4b4951ac75f3605e91aabe6412457373ab84f101",
                     "kwargs": {
+                        "gain": 2,
                         "in_channels": 2,
+                        "initial_features": 32,
+                        "norm": "none",
                         "out_channels": 2,
                         "scale_factors": [
                             [
@@ -231,41 +249,266 @@
                                 2,
                                 2
                             ]
-                        ],
-                        "initial_features": 32,
-                        "gain": 2,
-                        "norm": "none"
-                    }
-                }
+                        ]
+                    },
+                    "sha256": "d33416747f5171a517409b1b4b4951ac75f3605e91aabe6412457373ab84f101",
+                    "source": "model.py"
+                },
+                "pytorch_version": "2.7.1",
+                "sha256": "70c13da6687dd994c8a01c30fc5e19613fb55761778db2ae98529cf3a4a55b51",
+                "source": "weights.pt"
             },
             "torchscript": {
-                "source": "weights_torchscript.pt",
-                "sha256": "6582bd19284d242b006979bda0a7aca4a2f0cb7158280b7a5448e4e9582888bd",
                 "parent": "pytorch_state_dict",
-                "pytorch_version": "2.7.1"
+                "pytorch_version": "2.7.1",
+                "sha256": "6582bd19284d242b006979bda0a7aca4a2f0cb7158280b7a5448e4e9582888bd",
+                "source": "weights_torchscript.pt"
             }
-        },
-        "tags": [
-            "synapsenet",
-            "electron-microscopy",
-            "segmentation",
-            "unet",
-            "pytorch",
-            "3d",
-            "mitochondria",
-            "electron-tomography",
-            "cristae"
-        ],
-        "cite": [
-            {
-                "text": "SynapseNet: deep learning for automatic synapse reconstruction (software).",
-                "url": "https://github.com/computational-cell-analytics/synapse-net"
-            }
-        ],
-        "git_repo": "https://github.com/computational-cell-analytics/synapse-net",
-        "id": "gorgeous-eagle",
-        "id_emoji": "🦅"
+        }
     },
     "rdf_yaml_sha256": "6cc575decf70011acfcec71fafc63e70fc4b72d86f72350a020e22ff8cb41f2c",
-    "status": "untested"
+    "scores": {
+        "core_compatibility": 0.5,
+        "metadata_completeness": 0.38235294117647056,
+        "metadata_format": 1.0,
+        "overall_compatibility": 0.47058823529411764,
+        "overall_partner_tool_compatibility": 0.0,
+        "tool_compatibility": {
+            "biapy": 0.0,
+            "bioimageio.core": 0.5,
+            "ilastik": 0.0
+        },
+        "tool_compatibility_version_specific": {
+            "biapy_3.7.3": 0.0,
+            "bioimageio.core_0.11.0": 0.5,
+            "ilastik_1.4.1.post1": 0.0,
+            "ilastik_1.4.2": 0.0,
+            "ilastik_1.5.0b1": 0.0
+        }
+    },
+    "status": "passed",
+    "tests": {
+        "biapy": {
+            "3.7.3": {
+                "badge": null,
+                "details": "[all] Model needs to have a single input.\n",
+                "error": "[all] Model needs to have a single input.\n",
+                "links": [
+                    "biapy/biapy"
+                ],
+                "score": 0.0,
+                "status": "failed"
+            }
+        },
+        "bioimageio.core": {
+            "0.11.0": {
+                "badge": null,
+                "details": {
+                    "details": [
+                        {
+                            "context": {
+                                "file_name": "rdf.yaml",
+                                "known_files": {
+                                    "README.md": "9306b861460659934417406f8e934c5fc747108a03c2a383d7399d11d6f6c982",
+                                    "cover.png": "7cd6c81368c81fc3ca99a4beae54fab9c171466e4d294f7f782a07cffee0d453",
+                                    "https://github.com/computational-cell-analytics/synapse-net": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/gorgeous-eagle/files/README.md?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/gorgeous-eagle/files/cover.png?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/gorgeous-eagle/files/model.py?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/gorgeous-eagle/files/test_mito_mask.npy?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/gorgeous-eagle/files/test_output.npy?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/gorgeous-eagle/files/test_raw.npy?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/gorgeous-eagle/files/weights.pt?version=v0": null,
+                                    "https://hypha.aicell.io/bioimage-io/artifacts/gorgeous-eagle/files/weights_torchscript.pt?version=v0": null,
+                                    "model.py": "d33416747f5171a517409b1b4b4951ac75f3605e91aabe6412457373ab84f101",
+                                    "test_mito_mask.npy": "391ebfa87a95f74d99a671701134c4fb437a879581dcf21743bd690f165b201d",
+                                    "test_output.npy": "0e734e083895f7ee5abced5d20285a05e677be2405a8b1dfd9f7d89611f03042",
+                                    "test_raw.npy": "49bd5b93747875ae069bc13a5aa8e971f099a0180f06aa678890209feaf008fe",
+                                    "weights.pt": "70c13da6687dd994c8a01c30fc5e19613fb55761778db2ae98529cf3a4a55b51",
+                                    "weights_torchscript.pt": "6582bd19284d242b006979bda0a7aca4a2f0cb7158280b7a5448e4e9582888bd"
+                                },
+                                "original_source_name": null,
+                                "perform_io_checks": true,
+                                "root": "https://hypha.aicell.io/bioimage-io/artifacts/gorgeous-eagle/files?version=v0",
+                                "update_hashes": false
+                            },
+                            "errors": [],
+                            "loc": [],
+                            "name": "Successfully created `ModelDescr` instance.",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [],
+                            "name": "bioimageio.spec format validation model 0.5.12",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": [
+                                {
+                                    "loc": [
+                                        "inputs",
+                                        0,
+                                        "sample_tensor"
+                                    ],
+                                    "msg": "Needs to be filled for FAIR compliance",
+                                    "severity": 35,
+                                    "type": "warning"
+                                },
+                                {
+                                    "loc": [
+                                        "inputs",
+                                        1,
+                                        "sample_tensor"
+                                    ],
+                                    "msg": "Needs to be filled for FAIR compliance",
+                                    "severity": 35,
+                                    "type": "warning"
+                                },
+                                {
+                                    "loc": [
+                                        "outputs",
+                                        0,
+                                        "sample_tensor"
+                                    ],
+                                    "msg": "Needs to be filled for FAIR compliance",
+                                    "severity": 35,
+                                    "type": "warning"
+                                }
+                            ]
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "pytorch_state_dict"
+                            ],
+                            "name": "Created conda environment 'c31e7ed05eae7728b5162e6e2e909621c902e290b6b2b504d11cdaba101447ab'",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        },
+                        {
+                            "context": null,
+                            "errors": [
+                                {
+                                    "loc": [],
+                                    "msg": "Value error, Error calling function `package_file_descr_serializer`: TypeError: 'index_key' is expected to be an integer or a string, got 'SerializationInfo(include=None, exclude=None, context=None, mode='json', by_alias=False, exclude_unset=True, exclude_defaults=False, exclude_none=False, exclude_computed_fields=False, round_trip=False, serialize_as_any=False)'",
+                                    "traceback_html": "",
+                                    "traceback_md": "",
+                                    "type": "value_error",
+                                    "with_traceback": false
+                                }
+                            ],
+                            "loc": [],
+                            "name": "bioimageio.spec format validation model 0.5.12",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "failed",
+                            "warnings": [
+                                {
+                                    "loc": [
+                                        "inputs",
+                                        0,
+                                        "sample_tensor"
+                                    ],
+                                    "msg": "Needs to be filled for FAIR compliance",
+                                    "severity": 35,
+                                    "type": "warning"
+                                },
+                                {
+                                    "loc": [
+                                        "inputs",
+                                        1,
+                                        "sample_tensor"
+                                    ],
+                                    "msg": "Needs to be filled for FAIR compliance",
+                                    "severity": 35,
+                                    "type": "warning"
+                                },
+                                {
+                                    "loc": [
+                                        "outputs",
+                                        0,
+                                        "sample_tensor"
+                                    ],
+                                    "msg": "Needs to be filled for FAIR compliance",
+                                    "severity": 35,
+                                    "type": "warning"
+                                }
+                            ]
+                        },
+                        {
+                            "context": null,
+                            "errors": [],
+                            "loc": [
+                                "weights",
+                                "torchscript"
+                            ],
+                            "name": "Found existing conda environment 'c31e7ed05eae7728b5162e6e2e909621c902e290b6b2b504d11cdaba101447ab'",
+                            "recommended_env": null,
+                            "saved_conda_compare": null,
+                            "status": "passed",
+                            "warnings": []
+                        }
+                    ],
+                    "env": [
+                        [
+                            "bioimageio.spec",
+                            "0.5.12.0",
+                            "",
+                            ""
+                        ]
+                    ],
+                    "format_version": "0.5.12",
+                    "id": "gorgeous-eagle",
+                    "metadata_completeness": 0.38235294117647056,
+                    "name": "bioimageio format validation",
+                    "saved_conda_list": "Error while loading conda entry point: conda-anaconda-telemetry (cannot import name '_ExtendedAttributes' from 'opentelemetry.util.types' (/home/runner/.local/lib/python3.14/site-packages/opentelemetry/util/types.py))\nError while loading conda entry point: conda-anaconda-telemetry (cannot import name '_ExtendedAttributes' from 'opentelemetry.util.types' (/home/runner/.local/lib/python3.14/site-packages/opentelemetry/util/types.py))\n# packages in environment at /home/runner/miniconda3/envs/core:\n#\n# Name                     Version          Build            Channel\n",
+                    "source_name": "https://hypha.aicell.io/bioimage-io/artifacts/gorgeous-eagle/files/rdf.yaml?version=v0",
+                    "status": "valid-format",
+                    "traceback": null,
+                    "type": "model",
+                    "version": null,
+                    "warnings": null
+                },
+                "error": "Value error, Error calling function `package_file_descr_serializer`: TypeError: 'index_key' is expected to be an integer or a string, got 'SerializationInfo(include=None, exclude=None, context=None, mode='json', by_alias=False, exclude_unset=True, exclude_defaults=False, exclude_none=False, exclude_computed_fields=False, round_trip=False, serialize_as_any=False)'",
+                "links": [],
+                "score": 0.5,
+                "status": "failed"
+            }
+        },
+        "ilastik": {
+            "1.4.1.post1": {
+                "badge": null,
+                "details": null,
+                "error": "ilastik only supports a single input/output tensor (found 2/1)",
+                "links": [],
+                "score": 0.0,
+                "status": "failed"
+            },
+            "1.4.2": {
+                "badge": null,
+                "details": null,
+                "error": "ilastik only supports a single input/output tensor (found 2/1)",
+                "links": [],
+                "score": 0.0,
+                "status": "failed"
+            },
+            "1.5.0b1": {
+                "badge": null,
+                "details": null,
+                "error": "ilastik only supports a single input/output tensor (found 2/1)",
+                "links": [],
+                "score": 0.0,
+                "status": "failed"
+            }
+        }
+    }
 }
