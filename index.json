@@ -3483,9 +3483,9 @@
                     "version": "v0"
                 },
                 {
-                    "comment": "Published by oeway007@gmail.com",
+                    "comment": "Updated model",
                     "created_at": "2026-02-26T06:05:35Z",
-                    "sha256": "d60f18328ed247925bc9759abdff0ae083c86e98de662c95a5dd4f2b061502d1",
+                    "sha256": "76d6fc0c58c89b2c18ae1553bdffb6eb23bc15376ca110ef22ad345c54d17f3d",
                     "source": "https://hypha.aicell.io/bioimage-io/artifacts/romantic-shark/files/rdf.yaml?version=v1",
                     "version": "v1"
                 }
@@ -4078,6 +4078,6 @@
             ]
         }
     ],
-    "timestamp": "2026-11-27T07:36:06.164999",
+    "timestamp": "2026-11-28T06:58:50.056314",
     "total": 305
 }
